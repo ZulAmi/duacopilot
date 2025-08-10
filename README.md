@@ -2,7 +2,15 @@
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.7.0+-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
 [![Dart](https://img.shields.io/badge/Dart-3.0+-0175C2?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![## 📄 License
+
+**DuaCopilot** is proprietary software owned by ZulAmi. All rights reserved.
+
+This software is protected by copyright and other intellectual property laws. Unauthorized reproduction, distribution, modification, or commercial use of this software, in whole or in part, is strictly prohibited without prior written consent from the copyright owner.
+
+**Commercial License Available**: For licensing inquiries, partnerships, or commercial use, please contact: [zulhilmirahmat@gmail.com](mailto:zulhilmirahmat@gmail.com)
+
+**Terms of Use**: This software is provided for evaluation and personal use only. Any commercial use, redistribution, or modification requires a separate commercial license agreement.ense: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg?style=for-the-badge)](https://github.com/ZulAmi/duacopilot)
 
 A comprehensive Islamic application built with Flutter, featuring AI-powered RAG (Retrieval-Augmented Generation) integration for intelligent du'a discovery and learning. The app combines traditional Islamic content with modern technology to provide an enhanced spiritual experience.
 
