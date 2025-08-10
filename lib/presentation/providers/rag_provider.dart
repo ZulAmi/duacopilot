@@ -1,18 +1,25 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:dio/dio.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:web_socket_channel/io.dart';
 import '../../domain/entities/rag_response.dart';
+import '../../domain/entities/enhanced_query.dart';
+import '../../domain/entities/query_context.dart';
 import '../../services/rag_service.dart';
+import '../../core/services/query_enhancement/query_enhancement_service.dart';
 import 'rag_state_models.dart';
+import 'provider_config.dart';
 
 /// AsyncNotifierProvider for RAG API calls with loading, success, error states
 class RagApiNotifier extends AsyncNotifier<RagStateData> {
   late final RagService _ragService;
+  late final QueryEnhancementService _queryEnhancer;
 
   @override
   Future<RagStateData> build() async {
     _ragService = ref.read(ragServiceProvider);
+    _queryEnhancer = QueryEnhancementService();
 
     // Load persisted state
     final persistedState = await RagStatePersistence.loadState();
@@ -24,8 +31,14 @@ class RagApiNotifier extends AsyncNotifier<RagStateData> {
     return const RagStateData();
   }
 
-  /// Perform RAG query with error recovery and retry logic
-  Future<void> performQuery(String query, {bool useCache = true}) async {
+  /// Perform RAG query with smart enhancement and error recovery
+  Future<void> performQuery(
+    String query, {
+    bool useCache = true,
+    String language = 'en',
+    QueryContext? context,
+    Map<String, dynamic>? userPreferences,
+  }) async {
     if (query.isEmpty) return;
 
     try {
@@ -38,10 +51,20 @@ class RagApiNotifier extends AsyncNotifier<RagStateData> {
         ),
       );
 
-      // Check cache first if enabled
+      // Step 1: Enhance the query with smart processing
+      final enhancedQuery = await _queryEnhancer.enhanceQuery(
+        originalQuery: query,
+        language: language,
+        context: context,
+        userPreferences: userPreferences,
+      );
+
+      // Check cache first if enabled (using enhanced query)
       if (useCache) {
         final cacheNotifier = ref.read(ragCacheProvider.notifier);
-        final cachedResponse = await cacheNotifier.get(query);
+        final cachedResponse = await cacheNotifier.get(
+          enhancedQuery.processedQuery,
+        );
         if (cachedResponse != null) {
           state = AsyncValue.data(
             state.value!.copyWith(
@@ -50,6 +73,15 @@ class RagApiNotifier extends AsyncNotifier<RagStateData> {
               isFromCache: true,
               lastUpdated: DateTime.now(),
               retryCount: 0,
+              confidence: enhancedQuery.confidence,
+              metadata: {
+                'enhanced_query': enhancedQuery.processedQuery,
+                'original_query': enhancedQuery.originalQuery,
+                'intent': enhancedQuery.intent.name,
+                'semantic_tags': enhancedQuery.semanticTags,
+                'processing_steps': enhancedQuery.processingSteps,
+                ...enhancedQuery.metadata,
+              },
             ),
           );
           await _persistState();
@@ -57,8 +89,45 @@ class RagApiNotifier extends AsyncNotifier<RagStateData> {
         }
       }
 
-      // Perform RAG query
-      final response = await _ragService.query(query);
+      // Step 2: Perform RAG query with enhanced query
+      final searchResponse = await _ragService.searchDuas(
+        query: enhancedQuery.processedQuery,
+        language: language,
+        location: enhancedQuery.context.location,
+        additionalContext: {
+          'intent': enhancedQuery.intent.name,
+          'semantic_tags': enhancedQuery.semanticTags,
+          'time_context': enhancedQuery.context.timeOfDay?.name,
+          'prayer_context': enhancedQuery.context.prayerTime?.name,
+          'confidence': enhancedQuery.confidence,
+          ...enhancedQuery.metadata,
+        },
+      );
+
+      // Convert RagSearchResponse to RagResponse for compatibility
+      final response = RagResponse(
+        id: searchResponse.queryId,
+        query: enhancedQuery.originalQuery, // Keep original for user display
+        response:
+            searchResponse.recommendations.isNotEmpty
+                ? searchResponse.recommendations.first.dua.translation
+                : 'No results found',
+        timestamp: DateTime.now(),
+        responseTime: 0,
+        confidence: (searchResponse.confidence + enhancedQuery.confidence) / 2,
+        metadata: {
+          'reasoning': searchResponse.reasoning,
+          'recommendations_count': searchResponse.recommendations.length,
+          'enhanced_query': enhancedQuery.processedQuery,
+          'original_query': enhancedQuery.originalQuery,
+          'intent': enhancedQuery.intent.name,
+          'semantic_tags': enhancedQuery.semanticTags,
+          'processing_steps': enhancedQuery.processingSteps,
+          'query_enhancement_confidence': enhancedQuery.confidence,
+          'context_summary': enhancedQuery.context.summary,
+          ...enhancedQuery.metadata,
+        },
+      );
 
       // Update state with success
       final newState = state.value!.copyWith(
@@ -73,16 +142,26 @@ class RagApiNotifier extends AsyncNotifier<RagStateData> {
 
       state = AsyncValue.data(newState);
 
-      // Cache the response
+      // Cache the response (using enhanced query as key)
       if (useCache) {
-        await ref.read(ragCacheProvider.notifier).put(query, response);
+        await ref
+            .read(ragCacheProvider.notifier)
+            .put(enhancedQuery.processedQuery, response);
       }
 
       // Persist state
       await _persistState();
     } catch (error, stackTrace) {
       // Handle error with retry logic
-      await _handleError(error, stackTrace, query, useCache);
+      await _handleError(
+        error,
+        stackTrace,
+        query,
+        useCache,
+        language,
+        context,
+        userPreferences,
+      );
     }
   }
 
@@ -91,8 +170,11 @@ class RagApiNotifier extends AsyncNotifier<RagStateData> {
     Object error,
     StackTrace stackTrace,
     String query,
-    bool useCache,
-  ) async {
+    bool useCache, [
+    String language = 'en',
+    QueryContext? context,
+    Map<String, dynamic>? userPreferences,
+  ]) async {
     final currentState = state.value!;
     final retryCount = currentState.retryCount;
 
@@ -110,8 +192,14 @@ class RagApiNotifier extends AsyncNotifier<RagStateData> {
         ),
       );
 
-      // Retry the query
-      await performQuery(query, useCache: useCache);
+      // Retry the query with enhanced parameters
+      await performQuery(
+        query,
+        useCache: useCache,
+        language: language,
+        context: context,
+        userPreferences: userPreferences,
+      );
     } else {
       // Max retries reached or non-retryable error
       state = AsyncValue.data(
@@ -251,7 +339,6 @@ class RagCacheNotifier extends StateNotifier<Map<String, CachedRagEntry>> {
 
   /// Invalidate expired entries
   Future<void> invalidateExpired() async {
-    final now = DateTime.now();
     final validEntries = <String, CachedRagEntry>{};
 
     for (final entry in state.entries) {
@@ -297,7 +384,6 @@ class RagCacheNotifier extends StateNotifier<Map<String, CachedRagEntry>> {
 
   /// Get cache statistics
   Map<String, dynamic> getStats() {
-    final now = DateTime.now();
     int expiredCount = 0;
     int totalSize = 0;
 
@@ -532,9 +618,9 @@ class RagWebSocketNotifier extends StateNotifier<WebSocketState> {
     try {
       // Process real-time updates
       // This could trigger updates to other providers
-      print('WebSocket message received: $message');
+      debugPrint('WebSocket message received: $message');
     } catch (error) {
-      print('Error processing WebSocket message: $error');
+      debugPrint('Error processing WebSocket message: $error');
     }
   }
 
@@ -583,16 +669,12 @@ final ragWebSocketProvider =
 
 /// Stream provider for real-time RAG updates
 final ragUpdatesStreamProvider = StreamProvider<RagResponse>((ref) {
-  final webSocketNotifier = ref.watch(ragWebSocketProvider.notifier);
+  // Watch the WebSocket provider to ensure connection is maintained
+  ref.watch(ragWebSocketProvider.notifier);
 
   return Stream.periodic(const Duration(seconds: 30), (count) {
     // This would be replaced with actual WebSocket stream
     // For now, return empty stream
     return null;
   }).where((event) => event != null).cast<RagResponse>();
-});
-
-/// Provider for RAG service
-final ragServiceProvider = Provider<RagService>((ref) {
-  return RagService();
 });

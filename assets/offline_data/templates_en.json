@@ -1,0 +1,91 @@
+{
+  "templates": [
+    {
+      "id": "morning_dua_en",
+      "category": "time_based",
+      "confidence": 0.9,
+      "completeness": 0.9,
+      "relevance": 0.95,
+      "response_template": "Here is a beautiful morning dua: \"Allahumma bika asbahna wa bika amsayna wa bika nahya wa bika namutu wa ilayk an-nushur\" (O Allah, by You we enter the morning and by You we enter the evening, by You we live and by You we die, and to You is the resurrection). This dua is recommended to be recited every morning.",
+      "keywords": ["morning", "dawn", "sunrise", "start", "day", "dua"],
+      "patterns": ["morning.*dua", "dawn.*prayer", "start.*day", "morning.*prayer"],
+      "examples": ["morning dua", "dawn prayer", "start of day dua", "morning remembrance"],
+      "related_queries": ["evening dua", "daily prayers", "dhikr", "morning prayers"],
+      "popularity": 0.9
+    },
+    {
+      "id": "evening_dua_en",
+      "category": "time_based",
+      "confidence": 0.9,
+      "completeness": 0.9,
+      "relevance": 0.95,
+      "response_template": "Here is a blessed evening dua: \"Allahumma bika amsayna wa bika asbahna wa bika nahya wa bika namutu wa ilayka an-nushur\" (O Allah, by You we enter the evening and by You we enter the morning, by You we live and by You we die, and to You is the resurrection). This dua brings peace and protection for the night.",
+      "keywords": ["evening", "night", "sunset", "maghrib", "dua"],
+      "patterns": ["evening.*dua", "night.*prayer", "sunset.*dua", "maghrib.*dua"],
+      "examples": ["evening dua", "night prayer", "sunset dua", "maghrib remembrance"],
+      "related_queries": ["morning dua", "night prayers", "protection dua", "sleep dua"],
+      "popularity": 0.85
+    },
+    {
+      "id": "general_dua_en",
+      "category": "general",
+      "confidence": 0.7,
+      "completeness": 0.8,
+      "relevance": 0.9,
+      "response_template": "Here is a general dua for {{action}}: \"Bismillah, Rabbi zidni ilman\" (In the name of Allah, my Lord, increase me in knowledge). This dua can be recited at {{time}} and is beneficial for seeking Allah's guidance and blessings.",
+      "keywords": ["dua", "prayer", "general", "help", "guidance"],
+      "patterns": ["dua for.*", "prayer for.*", "help with.*", "guidance.*"],
+      "examples": ["dua for success", "prayer for guidance", "help with studies", "general dua"],
+      "related_queries": ["specific duas", "daily prayers", "remembrance", "supplications"],
+      "popularity": 0.8
+    },
+    {
+      "id": "travel_dua_en",
+      "category": "specific",
+      "confidence": 0.95,
+      "completeness": 0.95,
+      "relevance": 0.98,
+      "response_template": "Here is the travel dua (Dua al-Safar): \"Subhan alladhi sakh-khara lana hadha wa ma kunna lahu muqrineen, wa inna ila rabbina la munqaliboon\" (Glory be to Him who has subjected this to us, and we were not capable of it, and indeed we, to our Lord, will surely return). Recite this when beginning your journey.",
+      "keywords": ["travel", "journey", "trip", "safar", "dua"],
+      "patterns": ["travel.*dua", "journey.*prayer", "trip.*dua", "safar.*dua"],
+      "examples": ["travel dua", "journey prayer", "trip dua", "travel prayer"],
+      "related_queries": ["protection dua", "safety prayer", "arrival dua", "vehicle dua"],
+      "popularity": 0.75
+    },
+    {
+      "id": "eating_dua_en",
+      "category": "daily",
+      "confidence": 0.9,
+      "completeness": 0.9,
+      "relevance": 0.95,
+      "response_template": "Before eating, say: \"Bismillah\" (In the name of Allah). After eating, say: \"Alhamdulillahi rabbil alameen\" (All praise is due to Allah, Lord of the worlds). These simple duas bring blessings to your food and express gratitude to Allah.",
+      "keywords": ["eating", "food", "meal", "bismillah", "dua"],
+      "patterns": ["eating.*dua", "food.*prayer", "meal.*dua", "before.*eating"],
+      "examples": ["eating dua", "food prayer", "meal dua", "before eating prayer"],
+      "related_queries": ["drinking dua", "cooking dua", "hunger dua", "gratitude prayer"],
+      "popularity": 0.85
+    }
+  ],
+  "common_queries": [
+    "morning dua",
+    "evening dua",
+    "travel dua",
+    "dua for success",
+    "dua before eating",
+    "dua after eating",
+    "dua for health",
+    "dua for protection",
+    "dua for forgiveness",
+    "dua for guidance",
+    "prayer for strength",
+    "daily prayers",
+    "night prayers",
+    "study dua",
+    "work dua",
+    "family dua",
+    "sleep dua",
+    "waking up dua",
+    "rain dua",
+    "anxiety dua"
+  ]
+}
