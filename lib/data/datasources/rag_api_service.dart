@@ -5,12 +5,13 @@ import 'package:dio/dio.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:logger/logger.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+// import 'package:flutter_secure_storage/flutter_secure_storage.dart';  // Using mock implementation
 
 import '../models/rag_request_model.dart';
 import '../models/rag_response_model.dart';
 import '../../core/exceptions/exceptions.dart';
 import '../../core/network/network_info.dart';
+import '../../core/storage/secure_storage_service.dart'; // Using mock implementation
 
 class RagApiService {
   static const String _baseUrl = 'https://api.example.com/v1';
@@ -21,7 +22,8 @@ class RagApiService {
 
   final Dio _dio;
   final NetworkInfo _networkInfo;
-  final FlutterSecureStorage _secureStorage;
+  final SecureStorageService
+  _secureStorage; // Changed to use our mock implementation
   final Logger _logger;
   final Connectivity _connectivity;
 
@@ -36,7 +38,8 @@ class RagApiService {
 
   RagApiService({
     required NetworkInfo networkInfo,
-    required FlutterSecureStorage secureStorage,
+    required SecureStorageService
+    secureStorage, // Changed to use our mock implementation
     Logger? logger,
   }) : _networkInfo = networkInfo,
        _secureStorage = secureStorage,
@@ -193,7 +196,10 @@ class RagApiService {
 
   Future<String?> _getAuthToken() async {
     try {
-      return await _secureStorage.read(key: 'rag_api_token');
+      // return await _secureStorage.read(key: 'rag_api_token');  // Original FlutterSecureStorage API
+      return await _secureStorage.getValue(
+        'rag_api_token',
+      ); // Our SecureStorageService API
     } catch (e) {
       _logger.e('🔐 Failed to get auth token: $e');
       return null;
@@ -202,7 +208,11 @@ class RagApiService {
 
   Future<void> setAuthToken(String token) async {
     try {
-      await _secureStorage.write(key: 'rag_api_token', value: token);
+      // await _secureStorage.write(key: 'rag_api_token', value: token);  // Original FlutterSecureStorage API
+      await _secureStorage.saveValue(
+        'rag_api_token',
+        token,
+      ); // Our SecureStorageService API
       _logger.d('🔐 Auth token saved');
     } catch (e) {
       _logger.e('🔐 Failed to save auth token: $e');

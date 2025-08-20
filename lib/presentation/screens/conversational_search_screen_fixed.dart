@@ -1,19 +1,18 @@
-// lib/presentation/screens/conversational_search_screen.dart
+// lib/presentation/screens/conversational_search_screen_fixed.dart
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../services/ads/ad_service.dart';
 import '../widgets/ads/ad_widgets.dart';
 
 class ConversationalSearchScreen extends ConsumerStatefulWidget {
-  final bool enableVoiceSearch;
   final bool enableArabicKeyboard;
   final bool showSearchHistory;
   final VoidCallback? onMenuPressed;
 
   const ConversationalSearchScreen({
     super.key,
-    this.enableVoiceSearch = false,
     this.enableArabicKeyboard = true,
     this.showSearchHistory = true,
     this.onMenuPressed,
