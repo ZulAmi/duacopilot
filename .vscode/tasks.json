@@ -1,0 +1,37 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run DuaCopilot - Windows Dev",
+			"type": "shell",
+			"command": "flutter",
+			"args": [
+				"run",
+				"--target",
+				"lib/main_dev.dart",
+				"-d",
+				"windows"
+			],
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Run DuaCopilot - Web Dev",
+			"type": "shell",
+			"command": "flutter",
+			"args": [
+				"run",
+				"--target",
+				"lib/main_dev.dart",
+				"-d",
+				"chrome",
+				"--web-port",
+				"8080"
+			],
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}

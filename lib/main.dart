@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'presentation/screens/conversational_search_screen.dart';
+import 'services/ads/ad_service.dart';
+import 'core/di/injection_container.dart' as di;
 
-void main() {
-  runApp(const DuaCopilotApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize dependency injection
+  await di.init();
+
+  // Initialize ad service
+  await AdService.instance.initialize();
+
+  runApp(const ProviderScope(child: DuaCopilotApp()));
 }
 
 class DuaCopilotApp extends StatelessWidget {
@@ -84,11 +95,7 @@ class DuaCopilotApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: 'Inter',
       ),
-      home: const ConversationalSearchScreen(
-        enableVoiceSearch: true,
-        enableArabicKeyboard: true,
-        showSearchHistory: true,
-      ),
+      home: const ConversationalSearchScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

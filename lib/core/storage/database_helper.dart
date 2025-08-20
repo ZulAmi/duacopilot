@@ -1,5 +1,10 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'dart:io' show Platform;
+
+// Import platform-specific database factories
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._internal();
@@ -14,6 +19,13 @@ class DatabaseHelper {
   }
 
   Future<Database> _initDatabase() async {
+    // Initialize platform-specific database factory
+    if (!kIsWeb && (Platform.isWindows || Platform.isLinux)) {
+      // Initialize FFI for desktop platforms
+      sqfliteFfiInit();
+      databaseFactory = databaseFactoryFfi;
+    }
+    
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, 'duacopilot.db');
 
