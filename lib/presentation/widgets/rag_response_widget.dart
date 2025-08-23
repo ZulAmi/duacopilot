@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../domain/entities/rag_response.dart';
 
+/// RagResponseWidget class implementation
 class RagResponseWidget extends StatelessWidget {
   final RagResponse response;
 
@@ -217,6 +218,7 @@ class RagResponseWidget extends StatelessWidget {
   }
 }
 
+/// _DetailRow class implementation
 class _DetailRow extends StatelessWidget {
   final String label;
   final String value;

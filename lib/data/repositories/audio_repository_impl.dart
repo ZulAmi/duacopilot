@@ -6,6 +6,7 @@ import '../../core/error/exceptions.dart';
 import '../../core/network/network_info.dart';
 import '../datasources/local_datasource.dart';
 
+/// AudioRepositoryImpl class implementation
 class AudioRepositoryImpl implements AudioRepository {
   final LocalDataSource localDataSource;
   final NetworkInfo networkInfo;

@@ -1,5 +1,5 @@
 /// Main performance optimization integration file for RAG
-library performance_integration;
+library;
 
 /// This file brings together all performance optimizations for the DuaCopilot app
 export 'arabic_scroll_physics.dart';
@@ -18,8 +18,7 @@ import 'platform_optimizer.dart';
 
 /// Main performance manager that coordinates all optimizations
 class RagPerformanceManager {
-  static final RagPerformanceManager _instance =
-      RagPerformanceManager._internal();
+  static final RagPerformanceManager _instance = RagPerformanceManager._internal();
   factory RagPerformanceManager() => _instance;
   RagPerformanceManager._internal();
 
@@ -107,10 +106,10 @@ class PerformanceOptimizedApp extends StatefulWidget {
   });
 
   @override
-  State<PerformanceOptimizedApp> createState() =>
-      _PerformanceOptimizedAppState();
+  State<PerformanceOptimizedApp> createState() => _PerformanceOptimizedAppState();
 }
 
+/// _PerformanceOptimizedAppState class implementation
 class _PerformanceOptimizedAppState extends State<PerformanceOptimizedApp> {
   final RagPerformanceManager _performanceManager = RagPerformanceManager();
   bool _isInitialized = false;
@@ -143,19 +142,14 @@ class _PerformanceOptimizedAppState extends State<PerformanceOptimizedApp> {
   @override
   Widget build(BuildContext context) {
     if (!_isInitialized) {
-      return const MaterialApp(
-        home: Scaffold(body: Center(child: CircularProgressIndicator())),
-      );
+      return const MaterialApp(home: Scaffold(body: Center(child: CircularProgressIndicator())));
     }
 
     Widget child = widget.child;
 
     // Wrap with Arabic scroll optimization if enabled
     if (widget.enableArabicScrollOptimization) {
-      child = ScrollConfiguration(
-        behavior: ArabicScrollBehavior(isRTL: true),
-        child: child,
-      );
+      child = ScrollConfiguration(behavior: ArabicScrollBehavior(isRTL: true), child: child);
     }
 
     // Wrap with performance monitoring if enabled
@@ -163,9 +157,7 @@ class _PerformanceOptimizedAppState extends State<PerformanceOptimizedApp> {
       child = buildPerformanceMonitoredWidget(
         child: child,
         name: 'PerformanceOptimizedApp',
-        attributes: {
-          'arabic_scroll': widget.enableArabicScrollOptimization.toString(),
-        },
+        attributes: {'arabic_scroll': widget.enableArabicScrollOptimization.toString()},
       );
     }
 
@@ -200,9 +192,7 @@ class PerformanceHelpers {
   }
 
   /// Analyze sentiment in background
-  static Future<SentimentAnalysisResult> analyzeSentimentInBackground(
-    String text,
-  ) {
+  static Future<SentimentAnalysisResult> analyzeSentimentInBackground(String text) {
     return RagBackgroundProcessor.analyzeSentiment(text: text, language: 'ar');
   }
 
@@ -244,22 +234,12 @@ class PerformanceHelpers {
 /// Extension to add performance monitoring to existing widgets
 extension WidgetPerformanceExtension on Widget {
   /// Wrap widget with performance monitoring
-  Widget withPerformanceMonitoring({
-    required String name,
-    Map<String, String>? attributes,
-  }) {
-    return buildPerformanceMonitoredWidget(
-      child: this,
-      name: name,
-      attributes: attributes,
-    );
+  Widget withPerformanceMonitoring({required String name, Map<String, String>? attributes}) {
+    return buildPerformanceMonitoredWidget(child: this, name: name, attributes: attributes);
   }
 
   /// Wrap widget with Arabic scroll optimization
   Widget withArabicScrollOptimization({bool isRTL = true}) {
-    return ScrollConfiguration(
-      behavior: ArabicScrollBehavior(isRTL: isRTL),
-      child: this,
-    );
+    return ScrollConfiguration(behavior: ArabicScrollBehavior(isRTL: isRTL), child: this);
   }
 }

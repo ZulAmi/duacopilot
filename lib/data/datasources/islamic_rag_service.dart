@@ -1,3 +1,5 @@
+import 'package:duacopilot/core/logging/app_logger.dart';
+
 import '../models/dua_response.dart';
 import '../models/dua_recommendation.dart';
 import '../models/query_history.dart';
@@ -207,7 +209,7 @@ class IslamicRagService {
         searchResults.addAll(uniqueResults);
       } catch (e) {
         // Continue with other editions if one fails
-        print('Search failed for edition $edition: $e');
+        AppLogger.debug('Search failed for edition $edition: $e');
       }
     }
 
@@ -474,7 +476,7 @@ class IslamicRagService {
           recommendations.add(recs.first);
         }
       } catch (e) {
-        print('Failed to get popular recommendation for $query: $e');
+        AppLogger.debug('Failed to get popular recommendation for $query: $e');
       }
     }
 
@@ -496,6 +498,7 @@ class IslamicRagService {
   }
 }
 
+/// IslamicRagException class implementation
 class IslamicRagException implements Exception {
   final String message;
 

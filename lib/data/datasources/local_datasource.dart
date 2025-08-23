@@ -11,6 +11,7 @@ abstract class LocalDataSource {
   Future<void> clearExpiredCache();
 }
 
+/// LocalDataSourceImpl class implementation
 class LocalDataSourceImpl implements LocalDataSource {
   final Database database;
 

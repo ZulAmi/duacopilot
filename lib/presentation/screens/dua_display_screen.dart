@@ -8,6 +8,7 @@ import '../widgets/dua_display/rag_confidence_widget.dart';
 import '../widgets/dua_display/authenticity_badge_widget.dart';
 import '../widgets/dua_display/dua_audio_player_widget.dart';
 
+/// DuaDisplayScreen class implementation
 class DuaDisplayScreen extends StatefulWidget {
   final DuaEntity dua;
   final List<DuaEntity> relatedDuas;
@@ -16,20 +17,20 @@ class DuaDisplayScreen extends StatefulWidget {
   final Function(DuaEntity)? onRelatedDuaTap;
 
   const DuaDisplayScreen({
-    Key? key,
+    super.key,
     required this.dua,
     this.relatedDuas = const [],
     this.onFavoriteToggle,
     this.onShare,
     this.onRelatedDuaTap,
-  }) : super(key: key);
+  });
 
   @override
   State<DuaDisplayScreen> createState() => _DuaDisplayScreenState();
 }
 
-class _DuaDisplayScreenState extends State<DuaDisplayScreen>
-    with TickerProviderStateMixin {
+/// _DuaDisplayScreenState class implementation
+class _DuaDisplayScreenState extends State<DuaDisplayScreen> with TickerProviderStateMixin {
   late AnimationController _fadeController;
   late AnimationController _slideController;
   late PageController _relatedDuasController;
@@ -43,15 +44,9 @@ class _DuaDisplayScreenState extends State<DuaDisplayScreen>
   void initState() {
     super.initState();
 
-    _fadeController = AnimationController(
-      duration: const Duration(milliseconds: 600),
-      vsync: this,
-    );
+    _fadeController = AnimationController(duration: const Duration(milliseconds: 600), vsync: this);
 
-    _slideController = AnimationController(
-      duration: const Duration(milliseconds: 400),
-      vsync: this,
-    );
+    _slideController = AnimationController(duration: const Duration(milliseconds: 400), vsync: this);
 
     _relatedDuasController = PageController();
 
@@ -82,7 +77,7 @@ class _DuaDisplayScreenState extends State<DuaDisplayScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
         child: Column(
           children: [
@@ -140,8 +135,7 @@ class _DuaDisplayScreenState extends State<DuaDisplayScreen>
                         showDetailed: _showAuthenticityDetails,
                         onTap: () {
                           setState(() {
-                            _showAuthenticityDetails =
-                                !_showAuthenticityDetails;
+                            _showAuthenticityDetails = !_showAuthenticityDetails;
                           });
                         },
                       ),
@@ -149,15 +143,12 @@ class _DuaDisplayScreenState extends State<DuaDisplayScreen>
                       const SizedBox(height: 20),
 
                       // Context and Benefits (if available)
-                      if (widget.dua.context != null ||
-                          widget.dua.benefits != null)
-                        _buildContextAndBenefits(),
+                      if (widget.dua.context != null || widget.dua.benefits != null) _buildContextAndBenefits(),
 
                       const SizedBox(height: 20),
 
                       // Related Du'as Carousel
-                      if (widget.relatedDuas.isNotEmpty)
-                        _buildRelatedDuasSection(),
+                      if (widget.relatedDuas.isNotEmpty) _buildRelatedDuasSection(),
 
                       const SizedBox(height: 20),
 
@@ -181,22 +172,13 @@ class _DuaDisplayScreenState extends State<DuaDisplayScreen>
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.04),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8, offset: const Offset(0, 2))],
       ),
       child: Row(
         children: [
           IconButton(
             onPressed: () => Navigator.of(context).pop(),
-            icon: Icon(
-              Icons.arrow_back_rounded,
-              color: Theme.of(context).colorScheme.onSurface,
-            ),
+            icon: Icon(Icons.arrow_back_rounded, color: Theme.of(context).colorScheme.onSurface),
           ),
 
           Expanded(
@@ -213,10 +195,7 @@ class _DuaDisplayScreenState extends State<DuaDisplayScreen>
                 ),
                 Text(
                   widget.dua.category,
-                  style: GoogleFonts.inter(
-                    fontSize: 14,
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
+                  style: GoogleFonts.inter(fontSize: 14, color: Theme.of(context).colorScheme.onSurfaceVariant),
                 ),
               ],
             ),
@@ -226,23 +205,15 @@ class _DuaDisplayScreenState extends State<DuaDisplayScreen>
           IconButton(
             onPressed: _toggleFavorite,
             icon: Icon(
-              _isFavorite
-                  ? Icons.favorite_rounded
-                  : Icons.favorite_border_rounded,
-              color:
-                  _isFavorite
-                      ? Colors.red
-                      : Theme.of(context).colorScheme.onSurface,
+              _isFavorite ? Icons.favorite_rounded : Icons.favorite_border_rounded,
+              color: _isFavorite ? Colors.red : Theme.of(context).colorScheme.onSurface,
             ),
           ),
 
           // Share button
           IconButton(
             onPressed: _shareDua,
-            icon: Icon(
-              Icons.share_rounded,
-              color: Theme.of(context).colorScheme.onSurface,
-            ),
+            icon: Icon(Icons.share_rounded, color: Theme.of(context).colorScheme.onSurface),
           ),
         ],
       ),
@@ -262,10 +233,7 @@ class _DuaDisplayScreenState extends State<DuaDisplayScreen>
           ],
         ),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-          width: 1,
-        ),
+        border: Border.all(color: Theme.of(context).colorScheme.primary.withOpacity(0.1), width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -278,11 +246,7 @@ class _DuaDisplayScreenState extends State<DuaDisplayScreen>
                   color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Icon(
-                  Icons.mosque_rounded,
-                  color: Theme.of(context).colorScheme.primary,
-                  size: 20,
-                ),
+                child: Icon(Icons.mosque_rounded, color: Theme.of(context).colorScheme.primary, size: 20),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -308,21 +272,11 @@ class _DuaDisplayScreenState extends State<DuaDisplayScreen>
               children:
                   widget.dua.tags.map((tag) {
                     return Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 4,
-                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
-                        color: Theme.of(
-                          context,
-                        ).colorScheme.primary.withOpacity(0.1),
+                        color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                          color: Theme.of(
-                            context,
-                          ).colorScheme.primary.withOpacity(0.2),
-                          width: 1,
-                        ),
+                        border: Border.all(color: Theme.of(context).colorScheme.primary.withOpacity(0.2), width: 1),
                       ),
                       child: Text(
                         tag,
@@ -344,12 +298,9 @@ class _DuaDisplayScreenState extends State<DuaDisplayScreen>
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.3),
+        color: Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.3),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.outline.withOpacity(0.1),
-          width: 1,
-        ),
+        border: Border.all(color: Theme.of(context).colorScheme.outline.withOpacity(0.1), width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -357,11 +308,7 @@ class _DuaDisplayScreenState extends State<DuaDisplayScreen>
           if (widget.dua.context != null) ...[
             Row(
               children: [
-                Icon(
-                  Icons.info_outline_rounded,
-                  size: 16,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
+                Icon(Icons.info_outline_rounded, size: 16, color: Theme.of(context).colorScheme.primary),
                 const SizedBox(width: 8),
                 Text(
                   'Context',
@@ -384,17 +331,12 @@ class _DuaDisplayScreenState extends State<DuaDisplayScreen>
             ),
           ],
 
-          if (widget.dua.context != null && widget.dua.benefits != null)
-            const SizedBox(height: 16),
+          if (widget.dua.context != null && widget.dua.benefits != null) const SizedBox(height: 16),
 
           if (widget.dua.benefits != null) ...[
             Row(
               children: [
-                Icon(
-                  Icons.star_outline_rounded,
-                  size: 16,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
+                Icon(Icons.star_outline_rounded, size: 16, color: Theme.of(context).colorScheme.primary),
                 const SizedBox(width: 8),
                 Text(
                   'Benefits',
@@ -427,11 +369,7 @@ class _DuaDisplayScreenState extends State<DuaDisplayScreen>
       children: [
         Row(
           children: [
-            Icon(
-              Icons.auto_awesome_rounded,
-              size: 20,
-              color: Theme.of(context).colorScheme.primary,
-            ),
+            Icon(Icons.auto_awesome_rounded, size: 20, color: Theme.of(context).colorScheme.primary),
             const SizedBox(width: 8),
             Text(
               'Related Du\'as',
@@ -467,10 +405,7 @@ class _DuaDisplayScreenState extends State<DuaDisplayScreen>
             },
             itemBuilder: (context, index) {
               final relatedDua = widget.relatedDuas[index];
-              return Container(
-                margin: const EdgeInsets.only(right: 12),
-                child: _buildRelatedDuaCard(relatedDua),
-              );
+              return Container(margin: const EdgeInsets.only(right: 12), child: _buildRelatedDuaCard(relatedDua));
             },
           ),
         ),
@@ -490,9 +425,7 @@ class _DuaDisplayScreenState extends State<DuaDisplayScreen>
                   color:
                       index == _currentRelatedIndex
                           ? Theme.of(context).colorScheme.primary
-                          : Theme.of(
-                            context,
-                          ).colorScheme.outline.withOpacity(0.3),
+                          : Theme.of(context).colorScheme.outline.withOpacity(0.3),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -511,17 +444,8 @@ class _DuaDisplayScreenState extends State<DuaDisplayScreen>
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: Theme.of(context).colorScheme.outline.withOpacity(0.1),
-            width: 1,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.04),
-              blurRadius: 8,
-              offset: const Offset(0, 2),
-            ),
-          ],
+          border: Border.all(color: Theme.of(context).colorScheme.outline.withOpacity(0.1), width: 1),
+          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8, offset: const Offset(0, 2))],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -557,14 +481,9 @@ class _DuaDisplayScreenState extends State<DuaDisplayScreen>
             Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 6,
-                    vertical: 2,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.primary.withOpacity(0.1),
+                    color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
@@ -577,11 +496,7 @@ class _DuaDisplayScreenState extends State<DuaDisplayScreen>
                   ),
                 ),
                 const Spacer(),
-                Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  size: 12,
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+                Icon(Icons.arrow_forward_ios_rounded, size: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
               ],
             ),
           ],
@@ -600,9 +515,7 @@ class _DuaDisplayScreenState extends State<DuaDisplayScreen>
             label: Text('Share Du\'a'),
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 12),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             ),
           ),
         ),
@@ -612,17 +525,11 @@ class _DuaDisplayScreenState extends State<DuaDisplayScreen>
         Expanded(
           child: OutlinedButton.icon(
             onPressed: _toggleFavorite,
-            icon: Icon(
-              _isFavorite
-                  ? Icons.favorite_rounded
-                  : Icons.favorite_border_rounded,
-            ),
+            icon: Icon(_isFavorite ? Icons.favorite_rounded : Icons.favorite_border_rounded),
             label: Text(_isFavorite ? 'Saved' : 'Save'),
             style: OutlinedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 12),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             ),
           ),
         ),
@@ -650,9 +557,7 @@ class _DuaDisplayScreenState extends State<DuaDisplayScreen>
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(
-          _isFavorite ? 'Added to favorites' : 'Removed from favorites',
-        ),
+        content: Text(_isFavorite ? 'Added to favorites' : 'Removed from favorites'),
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
@@ -666,22 +571,14 @@ class _DuaDisplayScreenState extends State<DuaDisplayScreen>
   void _showShareOptions() {
     showModalBottomSheet(
       context: context,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
       builder:
           (context) => Container(
             padding: const EdgeInsets.all(16),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  'Share Du\'a',
-                  style: GoogleFonts.inter(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                Text('Share Du\'a', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 16),
 
                 ListTile(
@@ -699,9 +596,7 @@ class _DuaDisplayScreenState extends State<DuaDisplayScreen>
                   onTap: () async {
                     Navigator.pop(context);
                     await DuaShareService.copyToClipboard(widget.dua);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Du\'a copied to clipboard')),
-                    );
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Du\'a copied to clipboard')));
                   },
                 ),
 

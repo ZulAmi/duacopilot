@@ -1,3 +1,5 @@
+import 'package:duacopilot/core/logging/app_logger.dart';
+
 import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import '../../domain/entities/rag_response.dart';
@@ -43,7 +45,7 @@ class LocalSemanticSearchService {
     if (_isInitialized) return;
 
     try {
-      print('Initializing Local Semantic Search Service...');
+      AppLogger.debug('Initializing Local Semantic Search Service...');
 
       // Store callbacks
       _onConnectivityChanged = onConnectivityChanged;
@@ -68,9 +70,9 @@ class LocalSemanticSearchService {
       await _preloadPopularEmbeddings();
 
       _isInitialized = true;
-      print('Local Semantic Search Service initialized successfully');
+      AppLogger.debug('Local Semantic Search Service initialized successfully');
     } catch (e) {
-      print('Error initializing Local Semantic Search Service: $e');
+      AppLogger.debug('Error initializing Local Semantic Search Service: $e');
       throw Exception('Failed to initialize local search service: $e');
     }
   }
@@ -111,7 +113,7 @@ class LocalSemanticSearchService {
             );
           }
         } catch (e) {
-          print('Online search failed, falling back to offline: $e');
+          AppLogger.debug('Online search failed, falling back to offline: $e');
         }
       }
 
@@ -123,7 +125,7 @@ class LocalSemanticSearchService {
         minSimilarity: minSimilarity,
       );
     } catch (e) {
-      print('Error during search: $e');
+      AppLogger.debug('Error during search: $e');
       return SearchResponse.empty(query, language);
     }
   }
@@ -171,7 +173,7 @@ class LocalSemanticSearchService {
 
       return suggestions.take(limit).toList();
     } catch (e) {
-      print('Error getting suggestions: $e');
+      AppLogger.debug('Error getting suggestions: $e');
       return [];
     }
   }
@@ -199,7 +201,7 @@ class LocalSemanticSearchService {
         },
       };
     } catch (e) {
-      print('Error getting search stats: $e');
+      AppLogger.debug('Error getting search stats: $e');
       return {'error': e.toString()};
     }
   }
@@ -211,7 +213,7 @@ class LocalSemanticSearchService {
     if (_isOnline) {
       await _queueService.processQueue();
     } else {
-      print('Cannot sync: device is offline');
+      AppLogger.debug('Cannot sync: device is offline');
     }
   }
 
@@ -220,7 +222,7 @@ class LocalSemanticSearchService {
     await _ensureInitialized();
 
     try {
-      print('Preloading popular queries...');
+      AppLogger.debug('Preloading popular queries...');
       final languages =
           language != null ? [language] : ['en', 'ar', 'ur', 'id'];
 
@@ -251,17 +253,17 @@ class LocalSemanticSearchService {
             );
             embeddings.add(duaEmbedding);
           } catch (e) {
-            print('Failed to preload embedding for "$query": $e');
+            AppLogger.debug('Failed to preload embedding for "$query": $e');
           }
         }
 
         if (embeddings.isNotEmpty) {
           await _vectorStorage.storeBatchEmbeddings(embeddings);
-          print('Preloaded ${embeddings.length} embeddings for $lang');
+          AppLogger.debug('Preloaded ${embeddings.length} embeddings for $lang');
         }
       }
     } catch (e) {
-      print('Error preloading popular queries: $e');
+      AppLogger.debug('Error preloading popular queries: $e');
     }
   }
 
@@ -272,9 +274,9 @@ class LocalSemanticSearchService {
     try {
       await _vectorStorage.clearEmbeddings();
       await _queueService.clearQueue();
-      print('Offline data cleared');
+      AppLogger.debug('Offline data cleared');
     } catch (e) {
-      print('Error clearing offline data: $e');
+      AppLogger.debug('Error clearing offline data: $e');
     }
   }
 
@@ -286,7 +288,7 @@ class LocalSemanticSearchService {
     await _embeddingService.dispose();
 
     _isInitialized = false;
-    print('Local Semantic Search Service disposed');
+    AppLogger.debug('Local Semantic Search Service disposed');
   }
 
   // Private methods
@@ -311,7 +313,7 @@ class LocalSemanticSearchService {
         _isOnline = result != ConnectivityResult.none;
 
         if (_isOnline != wasOnline) {
-          print('Connectivity changed: ${_isOnline ? 'Online' : 'Offline'}');
+          AppLogger.debug('Connectivity changed: ${_isOnline ? 'Online' : 'Offline'}');
           _onConnectivityChanged?.call(_isOnline);
 
           if (_isOnline) {
@@ -321,7 +323,7 @@ class LocalSemanticSearchService {
         }
       });
     } catch (e) {
-      print('Error setting up connectivity monitoring: $e');
+      AppLogger.debug('Error setting up connectivity monitoring: $e');
     }
   }
 
@@ -419,7 +421,7 @@ class LocalSemanticSearchService {
         processingTime: stopwatch.elapsed,
       );
     } catch (e) {
-      print('Error in offline search: $e');
+      AppLogger.debug('Error in offline search: $e');
       stopwatch.stop();
       return SearchResponse.empty(query, language);
     }
@@ -477,7 +479,7 @@ class LocalSemanticSearchService {
 
       await _vectorStorage.storeEmbedding(duaEmbedding);
     } catch (e) {
-      print('Error storing online result: $e');
+      AppLogger.debug('Error storing online result: $e');
     }
   }
 
@@ -512,7 +514,7 @@ class LocalSemanticSearchService {
         await preloadPopularQueries(limit: 20);
       }
     } catch (e) {
-      print('Error preloading embeddings: $e');
+      AppLogger.debug('Error preloading embeddings: $e');
     }
   }
 
@@ -562,15 +564,15 @@ class LocalSemanticSearchService {
 
   // Queue service callbacks
   void _handleQueuedQueryProcessed(PendingQuery query) {
-    print('Queued query processed: ${query.query}');
+    AppLogger.debug('Queued query processed: ${query.query}');
   }
 
   void _handleQueuedQueryFailed(PendingQuery query, String error) {
-    print('Queued query failed: ${query.query} - $error');
+    AppLogger.debug('Queued query failed: ${query.query} - $error');
   }
 
   void _handleQueueSizeChanged(int newSize) {
-    print('Queue size changed: $newSize pending queries');
+    AppLogger.debug('Queue size changed: $newSize pending queries');
   }
 
   /// Check if service is initialized

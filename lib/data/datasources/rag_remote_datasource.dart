@@ -5,6 +5,7 @@ abstract class RagRemoteDataSource {
   Future<RagResponseModel> searchRag(String query);
 }
 
+/// RagRemoteDataSourceImpl class implementation
 class RagRemoteDataSourceImpl implements RagRemoteDataSource {
   final dynamic dioClient; // Using dynamic to avoid compile errors for now
 

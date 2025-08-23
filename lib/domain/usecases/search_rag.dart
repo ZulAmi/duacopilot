@@ -3,6 +3,7 @@ import '../entities/rag_response.dart';
 import '../repositories/rag_repository.dart';
 import '../../core/error/failures.dart';
 
+/// SearchRag class implementation
 class SearchRag {
   final RagRepository repository;
 

@@ -1,3 +1,5 @@
+import 'package:duacopilot/core/logging/app_logger.dart';
+
 import 'dart:convert';
 
 import '../models/dua_response.dart';
@@ -53,7 +55,7 @@ class RagCacheService {
       await QueryHistoryHelper.insert(queryHistory);
       await _maintainCacheSize();
     } catch (e) {
-      print('❌ Error caching query response: $e');
+      AppLogger.debug('❌ Error caching query response: $e');
     }
   }
 
@@ -80,7 +82,7 @@ class RagCacheService {
 
       return null;
     } catch (e) {
-      print('❌ Error finding similar query: $e');
+      AppLogger.debug('❌ Error finding similar query: $e');
       return null;
     }
   }
@@ -143,7 +145,7 @@ class RagCacheService {
         });
       }
     } catch (e) {
-      print('❌ Error caching Du\'a response: $e');
+      AppLogger.debug('❌ Error caching Du\'a response: $e');
     }
   }
 
@@ -211,7 +213,7 @@ class RagCacheService {
         isFromCache: (responseRow['is_from_cache'] as int) == 1,
       );
     } catch (e) {
-      print('❌ Error retrieving cached Du\'a response: $e');
+      AppLogger.debug('❌ Error retrieving cached Du\'a response: $e');
       return null;
     }
   }
@@ -223,7 +225,7 @@ class RagCacheService {
     try {
       await DuaRecommendationHelper.insert(recommendation);
     } catch (e) {
-      print('❌ Error caching Du\'a recommendation: $e');
+      AppLogger.debug('❌ Error caching Du\'a recommendation: $e');
     }
   }
 
@@ -268,7 +270,7 @@ class RagCacheService {
           return preference.value as T?;
       }
     } catch (e) {
-      print('❌ Error getting user preference: $e');
+      AppLogger.debug('❌ Error getting user preference: $e');
       return null;
     }
   }
@@ -301,7 +303,7 @@ class RagCacheService {
 
       await UserPreferenceHelper.insertOrUpdate(preference);
     } catch (e) {
-      print('❌ Error setting user preference: $e');
+      AppLogger.debug('❌ Error setting user preference: $e');
     }
   }
 
@@ -319,7 +321,7 @@ class RagCacheService {
 
       return ragContext;
     } catch (e) {
-      print('❌ Error getting user RAG context: $e');
+      AppLogger.debug('❌ Error getting user RAG context: $e');
       return {};
     }
   }
@@ -331,7 +333,7 @@ class RagCacheService {
     try {
       await AudioCacheHelper.insert(audioCache);
     } catch (e) {
-      print('❌ Error caching audio file: $e');
+      AppLogger.debug('❌ Error caching audio file: $e');
     }
   }
 
@@ -343,7 +345,7 @@ class RagCacheService {
     try {
       return await AudioCacheHelper.getByDuaId(duaId, quality: quality);
     } catch (e) {
-      print('❌ Error getting cached audio: $e');
+      AppLogger.debug('❌ Error getting cached audio: $e');
       return null;
     }
   }
@@ -353,7 +355,7 @@ class RagCacheService {
     try {
       await AudioCacheHelper.cleanupExpired();
     } catch (e) {
-      print('❌ Error cleaning up expired audio: $e');
+      AppLogger.debug('❌ Error cleaning up expired audio: $e');
     }
   }
 
@@ -387,7 +389,7 @@ class RagCacheService {
         );
       }
     } catch (e) {
-      print('❌ Error maintaining cache size: $e');
+      AppLogger.debug('❌ Error maintaining cache size: $e');
     }
   }
 
@@ -409,7 +411,7 @@ class RagCacheService {
         whereArgs: [cutoffTime],
       );
     } catch (e) {
-      print('❌ Error cleaning up expired cache: $e');
+      AppLogger.debug('❌ Error cleaning up expired cache: $e');
     }
   }
 
@@ -452,7 +454,7 @@ class RagCacheService {
         'max_cache_size': _maxCacheSize,
       };
     } catch (e) {
-      print('❌ Error getting cache stats: $e');
+      AppLogger.debug('❌ Error getting cache stats: $e');
       return {};
     }
   }
@@ -490,9 +492,9 @@ class RagCacheService {
       await db.delete('dua_sources');
       await db.delete('dua_recommendations');
       await db.delete('audio_cache');
-      print('✅ All cache cleared');
+      AppLogger.debug('✅ All cache cleared');
     } catch (e) {
-      print('❌ Error clearing cache: $e');
+      AppLogger.debug('❌ Error clearing cache: $e');
     }
   }
 }

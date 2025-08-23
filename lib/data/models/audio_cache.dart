@@ -8,6 +8,7 @@ part 'audio_cache.freezed.dart';
 part 'audio_cache.g.dart';
 
 @freezed
+/// AudioCache class implementation
 class AudioCache with _$AudioCache {
   const factory AudioCache({
     required String id,
@@ -28,8 +29,7 @@ class AudioCache with _$AudioCache {
     DateTime? expiresAt,
   }) = _AudioCache;
 
-  factory AudioCache.fromJson(Map<String, dynamic> json) =>
-      _$AudioCacheFromJson(json);
+  factory AudioCache.fromJson(Map<String, dynamic> json) => _$AudioCacheFromJson(json);
 }
 
 // Helper extension for database operations and audio management
@@ -66,8 +66,9 @@ extension AudioCacheExtension on AudioCache {
 
   String get displaySize {
     if (fileSizeBytes < 1024) return '${fileSizeBytes}B';
-    if (fileSizeBytes < 1024 * 1024)
+    if (fileSizeBytes < 1024 * 1024) {
       return '${(fileSizeBytes / 1024).toStringAsFixed(1)}KB';
+    }
     return '${fileSizeMB.toStringAsFixed(1)}MB';
   }
 
@@ -80,8 +81,9 @@ extension AudioCacheExtension on AudioCache {
   bool shouldCleanup({Duration maxAge = const Duration(days: 30)}) {
     if (isFavorite) return false;
     if (isExpired) return true;
-    if (playCount == 0 && ageInCache != null && ageInCache! > maxAge)
+    if (playCount == 0 && ageInCache != null && ageInCache! > maxAge) {
       return true;
+    }
     return false;
   }
 
@@ -91,9 +93,9 @@ extension AudioCacheExtension on AudioCache {
 }
 
 // Static helper methods
+/// AudioCacheHelper class implementation
 class AudioCacheHelper {
-  static Future<Database> get _database async =>
-      RagDatabaseHelper.instance.database;
+  static Future<Database> get _database async => RagDatabaseHelper.instance.database;
 
   static AudioCache fromDatabase(Map<String, dynamic> map) {
     return AudioCache(
@@ -102,35 +104,18 @@ class AudioCacheHelper {
       fileName: map['file_name'] as String,
       localPath: map['local_path'] as String,
       fileSizeBytes: map['file_size_bytes'] as int,
-      quality: AudioQuality.values.firstWhere(
-        (q) => q.name == map['quality'],
-        orElse: () => AudioQuality.medium,
-      ),
-      status: DownloadStatus.values.firstWhere(
-        (s) => s.name == map['status'],
-        orElse: () => DownloadStatus.pending,
-      ),
+      quality: AudioQuality.values.firstWhere((q) => q.name == map['quality'], orElse: () => AudioQuality.medium),
+      status: DownloadStatus.values.firstWhere((s) => s.name == map['status'], orElse: () => DownloadStatus.pending),
       originalUrl: map['original_url'] as String?,
       reciter: map['reciter'] as String?,
       language: map['language'] as String?,
-      metadata:
-          map['metadata'] != null
-              ? _decodeJson(map['metadata'] as String)
-              : null,
+      metadata: map['metadata'] != null ? _decodeJson(map['metadata'] as String) : null,
       playCount: map['play_count'] as int? ?? 0,
       isFavorite: (map['is_favorite'] as int) == 1,
       downloadedAt:
-          map['downloaded_at'] != null
-              ? DateTime.fromMillisecondsSinceEpoch(map['downloaded_at'] as int)
-              : null,
-      lastPlayed:
-          map['last_played'] != null
-              ? DateTime.fromMillisecondsSinceEpoch(map['last_played'] as int)
-              : null,
-      expiresAt:
-          map['expires_at'] != null
-              ? DateTime.fromMillisecondsSinceEpoch(map['expires_at'] as int)
-              : null,
+          map['downloaded_at'] != null ? DateTime.fromMillisecondsSinceEpoch(map['downloaded_at'] as int) : null,
+      lastPlayed: map['last_played'] != null ? DateTime.fromMillisecondsSinceEpoch(map['last_played'] as int) : null,
+      expiresAt: map['expires_at'] != null ? DateTime.fromMillisecondsSinceEpoch(map['expires_at'] as int) : null,
     );
   }
 
@@ -140,10 +125,7 @@ class AudioCacheHelper {
     await db.insert('audio_cache', audioCache.toDatabase());
   }
 
-  static Future<AudioCache?> getByDuaId(
-    String duaId, {
-    AudioQuality? quality,
-  }) async {
+  static Future<AudioCache?> getByDuaId(String duaId, {AudioQuality? quality}) async {
     final db = await _database;
     String whereClause = 'dua_id = ?';
     List<dynamic> whereArgs = [duaId];

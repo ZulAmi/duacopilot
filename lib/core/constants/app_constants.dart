@@ -1,3 +1,4 @@
+/// AppConstants class implementation
 class AppConstants {
   // API Configuration
   static const String defaultRagApiUrl = 'https://api.example.com/rag';
@@ -37,6 +38,7 @@ class AppConstants {
   static const String ragApiUrlKey = 'rag_api_url';
 }
 
+/// ErrorMessages class implementation
 class ErrorMessages {
   static const String networkError = 'Network connection failed';
   static const String serverError = 'Server error occurred';
@@ -57,6 +59,7 @@ class ErrorMessages {
   static const String audioFileNotFound = 'Audio file not found';
 }
 
+/// AppStrings class implementation
 class AppStrings {
   static const String appName = 'DuaCopilot';
   static const String searchHint = 'Ask me anything...';

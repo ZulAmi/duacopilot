@@ -8,6 +8,7 @@ abstract class Failure extends Equatable {
 }
 
 // General failures
+/// ServerFailure class implementation
 class ServerFailure extends Failure {
   final String message;
 
@@ -17,6 +18,7 @@ class ServerFailure extends Failure {
   List<Object> get props => [message];
 }
 
+/// CacheFailure class implementation
 class CacheFailure extends Failure {
   final String message;
 
@@ -26,6 +28,7 @@ class CacheFailure extends Failure {
   List<Object> get props => [message];
 }
 
+/// NetworkFailure class implementation
 class NetworkFailure extends Failure {
   final String message;
 
@@ -35,6 +38,7 @@ class NetworkFailure extends Failure {
   List<Object> get props => [message];
 }
 
+/// ValidationFailure class implementation
 class ValidationFailure extends Failure {
   final String message;
 
@@ -44,6 +48,7 @@ class ValidationFailure extends Failure {
   List<Object> get props => [message];
 }
 
+/// AuthenticationFailure class implementation
 class AuthenticationFailure extends Failure {
   final String message;
 
@@ -53,6 +58,7 @@ class AuthenticationFailure extends Failure {
   List<Object> get props => [message];
 }
 
+/// PermissionFailure class implementation
 class PermissionFailure extends Failure {
   final String message;
 

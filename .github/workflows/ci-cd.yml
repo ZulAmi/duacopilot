@@ -1,0 +1,217 @@
+# CI/CD Pipeline for DuaCopilot
+name: 🚀 DuaCopilot CI/CD
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  analyze:
+    name: 📊 Code Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📚 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🐦 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.7.0"
+          channel: "stable"
+          cache: true
+
+      - name: 📦 Install Dependencies
+        run: flutter pub get
+
+      - name: 🔍 Verify Formatting
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: 🧪 Analyze Code
+        run: flutter analyze --fatal-infos
+
+      - name: 🔒 Check for Security Issues
+        run: dart pub audit
+
+  test:
+    name: 🧪 Testing
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        test-type: [unit, integration, widget]
+    steps:
+      - name: 📚 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🐦 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.7.0"
+          channel: "stable"
+          cache: true
+
+      - name: 📦 Install Dependencies
+        run: flutter pub get
+
+      - name: 🧪 Run ${{ matrix.test-type }} Tests
+        run: |
+          case "${{ matrix.test-type }}" in
+            unit)
+              flutter test test/unit --coverage --test-randomize-ordering-seed random
+              ;;
+            integration)
+              flutter test test/integration --coverage
+              ;;
+            widget)
+              flutter test test/widget --coverage
+              ;;
+          esac
+
+      - name: 📈 Upload Coverage
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: coverage/lcov.info
+
+  build:
+    name: 🏗️ Build Applications
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [android, ios, web, windows, macos, linux]
+        include:
+          - target: android
+            os: ubuntu-latest
+          - target: ios
+            os: macos-latest
+          - target: web
+            os: ubuntu-latest
+          - target: windows
+            os: windows-latest
+          - target: macos
+            os: macos-latest
+          - target: linux
+            os: ubuntu-latest
+    steps:
+      - name: 📚 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🐦 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.7.0"
+          channel: "stable"
+          cache: true
+
+      - name: 📦 Install Dependencies
+        run: flutter pub get
+
+      - name: 🏗️ Build ${{ matrix.target }}
+        run: |
+          case "${{ matrix.target }}" in
+            android)
+              flutter build apk --release --split-per-abi
+              flutter build appbundle --release
+              ;;
+            ios)
+              flutter build ios --release --no-codesign
+              ;;
+            web)
+              flutter build web --release --web-renderer canvaskit
+              ;;
+            windows)
+              flutter build windows --release
+              ;;
+            macos)
+              flutter build macos --release
+              ;;
+            linux)
+              flutter build linux --release
+              ;;
+          esac
+
+      - name: 📦 Archive Build Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.target }}-build
+          path: |
+            build/app/outputs/
+            build/web/
+            build/windows/
+            build/macos/
+            build/linux/
+
+  security:
+    name: 🔒 Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📚 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🔒 Run Trivy Security Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: "fs"
+          scan-ref: "."
+          format: "sarif"
+          output: "trivy-results.sarif"
+
+      - name: 📤 Upload SARIF Results
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: "trivy-results.sarif"
+
+  performance:
+    name: ⚡ Performance Testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📚 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🐦 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.7.0"
+          channel: "stable"
+
+      - name: 📦 Install Dependencies
+        run: flutter pub get
+
+      - name: ⚡ Build Performance Profile
+        run: flutter build web --profile --dart-define=FLUTTER_WEB_CANVASKIT_URL=https://unpkg.com/canvaskit-wasm@0.37.2/bin/
+
+      - name: 📊 Bundle Analysis
+        run: |
+          dart pub global activate -s git https://github.com/dart-lang/web_benchmarks.git
+          dart pub global run web_benchmarks:bundle_size --target web --output-directory performance/
+
+  deploy:
+    name: 🚢 Deploy
+    needs: [analyze, test, build, security]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: 📚 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🐦 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.7.0"
+          channel: "stable"
+
+      - name: 📦 Install Dependencies
+        run: flutter pub get
+
+      - name: 🏗️ Build Web Production
+        run: flutter build web --release --web-renderer canvaskit
+
+      - name: 🚢 Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
+          projectId: duacopilot
+          channelId: live

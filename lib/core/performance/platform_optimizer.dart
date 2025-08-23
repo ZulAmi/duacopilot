@@ -476,6 +476,7 @@ class IOSScrollBehavior extends ScrollBehavior {
   }
 }
 
+/// AndroidScrollBehavior class implementation
 class AndroidScrollBehavior extends ScrollBehavior {
   @override
   ScrollPhysics getScrollPhysics(BuildContext context) {
@@ -490,6 +491,7 @@ abstract class ImageLoadingStrategy {
   Duration get cacheTimeout;
 }
 
+/// MobileImageLoadingStrategy class implementation
 class MobileImageLoadingStrategy implements ImageLoadingStrategy {
   @override
   int get maxConcurrentDownloads => 3;
@@ -501,6 +503,7 @@ class MobileImageLoadingStrategy implements ImageLoadingStrategy {
   Duration get cacheTimeout => const Duration(days: 7);
 }
 
+/// WebImageLoadingStrategy class implementation
 class WebImageLoadingStrategy implements ImageLoadingStrategy {
   @override
   int get maxConcurrentDownloads => 2;
@@ -512,6 +515,7 @@ class WebImageLoadingStrategy implements ImageLoadingStrategy {
   Duration get cacheTimeout => const Duration(days: 3);
 }
 
+/// DesktopImageLoadingStrategy class implementation
 class DesktopImageLoadingStrategy implements ImageLoadingStrategy {
   @override
   int get maxConcurrentDownloads => 5;

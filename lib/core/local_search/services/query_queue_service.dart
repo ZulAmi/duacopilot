@@ -1,3 +1,5 @@
+import 'package:duacopilot/core/logging/app_logger.dart';
+
 import 'dart:async';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -56,11 +58,9 @@ class QueryQueueService {
       _startPeriodicProcessing();
 
       _isInitialized = true;
-      print(
-        'Query queue service initialized with ${_pendingQueries.length} pending queries',
-      );
+      AppLogger.debug('Query queue service initialized with ${_pendingQueries.length} pending queries');
     } catch (e) {
-      print('Error initializing query queue service: $e');
+      AppLogger.debug('Error initializing query queue service: $e');
       throw Exception('Failed to initialize queue service: $e');
     }
   }
@@ -111,7 +111,7 @@ class QueryQueueService {
       print('Enqueued query: ${query.substring(0, 50)}...');
       return pendingQuery.id;
     } catch (e) {
-      print('Error enqueuing query: $e');
+      AppLogger.debug('Error enqueuing query: $e');
       throw Exception('Failed to enqueue query: $e');
     }
   }
@@ -131,7 +131,7 @@ class QueryQueueService {
       }
       return false;
     } catch (e) {
-      print('Error dequeuing query: $e');
+      AppLogger.debug('Error dequeuing query: $e');
       return false;
     }
   }
@@ -158,19 +158,14 @@ class QueryQueueService {
   /// Get queue statistics
   Map<String, dynamic> getQueueStats() {
     final now = DateTime.now();
-    final oldQueries =
-        _pendingQueries
-            .where((q) => now.difference(q.createdAt).inHours > 24)
-            .length;
+    final oldQueries = _pendingQueries.where((q) => now.difference(q.createdAt).inHours > 24).length;
 
     final priorityDistribution = <int, int>{};
     final languageDistribution = <String, int>{};
 
     for (final query in _pendingQueries) {
-      priorityDistribution[query.priority] =
-          (priorityDistribution[query.priority] ?? 0) + 1;
-      languageDistribution[query.language] =
-          (languageDistribution[query.language] ?? 0) + 1;
+      priorityDistribution[query.priority] = (priorityDistribution[query.priority] ?? 0) + 1;
+      languageDistribution[query.language] = (languageDistribution[query.language] ?? 0) + 1;
     }
 
     return {
@@ -191,12 +186,12 @@ class QueryQueueService {
     await _ensureInitialized();
 
     if (!await _isConnected()) {
-      print('No network connection, skipping queue processing');
+      AppLogger.debug('No network connection, skipping queue processing');
       return;
     }
 
     if (_isProcessing) {
-      print('Queue processing already in progress');
+      AppLogger.debug('Queue processing already in progress');
       return;
     }
 
@@ -213,9 +208,9 @@ class QueryQueueService {
       await _saveQueueToStorage();
       await LocalVectorStorage.instance.clearPendingQueries();
       _onQueueSizeChanged?.call(0);
-      print('Queue cleared');
+      AppLogger.debug('Queue cleared');
     } catch (e) {
-      print('Error clearing queue: $e');
+      AppLogger.debug('Error clearing queue: $e');
     }
   }
 
@@ -237,35 +232,26 @@ class QueryQueueService {
         await LocalVectorStorage.instance.storePendingQuery(updated);
       }
     } catch (e) {
-      print('Error updating query priority: $e');
+      AppLogger.debug('Error updating query priority: $e');
     }
   }
 
   /// Mark query as processed with local response
-  Future<void> markQueryProcessedLocally(
-    String queryId,
-    String localResponseId,
-  ) async {
+  Future<void> markQueryProcessedLocally(String queryId, String localResponseId) async {
     await _ensureInitialized();
 
     try {
       final index = _pendingQueries.indexWhere((q) => q.id == queryId);
       if (index != -1) {
         final query = _pendingQueries[index];
-        final updated = query.copyWith(
-          isProcessed: true,
-          localResponseId: localResponseId,
-        );
+        final updated = query.copyWith(isProcessed: true, localResponseId: localResponseId);
         _pendingQueries[index] = updated;
 
         await _saveQueueToStorage();
-        await LocalVectorStorage.instance.markQueryProcessed(
-          queryId,
-          localResponseId,
-        );
+        await LocalVectorStorage.instance.markQueryProcessed(queryId, localResponseId);
       }
     } catch (e) {
-      print('Error marking query as processed locally: $e');
+      AppLogger.debug('Error marking query as processed locally: $e');
     }
   }
 
@@ -278,7 +264,7 @@ class QueryQueueService {
     await _saveQueueToStorage();
     _isInitialized = false;
 
-    print('Query queue service disposed');
+    AppLogger.debug('Query queue service disposed');
   }
 
   // Private methods
@@ -321,19 +307,13 @@ class QueryQueueService {
 
       if (queueJson != null) {
         final queueData = jsonDecode(queueJson) as List;
-        final queries =
-            queueData
-                .map(
-                  (json) => PendingQuery.fromJson(json as Map<String, dynamic>),
-                )
-                .toList();
+        final queries = queueData.map((json) => PendingQuery.fromJson(json as Map<String, dynamic>)).toList();
 
         _pendingQueries.clear();
         _pendingQueries.addAll(queries);
 
         // Also load from local vector storage (backup)
-        final storageQueries = await LocalVectorStorage.instance
-            .getPendingQueries(unprocessedOnly: true);
+        final storageQueries = await LocalVectorStorage.instance.getPendingQueries(unprocessedOnly: true);
 
         // Merge and deduplicate
         final existingIds = _pendingQueries.map((q) => q.id).toSet();
@@ -344,22 +324,20 @@ class QueryQueueService {
         }
 
         _sortQueueByPriority();
-        print('Loaded ${_pendingQueries.length} queries from storage');
+        AppLogger.debug('Loaded ${_pendingQueries.length} queries from storage');
       }
     } catch (e) {
-      print('Error loading queue from storage: $e');
+      AppLogger.debug('Error loading queue from storage: $e');
     }
   }
 
   Future<void> _saveQueueToStorage() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final queueJson = jsonEncode(
-        _pendingQueries.map((q) => q.toJson()).toList(),
-      );
+      final queueJson = jsonEncode(_pendingQueries.map((q) => q.toJson()).toList());
       await prefs.setString(_queueStorageKey, queueJson);
     } catch (e) {
-      print('Error saving queue to storage: $e');
+      AppLogger.debug('Error saving queue to storage: $e');
     }
   }
 
@@ -373,14 +351,12 @@ class QueryQueueService {
       _lastConnectivityCheck = DateTime.now();
 
       // Monitor connectivity changes
-      _connectivitySubscription = Connectivity().onConnectivityChanged.listen((
-        ConnectivityResult result,
-      ) {
+      _connectivitySubscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
         _lastConnectivityResult = result != ConnectivityResult.none;
         _lastConnectivityCheck = DateTime.now();
 
         if (_lastConnectivityResult && _pendingQueries.isNotEmpty) {
-          print('Network connection restored, processing queue');
+          AppLogger.debug('Network connection restored, processing queue');
           _processQueueInternal();
         }
       });
@@ -391,7 +367,7 @@ class QueryQueueService {
         _lastConnectivityCheck = DateTime.now();
       });
     } catch (e) {
-      print('Error setting up connectivity monitoring: $e');
+      AppLogger.debug('Error setting up connectivity monitoring: $e');
     }
   }
 
@@ -400,7 +376,7 @@ class QueryQueueService {
       final connectivityResult = await Connectivity().checkConnectivity();
       return connectivityResult != ConnectivityResult.none;
     } catch (e) {
-      print('Error checking connectivity: $e');
+      AppLogger.debug('Error checking connectivity: $e');
       return false;
     }
   }
@@ -429,7 +405,7 @@ class QueryQueueService {
         }
       }
     } catch (e) {
-      print('Error processing queue: $e');
+      AppLogger.debug('Error processing queue: $e');
     } finally {
       _isProcessing = false;
     }
@@ -455,9 +431,7 @@ class QueryQueueService {
         // Notify callback
         _onQueryProcessed?.call(query);
 
-        print(
-          'Successfully processed query: ${query.query.substring(0, 50)}...',
-        );
+        print('Successfully processed query: ${query.query.substring(0, 50)}...');
       } else {
         // Handle failure
         await _handleQueryFailure(query, 'Simulated processing failure');
@@ -483,9 +457,7 @@ class QueryQueueService {
         await LocalVectorStorage.instance.removePendingQuery(query.id);
 
         _onQueryFailed?.call(query, 'Max retry attempts reached: $error');
-        print(
-          'Query failed after ${_maxRetryAttempts} attempts: ${query.query.substring(0, 50)}...',
-        );
+        print('Query failed after $_maxRetryAttempts attempts: ${query.query.substring(0, 50)}...');
       } else {
         // Schedule retry
         final index = _pendingQueries.indexWhere((q) => q.id == query.id);
@@ -494,12 +466,10 @@ class QueryQueueService {
           await LocalVectorStorage.instance.storePendingQuery(updatedQuery);
         }
 
-        print(
-          'Query failed (attempt ${updatedQuery.retryCount}), will retry: ${query.query.substring(0, 50)}...',
-        );
+        print('Query failed (attempt ${updatedQuery.retryCount}), will retry: ${query.query.substring(0, 50)}...');
       }
     } catch (e) {
-      print('Error handling query failure: $e');
+      AppLogger.debug('Error handling query failure: $e');
     }
   }
 
@@ -514,9 +484,9 @@ class QueryQueueService {
         await LocalVectorStorage.instance.removePendingQuery(query.id);
       }
 
-      print('Evicted $toRemove old queries from queue');
+      AppLogger.debug('Evicted $toRemove old queries from queue');
     } catch (e) {
-      print('Error evicting old queries: $e');
+      AppLogger.debug('Error evicting old queries: $e');
     }
   }
 

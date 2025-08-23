@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+/// QueryHistory class implementation
 class QueryHistory extends Equatable {
   final int? id;
   final String query;

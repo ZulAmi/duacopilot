@@ -1,5 +1,6 @@
 import '../../domain/entities/rag_response.dart';
 
+/// RagResponseModel class implementation
 class RagResponseModel extends RagResponse {
   const RagResponseModel({
     required super.id,
@@ -19,13 +20,11 @@ class RagResponseModel extends RagResponse {
       timestamp: DateTime.parse(json['timestamp'] as String),
       responseTime: json['response_time'] as int,
       metadata: json['metadata'] as Map<String, dynamic>?,
-      sources:
-          json['sources'] != null
-              ? List<String>.from(json['sources'] as List)
-              : null,
+      sources: json['sources'] != null ? List<String>.from(json['sources'] as List) : null,
     );
   }
 
+  @override
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -82,17 +81,9 @@ class RagResponseModel extends RagResponse {
       response: map['response'] as String,
       timestamp: DateTime.fromMillisecondsSinceEpoch(map['timestamp'] as int),
       responseTime: map['response_time'] as int,
-      metadata:
-          map['metadata'] != null
-              ? _decodeMetadata(map['metadata'] as String)
-              : null,
+      metadata: map['metadata'] != null ? _decodeMetadata(map['metadata'] as String) : null,
       sources:
-          map['sources'] != null
-              ? (map['sources'] as String)
-                  .split(',')
-                  .where((s) => s.isNotEmpty)
-                  .toList()
-              : null,
+          map['sources'] != null ? (map['sources'] as String).split(',').where((s) => s.isNotEmpty).toList() : null,
     );
   }
 

@@ -1,7 +1,10 @@
+import 'package:duacopilot/core/logging/app_logger.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import '../domain/entities/dua_entity.dart';
 
+/// FavoritesService class implementation
 class FavoritesService {
   static const String _favoritesKey = 'favorite_duas';
   static const String _recentlyViewedKey = 'recently_viewed_duas';
@@ -89,7 +92,7 @@ class FavoritesService {
   static Future<void> syncWithCloud(String userId) async {
     // This would implement cloud sync with Firebase or similar
     // For now, it's a placeholder
-    print('Cloud sync for user $userId - Feature coming soon');
+    AppLogger.debug('Cloud sync for user $userId - Feature coming soon');
   }
 
   // Export favorites to share or backup

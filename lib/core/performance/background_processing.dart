@@ -422,6 +422,7 @@ class TextProcessingTask {
   const TextProcessingTask({required this.text, required this.options});
 }
 
+/// TextProcessingOptions class implementation
 class TextProcessingOptions {
   final int maxKeywords;
   final bool removeExtraSpaces;
@@ -434,6 +435,7 @@ class TextProcessingOptions {
   });
 }
 
+/// ProcessedTextResult class implementation
 class ProcessedTextResult {
   final String originalText;
   final String processedText;
@@ -460,6 +462,7 @@ class ProcessedTextResult {
   });
 }
 
+/// KeywordExtractionTask class implementation
 class KeywordExtractionTask {
   final String text;
   final int maxKeywords;
@@ -472,6 +475,7 @@ class KeywordExtractionTask {
   });
 }
 
+/// SentimentAnalysisTask class implementation
 class SentimentAnalysisTask {
   final String text;
   final String language;
@@ -479,6 +483,7 @@ class SentimentAnalysisTask {
   const SentimentAnalysisTask({required this.text, required this.language});
 }
 
+/// SentimentAnalysisResult class implementation
 class SentimentAnalysisResult {
   final String sentiment;
   final double score;
@@ -491,6 +496,7 @@ class SentimentAnalysisResult {
   });
 }
 
+/// RagProcessingTask class implementation
 class RagProcessingTask {
   final RagResponse response;
   final RagProcessingOptions options;
@@ -498,6 +504,7 @@ class RagProcessingTask {
   const RagProcessingTask({required this.response, required this.options});
 }
 
+/// RagProcessingOptions class implementation
 class RagProcessingOptions {
   final bool extractKeywords;
   final bool analyzeSentiment;
@@ -512,6 +519,7 @@ class RagProcessingOptions {
   });
 }
 
+/// ProcessedRagResponse class implementation
 class ProcessedRagResponse {
   final RagResponse originalResponse;
   final ProcessedTextResult textAnalysis;

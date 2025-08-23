@@ -1,7 +1,7 @@
+import '../../core/error/exceptions.dart';
 import '../datasources/local_datasource.dart';
 import '../models/query_history_model.dart';
 import '../models/rag_response_model.dart';
-import '../../core/error/exceptions.dart';
 
 /// Mock implementation of LocalDataSource for web and fallback scenarios
 /// Provides in-memory storage that behaves like a database but doesn't require SQLite
@@ -15,10 +15,10 @@ class MockLocalDataSource implements LocalDataSource {
     try {
       // Remove existing entry with same query to avoid duplicates
       _queryHistory.removeWhere((item) => item.query == queryHistory.query);
-      
+
       // Add new entry
       _queryHistory.add(queryHistory);
-      
+
       // Keep only last 100 entries to prevent memory bloat
       if (_queryHistory.length > 100) {
         _queryHistory.sort((a, b) => b.timestamp.compareTo(a.timestamp));
@@ -34,13 +34,13 @@ class MockLocalDataSource implements LocalDataSource {
     try {
       final sortedHistory = List<QueryHistoryModel>.from(_queryHistory)
         ..sort((a, b) => b.timestamp.compareTo(a.timestamp));
-      
+
       int start = offset ?? 0;
       int end = limit != null ? start + limit : sortedHistory.length;
-      
+
       if (start >= sortedHistory.length) return [];
       if (end > sortedHistory.length) end = sortedHistory.length;
-      
+
       return sortedHistory.sublist(start, end);
     } catch (e) {
       throw CacheException('Failed to get query history: ${e.toString()}');
@@ -52,10 +52,10 @@ class MockLocalDataSource implements LocalDataSource {
     try {
       // Remove existing cache for this query
       _ragCache.removeWhere((item) => item.query == response.query);
-      
+
       // Add new cache entry
       _ragCache.add(response);
-      
+
       // Keep only last 50 cached responses to prevent memory bloat
       if (_ragCache.length > 50) {
         _ragCache.sort((a, b) => b.timestamp.compareTo(a.timestamp));
@@ -75,7 +75,7 @@ class MockLocalDataSource implements LocalDataSource {
           // Check if cache is still valid (24 hours for mock)
           final now = DateTime.now();
           final ageHours = now.difference(cached.timestamp).inHours;
-          
+
           if (ageHours < 24) {
             return cached;
           } else {
@@ -84,7 +84,7 @@ class MockLocalDataSource implements LocalDataSource {
           }
         }
       }
-      
+
       return null;
     } catch (e) {
       throw CacheException('Failed to get cached RAG response: ${e.toString()}');
@@ -112,9 +112,6 @@ class MockLocalDataSource implements LocalDataSource {
 
   // Get statistics for debugging
   Map<String, int> getStats() {
-    return {
-      'query_history_count': _queryHistory.length,
-      'rag_cache_count': _ragCache.length,
-    };
+    return {'query_history_count': _queryHistory.length, 'rag_cache_count': _ragCache.length};
   }
 }

@@ -1,0 +1,165 @@
+{
+  "_comment": "Professional VS Code Settings for DuaCopilot",
+  // Editor Configuration
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "editor.rulers": [80, 120],
+  "editor.wordWrap": "bounded",
+  "editor.wordWrapColumn": 120,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+
+  // Dart & Flutter Specific
+  "dart.flutterSdkPath": "C:\\flutter",
+  "dart.previewLsp": true,
+  "dart.lineLength": 120,
+  "dart.insertArgumentPlaceholders": true,
+  "dart.showTodos": true,
+  "dart.runPubGetOnPubspecChanges": "prompt",
+  "dart.warnWhenEditingFilesOutsideWorkspace": true,
+  "dart.warnWhenEditingFilesInPubCache": true,
+  "dart.allowAnalytics": false,
+  "dart.checkForSdkUpdates": true,
+  "dart.flutterCreateAndroidLanguage": "kotlin",
+  "dart.flutterCreateIOSLanguage": "swift",
+  "dart.flutterCreateOrganization": "com.duacopilot",
+  
+  // Flutter specific settings
+  "dart.flutterHotReloadOnSave": "all",
+  "dart.flutterHotRestartOnSave": "never",
+  "dart.flutterShowEmulators": "local",
+  "dart.openDevTools": "flutter",
+  
+  // Testing Configuration
+  "dart.showTestCodeLens": true,
+  "dart.showMainCodeLens": true,
+  "dart.showDependencyPackageCodeLens": false,
+  
+  // File Explorer
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/build": true,
+    "**/*.lock": false,
+    "**/*.generated.dart": true,
+    "**/*.freezed.dart": true,
+    "**/*.g.dart": true
+  },
+  
+  // Search Configuration
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/build": true,
+    "**/.git": true,
+    "**/*.lock": true,
+    "**/*.generated.dart": true,
+    "**/*.freezed.dart": true,
+    "**/*.g.dart": true
+  },
+  
+  // Emmet for Flutter
+  "emmet.includeLanguages": {
+    "dart": "html"
+  },
+  
+  // Git Configuration
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "git.pullBeforeCheckout": true,
+  
+  // Terminal Configuration
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell"
+    },
+    "Command Prompt": {
+      "path": [
+        "${env:windir}\\Sysnative\\cmd.exe",
+        "${env:windir}\\System32\\cmd.exe"
+      ],
+      "args": [],
+      "icon": "terminal-cmd"
+    }
+  },
+  
+  // Bracket Pair Colorization
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  
+  // Minimap
+  "editor.minimap.enabled": true,
+  "editor.minimap.maxColumn": 80,
+  
+  // Problems Panel
+  "problems.showCurrentInStatus": true,
+  
+  // Workbench
+  "workbench.editor.enablePreview": false,
+  "workbench.colorTheme": "Default Dark+",
+  "workbench.iconTheme": "vs-seti",
+  
+  // Extensions Configuration
+  "todo-tree.general.tags": [
+    "BUG",
+    "HACK",
+    "FIXME", 
+    "TODO",
+    "XXX",
+    "[ ]",
+    "[x]"
+  ],
+  "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^)\\s*($TAGS)|^\\s*- \\[ \\])",
+  
+  // Error Lens
+  "errorLens.enabledDiagnosticLevels": ["error", "warning", "info"],
+  "errorLens.excludeBySource": ["dart"],
+  
+  // GitLens
+  "gitlens.codeLens.enabled": true,
+  "gitlens.currentLine.enabled": true,
+  "gitlens.hovers.enabled": true,
+  
+  // Auto Save
+  "files.autoSave": "onFocusChange",
+  
+  // Language Specific Settings
+  "[dart]": {
+    "editor.formatOnSave": true,
+    "editor.selectionHighlight": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": "off",
+    "editor.defaultFormatter": "Dart-Code.dart-code"
+  },
+  "[yaml]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "advanced",
+    "editor.formatOnSave": true
+  },
+  "[json]": {
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2
+  },
+  "[markdown]": {
+    "editor.wordWrap": "on",
+    "editor.formatOnSave": true,
+    "files.trimTrailingWhitespace": false
+  },
+  "cSpell.words": [
+    "aquasecurity"
+  ]
+}

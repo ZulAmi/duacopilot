@@ -1,5 +1,8 @@
+import 'package:duacopilot/core/logging/app_logger.dart';
+
 import 'package:dio/dio.dart';
 
+/// DioClient class implementation
 class DioClient {
   late final Dio _dio;
 
@@ -15,19 +18,15 @@ class DioClient {
       InterceptorsWrapper(
         onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
           // Add auth headers, API keys, etc.
-          print('REQUEST[${options.method}] => PATH: ${options.path}');
+          AppLogger.debug('REQUEST[${options.method}] => PATH: ${options.path}');
           handler.next(options);
         },
         onResponse: (Response response, ResponseInterceptorHandler handler) {
-          print(
-            'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}',
-          );
+          AppLogger.debug('RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}',);
           handler.next(response);
         },
         onError: (DioException error, ErrorInterceptorHandler handler) {
-          print(
-            'ERROR[${error.response?.statusCode}] => PATH: ${error.requestOptions.path}',
-          );
+          AppLogger.debug('ERROR[${error.response?.statusCode}] => PATH: ${error.requestOptions.path}',);
           handler.next(error);
         },
       ),

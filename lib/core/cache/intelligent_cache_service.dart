@@ -1,3 +1,5 @@
+import 'package:duacopilot/core/logging/app_logger.dart';
+
 import 'dart:async';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -654,7 +656,7 @@ class IntelligentCacheService {
   void _scheduleRefresh(CacheEntry entry) {
     // This would typically trigger a background refresh
     // For now, we just log it
-    print('Scheduling refresh for: ${entry.metadata['original_query']}');
+    AppLogger.debug('Scheduling refresh for: ${entry.metadata['original_query']}');
   }
 
   Future<void> _updateExistingEntry(
@@ -785,7 +787,7 @@ class IntelligentCacheService {
         }
       }
     } catch (e) {
-      print('Error loading cache from persistent storage: $e');
+      AppLogger.debug('Error loading cache from persistent storage: $e');
     }
   }
 
@@ -802,7 +804,7 @@ class IntelligentCacheService {
 
       await prefs.setString('intelligent_cache_data', jsonEncode(cacheData));
     } catch (e) {
-      print('Error saving cache to persistent storage: $e');
+      AppLogger.debug('Error saving cache to persistent storage: $e');
     }
   }
 }

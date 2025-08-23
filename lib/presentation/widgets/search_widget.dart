@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/search_provider.dart';
 
+/// SearchWidget class implementation
 class SearchWidget extends ConsumerStatefulWidget {
   const SearchWidget({super.key});
 
@@ -9,6 +10,7 @@ class SearchWidget extends ConsumerStatefulWidget {
   ConsumerState<SearchWidget> createState() => _SearchWidgetState();
 }
 
+/// _SearchWidgetState class implementation
 class _SearchWidgetState extends ConsumerState<SearchWidget> {
   final TextEditingController _controller = TextEditingController();
   final FocusNode _focusNode = FocusNode();

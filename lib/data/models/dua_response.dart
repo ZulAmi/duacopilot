@@ -5,6 +5,7 @@ part 'dua_response.freezed.dart';
 part 'dua_response.g.dart';
 
 @freezed
+/// DuaResponse class implementation
 class DuaResponse with _$DuaResponse {
   const DuaResponse._();
 
@@ -29,6 +30,7 @@ class DuaResponse with _$DuaResponse {
 }
 
 @freezed
+/// DuaSource class implementation
 class DuaSource with _$DuaSource {
   const DuaSource._();
 

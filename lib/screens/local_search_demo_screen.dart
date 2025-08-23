@@ -5,13 +5,13 @@ import '../core/local_search/models/local_search_models.dart';
 
 /// Demo screen for local semantic search functionality
 class LocalSearchDemoScreen extends ConsumerStatefulWidget {
-  const LocalSearchDemoScreen({Key? key}) : super(key: key);
+  const LocalSearchDemoScreen({super.key});
 
   @override
-  ConsumerState<LocalSearchDemoScreen> createState() =>
-      _LocalSearchDemoScreenState();
+  ConsumerState<LocalSearchDemoScreen> createState() => _LocalSearchDemoScreenState();
 }
 
+/// _LocalSearchDemoScreenState class implementation
 class _LocalSearchDemoScreenState extends ConsumerState<LocalSearchDemoScreen> {
   final TextEditingController _searchController = TextEditingController();
   String _selectedLanguage = 'en';
@@ -30,20 +30,14 @@ class _LocalSearchDemoScreenState extends ConsumerState<LocalSearchDemoScreen> {
       await ref.read(localSearchServiceProvider).initialize();
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Local search service initialized successfully'),
-            backgroundColor: Colors.green,
-          ),
+          const SnackBar(content: Text('Local search service initialized successfully'), backgroundColor: Colors.green),
         );
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Failed to initialize: $e'),
-            backgroundColor: Colors.red,
-          ),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Failed to initialize: $e'), backgroundColor: Colors.red));
       }
     }
   }
@@ -59,17 +53,12 @@ class _LocalSearchDemoScreenState extends ConsumerState<LocalSearchDemoScreen> {
         backgroundColor: Colors.teal,
         actions: [
           IconButton(
-            icon: Icon(
-              offlineStatus ? Icons.cloud_off : Icons.cloud,
-              color: offlineStatus ? Colors.red : Colors.green,
-            ),
+            icon: Icon(offlineStatus ? Icons.cloud_off : Icons.cloud, color: offlineStatus ? Colors.red : Colors.green),
             onPressed: () => _showStatusDialog(context),
           ),
         ],
       ),
-      body: Column(
-        children: [_buildSearchHeader(), _buildSearchResults(searchState)],
-      ),
+      body: Column(children: [_buildSearchHeader(), _buildSearchResults(searchState)]),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _showActionsDialog(context),
         icon: const Icon(Icons.settings),
@@ -82,10 +71,7 @@ class _LocalSearchDemoScreenState extends ConsumerState<LocalSearchDemoScreen> {
   Widget _buildSearchHeader() {
     return Container(
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.grey[50],
-        border: Border(bottom: BorderSide(color: Colors.grey[300]!)),
-      ),
+      decoration: BoxDecoration(color: Colors.grey[50], border: Border(bottom: BorderSide(color: Colors.grey[300]!))),
       child: Column(
         children: [
           // Search input
@@ -95,13 +81,8 @@ class _LocalSearchDemoScreenState extends ConsumerState<LocalSearchDemoScreen> {
               labelText: 'Search for Du\'a or Islamic guidance',
               hintText: 'e.g., morning dua, travel prayer...',
               prefixIcon: const Icon(Icons.search),
-              suffixIcon: IconButton(
-                icon: const Icon(Icons.send),
-                onPressed: _performSearch,
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
+              suffixIcon: IconButton(icon: const Icon(Icons.send), onPressed: _performSearch),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
             ),
             onSubmitted: (_) => _performSearch(),
           ),
@@ -114,10 +95,7 @@ class _LocalSearchDemoScreenState extends ConsumerState<LocalSearchDemoScreen> {
               Expanded(
                 child: DropdownButtonFormField<String>(
                   value: _selectedLanguage,
-                  decoration: const InputDecoration(
-                    labelText: 'Language',
-                    border: OutlineInputBorder(),
-                  ),
+                  decoration: const InputDecoration(labelText: 'Language', border: OutlineInputBorder()),
                   items: const [
                     DropdownMenuItem(value: 'en', child: Text('English')),
                     DropdownMenuItem(value: 'ar', child: Text('العربية')),
@@ -168,10 +146,7 @@ class _LocalSearchDemoScreenState extends ConsumerState<LocalSearchDemoScreen> {
               const SizedBox(height: 16),
               Text('Error: ${searchState.error}'),
               const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: _performSearch,
-                child: const Text('Retry'),
-              ),
+              ElevatedButton(onPressed: _performSearch, child: const Text('Retry')),
             ],
           ),
         ),
@@ -269,15 +244,7 @@ class _LocalSearchDemoScreenState extends ConsumerState<LocalSearchDemoScreen> {
             // Header with quality indicators
             Row(
               children: [
-                Expanded(
-                  child: Text(
-                    result.query,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
+                Expanded(child: Text(result.query, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16))),
                 _buildQualityChip(result),
               ],
             ),
@@ -286,14 +253,8 @@ class _LocalSearchDemoScreenState extends ConsumerState<LocalSearchDemoScreen> {
             // Response text
             Container(
               padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.grey[50],
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Text(
-                result.response,
-                style: const TextStyle(fontSize: 14, height: 1.5),
-              ),
+              decoration: BoxDecoration(color: Colors.grey[50], borderRadius: BorderRadius.circular(8)),
+              child: Text(result.response, style: const TextStyle(fontSize: 14, height: 1.5)),
             ),
             const SizedBox(height: 12),
 
@@ -306,10 +267,7 @@ class _LocalSearchDemoScreenState extends ConsumerState<LocalSearchDemoScreen> {
                   color: result.isOffline ? Colors.orange : Colors.green,
                 ),
                 const SizedBox(width: 4),
-                Text(
-                  'Source: ${result.source}',
-                  style: TextStyle(color: Colors.grey[600], fontSize: 12),
-                ),
+                Text('Source: ${result.source}', style: TextStyle(color: Colors.grey[600], fontSize: 12)),
                 const Spacer(),
                 Text(
                   'Confidence: ${(result.confidence * 100).toInt()}%',
@@ -342,22 +300,14 @@ class _LocalSearchDemoScreenState extends ConsumerState<LocalSearchDemoScreen> {
     }
 
     return Chip(
-      label: Text(
-        quality.qualityLevel,
-        style: const TextStyle(color: Colors.white, fontSize: 12),
-      ),
+      label: Text(quality.qualityLevel, style: const TextStyle(color: Colors.white, fontSize: 12)),
       backgroundColor: chipColor,
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
     );
   }
 
   Widget _buildSampleQueries() {
-    final sampleQueries = [
-      'morning dua',
-      'travel prayer',
-      'dua before eating',
-      'evening remembrance',
-    ];
+    final sampleQueries = ['morning dua', 'travel prayer', 'dua before eating', 'evening remembrance'];
 
     return Column(
       children: [
@@ -385,11 +335,7 @@ class _LocalSearchDemoScreenState extends ConsumerState<LocalSearchDemoScreen> {
     if (query.isNotEmpty) {
       ref
           .read(searchStateProvider.notifier)
-          .search(
-            query: query,
-            language: _selectedLanguage,
-            forceOffline: _forceOffline,
-          );
+          .search(query: query, language: _selectedLanguage, forceOffline: _forceOffline);
     }
   }
 
@@ -418,27 +364,16 @@ class _LocalSearchDemoScreenState extends ConsumerState<LocalSearchDemoScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Online: ${!ref.watch(offlineStatusProvider)}'),
-                        Text(
-                          'Queue Size: ${stats['queue']?['total_pending'] ?? 0}',
-                        ),
-                        Text(
-                          'Embeddings: ${stats['embeddings']?['embeddings_count'] ?? 0}',
-                        ),
-                        Text(
-                          'Templates: ${stats['templates']?['en']?['total_templates'] ?? 0}',
-                        ),
+                        Text('Queue Size: ${stats['queue']?['total_pending'] ?? 0}'),
+                        Text('Embeddings: ${stats['embeddings']?['embeddings_count'] ?? 0}'),
+                        Text('Templates: ${stats['templates']?['en']?['total_templates'] ?? 0}'),
                       ],
                     );
                   },
                 );
               },
             ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Close'),
-              ),
-            ],
+            actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('Close'))],
           ),
     );
   }
@@ -458,21 +393,15 @@ class _LocalSearchDemoScreenState extends ConsumerState<LocalSearchDemoScreen> {
                   onTap: () async {
                     Navigator.pop(context);
                     try {
-                      await ref
-                          .read(localSearchServiceProvider)
-                          .preloadPopularQueries();
-                      if (mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Popular queries preloaded'),
-                          ),
-                        );
-                      }
-                    } catch (e) {
+                      await ref.read(localSearchServiceProvider).preloadPopularQueries();
                       if (mounted) {
                         ScaffoldMessenger.of(
                           context,
-                        ).showSnackBar(SnackBar(content: Text('Error: $e')));
+                        ).showSnackBar(const SnackBar(content: Text('Popular queries preloaded')));
+                      }
+                    } catch (e) {
+                      if (mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error: $e')));
                       }
                     }
                   },
@@ -483,19 +412,13 @@ class _LocalSearchDemoScreenState extends ConsumerState<LocalSearchDemoScreen> {
                   onTap: () async {
                     Navigator.pop(context);
                     try {
-                      await ref
-                          .read(localSearchServiceProvider)
-                          .syncPendingQueries();
+                      await ref.read(localSearchServiceProvider).syncPendingQueries();
                       if (mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Sync completed')),
-                        );
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Sync completed')));
                       }
                     } catch (e) {
                       if (mounted) {
-                        ScaffoldMessenger.of(
-                          context,
-                        ).showSnackBar(SnackBar(content: Text('Error: $e')));
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error: $e')));
                       }
                     }
                   },
@@ -512,35 +435,23 @@ class _LocalSearchDemoScreenState extends ConsumerState<LocalSearchDemoScreen> {
                             title: const Text('Confirm'),
                             content: const Text('Clear all offline data?'),
                             actions: [
-                              TextButton(
-                                onPressed: () => Navigator.pop(context, false),
-                                child: const Text('Cancel'),
-                              ),
-                              TextButton(
-                                onPressed: () => Navigator.pop(context, true),
-                                child: const Text('Clear'),
-                              ),
+                              TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Cancel')),
+                              TextButton(onPressed: () => Navigator.pop(context, true), child: const Text('Clear')),
                             ],
                           ),
                     );
 
                     if (confirm == true) {
                       try {
-                        await ref
-                            .read(localSearchServiceProvider)
-                            .clearOfflineData();
-                        if (mounted) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Offline data cleared'),
-                            ),
-                          );
-                        }
-                      } catch (e) {
+                        await ref.read(localSearchServiceProvider).clearOfflineData();
                         if (mounted) {
                           ScaffoldMessenger.of(
                             context,
-                          ).showSnackBar(SnackBar(content: Text('Error: $e')));
+                          ).showSnackBar(const SnackBar(content: Text('Offline data cleared')));
+                        }
+                      } catch (e) {
+                        if (mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error: $e')));
                         }
                       }
                     }
@@ -548,12 +459,7 @@ class _LocalSearchDemoScreenState extends ConsumerState<LocalSearchDemoScreen> {
                 ),
               ],
             ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Close'),
-              ),
-            ],
+            actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('Close'))],
           ),
     );
   }

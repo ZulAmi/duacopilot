@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import '../repositories/favorites_repository.dart';
 import '../../core/error/failures.dart';
 
+/// RemoveFavorite class implementation
 class RemoveFavorite {
   final FavoritesRepository repository;
 

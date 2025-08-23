@@ -282,6 +282,7 @@ final cachePerformanceProvider = FutureProvider.family<
 
 // Request classes for parameterized providers
 
+/// PopularQueriesRequest class implementation
 class PopularQueriesRequest {
   final int limit;
   final String? language;
@@ -302,6 +303,7 @@ class PopularQueriesRequest {
   int get hashCode => limit.hashCode ^ language.hashCode ^ queryType.hashCode;
 }
 
+/// TrendingQueriesRequest class implementation
 class TrendingQueriesRequest {
   final int limit;
   final Duration trendWindow;

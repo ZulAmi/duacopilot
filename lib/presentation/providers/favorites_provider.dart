@@ -6,6 +6,7 @@ import '../../domain/usecases/remove_favorite.dart';
 import '../../core/di/injection_container.dart' as di;
 
 // Favorites state
+/// FavoritesState class implementation
 class FavoritesState {
   final bool isLoading;
   final List<Favorite> favorites;
@@ -31,6 +32,7 @@ class FavoritesState {
 }
 
 // Favorites provider
+/// FavoritesNotifier class implementation
 class FavoritesNotifier extends StateNotifier<FavoritesState> {
   final GetFavorites getFavorites;
   final AddFavorite addFavorite;

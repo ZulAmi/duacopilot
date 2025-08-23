@@ -5,6 +5,7 @@ void main() {
   runApp(const DuaCopilotApp());
 }
 
+/// DuaCopilotApp class implementation
 class DuaCopilotApp extends StatelessWidget {
   const DuaCopilotApp({super.key});
 

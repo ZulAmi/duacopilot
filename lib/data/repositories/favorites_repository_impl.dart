@@ -5,6 +5,7 @@ import '../../core/error/failures.dart';
 import '../../core/error/exceptions.dart';
 import '../datasources/local_datasource.dart';
 
+/// FavoritesRepositoryImpl class implementation
 class FavoritesRepositoryImpl implements FavoritesRepository {
   final LocalDataSource localDataSource;
 

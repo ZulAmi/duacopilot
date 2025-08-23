@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/ads/ad_widgets.dart';
 
+/// AdDemoScreen class implementation
 class AdDemoScreen extends StatefulWidget {
   const AdDemoScreen({super.key});
 
@@ -8,6 +9,7 @@ class AdDemoScreen extends StatefulWidget {
   State<AdDemoScreen> createState() => _AdDemoScreenState();
 }
 
+/// _AdDemoScreenState class implementation
 class _AdDemoScreenState extends State<AdDemoScreen> {
   int _searchCount = 0;
   bool _isPremium = false;
@@ -29,21 +31,13 @@ class _AdDemoScreenState extends State<AdDemoScreen> {
             color: _isPremium ? Colors.green.shade100 : Colors.orange.shade100,
             child: Row(
               children: [
-                Icon(
-                  _isPremium ? Icons.star : Icons.star_border,
-                  color: _isPremium ? Colors.green : Colors.orange,
-                ),
+                Icon(_isPremium ? Icons.star : Icons.star_border, color: _isPremium ? Colors.green : Colors.orange),
                 const SizedBox(width: 8),
                 Text(
-                  _isPremium
-                      ? 'Premium User (Ad-Free)'
-                      : 'Free User (Ad-Supported)',
+                  _isPremium ? 'Premium User (Ad-Free)' : 'Free User (Ad-Supported)',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color:
-                        _isPremium
-                            ? Colors.green.shade800
-                            : Colors.orange.shade800,
+                    color: _isPremium ? Colors.green.shade800 : Colors.orange.shade800,
                   ),
                 ),
                 const Spacer(),
@@ -63,18 +57,12 @@ class _AdDemoScreenState extends State<AdDemoScreen> {
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(16),
-            color: Theme.of(context).colorScheme.surfaceVariant,
+            color: Theme.of(context).colorScheme.surfaceContainerHighest,
             child: Column(
               children: [
-                Text(
-                  'Searches Performed: $_searchCount',
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
+                Text('Searches Performed: $_searchCount', style: Theme.of(context).textTheme.titleMedium),
                 const SizedBox(height: 8),
-                Text(
-                  'Interstitial ads show every 3 searches',
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
+                Text('Interstitial ads show every 3 searches', style: Theme.of(context).textTheme.bodySmall),
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
@@ -97,10 +85,7 @@ class _AdDemoScreenState extends State<AdDemoScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Ad Integration Examples
-                  Text(
-                    'Ad Integration Examples',
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
+                  Text('Ad Integration Examples', style: Theme.of(context).textTheme.headlineSmall),
                   const SizedBox(height: 16),
 
                   // Rewarded Ad Example
@@ -112,31 +97,20 @@ class _AdDemoScreenState extends State<AdDemoScreen> {
                         children: [
                           Row(
                             children: [
-                              Icon(
-                                Icons.play_circle_filled,
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
+                              Icon(Icons.play_circle_filled, color: Theme.of(context).colorScheme.primary),
                               const SizedBox(width: 8),
-                              Text(
-                                'Rewarded Ad Example',
-                                style: Theme.of(context).textTheme.titleMedium,
-                              ),
+                              Text('Rewarded Ad Example', style: Theme.of(context).textTheme.titleMedium),
                             ],
                           ),
                           const SizedBox(height: 12),
-                          const Text(
-                            'Users can watch ads to unlock premium features temporarily.',
-                          ),
+                          const Text('Users can watch ads to unlock premium features temporarily.'),
                           const SizedBox(height: 16),
                           RewardedAdButton(
-                            rewardDescription:
-                                'Get 30 minutes of ad-free experience',
+                            rewardDescription: 'Get 30 minutes of ad-free experience',
                             onRewardEarned: (reward) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text(
-                                    'Reward earned: ${reward.amount} ${reward.type}! 30 minutes ad-free!',
-                                  ),
+                                  content: Text('Reward earned: ${reward.amount} ${reward.type}! 30 minutes ad-free!'),
                                   backgroundColor: Colors.green,
                                 ),
                               );
@@ -160,21 +134,13 @@ class _AdDemoScreenState extends State<AdDemoScreen> {
                             children: [
                               Icon(Icons.star, color: Colors.amber),
                               const SizedBox(width: 8),
-                              Text(
-                                'Premium Upgrade',
-                                style: Theme.of(context).textTheme.titleMedium,
-                              ),
+                              Text('Premium Upgrade', style: Theme.of(context).textTheme.titleMedium),
                             ],
                           ),
                           const SizedBox(height: 12),
-                          const Text(
-                            'Show premium upgrade dialogs to convert free users.',
-                          ),
+                          const Text('Show premium upgrade dialogs to convert free users.'),
                           const SizedBox(height: 16),
-                          ElevatedButton(
-                            onPressed: _showPremiumDialog,
-                            child: const Text('Show Premium Dialog'),
-                          ),
+                          ElevatedButton(onPressed: _showPremiumDialog, child: const Text('Show Premium Dialog')),
                         ],
                       ),
                     ),
@@ -189,10 +155,7 @@ class _AdDemoScreenState extends State<AdDemoScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'Monetization Strategy',
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
+                          Text('Monetization Strategy', style: Theme.of(context).textTheme.titleMedium),
                           const SizedBox(height: 12),
                           const Text(
                             '💰 Freemium Model: \$6.99-9.99/month\n'
@@ -218,10 +181,7 @@ class _AdDemoScreenState extends State<AdDemoScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'Technical Implementation',
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
+                          Text('Technical Implementation', style: Theme.of(context).textTheme.titleMedium),
                           const SizedBox(height: 12),
                           const Text(
                             '✅ Google AdMob SDK integrated\n'
@@ -275,9 +235,7 @@ class _AdDemoScreenState extends State<AdDemoScreen> {
     if (_searchCount % 3 == 0 && !_isPremium) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text(
-            '🎯 Interstitial ad would show here (every 3 searches)',
-          ),
+          content: Text('🎯 Interstitial ad would show here (every 3 searches)'),
           backgroundColor: Colors.blue,
           duration: Duration(seconds: 2),
         ),
@@ -301,19 +259,14 @@ class _AdDemoScreenState extends State<AdDemoScreen> {
                 _isPremium = true;
               });
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('🎉 Welcome to Premium! Ads removed.'),
-                  backgroundColor: Colors.green,
-                ),
+                const SnackBar(content: Text('🎉 Welcome to Premium! Ads removed.'), backgroundColor: Colors.green),
               );
             },
             onWatchAd: () {
               Navigator.of(context).pop();
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
-                  content: Text(
-                    '🎁 Watched ad! 30 minutes ad-free experience.',
-                  ),
+                  content: Text('🎁 Watched ad! 30 minutes ad-free experience.'),
                   backgroundColor: Colors.orange,
                 ),
               );

@@ -1,8 +1,11 @@
+import 'package:duacopilot/core/logging/app_logger.dart';
+
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 import '../models/query_history.dart';
 
+/// RagDatabaseHelper class implementation
 class RagDatabaseHelper {
   static const String _dbName = 'rag_dua_copilot.db';
   static const int _currentVersion = 3; // Updated for comprehensive RAG models
@@ -41,7 +44,7 @@ class RagDatabaseHelper {
 
   // Handle database upgrades with proper migration strategies
   Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
-    print('🔄 Upgrading RAG database from version $oldVersion to $newVersion');
+    AppLogger.debug('🔄 Upgrading RAG database from version $oldVersion to $newVersion');
 
     // Migration strategy: progressive upgrades
     for (int version = oldVersion + 1; version <= newVersion; version++) {
@@ -58,13 +61,13 @@ class RagDatabaseHelper {
         await _migrateToV3(db);
         break;
       default:
-        print('⚠️ No migration defined for version $toVersion');
+        AppLogger.debug('⚠️ No migration defined for version $toVersion');
     }
   }
 
   // Migration to version 2: Add semantic search and enhanced RAG features
   Future<void> _migrateToV2(Database db) async {
-    print('📊 Migrating to version 2: Enhanced RAG features');
+    AppLogger.debug('📊 Migrating to version 2: Enhanced RAG features');
 
     // Add semantic_hash column to query_history if not exists
     try {
@@ -73,7 +76,7 @@ class RagDatabaseHelper {
         ADD COLUMN semantic_hash TEXT
       ''');
     } catch (e) {
-      print('Column semantic_hash might already exist: $e');
+      AppLogger.debug('Column semantic_hash might already exist: $e');
     }
 
     // Create dua_responses table
@@ -117,7 +120,7 @@ class RagDatabaseHelper {
 
   // Migration to version 3: Add comprehensive RAG models
   Future<void> _migrateToV3(Database db) async {
-    print('🚀 Migrating to version 3: Comprehensive RAG models');
+    AppLogger.debug('🚀 Migrating to version 3: Comprehensive RAG models');
 
     // Create dua_recommendations table
     await db.execute('''
@@ -194,7 +197,7 @@ class RagDatabaseHelper {
         'ALTER TABLE query_history ADD COLUMN access_count INTEGER DEFAULT 0',
       );
     } catch (e) {
-      print('Enhanced query_history columns might already exist: $e');
+      AppLogger.debug('Enhanced query_history columns might already exist: $e');
     }
   }
 
@@ -492,7 +495,7 @@ class RagDatabaseHelper {
       final result = await db.rawQuery('PRAGMA integrity_check');
       return result.isNotEmpty && result.first['integrity_check'] == 'ok';
     } catch (e) {
-      print('❌ Database integrity check failed: $e');
+      AppLogger.debug('❌ Database integrity check failed: $e');
       return false;
     }
   }

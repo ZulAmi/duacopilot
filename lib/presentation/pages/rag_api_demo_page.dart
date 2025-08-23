@@ -8,14 +8,15 @@ import '../../data/datasources/rag_api_service.dart';
 import '../../data/models/rag_request_model.dart';
 import '../../core/di/injection_container.dart';
 
+/// RagApiServiceDemoPage class implementation
 class RagApiServiceDemoPage extends ConsumerStatefulWidget {
-  const RagApiServiceDemoPage({Key? key}) : super(key: key);
+  const RagApiServiceDemoPage({super.key});
 
   @override
-  ConsumerState<RagApiServiceDemoPage> createState() =>
-      _RagApiServiceDemoPageState();
+  ConsumerState<RagApiServiceDemoPage> createState() => _RagApiServiceDemoPageState();
 }
 
+/// _RagApiServiceDemoPageState class implementation
 class _RagApiServiceDemoPageState extends ConsumerState<RagApiServiceDemoPage> {
   final TextEditingController _queryController = TextEditingController();
   final TextEditingController _tokenController = TextEditingController();
@@ -41,9 +42,7 @@ class _RagApiServiceDemoPageState extends ConsumerState<RagApiServiceDemoPage> {
         });
       },
       onError: (error) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('WebSocket error: $error')));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('WebSocket error: $error')));
       },
     );
   }
@@ -51,9 +50,7 @@ class _RagApiServiceDemoPageState extends ConsumerState<RagApiServiceDemoPage> {
   Future<void> _setAuthToken() async {
     if (_tokenController.text.isNotEmpty) {
       await _ragApiService.setAuthToken(_tokenController.text);
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Auth token set successfully')),
-      );
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Auth token set successfully')));
     }
   }
 
@@ -127,29 +124,21 @@ ${history.map((h) => '• ${h.query} -> ${h.response.substring(0, 50)}...').join
 
   Future<void> _connectWebSocket() async {
     try {
-      await _ragApiService.connectWebSocket(
-        sessionId: DateTime.now().millisecondsSinceEpoch.toString(),
-      );
+      await _ragApiService.connectWebSocket(sessionId: DateTime.now().millisecondsSinceEpoch.toString());
       setState(() {
         _isWebSocketConnected = true;
       });
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('WebSocket connected for real-time updates'),
-        ),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('WebSocket connected for real-time updates')));
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('WebSocket connection failed: $e')),
-      );
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('WebSocket connection failed: $e')));
     }
   }
 
   void _clearCache() {
     _ragApiService.clearCache();
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(const SnackBar(content: Text('Cache cleared')));
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Cache cleared')));
   }
 
   @override
@@ -178,13 +167,7 @@ ${history.map((h) => '• ${h.query} -> ${h.response.substring(0, 50)}...').join
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Authentication',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    const Text('Authentication', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 8),
                     TextField(
                       controller: _tokenController,
@@ -196,10 +179,7 @@ ${history.map((h) => '• ${h.query} -> ${h.response.substring(0, 50)}...').join
                       obscureText: true,
                     ),
                     const SizedBox(height: 8),
-                    ElevatedButton(
-                      onPressed: _setAuthToken,
-                      child: const Text('Set Auth Token'),
-                    ),
+                    ElevatedButton(onPressed: _setAuthToken, child: const Text('Set Auth Token')),
                   ],
                 ),
               ),
@@ -214,13 +194,7 @@ ${history.map((h) => '• ${h.query} -> ${h.response.substring(0, 50)}...').join
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'RAG Query',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    const Text('RAG Query', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 8),
                     TextField(
                       controller: _queryController,
@@ -237,10 +211,7 @@ ${history.map((h) => '• ${h.query} -> ${h.response.substring(0, 50)}...').join
                       children: [
                         ElevatedButton(
                           onPressed: _isLoading ? null : _queryRag,
-                          child:
-                              _isLoading
-                                  ? const CircularProgressIndicator()
-                                  : const Text('Query RAG'),
+                          child: _isLoading ? const CircularProgressIndicator() : const Text('Query RAG'),
                         ),
                         ElevatedButton(
                           onPressed: _isLoading ? null : _getQueryHistory,
@@ -262,33 +233,17 @@ ${history.map((h) => '• ${h.query} -> ${h.response.substring(0, 50)}...').join
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Advanced Features',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    const Text('Advanced Features', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 8),
                     Wrap(
                       spacing: 8,
                       children: [
                         ElevatedButton(
                           onPressed: _connectWebSocket,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                _isWebSocketConnected ? Colors.green : null,
-                          ),
-                          child: Text(
-                            _isWebSocketConnected
-                                ? 'WebSocket Connected'
-                                : 'Connect WebSocket',
-                          ),
+                          style: ElevatedButton.styleFrom(backgroundColor: _isWebSocketConnected ? Colors.green : null),
+                          child: Text(_isWebSocketConnected ? 'WebSocket Connected' : 'Connect WebSocket'),
                         ),
-                        ElevatedButton(
-                          onPressed: _clearCache,
-                          child: const Text('Clear Cache'),
-                        ),
+                        ElevatedButton(onPressed: _clearCache, child: const Text('Clear Cache')),
                       ],
                     ),
                   ],
@@ -306,13 +261,7 @@ ${history.map((h) => '• ${h.query} -> ${h.response.substring(0, 50)}...').join
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Response',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      const Text('Response', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 8),
                       Expanded(
                         child: Container(
@@ -324,9 +273,7 @@ ${history.map((h) => '• ${h.query} -> ${h.response.substring(0, 50)}...').join
                           child: SingleChildScrollView(
                             padding: const EdgeInsets.all(8),
                             child: Text(
-                              _response.isEmpty
-                                  ? 'No response yet...'
-                                  : _response,
+                              _response.isEmpty ? 'No response yet...' : _response,
                               style: const TextStyle(fontFamily: 'monospace'),
                             ),
                           ),
@@ -350,36 +297,17 @@ ${history.map((h) => '• ${h.query} -> ${h.response.substring(0, 50)}...').join
                   children: [
                     const Text(
                       'RAG API Service Features:',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 8),
-                    const Text(
-                      '✅ Dio client with authentication interceptors and logging',
-                    ),
-                    const Text(
-                      '✅ Custom retry logic for failed requests with exponential backoff',
-                    ),
-                    const Text(
-                      '✅ Network connectivity monitoring using connectivity_plus',
-                    ),
-                    const Text(
-                      '✅ Response caching with intelligent query caching',
-                    ),
-                    const Text(
-                      '✅ WebSocket integration for real-time RAG updates',
-                    ),
-                    const Text(
-                      '✅ Custom error handling for timeouts, rate limits, and server errors',
-                    ),
-                    const Text(
-                      '✅ Secure token storage with flutter_secure_storage',
-                    ),
-                    const Text(
-                      '✅ Comprehensive logging with structured log messages',
-                    ),
+                    const Text('✅ Dio client with authentication interceptors and logging'),
+                    const Text('✅ Custom retry logic for failed requests with exponential backoff'),
+                    const Text('✅ Network connectivity monitoring using connectivity_plus'),
+                    const Text('✅ Response caching with intelligent query caching'),
+                    const Text('✅ WebSocket integration for real-time RAG updates'),
+                    const Text('✅ Custom error handling for timeouts, rate limits, and server errors'),
+                    const Text('✅ Secure token storage with flutter_secure_storage'),
+                    const Text('✅ Comprehensive logging with structured log messages'),
                   ],
                 ),
               ),

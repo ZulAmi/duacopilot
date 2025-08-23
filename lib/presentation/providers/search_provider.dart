@@ -7,6 +7,7 @@ import '../../domain/usecases/save_query_history.dart';
 import '../../core/di/injection_container.dart' as di;
 
 // Search state
+/// SearchState class implementation
 class SearchState {
   final bool isLoading;
   final RagResponse? response;
@@ -36,6 +37,7 @@ class SearchState {
 }
 
 // Search provider
+/// SearchNotifier class implementation
 class SearchNotifier extends StateNotifier<SearchState> {
   final SearchRag searchRag;
   final SaveQueryHistory saveQueryHistory;

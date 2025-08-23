@@ -4,6 +4,7 @@ import 'package:geolocator/geolocator.dart';
 import '../../domain/entities/dua_entity.dart';
 import '../../domain/entities/context_entity.dart';
 
+/// LocationService class implementation
 class LocationService {
   static LocationService? _instance;
   static LocationService get instance => _instance ??= LocationService._();

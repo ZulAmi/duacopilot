@@ -5,13 +5,13 @@ import '../services/ads/ad_service.dart';
 
 /// Demo screen showing ad integration in DuaCopilot
 class AdIntegrationDemoScreen extends StatefulWidget {
-  const AdIntegrationDemoScreen({Key? key}) : super(key: key);
+  const AdIntegrationDemoScreen({super.key});
 
   @override
-  State<AdIntegrationDemoScreen> createState() =>
-      _AdIntegrationDemoScreenState();
+  State<AdIntegrationDemoScreen> createState() => _AdIntegrationDemoScreenState();
 }
 
+/// _AdIntegrationDemoScreenState class implementation
 class _AdIntegrationDemoScreenState extends State<AdIntegrationDemoScreen> {
   int _searchCount = 0;
   bool _isPremiumUser = false;
@@ -44,9 +44,7 @@ class _AdIntegrationDemoScreenState extends State<AdIntegrationDemoScreen> {
             decoration: BoxDecoration(
               color: _isPremiumUser ? Colors.amber : Colors.grey[100],
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                color: _isPremiumUser ? Colors.amber : Colors.grey,
-              ),
+              border: Border.all(color: _isPremiumUser ? Colors.amber : Colors.grey),
             ),
             child: Row(
               children: [
@@ -57,13 +55,10 @@ class _AdIntegrationDemoScreenState extends State<AdIntegrationDemoScreen> {
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(
-                    _isPremiumUser
-                        ? 'Premium User - No Ads'
-                        : 'Free User - Ads Enabled',
+                    _isPremiumUser ? 'Premium User - No Ads' : 'Free User - Ads Enabled',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color:
-                          _isPremiumUser ? Colors.amber[800] : Colors.grey[700],
+                      color: _isPremiumUser ? Colors.amber[800] : Colors.grey[700],
                     ),
                   ),
                 ),
@@ -91,10 +86,7 @@ class _AdIntegrationDemoScreenState extends State<AdIntegrationDemoScreen> {
                       padding: const EdgeInsets.all(16),
                       child: Column(
                         children: [
-                          Text(
-                            'Search Count: $_searchCount',
-                            style: Theme.of(context).textTheme.headlineSmall,
-                          ),
+                          Text('Search Count: $_searchCount', style: Theme.of(context).textTheme.headlineSmall),
                           const SizedBox(height: 8),
                           Text(
                             'Interstitial ads show every 3 searches for free users',
@@ -130,9 +122,7 @@ class _AdIntegrationDemoScreenState extends State<AdIntegrationDemoScreen> {
                         _showRewardDialog(reward);
                       },
                       onAdClosed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Rewarded ad closed')),
-                        );
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Rewarded ad closed')));
                       },
                     ),
 
@@ -198,21 +188,13 @@ class _AdIntegrationDemoScreenState extends State<AdIntegrationDemoScreen> {
           (context) => AlertDialog(
             title: const Text('Search Results'),
             content: Text('Search #$_searchCount completed successfully!'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: const Text('OK'),
-              ),
-            ],
+            actions: [TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('OK'))],
           ),
     );
   }
 
   void _showPremiumUpgradeDialog() {
-    showDialog(
-      context: context,
-      builder: (context) => const PremiumUpgradeDialog(),
-    );
+    showDialog(context: context, builder: (context) => const PremiumUpgradeDialog());
   }
 
   void _showRewardDialog(RewardItem reward) {
@@ -225,12 +207,7 @@ class _AdIntegrationDemoScreenState extends State<AdIntegrationDemoScreen> {
               'You earned ${reward.amount} ${reward.type}!\n\n'
               'Enjoy premium features for the next 24 hours.',
             ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: const Text('Awesome!'),
-              ),
-            ],
+            actions: [TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Awesome!'))],
           ),
     );
   }
@@ -238,7 +215,7 @@ class _AdIntegrationDemoScreenState extends State<AdIntegrationDemoScreen> {
 
 /// Helper widget to demonstrate ad placement strategies
 class AdPlacementDemoWidget extends StatelessWidget {
-  const AdPlacementDemoWidget({Key? key}) : super(key: key);
+  const AdPlacementDemoWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -259,9 +236,7 @@ class AdPlacementDemoWidget extends StatelessWidget {
             // Example 2: Interstitial trigger on important actions
             InterstitialAdTrigger(
               onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Audio played after ad')),
-                );
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Audio played after ad')));
               },
               child: Container(
                 width: double.infinity,
@@ -273,11 +248,7 @@ class AdPlacementDemoWidget extends StatelessWidget {
                 ),
                 child: const Text(
                   '▶ Play Audio Recitation',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -292,18 +263,12 @@ class AdPlacementDemoWidget extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.grey[100],
-        borderRadius: BorderRadius.circular(12),
-      ),
+      decoration: BoxDecoration(color: Colors.grey[100], borderRadius: BorderRadius.circular(12)),
       child: Column(
         children: [
           Icon(icon, size: 48, color: Colors.green),
           const SizedBox(height: 12),
-          Text(
-            title,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
+          Text(title, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           const SizedBox(height: 8),
           const Text(
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '

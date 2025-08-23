@@ -86,30 +86,20 @@ class QueryContext extends Equatable {
   /// Create from map for deserialization
   factory QueryContext.fromMap(Map<String, dynamic> map) {
     return QueryContext(
-      timestamp:
-          map['timestamp'] != null ? DateTime.parse(map['timestamp']) : null,
+      timestamp: map['timestamp'] != null ? DateTime.parse(map['timestamp']) : null,
       timeOfDay:
           map['timeOfDay'] != null
-              ? TimeOfDay.values.firstWhere(
-                (e) => e.name == map['timeOfDay'],
-                orElse: () => TimeOfDay.morning,
-              )
+              ? TimeOfDay.values.firstWhere((e) => e.name == map['timeOfDay'], orElse: () => TimeOfDay.morning)
               : null,
       islamicDate: map['islamicDate'],
       prayerTime:
           map['prayerTime'] != null
-              ? PrayerTime.values.firstWhere(
-                (e) => e.name == map['prayerTime'],
-                orElse: () => PrayerTime.fajr,
-              )
+              ? PrayerTime.values.firstWhere((e) => e.name == map['prayerTime'], orElse: () => PrayerTime.fajr)
               : null,
       seasonalContext: map['seasonalContext'],
       weekday: map['weekday'],
       location: map['location'],
-      userPreferences:
-          map['userPreferences'] != null
-              ? Map<String, dynamic>.from(map['userPreferences'])
-              : null,
+      userPreferences: map['userPreferences'] != null ? Map<String, dynamic>.from(map['userPreferences']) : null,
       deviceLanguage: map['deviceLanguage'],
       timezone: map['timezone'],
     );
@@ -122,8 +112,9 @@ class QueryContext extends Equatable {
     if (prayerTime != null) contextFactors++;
     if (location != null) contextFactors++;
     if (seasonalContext != null) contextFactors++;
-    if (userPreferences != null && userPreferences!.isNotEmpty)
+    if (userPreferences != null && userPreferences!.isNotEmpty) {
       contextFactors++;
+    }
 
     return contextFactors >= 3;
   }

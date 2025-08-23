@@ -1,5 +1,6 @@
 // Background task service (WorkManager disabled for compatibility)
 
+/// BackgroundTaskService class implementation
 class BackgroundTaskService {
   static Future<void> initialize() async {
     // WorkManager initialization disabled for compatibility

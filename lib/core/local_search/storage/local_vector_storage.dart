@@ -1,3 +1,5 @@
+import 'package:duacopilot/core/logging/app_logger.dart';
+
 import 'dart:convert';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../models/local_search_models.dart';
@@ -45,9 +47,9 @@ class LocalVectorStorage {
       await _performMaintenance();
 
       _isInitialized = true;
-      print('Local vector storage initialized successfully');
+      AppLogger.debug('Local vector storage initialized successfully');
     } catch (e) {
-      print('Error initializing local vector storage: $e');
+      AppLogger.debug('Error initializing local vector storage: $e');
       throw Exception('Failed to initialize local storage: $e');
     }
   }
@@ -69,9 +71,9 @@ class LocalVectorStorage {
       // Update metadata
       await _updateStorageMetadata();
 
-      print('Stored embedding for: ${embedding.query}');
+      AppLogger.debug('Stored embedding for: ${embedding.query}');
     } catch (e) {
-      print('Error storing embedding: $e');
+      AppLogger.debug('Error storing embedding: $e');
       throw Exception('Failed to store embedding: $e');
     }
   }
@@ -100,9 +102,9 @@ class LocalVectorStorage {
       // Update metadata
       await _updateStorageMetadata();
 
-      print('Stored ${embeddings.length} embeddings in batch');
+      AppLogger.debug('Stored ${embeddings.length} embeddings in batch');
     } catch (e) {
-      print('Error storing batch embeddings: $e');
+      AppLogger.debug('Error storing batch embeddings: $e');
       throw Exception('Failed to store batch embeddings: $e');
     }
   }
@@ -119,7 +121,7 @@ class LocalVectorStorage {
       }
       return null;
     } catch (e) {
-      print('Error retrieving embedding: $e');
+      AppLogger.debug('Error retrieving embedding: $e');
       return null;
     }
   }
@@ -138,12 +140,12 @@ class LocalVectorStorage {
             embeddings.add(embedding);
           }
         } catch (e) {
-          print('Error parsing embedding: $e');
+          AppLogger.debug('Error parsing embedding: $e');
         }
       }
       return embeddings;
     } catch (e) {
-      print('Error retrieving embeddings by language: $e');
+      AppLogger.debug('Error retrieving embeddings by language: $e');
       return [];
     }
   }
@@ -162,12 +164,12 @@ class LocalVectorStorage {
             embeddings.add(embedding);
           }
         } catch (e) {
-          print('Error parsing embedding: $e');
+          AppLogger.debug('Error parsing embedding: $e');
         }
       }
       return embeddings;
     } catch (e) {
-      print('Error retrieving embeddings by category: $e');
+      AppLogger.debug('Error retrieving embeddings by category: $e');
       return [];
     }
   }
@@ -196,7 +198,7 @@ class LocalVectorStorage {
             }
           }
         } catch (e) {
-          print('Error parsing embedding for search: $e');
+          AppLogger.debug('Error parsing embedding for search: $e');
         }
       }
 
@@ -207,7 +209,7 @@ class LocalVectorStorage {
         minSimilarity: minSimilarity,
       );
     } catch (e) {
-      print('Error searching similar embeddings: $e');
+      AppLogger.debug('Error searching similar embeddings: $e');
       return [];
     }
   }
@@ -231,7 +233,7 @@ class LocalVectorStorage {
             embeddings.add(embedding);
           }
         } catch (e) {
-          print('Error parsing embedding: $e');
+          AppLogger.debug('Error parsing embedding: $e');
         }
       }
 
@@ -240,7 +242,7 @@ class LocalVectorStorage {
 
       return embeddings.take(limit).toList();
     } catch (e) {
-      print('Error retrieving popular embeddings: $e');
+      AppLogger.debug('Error retrieving popular embeddings: $e');
       return [];
     }
   }
@@ -264,7 +266,7 @@ class LocalVectorStorage {
         await _embeddingsBox!.put(id, updatedJsonString);
       }
     } catch (e) {
-      print('Error updating embedding popularity: $e');
+      AppLogger.debug('Error updating embedding popularity: $e');
     }
   }
 
@@ -280,9 +282,9 @@ class LocalVectorStorage {
 
       final jsonString = jsonEncode(query.toJson());
       await _pendingQueriesBox!.put(query.id, jsonString);
-      print('Stored pending query: ${query.query}');
+      AppLogger.debug('Stored pending query: ${query.query}');
     } catch (e) {
-      print('Error storing pending query: $e');
+      AppLogger.debug('Error storing pending query: $e');
       throw Exception('Failed to store pending query: $e');
     }
   }
@@ -305,7 +307,7 @@ class LocalVectorStorage {
             queries.add(query);
           }
         } catch (e) {
-          print('Error parsing pending query: $e');
+          AppLogger.debug('Error parsing pending query: $e');
         }
       }
 
@@ -318,7 +320,7 @@ class LocalVectorStorage {
 
       return queries;
     } catch (e) {
-      print('Error retrieving pending queries: $e');
+      AppLogger.debug('Error retrieving pending queries: $e');
       return [];
     }
   }
@@ -340,7 +342,7 @@ class LocalVectorStorage {
         await _pendingQueriesBox!.put(queryId, updatedJsonString);
       }
     } catch (e) {
-      print('Error marking query as processed: $e');
+      AppLogger.debug('Error marking query as processed: $e');
     }
   }
 
@@ -351,7 +353,7 @@ class LocalVectorStorage {
     try {
       await _pendingQueriesBox!.delete(queryId);
     } catch (e) {
-      print('Error removing pending query: $e');
+      AppLogger.debug('Error removing pending query: $e');
     }
   }
 
@@ -407,7 +409,7 @@ class LocalVectorStorage {
         'last_updated': await _getLastUpdated(),
       };
     } catch (e) {
-      print('Error getting storage stats: $e');
+      AppLogger.debug('Error getting storage stats: $e');
       return {};
     }
   }
@@ -419,9 +421,9 @@ class LocalVectorStorage {
     try {
       await _embeddingsBox!.clear();
       await _updateStorageMetadata();
-      print('Cleared all embeddings');
+      AppLogger.debug('Cleared all embeddings');
     } catch (e) {
-      print('Error clearing embeddings: $e');
+      AppLogger.debug('Error clearing embeddings: $e');
     }
   }
 
@@ -431,9 +433,9 @@ class LocalVectorStorage {
 
     try {
       await _pendingQueriesBox!.clear();
-      print('Cleared all pending queries');
+      AppLogger.debug('Cleared all pending queries');
     } catch (e) {
-      print('Error clearing pending queries: $e');
+      AppLogger.debug('Error clearing pending queries: $e');
     }
   }
 
@@ -444,9 +446,9 @@ class LocalVectorStorage {
       await _pendingQueriesBox?.close();
       await _metadataBox?.close();
       _isInitialized = false;
-      print('Local vector storage disposed');
+      AppLogger.debug('Local vector storage disposed');
     } catch (e) {
-      print('Error disposing local storage: $e');
+      AppLogger.debug('Error disposing local storage: $e');
     }
   }
 
@@ -483,9 +485,9 @@ class LocalVectorStorage {
         await _embeddingsBox!.delete(key);
       }
 
-      print('Maintenance completed: removed ${toRemove.length} old embeddings');
+      AppLogger.debug('Maintenance completed: removed ${toRemove.length} old embeddings');
     } catch (e) {
-      print('Error during maintenance: $e');
+      AppLogger.debug('Error during maintenance: $e');
     }
   }
 
@@ -523,9 +525,9 @@ class LocalVectorStorage {
         await _embeddingsBox!.delete(embeddingEntries[i].key);
       }
 
-      print('Evicted $actualEvictCount old embeddings');
+      AppLogger.debug('Evicted $actualEvictCount old embeddings');
     } catch (e) {
-      print('Error evicting old embeddings: $e');
+      AppLogger.debug('Error evicting old embeddings: $e');
     }
   }
 
@@ -553,9 +555,9 @@ class LocalVectorStorage {
         await _pendingQueriesBox!.delete(queryEntries[i].key);
       }
 
-      print('Evicted $toEvict old pending queries');
+      AppLogger.debug('Evicted $toEvict old pending queries');
     } catch (e) {
-      print('Error evicting old pending queries: $e');
+      AppLogger.debug('Error evicting old pending queries: $e');
     }
   }
 
@@ -567,7 +569,7 @@ class LocalVectorStorage {
         _embeddingsBox!.length.toString(),
       );
     } catch (e) {
-      print('Error updating storage metadata: $e');
+      AppLogger.debug('Error updating storage metadata: $e');
     }
   }
 
@@ -589,7 +591,7 @@ class LocalVectorStorage {
         final json = jsonDecode(jsonString) as Map<String, dynamic>;
         embeddings.add(DuaEmbedding.fromJson(json));
       } catch (e) {
-        print('Error parsing embedding: $e');
+        AppLogger.debug('Error parsing embedding: $e');
       }
     }
     return embeddings;

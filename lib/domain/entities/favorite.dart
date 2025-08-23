@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 
 enum FavoriteType { ragResponse, audio, query }
 
+/// Favorite class implementation
 class Favorite extends Equatable {
   final int? id;
   final String itemId;

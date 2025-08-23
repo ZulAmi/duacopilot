@@ -1,19 +1,19 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/services.dart';
+import 'package:duacopilot/core/logging/app_logger.dart';
 import '../models/local_search_models.dart';
 
 /// Service for managing fallback response templates stored in asset JSON files
 class FallbackTemplateService {
   static FallbackTemplateService? _instance;
-  static FallbackTemplateService get instance =>
-      _instance ??= FallbackTemplateService._();
+  static FallbackTemplateService get instance => _instance ??= FallbackTemplateService._();
 
   FallbackTemplateService._();
 
   // Template storage
-  Map<String, List<ResponseTemplate>> _templates = {};
-  Map<String, List<String>> _commonQueries = {};
+  final Map<String, List<ResponseTemplate>> _templates = {};
+  final Map<String, List<String>> _commonQueries = {};
   bool _isInitialized = false;
 
   // Asset paths
@@ -35,9 +35,9 @@ class FallbackTemplateService {
       }
 
       _isInitialized = true;
-      print('Fallback template service initialized successfully');
+      AppLogger.debug('Fallback template service initialized successfully');
     } catch (e) {
-      print('Error initializing fallback template service: $e');
+      AppLogger.debug('Error initializing fallback template service: $e');
       // Create default templates as fallback
       _createDefaultTemplates();
       _isInitialized = true;
@@ -90,26 +90,19 @@ class FallbackTemplateService {
         quality: quality,
       );
     } catch (e) {
-      print('Error generating fallback response: $e');
+      AppLogger.debug('Error generating fallback response: $e');
       return null;
     }
   }
 
   /// Get templates by category
-  List<ResponseTemplate> getTemplatesByCategory(
-    String category,
-    String language,
-  ) {
+  List<ResponseTemplate> getTemplatesByCategory(String category, String language) {
     final languageTemplates = _templates[language] ?? [];
     return languageTemplates.where((t) => t.category == category).toList();
   }
 
   /// Get most relevant templates for a query
-  List<ResponseTemplate> getMostRelevantTemplates(
-    String query,
-    String language, {
-    int limit = 5,
-  }) {
+  List<ResponseTemplate> getMostRelevantTemplates(String query, String language, {int limit = 5}) {
     final templates = _templates[language] ?? [];
     final scored = <_ScoredTemplate>[];
 
@@ -143,8 +136,7 @@ class FallbackTemplateService {
 
       final categoryCount = <String, int>{};
       for (final template in templates) {
-        categoryCount[template.category] =
-            (categoryCount[template.category] ?? 0) + 1;
+        categoryCount[template.category] = (categoryCount[template.category] ?? 0) + 1;
       }
 
       stats[language] = {
@@ -165,23 +157,14 @@ class FallbackTemplateService {
     }
   }
 
-  Future<void> _loadTemplatesForLanguage(
-    String language,
-    String assetPath,
-  ) async {
+  Future<void> _loadTemplatesForLanguage(String language, String assetPath) async {
     try {
       final jsonString = await rootBundle.loadString(assetPath);
       final data = jsonDecode(jsonString) as Map<String, dynamic>;
 
       // Parse templates
       final templatesJson = data['templates'] as List;
-      final templates =
-          templatesJson
-              .map(
-                (json) =>
-                    ResponseTemplate.fromJson(json as Map<String, dynamic>),
-              )
-              .toList();
+      final templates = templatesJson.map((json) => ResponseTemplate.fromJson(json as Map<String, dynamic>)).toList();
 
       _templates[language] = templates;
 
@@ -191,9 +174,9 @@ class FallbackTemplateService {
         _commonQueries[language] = queriesJson.cast<String>();
       }
 
-      print('Loaded ${templates.length} templates for $language');
+      AppLogger.debug('Loaded ${templates.length} templates for $language');
     } catch (e) {
-      print('Could not load templates for $language: $e');
+      AppLogger.debug('Could not load templates for $language: $e');
       _createDefaultTemplatesForLanguage(language);
     }
   }
@@ -236,10 +219,7 @@ class FallbackTemplateService {
 
     // Check semantic similarity with examples
     for (final example in template.examples) {
-      final similarity = _calculateStringSimilarity(
-        queryLower,
-        example.toLowerCase(),
-      );
+      final similarity = _calculateStringSimilarity(queryLower, example.toLowerCase());
       score += similarity * 0.2;
     }
 
@@ -261,11 +241,7 @@ class FallbackTemplateService {
     return union > 0 ? intersection / union : 0.0;
   }
 
-  String _generateResponseFromTemplate(
-    ResponseTemplate template,
-    String query,
-    String language,
-  ) {
+  String _generateResponseFromTemplate(ResponseTemplate template, String query, String language) {
     var response = template.responseTemplate;
 
     // Replace placeholders
@@ -284,20 +260,14 @@ class FallbackTemplateService {
     final placeholders = <String, String>{};
 
     // Extract time-based placeholders
-    final timeRegex = RegExp(
-      r'\b(morning|afternoon|evening|night|dawn|sunset)\b',
-      caseSensitive: false,
-    );
+    final timeRegex = RegExp(r'\b(morning|afternoon|evening|night|dawn|sunset)\b', caseSensitive: false);
     final timeMatch = timeRegex.firstMatch(query);
     if (timeMatch != null) {
       placeholders['time'] = timeMatch.group(1)!;
     }
 
     // Extract action-based placeholders
-    final actionRegex = RegExp(
-      r'\b(prayer|sleep|work|travel|study|eat)\b',
-      caseSensitive: false,
-    );
+    final actionRegex = RegExp(r'\b(prayer|sleep|work|travel|study|eat)\b', caseSensitive: false);
     final actionMatch = actionRegex.firstMatch(query);
     if (actionMatch != null) {
       placeholders['action'] = actionMatch.group(1)!;
@@ -318,10 +288,7 @@ class FallbackTemplateService {
     response = response.replaceAll('{{time}}', _formatTime(now, language));
 
     // Replace Islamic calendar info (simplified)
-    response = response.replaceAll(
-      '{{islamic_date}}',
-      _formatIslamicDate(now, language),
-    );
+    response = response.replaceAll('{{islamic_date}}', _formatIslamicDate(now, language));
 
     return response;
   }
@@ -368,11 +335,7 @@ class FallbackTemplateService {
     }
   }
 
-  double _calculateConfidence(
-    String query,
-    ResponseTemplate template,
-    double boost,
-  ) {
+  double _calculateConfidence(String query, ResponseTemplate template, double boost) {
     final baseConfidence = template.confidence;
     final matchScore = _calculateTemplateScore(query, template);
 
@@ -427,11 +390,7 @@ class FallbackTemplateService {
             'Here is a general dua for {{action}}: "Bismillah, Rabbi zidni ilman" (In the name of Allah, my Lord, increase me in knowledge). This dua can be recited at {{time}}.',
         keywords: ['dua', 'prayer', 'general', 'help'],
         patterns: [r'dua for.*', r'prayer for.*', r'help with.*'],
-        examples: [
-          'dua for success',
-          'prayer for guidance',
-          'help with studies',
-        ],
+        examples: ['dua for success', 'prayer for guidance', 'help with studies'],
         relatedQueries: ['morning dua', 'evening dua', 'travel dua'],
         popularity: 0.8,
       ),
@@ -460,8 +419,7 @@ class FallbackTemplateService {
         confidence: 0.7,
         completeness: 0.8,
         relevance: 0.9,
-        responseTemplate:
-            'دعاء عام لـ {{action}}: "بسم الله، رب زدني علماً". يمكن قراءة هذا الدعاء في {{time}}.',
+        responseTemplate: 'دعاء عام لـ {{action}}: "بسم الله، رب زدني علماً". يمكن قراءة هذا الدعاء في {{time}}.',
         keywords: ['دعاء', 'صلاة', 'عام', 'مساعدة'],
         patterns: [r'دعاء.*', r'صلاة.*', r'مساعدة.*'],
         examples: ['دعاء للنجاح', 'صلاة للهداية', 'مساعدة في الدراسة'],
@@ -479,8 +437,7 @@ class FallbackTemplateService {
         confidence: 0.7,
         completeness: 0.8,
         relevance: 0.9,
-        responseTemplate:
-            '{{action}} کے لیے عام دعا: "بسم اللہ، رب زدنی علماً"۔ یہ دعا {{time}} میں پڑھی جا سکتی ہے۔',
+        responseTemplate: '{{action}} کے لیے عام دعا: "بسم اللہ، رب زدنی علماً"۔ یہ دعا {{time}} میں پڑھی جا سکتی ہے۔',
         keywords: ['دعا', 'نماز', 'عام', 'مدد'],
         patterns: [r'دعا.*', r'نماز.*', r'مدد.*'],
         examples: ['کامیابی کی دعا', 'ہدایت کی نماز', 'پڑھائی میں مدد'],

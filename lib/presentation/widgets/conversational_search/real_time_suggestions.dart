@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
+/// SearchSuggestion class implementation
 class SearchSuggestion {
   final String id;
   final String text;
@@ -23,16 +24,9 @@ class SearchSuggestion {
   });
 }
 
-enum SuggestionType {
-  query,
-  completion,
-  correction,
-  related,
-  popular,
-  recent,
-  semantic,
-}
+enum SuggestionType { query, completion, correction, related, popular, recent, semantic }
 
+/// RealTimeSuggestionsController class implementation
 class RealTimeSuggestionsController extends ChangeNotifier {
   final List<SearchSuggestion> _suggestions = [];
   final List<SearchSuggestion> _recentSearches = [];
@@ -66,9 +60,7 @@ class RealTimeSuggestionsController extends ChangeNotifier {
       relevanceScore: 1.0,
     );
 
-    _recentSearches.removeWhere(
-      (s) => s.text.toLowerCase() == query.toLowerCase(),
-    );
+    _recentSearches.removeWhere((s) => s.text.toLowerCase() == query.toLowerCase());
     _recentSearches.insert(0, suggestion);
 
     if (_recentSearches.length > 10) {
@@ -82,14 +74,11 @@ class RealTimeSuggestionsController extends ChangeNotifier {
 
   void _updateSearchFrequency(String query) {
     final normalizedQuery = query.toLowerCase().trim();
-    _searchFrequency[normalizedQuery] =
-        (_searchFrequency[normalizedQuery] ?? 0) + 1;
+    _searchFrequency[normalizedQuery] = (_searchFrequency[normalizedQuery] ?? 0) + 1;
   }
 
   void _updatePopularSearches() {
-    final sortedEntries =
-        _searchFrequency.entries.toList()
-          ..sort((a, b) => b.value.compareTo(a.value));
+    final sortedEntries = _searchFrequency.entries.toList()..sort((a, b) => b.value.compareTo(a.value));
 
     _popularSearches.clear();
     for (int i = 0; i < sortedEntries.length && i < 5; i++) {
@@ -253,8 +242,7 @@ class RealTimeSuggestionsController extends ChangeNotifier {
       if (lowerQuery.contains(category)) {
         for (final subcategory in semanticMappings[category]!.keys) {
           if (lowerQuery.contains(subcategory)) {
-            for (final suggestion
-                in semanticMappings[category]![subcategory]!) {
+            for (final suggestion in semanticMappings[category]![subcategory]!) {
               suggestions.add(
                 SearchSuggestion(
                   id: 'semantic_${suggestion.replaceAll(' ', '_')}',
@@ -369,9 +357,7 @@ class RealTimeSuggestionsController extends ChangeNotifier {
     int matchCount = 0;
     for (final queryWord in queryWords) {
       for (final suggestionWord in suggestionWords) {
-        if (queryWord == suggestionWord ||
-            queryWord.contains(suggestionWord) ||
-            suggestionWord.contains(queryWord)) {
+        if (queryWord == suggestionWord || queryWord.contains(suggestionWord) || suggestionWord.contains(queryWord)) {
           matchCount++;
         }
       }
@@ -386,21 +372,19 @@ class RealTimeSuggestionsController extends ChangeNotifier {
 
     final dp = List.generate(len1 + 1, (i) => List.filled(len2 + 1, 0));
 
-    for (int i = 0; i <= len1; i++) dp[i][0] = i;
-    for (int j = 0; j <= len2; j++) dp[0][j] = j;
+    for (int i = 0; i <= len1; i++) {
+      dp[i][0] = i;
+    }
+    for (int j = 0; j <= len2; j++) {
+      dp[0][j] = j;
+    }
 
     for (int i = 1; i <= len1; i++) {
       for (int j = 1; j <= len2; j++) {
         if (s1[i - 1] == s2[j - 1]) {
           dp[i][j] = dp[i - 1][j - 1];
         } else {
-          dp[i][j] =
-              1 +
-              [
-                dp[i - 1][j],
-                dp[i][j - 1],
-                dp[i - 1][j - 1],
-              ].reduce((a, b) => a < b ? a : b);
+          dp[i][j] = 1 + [dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]].reduce((a, b) => a < b ? a : b);
         }
       }
     }
@@ -422,6 +406,7 @@ class RealTimeSuggestionsController extends ChangeNotifier {
   }
 }
 
+/// RealTimeSuggestionsWidget class implementation
 class RealTimeSuggestionsWidget extends StatefulWidget {
   final RealTimeSuggestionsController controller;
   final Function(SearchSuggestion) onSuggestionTapped;
@@ -430,19 +415,19 @@ class RealTimeSuggestionsWidget extends StatefulWidget {
   final double maxHeight;
 
   const RealTimeSuggestionsWidget({
-    Key? key,
+    super.key,
     required this.controller,
     required this.onSuggestionTapped,
     this.showIcons = true,
     this.showDescriptions = true,
     this.maxHeight = 300,
-  }) : super(key: key);
+  });
 
   @override
-  State<RealTimeSuggestionsWidget> createState() =>
-      _RealTimeSuggestionsWidgetState();
+  State<RealTimeSuggestionsWidget> createState() => _RealTimeSuggestionsWidgetState();
 }
 
+/// _RealTimeSuggestionsWidgetState class implementation
 class _RealTimeSuggestionsWidgetState extends State<RealTimeSuggestionsWidget> {
   @override
   void initState() {
@@ -473,21 +458,10 @@ class _RealTimeSuggestionsWidgetState extends State<RealTimeSuggestionsWidget> {
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.outline.withOpacity(0.2),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
-          ),
-        ],
+        border: Border.all(color: Theme.of(context).colorScheme.outline.withOpacity(0.2)),
+        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 8, offset: const Offset(0, 4))],
       ),
-      child:
-          widget.controller.isLoading
-              ? _buildLoadingState()
-              : _buildSuggestionsList(),
+      child: widget.controller.isLoading ? _buildLoadingState() : _buildSuggestionsList(),
     );
   }
 
@@ -502,17 +476,14 @@ class _RealTimeSuggestionsWidgetState extends State<RealTimeSuggestionsWidget> {
             SizedBox(
               width: 24,
               height: 24,
-              child: CircularProgressIndicator(
-                strokeWidth: 2,
-                color: Theme.of(context).colorScheme.primary,
-              ),
+              child: CircularProgressIndicator(strokeWidth: 2, color: Theme.of(context).colorScheme.primary),
             ),
             const SizedBox(height: 8),
             Text(
               'Generating suggestions...',
-              style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.labelMedium?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
             ),
           ],
         ),
@@ -555,9 +526,7 @@ class _RealTimeSuggestionsWidgetState extends State<RealTimeSuggestionsWidget> {
                 Container(
                   padding: const EdgeInsets.all(6),
                   decoration: BoxDecoration(
-                    color: _getSuggestionTypeColor(
-                      suggestion.type,
-                    ).withOpacity(0.1),
+                    color: _getSuggestionTypeColor(suggestion.type).withOpacity(0.1),
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Icon(
@@ -574,21 +543,15 @@ class _RealTimeSuggestionsWidgetState extends State<RealTimeSuggestionsWidget> {
                   children: [
                     Text(
                       suggestion.text,
-                      style: textTheme.bodyMedium?.copyWith(
-                        color: colorScheme.onSurface,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurface, fontWeight: FontWeight.w500),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    if (widget.showDescriptions &&
-                        suggestion.description != null) ...[
+                    if (widget.showDescriptions && suggestion.description != null) ...[
                       const SizedBox(height: 2),
                       Text(
                         suggestion.description!,
-                        style: textTheme.labelSmall?.copyWith(
-                          color: colorScheme.onSurfaceVariant,
-                        ),
+                        style: textTheme.labelSmall?.copyWith(color: colorScheme.onSurfaceVariant),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -596,11 +559,7 @@ class _RealTimeSuggestionsWidgetState extends State<RealTimeSuggestionsWidget> {
                   ],
                 ),
               ),
-              Icon(
-                Icons.north_west,
-                size: 14,
-                color: colorScheme.onSurfaceVariant.withOpacity(0.5),
-              ),
+              Icon(Icons.north_west, size: 14, color: colorScheme.onSurfaceVariant.withOpacity(0.5)),
             ],
           ),
         ),
