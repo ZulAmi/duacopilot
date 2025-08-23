@@ -1,6 +1,7 @@
 // Modern animated splash screen for DuaCopilot
 import 'dart:math' as math;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -28,6 +29,14 @@ class _ModernSplashScreenState extends State<ModernSplashScreen> with TickerProv
     super.initState();
     _initializeAnimations();
     _startAnimationSequence();
+
+    // Fallback timeout to ensure app doesn't hang
+    Future.delayed(const Duration(seconds: 5), () {
+      if (mounted) {
+        debugPrint('Splash screen timeout - forcing completion');
+        widget.onAnimationComplete();
+      }
+    });
   }
 
   void _initializeAnimations() {
@@ -67,25 +76,37 @@ class _ModernSplashScreenState extends State<ModernSplashScreen> with TickerProv
   }
 
   void _startAnimationSequence() async {
-    // Add haptic feedback
-    HapticFeedback.lightImpact();
+    try {
+      // Add haptic feedback only on mobile platforms
+      if (!kIsWeb) {
+        HapticFeedback.lightImpact();
+      }
 
-    // Start particles and breathing effects
-    _particleController.repeat();
-    _breatheController.repeat(reverse: true);
+      // Start particles and breathing effects
+      _particleController.repeat();
+      _breatheController.repeat(reverse: true);
 
-    // Start logo animation
-    await _logoController.forward();
+      // Start logo animation
+      await _logoController.forward();
 
-    // Small delay then start text animation
-    await Future.delayed(const Duration(milliseconds: 300));
-    await _textController.forward();
+      // Small delay then start text animation
+      await Future.delayed(const Duration(milliseconds: 300));
+      await _textController.forward();
 
-    // Keep splash screen visible for a moment
-    await Future.delayed(const Duration(seconds: 1));
+      // Keep splash screen visible for a moment
+      await Future.delayed(const Duration(seconds: 1));
 
-    // Complete animation
-    widget.onAnimationComplete();
+      // Complete animation
+      if (mounted) {
+        widget.onAnimationComplete();
+      }
+    } catch (e) {
+      // Fallback: immediately complete if animations fail
+      debugPrint('Splash animation error: $e');
+      if (mounted) {
+        widget.onAnimationComplete();
+      }
+    }
   }
 
   @override

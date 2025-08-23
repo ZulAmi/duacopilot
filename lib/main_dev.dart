@@ -2,8 +2,9 @@ import 'dart:io' show Platform;
 
 import 'package:duacopilot/core/logging/app_logger.dart';
 import 'package:duacopilot/core/theme/modern_islamic_theme.dart';
-import 'package:duacopilot/presentation/screens/modern_splash_screen.dart';
 import 'package:duacopilot/presentation/screens/modern_search_screen.dart';
+import 'package:duacopilot/presentation/screens/modern_splash_screen.dart';
+import 'package:duacopilot/presentation/screens/web_compatible_wrapper.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -83,6 +84,12 @@ class _ModernAppWrapperState extends State<ModernAppWrapper> {
 
   @override
   Widget build(BuildContext context) {
+    if (kIsWeb) {
+      // Use web-compatible wrapper for web platform
+      return const WebCompatibleAppWrapper();
+    }
+
+    // Use full featured splash screen for native platforms
     if (_showSplash) {
       return ModernSplashScreen(onAnimationComplete: _onSplashComplete);
     }

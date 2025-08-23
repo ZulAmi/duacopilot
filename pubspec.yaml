@@ -48,10 +48,16 @@ dependencies:
   # Ads & Monetization
   google_mobile_ads: ^5.1.0
 
+  # Premium Features - Qibla Compass & Tasbih
+  sensors_plus: ^4.0.2
+  vibration: ^1.8.4
+  wakelock_plus: ^1.2.5
+  device_info_plus: ^10.1.2
+
   # Local Storage & Database
   sqflite: ^2.3.0
   sqflite_common_ffi: ^2.3.0  # For Windows/Linux desktop support
-  # flutter_secure_storage: ^9.0.0  # Temporarily disabled for Windows dev
+  # flutter_secure_storage: ^9.2.2  # Temporarily disabled for Windows compatibility
 
   # Dependency Injection
   get_it: ^7.6.4
@@ -61,7 +67,7 @@ dependencies:
   riverpod_annotation: ^2.3.3
 
   # Background Tasks
-  # workmanager: ^0.5.2  # Disabled for compatibility
+  workmanager: ^0.5.2  # Production-ready background task management
 
   # Utilities
   equatable: ^2.0.5
@@ -98,7 +104,8 @@ dependencies:
   geolocator: ^10.1.0
   # home_widget: ^0.4.1  # Not compatible with web
   firebase_messaging: ^16.0.0
-  # workmanager: ^0.5.2  # Not compatible with web
+
+  # workmanager: ^0.5.2  # Production-ready - enabled above
   timezone: ^0.9.2
   intl: ^0.19.0
 

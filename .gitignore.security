@@ -1,0 +1,27 @@
+# DuaCopilot Security Files
+# These files should NEVER be committed to version control
+
+# Android Signing
+android/key.properties
+android/keystore/*.jks
+android/keystore/*.keystore
+
+# iOS Signing (when added)
+ios/Runner/GoogleService-Info.plist
+ios/Firebase/
+
+# Environment Variables (if used)
+.env
+.env.local
+.env.production
+
+# API Keys and Secrets
+secrets/
+*.key
+*.pem
+*.p8
+*.p12
+
+# Local configuration
+local.properties
+**/local.properties

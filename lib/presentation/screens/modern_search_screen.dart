@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../features/navigation/premium_features_menu.dart';
 import '../../services/ads/ad_service.dart';
 import '../widgets/ads/ad_widgets.dart';
 import 'courses/islamic_courses_screen.dart';
@@ -197,6 +198,7 @@ class _ModernSearchScreenState extends ConsumerState<ModernSearchScreen> with Ti
     return Scaffold(
       backgroundColor: colorScheme.surface,
       extendBodyBehindAppBar: true,
+      drawer: const PremiumFeaturesMenu(),
       body: Stack(
         children: [
           // Animated background gradient
@@ -382,11 +384,15 @@ class _ModernSearchScreenState extends ConsumerState<ModernSearchScreen> with Ti
                         ).push(MaterialPageRoute(builder: (context) => const SubscriptionScreen())),
                   ),
 
-                  // Menu button (if provided)
-                  if (widget.onMenuPressed != null) ...[
-                    const SizedBox(width: 8),
-                    _buildNavButton(icon: Icons.menu_rounded, tooltip: 'Menu', onTap: widget.onMenuPressed!),
-                  ],
+                  // Menu button for premium features
+                  Builder(
+                    builder:
+                        (context) => _buildNavButton(
+                          icon: Icons.menu_rounded,
+                          tooltip: 'Premium Features',
+                          onTap: () => Scaffold.of(context).openDrawer(),
+                        ),
+                  ),
                 ],
               ),
             ],
