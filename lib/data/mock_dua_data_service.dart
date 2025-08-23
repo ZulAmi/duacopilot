@@ -1,5 +1,6 @@
 import '../domain/entities/dua_entity.dart';
 
+/// MockDuaDataService class implementation
 class MockDuaDataService {
   static List<DuaEntity> getSampleDuas() {
     return [

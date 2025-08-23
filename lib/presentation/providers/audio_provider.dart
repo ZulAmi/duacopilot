@@ -4,6 +4,7 @@ import '../../domain/usecases/download_audio.dart';
 import '../../core/di/injection_container.dart' as di;
 
 // Audio state
+/// AudioState class implementation
 class AudioState {
   final bool isLoading;
   final List<AudioDownload> downloads;
@@ -29,6 +30,7 @@ class AudioState {
 }
 
 // Audio provider
+/// AudioNotifier class implementation
 class AudioNotifier extends StateNotifier<AudioState> {
   final DownloadAudio downloadAudio;
 

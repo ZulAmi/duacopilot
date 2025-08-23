@@ -6,6 +6,7 @@ import '../../domain/entities/audio_entity.dart';
 import 'dua_audio_handler.dart';
 import 'audio_cache_service.dart';
 
+/// DuaAudioService class implementation
 class DuaAudioService {
   static DuaAudioService? _instance;
   static DuaAudioService get instance => _instance ??= DuaAudioService._();

@@ -1,5 +1,6 @@
 import '../../domain/entities/query_history.dart';
 
+/// QueryHistoryModel class implementation
 class QueryHistoryModel extends QueryHistory {
   const QueryHistoryModel({
     super.id,

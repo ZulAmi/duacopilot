@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+/// ArabicTextDisplayWidget class implementation
 class ArabicTextDisplayWidget extends StatefulWidget {
   final String arabicText;
   final String transliteration;
@@ -15,7 +16,7 @@ class ArabicTextDisplayWidget extends StatefulWidget {
   final VoidCallback? onTextTap;
 
   const ArabicTextDisplayWidget({
-    Key? key,
+    super.key,
     required this.arabicText,
     required this.transliteration,
     required this.translation,
@@ -27,15 +28,14 @@ class ArabicTextDisplayWidget extends StatefulWidget {
     this.showTranslation = true,
     this.padding = const EdgeInsets.all(16),
     this.onTextTap,
-  }) : super(key: key);
+  });
 
   @override
-  State<ArabicTextDisplayWidget> createState() =>
-      _ArabicTextDisplayWidgetState();
+  State<ArabicTextDisplayWidget> createState() => _ArabicTextDisplayWidgetState();
 }
 
-class _ArabicTextDisplayWidgetState extends State<ArabicTextDisplayWidget>
-    with SingleTickerProviderStateMixin {
+/// _ArabicTextDisplayWidgetState class implementation
+class _ArabicTextDisplayWidgetState extends State<ArabicTextDisplayWidget> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
 
@@ -48,13 +48,11 @@ class _ArabicTextDisplayWidgetState extends State<ArabicTextDisplayWidget>
     _showTransliteration = widget.showTransliteration;
     _showTranslation = widget.showTranslation;
 
-    _animationController = AnimationController(
-      duration: const Duration(milliseconds: 300),
-      vsync: this,
-    );
-    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
-    );
+    _animationController = AnimationController(duration: const Duration(milliseconds: 300), vsync: this);
+    _fadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _animationController, curve: Curves.easeInOut));
 
     _animationController.forward();
   }
@@ -74,10 +72,7 @@ class _ArabicTextDisplayWidgetState extends State<ArabicTextDisplayWidget>
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: Theme.of(context).colorScheme.outline.withOpacity(0.1),
-            width: 1,
-          ),
+          border: Border.all(color: Theme.of(context).colorScheme.outline.withOpacity(0.1), width: 1),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.04),
@@ -99,16 +94,10 @@ class _ArabicTextDisplayWidgetState extends State<ArabicTextDisplayWidget>
             _buildArabicText(),
 
             // Transliteration (optional)
-            if (_showTransliteration) ...[
-              const SizedBox(height: 20),
-              _buildTransliteration(),
-            ],
+            if (_showTransliteration) ...[const SizedBox(height: 20), _buildTransliteration()],
 
             // Translation (optional)
-            if (_showTranslation) ...[
-              const SizedBox(height: 16),
-              _buildTranslation(),
-            ],
+            if (_showTranslation) ...[const SizedBox(height: 16), _buildTranslation()],
           ],
         ),
       ),
@@ -148,11 +137,7 @@ class _ArabicTextDisplayWidgetState extends State<ArabicTextDisplayWidget>
         const SizedBox(width: 8),
 
         // Copy text
-        _buildActionButton(
-          icon: Icons.copy_rounded,
-          onTap: () => _copyToClipboard(),
-          tooltip: 'Copy Text',
-        ),
+        _buildActionButton(icon: Icons.copy_rounded, onTap: () => _copyToClipboard(), tooltip: 'Copy Text'),
       ],
     );
   }
@@ -171,10 +156,7 @@ class _ArabicTextDisplayWidgetState extends State<ArabicTextDisplayWidget>
         child: Container(
           padding: const EdgeInsets.all(6),
           decoration: BoxDecoration(
-            color:
-                isActive
-                    ? Theme.of(context).colorScheme.primary.withOpacity(0.1)
-                    : Colors.transparent,
+            color: isActive ? Theme.of(context).colorScheme.primary.withOpacity(0.1) : Colors.transparent,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
               color:
@@ -187,21 +169,14 @@ class _ArabicTextDisplayWidgetState extends State<ArabicTextDisplayWidget>
           child: Icon(
             icon,
             size: 16,
-            color:
-                isActive
-                    ? Theme.of(context).colorScheme.primary
-                    : Theme.of(context).colorScheme.onSurfaceVariant,
+            color: isActive ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onSurfaceVariant,
           ),
         ),
       ),
     );
   }
 
-  Widget _buildActionButton({
-    required IconData icon,
-    required VoidCallback onTap,
-    required String tooltip,
-  }) {
+  Widget _buildActionButton({required IconData icon, required VoidCallback onTap, required String tooltip}) {
     return Tooltip(
       message: tooltip,
       child: InkWell(
@@ -210,16 +185,10 @@ class _ArabicTextDisplayWidgetState extends State<ArabicTextDisplayWidget>
         child: Container(
           padding: const EdgeInsets.all(6),
           decoration: BoxDecoration(
-            color: Theme.of(
-              context,
-            ).colorScheme.surfaceVariant.withOpacity(0.3),
+            color: Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.3),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Icon(
-            icon,
-            size: 16,
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-          ),
+          child: Icon(icon, size: 16, color: Theme.of(context).colorScheme.onSurfaceVariant),
         ),
       ),
     );
@@ -240,10 +209,7 @@ class _ArabicTextDisplayWidgetState extends State<ArabicTextDisplayWidget>
             ],
           ),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-            width: 1,
-          ),
+          border: Border.all(color: Theme.of(context).colorScheme.primary.withOpacity(0.1), width: 1),
         ),
         child: Column(
           children: [
@@ -306,10 +272,7 @@ class _ArabicTextDisplayWidgetState extends State<ArabicTextDisplayWidget>
     return Container(
       width: 6,
       height: 6,
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary,
-        shape: BoxShape.circle,
-      ),
+      decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary, shape: BoxShape.circle),
     );
   }
 
@@ -318,23 +281,16 @@ class _ArabicTextDisplayWidgetState extends State<ArabicTextDisplayWidget>
       duration: const Duration(milliseconds: 200),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.3),
+        color: Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.3),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.outline.withOpacity(0.1),
-          width: 1,
-        ),
+        border: Border.all(color: Theme.of(context).colorScheme.outline.withOpacity(0.1), width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Icon(
-                Icons.abc_rounded,
-                size: 16,
-                color: Theme.of(context).colorScheme.primary,
-              ),
+              Icon(Icons.abc_rounded, size: 16, color: Theme.of(context).colorScheme.primary),
               const SizedBox(width: 8),
               Text(
                 'Transliteration',
@@ -370,21 +326,14 @@ class _ArabicTextDisplayWidgetState extends State<ArabicTextDisplayWidget>
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.1),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
-          width: 1,
-        ),
+        border: Border.all(color: Theme.of(context).colorScheme.primary.withOpacity(0.2), width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Icon(
-                Icons.translate_rounded,
-                size: 16,
-                color: Theme.of(context).colorScheme.primary,
-              ),
+              Icon(Icons.translate_rounded, size: 16, color: Theme.of(context).colorScheme.primary),
               const SizedBox(width: 8),
               Text(
                 'Translation',

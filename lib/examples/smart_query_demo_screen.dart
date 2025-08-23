@@ -13,6 +13,7 @@ class SmartQueryDemoScreen extends ConsumerStatefulWidget {
       _SmartQueryDemoScreenState();
 }
 
+/// _SmartQueryDemoScreenState class implementation
 class _SmartQueryDemoScreenState extends ConsumerState<SmartQueryDemoScreen> {
   final TextEditingController _queryController = TextEditingController();
   String _selectedLanguage = 'en';

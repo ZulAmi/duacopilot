@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/search_provider.dart';
 import '../../domain/entities/query_history.dart';
 
+/// HistoryWidget class implementation
 class HistoryWidget extends ConsumerStatefulWidget {
   const HistoryWidget({super.key});
 
@@ -10,6 +11,7 @@ class HistoryWidget extends ConsumerStatefulWidget {
   ConsumerState<HistoryWidget> createState() => _HistoryWidgetState();
 }
 
+/// _HistoryWidgetState class implementation
 class _HistoryWidgetState extends ConsumerState<HistoryWidget> {
   final TextEditingController _searchController = TextEditingController();
   String _filterText = '';
@@ -149,6 +151,7 @@ class _HistoryWidgetState extends ConsumerState<HistoryWidget> {
   }
 }
 
+/// HistoryTile class implementation
 class HistoryTile extends StatelessWidget {
   final QueryHistory queryHistory;
   final VoidCallback? onTap;

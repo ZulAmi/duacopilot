@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// SmartChipController class implementation
 class SmartChipController extends ChangeNotifier {
   final List<SmartChipData> _contextualChips = [];
   String _currentContext = '';
@@ -94,6 +95,7 @@ class SmartChipController extends ChangeNotifier {
   }
 }
 
+/// SmartChipData class implementation
 class SmartChipData {
   final String label;
   final String query;
@@ -134,6 +136,7 @@ class SmartChipData {
   }
 }
 
+/// SmartChipWidget class implementation
 class SmartChipWidget extends StatefulWidget {
   final SmartChipData chipData;
   final VoidCallback onTap;
@@ -141,19 +144,19 @@ class SmartChipWidget extends StatefulWidget {
   final bool showUsageIndicator;
 
   const SmartChipWidget({
-    Key? key,
+    super.key,
     required this.chipData,
     required this.onTap,
     this.isSelected = false,
     this.showUsageIndicator = true,
-  }) : super(key: key);
+  });
 
   @override
   State<SmartChipWidget> createState() => _SmartChipWidgetState();
 }
 
-class _SmartChipWidgetState extends State<SmartChipWidget>
-    with SingleTickerProviderStateMixin {
+/// _SmartChipWidgetState class implementation
+class _SmartChipWidgetState extends State<SmartChipWidget> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _scaleAnimation;
   bool _isPressed = false;
@@ -161,13 +164,11 @@ class _SmartChipWidgetState extends State<SmartChipWidget>
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(
-      duration: const Duration(milliseconds: 150),
-      vsync: this,
-    );
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
-    );
+    _animationController = AnimationController(duration: const Duration(milliseconds: 150), vsync: this);
+    _scaleAnimation = Tween<double>(
+      begin: 1.0,
+      end: 0.95,
+    ).animate(CurvedAnimation(parent: _animationController, curve: Curves.easeInOut));
   }
 
   @override
@@ -204,10 +205,8 @@ class _SmartChipWidgetState extends State<SmartChipWidget>
     final textTheme = Theme.of(context).textTheme;
 
     final chipColor = widget.chipData.color ?? colorScheme.primary;
-    final backgroundColor =
-        widget.isSelected ? chipColor : chipColor.withOpacity(0.1);
-    final foregroundColor =
-        widget.isSelected ? colorScheme.onPrimary : chipColor;
+    final backgroundColor = widget.isSelected ? chipColor : chipColor.withOpacity(0.1);
+    final foregroundColor = widget.isSelected ? colorScheme.onPrimary : chipColor;
 
     return AnimatedBuilder(
       animation: _scaleAnimation,
@@ -224,22 +223,10 @@ class _SmartChipWidgetState extends State<SmartChipWidget>
               decoration: BoxDecoration(
                 color: backgroundColor,
                 borderRadius: BorderRadius.circular(20),
-                border:
-                    widget.isSelected
-                        ? null
-                        : Border.all(
-                          color: chipColor.withOpacity(0.3),
-                          width: 1,
-                        ),
+                border: widget.isSelected ? null : Border.all(color: chipColor.withOpacity(0.3), width: 1),
                 boxShadow:
                     widget.isSelected || _isPressed
-                        ? [
-                          BoxShadow(
-                            color: chipColor.withOpacity(0.3),
-                            blurRadius: 8,
-                            offset: const Offset(0, 2),
-                          ),
-                        ]
+                        ? [BoxShadow(color: chipColor.withOpacity(0.3), blurRadius: 8, offset: const Offset(0, 2))]
                         : null,
               ),
               child: Row(
@@ -251,18 +238,13 @@ class _SmartChipWidgetState extends State<SmartChipWidget>
                     widget.chipData.label,
                     style: textTheme.labelMedium?.copyWith(
                       color: foregroundColor,
-                      fontWeight:
-                          widget.isSelected ? FontWeight.w600 : FontWeight.w500,
+                      fontWeight: widget.isSelected ? FontWeight.w600 : FontWeight.w500,
                     ),
                   ),
-                  if (widget.showUsageIndicator &&
-                      widget.chipData.usageCount > 0) ...[
+                  if (widget.showUsageIndicator && widget.chipData.usageCount > 0) ...[
                     const SizedBox(width: 6),
                     Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 6,
-                        vertical: 2,
-                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                       decoration: BoxDecoration(
                         color: foregroundColor.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(8),
@@ -287,6 +269,7 @@ class _SmartChipWidgetState extends State<SmartChipWidget>
   }
 }
 
+/// SmartChipsSection class implementation
 class SmartChipsSection extends StatefulWidget {
   final List<SmartChipData> chips;
   final Function(String) onChipSelected;
@@ -295,18 +278,19 @@ class SmartChipsSection extends StatefulWidget {
   final bool groupByCategory;
 
   const SmartChipsSection({
-    Key? key,
+    super.key,
     required this.chips,
     required this.onChipSelected,
     this.selectedCategory,
     this.maxVisibleChips = 8,
     this.groupByCategory = true,
-  }) : super(key: key);
+  });
 
   @override
   State<SmartChipsSection> createState() => _SmartChipsSectionState();
 }
 
+/// _SmartChipsSectionState class implementation
 class _SmartChipsSectionState extends State<SmartChipsSection> {
   String? _selectedChipQuery;
   bool _showAll = false;
@@ -316,19 +300,13 @@ class _SmartChipsSectionState extends State<SmartChipsSection> {
     if (widget.chips.isEmpty) return const SizedBox.shrink();
 
     final sortedChips = _getSortedChips();
-    final visibleChips =
-        _showAll
-            ? sortedChips
-            : sortedChips.take(widget.maxVisibleChips).toList();
+    final visibleChips = _showAll ? sortedChips : sortedChips.take(widget.maxVisibleChips).toList();
 
     if (widget.groupByCategory) {
       return _buildGroupedChips(sortedChips);
     }
 
-    return _buildLinearChips(
-      visibleChips,
-      sortedChips.length > widget.maxVisibleChips,
-    );
+    return _buildLinearChips(visibleChips, sortedChips.length > widget.maxVisibleChips);
   }
 
   List<SmartChipData> _getSortedChips() {
@@ -377,7 +355,7 @@ class _SmartChipsSectionState extends State<SmartChipsSection> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surfaceVariant,
+                color: Theme.of(context).colorScheme.surfaceContainerHighest,
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Row(
@@ -391,9 +369,9 @@ class _SmartChipsSectionState extends State<SmartChipsSection> {
                   const SizedBox(width: 4),
                   Text(
                     _showAll ? 'Show Less' : 'Show More',
-                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.labelSmall?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
                   ),
                 ],
               ),
@@ -456,6 +434,7 @@ class _SmartChipsSectionState extends State<SmartChipsSection> {
   }
 }
 
+/// ContextualQuickActions class implementation
 class ContextualQuickActions {
   static List<SmartChipData> getIslamicQuickActions() {
     final now = DateTime.now();
@@ -554,10 +533,7 @@ class ContextualQuickActions {
     ];
   }
 
-  static List<SmartChipData> getPersonalizedActions(
-    List<String> recentQueries,
-    Map<String, int> queryFrequency,
-  ) {
+  static List<SmartChipData> getPersonalizedActions(List<String> recentQueries, Map<String, int> queryFrequency) {
     final actions = <SmartChipData>[];
     final now = DateTime.now();
 
@@ -594,8 +570,9 @@ class ContextualQuickActions {
 
     if (lowerQuery.contains('morning')) return Icons.wb_sunny;
     if (lowerQuery.contains('evening')) return Icons.nightlight_round;
-    if (lowerQuery.contains('prayer') || lowerQuery.contains('salah'))
+    if (lowerQuery.contains('prayer') || lowerQuery.contains('salah')) {
       return Icons.schedule;
+    }
     if (lowerQuery.contains('travel')) return Icons.flight;
     if (lowerQuery.contains('food')) return Icons.restaurant;
     if (lowerQuery.contains('sleep')) return Icons.bedtime;

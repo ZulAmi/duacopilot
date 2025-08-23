@@ -8,6 +8,7 @@ part 'user_preference.freezed.dart';
 part 'user_preference.g.dart';
 
 @freezed
+/// UserPreference class implementation
 class UserPreference with _$UserPreference {
   const factory UserPreference({
     required String id,
@@ -96,6 +97,7 @@ extension UserPreferenceExtension on UserPreference {
 }
 
 // Static helper methods
+/// UserPreferenceHelper class implementation
 class UserPreferenceHelper {
   static Future<Database> get _database async =>
       RagDatabaseHelper.instance.database;
@@ -175,6 +177,7 @@ class UserPreferenceHelper {
 enum PreferenceType { string, integer, decimal, boolean, list, json }
 
 // Predefined preference keys for RAG context
+/// PreferenceKeys class implementation
 class PreferenceKeys {
   static const String language = 'language';
   static const String region = 'region';

@@ -13,6 +13,7 @@ import '../../core/exceptions/exceptions.dart';
 import '../../core/network/network_info.dart';
 import '../../core/storage/secure_storage_service.dart'; // Using mock implementation
 
+/// RagApiService class implementation
 class RagApiService {
   static const String _baseUrl = 'https://api.example.com/v1';
   static const String _wsUrl = 'wss://api.example.com/v1/ws';

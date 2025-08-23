@@ -1,14 +1,16 @@
 import 'package:dartz/dartz.dart';
-import '../../domain/entities/rag_response.dart';
-import '../../domain/entities/query_history.dart';
-import '../../domain/repositories/rag_repository.dart';
-import '../../core/error/failures.dart';
+
 import '../../core/error/exceptions.dart';
+import '../../core/error/failures.dart';
 import '../../core/network/network_info.dart';
-import '../datasources/rag_remote_datasource.dart';
+import '../../domain/entities/query_history.dart';
+import '../../domain/entities/rag_response.dart';
+import '../../domain/repositories/rag_repository.dart';
 import '../datasources/local_datasource.dart';
+import '../datasources/rag_remote_datasource.dart';
 import '../models/query_history_model.dart';
 
+/// RagRepositoryImpl class implementation
 class RagRepositoryImpl implements RagRepository {
   final RagRemoteDataSource remoteDataSource;
   final LocalDataSource? localDataSource;
@@ -54,19 +56,13 @@ class RagRepositoryImpl implements RagRepository {
   }
 
   @override
-  Future<Either<Failure, List<QueryHistory>>> getQueryHistory({
-    int? limit,
-    int? offset,
-  }) async {
+  Future<Either<Failure, List<QueryHistory>>> getQueryHistory({int? limit, int? offset}) async {
     try {
       if (localDataSource == null) {
         return const Left(CacheFailure('Local storage not available'));
       }
-      
-      final queryHistoryModels = await localDataSource!.getQueryHistory(
-        limit: limit,
-        offset: offset,
-      );
+
+      final queryHistoryModels = await localDataSource!.getQueryHistory(limit: limit, offset: offset);
       return Right(queryHistoryModels);
     } on CacheException catch (e) {
       return Left(CacheFailure(e.message));
@@ -76,14 +72,12 @@ class RagRepositoryImpl implements RagRepository {
   }
 
   @override
-  Future<Either<Failure, void>> saveQueryHistory(
-    QueryHistory queryHistory,
-  ) async {
+  Future<Either<Failure, void>> saveQueryHistory(QueryHistory queryHistory) async {
     try {
       if (localDataSource == null) {
         return const Left(CacheFailure('Local storage not available'));
       }
-      
+
       final queryHistoryModel = QueryHistoryModel.fromEntity(queryHistory);
       await localDataSource!.saveQueryHistory(queryHistoryModel);
       return const Right(null);
@@ -100,7 +94,7 @@ class RagRepositoryImpl implements RagRepository {
       if (localDataSource == null) {
         return const Left(CacheFailure('Local storage not available'));
       }
-      
+
       // Implementation would clear all query history
       // For now, this is a placeholder
       return const Right(null);
@@ -117,7 +111,7 @@ class RagRepositoryImpl implements RagRepository {
       if (localDataSource == null) {
         return const Right(null);
       }
-      
+
       final cachedResponse = await localDataSource!.getCachedRagResponse(query);
       return Right(cachedResponse);
     } on CacheException catch (e) {

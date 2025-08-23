@@ -7,6 +7,7 @@ abstract class NetworkInfo {
   Stream<ConnectivityResult> get onConnectivityChanged;
 }
 
+/// NetworkInfoImpl class implementation
 class NetworkInfoImpl implements NetworkInfo {
   final Connectivity _connectivity;
 

@@ -1,11 +1,11 @@
-import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:io' show Platform;
 
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:path/path.dart';
 // Import platform-specific database factories
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
+/// DatabaseHelper class implementation
 class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._internal();
   static Database? _database;
@@ -25,16 +25,11 @@ class DatabaseHelper {
       sqfliteFfiInit();
       databaseFactory = databaseFactoryFfi;
     }
-    
+
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, 'duacopilot.db');
 
-    return await openDatabase(
-      path,
-      version: 1,
-      onCreate: _onCreate,
-      onUpgrade: _onUpgrade,
-    );
+    return await openDatabase(path, version: 1, onCreate: _onCreate, onUpgrade: _onUpgrade);
   }
 
   Future<void> _onCreate(Database db, int version) async {
@@ -111,18 +106,10 @@ class DatabaseHelper {
     ''');
 
     // Create indexes for better performance
-    await db.execute(
-      'CREATE INDEX idx_query_history_timestamp ON query_history(timestamp)',
-    );
-    await db.execute(
-      'CREATE INDEX idx_rag_cache_query_hash ON rag_cache(query_hash)',
-    );
-    await db.execute(
-      'CREATE INDEX idx_rag_cache_expires_at ON rag_cache(expires_at)',
-    );
-    await db.execute(
-      'CREATE INDEX idx_audio_downloads_status ON audio_downloads(download_status)',
-    );
+    await db.execute('CREATE INDEX idx_query_history_timestamp ON query_history(timestamp)');
+    await db.execute('CREATE INDEX idx_rag_cache_query_hash ON rag_cache(query_hash)');
+    await db.execute('CREATE INDEX idx_rag_cache_expires_at ON rag_cache(expires_at)');
+    await db.execute('CREATE INDEX idx_audio_downloads_status ON audio_downloads(download_status)');
     await db.execute('CREATE INDEX idx_favorites_type ON favorites(item_type)');
   }
 
@@ -145,14 +132,7 @@ class DatabaseHelper {
     final db = await database;
     final stats = <String, int>{};
 
-    final tables = [
-      'query_history',
-      'rag_cache',
-      'user_preferences',
-      'audio_downloads',
-      'favorites',
-      'sync_status',
-    ];
+    final tables = ['query_history', 'rag_cache', 'user_preferences', 'audio_downloads', 'favorites', 'sync_status'];
 
     for (final table in tables) {
       final result = await db.rawQuery('SELECT COUNT(*) as count FROM $table');

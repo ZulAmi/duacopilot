@@ -262,6 +262,7 @@ class QuranApiService {
 
 // ========== Data Models ==========
 
+/// QuranSearchResult class implementation
 class QuranSearchResult {
   final String query;
   final int count;
@@ -291,6 +292,7 @@ class QuranSearchResult {
   }
 }
 
+/// QuranSearchMatch class implementation
 class QuranSearchMatch {
   final int number;
   final String text;
@@ -317,6 +319,7 @@ class QuranSearchMatch {
   }
 }
 
+/// QuranVerse class implementation
 class QuranVerse {
   final int number;
   final String text;
@@ -361,6 +364,7 @@ class QuranVerse {
   }
 }
 
+/// QuranSurah class implementation
 class QuranSurah {
   final int number;
   final String name;
@@ -396,6 +400,7 @@ class QuranSurah {
   }
 }
 
+/// QuranSurahInfo class implementation
 class QuranSurahInfo {
   final int number;
   final String name;
@@ -422,6 +427,7 @@ class QuranSurahInfo {
   }
 }
 
+/// QuranEdition class implementation
 class QuranEdition {
   final String identifier;
   final String language;
@@ -454,6 +460,7 @@ class QuranEdition {
   }
 }
 
+/// QuranMeta class implementation
 class QuranMeta {
   final Map<String, int> ayahs;
   final Map<String, dynamic> surahs;
@@ -486,6 +493,7 @@ class QuranMeta {
   }
 }
 
+/// QuranApiException class implementation
 class QuranApiException implements Exception {
   final String message;
 

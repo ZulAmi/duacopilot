@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// ShimmerEffect class implementation
 class ShimmerEffect extends StatefulWidget {
   final Widget child;
   final Color? baseColor;
@@ -7,19 +8,19 @@ class ShimmerEffect extends StatefulWidget {
   final Duration period;
 
   const ShimmerEffect({
-    Key? key,
+    super.key,
     required this.child,
     this.baseColor,
     this.highlightColor,
     this.period = const Duration(milliseconds: 1500),
-  }) : super(key: key);
+  });
 
   @override
   State<ShimmerEffect> createState() => _ShimmerEffectState();
 }
 
-class _ShimmerEffectState extends State<ShimmerEffect>
-    with SingleTickerProviderStateMixin {
+/// _ShimmerEffectState class implementation
+class _ShimmerEffectState extends State<ShimmerEffect> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -44,7 +45,7 @@ class _ShimmerEffectState extends State<ShimmerEffect>
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final baseColor = widget.baseColor ?? colorScheme.surfaceVariant;
+    final baseColor = widget.baseColor ?? colorScheme.surfaceContainerHighest;
     final highlightColor = widget.highlightColor ?? colorScheme.surface;
 
     return AnimatedBuilder(
@@ -72,12 +73,12 @@ class _ShimmerEffectState extends State<ShimmerEffect>
   }
 }
 
+/// RAGLoadingWidget class implementation
 class RAGLoadingWidget extends StatelessWidget {
   final String? message;
   final bool showPulse;
 
-  const RAGLoadingWidget({Key? key, this.message, this.showPulse = true})
-    : super(key: key);
+  const RAGLoadingWidget({super.key, this.message, this.showPulse = true});
 
   @override
   Widget build(BuildContext context) {
@@ -98,9 +99,7 @@ class RAGLoadingWidget extends StatelessWidget {
             const SizedBox(height: 16),
             Text(
               message!,
-              style: textTheme.bodyMedium?.copyWith(
-                color: colorScheme.onSurfaceVariant,
-              ),
+              style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant),
               textAlign: TextAlign.center,
             ),
           ],
@@ -121,22 +120,10 @@ class RAGLoadingWidget extends StatelessWidget {
             height: 60,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              gradient: LinearGradient(
-                colors: [colorScheme.primary, colorScheme.primaryContainer],
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: colorScheme.primary.withOpacity(0.3),
-                  blurRadius: 20,
-                  spreadRadius: 2,
-                ),
-              ],
+              gradient: LinearGradient(colors: [colorScheme.primary, colorScheme.primaryContainer]),
+              boxShadow: [BoxShadow(color: colorScheme.primary.withOpacity(0.3), blurRadius: 20, spreadRadius: 2)],
             ),
-            child: Icon(
-              Icons.auto_awesome,
-              color: colorScheme.onPrimary,
-              size: 30,
-            ),
+            child: Icon(Icons.auto_awesome, color: colorScheme.onPrimary, size: 30),
           ),
         );
       },
@@ -153,10 +140,7 @@ class RAGLoadingWidget extends StatelessWidget {
           child: Container(
             height: 20,
             width: 200,
-            decoration: BoxDecoration(
-              color: Colors.grey[300],
-              borderRadius: BorderRadius.circular(10),
-            ),
+            decoration: BoxDecoration(color: Colors.grey[300], borderRadius: BorderRadius.circular(10)),
           ),
         ),
         const SizedBox(height: 8),
@@ -164,10 +148,7 @@ class RAGLoadingWidget extends StatelessWidget {
           child: Container(
             height: 16,
             width: 160,
-            decoration: BoxDecoration(
-              color: Colors.grey[300],
-              borderRadius: BorderRadius.circular(8),
-            ),
+            decoration: BoxDecoration(color: Colors.grey[300], borderRadius: BorderRadius.circular(8)),
           ),
         ),
       ],
@@ -182,10 +163,7 @@ class RAGLoadingWidget extends StatelessWidget {
           child: ShimmerEffect(
             child: Container(
               height: 80,
-              decoration: BoxDecoration(
-                color: Colors.grey[300],
-                borderRadius: BorderRadius.circular(12),
-              ),
+              decoration: BoxDecoration(color: Colors.grey[300], borderRadius: BorderRadius.circular(12)),
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
@@ -194,19 +172,13 @@ class RAGLoadingWidget extends StatelessWidget {
                     Container(
                       height: 16,
                       width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[400],
-                        borderRadius: BorderRadius.circular(8),
-                      ),
+                      decoration: BoxDecoration(color: Colors.grey[400], borderRadius: BorderRadius.circular(8)),
                     ),
                     const SizedBox(height: 8),
                     Container(
                       height: 12,
                       width: 200,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[400],
-                        borderRadius: BorderRadius.circular(6),
-                      ),
+                      decoration: BoxDecoration(color: Colors.grey[400], borderRadius: BorderRadius.circular(6)),
                     ),
                   ],
                 ),
@@ -219,24 +191,25 @@ class RAGLoadingWidget extends StatelessWidget {
   }
 }
 
+/// TypingIndicator class implementation
 class TypingIndicator extends StatefulWidget {
   final String text;
   final Duration typingSpeed;
   final TextStyle? textStyle;
 
   const TypingIndicator({
-    Key? key,
+    super.key,
     required this.text,
     this.typingSpeed = const Duration(milliseconds: 50),
     this.textStyle,
-  }) : super(key: key);
+  });
 
   @override
   State<TypingIndicator> createState() => _TypingIndicatorState();
 }
 
-class _TypingIndicatorState extends State<TypingIndicator>
-    with TickerProviderStateMixin {
+/// _TypingIndicatorState class implementation
+class _TypingIndicatorState extends State<TypingIndicator> with TickerProviderStateMixin {
   late AnimationController _controller;
   String _displayText = '';
   int _currentIndex = 0;
@@ -244,10 +217,7 @@ class _TypingIndicatorState extends State<TypingIndicator>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: widget.typingSpeed * widget.text.length,
-      vsync: this,
-    );
+    _controller = AnimationController(duration: widget.typingSpeed * widget.text.length, vsync: this);
 
     _startTyping();
   }
@@ -290,9 +260,7 @@ class _TypingIndicatorState extends State<TypingIndicator>
               builder: (context, child) {
                 return Opacity(
                   opacity: (_controller.value * 2) % 1,
-                  child: Container(
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
+                  child: Container(color: Theme.of(context).colorScheme.primary),
                 );
               },
             ),
@@ -302,10 +270,11 @@ class _TypingIndicatorState extends State<TypingIndicator>
   }
 }
 
+/// SearchResultShimmer class implementation
 class SearchResultShimmer extends StatelessWidget {
   final int itemCount;
 
-  const SearchResultShimmer({Key? key, this.itemCount = 5}) : super(key: key);
+  const SearchResultShimmer({super.key, this.itemCount = 5});
 
   @override
   Widget build(BuildContext context) {
@@ -319,38 +288,26 @@ class SearchResultShimmer extends StatelessWidget {
           child: ShimmerEffect(
             child: Container(
               padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.grey[300],
-                borderRadius: BorderRadius.circular(12),
-              ),
+              decoration: BoxDecoration(color: Colors.grey[300], borderRadius: BorderRadius.circular(12)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     height: 18,
                     width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[400],
-                      borderRadius: BorderRadius.circular(9),
-                    ),
+                    decoration: BoxDecoration(color: Colors.grey[400], borderRadius: BorderRadius.circular(9)),
                   ),
                   const SizedBox(height: 12),
                   Container(
                     height: 14,
                     width: MediaQuery.of(context).size.width * 0.7,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[400],
-                      borderRadius: BorderRadius.circular(7),
-                    ),
+                    decoration: BoxDecoration(color: Colors.grey[400], borderRadius: BorderRadius.circular(7)),
                   ),
                   const SizedBox(height: 8),
                   Container(
                     height: 14,
                     width: MediaQuery.of(context).size.width * 0.5,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[400],
-                      borderRadius: BorderRadius.circular(7),
-                    ),
+                    decoration: BoxDecoration(color: Colors.grey[400], borderRadius: BorderRadius.circular(7)),
                   ),
                   const SizedBox(height: 12),
                   Row(
@@ -358,19 +315,13 @@ class SearchResultShimmer extends StatelessWidget {
                       Container(
                         height: 12,
                         width: 60,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[400],
-                          borderRadius: BorderRadius.circular(6),
-                        ),
+                        decoration: BoxDecoration(color: Colors.grey[400], borderRadius: BorderRadius.circular(6)),
                       ),
                       const SizedBox(width: 16),
                       Container(
                         height: 12,
                         width: 80,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[400],
-                          borderRadius: BorderRadius.circular(6),
-                        ),
+                        decoration: BoxDecoration(color: Colors.grey[400], borderRadius: BorderRadius.circular(6)),
                       ),
                     ],
                   ),

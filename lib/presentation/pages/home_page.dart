@@ -5,6 +5,7 @@ import '../widgets/search_widget.dart';
 import '../widgets/rag_response_widget.dart';
 import '../widgets/history_widget.dart';
 
+/// HomePage class implementation
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
 
@@ -12,6 +13,7 @@ class HomePage extends ConsumerStatefulWidget {
   ConsumerState<HomePage> createState() => _HomePageState();
 }
 
+/// _HomePageState class implementation
 class _HomePageState extends ConsumerState<HomePage> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
@@ -64,6 +66,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   }
 }
 
+/// SearchPage class implementation
 class SearchPage extends ConsumerWidget {
   const SearchPage({super.key});
 
@@ -138,6 +141,7 @@ class SearchPage extends ConsumerWidget {
   }
 }
 
+/// HistoryPage class implementation
 class HistoryPage extends StatelessWidget {
   const HistoryPage({super.key});
 
@@ -147,6 +151,7 @@ class HistoryPage extends StatelessWidget {
   }
 }
 
+/// FavoritesPage class implementation
 class FavoritesPage extends StatelessWidget {
   const FavoritesPage({super.key});
 

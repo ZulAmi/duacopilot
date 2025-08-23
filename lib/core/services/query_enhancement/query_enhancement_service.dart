@@ -1,5 +1,3 @@
-import 'dart:math';
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import '../../../domain/entities/enhanced_query.dart';
 import '../../../domain/entities/query_context.dart';
@@ -54,17 +52,10 @@ class QueryEnhancementService {
       final enhancedContext = await _enhanceContext(context ?? QueryContext());
 
       // Step 4: Classify intent
-      final intent = await _intentClassifier.classifyIntent(
-        normalizedQuery,
-        language,
-      );
+      final intent = await _intentClassifier.classifyIntent(normalizedQuery, language);
 
       // Step 5: Expand query with Islamic terminology
-      final expandedQuery = await _terminologyMapper.expandQuery(
-        normalizedQuery,
-        language,
-        intent: intent,
-      );
+      final expandedQuery = await _terminologyMapper.expandQuery(normalizedQuery, language, intent: intent);
 
       // Step 6: Inject contextual information
       final contextualizedQuery = await _injectContextualInfo(
@@ -75,11 +66,7 @@ class QueryEnhancementService {
       );
 
       // Step 7: Generate semantic tags and keywords
-      final semanticTags = await _generateSemanticTags(
-        contextualizedQuery,
-        intent,
-        language,
-      );
+      final semanticTags = await _generateSemanticTags(contextualizedQuery, intent, language);
 
       // Step 8: Create enhanced query object
       final enhancedQuery = EnhancedQuery(
@@ -89,11 +76,7 @@ class QueryEnhancementService {
         intent: intent,
         context: enhancedContext,
         semanticTags: semanticTags,
-        confidence: _calculateConfidence(
-          normalizedQuery,
-          intent,
-          enhancedContext,
-        ),
+        confidence: _calculateConfidence(normalizedQuery, intent, enhancedContext),
         processingSteps: [
           'validation',
           'sanitization',
@@ -185,37 +168,27 @@ class QueryEnhancementService {
 
     // Time-based context
     if (context.timeOfDay != null) {
-      contextualPhrases.add(
-        _getTimeContextPhrase(context.timeOfDay!, language),
-      );
+      contextualPhrases.add(_getTimeContextPhrase(context.timeOfDay!, language));
     }
 
     // Prayer time context
     if (context.prayerTime != null) {
-      contextualPhrases.add(
-        _getPrayerContextPhrase(context.prayerTime!, language),
-      );
+      contextualPhrases.add(_getPrayerContextPhrase(context.prayerTime!, language));
     }
 
     // Seasonal context
     if (context.seasonalContext != null) {
-      contextualPhrases.add(
-        _getSeasonalContextPhrase(context.seasonalContext!, language),
-      );
+      contextualPhrases.add(_getSeasonalContextPhrase(context.seasonalContext!, language));
     }
 
     // Location context
     if (context.location != null) {
-      contextualPhrases.add(
-        _getLocationContextPhrase(context.location!, language),
-      );
+      contextualPhrases.add(_getLocationContextPhrase(context.location!, language));
     }
 
     // User preferences context
     if (userPreferences != null) {
-      contextualPhrases.addAll(
-        _getUserPreferenceContextPhrases(userPreferences, language),
-      );
+      contextualPhrases.addAll(_getUserPreferenceContextPhrases(userPreferences, language));
     }
 
     // Combine original query with context
@@ -228,11 +201,7 @@ class QueryEnhancementService {
   }
 
   /// Generate semantic tags for the query
-  Future<List<String>> _generateSemanticTags(
-    String query,
-    QueryIntent intent,
-    String language,
-  ) async {
+  Future<List<String>> _generateSemanticTags(String query, QueryIntent intent, String language) async {
     final tags = <String>[];
 
     // Intent-based tags
@@ -250,21 +219,14 @@ class QueryEnhancementService {
     tags.addAll(emotionalTags);
 
     // Topic tags using Islamic terminology
-    final topicTags = await _terminologyMapper.extractTopicTags(
-      query,
-      language,
-    );
+    final topicTags = await _terminologyMapper.extractTopicTags(query, language);
     tags.addAll(topicTags);
 
     return tags.toSet().toList(); // Remove duplicates
   }
 
   /// Calculate confidence score for the enhanced query
-  double _calculateConfidence(
-    String query,
-    QueryIntent intent,
-    QueryContext context,
-  ) {
+  double _calculateConfidence(String query, QueryIntent intent, QueryContext context) {
     double confidence = 0.5; // Base confidence
 
     // Query length factor
@@ -303,10 +265,7 @@ class QueryEnhancementService {
   String _normalizeUnicode(String text) {
     // Normalize Arabic diacritics and variants
     return text
-        .replaceAll(
-          RegExp(r'[\u064B-\u065F\u0670\u06D6-\u06ED]'),
-          '',
-        ) // Remove diacritics
+        .replaceAll(RegExp(r'[\u064B-\u065F\u0670\u06D6-\u06ED]'), '') // Remove diacritics
         .replaceAll('أ', 'ا') // Normalize Alif variants
         .replaceAll('إ', 'ا')
         .replaceAll('آ', 'ا')
@@ -331,10 +290,7 @@ class QueryEnhancementService {
   }
 
   String _preprocessUrdu(String text) {
-    return text
-        .replaceAll('ﷺ', 'صلی اللہ علیہ وسلم')
-        .replaceAll('ؑ', 'علیہ السلام')
-        .replaceAll('ؓ', 'رضی اللہ عنہ');
+    return text.replaceAll('ﷺ', 'صلی اللہ علیہ وسلم').replaceAll('ؑ', 'علیہ السلام').replaceAll('ؓ', 'رضی اللہ عنہ');
   }
 
   String _preprocessIndonesian(String text) {
@@ -370,10 +326,7 @@ class QueryEnhancementService {
     return 'السنة الهجرية $islamicYear';
   }
 
-  Future<PrayerTime?> _getCurrentPrayerTime(
-    DateTime time,
-    String? location,
-  ) async {
+  Future<PrayerTime?> _getCurrentPrayerTime(DateTime time, String? location) async {
     // Simplified prayer time calculation
     // In production, integrate with a proper prayer time API
     final hour = time.hour;
@@ -395,15 +348,7 @@ class QueryEnhancementService {
   }
 
   String _getIslamicWeekday(int weekday) {
-    const islamicWeekdays = [
-      'الإثنين',
-      'الثلاثاء',
-      'الأربعاء',
-      'الخميس',
-      'الجمعة',
-      'السبت',
-      'الأحد',
-    ];
+    const islamicWeekdays = ['الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت', 'الأحد'];
     return islamicWeekdays[weekday - 1];
   }
 
@@ -581,10 +526,7 @@ class QueryEnhancementService {
     }
   }
 
-  List<String> _getUserPreferenceContextPhrases(
-    Map<String, dynamic> preferences,
-    String language,
-  ) {
+  List<String> _getUserPreferenceContextPhrases(Map<String, dynamic> preferences, String language) {
     final phrases = <String>[];
 
     if (preferences['preferred_school'] != null) {
@@ -627,10 +569,7 @@ class QueryEnhancementService {
   }
 
   // Content analysis methods
-  Future<List<String>> _extractContentTags(
-    String query,
-    String language,
-  ) async {
+  Future<List<String>> _extractContentTags(String query, String language) async {
     final tags = <String>[];
     final lowerQuery = query.toLowerCase();
 
@@ -663,23 +602,10 @@ class QueryEnhancementService {
 
     // Emotional indicators
     final emotions = {
-      'distressed': [
-        'help',
-        'problem',
-        'difficulty',
-        'trouble',
-        'مشكلة',
-        'مساعدة',
-      ],
+      'distressed': ['help', 'problem', 'difficulty', 'trouble', 'مشكلة', 'مساعدة'],
       'grateful': ['thank', 'grateful', 'blessing', 'شكر', 'حمد'],
       'seeking': ['want', 'need', 'seeking', 'looking for', 'أريد', 'أحتاج'],
-      'confused': [
-        'confused',
-        'don\'t understand',
-        'unclear',
-        'محتار',
-        'لا أفهم',
-      ],
+      'confused': ['confused', 'don\'t understand', 'unclear', 'محتار', 'لا أفهم'],
     };
 
     for (final entry in emotions.entries) {

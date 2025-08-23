@@ -4,6 +4,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:flutter/foundation.dart';
 import '../../domain/entities/dua_entity.dart';
 
+/// DuaAudioHandler class implementation
 class DuaAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   final AudioPlayer _player = AudioPlayer();
   final List<MediaItem> _queue = [];

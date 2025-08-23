@@ -2,6 +2,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:flutter/services.dart';
 import '../domain/entities/dua_entity.dart';
 
+/// DuaShareService class implementation
 class DuaShareService {
   static Future<void> shareDua(
     DuaEntity dua, {

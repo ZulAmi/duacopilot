@@ -3,6 +3,7 @@ import '../entities/favorite.dart';
 import '../repositories/favorites_repository.dart';
 import '../../core/error/failures.dart';
 
+/// AddFavorite class implementation
 class AddFavorite {
   final FavoritesRepository repository;
 

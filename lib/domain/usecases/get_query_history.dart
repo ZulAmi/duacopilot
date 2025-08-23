@@ -3,6 +3,7 @@ import '../entities/query_history.dart';
 import '../repositories/rag_repository.dart';
 import '../../core/error/failures.dart';
 
+/// GetQueryHistory class implementation
 class GetQueryHistory {
   final RagRepository repository;
 

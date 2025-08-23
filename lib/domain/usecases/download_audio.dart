@@ -3,6 +3,7 @@ import '../entities/audio_download.dart';
 import '../repositories/audio_repository.dart';
 import '../../core/error/failures.dart';
 
+/// DownloadAudio class implementation
 class DownloadAudio {
   final AudioRepository repository;
 

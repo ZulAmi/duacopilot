@@ -4,6 +4,7 @@ part 'dua_entity.freezed.dart';
 part 'dua_entity.g.dart';
 
 @freezed
+/// DuaEntity class implementation
 class DuaEntity with _$DuaEntity {
   const factory DuaEntity({
     required String id,
@@ -27,6 +28,7 @@ class DuaEntity with _$DuaEntity {
 }
 
 @freezed
+/// SourceAuthenticity class implementation
 class SourceAuthenticity with _$SourceAuthenticity {
   const factory SourceAuthenticity({
     required AuthenticityLevel level,
@@ -43,6 +45,7 @@ class SourceAuthenticity with _$SourceAuthenticity {
 }
 
 @freezed
+/// RAGConfidence class implementation
 class RAGConfidence with _$RAGConfidence {
   const factory RAGConfidence({
     required double score,
@@ -59,6 +62,7 @@ class RAGConfidence with _$RAGConfidence {
 }
 
 @freezed
+/// ContextMatch class implementation
 class ContextMatch with _$ContextMatch {
   const factory ContextMatch({
     required double relevanceScore,

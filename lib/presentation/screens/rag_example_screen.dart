@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:duacopilot/core/logging/app_logger.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/rag_provider.dart';
 import '../providers/rag_debug_provider.dart';
@@ -12,6 +13,7 @@ class RagExampleScreen extends ConsumerStatefulWidget {
   ConsumerState<RagExampleScreen> createState() => _RagExampleScreenState();
 }
 
+/// _RagExampleScreenState class implementation
 class _RagExampleScreenState extends ConsumerState<RagExampleScreen> {
   final TextEditingController _queryController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
@@ -519,7 +521,7 @@ class _RagExampleScreenState extends ConsumerState<RagExampleScreen> {
                     final data =
                         ref.read(ragDebugProvider.notifier).exportDebugData();
                     // Export debug data (implement actual export functionality)
-                    print('Debug data exported: $data');
+                    AppLogger.debug('Debug data exported: $data');
                   },
                   child: const Text('Export'),
                 ),

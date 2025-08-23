@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import '../../domain/entities/dua_entity.dart';
 import '../../domain/entities/context_entity.dart';
 
+/// IslamicTimeService class implementation
 class IslamicTimeService {
   static IslamicTimeService? _instance;
   static IslamicTimeService get instance =>

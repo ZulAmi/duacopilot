@@ -4,6 +4,7 @@ part 'audio_entity.freezed.dart';
 part 'audio_entity.g.dart';
 
 @freezed
+/// AudioTrack class implementation
 class AudioTrack with _$AudioTrack {
   const factory AudioTrack({
     required String id,
@@ -32,6 +33,7 @@ class AudioTrack with _$AudioTrack {
 }
 
 @freezed
+/// Playlist class implementation
 class Playlist with _$Playlist {
   const factory Playlist({
     required String id,
@@ -52,6 +54,7 @@ class Playlist with _$Playlist {
 }
 
 @freezed
+/// AudioCacheItem class implementation
 class AudioCacheItem with _$AudioCacheItem {
   const factory AudioCacheItem({
     required String trackId,
@@ -70,6 +73,7 @@ class AudioCacheItem with _$AudioCacheItem {
 }
 
 @freezed
+/// AudioDownloadJob class implementation
 class AudioDownloadJob with _$AudioDownloadJob {
   const factory AudioDownloadJob({
     required String id,
@@ -93,6 +97,7 @@ class AudioDownloadJob with _$AudioDownloadJob {
 }
 
 @freezed
+/// AudioPlaybackState class implementation
 class AudioPlaybackState with _$AudioPlaybackState {
   const factory AudioPlaybackState({
     String? currentTrackId,

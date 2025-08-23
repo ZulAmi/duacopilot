@@ -1,40 +1,42 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:duacopilot/core/logging/app_logger.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 // import 'package:flutter_secure_storage/flutter_secure_storage.dart';  // Temporarily disabled
 import 'package:get_it/get_it.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:logger/logger.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:sqflite/sqflite.dart';
+
+import '../../data/datasources/local_datasource.dart';
+import '../../data/datasources/mock_local_datasource.dart'; // Add mock local datasource
+import '../../data/datasources/rag_api_service.dart'; // Re-enabled with mock secure storage
+import '../../data/datasources/rag_remote_datasource.dart';
+import '../../data/repositories/audio_repository_impl.dart';
+import '../../data/repositories/favorites_repository_impl.dart';
+import '../../data/repositories/rag_repository_impl.dart';
+import '../../domain/repositories/audio_repository.dart';
+import '../../domain/repositories/favorites_repository.dart';
+import '../../domain/repositories/rag_repository.dart';
+import '../../domain/usecases/add_favorite.dart';
+import '../../domain/usecases/download_audio.dart';
+import '../../domain/usecases/get_favorites.dart';
+import '../../domain/usecases/get_query_history.dart';
+import '../../domain/usecases/remove_favorite.dart';
+import '../../domain/usecases/save_query_history.dart';
+import '../../domain/usecases/search_rag.dart';
 // import 'package:workmanager/workmanager.dart';  // Disabled for compatibility
 
 import '../network/dio_client.dart';
 import '../network/network_info.dart';
 import '../storage/database_helper.dart';
-import '../../data/datasources/mock_local_datasource.dart'; // Add mock local datasource
 import '../storage/secure_storage_service.dart'; // Re-enabled with mock implementation
-import '../../data/datasources/rag_remote_datasource.dart';
-import '../../data/datasources/rag_api_service.dart'; // Re-enabled with mock secure storage
-import '../../data/datasources/local_datasource.dart';
-import '../../data/repositories/rag_repository_impl.dart';
-import '../../data/repositories/audio_repository_impl.dart';
-import '../../data/repositories/favorites_repository_impl.dart';
-import '../../domain/repositories/rag_repository.dart';
-import '../../domain/repositories/audio_repository.dart';
-import '../../domain/repositories/favorites_repository.dart';
-import '../../domain/usecases/search_rag.dart';
-import '../../domain/usecases/get_query_history.dart';
-import '../../domain/usecases/save_query_history.dart';
-import '../../domain/usecases/download_audio.dart';
-import '../../domain/usecases/get_favorites.dart';
-import '../../domain/usecases/add_favorite.dart';
-import '../../domain/usecases/remove_favorite.dart';
 
 final sl = GetIt.instance;
 
 Future<void> init() async {
   try {
-    print('🔧 Initializing DuaCopilot services...');
-    
+    AppLogger.debug('🔧 Initializing DuaCopilot services...');
+
     // External dependencies
     sl.registerLazySingleton(() => Dio());
     sl.registerLazySingleton(() => Connectivity());
@@ -43,55 +45,51 @@ Future<void> init() async {
     // Core services
     sl.registerLazySingleton<DioClient>(() => DioClient(sl()));
     sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
-    
+
     // Secure storage (mock implementation for development)
-    sl.registerLazySingleton<SecureStorageService>(
-      () => SecureStorageService(),
-    );
+    sl.registerLazySingleton<SecureStorageService>(() => SecureStorageService());
 
     // Database initialization with platform awareness
     if (kIsWeb) {
-      print('🌐 Web platform detected - using memory-based storage');
+      AppLogger.debug('🌐 Web platform detected - using memory-based storage');
       // For web, register mock local data source directly (no database needed)
       try {
         sl.registerLazySingleton<LocalDataSource>(() => MockLocalDataSource());
-        print('✅ Mock local data source initialized for web');
+        AppLogger.debug('✅ Mock local data source initialized for web');
       } catch (e) {
-        print('⚠️  Mock local data source initialization failed: $e');
+        AppLogger.debug('⚠️  Mock local data source initialization failed: $e');
       }
     } else {
       try {
         final database = await DatabaseHelper.instance.database;
         sl.registerLazySingleton<Database>(() => database);
         sl.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper.instance);
-        
+
         // Register real local data source for desktop/mobile
         sl.registerLazySingleton<LocalDataSource>(() => LocalDataSourceImpl(sl()));
-        print('✅ Database and local data source initialized successfully');
+        AppLogger.debug('✅ Database and local data source initialized successfully');
       } catch (e) {
-        print('⚠️  Database initialization failed: $e');
+        AppLogger.debug('⚠️  Database initialization failed: $e');
         // Fallback to mock implementation
         try {
           sl.registerLazySingleton<LocalDataSource>(() => MockLocalDataSource());
-          print('✅ Fallback to mock local data source');
+          AppLogger.debug('✅ Fallback to mock local data source');
         } catch (mockError) {
-          print('❌ Mock local data source fallback failed: $mockError');
+          AppLogger.debug('❌ Mock local data source fallback failed: $mockError');
         }
       }
     }
 
     // Data sources
     try {
-      sl.registerLazySingleton<RagRemoteDataSource>(
-        () => RagRemoteDataSourceImpl(sl()),
-      );
+      sl.registerLazySingleton<RagRemoteDataSource>(() => RagRemoteDataSourceImpl(sl()));
       sl.registerLazySingleton<RagApiService>(
         () => RagApiService(networkInfo: sl(), secureStorage: sl(), logger: sl()),
       );
-      
-      print('✅ Remote data sources initialized');
+
+      AppLogger.debug('✅ Remote data sources initialized');
     } catch (e) {
-      print('⚠️  Data source initialization error: $e');
+      AppLogger.debug('⚠️  Data source initialization error: $e');
     }
 
     // Repositories
@@ -103,24 +101,20 @@ Future<void> init() async {
           networkInfo: sl(),
         ),
       );
-      
+
       if (sl.isRegistered<LocalDataSource>()) {
-        sl.registerLazySingleton<AudioRepository>(
-          () => AudioRepositoryImpl(localDataSource: sl(), networkInfo: sl()),
-        );
-        sl.registerLazySingleton<FavoritesRepository>(
-          () => FavoritesRepositoryImpl(localDataSource: sl()),
-        );
+        sl.registerLazySingleton<AudioRepository>(() => AudioRepositoryImpl(localDataSource: sl(), networkInfo: sl()));
+        sl.registerLazySingleton<FavoritesRepository>(() => FavoritesRepositoryImpl(localDataSource: sl()));
       }
-      print('✅ Repositories initialized');
+      AppLogger.debug('✅ Repositories initialized');
     } catch (e) {
-      print('⚠️  Repository initialization error: $e');
+      AppLogger.debug('⚠️  Repository initialization error: $e');
     }
 
     // Use cases
     try {
       sl.registerLazySingleton(() => SearchRag(sl()));
-      
+
       if (sl.isRegistered<LocalDataSource>()) {
         sl.registerLazySingleton(() => GetQueryHistory(sl()));
         sl.registerLazySingleton(() => SaveQueryHistory(sl()));
@@ -129,14 +123,14 @@ Future<void> init() async {
         sl.registerLazySingleton(() => AddFavorite(sl()));
         sl.registerLazySingleton(() => RemoveFavorite(sl()));
       }
-      print('✅ Use cases initialized');
+      AppLogger.debug('✅ Use cases initialized');
     } catch (e) {
-      print('⚠️  Use case initialization error: $e');
+      AppLogger.debug('⚠️  Use case initialization error: $e');
     }
 
-    print('✅ Dependency injection initialization completed');
+    AppLogger.debug('✅ Dependency injection initialization completed');
   } catch (e) {
-    print('❌ Critical dependency injection error: $e');
+    AppLogger.debug('❌ Critical dependency injection error: $e');
     rethrow;
   }
 }

@@ -1,11 +1,9 @@
-import 'dart:convert';
-import 'dart:typed_data';
-import 'package:crypto/crypto.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
 /// Cache entry with TTL and metadata
 @immutable
+/// CacheEntry class implementation
 class CacheEntry extends Equatable {
   final String key;
   final String compressedData;
@@ -47,8 +45,7 @@ class CacheEntry extends Equatable {
 
   bool get isExpired => DateTime.now().isAfter(expiresAt);
 
-  bool get isNearExpiry =>
-      DateTime.now().isAfter(expiresAt.subtract(strategy.nearExpiryThreshold));
+  bool get isNearExpiry => DateTime.now().isAfter(expiresAt.subtract(strategy.nearExpiryThreshold));
 
   Duration get age => DateTime.now().difference(createdAt);
 
@@ -80,10 +77,7 @@ class CacheEntry extends Equatable {
 
   /// Increment access count and update last accessed time
   CacheEntry recordAccess() {
-    return copyWith(
-      accessCount: accessCount + 1,
-      lastAccessedAt: DateTime.now(),
-    );
+    return copyWith(accessCount: accessCount + 1, lastAccessedAt: DateTime.now());
   }
 
   /// Convert to map for storage
@@ -121,6 +115,7 @@ class CacheEntry extends Equatable {
 
 /// Cache strategy configuration
 @immutable
+/// CacheStrategy class implementation
 class CacheStrategy extends Equatable {
   final String name;
   final Duration ttl;
@@ -247,19 +242,11 @@ enum EvictionPolicy {
 }
 
 /// Query type classification for cache strategy selection
-enum QueryType {
-  dua,
-  quran,
-  hadith,
-  prayer,
-  fasting,
-  charity,
-  pilgrimage,
-  general,
-}
+enum QueryType { dua, quran, hadith, prayer, fasting, charity, pilgrimage, general }
 
 /// Semantic hash result for query deduplication
 @immutable
+/// SemanticHash class implementation
 class SemanticHash extends Equatable {
   final String hash;
   final String normalizedQuery;
@@ -276,13 +263,7 @@ class SemanticHash extends Equatable {
   });
 
   @override
-  List<Object?> get props => [
-    hash,
-    normalizedQuery,
-    semanticTokens,
-    language,
-    confidence,
-  ];
+  List<Object?> get props => [hash, normalizedQuery, semanticTokens, language, confidence];
 
   Map<String, dynamic> toJson() {
     return {
@@ -307,6 +288,7 @@ class SemanticHash extends Equatable {
 
 /// Cache performance metrics
 @immutable
+/// CacheMetrics class implementation
 class CacheMetrics extends Equatable {
   final int hitCount;
   final int missCount;
@@ -359,9 +341,7 @@ class CacheMetrics extends Equatable {
       'totalSize': totalSize,
       'entryCount': entryCount,
       'strategyUsage': strategyUsage,
-      'strategyPerformance': strategyPerformance.map(
-        (k, v) => MapEntry(k, v.inMicroseconds),
-      ),
+      'strategyPerformance': strategyPerformance.map((k, v) => MapEntry(k, v.inMicroseconds)),
     };
   }
 
@@ -371,11 +351,8 @@ class CacheMetrics extends Equatable {
       missCount: json['missCount'] ?? 0,
       evictionCount: json['evictionCount'] ?? 0,
       hitRatio: json['hitRatio']?.toDouble() ?? 0.0,
-      averageCompressionRatio:
-          json['averageCompressionRatio']?.toDouble() ?? 1.0,
-      averageRetrievalTime: Duration(
-        microseconds: json['averageRetrievalTime'] ?? 0,
-      ),
+      averageCompressionRatio: json['averageCompressionRatio']?.toDouble() ?? 1.0,
+      averageRetrievalTime: Duration(microseconds: json['averageRetrievalTime'] ?? 0),
       totalSize: json['totalSize'] ?? 0,
       entryCount: json['entryCount'] ?? 0,
       strategyUsage: Map<String, int>.from(json['strategyUsage'] ?? {}),
@@ -390,6 +367,7 @@ class CacheMetrics extends Equatable {
 
 /// Cache invalidation event
 @immutable
+/// CacheInvalidationEvent class implementation
 class CacheInvalidationEvent extends Equatable {
   final String eventType;
   final DateTime timestamp;
@@ -406,13 +384,7 @@ class CacheInvalidationEvent extends Equatable {
   });
 
   @override
-  List<Object?> get props => [
-    eventType,
-    timestamp,
-    affectedKeys,
-    metadata,
-    reason,
-  ];
+  List<Object?> get props => [eventType, timestamp, affectedKeys, metadata, reason];
 
   Map<String, dynamic> toJson() {
     return {

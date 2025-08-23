@@ -1,3 +1,5 @@
+import 'package:duacopilot/core/logging/app_logger.dart';
+
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
@@ -160,7 +162,7 @@ class QuranAudioService {
 
         onProgress?.call(i + 1, verseNumbers.length);
       } catch (e) {
-        print('Failed to download audio for verse ${verseNumbers[i]}: $e');
+        AppLogger.debug('Failed to download audio for verse ${verseNumbers[i]}: $e');
       }
     }
 
@@ -174,7 +176,7 @@ class QuranAudioService {
 
   /// Clear expired audio cache
   Future<void> clearExpiredCache() async {
-    print('Clearing expired audio cache...');
+    AppLogger.debug('Clearing expired audio cache...');
 
     // Clean up local audio files that are older than 30 days
     final audioFiles = await _getLocalAudioFiles();
@@ -185,10 +187,10 @@ class QuranAudioService {
         final stat = await file.stat();
         if (stat.modified.isBefore(cutoffDate)) {
           await file.delete();
-          print('Deleted expired audio file: ${file.path}');
+          AppLogger.debug('Deleted expired audio file: ${file.path}');
         }
       } catch (e) {
-        print('Error checking/deleting file ${file.path}: $e');
+        AppLogger.debug('Error checking/deleting file ${file.path}: $e');
       }
     }
   }
@@ -221,11 +223,11 @@ class QuranAudioService {
       }
 
       // Note: Remove from cache service would require additional implementation
-      print('Audio file $audioId deleted successfully');
+      AppLogger.debug('Audio file $audioId deleted successfully');
 
       return true;
     } catch (e) {
-      print('Failed to delete audio file $audioId: $e');
+      AppLogger.debug('Failed to delete audio file $audioId: $e');
       return false;
     }
   }
@@ -303,7 +305,7 @@ class QuranAudioService {
 
       return files;
     } catch (e) {
-      print('Error getting local audio files: $e');
+      AppLogger.debug('Error getting local audio files: $e');
       return [];
     }
   }
@@ -316,7 +318,7 @@ class QuranAudioService {
         final stat = await file.stat();
         totalSize += stat.size;
       } catch (e) {
-        print('Error getting file size for ${file.path}: $e');
+        AppLogger.debug('Error getting file size for ${file.path}: $e');
       }
     }
 
@@ -329,6 +331,7 @@ class QuranAudioService {
   }
 }
 
+/// AudioDownloadException class implementation
 class AudioDownloadException implements Exception {
   final String message;
 

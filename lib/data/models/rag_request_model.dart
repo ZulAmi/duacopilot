@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+/// RagRequestModel class implementation
 class RagRequestModel extends Equatable {
   final String query;
   final Map<String, dynamic>? context;

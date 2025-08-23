@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import '../../domain/entities/dua_entity.dart';
 import '../../domain/entities/audio_entity.dart';
 
+/// AudioCacheService class implementation
 class AudioCacheService {
   static const String _cacheDirectory = 'audio_cache';
   static const String _metadataFile = 'cache_metadata.json';
@@ -53,10 +54,7 @@ class AudioCacheService {
         final Map<String, dynamic> jsonData = json.decode(jsonString);
 
         _cacheMetadata = jsonData.map(
-          (key, value) => MapEntry(
-            key,
-            AudioCacheItem.fromJson(value as Map<String, dynamic>),
-          ),
+          (key, value) => MapEntry(key, AudioCacheItem.fromJson(value as Map<String, dynamic>)),
         );
 
         debugPrint('Loaded ${_cacheMetadata.length} cache items');
@@ -69,9 +67,7 @@ class AudioCacheService {
 
   Future<void> _saveMetadata() async {
     try {
-      final jsonData = _cacheMetadata.map(
-        (key, value) => MapEntry(key, value.toJson()),
-      );
+      final jsonData = _cacheMetadata.map((key, value) => MapEntry(key, value.toJson()));
 
       final jsonString = json.encode(jsonData);
       await _metadataFile_.writeAsString(jsonString);
@@ -140,10 +136,7 @@ class AudioCacheService {
     return _cacheMetadata.length < (_maxCacheItems * 0.5);
   }
 
-  Future<void> _cacheAudioWithPriority(
-    DuaEntity dua,
-    CachePriority priority,
-  ) async {
+  Future<void> _cacheAudioWithPriority(DuaEntity dua, CachePriority priority) async {
     try {
       final audioUrl = dua.audioUrl!;
       final fileName = _generateFileName(audioUrl);
@@ -171,9 +164,7 @@ class AudioCacheService {
         _cacheMetadata[audioUrl] = cacheItem;
         await _saveMetadata();
 
-        debugPrint(
-          'Successfully cached: $fileName (${_formatFileSize(response.bodyBytes.length)})',
-        );
+        debugPrint('Successfully cached: $fileName (${_formatFileSize(response.bodyBytes.length)})');
       } else {
         debugPrint('Failed to download audio: ${response.statusCode}');
       }
@@ -231,10 +222,7 @@ class AudioCacheService {
     }
 
     // Update access info
-    final updatedItem = cacheItem.copyWith(
-      lastAccessed: DateTime.now(),
-      accessCount: cacheItem.accessCount + 1,
-    );
+    final updatedItem = cacheItem.copyWith(lastAccessed: DateTime.now(), accessCount: cacheItem.accessCount + 1);
     _cacheMetadata[audioUrl] = updatedItem;
 
     return true;
@@ -247,10 +235,7 @@ class AudioCacheService {
     return null;
   }
 
-  Future<void> cacheAudio(
-    String audioUrl, {
-    CachePriority priority = CachePriority.normal,
-  }) async {
+  Future<void> cacheAudio(String audioUrl, {CachePriority priority = CachePriority.normal}) async {
     await initialize();
 
     if (await isAudioCached(audioUrl)) {
@@ -319,9 +304,7 @@ class AudioCacheService {
       final sortedItems =
           _cacheMetadata.entries.toList()..sort((a, b) {
             // Sort by priority first, then by last accessed date
-            final priorityCompare = a.value.priority.index.compareTo(
-              b.value.priority.index,
-            );
+            final priorityCompare = a.value.priority.index.compareTo(b.value.priority.index);
             if (priorityCompare != 0) return priorityCompare;
 
             final aLastAccessed = a.value.lastAccessed ?? DateTime(2000);
@@ -336,10 +319,7 @@ class AudioCacheService {
     }
 
     // Remove cache size overflow
-    final totalSize = _cacheMetadata.values.fold<int>(
-      0,
-      (sum, item) => sum + item.fileSizeBytes,
-    );
+    final totalSize = _cacheMetadata.values.fold<int>(0, (sum, item) => sum + item.fileSizeBytes);
     if (totalSize > _maxCacheSize) {
       final sortedBySize =
           _cacheMetadata.entries.toList()..sort((a, b) {
@@ -371,10 +351,7 @@ class AudioCacheService {
   Future<Map<String, dynamic>> getCacheStats() async {
     await initialize();
 
-    final totalSize = _cacheMetadata.values.fold<int>(
-      0,
-      (sum, item) => sum + item.fileSizeBytes,
-    );
+    final totalSize = _cacheMetadata.values.fold<int>(0, (sum, item) => sum + item.fileSizeBytes);
     final totalCount = _cacheMetadata.length;
 
     final priorityStats = <CachePriority, int>{};
@@ -417,8 +394,9 @@ class AudioCacheService {
   String _formatFileSize(int bytes) {
     if (bytes < 1024) return '$bytes B';
     if (bytes < 1024 * 1024) return '${(bytes / 1024).toStringAsFixed(1)} KB';
-    if (bytes < 1024 * 1024 * 1024)
+    if (bytes < 1024 * 1024 * 1024) {
       return '${(bytes / (1024 * 1024)).toStringAsFixed(1)} MB';
+    }
     return '${(bytes / (1024 * 1024 * 1024)).toStringAsFixed(1)} GB';
   }
 
@@ -432,10 +410,7 @@ class AudioCacheService {
 
   /// Pre-cache high confidence items
   Future<void> preloadHighConfidenceItems(List<DuaEntity> duas) async {
-    final highConfidenceItems =
-        duas
-            .where((dua) => dua.ragConfidence.score >= _highConfidenceThreshold)
-            .toList();
+    final highConfidenceItems = duas.where((dua) => dua.ragConfidence.score >= _highConfidenceThreshold).toList();
 
     await smartPreCache(highConfidenceItems);
   }

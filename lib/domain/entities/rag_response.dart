@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+/// RagResponse class implementation
 class RagResponse extends Equatable {
   final String id;
   final String query;

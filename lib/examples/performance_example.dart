@@ -23,6 +23,7 @@ class PerformanceOptimizedExampleApp extends StatelessWidget {
   }
 }
 
+/// ExampleHomePage class implementation
 class ExampleHomePage extends StatefulWidget {
   const ExampleHomePage({super.key});
 
@@ -30,6 +31,7 @@ class ExampleHomePage extends StatefulWidget {
   State<ExampleHomePage> createState() => _ExampleHomePageState();
 }
 
+/// _ExampleHomePageState class implementation
 class _ExampleHomePageState extends State<ExampleHomePage> {
   final List<String> _ragResponses = [
     'اللهم اغفر لي ذنبي',

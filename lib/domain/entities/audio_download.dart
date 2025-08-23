@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 
 enum AudioDownloadStatus { pending, downloading, completed, failed, paused }
 
+/// AudioDownload class implementation
 class AudioDownload extends Equatable {
   final int? id;
   final String url;

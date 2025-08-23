@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import '../error/api_exceptions.dart';
-import '../../domain/entities/dua_entity.dart';
 import '../../data/models/rag_response_models.dart';
 
 /// Flutter-optimized RAG API client for DuaCopilot
@@ -44,10 +43,7 @@ class RagApiClient {
   }
 
   /// Handle HTTP response and errors
-  T _handleResponse<T>(
-    http.Response response,
-    T Function(Map<String, dynamic>) parser,
-  ) {
+  T _handleResponse<T>(http.Response response, T Function(Map<String, dynamic>) parser) {
     if (response.statusCode >= 200 && response.statusCode < 300) {
       try {
         final Map<String, dynamic> data = json.decode(response.body);
@@ -86,10 +82,7 @@ class RagApiClient {
       case 500:
         throw ServerException(message);
       default:
-        throw GeneralApiException(
-          'HTTP $statusCode: $message',
-          statusCode: statusCode,
-        );
+        throw GeneralApiException('HTTP $statusCode: $message', statusCode: statusCode);
     }
   }
 
@@ -102,26 +95,15 @@ class RagApiClient {
   }) async {
     final requestBody = {
       'query': query,
-      'context': {
-        'language': language,
-        if (location != null) 'location': location,
-        ...?additionalContext,
-      },
+      'context': {'language': language, if (location != null) 'location': location, ...?additionalContext},
     };
 
     try {
       final response = await _httpClient
-          .post(
-            Uri.parse(_buildUrl('/search')),
-            headers: _headers,
-            body: json.encode(requestBody),
-          )
+          .post(Uri.parse(_buildUrl('/search')), headers: _headers, body: json.encode(requestBody))
           .timeout(_timeout);
 
-      return _handleResponse(
-        response,
-        (data) => RagSearchResponse.fromJson(data),
-      );
+      return _handleResponse(response, (data) => RagSearchResponse.fromJson(data));
     } on TimeoutException {
       throw GeneralApiException('Search request timed out');
     } catch (e) {
@@ -133,14 +115,9 @@ class RagApiClient {
   /// GET /api/v1/dua/{id}: Detailed Du'a with audio URL and metadata
   Future<DetailedDuaResponse> getDuaById(String duaId) async {
     try {
-      final response = await _httpClient
-          .get(Uri.parse(_buildUrl('/dua/$duaId')), headers: _headers)
-          .timeout(_timeout);
+      final response = await _httpClient.get(Uri.parse(_buildUrl('/dua/$duaId')), headers: _headers).timeout(_timeout);
 
-      return _handleResponse(
-        response,
-        (data) => DetailedDuaResponse.fromJson(data),
-      );
+      return _handleResponse(response, (data) => DetailedDuaResponse.fromJson(data));
     } on TimeoutException {
       throw GeneralApiException('Du\'a fetch request timed out');
     } catch (e) {
@@ -170,17 +147,10 @@ class RagApiClient {
 
     try {
       final response = await _httpClient
-          .post(
-            Uri.parse(_buildUrl('/feedback')),
-            headers: _headers,
-            body: json.encode(requestBody),
-          )
+          .post(Uri.parse(_buildUrl('/feedback')), headers: _headers, body: json.encode(requestBody))
           .timeout(_timeout);
 
-      return _handleResponse(
-        response,
-        (data) => FeedbackResponse.fromJson(data),
-      );
+      return _handleResponse(response, (data) => FeedbackResponse.fromJson(data));
     } on TimeoutException {
       throw GeneralApiException('Feedback submission timed out');
     } catch (e) {
@@ -203,19 +173,12 @@ class RagApiClient {
       if (timeframe != null) 'timeframe': timeframe,
     };
 
-    final uri = Uri.parse(
-      _buildUrl('/popular'),
-    ).replace(queryParameters: queryParams);
+    final uri = Uri.parse(_buildUrl('/popular')).replace(queryParameters: queryParams);
 
     try {
-      final response = await _httpClient
-          .get(uri, headers: _headers)
-          .timeout(_timeout);
+      final response = await _httpClient.get(uri, headers: _headers).timeout(_timeout);
 
-      return _handleResponse(
-        response,
-        (data) => PopularDuasResponse.fromJson(data),
-      );
+      return _handleResponse(response, (data) => PopularDuasResponse.fromJson(data));
     } on TimeoutException {
       throw GeneralApiException('Popular Du\'as request timed out');
     } catch (e) {
@@ -233,8 +196,7 @@ class RagApiClient {
     Map<String, dynamic>? customPreferences,
   }) async {
     final requestBody = {
-      if (preferredCategories != null)
-        'preferred_categories': preferredCategories,
+      if (preferredCategories != null) 'preferred_categories': preferredCategories,
       if (preferredLanguages != null) 'preferred_languages': preferredLanguages,
       if (topicPreferences != null) 'topic_preferences': topicPreferences,
       if (demographics != null) 'demographics': demographics.toJson(),
@@ -244,17 +206,10 @@ class RagApiClient {
 
     try {
       final response = await _httpClient
-          .post(
-            Uri.parse(_buildUrl('/personalize')),
-            headers: _headers,
-            body: json.encode(requestBody),
-          )
+          .post(Uri.parse(_buildUrl('/personalize')), headers: _headers, body: json.encode(requestBody))
           .timeout(_timeout);
 
-      return _handleResponse(
-        response,
-        (data) => PersonalizationResponse.fromJson(data),
-      );
+      return _handleResponse(response, (data) => PersonalizationResponse.fromJson(data));
     } on TimeoutException {
       throw GeneralApiException('Personalization update timed out');
     } catch (e) {
@@ -276,19 +231,12 @@ class RagApiClient {
     if (language != null) queryParams['language'] = language;
     if (maxSize != null) queryParams['max_size'] = maxSize.toString();
 
-    final uri = Uri.parse(
-      _buildUrl('/offline-cache'),
-    ).replace(queryParameters: queryParams);
+    final uri = Uri.parse(_buildUrl('/offline-cache')).replace(queryParameters: queryParams);
 
     try {
-      final response = await _httpClient
-          .get(uri, headers: _headers)
-          .timeout(_timeout);
+      final response = await _httpClient.get(uri, headers: _headers).timeout(_timeout);
 
-      return _handleResponse(
-        response,
-        (data) => OfflineCacheResponse.fromJson(data),
-      );
+      return _handleResponse(response, (data) => OfflineCacheResponse.fromJson(data));
     } on TimeoutException {
       throw GeneralApiException('Offline cache request timed out');
     } catch (e) {
@@ -318,14 +266,7 @@ class RagApiClient {
 }
 
 /// Feedback types for RAG model improvement
-enum FeedbackType {
-  helpful,
-  notHelpful,
-  incorrect,
-  inappropriate,
-  missing,
-  excellent,
-}
+enum FeedbackType { helpful, notHelpful, incorrect, inappropriate, missing, excellent }
 
 /// User demographics for personalization
 class UserDemographics {
@@ -335,13 +276,7 @@ class UserDemographics {
   final String? religiousLevel;
   final List<String>? interests;
 
-  const UserDemographics({
-    this.ageGroup,
-    this.gender,
-    this.region,
-    this.religiousLevel,
-    this.interests,
-  });
+  const UserDemographics({this.ageGroup, this.gender, this.region, this.religiousLevel, this.interests});
 
   Map<String, dynamic> toJson() => {
     if (ageGroup != null) 'age_group': ageGroup,
@@ -351,12 +286,11 @@ class UserDemographics {
     if (interests != null) 'interests': interests,
   };
 
-  factory UserDemographics.fromJson(Map<String, dynamic> json) =>
-      UserDemographics(
-        ageGroup: json['age_group'],
-        gender: json['gender'],
-        region: json['region'],
-        religiousLevel: json['religious_level'],
-        interests: json['interests']?.cast<String>(),
-      );
+  factory UserDemographics.fromJson(Map<String, dynamic> json) => UserDemographics(
+    ageGroup: json['age_group'],
+    gender: json['gender'],
+    region: json['region'],
+    religiousLevel: json['religious_level'],
+    interests: json['interests']?.cast<String>(),
+  );
 }

@@ -9,12 +9,11 @@ class CacheManagementScreen extends ConsumerStatefulWidget {
   const CacheManagementScreen({super.key});
 
   @override
-  ConsumerState<CacheManagementScreen> createState() =>
-      _CacheManagementScreenState();
+  ConsumerState<CacheManagementScreen> createState() => _CacheManagementScreenState();
 }
 
-class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
-    with TickerProviderStateMixin {
+/// _CacheManagementScreenState class implementation
+class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen> with TickerProviderStateMixin {
   late TabController _tabController;
   String _searchPattern = '';
   QueryType? _selectedQueryType;
@@ -54,12 +53,7 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
       ),
       body: TabBarView(
         controller: _tabController,
-        children: [
-          _buildOverviewTab(),
-          _buildAnalyticsTab(),
-          _buildPopularQueriesTab(),
-          _buildOperationsTab(),
-        ],
+        children: [_buildOverviewTab(), _buildAnalyticsTab(), _buildPopularQueriesTab(), _buildOperationsTab()],
       ),
     );
   }
@@ -86,9 +80,7 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
                         'Hit Ratio',
                         '${(metricsAsync.hitRatio * 100).toStringAsFixed(1)}%',
                         Icons.thumb_up,
-                        metricsAsync.hitRatio > 0.7
-                            ? Colors.green
-                            : Colors.orange,
+                        metricsAsync.hitRatio > 0.7 ? Colors.green : Colors.orange,
                       ),
                     ),
                     const SizedBox(width: 12),
@@ -129,24 +121,16 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
                 const SizedBox(height: 24),
 
                 // Strategy Performance
-                const Text(
-                  'Strategy Performance',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
+                const Text('Strategy Performance', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 12),
 
                 if (metricsAsync.strategyUsage.isNotEmpty)
-                  ...metricsAsync.strategyUsage.entries.map(
-                    (entry) => _buildStrategyCard(entry.key, entry.value),
-                  ),
+                  ...metricsAsync.strategyUsage.entries.map((entry) => _buildStrategyCard(entry.key, entry.value)),
 
                 const SizedBox(height: 24),
 
                 // Cache Size Breakdown
-                const Text(
-                  'Cache Statistics',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
+                const Text('Cache Statistics', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 12),
 
                 _buildStatisticsCard(metricsAsync),
@@ -162,9 +146,7 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
     return Consumer(
       builder: (context, ref, child) {
         final analyticsAsync = ref.watch(cacheAnalyticsProvider);
-        final performanceAsync = ref.watch(
-          cachePerformanceProvider(const Duration(hours: 24)),
-        );
+        final performanceAsync = ref.watch(cachePerformanceProvider(const Duration(hours: 24)));
 
         return SingleChildScrollView(
           padding: const EdgeInsets.all(16),
@@ -172,10 +154,7 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Performance Metrics
-              const Text(
-                'Performance Metrics (24h)',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
+              const Text('Performance Metrics (24h)', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
               const SizedBox(height: 12),
 
               performanceAsync.when(
@@ -188,10 +167,7 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
 
               // Analytics Summary
               if (analyticsAsync != null) ...[
-                const Text(
-                  'Analytics Summary',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
+                const Text('Analytics Summary', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 12),
                 _buildAnalyticsSummary(analyticsAsync),
               ],
@@ -207,17 +183,11 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
       builder: (context, ref, child) {
         final popularQueriesAsync = ref.watch(
           popularQueriesProvider(
-            PopularQueriesRequest(
-              limit: 50,
-              language: _selectedLanguage,
-              queryType: _selectedQueryType,
-            ),
+            PopularQueriesRequest(limit: 50, language: _selectedLanguage, queryType: _selectedQueryType),
           ),
         );
 
-        final trendingQueriesAsync = ref.watch(
-          trendingQueriesProvider(const TrendingQueriesRequest(limit: 20)),
-        );
+        final trendingQueriesAsync = ref.watch(trendingQueriesProvider(const TrendingQueriesRequest(limit: 20)));
 
         return SingleChildScrollView(
           padding: const EdgeInsets.all(16),
@@ -230,10 +200,7 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
               const SizedBox(height: 24),
 
               // Popular Queries
-              const Text(
-                'Popular Queries',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
+              const Text('Popular Queries', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
               const SizedBox(height: 12),
 
               popularQueriesAsync.when(
@@ -245,10 +212,7 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
               const SizedBox(height: 24),
 
               // Trending Queries
-              const Text(
-                'Trending Queries',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
+              const Text('Trending Queries', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
               const SizedBox(height: 12),
 
               trendingQueriesAsync.when(
@@ -274,10 +238,7 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Cache Operations
-              const Text(
-                'Cache Operations',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
+              const Text('Cache Operations', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
               const SizedBox(height: 12),
 
               // Operation Status
@@ -300,9 +261,7 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
                       IconButton(
                         icon: const Icon(Icons.close),
                         onPressed: () {
-                          ref
-                              .read(cacheOperationsProvider.notifier)
-                              .clearState();
+                          ref.read(cacheOperationsProvider.notifier).clearState();
                         },
                       ),
                     ],
@@ -356,12 +315,7 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
     );
   }
 
-  Widget _buildMetricCard(
-    String title,
-    String value,
-    IconData icon,
-    Color color,
-  ) {
+  Widget _buildMetricCard(String title, String value, IconData icon, Color color) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -372,26 +326,11 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
               children: [
                 Icon(icon, color: color, size: 20),
                 const SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
+                Expanded(child: Text(title, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500))),
               ],
             ),
             const SizedBox(height: 8),
-            Text(
-              value,
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: color,
-              ),
-            ),
+            Text(value, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: color)),
           ],
         ),
       ),
@@ -403,10 +342,7 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
       child: ListTile(
         leading: Icon(Icons.policy, color: Colors.teal),
         title: Text(strategy.replaceAll('_', ' ').toUpperCase()),
-        trailing: Chip(
-          label: Text('$count'),
-          backgroundColor: Colors.teal.shade50,
-        ),
+        trailing: Chip(label: Text('$count'), backgroundColor: Colors.teal.shade50),
       ),
     );
   }
@@ -421,14 +357,8 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
             _buildStatRow('Cache Hits', '${metrics.hitCount}'),
             _buildStatRow('Cache Misses', '${metrics.missCount}'),
             _buildStatRow('Evictions', '${metrics.evictionCount}'),
-            _buildStatRow(
-              'Total Size',
-              '${(metrics.totalSize / 1024).toStringAsFixed(1)} KB',
-            ),
-            _buildStatRow(
-              'Avg Retrieval Time',
-              '${metrics.averageRetrievalTime.inMilliseconds}ms',
-            ),
+            _buildStatRow('Total Size', '${(metrics.totalSize / 1024).toStringAsFixed(1)} KB'),
+            _buildStatRow('Avg Retrieval Time', '${metrics.averageRetrievalTime.inMilliseconds}ms'),
           ],
         ),
       ),
@@ -440,10 +370,7 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(label),
-          Text(value, style: const TextStyle(fontWeight: FontWeight.bold)),
-        ],
+        children: [Text(label), Text(value, style: const TextStyle(fontWeight: FontWeight.bold))],
       ),
     );
   }
@@ -453,23 +380,9 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
       children: [
         Row(
           children: [
-            Expanded(
-              child: _buildMetricCard(
-                'Hits',
-                '${performance.hitCount}',
-                Icons.check_circle,
-                Colors.green,
-              ),
-            ),
+            Expanded(child: _buildMetricCard('Hits', '${performance.hitCount}', Icons.check_circle, Colors.green)),
             const SizedBox(width: 12),
-            Expanded(
-              child: _buildMetricCard(
-                'Misses',
-                '${performance.missCount}',
-                Icons.cancel,
-                Colors.red,
-              ),
-            ),
+            Expanded(child: _buildMetricCard('Misses', '${performance.missCount}', Icons.cancel, Colors.red)),
           ],
         ),
         const SizedBox(height: 12),
@@ -507,14 +420,8 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
           children: [
             _buildStatRow('Unique Queries', '${summary.totalUniqueQueries}'),
             _buildStatRow('Total Events', '${summary.totalEvents}'),
-            _buildStatRow(
-              'Popular Queries',
-              '${summary.popularQueries.length}',
-            ),
-            _buildStatRow(
-              'Trending Queries',
-              '${summary.trendingQueries.length}',
-            ),
+            _buildStatRow('Popular Queries', '${summary.popularQueries.length}'),
+            _buildStatRow('Trending Queries', '${summary.trendingQueries.length}'),
           ],
         ),
       ),
@@ -528,10 +435,7 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Filters',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
+            const Text('Filters', style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 12),
 
             Row(
@@ -539,20 +443,11 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
                 Expanded(
                   child: DropdownButtonFormField<QueryType?>(
                     value: _selectedQueryType,
-                    decoration: const InputDecoration(
-                      labelText: 'Query Type',
-                      border: OutlineInputBorder(),
-                    ),
+                    decoration: const InputDecoration(labelText: 'Query Type', border: OutlineInputBorder()),
                     items: [
-                      const DropdownMenuItem<QueryType?>(
-                        value: null,
-                        child: Text('All Types'),
-                      ),
+                      const DropdownMenuItem<QueryType?>(value: null, child: Text('All Types')),
                       ...QueryType.values.map(
-                        (type) => DropdownMenuItem<QueryType?>(
-                          value: type,
-                          child: Text(type.name.toUpperCase()),
-                        ),
+                        (type) => DropdownMenuItem<QueryType?>(value: type, child: Text(type.name.toUpperCase())),
                       ),
                     ],
                     onChanged: (value) {
@@ -566,31 +461,13 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
                 Expanded(
                   child: DropdownButtonFormField<String?>(
                     value: _selectedLanguage,
-                    decoration: const InputDecoration(
-                      labelText: 'Language',
-                      border: OutlineInputBorder(),
-                    ),
+                    decoration: const InputDecoration(labelText: 'Language', border: OutlineInputBorder()),
                     items: const [
-                      DropdownMenuItem<String?>(
-                        value: null,
-                        child: Text('All Languages'),
-                      ),
-                      DropdownMenuItem<String?>(
-                        value: 'en',
-                        child: Text('English'),
-                      ),
-                      DropdownMenuItem<String?>(
-                        value: 'ar',
-                        child: Text('Arabic'),
-                      ),
-                      DropdownMenuItem<String?>(
-                        value: 'ur',
-                        child: Text('Urdu'),
-                      ),
-                      DropdownMenuItem<String?>(
-                        value: 'id',
-                        child: Text('Indonesian'),
-                      ),
+                      DropdownMenuItem<String?>(value: null, child: Text('All Languages')),
+                      DropdownMenuItem<String?>(value: 'en', child: Text('English')),
+                      DropdownMenuItem<String?>(value: 'ar', child: Text('Arabic')),
+                      DropdownMenuItem<String?>(value: 'ur', child: Text('Urdu')),
+                      DropdownMenuItem<String?>(value: 'id', child: Text('Indonesian')),
                     ],
                     onChanged: (value) {
                       setState(() {
@@ -610,10 +487,7 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
   Widget _buildPopularQueriesList(List<PopularQuery> queries) {
     if (queries.isEmpty) {
       return const Card(
-        child: Padding(
-          padding: EdgeInsets.all(32),
-          child: Center(child: Text('No popular queries found')),
-        ),
+        child: Padding(padding: EdgeInsets.all(32), child: Center(child: Text('No popular queries found'))),
       );
     }
 
@@ -625,22 +499,13 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
         final query = queries[index];
         return Card(
           child: ListTile(
-            title: Text(
-              query.query,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-            subtitle: Text(
-              '${query.language.toUpperCase()} • ${query.queryType.name} • ${query.accessCount} accesses',
-            ),
+            title: Text(query.query, maxLines: 2, overflow: TextOverflow.ellipsis),
+            subtitle: Text('${query.language.toUpperCase()} • ${query.queryType.name} • ${query.accessCount} accesses'),
             trailing: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text('${(query.cacheHitRatio * 100).toStringAsFixed(0)}%'),
-                Text(
-                  'hit ratio',
-                  style: TextStyle(fontSize: 10, color: Colors.grey.shade600),
-                ),
+                Text('hit ratio', style: TextStyle(fontSize: 10, color: Colors.grey.shade600)),
               ],
             ),
           ),
@@ -652,10 +517,7 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
   Widget _buildTrendingQueriesList(List<TrendingQuery> queries) {
     if (queries.isEmpty) {
       return const Card(
-        child: Padding(
-          padding: EdgeInsets.all(32),
-          child: Center(child: Text('No trending queries found')),
-        ),
+        child: Padding(padding: EdgeInsets.all(32), child: Center(child: Text('No trending queries found'))),
       );
     }
 
@@ -668,18 +530,9 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
         return Card(
           child: ListTile(
             leading: Icon(Icons.trending_up, color: Colors.green),
-            title: Text(
-              query.query,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-            subtitle: Text(
-              '${query.totalAccesses} total accesses • +${query.dailyGrowthRate.toStringAsFixed(1)}/day',
-            ),
-            trailing: Text(
-              '${query.trendScore.toStringAsFixed(0)}',
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
+            title: Text(query.query, maxLines: 2, overflow: TextOverflow.ellipsis),
+            subtitle: Text('${query.totalAccesses} total accesses • +${query.dailyGrowthRate.toStringAsFixed(1)}/day'),
+            trailing: Text(query.trendScore.toStringAsFixed(0), style: const TextStyle(fontWeight: FontWeight.bold)),
           ),
         );
       },
@@ -693,37 +546,19 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
           children: [
             Expanded(
               child: ElevatedButton.icon(
-                onPressed:
-                    isLoading
-                        ? null
-                        : () =>
-                            ref
-                                .read(cacheOperationsProvider.notifier)
-                                .clearAllCache(),
+                onPressed: isLoading ? null : () => ref.read(cacheOperationsProvider.notifier).clearAllCache(),
                 icon: const Icon(Icons.clear_all),
                 label: const Text('Clear All Cache'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  foregroundColor: Colors.white,
-                ),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.red, foregroundColor: Colors.white),
               ),
             ),
             const SizedBox(width: 12),
             Expanded(
               child: ElevatedButton.icon(
-                onPressed:
-                    isLoading
-                        ? null
-                        : () =>
-                            ref
-                                .read(cacheOperationsProvider.notifier)
-                                .prewarmCache(),
+                onPressed: isLoading ? null : () => ref.read(cacheOperationsProvider.notifier).prewarmCache(),
                 icon: const Icon(Icons.autorenew),
                 label: const Text('Prewarm Cache'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                  foregroundColor: Colors.white,
-                ),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.green, foregroundColor: Colors.white),
               ),
             ),
           ],
@@ -739,10 +574,7 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Search & Invalidate',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
+            const Text('Search & Invalidate', style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 12),
             TextField(
               decoration: const InputDecoration(
@@ -761,15 +593,10 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
                 onPressed:
                     _searchPattern.isEmpty
                         ? null
-                        : () => ref
-                            .read(cacheOperationsProvider.notifier)
-                            .invalidateByPattern(_searchPattern),
+                        : () => ref.read(cacheOperationsProvider.notifier).invalidateByPattern(_searchPattern),
                 icon: const Icon(Icons.search_off),
                 label: const Text('Invalidate Matching Entries'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.orange,
-                  foregroundColor: Colors.white,
-                ),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.orange, foregroundColor: Colors.white),
               ),
             ),
           ],
@@ -779,7 +606,7 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
   }
 
   Widget _buildPrewarmingSection(WidgetRef ref) {
-    int _prewarmLimit = 50;
+    int prewarmLimit = 50;
 
     return Card(
       child: Padding(
@@ -787,10 +614,7 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Cache Prewarming',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
+            const Text('Cache Prewarming', style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 12),
             Text(
               'Prewarming loads popular queries into cache to improve performance.',
@@ -801,22 +625,16 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
               children: [
                 Expanded(
                   child: TextField(
-                    decoration: const InputDecoration(
-                      labelText: 'Query Limit',
-                      border: OutlineInputBorder(),
-                    ),
+                    decoration: const InputDecoration(labelText: 'Query Limit', border: OutlineInputBorder()),
                     keyboardType: TextInputType.number,
                     onChanged: (value) {
-                      _prewarmLimit = int.tryParse(value) ?? 50;
+                      prewarmLimit = int.tryParse(value) ?? 50;
                     },
                   ),
                 ),
                 const SizedBox(width: 12),
                 ElevatedButton(
-                  onPressed:
-                      () => ref
-                          .read(cacheOperationsProvider.notifier)
-                          .prewarmCache(limit: _prewarmLimit),
+                  onPressed: () => ref.read(cacheOperationsProvider.notifier).prewarmCache(limit: prewarmLimit),
                   child: const Text('Start Prewarming'),
                 ),
               ],
@@ -828,7 +646,7 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
   }
 
   Widget _buildModelUpdateSection(WidgetRef ref) {
-    final _modelVersionController = TextEditingController();
+    final modelVersionController = TextEditingController();
 
     return Card(
       child: Padding(
@@ -836,18 +654,12 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Model Update',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
+            const Text('Model Update', style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 12),
-            Text(
-              'Invalidate cache when RAG model is updated.',
-              style: TextStyle(color: Colors.grey.shade600),
-            ),
+            Text('Invalidate cache when RAG model is updated.', style: TextStyle(color: Colors.grey.shade600)),
             const SizedBox(height: 12),
             TextField(
-              controller: _modelVersionController,
+              controller: modelVersionController,
               decoration: const InputDecoration(
                 labelText: 'Model Version',
                 hintText: 'e.g., v2.1.0',
@@ -859,19 +671,14 @@ class _CacheManagementScreenState extends ConsumerState<CacheManagementScreen>
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: () {
-                  final version = _modelVersionController.text.trim();
+                  final version = modelVersionController.text.trim();
                   if (version.isNotEmpty) {
-                    ref
-                        .read(cacheOperationsProvider.notifier)
-                        .handleModelUpdate(modelVersion: version);
+                    ref.read(cacheOperationsProvider.notifier).handleModelUpdate(modelVersion: version);
                   }
                 },
                 icon: const Icon(Icons.update),
                 label: const Text('Process Model Update'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  foregroundColor: Colors.white,
-                ),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.blue, foregroundColor: Colors.white),
               ),
             ),
           ],

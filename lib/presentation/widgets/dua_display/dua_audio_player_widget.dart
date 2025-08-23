@@ -1,7 +1,10 @@
+import 'dart:math' as math;
+
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:audioplayers/audioplayers.dart';
 
+/// Professional Islamic audio player widget for Dua recitations
 class DuaAudioPlayerWidget extends StatefulWidget {
   final String? audioUrl;
   final String duaTitle;
@@ -9,19 +12,19 @@ class DuaAudioPlayerWidget extends StatefulWidget {
   final bool showDownloadOption;
 
   const DuaAudioPlayerWidget({
-    Key? key,
+    super.key,
     this.audioUrl,
     required this.duaTitle,
     this.onDownload,
     this.showDownloadOption = true,
-  }) : super(key: key);
+  });
 
   @override
   State<DuaAudioPlayerWidget> createState() => _DuaAudioPlayerWidgetState();
 }
 
-class _DuaAudioPlayerWidgetState extends State<DuaAudioPlayerWidget>
-    with TickerProviderStateMixin {
+/// _DuaAudioPlayerWidgetState class implementation
+class _DuaAudioPlayerWidgetState extends State<DuaAudioPlayerWidget> with TickerProviderStateMixin {
   late AudioPlayer _audioPlayer;
   late AnimationController _playButtonController;
   late AnimationController _progressController;
@@ -29,7 +32,6 @@ class _DuaAudioPlayerWidgetState extends State<DuaAudioPlayerWidget>
 
   bool _isPlaying = false;
   bool _isLoading = false;
-  bool _hasError = false;
   Duration _duration = Duration.zero;
   Duration _position = Duration.zero;
   double _playbackSpeed = 1.0;
@@ -39,19 +41,14 @@ class _DuaAudioPlayerWidgetState extends State<DuaAudioPlayerWidget>
     super.initState();
     _audioPlayer = AudioPlayer();
 
-    _playButtonController = AnimationController(
-      duration: const Duration(milliseconds: 200),
-      vsync: this,
-    );
+    _playButtonController = AnimationController(duration: const Duration(milliseconds: 200), vsync: this);
 
-    _progressController = AnimationController(
-      duration: const Duration(milliseconds: 100),
-      vsync: this,
-    );
+    _progressController = AnimationController(duration: const Duration(milliseconds: 100), vsync: this);
 
-    _playButtonAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _playButtonController, curve: Curves.easeInOut),
-    );
+    _playButtonAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _playButtonController, curve: Curves.easeInOut));
 
     _setupAudioPlayer();
   }
@@ -110,13 +107,10 @@ class _DuaAudioPlayerWidgetState extends State<DuaAudioPlayerWidget>
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.outline.withOpacity(0.1),
-          width: 1,
-        ),
+        border: Border.all(color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.1), width: 1),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 16,
             offset: const Offset(0, 4),
             spreadRadius: 0,
@@ -138,10 +132,7 @@ class _DuaAudioPlayerWidgetState extends State<DuaAudioPlayerWidget>
           // Controls
           _buildControls(),
 
-          if (widget.showDownloadOption) ...[
-            const SizedBox(height: 12),
-            _buildDownloadOption(),
-          ],
+          if (widget.showDownloadOption) ...[const SizedBox(height: 12), _buildDownloadOption()],
         ],
       ),
     );
@@ -153,14 +144,10 @@ class _DuaAudioPlayerWidgetState extends State<DuaAudioPlayerWidget>
         Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+            color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Icon(
-            Icons.headphones_rounded,
-            color: Theme.of(context).colorScheme.primary,
-            size: 20,
-          ),
+          child: Icon(Icons.headphones_rounded, color: Theme.of(context).colorScheme.primary, size: 20),
         ),
         const SizedBox(width: 12),
         Expanded(
@@ -177,10 +164,7 @@ class _DuaAudioPlayerWidgetState extends State<DuaAudioPlayerWidget>
               ),
               Text(
                 widget.duaTitle,
-                style: GoogleFonts.inter(
-                  fontSize: 12,
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+                style: GoogleFonts.inter(fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -198,7 +182,7 @@ class _DuaAudioPlayerWidgetState extends State<DuaAudioPlayerWidget>
       icon: Container(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.5),
+          color: Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Text(
@@ -218,11 +202,11 @@ class _DuaAudioPlayerWidgetState extends State<DuaAudioPlayerWidget>
       },
       itemBuilder:
           (context) => [
-            PopupMenuItem(value: 0.5, child: Text('0.5x')),
-            PopupMenuItem(value: 0.75, child: Text('0.75x')),
-            PopupMenuItem(value: 1.0, child: Text('1.0x')),
-            PopupMenuItem(value: 1.25, child: Text('1.25x')),
-            PopupMenuItem(value: 1.5, child: Text('1.5x')),
+            const PopupMenuItem(value: 0.5, child: Text('0.5x')),
+            const PopupMenuItem(value: 0.75, child: Text('0.75x')),
+            const PopupMenuItem(value: 1.0, child: Text('1.0x')),
+            const PopupMenuItem(value: 1.25, child: Text('1.25x')),
+            const PopupMenuItem(value: 1.5, child: Text('1.5x')),
           ],
     );
   }
@@ -231,17 +215,14 @@ class _DuaAudioPlayerWidgetState extends State<DuaAudioPlayerWidget>
     return Column(
       children: [
         // Visual waveform-like progress indicator
-        Container(
+        SizedBox(
           height: 40,
           child: CustomPaint(
-            size: Size(double.infinity, 40),
+            size: const Size(double.infinity, 40),
             painter: AudioWaveformPainter(
-              progress:
-                  _duration.inMilliseconds > 0
-                      ? _position.inMilliseconds / _duration.inMilliseconds
-                      : 0.0,
+              progress: _duration.inMilliseconds > 0 ? _position.inMilliseconds / _duration.inMilliseconds : 0.0,
               color: Theme.of(context).colorScheme.primary,
-              backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+              backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
               isPlaying: _isPlaying,
             ),
           ),
@@ -258,7 +239,7 @@ class _DuaAudioPlayerWidgetState extends State<DuaAudioPlayerWidget>
               style: GoogleFonts.inter(
                 fontSize: 11,
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
-                fontFeatures: [FontFeature.tabularFigures()],
+                fontFeatures: const [FontFeature.tabularFigures()],
               ),
             ),
             Text(
@@ -266,7 +247,7 @@ class _DuaAudioPlayerWidgetState extends State<DuaAudioPlayerWidget>
               style: GoogleFonts.inter(
                 fontSize: 11,
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
-                fontFeatures: [FontFeature.tabularFigures()],
+                fontFeatures: const [FontFeature.tabularFigures()],
               ),
             ),
           ],
@@ -314,7 +295,7 @@ class _DuaAudioPlayerWidgetState extends State<DuaAudioPlayerWidget>
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
-              color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+              color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
               blurRadius: 12,
               offset: const Offset(0, 4),
               spreadRadius: 0,
@@ -327,18 +308,14 @@ class _DuaAudioPlayerWidgetState extends State<DuaAudioPlayerWidget>
                   padding: const EdgeInsets.all(16),
                   child: CircularProgressIndicator(
                     strokeWidth: 2,
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                      Theme.of(context).colorScheme.onPrimary,
-                    ),
+                    valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.onPrimary),
                   ),
                 )
                 : AnimatedBuilder(
                   animation: _playButtonAnimation,
                   builder: (context, child) {
                     return Icon(
-                      _isPlaying
-                          ? Icons.pause_rounded
-                          : Icons.play_arrow_rounded,
+                      _isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
                       color: Theme.of(context).colorScheme.onPrimary,
                       size: 28,
                     );
@@ -348,11 +325,7 @@ class _DuaAudioPlayerWidgetState extends State<DuaAudioPlayerWidget>
     );
   }
 
-  Widget _buildControlButton({
-    required IconData icon,
-    required VoidCallback onTap,
-    required String tooltip,
-  }) {
+  Widget _buildControlButton({required IconData icon, required VoidCallback onTap, required String tooltip}) {
     return Tooltip(
       message: tooltip,
       child: InkWell(
@@ -362,16 +335,10 @@ class _DuaAudioPlayerWidgetState extends State<DuaAudioPlayerWidget>
           width: 48,
           height: 48,
           decoration: BoxDecoration(
-            color: Theme.of(
-              context,
-            ).colorScheme.surfaceVariant.withOpacity(0.5),
+            color: Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
             shape: BoxShape.circle,
           ),
-          child: Icon(
-            icon,
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-            size: 24,
-          ),
+          child: Icon(icon, color: Theme.of(context).colorScheme.onSurfaceVariant, size: 24),
         ),
       ),
     );
@@ -384,21 +351,14 @@ class _DuaAudioPlayerWidgetState extends State<DuaAudioPlayerWidget>
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.3),
+          color: Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(
-            color: Theme.of(context).colorScheme.outline.withOpacity(0.2),
-            width: 1,
-          ),
+          border: Border.all(color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2), width: 1),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              Icons.download_rounded,
-              size: 16,
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
-            ),
+            Icon(Icons.download_rounded, size: 16, color: Theme.of(context).colorScheme.onSurfaceVariant),
             const SizedBox(width: 8),
             Text(
               'Download Audio',
@@ -418,28 +378,18 @@ class _DuaAudioPlayerWidgetState extends State<DuaAudioPlayerWidget>
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.3),
+        color: Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.outline.withOpacity(0.2),
-          width: 1,
-        ),
+        border: Border.all(color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2), width: 1),
       ),
       child: Row(
         children: [
-          Icon(
-            Icons.headphones_outlined,
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-            size: 20,
-          ),
+          Icon(Icons.headphones_outlined, color: Theme.of(context).colorScheme.onSurfaceVariant, size: 20),
           const SizedBox(width: 12),
           Expanded(
             child: Text(
               'Audio recitation not available for this Du\'a',
-              style: GoogleFonts.inter(
-                fontSize: 12,
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
+              style: GoogleFonts.inter(fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
             ),
           ),
         ],
@@ -447,7 +397,7 @@ class _DuaAudioPlayerWidgetState extends State<DuaAudioPlayerWidget>
     );
   }
 
-  void _togglePlayPause() async {
+  Future<void> _togglePlayPause() async {
     try {
       if (_isPlaying) {
         await _audioPlayer.pause();
@@ -458,26 +408,17 @@ class _DuaAudioPlayerWidgetState extends State<DuaAudioPlayerWidget>
         await _audioPlayer.play(UrlSource(widget.audioUrl!));
       }
     } catch (e) {
-      setState(() {
-        _hasError = true;
-      });
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Error playing audio: ${e.toString()}'),
-          behavior: SnackBarBehavior.floating,
-        ),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error playing audio: ${e.toString()}'), behavior: SnackBarBehavior.floating),
+        );
+      }
     }
   }
 
   void _seekRelative(int seconds) {
     final newPosition = _position + Duration(seconds: seconds);
-    final clampedPosition = Duration(
-      milliseconds: newPosition.inMilliseconds.clamp(
-        0,
-        _duration.inMilliseconds,
-      ),
-    );
+    final clampedPosition = Duration(milliseconds: newPosition.inMilliseconds.clamp(0, _duration.inMilliseconds));
     _audioPlayer.seek(clampedPosition);
   }
 
@@ -488,13 +429,14 @@ class _DuaAudioPlayerWidgetState extends State<DuaAudioPlayerWidget>
   }
 }
 
+/// Professional audio waveform painter for Islamic audio player
 class AudioWaveformPainter extends CustomPainter {
   final double progress;
   final Color color;
   final Color backgroundColor;
   final bool isPlaying;
 
-  AudioWaveformPainter({
+  const AudioWaveformPainter({
     required this.progress,
     required this.color,
     required this.backgroundColor,
@@ -505,7 +447,7 @@ class AudioWaveformPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final backgroundPaint =
         Paint()
-          ..color = backgroundColor.withOpacity(0.3)
+          ..color = backgroundColor.withValues(alpha: 0.3)
           ..style = PaintingStyle.fill;
 
     final progressPaint =
@@ -523,37 +465,26 @@ class AudioWaveformPainter extends CustomPainter {
       final height = _getBarHeight(i, barCount) * size.height;
       final y = (size.height - height) / 2;
 
-      final rect = Rect.fromLTWH(x, y, barWidth - 1, height);
+      final rect = Rect.fromLTRB(x, y, x + barWidth - 1, y + height);
 
       // Draw background bar
-      canvas.drawRRect(
-        RRect.fromRectAndRadius(rect, const Radius.circular(1)),
-        backgroundPaint,
-      );
+      canvas.drawRRect(RRect.fromRectAndRadius(rect, const Radius.circular(1)), backgroundPaint);
 
       // Draw progress bar
       if (x < progressWidth) {
-        canvas.drawRRect(
-          RRect.fromRectAndRadius(rect, const Radius.circular(1)),
-          progressPaint,
-        );
+        canvas.drawRRect(RRect.fromRectAndRadius(rect, const Radius.circular(1)), progressPaint);
       }
     }
   }
 
   double _getBarHeight(int index, int total) {
-    // Create a pseudo-random waveform pattern
+    // Create a pseudo-random waveform pattern using sine functions
     final normalized = index / total;
-    return 0.3 +
-        0.7 * (0.5 + 0.3 * sin(normalized * 15) + 0.2 * sin(normalized * 23));
+    return 0.3 + 0.7 * (0.5 + 0.3 * math.sin(normalized * 15) + 0.2 * math.sin(normalized * 23));
   }
 
   @override
   bool shouldRepaint(AudioWaveformPainter oldDelegate) {
-    return oldDelegate.progress != progress ||
-        oldDelegate.isPlaying != isPlaying;
+    return oldDelegate.progress != progress || oldDelegate.isPlaying != isPlaying;
   }
 }
-
-// Helper function for sine calculation
-double sin(double x) => (x * 100).round() % 2 == 0 ? 0.7 : 0.3;

@@ -10,6 +10,7 @@ enum RagApiState { idle, loading, success, error, retrying }
 
 /// Comprehensive RAG response data model
 @immutable
+/// RagStateData class implementation
 class RagStateData {
   final RagApiState apiState;
   final RagResponse? response;
@@ -151,6 +152,7 @@ class RagCacheConfig {
 
 /// Cached RAG response entry
 @immutable
+/// CachedRagEntry class implementation
 class CachedRagEntry {
   final String query;
   final RagResponse response;
@@ -197,6 +199,7 @@ enum WebSocketConnectionState {
 }
 
 @immutable
+/// WebSocketState class implementation
 class WebSocketState {
   final WebSocketConnectionState connectionState;
   final String? error;
@@ -237,6 +240,7 @@ class WebSocketState {
 
 /// Filter configuration for RAG results
 @immutable
+/// RagFilterConfig class implementation
 class RagFilterConfig {
   final double minConfidence;
   final List<String> includeCategories;

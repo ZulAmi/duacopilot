@@ -1,3 +1,5 @@
+import 'package:duacopilot/core/logging/app_logger.dart';
+
 import 'dart:async';
 import 'dart:collection';
 // Note: Firebase Analytics will be added when firebase_analytics package is available
@@ -5,6 +7,7 @@ import 'dart:collection';
 import '../models/cache_models.dart';
 
 // Mock Firebase Analytics for development
+/// MockFirebaseAnalytics class implementation
 class MockFirebaseAnalytics {
   static final MockFirebaseAnalytics instance = MockFirebaseAnalytics();
 
@@ -13,7 +16,7 @@ class MockFirebaseAnalytics {
     Map<String, Object>? parameters,
   }) async {
     // In development, just print to console
-    print('Analytics Event: $name - $parameters');
+    AppLogger.debug('Analytics Event: $name - $parameters');
   }
 }
 
@@ -542,6 +545,7 @@ class CacheAnalyticsService {
 
 enum CacheEventType { hit, miss, eviction, prewarming, invalidation }
 
+/// CacheEvent class implementation
 class CacheEvent {
   final CacheEventType type;
   final DateTime timestamp;
@@ -580,6 +584,7 @@ class CacheEvent {
   });
 }
 
+/// QueryAnalytics class implementation
 class QueryAnalytics {
   final String query;
   final String language;
@@ -621,6 +626,7 @@ class QueryAnalytics {
   }
 }
 
+/// PopularQuery class implementation
 class PopularQuery {
   final String query;
   final String language;
@@ -643,6 +649,7 @@ class PopularQuery {
   });
 }
 
+/// TrendingQuery class implementation
 class TrendingQuery {
   final String query;
   final double trendScore;
@@ -657,6 +664,7 @@ class TrendingQuery {
   });
 }
 
+/// CachePerformanceMetrics class implementation
 class CachePerformanceMetrics {
   final int totalRequests;
   final int hitCount;
@@ -679,6 +687,7 @@ class CachePerformanceMetrics {
   });
 }
 
+/// StrategyPerformance class implementation
 class StrategyPerformance {
   final String strategyName;
   final int hitCount;
@@ -693,6 +702,7 @@ class StrategyPerformance {
   });
 }
 
+/// CacheAnalyticsSummary class implementation
 class CacheAnalyticsSummary {
   final CachePerformanceMetrics performance;
   final List<PopularQuery> popularQueries;
@@ -709,10 +719,12 @@ class CacheAnalyticsSummary {
   });
 }
 
+/// TrendData class implementation
 class TrendData {
   final Map<String, int> dailyCounts = {};
 }
 
+/// TrendCalculation class implementation
 class TrendCalculation {
   final double score;
   final double growthRate;

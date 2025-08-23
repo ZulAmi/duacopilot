@@ -12,6 +12,7 @@ void main() async {
   runApp(const ProviderScope(child: DuaCopilotApp()));
 }
 
+/// DuaCopilotApp class implementation
 class DuaCopilotApp extends StatelessWidget {
   const DuaCopilotApp({super.key});
 

@@ -7,6 +7,7 @@ import 'package:timezone/data/latest.dart' as tz;
 import '../../domain/entities/dua_entity.dart';
 import '../../domain/entities/context_entity.dart';
 
+/// _TimeOfDay class implementation
 class _TimeOfDay {
   final int hour;
   final int minute;
@@ -14,6 +15,7 @@ class _TimeOfDay {
   const _TimeOfDay(this.hour, this.minute);
 }
 
+/// SmartNotificationService class implementation
 class SmartNotificationService {
   static SmartNotificationService? _instance;
   static SmartNotificationService get instance =>

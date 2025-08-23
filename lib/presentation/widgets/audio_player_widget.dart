@@ -3,15 +3,17 @@ import 'package:audio_service/audio_service.dart';
 import '../../domain/entities/dua_entity.dart';
 import '../../services/audio/audio_service.dart';
 
+/// AudioPlayerWidget class implementation
 class AudioPlayerWidget extends StatefulWidget {
   final List<DuaEntity> duas;
 
-  const AudioPlayerWidget({Key? key, required this.duas}) : super(key: key);
+  const AudioPlayerWidget({super.key, required this.duas});
 
   @override
   State<AudioPlayerWidget> createState() => _AudioPlayerWidgetState();
 }
 
+/// _AudioPlayerWidgetState class implementation
 class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
   final DuaAudioService _audioService = DuaAudioService.instance;
 
@@ -104,16 +106,12 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                 Expanded(
                   child: Text(
                     'Smart Audio Player',
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
                   ),
                 ),
                 if (_cacheStats != null)
                   Chip(
-                    label: Text(
-                      'Cache: ${_cacheStats!['utilizationPercent']}%',
-                    ),
+                    label: Text('Cache: ${_cacheStats!['utilizationPercent']}%'),
                     backgroundColor: Colors.teal.shade50,
                   ),
               ],
@@ -124,45 +122,31 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
             if (_queue.isNotEmpty && _currentIndex != null)
               Container(
                 padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade50,
-                  borderRadius: BorderRadius.circular(8),
-                ),
+                decoration: BoxDecoration(color: Colors.grey.shade50, borderRadius: BorderRadius.circular(8)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       _queue[_currentIndex!].title,
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       _queue[_currentIndex!].artist ?? 'Unknown Artist',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.grey.shade600,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey.shade600),
                     ),
                     if (_queue[_currentIndex!].extras?['ragScore'] != null)
                       Container(
                         margin: const EdgeInsets.only(top: 8),
                         child: Row(
                           children: [
-                            const Icon(
-                              Icons.psychology,
-                              size: 16,
-                              color: Colors.purple,
-                            ),
+                            const Icon(Icons.psychology, size: 16, color: Colors.purple),
                             const SizedBox(width: 4),
                             Text(
                               'RAG Score: ${(_queue[_currentIndex!].extras!['ragScore'] as double).toStringAsFixed(2)}',
                               style: Theme.of(
                                 context,
-                              ).textTheme.bodySmall?.copyWith(
-                                color: Colors.purple,
-                                fontWeight: FontWeight.w500,
-                              ),
+                              ).textTheme.bodySmall?.copyWith(color: Colors.purple, fontWeight: FontWeight.w500),
                             ),
                           ],
                         ),
@@ -185,10 +169,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(_formatDuration(_position)),
-                      Text(_formatDuration(_duration!)),
-                    ],
+                    children: [Text(_formatDuration(_position)), Text(_formatDuration(_duration!))],
                   ),
                 ],
               ),
@@ -198,10 +179,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                IconButton(
-                  onPressed: _audioService.skipToPrevious,
-                  icon: const Icon(Icons.skip_previous),
-                ),
+                IconButton(onPressed: _audioService.skipToPrevious, icon: const Icon(Icons.skip_previous)),
                 IconButton(
                   onPressed: () {
                     _audioService.seekBackward(10);
@@ -209,10 +187,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                   icon: const Icon(Icons.replay_10),
                 ),
                 Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.teal,
-                  ),
+                  decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.teal),
                   child: IconButton(
                     onPressed: () {
                       if (_isPlaying) {
@@ -221,11 +196,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                         _audioService.play();
                       }
                     },
-                    icon: Icon(
-                      _isPlaying ? Icons.pause : Icons.play_arrow,
-                      color: Colors.white,
-                      size: 32,
-                    ),
+                    icon: Icon(_isPlaying ? Icons.pause : Icons.play_arrow, color: Colors.white, size: 32),
                   ),
                 ),
                 IconButton(
@@ -234,10 +205,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                   },
                   icon: const Icon(Icons.forward_10),
                 ),
-                IconButton(
-                  onPressed: _audioService.skipToNext,
-                  icon: const Icon(Icons.skip_next),
-                ),
+                IconButton(onPressed: _audioService.skipToNext, icon: const Icon(Icons.skip_next)),
               ],
             ),
             const SizedBox(height: 16),
@@ -248,10 +216,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
               children: [
                 // Speed control
                 Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 6,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey.shade300),
                     borderRadius: BorderRadius.circular(20),
@@ -262,19 +227,13 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                       IconButton(
                         onPressed: _audioService.decreaseSpeed,
                         icon: const Icon(Icons.remove, size: 16),
-                        constraints: const BoxConstraints(
-                          minWidth: 24,
-                          minHeight: 24,
-                        ),
+                        constraints: const BoxConstraints(minWidth: 24, minHeight: 24),
                       ),
                       Text('${_speed.toStringAsFixed(1)}x'),
                       IconButton(
                         onPressed: _audioService.increaseSpeed,
                         icon: const Icon(Icons.add, size: 16),
-                        constraints: const BoxConstraints(
-                          minWidth: 24,
-                          minHeight: 24,
-                        ),
+                        constraints: const BoxConstraints(minWidth: 24, minHeight: 24),
                       ),
                     ],
                   ),
@@ -286,26 +245,18 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                     await _audioService.smartPreCache(widget.duas);
                     _updateCacheStats();
                     if (mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Smart pre-caching completed!'),
-                        ),
-                      );
+                      ScaffoldMessenger.of(
+                        context,
+                      ).showSnackBar(const SnackBar(content: Text('Smart pre-caching completed!')));
                     }
                   },
                   icon: const Icon(Icons.download, size: 16),
                   label: const Text('Smart Cache'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange,
-                    foregroundColor: Colors.white,
-                  ),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.orange, foregroundColor: Colors.white),
                 ),
 
                 // Stop button
-                IconButton(
-                  onPressed: _audioService.stop,
-                  icon: const Icon(Icons.stop),
-                ),
+                IconButton(onPressed: _audioService.stop, icon: const Icon(Icons.stop)),
               ],
             ),
 
@@ -314,19 +265,15 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
               Container(
                 margin: const EdgeInsets.only(top: 16),
                 padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Colors.blue.shade50,
-                  borderRadius: BorderRadius.circular(8),
-                ),
+                decoration: BoxDecoration(color: Colors.blue.shade50, borderRadius: BorderRadius.circular(8)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'Smart Cache Statistics',
-                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: Colors.blue.shade700,
-                      ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600, color: Colors.blue.shade700),
                     ),
                     const SizedBox(height: 8),
                     Row(
@@ -338,12 +285,9 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                     ),
                     const SizedBox(height: 4),
                     LinearProgressIndicator(
-                      value:
-                          (_cacheStats!['utilizationPercent'] as int) / 100.0,
+                      value: (_cacheStats!['utilizationPercent'] as int) / 100.0,
                       backgroundColor: Colors.grey.shade300,
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        Colors.blue.shade600,
-                      ),
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.blue.shade600),
                     ),
                   ],
                 ),
