@@ -9,19 +9,27 @@ import '../../core/network/network_info.dart';
 import '../../core/storage/secure_storage_service.dart';
 import '../models/rag_request_model.dart';
 import '../models/rag_response_model.dart';
+import 'islamic_rag_service.dart';
 
-/// Production-ready RAG API Service with multiple provider support
+/// TRUE RAG API Service with Islamic Knowledge Retrieval
+/// Architecture: RETRIEVE Islamic content → AUGMENT prompts → GENERATE responses
 class RagApiService {
   final Dio _dio;
   final NetworkInfo _networkInfo;
   final SecureStorageService _secureStorage;
+  final IslamicRagService _islamicRagService;
   final Logger _logger;
 
-  RagApiService({required NetworkInfo networkInfo, required SecureStorageService secureStorage, Logger? logger})
-    : _networkInfo = networkInfo,
-      _secureStorage = secureStorage,
-      _logger = logger ?? Logger(),
-      _dio = Dio() {
+  RagApiService({
+    required NetworkInfo networkInfo,
+    required SecureStorageService secureStorage,
+    required IslamicRagService islamicRagService,
+    Logger? logger,
+  }) : _networkInfo = networkInfo,
+       _secureStorage = secureStorage,
+       _islamicRagService = islamicRagService,
+       _logger = logger ?? Logger(),
+       _dio = Dio() {
     _setupDio();
   }
 
@@ -145,68 +153,206 @@ class RagApiService {
   }
 
   Future<Map<String, dynamic>> _makeOpenAiRequest(RagRequestModel request) async {
+    _logger.i('🔍 Starting TRUE RAG process for OpenAI...');
+
+    // STEP 1: RETRIEVE - Get Islamic knowledge from Quran/Hadith
+    String retrievedContext = '';
+    List<String> retrievedSources = [];
+    double retrievalConfidence = 0.0;
+
+    try {
+      _logger.i('📚 Retrieving Islamic knowledge for: ${request.query}');
+      final islamicResponse = await _islamicRagService.processQuery(
+        query: request.query,
+        language: 'en',
+        includeAudio: false,
+      );
+
+      if (islamicResponse.response.isNotEmpty) {
+        retrievedContext = islamicResponse.response;
+        retrievedSources =
+            islamicResponse.sources
+                .map((source) => source.reference ?? source.title)
+                .where((ref) => ref.isNotEmpty)
+                .toList();
+        retrievalConfidence = islamicResponse.confidence;
+        _logger.i('✅ Retrieved ${retrievedSources.length} Islamic sources');
+      }
+    } catch (e) {
+      _logger.w('⚠️ Islamic knowledge retrieval failed: $e');
+      // Continue with general Islamic prompting if retrieval fails
+    }
+
+    // STEP 2: AUGMENT - Build enhanced prompt with retrieved knowledge
+    final augmentedPrompt = _buildAugmentedPrompt(
+      originalQuery: request.query,
+      retrievedContext: retrievedContext,
+      sources: retrievedSources,
+    );
+
+    _logger.i('🔗 Built augmented prompt with ${retrievedContext.isEmpty ? 'general' : 'specific'} Islamic context');
+
+    // STEP 3: GENERATE - Send augmented prompt to OpenAI
     final response = await _dio.post(
       '/chat/completions',
       data: {
         'model': RagConfig.openAiModel,
         'messages': [
           {'role': 'system', 'content': RagConfig.islamicSystemPrompt},
-          {'role': 'user', 'content': request.query},
+          {'role': 'user', 'content': augmentedPrompt},
         ],
-        'max_tokens': 1000,
+        'max_tokens': 1200,
         'temperature': 0.7,
       },
     );
 
     final content = response.data['choices'][0]['message']['content'];
+
+    // Enhanced response with TRUE RAG metadata
+    final ragSources = ['OpenAI GPT-4 (RAG Enhanced)'];
+    if (retrievedSources.isNotEmpty) {
+      ragSources.addAll(retrievedSources);
+    }
+
     return {
       'content': content,
-      'confidence': 0.9,
-      'sources': ['OpenAI GPT-4'],
+      'confidence': retrievedContext.isNotEmpty ? 0.95 : 0.85, // Higher confidence with retrieved context
+      'sources': ragSources,
       'metadata': {
         'provider': 'openai',
         'model': RagConfig.openAiModel,
+        'rag_enabled': true,
+        'retrieved_context_length': retrievedContext.length,
+        'retrieval_confidence': retrievalConfidence,
+        'sources_count': retrievedSources.length,
         'tokens_used': response.data['usage']['total_tokens'],
       },
     };
   }
 
   Future<Map<String, dynamic>> _makeClaudeRequest(RagRequestModel request) async {
+    _logger.i('🔍 Starting TRUE RAG process for Claude...');
+
+    // STEP 1: RETRIEVE - Get Islamic knowledge
+    String retrievedContext = '';
+    List<String> retrievedSources = [];
+    double retrievalConfidence = 0.0;
+
+    try {
+      _logger.i('📚 Retrieving Islamic knowledge for: ${request.query}');
+      final islamicResponse = await _islamicRagService.processQuery(
+        query: request.query,
+        language: 'en',
+        includeAudio: false,
+      );
+
+      if (islamicResponse.response.isNotEmpty) {
+        retrievedContext = islamicResponse.response;
+        retrievedSources =
+            islamicResponse.sources
+                .map((source) => source.reference ?? source.title)
+                .where((ref) => ref.isNotEmpty)
+                .toList();
+        retrievalConfidence = islamicResponse.confidence;
+        _logger.i('✅ Retrieved ${retrievedSources.length} Islamic sources');
+      }
+    } catch (e) {
+      _logger.w('⚠️ Islamic knowledge retrieval failed: $e');
+    }
+
+    // STEP 2: AUGMENT - Build enhanced prompt
+    final augmentedPrompt = _buildAugmentedPrompt(
+      originalQuery: request.query,
+      retrievedContext: retrievedContext,
+      sources: retrievedSources,
+    );
+
+    _logger.i('🔗 Built augmented prompt for Claude');
+
+    // STEP 3: GENERATE - Send to Claude
     final response = await _dio.post(
       '/messages',
       data: {
         'model': RagConfig.claudeModel,
         'system': RagConfig.islamicSystemPrompt,
         'messages': [
-          {'role': 'user', 'content': request.query},
+          {'role': 'user', 'content': augmentedPrompt},
         ],
-        'max_tokens': 1000,
+        'max_tokens': 1200,
       },
     );
 
     final content = response.data['content'][0]['text'];
+
+    // Enhanced response with TRUE RAG metadata
+    final ragSources = ['Anthropic Claude (RAG Enhanced)'];
+    if (retrievedSources.isNotEmpty) {
+      ragSources.addAll(retrievedSources);
+    }
+
     return {
       'content': content,
-      'confidence': 0.9,
-      'sources': ['Anthropic Claude'],
+      'confidence': retrievedContext.isNotEmpty ? 0.95 : 0.85,
+      'sources': ragSources,
       'metadata': {
         'provider': 'claude',
         'model': RagConfig.claudeModel,
+        'rag_enabled': true,
+        'retrieved_context_length': retrievedContext.length,
+        'retrieval_confidence': retrievalConfidence,
+        'sources_count': retrievedSources.length,
         'tokens_used': response.data['usage']['output_tokens'],
       },
     };
   }
 
   Future<Map<String, dynamic>> _makeGeminiRequest(RagRequestModel request) async {
-    final prompt = '${RagConfig.islamicSystemPrompt}\n\nUser Query: ${request.query}';
+    _logger.i('🔍 Starting TRUE RAG process for Gemini...');
 
+    // STEP 1: RETRIEVE - Get Islamic knowledge
+    String retrievedContext = '';
+    List<String> retrievedSources = [];
+    double retrievalConfidence = 0.0;
+
+    try {
+      _logger.i('📚 Retrieving Islamic knowledge for: ${request.query}');
+      final islamicResponse = await _islamicRagService.processQuery(
+        query: request.query,
+        language: 'en',
+        includeAudio: false,
+      );
+
+      if (islamicResponse.response.isNotEmpty) {
+        retrievedContext = islamicResponse.response;
+        retrievedSources =
+            islamicResponse.sources
+                .map((source) => source.reference ?? source.title)
+                .where((ref) => ref.isNotEmpty)
+                .toList();
+        retrievalConfidence = islamicResponse.confidence;
+        _logger.i('✅ Retrieved ${retrievedSources.length} Islamic sources');
+      }
+    } catch (e) {
+      _logger.w('⚠️ Islamic knowledge retrieval failed: $e');
+    }
+
+    // STEP 2: AUGMENT - Build enhanced prompt
+    final augmentedPrompt = _buildAugmentedPrompt(
+      originalQuery: request.query,
+      retrievedContext: retrievedContext,
+      sources: retrievedSources,
+    );
+
+    _logger.i('🔗 Built augmented prompt for Gemini');
+
+    // STEP 3: GENERATE - Send to Gemini
     final response = await _dio.post(
       '/models/${RagConfig.geminiModel}:generateContent',
       data: {
         'contents': [
           {
             'parts': [
-              {'text': prompt},
+              {'text': augmentedPrompt},
             ],
           },
         ],
@@ -214,11 +360,25 @@ class RagApiService {
     );
 
     final content = response.data['candidates'][0]['content']['parts'][0]['text'];
+
+    // Enhanced response with TRUE RAG metadata
+    final ragSources = ['Google Gemini (RAG Enhanced)'];
+    if (retrievedSources.isNotEmpty) {
+      ragSources.addAll(retrievedSources);
+    }
+
     return {
       'content': content,
-      'confidence': 0.85,
-      'sources': ['Google Gemini'],
-      'metadata': {'provider': 'gemini', 'model': RagConfig.geminiModel},
+      'confidence': retrievedContext.isNotEmpty ? 0.95 : 0.85,
+      'sources': ragSources,
+      'metadata': {
+        'provider': 'gemini',
+        'model': RagConfig.geminiModel,
+        'rag_enabled': true,
+        'retrieved_context_length': retrievedContext.length,
+        'retrieval_confidence': retrievalConfidence,
+        'sources_count': retrievedSources.length,
+      },
     };
   }
 
@@ -292,6 +452,37 @@ class RagApiService {
       default:
         return ServerException('Unknown error: ${e.message}');
     }
+  }
+
+  /// Build augmented prompt with retrieved Islamic context
+  /// This is the core of the RAG system - combining user query with retrieved knowledge
+  String _buildAugmentedPrompt({
+    required String originalQuery,
+    required String retrievedContext,
+    required List<String> sources,
+  }) {
+    if (retrievedContext.isEmpty) {
+      // Fallback to original query if no context retrieved
+      return originalQuery;
+    }
+
+    // TRUE RAG: Augment user query with retrieved Islamic knowledge
+    return '''
+User Query: "$originalQuery"
+
+Retrieved Islamic Knowledge:
+$retrievedContext
+
+Sources: ${sources.join(', ')}
+
+Instructions:
+1. Use the retrieved Islamic knowledge above to provide a comprehensive answer
+2. Reference specific Quranic verses or Hadith mentioned in the retrieved content
+3. If the retrieved content doesn't fully answer the question, supplement with your Islamic knowledge
+4. Always maintain authenticity and cite sources properly
+5. Provide practical guidance along with the spiritual context
+
+Please provide a detailed Islamic response based on the retrieved knowledge and the user's question.''';
   }
 
   void dispose() {
