@@ -1,0 +1,19 @@
+# Android Signing Configuration for DuaCopilot
+# This file contains sensitive information - never commit to version control
+# Add this file to .gitignore
+
+storePassword=DuaCopilot2024!SecureKey
+keyPassword=DuaCopilot2024!SecureKey
+keyAlias=duacopilot-release-key
+storeFile=../keystore/duacopilot-release-keystore.jks
+
+# Instructions for generating the keystore:
+# 1. Run: keytool -genkey -v -keystore duacopilot-release-keystore.jks -keyalg RSA -keysize 2048 -validity 10000 -alias duacopilot-release-key
+# 2. Follow the prompts and use the passwords specified above
+# 3. Store this file securely and never share publicly
+
+# Security Notes:
+# - Use strong passwords (as shown above)
+# - Store keystore file in a secure location
+# - Back up keystore file securely - losing it means you cannot update your app
+# - Consider using environment variables for passwords in CI/CD

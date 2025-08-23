@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.duacopilot"
+    namespace = "com.duacopilot.app"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -20,8 +20,8 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.duacopilot"
+        // Professional Application ID for DuaCopilot
+        applicationId = "com.duacopilot.app"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
@@ -30,11 +30,43 @@ android {
         versionName = flutter.versionName
     }
 
+    // Load signing configuration from key.properties file
+    val keystoreProperties = Properties()
+    val keystorePropertiesFile = rootProject.file("key.properties")
+    if (keystorePropertiesFile.exists()) {
+        keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+    }
+
+    signingConfigs {
+        create("release") {
+            if (keystorePropertiesFile.exists()) {
+                keyAlias = keystoreProperties["keyAlias"] as String
+                keyPassword = keystoreProperties["keyPassword"] as String
+                storeFile = file(keystoreProperties["storeFile"] as String)
+                storePassword = keystoreProperties["storePassword"] as String
+            }
+        }
+    }
+
     buildTypes {
-        release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
+        debug {
+            applicationIdSuffix = ".debug"
+            isDebuggable = true
             signingConfig = signingConfigs.getByName("debug")
+        }
+        release {
+            // Production release configuration with proper signing
+            isMinifyEnabled = true
+            isShrinkResources = true
+            signingConfig = if (keystorePropertiesFile.exists()) {
+                signingConfigs.getByName("release")
+            } else {
+                // Fallback to debug signing if key.properties doesn't exist
+                println("WARNING: key.properties not found. Using debug signing for release build.")
+                signingConfigs.getByName("debug")
+            }
+            
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
 }
