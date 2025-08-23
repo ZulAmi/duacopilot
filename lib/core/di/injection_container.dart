@@ -7,10 +7,13 @@ import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../../data/datasources/islamic_rag_service.dart'; // Islamic knowledge retrieval
 import '../../data/datasources/local_datasource.dart';
 import '../../data/datasources/mock_local_datasource.dart'; // Add mock local datasource
-import '../../data/datasources/rag_api_service.dart'; // Re-enabled with mock secure storage
+import '../../data/datasources/quran_api_service.dart'; // Quran API integration
+import '../../data/datasources/rag_cache_service.dart'; // RAG caching
 import '../../data/datasources/rag_remote_datasource.dart';
+import '../../data/datasources/working_rag_api_service.dart'; // TRUE RAG API Service
 import '../../data/repositories/audio_repository_impl.dart';
 import '../../data/repositories/favorites_repository_impl.dart';
 import '../../data/repositories/rag_repository_impl.dart';
@@ -83,11 +86,18 @@ Future<void> init() async {
     // Data sources
     try {
       sl.registerLazySingleton<RagRemoteDataSource>(() => RagRemoteDataSourceImpl(sl()));
+
+      // Islamic services for TRUE RAG
+      sl.registerLazySingleton<QuranApiService>(() => QuranApiService());
+      sl.registerLazySingleton<RagCacheService>(() => RagCacheService());
+      sl.registerLazySingleton<IslamicRagService>(() => IslamicRagService(quranApi: sl(), cacheService: sl()));
+
+      // TRUE RAG API Service with Islamic knowledge retrieval
       sl.registerLazySingleton<RagApiService>(
-        () => RagApiService(networkInfo: sl(), secureStorage: sl(), logger: sl()),
+        () => RagApiService(networkInfo: sl(), secureStorage: sl(), islamicRagService: sl(), logger: sl()),
       );
 
-      AppLogger.debug('✅ Remote data sources initialized');
+      AppLogger.debug('✅ Remote data sources and TRUE RAG services initialized');
     } catch (e) {
       AppLogger.debug('⚠️  Data source initialization error: $e');
     }
