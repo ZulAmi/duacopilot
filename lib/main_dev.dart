@@ -1,12 +1,13 @@
+import 'dart:async';
 import 'dart:io' show Platform;
 
 import 'package:duacopilot/core/logging/app_logger.dart';
-import 'package:duacopilot/core/theme/ultra_modern_theme.dart';
-import 'package:duacopilot/presentation/screens/modern_splash_screen.dart';
-import 'package:duacopilot/presentation/screens/ultra_modern_search_screen.dart';
-import 'package:duacopilot/presentation/screens/web_compatible_wrapper.dart';
+import 'package:duacopilot/core/theme/revolutionary_islamic_theme.dart';
+import 'package:duacopilot/presentation/screens/enhanced_web_wrapper.dart';
+import 'package:duacopilot/presentation/screens/revolutionary_home_screen.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'core/di/injection_container.dart' as di;
@@ -24,194 +25,147 @@ void main() async {
       await AdService.instance.initialize();
     }
 
-    AppLogger.debug('✅ DuaCopilot Ultra-Modern UI initialized successfully');
+    AppLogger.debug('✅ DuaCopilot Revolutionary Islamic AI initialized successfully');
   } catch (e) {
     AppLogger.debug('⚠️  DuaCopilot initialization error: $e');
     // Continue anyway with limited functionality
   }
 
-  runApp(const ProviderScope(child: UltraModernDuaCopilotDevApp()));
+  runApp(const ProviderScope(child: RevolutionaryDuaCopilotDevApp()));
 }
 
-/// Ultra-Modern Development Version with Enhanced UI/UX
-class UltraModernDuaCopilotDevApp extends StatelessWidget {
-  const UltraModernDuaCopilotDevApp({super.key});
+/// Revolutionary Development Version with Next-Generation Islamic UI/UX
+class RevolutionaryDuaCopilotDevApp extends StatelessWidget {
+  const RevolutionaryDuaCopilotDevApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'DuaCopilot Dev - Ultra Modern Islamic AI Companion',
+      title: 'DuaCopilot Dev - Revolutionary Islamic AI Assistant',
       debugShowCheckedModeBanner: false,
-
-      // Apply our revolutionary ultra-modern theme
-      theme: UltraModernTheme.lightTheme,
-      darkTheme: UltraModernTheme.darkTheme,
-      themeMode: ThemeMode.system,
-
-      // Use ultra-modern app wrapper with splash screen
-      home: const UltraModernAppWrapper(),
-
-      // App-wide configuration for better UX
+      theme: RevolutionaryIslamicTheme.revolutionaryTheme,
+      home: const RevolutionaryAppWrapper(),
       builder: (context, child) {
-        return MediaQuery(
-          data: MediaQuery.of(context).copyWith(
-            // Ensure text scaling is reasonable for Islamic content
-            textScaler: TextScaler.linear(MediaQuery.of(context).textScaleFactor.clamp(0.8, 1.3)),
+        return AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+            statusBarIconBrightness: Brightness.dark,
+            systemNavigationBarColor: RevolutionaryIslamicTheme.backgroundSecondary,
+            systemNavigationBarIconBrightness: Brightness.dark,
           ),
-          child: child!,
+          child: MediaQuery(
+            data: MediaQuery.of(context).copyWith(
+              // Ensure text scaling is reasonable for Islamic content
+              textScaler: TextScaler.linear(MediaQuery.of(context).textScaleFactor.clamp(0.8, 1.3)),
+            ),
+            child: child!,
+          ),
         );
       },
     );
   }
 }
 
-/// App wrapper that handles splash screen and main navigation
-class UltraModernAppWrapper extends StatefulWidget {
-  const UltraModernAppWrapper({super.key});
+/// App wrapper that handles splash screen and main navigation with revolutionary styling
+class RevolutionaryAppWrapper extends StatefulWidget {
+  const RevolutionaryAppWrapper({super.key});
 
   @override
-  State<UltraModernAppWrapper> createState() => _UltraModernAppWrapperState();
+  State<RevolutionaryAppWrapper> createState() => _RevolutionaryAppWrapperState();
 }
 
-class _UltraModernAppWrapperState extends State<UltraModernAppWrapper> {
+class _RevolutionaryAppWrapperState extends State<RevolutionaryAppWrapper> with SingleTickerProviderStateMixin {
   bool _showSplash = true;
-
-  void _onSplashComplete() {
-    setState(() {
-      _showSplash = false;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (kIsWeb) {
-      // Use web-compatible wrapper for web platform
-      return const WebCompatibleAppWrapper();
-    }
-
-    // Use full featured splash screen for native platforms
-    if (_showSplash) {
-      return ModernSplashScreen(onAnimationComplete: _onSplashComplete);
-    }
-
-    // Show the ultra-modern search screen
-    return _buildMainScreen();
-  }
-
-  Widget _buildMainScreen() {
-    if (kIsWeb) {
-      return const UltraModernWebLandingScreen();
-    }
-
-    // Desktop/Mobile main screen with ultra-modern features
-    return const UltraModernSearchScreen(enableVoiceSearch: true, enableArabicKeyboard: true, showSearchHistory: true);
-  }
-}
-
-/// Ultra-modern web landing screen for browsers
-class UltraModernWebLandingScreen extends StatefulWidget {
-  const UltraModernWebLandingScreen({super.key});
-
-  @override
-  State<UltraModernWebLandingScreen> createState() => _UltraModernWebLandingScreenState();
-}
-
-class _UltraModernWebLandingScreenState extends State<UltraModernWebLandingScreen> with TickerProviderStateMixin {
-  late AnimationController _pulseController;
-  late Animation<double> _pulseAnimation;
+  late AnimationController _animationController;
 
   @override
   void initState() {
     super.initState();
-    _pulseController = AnimationController(duration: const Duration(seconds: 2), vsync: this);
-    _pulseAnimation = Tween<double>(
-      begin: 0.95,
-      end: 1.05,
-    ).animate(CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut));
-    _pulseController.repeat(reverse: true);
+    _animationController = AnimationController(duration: RevolutionaryIslamicTheme.animationExtraSlow, vsync: this);
 
-    // Auto-navigate to main screen after 3 seconds
-    Future.delayed(const Duration(seconds: 3), () {
-      if (mounted) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder:
-                (context) => const UltraModernSearchScreen(
-                  enableVoiceSearch: false,
-                  enableArabicKeyboard: true,
-                  showSearchHistory: true,
-                ),
-          ),
-        );
-      }
-    });
+    // Auto-complete splash after 3 seconds
+    Timer(const Duration(seconds: 3), _onSplashComplete);
+    _animationController.forward();
   }
 
   @override
   void dispose() {
-    _pulseController.dispose();
+    _animationController.dispose();
     super.dispose();
+  }
+
+  void _onSplashComplete() {
+    if (mounted) {
+      setState(() {
+        _showSplash = false;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(gradient: UltraModernTheme.primaryGradient),
+    if (kIsWeb) {
+      // Use enhanced web wrapper for web platform
+      return const EnhancedWebAppWrapper();
+    }
+
+    // Use revolutionary splash screen for native platforms
+    if (_showSplash) {
+      return Container(
+        decoration: BoxDecoration(gradient: RevolutionaryIslamicTheme.heroGradient),
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              AnimatedBuilder(
-                animation: _pulseAnimation,
-                builder: (context, child) {
-                  return Transform.scale(
-                    scale: _pulseAnimation.value,
-                    child: Container(
-                      padding: const EdgeInsets.all(32),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white.withOpacity(0.2),
-                        border: Border.all(color: Colors.white.withOpacity(0.5), width: 2),
-                      ),
-                      child: const Icon(Icons.mosque, size: 80, color: Colors.white),
+          child: FadeTransition(
+            opacity: _animationController,
+            child: ScaleTransition(
+              scale: Tween<double>(
+                begin: 0.8,
+                end: 1.0,
+              ).animate(CurvedAnimation(parent: _animationController, curve: Curves.elasticOut)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space8),
+                    decoration: BoxDecoration(
+                      color: RevolutionaryIslamicTheme.backgroundSecondary.withOpacity(0.9),
+                      borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radius3Xl),
+                      boxShadow: RevolutionaryIslamicTheme.shadowXl,
                     ),
-                  );
-                },
-              ),
-              const SizedBox(height: 32),
-              const Text(
-                'DuaCopilot',
-                style: TextStyle(fontSize: 48, fontWeight: FontWeight.w800, color: Colors.white, letterSpacing: -1.0),
-              ),
-              const SizedBox(height: 16),
-              const Text(
-                'Ultra-Modern Islamic AI Companion',
-                style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.w300, letterSpacing: 0.5),
-              ),
-              const SizedBox(height: 48),
-              AnimatedBuilder(
-                animation: _pulseAnimation,
-                builder: (context, child) {
-                  return Transform.scale(
-                    scale: _pulseAnimation.value * 0.5 + 0.5,
-                    child: Container(
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white.withOpacity(0.1)),
-                      child: const CircularProgressIndicator(color: Colors.white, strokeWidth: 3),
+                    child: const Icon(Icons.mosque_rounded, size: 80, color: RevolutionaryIslamicTheme.primaryEmerald),
+                  ),
+                  const SizedBox(height: RevolutionaryIslamicTheme.space8),
+                  Text(
+                    'DuaCopilot',
+                    style: RevolutionaryIslamicTheme.display1.copyWith(
+                      color: RevolutionaryIslamicTheme.textOnColor,
+                      fontWeight: FontWeight.w900,
                     ),
-                  );
-                },
+                  ),
+                  const SizedBox(height: RevolutionaryIslamicTheme.space2),
+                  Text(
+                    'Revolutionary Islamic AI Assistant',
+                    style: RevolutionaryIslamicTheme.body1.copyWith(
+                      color: RevolutionaryIslamicTheme.textOnColor.withOpacity(0.9),
+                    ),
+                  ),
+                  const SizedBox(height: RevolutionaryIslamicTheme.space8),
+                  SizedBox(
+                    width: 40,
+                    height: 40,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 3,
+                      valueColor: AlwaysStoppedAnimation<Color>(RevolutionaryIslamicTheme.textOnColor),
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 24),
-              Text(
-                'Launching ultra-modern experience...',
-                style: TextStyle(fontSize: 16, color: Colors.white.withOpacity(0.8), fontWeight: FontWeight.w400),
-              ),
-            ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    }
+
+    // Show the revolutionary home screen
+    return const RevolutionaryHomeScreen();
   }
 }

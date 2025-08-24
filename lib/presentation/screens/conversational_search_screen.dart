@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../core/theme/revolutionary_islamic_theme.dart';
+import '../widgets/revolutionary_components.dart';
 import '../../services/ads/ad_service.dart';
 import '../widgets/ads/ad_widgets.dart';
 
@@ -190,66 +192,31 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
     );
   }
 
-  void _clearSearch() {
-    _searchController.clear();
-    setState(() {
-      _currentQuery = '';
-      _isSearching = false;
-      _showResults = false;
-      _searchResults = null;
-    });
-    _searchAnimationController.reset();
-    _resultAnimationController.reset();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: RevolutionaryIslamicTheme.backgroundPrimary,
+      appBar: RevolutionaryComponents.modernAppBar(
+        title: 'Smart Search',
+        showBackButton: true,
+        showHamburger: false,
+        onBackPressed: () => Navigator.of(context).pop(),
+      ),
       body: Column(
         children: [
           // Search Header
           Container(
-            padding: const EdgeInsets.fromLTRB(16, 60, 16, 16),
+            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Theme.of(context).colorScheme.primary.withOpacity(0.08),
-                  Theme.of(context).colorScheme.secondary.withOpacity(0.06),
-                ],
-              ),
+              gradient: RevolutionaryIslamicTheme.heroGradient,
             ),
             child: Column(
               children: [
-                // Header Row
-                Row(
-                  children: [
-                    if (widget.onMenuPressed != null)
-                      IconButton(
-                        onPressed: widget.onMenuPressed,
-                        icon: Icon(Icons.menu, color: Theme.of(context).colorScheme.primary),
-                      ),
-                    Expanded(
-                      child: Text(
-                        'DuaCopilot',
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurface,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    const SizedBox(width: 48), // Balance the menu button
-                  ],
-                ),
-                const SizedBox(height: 8),
                 Text(
                   'Your AI Islamic Companion',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodyLarge?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
+                  style: RevolutionaryIslamicTheme.body1.copyWith(
+                    color: RevolutionaryIslamicTheme.textSecondary,
+                  ),
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -259,44 +226,11 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
           // Search Input
           Padding(
             padding: const EdgeInsets.all(16),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surface,
-                borderRadius: BorderRadius.circular(24),
-                border: Border.all(color: Theme.of(context).colorScheme.outline.withOpacity(0.2)),
-                boxShadow: [
-                  BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 2)),
-                ],
-              ),
-              child: Row(
-                children: [
-                  const SizedBox(width: 16),
-                  Icon(Icons.search, color: Theme.of(context).colorScheme.primary),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: TextField(
-                      controller: _searchController,
-                      onSubmitted: _performSearch,
-                      decoration: const InputDecoration(
-                        hintText: 'Ask about Islamic guidance, duas, or teachings...',
-                        border: InputBorder.none,
-                        hintStyle: TextStyle(fontSize: 16),
-                      ),
-                      style: const TextStyle(fontSize: 16),
-                    ),
-                  ),
-                  if (_searchController.text.isNotEmpty)
-                    IconButton(
-                      onPressed: _clearSearch,
-                      icon: Icon(Icons.clear, color: Theme.of(context).colorScheme.onSurfaceVariant),
-                    ),
-                  IconButton(
-                    onPressed: () => _performSearch(_searchController.text),
-                    icon: Icon(Icons.send, color: Theme.of(context).colorScheme.primary),
-                  ),
-                  const SizedBox(width: 8),
-                ],
-              ),
+            child: RevolutionaryComponents.modernSearchBar(
+              controller: _searchController,
+              onSubmitted: _performSearch,
+              onChanged: (value) => setState(() => _currentQuery = value),
+              hintText: 'Ask about Islamic guidance, duas, or teachings...',
             ),
           ),
 

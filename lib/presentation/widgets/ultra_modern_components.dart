@@ -523,7 +523,6 @@ class ModernCardWidget extends StatefulWidget {
 class _ModernCardWidgetState extends State<ModernCardWidget> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _scaleAnimation;
-  late Animation<double> _elevationAnimation;
   bool _isHovered = false;
 
   @override
@@ -534,11 +533,6 @@ class _ModernCardWidgetState extends State<ModernCardWidget> with SingleTickerPr
     _scaleAnimation = Tween<double>(
       begin: 1.0,
       end: 1.02,
-    ).animate(CurvedAnimation(parent: _animationController, curve: UltraModernTheme.smoothCurve));
-
-    _elevationAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
     ).animate(CurvedAnimation(parent: _animationController, curve: UltraModernTheme.smoothCurve));
   }
 
