@@ -5,12 +5,11 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:duacopilot/main.dart';
 import 'package:duacopilot/presentation/screens/conversational_search_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets('DuaCopilotApp widget test', (WidgetTester tester) async {
@@ -32,13 +31,13 @@ void main() {
     expect(find.byType(ConversationalSearchScreen), findsOneWidget);
   });
 
-  testWidgets('DuaCopilotApp material app test', (WidgetTester tester) async {
+  testWidgets('ProfessionalDuaCopilotApp material app test', (WidgetTester tester) async {
     // Test that the app structure is correct
-    const app = DuaCopilotApp();
+    const app = ProfessionalDuaCopilotApp();
 
     await tester.pumpWidget(const ProviderScope(child: app));
 
     // The app should create a MaterialApp
-    expect(find.byType(DuaCopilotApp), findsOneWidget);
+    expect(find.byType(ProfessionalDuaCopilotApp), findsOneWidget);
   });
 }

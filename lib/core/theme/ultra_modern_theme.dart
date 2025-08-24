@@ -27,6 +27,20 @@ class UltraModernTheme {
     colors: [Color(0xFFFFD700), Color(0xFFD4AF37), Color(0xFFB8860B)],
   );
 
+  static const LinearGradient secondaryGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [Color(0xFF41A3B3), Color(0xFF5BC0BE)],
+    stops: [0.0, 1.0],
+  );
+
+  static const LinearGradient accentGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [Color(0xFFD4AF37), Color(0xFFE6B17A)],
+    stops: [0.0, 1.0],
+  );
+
   static const LinearGradient glassMorphism = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
@@ -38,6 +52,16 @@ class UltraModernTheme {
     end: Alignment.bottomRight,
     colors: [Color(0x40000000), Color(0x20000000), Color(0x10000000)],
   );
+
+  // Animation Durations
+  static const Duration fastDuration = Duration(milliseconds: 200);
+  static const Duration normalDuration = Duration(milliseconds: 300);
+  static const Duration slowDuration = Duration(milliseconds: 500);
+
+  // Animation Curves
+  static const Curve primaryCurve = Curves.easeInOut;
+  static const Curve smoothCurve = Curves.easeOutCubic;
+  static const Curve bounceCurve = Curves.elasticOut;
 
   static const LinearGradient surfaceGradient = LinearGradient(
     begin: Alignment.topCenter,
@@ -52,6 +76,21 @@ class UltraModernTheme {
     colors: [Color(0xFFFFFFFF), Color(0xFFF8FFFE)],
     stops: [0.0, 1.0],
   );
+
+  // Shadow System
+  static List<BoxShadow> get softShadow => [
+    BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 4)),
+    BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 6, offset: const Offset(0, 2)),
+  ];
+
+  static List<BoxShadow> get elevatedShadow => [
+    BoxShadow(color: deepEmerald.withOpacity(0.15), blurRadius: 20, offset: const Offset(0, 8)),
+    BoxShadow(color: Colors.black.withOpacity(0.08), blurRadius: 12, offset: const Offset(0, 4)),
+  ];
+
+  static List<BoxShadow> get glowShadow => [
+    BoxShadow(color: primaryGold.withOpacity(0.3), blurRadius: 24, spreadRadius: -4, offset: const Offset(0, 0)),
+  ];
 
   // Light Theme
   static ThemeData get lightTheme {
@@ -385,6 +424,14 @@ extension ThemeExtensions on BuildContext {
   ColorScheme get colorScheme => Theme.of(this).colorScheme;
   TextTheme get textTheme => Theme.of(this).textTheme;
   LinearGradient get primaryGradient => UltraModernTheme.primaryGradient;
+  LinearGradient get secondaryGradient => UltraModernTheme.secondaryGradient;
+  LinearGradient get accentGradient => UltraModernTheme.accentGradient;
+  LinearGradient get goldGradient => UltraModernTheme.goldGradient;
   LinearGradient get surfaceGradient => UltraModernTheme.surfaceGradient;
   LinearGradient get cardGradient => UltraModernTheme.cardGradient;
+
+  // Shadow system
+  List<BoxShadow> get softShadow => UltraModernTheme.softShadow;
+  List<BoxShadow> get elevatedShadow => UltraModernTheme.elevatedShadow;
+  List<BoxShadow> get glowShadow => UltraModernTheme.glowShadow;
 }
