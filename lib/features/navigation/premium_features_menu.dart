@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../presentation/screens/ai/smart_dua_collections_screen.dart';
 import '../../presentation/screens/conversational_search_screen.dart';
 import '../../presentation/screens/courses/islamic_courses_screen.dart';
 import '../../presentation/screens/subscription/subscription_screen.dart';
@@ -102,6 +103,16 @@ class PremiumFeaturesMenu extends ConsumerWidget {
                         subtitle: 'Voice recognition & smart goals',
                         isPremium: true,
                         onTap: () => _navigateTo(context, const DigitalTasbihScreen()),
+                      ),
+
+                      // Smart Dua Collections
+                      _buildMenuItem(
+                        context,
+                        icon: Icons.psychology,
+                        title: '🧠 Smart Dua Collections',
+                        subtitle: 'AI-powered contextual duas',
+                        isPremium: true,
+                        onTap: () => _navigateTo(context, const SmartDuaCollectionsScreen()),
                       ),
 
                       // Islamic Courses

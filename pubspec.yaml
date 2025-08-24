@@ -65,6 +65,9 @@ dependencies:
   # State Management
   flutter_riverpod: ^2.4.9
   riverpod_annotation: ^2.3.3
+  
+  # Navigation
+  go_router: ^14.2.0
 
   # Background Tasks
   workmanager: ^0.5.2  # Production-ready background task management
