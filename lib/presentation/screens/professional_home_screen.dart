@@ -315,7 +315,7 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
               ),
               ProfessionalComponents.featureCard(
                 icon: Icons.favorite_rounded,
-                title: 'Daily Duas',
+                title: 'Digital Tasbih',
                 description: 'Collection of daily prayers and supplications',
                 onTap: () => _navigateToDuas(),
               ),

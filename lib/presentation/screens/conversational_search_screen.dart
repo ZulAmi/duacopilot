@@ -203,40 +203,144 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
         showHamburger: false,
         onBackPressed: () => Navigator.of(context).pop(),
       ),
-      body: Column(
+      body: SafeArea(
+        child: Column(
+          children: [_buildHeader(), _buildSearchBar(), Expanded(child: _buildContent()), const SmartBannerAd()],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHeader() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1),
+            RevolutionaryIslamicTheme.secondaryNavy.withOpacity(0.1),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+      ),
+      child: Column(
         children: [
-          // Search Header
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(gradient: RevolutionaryIslamicTheme.heroGradient),
-            child: Column(
-              children: [
-                Text(
-                  'Your AI Islamic Companion',
-                  style: RevolutionaryIslamicTheme.body1.copyWith(color: RevolutionaryIslamicTheme.textSecondary),
-                  textAlign: TextAlign.center,
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: RevolutionaryIslamicTheme.primaryEmerald,
+                  borderRadius: BorderRadius.circular(12),
                 ),
-              ],
-            ),
+                child: const Icon(Icons.search_rounded, color: RevolutionaryIslamicTheme.neutralWhite, size: 24),
+              ),
+              const SizedBox(width: 16),
+              const Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Smart Islamic Search',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: RevolutionaryIslamicTheme.textPrimary,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    Text(
+                      'AI-powered Islamic knowledge search',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: RevolutionaryIslamicTheme.textSecondary,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-
-          // Search Input
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: RevolutionaryComponents.modernSearchBar(
-              controller: _searchController,
-              onSubmitted: _performSearch,
-              onChanged: (value) => setState(() => _currentQuery = value),
-              hintText: 'Ask about Islamic guidance, duas, or teachings...',
-            ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Expanded(child: _buildStatCard('Searches', _searchCount.toString(), Icons.search_rounded)),
+              const SizedBox(width: 12),
+              Expanded(child: _buildStatCard('History', _searchHistory.length.toString(), Icons.history_rounded)),
+              const SizedBox(width: 12),
+              Expanded(child: _buildStatCard('AI Powered', 'GPT', Icons.auto_awesome_rounded)),
+            ],
           ),
-
-          // Content Area
-          Expanded(child: _buildContent()),
-
-          // Banner Ad at Bottom
-          const SmartBannerAd(),
         ],
+      ),
+    );
+  }
+
+  Widget _buildStatCard(String title, String value, IconData icon) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(
+        color: RevolutionaryIslamicTheme.backgroundSecondary,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: RevolutionaryIslamicTheme.borderLight),
+      ),
+      child: Column(
+        children: [
+          Icon(icon, color: RevolutionaryIslamicTheme.primaryEmerald, size: 20),
+          const SizedBox(height: 4),
+          Text(
+            value,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w700,
+              color: RevolutionaryIslamicTheme.textPrimary,
+            ),
+          ),
+          Text(title, style: const TextStyle(fontSize: 12, color: RevolutionaryIslamicTheme.textSecondary)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSearchBar() {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Container(
+        decoration: BoxDecoration(
+          color: RevolutionaryIslamicTheme.backgroundSecondary,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: RevolutionaryIslamicTheme.borderLight),
+          boxShadow: [
+            BoxShadow(
+              color: RevolutionaryIslamicTheme.neutralGray300.withOpacity(0.5),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: TextField(
+          controller: _searchController,
+          onSubmitted: _performSearch,
+          onChanged: (value) => setState(() => _currentQuery = value),
+          decoration: InputDecoration(
+            hintText: 'Ask about Islamic guidance, duas, or teachings...',
+            prefixIcon: const Icon(Icons.search_rounded, color: RevolutionaryIslamicTheme.textSecondary),
+            suffixIcon:
+                _currentQuery.isNotEmpty
+                    ? IconButton(
+                      onPressed: () {
+                        _searchController.clear();
+                        setState(() => _currentQuery = '');
+                      },
+                      icon: const Icon(Icons.clear, color: RevolutionaryIslamicTheme.textSecondary),
+                    )
+                    : null,
+            border: InputBorder.none,
+            contentPadding: const EdgeInsets.all(16),
+            hintStyle: const TextStyle(color: RevolutionaryIslamicTheme.textSecondary),
+          ),
+        ),
       ),
     );
   }
@@ -254,7 +358,7 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
     if (_showResults && _searchResults != null) {
       return SingleChildScrollView(
         controller: _scrollController,
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: FadeTransition(
           opacity: _resultAnimationController,
           child: SlideTransition(
@@ -265,75 +369,7 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        Theme.of(context).colorScheme.primary.withOpacity(0.08),
-                        Theme.of(context).colorScheme.primary.withOpacity(0.04),
-                      ],
-                    ),
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: Theme.of(context).colorScheme.primary.withOpacity(0.2)),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.primary,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Icon(Icons.auto_awesome, color: Theme.of(context).colorScheme.onPrimary, size: 20),
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Text(
-                              'AI Response',
-                              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                color: Theme.of(context).colorScheme.onSurface,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        'Based on your query: "$_currentQuery"',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                          fontStyle: FontStyle.italic,
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.surface,
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: Theme.of(context).colorScheme.outline.withOpacity(0.1)),
-                        ),
-                        child: Text(
-                          _searchResults!,
-                          style: Theme.of(
-                            context,
-                          ).textTheme.bodyLarge?.copyWith(color: Theme.of(context).colorScheme.onSurface, height: 1.6),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                // Interstitial Ad Trigger (invisible, triggers based on search count)
+                _buildSearchResultCard(),
                 InterstitialAdTrigger(searchCount: _searchCount, onPremiumPrompt: _showPremiumUpgradeDialog),
               ],
             ),
@@ -344,92 +380,50 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
 
     // Default welcome screen
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         children: [
-          const SizedBox(height: 40),
+          const SizedBox(height: 20),
 
-          // Welcome Card
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(24),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Theme.of(context).colorScheme.primary.withOpacity(0.08),
-                  Theme.of(context).colorScheme.secondary.withOpacity(0.06),
-                ],
-              ),
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: Theme.of(context).colorScheme.primary.withOpacity(0.1)),
-            ),
-            child: Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: Icon(Icons.mosque, size: 48, color: Theme.of(context).colorScheme.primary),
-                ),
-                const SizedBox(height: 20),
-                Text(
-                  'Welcome to DuaCopilot',
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 12),
-                Text(
-                  'Your intelligent Islamic companion powered by AI. Ask about duas, Islamic teachings, or seek guidance for any situation.',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodyLarge?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant, height: 1.5),
-                  textAlign: TextAlign.center,
-                ),
-              ],
+          // Quick Start Suggestions Header
+          const Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Try asking about:',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: RevolutionaryIslamicTheme.textPrimary),
             ),
           ),
 
-          const SizedBox(height: 32),
+          const SizedBox(height: 12),
 
-          // Quick Start Suggestions
-          Text(
-            'Try asking about:',
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              color: Theme.of(context).colorScheme.onSurface,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
+          // Suggestion Cards
+          ...[
+            'Morning duas',
+            'Travel prayers',
+            'Protection from evil',
+            'Seeking forgiveness',
+          ].map((suggestion) => _buildSuggestionChip(suggestion)),
 
-          const SizedBox(height: 16),
-
-          ...['Morning duas', 'Travel prayers', 'Protection from evil', 'Seeking forgiveness'].map(
-            (suggestion) => Padding(padding: const EdgeInsets.only(bottom: 8), child: _buildSuggestionChip(suggestion)),
-          ),
-
-          const SizedBox(height: 32),
+          const SizedBox(height: 24),
 
           // Search History (if available)
           if (widget.showSearchHistory && _searchHistory.isNotEmpty) ...[
-            const SizedBox(height: 16),
-            Row(
-              children: [
-                Icon(Icons.history, color: Theme.of(context).colorScheme.onSurfaceVariant, size: 20),
-                const SizedBox(width: 8),
-                Text(
-                  'Recent Searches',
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface,
-                    fontWeight: FontWeight.w600,
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Row(
+                children: [
+                  Icon(Icons.history, color: RevolutionaryIslamicTheme.textSecondary, size: 20),
+                  SizedBox(width: 8),
+                  Text(
+                    'Recent Searches',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: RevolutionaryIslamicTheme.textPrimary,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             const SizedBox(height: 12),
             ...(_searchHistory.take(3).map((item) => _buildHistoryItem(item))),
@@ -439,34 +433,101 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
     );
   }
 
-  Widget _buildSuggestionChip(String title) {
-    return InkWell(
-      onTap: () => _performSearch(title),
-      borderRadius: BorderRadius.circular(12),
-      child: Container(
-        width: double.infinity,
+  Widget _buildSearchResultCard() {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      decoration: BoxDecoration(
+        color: RevolutionaryIslamicTheme.backgroundSecondary,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: RevolutionaryIslamicTheme.borderLight),
+        boxShadow: [
+          BoxShadow(
+            color: RevolutionaryIslamicTheme.neutralGray300.withOpacity(0.5),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Padding(
         padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Theme.of(context).colorScheme.outline.withOpacity(0.2)),
-        ),
-        child: Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary.withOpacity(0.15),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Icon(Icons.lightbulb_outline, size: 16, color: Theme.of(context).colorScheme.primary),
+            Row(
+              children: [
+                Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        RevolutionaryIslamicTheme.primaryEmerald,
+                        RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.8),
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Center(
+                    child: Icon(Icons.auto_awesome, color: RevolutionaryIslamicTheme.neutralWhite, size: 24),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'AI Response',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: RevolutionaryIslamicTheme.textPrimary,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        'Query: "$_currentQuery"',
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: RevolutionaryIslamicTheme.textSecondary,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.3)),
+                  ),
+                  child: const Text(
+                    'AI',
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w600,
+                      color: RevolutionaryIslamicTheme.primaryEmerald,
+                    ),
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(width: 12),
-            Text(
-              title,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                fontWeight: FontWeight.w500,
-                color: Theme.of(context).colorScheme.onSurface,
+            const SizedBox(height: 16),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: RevolutionaryIslamicTheme.backgroundPrimary,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: RevolutionaryIslamicTheme.borderLight),
+              ),
+              child: Text(
+                _searchResults!,
+                style: const TextStyle(fontSize: 14, color: RevolutionaryIslamicTheme.textPrimary, height: 1.6),
               ),
             ),
           ],
@@ -475,21 +536,122 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
     );
   }
 
+  Widget _buildSuggestionChip(String title) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      decoration: BoxDecoration(
+        color: RevolutionaryIslamicTheme.backgroundSecondary,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: RevolutionaryIslamicTheme.borderLight),
+        boxShadow: [
+          BoxShadow(
+            color: RevolutionaryIslamicTheme.neutralGray300.withOpacity(0.5),
+            blurRadius: 4,
+            offset: const Offset(0, 1),
+          ),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () => _performSearch(title),
+          borderRadius: BorderRadius.circular(12),
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                    color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Icon(Icons.lightbulb_outline, size: 16, color: RevolutionaryIslamicTheme.primaryEmerald),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: RevolutionaryIslamicTheme.textPrimary,
+                    ),
+                  ),
+                ),
+                const Icon(Icons.arrow_forward_ios_rounded, color: RevolutionaryIslamicTheme.textSecondary, size: 12),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildHistoryItem(SearchHistoryItem item) {
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
-      child: ListTile(
-        leading: const Icon(Icons.history),
-        title: Text(item.query),
-        subtitle: Text(_formatDateTime(item.timestamp)),
-        onTap: () => _performSearch(item.query),
-        trailing: IconButton(
-          icon: const Icon(Icons.clear),
-          onPressed: () {
-            setState(() {
-              _searchHistory.removeWhere((historyItem) => historyItem.id == item.id);
-            });
-          },
+      decoration: BoxDecoration(
+        color: RevolutionaryIslamicTheme.backgroundSecondary,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: RevolutionaryIslamicTheme.borderLight),
+        boxShadow: [
+          BoxShadow(
+            color: RevolutionaryIslamicTheme.neutralGray300.withOpacity(0.3),
+            blurRadius: 4,
+            offset: const Offset(0, 1),
+          ),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () => _performSearch(item.query),
+          borderRadius: BorderRadius.circular(12),
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                    color: RevolutionaryIslamicTheme.secondaryNavy.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: const Icon(Icons.history, size: 16, color: RevolutionaryIslamicTheme.secondaryNavy),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        item.query,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: RevolutionaryIslamicTheme.textPrimary,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        _formatDateTime(item.timestamp),
+                        style: const TextStyle(fontSize: 12, color: RevolutionaryIslamicTheme.textSecondary),
+                      ),
+                    ],
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _searchHistory.removeWhere((historyItem) => historyItem.id == item.id);
+                    });
+                  },
+                  icon: const Icon(Icons.clear, size: 16, color: RevolutionaryIslamicTheme.textSecondary),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
