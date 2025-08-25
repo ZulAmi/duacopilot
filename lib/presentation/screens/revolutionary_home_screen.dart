@@ -469,7 +469,7 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
               ),
               RevolutionaryComponents.modernFeatureCard(
                 icon: Icons.favorite_rounded,
-                title: 'Daily Duas',
+                title: 'Digital Tasbih',
                 description: 'Beautiful collection of daily prayers and supplications',
                 onTap: _navigateToDuas,
                 gradientColors: [RevolutionaryIslamicTheme.accentPurple, RevolutionaryIslamicTheme.primaryEmeraldLight],
