@@ -17,6 +17,38 @@
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
+        },
+        {
+            "name": "duacopilot Dev - Chrome",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_dev.dart",
+            "deviceId": "chrome",
+            "args": [
+                "--web-port=8080"
+            ]
+        },
+        {
+            "name": "duacopilot Dev - Chrome (Debug)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_dev.dart",
+            "deviceId": "chrome",
+            "flutterMode": "debug",
+            "args": [
+                "--web-port=8080",
+                "--web-renderer=html"
+            ]
+        },
+        {
+            "name": "duacopilot Production - Chrome",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "deviceId": "chrome",
+            "args": [
+                "--web-port=8080"
+            ]
         }
     ]
 }

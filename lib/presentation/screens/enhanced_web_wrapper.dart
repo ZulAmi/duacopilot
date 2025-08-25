@@ -217,16 +217,15 @@ class _EnhancedWebAppWrapperState extends ConsumerState<EnhancedWebAppWrapper> {
       return EnhancedWebSplashScreen(onAnimationComplete: _onSplashComplete);
     }
 
-    // Use the SAME professional home screen as Windows for consistency
-    // But with web-specific optimizations through MediaQuery
+    // Use the SAME revolutionary home screen as Windows for perfect consistency
+    // This ensures identical hamburger menu behavior across platforms
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(
-        // Optimize for web viewing
+        // Optimize for web viewing while maintaining identical functionality
         textScaler: TextScaler.linear(MediaQuery.of(context).textScaleFactor.clamp(0.9, 1.2)),
       ),
       child: const RevolutionaryHomeScreen(
-        // Web-specific optimizations can be passed as parameters
-        // or detected internally via kIsWeb
+        // Both platforms use identical revolutionary components and drawer
       ),
     );
   }

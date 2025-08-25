@@ -105,7 +105,7 @@ class _RevolutionaryAppWrapperState extends State<RevolutionaryAppWrapper> with 
   @override
   Widget build(BuildContext context) {
     if (kIsWeb) {
-      // Use enhanced web wrapper for web platform
+      // Use enhanced web wrapper for web platform - this ensures identical hamburger menu
       return const EnhancedWebAppWrapper();
     }
 

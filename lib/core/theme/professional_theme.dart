@@ -17,7 +17,7 @@ class ProfessionalTheme {
   static const Color warningOrange = Color(0xFFF59E0B); // Warning state
   static const Color errorRed = Color(0xFFEF4444); // Error state
   static const Color infoBlue = Color(0xFF3B82F6); // Info state
-  
+
   // Neutral Grays for Professional Look
   static const Color gray50 = Color(0xFFF9FAFB);
   static const Color gray100 = Color(0xFFF3F4F6);
@@ -60,12 +60,12 @@ class ProfessionalTheme {
   static const Duration standardDuration = Duration(milliseconds: 200);
   static const Duration mediumDuration = Duration(milliseconds: 300);
   static const Duration slowDuration = Duration(milliseconds: 400);
-  
+
   // Animation Curves
   static const Curve standardCurve = Curves.easeInOut;
   static const Curve emphasizedCurve = Curves.easeOutCubic;
   static const Curve smoothCurve = Curves.easeInOutCubic;
-  
+
   // Spacing System
   static const double spaceXs = 4.0;
   static const double spaceSm = 8.0;
@@ -85,46 +85,21 @@ class ProfessionalTheme {
 
   // Shadow System
   static List<BoxShadow> get subtleShadow => [
-    BoxShadow(
-      color: gray900.withOpacity(0.05),
-      blurRadius: 4,
-      offset: const Offset(0, 1),
-    ),
+    BoxShadow(color: gray900.withOpacity(0.05), blurRadius: 4, offset: const Offset(0, 1)),
   ];
 
   static List<BoxShadow> get cardShadow => [
-    BoxShadow(
-      color: gray900.withOpacity(0.08),
-      blurRadius: 8,
-      offset: const Offset(0, 2),
-    ),
-    BoxShadow(
-      color: gray900.withOpacity(0.04),
-      blurRadius: 2,
-      offset: const Offset(0, 1),
-    ),
+    BoxShadow(color: gray900.withOpacity(0.08), blurRadius: 8, offset: const Offset(0, 2)),
+    BoxShadow(color: gray900.withOpacity(0.04), blurRadius: 2, offset: const Offset(0, 1)),
   ];
 
   static List<BoxShadow> get elevatedShadow => [
-    BoxShadow(
-      color: gray900.withOpacity(0.12),
-      blurRadius: 16,
-      offset: const Offset(0, 4),
-    ),
-    BoxShadow(
-      color: gray900.withOpacity(0.08),
-      blurRadius: 6,
-      offset: const Offset(0, 2),
-    ),
+    BoxShadow(color: gray900.withOpacity(0.12), blurRadius: 16, offset: const Offset(0, 4)),
+    BoxShadow(color: gray900.withOpacity(0.08), blurRadius: 6, offset: const Offset(0, 2)),
   ];
 
   static List<BoxShadow> get focusShadow => [
-    BoxShadow(
-      color: primaryEmerald.withOpacity(0.15),
-      blurRadius: 12,
-      offset: const Offset(0, 0),
-      spreadRadius: 2,
-    ),
+    BoxShadow(color: primaryEmerald.withOpacity(0.15), blurRadius: 12, offset: const Offset(0, 0), spreadRadius: 2),
   ];
 
   // Light Theme
@@ -132,7 +107,7 @@ class ProfessionalTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
-      
+
       // Color Scheme
       colorScheme: const ColorScheme.light(
         primary: primaryEmerald,
@@ -141,15 +116,13 @@ class ProfessionalTheme {
         onSecondary: surfaceColor,
         surface: surfaceColor,
         onSurface: textPrimary,
-        background: backgroundColor,
-        onBackground: textPrimary,
         error: errorRed,
         onError: surfaceColor,
       ),
 
       // Typography
       textTheme: _buildTextTheme(),
-      
+
       // App Bar Theme
       appBarTheme: AppBarTheme(
         centerTitle: true,
@@ -159,10 +132,7 @@ class ProfessionalTheme {
         surfaceTintColor: surfaceColor,
         foregroundColor: textPrimary,
         systemOverlayStyle: SystemUiOverlayStyle.dark,
-        titleTextStyle: _buildTextTheme().headlineSmall?.copyWith(
-          fontWeight: FontWeight.w600,
-          color: textPrimary,
-        ),
+        titleTextStyle: _buildTextTheme().headlineSmall?.copyWith(fontWeight: FontWeight.w600, color: textPrimary),
       ),
 
       // Card Theme
@@ -235,11 +205,7 @@ class ProfessionalTheme {
       ),
 
       // Divider Theme
-      dividerTheme: const DividerThemeData(
-        color: borderLight,
-        thickness: 1,
-        space: 1,
-      ),
+      dividerTheme: const DividerThemeData(color: borderLight, thickness: 1, space: 1),
 
       // Chip Theme
       chipTheme: ChipThemeData(
@@ -268,13 +234,8 @@ class ProfessionalTheme {
         elevation: 24,
         shadowColor: gray900.withOpacity(0.25),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radiusXl)),
-        titleTextStyle: _buildTextTheme().headlineSmall?.copyWith(
-          fontWeight: FontWeight.w600,
-          color: textPrimary,
-        ),
-        contentTextStyle: _buildTextTheme().bodyMedium?.copyWith(
-          color: textSecondary,
-        ),
+        titleTextStyle: _buildTextTheme().headlineSmall?.copyWith(fontWeight: FontWeight.w600, color: textPrimary),
+        contentTextStyle: _buildTextTheme().bodyMedium?.copyWith(color: textSecondary),
       ),
 
       // Floating Action Button Theme
@@ -295,11 +256,11 @@ class ProfessionalTheme {
     const darkBackground = Color(0xFF0F1419);
     const darkSurface = Color(0xFF1A1F2E);
     const darkText = Color(0xFFF9FAFB);
-    
+
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
-      
+
       colorScheme: const ColorScheme.dark(
         primary: primaryEmerald,
         onPrimary: surfaceColor,
@@ -307,14 +268,12 @@ class ProfessionalTheme {
         onSecondary: darkBackground,
         surface: darkSurface,
         onSurface: darkText,
-        background: darkBackground,
-        onBackground: darkText,
         error: errorRed,
         onError: surfaceColor,
       ),
 
       textTheme: _buildTextTheme(isDark: true),
-      
+
       appBarTheme: AppBarTheme(
         centerTitle: true,
         elevation: 0,
@@ -326,17 +285,19 @@ class ProfessionalTheme {
       cardTheme: CardTheme(
         elevation: 0,
         color: darkSurface,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(radiusLg),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radiusLg)),
       ),
     );
   }
 
+  // Static getters for easy access
+  static TextTheme get textTheme => _buildTextTheme();
+  static Color get primaryColor => primaryEmerald;
+
   static TextTheme _buildTextTheme({bool isDark = false}) {
     final textColor = isDark ? const Color(0xFFF9FAFB) : textPrimary;
     const fontFamily = 'Inter'; // Professional font family
-    
+
     return TextTheme(
       displayLarge: TextStyle(
         fontSize: 57,
@@ -345,36 +306,11 @@ class ProfessionalTheme {
         color: textColor,
         fontFamily: fontFamily,
       ),
-      displayMedium: TextStyle(
-        fontSize: 45,
-        fontWeight: FontWeight.w400,
-        color: textColor,
-        fontFamily: fontFamily,
-      ),
-      displaySmall: TextStyle(
-        fontSize: 36,
-        fontWeight: FontWeight.w400,
-        color: textColor,
-        fontFamily: fontFamily,
-      ),
-      headlineLarge: TextStyle(
-        fontSize: 32,
-        fontWeight: FontWeight.w600,
-        color: textColor,
-        fontFamily: fontFamily,
-      ),
-      headlineMedium: TextStyle(
-        fontSize: 28,
-        fontWeight: FontWeight.w600,
-        color: textColor,
-        fontFamily: fontFamily,
-      ),
-      headlineSmall: TextStyle(
-        fontSize: 24,
-        fontWeight: FontWeight.w600,
-        color: textColor,
-        fontFamily: fontFamily,
-      ),
+      displayMedium: TextStyle(fontSize: 45, fontWeight: FontWeight.w400, color: textColor, fontFamily: fontFamily),
+      displaySmall: TextStyle(fontSize: 36, fontWeight: FontWeight.w400, color: textColor, fontFamily: fontFamily),
+      headlineLarge: TextStyle(fontSize: 32, fontWeight: FontWeight.w600, color: textColor, fontFamily: fontFamily),
+      headlineMedium: TextStyle(fontSize: 28, fontWeight: FontWeight.w600, color: textColor, fontFamily: fontFamily),
+      headlineSmall: TextStyle(fontSize: 24, fontWeight: FontWeight.w600, color: textColor, fontFamily: fontFamily),
       titleLarge: TextStyle(
         fontSize: 22,
         fontWeight: FontWeight.w600,
@@ -446,7 +382,7 @@ class ProfessionalTheme {
 extension ProfessionalThemeExtension on BuildContext {
   ColorScheme get colorScheme => Theme.of(this).colorScheme;
   TextTheme get textTheme => Theme.of(this).textTheme;
-  
+
   // Quick access to professional colors
   Color get primaryColor => ProfessionalTheme.primaryEmerald;
   Color get secondaryColor => ProfessionalTheme.secondaryGold;
@@ -455,7 +391,7 @@ extension ProfessionalThemeExtension on BuildContext {
   Color get textPrimary => ProfessionalTheme.textPrimary;
   Color get textSecondary => ProfessionalTheme.textSecondary;
   Color get textTertiary => ProfessionalTheme.textTertiary;
-  
+
   // Shadow system
   List<BoxShadow> get subtleShadow => ProfessionalTheme.subtleShadow;
   List<BoxShadow> get cardShadow => ProfessionalTheme.cardShadow;
