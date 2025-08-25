@@ -3,7 +3,9 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/theme/revolutionary_islamic_theme.dart';
 import '../../../domain/entities/qibla_entity.dart';
+import '../../../presentation/widgets/revolutionary_components.dart';
 import '../providers/qibla_providers.dart';
 
 /// QiblaCompassScreen - Premium Qibla Compass with Prayer Tracking
@@ -41,12 +43,22 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen> with Ti
     final nextPrayer = ref.watch(nextPrayerProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Qibla Compass'),
-        backgroundColor: const Color(0xFF1B5E20),
-        foregroundColor: Colors.white,
-        elevation: 0,
-        actions: [IconButton(icon: const Icon(Icons.settings), onPressed: () => _showSettingsDialog(context))],
+      appBar: RevolutionaryComponents.modernAppBar(
+        title: 'Qibla Compass',
+        showBackButton: true,
+        onBackPressed: () => Navigator.of(context).pop(),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings_rounded),
+            onPressed: () => _showSettingsDialog(context),
+            style: IconButton.styleFrom(
+              backgroundColor: RevolutionaryIslamicTheme.neutralGray100,
+              foregroundColor: RevolutionaryIslamicTheme.textSecondary,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusXl)),
+            ),
+          ),
+          const SizedBox(width: RevolutionaryIslamicTheme.space2),
+        ],
       ),
       body: compassInit.when(
         loading:
@@ -135,25 +147,34 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen> with Ti
   Widget _buildStatusBar(QiblaCompass compass, bool needsCalibration) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space4),
       decoration: BoxDecoration(
-        color: needsCalibration ? Colors.orange.shade100 : Colors.green.shade100,
-        border: Border(bottom: BorderSide(color: needsCalibration ? Colors.orange : Colors.green, width: 2)),
+        color:
+            needsCalibration
+                ? RevolutionaryIslamicTheme.warningAmber.withOpacity(0.1)
+                : RevolutionaryIslamicTheme.successGreen.withOpacity(0.1),
+        border: Border(
+          bottom: BorderSide(
+            color: needsCalibration ? RevolutionaryIslamicTheme.warningAmber : RevolutionaryIslamicTheme.successGreen,
+            width: 2,
+          ),
+        ),
       ),
       child: Row(
         children: [
           Icon(
-            needsCalibration ? Icons.warning : Icons.check_circle,
-            color: needsCalibration ? Colors.orange : Colors.green,
+            needsCalibration ? Icons.warning_rounded : Icons.check_circle_rounded,
+            color: needsCalibration ? RevolutionaryIslamicTheme.warningAmber : RevolutionaryIslamicTheme.successGreen,
           ),
-          const SizedBox(width: 8),
+          const SizedBox(width: RevolutionaryIslamicTheme.space2),
           Expanded(
             child: Text(
               needsCalibration
                   ? 'Compass needs calibration for accuracy'
                   : 'Compass calibrated - ${_getAccuracyText(compass.accuracy)}',
-              style: TextStyle(
-                color: needsCalibration ? Colors.orange.shade800 : Colors.green.shade800,
+              style: RevolutionaryIslamicTheme.body1.copyWith(
+                color:
+                    needsCalibration ? RevolutionaryIslamicTheme.warningAmber : RevolutionaryIslamicTheme.successGreen,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -165,7 +186,7 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen> with Ti
 
   Widget _buildCompass(QiblaCompass compass) {
     return Container(
-      margin: const EdgeInsets.all(24),
+      margin: const EdgeInsets.all(RevolutionaryIslamicTheme.space6),
       child: AspectRatio(
         aspectRatio: 1,
         child: Stack(
@@ -176,9 +197,13 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen> with Ti
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
-                  colors: [const Color(0xFF2E7D32).withOpacity(0.1), const Color(0xFF1B5E20).withOpacity(0.3)],
+                  colors: [
+                    RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1),
+                    RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.3),
+                  ],
                 ),
-                border: Border.all(color: const Color(0xFF1B5E20), width: 3),
+                border: Border.all(color: RevolutionaryIslamicTheme.primaryEmerald, width: 3),
+                boxShadow: RevolutionaryIslamicTheme.shadowLg,
               ),
             ),
 
@@ -192,10 +217,14 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen> with Ti
                 width: 4,
                 height: 120,
                 decoration: BoxDecoration(
-                  color: const Color(0xFF4CAF50),
-                  borderRadius: BorderRadius.circular(2),
+                  color: RevolutionaryIslamicTheme.successGreen,
+                  borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusXs),
                   boxShadow: [
-                    BoxShadow(color: const Color(0xFF4CAF50).withOpacity(0.5), blurRadius: 8, spreadRadius: 2),
+                    BoxShadow(
+                      color: RevolutionaryIslamicTheme.successGreen.withOpacity(0.5),
+                      blurRadius: 8,
+                      spreadRadius: 2,
+                    ),
                   ],
                 ),
               ),
@@ -210,29 +239,38 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen> with Ti
                   height: 60 + (_pulseController.value * 10),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: const Color(0xFF1B5E20),
+                    color: RevolutionaryIslamicTheme.primaryEmerald,
                     boxShadow: [
                       BoxShadow(
-                        color: const Color(0xFF1B5E20).withOpacity(0.3),
+                        color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.3),
                         blurRadius: 10 + (_pulseController.value * 5),
                         spreadRadius: 2,
                       ),
                     ],
                   ),
-                  child: const Icon(Icons.mosque, color: Colors.white, size: 32),
+                  child: const Icon(Icons.mosque_rounded, color: RevolutionaryIslamicTheme.textOnColor, size: 32),
                 );
               },
             ),
 
             // Direction Text
             Positioned(
-              top: 20,
+              top: RevolutionaryIslamicTheme.space5,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                decoration: BoxDecoration(color: const Color(0xFF1B5E20), borderRadius: BorderRadius.circular(16)),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: RevolutionaryIslamicTheme.space3,
+                  vertical: RevolutionaryIslamicTheme.space2,
+                ),
+                decoration: BoxDecoration(
+                  color: RevolutionaryIslamicTheme.primaryEmerald,
+                  borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radius2Xl),
+                ),
                 child: Text(
                   'N',
-                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+                  style: RevolutionaryIslamicTheme.subtitle1.copyWith(
+                    color: RevolutionaryIslamicTheme.textOnColor,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
@@ -250,8 +288,8 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen> with Ti
         height: 30,
         margin: const EdgeInsets.only(bottom: 140),
         decoration: BoxDecoration(
-          color: const Color(0xFF1B5E20).withOpacity(0.5),
-          borderRadius: BorderRadius.circular(1),
+          color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.5),
+          borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusXs),
         ),
       ),
     );
@@ -259,45 +297,53 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen> with Ti
 
   Widget _buildInfoPanel(QiblaCompass compass, double? distance, PrayerCompletion? nextPrayer) {
     return Container(
-      margin: const EdgeInsets.all(16),
-      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.all(RevolutionaryIslamicTheme.space4),
+      padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space4),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 8, spreadRadius: 1)],
+        color: RevolutionaryIslamicTheme.backgroundSecondary,
+        borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusXl),
+        boxShadow: RevolutionaryIslamicTheme.shadowMd,
+        border: Border.all(color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.2), width: 1),
       ),
       child: Column(
         children: [
           Row(
             children: [
               Expanded(
-                child: _buildInfoItem('Qibla Direction', '${compass.qiblaDirection.toInt()}°', Icons.navigation),
+                child: _buildInfoItem(
+                  'Qibla Direction',
+                  '${compass.qiblaDirection.toInt()}°',
+                  Icons.navigation_rounded,
+                ),
               ),
               Expanded(
                 child: _buildInfoItem(
                   'Distance to Kaaba',
                   distance != null ? '${distance.toInt()} km' : '---',
-                  Icons.place,
+                  Icons.place_rounded,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: RevolutionaryIslamicTheme.space4),
           if (nextPrayer != null) ...[
-            const Divider(),
+            Divider(color: RevolutionaryIslamicTheme.borderLight),
             Row(
               children: [
-                const Icon(Icons.schedule, color: Color(0xFF1B5E20)),
-                const SizedBox(width: 8),
+                Icon(Icons.schedule_rounded, color: RevolutionaryIslamicTheme.primaryEmerald),
+                const SizedBox(width: RevolutionaryIslamicTheme.space2),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Next Prayer: ${_getPrayerName(nextPrayer.type)}',
-                        style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                        style: RevolutionaryIslamicTheme.subtitle1.copyWith(fontWeight: FontWeight.w600),
                       ),
-                      Text(_formatTime(nextPrayer.scheduledTime), style: TextStyle(color: Colors.grey.shade600)),
+                      Text(
+                        _formatTime(nextPrayer.scheduledTime),
+                        style: RevolutionaryIslamicTheme.body2.copyWith(color: RevolutionaryIslamicTheme.textSecondary),
+                      ),
                     ],
                   ),
                 ),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/theme/revolutionary_islamic_theme.dart';
 import '../../../domain/entities/tasbih_entity.dart';
+import '../../../presentation/widgets/revolutionary_components.dart';
 import '../providers/tasbih_providers.dart';
 
 /// DigitalTasbihScreen - Premium Digital Tasbih with Voice Recognition
@@ -57,14 +59,30 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
     });
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Digital Tasbih'),
-        backgroundColor: const Color(0xFF6A4C93),
-        foregroundColor: Colors.white,
-        elevation: 0,
+      appBar: RevolutionaryComponents.modernAppBar(
+        title: 'Digital Tasbih',
+        showBackButton: true,
+        onBackPressed: () => Navigator.of(context).pop(),
         actions: [
-          IconButton(icon: const Icon(Icons.settings), onPressed: () => _showSettingsDialog(context)),
-          IconButton(icon: const Icon(Icons.analytics), onPressed: () => _showStatsDialog(context)),
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () => _showSettingsDialog(context),
+            style: IconButton.styleFrom(
+              backgroundColor: RevolutionaryIslamicTheme.neutralGray100,
+              foregroundColor: RevolutionaryIslamicTheme.textSecondary,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusXl)),
+            ),
+          ),
+          IconButton(
+            icon: const Icon(Icons.analytics),
+            onPressed: () => _showStatsDialog(context),
+            style: IconButton.styleFrom(
+              backgroundColor: RevolutionaryIslamicTheme.neutralGray100,
+              foregroundColor: RevolutionaryIslamicTheme.textSecondary,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusXl)),
+            ),
+          ),
+          const SizedBox(width: RevolutionaryIslamicTheme.space2),
         ],
       ),
       body: tasbihInit.when(
@@ -114,34 +132,43 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
 
   Widget _buildHeader(int currentCount, int targetCount, double progress, bool isActive) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space5),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [const Color(0xFF6A4C93), const Color(0xFF6A4C93).withOpacity(0.8)],
+        gradient: RevolutionaryIslamicTheme.heroGradient,
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(RevolutionaryIslamicTheme.radius3Xl),
+          bottomRight: Radius.circular(RevolutionaryIslamicTheme.radius3Xl),
         ),
       ),
       child: Column(
         children: [
           Text(
             '$currentCount / $targetCount',
-            style: const TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
+            style: RevolutionaryIslamicTheme.headline1.copyWith(
+              color: RevolutionaryIslamicTheme.textOnColor,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: RevolutionaryIslamicTheme.space3),
           AnimatedBuilder(
             animation: _progressController,
             builder: (context, child) {
               return LinearProgressIndicator(
                 value: _progressController.value,
-                backgroundColor: Colors.white.withOpacity(0.3),
-                valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
+                backgroundColor: RevolutionaryIslamicTheme.textOnColor.withOpacity(0.3),
+                valueColor: const AlwaysStoppedAnimation<Color>(RevolutionaryIslamicTheme.textOnColor),
                 minHeight: 6,
+                borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusSm),
               );
             },
           ),
-          const SizedBox(height: 8),
-          Text('${(progress * 100).toInt()}% Complete', style: const TextStyle(color: Colors.white70, fontSize: 14)),
+          const SizedBox(height: RevolutionaryIslamicTheme.space2),
+          Text(
+            '${(progress * 100).toInt()}% Complete',
+            style: RevolutionaryIslamicTheme.body1.copyWith(
+              color: RevolutionaryIslamicTheme.textOnColor.withOpacity(0.8),
+            ),
+          ),
         ],
       ),
     );
@@ -149,7 +176,7 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
 
   Widget _buildCounterArea(String dhikrText, int currentCount, bool isActive) {
     return Container(
-      margin: const EdgeInsets.all(24),
+      margin: const EdgeInsets.all(RevolutionaryIslamicTheme.space6),
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -162,7 +189,10 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
                 height: 300 + (_rippleController.value * 50),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(color: const Color(0xFF6A4C93).withOpacity(1 - _rippleController.value), width: 3),
+                  border: Border.all(
+                    color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(1 - _rippleController.value),
+                    width: 3,
+                  ),
                 ),
               );
             },
@@ -183,11 +213,18 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       gradient: RadialGradient(
-                        colors: [const Color(0xFF6A4C93).withOpacity(0.1), const Color(0xFF6A4C93).withOpacity(0.3)],
+                        colors: [
+                          RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1),
+                          RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.3),
+                        ],
                       ),
-                      border: Border.all(color: const Color(0xFF6A4C93), width: 4),
+                      border: Border.all(color: RevolutionaryIslamicTheme.primaryEmerald, width: 4),
                       boxShadow: [
-                        BoxShadow(color: const Color(0xFF6A4C93).withOpacity(0.3), blurRadius: 20, spreadRadius: 5),
+                        BoxShadow(
+                          color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.3),
+                          blurRadius: 20,
+                          spreadRadius: 5,
+                        ),
                       ],
                     ),
                     child: Center(
@@ -196,9 +233,18 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
                         children: [
                           Text(
                             '$currentCount',
-                            style: const TextStyle(fontSize: 64, fontWeight: FontWeight.bold, color: Color(0xFF6A4C93)),
+                            style: RevolutionaryIslamicTheme.display1.copyWith(
+                              color: RevolutionaryIslamicTheme.primaryEmerald,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                          if (!isActive) const Text('Tap to start', style: TextStyle(fontSize: 16, color: Colors.grey)),
+                          if (!isActive)
+                            Text(
+                              'Tap to start',
+                              style: RevolutionaryIslamicTheme.body2.copyWith(
+                                color: RevolutionaryIslamicTheme.textSecondary,
+                              ),
+                            ),
                         ],
                       ),
                     ),
@@ -214,17 +260,21 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
 
   Widget _buildDhikrDisplay(String dhikrText) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 24),
-      padding: const EdgeInsets.all(20),
+      margin: const EdgeInsets.symmetric(horizontal: RevolutionaryIslamicTheme.space6),
+      padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space5),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 10, spreadRadius: 2)],
+        color: RevolutionaryIslamicTheme.backgroundSecondary,
+        borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radius2Xl),
+        boxShadow: RevolutionaryIslamicTheme.shadowMd,
+        border: Border.all(color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.2), width: 1),
       ),
       child: Center(
         child: Text(
           dhikrText,
-          style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w500, color: Color(0xFF6A4C93)),
+          style: RevolutionaryIslamicTheme.headline2.copyWith(
+            color: RevolutionaryIslamicTheme.primaryEmerald,
+            fontWeight: FontWeight.w600,
+          ),
           textAlign: TextAlign.center,
         ),
       ),
@@ -255,18 +305,25 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
       child: Container(
         width: 120,
         decoration: BoxDecoration(
-          color: const Color(0xFF6A4C93).withOpacity(0.1),
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: const Color(0xFF6A4C93).withOpacity(0.3)),
+          color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusXl),
+          border: Border.all(color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.3)),
+          boxShadow: RevolutionaryIslamicTheme.shadowSm,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(text, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Color(0xFF6A4C93))),
-            const SizedBox(height: 4),
+            Text(
+              text,
+              style: RevolutionaryIslamicTheme.subtitle1.copyWith(
+                color: RevolutionaryIslamicTheme.primaryEmerald,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            const SizedBox(height: RevolutionaryIslamicTheme.space1),
             Text(
               _getTasbihTypeName(type),
-              style: TextStyle(fontSize: 10, color: Colors.grey.shade600),
+              style: RevolutionaryIslamicTheme.caption.copyWith(color: RevolutionaryIslamicTheme.textSecondary),
               textAlign: TextAlign.center,
             ),
           ],
@@ -277,32 +334,40 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
 
   Widget _buildActionButtons(bool isActive, TasbihSession? session) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space4),
       child: Row(
         children: [
           if (isActive) ...[
             Expanded(
               child: ElevatedButton.icon(
                 onPressed: _endSession,
-                icon: const Icon(Icons.stop),
+                icon: const Icon(Icons.stop_rounded),
                 label: const Text('End Session'),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  backgroundColor: RevolutionaryIslamicTheme.errorRose,
+                  foregroundColor: RevolutionaryIslamicTheme.textOnColor,
+                  padding: const EdgeInsets.symmetric(vertical: RevolutionaryIslamicTheme.space3),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusXl),
+                  ),
+                  elevation: 0,
                 ),
               ),
             ),
-            const SizedBox(width: 12),
+            const SizedBox(width: RevolutionaryIslamicTheme.space3),
             Expanded(
               child: ElevatedButton.icon(
                 onPressed: _showSessionDetails,
-                icon: const Icon(Icons.info),
+                icon: const Icon(Icons.info_outline_rounded),
                 label: const Text('Details'),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF6A4C93),
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  backgroundColor: RevolutionaryIslamicTheme.primaryEmerald,
+                  foregroundColor: RevolutionaryIslamicTheme.textOnColor,
+                  padding: const EdgeInsets.symmetric(vertical: RevolutionaryIslamicTheme.space3),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusXl),
+                  ),
+                  elevation: 0,
                 ),
               ),
             ),
@@ -310,12 +375,16 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
             Expanded(
               child: ElevatedButton.icon(
                 onPressed: _showStartDialog,
-                icon: const Icon(Icons.play_arrow),
+                icon: const Icon(Icons.play_arrow_rounded),
                 label: const Text('Start Session'),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF6A4C93),
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  backgroundColor: RevolutionaryIslamicTheme.primaryEmerald,
+                  foregroundColor: RevolutionaryIslamicTheme.textOnColor,
+                  padding: const EdgeInsets.symmetric(vertical: RevolutionaryIslamicTheme.space3),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusXl),
+                  ),
+                  elevation: 0,
                 ),
               ),
             ),
@@ -339,9 +408,14 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
     final sessionNotifier = ref.read(tasbihSessionProvider.notifier);
     await sessionNotifier.endSession();
 
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(const SnackBar(content: Text('Session completed! Well done.'), backgroundColor: Color(0xFF6A4C93)));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text('Session completed! Well done.'),
+        backgroundColor: RevolutionaryIslamicTheme.primaryEmerald,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusLg)),
+      ),
+    );
   }
 
   void _showStartDialog() {

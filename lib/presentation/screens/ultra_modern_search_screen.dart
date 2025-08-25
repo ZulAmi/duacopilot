@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/theme/ultra_modern_theme.dart';
-import '../../features/navigation/premium_features_menu.dart';
 import '../../services/ads/ad_service.dart';
 
 /// Ultra-Modern Islamic Search Screen with Glassmorphism & Floating Elements
@@ -292,7 +291,7 @@ class _UltraModernSearchScreenState extends ConsumerState<UltraModernSearchScree
       ),
 
       floatingActionButton: _buildFloatingActionButton(),
-      drawer: const PremiumFeaturesMenu(),
+      drawer: null, // Premium features menu removed
     );
   }
 

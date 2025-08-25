@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/theme/ultra_modern_theme.dart';
-import '../../features/navigation/premium_features_menu.dart';
 import '../../services/ads/ad_service.dart';
 import '../widgets/ads/ad_widgets.dart';
 import '../widgets/ultra_modern_components.dart';
@@ -237,7 +236,7 @@ class _UltraModernHomeScreenState extends ConsumerState<UltraModernHomeScreen> w
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      drawer: const PremiumFeaturesMenu(),
+      drawer: null, // Premium features menu removed
       body: CustomScrollView(
         controller: _scrollController,
         physics: const BouncingScrollPhysics(),
