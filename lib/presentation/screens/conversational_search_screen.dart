@@ -2,10 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../core/theme/revolutionary_islamic_theme.dart';
-import '../widgets/revolutionary_components.dart';
 import '../../services/ads/ad_service.dart';
 import '../widgets/ads/ad_widgets.dart';
+import '../widgets/revolutionary_components.dart';
 
 /// ConversationalSearchScreen class implementation
 class ConversationalSearchScreen extends ConsumerStatefulWidget {
@@ -207,16 +208,12 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
           // Search Header
           Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              gradient: RevolutionaryIslamicTheme.heroGradient,
-            ),
+            decoration: BoxDecoration(gradient: RevolutionaryIslamicTheme.heroGradient),
             child: Column(
               children: [
                 Text(
                   'Your AI Islamic Companion',
-                  style: RevolutionaryIslamicTheme.body1.copyWith(
-                    color: RevolutionaryIslamicTheme.textSecondary,
-                  ),
+                  style: RevolutionaryIslamicTheme.body1.copyWith(color: RevolutionaryIslamicTheme.textSecondary),
                   textAlign: TextAlign.center,
                 ),
               ],

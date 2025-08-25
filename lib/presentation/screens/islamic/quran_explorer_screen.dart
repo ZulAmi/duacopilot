@@ -100,7 +100,9 @@ class _QuranExplorerScreenState extends ConsumerState<QuranExplorerScreen> with 
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(RevolutionaryIslamicTheme.primaryEmerald)),
+          CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(RevolutionaryIslamicTheme.primaryEmerald),
+          ),
           SizedBox(height: 24),
           Text(
             'Loading Quran...',
@@ -123,7 +125,10 @@ class _QuranExplorerScreenState extends ConsumerState<QuranExplorerScreen> with 
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1), RevolutionaryIslamicTheme.secondaryNavy.withOpacity(0.1)],
+          colors: [
+            RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1),
+            RevolutionaryIslamicTheme.secondaryNavy.withOpacity(0.1),
+          ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -147,7 +152,11 @@ class _QuranExplorerScreenState extends ConsumerState<QuranExplorerScreen> with 
                   children: [
                     Text(
                       'Holy Quran',
-                      style: TextStyle(fontSize: 20, color: RevolutionaryIslamicTheme.textPrimary, fontWeight: FontWeight.w700),
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: RevolutionaryIslamicTheme.textPrimary,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                     Text(
                       '114 Surahs • 6,236 Verses',
@@ -209,7 +218,11 @@ class _QuranExplorerScreenState extends ConsumerState<QuranExplorerScreen> with 
           const SizedBox(height: 4),
           Text(
             value,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: RevolutionaryIslamicTheme.textPrimary),
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w700,
+              color: RevolutionaryIslamicTheme.textPrimary,
+            ),
           ),
           Text(title, style: const TextStyle(fontSize: 12, color: RevolutionaryIslamicTheme.textSecondary)),
         ],
@@ -289,7 +302,10 @@ class _QuranExplorerScreenState extends ConsumerState<QuranExplorerScreen> with 
                   height: 48,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [RevolutionaryIslamicTheme.primaryEmerald, RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.8)],
+                      colors: [
+                        RevolutionaryIslamicTheme.primaryEmerald,
+                        RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.8),
+                      ],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
@@ -398,7 +414,11 @@ class _QuranExplorerScreenState extends ConsumerState<QuranExplorerScreen> with 
                       ),
                       tooltip: surah.isFavorite ? 'Remove from favorites' : 'Add to favorites',
                     ),
-                    const Icon(Icons.arrow_forward_ios_rounded, color: RevolutionaryIslamicTheme.textSecondary, size: 16),
+                    const Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      color: RevolutionaryIslamicTheme.textSecondary,
+                      size: 16,
+                    ),
                   ],
                 ),
               ],
