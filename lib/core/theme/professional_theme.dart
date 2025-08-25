@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../typography/arabic_typography.dart';
 
 /// Professional Islamic Theme System with Enterprise-Grade Design
 class ProfessionalTheme {
@@ -294,87 +297,46 @@ class ProfessionalTheme {
   static TextTheme get textTheme => _buildTextTheme();
   static Color get primaryColor => primaryEmerald;
 
+  /// Build text theme with Arabic font support
   static TextTheme _buildTextTheme({bool isDark = false}) {
     final textColor = isDark ? const Color(0xFFF9FAFB) : textPrimary;
-    const fontFamily = 'Inter'; // Professional font family
 
     return TextTheme(
-      displayLarge: TextStyle(
+      displayLarge: GoogleFonts.inter(
         fontSize: 57,
         fontWeight: FontWeight.w400,
         letterSpacing: -0.25,
         color: textColor,
-        fontFamily: fontFamily,
       ),
-      displayMedium: TextStyle(fontSize: 45, fontWeight: FontWeight.w400, color: textColor, fontFamily: fontFamily),
-      displaySmall: TextStyle(fontSize: 36, fontWeight: FontWeight.w400, color: textColor, fontFamily: fontFamily),
-      headlineLarge: TextStyle(fontSize: 32, fontWeight: FontWeight.w600, color: textColor, fontFamily: fontFamily),
-      headlineMedium: TextStyle(fontSize: 28, fontWeight: FontWeight.w600, color: textColor, fontFamily: fontFamily),
-      headlineSmall: TextStyle(fontSize: 24, fontWeight: FontWeight.w600, color: textColor, fontFamily: fontFamily),
-      titleLarge: TextStyle(
-        fontSize: 22,
-        fontWeight: FontWeight.w600,
-        letterSpacing: 0,
-        color: textColor,
-        fontFamily: fontFamily,
-      ),
-      titleMedium: TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.w500,
-        letterSpacing: 0.15,
-        color: textColor,
-        fontFamily: fontFamily,
-      ),
-      titleSmall: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w500,
-        letterSpacing: 0.1,
-        color: textColor,
-        fontFamily: fontFamily,
-      ),
-      bodyLarge: TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.w400,
-        letterSpacing: 0.5,
-        color: textColor,
-        fontFamily: fontFamily,
-      ),
-      bodyMedium: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-        letterSpacing: 0.25,
-        color: textColor,
-        fontFamily: fontFamily,
-      ),
-      bodySmall: TextStyle(
-        fontSize: 12,
-        fontWeight: FontWeight.w400,
-        letterSpacing: 0.4,
-        color: textColor,
-        fontFamily: fontFamily,
-      ),
-      labelLarge: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w500,
-        letterSpacing: 0.1,
-        color: textColor,
-        fontFamily: fontFamily,
-      ),
-      labelMedium: TextStyle(
-        fontSize: 12,
-        fontWeight: FontWeight.w500,
-        letterSpacing: 0.5,
-        color: textColor,
-        fontFamily: fontFamily,
-      ),
-      labelSmall: TextStyle(
-        fontSize: 11,
-        fontWeight: FontWeight.w500,
-        letterSpacing: 0.5,
-        color: textColor,
-        fontFamily: fontFamily,
-      ),
+      displayMedium: GoogleFonts.inter(fontSize: 45, fontWeight: FontWeight.w400, color: textColor),
+      displaySmall: GoogleFonts.inter(fontSize: 36, fontWeight: FontWeight.w400, color: textColor),
+      headlineLarge: GoogleFonts.inter(fontSize: 32, fontWeight: FontWeight.w600, color: textColor),
+      headlineMedium: GoogleFonts.inter(fontSize: 28, fontWeight: FontWeight.w600, color: textColor),
+      headlineSmall: GoogleFonts.inter(fontSize: 24, fontWeight: FontWeight.w600, color: textColor),
+      titleLarge: GoogleFonts.inter(fontSize: 22, fontWeight: FontWeight.w600, letterSpacing: 0, color: textColor),
+      titleMedium: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w500, letterSpacing: 0.15, color: textColor),
+      titleSmall: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w500, letterSpacing: 0.1, color: textColor),
+      bodyLarge: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w400, letterSpacing: 0.5, color: textColor),
+      bodyMedium: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w400, letterSpacing: 0.25, color: textColor),
+      bodySmall: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w400, letterSpacing: 0.4, color: textColor),
+      labelLarge: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w500, letterSpacing: 0.1, color: textColor),
+      labelMedium: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w500, letterSpacing: 0.5, color: textColor),
+      labelSmall: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w500, letterSpacing: 0.5, color: textColor),
     );
+  }
+
+  /// Get Arabic-aware text style for specific content
+  static TextStyle getArabicAwareStyle(String text, TextStyle baseStyle) {
+    if (ArabicTypography.containsArabic(text)) {
+      return ArabicTypography.getArabicGoogleFont(
+        'readable',
+        fontSize: baseStyle.fontSize ?? 16,
+        fontWeight: baseStyle.fontWeight ?? FontWeight.normal,
+        color: baseStyle.color,
+        height: baseStyle.height,
+      );
+    }
+    return baseStyle;
   }
 }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
+
+import '../../../core/typography/arabic_typography.dart';
 
 /// ConversationalSearchField class implementation
 class ConversationalSearchField extends StatefulWidget {
@@ -334,23 +335,41 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField> w
         child: TextField(
           controller: _controller,
           focusNode: _focusNode,
-          textDirection: TextDirection.ltr, // Always left-to-right for English
-          textAlign: TextAlign.left, // Ensure text starts from left
+          textDirection: ArabicTypography.getTextDirection(_controller.text),
+          textAlign: ArabicTypography.getTextAlign(
+            _controller.text,
+            ArabicTypography.getTextDirection(_controller.text),
+          ),
           textInputAction: TextInputAction.search,
           onSubmitted: _onSubmitted,
-          style: textTheme.bodyLarge?.copyWith(
-            color: colorScheme.onSurface,
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-            height: 1.5,
-          ),
+          onChanged: (text) {
+            // Update text direction dynamically as user types
+            setState(() {});
+            widget.onTextChanged?.call(text);
+          },
+          style: textTheme.bodyLarge
+              ?.copyWith(color: colorScheme.onSurface, fontSize: 16, fontWeight: FontWeight.w400, height: 1.5)
+              .merge(
+                ArabicTypography.containsArabic(_controller.text)
+                    ? ArabicTextStyles.bodyLarge(context, fontType: 'readable')
+                    : null,
+              ),
           decoration: InputDecoration(
-            hintText: 'Ask about duas, verses, and Islamic guidance...',
-            hintStyle: textTheme.bodyLarge?.copyWith(
-              color: colorScheme.onSurfaceVariant.withOpacity(0.7),
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-            ),
+            hintText:
+                widget.supportArabic
+                    ? 'Ask about duas, verses, and Islamic guidance... | اسأل عن الأدعية والآيات والإرشادات الإسلامية...'
+                    : 'Ask about duas, verses, and Islamic guidance...',
+            hintStyle: textTheme.bodyLarge
+                ?.copyWith(
+                  color: colorScheme.onSurfaceVariant.withOpacity(0.7),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                )
+                .merge(
+                  widget.supportArabic && ArabicTypography.containsArabic(_controller.text)
+                      ? ArabicTextStyles.bodyMedium(context, fontType: 'readable')
+                      : null,
+                ),
             border: InputBorder.none,
             contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
             prefixIcon: Container(

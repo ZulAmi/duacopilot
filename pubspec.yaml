@@ -60,7 +60,7 @@ dependencies:
   # Premium Features - Qibla Compass & Tasbih
   sensors_plus: ^4.0.2
   vibration: ^1.8.4
-  wakelock_plus: ^1.2.5
+  wakelock_plus: ^1.2.1
   device_info_plus: ^10.1.2
 
   # Local Storage & Database
@@ -117,6 +117,14 @@ dependencies:
   path_provider: ^2.1.1
   http: ^1.1.0
   crypto: ^3.0.3
+
+  # Platform-Specific Optimization Dependencies
+  url_launcher: ^6.2.2  # Deep linking and external URL handling
+  app_links: ^6.1.4  # Advanced deep linking support
+  quick_actions: ^1.0.7  # iOS Shortcuts & Android App Shortcuts
+  flutter_native_splash: ^2.3.6  # Platform-specific splash screens
+  package_info_plus: ^8.3.1  # Platform-specific app info
+  flutter_background: ^1.2.0  # Advanced background processing
 
   # Intelligent Context-Aware Features
   flutter_local_notifications: ^17.2.2

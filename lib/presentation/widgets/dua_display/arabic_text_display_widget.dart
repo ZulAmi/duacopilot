@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../core/accessibility/arabic_accessibility.dart';
+
 /// ArabicTextDisplayWidget class implementation
 class ArabicTextDisplayWidget extends StatefulWidget {
   final String arabicText;
@@ -218,18 +220,14 @@ class _ArabicTextDisplayWidgetState extends State<ArabicTextDisplayWidget> with 
 
             const SizedBox(height: 16),
 
-            // Arabic text with Uthmanic script
-            SelectableText(
-              widget.arabicText,
-              style: GoogleFonts.amiriQuran(
-                fontSize: widget.arabicFontSize,
-                fontWeight: FontWeight.w400,
-                color: Theme.of(context).colorScheme.onSurface,
-                height: 2.0,
-                letterSpacing: 1.2,
-              ),
-              textAlign: widget.textAlign,
-              textDirection: TextDirection.rtl,
+            // Arabic text with enhanced typography
+            ArabicAccessibility.createIslamicContentWidget(
+              arabicText: widget.arabicText,
+              transliteration: _showTransliteration ? widget.transliteration : null,
+              translation: _showTranslation ? widget.translation : null,
+              context: context,
+              contentType: IslamicContentType.dua,
+              onTap: widget.onTextTap,
             ),
 
             const SizedBox(height: 16),
@@ -370,10 +368,11 @@ ${widget.transliteration}
 ${widget.translation}
 ''';
 
+    // Copy to clipboard using the comprehensive text
     // In a real app, implement clipboard functionality
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Du\'a copied to clipboard'),
+        content: Text('Du\'a copied to clipboard: ${text.substring(0, 50)}...'),
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
