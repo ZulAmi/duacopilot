@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import '../../core/theme/professional_theme.dart';
 
 /// Professional UI Components for Islamic App
 class ProfessionalComponents {
-  
   /// Professional App Bar with Islamic branding
   static PreferredSizeWidget appBar({
     required String title,
@@ -25,42 +25,33 @@ class ProfessionalComponents {
                 color: ProfessionalTheme.primaryEmerald.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(ProfessionalTheme.radiusSm),
               ),
-              child: const Icon(
-                Icons.mosque_rounded,
-                color: ProfessionalTheme.primaryEmerald,
-                size: 20,
-              ),
+              child: const Icon(Icons.mosque_rounded, color: ProfessionalTheme.primaryEmerald, size: 20),
             ),
             const SizedBox(width: 12),
           ],
           Text(
             title,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-              color: ProfessionalTheme.textPrimary,
-            ),
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: ProfessionalTheme.textPrimary),
           ),
         ],
       ),
       centerTitle: centerTitle,
-      leading: leading ?? (onMenuPressed != null
-          ? IconButton(
-              onPressed: onMenuPressed,
-              icon: const Icon(Icons.menu_rounded),
-              color: ProfessionalTheme.textPrimary,
-            )
-          : null),
+      leading:
+          leading ??
+          (onMenuPressed != null
+              ? IconButton(
+                onPressed: onMenuPressed,
+                icon: const Icon(Icons.menu_rounded),
+                color: ProfessionalTheme.textPrimary,
+              )
+              : null),
       actions: actions,
       backgroundColor: ProfessionalTheme.surfaceColor,
       elevation: 0,
       systemOverlayStyle: SystemUiOverlayStyle.dark,
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(1),
-        child: Container(
-          height: 1,
-          color: ProfessionalTheme.borderLight,
-        ),
+        child: Container(height: 1, color: ProfessionalTheme.borderLight),
       ),
     );
   }
@@ -87,36 +78,24 @@ class ProfessionalComponents {
         controller: controller,
         onSubmitted: onSubmitted,
         onChanged: onChanged,
-        style: const TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w400,
-          color: ProfessionalTheme.textPrimary,
-        ),
+        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: ProfessionalTheme.textPrimary),
         decoration: InputDecoration(
           hintText: isLoading ? 'Searching...' : hintText,
-          hintStyle: const TextStyle(
-            color: ProfessionalTheme.textTertiary,
-            fontSize: 16,
-          ),
-          prefixIcon: isLoading
-              ? Container(
-                  padding: const EdgeInsets.all(12),
-                  child: const SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        ProfessionalTheme.primaryEmerald,
+          hintStyle: const TextStyle(color: ProfessionalTheme.textTertiary, fontSize: 16),
+          prefixIcon:
+              isLoading
+                  ? Container(
+                    padding: const EdgeInsets.all(12),
+                    child: const SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        valueColor: AlwaysStoppedAnimation<Color>(ProfessionalTheme.primaryEmerald),
                       ),
                     ),
-                  ),
-                )
-              : const Icon(
-                  Icons.search_rounded,
-                  color: ProfessionalTheme.textSecondary,
-                  size: 24,
-                ),
+                  )
+                  : const Icon(Icons.search_rounded, color: ProfessionalTheme.textSecondary, size: 24),
           suffixIcon: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -125,31 +104,21 @@ class ProfessionalComponents {
                   margin: const EdgeInsets.only(right: 8),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: isVoiceListening
-                        ? ProfessionalTheme.primaryEmerald
-                        : ProfessionalTheme.gray100,
+                    color: isVoiceListening ? ProfessionalTheme.primaryEmerald : ProfessionalTheme.gray100,
                   ),
                   child: IconButton(
                     icon: Icon(
                       isVoiceListening ? Icons.mic : Icons.mic_none_rounded,
-                      color: isVoiceListening
-                          ? ProfessionalTheme.surfaceColor
-                          : ProfessionalTheme.textSecondary,
+                      color: isVoiceListening ? ProfessionalTheme.surfaceColor : ProfessionalTheme.textSecondary,
                     ),
                     onPressed: onVoiceSearch,
                   ),
                 ),
               Container(
                 margin: const EdgeInsets.only(right: 8),
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: ProfessionalTheme.primaryEmerald,
-                ),
+                decoration: const BoxDecoration(shape: BoxShape.circle, color: ProfessionalTheme.primaryEmerald),
                 child: IconButton(
-                  icon: const Icon(
-                    Icons.send_rounded,
-                    color: ProfessionalTheme.surfaceColor,
-                  ),
+                  icon: const Icon(Icons.send_rounded, color: ProfessionalTheme.surfaceColor),
                   onPressed: () {
                     final query = controller.text.trim();
                     if (query.isNotEmpty) {
@@ -190,16 +159,14 @@ class ProfessionalComponents {
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(ProfessionalTheme.radiusLg),
-          onTap: onTap != null
-              ? () {
-                  HapticFeedback.lightImpact();
-                  onTap();
-                }
-              : null,
-          child: Padding(
-            padding: padding ?? const EdgeInsets.all(ProfessionalTheme.spaceMd),
-            child: child,
-          ),
+          onTap:
+              onTap != null
+                  ? () {
+                    HapticFeedback.lightImpact();
+                    onTap();
+                  }
+                  : null,
+          child: Padding(padding: padding ?? const EdgeInsets.all(ProfessionalTheme.spaceMd), child: child),
         ),
       ),
     );
@@ -217,54 +184,45 @@ class ProfessionalComponents {
   }) {
     return SizedBox(
       width: width,
-      child: isOutlined
-          ? OutlinedButton.icon(
-              onPressed: enabled && !isLoading ? onPressed : null,
-              icon: isLoading
-                  ? const SizedBox(
-                      width: 16,
-                      height: 16,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          ProfessionalTheme.primaryEmerald,
-                        ),
-                      ),
-                    )
-                  : Icon(icon ?? Icons.arrow_forward_rounded),
-              label: Text(text),
-              style: OutlinedButton.styleFrom(
-                foregroundColor: enabled
-                    ? ProfessionalTheme.primaryEmerald
-                    : ProfessionalTheme.textTertiary,
-                side: BorderSide(
-                  color: enabled
-                      ? ProfessionalTheme.primaryEmerald
-                      : ProfessionalTheme.borderLight,
+      child:
+          isOutlined
+              ? OutlinedButton.icon(
+                onPressed: enabled && !isLoading ? onPressed : null,
+                icon:
+                    isLoading
+                        ? const SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            valueColor: AlwaysStoppedAnimation<Color>(ProfessionalTheme.primaryEmerald),
+                          ),
+                        )
+                        : Icon(icon ?? Icons.arrow_forward_rounded),
+                label: Text(text),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: enabled ? ProfessionalTheme.primaryEmerald : ProfessionalTheme.textTertiary,
+                  side: BorderSide(color: enabled ? ProfessionalTheme.primaryEmerald : ProfessionalTheme.borderLight),
+                ),
+              )
+              : ElevatedButton.icon(
+                onPressed: enabled && !isLoading ? onPressed : null,
+                icon:
+                    isLoading
+                        ? const SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            valueColor: AlwaysStoppedAnimation<Color>(ProfessionalTheme.surfaceColor),
+                          ),
+                        )
+                        : Icon(icon ?? Icons.arrow_forward_rounded),
+                label: Text(text),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: enabled ? ProfessionalTheme.primaryEmerald : ProfessionalTheme.gray300,
                 ),
               ),
-            )
-          : ElevatedButton.icon(
-              onPressed: enabled && !isLoading ? onPressed : null,
-              icon: isLoading
-                  ? const SizedBox(
-                      width: 16,
-                      height: 16,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          ProfessionalTheme.surfaceColor,
-                        ),
-                      ),
-                    )
-                  : Icon(icon ?? Icons.arrow_forward_rounded),
-              label: Text(text),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: enabled
-                    ? ProfessionalTheme.primaryEmerald
-                    : ProfessionalTheme.gray300,
-              ),
-            ),
     );
   }
 
@@ -287,28 +245,18 @@ class ProfessionalComponents {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: (iconColor ?? ProfessionalTheme.primaryEmerald)
-                      .withOpacity(0.1),
-                  borderRadius:
-                      BorderRadius.circular(ProfessionalTheme.radiusMd),
+                  color: (iconColor ?? ProfessionalTheme.primaryEmerald).withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(ProfessionalTheme.radiusMd),
                 ),
-                child: Icon(
-                  icon,
-                  color: iconColor ?? ProfessionalTheme.primaryEmerald,
-                  size: 24,
-                ),
+                child: Icon(icon, color: iconColor ?? ProfessionalTheme.primaryEmerald, size: 24),
               ),
               const Spacer(),
               if (badge != null)
                 Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 4,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: ProfessionalTheme.secondaryGold,
-                    borderRadius:
-                        BorderRadius.circular(ProfessionalTheme.radiusSm),
+                    borderRadius: BorderRadius.circular(ProfessionalTheme.radiusSm),
                   ),
                   child: Text(
                     badge,
@@ -324,43 +272,23 @@ class ProfessionalComponents {
           const SizedBox(height: ProfessionalTheme.spaceMd),
           Text(
             title,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              color: ProfessionalTheme.textPrimary,
-            ),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: ProfessionalTheme.textPrimary),
           ),
           const SizedBox(height: ProfessionalTheme.spaceXs),
-          Text(
-            description,
-            style: const TextStyle(
-              fontSize: 14,
-              color: ProfessionalTheme.textSecondary,
-              height: 1.4,
-            ),
-          ),
+          Text(description, style: const TextStyle(fontSize: 14, color: ProfessionalTheme.textSecondary, height: 1.4)),
         ],
       ),
     );
   }
 
   /// Professional Stats Card
-  static Widget statsCard({
-    required String value,
-    required String label,
-    IconData? icon,
-    Color? accentColor,
-  }) {
+  static Widget statsCard({required String value, required String label, IconData? icon, Color? accentColor}) {
     return card(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           if (icon != null) ...[
-            Icon(
-              icon,
-              color: accentColor ?? ProfessionalTheme.primaryEmerald,
-              size: 28,
-            ),
+            Icon(icon, color: accentColor ?? ProfessionalTheme.primaryEmerald, size: 28),
             const SizedBox(height: ProfessionalTheme.spaceXs),
           ],
           Text(
@@ -374,11 +302,7 @@ class ProfessionalComponents {
           const SizedBox(height: ProfessionalTheme.spaceXs),
           Text(
             label,
-            style: const TextStyle(
-              fontSize: 12,
-              color: ProfessionalTheme.textSecondary,
-              fontWeight: FontWeight.w500,
-            ),
+            style: const TextStyle(fontSize: 12, color: ProfessionalTheme.textSecondary, fontWeight: FontWeight.w500),
             textAlign: TextAlign.center,
           ),
         ],
@@ -387,10 +311,7 @@ class ProfessionalComponents {
   }
 
   /// Professional Loading Indicator
-  static Widget loadingIndicator({
-    String? message,
-    double size = 24,
-  }) {
+  static Widget loadingIndicator({String? message, double size = 24}) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -398,9 +319,7 @@ class ProfessionalComponents {
           width: size,
           height: size,
           child: const CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(
-              ProfessionalTheme.primaryEmerald,
-            ),
+            valueColor: AlwaysStoppedAnimation<Color>(ProfessionalTheme.primaryEmerald),
             strokeWidth: 3,
           ),
         ),
@@ -408,10 +327,7 @@ class ProfessionalComponents {
           const SizedBox(height: ProfessionalTheme.spaceMd),
           Text(
             message,
-            style: const TextStyle(
-              color: ProfessionalTheme.textSecondary,
-              fontSize: 14,
-            ),
+            style: const TextStyle(color: ProfessionalTheme.textSecondary, fontSize: 14),
             textAlign: TextAlign.center,
           ),
         ],
@@ -434,40 +350,22 @@ class ProfessionalComponents {
           children: [
             Container(
               padding: const EdgeInsets.all(ProfessionalTheme.spaceLg),
-              decoration: BoxDecoration(
-                color: ProfessionalTheme.gray100,
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                icon,
-                size: 48,
-                color: ProfessionalTheme.textTertiary,
-              ),
+              decoration: BoxDecoration(color: ProfessionalTheme.gray100, shape: BoxShape.circle),
+              child: Icon(icon, size: 48, color: ProfessionalTheme.textTertiary),
             ),
             const SizedBox(height: ProfessionalTheme.spaceLg),
             Text(
               title,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                color: ProfessionalTheme.textPrimary,
-              ),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: ProfessionalTheme.textPrimary),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: ProfessionalTheme.spaceXs),
             Text(
               description,
-              style: const TextStyle(
-                fontSize: 14,
-                color: ProfessionalTheme.textSecondary,
-                height: 1.4,
-              ),
+              style: const TextStyle(fontSize: 14, color: ProfessionalTheme.textSecondary, height: 1.4),
               textAlign: TextAlign.center,
             ),
-            if (action != null) ...[
-              const SizedBox(height: ProfessionalTheme.spaceLg),
-              action,
-            ],
+            if (action != null) ...[const SizedBox(height: ProfessionalTheme.spaceLg), action],
           ],
         ),
       ),
@@ -486,60 +384,59 @@ class ProfessionalComponents {
       isDismissible: isDismissible,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (context) => Container(
-        decoration: const BoxDecoration(
-          color: ProfessionalTheme.surfaceColor,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(ProfessionalTheme.radiusXl),
-            topRight: Radius.circular(ProfessionalTheme.radiusXl),
-          ),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (title != null) ...[
-              Container(
-                padding: const EdgeInsets.all(ProfessionalTheme.spaceMd),
-                decoration: const BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(color: ProfessionalTheme.borderLight),
+      builder:
+          (context) => Container(
+            decoration: const BoxDecoration(
+              color: ProfessionalTheme.surfaceColor,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(ProfessionalTheme.radiusXl),
+                topRight: Radius.circular(ProfessionalTheme.radiusXl),
+              ),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (title != null) ...[
+                  Container(
+                    padding: const EdgeInsets.all(ProfessionalTheme.spaceMd),
+                    decoration: const BoxDecoration(
+                      border: Border(bottom: BorderSide(color: ProfessionalTheme.borderLight)),
+                    ),
+                    child: Row(
+                      children: [
+                        Text(
+                          title,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            color: ProfessionalTheme.textPrimary,
+                          ),
+                        ),
+                        const Spacer(),
+                        IconButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          icon: const Icon(Icons.close_rounded),
+                          color: ProfessionalTheme.textSecondary,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                child: Row(
-                  children: [
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: ProfessionalTheme.textPrimary,
-                      ),
+                ] else ...[
+                  Container(
+                    margin: const EdgeInsets.only(top: 12),
+                    width: 32,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: ProfessionalTheme.borderMedium,
+                      borderRadius: BorderRadius.circular(2),
                     ),
-                    const Spacer(),
-                    IconButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      icon: const Icon(Icons.close_rounded),
-                      color: ProfessionalTheme.textSecondary,
-                    ),
-                  ],
-                ),
-              ),
-            ] else ...[
-              Container(
-                margin: const EdgeInsets.only(top: 12),
-                width: 32,
-                height: 4,
-                decoration: BoxDecoration(
-                  color: ProfessionalTheme.borderMedium,
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-              const SizedBox(height: 8),
-            ],
-            Flexible(child: child),
-          ],
-        ),
-      ),
+                  ),
+                  const SizedBox(height: 8),
+                ],
+                Flexible(child: child),
+              ],
+            ),
+          ),
     );
   }
 
@@ -555,28 +452,46 @@ class ProfessionalComponents {
       SnackBar(
         content: Row(
           children: [
-            if (icon != null) ...[
-              Icon(icon, color: ProfessionalTheme.surfaceColor),
-              const SizedBox(width: 12),
-            ],
-            Expanded(
-              child: Text(
-                message,
-                style: const TextStyle(
-                  color: ProfessionalTheme.surfaceColor,
-                  fontSize: 14,
-                ),
-              ),
-            ),
+            if (icon != null) ...[Icon(icon, color: ProfessionalTheme.surfaceColor), const SizedBox(width: 12)],
+            Expanded(child: Text(message, style: const TextStyle(color: ProfessionalTheme.surfaceColor, fontSize: 14))),
           ],
         ),
-        backgroundColor:
-            backgroundColor ?? ProfessionalTheme.textPrimary,
+        backgroundColor: backgroundColor ?? ProfessionalTheme.textPrimary,
         behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(ProfessionalTheme.radiusMd),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(ProfessionalTheme.radiusMd)),
         action: action,
+      ),
+    );
+  }
+
+  /// Professional Section Header
+  static Widget buildSectionHeader(String title, String? subtitle, {Widget? trailing, EdgeInsetsGeometry? padding}) {
+    return Container(
+      padding: padding ?? const EdgeInsets.symmetric(vertical: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    color: ProfessionalTheme.textPrimary,
+                  ),
+                ),
+              ),
+              if (trailing != null) trailing,
+            ],
+          ),
+          if (subtitle != null) ...[
+            const SizedBox(height: 4),
+            Text(subtitle, style: const TextStyle(fontSize: 14, color: ProfessionalTheme.textSecondary)),
+          ],
+        ],
       ),
     );
   }
