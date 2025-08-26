@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>DuaCopilot - Islamic Du'a Assistant</title>
+  <meta name="description" content="DuaCopilot - Your Islamic Du'a and Prayer Assistant">
+  <script>
+    // Redirect to the root with the current path as a query parameter
+    // This helps with client-side routing in Flutter web apps
+    var path = window.location.pathname;
+    var query = window.location.search;
+    var redirect = '/duacopilot/' + '?redirect=' + encodeURIComponent(path + query);
+    window.location.replace(redirect);
+  </script>
+</head>
+<body>
+  <p>Redirecting...</p>
+</body>
+</html>

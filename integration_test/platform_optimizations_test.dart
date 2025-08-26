@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_print
 import 'package:duacopilot/main.dart' as app;
 import 'package:duacopilot/services/platform/enhanced_audio_session_manager.dart';
 import 'package:duacopilot/services/platform/enhanced_background_task_optimizer.dart';
@@ -16,17 +17,13 @@ void main() {
 
     setUpAll(() async {
       app.main();
-      await Future.delayed(
-        const Duration(seconds: 2),
-      ); // Wait for app initialization
+      await Future.delayed(const Duration(seconds: 2)); // Wait for app initialization
 
       platformService = PlatformOptimizationService.instance;
       integrationService = PlatformIntegrationService.instance;
     });
 
-    testWidgets('Platform Detection and Basic Capabilities', (
-      WidgetTester tester,
-    ) async {
+    testWidgets('Platform Detection and Basic Capabilities', (WidgetTester tester) async {
       await tester.pumpAndSettle();
 
       // Test platform detection
@@ -40,15 +37,9 @@ void main() {
       print('Device Model: ${deviceInfo.model}');
 
       // Test feature support methods
-      final supportsBackgroundAudio = platformService.isFeatureSupported(
-        'supportsBackgroundAudio',
-      );
-      final supportsNotifications = platformService.isFeatureSupported(
-        'supportsNotifications',
-      );
-      final supportsSharing = platformService.isFeatureSupported(
-        'supportsSharing',
-      );
+      final supportsBackgroundAudio = platformService.isFeatureSupported('supportsBackgroundAudio');
+      final supportsNotifications = platformService.isFeatureSupported('supportsNotifications');
+      final supportsSharing = platformService.isFeatureSupported('supportsSharing');
 
       expect(supportsBackgroundAudio, isA<bool>());
       expect(supportsNotifications, isA<bool>());
@@ -59,9 +50,7 @@ void main() {
       print('Sharing Support: $supportsSharing');
     });
 
-    testWidgets('Audio Session Manager Basic Operations', (
-      WidgetTester tester,
-    ) async {
+    testWidgets('Audio Session Manager Basic Operations', (WidgetTester tester) async {
       await tester.pumpAndSettle();
 
       final audioManager = EnhancedAudioSessionManager.instance;
@@ -84,9 +73,7 @@ void main() {
       expect(() => EnhancedAudioSessionManager.instance, returnsNormally);
     });
 
-    testWidgets('Notification Strategy Manager Initialization', (
-      WidgetTester tester,
-    ) async {
+    testWidgets('Notification Strategy Manager Initialization', (WidgetTester tester) async {
       await tester.pumpAndSettle();
 
       final notificationManager = EnhancedNotificationStrategyManager.instance;
@@ -102,15 +89,10 @@ void main() {
 
       // Test that the service exists
       expect(notificationManager, isNotNull);
-      expect(
-        () => EnhancedNotificationStrategyManager.instance,
-        returnsNormally,
-      );
+      expect(() => EnhancedNotificationStrategyManager.instance, returnsNormally);
     });
 
-    testWidgets('Background Task Optimizer Initialization', (
-      WidgetTester tester,
-    ) async {
+    testWidgets('Background Task Optimizer Initialization', (WidgetTester tester) async {
       await tester.pumpAndSettle();
 
       final backgroundOptimizer = EnhancedBackgroundTaskOptimizer.instance;
@@ -147,9 +129,7 @@ void main() {
       }
     });
 
-    testWidgets('Platform Integration Service Coordination', (
-      WidgetTester tester,
-    ) async {
+    testWidgets('Platform Integration Service Coordination', (WidgetTester tester) async {
       await tester.pumpAndSettle();
 
       // Test service initialization
@@ -199,9 +179,7 @@ void main() {
     });
 
     group('Platform-Specific Feature Tests', () {
-      testWidgets('iOS vs Android vs Web Differences', (
-        WidgetTester tester,
-      ) async {
+      testWidgets('iOS vs Android vs Web Differences', (WidgetTester tester) async {
         await tester.pumpAndSettle();
 
         final platformType = platformService.platformType;
@@ -241,26 +219,11 @@ void main() {
       await tester.pumpAndSettle();
 
       // Test that all services follow singleton pattern
-      expect(
-        PlatformOptimizationService.instance,
-        same(PlatformOptimizationService.instance),
-      );
-      expect(
-        EnhancedAudioSessionManager.instance,
-        same(EnhancedAudioSessionManager.instance),
-      );
-      expect(
-        EnhancedNotificationStrategyManager.instance,
-        same(EnhancedNotificationStrategyManager.instance),
-      );
-      expect(
-        EnhancedBackgroundTaskOptimizer.instance,
-        same(EnhancedBackgroundTaskOptimizer.instance),
-      );
-      expect(
-        PlatformIntegrationService.instance,
-        same(PlatformIntegrationService.instance),
-      );
+      expect(PlatformOptimizationService.instance, same(PlatformOptimizationService.instance));
+      expect(EnhancedAudioSessionManager.instance, same(EnhancedAudioSessionManager.instance));
+      expect(EnhancedNotificationStrategyManager.instance, same(EnhancedNotificationStrategyManager.instance));
+      expect(EnhancedBackgroundTaskOptimizer.instance, same(EnhancedBackgroundTaskOptimizer.instance));
+      expect(PlatformIntegrationService.instance, same(PlatformIntegrationService.instance));
 
       print('All services follow singleton pattern correctly');
     });
@@ -269,17 +232,14 @@ void main() {
       await tester.pumpAndSettle();
 
       const arabicText = 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ';
-      const translation =
-          'In the name of Allah, the Most Gracious, the Most Merciful';
+      const translation = 'In the name of Allah, the Most Gracious, the Most Merciful';
 
       // Test that Arabic text can be handled by the platform services
       expect(arabicText.isNotEmpty, true);
       expect(translation.isNotEmpty, true);
 
       // Test platform sharing capability with Arabic text
-      final sharingSupported = platformService.isFeatureSupported(
-        'supportsSharing',
-      );
+      final sharingSupported = platformService.isFeatureSupported('supportsSharing');
       expect(sharingSupported, isA<bool>());
 
       if (sharingSupported) {
@@ -289,9 +249,7 @@ void main() {
       }
     });
 
-    testWidgets('Error Handling and Graceful Degradation', (
-      WidgetTester tester,
-    ) async {
+    testWidgets('Error Handling and Graceful Degradation', (WidgetTester tester) async {
       await tester.pumpAndSettle();
 
       // Test that services handle errors gracefully
@@ -308,9 +266,7 @@ void main() {
     });
 
     group('Performance and Memory Tests', () {
-      testWidgets('Service Initialization Performance', (
-        WidgetTester tester,
-      ) async {
+      testWidgets('Service Initialization Performance', (WidgetTester tester) async {
         await tester.pumpAndSettle();
 
         final stopwatch = Stopwatch()..start();
@@ -333,8 +289,7 @@ void main() {
 
         final platformService = PlatformOptimizationService.instance;
         final audioManager = EnhancedAudioSessionManager.instance;
-        final notificationManager =
-            EnhancedNotificationStrategyManager.instance;
+        final notificationManager = EnhancedNotificationStrategyManager.instance;
         final backgroundOptimizer = EnhancedBackgroundTaskOptimizer.instance;
         final integrationService = PlatformIntegrationService.instance;
 

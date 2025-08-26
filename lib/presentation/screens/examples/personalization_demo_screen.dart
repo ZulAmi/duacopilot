@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../widgets/professional_components.dart';
+
 import '../../../core/theme/professional_theme.dart';
-import '../../../services/personalization/user_personalization_service.dart';
 import '../../../services/personalization/personalization_models.dart';
+import '../../../services/personalization/user_personalization_service.dart';
+import '../../widgets/professional_components.dart';
 
 /// Demonstration screen for comprehensive user personalization system
 ///
@@ -18,12 +19,10 @@ class PersonalizationDemoScreen extends ConsumerStatefulWidget {
   const PersonalizationDemoScreen({super.key});
 
   @override
-  ConsumerState<PersonalizationDemoScreen> createState() =>
-      _PersonalizationDemoScreenState();
+  ConsumerState<PersonalizationDemoScreen> createState() => _PersonalizationDemoScreenState();
 }
 
-class _PersonalizationDemoScreenState
-    extends ConsumerState<PersonalizationDemoScreen>
+class _PersonalizationDemoScreenState extends ConsumerState<PersonalizationDemoScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final _personalizationService = UserPersonalizationService.instance;
@@ -34,13 +33,6 @@ class _PersonalizationDemoScreenState
   final List<String> _preferredLanguages = ['en', 'ar'];
   String _primaryLanguage = 'en';
   PrivacyLevel _privacyLevel = PrivacyLevel.balanced;
-
-  // Session context
-  final Map<String, dynamic> _sessionContext = {};
-
-  // Demo recommendations
-  List<EnhancedRecommendation> _recommendations = [];
-  List<EnhancedRecommendation> _contextualSuggestions = [];
 
   // Interaction tracking
   int _totalInteractions = 0;
@@ -72,15 +64,6 @@ class _PersonalizationDemoScreenState
         }
       });
 
-      // Listen to recommendations
-      _personalizationService.recommendationsStream.listen((recommendations) {
-        if (mounted) {
-          setState(() {
-            _recommendations = recommendations;
-          });
-        }
-      });
-
       setState(() {
         _isInitialized = true;
       });
@@ -97,8 +80,7 @@ class _PersonalizationDemoScreenState
       case UpdateType.interaction:
         _totalInteractions++;
         final interaction = update.data as DuaInteraction;
-        _interactionTypes[interaction.type.name] =
-            (_interactionTypes[interaction.type.name] ?? 0) + 1;
+        _interactionTypes[interaction.type.name] = (_interactionTypes[interaction.type.name] ?? 0) + 1;
         break;
       case UpdateType.culturalPreferences:
         // Handle cultural preference updates
@@ -120,29 +102,20 @@ class _PersonalizationDemoScreenState
 
   Future<void> _loadContextualSuggestions() async {
     try {
-      final suggestions = await _personalizationService
-          .getContextualSuggestions(limit: 5);
-      setState(() {
-        _contextualSuggestions = suggestions;
-      });
+      final suggestions = await _personalizationService.getContextualSuggestions(limit: 5);
+      // Suggestions would be used to update UI in a real implementation
+      debugPrint('Loaded ${suggestions.length} contextual suggestions');
     } catch (e) {
       debugPrint('Error loading contextual suggestions: $e');
     }
   }
 
-  Future<void> _simulateDuaInteraction(
-    String duaId,
-    InteractionType type,
-  ) async {
+  Future<void> _simulateDuaInteraction(String duaId, InteractionType type) async {
     await _personalizationService.trackDuaInteraction(
       duaId: duaId,
       type: type,
       duration: const Duration(seconds: 30),
-      metadata: {
-        'language': _primaryLanguage,
-        'cultural_context': 'demo',
-        'session_id': 'demo_session',
-      },
+      metadata: {'language': _primaryLanguage, 'cultural_context': 'demo', 'session_id': 'demo_session'},
     );
   }
 
@@ -235,17 +208,14 @@ class _PersonalizationDemoScreenState
         children: [
           Text(
             'Usage Pattern Tracking',
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: ProfessionalTheme.textPrimary,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: ProfessionalTheme.textPrimary),
           ),
           const SizedBox(height: 4),
           Text(
             'Local storage with SharedPreferences',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: ProfessionalTheme.textSecondary,
-            ),
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ProfessionalTheme.textSecondary),
           ),
 
           const SizedBox(height: 16),
@@ -284,9 +254,7 @@ class _PersonalizationDemoScreenState
                 children: [
                   Text(
                     'Interaction Types',
-                    style: ProfessionalTheme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: ProfessionalTheme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12),
                   ..._interactionTypes.entries.map(
@@ -298,8 +266,7 @@ class _PersonalizationDemoScreenState
                           Text(entry.key.toUpperCase()),
                           Chip(
                             label: Text('${entry.value}'),
-                            backgroundColor: ProfessionalTheme.primaryColor
-                                .withOpacity(0.1),
+                            backgroundColor: ProfessionalTheme.primaryColor.withOpacity(0.1),
                           ),
                         ],
                       ),
@@ -341,17 +308,13 @@ class _PersonalizationDemoScreenState
                 children: [
                   Text(
                     'Preferred Languages',
-                    style: ProfessionalTheme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: ProfessionalTheme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12),
                   Wrap(
                     spacing: 8,
                     children:
-                        ['English', 'Arabic', 'Urdu', 'Turkish', 'Malay'].map((
-                          language,
-                        ) {
+                        ['English', 'Arabic', 'Urdu', 'Turkish', 'Malay'].map((language) {
                           final code = language.substring(0, 2).toLowerCase();
                           final isSelected = _preferredLanguages.contains(code);
                           return FilterChip(
@@ -385,29 +348,18 @@ class _PersonalizationDemoScreenState
                 children: [
                   Text(
                     'Primary Language',
-                    style: ProfessionalTheme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: ProfessionalTheme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12),
                   DropdownButtonFormField<String>(
                     value: _primaryLanguage,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 8,
-                      ),
+                      contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
                     items: [
-                      const DropdownMenuItem(
-                        value: 'en',
-                        child: Text('English'),
-                      ),
-                      const DropdownMenuItem(
-                        value: 'ar',
-                        child: Text('Arabic'),
-                      ),
+                      const DropdownMenuItem(value: 'en', child: Text('English')),
+                      const DropdownMenuItem(value: 'ar', child: Text('Arabic')),
                       const DropdownMenuItem(value: 'ur', child: Text('Urdu')),
                     ],
                     onChanged: (value) {
@@ -446,10 +398,7 @@ class _PersonalizationDemoScreenState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ProfessionalComponents.buildSectionHeader(
-            'Temporal Pattern Recognition',
-            'DateTime analysis for habits',
-          ),
+          ProfessionalComponents.buildSectionHeader('Temporal Pattern Recognition', 'DateTime analysis for habits'),
 
           const SizedBox(height: 16),
 
@@ -462,18 +411,13 @@ class _PersonalizationDemoScreenState
                 children: [
                   Text(
                     'Current Time Context',
-                    style: ProfessionalTheme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: ProfessionalTheme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12),
                   _buildTimeContextItem('Time of Day', _getTimeOfDay()),
                   _buildTimeContextItem('Day of Week', _getDayOfWeek()),
                   _buildTimeContextItem('Islamic Date', 'Loading...'),
-                  _buildTimeContextItem(
-                    'Prayer Time Context',
-                    'Between Dhuhr & Asr',
-                  ),
+                  _buildTimeContextItem('Prayer Time Context', 'Between Dhuhr & Asr'),
                 ],
               ),
             ),
@@ -490,9 +434,7 @@ class _PersonalizationDemoScreenState
                 children: [
                   Text(
                     'Habit Strength Analysis',
-                    style: ProfessionalTheme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: ProfessionalTheme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12),
                   _buildHabitStrengthItem('Morning Du\'as', 0.8),
@@ -514,10 +456,7 @@ class _PersonalizationDemoScreenState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ProfessionalComponents.buildSectionHeader(
-            'Islamic Calendar Integration',
-            'Seasonal Du\'a recommendations',
-          ),
+          ProfessionalComponents.buildSectionHeader('Islamic Calendar Integration', 'Seasonal Du\'a recommendations'),
 
           const SizedBox(height: 16),
 
@@ -530,17 +469,12 @@ class _PersonalizationDemoScreenState
                 children: [
                   Text(
                     'Islamic Calendar Context',
-                    style: ProfessionalTheme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: ProfessionalTheme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12),
                   _buildCalendarContextItem('Current Month', 'Rabi\' al-awwal'),
                   _buildCalendarContextItem('Is Holy Month', 'No'),
-                  _buildCalendarContextItem(
-                    'Special Occasion',
-                    'Mawlid an-Nabi approaching',
-                  ),
+                  _buildCalendarContextItem('Special Occasion', 'Mawlid an-Nabi approaching'),
                   _buildCalendarContextItem('Season', 'Winter'),
                 ],
               ),
@@ -558,9 +492,7 @@ class _PersonalizationDemoScreenState
                 children: [
                   Text(
                     'Seasonal Recommendations',
-                    style: ProfessionalTheme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: ProfessionalTheme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12),
                   _buildRecommendationItem(
@@ -609,9 +541,7 @@ class _PersonalizationDemoScreenState
                 children: [
                   Text(
                     'Privacy Level',
-                    style: ProfessionalTheme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: ProfessionalTheme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12),
                   ...PrivacyLevel.values.map(
@@ -645,35 +575,13 @@ class _PersonalizationDemoScreenState
                 children: [
                   Text(
                     'Data Processing',
-                    style: ProfessionalTheme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: ProfessionalTheme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12),
-                  _buildDataProcessingItem(
-                    'Local Storage',
-                    'SharedPreferences',
-                    Icons.storage,
-                    true,
-                  ),
-                  _buildDataProcessingItem(
-                    'On-Device Processing',
-                    'Compute Isolates',
-                    Icons.security,
-                    true,
-                  ),
-                  _buildDataProcessingItem(
-                    'Cloud Sync',
-                    'Optional',
-                    Icons.cloud_off,
-                    false,
-                  ),
-                  _buildDataProcessingItem(
-                    'Analytics',
-                    'Privacy-Preserving',
-                    Icons.analytics,
-                    true,
-                  ),
+                  _buildDataProcessingItem('Local Storage', 'SharedPreferences', Icons.storage, true),
+                  _buildDataProcessingItem('On-Device Processing', 'Compute Isolates', Icons.security, true),
+                  _buildDataProcessingItem('Cloud Sync', 'Optional', Icons.cloud_off, false),
+                  _buildDataProcessingItem('Analytics', 'Privacy-Preserving', Icons.analytics, true),
                 ],
               ),
             ),
@@ -683,12 +591,7 @@ class _PersonalizationDemoScreenState
     );
   }
 
-  Widget _buildStatCard(
-    String title,
-    String value,
-    IconData icon,
-    Color color,
-  ) {
+  Widget _buildStatCard(String title, String value, IconData icon, Color color) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -699,16 +602,11 @@ class _PersonalizationDemoScreenState
             const SizedBox(height: 8),
             Text(
               value,
-              style: ProfessionalTheme.textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: color,
-              ),
+              style: ProfessionalTheme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold, color: color),
             ),
             Text(
               title,
-              style: ProfessionalTheme.textTheme.bodyMedium?.copyWith(
-                color: Colors.grey[600],
-              ),
+              style: ProfessionalTheme.textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
               textAlign: TextAlign.center,
             ),
           ],
@@ -721,41 +619,24 @@ class _PersonalizationDemoScreenState
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Quick Actions',
-          style: ProfessionalTheme.textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        Text('Quick Actions', style: ProfessionalTheme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
         const SizedBox(height: 12),
         Wrap(
           spacing: 8,
           runSpacing: 8,
           children: [
             ElevatedButton.icon(
-              onPressed:
-                  () => _simulateDuaInteraction(
-                    'morning_duas',
-                    InteractionType.read,
-                  ),
+              onPressed: () => _simulateDuaInteraction('morning_duas', InteractionType.read),
               icon: const Icon(Icons.wb_sunny),
               label: const Text('Read Morning Du\'as'),
             ),
             ElevatedButton.icon(
-              onPressed:
-                  () => _simulateDuaInteraction(
-                    'travel_duas',
-                    InteractionType.bookmark,
-                  ),
+              onPressed: () => _simulateDuaInteraction('travel_duas', InteractionType.bookmark),
               icon: const Icon(Icons.bookmark),
               label: const Text('Bookmark Travel Du\'as'),
             ),
             ElevatedButton.icon(
-              onPressed:
-                  () => _simulateDuaInteraction(
-                    'evening_dhikr',
-                    InteractionType.audio,
-                  ),
+              onPressed: () => _simulateDuaInteraction('evening_dhikr', InteractionType.audio),
               icon: const Icon(Icons.play_arrow),
               label: const Text('Play Evening Dhikr'),
             ),
@@ -770,10 +651,7 @@ class _PersonalizationDemoScreenState
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(label),
-          Text(value, style: const TextStyle(fontWeight: FontWeight.bold)),
-        ],
+        children: [Text(label), Text(value, style: const TextStyle(fontWeight: FontWeight.bold))],
       ),
     );
   }
@@ -810,19 +688,12 @@ class _PersonalizationDemoScreenState
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(label),
-          Text(value, style: const TextStyle(fontWeight: FontWeight.bold)),
-        ],
+        children: [Text(label), Text(value, style: const TextStyle(fontWeight: FontWeight.bold))],
       ),
     );
   }
 
-  Widget _buildRecommendationItem(
-    String title,
-    String description,
-    IconData icon,
-  ) {
+  Widget _buildRecommendationItem(String title, String description, IconData icon) {
     return ListTile(
       leading: Icon(icon, color: ProfessionalTheme.primaryColor),
       title: Text(title),
@@ -834,20 +705,13 @@ class _PersonalizationDemoScreenState
     );
   }
 
-  Widget _buildDataProcessingItem(
-    String title,
-    String description,
-    IconData icon,
-    bool enabled,
-  ) {
+  Widget _buildDataProcessingItem(String title, String description, IconData icon, bool enabled) {
     return ListTile(
       leading: Icon(icon, color: enabled ? Colors.green : Colors.grey),
       title: Text(title),
       subtitle: Text(description),
       trailing:
-          enabled
-              ? const Icon(Icons.check_circle, color: Colors.green)
-              : const Icon(Icons.cancel, color: Colors.grey),
+          enabled ? const Icon(Icons.check_circle, color: Colors.green) : const Icon(Icons.cancel, color: Colors.grey),
     );
   }
 
@@ -860,15 +724,7 @@ class _PersonalizationDemoScreenState
   }
 
   String _getDayOfWeek() {
-    final days = [
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-      'Sunday',
-    ];
+    final days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     return days[DateTime.now().weekday - 1];
   }
 
@@ -895,13 +751,7 @@ class _PersonalizationDemoScreenState
   }
 
   void _simulateRandomInteraction() {
-    final duaIds = [
-      'morning_duas',
-      'travel_duas',
-      'evening_dhikr',
-      'meal_duas',
-      'sleep_duas',
-    ];
+    final duaIds = ['morning_duas', 'travel_duas', 'evening_dhikr', 'meal_duas', 'sleep_duas'];
     final types = InteractionType.values;
 
     final randomDua = duaIds[DateTime.now().millisecond % duaIds.length];

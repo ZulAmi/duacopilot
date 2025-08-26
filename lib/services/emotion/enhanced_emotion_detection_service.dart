@@ -6,25 +6,20 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/logging/app_logger.dart';
 import '../../domain/entities/conversation_entity.dart';
-import '../secure_storage/secure_storage_service.dart';
 
 /// Enhanced emotion detection service for sophisticated Du'a matching
 /// Uses advanced NLP techniques and Islamic context awareness
 class EnhancedEmotionDetectionService {
   static EnhancedEmotionDetectionService? _instance;
-  static EnhancedEmotionDetectionService get instance =>
-      _instance ??= EnhancedEmotionDetectionService._();
+  static EnhancedEmotionDetectionService get instance => _instance ??= EnhancedEmotionDetectionService._();
 
   EnhancedEmotionDetectionService._();
 
   // Core services
-  late SecureStorageService _secureStorage;
   SharedPreferences? _prefs;
 
   // Configuration
   static const String _emotionHistoryKey = 'emotion_history';
-  static const String _emotionPatternsKey = 'emotion_patterns';
-  static const double _confidenceThreshold = 0.6;
   static const int _maxHistoryEntries = 500;
 
   // State management
@@ -34,262 +29,126 @@ class EnhancedEmotionDetectionService {
 
   // Advanced emotion detection models
   late Map<String, EmotionModel> _emotionModels;
-  late Map<String, List<String>> _culturalExpressions;
   late Map<String, double> _contextWeights;
 
   // Stream controllers
-  final _emotionDetectionController =
-      StreamController<EmotionalDetection>.broadcast();
-  final _emotionPatternController =
-      StreamController<EmotionalPattern>.broadcast();
+  final _emotionDetectionController = StreamController<EmotionalDetection>.broadcast();
+  final _emotionPatternController = StreamController<EmotionalPattern>.broadcast();
 
   // Public streams
-  Stream<EmotionalDetection> get emotionDetectionStream =>
-      _emotionDetectionController.stream;
-  Stream<EmotionalPattern> get emotionPatternStream =>
-      _emotionPatternController.stream;
+  Stream<EmotionalDetection> get emotionDetectionStream => _emotionDetectionController.stream;
+  Stream<EmotionalPattern> get emotionPatternStream => _emotionPatternController.stream;
 
   // Comprehensive emotion lexicon with cultural variations
-  static const Map<EmotionalState, Map<String, List<String>>> _emotionLexicon =
-      {
-        EmotionalState.anxious: {
-          'english': [
-            'anxious',
-            'worried',
-            'nervous',
-            'tense',
-            'restless',
-            'uneasy',
-            'distressed',
-            'troubled',
-            'apprehensive',
-            'fearful',
-            'panicked',
-            'stressed',
-            'overwhelmed',
-          ],
-          'arabic': [
-            'قلق',
-            'خائف',
-            'مضطرب',
-            'متوتر',
-            'مرتبك',
-            'مشدود',
-            'خوف',
-            'رهبة',
-          ],
-          'urdu': ['پریشان', 'بے چین', 'گھبرایا', 'خوفزدہ', 'فکرمند', 'تشویش'],
-          'contextual': [
-            'can\'t sleep',
-            'heart racing',
-            'can\'t focus',
-            'feel sick',
-            'shaking',
-            'sweating',
-          ],
-        },
-        EmotionalState.grateful: {
-          'english': [
-            'grateful',
-            'thankful',
-            'blessed',
-            'appreciate',
-            'honored',
-            'privileged',
-            'fortunate',
-            'indebted',
-            'appreciative',
-          ],
-          'arabic': ['شاكر', 'ممتن', 'مبارك', 'محظوظ', 'نعمة', 'بركة', 'حمد'],
-          'urdu': [
-            'شکر گزار',
-            'ممنون',
-            'احسان مند',
-            'برکت',
-            'نعمت',
-            'خوش قسمت',
-          ],
-          'contextual': [
-            'alhamdulillah',
-            'thank allah',
-            'so blessed',
-            'allah\'s mercy',
-            'count blessings',
-          ],
-        },
-        EmotionalState.sad: {
-          'english': [
-            'sad',
-            'depressed',
-            'down',
-            'melancholy',
-            'heartbroken',
-            'grief',
-            'sorrow',
-            'despair',
-            'dejected',
-            'gloomy',
-            'miserable',
-          ],
-          'arabic': ['حزين', 'مكتئب', 'غم', 'أسى', 'كآبة', 'يأس', 'حسرة'],
-          'urdu': ['اداس', 'غمگین', 'افسردہ', 'دکھی', 'رنجیدہ', 'پریشان'],
-          'contextual': [
-            'feel empty',
-            'lost someone',
-            'everything dark',
-            'no hope',
-            'crying',
-          ],
-        },
-        EmotionalState.uncertain: {
-          'english': [
-            'uncertain',
-            'confused',
-            'doubtful',
-            'hesitant',
-            'lost',
-            'unclear',
-            'puzzled',
-            'bewildered',
-            'perplexed',
-            'conflicted',
-          ],
-          'arabic': ['محتار', 'متردد', 'مشكوك', 'غير متأكد', 'حائر', 'متضارب'],
-          'urdu': ['شک', 'تذبذب', 'کنفیوزڈ', 'الجھن', 'بے یقینی'],
-          'contextual': [
-            'don\'t know what to do',
-            'which path',
-            'need guidance',
-            'torn between',
-            'can\'t decide',
-          ],
-        },
-        EmotionalState.seeking_guidance: {
-          'english': [
-            'guidance',
-            'help',
-            'direction',
-            'advice',
-            'support',
-            'assistance',
-            'counsel',
-            'wisdom',
-            'insight',
-          ],
-          'arabic': ['هداية', 'إرشاد', 'نصح', 'مساعدة', 'دعم', 'توجيه', 'حكمة'],
-          'urdu': ['ہدایت', 'رہنمائی', 'مدد', 'نصیحت', 'راہ', 'سپورٹ'],
-          'contextual': [
-            'need allah\'s help',
-            'show me the way',
-            'what should i do',
-            'pray for guidance',
-            'lost my way',
-          ],
-        },
-        EmotionalState.hopeful: {
-          'english': [
-            'hopeful',
-            'optimistic',
-            'positive',
-            'confident',
-            'expectant',
-            'encouraged',
-            'inspired',
-            'uplifted',
-          ],
-          'arabic': ['متفائل', 'راجي', 'مأمول', 'واثق', 'مشجع', 'ملهم'],
-          'urdu': ['امیدوار', 'مثبت', 'خوش امید', 'حوصلہ مند', 'متوقع'],
-          'contextual': [
-            'things will improve',
-            'allah will provide',
-            'trust in allah',
-            'better days',
-            'have faith',
-          ],
-        },
-        EmotionalState.worried: {
-          'english': [
-            'worried',
-            'concerned',
-            'troubled',
-            'apprehensive',
-            'anxious about',
-            'bothered',
-            'disturbed',
-          ],
-          'arabic': ['مهموم', 'قلق', 'مضطرب', 'خائف من', 'مشغول البال'],
-          'urdu': ['فکرمند', 'پریشان', 'بے چینی', 'تشویش', 'خدشہ'],
-          'contextual': [
-            'what if',
-            'scared that',
-            'worried about',
-            'concerned for',
-            'fear for',
-          ],
-        },
-        EmotionalState.excited: {
-          'english': [
-            'excited',
-            'thrilled',
-            'enthusiastic',
-            'elated',
-            'joyful',
-            'happy',
-            'delighted',
-            'ecstatic',
-          ],
-          'arabic': ['متحمس', 'مبتهج', 'فرح', 'سعيد', 'مسرور', 'مرح'],
-          'urdu': ['پرجوش', 'خوش', 'مسرور', 'خوشی', 'جوش', 'ولولہ'],
-          'contextual': [
-            'can\'t wait',
-            'so happy',
-            'amazing news',
-            'allah blessed',
-            'fantastic',
-          ],
-        },
-        EmotionalState.peaceful: {
-          'english': [
-            'peaceful',
-            'calm',
-            'serene',
-            'tranquil',
-            'relaxed',
-            'content',
-            'at ease',
-            'harmonious',
-          ],
-          'arabic': ['هادئ', 'مطمئن', 'ساكن', 'راض', 'مرتاح', 'سلام'],
-          'urdu': ['پُر سکون', 'اطمینان', 'سکون', 'آرام', 'راحت'],
-          'contextual': [
-            'feel at peace',
-            'allah\'s peace',
-            'heart calm',
-            'no worries',
-            'content',
-          ],
-        },
-        EmotionalState.fearful: {
-          'english': [
-            'fearful',
-            'scared',
-            'afraid',
-            'terrified',
-            'frightened',
-            'petrified',
-            'horrified',
-          ],
-          'arabic': ['خائف', 'مذعور', 'مرعوب', 'فزع', 'هلع', 'رعب'],
-          'urdu': ['خوفزدہ', 'ڈرا ہوا', 'خائف', 'دہشت زدہ', 'گھبرایا'],
-          'contextual': [
-            'so scared',
-            'afraid of',
-            'terrified',
-            'fear allah\'s punishment',
-            'nightmares',
-          ],
-        },
-      };
+  static const Map<EmotionalState, Map<String, List<String>>> _emotionLexicon = {
+    EmotionalState.anxious: {
+      'english': [
+        'anxious',
+        'worried',
+        'nervous',
+        'tense',
+        'restless',
+        'uneasy',
+        'distressed',
+        'troubled',
+        'apprehensive',
+        'fearful',
+        'panicked',
+        'stressed',
+        'overwhelmed',
+      ],
+      'arabic': ['قلق', 'خائف', 'مضطرب', 'متوتر', 'مرتبك', 'مشدود', 'خوف', 'رهبة'],
+      'urdu': ['پریشان', 'بے چین', 'گھبرایا', 'خوفزدہ', 'فکرمند', 'تشویش'],
+      'contextual': ['can\'t sleep', 'heart racing', 'can\'t focus', 'feel sick', 'shaking', 'sweating'],
+    },
+    EmotionalState.grateful: {
+      'english': [
+        'grateful',
+        'thankful',
+        'blessed',
+        'appreciate',
+        'honored',
+        'privileged',
+        'fortunate',
+        'indebted',
+        'appreciative',
+      ],
+      'arabic': ['شاكر', 'ممتن', 'مبارك', 'محظوظ', 'نعمة', 'بركة', 'حمد'],
+      'urdu': ['شکر گزار', 'ممنون', 'احسان مند', 'برکت', 'نعمت', 'خوش قسمت'],
+      'contextual': ['alhamdulillah', 'thank allah', 'so blessed', 'allah\'s mercy', 'count blessings'],
+    },
+    EmotionalState.sad: {
+      'english': [
+        'sad',
+        'depressed',
+        'down',
+        'melancholy',
+        'heartbroken',
+        'grief',
+        'sorrow',
+        'despair',
+        'dejected',
+        'gloomy',
+        'miserable',
+      ],
+      'arabic': ['حزين', 'مكتئب', 'غم', 'أسى', 'كآبة', 'يأس', 'حسرة'],
+      'urdu': ['اداس', 'غمگین', 'افسردہ', 'دکھی', 'رنجیدہ', 'پریشان'],
+      'contextual': ['feel empty', 'lost someone', 'everything dark', 'no hope', 'crying'],
+    },
+    EmotionalState.uncertain: {
+      'english': [
+        'uncertain',
+        'confused',
+        'doubtful',
+        'hesitant',
+        'lost',
+        'unclear',
+        'puzzled',
+        'bewildered',
+        'perplexed',
+        'conflicted',
+      ],
+      'arabic': ['محتار', 'متردد', 'مشكوك', 'غير متأكد', 'حائر', 'متضارب'],
+      'urdu': ['شک', 'تذبذب', 'کنفیوزڈ', 'الجھن', 'بے یقینی'],
+      'contextual': ['don\'t know what to do', 'which path', 'need guidance', 'torn between', 'can\'t decide'],
+    },
+    EmotionalState.seeking_guidance: {
+      'english': ['guidance', 'help', 'direction', 'advice', 'support', 'assistance', 'counsel', 'wisdom', 'insight'],
+      'arabic': ['هداية', 'إرشاد', 'نصح', 'مساعدة', 'دعم', 'توجيه', 'حكمة'],
+      'urdu': ['ہدایت', 'رہنمائی', 'مدد', 'نصیحت', 'راہ', 'سپورٹ'],
+      'contextual': ['need allah\'s help', 'show me the way', 'what should i do', 'pray for guidance', 'lost my way'],
+    },
+    EmotionalState.hopeful: {
+      'english': ['hopeful', 'optimistic', 'positive', 'confident', 'expectant', 'encouraged', 'inspired', 'uplifted'],
+      'arabic': ['متفائل', 'راجي', 'مأمول', 'واثق', 'مشجع', 'ملهم'],
+      'urdu': ['امیدوار', 'مثبت', 'خوش امید', 'حوصلہ مند', 'متوقع'],
+      'contextual': ['things will improve', 'allah will provide', 'trust in allah', 'better days', 'have faith'],
+    },
+    EmotionalState.worried: {
+      'english': ['worried', 'concerned', 'troubled', 'apprehensive', 'anxious about', 'bothered', 'disturbed'],
+      'arabic': ['مهموم', 'قلق', 'مضطرب', 'خائف من', 'مشغول البال'],
+      'urdu': ['فکرمند', 'پریشان', 'بے چینی', 'تشویش', 'خدشہ'],
+      'contextual': ['what if', 'scared that', 'worried about', 'concerned for', 'fear for'],
+    },
+    EmotionalState.excited: {
+      'english': ['excited', 'thrilled', 'enthusiastic', 'elated', 'joyful', 'happy', 'delighted', 'ecstatic'],
+      'arabic': ['متحمس', 'مبتهج', 'فرح', 'سعيد', 'مسرور', 'مرح'],
+      'urdu': ['پرجوش', 'خوش', 'مسرور', 'خوشی', 'جوش', 'ولولہ'],
+      'contextual': ['can\'t wait', 'so happy', 'amazing news', 'allah blessed', 'fantastic'],
+    },
+    EmotionalState.peaceful: {
+      'english': ['peaceful', 'calm', 'serene', 'tranquil', 'relaxed', 'content', 'at ease', 'harmonious'],
+      'arabic': ['هادئ', 'مطمئن', 'ساكن', 'راض', 'مرتاح', 'سلام'],
+      'urdu': ['پُر سکون', 'اطمینان', 'سکون', 'آرام', 'راحت'],
+      'contextual': ['feel at peace', 'allah\'s peace', 'heart calm', 'no worries', 'content'],
+    },
+    EmotionalState.fearful: {
+      'english': ['fearful', 'scared', 'afraid', 'terrified', 'frightened', 'petrified', 'horrified'],
+      'arabic': ['خائف', 'مذعور', 'مرعوب', 'فزع', 'هلع', 'رعب'],
+      'urdu': ['خوفزدہ', 'ڈرا ہوا', 'خائف', 'دہشت زدہ', 'گھبرایا'],
+      'contextual': ['so scared', 'afraid of', 'terrified', 'fear allah\'s punishment', 'nightmares'],
+    },
+  };
 
   // Islamic emotional expressions and phrases
   static const Map<String, EmotionalState> _islamicExpressions = {
@@ -327,14 +186,10 @@ class EnhancedEmotionDetectionService {
     try {
       AppLogger.info('Initializing Enhanced Emotion Detection Service...');
 
-      _secureStorage = SecureStorageService.instance;
       _prefs = await SharedPreferences.getInstance();
 
       // Initialize emotion models
       await _initializeEmotionModels();
-
-      // Load cultural expressions
-      await _loadCulturalExpressions();
 
       // Initialize context weights
       _initializeContextWeights();
@@ -343,13 +198,9 @@ class EnhancedEmotionDetectionService {
       await _loadEmotionHistory();
 
       _isInitialized = true;
-      AppLogger.info(
-        'Enhanced Emotion Detection Service initialized successfully',
-      );
+      AppLogger.info('Enhanced Emotion Detection Service initialized successfully');
     } catch (e) {
-      AppLogger.error(
-        'Failed to initialize Enhanced Emotion Detection Service: $e',
-      );
+      AppLogger.error('Failed to initialize Enhanced Emotion Detection Service: $e');
       throw Exception('Emotion detection service initialization failed');
     }
   }
@@ -368,14 +219,8 @@ class EnhancedEmotionDetectionService {
       final detectedLanguage = language ?? await _detectLanguage(text);
 
       // Multi-model emotion analysis
-      final lexicalEmotion = _detectLexicalEmotion(
-        processedText,
-        detectedLanguage,
-      );
-      final contextualEmotion = _detectContextualEmotion(
-        processedText,
-        context,
-      );
+      final lexicalEmotion = _detectLexicalEmotion(processedText, detectedLanguage);
+      final contextualEmotion = _detectContextualEmotion(processedText, context);
       final islamicEmotion = _detectIslamicEmotion(processedText);
       final historicalEmotion = _getHistoricalEmotionBias(userId);
 
@@ -389,8 +234,7 @@ class EnhancedEmotionDetectionService {
 
       // Apply intensity modifiers
       final intensityScore = _calculateIntensityScore(processedText);
-      final adjustedConfidence = (combinedResult.confidence * intensityScore)
-          .clamp(0.0, 1.0);
+      final adjustedConfidence = (combinedResult.confidence * intensityScore).clamp(0.0, 1.0);
 
       final detection = EmotionalDetection(
         id: 'emotion_${DateTime.now().millisecondsSinceEpoch}',
@@ -495,10 +339,7 @@ class EnhancedEmotionDetectionService {
 
     // Add cultural context if available
     if (culturalContext != null) {
-      final culturalDuas = await _getCulturalDuaRecommendations(
-        emotion,
-        culturalContext,
-      );
+      final culturalDuas = await _getCulturalDuaRecommendations(emotion, culturalContext);
       recommendations.addAll(culturalDuas);
     }
 
@@ -512,10 +353,7 @@ class EnhancedEmotionDetectionService {
   }
 
   /// Get emotion history for user
-  Future<List<EmotionalDetection>> getEmotionHistory(
-    String userId, {
-    int limit = 50,
-  }) async {
+  Future<List<EmotionalDetection>> getEmotionHistory(String userId, {int limit = 50}) async {
     await _ensureInitialized();
     final history = _emotionHistory[userId] ?? [];
     return history.reversed.take(limit).toList();
@@ -542,29 +380,8 @@ class EnhancedEmotionDetectionService {
     }
   }
 
-  Future<void> _loadCulturalExpressions() async {
-    _culturalExpressions = {
-      'islamic': _islamicExpressions.keys.toList(),
-      'arabic':
-          _emotionLexicon.values
-              .expand((lang) => lang['arabic'] ?? <String>[])
-              .cast<String>()
-              .toList(),
-      'urdu':
-          _emotionLexicon.values
-              .expand((lang) => lang['urdu'] ?? <String>[])
-              .cast<String>()
-              .toList(),
-    };
-  }
-
   void _initializeContextWeights() {
-    _contextWeights = {
-      'lexical': 0.4,
-      'contextual': 0.3,
-      'islamic': 0.2,
-      'historical': 0.1,
-    };
+    _contextWeights = {'lexical': 0.4, 'contextual': 0.3, 'islamic': 0.2, 'historical': 0.1};
   }
 
   Future<void> _loadEmotionHistory() async {
@@ -574,9 +391,7 @@ class EnhancedEmotionDetectionService {
         final data = jsonDecode(historyJson) as Map<String, dynamic>;
         data.forEach((userId, history) {
           _emotionHistory[userId] =
-              (history as List<dynamic>)
-                  .map((item) => EmotionalDetection.fromJson(item))
-                  .toList();
+              (history as List<dynamic>).map((item) => EmotionalDetection.fromJson(item)).toList();
         });
       }
     } catch (e) {
@@ -656,21 +471,13 @@ class EnhancedEmotionDetectionService {
       return EmotionResult(EmotionalState.neutral, 0.5);
     }
 
-    final topEmotion = emotionScores.entries.reduce(
-      (a, b) => a.value > b.value ? a : b,
-    );
+    final topEmotion = emotionScores.entries.reduce((a, b) => a.value > b.value ? a : b);
 
-    final confidence = (topEmotion.value / (text.split(' ').length + 1)).clamp(
-      0.0,
-      1.0,
-    );
+    final confidence = (topEmotion.value / (text.split(' ').length + 1)).clamp(0.0, 1.0);
     return EmotionResult(topEmotion.key, confidence);
   }
 
-  EmotionResult _detectContextualEmotion(
-    String text,
-    Map<String, dynamic>? context,
-  ) {
+  EmotionResult _detectContextualEmotion(String text, Map<String, dynamic>? context) {
     if (context == null) {
       return EmotionResult(EmotionalState.neutral, 0.0);
     }
@@ -691,8 +498,7 @@ class EnhancedEmotionDetectionService {
     if (situation != null) {
       if (situation.contains('work') || situation.contains('exam')) {
         anxietyScore += 0.3;
-      } else if (situation.contains('family') ||
-          situation.contains('celebration')) {
+      } else if (situation.contains('family') || situation.contains('celebration')) {
         gratitudeScore += 0.3;
       }
     }
@@ -725,14 +531,9 @@ class EnhancedEmotionDetectionService {
       return EmotionResult(EmotionalState.neutral, 0.0);
     }
 
-    final topEmotion = emotionScores.entries.reduce(
-      (a, b) => a.value > b.value ? a : b,
-    );
+    final topEmotion = emotionScores.entries.reduce((a, b) => a.value > b.value ? a : b);
 
-    return EmotionResult(
-      topEmotion.key,
-      (topEmotion.value / totalScore).clamp(0.0, 1.0),
-    );
+    return EmotionResult(topEmotion.key, (topEmotion.value / totalScore).clamp(0.0, 1.0));
   }
 
   EmotionResult _getHistoricalEmotionBias(String userId) {
@@ -746,17 +547,14 @@ class EnhancedEmotionDetectionService {
     final emotionCounts = <EmotionalState, int>{};
 
     for (final detection in recentEmotions) {
-      emotionCounts[detection.detectedEmotion] =
-          (emotionCounts[detection.detectedEmotion] ?? 0) + 1;
+      emotionCounts[detection.detectedEmotion] = (emotionCounts[detection.detectedEmotion] ?? 0) + 1;
     }
 
     if (emotionCounts.isEmpty) {
       return EmotionResult(EmotionalState.neutral, 0.0);
     }
 
-    final mostFrequent = emotionCounts.entries.reduce(
-      (a, b) => a.value > b.value ? a : b,
-    );
+    final mostFrequent = emotionCounts.entries.reduce((a, b) => a.value > b.value ? a : b);
 
     final confidence = (mostFrequent.value / recentEmotions.length) * 0.3;
     return EmotionResult(mostFrequent.key, confidence);
@@ -775,18 +573,14 @@ class EnhancedEmotionDetectionService {
       final result = results[i];
       final weight = weights[i];
 
-      weightedScores[result.emotion] =
-          (weightedScores[result.emotion] ?? 0.0) +
-          (result.confidence * weight);
+      weightedScores[result.emotion] = (weightedScores[result.emotion] ?? 0.0) + (result.confidence * weight);
     }
 
     if (weightedScores.isEmpty) {
       return EmotionResult(EmotionalState.neutral, 0.5);
     }
 
-    final topEmotion = weightedScores.entries.reduce(
-      (a, b) => a.value > b.value ? a : b,
-    );
+    final topEmotion = weightedScores.entries.reduce((a, b) => a.value > b.value ? a : b);
 
     return EmotionResult(topEmotion.key, topEmotion.value.clamp(0.0, 1.0));
   }
@@ -808,8 +602,7 @@ class EnhancedEmotionDetectionService {
     }
 
     // Check for capital letters (intensity indicator)
-    final capitalRatio =
-        text.split('').where((c) => c == c.toUpperCase()).length / text.length;
+    final capitalRatio = text.split('').where((c) => c == c.toUpperCase()).length / text.length;
     if (capitalRatio > 0.3) {
       intensity *= 1.1;
     }
@@ -818,23 +611,15 @@ class EnhancedEmotionDetectionService {
   }
 
   List<String> _findIslamicExpressions(String text) {
-    return _islamicExpressions.keys
-        .where((expr) => text.contains(expr))
-        .toList();
+    return _islamicExpressions.keys.where((expr) => text.contains(expr)).toList();
   }
 
-  Future<void> _updateEmotionHistory(
-    String userId,
-    EmotionalDetection detection,
-  ) async {
+  Future<void> _updateEmotionHistory(String userId, EmotionalDetection detection) async {
     _emotionHistory.putIfAbsent(userId, () => []).insert(0, detection);
 
     // Limit history size
     if (_emotionHistory[userId]!.length > _maxHistoryEntries) {
-      _emotionHistory[userId]!.removeRange(
-        _maxHistoryEntries,
-        _emotionHistory[userId]!.length,
-      );
+      _emotionHistory[userId]!.removeRange(_maxHistoryEntries, _emotionHistory[userId]!.length);
     }
 
     await _saveEmotionHistory();
@@ -844,8 +629,7 @@ class EnhancedEmotionDetectionService {
     try {
       final historyData = <String, dynamic>{};
       _emotionHistory.forEach((userId, history) {
-        historyData[userId] =
-            history.map((detection) => detection.toJson()).toList();
+        historyData[userId] = history.map((detection) => detection.toJson()).toList();
       });
 
       await _prefs?.setString(_emotionHistoryKey, jsonEncode(historyData));
@@ -871,66 +655,45 @@ class EnhancedEmotionDetectionService {
     _emotionPatternController.add(patterns);
   }
 
-  EmotionalPattern _identifyEmotionalPatterns(
-    List<EmotionalDetection> history,
-  ) {
+  EmotionalPattern _identifyEmotionalPatterns(List<EmotionalDetection> history) {
     final emotionCounts = <EmotionalState, int>{};
     final emotionConfidences = <EmotionalState, List<double>>{};
 
     for (final detection in history) {
-      emotionCounts[detection.detectedEmotion] =
-          (emotionCounts[detection.detectedEmotion] ?? 0) + 1;
-      emotionConfidences
-          .putIfAbsent(detection.detectedEmotion, () => [])
-          .add(detection.confidence);
+      emotionCounts[detection.detectedEmotion] = (emotionCounts[detection.detectedEmotion] ?? 0) + 1;
+      emotionConfidences.putIfAbsent(detection.detectedEmotion, () => []).add(detection.confidence);
     }
 
     // Calculate dominant emotions
-    final sortedEmotions =
-        emotionCounts.entries.toList()
-          ..sort((a, b) => b.value.compareTo(a.value));
+    final sortedEmotions = emotionCounts.entries.toList()..sort((a, b) => b.value.compareTo(a.value));
 
-    final dominantEmotions =
-        sortedEmotions.take(3).map((entry) => entry.key).toList();
+    final dominantEmotions = sortedEmotions.take(3).map((entry) => entry.key).toList();
 
     // Calculate stability (variance in emotions)
-    final stability = _calculateEmotionalStability(
-      emotionCounts,
-      history.length,
-    );
+    final stability = _calculateEmotionalStability(emotionCounts, history.length);
 
     return EmotionalPattern(
       userId: history.first.userId,
       dominantEmotions: dominantEmotions,
       stability: stability,
-      culturalContext:
-          'general', // Would be enhanced with actual cultural analysis
+      culturalContext: 'general', // Would be enhanced with actual cultural analysis
       patternStrength: sortedEmotions.first.value / history.length,
       analysisDate: DateTime.now(),
     );
   }
 
-  double _calculateEmotionalStability(
-    Map<EmotionalState, int> emotionCounts,
-    int totalCount,
-  ) {
+  double _calculateEmotionalStability(Map<EmotionalState, int> emotionCounts, int totalCount) {
     if (emotionCounts.length <= 1) return 1.0;
 
     final mean = totalCount / emotionCounts.length;
     final variance =
-        emotionCounts.values
-            .map((count) => pow(count - mean, 2))
-            .reduce((a, b) => a + b) /
-        emotionCounts.length;
+        emotionCounts.values.map((count) => pow(count - mean, 2)).reduce((a, b) => a + b) / emotionCounts.length;
 
     // Convert variance to stability score (0-1, higher = more stable)
     return (1.0 / (1.0 + variance / mean)).clamp(0.0, 1.0);
   }
 
-  Future<List<String>> _getCulturalDuaRecommendations(
-    EmotionalState emotion,
-    String culturalContext,
-  ) async {
+  Future<List<String>> _getCulturalDuaRecommendations(EmotionalState emotion, String culturalContext) async {
     // This would be enhanced with actual cultural Du'a database
     return ['Cultural Du\'a recommendation for $culturalContext context'];
   }
@@ -956,11 +719,7 @@ class EmotionModel {
   final Map<String, List<String>> keywords;
   final double confidence;
 
-  EmotionModel({
-    required this.emotion,
-    required this.keywords,
-    required this.confidence,
-  });
+  EmotionModel({required this.emotion, required this.keywords, required this.confidence});
 }
 
 class EmotionalDetection {
