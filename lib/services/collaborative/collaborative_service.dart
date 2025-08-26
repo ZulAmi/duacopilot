@@ -12,7 +12,8 @@ import '../secure_storage/secure_storage_service.dart';
 /// Handles real-time family collaboration, sharing, and group activities
 class CollaborativeService {
   static CollaborativeService? _instance;
-  static CollaborativeService get instance => _instance ??= CollaborativeService._();
+  static CollaborativeService get instance =>
+      _instance ??= CollaborativeService._();
 
   CollaborativeService._();
 
@@ -31,20 +32,31 @@ class CollaborativeService {
   String? _currentUserId;
 
   // Stream controllers for collaborative events
-  final _familyDuaSharedController = StreamController<FamilyDuaShare>.broadcast();
-  final _familyMemberJoinedController = StreamController<FamilyMemberJoined>.broadcast();
-  final _familyMemberLeftController = StreamController<FamilyMemberLeft>.broadcast();
-  final _collaborativeEditController = StreamController<CollaborativeEdit>.broadcast();
-  final _familyActivityController = StreamController<FamilyActivity>.broadcast();
+  final _familyDuaSharedController =
+      StreamController<FamilyDuaShare>.broadcast();
+  final _familyMemberJoinedController =
+      StreamController<FamilyMemberJoined>.broadcast();
+  final _familyMemberLeftController =
+      StreamController<FamilyMemberLeft>.broadcast();
+  final _collaborativeEditController =
+      StreamController<CollaborativeEdit>.broadcast();
+  final _familyActivityController =
+      StreamController<FamilyActivity>.broadcast();
   final _prayerSessionController = StreamController<PrayerSession>.broadcast();
 
   // Public streams
-  Stream<FamilyDuaShare> get familyDuaSharedStream => _familyDuaSharedController.stream;
-  Stream<FamilyMemberJoined> get familyMemberJoinedStream => _familyMemberJoinedController.stream;
-  Stream<FamilyMemberLeft> get familyMemberLeftStream => _familyMemberLeftController.stream;
-  Stream<CollaborativeEdit> get collaborativeEditStream => _collaborativeEditController.stream;
-  Stream<FamilyActivity> get familyActivityStream => _familyActivityController.stream;
-  Stream<PrayerSession> get prayerSessionStream => _prayerSessionController.stream;
+  Stream<FamilyDuaShare> get familyDuaSharedStream =>
+      _familyDuaSharedController.stream;
+  Stream<FamilyMemberJoined> get familyMemberJoinedStream =>
+      _familyMemberJoinedController.stream;
+  Stream<FamilyMemberLeft> get familyMemberLeftStream =>
+      _familyMemberLeftController.stream;
+  Stream<CollaborativeEdit> get collaborativeEditStream =>
+      _collaborativeEditController.stream;
+  Stream<FamilyActivity> get familyActivityStream =>
+      _familyActivityController.stream;
+  Stream<PrayerSession> get prayerSessionStream =>
+      _prayerSessionController.stream;
 
   // Family data caching
   final Map<String, FamilyMember> _familyMembers = {};
@@ -100,14 +112,17 @@ class CollaborativeService {
   /// Setup connectivity monitoring
   Future<void> _setupConnectivityMonitoring() async {
     final connectivity = Connectivity();
-    _isOnline = await connectivity.checkConnectivity() != ConnectivityResult.none;
+    _isOnline =
+        await connectivity.checkConnectivity() != ConnectivityResult.none;
 
     connectivity.onConnectivityChanged.listen((result) {
       final wasOnline = _isOnline;
       _isOnline = result != ConnectivityResult.none;
 
       if (!wasOnline && _isOnline && _currentFamilyId != null) {
-        AppLogger.info('🌐 Internet restored, reconnecting to family collaboration...');
+        AppLogger.info(
+          '🌐 Internet restored, reconnecting to family collaboration...',
+        );
         _initializeSocketConnection();
       } else if (wasOnline && !_isOnline) {
         AppLogger.warning('📡 Internet lost, collaborative features offline');
@@ -128,7 +143,11 @@ class CollaborativeService {
         'https://api.duacopilot.com',
         IO.OptionBuilder()
             .setTransports(['websocket'])
-            .setAuth({if (token != null) 'token': token, 'user_id': _currentUserId, 'family_id': _currentFamilyId})
+            .setAuth({
+              if (token != null) 'token': token,
+              'user_id': _currentUserId,
+              'family_id': _currentFamilyId,
+            })
             .enableReconnection()
             .setReconnectionAttempts(5)
             .setReconnectionDelay(5000)
@@ -196,7 +215,10 @@ class CollaborativeService {
   /// Join family room for collaborative features
   void _joinFamilyRoom() {
     if (_socket?.connected == true && _currentFamilyId != null) {
-      _socket!.emit('join_family', {'family_id': _currentFamilyId, 'user_id': _currentUserId});
+      _socket!.emit('join_family', {
+        'family_id': _currentFamilyId,
+        'user_id': _currentUserId,
+      });
       AppLogger.info('👨‍👩‍👧‍👦 Joined family room: $_currentFamilyId');
     }
   }
@@ -326,7 +348,10 @@ class CollaborativeService {
   }
 
   /// Create a family group
-  Future<void> createFamily({required String familyName, String? description}) async {
+  Future<void> createFamily({
+    required String familyName,
+    String? description,
+  }) async {
     try {
       final familyId = 'family_${DateTime.now().millisecondsSinceEpoch}';
 
@@ -602,7 +627,10 @@ class CollaborativeService {
         membersData[id] = member.toJson();
       });
 
-      await _prefs.setString('family_members_$_currentFamilyId', jsonEncode(membersData));
+      await _prefs.setString(
+        'family_members_$_currentFamilyId',
+        jsonEncode(membersData),
+      );
     } catch (e) {
       AppLogger.error('❌ Failed to save family members: $e');
     }
@@ -615,7 +643,9 @@ class CollaborativeService {
       if (sharesJson != null) {
         final sharesData = jsonDecode(sharesJson) as List<dynamic>;
         _recentShares.clear();
-        _recentShares.addAll(sharesData.map((data) => FamilyDuaShare.fromJson(data)).toList());
+        _recentShares.addAll(
+          sharesData.map((data) => FamilyDuaShare.fromJson(data)).toList(),
+        );
       }
     } catch (e) {
       AppLogger.error('❌ Failed to load recent shares: $e');
@@ -628,7 +658,10 @@ class CollaborativeService {
       if (_currentFamilyId == null) return;
 
       final sharesData = _recentShares.map((share) => share.toJson()).toList();
-      await _prefs.setString('recent_shares_$_currentFamilyId', jsonEncode(sharesData));
+      await _prefs.setString(
+        'recent_shares_$_currentFamilyId',
+        jsonEncode(sharesData),
+      );
     } catch (e) {
       AppLogger.error('❌ Failed to save recent shares: $e');
     }
@@ -637,11 +670,15 @@ class CollaborativeService {
   /// Load recent activities from storage
   Future<void> _loadRecentActivities() async {
     try {
-      final activitiesJson = _prefs.getString('recent_activities_$_currentFamilyId');
+      final activitiesJson = _prefs.getString(
+        'recent_activities_$_currentFamilyId',
+      );
       if (activitiesJson != null) {
         final activitiesData = jsonDecode(activitiesJson) as List<dynamic>;
         _recentActivities.clear();
-        _recentActivities.addAll(activitiesData.map((data) => FamilyActivity.fromJson(data)).toList());
+        _recentActivities.addAll(
+          activitiesData.map((data) => FamilyActivity.fromJson(data)).toList(),
+        );
       }
     } catch (e) {
       AppLogger.error('❌ Failed to load recent activities: $e');
@@ -653,8 +690,12 @@ class CollaborativeService {
     try {
       if (_currentFamilyId == null) return;
 
-      final activitiesData = _recentActivities.map((activity) => activity.toJson()).toList();
-      await _prefs.setString('recent_activities_$_currentFamilyId', jsonEncode(activitiesData));
+      final activitiesData =
+          _recentActivities.map((activity) => activity.toJson()).toList();
+      await _prefs.setString(
+        'recent_activities_$_currentFamilyId',
+        jsonEncode(activitiesData),
+      );
     } catch (e) {
       AppLogger.error('❌ Failed to save recent activities: $e');
     }
@@ -820,7 +861,11 @@ class FamilyMemberLeft {
   final String memberName;
   final DateTime timestamp;
 
-  FamilyMemberLeft({required this.memberId, required this.memberName, required this.timestamp});
+  FamilyMemberLeft({
+    required this.memberId,
+    required this.memberName,
+    required this.timestamp,
+  });
 
   factory FamilyMemberLeft.fromJson(Map<String, dynamic> json) {
     return FamilyMemberLeft(

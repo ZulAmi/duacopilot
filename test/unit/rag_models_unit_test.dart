@@ -53,7 +53,14 @@ void main() {
           timestamp: DateTime.parse('2024-01-01T10:00:00Z'),
           responseTime: 300,
           confidence: 0.88,
-          sources: [DuaSource(id: 'source-1', title: 'Test Source', content: 'Test content', relevanceScore: 0.88)],
+          sources: [
+            DuaSource(
+              id: 'source-1',
+              title: 'Test Source',
+              content: 'Test content',
+              relevanceScore: 0.88,
+            ),
+          ],
         );
 
         expect(originalResponse.id, equals('test-json'));
@@ -171,7 +178,10 @@ void main() {
         expect(deserializedSource.id, equals(originalSource.id));
         expect(deserializedSource.title, equals(originalSource.title));
         expect(deserializedSource.content, equals(originalSource.content));
-        expect(deserializedSource.relevanceScore, equals(originalSource.relevanceScore));
+        expect(
+          deserializedSource.relevanceScore,
+          equals(originalSource.relevanceScore),
+        );
         expect(deserializedSource.reference, equals(originalSource.reference));
       });
 
@@ -261,8 +271,14 @@ void main() {
           sources: [],
         );
 
-        expect(fastResponse.responseTime, lessThan(TestConfig.maxResponseTime.inMilliseconds));
-        expect(slowResponse.responseTime, greaterThan(TestConfig.maxResponseTime.inMilliseconds));
+        expect(
+          fastResponse.responseTime,
+          lessThan(TestConfig.maxResponseTime.inMilliseconds),
+        );
+        expect(
+          slowResponse.responseTime,
+          greaterThan(TestConfig.maxResponseTime.inMilliseconds),
+        );
       });
 
       test('should validate confidence scores', () {
@@ -287,17 +303,29 @@ void main() {
 
         // Test Arabic detection
         for (final query in arabicQueries) {
-          expect(containsArabic(query), isTrue, reason: 'Should detect Arabic in: $query');
+          expect(
+            containsArabic(query),
+            isTrue,
+            reason: 'Should detect Arabic in: $query',
+          );
         }
 
         // Test English (no Arabic)
         for (final query in englishQueries) {
-          expect(containsArabic(query), isFalse, reason: 'Should not detect Arabic in: $query');
+          expect(
+            containsArabic(query),
+            isFalse,
+            reason: 'Should not detect Arabic in: $query',
+          );
         }
 
         // Test mixed content
         for (final query in mixedQueries) {
-          expect(containsArabic(query), isTrue, reason: 'Should detect Arabic in mixed: $query');
+          expect(
+            containsArabic(query),
+            isTrue,
+            reason: 'Should detect Arabic in mixed: $query',
+          );
         }
       });
 
@@ -324,7 +352,10 @@ void main() {
         final mockResponses = TestConfig.createMockRagResponses();
 
         for (final response in mockResponses) {
-          expect(response.responseTime, lessThan(TestConfig.maxResponseTime.inMilliseconds));
+          expect(
+            response.responseTime,
+            lessThan(TestConfig.maxResponseTime.inMilliseconds),
+          );
           expect(response.responseTime, greaterThan(0));
         }
       });
@@ -368,9 +399,18 @@ void main() {
             expect(source.content.isNotEmpty, isTrue);
 
             // Check for Islamic source indicators
-            final islamicSources = ['Bukhari', 'Muslim', 'Tirmidhi', 'Abu Dawud', 'Nasai', 'Ibn Majah'];
+            final islamicSources = [
+              'Bukhari',
+              'Muslim',
+              'Tirmidhi',
+              'Abu Dawud',
+              'Nasai',
+              'Ibn Majah',
+            ];
             final hasIslamicSource = islamicSources.any(
-              (sourceName) => source.title.contains(sourceName) || source.reference?.contains(sourceName) == true,
+              (sourceName) =>
+                  source.title.contains(sourceName) ||
+                  source.reference?.contains(sourceName) == true,
             );
 
             if (source.reference?.isNotEmpty == true) {
@@ -424,15 +464,18 @@ void main() {
 
     test('should validate required fields', () {
       // These should throw errors for required fields
-      expect(() {
-        RagResponseModel(
-          id: '', // Empty ID should be invalid in real usage
-          query: 'test',
-          response: 'test',
-          timestamp: DateTime.now(),
-          responseTime: 100,
-        );
-      }, returnsNormally); // Model allows empty ID, but business logic should validate
+      expect(
+        () {
+          RagResponseModel(
+            id: '', // Empty ID should be invalid in real usage
+            query: 'test',
+            response: 'test',
+            timestamp: DateTime.now(),
+            responseTime: 100,
+          );
+        },
+        returnsNormally,
+      ); // Model allows empty ID, but business logic should validate
 
       // Test timestamp validation
       final futureTimestamp = DateTime.now().add(Duration(days: 1));
@@ -444,7 +487,10 @@ void main() {
         responseTime: 200,
       );
 
-      expect(responseWithFutureTimestamp.timestamp.isAfter(DateTime.now()), isTrue);
+      expect(
+        responseWithFutureTimestamp.timestamp.isAfter(DateTime.now()),
+        isTrue,
+      );
     });
   });
 

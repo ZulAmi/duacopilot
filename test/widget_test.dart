@@ -31,7 +31,9 @@ void main() {
     expect(find.byType(ConversationalSearchScreen), findsOneWidget);
   });
 
-  testWidgets('SecureDuaCopilotApp material app test', (WidgetTester tester) async {
+  testWidgets('SecureDuaCopilotApp material app test', (
+    WidgetTester tester,
+  ) async {
     // Test that the app structure is correct
     const app = SecureDuaCopilotApp();
 

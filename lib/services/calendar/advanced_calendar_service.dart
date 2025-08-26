@@ -14,7 +14,8 @@ import '../time/islamic_time_service.dart';
 /// Intelligently analyzes calendar events to suggest appropriate Islamic guidance
 class AdvancedCalendarService {
   static AdvancedCalendarService? _instance;
-  static AdvancedCalendarService get instance => _instance ??= AdvancedCalendarService._();
+  static AdvancedCalendarService get instance =>
+      _instance ??= AdvancedCalendarService._();
 
   AdvancedCalendarService._();
 
@@ -40,18 +41,34 @@ class AdvancedCalendarService {
   final Map<String, CalendarEvent> _eventCache = {};
 
   // Stream controllers
-  final _calendarEventsController = StreamController<List<CalendarEvent>>.broadcast();
-  final _contextualSuggestionsController = StreamController<List<ContextualSuggestion>>.broadcast();
-  final _reminderNotificationsController = StreamController<ReminderNotification>.broadcast();
+  final _calendarEventsController =
+      StreamController<List<CalendarEvent>>.broadcast();
+  final _contextualSuggestionsController =
+      StreamController<List<ContextualSuggestion>>.broadcast();
+  final _reminderNotificationsController =
+      StreamController<ReminderNotification>.broadcast();
 
   // Public streams
-  Stream<List<CalendarEvent>> get calendarEventsStream => _calendarEventsController.stream;
-  Stream<List<ContextualSuggestion>> get contextualSuggestionsStream => _contextualSuggestionsController.stream;
-  Stream<ReminderNotification> get reminderNotificationsStream => _reminderNotificationsController.stream;
+  Stream<List<CalendarEvent>> get calendarEventsStream =>
+      _calendarEventsController.stream;
+  Stream<List<ContextualSuggestion>> get contextualSuggestionsStream =>
+      _contextualSuggestionsController.stream;
+  Stream<ReminderNotification> get reminderNotificationsStream =>
+      _reminderNotificationsController.stream;
 
   // Islamic event patterns
   static const Map<String, List<String>> _islamicEventPatterns = {
-    'prayer': ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha', 'صلاة', 'نماز', 'prayer', 'salah'],
+    'prayer': [
+      'fajr',
+      'dhuhr',
+      'asr',
+      'maghrib',
+      'isha',
+      'صلاة',
+      'نماز',
+      'prayer',
+      'salah',
+    ],
     'religious_study': [
       'quran',
       'islamic',
@@ -62,16 +79,61 @@ class AdvancedCalendarService {
       'islamic center',
       'religious class',
     ],
-    'travel': ['flight', 'trip', 'travel', 'vacation', 'journey', 'airport', 'departure', 'arrival'],
-    'work_meeting': ['meeting', 'conference', 'presentation', 'interview', 'work', 'office', 'business'],
-    'medical_appointment': ['doctor', 'hospital', 'medical', 'appointment', 'checkup', 'surgery', 'dentist'],
-    'family_event': ['wedding', 'birthday', 'anniversary', 'family', 'celebration', 'party', 'gathering'],
-    'exam_study': ['exam', 'test', 'study', 'school', 'university', 'education', 'academic'],
+    'travel': [
+      'flight',
+      'trip',
+      'travel',
+      'vacation',
+      'journey',
+      'airport',
+      'departure',
+      'arrival',
+    ],
+    'work_meeting': [
+      'meeting',
+      'conference',
+      'presentation',
+      'interview',
+      'work',
+      'office',
+      'business',
+    ],
+    'medical_appointment': [
+      'doctor',
+      'hospital',
+      'medical',
+      'appointment',
+      'checkup',
+      'surgery',
+      'dentist',
+    ],
+    'family_event': [
+      'wedding',
+      'birthday',
+      'anniversary',
+      'family',
+      'celebration',
+      'party',
+      'gathering',
+    ],
+    'exam_study': [
+      'exam',
+      'test',
+      'study',
+      'school',
+      'university',
+      'education',
+      'academic',
+    ],
   };
 
   // Du'a recommendations for event types
   static const Map<String, List<String>> _duaRecommendations = {
-    'prayer': ['Seek Allah\'s guidance and peace', 'Ask for spiritual purification', 'Request strength in faith'],
+    'prayer': [
+      'Seek Allah\'s guidance and peace',
+      'Ask for spiritual purification',
+      'Request strength in faith',
+    ],
     'travel': [
       'Recite travel Du\'a for protection',
       'Seek Allah\'s blessing for safe journey',
@@ -153,7 +215,9 @@ class AdvancedCalendarService {
     await _saveUserPreferences();
     await _startEventMonitoring();
 
-    AppLogger.info('Calendar integration enabled with ${_enabledCalendarIds.length} calendars');
+    AppLogger.info(
+      'Calendar integration enabled with ${_enabledCalendarIds.length} calendars',
+    );
   }
 
   /// Disable calendar integration
@@ -167,7 +231,10 @@ class AdvancedCalendarService {
   }
 
   /// Get upcoming events with Islamic context
-  Future<List<CalendarEvent>> getUpcomingEvents({Duration? lookAhead, bool includeIslamicContext = true}) async {
+  Future<List<CalendarEvent>> getUpcomingEvents({
+    Duration? lookAhead,
+    bool includeIslamicContext = true,
+  }) async {
     await _ensureInitialized();
 
     if (!_isEnabled || !_hasPermission) {
@@ -187,7 +254,10 @@ class AdvancedCalendarService {
 
         if (retrievedEvents.isSuccess && retrievedEvents.data != null) {
           for (final event in retrievedEvents.data!) {
-            final calendarEvent = await _processEvent(event, includeIslamicContext);
+            final calendarEvent = await _processEvent(
+              event,
+              includeIslamicContext,
+            );
             if (calendarEvent != null) {
               events.add(calendarEvent);
               _eventCache[calendarEvent.eventId] = calendarEvent;
@@ -223,7 +293,10 @@ class AdvancedCalendarService {
         final timeUntilEvent = event.startTime.difference(now);
 
         if (timeUntilEvent.inMinutes <= 60 && timeUntilEvent.inMinutes > 0) {
-          final eventSuggestions = await _generateEventSuggestions(event, timeUntilEvent);
+          final eventSuggestions = await _generateEventSuggestions(
+            event,
+            timeUntilEvent,
+          );
           suggestions.addAll(eventSuggestions);
         }
       }
@@ -244,7 +317,10 @@ class AdvancedCalendarService {
   }
 
   /// Set up event reminders
-  Future<void> setupEventReminders(String eventId, List<Duration> reminderTimes) async {
+  Future<void> setupEventReminders(
+    String eventId,
+    List<Duration> reminderTimes,
+  ) async {
     await _ensureInitialized();
 
     final event = _eventCache[eventId];
@@ -259,14 +335,17 @@ class AdvancedCalendarService {
         }
       }
 
-      AppLogger.info('Set up ${reminderTimes.length} reminders for event: ${event.title}');
+      AppLogger.info(
+        'Set up ${reminderTimes.length} reminders for event: ${event.title}',
+      );
     } catch (e) {
       AppLogger.error('Failed to setup event reminders: $e');
     }
   }
 
   /// Get available calendars
-  List<Calendar> get availableCalendars => List.unmodifiable(_availableCalendars);
+  List<Calendar> get availableCalendars =>
+      List.unmodifiable(_availableCalendars);
 
   /// Check if integration is enabled
   bool get isEnabled => _isEnabled;
@@ -302,7 +381,9 @@ class AdvancedCalendarService {
       if (prefsJson != null) {
         final prefs = jsonDecode(prefsJson) as Map<String, dynamic>;
         _isEnabled = prefs['enabled'] ?? false;
-        _enabledCalendarIds = (prefs['enabled_calendars'] as List<dynamic>?)?.cast<String>() ?? [];
+        _enabledCalendarIds =
+            (prefs['enabled_calendars'] as List<dynamic>?)?.cast<String>() ??
+            [];
       }
     } catch (e) {
       AppLogger.warning('Failed to load calendar preferences: $e');
@@ -326,24 +407,38 @@ class AdvancedCalendarService {
     try {
       final calendarsResult = await _deviceCalendar.retrieveCalendars();
       if (calendarsResult.isSuccess && calendarsResult.data != null) {
-        _availableCalendars = calendarsResult.data!.where((cal) => cal.isReadOnly == false).toList();
-        AppLogger.info('Loaded ${_availableCalendars.length} available calendars');
+        _availableCalendars =
+            calendarsResult.data!
+                .where((cal) => cal.isReadOnly == false)
+                .toList();
+        AppLogger.info(
+          'Loaded ${_availableCalendars.length} available calendars',
+        );
       }
     } catch (e) {
       AppLogger.error('Failed to load available calendars: $e');
     }
   }
 
-  Future<CalendarEvent?> _processEvent(Event event, bool includeIslamicContext) async {
+  Future<CalendarEvent?> _processEvent(
+    Event event,
+    bool includeIslamicContext,
+  ) async {
     if (event.title == null || event.start == null || event.end == null) {
       return null;
     }
 
     // Detect event category
-    final eventCategory = _detectEventCategory(event.title!, event.description ?? '');
+    final eventCategory = _detectEventCategory(
+      event.title!,
+      event.description ?? '',
+    );
 
     // Check if it's an Islamic event
-    final isIslamicEvent = _isIslamicEvent(event.title!, event.description ?? '');
+    final isIslamicEvent = _isIslamicEvent(
+      event.title!,
+      event.description ?? '',
+    );
 
     // Generate suggested Du'as
     List<String>? suggestedDuas;
@@ -439,7 +534,10 @@ class AdvancedCalendarService {
     return suggestions;
   }
 
-  Future<List<ContextualSuggestion>> _generateEventSuggestions(CalendarEvent event, Duration timeUntilEvent) async {
+  Future<List<ContextualSuggestion>> _generateEventSuggestions(
+    CalendarEvent event,
+    Duration timeUntilEvent,
+  ) async {
     final suggestions = <ContextualSuggestion>[];
 
     final suggestion = ContextualSuggestion(
@@ -474,7 +572,8 @@ class AdvancedCalendarService {
         ContextualSuggestion(
           id: 'prayer_reminder_${DateTime.now().millisecondsSinceEpoch}',
           userId: await _secureStorage.getUserId() ?? 'anonymous',
-          suggestionText: 'Prepare for ${nextPrayer.type.name} prayer in ${nextPrayer.remaining.inMinutes} minutes',
+          suggestionText:
+              'Prepare for ${nextPrayer.type.name} prayer in ${nextPrayer.remaining.inMinutes} minutes',
           reason: 'Upcoming prayer time',
           relevanceScore: 0.9,
           suggestedAt: DateTime.now(),
@@ -493,7 +592,9 @@ class AdvancedCalendarService {
 
   String _buildSuggestionText(CalendarEvent event, Duration timeUntilEvent) {
     final timeText =
-        timeUntilEvent.inMinutes < 60 ? '${timeUntilEvent.inMinutes} minutes' : '${timeUntilEvent.inHours} hours';
+        timeUntilEvent.inMinutes < 60
+            ? '${timeUntilEvent.inMinutes} minutes'
+            : '${timeUntilEvent.inHours} hours';
 
     if (event.suggestedDuas?.isNotEmpty == true) {
       return 'You have "${event.title}" in $timeText. Consider: ${event.suggestedDuas!.first}';
@@ -502,7 +603,10 @@ class AdvancedCalendarService {
     return 'You have "${event.title}" in $timeText. May Allah bless your endeavor.';
   }
 
-  double _calculateRelevanceScore(CalendarEvent event, Duration timeUntilEvent) {
+  double _calculateRelevanceScore(
+    CalendarEvent event,
+    Duration timeUntilEvent,
+  ) {
     double score = 0.5; // Base score
 
     // Higher score for Islamic events
@@ -567,13 +671,18 @@ class AdvancedCalendarService {
     }
   }
 
-  Future<void> _scheduleReminder(CalendarEvent event, Duration reminderTime) async {
+  Future<void> _scheduleReminder(
+    CalendarEvent event,
+    Duration reminderTime,
+  ) async {
     // This would integrate with the notification service
     final reminderDateTime = event.startTime.subtract(reminderTime);
 
     if (reminderDateTime.isAfter(DateTime.now())) {
       // Schedule notification
-      AppLogger.info('Scheduling reminder for ${event.title} at $reminderDateTime');
+      AppLogger.info(
+        'Scheduling reminder for ${event.title} at $reminderDateTime',
+      );
     }
   }
 

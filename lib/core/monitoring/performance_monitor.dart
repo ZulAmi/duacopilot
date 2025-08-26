@@ -8,7 +8,8 @@ import 'package:flutter/foundation.dart';
 /// Tracks app performance, memory usage, and user interactions
 class PerformanceMonitor {
   static PerformanceMonitor? _instance;
-  static PerformanceMonitor get instance => _instance ??= PerformanceMonitor._();
+  static PerformanceMonitor get instance =>
+      _instance ??= PerformanceMonitor._();
 
   PerformanceMonitor._();
 
@@ -53,9 +54,18 @@ class PerformanceMonitor {
   }
 
   /// Record a custom performance metric
-  void recordMetric({required String name, required Duration duration, Map<String, dynamic>? metadata}) {
+  void recordMetric({
+    required String name,
+    required Duration duration,
+    Map<String, dynamic>? metadata,
+  }) {
     // Create concrete implementation instead of abstract class
-    final metric = OperationMetric(name: name, duration: duration, timestamp: DateTime.now(), metadata: metadata ?? {});
+    final metric = OperationMetric(
+      name: name,
+      duration: duration,
+      timestamp: DateTime.now(),
+      metadata: metadata ?? {},
+    );
 
     _recordMetric(metric);
   }
@@ -79,7 +89,11 @@ class PerformanceMonitor {
   }
 
   /// Track user interaction events
-  void trackUserInteraction({required String action, required String screen, Map<String, dynamic>? properties}) {
+  void trackUserInteraction({
+    required String action,
+    required String screen,
+    Map<String, dynamic>? properties,
+  }) {
     final metric = UserInteractionMetric(
       action: action,
       screen: screen,
@@ -93,7 +107,8 @@ class PerformanceMonitor {
   /// Get performance statistics
   PerformanceStats getStats() {
     final now = DateTime.now();
-    final recentMetrics = _metrics.where((m) => now.difference(m.timestamp).inHours < 1).toList();
+    final recentMetrics =
+        _metrics.where((m) => now.difference(m.timestamp).inHours < 1).toList();
 
     if (recentMetrics.isEmpty) {
       return PerformanceStats(
@@ -104,14 +119,22 @@ class PerformanceMonitor {
       );
     }
 
-    final totalDuration = recentMetrics.map((m) => m.duration.inMilliseconds).reduce((a, b) => a + b);
+    final totalDuration = recentMetrics
+        .map((m) => m.duration.inMilliseconds)
+        .reduce((a, b) => a + b);
 
     final averageMs = totalDuration / recentMetrics.length;
 
     final slowOperations =
         recentMetrics
             .where((m) => m.duration.inMilliseconds > 1000)
-            .map((m) => SlowOperation(name: m.name, duration: m.duration, timestamp: m.timestamp))
+            .map(
+              (m) => SlowOperation(
+                name: m.name,
+                duration: m.duration,
+                timestamp: m.timestamp,
+              ),
+            )
             .toList();
 
     return PerformanceStats(
@@ -144,7 +167,9 @@ class PerformanceMonitor {
     _metrics.add(metric);
 
     if (kDebugMode && metric.duration.inMilliseconds > 1000) {
-      AppLogger.debug('⚠️ Slow operation detected: ${metric.name} took ${metric.duration.inMilliseconds}ms');
+      AppLogger.debug(
+        '⚠️ Slow operation detected: ${metric.name} took ${metric.duration.inMilliseconds}ms',
+      );
     }
 
     // Prevent memory buildup
@@ -154,7 +179,10 @@ class PerformanceMonitor {
   }
 
   void _startMemoryMonitoring() {
-    _memoryMonitorTimer = Timer.periodic(const Duration(minutes: 1), (timer) => _checkMemoryUsage());
+    _memoryMonitorTimer = Timer.periodic(
+      const Duration(minutes: 1),
+      (timer) => _checkMemoryUsage(),
+    );
   }
 
   void _checkMemoryUsage() {
@@ -163,7 +191,9 @@ class PerformanceMonitor {
     if (memoryUsage > 200 * 1024 * 1024) {
       // 200MB threshold
       if (kDebugMode) {
-        AppLogger.debug('⚠️ High memory usage detected: ${(memoryUsage / 1024 / 1024).toStringAsFixed(2)}MB');
+        AppLogger.debug(
+          '⚠️ High memory usage detected: ${(memoryUsage / 1024 / 1024).toStringAsFixed(2)}MB',
+        );
       }
 
       // Trigger cleanup
@@ -223,7 +253,10 @@ class OperationMetric extends PerformanceMetric {
   });
 
   @override
-  Map<String, dynamic> toJson() => {...super.toJson(), 'operation_type': 'general'};
+  Map<String, dynamic> toJson() => {
+    ...super.toJson(),
+    'operation_type': 'general',
+  };
 }
 
 /// Network request performance metric
@@ -260,10 +293,19 @@ class UserInteractionMetric extends PerformanceMetric {
     required this.screen,
     required this.properties,
     required super.timestamp,
-  }) : super(name: 'user_interaction', duration: Duration.zero, metadata: properties);
+  }) : super(
+         name: 'user_interaction',
+         duration: Duration.zero,
+         metadata: properties,
+       );
 
   @override
-  Map<String, dynamic> toJson() => {...super.toJson(), 'action': action, 'screen': screen, 'properties': properties};
+  Map<String, dynamic> toJson() => {
+    ...super.toJson(),
+    'action': action,
+    'screen': screen,
+    'properties': properties,
+  };
 }
 
 /// Performance statistics summary
@@ -295,7 +337,11 @@ class SlowOperation {
   final Duration duration;
   final DateTime timestamp;
 
-  const SlowOperation({required this.name, required this.duration, required this.timestamp});
+  const SlowOperation({
+    required this.name,
+    required this.duration,
+    required this.timestamp,
+  });
 
   Map<String, dynamic> toJson() => {
     'name': name,

@@ -51,15 +51,21 @@ class FeedbackSystemIntegration {
 
       // Register services with GetIt
       if (!GetIt.instance.isRegistered<ComprehensiveFeedbackService>()) {
-        GetIt.instance.registerSingleton<ComprehensiveFeedbackService>(_feedbackService);
+        GetIt.instance.registerSingleton<ComprehensiveFeedbackService>(
+          _feedbackService,
+        );
       }
 
       if (!GetIt.instance.isRegistered<ABTestingFramework>()) {
-        GetIt.instance.registerSingleton<ABTestingFramework>(_abTestingFramework);
+        GetIt.instance.registerSingleton<ABTestingFramework>(
+          _abTestingFramework,
+        );
       }
 
       if (!GetIt.instance.isRegistered<ScholarFeedbackSystem>()) {
-        GetIt.instance.registerSingleton<ScholarFeedbackSystem>(_scholarFeedbackSystem);
+        GetIt.instance.registerSingleton<ScholarFeedbackSystem>(
+          _scholarFeedbackSystem,
+        );
       }
 
       _initialized = true;
@@ -72,7 +78,10 @@ class FeedbackSystemIntegration {
         action: 'feedback_system_initialized',
         contentId: _serviceName,
         contentType: 'system',
-        additionalData: {'timestamp': DateTime.now().millisecondsSinceEpoch, 'version': '1.0.0'},
+        additionalData: {
+          'timestamp': DateTime.now().millisecondsSinceEpoch,
+          'version': '1.0.0',
+        },
       );
     } catch (e) {
       debugPrint('Error initializing Feedback System Integration: $e');
@@ -158,8 +167,16 @@ class FeedbackSystemIntegration {
   }
 
   /// Track sharing activity
-  Future<void> trackShare({required String contentId, required String shareMethod, String? contentType}) async {
-    await _feedbackService.trackShare(contentId: contentId, shareMethod: shareMethod, contentType: contentType);
+  Future<void> trackShare({
+    required String contentId,
+    required String shareMethod,
+    String? contentType,
+  }) async {
+    await _feedbackService.trackShare(
+      contentId: contentId,
+      shareMethod: shareMethod,
+      contentType: contentType,
+    );
   }
 
   /// Submit scholar verification
@@ -204,13 +221,25 @@ class FeedbackSystemIntegration {
   }
 
   /// Get aggregated analytics
-  Future<Map<String, dynamic>> getAnalytics({DateTime? startDate, DateTime? endDate}) async {
-    return await _feedbackService.getAggregatedAnalytics(startDate: startDate, endDate: endDate);
+  Future<Map<String, dynamic>> getAnalytics({
+    DateTime? startDate,
+    DateTime? endDate,
+  }) async {
+    return await _feedbackService.getAggregatedAnalytics(
+      startDate: startDate,
+      endDate: endDate,
+    );
   }
 
   /// Export anonymized data for research
-  Future<Map<String, dynamic>> exportAnonymizedData({DateTime? startDate, DateTime? endDate}) async {
-    return await _feedbackService.exportAnonymizedData(startDate: startDate, endDate: endDate);
+  Future<Map<String, dynamic>> exportAnonymizedData({
+    DateTime? startDate,
+    DateTime? endDate,
+  }) async {
+    return await _feedbackService.exportAnonymizedData(
+      startDate: startDate,
+      endDate: endDate,
+    );
   }
 
   /// Clear all user data (GDPR compliance)
@@ -263,25 +292,40 @@ mixin FeedbackMixin<T extends StatefulWidget> on State<T> {
   }
 
   /// Quick access to feedback services
-  ComprehensiveFeedbackService get feedbackService => _feedbackIntegration.feedbackService;
+  ComprehensiveFeedbackService get feedbackService =>
+      _feedbackIntegration.feedbackService;
   ABTestingFramework get abTesting => _feedbackIntegration.abTestingFramework;
-  ScholarFeedbackSystem get scholarFeedback => _feedbackIntegration.scholarFeedbackSystem;
+  ScholarFeedbackSystem get scholarFeedback =>
+      _feedbackIntegration.scholarFeedbackSystem;
 
   /// Convenience methods
   Future<void> rateDua(String duaId, String queryId, double rating) async {
-    await _feedbackIntegration.rateDua(duaId: duaId, queryId: queryId, rating: rating);
+    await _feedbackIntegration.rateDua(
+      duaId: duaId,
+      queryId: queryId,
+      rating: rating,
+    );
   }
 
   Future<void> trackReading(String contentId, Duration duration) async {
-    await _feedbackIntegration.trackReadingTime(contentId: contentId, readingTime: duration);
+    await _feedbackIntegration.trackReadingTime(
+      contentId: contentId,
+      readingTime: duration,
+    );
   }
 
   Future<void> trackAudio(String contentId, Duration duration) async {
-    await _feedbackIntegration.trackAudioPlayback(contentId: contentId, playbackTime: duration);
+    await _feedbackIntegration.trackAudioPlayback(
+      contentId: contentId,
+      playbackTime: duration,
+    );
   }
 
   Future<void> trackSharing(String contentId, String method) async {
-    await _feedbackIntegration.trackShare(contentId: contentId, shareMethod: method);
+    await _feedbackIntegration.trackShare(
+      contentId: contentId,
+      shareMethod: method,
+    );
   }
 
   T getVariant<T>(String experiment, T defaultValue) {

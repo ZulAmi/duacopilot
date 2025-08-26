@@ -8,7 +8,8 @@ import '../secure_storage/secure_storage_service.dart';
 /// Features: Wise responses, spiritual guidance, emotional support, teaching moments
 class IslamicPersonalityService {
   static IslamicPersonalityService? _instance;
-  static IslamicPersonalityService get instance => _instance ??= IslamicPersonalityService._();
+  static IslamicPersonalityService get instance =>
+      _instance ??= IslamicPersonalityService._();
 
   IslamicPersonalityService._();
 
@@ -178,7 +179,9 @@ class IslamicPersonalityService {
       responseType = 'seeking_guidance';
     } else if (lowerQuery.contains(RegExp(r'sad|difficult|hard|struggle'))) {
       responseType = 'distress';
-    } else if (lowerQuery.contains(RegExp(r'happy|grateful|blessed|alhamdulillah'))) {
+    } else if (lowerQuery.contains(
+      RegExp(r'happy|grateful|blessed|alhamdulillah'),
+    )) {
       responseType = 'celebration';
     } else if (lowerQuery.contains(RegExp(r'learn|teach|explain|understand'))) {
       responseType = 'seeking_knowledge';
@@ -195,7 +198,10 @@ class IslamicPersonalityService {
       'emotional_tone': detectedEmotion,
       'time_context': timeContext,
       'query_complexity': _calculateQueryComplexity(userQuery),
-      'spiritual_depth_needed': _determineNeededSpiritualDepth(userQuery, detectedEmotion),
+      'spiritual_depth_needed': _determineNeededSpiritualDepth(
+        userQuery,
+        detectedEmotion,
+      ),
     };
   }
 
@@ -216,7 +222,8 @@ class IslamicPersonalityService {
     final responseType = context['type'] as String;
     final spiritualDepth = context['spiritual_depth_needed'] as double;
 
-    if (spiritualDepth < 0.3) return null; // Don't add spiritual insight for simple queries
+    if (spiritualDepth < 0.3)
+      return null; // Don't add spiritual insight for simple queries
 
     final insights = {
       'distress': [
@@ -245,7 +252,8 @@ class IslamicPersonalityService {
   String? _generateTeachingMoment(Map<String, dynamic> context) {
     final queryComplexity = context['query_complexity'] as double;
 
-    if (queryComplexity < 0.5) return null; // Simple queries don't need teaching moments
+    if (queryComplexity < 0.5)
+      return null; // Simple queries don't need teaching moments
 
     final teachings = _voicePersonality['teaching_moments']!;
     return teachings[Random().nextInt(teachings.length)];
@@ -254,7 +262,12 @@ class IslamicPersonalityService {
   /// Generate emotional support
   String? _generateEmotionalSupport(Map<String, dynamic> context) {
     final emotionalTone = context['emotional_tone'] as String;
-    final needsSupport = ['sadness', 'anxiety', 'distress', 'worry'].contains(emotionalTone);
+    final needsSupport = [
+      'sadness',
+      'anxiety',
+      'distress',
+      'worry',
+    ].contains(emotionalTone);
 
     if (!needsSupport) return null;
 
@@ -315,8 +328,17 @@ class IslamicPersonalityService {
 
   /// Calculate query complexity
   double _calculateQueryComplexity(String query) {
-    final complexWords = ['why', 'how', 'explain', 'difference', 'understand', 'meaning'];
-    final hasComplexWords = complexWords.any((word) => query.toLowerCase().contains(word));
+    final complexWords = [
+      'why',
+      'how',
+      'explain',
+      'difference',
+      'understand',
+      'meaning',
+    ];
+    final hasComplexWords = complexWords.any(
+      (word) => query.toLowerCase().contains(word),
+    );
     final wordCount = query.split(' ').length;
 
     double complexity = wordCount > 5 ? 0.6 : 0.3;
@@ -327,8 +349,18 @@ class IslamicPersonalityService {
 
   /// Determine needed spiritual depth
   double _determineNeededSpiritualDepth(String query, String emotion) {
-    final spiritualKeywords = ['allah', 'prayer', 'dua', 'faith', 'islam', 'quran', 'prophet'];
-    final hasSpiritual = spiritualKeywords.any((word) => query.toLowerCase().contains(word));
+    final spiritualKeywords = [
+      'allah',
+      'prayer',
+      'dua',
+      'faith',
+      'islam',
+      'quran',
+      'prophet',
+    ];
+    final hasSpiritual = spiritualKeywords.any(
+      (word) => query.toLowerCase().contains(word),
+    );
 
     double depth = hasSpiritual ? 0.8 : 0.3;
 

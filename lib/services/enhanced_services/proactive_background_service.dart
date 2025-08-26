@@ -12,7 +12,8 @@ import '../../domain/entities/conversation_entity.dart';
 /// Analyzes usage patterns and provides contextual recommendations
 class ProactiveBackgroundService {
   static ProactiveBackgroundService? _instance;
-  static ProactiveBackgroundService get instance => _instance ??= ProactiveBackgroundService._();
+  static ProactiveBackgroundService get instance =>
+      _instance ??= ProactiveBackgroundService._();
 
   ProactiveBackgroundService._();
 
@@ -28,10 +29,12 @@ class ProactiveBackgroundService {
   // State management
   bool _isServiceRunning = false;
   Timer? _analysisTimer;
-  final _suggestionController = StreamController<ProactiveSuggestion>.broadcast();
+  final _suggestionController =
+      StreamController<ProactiveSuggestion>.broadcast();
 
   // Stream for proactive suggestions
-  Stream<ProactiveSuggestion> get suggestionStream => _suggestionController.stream;
+  Stream<ProactiveSuggestion> get suggestionStream =>
+      _suggestionController.stream;
 
   // Usage pattern tracking
   final Map<String, UsagePattern> _usagePatterns = {};
@@ -85,7 +88,9 @@ class ProactiveBackgroundService {
   /// Record user interaction for pattern analysis
   Future<void> recordInteraction(UserInteraction interaction) async {
     try {
-      final pattern = _usagePatterns[interaction.category] ?? UsagePattern(category: interaction.category);
+      final pattern =
+          _usagePatterns[interaction.category] ??
+          UsagePattern(category: interaction.category);
 
       pattern.addInteraction(interaction);
       _usagePatterns[interaction.category] = pattern;
@@ -93,23 +98,31 @@ class ProactiveBackgroundService {
       // Save updated patterns
       await _saveUsagePatterns();
 
-      AppLogger.debug('Recorded interaction: ${interaction.category} at ${interaction.timestamp}');
+      AppLogger.debug(
+        'Recorded interaction: ${interaction.category} at ${interaction.timestamp}',
+      );
     } catch (e) {
       AppLogger.error('Failed to record interaction: $e');
     }
   }
 
   /// Get current usage patterns for analysis
-  Map<String, UsagePattern> get usagePatterns => Map.unmodifiable(_usagePatterns);
+  Map<String, UsagePattern> get usagePatterns =>
+      Map.unmodifiable(_usagePatterns);
 
   /// Check service status
   bool get isRunning => _isServiceRunning;
 
   /// Configure user preferences for background processing
-  Future<void> setUserPreferences(BackgroundServicePreferences preferences) async {
+  Future<void> setUserPreferences(
+    BackgroundServicePreferences preferences,
+  ) async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString(_userPreferencesKey, jsonEncode(preferences.toJson()));
+      await prefs.setString(
+        _userPreferencesKey,
+        jsonEncode(preferences.toJson()),
+      );
 
       AppLogger.info('Updated background service preferences');
 
@@ -129,14 +142,19 @@ class ProactiveBackgroundService {
     final service = FlutterBackgroundService();
 
     await service.configure(
-      iosConfiguration: IosConfiguration(autoStart: true, onForeground: _onStart, onBackground: _onIosBackground),
+      iosConfiguration: IosConfiguration(
+        autoStart: true,
+        onForeground: _onStart,
+        onBackground: _onIosBackground,
+      ),
       androidConfiguration: AndroidConfiguration(
         onStart: _onStart,
         autoStart: true,
         isForegroundMode: false,
         autoStartOnBoot: true,
         initialNotificationTitle: 'DuaCopilot Background Service',
-        initialNotificationContent: 'Analyzing usage patterns for proactive suggestions',
+        initialNotificationContent:
+            'Analyzing usage patterns for proactive suggestions',
         foregroundServiceNotificationId: 888,
       ),
     );
@@ -229,7 +247,9 @@ class ProactiveBackgroundService {
       locationPatterns: locationPatterns,
     );
 
-    AppLogger.debug('Analyzed pattern for ${pattern.category}: ${pattern.interactions.length} interactions');
+    AppLogger.debug(
+      'Analyzed pattern for ${pattern.category}: ${pattern.interactions.length} interactions',
+    );
   }
 
   Map<String, dynamic> _detectTimePatterns(UsagePattern pattern) {
@@ -261,7 +281,10 @@ class ProactiveBackgroundService {
       }
     }
 
-    return {'dominant_emotions': emotionMap.keys.toList(), 'emotion_distribution': emotionMap};
+    return {
+      'dominant_emotions': emotionMap.keys.toList(),
+      'emotion_distribution': emotionMap,
+    };
   }
 
   Map<String, dynamic> _detectLocationPatterns(UsagePattern pattern) {
@@ -274,13 +297,17 @@ class ProactiveBackgroundService {
       }
     }
 
-    return {'common_locations': locationMap.keys.toList(), 'location_distribution': locationMap};
+    return {
+      'common_locations': locationMap.keys.toList(),
+      'location_distribution': locationMap,
+    };
   }
 
   List<int> _findPeakTimes(Map<int, int> timeMap) {
     if (timeMap.isEmpty) return [];
 
-    final sortedEntries = timeMap.entries.toList()..sort((a, b) => b.value.compareTo(a.value));
+    final sortedEntries =
+        timeMap.entries.toList()..sort((a, b) => b.value.compareTo(a.value));
 
     return sortedEntries.take(3).map((e) => e.key).toList();
   }
@@ -288,7 +315,8 @@ class ProactiveBackgroundService {
   List<int> _findPeakDays(Map<int, int> dayMap) {
     if (dayMap.isEmpty) return [];
 
-    final sortedEntries = dayMap.entries.toList()..sort((a, b) => b.value.compareTo(a.value));
+    final sortedEntries =
+        dayMap.entries.toList()..sort((a, b) => b.value.compareTo(a.value));
 
     return sortedEntries.take(3).map((e) => e.key).toList();
   }
@@ -298,7 +326,9 @@ class ProactiveBackgroundService {
 
     final values = timeMap.values.toList();
     final mean = values.reduce((a, b) => a + b) / values.length;
-    final variance = values.map((v) => (v - mean) * (v - mean)).reduce((a, b) => a + b) / values.length;
+    final variance =
+        values.map((v) => (v - mean) * (v - mean)).reduce((a, b) => a + b) /
+        values.length;
 
     return variance / (mean + 1); // Normalized pattern strength
   }
@@ -325,7 +355,10 @@ class ProactiveBackgroundService {
     }
   }
 
-  Future<ProactiveSuggestion?> _createSuggestionFromPattern(UsagePattern pattern, DateTime now) async {
+  Future<ProactiveSuggestion?> _createSuggestionFromPattern(
+    UsagePattern pattern,
+    DateTime now,
+  ) async {
     final analysis = pattern.analysis;
     if (analysis == null) return null;
 
@@ -337,7 +370,8 @@ class ProactiveBackgroundService {
         category: pattern.category,
         trigger: SuggestionTrigger.timePattern,
         content: await _generateSuggestionContent(pattern, 'time_based'),
-        confidence: analysis['time_patterns']?['pattern_strength'] as double? ?? 0.5,
+        confidence:
+            analysis['time_patterns']?['pattern_strength'] as double? ?? 0.5,
         timestamp: now,
         metadata: {
           'pattern_type': 'time_based',
@@ -362,7 +396,10 @@ class ProactiveBackgroundService {
     );
   }
 
-  Future<String> _generateSuggestionContent(UsagePattern pattern, String triggerType) async {
+  Future<String> _generateSuggestionContent(
+    UsagePattern pattern,
+    String triggerType,
+  ) async {
     // This would integrate with the Islamic RAG provider for actual content generation
     return 'Based on your usage pattern for ${pattern.category}, here\'s a relevant Du\'a suggestion ($triggerType)';
   }
@@ -511,7 +548,9 @@ class UserInteraction {
     timestamp: DateTime.parse(json['timestamp']),
     emotionalState:
         json['emotional_state'] != null
-            ? EmotionalState.values.firstWhere((e) => e.toString() == json['emotional_state'])
+            ? EmotionalState.values.firstWhere(
+              (e) => e.toString() == json['emotional_state'],
+            )
             : null,
     location: json['location'],
     metadata: json['metadata'] ?? {},
@@ -548,15 +587,18 @@ class ProactiveSuggestion {
     'metadata': metadata,
   };
 
-  static ProactiveSuggestion fromJson(Map<String, dynamic> json) => ProactiveSuggestion(
-    id: json['id'],
-    category: json['category'],
-    trigger: SuggestionTrigger.values.firstWhere((t) => t.toString() == json['trigger']),
-    content: json['content'],
-    confidence: json['confidence'],
-    timestamp: DateTime.parse(json['timestamp']),
-    metadata: json['metadata'] ?? {},
-  );
+  static ProactiveSuggestion fromJson(Map<String, dynamic> json) =>
+      ProactiveSuggestion(
+        id: json['id'],
+        category: json['category'],
+        trigger: SuggestionTrigger.values.firstWhere(
+          (t) => t.toString() == json['trigger'],
+        ),
+        content: json['content'],
+        confidence: json['confidence'],
+        timestamp: DateTime.parse(json['timestamp']),
+        metadata: json['metadata'] ?? {},
+      );
 }
 
 /// Types of suggestion triggers
@@ -599,10 +641,13 @@ class BackgroundServicePreferences {
     'confidence_threshold': confidenceThreshold,
   };
 
-  static BackgroundServicePreferences fromJson(Map<String, dynamic> json) => BackgroundServicePreferences(
+  static BackgroundServicePreferences fromJson(
+    Map<String, dynamic> json,
+  ) => BackgroundServicePreferences(
     enableProactiveSuggestions: json['enable_proactive_suggestions'] ?? true,
     enabledCategories:
-        (json['enabled_categories'] as List<dynamic>?)?.cast<String>() ?? ['dua', 'prayer', 'guidance', 'gratitude'],
+        (json['enabled_categories'] as List<dynamic>?)?.cast<String>() ??
+        ['dua', 'prayer', 'guidance', 'gratitude'],
     suggestionInterval: Duration(hours: json['suggestion_interval_hours'] ?? 2),
     enableLocationBasedSuggestions: json['enable_location_based'] ?? true,
     enableTimeBasedSuggestions: json['enable_time_based'] ?? true,

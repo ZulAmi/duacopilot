@@ -13,10 +13,12 @@ class FeedbackSystemDemoScreen extends StatefulWidget {
   const FeedbackSystemDemoScreen({super.key});
 
   @override
-  State<FeedbackSystemDemoScreen> createState() => _FeedbackSystemDemoScreenState();
+  State<FeedbackSystemDemoScreen> createState() =>
+      _FeedbackSystemDemoScreenState();
 }
 
-class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> with FeedbackMixin {
+class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen>
+    with FeedbackMixin {
   final String _selectedContentId = 'demo_dua_001';
   bool _showRatingWidget = false;
   double _currentRating = 0.0;
@@ -110,7 +112,10 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> wit
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [theme.primaryColor.withOpacity(0.1), theme.primaryColor.withOpacity(0.05)],
+            colors: [
+              theme.primaryColor.withOpacity(0.1),
+              theme.primaryColor.withOpacity(0.05),
+            ],
           ),
         ),
         child: Column(
@@ -119,13 +124,18 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> wit
             const SizedBox(height: 12),
             Text(
               'Comprehensive Feedback System',
-              style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold, color: theme.primaryColor),
+              style: theme.textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: theme.primaryColor,
+              ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 8),
             Text(
               'Experience advanced feedback collection, analytics tracking, A/B testing, and scholar verification systems.',
-              style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurface.withOpacity(0.8)),
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: theme.colorScheme.onSurface.withOpacity(0.8),
+              ),
               textAlign: TextAlign.center,
             ),
           ],
@@ -151,7 +161,9 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> wit
                 const SizedBox(width: 8),
                 Text(
                   'Du\'a Relevance Rating',
-                  style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ],
             ),
@@ -163,7 +175,9 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> wit
               decoration: BoxDecoration(
                 color: theme.colorScheme.surface.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: theme.colorScheme.outline.withOpacity(0.2)),
+                border: Border.all(
+                  color: theme.colorScheme.outline.withOpacity(0.2),
+                ),
               ),
               child: Text(
                 'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ\n\n'
@@ -238,7 +252,12 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> wit
               children: [
                 Icon(Icons.feedback, color: theme.primaryColor),
                 const SizedBox(width: 8),
-                Text('Contextual Feedback', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600)),
+                Text(
+                  'Contextual Feedback',
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 16),
@@ -257,7 +276,10 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> wit
 
                 if (mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Quick feedback submitted!'), behavior: SnackBarBehavior.floating),
+                    const SnackBar(
+                      content: Text('Quick feedback submitted!'),
+                      behavior: SnackBarBehavior.floating,
+                    ),
                   );
                 }
               },
@@ -295,7 +317,12 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> wit
               children: [
                 Icon(Icons.analytics, color: theme.primaryColor),
                 const SizedBox(width: 8),
-                Text('Usage Analytics', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600)),
+                Text(
+                  'Usage Analytics',
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 16),
@@ -305,13 +332,23 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> wit
               runSpacing: 8,
               children: [
                 _buildAnalyticsButton('Track Reading', Icons.book, () async {
-                  await trackReading(_selectedContentId, const Duration(minutes: 2));
+                  await trackReading(
+                    _selectedContentId,
+                    const Duration(minutes: 2),
+                  );
                   _showSnackbar('Reading time tracked!');
                 }),
-                _buildAnalyticsButton('Track Audio', Icons.audio_file, () async {
-                  await trackAudio(_selectedContentId, const Duration(minutes: 1, seconds: 30));
-                  _showSnackbar('Audio playback tracked!');
-                }),
+                _buildAnalyticsButton(
+                  'Track Audio',
+                  Icons.audio_file,
+                  () async {
+                    await trackAudio(
+                      _selectedContentId,
+                      const Duration(minutes: 1, seconds: 30),
+                    );
+                    _showSnackbar('Audio playback tracked!');
+                  },
+                ),
                 _buildAnalyticsButton('Track Share', Icons.share, () async {
                   await trackSharing(_selectedContentId, 'demo_share');
                   _showSnackbar('Share event tracked!');
@@ -322,7 +359,11 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> wit
             const SizedBox(height: 12),
 
             // Analytics Display
-            AnimatedRatingDisplayWidget(rating: _currentRating, totalRatings: 42, contentId: _selectedContentId),
+            AnimatedRatingDisplayWidget(
+              rating: _currentRating,
+              totalRatings: 42,
+              contentId: _selectedContentId,
+            ),
           ],
         ),
       ),
@@ -344,15 +385,29 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> wit
               children: [
                 Icon(Icons.science, color: theme.primaryColor),
                 const SizedBox(width: 8),
-                Text('A/B Testing', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600)),
+                Text(
+                  'A/B Testing',
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 16),
 
             // Current variants display
-            _buildVariantDisplay('Feedback Button Style', getVariant('feedback_button_style', 'modern')),
-            _buildVariantDisplay('Rating Widget Type', getVariant('rating_widget_type', 'stars')),
-            _buildVariantDisplay('Color Scheme', getVariant('color_scheme', 'default')),
+            _buildVariantDisplay(
+              'Feedback Button Style',
+              getVariant('feedback_button_style', 'modern'),
+            ),
+            _buildVariantDisplay(
+              'Rating Widget Type',
+              getVariant('rating_widget_type', 'stars'),
+            ),
+            _buildVariantDisplay(
+              'Color Scheme',
+              getVariant('color_scheme', 'default'),
+            ),
 
             const SizedBox(height: 12),
 
@@ -389,7 +444,12 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> wit
               children: [
                 Icon(Icons.verified_user, color: theme.primaryColor),
                 const SizedBox(width: 8),
-                Text('Scholar Verification', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600)),
+                Text(
+                  'Scholar Verification',
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 16),
@@ -422,7 +482,10 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> wit
                 },
                 icon: const Icon(Icons.edit_note),
                 label: const Text('Submit Scholar Review'),
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.green, foregroundColor: Colors.white),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  foregroundColor: Colors.white,
+                ),
               ),
             ),
           ],
@@ -448,7 +511,9 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> wit
                 const SizedBox(width: 8),
                 Text(
                   'Privacy & Data Control',
-                  style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ],
             ),
@@ -458,11 +523,16 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> wit
               spacing: 8,
               runSpacing: 8,
               children: [
-                _buildPrivacyButton('View Analytics', Icons.bar_chart, () async {
-                  final analytics = await feedbackService.getAggregatedAnalytics();
-                  debugPrint('Analytics: $analytics');
-                  _showSnackbar('Analytics data retrieved!');
-                }),
+                _buildPrivacyButton(
+                  'View Analytics',
+                  Icons.bar_chart,
+                  () async {
+                    final analytics =
+                        await feedbackService.getAggregatedAnalytics();
+                    debugPrint('Analytics: $analytics');
+                    _showSnackbar('Analytics data retrieved!');
+                  },
+                ),
                 _buildPrivacyButton('Export Data', Icons.download, () async {
                   final data = await feedbackService.exportAnonymizedData();
                   debugPrint('Exported data size: ${data.keys.length}');
@@ -479,7 +549,11 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> wit
     );
   }
 
-  Widget _buildAnalyticsButton(String label, IconData icon, VoidCallback onPressed) {
+  Widget _buildAnalyticsButton(
+    String label,
+    IconData icon,
+    VoidCallback onPressed,
+  ) {
     return InteractionTracker(
       actionName: 'analytics_button_pressed',
       contentId: 'demo_analytics',
@@ -490,12 +564,18 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> wit
         onPressed: onPressed,
         icon: Icon(icon, size: 16),
         label: Text(label),
-        style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8)),
+        style: ElevatedButton.styleFrom(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        ),
       ),
     );
   }
 
-  Widget _buildPrivacyButton(String label, IconData icon, VoidCallback onPressed) {
+  Widget _buildPrivacyButton(
+    String label,
+    IconData icon,
+    VoidCallback onPressed,
+  ) {
     return ElevatedButton.icon(
       onPressed: onPressed,
       icon: Icon(icon, size: 16),
@@ -524,7 +604,10 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> wit
             ),
             child: Text(
               variant,
-              style: theme.textTheme.bodySmall?.copyWith(color: theme.primaryColor, fontWeight: FontWeight.w500),
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: theme.primaryColor,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
         ],
@@ -561,7 +644,10 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> wit
               },
             ),
             ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.red, foregroundColor: Colors.white),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red,
+                foregroundColor: Colors.white,
+              ),
               child: const Text('Clear Data'),
               onPressed: () async {
                 Navigator.of(context).pop();
@@ -580,10 +666,14 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> wit
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
       builder:
           (context) => Padding(
-            padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
             child: ContextualFeedbackForm(
               contentId: _selectedContentId,
               contentType: 'dua',
@@ -606,10 +696,14 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> wit
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
       builder:
           (context) => Padding(
-            padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
             child: ScholarFeedbackForm(
               contentId: _selectedContentId,
               contentType: 'dua',

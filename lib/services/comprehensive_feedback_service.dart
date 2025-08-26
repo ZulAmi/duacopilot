@@ -23,9 +23,11 @@ class ComprehensiveFeedbackService {
   Timer? _batchUploadTimer;
   final List<Map<String, dynamic>> _pendingAnalytics = [];
 
-  ComprehensiveFeedbackService({FirebaseAnalytics? analytics, FirebaseRemoteConfig? remoteConfig})
-    : _analytics = analytics ?? FirebaseAnalytics.instance,
-      _remoteConfig = remoteConfig ?? FirebaseRemoteConfig.instance;
+  ComprehensiveFeedbackService({
+    FirebaseAnalytics? analytics,
+    FirebaseRemoteConfig? remoteConfig,
+  }) : _analytics = analytics ?? FirebaseAnalytics.instance,
+       _remoteConfig = remoteConfig ?? FirebaseRemoteConfig.instance;
 
   /// Initialize the feedback service
   Future<void> initialize() async {
@@ -34,12 +36,17 @@ class ComprehensiveFeedbackService {
     try {
       // Initialize storage
       _feedbackBox = await Hive.openBox<Map<String, dynamic>>(_feedbackBoxName);
-      _analyticsBox = await Hive.openBox<Map<String, dynamic>>(_analyticsBoxName);
+      _analyticsBox = await Hive.openBox<Map<String, dynamic>>(
+        _analyticsBoxName,
+      );
       _prefs = await SharedPreferences.getInstance();
 
       // Initialize Firebase Remote Config
       await _remoteConfig.setConfigSettings(
-        RemoteConfigSettings(fetchTimeout: const Duration(minutes: 1), minimumFetchInterval: const Duration(hours: 1)),
+        RemoteConfigSettings(
+          fetchTimeout: const Duration(minutes: 1),
+          minimumFetchInterval: const Duration(hours: 1),
+        ),
       );
 
       // Set default values for A/B testing
@@ -178,7 +185,8 @@ class ComprehensiveFeedbackService {
       await _storeAnalyticsLocally(analyticsData);
 
       // Check if we should upload batch
-      if (_pendingAnalytics.length >= _remoteConfig.getInt('analytics_batch_size')) {
+      if (_pendingAnalytics.length >=
+          _remoteConfig.getInt('analytics_batch_size')) {
         await _uploadAnalyticsBatch();
       }
     } catch (e) {
@@ -198,7 +206,10 @@ class ComprehensiveFeedbackService {
       contentId: contentId,
       contentType: contentCategory ?? 'dua',
       duration: readingTime,
-      additionalData: {'completed': completed, 'reading_speed_wpm': _calculateReadingSpeed(readingTime)},
+      additionalData: {
+        'completed': completed,
+        'reading_speed_wpm': _calculateReadingSpeed(readingTime),
+      },
     );
   }
 
@@ -216,14 +227,21 @@ class ComprehensiveFeedbackService {
       duration: playbackTime,
       additionalData: {
         'total_duration_ms': totalDuration?.inMilliseconds,
-        'completion_rate': totalDuration != null ? playbackTime.inMilliseconds / totalDuration.inMilliseconds : null,
+        'completion_rate':
+            totalDuration != null
+                ? playbackTime.inMilliseconds / totalDuration.inMilliseconds
+                : null,
         'completed': completed,
       },
     );
   }
 
   /// Track sharing activity
-  Future<void> trackShare({required String contentId, required String shareMethod, String? contentType}) async {
+  Future<void> trackShare({
+    required String contentId,
+    required String shareMethod,
+    String? contentType,
+  }) async {
     await trackUsageAnalytics(
       action: 'share',
       contentId: contentId,
@@ -297,7 +315,10 @@ class ComprehensiveFeedbackService {
   }
 
   /// Get aggregated analytics (privacy-preserving)
-  Future<Map<String, dynamic>> getAggregatedAnalytics({DateTime? startDate, DateTime? endDate}) async {
+  Future<Map<String, dynamic>> getAggregatedAnalytics({
+    DateTime? startDate,
+    DateTime? endDate,
+  }) async {
     await _ensureInitialized();
 
     try {
@@ -324,17 +345,29 @@ class ComprehensiveFeedbackService {
   }
 
   /// Export anonymized data for research
-  Future<Map<String, dynamic>> exportAnonymizedData({DateTime? startDate, DateTime? endDate}) async {
+  Future<Map<String, dynamic>> exportAnonymizedData({
+    DateTime? startDate,
+    DateTime? endDate,
+  }) async {
     await _ensureInitialized();
 
-    final analytics = await getAggregatedAnalytics(startDate: startDate, endDate: endDate);
+    final analytics = await getAggregatedAnalytics(
+      startDate: startDate,
+      endDate: endDate,
+    );
 
     final feedback = _feedbackBox.values.toList();
 
     // Remove personally identifiable information
     final anonymizedFeedback =
         feedback
-            .map((data) => {...data, 'user_id': 'anonymized', 'timestamp': _roundTimestamp(data['timestamp'] as int)})
+            .map(
+              (data) => {
+                ...data,
+                'user_id': 'anonymized',
+                'timestamp': _roundTimestamp(data['timestamp'] as int),
+              },
+            )
             .toList();
 
     return {
@@ -342,7 +375,10 @@ class ComprehensiveFeedbackService {
       'feedback': anonymizedFeedback,
       'metadata': {
         'export_date': DateTime.now().millisecondsSinceEpoch,
-        'date_range': {'start': startDate?.millisecondsSinceEpoch, 'end': endDate?.millisecondsSinceEpoch},
+        'date_range': {
+          'start': startDate?.millisecondsSinceEpoch,
+          'end': endDate?.millisecondsSinceEpoch,
+        },
       },
     };
   }
@@ -356,7 +392,8 @@ class ComprehensiveFeedbackService {
     _pendingAnalytics.clear();
 
     // Clear preferences
-    final keys = _prefs.getKeys().where((key) => key.startsWith(_prefsPrefix)).toList();
+    final keys =
+        _prefs.getKeys().where((key) => key.startsWith(_prefsPrefix)).toList();
 
     for (final key in keys) {
       await _prefs.remove(key);
@@ -400,7 +437,10 @@ class ComprehensiveFeedbackService {
     await _analyticsBox.add(analytics);
   }
 
-  Future<void> _logEvent(String eventName, Map<String, Object> parameters) async {
+  Future<void> _logEvent(
+    String eventName,
+    Map<String, Object> parameters,
+  ) async {
     try {
       await _analytics.logEvent(name: eventName, parameters: parameters);
     } catch (e) {
@@ -433,7 +473,9 @@ class ComprehensiveFeedbackService {
     return roundedDate.millisecondsSinceEpoch;
   }
 
-  Map<String, dynamic> _aggregateAnalyticsData(List<Map<String, dynamic>> data) {
+  Map<String, dynamic> _aggregateAnalyticsData(
+    List<Map<String, dynamic>> data,
+  ) {
     final Map<String, int> actionCounts = {};
     final Map<String, int> contentTypeCounts = {};
     final Map<String, List<int>> durationsByAction = {};
@@ -446,7 +488,8 @@ class ComprehensiveFeedbackService {
       actionCounts[action] = (actionCounts[action] ?? 0) + 1;
 
       if (contentType != null) {
-        contentTypeCounts[contentType] = (contentTypeCounts[contentType] ?? 0) + 1;
+        contentTypeCounts[contentType] =
+            (contentTypeCounts[contentType] ?? 0) + 1;
       }
 
       if (duration != null) {
@@ -457,7 +500,8 @@ class ComprehensiveFeedbackService {
     // Calculate average durations
     final Map<String, double> averageDurations = {};
     durationsByAction.forEach((action, durations) {
-      averageDurations[action] = durations.reduce((a, b) => a + b) / durations.length;
+      averageDurations[action] =
+          durations.reduce((a, b) => a + b) / durations.length;
     });
 
     return {
@@ -469,9 +513,14 @@ class ComprehensiveFeedbackService {
   }
 
   void _startBatchUploadTimer() {
-    final interval = Duration(minutes: _remoteConfig.getInt('analytics_upload_interval_minutes'));
+    final interval = Duration(
+      minutes: _remoteConfig.getInt('analytics_upload_interval_minutes'),
+    );
 
-    _batchUploadTimer = Timer.periodic(interval, (_) => _uploadAnalyticsBatch());
+    _batchUploadTimer = Timer.periodic(
+      interval,
+      (_) => _uploadAnalyticsBatch(),
+    );
   }
 
   Future<void> _uploadAnalyticsBatch() async {
@@ -480,7 +529,9 @@ class ComprehensiveFeedbackService {
     try {
       // In a real implementation, this would upload to your backend
       // For now, we'll just log and clear the batch
-      debugPrint('Uploading analytics batch: ${_pendingAnalytics.length} events');
+      debugPrint(
+        'Uploading analytics batch: ${_pendingAnalytics.length} events',
+      );
 
       // Simulate upload
       await Future.delayed(const Duration(milliseconds: 500));

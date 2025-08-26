@@ -43,13 +43,22 @@ class GlassmorphicContainer extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [bgColor.withOpacity(opacity), bgColor.withOpacity(opacity * 0.7)],
+          colors: [
+            bgColor.withOpacity(opacity),
+            bgColor.withOpacity(opacity * 0.7),
+          ],
         ),
         borderRadius: BorderRadius.circular(borderRadius),
         border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
         boxShadow:
             withShadow
-                ? [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 20, offset: const Offset(0, 10))]
+                ? [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 20,
+                    offset: const Offset(0, 10),
+                  ),
+                ]
                 : null,
       ),
       child: child,
@@ -82,19 +91,22 @@ class ModernGradientButton extends StatefulWidget {
   State<ModernGradientButton> createState() => _ModernGradientButtonState();
 }
 
-class _ModernGradientButtonState extends State<ModernGradientButton> with SingleTickerProviderStateMixin {
+class _ModernGradientButtonState extends State<ModernGradientButton>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _scaleAnimation;
 
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(duration: const Duration(milliseconds: 200), vsync: this);
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 200),
+      vsync: this,
+    );
 
-    _scaleAnimation = Tween<double>(
-      begin: 1.0,
-      end: 0.95,
-    ).animate(CurvedAnimation(parent: _animationController, curve: Curves.easeInOut));
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
   }
 
   @override
@@ -106,7 +118,9 @@ class _ModernGradientButtonState extends State<ModernGradientButton> with Single
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final colors = widget.gradientColors ?? [theme.colorScheme.primary, theme.colorScheme.primary.withOpacity(0.8)];
+    final colors =
+        widget.gradientColors ??
+        [theme.colorScheme.primary, theme.colorScheme.primary.withOpacity(0.8)];
 
     return GestureDetector(
       onTapDown: (_) {
@@ -126,12 +140,22 @@ class _ModernGradientButtonState extends State<ModernGradientButton> with Single
           return Transform.scale(
             scale: _scaleAnimation.value,
             child: Container(
-              padding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              padding:
+                  widget.padding ??
+                  const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
               decoration: BoxDecoration(
-                gradient: LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: colors),
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: colors,
+                ),
                 borderRadius: BorderRadius.circular(widget.borderRadius),
                 boxShadow: [
-                  BoxShadow(color: colors.first.withOpacity(0.3), blurRadius: 15, offset: const Offset(0, 8)),
+                  BoxShadow(
+                    color: colors.first.withOpacity(0.3),
+                    blurRadius: 15,
+                    offset: const Offset(0, 8),
+                  ),
                 ],
               ),
               child: Row(
@@ -149,10 +173,14 @@ class _ModernGradientButtonState extends State<ModernGradientButton> with Single
                     )
                   else if (widget.icon != null)
                     Icon(widget.icon, color: Colors.white, size: 18),
-                  if (widget.icon != null || widget.isLoading) const SizedBox(width: 8),
+                  if (widget.icon != null || widget.isLoading)
+                    const SizedBox(width: 8),
                   Text(
                     widget.text,
-                    style: theme.textTheme.labelLarge?.copyWith(color: Colors.white, fontWeight: FontWeight.w600),
+                    style: theme.textTheme.labelLarge?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ],
               ),
@@ -187,7 +215,8 @@ class ModernSearchInput extends StatefulWidget {
   State<ModernSearchInput> createState() => _ModernSearchInputState();
 }
 
-class _ModernSearchInputState extends State<ModernSearchInput> with SingleTickerProviderStateMixin {
+class _ModernSearchInputState extends State<ModernSearchInput>
+    with SingleTickerProviderStateMixin {
   late AnimationController _pulseController;
   bool _isFocused = false;
   late FocusNode _focusNode;
@@ -196,7 +225,10 @@ class _ModernSearchInputState extends State<ModernSearchInput> with SingleTicker
   void initState() {
     super.initState();
     _focusNode = FocusNode();
-    _pulseController = AnimationController(duration: const Duration(milliseconds: 1500), vsync: this);
+    _pulseController = AnimationController(
+      duration: const Duration(milliseconds: 1500),
+      vsync: this,
+    );
 
     _focusNode.addListener(() {
       setState(() {
@@ -243,12 +275,18 @@ class _ModernSearchInputState extends State<ModernSearchInput> with SingleTicker
         ),
         borderRadius: BorderRadius.circular(30),
         border: Border.all(
-          color: _isFocused ? theme.colorScheme.primary.withOpacity(0.5) : Colors.transparent,
+          color:
+              _isFocused
+                  ? theme.colorScheme.primary.withOpacity(0.5)
+                  : Colors.transparent,
           width: 2,
         ),
         boxShadow: [
           BoxShadow(
-            color: _isFocused ? theme.colorScheme.primary.withOpacity(0.1) : Colors.black.withOpacity(0.05),
+            color:
+                _isFocused
+                    ? theme.colorScheme.primary.withOpacity(0.1)
+                    : Colors.black.withOpacity(0.05),
             blurRadius: _isFocused ? 20 : 10,
             offset: const Offset(0, 10),
           ),
@@ -257,7 +295,11 @@ class _ModernSearchInputState extends State<ModernSearchInput> with SingleTicker
       child: Row(
         children: [
           const SizedBox(width: 20),
-          Icon(Icons.search_rounded, color: theme.colorScheme.primary.withOpacity(0.7), size: 24),
+          Icon(
+            Icons.search_rounded,
+            color: theme.colorScheme.primary.withOpacity(0.7),
+            size: 24,
+          ),
           const SizedBox(width: 16),
 
           Expanded(
@@ -274,7 +316,11 @@ class _ModernSearchInputState extends State<ModernSearchInput> with SingleTicker
                   fontWeight: FontWeight.w400,
                 ),
               ),
-              style: TextStyle(fontSize: 16, color: theme.colorScheme.onSurface, fontWeight: FontWeight.w500),
+              style: TextStyle(
+                fontSize: 16,
+                color: theme.colorScheme.onSurface,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
 
@@ -284,13 +330,21 @@ class _ModernSearchInputState extends State<ModernSearchInput> with SingleTicker
               animation: _pulseController,
               builder: (context, child) {
                 return Transform.scale(
-                  scale: widget.isListening ? 1.0 + (_pulseController.value * 0.1) : 1.0,
+                  scale:
+                      widget.isListening
+                          ? 1.0 + (_pulseController.value * 0.1)
+                          : 1.0,
                   child: Container(
                     margin: const EdgeInsets.only(right: 8),
                     decoration: BoxDecoration(
                       gradient:
                           widget.isListening
-                              ? LinearGradient(colors: [Colors.red.withOpacity(0.8), Colors.redAccent.withOpacity(0.6)])
+                              ? LinearGradient(
+                                colors: [
+                                  Colors.red.withOpacity(0.8),
+                                  Colors.redAccent.withOpacity(0.6),
+                                ],
+                              )
                               : LinearGradient(
                                 colors: [
                                   theme.colorScheme.primary.withOpacity(0.1),
@@ -302,8 +356,13 @@ class _ModernSearchInputState extends State<ModernSearchInput> with SingleTicker
                     child: IconButton(
                       onPressed: widget.onVoice,
                       icon: Icon(
-                        widget.isListening ? Icons.mic_rounded : Icons.mic_none_rounded,
-                        color: widget.isListening ? Colors.white : theme.colorScheme.primary,
+                        widget.isListening
+                            ? Icons.mic_rounded
+                            : Icons.mic_none_rounded,
+                        color:
+                            widget.isListening
+                                ? Colors.white
+                                : theme.colorScheme.primary,
                         size: 22,
                       ),
                     ),
@@ -319,16 +378,27 @@ class _ModernSearchInputState extends State<ModernSearchInput> with SingleTicker
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [theme.colorScheme.primary, theme.colorScheme.primary.withOpacity(0.8)],
+                colors: [
+                  theme.colorScheme.primary,
+                  theme.colorScheme.primary.withOpacity(0.8),
+                ],
               ),
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
-                BoxShadow(color: theme.colorScheme.primary.withOpacity(0.3), blurRadius: 8, offset: const Offset(0, 4)),
+                BoxShadow(
+                  color: theme.colorScheme.primary.withOpacity(0.3),
+                  blurRadius: 8,
+                  offset: const Offset(0, 4),
+                ),
               ],
             ),
             child: IconButton(
               onPressed: widget.onSend,
-              icon: const Icon(Icons.send_rounded, color: Colors.white, size: 20),
+              icon: const Icon(
+                Icons.send_rounded,
+                color: Colors.white,
+                size: 20,
+              ),
             ),
           ),
 
@@ -350,15 +420,22 @@ class ModernLoadingIndicator extends StatefulWidget {
   State<ModernLoadingIndicator> createState() => _ModernLoadingIndicatorState();
 }
 
-class _ModernLoadingIndicatorState extends State<ModernLoadingIndicator> with TickerProviderStateMixin {
+class _ModernLoadingIndicatorState extends State<ModernLoadingIndicator>
+    with TickerProviderStateMixin {
   late AnimationController _pulseController;
   late AnimationController _rotateController;
 
   @override
   void initState() {
     super.initState();
-    _pulseController = AnimationController(duration: const Duration(seconds: 2), vsync: this);
-    _rotateController = AnimationController(duration: const Duration(seconds: 1), vsync: this);
+    _pulseController = AnimationController(
+      duration: const Duration(seconds: 2),
+      vsync: this,
+    );
+    _rotateController = AnimationController(
+      duration: const Duration(seconds: 1),
+      vsync: this,
+    );
 
     _pulseController.repeat(reverse: true);
     _rotateController.repeat();
@@ -391,7 +468,11 @@ class _ModernLoadingIndicatorState extends State<ModernLoadingIndicator> with Ti
                   height: 80,
                   decoration: BoxDecoration(
                     gradient: RadialGradient(
-                      colors: [primaryColor.withOpacity(0.3), primaryColor.withOpacity(0.1), Colors.transparent],
+                      colors: [
+                        primaryColor.withOpacity(0.3),
+                        primaryColor.withOpacity(0.1),
+                        Colors.transparent,
+                      ],
                     ),
                     shape: BoxShape.circle,
                   ),
@@ -403,12 +484,18 @@ class _ModernLoadingIndicatorState extends State<ModernLoadingIndicator> with Ti
                         color: primaryColor,
                         shape: BoxShape.circle,
                         boxShadow: [
-                          BoxShadow(color: primaryColor.withOpacity(0.3), blurRadius: 15, offset: const Offset(0, 5)),
+                          BoxShadow(
+                            color: primaryColor.withOpacity(0.3),
+                            blurRadius: 15,
+                            offset: const Offset(0, 5),
+                          ),
                         ],
                       ),
                       child: const Center(
                         child: CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            Colors.white,
+                          ),
                           strokeWidth: 3,
                         ),
                       ),
@@ -424,12 +511,17 @@ class _ModernLoadingIndicatorState extends State<ModernLoadingIndicator> with Ti
           const SizedBox(height: 24),
           Text(
             widget.message!,
-            style: theme.textTheme.titleMedium?.copyWith(color: primaryColor, fontWeight: FontWeight.w600),
+            style: theme.textTheme.titleMedium?.copyWith(
+              color: primaryColor,
+              fontWeight: FontWeight.w600,
+            ),
           ),
           const SizedBox(height: 8),
           Text(
             'Please wait while we process your request',
-            style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
+            ),
             textAlign: TextAlign.center,
           ),
         ],
@@ -461,7 +553,8 @@ class ModernAnimatedCard extends StatefulWidget {
   State<ModernAnimatedCard> createState() => _ModernAnimatedCardState();
 }
 
-class _ModernAnimatedCardState extends State<ModernAnimatedCard> with SingleTickerProviderStateMixin {
+class _ModernAnimatedCardState extends State<ModernAnimatedCard>
+    with SingleTickerProviderStateMixin {
   late AnimationController _hoverController;
   late Animation<double> _scaleAnimation;
   late Animation<double> _elevationAnimation;
@@ -470,7 +563,10 @@ class _ModernAnimatedCardState extends State<ModernAnimatedCard> with SingleTick
   @override
   void initState() {
     super.initState();
-    _hoverController = AnimationController(duration: const Duration(milliseconds: 200), vsync: this);
+    _hoverController = AnimationController(
+      duration: const Duration(milliseconds: 200),
+      vsync: this,
+    );
 
     _scaleAnimation = Tween<double>(
       begin: 1.0,
@@ -572,22 +668,26 @@ class ModernFloatingActionButton extends StatefulWidget {
   });
 
   @override
-  State<ModernFloatingActionButton> createState() => _ModernFloatingActionButtonState();
+  State<ModernFloatingActionButton> createState() =>
+      _ModernFloatingActionButtonState();
 }
 
-class _ModernFloatingActionButtonState extends State<ModernFloatingActionButton> with SingleTickerProviderStateMixin {
+class _ModernFloatingActionButtonState extends State<ModernFloatingActionButton>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _scaleAnimation;
 
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(duration: const Duration(milliseconds: 150), vsync: this);
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 150),
+      vsync: this,
+    );
 
-    _scaleAnimation = Tween<double>(
-      begin: 1.0,
-      end: 0.9,
-    ).animate(CurvedAnimation(parent: _animationController, curve: Curves.easeInOut));
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.9).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
   }
 
   @override
@@ -599,7 +699,9 @@ class _ModernFloatingActionButtonState extends State<ModernFloatingActionButton>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final colors = widget.gradientColors ?? [theme.colorScheme.primary, theme.colorScheme.primary.withOpacity(0.8)];
+    final colors =
+        widget.gradientColors ??
+        [theme.colorScheme.primary, theme.colorScheme.primary.withOpacity(0.8)];
 
     return Tooltip(
       message: widget.tooltip ?? '',
@@ -620,10 +722,18 @@ class _ModernFloatingActionButtonState extends State<ModernFloatingActionButton>
                 width: 56,
                 height: 56,
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: colors),
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: colors,
+                  ),
                   shape: BoxShape.circle,
                   boxShadow: [
-                    BoxShadow(color: colors.first.withOpacity(0.3), blurRadius: 15, offset: const Offset(0, 8)),
+                    BoxShadow(
+                      color: colors.first.withOpacity(0.3),
+                      blurRadius: 15,
+                      offset: const Offset(0, 8),
+                    ),
                   ],
                 ),
                 child: Icon(widget.icon, color: Colors.white, size: 24),

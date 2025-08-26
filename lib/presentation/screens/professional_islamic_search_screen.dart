@@ -23,10 +23,12 @@ class ProfessionalIslamicSearchScreen extends ConsumerStatefulWidget {
   });
 
   @override
-  ConsumerState<ProfessionalIslamicSearchScreen> createState() => _ProfessionalIslamicSearchScreenState();
+  ConsumerState<ProfessionalIslamicSearchScreen> createState() =>
+      _ProfessionalIslamicSearchScreenState();
 }
 
-class _ProfessionalIslamicSearchScreenState extends ConsumerState<ProfessionalIslamicSearchScreen>
+class _ProfessionalIslamicSearchScreenState
+    extends ConsumerState<ProfessionalIslamicSearchScreen>
     with TickerProviderStateMixin {
   late final TextEditingController _searchController;
   late final ScrollController _scrollController;
@@ -72,7 +74,10 @@ class _ProfessionalIslamicSearchScreenState extends ConsumerState<ProfessionalIs
     super.initState();
     _searchController = TextEditingController();
     _scrollController = ScrollController();
-    _fadeController = AnimationController(duration: ProfessionalIslamicTheme.animationNormal, vsync: this);
+    _fadeController = AnimationController(
+      duration: ProfessionalIslamicTheme.animationNormal,
+      vsync: this,
+    );
 
     _fadeController.forward();
   }
@@ -213,18 +218,28 @@ Based on your query about "$query", here is relevant Islamic knowledge:
         appBar: AppBar(
           title: Text(
             'Islamic Knowledge Search',
-            style: TextStyle(color: ProfessionalIslamicTheme.textOnIslamic, fontWeight: FontWeight.w600),
+            style: TextStyle(
+              color: ProfessionalIslamicTheme.textOnIslamic,
+              fontWeight: FontWeight.w600,
+            ),
           ),
           backgroundColor: ProfessionalIslamicTheme.islamicGreen,
           foregroundColor: ProfessionalIslamicTheme.textOnIslamic,
           elevation: 0,
-          leading: IconButton(icon: const Icon(Icons.arrow_back_rounded), onPressed: () => Navigator.of(context).pop()),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_rounded),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
         ),
         body: SafeArea(
           child: FadeTransition(
             opacity: _fadeController,
             child: Column(
-              children: [_buildProfessionalHeader(), _buildSearchSection(), Expanded(child: _buildContent())],
+              children: [
+                _buildProfessionalHeader(),
+                _buildSearchSection(),
+                Expanded(child: _buildContent()),
+              ],
             ),
           ),
         ),
@@ -238,7 +253,12 @@ Based on your query about "$query", here is relevant Islamic knowledge:
       padding: const EdgeInsets.all(ProfessionalIslamicTheme.space6),
       decoration: BoxDecoration(
         color: ProfessionalIslamicTheme.backgroundSecondary,
-        border: Border(bottom: BorderSide(color: ProfessionalIslamicTheme.borderLight, width: 1)),
+        border: Border(
+          bottom: BorderSide(
+            color: ProfessionalIslamicTheme.borderLight,
+            width: 1,
+          ),
+        ),
       ),
       child: Column(
         children: [
@@ -248,9 +268,15 @@ Based on your query about "$query", here is relevant Islamic knowledge:
                 padding: const EdgeInsets.all(ProfessionalIslamicTheme.space3),
                 decoration: BoxDecoration(
                   color: ProfessionalIslamicTheme.islamicGreen,
-                  borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusMd),
+                  borderRadius: BorderRadius.circular(
+                    ProfessionalIslamicTheme.radiusMd,
+                  ),
                 ),
-                child: Icon(Icons.search_rounded, color: ProfessionalIslamicTheme.textOnIslamic, size: 24),
+                child: Icon(
+                  Icons.search_rounded,
+                  color: ProfessionalIslamicTheme.textOnIslamic,
+                  size: 24,
+                ),
               ),
               const SizedBox(width: ProfessionalIslamicTheme.space4),
               Expanded(
@@ -267,7 +293,9 @@ Based on your query about "$query", here is relevant Islamic knowledge:
                     const SizedBox(height: 2),
                     Text(
                       'Search Islamic Knowledge & Guidance',
-                      style: ProfessionalIslamicTheme.body2.copyWith(color: ProfessionalIslamicTheme.textSecondary),
+                      style: ProfessionalIslamicTheme.body2.copyWith(
+                        color: ProfessionalIslamicTheme.textSecondary,
+                      ),
                     ),
                   ],
                 ),
@@ -282,14 +310,26 @@ Based on your query about "$query", here is relevant Islamic knowledge:
                 vertical: ProfessionalIslamicTheme.space2,
               ),
               decoration: BoxDecoration(
-                color: ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusSm),
-                border: Border.all(color: ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.2)),
+                color: ProfessionalIslamicTheme.islamicGreen.withValues(
+                  alpha: 0.1,
+                ),
+                borderRadius: BorderRadius.circular(
+                  ProfessionalIslamicTheme.radiusSm,
+                ),
+                border: Border.all(
+                  color: ProfessionalIslamicTheme.islamicGreen.withValues(
+                    alpha: 0.2,
+                  ),
+                ),
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.analytics_rounded, size: 16, color: ProfessionalIslamicTheme.islamicGreen),
+                  Icon(
+                    Icons.analytics_rounded,
+                    size: 16,
+                    color: ProfessionalIslamicTheme.islamicGreen,
+                  ),
                   const SizedBox(width: ProfessionalIslamicTheme.space2),
                   Text(
                     'Searches performed: $_searchCount',
@@ -317,7 +357,9 @@ Based on your query about "$query", here is relevant Islamic knowledge:
           Container(
             decoration: BoxDecoration(
               color: ProfessionalIslamicTheme.backgroundSecondary,
-              borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusMd),
+              borderRadius: BorderRadius.circular(
+                ProfessionalIslamicTheme.radiusMd,
+              ),
               border: Border.all(color: ProfessionalIslamicTheme.borderLight),
               boxShadow: ProfessionalIslamicTheme.shadowSoft,
             ),
@@ -327,8 +369,13 @@ Based on your query about "$query", here is relevant Islamic knowledge:
               onChanged: (value) => setState(() => _currentQuery = value),
               decoration: InputDecoration(
                 hintText: 'Search Quran, Hadith, Duas, or Islamic guidance...',
-                hintStyle: TextStyle(color: ProfessionalIslamicTheme.textSecondary),
-                prefixIcon: Icon(Icons.search_rounded, color: ProfessionalIslamicTheme.textSecondary),
+                hintStyle: TextStyle(
+                  color: ProfessionalIslamicTheme.textSecondary,
+                ),
+                prefixIcon: Icon(
+                  Icons.search_rounded,
+                  color: ProfessionalIslamicTheme.textSecondary,
+                ),
                 suffixIcon:
                     _currentQuery.isNotEmpty
                         ? IconButton(
@@ -336,11 +383,16 @@ Based on your query about "$query", here is relevant Islamic knowledge:
                             _searchController.clear();
                             setState(() => _currentQuery = '');
                           },
-                          icon: Icon(Icons.clear, color: ProfessionalIslamicTheme.textSecondary),
+                          icon: Icon(
+                            Icons.clear,
+                            color: ProfessionalIslamicTheme.textSecondary,
+                          ),
                         )
                         : null,
                 border: InputBorder.none,
-                contentPadding: const EdgeInsets.all(ProfessionalIslamicTheme.space4),
+                contentPadding: const EdgeInsets.all(
+                  ProfessionalIslamicTheme.space4,
+                ),
               ),
               style: TextStyle(color: ProfessionalIslamicTheme.textPrimary),
             ),
@@ -359,7 +411,12 @@ Based on your query about "$query", here is relevant Islamic knowledge:
             const SizedBox(height: ProfessionalIslamicTheme.space2),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              child: Row(children: _searchCategories.map((category) => _buildCompactCategoryChip(category)).toList()),
+              child: Row(
+                children:
+                    _searchCategories
+                        .map((category) => _buildCompactCategoryChip(category))
+                        .toList(),
+              ),
             ),
           ],
         ],
@@ -379,14 +436,20 @@ Based on your query about "$query", here is relevant Islamic knowledge:
           ),
           decoration: BoxDecoration(
             color: ProfessionalIslamicTheme.backgroundSecondary,
-            borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusFull),
+            borderRadius: BorderRadius.circular(
+              ProfessionalIslamicTheme.radiusFull,
+            ),
             border: Border.all(color: ProfessionalIslamicTheme.borderLight),
             boxShadow: ProfessionalIslamicTheme.shadowSoft,
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(category.icon, size: 16, color: ProfessionalIslamicTheme.islamicGreen),
+              Icon(
+                category.icon,
+                size: 16,
+                color: ProfessionalIslamicTheme.islamicGreen,
+              ),
               const SizedBox(width: ProfessionalIslamicTheme.space2),
               Text(
                 category.titleEn,
@@ -408,11 +471,15 @@ Based on your query about "$query", here is relevant Islamic knowledge:
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircularProgressIndicator(color: ProfessionalIslamicTheme.islamicGreen),
+            CircularProgressIndicator(
+              color: ProfessionalIslamicTheme.islamicGreen,
+            ),
             const SizedBox(height: ProfessionalIslamicTheme.space4),
             Text(
               'Searching Islamic knowledge...',
-              style: ProfessionalIslamicTheme.body1.copyWith(color: ProfessionalIslamicTheme.textSecondary),
+              style: ProfessionalIslamicTheme.body1.copyWith(
+                color: ProfessionalIslamicTheme.textSecondary,
+              ),
             ),
           ],
         ),
@@ -448,9 +515,15 @@ Based on your query about "$query", here is relevant Islamic knowledge:
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   color: ProfessionalIslamicTheme.islamicGreen,
-                  borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusSm),
+                  borderRadius: BorderRadius.circular(
+                    ProfessionalIslamicTheme.radiusSm,
+                  ),
                 ),
-                child: Icon(Icons.auto_awesome, color: ProfessionalIslamicTheme.textOnIslamic, size: 20),
+                child: Icon(
+                  Icons.auto_awesome,
+                  color: ProfessionalIslamicTheme.textOnIslamic,
+                  size: 20,
+                ),
               ),
               const SizedBox(width: ProfessionalIslamicTheme.space3),
               Expanded(
@@ -466,7 +539,9 @@ Based on your query about "$query", here is relevant Islamic knowledge:
                     ),
                     Text(
                       'Query: "$_currentQuery"',
-                      style: ProfessionalIslamicTheme.body2.copyWith(color: ProfessionalIslamicTheme.textSecondary),
+                      style: ProfessionalIslamicTheme.body2.copyWith(
+                        color: ProfessionalIslamicTheme.textSecondary,
+                      ),
                     ),
                   ],
                 ),
@@ -479,12 +554,17 @@ Based on your query about "$query", here is relevant Islamic knowledge:
             padding: const EdgeInsets.all(ProfessionalIslamicTheme.space4),
             decoration: BoxDecoration(
               color: ProfessionalIslamicTheme.backgroundPrimary,
-              borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusSm),
+              borderRadius: BorderRadius.circular(
+                ProfessionalIslamicTheme.radiusSm,
+              ),
               border: Border.all(color: ProfessionalIslamicTheme.borderLight),
             ),
             child: Text(
               _searchResults!,
-              style: ProfessionalIslamicTheme.body1.copyWith(color: ProfessionalIslamicTheme.textPrimary, height: 1.6),
+              style: ProfessionalIslamicTheme.body1.copyWith(
+                color: ProfessionalIslamicTheme.textPrimary,
+                height: 1.6,
+              ),
             ),
           ),
         ],
@@ -503,13 +583,25 @@ Based on your query about "$query", here is relevant Islamic knowledge:
             width: double.infinity,
             padding: const EdgeInsets.all(ProfessionalIslamicTheme.space4),
             decoration: BoxDecoration(
-              color: ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.05),
-              borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusMd),
-              border: Border.all(color: ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.1)),
+              color: ProfessionalIslamicTheme.islamicGreen.withValues(
+                alpha: 0.05,
+              ),
+              borderRadius: BorderRadius.circular(
+                ProfessionalIslamicTheme.radiusMd,
+              ),
+              border: Border.all(
+                color: ProfessionalIslamicTheme.islamicGreen.withValues(
+                  alpha: 0.1,
+                ),
+              ),
             ),
             child: Column(
               children: [
-                Icon(Icons.mosque_rounded, size: 40, color: ProfessionalIslamicTheme.islamicGreen),
+                Icon(
+                  Icons.mosque_rounded,
+                  size: 40,
+                  color: ProfessionalIslamicTheme.islamicGreen,
+                ),
                 const SizedBox(height: ProfessionalIslamicTheme.space3),
                 Text(
                   'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ',
@@ -531,7 +623,9 @@ Based on your query about "$query", here is relevant Islamic knowledge:
                 const SizedBox(height: ProfessionalIslamicTheme.space2),
                 Text(
                   'Search for Quranic verses, authentic Hadith, daily duas, and Islamic guidance.',
-                  style: ProfessionalIslamicTheme.body2.copyWith(color: ProfessionalIslamicTheme.textSecondary),
+                  style: ProfessionalIslamicTheme.body2.copyWith(
+                    color: ProfessionalIslamicTheme.textSecondary,
+                  ),
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -570,7 +664,10 @@ Based on your query about "$query", here is relevant Islamic knowledge:
               ),
             ),
             const SizedBox(height: ProfessionalIslamicTheme.space3),
-            ...(_searchHistory.take(5).map((item) => _buildHistoryItem(item)).toList()),
+            ...(_searchHistory
+                .take(5)
+                .map((item) => _buildHistoryItem(item))
+                .toList()),
           ],
         ],
       ),
@@ -587,20 +684,32 @@ Based on your query about "$query", here is relevant Islamic knowledge:
           padding: const EdgeInsets.all(ProfessionalIslamicTheme.space3),
           decoration: BoxDecoration(
             color: ProfessionalIslamicTheme.backgroundSecondary,
-            borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusSm),
+            borderRadius: BorderRadius.circular(
+              ProfessionalIslamicTheme.radiusSm,
+            ),
             border: Border.all(color: ProfessionalIslamicTheme.borderLight),
           ),
           child: Row(
             children: [
-              Icon(Icons.search_rounded, size: 18, color: ProfessionalIslamicTheme.textSecondary),
+              Icon(
+                Icons.search_rounded,
+                size: 18,
+                color: ProfessionalIslamicTheme.textSecondary,
+              ),
               const SizedBox(width: ProfessionalIslamicTheme.space3),
               Expanded(
                 child: Text(
                   suggestion,
-                  style: ProfessionalIslamicTheme.body2.copyWith(color: ProfessionalIslamicTheme.textPrimary),
+                  style: ProfessionalIslamicTheme.body2.copyWith(
+                    color: ProfessionalIslamicTheme.textPrimary,
+                  ),
                 ),
               ),
-              Icon(Icons.arrow_forward_ios_rounded, size: 14, color: ProfessionalIslamicTheme.textSecondary),
+              Icon(
+                Icons.arrow_forward_ios_rounded,
+                size: 14,
+                color: ProfessionalIslamicTheme.textSecondary,
+              ),
             ],
           ),
         ),
@@ -618,12 +727,18 @@ Based on your query about "$query", here is relevant Islamic knowledge:
           padding: const EdgeInsets.all(ProfessionalIslamicTheme.space3),
           decoration: BoxDecoration(
             color: ProfessionalIslamicTheme.backgroundSecondary,
-            borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusSm),
+            borderRadius: BorderRadius.circular(
+              ProfessionalIslamicTheme.radiusSm,
+            ),
             border: Border.all(color: ProfessionalIslamicTheme.borderLight),
           ),
           child: Row(
             children: [
-              Icon(Icons.history_rounded, size: 18, color: ProfessionalIslamicTheme.textSecondary),
+              Icon(
+                Icons.history_rounded,
+                size: 18,
+                color: ProfessionalIslamicTheme.textSecondary,
+              ),
               const SizedBox(width: ProfessionalIslamicTheme.space3),
               Expanded(
                 child: Column(
@@ -631,18 +746,27 @@ Based on your query about "$query", here is relevant Islamic knowledge:
                   children: [
                     Text(
                       item.query,
-                      style: ProfessionalIslamicTheme.body2.copyWith(color: ProfessionalIslamicTheme.textPrimary),
+                      style: ProfessionalIslamicTheme.body2.copyWith(
+                        color: ProfessionalIslamicTheme.textPrimary,
+                      ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
                       _formatDateTime(item.timestamp),
-                      style: TextStyle(fontSize: 11, color: ProfessionalIslamicTheme.textSecondary),
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: ProfessionalIslamicTheme.textSecondary,
+                      ),
                     ),
                   ],
                 ),
               ),
-              Icon(Icons.arrow_forward_ios_rounded, size: 14, color: ProfessionalIslamicTheme.textSecondary),
+              Icon(
+                Icons.arrow_forward_ios_rounded,
+                size: 14,
+                color: ProfessionalIslamicTheme.textSecondary,
+              ),
             ],
           ),
         ),
@@ -673,7 +797,12 @@ class IslamicSearchHistoryItem {
   final DateTime timestamp;
   final String results;
 
-  IslamicSearchHistoryItem({required this.id, required this.query, required this.timestamp, required this.results});
+  IslamicSearchHistoryItem({
+    required this.id,
+    required this.query,
+    required this.timestamp,
+    required this.results,
+  });
 }
 
 /// Islamic Search Category
@@ -683,5 +812,10 @@ class IslamicSearchCategory {
   final String titleEn; // English
   final String description;
 
-  IslamicSearchCategory({required this.icon, required this.title, required this.titleEn, required this.description});
+  IslamicSearchCategory({
+    required this.icon,
+    required this.title,
+    required this.titleEn,
+    required this.description,
+  });
 }

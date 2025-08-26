@@ -8,14 +8,20 @@ class RAGConfidenceWidget extends StatefulWidget {
   final bool showDetailed;
   final VoidCallback? onExpandToggle;
 
-  const RAGConfidenceWidget({super.key, required this.confidence, this.showDetailed = false, this.onExpandToggle});
+  const RAGConfidenceWidget({
+    super.key,
+    required this.confidence,
+    this.showDetailed = false,
+    this.onExpandToggle,
+  });
 
   @override
   State<RAGConfidenceWidget> createState() => _RAGConfidenceWidgetState();
 }
 
 /// _RAGConfidenceWidgetState class implementation
-class _RAGConfidenceWidgetState extends State<RAGConfidenceWidget> with SingleTickerProviderStateMixin {
+class _RAGConfidenceWidgetState extends State<RAGConfidenceWidget>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
   late Animation<double> _slideAnimation;
@@ -23,15 +29,16 @@ class _RAGConfidenceWidgetState extends State<RAGConfidenceWidget> with SingleTi
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(duration: const Duration(milliseconds: 300), vsync: this);
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(parent: _animationController, curve: Curves.easeInOut));
-    _slideAnimation = Tween<double>(
-      begin: -0.1,
-      end: 0.0,
-    ).animate(CurvedAnimation(parent: _animationController, curve: Curves.easeOutCubic));
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 300),
+      vsync: this,
+    );
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
+    _slideAnimation = Tween<double>(begin: -0.1, end: 0.0).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeOutCubic),
+    );
 
     if (widget.showDetailed) {
       _animationController.forward();
@@ -62,7 +69,10 @@ class _RAGConfidenceWidgetState extends State<RAGConfidenceWidget> with SingleTi
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: _getConfidenceColor().withOpacity(0.3), width: 1),
+        border: Border.all(
+          color: _getConfidenceColor().withOpacity(0.3),
+          width: 1,
+        ),
         boxShadow: [
           BoxShadow(
             color: _getConfidenceColor().withOpacity(0.1),
@@ -115,7 +125,11 @@ class _RAGConfidenceWidgetState extends State<RAGConfidenceWidget> with SingleTi
                 color: _getConfidenceColor().withOpacity(0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Icon(Icons.psychology_rounded, color: _getConfidenceColor(), size: 20),
+              child: Icon(
+                Icons.psychology_rounded,
+                color: _getConfidenceColor(),
+                size: 20,
+              ),
             ),
             const SizedBox(width: 12),
 
@@ -141,7 +155,10 @@ class _RAGConfidenceWidgetState extends State<RAGConfidenceWidget> with SingleTi
                   const SizedBox(height: 4),
                   Text(
                     _getConfidenceDescription(),
-                    style: GoogleFonts.inter(fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
+                    style: GoogleFonts.inter(
+                      fontSize: 12,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
                   ),
                 ],
               ),
@@ -152,7 +169,10 @@ class _RAGConfidenceWidgetState extends State<RAGConfidenceWidget> with SingleTi
               AnimatedRotation(
                 turns: widget.showDetailed ? 0.5 : 0,
                 duration: const Duration(milliseconds: 200),
-                child: Icon(Icons.expand_more_rounded, color: Theme.of(context).colorScheme.onSurfaceVariant),
+                child: Icon(
+                  Icons.expand_more_rounded,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
               ),
           ],
         ),
@@ -163,10 +183,17 @@ class _RAGConfidenceWidgetState extends State<RAGConfidenceWidget> with SingleTi
   Widget _buildConfidenceBadge() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-      decoration: BoxDecoration(color: _getConfidenceColor(), borderRadius: BorderRadius.circular(12)),
+      decoration: BoxDecoration(
+        color: _getConfidenceColor(),
+        borderRadius: BorderRadius.circular(12),
+      ),
       child: Text(
         '${(widget.confidence.score * 100).toInt()}%',
-        style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white),
+        style: GoogleFonts.inter(
+          fontSize: 11,
+          fontWeight: FontWeight.w700,
+          color: Colors.white,
+        ),
       ),
     );
   }
@@ -227,7 +254,11 @@ class _RAGConfidenceWidgetState extends State<RAGConfidenceWidget> with SingleTi
         const SizedBox(height: 8),
         Text(
           content,
-          style: GoogleFonts.inter(fontSize: 12, height: 1.4, color: Theme.of(context).colorScheme.onSurfaceVariant),
+          style: GoogleFonts.inter(
+            fontSize: 12,
+            height: 1.4,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+          ),
         ),
       ],
     );
@@ -239,7 +270,11 @@ class _RAGConfidenceWidgetState extends State<RAGConfidenceWidget> with SingleTi
       children: [
         Row(
           children: [
-            Icon(Icons.local_offer_outlined, size: 16, color: Theme.of(context).colorScheme.primary),
+            Icon(
+              Icons.local_offer_outlined,
+              size: 16,
+              color: Theme.of(context).colorScheme.primary,
+            ),
             const SizedBox(width: 8),
             Text(
               'Matched Keywords:',
@@ -258,11 +293,21 @@ class _RAGConfidenceWidgetState extends State<RAGConfidenceWidget> with SingleTi
           children:
               widget.confidence.keywords.map((keyword) {
                 return Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.primary.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Theme.of(context).colorScheme.primary.withOpacity(0.2), width: 1),
+                    border: Border.all(
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.primary.withOpacity(0.2),
+                      width: 1,
+                    ),
                   ),
                   child: Text(
                     keyword,
@@ -286,7 +331,11 @@ class _RAGConfidenceWidgetState extends State<RAGConfidenceWidget> with SingleTi
       children: [
         Row(
           children: [
-            Icon(Icons.analytics_outlined, size: 16, color: Theme.of(context).colorScheme.primary),
+            Icon(
+              Icons.analytics_outlined,
+              size: 16,
+              color: Theme.of(context).colorScheme.primary,
+            ),
             const SizedBox(width: 8),
             Text(
               'Context Analysis:',
@@ -300,7 +349,9 @@ class _RAGConfidenceWidgetState extends State<RAGConfidenceWidget> with SingleTi
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: BoxDecoration(
-                color: _getRelevanceColor(contextMatch.relevanceScore).withOpacity(0.1),
+                color: _getRelevanceColor(
+                  contextMatch.relevanceScore,
+                ).withOpacity(0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
@@ -322,12 +373,19 @@ class _RAGConfidenceWidgetState extends State<RAGConfidenceWidget> with SingleTi
             padding: const EdgeInsets.only(bottom: 4),
             child: Row(
               children: [
-                Icon(Icons.check_circle_outline, size: 12, color: Theme.of(context).colorScheme.primary),
+                Icon(
+                  Icons.check_circle_outline,
+                  size: 12,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
                     criteria,
-                    style: GoogleFonts.inter(fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
+                    style: GoogleFonts.inter(
+                      fontSize: 12,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
                   ),
                 ),
               ],
@@ -344,7 +402,11 @@ class _RAGConfidenceWidgetState extends State<RAGConfidenceWidget> with SingleTi
       children: [
         Row(
           children: [
-            Icon(Icons.verified_outlined, size: 16, color: Theme.of(context).colorScheme.primary),
+            Icon(
+              Icons.verified_outlined,
+              size: 16,
+              color: Theme.of(context).colorScheme.primary,
+            ),
             const SizedBox(width: 8),
             Text(
               'Supporting Evidence:',
@@ -363,9 +425,14 @@ class _RAGConfidenceWidgetState extends State<RAGConfidenceWidget> with SingleTi
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.3),
+                color: Theme.of(
+                  context,
+                ).colorScheme.surfaceContainerHighest.withOpacity(0.3),
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Theme.of(context).colorScheme.outline.withOpacity(0.1), width: 1),
+                border: Border.all(
+                  color: Theme.of(context).colorScheme.outline.withOpacity(0.1),
+                  width: 1,
+                ),
               ),
               child: Text(
                 evidence,

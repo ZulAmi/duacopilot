@@ -74,7 +74,8 @@ class ArabicTypography {
     double? letterSpacing,
     double? wordSpacing,
   }) {
-    final fontName = arabicGoogleFonts[fontType] ?? arabicGoogleFonts['modern']!;
+    final fontName =
+        arabicGoogleFonts[fontType] ?? arabicGoogleFonts['modern']!;
     final scaleFactor = textScaleFactors[fontType] ?? 1.0;
 
     try {
@@ -162,7 +163,9 @@ class ArabicTypography {
 
   /// Check if text contains Arabic characters
   static bool containsArabic(String text) {
-    return RegExp(r'[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]').hasMatch(text);
+    return RegExp(
+      r'[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]',
+    ).hasMatch(text);
   }
 
   /// Check if text contains Hebrew characters (for mixed RTL support)
@@ -180,7 +183,9 @@ class ArabicTypography {
     if (text.isEmpty) return TextDirection.ltr;
 
     final arabicMatches =
-        RegExp(r'[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]').allMatches(text).length;
+        RegExp(
+          r'[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]',
+        ).allMatches(text).length;
     final hebrewMatches = RegExp(r'[\u0590-\u05FF]').allMatches(text).length;
 
     final rtlChars = arabicMatches + hebrewMatches;
@@ -231,15 +236,27 @@ class ArabicTypography {
 
   /// Extract Arabic words from mixed content
   static List<String> extractArabicWords(String text) {
-    final arabicRegex = RegExp(r'[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF\s]+');
+    final arabicRegex = RegExp(
+      r'[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF\s]+',
+    );
     final matches = arabicRegex.allMatches(text);
-    return matches.map((match) => match.group(0)?.trim() ?? '').where((s) => s.isNotEmpty).toList();
+    return matches
+        .map((match) => match.group(0)?.trim() ?? '')
+        .where((s) => s.isNotEmpty)
+        .toList();
   }
 
   /// Get appropriate line height based on font type and size
   static double getLineHeight(String fontType, double fontSize) {
     final baseHeight =
-        {'quran': 2.2, 'traditional': 2.0, 'elegant': 1.9, 'readable': 1.7, 'modern': 1.6, 'compact': 1.5}[fontType] ??
+        {
+          'quran': 2.2,
+          'traditional': 2.0,
+          'elegant': 1.9,
+          'readable': 1.7,
+          'modern': 1.6,
+          'compact': 1.5,
+        }[fontType] ??
         1.7;
 
     // Adjust line height based on font size
@@ -255,7 +272,14 @@ class ArabicTypography {
   /// Get appropriate letter spacing for Arabic fonts
   static double getLetterSpacing(String fontType, double fontSize) {
     final baseSpacing =
-        {'quran': 0.8, 'traditional': 0.5, 'elegant': 0.8, 'readable': 0.3, 'modern': 0.2, 'compact': 0.1}[fontType] ??
+        {
+          'quran': 0.8,
+          'traditional': 0.5,
+          'elegant': 0.8,
+          'readable': 0.3,
+          'modern': 0.2,
+          'compact': 0.1,
+        }[fontType] ??
         0.3;
 
     // Scale spacing with font size
@@ -265,192 +289,246 @@ class ArabicTypography {
   /// Platform-specific font optimization
   static Map<String, dynamic> getPlatformFontConfig() {
     if (Platform.isIOS) {
-      return {'renderingMode': 'subpixel', 'hinting': 'full', 'antialiasing': true, 'fontSmoothingType': 'lcd'};
+      return {
+        'renderingMode': 'subpixel',
+        'hinting': 'full',
+        'antialiasing': true,
+        'fontSmoothingType': 'lcd',
+      };
     } else if (Platform.isAndroid) {
-      return {'renderingMode': 'grayscale', 'hinting': 'slight', 'antialiasing': true, 'fontSmoothingType': 'standard'};
+      return {
+        'renderingMode': 'grayscale',
+        'hinting': 'slight',
+        'antialiasing': true,
+        'fontSmoothingType': 'standard',
+      };
     } else if (Platform.isWindows) {
-      return {'renderingMode': 'cleartype', 'hinting': 'full', 'antialiasing': true, 'fontSmoothingType': 'cleartype'};
+      return {
+        'renderingMode': 'cleartype',
+        'hinting': 'full',
+        'antialiasing': true,
+        'fontSmoothingType': 'cleartype',
+      };
     }
 
-    return {'renderingMode': 'auto', 'hinting': 'auto', 'antialiasing': true, 'fontSmoothingType': 'auto'};
+    return {
+      'renderingMode': 'auto',
+      'hinting': 'auto',
+      'antialiasing': true,
+      'fontSmoothingType': 'auto',
+    };
   }
 }
 
 /// Arabic Typography Scale with specialized styles for Islamic content
 class ArabicTextStyles {
   // Display Styles - For large headings
-  static TextStyle displayLarge(BuildContext context, {String fontType = 'traditional'}) =>
-      ArabicTypography.getArabicGoogleFont(
-        fontType,
-        fontSize: 57,
-        fontWeight: FontWeight.w400,
-        color: Theme.of(context).colorScheme.onSurface,
-        height: 1.12,
-      );
+  static TextStyle displayLarge(
+    BuildContext context, {
+    String fontType = 'traditional',
+  }) => ArabicTypography.getArabicGoogleFont(
+    fontType,
+    fontSize: 57,
+    fontWeight: FontWeight.w400,
+    color: Theme.of(context).colorScheme.onSurface,
+    height: 1.12,
+  );
 
-  static TextStyle displayMedium(BuildContext context, {String fontType = 'traditional'}) =>
-      ArabicTypography.getArabicGoogleFont(
-        fontType,
-        fontSize: 45,
-        fontWeight: FontWeight.w400,
-        color: Theme.of(context).colorScheme.onSurface,
-        height: 1.16,
-      );
+  static TextStyle displayMedium(
+    BuildContext context, {
+    String fontType = 'traditional',
+  }) => ArabicTypography.getArabicGoogleFont(
+    fontType,
+    fontSize: 45,
+    fontWeight: FontWeight.w400,
+    color: Theme.of(context).colorScheme.onSurface,
+    height: 1.16,
+  );
 
-  static TextStyle displaySmall(BuildContext context, {String fontType = 'traditional'}) =>
-      ArabicTypography.getArabicGoogleFont(
-        fontType,
-        fontSize: 36,
-        fontWeight: FontWeight.w400,
-        color: Theme.of(context).colorScheme.onSurface,
-        height: 1.22,
-      );
+  static TextStyle displaySmall(
+    BuildContext context, {
+    String fontType = 'traditional',
+  }) => ArabicTypography.getArabicGoogleFont(
+    fontType,
+    fontSize: 36,
+    fontWeight: FontWeight.w400,
+    color: Theme.of(context).colorScheme.onSurface,
+    height: 1.22,
+  );
 
   // Headline Styles - For section titles
-  static TextStyle headlineLarge(BuildContext context, {String fontType = 'modern'}) =>
-      ArabicTypography.getArabicGoogleFont(
-        fontType,
-        fontSize: 32,
-        fontWeight: FontWeight.w400,
-        color: Theme.of(context).colorScheme.onSurface,
-        height: 1.25,
-      );
+  static TextStyle headlineLarge(
+    BuildContext context, {
+    String fontType = 'modern',
+  }) => ArabicTypography.getArabicGoogleFont(
+    fontType,
+    fontSize: 32,
+    fontWeight: FontWeight.w400,
+    color: Theme.of(context).colorScheme.onSurface,
+    height: 1.25,
+  );
 
-  static TextStyle headlineMedium(BuildContext context, {String fontType = 'modern'}) =>
-      ArabicTypography.getArabicGoogleFont(
-        fontType,
-        fontSize: 28,
-        fontWeight: FontWeight.w400,
-        color: Theme.of(context).colorScheme.onSurface,
-        height: 1.29,
-      );
+  static TextStyle headlineMedium(
+    BuildContext context, {
+    String fontType = 'modern',
+  }) => ArabicTypography.getArabicGoogleFont(
+    fontType,
+    fontSize: 28,
+    fontWeight: FontWeight.w400,
+    color: Theme.of(context).colorScheme.onSurface,
+    height: 1.29,
+  );
 
-  static TextStyle headlineSmall(BuildContext context, {String fontType = 'modern'}) =>
-      ArabicTypography.getArabicGoogleFont(
-        fontType,
-        fontSize: 24,
-        fontWeight: FontWeight.w400,
-        color: Theme.of(context).colorScheme.onSurface,
-        height: 1.33,
-      );
-
-  // Title Styles - For card titles and important text
-  static TextStyle titleLarge(BuildContext context, {String fontType = 'readable'}) =>
-      ArabicTypography.getArabicGoogleFont(
-        fontType,
-        fontSize: 22,
-        fontWeight: FontWeight.w500,
-        color: Theme.of(context).colorScheme.onSurface,
-        height: 1.27,
-      );
-
-  static TextStyle titleMedium(BuildContext context, {String fontType = 'readable'}) =>
-      ArabicTypography.getArabicGoogleFont(
-        fontType,
-        fontSize: 16,
-        fontWeight: FontWeight.w500,
-        color: Theme.of(context).colorScheme.onSurface,
-        height: 1.50,
-      );
-
-  static TextStyle titleSmall(BuildContext context, {String fontType = 'readable'}) =>
-      ArabicTypography.getArabicGoogleFont(
-        fontType,
-        fontSize: 14,
-        fontWeight: FontWeight.w500,
-        color: Theme.of(context).colorScheme.onSurface,
-        height: 1.43,
-      );
-
-  // Label Styles - For buttons and form labels
-  static TextStyle labelLarge(BuildContext context, {String fontType = 'compact'}) =>
-      ArabicTypography.getArabicGoogleFont(
-        fontType,
-        fontSize: 14,
-        fontWeight: FontWeight.w500,
-        color: Theme.of(context).colorScheme.onSurface,
-        height: 1.43,
-      );
-
-  static TextStyle labelMedium(BuildContext context, {String fontType = 'compact'}) =>
-      ArabicTypography.getArabicGoogleFont(
-        fontType,
-        fontSize: 12,
-        fontWeight: FontWeight.w500,
-        color: Theme.of(context).colorScheme.onSurface,
-        height: 1.33,
-      );
-
-  static TextStyle labelSmall(BuildContext context, {String fontType = 'compact'}) =>
-      ArabicTypography.getArabicGoogleFont(
-        fontType,
-        fontSize: 11,
-        fontWeight: FontWeight.w500,
-        color: Theme.of(context).colorScheme.onSurface,
-        height: 1.45,
-      );
-
-  // Body Styles - For content and reading text
-  static TextStyle bodyLarge(BuildContext context, {String fontType = 'readable'}) =>
-      ArabicTypography.getArabicGoogleFont(
-        fontType,
-        fontSize: 16,
-        fontWeight: FontWeight.w400,
-        color: Theme.of(context).colorScheme.onSurface,
-        height: 1.75, // Increased for better Arabic reading
-      );
-
-  static TextStyle bodyMedium(BuildContext context, {String fontType = 'readable'}) =>
-      ArabicTypography.getArabicGoogleFont(
-        fontType,
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-        color: Theme.of(context).colorScheme.onSurface,
-        height: 1.71,
-      );
-
-  static TextStyle bodySmall(BuildContext context, {String fontType = 'readable'}) =>
-      ArabicTypography.getArabicGoogleFont(
-        fontType,
-        fontSize: 12,
-        fontWeight: FontWeight.w400,
-        color: Theme.of(context).colorScheme.onSurface,
-        height: 1.67,
-      );
-
-  // Specialized Islamic Content Styles
-  static TextStyle quranVerse(BuildContext context) => ArabicTypography.getArabicGoogleFont(
-    'quran',
+  static TextStyle headlineSmall(
+    BuildContext context, {
+    String fontType = 'modern',
+  }) => ArabicTypography.getArabicGoogleFont(
+    fontType,
     fontSize: 24,
     fontWeight: FontWeight.w400,
     color: Theme.of(context).colorScheme.onSurface,
-    height: 2.2, // Extra spacing for Quranic verses
-    wordSpacing: 2.0,
+    height: 1.33,
   );
 
-  static TextStyle duaText(BuildContext context) => ArabicTypography.getArabicGoogleFont(
-    'traditional',
-    fontSize: 20,
-    fontWeight: FontWeight.w400,
+  // Title Styles - For card titles and important text
+  static TextStyle titleLarge(
+    BuildContext context, {
+    String fontType = 'readable',
+  }) => ArabicTypography.getArabicGoogleFont(
+    fontType,
+    fontSize: 22,
+    fontWeight: FontWeight.w500,
     color: Theme.of(context).colorScheme.onSurface,
-    height: 2.0,
-    wordSpacing: 1.5,
+    height: 1.27,
   );
 
-  static TextStyle hadithText(BuildContext context) => ArabicTypography.getArabicGoogleFont(
-    'readable',
+  static TextStyle titleMedium(
+    BuildContext context, {
+    String fontType = 'readable',
+  }) => ArabicTypography.getArabicGoogleFont(
+    fontType,
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    color: Theme.of(context).colorScheme.onSurface,
+    height: 1.50,
+  );
+
+  static TextStyle titleSmall(
+    BuildContext context, {
+    String fontType = 'readable',
+  }) => ArabicTypography.getArabicGoogleFont(
+    fontType,
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    color: Theme.of(context).colorScheme.onSurface,
+    height: 1.43,
+  );
+
+  // Label Styles - For buttons and form labels
+  static TextStyle labelLarge(
+    BuildContext context, {
+    String fontType = 'compact',
+  }) => ArabicTypography.getArabicGoogleFont(
+    fontType,
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    color: Theme.of(context).colorScheme.onSurface,
+    height: 1.43,
+  );
+
+  static TextStyle labelMedium(
+    BuildContext context, {
+    String fontType = 'compact',
+  }) => ArabicTypography.getArabicGoogleFont(
+    fontType,
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+    color: Theme.of(context).colorScheme.onSurface,
+    height: 1.33,
+  );
+
+  static TextStyle labelSmall(
+    BuildContext context, {
+    String fontType = 'compact',
+  }) => ArabicTypography.getArabicGoogleFont(
+    fontType,
+    fontSize: 11,
+    fontWeight: FontWeight.w500,
+    color: Theme.of(context).colorScheme.onSurface,
+    height: 1.45,
+  );
+
+  // Body Styles - For content and reading text
+  static TextStyle bodyLarge(
+    BuildContext context, {
+    String fontType = 'readable',
+  }) => ArabicTypography.getArabicGoogleFont(
+    fontType,
     fontSize: 16,
     fontWeight: FontWeight.w400,
     color: Theme.of(context).colorScheme.onSurface,
-    height: 1.8,
+    height: 1.75, // Increased for better Arabic reading
   );
 
-  static TextStyle dhikrText(BuildContext context) => ArabicTypography.getArabicGoogleFont(
-    'elegant',
-    fontSize: 18,
-    fontWeight: FontWeight.w500,
+  static TextStyle bodyMedium(
+    BuildContext context, {
+    String fontType = 'readable',
+  }) => ArabicTypography.getArabicGoogleFont(
+    fontType,
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
     color: Theme.of(context).colorScheme.onSurface,
-    height: 1.9,
-    letterSpacing: 0.8,
+    height: 1.71,
   );
+
+  static TextStyle bodySmall(
+    BuildContext context, {
+    String fontType = 'readable',
+  }) => ArabicTypography.getArabicGoogleFont(
+    fontType,
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    color: Theme.of(context).colorScheme.onSurface,
+    height: 1.67,
+  );
+
+  // Specialized Islamic Content Styles
+  static TextStyle quranVerse(BuildContext context) =>
+      ArabicTypography.getArabicGoogleFont(
+        'quran',
+        fontSize: 24,
+        fontWeight: FontWeight.w400,
+        color: Theme.of(context).colorScheme.onSurface,
+        height: 2.2, // Extra spacing for Quranic verses
+        wordSpacing: 2.0,
+      );
+
+  static TextStyle duaText(BuildContext context) =>
+      ArabicTypography.getArabicGoogleFont(
+        'traditional',
+        fontSize: 20,
+        fontWeight: FontWeight.w400,
+        color: Theme.of(context).colorScheme.onSurface,
+        height: 2.0,
+        wordSpacing: 1.5,
+      );
+
+  static TextStyle hadithText(BuildContext context) =>
+      ArabicTypography.getArabicGoogleFont(
+        'readable',
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+        color: Theme.of(context).colorScheme.onSurface,
+        height: 1.8,
+      );
+
+  static TextStyle dhikrText(BuildContext context) =>
+      ArabicTypography.getArabicGoogleFont(
+        'elegant',
+        fontSize: 18,
+        fontWeight: FontWeight.w500,
+        color: Theme.of(context).colorScheme.onSurface,
+        height: 1.9,
+        letterSpacing: 0.8,
+      );
 }

@@ -8,27 +8,39 @@ class FlutterSecureStorage {
   const FlutterSecureStorage();
 
   Future<void> write({required String key, required String value}) async {
-    throw UnsupportedError('FlutterSecureStorage not available on this platform');
+    throw UnsupportedError(
+      'FlutterSecureStorage not available on this platform',
+    );
   }
 
   Future<String?> read({required String key}) async {
-    throw UnsupportedError('FlutterSecureStorage not available on this platform');
+    throw UnsupportedError(
+      'FlutterSecureStorage not available on this platform',
+    );
   }
 
   Future<void> delete({required String key}) async {
-    throw UnsupportedError('FlutterSecureStorage not available on this platform');
+    throw UnsupportedError(
+      'FlutterSecureStorage not available on this platform',
+    );
   }
 
   Future<void> deleteAll() async {
-    throw UnsupportedError('FlutterSecureStorage not available on this platform');
+    throw UnsupportedError(
+      'FlutterSecureStorage not available on this platform',
+    );
   }
 
   Future<bool> containsKey({required String key}) async {
-    throw UnsupportedError('FlutterSecureStorage not available on this platform');
+    throw UnsupportedError(
+      'FlutterSecureStorage not available on this platform',
+    );
   }
 
   Future<Map<String, String>> readAll() async {
-    throw UnsupportedError('FlutterSecureStorage not available on this platform');
+    throw UnsupportedError(
+      'FlutterSecureStorage not available on this platform',
+    );
   }
 }
 
@@ -53,7 +65,10 @@ class SecureStorageAdapter {
   }
 
   /// Write secure data with platform-specific implementation
-  static Future<void> write({required String key, required String value}) async {
+  static Future<void> write({
+    required String key,
+    required String value,
+  }) async {
     final platform = PlatformService.instance;
 
     // Use secure storage on supported mobile platforms
@@ -63,7 +78,9 @@ class SecureStorageAdapter {
         return;
       } catch (e) {
         if (kDebugMode) {
-          print('⚠️ Secure storage failed, falling back to SharedPreferences: $e');
+          print(
+            '⚠️ Secure storage failed, falling back to SharedPreferences: $e',
+          );
         }
       }
     }
@@ -92,7 +109,9 @@ class SecureStorageAdapter {
         }
       } catch (e) {
         if (kDebugMode) {
-          print('⚠️ Secure storage read failed, checking SharedPreferences: $e');
+          print(
+            '⚠️ Secure storage read failed, checking SharedPreferences: $e',
+          );
         }
       }
     }
@@ -149,7 +168,8 @@ class SecureStorageAdapter {
 
     // Clear secure keys from SharedPreferences
     _prefs ??= await SharedPreferences.getInstance();
-    final keys = _prefs!.getKeys().where((key) => key.startsWith('secure_')).toList();
+    final keys =
+        _prefs!.getKeys().where((key) => key.startsWith('secure_')).toList();
     for (final key in keys) {
       await _prefs!.remove(key);
     }
@@ -219,7 +239,8 @@ class SecureStorageAdapter {
     final platform = PlatformService.instance;
     _prefs ??= await SharedPreferences.getInstance();
 
-    final secureKeys = _prefs!.getKeys().where((key) => key.startsWith('secure_')).length;
+    final secureKeys =
+        _prefs!.getKeys().where((key) => key.startsWith('secure_')).length;
     final info = {
       'platform': platform.platformName,
       'supportsSecureStorage': platform.supportsSecureStorage,

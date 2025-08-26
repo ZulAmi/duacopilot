@@ -24,7 +24,12 @@ class DeviceInfo {
   final String identifier;
   final Map<String, dynamic> capabilities;
 
-  DeviceInfo({required this.model, required this.version, required this.identifier, required this.capabilities});
+  DeviceInfo({
+    required this.model,
+    required this.version,
+    required this.identifier,
+    required this.capabilities,
+  });
 }
 
 /// Notification priority levels
@@ -40,7 +45,8 @@ enum BackgroundTaskPriority { low, normal, high, urgent }
 /// Handles iOS/Android differences in Flutter RAG integration
 class PlatformOptimizationService {
   static PlatformOptimizationService? _instance;
-  static PlatformOptimizationService get instance => _instance ??= PlatformOptimizationService._();
+  static PlatformOptimizationService get instance =>
+      _instance ??= PlatformOptimizationService._();
 
   PlatformOptimizationService._();
 
@@ -54,7 +60,8 @@ class PlatformOptimizationService {
   bool _isInitialized = false;
 
   // Service instances
-  final FlutterLocalNotificationsPlugin _localNotifications = FlutterLocalNotificationsPlugin();
+  final FlutterLocalNotificationsPlugin _localNotifications =
+      FlutterLocalNotificationsPlugin();
   final QuickActions _quickActions = const QuickActions();
   final AppLinks _appLinks = AppLinks();
 
@@ -82,7 +89,9 @@ class PlatformOptimizationService {
       _isInitialized = true;
       AppLogger.info('✅ Platform optimization service initialized');
     } catch (e) {
-      AppLogger.error('❌ Failed to initialize platform optimization service: $e');
+      AppLogger.error(
+        '❌ Failed to initialize platform optimization service: $e',
+      );
       rethrow;
     }
   }
@@ -168,7 +177,12 @@ class PlatformOptimizationService {
         break;
     }
 
-    _deviceInfo = DeviceInfo(model: model, version: version, identifier: identifier, capabilities: capabilities);
+    _deviceInfo = DeviceInfo(
+      model: model,
+      version: version,
+      identifier: identifier,
+      capabilities: capabilities,
+    );
 
     AppLogger.info('📱 Device: ${_deviceInfo.model} (${_deviceInfo.version})');
     AppLogger.debug('🔧 Capabilities: ${_deviceInfo.capabilities}');
@@ -176,7 +190,9 @@ class PlatformOptimizationService {
 
   Future<void> _initializePackageInfo() async {
     _packageInfo = await PackageInfo.fromPlatform();
-    AppLogger.info('📦 App: ${_packageInfo.appName} v${_packageInfo.version}+${_packageInfo.buildNumber}');
+    AppLogger.info(
+      '📦 App: ${_packageInfo.appName} v${_packageInfo.version}+${_packageInfo.buildNumber}',
+    );
   }
 
   Future<void> _initializePlatformServices() async {
@@ -188,14 +204,19 @@ class PlatformOptimizationService {
   Future<void> _initializeNotifications() async {
     if (!isFeatureSupported('supportsNotifications')) return;
 
-    const androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
+    const androidSettings = AndroidInitializationSettings(
+      '@mipmap/ic_launcher',
+    );
     const iosSettings = DarwinInitializationSettings(
       requestSoundPermission: true,
       requestBadgePermission: true,
       requestAlertPermission: true,
     );
 
-    const settings = InitializationSettings(android: androidSettings, iOS: iosSettings);
+    const settings = InitializationSettings(
+      android: androidSettings,
+      iOS: iosSettings,
+    );
 
     await _localNotifications.initialize(settings);
     AppLogger.info('🔔 Notifications initialized');
@@ -239,7 +260,9 @@ class PlatformOptimizationService {
       'deepLinking': _getDeepLinkingConfiguration(),
     });
 
-    AppLogger.debug('⚙️ Platform configuration loaded: ${_platformConfig.keys.join(', ')}');
+    AppLogger.debug(
+      '⚙️ Platform configuration loaded: ${_platformConfig.keys.join(', ')}',
+    );
   }
 
   Map<String, dynamic> _getAudioConfiguration() {
@@ -334,9 +357,17 @@ class PlatformOptimizationService {
           'backgroundModes': ['background-audio', 'background-processing'],
         };
       case PlatformType.android:
-        return {'foregroundService': true, 'wakeLocks': true, 'workManager': true, 'dozeOptimization': true};
+        return {
+          'foregroundService': true,
+          'wakeLocks': true,
+          'workManager': true,
+          'dozeOptimization': true,
+        };
       default:
-        return {'webWorkers': _platformType == PlatformType.web, 'serviceWorkers': _platformType == PlatformType.web};
+        return {
+          'webWorkers': _platformType == PlatformType.web,
+          'serviceWorkers': _platformType == PlatformType.web,
+        };
     }
   }
 
@@ -376,7 +407,9 @@ class PlatformOptimizationService {
     if (!isFeatureSupported('supportsBackgroundAudio')) return;
 
     // This would integrate with audio_service for actual implementation
-    AppLogger.info('🎵 Audio session configured: background=$backgroundPlayback');
+    AppLogger.info(
+      '🎵 Audio session configured: background=$backgroundPlayback',
+    );
   }
 
   /// Show platform-optimized notification
@@ -397,11 +430,23 @@ class PlatformOptimizationService {
       priority: Priority.defaultPriority,
     );
 
-    const iosDetails = DarwinNotificationDetails(presentAlert: true, presentBadge: true, presentSound: true);
+    const iosDetails = DarwinNotificationDetails(
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
+    );
 
-    const details = NotificationDetails(android: androidDetails, iOS: iosDetails);
+    const details = NotificationDetails(
+      android: androidDetails,
+      iOS: iosDetails,
+    );
 
-    await _localNotifications.show(DateTime.now().millisecondsSinceEpoch ~/ 1000, title, body, details);
+    await _localNotifications.show(
+      DateTime.now().millisecondsSinceEpoch ~/ 1000,
+      title,
+      body,
+      details,
+    );
 
     AppLogger.info('🔔 Notification shown: $title');
   }
@@ -412,14 +457,32 @@ class PlatformOptimizationService {
 
     try {
       final shortcutItems = <ShortcutItem>[
-        const ShortcutItem(type: 'search_dua', localizedTitle: 'Search Du\'a', icon: 'ic_search'),
-        const ShortcutItem(type: 'favorite_duas', localizedTitle: 'Favorite Du\'as', icon: 'ic_favorite'),
-        const ShortcutItem(type: 'prayer_times', localizedTitle: 'Prayer Times', icon: 'ic_prayer'),
-        const ShortcutItem(type: 'qibla', localizedTitle: 'Qibla Direction', icon: 'ic_qibla'),
+        const ShortcutItem(
+          type: 'search_dua',
+          localizedTitle: 'Search Du\'a',
+          icon: 'ic_search',
+        ),
+        const ShortcutItem(
+          type: 'favorite_duas',
+          localizedTitle: 'Favorite Du\'as',
+          icon: 'ic_favorite',
+        ),
+        const ShortcutItem(
+          type: 'prayer_times',
+          localizedTitle: 'Prayer Times',
+          icon: 'ic_prayer',
+        ),
+        const ShortcutItem(
+          type: 'qibla',
+          localizedTitle: 'Qibla Direction',
+          icon: 'ic_qibla',
+        ),
       ];
 
       await _quickActions.setShortcutItems(shortcutItems);
-      AppLogger.info('⚡ Quick actions setup with ${shortcutItems.length} items');
+      AppLogger.info(
+        '⚡ Quick actions setup with ${shortcutItems.length} items',
+      );
     } catch (e) {
       AppLogger.warning('⚠️ Failed to setup quick actions: $e');
     }

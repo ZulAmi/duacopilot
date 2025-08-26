@@ -4,8 +4,12 @@ import 'package:flutter/material.dart';
 /// Traditional Islamic color palette with modern professional aesthetics
 class ProfessionalIslamicTheme {
   // Primary Islamic Colors - Traditional Muslim Green & Pure White
-  static const Color islamicGreen = Color(0xFF006633); // Traditional Islamic green
-  static const Color islamicGreenLight = Color(0xFF00994D); // Light Islamic green
+  static const Color islamicGreen = Color(
+    0xFF006633,
+  ); // Traditional Islamic green
+  static const Color islamicGreenLight = Color(
+    0xFF00994D,
+  ); // Light Islamic green
   static const Color islamicGreenDark = Color(0xFF004D26); // Dark Islamic green
 
   static const Color pureWhite = Color(0xFFFFFFFF); // Pure white
@@ -61,11 +65,17 @@ class ProfessionalIslamicTheme {
     end: Alignment.bottomRight,
   );
 
-  static LinearGradient get whiteGradient =>
-      const LinearGradient(colors: [pureWhite, creamWhite], begin: Alignment.topCenter, end: Alignment.bottomCenter);
+  static LinearGradient get whiteGradient => const LinearGradient(
+    colors: [pureWhite, creamWhite],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
 
-  static LinearGradient get goldAccentGradient =>
-      const LinearGradient(colors: [goldAccent, islamicGreen], begin: Alignment.topLeft, end: Alignment.bottomRight);
+  static LinearGradient get goldAccentGradient => const LinearGradient(
+    colors: [goldAccent, islamicGreen],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
 
   // Professional Spacing Scale - 8pt Grid System
   static const double space1 = 4.0;
@@ -93,19 +103,35 @@ class ProfessionalIslamicTheme {
 
   // Professional Shadow System
   static List<BoxShadow> get shadowSoft => [
-    BoxShadow(color: gray900.withOpacity(0.08), blurRadius: 4, offset: const Offset(0, 2)),
+    BoxShadow(
+      color: gray900.withOpacity(0.08),
+      blurRadius: 4,
+      offset: const Offset(0, 2),
+    ),
   ];
 
   static List<BoxShadow> get shadowMedium => [
-    BoxShadow(color: gray900.withOpacity(0.12), blurRadius: 8, offset: const Offset(0, 4)),
+    BoxShadow(
+      color: gray900.withOpacity(0.12),
+      blurRadius: 8,
+      offset: const Offset(0, 4),
+    ),
   ];
 
   static List<BoxShadow> get shadowStrong => [
-    BoxShadow(color: gray900.withOpacity(0.16), blurRadius: 16, offset: const Offset(0, 8)),
+    BoxShadow(
+      color: gray900.withOpacity(0.16),
+      blurRadius: 16,
+      offset: const Offset(0, 8),
+    ),
   ];
 
   static List<BoxShadow> get shadowIslamic => [
-    BoxShadow(color: islamicGreen.withOpacity(0.2), blurRadius: 12, offset: const Offset(0, 4)),
+    BoxShadow(
+      color: islamicGreen.withOpacity(0.2),
+      blurRadius: 12,
+      offset: const Offset(0, 4),
+    ),
   ];
 
   // Professional Typography Scale
@@ -205,7 +231,9 @@ class ProfessionalIslamicTheme {
       centerTitle: true,
       titleTextStyle: heading2.copyWith(color: pureWhite),
       toolbarHeight: 64,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(radiusLg))),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(bottom: Radius.circular(radiusLg)),
+      ),
     ),
 
     // Card Theme - Clean Professional Cards
@@ -213,7 +241,9 @@ class ProfessionalIslamicTheme {
       color: backgroundPrimary,
       shadowColor: gray900.withOpacity(0.08),
       elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radiusXl)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(radiusXl),
+      ),
       margin: const EdgeInsets.all(space2),
     ),
 
@@ -224,8 +254,13 @@ class ProfessionalIslamicTheme {
         foregroundColor: pureWhite,
         elevation: 4,
         shadowColor: islamicGreen.withOpacity(0.3),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radiusLg)),
-        padding: const EdgeInsets.symmetric(horizontal: space6, vertical: space4),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(radiusLg),
+        ),
+        padding: const EdgeInsets.symmetric(
+          horizontal: space6,
+          vertical: space4,
+        ),
         textStyle: body1.copyWith(fontWeight: FontWeight.w600),
       ),
     ),
@@ -234,8 +269,13 @@ class ProfessionalIslamicTheme {
       style: OutlinedButton.styleFrom(
         foregroundColor: islamicGreen,
         side: const BorderSide(color: islamicGreen, width: 2),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radiusLg)),
-        padding: const EdgeInsets.symmetric(horizontal: space6, vertical: space4),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(radiusLg),
+        ),
+        padding: const EdgeInsets.symmetric(
+          horizontal: space6,
+          vertical: space4,
+        ),
         textStyle: body1.copyWith(fontWeight: FontWeight.w600),
       ),
     ),
@@ -272,7 +312,10 @@ class ProfessionalIslamicTheme {
         borderRadius: BorderRadius.circular(radiusLg),
         borderSide: const BorderSide(color: error, width: 2),
       ),
-      contentPadding: const EdgeInsets.symmetric(horizontal: space4, vertical: space4),
+      contentPadding: const EdgeInsets.symmetric(
+        horizontal: space4,
+        vertical: space4,
+      ),
       hintStyle: body1.copyWith(color: textMuted),
       labelStyle: body2.copyWith(color: textSecondary),
     ),
@@ -283,7 +326,11 @@ class ProfessionalIslamicTheme {
     primaryIconTheme: const IconThemeData(color: pureWhite, size: 24),
 
     // Divider Theme
-    dividerTheme: const DividerThemeData(color: borderLight, thickness: 1, space: space4),
+    dividerTheme: const DividerThemeData(
+      color: borderLight,
+      thickness: 1,
+      space: space4,
+    ),
 
     // Chip Theme - Professional Styling
     chipTheme: ChipThemeData(
@@ -291,7 +338,9 @@ class ProfessionalIslamicTheme {
       selectedColor: islamicGreen,
       labelStyle: body2,
       padding: const EdgeInsets.symmetric(horizontal: space3, vertical: space1),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radiusXl)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(radiusXl),
+      ),
     ),
 
     // Bottom Navigation Bar Theme

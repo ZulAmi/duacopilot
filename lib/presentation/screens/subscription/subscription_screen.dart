@@ -15,7 +15,8 @@ class SubscriptionScreen extends StatefulWidget {
   State<SubscriptionScreen> createState() => _SubscriptionScreenState();
 }
 
-class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProviderStateMixin {
+class _SubscriptionScreenState extends State<SubscriptionScreen>
+    with TickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
@@ -32,17 +33,27 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
   }
 
   void _initializeAnimations() {
-    _controller = AnimationController(duration: const Duration(milliseconds: 1200), vsync: this);
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 1200),
+      vsync: this,
+    );
 
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(parent: _controller, curve: const Interval(0.0, 0.8, curve: Curves.easeOut)));
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.0, 0.8, curve: Curves.easeOut),
+      ),
+    );
 
     _slideAnimation = Tween<Offset>(
       begin: const Offset(0, 0.3),
       end: Offset.zero,
-    ).animate(CurvedAnimation(parent: _controller, curve: const Interval(0.2, 1.0, curve: Curves.easeOutCubic)));
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.2, 1.0, curve: Curves.easeOutCubic),
+      ),
+    );
 
     _controller.forward();
   }
@@ -135,7 +146,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
                   child: Container(
                     width: 4,
                     height: 4,
-                    decoration: BoxDecoration(color: Colors.white.withOpacity(0.3), shape: BoxShape.circle),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.3),
+                      shape: BoxShape.circle,
+                    ),
                   ),
                 );
               }),
@@ -147,10 +161,17 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
                     SizedBox(height: 16),
                     Text(
                       'Choose Your Plan',
-                      style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
                     SizedBox(height: 8),
-                    Text('Unlock the full Islamic experience', style: TextStyle(fontSize: 16, color: Colors.white70)),
+                    Text(
+                      'Unlock the full Islamic experience',
+                      style: TextStyle(fontSize: 16, color: Colors.white70),
+                    ),
                   ],
                 ),
               ),
@@ -178,7 +199,12 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
                 size: 24,
               ),
               const SizedBox(width: 12),
-              Text('Current Plan', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+              Text(
+                'Current Plan',
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 16),
@@ -188,14 +214,27 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(plan.name, style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
+                  Text(
+                    plan.name,
+                    style: theme.textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   const SizedBox(height: 4),
-                  Text(plan.description, style: theme.textTheme.bodyMedium?.copyWith(color: Colors.grey[600])),
+                  Text(
+                    plan.description,
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: Colors.grey[600],
+                    ),
+                  ),
                 ],
               ),
               if (currentTier != SubscriptionTier.free)
                 Text(
-                  _subscriptionService.getFormattedPrice(currentTier, yearly: _isYearly),
+                  _subscriptionService.getFormattedPrice(
+                    currentTier,
+                    yearly: _isYearly,
+                  ),
                   style: theme.textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: theme.colorScheme.primary,
@@ -243,13 +282,19 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 decoration: BoxDecoration(
-                  color: !_isYearly ? theme.colorScheme.primary : Colors.transparent,
+                  color:
+                      !_isYearly
+                          ? theme.colorScheme.primary
+                          : Colors.transparent,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
                   'Monthly',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontWeight: FontWeight.bold, color: !_isYearly ? Colors.white : Colors.grey[600]),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: !_isYearly ? Colors.white : Colors.grey[600],
+                  ),
                 ),
               ),
             ),
@@ -261,7 +306,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 decoration: BoxDecoration(
-                  color: _isYearly ? theme.colorScheme.primary : Colors.transparent,
+                  color:
+                      _isYearly
+                          ? theme.colorScheme.primary
+                          : Colors.transparent,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
@@ -269,10 +317,19 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
                     Text(
                       'Yearly',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontWeight: FontWeight.bold, color: _isYearly ? Colors.white : Colors.grey[600]),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: _isYearly ? Colors.white : Colors.grey[600],
+                      ),
                     ),
                     if (_isYearly)
-                      Text('Save 17%', style: TextStyle(fontSize: 12, color: Colors.white.withOpacity(0.9))),
+                      Text(
+                        'Save 17%',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.white.withOpacity(0.9),
+                        ),
+                      ),
                   ],
                 ),
               ),
@@ -293,7 +350,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
     final isCurrentPlan = _subscriptionService.currentTier == plan.tier;
     final theme = Theme.of(context);
     final price = _isYearly ? plan.yearlyPrice : plan.monthlyPrice;
-    final savingsText = _isYearly && plan.discountPercentage > 0 ? 'Save ${plan.discountPercentage.toInt()}%' : null;
+    final savingsText =
+        _isYearly && plan.discountPercentage > 0
+            ? 'Save ${plan.discountPercentage.toInt()}%'
+            : null;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
@@ -314,26 +374,40 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
                           children: [
                             Text(
                               plan.name,
-                              style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+                              style: theme.textTheme.headlineSmall?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             if (plan.isPopular) ...[
                               const SizedBox(width: 8),
                               Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 4,
+                                ),
                                 decoration: BoxDecoration(
                                   color: theme.colorScheme.secondary,
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: const Text(
                                   'POPULAR',
-                                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white),
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ],
                           ],
                         ),
                         const SizedBox(height: 4),
-                        Text(plan.description, style: theme.textTheme.bodyMedium?.copyWith(color: Colors.grey[600])),
+                        Text(
+                          plan.description,
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            color: Colors.grey[600],
+                          ),
+                        ),
                       ],
                     ),
                     Column(
@@ -348,12 +422,18 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
                         ),
                         Text(
                           _isYearly ? '/year' : '/month',
-                          style: theme.textTheme.bodySmall?.copyWith(color: Colors.grey[600]),
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: Colors.grey[600],
+                          ),
                         ),
                         if (savingsText != null)
                           Text(
                             savingsText,
-                            style: const TextStyle(fontSize: 12, color: Colors.green, fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: Colors.green,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                       ],
                     ),
@@ -366,13 +446,24 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
                   children:
                       plan.features.take(6).map((feature) {
                         return Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
                           decoration: BoxDecoration(
                             color: theme.colorScheme.primary.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: theme.colorScheme.primary.withOpacity(0.2)),
+                            border: Border.all(
+                              color: theme.colorScheme.primary.withOpacity(0.2),
+                            ),
                           ),
-                          child: Text(feature, style: TextStyle(fontSize: 12, color: theme.colorScheme.primary)),
+                          child: Text(
+                            feature,
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: theme.colorScheme.primary,
+                            ),
+                          ),
                         );
                       }).toList(),
                 ),
@@ -385,7 +476,8 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
                 ],
                 const SizedBox(height: 16),
                 ModernGradientButton(
-                  onPressed: () => isCurrentPlan ? null : _handlePlanSelection(plan),
+                  onPressed:
+                      () => isCurrentPlan ? null : _handlePlanSelection(plan),
                   text: isCurrentPlan ? 'Current Plan' : 'Choose Plan',
                 ),
               ],
@@ -396,7 +488,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
                 right: 8,
                 child: Container(
                   padding: const EdgeInsets.all(6),
-                  decoration: BoxDecoration(color: Colors.green, borderRadius: BorderRadius.circular(20)),
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                   child: const Icon(Icons.check, size: 16, color: Colors.white),
                 ),
               ),
@@ -413,7 +508,12 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Feature Comparison', style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
+          Text(
+            'Feature Comparison',
+            style: theme.textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           const SizedBox(height: 16),
           _buildFeatureRow('Unlimited Duas Access', [false, true, true, true]),
           _buildFeatureRow('Ad-free Experience', [false, true, true, true]),
@@ -434,7 +534,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
         children: [
-          Expanded(flex: 2, child: Text(feature, style: theme.textTheme.bodyMedium)),
+          Expanded(
+            flex: 2,
+            child: Text(feature, style: theme.textTheme.bodyMedium),
+          ),
           ...tiers.asMap().entries.map((entry) {
             final index = entry.key;
             final isAvailable = availability[index];
@@ -463,7 +566,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
         minimumSize: const Size.fromHeight(50),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
-      child: const Text('Restore Purchases', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+      child: const Text(
+        'Restore Purchases',
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      ),
     );
   }
 
@@ -491,7 +597,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
               children: [
                 const Text('You are about to purchase:'),
                 const SizedBox(height: 8),
-                Text('${plan.name} Plan', style: const TextStyle(fontWeight: FontWeight.bold)),
+                Text(
+                  '${plan.name} Plan',
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
                 Text('\$${price.toStringAsFixed(2)}/$period'),
                 if (_isYearly && plan.discountPercentage > 0) ...[
                   const SizedBox(height: 8),
@@ -503,8 +612,14 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
               ],
             ),
             actions: [
-              TextButton(onPressed: () => Navigator.of(context).pop(false), child: const Text('Cancel')),
-              ElevatedButton(onPressed: () => Navigator.of(context).pop(true), child: const Text('Purchase')),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: const Text('Cancel'),
+              ),
+              ElevatedButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: const Text('Purchase'),
+              ),
             ],
           ),
     );
@@ -514,21 +629,32 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
     try {
       setState(() => _isLoading = true);
 
-      final success = await _subscriptionService.purchaseSubscription(plan.tier, yearly: _isYearly);
+      final success = await _subscriptionService.purchaseSubscription(
+        plan.tier,
+        yearly: _isYearly,
+      );
 
       if (success && mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Successfully subscribed to ${plan.name}!'), backgroundColor: Colors.green),
+          SnackBar(
+            content: Text('Successfully subscribed to ${plan.name}!'),
+            backgroundColor: Colors.green,
+          ),
         );
         setState(() {}); // Refresh UI
       } else if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Purchase failed. Please try again.'), backgroundColor: Colors.red),
+          const SnackBar(
+            content: Text('Purchase failed. Please try again.'),
+            backgroundColor: Colors.red,
+          ),
         );
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error: $e'), backgroundColor: Colors.red));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: $e'), backgroundColor: Colors.red),
+        );
       }
     } finally {
       if (mounted) {
@@ -544,15 +670,21 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Purchases restored successfully!'), backgroundColor: Colors.green),
+          const SnackBar(
+            content: Text('Purchases restored successfully!'),
+            backgroundColor: Colors.green,
+          ),
         );
         setState(() {}); // Refresh UI
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('Restore failed: $e'), backgroundColor: Colors.red));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Restore failed: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
       }
     } finally {
       if (mounted) {

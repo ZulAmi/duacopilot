@@ -7,7 +7,8 @@ import '../models/local_search_models.dart';
 /// TensorFlow Lite service for generating embeddings locally
 class LocalEmbeddingService {
   static LocalEmbeddingService? _instance;
-  static LocalEmbeddingService get instance => _instance ??= LocalEmbeddingService._();
+  static LocalEmbeddingService get instance =>
+      _instance ??= LocalEmbeddingService._();
 
   LocalEmbeddingService._();
 
@@ -16,7 +17,8 @@ class LocalEmbeddingService {
   bool _isInitialized = false;
 
   // Model configuration
-  static const String _modelAssetPath = 'assets/models/dua_embedding_model.tflite';
+  static const String _modelAssetPath =
+      'assets/models/dua_embedding_model.tflite';
   static const int _maxSequenceLength = 128;
   static const int _embeddingDimension = 256;
 
@@ -77,7 +79,10 @@ class LocalEmbeddingService {
   }
 
   /// Generate embeddings in batch for efficiency
-  Future<List<List<double>>> generateBatchEmbeddings(List<String> queries, String language) async {
+  Future<List<List<double>>> generateBatchEmbeddings(
+    List<String> queries,
+    String language,
+  ) async {
     final embeddings = <List<double>>[];
 
     for (final query in queries) {
@@ -89,7 +94,10 @@ class LocalEmbeddingService {
   }
 
   /// Calculate cosine similarity between two embeddings
-  static double calculateSimilarity(List<double> embedding1, List<double> embedding2) {
+  static double calculateSimilarity(
+    List<double> embedding1,
+    List<double> embedding2,
+  ) {
     if (embedding1.length != embedding2.length) {
       throw ArgumentError('Embeddings must have the same dimension');
     }
@@ -122,11 +130,20 @@ class LocalEmbeddingService {
     final matches = <SimilarityMatch>[];
 
     for (final candidate in candidates) {
-      final similarity = calculateSimilarity(queryEmbedding, candidate.embedding);
+      final similarity = calculateSimilarity(
+        queryEmbedding,
+        candidate.embedding,
+      );
 
       if (similarity >= minSimilarity) {
         final matchReason = _generateMatchReason(similarity);
-        matches.add(SimilarityMatch(embedding: candidate, similarity: similarity, matchReason: matchReason));
+        matches.add(
+          SimilarityMatch(
+            embedding: candidate,
+            similarity: similarity,
+            matchReason: matchReason,
+          ),
+        );
       }
     }
 
@@ -190,7 +207,10 @@ class LocalEmbeddingService {
     AppLogger.debug('Fallback embedding initialized');
   }
 
-  Future<List<double>> _generateMLEmbedding(String query, String language) async {
+  Future<List<double>> _generateMLEmbedding(
+    String query,
+    String language,
+  ) async {
     if (_interpreter == null) {
       return _generateFallbackEmbedding(query, language);
     }
@@ -263,7 +283,10 @@ class LocalEmbeddingService {
         processed = _preprocessEnglish(processed);
     }
 
-    return processed.split(RegExp(r'\s+')).where((word) => word.isNotEmpty).toList();
+    return processed
+        .split(RegExp(r'\s+'))
+        .where((word) => word.isNotEmpty)
+        .toList();
   }
 
   String _preprocessArabic(String text) {
@@ -283,7 +306,9 @@ class LocalEmbeddingService {
   }
 
   String _preprocessEnglish(String text) {
-    return text.replaceAll(RegExp(r'[^\w\s]'), ' ').replaceAll(RegExp(r'\s+'), ' ');
+    return text
+        .replaceAll(RegExp(r'[^\w\s]'), ' ')
+        .replaceAll(RegExp(r'\s+'), ' ');
   }
 
   List<int> _tokenizeText(String text, String language) {
@@ -326,10 +351,17 @@ class LocalEmbeddingService {
 
   List<double> _getLanguageBias(String language) {
     final random = Random(language.hashCode);
-    return List.generate(_embeddingDimension, (_) => random.nextGaussian() * 0.1);
+    return List.generate(
+      _embeddingDimension,
+      (_) => random.nextGaussian() * 0.1,
+    );
   }
 
-  void _addIslamicTermsBoost(List<double> embedding, List<String> words, String language) {
+  void _addIslamicTermsBoost(
+    List<double> embedding,
+    List<String> words,
+    String language,
+  ) {
     final islamicTerms = _getIslamicTerms(language);
     double boost = 0.0;
 
@@ -350,7 +382,21 @@ class LocalEmbeddingService {
   Set<String> _getIslamicTerms(String language) {
     switch (language) {
       case 'ar':
-        return {'الله', 'صلاة', 'دعاء', 'قرآن', 'حديث', 'إسلام', 'مسلم', 'رمضان', 'حج', 'زكاة', 'صوم', 'جهاد', 'إيمان'};
+        return {
+          'الله',
+          'صلاة',
+          'دعاء',
+          'قرآن',
+          'حديث',
+          'إسلام',
+          'مسلم',
+          'رمضان',
+          'حج',
+          'زكاة',
+          'صوم',
+          'جهاد',
+          'إيمان',
+        };
       case 'ur':
         return {
           'اللہ',
@@ -388,7 +434,10 @@ class LocalEmbeddingService {
 
   List<double> _generateBoostVector(double intensity) {
     final random = Random(42); // Fixed seed for consistency
-    return List.generate(_embeddingDimension, (_) => random.nextGaussian() * intensity * 0.1);
+    return List.generate(
+      _embeddingDimension,
+      (_) => random.nextGaussian() * intensity * 0.1,
+    );
   }
 
   String _generateMatchReason(double similarity) {

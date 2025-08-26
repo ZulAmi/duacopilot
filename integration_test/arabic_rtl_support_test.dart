@@ -47,7 +47,10 @@ void main() {
             body: Column(
               children: [
                 // Test MixedTextDirectionWidget
-                const MixedTextDirectionWidget(text: 'بسم الله الرحمن الرحيم', selectable: true),
+                const MixedTextDirectionWidget(
+                  text: 'بسم الله الرحمن الرحيم',
+                  selectable: true,
+                ),
 
                 // Test RTL-aware container
                 RTLAwareContainer(
@@ -57,7 +60,10 @@ void main() {
                 ),
 
                 // Test RTL-aware row
-                const RTLAwareRow(content: 'صف عربي', children: [Text('First'), Text('Second'), Text('Third')]),
+                const RTLAwareRow(
+                  content: 'صف عربي',
+                  children: [Text('First'), Text('Second'), Text('Third')],
+                ),
               ],
             ),
           ),
@@ -75,7 +81,14 @@ void main() {
       final controller = TextEditingController();
 
       await tester.pumpWidget(
-        MaterialApp(home: Scaffold(body: ArabicTextInputWidget(controller: controller, hintText: 'أدخل النص العربي'))),
+        MaterialApp(
+          home: Scaffold(
+            body: ArabicTextInputWidget(
+              controller: controller,
+              hintText: 'أدخل النص العربي',
+            ),
+          ),
+        ),
       );
       await tester.pumpAndSettle();
 
@@ -90,8 +103,14 @@ void main() {
       expect(controller.text, 'بسم الله');
     });
 
-    testWidgets('Arabic Suggestion TextField Test', (WidgetTester tester) async {
-      const suggestions = ['بسم الله الرحمن الرحيم', 'الحمد لله رب العالمين', 'سبحان الله وبحمده'];
+    testWidgets('Arabic Suggestion TextField Test', (
+      WidgetTester tester,
+    ) async {
+      const suggestions = [
+        'بسم الله الرحمن الرحيم',
+        'الحمد لله رب العالمين',
+        'سبحان الله وبحمده',
+      ];
 
       await tester.pumpWidget(
         MaterialApp(
@@ -163,7 +182,9 @@ void main() {
       expect(find.byType(Semantics), findsWidgets);
     });
 
-    testWidgets('Mixed Content Direction Handling Test', (WidgetTester tester) async {
+    testWidgets('Mixed Content Direction Handling Test', (
+      WidgetTester tester,
+    ) async {
       const mixedTexts = [
         'Hello مرحبا World',
         'English text with عربي في الوسط middle',
@@ -173,7 +194,11 @@ void main() {
 
       for (final text in mixedTexts) {
         await tester.pumpWidget(
-          MaterialApp(home: Scaffold(body: MixedTextDirectionWidget(text: text, selectable: true))),
+          MaterialApp(
+            home: Scaffold(
+              body: MixedTextDirectionWidget(text: text, selectable: true),
+            ),
+          ),
         );
         await tester.pumpAndSettle();
 
@@ -188,7 +213,14 @@ void main() {
     });
 
     testWidgets('Arabic Font Rendering Test', (WidgetTester tester) async {
-      const fontTypes = ['quran', 'traditional', 'modern', 'readable', 'elegant', 'compact'];
+      const fontTypes = [
+        'quran',
+        'traditional',
+        'modern',
+        'readable',
+        'elegant',
+        'compact',
+      ];
       const testText = 'بسم الله الرحمن الرحيم';
 
       for (final fontType in fontTypes) {
@@ -197,7 +229,11 @@ void main() {
             home: Scaffold(
               body: Text(
                 testText,
-                style: ArabicTypography.getArabicGoogleFont(fontType, fontSize: 24, fontWeight: FontWeight.normal),
+                style: ArabicTypography.getArabicGoogleFont(
+                  fontType,
+                  fontSize: 24,
+                  fontWeight: FontWeight.normal,
+                ),
               ),
             ),
           ),
@@ -232,7 +268,10 @@ void main() {
 
                     // Test RTL-aware alignment
                     Container(
-                      alignment: RTLLayoutSupport.createRTLAwareAlignment(context, Alignment.centerLeft),
+                      alignment: RTLLayoutSupport.createRTLAwareAlignment(
+                        context,
+                        Alignment.centerLeft,
+                      ),
                       child: const Text('RTL Aware Alignment'),
                     ),
                   ],
@@ -258,7 +297,10 @@ void main() {
               builder:
                   (context) => SelectableText(
                     arabicText,
-                    style: ArabicTextStyles.bodyLarge(context, fontType: 'readable'),
+                    style: ArabicTextStyles.bodyLarge(
+                      context,
+                      fontType: 'readable',
+                    ),
                     textDirection: TextDirection.rtl,
                     selectionControls: ArabicTextSelectionControls(),
                   ),
@@ -291,7 +333,11 @@ void main() {
     });
 
     testWidgets('Arabic Text Normalization Test', (WidgetTester tester) async {
-      const testTexts = ['أَلسَّلَامُ عَلَيْكُمْ', 'مَرْحَبَاً بِكُمْ', 'ٱلْحَمْدُ لِلَّٰهِ'];
+      const testTexts = [
+        'أَلسَّلَامُ عَلَيْكُمْ',
+        'مَرْحَبَاً بِكُمْ',
+        'ٱلْحَمْدُ لِلَّٰهِ',
+      ];
 
       for (final text in testTexts) {
         final normalized = ArabicTypography.normalizeArabicText(text);
@@ -300,7 +346,9 @@ void main() {
       }
     });
 
-    testWidgets('Voice Control Arabic Button Test', (WidgetTester tester) async {
+    testWidgets('Voice Control Arabic Button Test', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -345,7 +393,9 @@ void main() {
   });
 
   group('Platform-Specific Arabic Font Tests', () {
-    testWidgets('Platform Font Configuration Test', (WidgetTester tester) async {
+    testWidgets('Platform Font Configuration Test', (
+      WidgetTester tester,
+    ) async {
       // Test platform-specific font configurations
       const arabicText = 'بسم الله الرحمن الرحيم';
 
@@ -360,11 +410,15 @@ void main() {
                 ),
                 Text(
                   arabicText,
-                  style: const TextStyle(fontFamily: 'Noto Sans Arabic'), // Android
+                  style: const TextStyle(
+                    fontFamily: 'Noto Sans Arabic',
+                  ), // Android
                 ),
                 Text(
                   arabicText,
-                  style: const TextStyle(fontFamily: 'Segoe UI Arabic'), // Windows
+                  style: const TextStyle(
+                    fontFamily: 'Segoe UI Arabic',
+                  ), // Windows
                 ),
               ],
             ),
@@ -379,11 +433,20 @@ void main() {
 
     testWidgets('Font Fallback Chain Test', (WidgetTester tester) async {
       const arabicText = 'اختبار الخط العربي';
-      const fallbackFonts = ['NonExistentFont', 'Noto Sans Arabic', 'Arial Unicode MS', 'Tahoma'];
+      const fallbackFonts = [
+        'NonExistentFont',
+        'Noto Sans Arabic',
+        'Arial Unicode MS',
+        'Tahoma',
+      ];
 
       for (final font in fallbackFonts) {
         await tester.pumpWidget(
-          MaterialApp(home: Scaffold(body: Text(arabicText, style: TextStyle(fontFamily: font)))),
+          MaterialApp(
+            home: Scaffold(
+              body: Text(arabicText, style: TextStyle(fontFamily: font)),
+            ),
+          ),
         );
         await tester.pumpAndSettle();
 
@@ -394,7 +457,9 @@ void main() {
   });
 
   group('Performance Tests', () {
-    testWidgets('Large Arabic Text Performance Test', (WidgetTester tester) async {
+    testWidgets('Large Arabic Text Performance Test', (
+      WidgetTester tester,
+    ) async {
       // Generate large Arabic text
       const baseText = 'بسم الله الرحمن الرحيم ';
       final largeText = List.generate(100, (index) => baseText).join();
@@ -409,7 +474,10 @@ void main() {
                 builder:
                     (context) => Text(
                       largeText,
-                      style: ArabicTextStyles.bodyLarge(context, fontType: 'readable'),
+                      style: ArabicTextStyles.bodyLarge(
+                        context,
+                        fontType: 'readable',
+                      ),
                       textDirection: TextDirection.rtl,
                     ),
               ),
@@ -425,12 +493,27 @@ void main() {
       expect(stopwatch.elapsedMilliseconds, lessThan(1000));
     });
 
-    testWidgets('Arabic Text Direction Switch Performance Test', (WidgetTester tester) async {
+    testWidgets('Arabic Text Direction Switch Performance Test', (
+      WidgetTester tester,
+    ) async {
       final controller = TextEditingController();
-      const texts = ['Hello', 'مرحبا', 'Hello World', 'بسم الله الرحمن الرحيم', 'Mixed العربية English'];
+      const texts = [
+        'Hello',
+        'مرحبا',
+        'Hello World',
+        'بسم الله الرحمن الرحيم',
+        'Mixed العربية English',
+      ];
 
       await tester.pumpWidget(
-        MaterialApp(home: Scaffold(body: ArabicTextInputWidget(controller: controller, hintText: 'Test input'))),
+        MaterialApp(
+          home: Scaffold(
+            body: ArabicTextInputWidget(
+              controller: controller,
+              hintText: 'Test input',
+            ),
+          ),
+        ),
       );
       await tester.pumpAndSettle();
 

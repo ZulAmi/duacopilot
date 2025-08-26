@@ -45,7 +45,8 @@ class OfflineSemanticSearchService {
        _prefs = prefs;
 
   /// Stream of search results for reactive UI updates
-  Stream<OfflineSearchResult> get searchResults => _searchResultsController.stream;
+  Stream<OfflineSearchResult> get searchResults =>
+      _searchResultsController.stream;
 
   /// Initialize all offline search components
   Future<void> initialize() async {
@@ -103,7 +104,11 @@ class OfflineSemanticSearchService {
           if (onlineResult != null) {
             // Cache the online result for offline use
             await _cacheOnlineResult(queryId, query, onlineResult);
-            return _convertToOfflineResult(onlineResult, queryId, SearchQuality.high);
+            return _convertToOfflineResult(
+              onlineResult,
+              queryId,
+              SearchQuality.high,
+            );
           }
         } catch (e) {
           print('Online search failed, falling back to offline: $e');
@@ -183,7 +188,10 @@ class OfflineSemanticSearchService {
       // Calculate similarities
       final similarities = <MapEntry<DuaEmbedding, double>>[];
       for (final candidate in candidates) {
-        final similarity = _embeddingService.calculateSimilarity(queryEmbedding, candidate.vector);
+        final similarity = _embeddingService.calculateSimilarity(
+          queryEmbedding,
+          candidate.vector,
+        );
 
         if (similarity >= _minSimilarityThreshold) {
           similarities.add(MapEntry(candidate, similarity));
@@ -203,12 +211,15 @@ class OfflineSemanticSearchService {
           OfflineDuaMatch(
             duaId: embedding.duaId,
             text: embedding.text,
-            translation: embedding.metadata['translation'] as String? ?? embedding.text,
-            transliteration: embedding.metadata['transliteration'] as String? ?? '',
+            translation:
+                embedding.metadata['translation'] as String? ?? embedding.text,
+            transliteration:
+                embedding.metadata['transliteration'] as String? ?? '',
             category: embedding.category,
             similarityScore: similarity,
             matchedKeywords: _extractMatchedKeywords(query, embedding.keywords),
-            matchReason: 'Semantic similarity match (${(similarity * 100).toInt()}%)',
+            matchReason:
+                'Semantic similarity match (${(similarity * 100).toInt()}%)',
             metadata: {
               'embedding_id': embedding.id,
               'similarity_score': similarity,
@@ -261,7 +272,10 @@ class OfflineSemanticSearchService {
       await _simulateRemoteSync();
 
       // Update last sync timestamp
-      await _prefs.setString('last_offline_sync', DateTime.now().toIso8601String());
+      await _prefs.setString(
+        'last_offline_sync',
+        DateTime.now().toIso8601String(),
+      );
 
       print('Sync completed successfully');
     } catch (e) {
@@ -311,11 +325,19 @@ class OfflineSemanticSearchService {
     String? location,
     required Map<String, dynamic> context,
   }) async {
-    await _prefs.setString('last_online_attempt', DateTime.now().toIso8601String());
+    await _prefs.setString(
+      'last_online_attempt',
+      DateTime.now().toIso8601String(),
+    );
 
     // Try online search with timeout
     return await _ragService
-        .searchDuas(query: query, language: language, location: location, additionalContext: context)
+        .searchDuas(
+          query: query,
+          language: language,
+          location: location,
+          additionalContext: context,
+        )
         .timeout(const Duration(seconds: 10));
   }
 
@@ -333,7 +355,11 @@ class OfflineSemanticSearchService {
     }
 
     // Try semantic search if embeddings available
-    final semanticMatches = await searchSimilarDuas(query: query, language: language, category: category);
+    final semanticMatches = await searchSimilarDuas(
+      query: query,
+      language: language,
+      category: category,
+    );
 
     if (semanticMatches.isNotEmpty) {
       final result = OfflineSearchResult(
@@ -341,12 +367,15 @@ class OfflineSemanticSearchService {
         matches: semanticMatches,
         confidence: _calculateConfidence(semanticMatches),
         quality: SearchQuality.medium,
-        reasoning: 'Local semantic search with ${semanticMatches.length} matches',
+        reasoning:
+            'Local semantic search with ${semanticMatches.length} matches',
         timestamp: DateTime.now(),
         metadata: {
           'search_method': 'local_semantic',
           'embedding_service_used': _embeddingService.isReady,
-          'total_candidates': await _storageService.getStorageStats().then((s) => s['embeddings_count']),
+          'total_candidates': await _storageService.getStorageStats().then(
+            (s) => s['embeddings_count'],
+          ),
         },
       );
 
@@ -355,7 +384,11 @@ class OfflineSemanticSearchService {
     }
 
     // Fall back to keyword search
-    final keywordMatches = await _performKeywordSearch(query, language, category);
+    final keywordMatches = await _performKeywordSearch(
+      query,
+      language,
+      category,
+    );
     if (keywordMatches.isNotEmpty) {
       final result = OfflineSearchResult(
         queryId: queryId,
@@ -388,10 +421,21 @@ class OfflineSemanticSearchService {
     return _createEmergencyFallback(queryId, query, language);
   }
 
-  Future<List<OfflineDuaMatch>> _performKeywordSearch(String query, String language, String? category) async {
-    final keywords = query.toLowerCase().split(' ').where((word) => word.isNotEmpty && word.length > 2).toList();
+  Future<List<OfflineDuaMatch>> _performKeywordSearch(
+    String query,
+    String language,
+    String? category,
+  ) async {
+    final keywords =
+        query
+            .toLowerCase()
+            .split(' ')
+            .where((word) => word.isNotEmpty && word.length > 2)
+            .toList();
 
-    final embeddings = await _storageService.searchEmbeddingsByKeywords(keywords);
+    final embeddings = await _storageService.searchEmbeddingsByKeywords(
+      keywords,
+    );
 
     // Filter by language and category
     final filteredEmbeddings =
@@ -404,19 +448,28 @@ class OfflineSemanticSearchService {
     // Convert to matches
     final matches = <OfflineDuaMatch>[];
     for (final embedding in filteredEmbeddings.take(5)) {
-      final matchedKeywords = _extractMatchedKeywords(query, embedding.keywords);
+      final matchedKeywords = _extractMatchedKeywords(
+        query,
+        embedding.keywords,
+      );
 
       matches.add(
         OfflineDuaMatch(
           duaId: embedding.duaId,
           text: embedding.text,
-          translation: embedding.metadata['translation'] as String? ?? embedding.text,
-          transliteration: embedding.metadata['transliteration'] as String? ?? '',
+          translation:
+              embedding.metadata['translation'] as String? ?? embedding.text,
+          transliteration:
+              embedding.metadata['transliteration'] as String? ?? '',
           category: embedding.category,
           similarityScore: matchedKeywords.length / keywords.length,
           matchedKeywords: matchedKeywords,
           matchReason: 'Keyword match: ${matchedKeywords.join(", ")}',
-          metadata: {'embedding_id': embedding.id, 'search_method': 'keyword_search', ...embedding.metadata},
+          metadata: {
+            'embedding_id': embedding.id,
+            'search_method': 'keyword_search',
+            ...embedding.metadata,
+          },
         ),
       );
     }
@@ -424,13 +477,17 @@ class OfflineSemanticSearchService {
     return matches;
   }
 
-  List<String> _extractMatchedKeywords(String query, List<String> candidateKeywords) {
+  List<String> _extractMatchedKeywords(
+    String query,
+    List<String> candidateKeywords,
+  ) {
     final queryWords = query.toLowerCase().split(' ');
     final matched = <String>[];
 
     for (final keyword in candidateKeywords) {
       for (final word in queryWords) {
-        if (keyword.toLowerCase().contains(word) || word.contains(keyword.toLowerCase())) {
+        if (keyword.toLowerCase().contains(word) ||
+            word.contains(keyword.toLowerCase())) {
           matched.add(keyword);
           break;
         }
@@ -443,7 +500,9 @@ class OfflineSemanticSearchService {
   double _calculateConfidence(List<OfflineDuaMatch> matches) {
     if (matches.isEmpty) return 0.0;
 
-    final avgSimilarity = matches.map((m) => m.similarityScore).reduce((a, b) => a + b) / matches.length;
+    final avgSimilarity =
+        matches.map((m) => m.similarityScore).reduce((a, b) => a + b) /
+        matches.length;
 
     // Boost confidence if we have multiple good matches
     if (matches.length >= 3 && avgSimilarity > 0.6) {
@@ -453,12 +512,20 @@ class OfflineSemanticSearchService {
     return (avgSimilarity * 0.6).clamp(0.0, 1.0);
   }
 
-  Future<void> _cacheOnlineResult(String queryId, String query, dynamic onlineResult) async {
+  Future<void> _cacheOnlineResult(
+    String queryId,
+    String query,
+    dynamic onlineResult,
+  ) async {
     // Convert online result to offline format for caching
     // Implementation depends on your online result format
   }
 
-  OfflineSearchResult _convertToOfflineResult(dynamic onlineResult, String queryId, SearchQuality quality) {
+  OfflineSearchResult _convertToOfflineResult(
+    dynamic onlineResult,
+    String queryId,
+    SearchQuality quality,
+  ) {
     // Convert online result to OfflineSearchResult
     // Implementation depends on your online result format
 
@@ -473,7 +540,11 @@ class OfflineSemanticSearchService {
     );
   }
 
-  OfflineSearchResult _createEmergencyFallback(String queryId, String query, String language) {
+  OfflineSearchResult _createEmergencyFallback(
+    String queryId,
+    String query,
+    String language,
+  ) {
     final isArabic = language == 'ar';
 
     return OfflineSearchResult(

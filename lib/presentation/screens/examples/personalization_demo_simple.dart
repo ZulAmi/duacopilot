@@ -10,10 +10,12 @@ class PersonalizationDemoScreen extends ConsumerStatefulWidget {
   const PersonalizationDemoScreen({super.key});
 
   @override
-  ConsumerState<PersonalizationDemoScreen> createState() => _PersonalizationDemoScreenState();
+  ConsumerState<PersonalizationDemoScreen> createState() =>
+      _PersonalizationDemoScreenState();
 }
 
-class _PersonalizationDemoScreenState extends ConsumerState<PersonalizationDemoScreen> {
+class _PersonalizationDemoScreenState
+    extends ConsumerState<PersonalizationDemoScreen> {
   final _personalizationService = UserPersonalizationService.instance;
   bool _isInitialized = false;
   final String _currentUserId = 'demo_user_123';
@@ -46,12 +48,19 @@ class _PersonalizationDemoScreenState extends ConsumerState<PersonalizationDemoS
     }
   }
 
-  Future<void> _simulateDuaInteraction(String duaId, InteractionType type) async {
+  Future<void> _simulateDuaInteraction(
+    String duaId,
+    InteractionType type,
+  ) async {
     await _personalizationService.trackDuaInteraction(
       duaId: duaId,
       type: type,
       duration: const Duration(seconds: 30),
-      metadata: {'language': 'en', 'cultural_context': 'demo', 'session_id': 'demo_session'},
+      metadata: {
+        'language': 'en',
+        'cultural_context': 'demo',
+        'session_id': 'demo_session',
+      },
     );
   }
 
@@ -91,7 +100,9 @@ class _PersonalizationDemoScreenState extends ConsumerState<PersonalizationDemoS
                           children: [
                             Text(
                               'Personalization Demo Status',
-                              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                              style: Theme.of(
+                                context,
+                              ).textTheme.headlineSmall?.copyWith(
                                 color: ProfessionalTheme.primaryEmerald,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -100,7 +111,10 @@ class _PersonalizationDemoScreenState extends ConsumerState<PersonalizationDemoS
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                _buildStatusItem('Total Interactions', _totalInteractions.toString()),
+                                _buildStatusItem(
+                                  'Total Interactions',
+                                  _totalInteractions.toString(),
+                                ),
                                 _buildStatusItem('System Status', 'Active'),
                                 _buildStatusItem('Privacy Level', 'Balanced'),
                               ],
@@ -115,7 +129,9 @@ class _PersonalizationDemoScreenState extends ConsumerState<PersonalizationDemoS
                     // Features overview
                     Text(
                       'System Features',
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      style: Theme.of(
+                        context,
+                      ).textTheme.headlineSmall?.copyWith(
                         color: ProfessionalTheme.textPrimary,
                         fontWeight: FontWeight.bold,
                       ),
@@ -162,7 +178,9 @@ class _PersonalizationDemoScreenState extends ConsumerState<PersonalizationDemoS
                     // Demo actions
                     Text(
                       'Try Demo Actions',
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      style: Theme.of(
+                        context,
+                      ).textTheme.headlineSmall?.copyWith(
                         color: ProfessionalTheme.textPrimary,
                         fontWeight: FontWeight.bold,
                       ),
@@ -172,25 +190,37 @@ class _PersonalizationDemoScreenState extends ConsumerState<PersonalizationDemoS
                     _buildActionButton(
                       'Read Morning Du\'as',
                       Icons.wb_sunny,
-                      () => _simulateDuaInteraction('morning_duas', InteractionType.read),
+                      () => _simulateDuaInteraction(
+                        'morning_duas',
+                        InteractionType.read,
+                      ),
                     ),
 
                     _buildActionButton(
                       'Bookmark Travel Du\'as',
                       Icons.bookmark,
-                      () => _simulateDuaInteraction('travel_duas', InteractionType.bookmark),
+                      () => _simulateDuaInteraction(
+                        'travel_duas',
+                        InteractionType.bookmark,
+                      ),
                     ),
 
                     _buildActionButton(
                       'Play Audio',
                       Icons.play_arrow,
-                      () => _simulateDuaInteraction('audio_dua', InteractionType.audio),
+                      () => _simulateDuaInteraction(
+                        'audio_dua',
+                        InteractionType.audio,
+                      ),
                     ),
 
                     _buildActionButton(
                       'Share Du\'a',
                       Icons.share,
-                      () => _simulateDuaInteraction('shared_dua', InteractionType.share),
+                      () => _simulateDuaInteraction(
+                        'shared_dua',
+                        InteractionType.share,
+                      ),
                     ),
                   ],
                 ),
@@ -203,26 +233,37 @@ class _PersonalizationDemoScreenState extends ConsumerState<PersonalizationDemoS
       children: [
         Text(
           value,
-          style: Theme.of(
-            context,
-          ).textTheme.headlineSmall?.copyWith(color: ProfessionalTheme.primaryEmerald, fontWeight: FontWeight.bold),
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            color: ProfessionalTheme.primaryEmerald,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         Text(
           label,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ProfessionalTheme.textSecondary),
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: ProfessionalTheme.textSecondary,
+          ),
           textAlign: TextAlign.center,
         ),
       ],
     );
   }
 
-  Widget _buildFeatureCard(String title, String description, IconData icon, Color color) {
+  Widget _buildFeatureCard(
+    String title,
+    String description,
+    IconData icon,
+    Color color,
+  ) {
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
       child: ListTile(
         leading: Container(
           padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(color: color.withOpacity(0.1), borderRadius: BorderRadius.circular(8)),
+          decoration: BoxDecoration(
+            color: color.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(8),
+          ),
           child: Icon(icon, color: color, size: 24),
         ),
         title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
@@ -231,7 +272,11 @@ class _PersonalizationDemoScreenState extends ConsumerState<PersonalizationDemoS
     );
   }
 
-  Widget _buildActionButton(String label, IconData icon, VoidCallback onPressed) {
+  Widget _buildActionButton(
+    String label,
+    IconData icon,
+    VoidCallback onPressed,
+  ) {
     return Container(
       width: double.infinity,
       margin: const EdgeInsets.only(bottom: 12),

@@ -22,7 +22,8 @@ class ArabicRTLDemoPage extends StatefulWidget {
   State<ArabicRTLDemoPage> createState() => _ArabicRTLDemoPageState();
 }
 
-class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProviderStateMixin {
+class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage>
+    with TickerProviderStateMixin {
   late TabController _tabController;
   final TextEditingController _textController = TextEditingController();
   bool _showHighContrast = false;
@@ -43,16 +44,23 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
 
   @override
   Widget build(BuildContext context) {
-    final theme = _showHighContrast ? ArabicAccessibility.createHighContrastTheme(context) : Theme.of(context);
+    final theme =
+        _showHighContrast
+            ? ArabicAccessibility.createHighContrastTheme(context)
+            : Theme.of(context);
 
     return Theme(
       data: theme,
       child: Scaffold(
         appBar: AppBar(
-          title: const MixedTextDirectionWidget(text: 'Arabic Text & RTL Support Demo - عرض النص العربي'),
+          title: const MixedTextDirectionWidget(
+            text: 'Arabic Text & RTL Support Demo - عرض النص العربي',
+          ),
           actions: [
             IconButton(
-              icon: Icon(_showHighContrast ? Icons.contrast : Icons.contrast_outlined),
+              icon: Icon(
+                _showHighContrast ? Icons.contrast : Icons.contrast_outlined,
+              ),
               tooltip: 'Toggle High Contrast',
               onPressed: () {
                 setState(() {
@@ -92,7 +100,8 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
   Widget _buildTypographyDemo() {
     const arabicTexts = {
       'Quran': 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',
-      'Du\'a': 'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً',
+      'Du\'a':
+          'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً',
       'Dhikr': 'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ سُبْحَانَ اللَّهِ الْعَظِيمِ',
       'Hadith': 'إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ',
     };
@@ -126,15 +135,24 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text('${entry.key} Style', style: Theme.of(context).textTheme.titleMedium),
+                  Text(
+                    '${entry.key} Style',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
                   const SizedBox(height: 8),
                   AccessibleArabicText(
                     text: entry.value,
-                    style: ArabicTextStyles.bodyLarge(context, fontType: fontType),
+                    style: ArabicTextStyles.bodyLarge(
+                      context,
+                      fontType: fontType,
+                    ),
                     semanticsLabel: '${entry.key}: ${entry.value}',
                   ),
                   const SizedBox(height: 8),
-                  Text('Font Type: $fontType', style: Theme.of(context).textTheme.bodySmall),
+                  Text(
+                    'Font Type: $fontType',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
                 ],
               ),
             ),
@@ -148,9 +166,17 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Font Size Variations - تباين أحجام الخط', style: Theme.of(context).textTheme.titleMedium),
+                Text(
+                  'Font Size Variations - تباين أحجام الخط',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
                 const SizedBox(height: 16),
-                ...['Small (14)', 'Medium (18)', 'Large (24)', 'Extra Large (32)'].asMap().entries.map((entry) {
+                ...[
+                  'Small (14)',
+                  'Medium (18)',
+                  'Large (24)',
+                  'Extra Large (32)',
+                ].asMap().entries.map((entry) {
                   final sizes = [14.0, 18.0, 24.0, 32.0];
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8),
@@ -193,7 +219,10 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('RTL-Aware Row - صف يدعم العربية', style: Theme.of(context).textTheme.titleMedium),
+                Text(
+                  'RTL-Aware Row - صف يدعم العربية',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
                 const SizedBox(height: 16),
                 RTLAwareRow(
                   content: 'عنصر أول',
@@ -205,7 +234,10 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
                         color: Theme.of(context).colorScheme.primary,
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: const Text('أول', style: TextStyle(color: Colors.white)),
+                      child: const Text(
+                        'أول',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                     Container(
                       padding: const EdgeInsets.all(12),
@@ -213,7 +245,10 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
                         color: Theme.of(context).colorScheme.secondary,
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: const Text('ثاني', style: TextStyle(color: Colors.white)),
+                      child: const Text(
+                        'ثاني',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                     Container(
                       padding: const EdgeInsets.all(12),
@@ -221,7 +256,10 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
                         color: Theme.of(context).colorScheme.tertiary,
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: const Text('ثالث', style: TextStyle(color: Colors.white)),
+                      child: const Text(
+                        'ثالث',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ],
                 ),
@@ -237,7 +275,10 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('RTL-Aware Container - حاوي يدعم العربية', style: Theme.of(context).textTheme.titleMedium),
+                Text(
+                  'RTL-Aware Container - حاوي يدعم العربية',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
                 const SizedBox(height: 16),
                 RTLAwareContainer(
                   content: 'محتوى عربي',
@@ -268,7 +309,10 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('RTL Positioning - المواضع العربية', style: Theme.of(context).textTheme.titleMedium),
+                Text(
+                  'RTL Positioning - المواضع العربية',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
                 const SizedBox(height: 16),
                 SizedBox(
                   height: 200,
@@ -280,8 +324,14 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
                         content: 'البداية',
                         child: Container(
                           padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(color: Colors.green, borderRadius: BorderRadius.circular(8)),
-                          child: const Text('بداية', style: TextStyle(color: Colors.white)),
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Text(
+                            'بداية',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ),
                       RTLAwarePositioned(
@@ -290,8 +340,14 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
                         content: 'النهاية',
                         child: Container(
                           padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(8)),
-                          child: const Text('نهاية', style: TextStyle(color: Colors.white)),
+                          decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Text(
+                            'نهاية',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ),
                       RTLAwarePositioned(
@@ -300,8 +356,14 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
                         content: 'الأسفل',
                         child: Container(
                           padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(8)),
-                          child: const Text('أسفل يسار', style: TextStyle(color: Colors.white)),
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Text(
+                            'أسفل يسار',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ),
                       RTLAwarePositioned(
@@ -310,8 +372,14 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
                         content: 'أسفل يمين',
                         child: Container(
                           padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(color: Colors.purple, borderRadius: BorderRadius.circular(8)),
-                          child: const Text('أسفل يمين', style: TextStyle(color: Colors.white)),
+                          decoration: BoxDecoration(
+                            color: Colors.purple,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Text(
+                            'أسفل يمين',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ),
                     ],
@@ -344,7 +412,10 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Enhanced Arabic Input - إدخال محسن للعربية', style: Theme.of(context).textTheme.titleMedium),
+                Text(
+                  'Enhanced Arabic Input - إدخال محسن للعربية',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
                 const SizedBox(height: 16),
                 ArabicTextInputWidget(
                   controller: _textController,
@@ -364,7 +435,10 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Arabic Suggestions - اقتراحات عربية', style: Theme.of(context).textTheme.titleMedium),
+                Text(
+                  'Arabic Suggestions - اقتراحات عربية',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
                 const SizedBox(height: 16),
                 ArabicSuggestionTextField(
                   hintText: 'ابحث عن دعاء أو ذكر',
@@ -392,7 +466,10 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Arabic Form Field - حقل نموذج عربي', style: Theme.of(context).textTheme.titleMedium),
+                Text(
+                  'Arabic Form Field - حقل نموذج عربي',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
                 const SizedBox(height: 16),
                 ArabicTextFormField(
                   labelText: 'الاسم الكامل',
@@ -416,7 +493,10 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Current Input Analysis - تحليل الإدخال الحالي', style: Theme.of(context).textTheme.titleMedium),
+                Text(
+                  'Current Input Analysis - تحليل الإدخال الحالي',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
                 const SizedBox(height: 16),
                 ValueListenableBuilder<TextEditingValue>(
                   valueListenable: _textController,
@@ -424,7 +504,9 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
                     final text = value.text;
                     final direction = ArabicTypography.getTextDirection(text);
                     final hasArabic = ArabicTypography.containsArabic(text);
-                    final arabicWords = ArabicTypography.extractArabicWords(text);
+                    final arabicWords = ArabicTypography.extractArabicWords(
+                      text,
+                    );
 
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -433,7 +515,10 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
                         Text('Direction: ${direction.name}'),
                         Text('Contains Arabic: $hasArabic'),
                         Text('Arabic Words: ${arabicWords.join(', ')}'),
-                        if (text.isNotEmpty) Text('Normalized: ${ArabicTypography.normalizeArabicText(text)}'),
+                        if (text.isNotEmpty)
+                          Text(
+                            'Normalized: ${ArabicTypography.normalizeArabicText(text)}',
+                          ),
                       ],
                     );
                   },
@@ -478,9 +563,16 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Mixed Text Example', style: Theme.of(context).textTheme.titleSmall),
+                  Text(
+                    'Mixed Text Example',
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
                   const SizedBox(height: 12),
-                  MixedTextDirectionWidget(text: text, style: Theme.of(context).textTheme.bodyLarge, selectable: true),
+                  MixedTextDirectionWidget(
+                    text: text,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                    selectable: true,
+                  ),
                   const SizedBox(height: 8),
                   Row(
                     children: [
@@ -492,7 +584,10 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
                                 : Colors.blue.withOpacity(0.2),
                       ),
                       const SizedBox(width: 8),
-                      Chip(label: Text('Align: ${alignment.name}'), backgroundColor: Colors.orange.withOpacity(0.2)),
+                      Chip(
+                        label: Text('Align: ${alignment.name}'),
+                        backgroundColor: Colors.orange.withOpacity(0.2),
+                      ),
                     ],
                   ),
                 ],
@@ -515,8 +610,14 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
                 const SizedBox(height: 16),
                 const Column(
                   children: [
-                    _NumberFormattingRow('English: 123456789', 'Arabic: ١٢٣٤٥٦٧٨٩'),
-                    _NumberFormattingRow('Date: 2024/12/25', 'التاريخ: ٢٠٢٤/١٢/٢٥'),
+                    _NumberFormattingRow(
+                      'English: 123456789',
+                      'Arabic: ١٢٣٤٥٦٧٨٩',
+                    ),
+                    _NumberFormattingRow(
+                      'Date: 2024/12/25',
+                      'التاريخ: ٢٠٢٤/١٢/٢٥',
+                    ),
                     _NumberFormattingRow('Time: 14:30', 'الوقت: ١٤:٣٠'),
                   ],
                 ),
@@ -555,7 +656,8 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
                 ArabicAccessibility.createIslamicContentWidget(
                   arabicText: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',
                   transliteration: 'Bismillahir Rahmanir Raheem',
-                  translation: 'In the name of Allah, the Most Gracious, the Most Merciful',
+                  translation:
+                      'In the name of Allah, the Most Gracious, the Most Merciful',
                   context: context,
                   contentType: IslamicContentType.quranVerse,
                 ),
@@ -607,7 +709,10 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Voice Control Button - زر التحكم الصوتي', style: Theme.of(context).textTheme.titleMedium),
+                Text(
+                  'Voice Control Button - زر التحكم الصوتي',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
                 const SizedBox(height: 16),
                 VoiceControlArabicButton(
                   label: 'البحث بالصوت',
@@ -615,9 +720,13 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
                   voiceCommand: 'ابدأ البحث الصوتي',
                   tooltip: 'اضغط للبحث بالصوت',
                   onPressed: () {
-                    ScaffoldMessenger.of(
-                      context,
-                    ).showSnackBar(const SnackBar(content: Text('Voice search activated - تم تشغيل البحث الصوتي')));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'Voice search activated - تم تشغيل البحث الصوتي',
+                        ),
+                      ),
+                    );
                   },
                 ),
               ],
@@ -632,11 +741,15 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Screen Reader Optimized - محسن لقارئ الشاشة', style: Theme.of(context).textTheme.titleMedium),
+                Text(
+                  'Screen Reader Optimized - محسن لقارئ الشاشة',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
                 const SizedBox(height: 16),
                 const ScreenReaderOptimizedText(
                   text: 'اللَّهُمَّ اهْدِنَا فِيمَنْ هَدَيْتَ',
-                  alternativeText: 'Islamic supplication: O Allah, guide us among those You have guided',
+                  alternativeText:
+                      'Islamic supplication: O Allah, guide us among those You have guided',
                   isLive: true,
                 ),
               ],
@@ -689,7 +802,10 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Text Direction Detection Tests', style: Theme.of(context).textTheme.titleMedium),
+                Text(
+                  'Text Direction Detection Tests',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
                 const SizedBox(height: 16),
                 ..._buildTextDirectionTests(),
               ],
@@ -704,11 +820,16 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Performance Test - اختبار الأداء', style: Theme.of(context).textTheme.titleMedium),
+                Text(
+                  'Performance Test - اختبار الأداء',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () => _runPerformanceTest(),
-                  child: const Text('Run Performance Test - تشغيل اختبار الأداء'),
+                  child: const Text(
+                    'Run Performance Test - تشغيل اختبار الأداء',
+                  ),
                 ),
               ],
             ),
@@ -732,10 +853,15 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
       final isCorrect = actualDirection == test.$3;
 
       return ListTile(
-        leading: Icon(isCorrect ? Icons.check : Icons.close, color: isCorrect ? Colors.green : Colors.red),
+        leading: Icon(
+          isCorrect ? Icons.check : Icons.close,
+          color: isCorrect ? Colors.green : Colors.red,
+        ),
         title: Text(test.$1),
         subtitle: Text('${test.$2} → ${actualDirection.name}'),
-        trailing: Icon(test.$3 == TextDirection.rtl ? Icons.arrow_back : Icons.arrow_forward),
+        trailing: Icon(
+          test.$3 == TextDirection.rtl ? Icons.arrow_back : Icons.arrow_forward,
+        ),
       );
     }).toList();
   }
@@ -758,7 +884,9 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProvid
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Performance Test Complete: ${stopwatch.elapsedMilliseconds}ms for $iterations operations'),
+          content: Text(
+            'Performance Test Complete: ${stopwatch.elapsedMilliseconds}ms for $iterations operations',
+          ),
         ),
       );
     }
@@ -779,7 +907,13 @@ class _NumberFormattingRow extends StatelessWidget {
         children: [
           Expanded(child: Text(english, textAlign: TextAlign.left)),
           const SizedBox(width: 16),
-          Expanded(child: Text(arabic, textAlign: TextAlign.right, textDirection: TextDirection.rtl)),
+          Expanded(
+            child: Text(
+              arabic,
+              textAlign: TextAlign.right,
+              textDirection: TextDirection.rtl,
+            ),
+          ),
         ],
       ),
     );
@@ -799,7 +933,10 @@ class ArabicRTLDemoApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Arabic RTL Demo',
-      theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple), useMaterial3: true),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
       home: const ArabicRTLDemoPage(),
       debugShowCheckedModeBanner: false,
     );

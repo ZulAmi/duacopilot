@@ -11,7 +11,8 @@ class PlatformService {
 
   // Platform Detection
   bool get isMobile => Platform.isAndroid || Platform.isIOS;
-  bool get isDesktop => Platform.isWindows || Platform.isMacOS || Platform.isLinux;
+  bool get isDesktop =>
+      Platform.isWindows || Platform.isMacOS || Platform.isLinux;
   bool get isAndroid => Platform.isAndroid;
   bool get isIOS => Platform.isIOS;
   bool get isWindows => Platform.isWindows;

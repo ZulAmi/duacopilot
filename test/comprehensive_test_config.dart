@@ -22,7 +22,12 @@ class TestConfig {
   // Accessibility test configuration
   static const double minTouchTargetSize = 44.0;
   static const double minContrastRatio = 4.5;
-  static const List<String> supportedScreenReaders = ['TalkBack', 'VoiceOver', 'NVDA', 'JAWS'];
+  static const List<String> supportedScreenReaders = [
+    'TalkBack',
+    'VoiceOver',
+    'NVDA',
+    'JAWS',
+  ];
 
   // Test data constants
   static const List<String> sampleArabicQueries = [
@@ -63,7 +68,10 @@ class TestConfig {
   ];
 
   // Device orientations for testing
-  static const List<TestOrientation> testOrientations = [TestOrientation.portrait, TestOrientation.landscape];
+  static const List<TestOrientation> testOrientations = [
+    TestOrientation.portrait,
+    TestOrientation.landscape,
+  ];
 
   // Screen sizes for responsive testing
   static const List<Size> testScreenSizes = [
@@ -122,7 +130,8 @@ class TestConfig {
       DuaResponse(
         id: 'dua-1',
         query: 'morning prayer',
-        response: 'بسم الله الذي لا يضر مع اسمه شيء في الأرض ولا في السماء وهو السميع العليم',
+        response:
+            'بسم الله الذي لا يضر مع اسمه شيء في الأرض ولا في السماء وهو السميع العليم',
         timestamp: DateTime.now(),
         responseTime: 200,
         confidence: 0.95,
@@ -161,7 +170,10 @@ class TestConfig {
   }
 
   /// Performance test helper
-  static void performanceTest(String testName, Future<void> Function() testFunction) {
+  static void performanceTest(
+    String testName,
+    Future<void> Function() testFunction,
+  ) {
     group('Performance: $testName', () {
       test('should complete within acceptable time', () async {
         final stopwatch = Stopwatch()..start();
@@ -174,7 +186,10 @@ class TestConfig {
   }
 
   /// Memory usage test helper (simplified for testing)
-  static void memoryTest(String testName, Future<void> Function() testFunction) {
+  static void memoryTest(
+    String testName,
+    Future<void> Function() testFunction,
+  ) {
     group('Memory: $testName', () {
       test('should not create memory leaks', () async {
         // Basic memory test - actual implementation would require platform-specific tools
@@ -189,7 +204,11 @@ class TestConfig {
   }
 
   /// Accessibility test helper
-  static void accessibilityTest(WidgetTester tester, String description, Widget testWidget) {
+  static void accessibilityTest(
+    WidgetTester tester,
+    String description,
+    Widget testWidget,
+  ) {
     testWidgets('Accessibility: $description', (tester) async {
       await tester.pumpWidget(MaterialApp(home: Scaffold(body: testWidget)));
       await tester.pumpAndSettle();
@@ -309,7 +328,10 @@ class TestUtils {
   }
 
   /// Wait for animation to complete
-  static Future<void> waitForAnimation(WidgetTester tester, [Duration? duration]) async {
+  static Future<void> waitForAnimation(
+    WidgetTester tester, [
+    Duration? duration,
+  ]) async {
     await tester.pumpAndSettle(duration ?? const Duration(milliseconds: 500));
   }
 
@@ -320,19 +342,31 @@ class TestUtils {
   }
 
   /// Enter text and wait
-  static Future<void> enterTextAndWait(WidgetTester tester, Finder finder, String text) async {
+  static Future<void> enterTextAndWait(
+    WidgetTester tester,
+    Finder finder,
+    String text,
+  ) async {
     await tester.enterText(finder, text);
     await waitForAnimation(tester);
   }
 
   /// Scroll vertically and wait
-  static Future<void> scrollAndWait(WidgetTester tester, Finder finder, double offset) async {
+  static Future<void> scrollAndWait(
+    WidgetTester tester,
+    Finder finder,
+    double offset,
+  ) async {
     await tester.drag(finder, Offset(0, offset));
     await waitForAnimation(tester);
   }
 
   /// Test responsive design across different screen sizes
-  static Future<void> testResponsiveDesign(WidgetTester tester, Widget widget, List<Size> screenSizes) async {
+  static Future<void> testResponsiveDesign(
+    WidgetTester tester,
+    Widget widget,
+    List<Size> screenSizes,
+  ) async {
     for (final size in screenSizes) {
       await tester.binding.setSurfaceSize(size);
       await tester.pumpWidget(MaterialApp(home: Scaffold(body: widget)));
@@ -347,9 +381,15 @@ class TestUtils {
   }
 
   /// Test widget with different orientations
-  static Future<void> testOrientationChanges(WidgetTester tester, Widget widget) async {
+  static Future<void> testOrientationChanges(
+    WidgetTester tester,
+    Widget widget,
+  ) async {
     for (final orientation in TestConfig.testOrientations) {
-      final size = orientation == TestOrientation.portrait ? const Size(414, 896) : const Size(896, 414);
+      final size =
+          orientation == TestOrientation.portrait
+              ? const Size(414, 896)
+              : const Size(896, 414);
 
       await tester.binding.setSurfaceSize(size);
       await tester.pumpWidget(MaterialApp(home: Scaffold(body: widget)));
@@ -362,7 +402,9 @@ class TestUtils {
   }
 
   /// Simulate different network conditions
-  static Future<void> testNetworkConditions(Future<void> Function(NetworkCondition) testFunction) async {
+  static Future<void> testNetworkConditions(
+    Future<void> Function(NetworkCondition) testFunction,
+  ) async {
     for (final condition in TestConfig.networkConditions) {
       TestConfig.simulateNetworkCondition(condition);
       await testFunction(condition);

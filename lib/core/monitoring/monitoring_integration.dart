@@ -6,7 +6,8 @@ import '../monitoring/comprehensive_monitoring_service.dart';
 /// Integration helper for comprehensive monitoring with RAG queries
 /// Provides easy-to-use methods for tracking RAG performance and user satisfaction
 class MonitoringIntegration {
-  static final ComprehensiveMonitoringService _monitoring = ComprehensiveMonitoringService.instance;
+  static final ComprehensiveMonitoringService _monitoring =
+      ComprehensiveMonitoringService.instance;
 
   /// Initialize monitoring system
   static Future<void> initialize() async {
@@ -89,20 +90,33 @@ class MonitoringIntegration {
   }
 
   /// Get comprehensive analytics for dashboard
-  static Future<RagAnalyticsSummary> getRagAnalyticsSummary({Duration? timeWindow}) async {
-    final rawData = await _monitoring.getAnalyticsSummary(timeWindow: timeWindow);
+  static Future<RagAnalyticsSummary> getRagAnalyticsSummary({
+    Duration? timeWindow,
+  }) async {
+    final rawData = await _monitoring.getAnalyticsSummary(
+      timeWindow: timeWindow,
+    );
     return RagAnalyticsSummary.fromMap(rawData);
   }
 
   /// Show user satisfaction dialog and track response
-  static Future<void> showSatisfactionDialog(BuildContext context, String traceId, {VoidCallback? onCompleted}) async {
+  static Future<void> showSatisfactionDialog(
+    BuildContext context,
+    String traceId, {
+    VoidCallback? onCompleted,
+  }) async {
     await showDialog<void>(
       context: context,
       builder:
           (context) => RagSatisfactionDialog(
             traceId: traceId,
             onRatingSubmitted: (rating, feedback, tags) async {
-              await _monitoring.trackUserSatisfaction(traceId: traceId, rating: rating, feedback: feedback, tags: tags);
+              await _monitoring.trackUserSatisfaction(
+                traceId: traceId,
+                rating: rating,
+                feedback: feedback,
+                tags: tags,
+              );
               onCompleted?.call();
             },
           ),
@@ -163,7 +177,11 @@ class RagQueryTracker {
   }
 
   /// Record user satisfaction for this query
-  Future<void> recordSatisfaction({required int rating, String? feedback, List<String>? tags}) async {
+  Future<void> recordSatisfaction({
+    required int rating,
+    String? feedback,
+    List<String>? tags,
+  }) async {
     await ComprehensiveMonitoringService.instance.trackUserSatisfaction(
       traceId: _traceId,
       rating: rating,
@@ -208,11 +226,22 @@ class RagAnalyticsSummary {
       timeWindowHours: data['time_window_hours'] as int,
       overview: RagOverviewMetrics.fromMap(overview),
       queryTypes: queryTypesData.map(
-        (key, value) => MapEntry(key, RagQueryTypeStats.fromMap(value as Map<String, dynamic>)),
+        (key, value) => MapEntry(
+          key,
+          RagQueryTypeStats.fromMap(value as Map<String, dynamic>),
+        ),
       ),
-      trendingTopics: trendingData.map((item) => TrendingTopic.fromMap(item as Map<String, dynamic>)).toList(),
+      trendingTopics:
+          trendingData
+              .map(
+                (item) => TrendingTopic.fromMap(item as Map<String, dynamic>),
+              )
+              .toList(),
       geographicData: RagGeographicData.fromMap(geographicRaw),
-      abTests: abTestsData.map((item) => ABTestResult.fromMap(item as Map<String, dynamic>)).toList(),
+      abTests:
+          abTestsData
+              .map((item) => ABTestResult.fromMap(item as Map<String, dynamic>))
+              .toList(),
     );
   }
 }
@@ -280,7 +309,10 @@ class TrendingTopic {
   TrendingTopic({required this.topic, required this.count});
 
   factory TrendingTopic.fromMap(Map<String, dynamic> data) {
-    return TrendingTopic(topic: data['topic'] as String, count: data['count'] as int);
+    return TrendingTopic(
+      topic: data['topic'] as String,
+      count: data['count'] as int,
+    );
   }
 }
 
@@ -289,11 +321,19 @@ class RagGeographicData {
   final int uniqueRegions;
   final List<RegionUsage> topRegions;
 
-  RagGeographicData({required this.totalGeographicQueries, required this.uniqueRegions, required this.topRegions});
+  RagGeographicData({
+    required this.totalGeographicQueries,
+    required this.uniqueRegions,
+    required this.topRegions,
+  });
 
   factory RagGeographicData.fromMap(Map<String, dynamic> data) {
     if (data.containsKey('error')) {
-      return RagGeographicData(totalGeographicQueries: 0, uniqueRegions: 0, topRegions: []);
+      return RagGeographicData(
+        totalGeographicQueries: 0,
+        uniqueRegions: 0,
+        topRegions: [],
+      );
     }
 
     final topRegionsData = data['top_regions'] as List<dynamic>;
@@ -301,7 +341,10 @@ class RagGeographicData {
     return RagGeographicData(
       totalGeographicQueries: data['total_geographic_queries'] as int,
       uniqueRegions: data['unique_regions'] as int,
-      topRegions: topRegionsData.map((item) => RegionUsage.fromMap(item as Map<String, dynamic>)).toList(),
+      topRegions:
+          topRegionsData
+              .map((item) => RegionUsage.fromMap(item as Map<String, dynamic>))
+              .toList(),
     );
   }
 }
@@ -313,7 +356,10 @@ class RegionUsage {
   RegionUsage({required this.region, required this.count});
 
   factory RegionUsage.fromMap(Map<String, dynamic> data) {
-    return RegionUsage(region: data['region'] as String, count: data['count'] as int);
+    return RegionUsage(
+      region: data['region'] as String,
+      count: data['count'] as int,
+    );
   }
 }
 
@@ -322,7 +368,11 @@ class ABTestResult {
   final String variant;
   final DateTime assignedAt;
 
-  ABTestResult({required this.experiment, required this.variant, required this.assignedAt});
+  ABTestResult({
+    required this.experiment,
+    required this.variant,
+    required this.assignedAt,
+  });
 
   factory ABTestResult.fromMap(Map<String, dynamic> data) {
     return ABTestResult(
@@ -336,9 +386,14 @@ class ABTestResult {
 /// User satisfaction dialog widget
 class RagSatisfactionDialog extends StatefulWidget {
   final String traceId;
-  final Function(int rating, String? feedback, List<String> tags) onRatingSubmitted;
+  final Function(int rating, String? feedback, List<String> tags)
+  onRatingSubmitted;
 
-  const RagSatisfactionDialog({super.key, required this.traceId, required this.onRatingSubmitted});
+  const RagSatisfactionDialog({
+    super.key,
+    required this.traceId,
+    required this.onRatingSubmitted,
+  });
 
   @override
   State<RagSatisfactionDialog> createState() => _RagSatisfactionDialogState();
@@ -379,7 +434,11 @@ class _RagSatisfactionDialogState extends State<RagSatisfactionDialog> {
                 final starIndex = index + 1;
                 return IconButton(
                   onPressed: () => setState(() => _rating = starIndex),
-                  icon: Icon(starIndex <= _rating ? Icons.star : Icons.star_border, color: Colors.amber, size: 32),
+                  icon: Icon(
+                    starIndex <= _rating ? Icons.star : Icons.star_border,
+                    color: Colors.amber,
+                    size: 32,
+                  ),
                 );
               }),
             ),
@@ -424,14 +483,19 @@ class _RagSatisfactionDialogState extends State<RagSatisfactionDialog> {
         ),
       ),
       actions: [
-        TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Cancel')),
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Cancel'),
+        ),
         ElevatedButton(
           onPressed:
               _rating > 0
                   ? () {
                     widget.onRatingSubmitted(
                       _rating,
-                      _feedbackController.text.trim().isEmpty ? null : _feedbackController.text.trim(),
+                      _feedbackController.text.trim().isEmpty
+                          ? null
+                          : _feedbackController.text.trim(),
                       _selectedTags.toList(),
                     );
                     Navigator.of(context).pop();

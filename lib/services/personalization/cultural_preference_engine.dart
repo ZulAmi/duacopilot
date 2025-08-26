@@ -47,11 +47,16 @@ class CulturalPreferenceEngine {
 
       // Build updated preferences
       final updatedPrefs = currentPrefs.copyWith(
-        preferredLanguages: update.preferredLanguages ?? currentPrefs.preferredLanguages,
+        preferredLanguages:
+            update.preferredLanguages ?? currentPrefs.preferredLanguages,
         primaryLanguage: update.primaryLanguage ?? currentPrefs.primaryLanguage,
         culturalTags: update.culturalTags ?? currentPrefs.culturalTags,
-        languagePreferences: update.languagePreferences ?? currentPrefs.languagePreferences,
-        customPreferences: {...currentPrefs.customPreferences, ...(update.customPreferences ?? {})},
+        languagePreferences:
+            update.languagePreferences ?? currentPrefs.languagePreferences,
+        customPreferences: {
+          ...currentPrefs.customPreferences,
+          ...(update.customPreferences ?? {}),
+        },
         lastUpdated: update.timestamp,
       );
 
@@ -72,7 +77,11 @@ class CulturalPreferenceEngine {
       final culturalContext = _extractCulturalContext(interaction);
 
       if (culturalContext.isNotEmpty) {
-        await _recordCulturalContext(interaction.userId, culturalContext, prefs);
+        await _recordCulturalContext(
+          interaction.userId,
+          culturalContext,
+          prefs,
+        );
         await _updateLanguagePreferences(interaction, prefs);
       }
 
@@ -86,7 +95,8 @@ class CulturalPreferenceEngine {
   Future<String> detectPreferredLanguage(String userId) async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final interactions = prefs.getStringList('$_languageInteractionsKey$userId') ?? [];
+      final interactions =
+          prefs.getStringList('$_languageInteractionsKey$userId') ?? [];
 
       final languageFrequency = <String, int>{};
 
@@ -96,7 +106,8 @@ class CulturalPreferenceEngine {
           final language = data['language'] as String?;
 
           if (language != null) {
-            languageFrequency[language] = (languageFrequency[language] ?? 0) + 1;
+            languageFrequency[language] =
+                (languageFrequency[language] ?? 0) + 1;
           }
         } catch (e) {
           continue; // Skip invalid entries
@@ -105,7 +116,9 @@ class CulturalPreferenceEngine {
 
       if (languageFrequency.isNotEmpty) {
         // Return most frequently used language
-        final mostUsed = languageFrequency.entries.reduce((a, b) => a.value > b.value ? a : b);
+        final mostUsed = languageFrequency.entries.reduce(
+          (a, b) => a.value > b.value ? a : b,
+        );
 
         debugPrint('🔍 Detected preferred language: ${mostUsed.key}');
         return mostUsed.key;
@@ -119,7 +132,10 @@ class CulturalPreferenceEngine {
   }
 
   /// Get cultural recommendations based on user context
-  Future<List<String>> getCulturalRecommendations(String userId, String duaCategory) async {
+  Future<List<String>> getCulturalRecommendations(
+    String userId,
+    String duaCategory,
+  ) async {
     try {
       final preferences = await getPreferences(userId);
       final recommendations = <String>[];
@@ -145,7 +161,8 @@ class CulturalPreferenceEngine {
   Future<void> learnFromPatterns(String userId) async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final culturalData = prefs.getStringList('$_culturalContextKey$userId') ?? [];
+      final culturalData =
+          prefs.getStringList('$_culturalContextKey$userId') ?? [];
 
       if (culturalData.isEmpty) return;
 
@@ -166,11 +183,13 @@ class CulturalPreferenceEngine {
           }
 
           if (language != null) {
-            languageFrequency[language] = (languageFrequency[language] ?? 0) + 1;
+            languageFrequency[language] =
+                (languageFrequency[language] ?? 0) + 1;
 
             if (timeOfDay != null) {
               timeOfDayLanguage[timeOfDay] ??= {};
-              timeOfDayLanguage[timeOfDay]![language] = (timeOfDayLanguage[timeOfDay]![language] ?? 0) + 1;
+              timeOfDayLanguage[timeOfDay]![language] =
+                  (timeOfDayLanguage[timeOfDay]![language] ?? 0) + 1;
             }
           }
         } catch (e) {
@@ -179,7 +198,13 @@ class CulturalPreferenceEngine {
       }
 
       // Update preferences based on learned patterns
-      await _updatePreferencesFromPatterns(userId, regionFrequency, languageFrequency, timeOfDayLanguage, prefs);
+      await _updatePreferencesFromPatterns(
+        userId,
+        regionFrequency,
+        languageFrequency,
+        timeOfDayLanguage,
+        prefs,
+      );
 
       debugPrint('🧠 Learned cultural patterns for user: $userId');
     } catch (e) {
@@ -211,12 +236,17 @@ class CulturalPreferenceEngine {
   }
 
   /// Load cultural preferences from storage
-  Future<CulturalPreferences> _loadPreferences(String userId, SharedPreferences prefs) async {
+  Future<CulturalPreferences> _loadPreferences(
+    String userId,
+    SharedPreferences prefs,
+  ) async {
     try {
       final prefsJson = prefs.getString('$_culturalPreferencesKey$userId');
 
       if (prefsJson != null) {
-        final preferences = CulturalPreferences.fromJson(json.decode(prefsJson));
+        final preferences = CulturalPreferences.fromJson(
+          json.decode(prefsJson),
+        );
         _preferencesCache[userId] = preferences;
         return preferences;
       } else {
@@ -233,10 +263,16 @@ class CulturalPreferenceEngine {
   }
 
   /// Save cultural preferences to storage
-  Future<void> _savePreferences(CulturalPreferences preferences, SharedPreferences prefs) async {
+  Future<void> _savePreferences(
+    CulturalPreferences preferences,
+    SharedPreferences prefs,
+  ) async {
     try {
       final prefsJson = json.encode(preferences.toJson());
-      await prefs.setString('$_culturalPreferencesKey${preferences.userId}', prefsJson);
+      await prefs.setString(
+        '$_culturalPreferencesKey${preferences.userId}',
+        prefsJson,
+      );
       _preferencesCache[preferences.userId] = preferences;
     } catch (e) {
       debugPrint('❌ Error saving cultural preferences: $e');
@@ -270,9 +306,14 @@ class CulturalPreferenceEngine {
   }
 
   /// Record cultural context for learning
-  Future<void> _recordCulturalContext(String userId, Map<String, dynamic> context, SharedPreferences prefs) async {
+  Future<void> _recordCulturalContext(
+    String userId,
+    Map<String, dynamic> context,
+    SharedPreferences prefs,
+  ) async {
     try {
-      final contextHistory = prefs.getStringList('$_culturalContextKey$userId') ?? [];
+      final contextHistory =
+          prefs.getStringList('$_culturalContextKey$userId') ?? [];
 
       contextHistory.add(json.encode(context));
 
@@ -288,12 +329,19 @@ class CulturalPreferenceEngine {
   }
 
   /// Update language preferences based on interaction
-  Future<void> _updateLanguagePreferences(DuaInteraction interaction, SharedPreferences prefs) async {
+  Future<void> _updateLanguagePreferences(
+    DuaInteraction interaction,
+    SharedPreferences prefs,
+  ) async {
     try {
       final language = interaction.metadata['language'] as String?;
       if (language == null) return;
 
-      final interactions = prefs.getStringList('$_languageInteractionsKey${interaction.userId}') ?? [];
+      final interactions =
+          prefs.getStringList(
+            '$_languageInteractionsKey${interaction.userId}',
+          ) ??
+          [];
 
       final languageData = {
         'language': language,
@@ -309,7 +357,10 @@ class CulturalPreferenceEngine {
         interactions.removeRange(0, interactions.length - 100);
       }
 
-      await prefs.setStringList('$_languageInteractionsKey${interaction.userId}', interactions);
+      await prefs.setStringList(
+        '$_languageInteractionsKey${interaction.userId}',
+        interactions,
+      );
     } catch (e) {
       debugPrint('❌ Error updating language preferences: $e');
     }
@@ -328,7 +379,10 @@ class CulturalPreferenceEngine {
 
       // Update language preferences based on frequency
       final updatedLanguagePrefs = <String, double>{};
-      final totalInteractions = languageFrequency.values.fold(0, (sum, count) => sum + count);
+      final totalInteractions = languageFrequency.values.fold(
+        0,
+        (sum, count) => sum + count,
+      );
 
       languageFrequency.forEach((language, count) {
         updatedLanguagePrefs[language] = count / totalInteractions;
@@ -337,7 +391,10 @@ class CulturalPreferenceEngine {
       // Update primary language if we have enough data
       String? newPrimaryLanguage;
       if (languageFrequency.isNotEmpty) {
-        newPrimaryLanguage = languageFrequency.entries.reduce((a, b) => a.value > b.value ? a : b).key;
+        newPrimaryLanguage =
+            languageFrequency.entries
+                .reduce((a, b) => a.value > b.value ? a : b)
+                .key;
       }
 
       // Update cultural tags based on regions
@@ -345,8 +402,12 @@ class CulturalPreferenceEngine {
 
       final updatedPrefs = currentPrefs.copyWith(
         primaryLanguage: newPrimaryLanguage ?? currentPrefs.primaryLanguage,
-        languagePreferences: updatedLanguagePrefs.isNotEmpty ? updatedLanguagePrefs : currentPrefs.languagePreferences,
-        culturalTags: culturalTags.isNotEmpty ? culturalTags : currentPrefs.culturalTags,
+        languagePreferences:
+            updatedLanguagePrefs.isNotEmpty
+                ? updatedLanguagePrefs
+                : currentPrefs.languagePreferences,
+        culturalTags:
+            culturalTags.isNotEmpty ? culturalTags : currentPrefs.culturalTags,
         lastUpdated: DateTime.now(),
       );
 
@@ -357,9 +418,14 @@ class CulturalPreferenceEngine {
   }
 
   /// Clean up data for a specific key based on cutoff date
-  Future<void> _cleanupDataForKey(String key, DateTime cutoffDate, SharedPreferences prefs) async {
+  Future<void> _cleanupDataForKey(
+    String key,
+    DateTime cutoffDate,
+    SharedPreferences prefs,
+  ) async {
     try {
-      if (key.contains('language_interactions_') || key.contains('cultural_context_')) {
+      if (key.contains('language_interactions_') ||
+          key.contains('cultural_context_')) {
         // Clean up interaction/context data
         final data = prefs.getStringList(key) ?? [];
         final filteredData = <String>[];

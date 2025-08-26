@@ -17,7 +17,8 @@ enum ProcessingState { idle, loading, buffering, ready, completed }
 /// Premium Audio Service with enterprise-grade security and features
 class PremiumAudioService {
   static PremiumAudioService? _instance;
-  static PremiumAudioService get instance => _instance ??= PremiumAudioService._();
+  static PremiumAudioService get instance =>
+      _instance ??= PremiumAudioService._();
 
   PremiumAudioService._();
 
@@ -46,16 +47,21 @@ class PremiumAudioService {
 
   // Stream controllers
   final _playbackStateController = StreamController<PlaybackState>.broadcast();
-  final _currentRecitationController = StreamController<PremiumRecitation?>.broadcast();
+  final _currentRecitationController =
+      StreamController<PremiumRecitation?>.broadcast();
   final _playlistController = StreamController<PremiumPlaylist?>.broadcast();
-  final _downloadProgressController = StreamController<Map<String, double>>.broadcast();
+  final _downloadProgressController =
+      StreamController<Map<String, double>>.broadcast();
   final _sleepTimerController = StreamController<SleepTimerConfig>.broadcast();
 
   // Public streams
-  Stream<PlaybackState> get playbackStateStream => _playbackStateController.stream;
-  Stream<PremiumRecitation?> get currentRecitationStream => _currentRecitationController.stream;
+  Stream<PlaybackState> get playbackStateStream =>
+      _playbackStateController.stream;
+  Stream<PremiumRecitation?> get currentRecitationStream =>
+      _currentRecitationController.stream;
   Stream<PremiumPlaylist?> get playlistStream => _playlistController.stream;
-  Stream<Map<String, double>> get downloadProgressStream => _downloadProgressController.stream;
+  Stream<Map<String, double>> get downloadProgressStream =>
+      _downloadProgressController.stream;
   Stream<SleepTimerConfig> get sleepTimerStream => _sleepTimerController.stream;
 
   bool _isInitialized = false;
@@ -101,7 +107,9 @@ class PremiumAudioService {
     _backgroundPlayer = just_audio.AudioPlayer();
 
     // Configure players for premium features
-    _mainPlayer?.setAudioSource(just_audio.AudioSource.uri(Uri.parse('about:blank')));
+    _mainPlayer?.setAudioSource(
+      just_audio.AudioSource.uri(Uri.parse('about:blank')),
+    );
 
     // Listen to playback states
     _mainPlayer?.playbackEventStream.listen((event) {
@@ -168,10 +176,14 @@ class PremiumAudioService {
   /// Validate user's subscription for premium audio features
   Future<void> _validateSubscription() async {
     final hasSubscription = _subscriptionService.hasActiveSubscription;
-    final isPremium = _subscriptionService.hasTierOrHigher(SubscriptionTier.premium);
+    final isPremium = _subscriptionService.hasTierOrHigher(
+      SubscriptionTier.premium,
+    );
 
     if (!hasSubscription || !isPremium) {
-      throw Exception('Premium subscription required for advanced audio features');
+      throw Exception(
+        'Premium subscription required for advanced audio features',
+      );
     }
   }
 
@@ -199,9 +211,13 @@ class PremiumAudioService {
         profileImageUrl: 'https://secure-cdn.duacopilot.com/qaris/afasy.jpg',
         specializations: const ['Quran Recitation', 'Islamic Education'],
         isVerified: true,
-        bioEnglish: 'Mishary Rashid Alafasy is a renowned Kuwaiti qāriʾ, imam, preacher, and Nasheed artist.',
+        bioEnglish:
+            'Mishary Rashid Alafasy is a renowned Kuwaiti qāriʾ, imam, preacher, and Nasheed artist.',
         bioArabic: 'مشاري بن راشد بن محمد بن راشد العفاسي قارئ وداعية كويتي',
-        awards: const ['International Quran Competition Winner', 'Islamic Media Award'],
+        awards: const [
+          'International Quran Competition Winner',
+          'Islamic Media Award',
+        ],
         rating: 4.9,
         totalRecitations: 150,
         createdAt: DateTime.now().subtract(const Duration(days: 365)),
@@ -215,7 +231,8 @@ class PremiumAudioService {
         profileImageUrl: 'https://secure-cdn.duacopilot.com/qaris/sudais.jpg',
         specializations: const ['Quran Recitation', 'Islamic Leadership'],
         isVerified: true,
-        bioEnglish: 'Abdul Rahman Al-Sudais is the chief imam and khateeb of the Grand Mosque in Mecca.',
+        bioEnglish:
+            'Abdul Rahman Al-Sudais is the chief imam and khateeb of the Grand Mosque in Mecca.',
         bioArabic: 'عبد الرحمن بن عبد العزيز السديس إمام وخطيب المسجد الحرام',
         awards: const ['Islamic Personality Award', 'Makkah Excellence Award'],
         rating: 4.95,
@@ -231,9 +248,13 @@ class PremiumAudioService {
         profileImageUrl: 'https://secure-cdn.duacopilot.com/qaris/minshawi.jpg',
         specializations: const ['Classical Recitation', 'Tajweed Mastery'],
         isVerified: true,
-        bioEnglish: 'Mohamed Siddiq El-Minshawi was one of the most celebrated Quran reciters in history.',
+        bioEnglish:
+            'Mohamed Siddiq El-Minshawi was one of the most celebrated Quran reciters in history.',
         bioArabic: 'محمد صديق المنشاوي من أشهر قراء القرآن الكريم في التاريخ',
-        awards: const ['Grand Master of Quranic Recitation', 'Eternal Voice Award'],
+        awards: const [
+          'Grand Master of Quranic Recitation',
+          'Eternal Voice Award',
+        ],
         rating: 4.98,
         totalRecitations: 180,
         createdAt: DateTime.now().subtract(const Duration(days: 500)),
@@ -247,7 +268,10 @@ class PremiumAudioService {
       _currentSessionToken = await _generateSecureToken();
 
       // Schedule token refresh every 30 minutes
-      _sessionRefreshTimer = Timer.periodic(const Duration(minutes: 30), (timer) => _refreshSecuritySession());
+      _sessionRefreshTimer = Timer.periodic(
+        const Duration(minutes: 30),
+        (timer) => _refreshSecuritySession(),
+      );
 
       AppLogger.info('Security session established');
     } catch (e) {
@@ -283,7 +307,10 @@ class PremiumAudioService {
   void _cleanupExpiredTokens() {
     final now = DateTime.now();
     final expiredKeys =
-        _tokenExpirations.entries.where((entry) => entry.value.isBefore(now)).map((entry) => entry.key).toList();
+        _tokenExpirations.entries
+            .where((entry) => entry.value.isBefore(now))
+            .map((entry) => entry.key)
+            .toList();
 
     for (final key in expiredKeys) {
       _encryptedUrls.remove(key);
@@ -406,13 +433,21 @@ class PremiumAudioService {
 
     // Generate new secure URL (in production, call secure API)
     final timestamp = DateTime.now().millisecondsSinceEpoch;
-    final signature = sha256.convert(utf8.encode('${recitation.id}:$timestamp:$_currentSessionToken')).toString();
+    final signature =
+        sha256
+            .convert(
+              utf8.encode('${recitation.id}:$timestamp:$_currentSessionToken'),
+            )
+            .toString();
 
-    final secureUrl = '${recitation.url}?token=$signature&ts=$timestamp&session=$_currentSessionToken';
+    final secureUrl =
+        '${recitation.url}?token=$signature&ts=$timestamp&session=$_currentSessionToken';
 
     // Cache with 1-hour expiration
     _encryptedUrls[recitation.id] = secureUrl;
-    _tokenExpirations[recitation.id] = DateTime.now().add(const Duration(hours: 1));
+    _tokenExpirations[recitation.id] = DateTime.now().add(
+      const Duration(hours: 1),
+    );
 
     return secureUrl;
   }
@@ -436,7 +471,8 @@ class PremiumAudioService {
         sessionsCount: stats.sessionsCount + 1,
         qariPreferences: {
           ...stats.qariPreferences,
-          recitation.qariId: (stats.qariPreferences[recitation.qariId] ?? 0) + 1,
+          recitation.qariId:
+              (stats.qariPreferences[recitation.qariId] ?? 0) + 1,
         },
         lastSessionDate: DateTime.now(),
       );

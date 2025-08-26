@@ -89,7 +89,9 @@ class LocalVectorStorageService {
     try {
       final embeddings = <DuaEmbedding>[];
       for (final data in _embeddingsBox!.values) {
-        final embedding = DuaEmbedding.fromJson(Map<String, dynamic>.from(data));
+        final embedding = DuaEmbedding.fromJson(
+          Map<String, dynamic>.from(data),
+        );
         if (embedding.language == language) {
           embeddings.add(embedding);
         }
@@ -108,7 +110,9 @@ class LocalVectorStorageService {
     try {
       final embeddings = <DuaEmbedding>[];
       for (final data in _embeddingsBox!.values) {
-        final embedding = DuaEmbedding.fromJson(Map<String, dynamic>.from(data));
+        final embedding = DuaEmbedding.fromJson(
+          Map<String, dynamic>.from(data),
+        );
         if (embedding.category == category) {
           embeddings.add(embedding);
         }
@@ -137,7 +141,9 @@ class LocalVectorStorageService {
   }
 
   /// Search embeddings by keywords
-  Future<List<DuaEmbedding>> searchEmbeddingsByKeywords(List<String> keywords) async {
+  Future<List<DuaEmbedding>> searchEmbeddingsByKeywords(
+    List<String> keywords,
+  ) async {
     if (!isReady) return [];
 
     try {
@@ -145,12 +151,16 @@ class LocalVectorStorageService {
       final lowercaseKeywords = keywords.map((k) => k.toLowerCase()).toList();
 
       for (final data in _embeddingsBox!.values) {
-        final embedding = DuaEmbedding.fromJson(Map<String, dynamic>.from(data));
+        final embedding = DuaEmbedding.fromJson(
+          Map<String, dynamic>.from(data),
+        );
 
         // Check if any keyword matches
         final hasMatch = lowercaseKeywords.any(
           (keyword) =>
-              embedding.keywords.any((k) => k.toLowerCase().contains(keyword)) ||
+              embedding.keywords.any(
+                (k) => k.toLowerCase().contains(keyword),
+              ) ||
               embedding.text.toLowerCase().contains(keyword),
         );
 
@@ -227,7 +237,10 @@ class LocalVectorStorageService {
   // Search Results Cache Management
 
   /// Store a search result
-  Future<void> storeSearchResult(String queryId, OfflineSearchResult result) async {
+  Future<void> storeSearchResult(
+    String queryId,
+    OfflineSearchResult result,
+  ) async {
     if (!isReady) return;
 
     try {
@@ -244,7 +257,9 @@ class LocalVectorStorageService {
     try {
       final data = _cacheBox!.get(queryId);
       if (data != null) {
-        final result = OfflineSearchResult.fromJson(Map<String, dynamic>.from(data));
+        final result = OfflineSearchResult.fromJson(
+          Map<String, dynamic>.from(data),
+        );
 
         // Check if cache is still valid (24 hours)
         final now = DateTime.now();
@@ -263,7 +278,9 @@ class LocalVectorStorageService {
   }
 
   /// Clear old cached results
-  Future<void> cleanOldCache({Duration maxAge = const Duration(days: 7)}) async {
+  Future<void> cleanOldCache({
+    Duration maxAge = const Duration(days: 7),
+  }) async {
     if (!isReady) return;
 
     try {
@@ -272,7 +289,9 @@ class LocalVectorStorageService {
 
       for (final entry in _cacheBox!.toMap().entries) {
         try {
-          final result = OfflineSearchResult.fromJson(Map<String, dynamic>.from(entry.value));
+          final result = OfflineSearchResult.fromJson(
+            Map<String, dynamic>.from(entry.value),
+          );
           if (now.difference(result.timestamp) > maxAge) {
             keysToDelete.add(entry.key);
           }
@@ -306,7 +325,9 @@ class LocalVectorStorageService {
   }
 
   /// Store multiple fallback templates
-  Future<void> storeBatchFallbackTemplates(List<FallbackTemplate> templates) async {
+  Future<void> storeBatchFallbackTemplates(
+    List<FallbackTemplate> templates,
+  ) async {
     if (!isReady) return;
 
     try {
@@ -321,14 +342,19 @@ class LocalVectorStorageService {
   }
 
   /// Get fallback templates by category and language
-  Future<List<FallbackTemplate>> getFallbackTemplates({String? category, String? language}) async {
+  Future<List<FallbackTemplate>> getFallbackTemplates({
+    String? category,
+    String? language,
+  }) async {
     if (!isReady) return [];
 
     try {
       final templates = <FallbackTemplate>[];
 
       for (final data in _templatesBox!.values) {
-        final template = FallbackTemplate.fromJson(Map<String, dynamic>.from(data));
+        final template = FallbackTemplate.fromJson(
+          Map<String, dynamic>.from(data),
+        );
 
         bool matches = true;
         if (category != null && template.category != category) {
@@ -361,7 +387,10 @@ class LocalVectorStorageService {
     if (!isReady) return null;
 
     try {
-      final templates = await getFallbackTemplates(category: category, language: language);
+      final templates = await getFallbackTemplates(
+        category: category,
+        language: language,
+      );
 
       FallbackTemplate? bestMatch;
       double bestScore = 0.0;
@@ -371,7 +400,9 @@ class LocalVectorStorageService {
 
         // Calculate keyword match score
         for (final keyword in keywords) {
-          if (template.keywords.any((k) => k.toLowerCase().contains(keyword.toLowerCase()))) {
+          if (template.keywords.any(
+            (k) => k.toLowerCase().contains(keyword.toLowerCase()),
+          )) {
             score += 1.0;
           }
         }
@@ -419,7 +450,9 @@ class LocalVectorStorageService {
     try {
       final languages = <String>{};
       for (final data in _embeddingsBox!.values) {
-        final embedding = DuaEmbedding.fromJson(Map<String, dynamic>.from(data));
+        final embedding = DuaEmbedding.fromJson(
+          Map<String, dynamic>.from(data),
+        );
         languages.add(embedding.language);
       }
       return languages;
@@ -436,7 +469,9 @@ class LocalVectorStorageService {
     try {
       final categories = <String>{};
       for (final data in _embeddingsBox!.values) {
-        final embedding = DuaEmbedding.fromJson(Map<String, dynamic>.from(data));
+        final embedding = DuaEmbedding.fromJson(
+          Map<String, dynamic>.from(data),
+        );
         categories.add(embedding.category);
       }
       return categories;

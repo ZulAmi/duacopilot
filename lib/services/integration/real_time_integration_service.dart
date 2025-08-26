@@ -11,7 +11,8 @@ import '../sse/server_sent_events_service.dart';
 /// Coordinates all real-time services and provides unified interface
 class RealTimeIntegrationService {
   static RealTimeIntegrationService? _instance;
-  static RealTimeIntegrationService get instance => _instance ??= RealTimeIntegrationService._();
+  static RealTimeIntegrationService get instance =>
+      _instance ??= RealTimeIntegrationService._();
 
   RealTimeIntegrationService._();
 
@@ -56,12 +57,16 @@ class RealTimeIntegrationService {
       _isInitialized = true;
       _isActive = true;
 
-      AppLogger.info('✅ Real-Time Integration Service initialized successfully');
+      AppLogger.info(
+        '✅ Real-Time Integration Service initialized successfully',
+      );
 
       // Record usage for intelligent background sync
       _backgroundSync.recordUsage('real_time_service_init');
     } catch (e) {
-      AppLogger.error('❌ Failed to initialize Real-Time Integration Service: $e');
+      AppLogger.error(
+        '❌ Failed to initialize Real-Time Integration Service: $e',
+      );
       rethrow;
     }
   }
@@ -77,7 +82,11 @@ class RealTimeIntegrationService {
         // Schedule urgent sync for new content
         _backgroundSync.scheduleUrgentSync(
           reason: 'Scholar approved new Du\'a: ${approval.duaTitle}',
-          data: {'dua_id': approval.duaId, 'dua_title': approval.duaTitle, 'scholar_name': approval.scholarName},
+          data: {
+            'dua_id': approval.duaId,
+            'dua_title': approval.duaTitle,
+            'scholar_name': approval.scholarName,
+          },
         );
       }),
     );
@@ -90,7 +99,11 @@ class RealTimeIntegrationService {
         // Schedule background sync for content updates
         _backgroundSync.scheduleUrgentSync(
           reason: 'Content updated: ${update.title}',
-          data: {'content_id': update.id, 'content_title': update.title, 'update_type': update.updateType},
+          data: {
+            'content_id': update.id,
+            'content_title': update.title,
+            'update_type': update.updateType,
+          },
         );
       }),
     );
@@ -101,7 +114,10 @@ class RealTimeIntegrationService {
         _backgroundSync.recordUsage('family_dua_shared');
 
         // Schedule family sync for collaborative data
-        _backgroundSync.scheduleFamilySync(familyId: share.familyId, action: 'dua_shared_${share.duaId}');
+        _backgroundSync.scheduleFamilySync(
+          familyId: share.familyId,
+          action: 'dua_shared_${share.duaId}',
+        );
       }),
     );
 
@@ -112,7 +128,9 @@ class RealTimeIntegrationService {
 
         // If we have collaborative service active, share with family
         if (_collaborativeService.hasFamily) {
-          AppLogger.info('📲 Scholar approval push received, coordinating with family sharing');
+          AppLogger.info(
+            '📲 Scholar approval push received, coordinating with family sharing',
+          );
         }
       }),
     );
@@ -122,15 +140,21 @@ class RealTimeIntegrationService {
       _realTimeManager.connectionStateStream.listen((state) {
         switch (state) {
           case ConnectionState.connected:
-            AppLogger.info('🔗 WebSocket connected, coordinating real-time services');
+            AppLogger.info(
+              '🔗 WebSocket connected, coordinating real-time services',
+            );
             _backgroundSync.recordUsage('websocket_connected');
             break;
           case ConnectionState.offline:
-            AppLogger.info('📱 WebSocket offline, relying on SSE and push notifications');
+            AppLogger.info(
+              '📱 WebSocket offline, relying on SSE and push notifications',
+            );
             break;
           case ConnectionState.failed:
             AppLogger.warning('⚠️ WebSocket failed, scheduling urgent sync');
-            _backgroundSync.scheduleUrgentSync(reason: 'WebSocket connection failed, forcing sync');
+            _backgroundSync.scheduleUrgentSync(
+              reason: 'WebSocket connection failed, forcing sync',
+            );
             break;
           default:
             break;
@@ -146,7 +170,10 @@ class RealTimeIntegrationService {
         AppLogger.info('🤲 Prayer session activity: ${session.sessionName}');
 
         // Schedule family sync for prayer session data
-        _backgroundSync.scheduleFamilySync(familyId: session.familyId, action: 'prayer_session_${session.status}');
+        _backgroundSync.scheduleFamilySync(
+          familyId: session.familyId,
+          action: 'prayer_session_${session.status}',
+        );
       }),
     );
   }
@@ -161,7 +188,9 @@ class RealTimeIntegrationService {
     String? category,
   }) async {
     try {
-      AppLogger.info('📤 Sharing Du\'a with family through multiple channels: $duaTitle');
+      AppLogger.info(
+        '📤 Sharing Du\'a with family through multiple channels: $duaTitle',
+      );
 
       // Primary: Use collaborative service
       await _collaborativeService.shareDuaWithFamily(
@@ -202,7 +231,11 @@ class RealTimeIntegrationService {
       AppLogger.info('🔍 Requesting live RAG processing: $query');
 
       // Primary: Use WebSocket connection
-      await _realTimeManager.requestLiveRagProcessing(query: query, sessionId: sessionId, context: context);
+      await _realTimeManager.requestLiveRagProcessing(
+        query: query,
+        sessionId: sessionId,
+        context: context,
+      );
 
       // Record usage for intelligent sync
       _backgroundSync.recordUsage('live_rag_query');
@@ -247,12 +280,20 @@ class RealTimeIntegrationService {
   }
 
   /// Create family group with full integration
-  Future<void> createFamily({required String familyName, String? description}) async {
+  Future<void> createFamily({
+    required String familyName,
+    String? description,
+  }) async {
     try {
-      AppLogger.info('👨‍👩‍👧‍👦 Creating family with real-time integration: $familyName');
+      AppLogger.info(
+        '👨‍👩‍👧‍👦 Creating family with real-time integration: $familyName',
+      );
 
       // Create family through collaborative service
-      await _collaborativeService.createFamily(familyName: familyName, description: description);
+      await _collaborativeService.createFamily(
+        familyName: familyName,
+        description: description,
+      );
 
       // Subscribe to family notifications
       // (Family ID is set internally by collaborative service)
@@ -268,7 +309,10 @@ class RealTimeIntegrationService {
 
       // Schedule family sync to establish initial data
       if (familyId != null) {
-        await _backgroundSync.scheduleFamilySync(familyId: familyId, action: 'family_created');
+        await _backgroundSync.scheduleFamilySync(
+          familyId: familyId,
+          action: 'family_created',
+        );
       }
 
       AppLogger.info('✅ Family created with full real-time integration');
@@ -296,7 +340,8 @@ class RealTimeIntegrationService {
       },
       'family_info': _collaborativeService.getFamilyInfo(),
       'sync_stats': _backgroundSync.getSyncStats(),
-      'notification_preferences': _messagingService.getNotificationPreferences(),
+      'notification_preferences':
+          _messagingService.getNotificationPreferences(),
     };
   }
 

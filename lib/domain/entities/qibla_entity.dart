@@ -18,7 +18,8 @@ class QiblaCompass with _$QiblaCompass {
     QiblaCalibrationData? calibrationData,
   }) = _QiblaCompass;
 
-  factory QiblaCompass.fromJson(Map<String, dynamic> json) => _$QiblaCompassFromJson(json);
+  factory QiblaCompass.fromJson(Map<String, dynamic> json) =>
+      _$QiblaCompassFromJson(json);
 }
 
 @freezed
@@ -33,7 +34,8 @@ class QiblaCalibrationData with _$QiblaCalibrationData {
     Map<String, dynamic>? sensorInfo,
   }) = _QiblaCalibrationData;
 
-  factory QiblaCalibrationData.fromJson(Map<String, dynamic> json) => _$QiblaCalibrationDataFromJson(json);
+  factory QiblaCalibrationData.fromJson(Map<String, dynamic> json) =>
+      _$QiblaCalibrationDataFromJson(json);
 }
 
 @freezed
@@ -49,7 +51,8 @@ class PrayerTracker with _$PrayerTracker {
     Map<String, dynamic>? metadata,
   }) = _PrayerTracker;
 
-  factory PrayerTracker.fromJson(Map<String, dynamic> json) => _$PrayerTrackerFromJson(json);
+  factory PrayerTracker.fromJson(Map<String, dynamic> json) =>
+      _$PrayerTrackerFromJson(json);
 }
 
 @freezed
@@ -67,7 +70,8 @@ class PrayerCompletion with _$PrayerCompletion {
     double? qiblaAccuracy,
   }) = _PrayerCompletion;
 
-  factory PrayerCompletion.fromJson(Map<String, dynamic> json) => _$PrayerCompletionFromJson(json);
+  factory PrayerCompletion.fromJson(Map<String, dynamic> json) =>
+      _$PrayerCompletionFromJson(json);
 }
 
 @freezed
@@ -84,7 +88,8 @@ class PrayerStats with _$PrayerStats {
     DateTime? lastPrayerTime,
   }) = _PrayerStats;
 
-  factory PrayerStats.fromJson(Map<String, dynamic> json) => _$PrayerStatsFromJson(json);
+  factory PrayerStats.fromJson(Map<String, dynamic> json) =>
+      _$PrayerStatsFromJson(json);
 }
 
 @freezed
@@ -101,7 +106,8 @@ class PrayerReminder with _$PrayerReminder {
     Map<String, dynamic>? soundSettings,
   }) = _PrayerReminder;
 
-  factory PrayerReminder.fromJson(Map<String, dynamic> json) => _$PrayerReminderFromJson(json);
+  factory PrayerReminder.fromJson(Map<String, dynamic> json) =>
+      _$PrayerReminderFromJson(json);
 }
 
 @freezed
@@ -123,7 +129,8 @@ class MosqueLocation with _$MosqueLocation {
     List<String>? images,
   }) = _MosqueLocation;
 
-  factory MosqueLocation.fromJson(Map<String, dynamic> json) => _$MosqueLocationFromJson(json);
+  factory MosqueLocation.fromJson(Map<String, dynamic> json) =>
+      _$MosqueLocationFromJson(json);
 }
 
 @freezed
@@ -136,7 +143,8 @@ class MosqueRating with _$MosqueRating {
     List<MosqueReview>? recentReviews,
   }) = _MosqueRating;
 
-  factory MosqueRating.fromJson(Map<String, dynamic> json) => _$MosqueRatingFromJson(json);
+  factory MosqueRating.fromJson(Map<String, dynamic> json) =>
+      _$MosqueRatingFromJson(json);
 }
 
 @freezed
@@ -152,7 +160,8 @@ class MosqueReview with _$MosqueReview {
     bool? isVerified,
   }) = _MosqueReview;
 
-  factory MosqueReview.fromJson(Map<String, dynamic> json) => _$MosqueReviewFromJson(json);
+  factory MosqueReview.fromJson(Map<String, dynamic> json) =>
+      _$MosqueReviewFromJson(json);
 }
 
 // Enums

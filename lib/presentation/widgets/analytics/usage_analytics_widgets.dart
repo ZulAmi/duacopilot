@@ -83,7 +83,8 @@ mixin ReadingTimeTracker<T extends StatefulWidget> on State<T> {
   void _trackReadingSession() {
     if (_readingStartTime == null || _contentId == null) return;
 
-    final sessionDuration = DateTime.now().difference(_readingStartTime!) + _totalReadingTime;
+    final sessionDuration =
+        DateTime.now().difference(_readingStartTime!) + _totalReadingTime;
 
     // Track reading progress every 5 seconds for analytics
     _feedbackService?.trackUsageAnalytics(
@@ -119,7 +120,8 @@ class ReadingTimeTrackerWidget extends StatefulWidget {
   });
 
   @override
-  State<ReadingTimeTrackerWidget> createState() => _ReadingTimeTrackerWidgetState();
+  State<ReadingTimeTrackerWidget> createState() =>
+      _ReadingTimeTrackerWidgetState();
 }
 
 class _ReadingTimeTrackerWidgetState extends State<ReadingTimeTrackerWidget>
@@ -258,7 +260,8 @@ class _AudioPlaybackTrackerState extends State<AudioPlaybackTracker> {
   void _trackPlaybackProgress() {
     if (!_isPlaying || _playbackStartTime == null) return;
 
-    final currentPlaybackTime = _totalPlaybackTime + DateTime.now().difference(_playbackStartTime!);
+    final currentPlaybackTime =
+        _totalPlaybackTime + DateTime.now().difference(_playbackStartTime!);
 
     widget.onPlaybackTimeUpdate?.call(currentPlaybackTime);
 
@@ -272,7 +275,10 @@ class _AudioPlaybackTrackerState extends State<AudioPlaybackTracker> {
         'total_duration_ms': widget.totalDuration?.inMilliseconds,
         'completion_percentage':
             widget.totalDuration != null
-                ? (currentPlaybackTime.inMilliseconds / widget.totalDuration!.inMilliseconds * 100).clamp(0, 100)
+                ? (currentPlaybackTime.inMilliseconds /
+                        widget.totalDuration!.inMilliseconds *
+                        100)
+                    .clamp(0, 100)
                 : null,
       },
     );
@@ -307,7 +313,8 @@ class ShareTrackingButton extends StatefulWidget {
   State<ShareTrackingButton> createState() => _ShareTrackingButtonState();
 }
 
-class _ShareTrackingButtonState extends State<ShareTrackingButton> with SingleTickerProviderStateMixin {
+class _ShareTrackingButtonState extends State<ShareTrackingButton>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _scaleAnimation;
   bool _isSharing = false;
@@ -315,12 +322,14 @@ class _ShareTrackingButtonState extends State<ShareTrackingButton> with SingleTi
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(duration: const Duration(milliseconds: 200), vsync: this);
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 200),
+      vsync: this,
+    );
 
-    _scaleAnimation = Tween<double>(
-      begin: 1.0,
-      end: 0.95,
-    ).animate(CurvedAnimation(parent: _animationController, curve: Curves.easeInOut));
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
   }
 
   @override
@@ -418,7 +427,10 @@ class _UsageAnalyticsWidgetState extends State<UsageAnalyticsWidget> {
       action: 'content_view',
       contentId: widget.contentId,
       contentType: widget.contentType ?? 'unknown',
-      additionalData: {...?widget.additionalData, 'view_start_time': _viewStartTime?.millisecondsSinceEpoch},
+      additionalData: {
+        ...?widget.additionalData,
+        'view_start_time': _viewStartTime?.millisecondsSinceEpoch,
+      },
     );
   }
 
@@ -432,7 +444,10 @@ class _UsageAnalyticsWidgetState extends State<UsageAnalyticsWidget> {
       contentId: widget.contentId,
       contentType: widget.contentType ?? 'unknown',
       duration: viewDuration,
-      additionalData: {...?widget.additionalData, 'meaningful_view': viewDuration.inSeconds > 3},
+      additionalData: {
+        ...?widget.additionalData,
+        'meaningful_view': viewDuration.inSeconds > 3,
+      },
     );
   }
 
@@ -504,8 +519,12 @@ class AnalyticsDashboardData {
   factory AnalyticsDashboardData.fromMap(Map<String, dynamic> data) {
     return AnalyticsDashboardData(
       actionCounts: Map<String, int>.from(data['action_counts'] ?? {}),
-      contentTypeCounts: Map<String, int>.from(data['content_type_counts'] ?? {}),
-      averageDurations: Map<String, double>.from(data['average_durations_ms'] ?? {}),
+      contentTypeCounts: Map<String, int>.from(
+        data['content_type_counts'] ?? {},
+      ),
+      averageDurations: Map<String, double>.from(
+        data['average_durations_ms'] ?? {},
+      ),
       totalEvents: data['total_events'] ?? 0,
       startDate: DateTime.fromMillisecondsSinceEpoch(data['start_date'] ?? 0),
       endDate: DateTime.fromMillisecondsSinceEpoch(data['end_date'] ?? 0),

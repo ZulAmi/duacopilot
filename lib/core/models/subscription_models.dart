@@ -45,19 +45,21 @@ class SubscriptionPlan {
     'productId': productId,
   };
 
-  factory SubscriptionPlan.fromJson(Map<String, dynamic> json) => SubscriptionPlan(
-    id: json['id'],
-    name: json['name'],
-    tier: SubscriptionTier.values.firstWhere((e) => e.name == json['tier']),
-    monthlyPrice: (json['monthlyPrice'] as num).toDouble(),
-    yearlyPrice: (json['yearlyPrice'] as num).toDouble(),
-    features: List<String>.from(json['features']),
-    description: json['description'],
-    isPopular: json['isPopular'] ?? false,
-    discountPercentage: (json['discountPercentage'] as num?)?.toDouble() ?? 0.0,
-    billingPeriod: json['billingPeriod'],
-    productId: json['productId'],
-  );
+  factory SubscriptionPlan.fromJson(Map<String, dynamic> json) =>
+      SubscriptionPlan(
+        id: json['id'],
+        name: json['name'],
+        tier: SubscriptionTier.values.firstWhere((e) => e.name == json['tier']),
+        monthlyPrice: (json['monthlyPrice'] as num).toDouble(),
+        yearlyPrice: (json['yearlyPrice'] as num).toDouble(),
+        features: List<String>.from(json['features']),
+        description: json['description'],
+        isPopular: json['isPopular'] ?? false,
+        discountPercentage:
+            (json['discountPercentage'] as num?)?.toDouble() ?? 0.0,
+        billingPeriod: json['billingPeriod'],
+        productId: json['productId'],
+      );
 }
 
 /// User subscription status
@@ -102,25 +104,33 @@ class UserSubscription {
     'nextBillingDate': nextBillingDate?.toIso8601String(),
   };
 
-  factory UserSubscription.fromJson(Map<String, dynamic> json) => UserSubscription(
-    userId: json['userId'],
-    tier: SubscriptionTier.values.firstWhere((e) => e.name == json['tier']),
-    startDate: DateTime.parse(json['startDate']),
-    endDate: DateTime.parse(json['endDate']),
-    isActive: json['isActive'] ?? true,
-    autoRenew: json['autoRenew'] ?? false,
-    subscriptionId: json['subscriptionId'],
-    paymentMethod: json['paymentMethod'],
-    lastPaymentAmount: (json['lastPaymentAmount'] as num?)?.toDouble(),
-    lastPaymentDate: json['lastPaymentDate'] != null ? DateTime.parse(json['lastPaymentDate']) : null,
-    nextBillingDate: json['nextBillingDate'] != null ? DateTime.parse(json['nextBillingDate']) : null,
-  );
+  factory UserSubscription.fromJson(Map<String, dynamic> json) =>
+      UserSubscription(
+        userId: json['userId'],
+        tier: SubscriptionTier.values.firstWhere((e) => e.name == json['tier']),
+        startDate: DateTime.parse(json['startDate']),
+        endDate: DateTime.parse(json['endDate']),
+        isActive: json['isActive'] ?? true,
+        autoRenew: json['autoRenew'] ?? false,
+        subscriptionId: json['subscriptionId'],
+        paymentMethod: json['paymentMethod'],
+        lastPaymentAmount: (json['lastPaymentAmount'] as num?)?.toDouble(),
+        lastPaymentDate:
+            json['lastPaymentDate'] != null
+                ? DateTime.parse(json['lastPaymentDate'])
+                : null,
+        nextBillingDate:
+            json['nextBillingDate'] != null
+                ? DateTime.parse(json['nextBillingDate'])
+                : null,
+      );
 
   /// Check if subscription is currently valid
   bool get isValid => isActive && DateTime.now().isBefore(endDate);
 
   /// Get days remaining in subscription
-  int get daysRemaining => isValid ? endDate.difference(DateTime.now()).inDays : 0;
+  int get daysRemaining =>
+      isValid ? endDate.difference(DateTime.now()).inDays : 0;
 
   /// Check if subscription is expiring soon (within 7 days)
   bool get isExpiringSoon => isValid && daysRemaining <= 7;
@@ -156,15 +166,18 @@ class SubscriptionFeature {
     'category': category,
   };
 
-  factory SubscriptionFeature.fromJson(Map<String, dynamic> json) => SubscriptionFeature(
-    id: json['id'],
-    name: json['name'],
-    description: json['description'],
-    requiredTier: SubscriptionTier.values.firstWhere((e) => e.name == json['requiredTier']),
-    isCore: json['isCore'] ?? false,
-    iconCode: json['iconCode'],
-    category: json['category'],
-  );
+  factory SubscriptionFeature.fromJson(Map<String, dynamic> json) =>
+      SubscriptionFeature(
+        id: json['id'],
+        name: json['name'],
+        description: json['description'],
+        requiredTier: SubscriptionTier.values.firstWhere(
+          (e) => e.name == json['requiredTier'],
+        ),
+        isCore: json['isCore'] ?? false,
+        iconCode: json['iconCode'],
+        category: json['category'],
+      );
 }
 
 /// Payment method model
@@ -265,7 +278,12 @@ class SubscriptionPlans {
     tier: SubscriptionTier.free,
     monthlyPrice: 0.0,
     yearlyPrice: 0.0,
-    features: ['Basic duas access', 'Limited search queries (10/day)', 'Ad-supported experience', 'Basic prayer times'],
+    features: [
+      'Basic duas access',
+      'Limited search queries (10/day)',
+      'Ad-supported experience',
+      'Basic prayer times',
+    ],
     description: 'Perfect for getting started with Islamic guidance',
   );
 

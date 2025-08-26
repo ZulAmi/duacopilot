@@ -44,7 +44,10 @@ class ABTestingFramework {
 
       // Configure fetch settings
       await _remoteConfig.setConfigSettings(
-        RemoteConfigSettings(fetchTimeout: const Duration(minutes: 1), minimumFetchInterval: const Duration(hours: 1)),
+        RemoteConfigSettings(
+          fetchTimeout: const Duration(minutes: 1),
+          minimumFetchInterval: const Duration(hours: 1),
+        ),
       );
 
       // Fetch and activate
@@ -87,19 +90,31 @@ class ABTestingFramework {
       action: 'ab_test_outcome',
       contentId: experimentName,
       contentType: 'experiment',
-      additionalData: {'variant': variant, 'outcome': outcome, ...?additionalData},
+      additionalData: {
+        'variant': variant,
+        'outcome': outcome,
+        ...?additionalData,
+      },
     );
   }
 
   /// Track conversion events for experiments
-  Future<void> trackConversion({required String experimentName, required String conversionType, double? value}) async {
+  Future<void> trackConversion({
+    required String experimentName,
+    required String conversionType,
+    double? value,
+  }) async {
     final variant = getVariant(experimentName, 'control');
 
     await _feedbackService.trackUsageAnalytics(
       action: 'ab_test_conversion',
       contentId: experimentName,
       contentType: 'conversion',
-      additionalData: {'variant': variant, 'conversion_type': conversionType, 'value': value},
+      additionalData: {
+        'variant': variant,
+        'conversion_type': conversionType,
+        'value': value,
+      },
     );
   }
 
@@ -124,7 +139,13 @@ class ABTestWidget extends StatelessWidget {
   final Widget Function(BuildContext)? fallback;
   final ABTestingFramework? abTesting;
 
-  const ABTestWidget({super.key, required this.experimentName, required this.variants, this.fallback, this.abTesting});
+  const ABTestWidget({
+    super.key,
+    required this.experimentName,
+    required this.variants,
+    this.fallback,
+    this.abTesting,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +170,12 @@ class ABFeedbackButton extends StatelessWidget {
   final String text;
   final ABTestingFramework? abTesting;
 
-  const ABFeedbackButton({super.key, this.onPressed, this.text = 'Feedback', this.abTesting});
+  const ABFeedbackButton({
+    super.key,
+    this.onPressed,
+    this.text = 'Feedback',
+    this.abTesting,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -157,11 +183,18 @@ class ABFeedbackButton extends StatelessWidget {
       experimentName: 'feedback_button_style',
       abTesting: abTesting,
       variants: {
-        'modern': (context) => _ModernFeedbackButton(onPressed: onPressed, text: text),
-        'classic': (context) => _ClassicFeedbackButton(onPressed: onPressed, text: text),
-        'minimal': (context) => _MinimalFeedbackButton(onPressed: onPressed, text: text),
+        'modern':
+            (context) =>
+                _ModernFeedbackButton(onPressed: onPressed, text: text),
+        'classic':
+            (context) =>
+                _ClassicFeedbackButton(onPressed: onPressed, text: text),
+        'minimal':
+            (context) =>
+                _MinimalFeedbackButton(onPressed: onPressed, text: text),
       },
-      fallback: (context) => _ModernFeedbackButton(onPressed: onPressed, text: text),
+      fallback:
+          (context) => _ModernFeedbackButton(onPressed: onPressed, text: text),
     );
   }
 }
@@ -178,20 +211,34 @@ class _ModernFeedbackButton extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(colors: [theme.primaryColor, theme.primaryColor.withOpacity(0.8)]),
+        gradient: LinearGradient(
+          colors: [theme.primaryColor, theme.primaryColor.withOpacity(0.8)],
+        ),
         borderRadius: BorderRadius.circular(25),
-        boxShadow: [BoxShadow(color: theme.primaryColor.withOpacity(0.3), blurRadius: 8, offset: const Offset(0, 2))],
+        boxShadow: [
+          BoxShadow(
+            color: theme.primaryColor.withOpacity(0.3),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25),
+          ),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
-          children: [const Icon(Icons.feedback, size: 18), const SizedBox(width: 8), Text(text)],
+          children: [
+            const Icon(Icons.feedback, size: 18),
+            const SizedBox(width: 8),
+            Text(text),
+          ],
         ),
       ),
     );
@@ -210,7 +257,9 @@ class _ClassicFeedbackButton extends StatelessWidget {
       onPressed: onPressed,
       icon: const Icon(Icons.feedback),
       label: Text(text),
-      style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+      style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      ),
     );
   }
 }
@@ -227,7 +276,9 @@ class _MinimalFeedbackButton extends StatelessWidget {
       onPressed: onPressed,
       icon: const Icon(Icons.feedback, size: 16),
       label: Text(text),
-      style: TextButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8)),
+      style: TextButton.styleFrom(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      ),
     );
   }
 }
@@ -241,7 +292,8 @@ class ABThemeProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = abTesting?.getVariant('color_scheme', 'default') ?? 'default';
+    final colorScheme =
+        abTesting?.getVariant('color_scheme', 'default') ?? 'default';
 
     return Theme(data: _getThemeData(context, colorScheme), child: child);
   }
@@ -252,15 +304,24 @@ class ABThemeProvider extends StatelessWidget {
     switch (scheme) {
       case 'dark':
         return baseTheme.copyWith(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo, brightness: Brightness.dark),
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.indigo,
+            brightness: Brightness.dark,
+          ),
         );
       case 'blue':
         return baseTheme.copyWith(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue, brightness: baseTheme.brightness),
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.blue,
+            brightness: baseTheme.brightness,
+          ),
         );
       case 'green':
         return baseTheme.copyWith(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.green, brightness: baseTheme.brightness),
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.green,
+            brightness: baseTheme.brightness,
+          ),
         );
       default:
         return baseTheme;
@@ -296,13 +357,23 @@ mixin ExperimentTracker<T extends StatefulWidget> on State<T> {
     if (_trackedExperiments.contains(experimentName)) return;
 
     _trackedExperiments.add(experimentName);
-    final variant = _abTesting?.getVariant(experimentName, 'control') ?? 'control';
+    final variant =
+        _abTesting?.getVariant(experimentName, 'control') ?? 'control';
 
-    _abTesting?.trackExperimentOutcome(experimentName: experimentName, variant: variant, outcome: 'view');
+    _abTesting?.trackExperimentOutcome(
+      experimentName: experimentName,
+      variant: variant,
+      outcome: 'view',
+    );
   }
 
-  void trackExperimentInteraction(String experimentName, String interactionType, {Map<String, dynamic>? data}) {
-    final variant = _abTesting?.getVariant(experimentName, 'control') ?? 'control';
+  void trackExperimentInteraction(
+    String experimentName,
+    String interactionType, {
+    Map<String, dynamic>? data,
+  }) {
+    final variant =
+        _abTesting?.getVariant(experimentName, 'control') ?? 'control';
 
     _abTesting?.trackExperimentOutcome(
       experimentName: experimentName,
@@ -312,8 +383,16 @@ mixin ExperimentTracker<T extends StatefulWidget> on State<T> {
     );
   }
 
-  void trackExperimentConversion(String experimentName, String conversionType, {double? value}) {
-    _abTesting?.trackConversion(experimentName: experimentName, conversionType: conversionType, value: value);
+  void trackExperimentConversion(
+    String experimentName,
+    String conversionType, {
+    double? value,
+  }) {
+    _abTesting?.trackConversion(
+      experimentName: experimentName,
+      conversionType: conversionType,
+      value: value,
+    );
   }
 }
 

@@ -37,7 +37,8 @@ class QariInfo with _$QariInfo {
     DateTime? updatedAt,
   }) = _QariInfo;
 
-  factory QariInfo.fromJson(Map<String, dynamic> json) => _$QariInfoFromJson(json);
+  factory QariInfo.fromJson(Map<String, dynamic> json) =>
+      _$QariInfoFromJson(json);
 }
 
 /// Premium recitation with encrypted metadata
@@ -74,11 +75,19 @@ class PremiumRecitation with _$PremiumRecitation {
     DateTime? lastPlayed,
   }) = _PremiumRecitation;
 
-  factory PremiumRecitation.fromJson(Map<String, dynamic> json) => _$PremiumRecitationFromJson(json);
+  factory PremiumRecitation.fromJson(Map<String, dynamic> json) =>
+      _$PremiumRecitationFromJson(json);
 }
 
 /// Download status for offline recitations
-enum DownloadStatus { notDownloaded, downloading, downloaded, failed, pending, paused }
+enum DownloadStatus {
+  notDownloaded,
+  downloading,
+  downloaded,
+  failed,
+  pending,
+  paused,
+}
 
 /// Premium playlist for different moods/occasions
 @freezed
@@ -100,7 +109,8 @@ class PremiumPlaylist with _$PremiumPlaylist {
     DateTime? lastPlayed,
   }) = _PremiumPlaylist;
 
-  factory PremiumPlaylist.fromJson(Map<String, dynamic> json) => _$PremiumPlaylistFromJson(json);
+  factory PremiumPlaylist.fromJson(Map<String, dynamic> json) =>
+      _$PremiumPlaylistFromJson(json);
 }
 
 /// Playlist moods for personalized experience
@@ -133,7 +143,8 @@ class SleepTimerConfig with _$SleepTimerConfig {
     DateTime? endTime,
   }) = _SleepTimerConfig;
 
-  factory SleepTimerConfig.fromJson(Map<String, dynamic> json) => _$SleepTimerConfigFromJson(json);
+  factory SleepTimerConfig.fromJson(Map<String, dynamic> json) =>
+      _$SleepTimerConfigFromJson(json);
 }
 
 /// Sleep timer actions
@@ -178,11 +189,18 @@ class PremiumAudioSettings with _$PremiumAudioSettings {
     DateTime? lastUpdated,
   }) = _PremiumAudioSettings;
 
-  factory PremiumAudioSettings.fromJson(Map<String, dynamic> json) => _$PremiumAudioSettingsFromJson(json);
+  factory PremiumAudioSettings.fromJson(Map<String, dynamic> json) =>
+      _$PremiumAudioSettingsFromJson(json);
 }
 
 /// Auto delete policy for storage management
-enum AutoDeletePolicy { never, after30Days, after60Days, after90Days, whenStorageFull }
+enum AutoDeletePolicy {
+  never,
+  after30Days,
+  after60Days,
+  after90Days,
+  whenStorageFull,
+}
 
 /// Premium audio statistics for analytics
 @freezed
@@ -203,7 +221,8 @@ class PremiumAudioStats with _$PremiumAudioStats {
     DateTime? updatedAt,
   }) = _PremiumAudioStats;
 
-  factory PremiumAudioStats.fromJson(Map<String, dynamic> json) => _$PremiumAudioStatsFromJson(json);
+  factory PremiumAudioStats.fromJson(Map<String, dynamic> json) =>
+      _$PremiumAudioStatsFromJson(json);
 }
 
 /// Content verification for authenticity
@@ -219,5 +238,6 @@ class ContentVerification with _$ContentVerification {
     DateTime? expiresAt,
   }) = _ContentVerification;
 
-  factory ContentVerification.fromJson(Map<String, dynamic> json) => _$ContentVerificationFromJson(json);
+  factory ContentVerification.fromJson(Map<String, dynamic> json) =>
+      _$ContentVerificationFromJson(json);
 }

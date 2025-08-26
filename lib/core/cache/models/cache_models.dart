@@ -45,7 +45,8 @@ class CacheEntry extends Equatable {
 
   bool get isExpired => DateTime.now().isAfter(expiresAt);
 
-  bool get isNearExpiry => DateTime.now().isAfter(expiresAt.subtract(strategy.nearExpiryThreshold));
+  bool get isNearExpiry =>
+      DateTime.now().isAfter(expiresAt.subtract(strategy.nearExpiryThreshold));
 
   Duration get age => DateTime.now().difference(createdAt);
 
@@ -77,7 +78,10 @@ class CacheEntry extends Equatable {
 
   /// Increment access count and update last accessed time
   CacheEntry recordAccess() {
-    return copyWith(accessCount: accessCount + 1, lastAccessedAt: DateTime.now());
+    return copyWith(
+      accessCount: accessCount + 1,
+      lastAccessedAt: DateTime.now(),
+    );
   }
 
   /// Convert to map for storage
@@ -242,7 +246,16 @@ enum EvictionPolicy {
 }
 
 /// Query type classification for cache strategy selection
-enum QueryType { dua, quran, hadith, prayer, fasting, charity, pilgrimage, general }
+enum QueryType {
+  dua,
+  quran,
+  hadith,
+  prayer,
+  fasting,
+  charity,
+  pilgrimage,
+  general,
+}
 
 /// Semantic hash result for query deduplication
 @immutable
@@ -263,7 +276,13 @@ class SemanticHash extends Equatable {
   });
 
   @override
-  List<Object?> get props => [hash, normalizedQuery, semanticTokens, language, confidence];
+  List<Object?> get props => [
+    hash,
+    normalizedQuery,
+    semanticTokens,
+    language,
+    confidence,
+  ];
 
   Map<String, dynamic> toJson() {
     return {
@@ -341,7 +360,9 @@ class CacheMetrics extends Equatable {
       'totalSize': totalSize,
       'entryCount': entryCount,
       'strategyUsage': strategyUsage,
-      'strategyPerformance': strategyPerformance.map((k, v) => MapEntry(k, v.inMicroseconds)),
+      'strategyPerformance': strategyPerformance.map(
+        (k, v) => MapEntry(k, v.inMicroseconds),
+      ),
     };
   }
 
@@ -351,8 +372,11 @@ class CacheMetrics extends Equatable {
       missCount: json['missCount'] ?? 0,
       evictionCount: json['evictionCount'] ?? 0,
       hitRatio: json['hitRatio']?.toDouble() ?? 0.0,
-      averageCompressionRatio: json['averageCompressionRatio']?.toDouble() ?? 1.0,
-      averageRetrievalTime: Duration(microseconds: json['averageRetrievalTime'] ?? 0),
+      averageCompressionRatio:
+          json['averageCompressionRatio']?.toDouble() ?? 1.0,
+      averageRetrievalTime: Duration(
+        microseconds: json['averageRetrievalTime'] ?? 0,
+      ),
       totalSize: json['totalSize'] ?? 0,
       entryCount: json['entryCount'] ?? 0,
       strategyUsage: Map<String, int>.from(json['strategyUsage'] ?? {}),
@@ -384,7 +408,13 @@ class CacheInvalidationEvent extends Equatable {
   });
 
   @override
-  List<Object?> get props => [eventType, timestamp, affectedKeys, metadata, reason];
+  List<Object?> get props => [
+    eventType,
+    timestamp,
+    affectedKeys,
+    metadata,
+    reason,
+  ];
 
   Map<String, dynamic> toJson() {
     return {

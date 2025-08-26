@@ -18,7 +18,10 @@ void main() {
 
         // Verify Islamic theming is applied
         final MaterialApp materialApp = tester.widget(find.byType(MaterialApp));
-        expect(materialApp.theme?.colorScheme.primary, equals(const Color(0xFF2E7D32)));
+        expect(
+          materialApp.theme?.colorScheme.primary,
+          equals(const Color(0xFF2E7D32)),
+        );
 
         // Verify main screen is displayed
         expect(find.text('DuaCopilot'), findsWidgets);
@@ -127,18 +130,26 @@ void main() {
         final theme = Theme.of(context);
 
         // Verify Islamic green color scheme using proper color accessors
-        expect(theme.colorScheme.primary.r, closeTo(46 / 255, 0.01)); // 0xFF2E7D32
+        expect(
+          theme.colorScheme.primary.r,
+          closeTo(46 / 255, 0.01),
+        ); // 0xFF2E7D32
         expect(theme.colorScheme.primary.g, closeTo(125 / 255, 0.01));
         expect(theme.colorScheme.primary.b, closeTo(50 / 255, 0.01));
 
-        expect(theme.colorScheme.secondary.r, closeTo(76 / 255, 0.01)); // 0xFF4CAF50
+        expect(
+          theme.colorScheme.secondary.r,
+          closeTo(76 / 255, 0.01),
+        ); // 0xFF4CAF50
         expect(theme.colorScheme.secondary.g, closeTo(175 / 255, 0.01));
         expect(theme.colorScheme.secondary.b, closeTo(80 / 255, 0.01));
 
         expect(theme.useMaterial3, isTrue);
       });
 
-      testWidgets('Should be responsive on different screen sizes', (tester) async {
+      testWidgets('Should be responsive on different screen sizes', (
+        tester,
+      ) async {
         // Test different screen sizes
         final sizes = [
           const Size(360, 640), // Phone
@@ -163,7 +174,9 @@ void main() {
     });
 
     group('⚡ Performance Tests', () {
-      testWidgets('Should handle rapid navigation without memory leaks', (tester) async {
+      testWidgets('Should handle rapid navigation without memory leaks', (
+        tester,
+      ) async {
         app.main();
         await tester.pumpAndSettle();
 
@@ -185,7 +198,9 @@ void main() {
         expect(find.byType(MaterialApp), findsOneWidget);
       });
 
-      testWidgets('Should load initial content within acceptable time', (tester) async {
+      testWidgets('Should load initial content within acceptable time', (
+        tester,
+      ) async {
         final stopwatch = Stopwatch()..start();
 
         app.main();

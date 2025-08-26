@@ -104,7 +104,11 @@ class WebSafeQiblaNotifier extends StateNotifier<QiblaCompass> {
   void updateDirection(double direction) {
     if (kIsWeb) {
       // Simulate smooth direction updates on web
-      state = state.copyWith(currentDirection: direction, deviceHeading: direction + 1.0, lastUpdated: DateTime.now());
+      state = state.copyWith(
+        currentDirection: direction,
+        deviceHeading: direction + 1.0,
+        lastUpdated: DateTime.now(),
+      );
     }
   }
 
@@ -130,6 +134,7 @@ class WebSafeQiblaNotifier extends StateNotifier<QiblaCompass> {
   }
 }
 
-final webSafeQiblaProvider = StateNotifierProvider<WebSafeQiblaNotifier, QiblaCompass>((ref) {
-  return WebSafeQiblaNotifier();
-});
+final webSafeQiblaProvider =
+    StateNotifierProvider<WebSafeQiblaNotifier, QiblaCompass>((ref) {
+      return WebSafeQiblaNotifier();
+    });

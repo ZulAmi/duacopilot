@@ -118,7 +118,8 @@ class _ArabicTextInputWidgetState extends State<ArabicTextInputWidget> {
     final newDirection = ArabicTypography.getTextDirection(text);
     final newAlignment = ArabicTypography.getTextAlign(text, newDirection);
 
-    if (newDirection != _currentDirection || newAlignment != _currentAlignment) {
+    if (newDirection != _currentDirection ||
+        newAlignment != _currentAlignment) {
       setState(() {
         _currentDirection = newDirection;
         _currentAlignment = newAlignment;
@@ -172,7 +173,10 @@ class _ArabicTextInputWidgetState extends State<ArabicTextInputWidget> {
         textAlign: _currentAlignment,
         textDirection: _currentDirection,
         keyboardType: widget.keyboardType,
-        inputFormatters: [...widget.inputFormatters ?? [], _ArabicTextInputFormatter()],
+        inputFormatters: [
+          ...widget.inputFormatters ?? [],
+          _ArabicTextInputFormatter(),
+        ],
         autofocus: widget.autofocus,
         maxLines: widget.maxLines,
         minLines: widget.minLines,
@@ -204,11 +208,17 @@ class _ArabicTextInputWidgetState extends State<ArabicTextInputWidget> {
 /// Custom text input formatter for Arabic content
 class _ArabicTextInputFormatter extends TextInputFormatter {
   @override
-  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
     // Normalize Arabic text input
     final normalizedText = _normalizeArabicInput(newValue.text);
 
-    return newValue.copyWith(text: normalizedText, selection: newValue.selection);
+    return newValue.copyWith(
+      text: normalizedText,
+      selection: newValue.selection,
+    );
   }
 
   String _normalizeArabicInput(String text) {
@@ -218,7 +228,9 @@ class _ArabicTextInputFormatter extends TextInputFormatter {
         .replaceAll('ك', 'ك') // Replace Arabic-Indic Kaf with Arabic Kaf
         .replaceAll('ي', 'ي') // Normalize Yeh variations
         // Add intelligent space handling for Arabic
-        .replaceAllMapped(RegExp(r'([^\u0600-\u06FF\s])([^\u0600-\u06FF\s])'), (match) {
+        .replaceAllMapped(RegExp(r'([^\u0600-\u06FF\s])([^\u0600-\u06FF\s])'), (
+          match,
+        ) {
           return '${match.group(1)} ${match.group(2)}';
         });
   }
@@ -227,7 +239,12 @@ class _ArabicTextInputFormatter extends TextInputFormatter {
 /// Custom text selection controls optimized for Arabic
 class _ArabicTextSelectionControls extends MaterialTextSelectionControls {
   @override
-  Widget buildHandle(BuildContext context, TextSelectionHandleType type, double textLineHeight, [VoidCallback? onTap]) {
+  Widget buildHandle(
+    BuildContext context,
+    TextSelectionHandleType type,
+    double textLineHeight, [
+    VoidCallback? onTap,
+  ]) {
     final isRTL = Directionality.of(context) == TextDirection.rtl;
 
     // Swap handles for RTL text
@@ -284,7 +301,8 @@ class ArabicSuggestionTextField extends StatefulWidget {
   });
 
   @override
-  State<ArabicSuggestionTextField> createState() => _ArabicSuggestionTextFieldState();
+  State<ArabicSuggestionTextField> createState() =>
+      _ArabicSuggestionTextFieldState();
 }
 
 class _ArabicSuggestionTextFieldState extends State<ArabicSuggestionTextField> {
@@ -321,7 +339,9 @@ class _ArabicSuggestionTextFieldState extends State<ArabicSuggestionTextField> {
     _filteredSuggestions =
         widget.suggestions
             .where((suggestion) {
-              final normalizedSuggestion = ArabicTypography.normalizeArabicText(suggestion.toLowerCase());
+              final normalizedSuggestion = ArabicTypography.normalizeArabicText(
+                suggestion.toLowerCase(),
+              );
               final normalizedText = ArabicTypography.normalizeArabicText(text);
               return normalizedSuggestion.contains(normalizedText);
             })
@@ -355,7 +375,9 @@ class _ArabicSuggestionTextFieldState extends State<ArabicSuggestionTextField> {
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Theme.of(context).colorScheme.outline),
+                    border: Border.all(
+                      color: Theme.of(context).colorScheme.outline,
+                    ),
                   ),
                   child: ListView.builder(
                     padding: EdgeInsets.zero,
@@ -363,7 +385,9 @@ class _ArabicSuggestionTextFieldState extends State<ArabicSuggestionTextField> {
                     itemCount: _filteredSuggestions.length,
                     itemBuilder: (context, index) {
                       final suggestion = _filteredSuggestions[index];
-                      final isArabic = ArabicTypography.containsArabic(suggestion);
+                      final isArabic = ArabicTypography.containsArabic(
+                        suggestion,
+                      );
 
                       return ListTile(
                         dense: true,
@@ -371,12 +395,21 @@ class _ArabicSuggestionTextFieldState extends State<ArabicSuggestionTextField> {
                           suggestion,
                           style:
                               widget.suggestionStyle ??
-                              (isArabic ? ArabicTextStyles.bodyMedium(context, fontType: 'readable') : null),
-                          textDirection: ArabicTypography.getTextDirection(suggestion),
+                              (isArabic
+                                  ? ArabicTextStyles.bodyMedium(
+                                    context,
+                                    fontType: 'readable',
+                                  )
+                                  : null),
+                          textDirection: ArabicTypography.getTextDirection(
+                            suggestion,
+                          ),
                         ),
                         onTap: () {
                           _controller.text = suggestion;
-                          _controller.selection = TextSelection.fromPosition(TextPosition(offset: suggestion.length));
+                          _controller.selection = TextSelection.fromPosition(
+                            TextPosition(offset: suggestion.length),
+                          );
                           widget.onSuggestionSelected?.call(suggestion);
                           _removeOverlay();
                         },
@@ -466,7 +499,9 @@ class ArabicTextFormField extends StatelessWidget {
         onChanged: onChanged,
         style:
             textStyle ??
-            (ArabicTypography.containsArabic(text) ? ArabicTextStyles.bodyLarge(context, fontType: 'readable') : null),
+            (ArabicTypography.containsArabic(text)
+                ? ArabicTextStyles.bodyLarge(context, fontType: 'readable')
+                : null),
         textDirection: textDirection,
         textAlign: ArabicTypography.getTextAlign(text, textDirection),
         keyboardType: keyboardType,
@@ -477,7 +512,12 @@ class ArabicTextFormField extends StatelessWidget {
         readOnly: readOnly,
         autovalidateMode: autovalidateMode,
         decoration:
-            decoration ?? InputDecoration(hintText: hintText, labelText: labelText, border: const OutlineInputBorder()),
+            decoration ??
+            InputDecoration(
+              hintText: hintText,
+              labelText: labelText,
+              border: const OutlineInputBorder(),
+            ),
       ),
     );
   }

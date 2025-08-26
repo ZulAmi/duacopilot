@@ -13,7 +13,8 @@ import '../secure_storage/secure_storage_service.dart';
 /// Handles WebSockets, Server-Sent Events, Socket.IO, and real-time synchronization
 class RealTimeServiceManager {
   static RealTimeServiceManager? _instance;
-  static RealTimeServiceManager get instance => _instance ??= RealTimeServiceManager._();
+  static RealTimeServiceManager get instance =>
+      _instance ??= RealTimeServiceManager._();
 
   RealTimeServiceManager._();
 
@@ -44,16 +45,22 @@ class RealTimeServiceManager {
   Timer? _reconnectTimer;
 
   // Stream controllers
-  final _realTimeUpdatesController = StreamController<RealTimeUpdate>.broadcast();
-  final _connectionStateController = StreamController<ConnectionState>.broadcast();
+  final _realTimeUpdatesController =
+      StreamController<RealTimeUpdate>.broadcast();
+  final _connectionStateController =
+      StreamController<ConnectionState>.broadcast();
   final _syncStatusController = StreamController<SyncStatus>.broadcast();
-  final _collaborativeUpdatesController = StreamController<CollaborativeUpdate>.broadcast();
+  final _collaborativeUpdatesController =
+      StreamController<CollaborativeUpdate>.broadcast();
 
   // Public streams
-  Stream<RealTimeUpdate> get realTimeUpdatesStream => _realTimeUpdatesController.stream;
-  Stream<ConnectionState> get connectionStateStream => _connectionStateController.stream;
+  Stream<RealTimeUpdate> get realTimeUpdatesStream =>
+      _realTimeUpdatesController.stream;
+  Stream<ConnectionState> get connectionStateStream =>
+      _connectionStateController.stream;
   Stream<SyncStatus> get syncStatusStream => _syncStatusController.stream;
-  Stream<CollaborativeUpdate> get collaborativeUpdatesStream => _collaborativeUpdatesController.stream;
+  Stream<CollaborativeUpdate> get collaborativeUpdatesStream =>
+      _collaborativeUpdatesController.stream;
 
   // Data queues for offline synchronization
   final List<PendingUpdate> _pendingUpdates = [];
@@ -92,9 +99,12 @@ class RealTimeServiceManager {
   /// Setup connectivity monitoring
   Future<void> _setupConnectivityMonitoring() async {
     final connectivity = Connectivity();
-    _isOnline = await connectivity.checkConnectivity() != ConnectivityResult.none;
+    _isOnline =
+        await connectivity.checkConnectivity() != ConnectivityResult.none;
 
-    _connectivitySubscription = connectivity.onConnectivityChanged.listen((result) {
+    _connectivitySubscription = connectivity.onConnectivityChanged.listen((
+      result,
+    ) {
       final wasOnline = _isOnline;
       _isOnline = result != ConnectivityResult.none;
 
@@ -125,7 +135,9 @@ class RealTimeServiceManager {
   /// Initialize all connections
   Future<void> _initializeConnections() async {
     if (!_isOnline) {
-      AppLogger.warning('⚠️ No internet connection, skipping connection initialization');
+      AppLogger.warning(
+        '⚠️ No internet connection, skipping connection initialization',
+      );
       return;
     }
 
@@ -138,9 +150,12 @@ class RealTimeServiceManager {
       final token = await _secureStorage.read('auth_token');
       final userId = await _secureStorage.getUserId();
 
-      final uri = Uri.parse(
-        '$_wsBaseUrl/rag/live',
-      ).replace(queryParameters: {if (token != null) 'token': token, if (userId != null) 'user_id': userId});
+      final uri = Uri.parse('$_wsBaseUrl/rag/live').replace(
+        queryParameters: {
+          if (token != null) 'token': token,
+          if (userId != null) 'user_id': userId,
+        },
+      );
 
       AppLogger.info('🔌 Connecting to WebSocket: $uri');
 
@@ -176,7 +191,10 @@ class RealTimeServiceManager {
         _socketIOUrl,
         IO.OptionBuilder()
             .setTransports(['websocket'])
-            .setAuth({if (token != null) 'token': token, if (userId != null) 'user_id': userId})
+            .setAuth({
+              if (token != null) 'token': token,
+              if (userId != null) 'user_id': userId,
+            })
             .enableReconnection()
             .setReconnectionAttempts(5)
             .setReconnectionDelay(5000)
@@ -405,7 +423,13 @@ class RealTimeServiceManager {
         AppLogger.info('👨‍👩‍👧‍👦 Du\'a shared with family: $duaTitle');
       } else {
         // Queue for later when connection is restored
-        _queueUpdate(PendingUpdate(type: PendingUpdateType.familyShare, data: shareData, timestamp: DateTime.now()));
+        _queueUpdate(
+          PendingUpdate(
+            type: PendingUpdateType.familyShare,
+            data: shareData,
+            timestamp: DateTime.now(),
+          ),
+        );
         AppLogger.info('📋 Du\'a sharing queued (offline)');
       }
     } catch (e) {
@@ -434,7 +458,13 @@ class RealTimeServiceManager {
         AppLogger.info('🔍 Live RAG query sent: $query');
       } else {
         // Queue for later processing
-        _queueUpdate(PendingUpdate(type: PendingUpdateType.ragQuery, data: requestData, timestamp: DateTime.now()));
+        _queueUpdate(
+          PendingUpdate(
+            type: PendingUpdateType.ragQuery,
+            data: requestData,
+            timestamp: DateTime.now(),
+          ),
+        );
         AppLogger.info('📋 RAG query queued (offline)');
       }
     } catch (e) {
@@ -574,7 +604,9 @@ class RealTimeServiceManager {
   Future<void> _processPendingUpdates() async {
     if (_pendingUpdates.isEmpty || !_isConnected) return;
 
-    AppLogger.info('🔄 Processing ${_pendingUpdates.length} pending updates...');
+    AppLogger.info(
+      '🔄 Processing ${_pendingUpdates.length} pending updates...',
+    );
 
     final updates = List<PendingUpdate>.from(_pendingUpdates);
     _pendingUpdates.clear();
@@ -628,7 +660,9 @@ class RealTimeServiceManager {
       if (updatesJson != null) {
         final updatesList = jsonDecode(updatesJson) as List;
         _pendingUpdates.clear();
-        _pendingUpdates.addAll(updatesList.map((json) => PendingUpdate.fromJson(json)).toList());
+        _pendingUpdates.addAll(
+          updatesList.map((json) => PendingUpdate.fromJson(json)).toList(),
+        );
         AppLogger.debug('📋 Loaded ${_pendingUpdates.length} pending updates');
       }
     } catch (e) {
@@ -639,7 +673,9 @@ class RealTimeServiceManager {
   /// Save pending updates to storage
   Future<void> _savePendingUpdates() async {
     try {
-      final updatesJson = jsonEncode(_pendingUpdates.map((update) => update.toJson()).toList());
+      final updatesJson = jsonEncode(
+        _pendingUpdates.map((update) => update.toJson()).toList(),
+      );
       await _prefs.setString('pending_updates', updatesJson);
     } catch (e) {
       AppLogger.error('❌ Failed to save pending updates: $e');
@@ -688,7 +724,9 @@ class RealTimeServiceManager {
     _reconnectTimer?.cancel();
     _reconnectTimer = Timer(_reconnectDelay, () {
       _reconnectAttempts++;
-      AppLogger.info('🔄 Attempting reconnection ($_reconnectAttempts/$_maxReconnectAttempts)');
+      AppLogger.info(
+        '🔄 Attempting reconnection ($_reconnectAttempts/$_maxReconnectAttempts)',
+      );
       _broadcastConnectionState(ConnectionState.reconnecting);
       _reconnectAll();
     });
@@ -753,7 +791,12 @@ class RealTimeUpdate {
   final DateTime timestamp;
   final String? userId;
 
-  RealTimeUpdate({required this.type, required this.data, required this.timestamp, this.userId});
+  RealTimeUpdate({
+    required this.type,
+    required this.data,
+    required this.timestamp,
+    this.userId,
+  });
 
   factory RealTimeUpdate.fromJson(Map<String, dynamic> json) {
     return RealTimeUpdate(
@@ -785,11 +828,20 @@ class CollaborativeUpdate {
   final DateTime timestamp;
   final String userId;
 
-  CollaborativeUpdate({required this.type, required this.data, required this.timestamp, required this.userId});
+  CollaborativeUpdate({
+    required this.type,
+    required this.data,
+    required this.timestamp,
+    required this.userId,
+  });
 }
 
 /// Collaborative update types
-enum CollaborativeUpdateType { familyDuaShared, scholarApproval, collaborativeEdit }
+enum CollaborativeUpdateType {
+  familyDuaShared,
+  scholarApproval,
+  collaborativeEdit,
+}
 
 /// Pending update model
 class PendingUpdate {
@@ -797,11 +849,17 @@ class PendingUpdate {
   final Map<String, dynamic> data;
   final DateTime timestamp;
 
-  PendingUpdate({required this.type, required this.data, required this.timestamp});
+  PendingUpdate({
+    required this.type,
+    required this.data,
+    required this.timestamp,
+  });
 
   factory PendingUpdate.fromJson(Map<String, dynamic> json) {
     return PendingUpdate(
-      type: PendingUpdateType.values.firstWhere((e) => e.toString().split('.').last == json['type']),
+      type: PendingUpdateType.values.firstWhere(
+        (e) => e.toString().split('.').last == json['type'],
+      ),
       data: json['data'],
       timestamp: DateTime.parse(json['timestamp']),
     );
@@ -818,7 +876,16 @@ class PendingUpdate {
 enum PendingUpdateType { familyShare, ragQuery, preference, favorite }
 
 /// Connection state
-enum ConnectionState { disconnected, connecting, connected, reconnecting, offline, error, failed, initialized }
+enum ConnectionState {
+  disconnected,
+  connecting,
+  connected,
+  reconnecting,
+  offline,
+  error,
+  failed,
+  initialized,
+}
 
 /// Sync status
 enum SyncStatus { idle, syncing, completed, failed }

@@ -25,7 +25,10 @@ abstract class PersonalizationState {
   }) = PersonalizationLoaded;
 
   /// Error state when personalization fails
-  const factory PersonalizationState.error(Object error, StackTrace stackTrace) = PersonalizationError;
+  const factory PersonalizationState.error(
+    Object error,
+    StackTrace stackTrace,
+  ) = PersonalizationError;
 
   /// Pattern matching method
   T when<T>({
@@ -90,9 +93,11 @@ class PersonalizationLoaded extends PersonalizationState {
     return PersonalizationLoaded(
       usagePatterns: usagePatterns ?? this.usagePatterns,
       culturalPreferences: culturalPreferences ?? this.culturalPreferences,
-      isPersonalizationActive: isPersonalizationActive ?? this.isPersonalizationActive,
+      isPersonalizationActive:
+          isPersonalizationActive ?? this.isPersonalizationActive,
       recommendations: recommendations ?? this.recommendations,
-      contextualSuggestions: contextualSuggestions ?? this.contextualSuggestions,
+      contextualSuggestions:
+          contextualSuggestions ?? this.contextualSuggestions,
       temporalPatterns: temporalPatterns ?? this.temporalPatterns,
       metadata: metadata ?? this.metadata,
     );

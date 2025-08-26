@@ -20,16 +20,18 @@ class EnhancedRecommendation with _$EnhancedRecommendation {
     Map<String, dynamic>? metadata,
   }) = _EnhancedRecommendation;
 
-  factory EnhancedRecommendation.fromJson(Map<String, dynamic> json) => _$EnhancedRecommendationFromJson(json);
+  factory EnhancedRecommendation.fromJson(Map<String, dynamic> json) =>
+      _$EnhancedRecommendationFromJson(json);
 
   /// Create enhanced recommendation from basic Du'a entity
-  factory EnhancedRecommendation.fromDua(DuaEntity dua) => EnhancedRecommendation(
-    dua: dua,
-    personalizationScore: PersonalizationScore.neutral(),
-    reasoning: [],
-    contextTags: [],
-    confidence: 0.5,
-  );
+  factory EnhancedRecommendation.fromDua(DuaEntity dua) =>
+      EnhancedRecommendation(
+        dua: dua,
+        personalizationScore: PersonalizationScore.neutral(),
+        reasoning: [],
+        contextTags: [],
+        confidence: 0.5,
+      );
 }
 
 /// Personalization scoring system
@@ -44,11 +46,17 @@ class PersonalizationScore with _$PersonalizationScore {
     @Default({}) Map<String, double> customScores,
   }) = _PersonalizationScore;
 
-  factory PersonalizationScore.fromJson(Map<String, dynamic> json) => _$PersonalizationScoreFromJson(json);
+  factory PersonalizationScore.fromJson(Map<String, dynamic> json) =>
+      _$PersonalizationScoreFromJson(json);
 
   /// Create neutral personalization score
-  factory PersonalizationScore.neutral() =>
-      const PersonalizationScore(usage: 0.5, cultural: 0.5, temporal: 0.5, contextual: 0.5, overall: 0.5);
+  factory PersonalizationScore.neutral() => const PersonalizationScore(
+    usage: 0.5,
+    cultural: 0.5,
+    temporal: 0.5,
+    contextual: 0.5,
+    overall: 0.5,
+  );
 }
 
 /// User session information
@@ -67,7 +75,8 @@ class UserSession with _$UserSession {
     @Default(0) int bookmarkCount,
   }) = _UserSession;
 
-  factory UserSession.fromJson(Map<String, dynamic> json) => _$UserSessionFromJson(json);
+  factory UserSession.fromJson(Map<String, dynamic> json) =>
+      _$UserSessionFromJson(json);
 }
 
 /// Du'a interaction tracking
@@ -84,11 +93,21 @@ class DuaInteraction with _$DuaInteraction {
     @Default({}) Map<String, dynamic> metadata,
   }) = _DuaInteraction;
 
-  factory DuaInteraction.fromJson(Map<String, dynamic> json) => _$DuaInteractionFromJson(json);
+  factory DuaInteraction.fromJson(Map<String, dynamic> json) =>
+      _$DuaInteractionFromJson(json);
 }
 
 /// Types of user interactions
-enum InteractionType { view, read, bookmark, share, copy, audio, search, translation }
+enum InteractionType {
+  view,
+  read,
+  bookmark,
+  share,
+  copy,
+  audio,
+  search,
+  translation,
+}
 
 /// Personalization update notifications
 @freezed
@@ -100,11 +119,19 @@ class PersonalizationUpdate with _$PersonalizationUpdate {
     Map<String, dynamic>? metadata,
   }) = _PersonalizationUpdate;
 
-  factory PersonalizationUpdate.fromJson(Map<String, dynamic> json) => _$PersonalizationUpdateFromJson(json);
+  factory PersonalizationUpdate.fromJson(Map<String, dynamic> json) =>
+      _$PersonalizationUpdateFromJson(json);
 }
 
 /// Types of personalization updates
-enum UpdateType { interaction, culturalPreferences, usagePatterns, temporalPatterns, sessionStart, sessionEnd }
+enum UpdateType {
+  interaction,
+  culturalPreferences,
+  usagePatterns,
+  temporalPatterns,
+  sessionStart,
+  sessionEnd,
+}
 
 /// Usage patterns for a user
 @freezed
@@ -121,7 +148,8 @@ class UsagePatterns with _$UsagePatterns {
     @Default({}) Map<String, double> averageReadingTimes,
   }) = _UsagePatterns;
 
-  factory UsagePatterns.fromJson(Map<String, dynamic> json) => _$UsagePatternsFromJson(json);
+  factory UsagePatterns.fromJson(Map<String, dynamic> json) =>
+      _$UsagePatternsFromJson(json);
 
   /// Create empty usage patterns
   factory UsagePatterns.empty(String userId) => UsagePatterns(
@@ -150,7 +178,8 @@ class CulturalPreferences with _$CulturalPreferences {
     @Default('balanced') String transliterationStyle,
   }) = _CulturalPreferences;
 
-  factory CulturalPreferences.fromJson(Map<String, dynamic> json) => _$CulturalPreferencesFromJson(json);
+  factory CulturalPreferences.fromJson(Map<String, dynamic> json) =>
+      _$CulturalPreferencesFromJson(json);
 
   /// Create default cultural preferences
   factory CulturalPreferences.defaultFor(String userId) => CulturalPreferences(
@@ -176,7 +205,8 @@ class CulturalPreferenceUpdate with _$CulturalPreferenceUpdate {
     required DateTime timestamp,
   }) = _CulturalPreferenceUpdate;
 
-  factory CulturalPreferenceUpdate.fromJson(Map<String, dynamic> json) => _$CulturalPreferenceUpdateFromJson(json);
+  factory CulturalPreferenceUpdate.fromJson(Map<String, dynamic> json) =>
+      _$CulturalPreferenceUpdateFromJson(json);
 }
 
 /// Temporal patterns for time-based recommendations
@@ -192,7 +222,8 @@ class TemporalPatterns with _$TemporalPatterns {
     @Default({}) Map<String, double> habitStrengths,
   }) = _TemporalPatterns;
 
-  factory TemporalPatterns.fromJson(Map<String, dynamic> json) => _$TemporalPatternsFromJson(json);
+  factory TemporalPatterns.fromJson(Map<String, dynamic> json) =>
+      _$TemporalPatternsFromJson(json);
 
   /// Create empty temporal patterns
   factory TemporalPatterns.empty(String userId) => TemporalPatterns(
@@ -215,7 +246,8 @@ class HourlyPattern with _$HourlyPattern {
     @Default(0) int totalInteractions,
   }) = _HourlyPattern;
 
-  factory HourlyPattern.fromJson(Map<String, dynamic> json) => _$HourlyPatternFromJson(json);
+  factory HourlyPattern.fromJson(Map<String, dynamic> json) =>
+      _$HourlyPatternFromJson(json);
 }
 
 /// Day of week patterns
@@ -229,7 +261,8 @@ class DayOfWeekPattern with _$DayOfWeekPattern {
     @Default(0) int totalSessions,
   }) = _DayOfWeekPattern;
 
-  factory DayOfWeekPattern.fromJson(Map<String, dynamic> json) => _$DayOfWeekPatternFromJson(json);
+  factory DayOfWeekPattern.fromJson(Map<String, dynamic> json) =>
+      _$DayOfWeekPatternFromJson(json);
 }
 
 /// Seasonal patterns based on Islamic calendar
@@ -243,7 +276,8 @@ class SeasonalPattern with _$SeasonalPattern {
     @Default([]) List<String> specialOccasions,
   }) = _SeasonalPattern;
 
-  factory SeasonalPattern.fromJson(Map<String, dynamic> json) => _$SeasonalPatternFromJson(json);
+  factory SeasonalPattern.fromJson(Map<String, dynamic> json) =>
+      _$SeasonalPatternFromJson(json);
 }
 
 /// Comprehensive personalization context
@@ -264,7 +298,8 @@ class PersonalizationContext with _$PersonalizationContext {
     @Default({}) Map<String, dynamic> customContext,
   }) = _PersonalizationContext;
 
-  factory PersonalizationContext.fromJson(Map<String, dynamic> json) => _$PersonalizationContextFromJson(json);
+  factory PersonalizationContext.fromJson(Map<String, dynamic> json) =>
+      _$PersonalizationContextFromJson(json);
 }
 
 /// Location context for geospatial recommendations
@@ -281,7 +316,8 @@ class LocationContext with _$LocationContext {
     @Default(false) bool isTraveling,
   }) = _LocationContext;
 
-  factory LocationContext.fromJson(Map<String, dynamic> json) => _$LocationContextFromJson(json);
+  factory LocationContext.fromJson(Map<String, dynamic> json) =>
+      _$LocationContextFromJson(json);
 }
 
 /// Privacy level settings
@@ -301,7 +337,8 @@ class PersonalizationInput with _$PersonalizationInput {
     required String userId,
   }) = _PersonalizationInput;
 
-  factory PersonalizationInput.fromJson(Map<String, dynamic> json) => _$PersonalizationInputFromJson(json);
+  factory PersonalizationInput.fromJson(Map<String, dynamic> json) =>
+      _$PersonalizationInputFromJson(json);
 }
 
 /// Input for contextual suggestions isolate
@@ -317,7 +354,8 @@ class ContextualSuggestionInput with _$ContextualSuggestionInput {
     required int limit,
   }) = _ContextualSuggestionInput;
 
-  factory ContextualSuggestionInput.fromJson(Map<String, dynamic> json) => _$ContextualSuggestionInputFromJson(json);
+  factory ContextualSuggestionInput.fromJson(Map<String, dynamic> json) =>
+      _$ContextualSuggestionInputFromJson(json);
 }
 
 /// Analytics data point for pattern learning
@@ -332,7 +370,8 @@ class AnalyticsDataPoint with _$AnalyticsDataPoint {
     @Default({}) Map<String, double> metrics,
   }) = _AnalyticsDataPoint;
 
-  factory AnalyticsDataPoint.fromJson(Map<String, dynamic> json) => _$AnalyticsDataPointFromJson(json);
+  factory AnalyticsDataPoint.fromJson(Map<String, dynamic> json) =>
+      _$AnalyticsDataPointFromJson(json);
 }
 
 /// Habit strength calculation
@@ -348,7 +387,8 @@ class HabitStrength with _$HabitStrength {
     @Default([]) List<DateTime> recentSessions,
   }) = _HabitStrength;
 
-  factory HabitStrength.fromJson(Map<String, dynamic> json) => _$HabitStrengthFromJson(json);
+  factory HabitStrength.fromJson(Map<String, dynamic> json) =>
+      _$HabitStrengthFromJson(json);
 }
 
 /// Smart recommendation enhancement
@@ -362,7 +402,8 @@ class RecommendationEnhancement with _$RecommendationEnhancement {
     @Default(false) bool isActive,
   }) = _RecommendationEnhancement;
 
-  factory RecommendationEnhancement.fromJson(Map<String, dynamic> json) => _$RecommendationEnhancementFromJson(json);
+  factory RecommendationEnhancement.fromJson(Map<String, dynamic> json) =>
+      _$RecommendationEnhancementFromJson(json);
 }
 
 /// Personalization state for Riverpod state management
@@ -382,7 +423,10 @@ class PersonalizationState with _$PersonalizationState {
     Map<String, dynamic>? metadata,
   }) = PersonalizationLoaded;
 
-  const factory PersonalizationState.error(Object error, StackTrace stackTrace) = PersonalizationError;
+  const factory PersonalizationState.error(
+    Object error,
+    StackTrace stackTrace,
+  ) = PersonalizationError;
 }
 
 /// Personalization settings model
@@ -405,5 +449,6 @@ class PersonalizationSettings with _$PersonalizationSettings {
     islamicCalendarEnabled: true,
   );
 
-  factory PersonalizationSettings.fromJson(Map<String, dynamic> json) => _$PersonalizationSettingsFromJson(json);
+  factory PersonalizationSettings.fromJson(Map<String, dynamic> json) =>
+      _$PersonalizationSettingsFromJson(json);
 }

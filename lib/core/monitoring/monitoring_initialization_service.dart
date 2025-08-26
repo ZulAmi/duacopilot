@@ -9,7 +9,8 @@ import '../platform/platform_service.dart';
 /// Coordinates Firebase services, platform detection, and monitoring setup
 class MonitoringInitializationService {
   static MonitoringInitializationService? _instance;
-  static MonitoringInitializationService get instance => _instance ??= MonitoringInitializationService._();
+  static MonitoringInitializationService get instance =>
+      _instance ??= MonitoringInitializationService._();
 
   MonitoringInitializationService._();
 
@@ -69,7 +70,8 @@ class MonitoringInitializationService {
         additionalMetadata: {
           'event_type': 'monitoring_init',
           'platform': PlatformService.instance.platformName,
-          'features_available': PlatformService.instance.availableFeatures.length,
+          'features_available':
+              PlatformService.instance.availableFeatures.length,
         },
       );
 
@@ -122,13 +124,18 @@ class MonitoredApp extends StatefulWidget {
   final Widget child;
   final bool enableMonitoring;
 
-  const MonitoredApp({super.key, required this.child, this.enableMonitoring = true});
+  const MonitoredApp({
+    super.key,
+    required this.child,
+    this.enableMonitoring = true,
+  });
 
   @override
   State<MonitoredApp> createState() => _MonitoredAppState();
 }
 
-class _MonitoredAppState extends State<MonitoredApp> with WidgetsBindingObserver {
+class _MonitoredAppState extends State<MonitoredApp>
+    with WidgetsBindingObserver {
   bool _monitoringInitialized = false;
   String? _initializationError;
 
@@ -188,10 +195,16 @@ class _MonitoredAppState extends State<MonitoredApp> with WidgetsBindingObserver
       final tracker = await MonitoringIntegration.startRagQueryTracking(
         query: 'app_lifecycle_${state.name}',
         queryType: 'system_event',
-        additionalMetadata: {'lifecycle_state': state.name, 'timestamp': DateTime.now().toIso8601String()},
+        additionalMetadata: {
+          'lifecycle_state': state.name,
+          'timestamp': DateTime.now().toIso8601String(),
+        },
       );
 
-      await tracker.complete(success: true, additionalMetrics: {'app_state': state.name, 'monitoring_active': true});
+      await tracker.complete(
+        success: true,
+        additionalMetrics: {'app_state': state.name, 'monitoring_active': true},
+      );
     } catch (e) {
       AppLogger.warning('Failed to track app lifecycle event: $e');
     }
@@ -231,7 +244,10 @@ class _MonitoredAppState extends State<MonitoredApp> with WidgetsBindingObserver
                           children: [
                             const Text(
                               'Monitoring Init Error',
-                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             Text(
                               _initializationError!.length > 100
@@ -266,10 +282,16 @@ class _MonitoredAppState extends State<MonitoredApp> with WidgetsBindingObserver
                       SizedBox(
                         width: 20,
                         height: 20,
-                        child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: Colors.white,
+                        ),
                       ),
                       SizedBox(width: 12),
-                      Text('Initializing monitoring...', style: TextStyle(color: Colors.white)),
+                      Text(
+                        'Initializing monitoring...',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ],
                   ),
                 ),
@@ -303,7 +325,10 @@ class MonitoringDebugWidget extends StatelessWidget {
                   color: status['initialized'] ? Colors.green : Colors.red,
                 ),
                 const SizedBox(width: 8),
-                Text('Monitoring Status', style: Theme.of(context).textTheme.titleMedium),
+                Text(
+                  'Monitoring Status',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
               ],
             ),
             const SizedBox(height: 16),
@@ -314,7 +339,10 @@ class MonitoringDebugWidget extends StatelessWidget {
                   children: [
                     Expanded(
                       flex: 2,
-                      child: Text('${entry.key}:', style: const TextStyle(fontWeight: FontWeight.bold)),
+                      child: Text(
+                        '${entry.key}:',
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ),
                     Expanded(flex: 3, child: Text('${entry.value}')),
                   ],

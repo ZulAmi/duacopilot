@@ -5,7 +5,9 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('GoRouter Integration Tests', () {
-    testWidgets('Router provider should create GoRouter instance', (tester) async {
+    testWidgets('Router provider should create GoRouter instance', (
+      tester,
+    ) async {
       final container = ProviderContainer();
 
       final router = container.read(goRouterProvider);
@@ -33,7 +35,8 @@ void main() {
 
       // Check if premium routes exist by trying to navigate
       final routeInformation = RouteInformation(uri: Uri.parse('/premium'));
-      final routeConfig = await router.routeInformationParser.parseRouteInformation(routeInformation);
+      final routeConfig = await router.routeInformationParser
+          .parseRouteInformation(routeInformation);
 
       expect(routeConfig, isNotNull);
 
@@ -46,8 +49,11 @@ void main() {
       final router = container.read(goRouterProvider);
 
       // Check subscription route
-      final routeInformation = RouteInformation(uri: Uri.parse('/subscription'));
-      final routeConfig = await router.routeInformationParser.parseRouteInformation(routeInformation);
+      final routeInformation = RouteInformation(
+        uri: Uri.parse('/subscription'),
+      );
+      final routeConfig = await router.routeInformationParser
+          .parseRouteInformation(routeInformation);
 
       expect(routeConfig, isNotNull);
 

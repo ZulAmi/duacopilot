@@ -6,7 +6,9 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('Settings Navigation Tests', () {
-    testWidgets('Settings screen can be navigated to', (WidgetTester tester) async {
+    testWidgets('Settings screen can be navigated to', (
+      WidgetTester tester,
+    ) async {
       // Build our app with proper providers
       await tester.pumpWidget(
         ProviderScope(
@@ -32,9 +34,13 @@ void main() {
       expect(find.byType(SettingsScreen), findsOneWidget);
     });
 
-    testWidgets('Settings screen displays correctly', (WidgetTester tester) async {
+    testWidgets('Settings screen displays correctly', (
+      WidgetTester tester,
+    ) async {
       // Build the settings screen directly with proper providers
-      await tester.pumpWidget(ProviderScope(child: const MaterialApp(home: SettingsScreen())));
+      await tester.pumpWidget(
+        ProviderScope(child: const MaterialApp(home: SettingsScreen())),
+      );
 
       // Pump a frame to allow the screen to build
       await tester.pump();
@@ -46,8 +52,12 @@ void main() {
       expect(find.textContaining('Account'), findsAtLeastNWidgets(1));
     });
 
-    testWidgets('Settings screen has expected sections', (WidgetTester tester) async {
-      await tester.pumpWidget(ProviderScope(child: const MaterialApp(home: SettingsScreen())));
+    testWidgets('Settings screen has expected sections', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(
+        ProviderScope(child: const MaterialApp(home: SettingsScreen())),
+      );
 
       await tester.pumpAndSettle();
 

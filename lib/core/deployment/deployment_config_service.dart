@@ -54,7 +54,11 @@ class DeploymentConfig {
       enablePerformanceMonitoring: true,
       enableFeatureFlags: true,
       debugMode: true,
-      platformConfig: {'timeout_seconds': 30, 'retry_attempts': 3, 'cache_enabled': true},
+      platformConfig: {
+        'timeout_seconds': 30,
+        'retry_attempts': 3,
+        'cache_enabled': true,
+      },
       ragConfig: {
         'model_name': 'gpt-3.5-turbo',
         'max_tokens': 1000,
@@ -77,7 +81,11 @@ class DeploymentConfig {
       enablePerformanceMonitoring: true,
       enableFeatureFlags: true,
       debugMode: false,
-      platformConfig: {'timeout_seconds': 30, 'retry_attempts': 3, 'cache_enabled': true},
+      platformConfig: {
+        'timeout_seconds': 30,
+        'retry_attempts': 3,
+        'cache_enabled': true,
+      },
       ragConfig: {
         'model_name': 'gpt-3.5-turbo',
         'max_tokens': 1500,
@@ -100,7 +108,11 @@ class DeploymentConfig {
       enablePerformanceMonitoring: true,
       enableFeatureFlags: true,
       debugMode: false,
-      platformConfig: {'timeout_seconds': 45, 'retry_attempts': 5, 'cache_enabled': true},
+      platformConfig: {
+        'timeout_seconds': 45,
+        'retry_attempts': 5,
+        'cache_enabled': true,
+      },
       ragConfig: {
         'model_name': 'gpt-4',
         'max_tokens': 2000,
@@ -131,12 +143,17 @@ class DeploymentConfig {
           ragServiceUrl: configMap['rag_service_url'] ?? '',
           enableAnalytics: configMap['enable_analytics'] ?? true,
           enableCrashReporting: configMap['enable_crash_reporting'] ?? true,
-          enablePerformanceMonitoring: configMap['enable_performance_monitoring'] ?? true,
+          enablePerformanceMonitoring:
+              configMap['enable_performance_monitoring'] ?? true,
           enableFeatureFlags: configMap['enable_feature_flags'] ?? true,
           debugMode: configMap['debug_mode'] ?? false,
-          platformConfig: Map<String, dynamic>.from(configMap['platform_config'] ?? {}),
+          platformConfig: Map<String, dynamic>.from(
+            configMap['platform_config'] ?? {},
+          ),
           ragConfig: Map<String, dynamic>.from(configMap['rag_config'] ?? {}),
-          customConfig: Map<String, dynamic>.from(configMap['custom_config'] ?? {}),
+          customConfig: Map<String, dynamic>.from(
+            configMap['custom_config'] ?? {},
+          ),
         );
       }
     } catch (e) {
@@ -189,7 +206,9 @@ class DeploymentConfigService {
   static const String _environmentKey = 'deployment_environment';
 
   /// Initialize deployment configuration service
-  static Future<void> initialize({DeploymentEnvironment? forcedEnvironment}) async {
+  static Future<void> initialize({
+    DeploymentEnvironment? forcedEnvironment,
+  }) async {
     if (_isInitialized) return;
 
     try {
@@ -215,8 +234,16 @@ class DeploymentConfigService {
         'platform': Platform.operatingSystem,
       });
     } catch (e, stackTrace) {
-      _logger.e('Failed to initialize DeploymentConfigService', error: e, stackTrace: stackTrace);
-      await ProductionCrashReporter.recordError(e, stackTrace, context: 'DeploymentConfigService.initialize');
+      _logger.e(
+        'Failed to initialize DeploymentConfigService',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      await ProductionCrashReporter.recordError(
+        e,
+        stackTrace,
+        context: 'DeploymentConfigService.initialize',
+      );
 
       // Fallback to development config
       _currentConfig = DeploymentConfig.development();
@@ -265,7 +292,11 @@ class DeploymentConfigService {
         });
       }
     } catch (e, stackTrace) {
-      _logger.e('Failed to update from remote config', error: e, stackTrace: stackTrace);
+      _logger.e(
+        'Failed to update from remote config',
+        error: e,
+        stackTrace: stackTrace,
+      );
       await ProductionCrashReporter.recordError(
         e,
         stackTrace,
@@ -275,7 +306,9 @@ class DeploymentConfigService {
   }
 
   /// Force environment change (development/testing only)
-  static Future<void> forceEnvironment(DeploymentEnvironment environment) async {
+  static Future<void> forceEnvironment(
+    DeploymentEnvironment environment,
+  ) async {
     if (kReleaseMode) {
       _logger.w('Cannot force environment in release mode');
       return;
@@ -287,8 +320,16 @@ class DeploymentConfigService {
 
       _logger.i('Environment forced to ${environment.name}');
     } catch (e, stackTrace) {
-      _logger.e('Failed to force environment', error: e, stackTrace: stackTrace);
-      await ProductionCrashReporter.recordError(e, stackTrace, context: 'DeploymentConfigService.forceEnvironment');
+      _logger.e(
+        'Failed to force environment',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      await ProductionCrashReporter.recordError(
+        e,
+        stackTrace,
+        context: 'DeploymentConfigService.forceEnvironment',
+      );
     }
   }
 
@@ -326,7 +367,8 @@ class DeploymentConfigService {
       }
 
       // Validate environment consistency
-      if (kDebugMode && config.environment == DeploymentEnvironment.production) {
+      if (kDebugMode &&
+          config.environment == DeploymentEnvironment.production) {
         _logger.w('Debug mode enabled in production environment');
         return false;
       }
@@ -335,7 +377,11 @@ class DeploymentConfigService {
 
       return true;
     } catch (e, stackTrace) {
-      _logger.e('Configuration validation failed', error: e, stackTrace: stackTrace);
+      _logger.e(
+        'Configuration validation failed',
+        error: e,
+        stackTrace: stackTrace,
+      );
       await ProductionCrashReporter.recordError(
         e,
         stackTrace,
@@ -394,7 +440,9 @@ class DeploymentConfigService {
     }
   }
 
-  static Future<void> _loadConfiguration(DeploymentEnvironment environment) async {
+  static Future<void> _loadConfiguration(
+    DeploymentEnvironment environment,
+  ) async {
     try {
       // Try to load from cache first
       await _loadCachedConfiguration(environment);
@@ -403,13 +451,19 @@ class DeploymentConfigService {
       if (config.enableFeatureFlags) {
         try {
           final remoteConfig = FirebaseRemoteConfig.instance;
-          final newConfig = DeploymentConfig.fromRemoteConfig(remoteConfig, environment);
+          final newConfig = DeploymentConfig.fromRemoteConfig(
+            remoteConfig,
+            environment,
+          );
 
           if (_isDifferentConfig(newConfig)) {
             await _updateConfiguration(newConfig);
           }
         } catch (e) {
-          _logger.w('Failed to load from remote config, using defaults', error: e);
+          _logger.w(
+            'Failed to load from remote config, using defaults',
+            error: e,
+          );
         }
       }
 
@@ -428,12 +482,22 @@ class DeploymentConfigService {
         }
       }
     } catch (e, stackTrace) {
-      _logger.e('Failed to load configuration', error: e, stackTrace: stackTrace);
-      await ProductionCrashReporter.recordError(e, stackTrace, context: 'DeploymentConfigService._loadConfiguration');
+      _logger.e(
+        'Failed to load configuration',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      await ProductionCrashReporter.recordError(
+        e,
+        stackTrace,
+        context: 'DeploymentConfigService._loadConfiguration',
+      );
     }
   }
 
-  static Future<void> _loadCachedConfiguration(DeploymentEnvironment environment) async {
+  static Future<void> _loadCachedConfiguration(
+    DeploymentEnvironment environment,
+  ) async {
     try {
       final cachedConfig = _prefs?.getString(_configCacheKey);
       if (cachedConfig != null) {
@@ -447,12 +511,17 @@ class DeploymentConfigService {
             ragServiceUrl: configMap['rag_service_url'] ?? '',
             enableAnalytics: configMap['enable_analytics'] ?? true,
             enableCrashReporting: configMap['enable_crash_reporting'] ?? true,
-            enablePerformanceMonitoring: configMap['enable_performance_monitoring'] ?? true,
+            enablePerformanceMonitoring:
+                configMap['enable_performance_monitoring'] ?? true,
             enableFeatureFlags: configMap['enable_feature_flags'] ?? true,
             debugMode: configMap['debug_mode'] ?? false,
-            platformConfig: Map<String, dynamic>.from(configMap['platform_config'] ?? {}),
+            platformConfig: Map<String, dynamic>.from(
+              configMap['platform_config'] ?? {},
+            ),
             ragConfig: Map<String, dynamic>.from(configMap['rag_config'] ?? {}),
-            customConfig: Map<String, dynamic>.from(configMap['custom_config'] ?? {}),
+            customConfig: Map<String, dynamic>.from(
+              configMap['custom_config'] ?? {},
+            ),
           );
 
           _logger.i('Loaded cached deployment configuration');
@@ -491,8 +560,10 @@ class DeploymentConfigService {
     return _currentConfig!.apiBaseUrl != newConfig.apiBaseUrl ||
         _currentConfig!.ragServiceUrl != newConfig.ragServiceUrl ||
         _currentConfig!.enableAnalytics != newConfig.enableAnalytics ||
-        _currentConfig!.enableCrashReporting != newConfig.enableCrashReporting ||
-        _currentConfig!.enablePerformanceMonitoring != newConfig.enablePerformanceMonitoring ||
+        _currentConfig!.enableCrashReporting !=
+            newConfig.enableCrashReporting ||
+        _currentConfig!.enablePerformanceMonitoring !=
+            newConfig.enablePerformanceMonitoring ||
         _currentConfig!.enableFeatureFlags != newConfig.enableFeatureFlags;
   }
 

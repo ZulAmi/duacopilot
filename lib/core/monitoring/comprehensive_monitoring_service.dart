@@ -17,7 +17,8 @@ import '../storage/secure_storage_adapter.dart';
 /// geographic patterns, A/B testing, and crash reporting
 class ComprehensiveMonitoringService {
   static ComprehensiveMonitoringService? _instance;
-  static ComprehensiveMonitoringService get instance => _instance ??= ComprehensiveMonitoringService._();
+  static ComprehensiveMonitoringService get instance =>
+      _instance ??= ComprehensiveMonitoringService._();
 
   ComprehensiveMonitoringService._();
 
@@ -52,7 +53,9 @@ class ComprehensiveMonitoringService {
         await _initializeFirebaseServices();
         AppLogger.info('✅ Firebase monitoring services initialized');
       } catch (e) {
-        AppLogger.warning('⚠️  Firebase monitoring services failed - continuing with limited monitoring: $e');
+        AppLogger.warning(
+          '⚠️  Firebase monitoring services failed - continuing with limited monitoring: $e',
+        );
         // Continue initialization even if Firebase fails
       }
 
@@ -75,7 +78,9 @@ class ComprehensiveMonitoringService {
       }
 
       _isInitialized = true;
-      AppLogger.info('🚀 Comprehensive monitoring initialized for user: $userId');
+      AppLogger.info(
+        '🚀 Comprehensive monitoring initialized for user: $userId',
+      );
     } catch (e) {
       AppLogger.error('Failed to initialize monitoring: $e');
 
@@ -170,7 +175,10 @@ class ComprehensiveMonitoringService {
         }
         if (cacheHitTime != null) {
           trace.putAttribute('cache_hit', 'true');
-          trace.putAttribute('cache_time_ms', cacheHitTime.inMilliseconds.toString());
+          trace.putAttribute(
+            'cache_time_ms',
+            cacheHitTime.inMilliseconds.toString(),
+          );
         }
 
         // Stop performance trace
@@ -202,7 +210,8 @@ class ComprehensiveMonitoringService {
             'source_count': sources?.length ?? 0,
             'cache_hit': cacheHitTime != null,
             'session_id': _sessionId,
-            if (errorMessage != null) 'error_category': _categorizeError(errorMessage),
+            if (errorMessage != null)
+              'error_category': _categorizeError(errorMessage),
           },
         );
 
@@ -282,7 +291,9 @@ class ComprehensiveMonitoringService {
         },
       );
 
-      AppLogger.info('🧪 A/B test result tracked: $experimentName -> $variant = $outcome');
+      AppLogger.info(
+        '🧪 A/B test result tracked: $experimentName -> $variant = $outcome',
+      );
     } catch (e) {
       AppLogger.error('Failed to track A/B test result: $e');
     }
@@ -312,7 +323,11 @@ class ComprehensiveMonitoringService {
       // Track variant assignment
       await _analytics.logEvent(
         name: 'ab_test_assignment',
-        parameters: {'experiment_name': experimentName, 'variant': variant, 'session_id': _sessionId},
+        parameters: {
+          'experiment_name': experimentName,
+          'variant': variant,
+          'session_id': _sessionId,
+        },
       );
 
       return variant;
@@ -340,11 +355,22 @@ class ComprehensiveMonitoringService {
 
       // Set session context
       await _crashlytics.setCustomKey('session_id', _sessionId);
-      await _crashlytics.setCustomKey('platform', PlatformService.instance.platformName);
-      await _crashlytics.setCustomKey('timestamp', DateTime.now().toIso8601String());
+      await _crashlytics.setCustomKey(
+        'platform',
+        PlatformService.instance.platformName,
+      );
+      await _crashlytics.setCustomKey(
+        'timestamp',
+        DateTime.now().toIso8601String(),
+      );
 
       // Record the exception
-      await _crashlytics.recordError(exception, stackTrace ?? StackTrace.current, reason: reason, fatal: fatal);
+      await _crashlytics.recordError(
+        exception,
+        stackTrace ?? StackTrace.current,
+        reason: reason,
+        fatal: fatal,
+      );
 
       // Also track as analytics event for non-fatal errors
       if (!fatal) {
@@ -366,25 +392,40 @@ class ComprehensiveMonitoringService {
   }
 
   /// Get comprehensive analytics summary
-  Future<Map<String, dynamic>> getAnalyticsSummary({Duration? timeWindow}) async {
+  Future<Map<String, dynamic>> getAnalyticsSummary({
+    Duration? timeWindow,
+  }) async {
     try {
       final cutoffTime =
-          timeWindow != null ? DateTime.now().subtract(timeWindow) : DateTime.now().subtract(const Duration(hours: 24));
+          timeWindow != null
+              ? DateTime.now().subtract(timeWindow)
+              : DateTime.now().subtract(const Duration(hours: 24));
 
       // Filter recent metrics
-      final recentMetrics = _queryMetrics.values.where((m) => m.startTime.isAfter(cutoffTime)).toList();
+      final recentMetrics =
+          _queryMetrics.values
+              .where((m) => m.startTime.isAfter(cutoffTime))
+              .toList();
 
-      final recentSatisfaction = _satisfactionEvents.where((s) => s.timestamp.isAfter(cutoffTime)).toList();
+      final recentSatisfaction =
+          _satisfactionEvents
+              .where((s) => s.timestamp.isAfter(cutoffTime))
+              .toList();
 
       // Calculate success rates
       final totalQueries = recentMetrics.length;
-      final successfulQueries = recentMetrics.where((m) => m.success == true).length;
-      final successRate = totalQueries > 0 ? successfulQueries / totalQueries : 0.0;
+      final successfulQueries =
+          recentMetrics.where((m) => m.success == true).length;
+      final successRate =
+          totalQueries > 0 ? successfulQueries / totalQueries : 0.0;
 
       // Calculate satisfaction metrics
       final avgRating =
           recentSatisfaction.isNotEmpty
-              ? recentSatisfaction.map((s) => s.rating).reduce((a, b) => a + b) / recentSatisfaction.length
+              ? recentSatisfaction
+                      .map((s) => s.rating)
+                      .reduce((a, b) => a + b) /
+                  recentSatisfaction.length
               : 0.0;
 
       // Query type analysis
@@ -392,7 +433,12 @@ class ComprehensiveMonitoringService {
       for (final metric in recentMetrics) {
         queryTypeStats.putIfAbsent(
           metric.queryType,
-          () => {'count': 0, 'success_count': 0, 'total_time_ms': 0, 'avg_confidence': 0.0},
+          () => {
+            'count': 0,
+            'success_count': 0,
+            'total_time_ms': 0,
+            'avg_confidence': 0.0,
+          },
         );
 
         final stats = queryTypeStats[metric.queryType]!;
@@ -401,11 +447,15 @@ class ComprehensiveMonitoringService {
           stats['success_count'] = stats['success_count'] + 1;
         }
         if (metric.endTime != null) {
-          stats['total_time_ms'] = stats['total_time_ms'] + metric.endTime!.difference(metric.startTime).inMilliseconds;
+          stats['total_time_ms'] =
+              stats['total_time_ms'] +
+              metric.endTime!.difference(metric.startTime).inMilliseconds;
         }
         if (metric.confidence != null) {
           stats['avg_confidence'] =
-              ((stats['avg_confidence'] * (stats['count'] - 1)) + metric.confidence!) / stats['count'];
+              ((stats['avg_confidence'] * (stats['count'] - 1)) +
+                  metric.confidence!) /
+              stats['count'];
         }
       }
 
@@ -429,8 +479,12 @@ class ComprehensiveMonitoringService {
         },
         'query_types': queryTypeStats,
         'trending_topics':
-            topicCounts.entries.map((e) => {'topic': e.key, 'count': e.value}).toList()
-              ..sort((a, b) => (b['count'] as int).compareTo(a['count'] as int)),
+            topicCounts.entries
+                .map((e) => {'topic': e.key, 'count': e.value})
+                .toList()
+              ..sort(
+                (a, b) => (b['count'] as int).compareTo(a['count'] as int),
+              ),
         'geographic_data': await _getGeographicSummary(cutoffTime),
         'ab_tests':
             _activeABTests.entries
@@ -493,7 +547,9 @@ class ComprehensiveMonitoringService {
           await _remoteConfig.fetchAndActivate();
           AppLogger.info('✅ Firebase Remote Config initialized');
         } catch (e) {
-          AppLogger.warning('⚠️  Remote Config fetch failed, using defaults: $e');
+          AppLogger.warning(
+            '⚠️  Remote Config fetch failed, using defaults: $e',
+          );
         }
       } catch (e) {
         AppLogger.warning('⚠️  Remote Config initialization failed: $e');
@@ -516,7 +572,12 @@ class ComprehensiveMonitoringService {
 
   Future<void> _setupABTesting() async {
     // Define A/B test experiments
-    final experiments = ['rag_integration_approach', 'ui_response_format', 'cache_strategy', 'user_feedback_method'];
+    final experiments = [
+      'rag_integration_approach',
+      'ui_response_format',
+      'cache_strategy',
+      'user_feedback_method',
+    ];
 
     for (final experiment in experiments) {
       await getABTestVariant(experiment);
@@ -564,7 +625,8 @@ class ComprehensiveMonitoringService {
         parameters: {
           'session_id': _sessionId,
           'platform': PlatformService.instance.platformName,
-          'features_available': PlatformService.instance.availableFeatures.length,
+          'features_available':
+              PlatformService.instance.availableFeatures.length,
           'monitoring_initialized': true,
         },
       );
@@ -637,13 +699,16 @@ class ComprehensiveMonitoringService {
 
   String _categorizeError(String errorMessage) {
     final lowercaseError = errorMessage.toLowerCase();
-    if (lowercaseError.contains('network') || lowercaseError.contains('connection')) {
+    if (lowercaseError.contains('network') ||
+        lowercaseError.contains('connection')) {
       return 'network_error';
     } else if (lowercaseError.contains('timeout')) {
       return 'timeout_error';
-    } else if (lowercaseError.contains('authentication') || lowercaseError.contains('unauthorized')) {
+    } else if (lowercaseError.contains('authentication') ||
+        lowercaseError.contains('unauthorized')) {
       return 'auth_error';
-    } else if (lowercaseError.contains('server') || lowercaseError.contains('500')) {
+    } else if (lowercaseError.contains('server') ||
+        lowercaseError.contains('500')) {
       return 'server_error';
     } else if (lowercaseError.contains('cache')) {
       return 'cache_error';
@@ -652,9 +717,14 @@ class ComprehensiveMonitoringService {
     }
   }
 
-  Future<Map<String, dynamic>> _getGeographicSummary(DateTime cutoffTime) async {
+  Future<Map<String, dynamic>> _getGeographicSummary(
+    DateTime cutoffTime,
+  ) async {
     try {
-      final recentEvents = _geographicEvents.where((e) => e.timestamp.isAfter(cutoffTime)).toList();
+      final recentEvents =
+          _geographicEvents
+              .where((e) => e.timestamp.isAfter(cutoffTime))
+              .toList();
 
       final regionCounts = <String, int>{};
       for (final event in recentEvents) {
@@ -666,7 +736,9 @@ class ComprehensiveMonitoringService {
         'total_geographic_queries': recentEvents.length,
         'unique_regions': regionCounts.length,
         'top_regions':
-            regionCounts.entries.map((e) => {'region': e.key, 'count': e.value}).toList()
+            regionCounts.entries
+                .map((e) => {'region': e.key, 'count': e.value})
+                .toList()
               ..sort((a, b) => (b['count'] as int).compareTo(a['count'] as int))
               ..take(5).toList(),
       };
@@ -685,11 +757,17 @@ class ComprehensiveMonitoringService {
     try {
       // Flush satisfaction data
       if (_satisfactionEvents.isNotEmpty) {
-        final avgRating = _satisfactionEvents.map((s) => s.rating).reduce((a, b) => a + b) / _satisfactionEvents.length;
+        final avgRating =
+            _satisfactionEvents.map((s) => s.rating).reduce((a, b) => a + b) /
+            _satisfactionEvents.length;
 
         await _analytics.logEvent(
           name: 'satisfaction_batch_flush',
-          parameters: {'batch_size': _satisfactionEvents.length, 'avg_rating': avgRating, 'session_id': _sessionId},
+          parameters: {
+            'batch_size': _satisfactionEvents.length,
+            'avg_rating': avgRating,
+            'session_id': _sessionId,
+          },
         );
 
         _satisfactionEvents.clear();
@@ -701,7 +779,11 @@ class ComprehensiveMonitoringService {
           name: 'geographic_batch_flush',
           parameters: {
             'batch_size': _geographicEvents.length,
-            'unique_regions': _geographicEvents.map((e) => '${e.latitude},${e.longitude}').toSet().length,
+            'unique_regions':
+                _geographicEvents
+                    .map((e) => '${e.latitude},${e.longitude}')
+                    .toSet()
+                    .length,
             'session_id': _sessionId,
           },
         );
@@ -783,5 +865,9 @@ class ABTestVariant {
   final String variant;
   final DateTime assignmentTime;
 
-  ABTestVariant({required this.experimentName, required this.variant, required this.assignmentTime});
+  ABTestVariant({
+    required this.experimentName,
+    required this.variant,
+    required this.assignmentTime,
+  });
 }

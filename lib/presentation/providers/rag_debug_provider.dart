@@ -33,17 +33,32 @@ class RagLogger {
 
   static void error(String message, [dynamic error, StackTrace? stackTrace]) {
     _logger.e(message, error: error, stackTrace: stackTrace);
-    developer.log(message, name: 'RAG_ERROR', error: error, stackTrace: stackTrace);
+    developer.log(
+      message,
+      name: 'RAG_ERROR',
+      error: error,
+      stackTrace: stackTrace,
+    );
   }
 
-  static void performance(String operation, Duration duration, [Map<String, dynamic>? metadata]) {
+  static void performance(
+    String operation,
+    Duration duration, [
+    Map<String, dynamic>? metadata,
+  ]) {
     final message = '$operation completed in ${duration.inMilliseconds}ms';
     _logger.i(message, error: metadata);
     developer.log(message, name: 'RAG_PERFORMANCE');
   }
 
-  static void apiCall(String endpoint, String method, Duration duration, int? statusCode) {
-    final message = '$method $endpoint - ${statusCode ?? 'TIMEOUT'} (${duration.inMilliseconds}ms)';
+  static void apiCall(
+    String endpoint,
+    String method,
+    Duration duration,
+    int? statusCode,
+  ) {
+    final message =
+        '$method $endpoint - ${statusCode ?? 'TIMEOUT'} (${duration.inMilliseconds}ms)';
     if (statusCode != null && statusCode >= 200 && statusCode < 300) {
       info(message);
     } else {
@@ -51,7 +66,12 @@ class RagLogger {
     }
   }
 
-  static void cacheOperation(String operation, String key, bool hit, [Duration? duration]) {
+  static void cacheOperation(
+    String operation,
+    String key,
+    bool hit, [
+    Duration? duration,
+  ]) {
     final message = 'Cache $operation: $key (${hit ? 'HIT' : 'MISS'})';
     if (duration != null) {
       debug('$message - ${duration.inMilliseconds}ms');
@@ -64,8 +84,15 @@ class RagLogger {
     debug('WebSocket $event', data);
   }
 
-  static void stateTransition(String provider, dynamic oldState, dynamic newState) {
-    debug('$provider state transition', {'from': oldState.toString(), 'to': newState.toString()});
+  static void stateTransition(
+    String provider,
+    dynamic oldState,
+    dynamic newState,
+  ) {
+    debug('$provider state transition', {
+      'from': oldState.toString(),
+      'to': newState.toString(),
+    });
   }
 }
 
@@ -93,7 +120,13 @@ class RagDebugNotifier extends StateNotifier<RagDebugState> {
   }
 
   /// Log API call metrics
-  void logApiCall(String endpoint, String method, Duration duration, int? statusCode, {String? error}) {
+  void logApiCall(
+    String endpoint,
+    String method,
+    Duration duration,
+    int? statusCode, {
+    String? error,
+  }) {
     final call = ApiCallLog(
       endpoint: endpoint,
       method: method,
@@ -114,7 +147,12 @@ class RagDebugNotifier extends StateNotifier<RagDebugState> {
   }
 
   /// Log cache operation
-  void logCacheOperation(String operation, String key, bool hit, Duration? duration) {
+  void logCacheOperation(
+    String operation,
+    String key,
+    bool hit,
+    Duration? duration,
+  ) {
     final cacheOp = CacheOperationLog(
       operation: operation,
       key: key,
@@ -123,16 +161,24 @@ class RagDebugNotifier extends StateNotifier<RagDebugState> {
       timestamp: DateTime.now(),
     );
 
-    state = state.copyWith(cacheOperations: [...state.cacheOperations.take(99), cacheOp]);
+    state = state.copyWith(
+      cacheOperations: [...state.cacheOperations.take(99), cacheOp],
+    );
 
     RagLogger.cacheOperation(operation, key, hit, duration);
   }
 
   /// Log WebSocket event
   void logWebSocketEvent(String event, dynamic data) {
-    final wsEvent = WebSocketEventLog(event: event, data: data, timestamp: DateTime.now());
+    final wsEvent = WebSocketEventLog(
+      event: event,
+      data: data,
+      timestamp: DateTime.now(),
+    );
 
-    state = state.copyWith(webSocketEvents: [...state.webSocketEvents.take(99), wsEvent]);
+    state = state.copyWith(
+      webSocketEvents: [...state.webSocketEvents.take(99), wsEvent],
+    );
 
     RagLogger.websocketEvent(event, data);
   }
@@ -146,7 +192,9 @@ class RagDebugNotifier extends StateNotifier<RagDebugState> {
       timestamp: DateTime.now(),
     );
 
-    state = state.copyWith(stateTransitions: [...state.stateTransitions.take(99), transition]);
+    state = state.copyWith(
+      stateTransitions: [...state.stateTransitions.take(99), transition],
+    );
 
     if (state.isVerboseEnabled) {
       RagLogger.stateTransition(provider, oldState, newState);
@@ -154,7 +202,12 @@ class RagDebugNotifier extends StateNotifier<RagDebugState> {
   }
 
   /// Log error with context
-  void logError(String context, dynamic error, StackTrace? stackTrace, {Map<String, dynamic>? metadata}) {
+  void logError(
+    String context,
+    dynamic error,
+    StackTrace? stackTrace, {
+    Map<String, dynamic>? metadata,
+  }) {
     final errorLog = ErrorLog(
       context: context,
       error: error.toString(),
@@ -176,13 +229,23 @@ class RagDebugNotifier extends StateNotifier<RagDebugState> {
     final cacheOps = state.cacheOperations;
 
     if (apiCalls.isEmpty) {
-      return {'apiCalls': 0, 'averageResponseTime': 0, 'cacheHitRate': 0, 'errorRate': 0};
+      return {
+        'apiCalls': 0,
+        'averageResponseTime': 0,
+        'cacheHitRate': 0,
+        'errorRate': 0,
+      };
     }
 
-    final totalResponseTime = apiCalls.map((call) => call.duration.inMilliseconds).reduce((a, b) => a + b);
+    final totalResponseTime = apiCalls
+        .map((call) => call.duration.inMilliseconds)
+        .reduce((a, b) => a + b);
 
     final successfulCalls = apiCalls.where(
-      (call) => call.statusCode != null && call.statusCode! >= 200 && call.statusCode! < 300,
+      (call) =>
+          call.statusCode != null &&
+          call.statusCode! >= 200 &&
+          call.statusCode! < 300,
     );
 
     final cacheHits = cacheOps.where((op) => op.hit).length;
@@ -192,7 +255,8 @@ class RagDebugNotifier extends StateNotifier<RagDebugState> {
       'apiCalls': apiCalls.length,
       'averageResponseTime': totalResponseTime / apiCalls.length,
       'cacheHitRate': totalCacheOps > 0 ? (cacheHits / totalCacheOps) * 100 : 0,
-      'errorRate': ((apiCalls.length - successfulCalls.length) / apiCalls.length) * 100,
+      'errorRate':
+          ((apiCalls.length - successfulCalls.length) / apiCalls.length) * 100,
       'errors': state.errors.length,
     };
   }
@@ -316,7 +380,11 @@ class WebSocketEventLog {
   final dynamic data;
   final DateTime timestamp;
 
-  const WebSocketEventLog({required this.event, this.data, required this.timestamp});
+  const WebSocketEventLog({
+    required this.event,
+    this.data,
+    required this.timestamp,
+  });
 }
 
 /// State transition log entry
@@ -346,10 +414,18 @@ class ErrorLog {
   final Map<String, dynamic>? metadata;
   final DateTime timestamp;
 
-  const ErrorLog({required this.context, required this.error, this.stackTrace, this.metadata, required this.timestamp});
+  const ErrorLog({
+    required this.context,
+    required this.error,
+    this.stackTrace,
+    this.metadata,
+    required this.timestamp,
+  });
 }
 
 /// Provider for RAG debugging and monitoring
-final ragDebugProvider = StateNotifierProvider<RagDebugNotifier, RagDebugState>((ref) {
-  return RagDebugNotifier();
-});
+final ragDebugProvider = StateNotifierProvider<RagDebugNotifier, RagDebugState>(
+  (ref) {
+    return RagDebugNotifier();
+  },
+);

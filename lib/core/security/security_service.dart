@@ -75,7 +75,10 @@ class SecurityService {
   /// Sanitize user input to prevent XSS
   static String sanitizeInput(String input) {
     return input
-        .replaceAll(RegExp(r'<script[^>]*>.*?</script>', caseSensitive: false), '')
+        .replaceAll(
+          RegExp(r'<script[^>]*>.*?</script>', caseSensitive: false),
+          '',
+        )
         .replaceAll(RegExp(r'<[^>]*>'), '') // Remove HTML tags
         .replaceAll(RegExp(r'javascript:', caseSensitive: false), '')
         .trim();
@@ -83,7 +86,10 @@ class SecurityService {
 
   /// Generate secure random tokens
   static String generateSecureToken() {
-    final bytes = List<int>.generate(32, (i) => DateTime.now().millisecondsSinceEpoch + i);
+    final bytes = List<int>.generate(
+      32,
+      (i) => DateTime.now().millisecondsSinceEpoch + i,
+    );
     return sha256.convert(bytes).toString();
   }
 
@@ -110,7 +116,9 @@ class SecurityService {
     return encrypted;
   }
 
-  static Future<String> _decryptWithPlatformSecurity(String encryptedData) async {
+  static Future<String> _decryptWithPlatformSecurity(
+    String encryptedData,
+  ) async {
     // In a real implementation, use platform channels
     // to call native decryption APIs
     final bytes = base64.decode(encryptedData);
@@ -152,7 +160,8 @@ class RateLimitService {
     }
 
     // Check per-minute limit
-    final recentRequests = history.where((time) => now.difference(time).inMinutes < 1).length;
+    final recentRequests =
+        history.where((time) => now.difference(time).inMinutes < 1).length;
 
     if (recentRequests >= maxRequestsPerMinute) {
       return false;

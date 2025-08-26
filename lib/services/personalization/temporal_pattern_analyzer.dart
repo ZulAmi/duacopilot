@@ -34,7 +34,10 @@ class TemporalPatternAnalyzer {
   }
 
   /// Get temporal patterns for a user
-  Future<TemporalPatterns> analyzePatterns(String userId, DateTime currentTime) async {
+  Future<TemporalPatterns> analyzePatterns(
+    String userId,
+    DateTime currentTime,
+  ) async {
     // Check cache first
     if (_patternsCache.containsKey(userId)) {
       final cached = _patternsCache[userId]!;
@@ -71,13 +74,19 @@ class TemporalPatternAnalyzer {
   }
 
   /// Get time-based patterns for recommendations
-  Future<TemporalPatterns> getTimeBasedPatterns(String userId, DateTime currentTime) async {
+  Future<TemporalPatterns> getTimeBasedPatterns(
+    String userId,
+    DateTime currentTime,
+  ) async {
     try {
       final patterns = await analyzePatterns(userId, currentTime);
 
       // Add real-time context
       final islamicTime = IslamicTimeService.instance.getCurrentTimeContext();
-      final enrichedPatterns = await _enrichWithIslamicContext(patterns, islamicTime);
+      final enrichedPatterns = await _enrichWithIslamicContext(
+        patterns,
+        islamicTime,
+      );
 
       return enrichedPatterns;
     } catch (e) {
@@ -100,7 +109,9 @@ class TemporalPatternAnalyzer {
       // Update weekly patterns
       await _updateWeeklyPatterns(session, prefs);
 
-      debugPrint('📊 Processed session data for temporal analysis: ${session.id}');
+      debugPrint(
+        '📊 Processed session data for temporal analysis: ${session.id}',
+      );
     } catch (e) {
       debugPrint('❌ Error processing session data: $e');
     }
@@ -135,7 +146,10 @@ class TemporalPatternAnalyzer {
   }
 
   /// Predict optimal times for Du'a recommendations
-  Future<List<DateTime>> predictOptimalTimes(String userId, String duaId) async {
+  Future<List<DateTime>> predictOptimalTimes(
+    String userId,
+    String duaId,
+  ) async {
     try {
       final patterns = await analyzePatterns(userId, DateTime.now());
       final habitStrengths = await getHabitStrengths(userId);
@@ -145,7 +159,8 @@ class TemporalPatternAnalyzer {
 
       // Analyze hourly patterns
       patterns.hourlyPatterns.forEach((hour, pattern) {
-        if (pattern.popularDuas.contains(duaId) && pattern.activityScore > 0.5) {
+        if (pattern.popularDuas.contains(duaId) &&
+            pattern.activityScore > 0.5) {
           final nextOccurrence = _getNextOccurrenceOfHour(now, hour);
           optimalTimes.add(nextOccurrence);
         }
@@ -158,7 +173,9 @@ class TemporalPatternAnalyzer {
           // Add times based on historical practice
           for (final session in habit.recentSessions) {
             final nextSimilarTime = _getNextSimilarTime(now, session);
-            if (!optimalTimes.any((time) => time.difference(nextSimilarTime).inHours.abs() < 2)) {
+            if (!optimalTimes.any(
+              (time) => time.difference(nextSimilarTime).inHours.abs() < 2,
+            )) {
               optimalTimes.add(nextSimilarTime);
             }
           }
@@ -166,7 +183,13 @@ class TemporalPatternAnalyzer {
       }
 
       // Sort by proximity to current time
-      optimalTimes.sort((a, b) => a.difference(now).inMinutes.abs().compareTo(b.difference(now).inMinutes.abs()));
+      optimalTimes.sort(
+        (a, b) => a
+            .difference(now)
+            .inMinutes
+            .abs()
+            .compareTo(b.difference(now).inMinutes.abs()),
+      );
 
       return optimalTimes.take(5).toList();
     } catch (e) {
@@ -200,7 +223,10 @@ class TemporalPatternAnalyzer {
   }
 
   /// Load temporal patterns from storage
-  Future<TemporalPatterns> _loadPatterns(String userId, SharedPreferences prefs) async {
+  Future<TemporalPatterns> _loadPatterns(
+    String userId,
+    SharedPreferences prefs,
+  ) async {
     try {
       final patternsJson = prefs.getString('$_temporalPatternsKey$userId');
 
@@ -222,10 +248,16 @@ class TemporalPatternAnalyzer {
   }
 
   /// Save temporal patterns to storage
-  Future<void> _savePatterns(TemporalPatterns patterns, SharedPreferences prefs) async {
+  Future<void> _savePatterns(
+    TemporalPatterns patterns,
+    SharedPreferences prefs,
+  ) async {
     try {
       final patternsJson = json.encode(patterns.toJson());
-      await prefs.setString('$_temporalPatternsKey${patterns.userId}', patternsJson);
+      await prefs.setString(
+        '$_temporalPatternsKey${patterns.userId}',
+        patternsJson,
+      );
       _patternsCache[patterns.userId] = patterns;
     } catch (e) {
       debugPrint('❌ Error saving temporal patterns: $e');
@@ -272,7 +304,10 @@ class TemporalPatternAnalyzer {
   }
 
   /// Record time-based interaction data
-  Future<void> _recordTimeBasedInteraction(DuaInteraction interaction, SharedPreferences prefs) async {
+  Future<void> _recordTimeBasedInteraction(
+    DuaInteraction interaction,
+    SharedPreferences prefs,
+  ) async {
     try {
       final timeData = {
         'dua_id': interaction.duaId,
@@ -283,7 +318,11 @@ class TemporalPatternAnalyzer {
         'interaction_type': interaction.type.name,
       };
 
-      final interactions = prefs.getStringList('$_timeBasedInteractionsKey${interaction.userId}') ?? [];
+      final interactions =
+          prefs.getStringList(
+            '$_timeBasedInteractionsKey${interaction.userId}',
+          ) ??
+          [];
       interactions.add(json.encode(timeData));
 
       // Keep only last 1000 interactions for performance
@@ -291,14 +330,20 @@ class TemporalPatternAnalyzer {
         interactions.removeRange(0, interactions.length - 1000);
       }
 
-      await prefs.setStringList('$_timeBasedInteractionsKey${interaction.userId}', interactions);
+      await prefs.setStringList(
+        '$_timeBasedInteractionsKey${interaction.userId}',
+        interactions,
+      );
     } catch (e) {
       debugPrint('❌ Error recording time-based interaction: $e');
     }
   }
 
   /// Update habit strength for a Du'a
-  Future<void> _updateHabitStrength(DuaInteraction interaction, SharedPreferences prefs) async {
+  Future<void> _updateHabitStrength(
+    DuaInteraction interaction,
+    SharedPreferences prefs,
+  ) async {
     try {
       final habits = await getHabitStrengths(interaction.userId);
 
@@ -316,12 +361,14 @@ class TemporalPatternAnalyzer {
       final newFrequency = currentHabit.frequency + 1;
       final newAvgDuration = Duration(
         seconds:
-            ((currentHabit.avgDuration.inSeconds * currentHabit.frequency) + interaction.duration.inSeconds) ~/
+            ((currentHabit.avgDuration.inSeconds * currentHabit.frequency) +
+                interaction.duration.inSeconds) ~/
             newFrequency,
       );
 
       // Calculate strength based on frequency and recency
-      final daysSinceLastPractice = interaction.timestamp.difference(currentHabit.lastPracticed).inDays;
+      final daysSinceLastPractice =
+          interaction.timestamp.difference(currentHabit.lastPracticed).inDays;
 
       double strengthBoost = 0.1; // Base boost per interaction
       if (daysSinceLastPractice <= 1) {
@@ -330,10 +377,16 @@ class TemporalPatternAnalyzer {
         strengthBoost *= 0.5; // Reduced boost for long gaps
       }
 
-      final newStrength = (currentHabit.strength + strengthBoost).clamp(0.0, 1.0);
+      final newStrength = (currentHabit.strength + strengthBoost).clamp(
+        0.0,
+        1.0,
+      );
 
       // Update recent sessions
-      final recentSessions = [...currentHabit.recentSessions, interaction.timestamp];
+      final recentSessions = [
+        ...currentHabit.recentSessions,
+        interaction.timestamp,
+      ];
       recentSessions.sort();
       if (recentSessions.length > 10) {
         recentSessions.removeRange(0, recentSessions.length - 10);
@@ -359,14 +412,20 @@ class TemporalPatternAnalyzer {
         habitsJson[duaId] = habit.toJson();
       });
 
-      await prefs.setString('$_habitStrengthKey${interaction.userId}', json.encode(habitsJson));
+      await prefs.setString(
+        '$_habitStrengthKey${interaction.userId}',
+        json.encode(habitsJson),
+      );
     } catch (e) {
       debugPrint('❌ Error updating habit strength: $e');
     }
   }
 
   /// Update Islamic calendar patterns
-  Future<void> _updateIslamicPatterns(DuaInteraction interaction, SharedPreferences prefs) async {
+  Future<void> _updateIslamicPatterns(
+    DuaInteraction interaction,
+    SharedPreferences prefs,
+  ) async {
     try {
       final islamicTime = IslamicTimeService.instance.getCurrentTimeContext();
 
@@ -381,7 +440,11 @@ class TemporalPatternAnalyzer {
         'timestamp': interaction.timestamp.toIso8601String(),
       };
 
-      final patterns = prefs.getStringList('$_islamicCalendarPatternsKey${interaction.userId}') ?? [];
+      final patterns =
+          prefs.getStringList(
+            '$_islamicCalendarPatternsKey${interaction.userId}',
+          ) ??
+          [];
       patterns.add(json.encode(patternData));
 
       // Keep only last 500 entries
@@ -389,17 +452,26 @@ class TemporalPatternAnalyzer {
         patterns.removeRange(0, patterns.length - 500);
       }
 
-      await prefs.setStringList('$_islamicCalendarPatternsKey${interaction.userId}', patterns);
+      await prefs.setStringList(
+        '$_islamicCalendarPatternsKey${interaction.userId}',
+        patterns,
+      );
     } catch (e) {
       debugPrint('❌ Error updating Islamic patterns: $e');
     }
   }
 
   /// Load time-based interactions
-  Future<List<Map<String, dynamic>>> _loadTimeBasedInteractions(String userId, SharedPreferences prefs) async {
+  Future<List<Map<String, dynamic>>> _loadTimeBasedInteractions(
+    String userId,
+    SharedPreferences prefs,
+  ) async {
     try {
-      final interactions = prefs.getStringList('$_timeBasedInteractionsKey$userId') ?? [];
-      return interactions.map((i) => json.decode(i) as Map<String, dynamic>).toList();
+      final interactions =
+          prefs.getStringList('$_timeBasedInteractionsKey$userId') ?? [];
+      return interactions
+          .map((i) => json.decode(i) as Map<String, dynamic>)
+          .toList();
     } catch (e) {
       debugPrint('❌ Error loading time-based interactions: $e');
       return [];
@@ -407,7 +479,9 @@ class TemporalPatternAnalyzer {
   }
 
   /// Analyze hourly patterns
-  Map<int, HourlyPattern> _analyzeHourlyPatterns(List<Map<String, dynamic>> interactions) {
+  Map<int, HourlyPattern> _analyzeHourlyPatterns(
+    List<Map<String, dynamic>> interactions,
+  ) {
     final hourlyData = <int, Map<String, List<String>>>{};
     final hourlyActivity = <int, int>{};
 
@@ -437,8 +511,12 @@ class TemporalPatternAnalyzer {
               .map((entry) => entry.key)
               .toList();
 
-      final totalActivity = hourlyActivity.values.fold(0, (sum, count) => sum + count);
-      final activityScore = totalActivity > 0 ? hourlyActivity[hour]! / totalActivity : 0.0;
+      final totalActivity = hourlyActivity.values.fold(
+        0,
+        (sum, count) => sum + count,
+      );
+      final activityScore =
+          totalActivity > 0 ? hourlyActivity[hour]! / totalActivity : 0.0;
 
       patterns[hour] = HourlyPattern(
         hour: hour,
@@ -453,7 +531,9 @@ class TemporalPatternAnalyzer {
   }
 
   /// Analyze day of week patterns
-  Map<String, DayOfWeekPattern> _analyzeDayOfWeekPatterns(List<Map<String, dynamic>> interactions) {
+  Map<String, DayOfWeekPattern> _analyzeDayOfWeekPatterns(
+    List<Map<String, dynamic>> interactions,
+  ) {
     final dailyData = <String, Map<String, List<String>>>{};
     final dailyActivity = <String, int>{};
 
@@ -483,8 +563,12 @@ class TemporalPatternAnalyzer {
               .map((entry) => entry.key)
               .toList();
 
-      final totalActivity = dailyActivity.values.fold(0, (sum, count) => sum + count);
-      final engagementScore = totalActivity > 0 ? dailyActivity[day]! / totalActivity : 0.0;
+      final totalActivity = dailyActivity.values.fold(
+        0,
+        (sum, count) => sum + count,
+      );
+      final engagementScore =
+          totalActivity > 0 ? dailyActivity[day]! / totalActivity : 0.0;
 
       patterns[day] = DayOfWeekPattern(
         dayName: day,
@@ -499,17 +583,26 @@ class TemporalPatternAnalyzer {
   }
 
   /// Analyze seasonal patterns
-  Future<Map<String, SeasonalPattern>> _analyzeSeasonalPatterns(List<Map<String, dynamic>> interactions) async {
+  Future<Map<String, SeasonalPattern>> _analyzeSeasonalPatterns(
+    List<Map<String, dynamic>> interactions,
+  ) async {
     // This would analyze Islamic calendar patterns
     // For now, returning basic structure
 
     return {
-      'ramadan': const SeasonalPattern(season: 'ramadan', seasonalDuas: [], relevanceScore: 0.0, occasionFrequency: {}),
+      'ramadan': const SeasonalPattern(
+        season: 'ramadan',
+        seasonalDuas: [],
+        relevanceScore: 0.0,
+        occasionFrequency: {},
+      ),
     };
   }
 
   /// Calculate habit strengths
-  Map<String, double> _calculateHabitStrengths(List<Map<String, dynamic>> interactions) {
+  Map<String, double> _calculateHabitStrengths(
+    List<Map<String, dynamic>> interactions,
+  ) {
     final duaFrequency = <String, int>{};
     final duaLastSeen = <String, DateTime>{};
 
@@ -519,7 +612,8 @@ class TemporalPatternAnalyzer {
 
       duaFrequency[duaId] = (duaFrequency[duaId] ?? 0) + 1;
 
-      if (!duaLastSeen.containsKey(duaId) || duaLastSeen[duaId]!.isBefore(timestamp)) {
+      if (!duaLastSeen.containsKey(duaId) ||
+          duaLastSeen[duaId]!.isBefore(timestamp)) {
         duaLastSeen[duaId] = timestamp;
       }
     }
@@ -548,7 +642,10 @@ class TemporalPatternAnalyzer {
   }
 
   /// Enrich patterns with Islamic context
-  Future<TemporalPatterns> _enrichWithIslamicContext(TemporalPatterns patterns, TimeContext islamicTime) async {
+  Future<TemporalPatterns> _enrichWithIslamicContext(
+    TemporalPatterns patterns,
+    TimeContext islamicTime,
+  ) async {
     // Add prayer time patterns
     final prayerPatterns = <String, int>{};
 
@@ -560,7 +657,10 @@ class TemporalPatternAnalyzer {
       prayerPatterns['hajj'] = 8;
     }
 
-    return patterns.copyWith(prayerTimePatterns: prayerPatterns, lastAnalyzed: DateTime.now());
+    return patterns.copyWith(
+      prayerTimePatterns: prayerPatterns,
+      lastAnalyzed: DateTime.now(),
+    );
   }
 
   /// Get prayer time context
@@ -614,7 +714,13 @@ class TemporalPatternAnalyzer {
 
   /// Get next similar time based on historical session
   DateTime _getNextSimilarTime(DateTime now, DateTime historicalTime) {
-    var nextSimilar = DateTime(now.year, now.month, now.day, historicalTime.hour, historicalTime.minute);
+    var nextSimilar = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      historicalTime.hour,
+      historicalTime.minute,
+    );
 
     if (nextSimilar.isBefore(now)) {
       nextSimilar = nextSimilar.add(const Duration(days: 1));
@@ -624,24 +730,38 @@ class TemporalPatternAnalyzer {
   }
 
   /// Analyze session timing patterns
-  Future<void> _analyzeSessionTiming(UserSession session, SharedPreferences prefs) async {
+  Future<void> _analyzeSessionTiming(
+    UserSession session,
+    SharedPreferences prefs,
+  ) async {
     // Implementation would analyze session start times, durations, etc.
   }
 
   /// Update daily patterns
-  Future<void> _updateDailyPatterns(UserSession session, SharedPreferences prefs) async {
+  Future<void> _updateDailyPatterns(
+    UserSession session,
+    SharedPreferences prefs,
+  ) async {
     // Implementation would track daily usage patterns
   }
 
   /// Update weekly patterns
-  Future<void> _updateWeeklyPatterns(UserSession session, SharedPreferences prefs) async {
+  Future<void> _updateWeeklyPatterns(
+    UserSession session,
+    SharedPreferences prefs,
+  ) async {
     // Implementation would track weekly usage patterns
   }
 
   /// Clean up data for a specific key
-  Future<void> _cleanupDataForKey(String key, DateTime cutoffDate, SharedPreferences prefs) async {
+  Future<void> _cleanupDataForKey(
+    String key,
+    DateTime cutoffDate,
+    SharedPreferences prefs,
+  ) async {
     try {
-      if (key.contains('time_interactions_') || key.contains('islamic_patterns_')) {
+      if (key.contains('time_interactions_') ||
+          key.contains('islamic_patterns_')) {
         final data = prefs.getStringList(key) ?? [];
         final filteredData = <String>[];
 

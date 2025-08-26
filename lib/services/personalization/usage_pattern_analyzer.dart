@@ -58,7 +58,9 @@ class UsagePatternAnalyzer {
       // Update daily statistics
       await _updateDailyStats(interaction, prefs);
 
-      debugPrint('📊 Recorded interaction: ${interaction.type} for ${interaction.duaId}');
+      debugPrint(
+        '📊 Recorded interaction: ${interaction.type} for ${interaction.duaId}',
+      );
     } catch (e) {
       debugPrint('❌ Error recording interaction: $e');
     }
@@ -70,9 +72,14 @@ class UsagePatternAnalyzer {
       final prefs = await SharedPreferences.getInstance();
       const userId = 'current_user'; // This should be injected
 
-      final queryHistory = prefs.getStringList('$_queryHistoryKey$userId') ?? [];
+      final queryHistory =
+          prefs.getStringList('$_queryHistoryKey$userId') ?? [];
 
-      final queryData = {'query': query, 'result_count': resultCount, 'timestamp': DateTime.now().toIso8601String()};
+      final queryData = {
+        'query': query,
+        'result_count': resultCount,
+        'timestamp': DateTime.now().toIso8601String(),
+      };
 
       queryHistory.add(json.encode(queryData));
 
@@ -132,7 +139,10 @@ class UsagePatternAnalyzer {
   }
 
   /// Load usage patterns from storage
-  Future<UsagePatterns> _loadPatterns(String userId, SharedPreferences prefs) async {
+  Future<UsagePatterns> _loadPatterns(
+    String userId,
+    SharedPreferences prefs,
+  ) async {
     try {
       final patternsJson = prefs.getString('$_usagePatternsKey$userId');
 
@@ -154,10 +164,16 @@ class UsagePatternAnalyzer {
   }
 
   /// Save usage patterns to storage
-  Future<void> _savePatterns(UsagePatterns patterns, SharedPreferences prefs) async {
+  Future<void> _savePatterns(
+    UsagePatterns patterns,
+    SharedPreferences prefs,
+  ) async {
     try {
       final patternsJson = json.encode(patterns.toJson());
-      await prefs.setString('$_usagePatternsKey${patterns.userId}', patternsJson);
+      await prefs.setString(
+        '$_usagePatternsKey${patterns.userId}',
+        patternsJson,
+      );
       _patternsCache[patterns.userId] = patterns;
     } catch (e) {
       debugPrint('❌ Error saving usage patterns: $e');
@@ -165,7 +181,10 @@ class UsagePatternAnalyzer {
   }
 
   /// Record interaction history
-  Future<void> _recordInteractionHistory(DuaInteraction interaction, SharedPreferences prefs) async {
+  Future<void> _recordInteractionHistory(
+    DuaInteraction interaction,
+    SharedPreferences prefs,
+  ) async {
     try {
       final historyKey = '$_interactionHistoryKey${interaction.userId}';
       final history = prefs.getStringList(historyKey) ?? [];
@@ -184,7 +203,10 @@ class UsagePatternAnalyzer {
   }
 
   /// Update usage patterns based on interaction
-  Future<void> _updateUsagePatterns(DuaInteraction interaction, SharedPreferences prefs) async {
+  Future<void> _updateUsagePatterns(
+    DuaInteraction interaction,
+    SharedPreferences prefs,
+  ) async {
     try {
       final patterns = await _loadPatterns(interaction.userId, prefs);
 
@@ -207,17 +229,23 @@ class UsagePatternAnalyzer {
       // Update time of day patterns
       final hour = interaction.timestamp.hour;
       final timeOfDayKey = _getTimeOfDayCategory(hour);
-      final updatedTimePatterns = Map<String, double>.from(patterns.timeOfDayPatterns);
-      updatedTimePatterns[timeOfDayKey] = (updatedTimePatterns[timeOfDayKey] ?? 0.0) + 1.0;
+      final updatedTimePatterns = Map<String, double>.from(
+        patterns.timeOfDayPatterns,
+      );
+      updatedTimePatterns[timeOfDayKey] =
+          (updatedTimePatterns[timeOfDayKey] ?? 0.0) + 1.0;
 
       // Update total interactions
       final totalInteractions = patterns.totalInteractions + 1;
 
       // Update average reading times
-      final updatedReadingTimes = Map<String, double>.from(patterns.averageReadingTimes);
+      final updatedReadingTimes = Map<String, double>.from(
+        patterns.averageReadingTimes,
+      );
       if (interaction.duration.inSeconds > 0) {
         final currentAvg = updatedReadingTimes[interaction.duaId] ?? 0.0;
-        updatedReadingTimes[interaction.duaId] = (currentAvg + interaction.duration.inSeconds) / 2;
+        updatedReadingTimes[interaction.duaId] =
+            (currentAvg + interaction.duration.inSeconds) / 2;
       }
 
       final updatedPatterns = patterns.copyWith(
@@ -236,7 +264,10 @@ class UsagePatternAnalyzer {
   }
 
   /// Update daily statistics
-  Future<void> _updateDailyStats(DuaInteraction interaction, SharedPreferences prefs) async {
+  Future<void> _updateDailyStats(
+    DuaInteraction interaction,
+    SharedPreferences prefs,
+  ) async {
     try {
       final today = DateTime.now().toIso8601String().split('T')[0];
       final statsKey = '$_dailyStatsKey${interaction.userId}_$today';
@@ -250,8 +281,10 @@ class UsagePatternAnalyzer {
 
       // Update daily statistics
       stats['total_interactions'] = (stats['total_interactions'] ?? 0) + 1;
-      stats['interaction_types'] = stats['interaction_types'] ?? <String, int>{};
-      stats['interaction_types'][interaction.type.name] = (stats['interaction_types'][interaction.type.name] ?? 0) + 1;
+      stats['interaction_types'] =
+          stats['interaction_types'] ?? <String, int>{};
+      stats['interaction_types'][interaction.type.name] =
+          (stats['interaction_types'][interaction.type.name] ?? 0) + 1;
       stats['last_updated'] = DateTime.now().toIso8601String();
 
       await prefs.setString(statsKey, json.encode(stats));
@@ -261,14 +294,19 @@ class UsagePatternAnalyzer {
   }
 
   /// Analyze interaction patterns for insights
-  Future<void> _analyzeInteractionPatterns(String userId, SharedPreferences prefs) async {
+  Future<void> _analyzeInteractionPatterns(
+    String userId,
+    SharedPreferences prefs,
+  ) async {
     try {
       // Load interaction history
-      final history = prefs.getStringList('$_interactionHistoryKey$userId') ?? [];
+      final history =
+          prefs.getStringList('$_interactionHistoryKey$userId') ?? [];
 
       if (history.isEmpty) return;
 
-      final interactions = history.map((h) => DuaInteraction.fromJson(json.decode(h))).toList();
+      final interactions =
+          history.map((h) => DuaInteraction.fromJson(json.decode(h))).toList();
 
       // Analyze patterns
       final duaFrequency = <String, int>{};
@@ -277,36 +315,48 @@ class UsagePatternAnalyzer {
 
       for (final interaction in interactions) {
         // Count Du'a frequency
-        duaFrequency[interaction.duaId] = (duaFrequency[interaction.duaId] ?? 0) + 1;
+        duaFrequency[interaction.duaId] =
+            (duaFrequency[interaction.duaId] ?? 0) + 1;
 
         // Count hourly activity
         final hour = interaction.timestamp.hour;
         hourlyActivity[hour] = (hourlyActivity[hour] ?? 0) + 1;
 
         // Count interaction types
-        typeDistribution[interaction.type.name] = (typeDistribution[interaction.type.name] ?? 0) + 1;
+        typeDistribution[interaction.type.name] =
+            (typeDistribution[interaction.type.name] ?? 0) + 1;
       }
 
       // Update patterns with insights
       final patterns = await _loadPatterns(userId, prefs);
 
       // Update frequent Du'as based on frequency analysis
-      final sortedDuas = duaFrequency.entries.toList()..sort((a, b) => b.value.compareTo(a.value));
+      final sortedDuas =
+          duaFrequency.entries.toList()
+            ..sort((a, b) => b.value.compareTo(a.value));
 
       final topDuas = sortedDuas.take(10).map((e) => e.key).toList();
 
-      final updatedPatterns = patterns.copyWith(frequentDuas: topDuas, lastUpdated: DateTime.now());
+      final updatedPatterns = patterns.copyWith(
+        frequentDuas: topDuas,
+        lastUpdated: DateTime.now(),
+      );
 
       await _savePatterns(updatedPatterns, prefs);
 
-      debugPrint('🔍 Analyzed ${interactions.length} interactions for patterns');
+      debugPrint(
+        '🔍 Analyzed ${interactions.length} interactions for patterns',
+      );
     } catch (e) {
       debugPrint('❌ Error analyzing interaction patterns: $e');
     }
   }
 
   /// Update category preferences based on usage
-  Future<void> _updateCategoryPreferences(String userId, SharedPreferences prefs) async {
+  Future<void> _updateCategoryPreferences(
+    String userId,
+    SharedPreferences prefs,
+  ) async {
     try {
       // This would analyze which categories the user interacts with most
       // Implementation would examine Du'a categories from interactions
@@ -317,9 +367,13 @@ class UsagePatternAnalyzer {
   }
 
   /// Calculate reading time patterns
-  Future<void> _calculateReadingTimePatterns(String userId, SharedPreferences prefs) async {
+  Future<void> _calculateReadingTimePatterns(
+    String userId,
+    SharedPreferences prefs,
+  ) async {
     try {
-      final history = prefs.getStringList('$_interactionHistoryKey$userId') ?? [];
+      final history =
+          prefs.getStringList('$_interactionHistoryKey$userId') ?? [];
 
       if (history.isEmpty) return;
 
@@ -327,7 +381,9 @@ class UsagePatternAnalyzer {
           history
               .map((h) => DuaInteraction.fromJson(json.decode(h)))
               .where(
-                (interaction) => interaction.type == InteractionType.read || interaction.type == InteractionType.view,
+                (interaction) =>
+                    interaction.type == InteractionType.read ||
+                    interaction.type == InteractionType.view,
               )
               .toList();
 
@@ -350,20 +406,30 @@ class UsagePatternAnalyzer {
 
       // Update patterns
       final patterns = await _loadPatterns(userId, prefs);
-      final updatedPatterns = patterns.copyWith(averageReadingTimes: averageTimes, lastUpdated: DateTime.now());
+      final updatedPatterns = patterns.copyWith(
+        averageReadingTimes: averageTimes,
+        lastUpdated: DateTime.now(),
+      );
 
       await _savePatterns(updatedPatterns, prefs);
 
-      debugPrint('⏱️ Calculated reading time patterns for ${averageTimes.length} Du\'as');
+      debugPrint(
+        '⏱️ Calculated reading time patterns for ${averageTimes.length} Du\'as',
+      );
     } catch (e) {
       debugPrint('❌ Error calculating reading time patterns: $e');
     }
   }
 
   /// Clean up data for a specific key based on cutoff date
-  Future<void> _cleanupDataForKey(String key, DateTime cutoffDate, SharedPreferences prefs) async {
+  Future<void> _cleanupDataForKey(
+    String key,
+    DateTime cutoffDate,
+    SharedPreferences prefs,
+  ) async {
     try {
-      if (key.contains('interaction_history_') || key.contains('query_history_')) {
+      if (key.contains('interaction_history_') ||
+          key.contains('query_history_')) {
         // Clean up history data
         final history = prefs.getStringList(key) ?? [];
         final filteredHistory = <String>[];

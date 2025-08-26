@@ -8,7 +8,8 @@ import '../secure_storage/secure_storage_service.dart';
 /// This is a simplified integration service that coordinates the sophisticated RAG features
 class SophisticatedRagIntegrationService {
   static SophisticatedRagIntegrationService? _instance;
-  static SophisticatedRagIntegrationService get instance => _instance ??= SophisticatedRagIntegrationService._();
+  static SophisticatedRagIntegrationService get instance =>
+      _instance ??= SophisticatedRagIntegrationService._();
 
   SophisticatedRagIntegrationService._();
 
@@ -20,14 +21,19 @@ class SophisticatedRagIntegrationService {
   CulturalContext? _currentCulturalContext;
 
   // Stream controllers for unified events
-  final _queryProcessedController = StreamController<SophisticatedQueryResult>.broadcast();
-  final _proactiveSuggestionController = StreamController<ProactiveSuggestion>.broadcast();
+  final _queryProcessedController =
+      StreamController<SophisticatedQueryResult>.broadcast();
+  final _proactiveSuggestionController =
+      StreamController<ProactiveSuggestion>.broadcast();
   final _contextUpdateController = StreamController<ContextUpdate>.broadcast();
 
   // Public streams
-  Stream<SophisticatedQueryResult> get queryProcessedStream => _queryProcessedController.stream;
-  Stream<ProactiveSuggestion> get proactiveSuggestionStream => _proactiveSuggestionController.stream;
-  Stream<ContextUpdate> get contextUpdateStream => _contextUpdateController.stream;
+  Stream<SophisticatedQueryResult> get queryProcessedStream =>
+      _queryProcessedController.stream;
+  Stream<ProactiveSuggestion> get proactiveSuggestionStream =>
+      _proactiveSuggestionController.stream;
+  Stream<ContextUpdate> get contextUpdateStream =>
+      _contextUpdateController.stream;
 
   /// Initialize sophisticated RAG integration service
   Future<void> initialize() async {
@@ -41,9 +47,13 @@ class SophisticatedRagIntegrationService {
       await _secureStorage.initialize();
 
       _isInitialized = true;
-      AppLogger.info('Sophisticated RAG Integration Service initialized successfully');
+      AppLogger.info(
+        'Sophisticated RAG Integration Service initialized successfully',
+      );
     } catch (e) {
-      AppLogger.error('Failed to initialize Sophisticated RAG Integration Service: $e');
+      AppLogger.error(
+        'Failed to initialize Sophisticated RAG Integration Service: $e',
+      );
       rethrow;
     }
   }
@@ -58,7 +68,9 @@ class SophisticatedRagIntegrationService {
     await _ensureInitialized();
 
     try {
-      AppLogger.info('Processing sophisticated query: ${query.substring(0, query.length < 50 ? query.length : 50)}...');
+      AppLogger.info(
+        'Processing sophisticated query: ${query.substring(0, query.length < 50 ? query.length : 50)}...',
+      );
 
       final startTime = DateTime.now();
       final queryId = 'query_${startTime.millisecondsSinceEpoch}';
@@ -79,7 +91,9 @@ class SophisticatedRagIntegrationService {
 
       _queryProcessedController.add(result);
 
-      AppLogger.info('Sophisticated query processed successfully in ${result.processingTime.inMilliseconds}ms');
+      AppLogger.info(
+        'Sophisticated query processed successfully in ${result.processingTime.inMilliseconds}ms',
+      );
       return result;
     } catch (e) {
       AppLogger.error('Failed to process sophisticated query: $e');
@@ -202,9 +216,17 @@ class ContextUpdate {
   final Map<String, dynamic> data;
   final DateTime timestamp;
 
-  ContextUpdate({required this.type, required this.data, required this.timestamp});
+  ContextUpdate({
+    required this.type,
+    required this.data,
+    required this.timestamp,
+  });
 
-  Map<String, dynamic> toJson() => {'type': type.toString(), 'data': data, 'timestamp': timestamp.toIso8601String()};
+  Map<String, dynamic> toJson() => {
+    'type': type.toString(),
+    'data': data,
+    'timestamp': timestamp.toIso8601String(),
+  };
 }
 
 /// Types of context updates

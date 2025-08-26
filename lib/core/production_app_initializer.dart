@@ -59,7 +59,9 @@ class ProductionAppInitializer {
       initStopwatch.stop();
       _isInitialized = true;
 
-      _logger.i('Production app initialization completed in ${initStopwatch.elapsedMilliseconds}ms');
+      _logger.i(
+        'Production app initialization completed in ${initStopwatch.elapsedMilliseconds}ms',
+      );
 
       // Track successful initialization
       await ProductionAnalytics.trackEvent('app_initialization_completed', {
@@ -70,7 +72,11 @@ class ProductionAppInitializer {
       });
     } catch (e, stackTrace) {
       initStopwatch.stop();
-      _logger.e('Failed to initialize production app', error: e, stackTrace: stackTrace);
+      _logger.e(
+        'Failed to initialize production app',
+        error: e,
+        stackTrace: stackTrace,
+      );
 
       // Still record the error even if crash reporting isn't fully initialized
       try {
@@ -81,7 +87,10 @@ class ProductionAppInitializer {
           severity: CrashSeverity.critical,
         );
       } catch (crashReportError) {
-        _logger.e('Failed to record initialization error', error: crashReportError);
+        _logger.e(
+          'Failed to record initialization error',
+          error: crashReportError,
+        );
       }
 
       rethrow;
@@ -91,10 +100,16 @@ class ProductionAppInitializer {
   static Future<void> _initializeFirebase() async {
     try {
       _logger.i('Initializing Firebase...');
-      await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
       _logger.i('Firebase initialized successfully');
     } catch (e, stackTrace) {
-      _logger.e('Failed to initialize Firebase', error: e, stackTrace: stackTrace);
+      _logger.e(
+        'Failed to initialize Firebase',
+        error: e,
+        stackTrace: stackTrace,
+      );
       rethrow;
     }
   }
@@ -105,7 +120,11 @@ class ProductionAppInitializer {
       await ProductionCrashReporter.initialize();
       _logger.i('Crash reporting initialized successfully');
     } catch (e, stackTrace) {
-      _logger.e('Failed to initialize crash reporting', error: e, stackTrace: stackTrace);
+      _logger.e(
+        'Failed to initialize crash reporting',
+        error: e,
+        stackTrace: stackTrace,
+      );
       // Don't rethrow - continue without crash reporting if necessary
     }
   }
@@ -116,8 +135,16 @@ class ProductionAppInitializer {
       await DeploymentConfigService.initialize();
       _logger.i('Deployment configuration initialized successfully');
     } catch (e, stackTrace) {
-      _logger.e('Failed to initialize deployment config', error: e, stackTrace: stackTrace);
-      await ProductionCrashReporter.recordError(e, stackTrace, context: 'DeploymentConfig.initialize');
+      _logger.e(
+        'Failed to initialize deployment config',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      await ProductionCrashReporter.recordError(
+        e,
+        stackTrace,
+        context: 'DeploymentConfig.initialize',
+      );
       rethrow;
     }
   }
@@ -128,8 +155,16 @@ class ProductionAppInitializer {
       _featureFlagService = await FeatureFlagService.initialize();
       _logger.i('Feature flags initialized successfully');
     } catch (e, stackTrace) {
-      _logger.e('Failed to initialize feature flags', error: e, stackTrace: stackTrace);
-      await ProductionCrashReporter.recordError(e, stackTrace, context: 'FeatureFlags.initialize');
+      _logger.e(
+        'Failed to initialize feature flags',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      await ProductionCrashReporter.recordError(
+        e,
+        stackTrace,
+        context: 'FeatureFlags.initialize',
+      );
       // Continue without feature flags if necessary
     }
   }
@@ -144,8 +179,16 @@ class ProductionAppInitializer {
         _logger.i('Analytics disabled in configuration');
       }
     } catch (e, stackTrace) {
-      _logger.e('Failed to initialize analytics', error: e, stackTrace: stackTrace);
-      await ProductionCrashReporter.recordError(e, stackTrace, context: 'Analytics.initialize');
+      _logger.e(
+        'Failed to initialize analytics',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      await ProductionCrashReporter.recordError(
+        e,
+        stackTrace,
+        context: 'Analytics.initialize',
+      );
       // Continue without analytics if necessary
     }
   }
@@ -160,8 +203,16 @@ class ProductionAppInitializer {
         _logger.i('Performance monitoring disabled in configuration');
       }
     } catch (e, stackTrace) {
-      _logger.e('Failed to initialize performance monitoring', error: e, stackTrace: stackTrace);
-      await ProductionCrashReporter.recordError(e, stackTrace, context: 'PerformanceMonitor.initialize');
+      _logger.e(
+        'Failed to initialize performance monitoring',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      await ProductionCrashReporter.recordError(
+        e,
+        stackTrace,
+        context: 'PerformanceMonitor.initialize',
+      );
       // Continue without performance monitoring if necessary
     }
   }
@@ -172,8 +223,16 @@ class ProductionAppInitializer {
       await UserFeedbackService.initialize();
       _logger.i('User feedback service initialized successfully');
     } catch (e, stackTrace) {
-      _logger.e('Failed to initialize user feedback service', error: e, stackTrace: stackTrace);
-      await ProductionCrashReporter.recordError(e, stackTrace, context: 'UserFeedbackService.initialize');
+      _logger.e(
+        'Failed to initialize user feedback service',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      await ProductionCrashReporter.recordError(
+        e,
+        stackTrace,
+        context: 'UserFeedbackService.initialize',
+      );
       // Continue without feedback service if necessary
     }
   }
@@ -183,7 +242,8 @@ class ProductionAppInitializer {
       _logger.i('Validating production services...');
 
       final validationResults = <String, bool>{
-        'deployment_config': await DeploymentConfigService.validateConfiguration(),
+        'deployment_config':
+            await DeploymentConfigService.validateConfiguration(),
         'feature_flags': _isFeatureFlagsHealthy(),
         'analytics': _isAnalyticsHealthy(),
         'performance_monitor': _isPerformanceMonitorHealthy(),
@@ -191,10 +251,15 @@ class ProductionAppInitializer {
       };
 
       final failedServices =
-          validationResults.entries.where((entry) => !entry.value).map((entry) => entry.key).toList();
+          validationResults.entries
+              .where((entry) => !entry.value)
+              .map((entry) => entry.key)
+              .toList();
 
       if (failedServices.isNotEmpty) {
-        _logger.w('Some services failed validation: ${failedServices.join(', ')}');
+        _logger.w(
+          'Some services failed validation: ${failedServices.join(', ')}',
+        );
 
         // Track service validation issues
         await ProductionAnalytics.trackEvent('service_validation_issues', {
@@ -206,7 +271,11 @@ class ProductionAppInitializer {
       }
     } catch (e, stackTrace) {
       _logger.e('Service validation failed', error: e, stackTrace: stackTrace);
-      await ProductionCrashReporter.recordError(e, stackTrace, context: 'ServiceValidation');
+      await ProductionCrashReporter.recordError(
+        e,
+        stackTrace,
+        context: 'ServiceValidation',
+      );
     }
   }
 
@@ -270,13 +339,19 @@ class ProductionAppInitializer {
 
       _logger.i('Production services cleanup completed');
     } catch (e, stackTrace) {
-      _logger.e('Failed to cleanup production services', error: e, stackTrace: stackTrace);
+      _logger.e(
+        'Failed to cleanup production services',
+        error: e,
+        stackTrace: stackTrace,
+      );
     }
   }
 }
 
 /// Production-ready Riverpod providers
-final productionAppInitializerProvider = Provider<ProductionAppInitializer>((ref) {
+final productionAppInitializerProvider = Provider<ProductionAppInitializer>((
+  ref,
+) {
   return ProductionAppInitializer();
 });
 
@@ -296,10 +371,14 @@ final featureFlagServiceProvider = Provider<FeatureFlagService>((ref) {
 });
 
 /// Production app state provider
-final productionAppStateProvider = StreamProvider<Map<String, dynamic>>((ref) async* {
+final productionAppStateProvider = StreamProvider<Map<String, dynamic>>((
+  ref,
+) async* {
   while (true) {
     yield ProductionAppInitializer.getServicesStatus();
-    await Future.delayed(const Duration(seconds: 30)); // Update every 30 seconds
+    await Future.delayed(
+      const Duration(seconds: 30),
+    ); // Update every 30 seconds
   }
 });
 
@@ -370,7 +449,11 @@ class ProductionAppWrapper extends ConsumerWidget {
   final Widget child;
   final VoidCallback? onInitializationError;
 
-  const ProductionAppWrapper({super.key, required this.child, this.onInitializationError});
+  const ProductionAppWrapper({
+    super.key,
+    required this.child,
+    this.onInitializationError,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -384,7 +467,11 @@ class ProductionAppWrapper extends ConsumerWidget {
               body: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [CircularProgressIndicator(), SizedBox(height: 16), Text('Initializing DuaCopilot...')],
+                  children: [
+                    CircularProgressIndicator(),
+                    SizedBox(height: 16),
+                    Text('Initializing DuaCopilot...'),
+                  ],
                 ),
               ),
             ),
@@ -402,7 +489,11 @@ class ProductionAppWrapper extends ConsumerWidget {
               body: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [CircularProgressIndicator(), SizedBox(height: 16), Text('Loading production services...')],
+                  children: [
+                    CircularProgressIndicator(),
+                    SizedBox(height: 16),
+                    Text('Loading production services...'),
+                  ],
                 ),
               ),
             ),
@@ -418,7 +509,10 @@ class ProductionAppWrapper extends ConsumerWidget {
                 children: [
                   const Icon(Icons.error, color: Colors.red, size: 48),
                   const SizedBox(height: 16),
-                  const Text('Failed to initialize app', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const Text(
+                    'Failed to initialize app',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
                   const SizedBox(height: 8),
                   Text(error.toString()),
                   const SizedBox(height: 16),

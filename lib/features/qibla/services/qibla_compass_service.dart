@@ -22,7 +22,8 @@ class QiblaCompassService {
   StreamSubscription<AccelerometerEvent>? _accelerometerSubscription;
   StreamSubscription<GyroscopeEvent>? _gyroscopeSubscription;
 
-  final StreamController<QiblaCompass> _compassController = StreamController<QiblaCompass>.broadcast();
+  final StreamController<QiblaCompass> _compassController =
+      StreamController<QiblaCompass>.broadcast();
 
   // Sensor data for advanced calibration
   final List<double> _magneticReadings = [];
@@ -46,7 +47,8 @@ class QiblaCompassService {
     try {
       // Request location permissions
       final permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
         throw Exception('Location permission is required for Qibla compass');
       }
 
@@ -75,7 +77,10 @@ class QiblaCompassService {
       );
 
       if (_currentPosition != null) {
-        _qiblaDirection = _calculateQiblaDirection(_currentPosition!.latitude, _currentPosition!.longitude);
+        _qiblaDirection = _calculateQiblaDirection(
+          _currentPosition!.latitude,
+          _currentPosition!.longitude,
+        );
 
         // Save location for offline use
         await _secureStorage.saveValue(
@@ -117,7 +122,9 @@ class QiblaCompassService {
     final double deltaLng = kaabaLngRad - userLngRad;
 
     final double y = sin(deltaLng) * cos(kaabaLatRad);
-    final double x = cos(userLatRad) * sin(kaabaLatRad) - sin(userLatRad) * cos(kaabaLatRad) * cos(deltaLng);
+    final double x =
+        cos(userLatRad) * sin(kaabaLatRad) -
+        sin(userLatRad) * cos(kaabaLatRad) * cos(deltaLng);
 
     double qiblaDirection = atan2(y, x) * 180 / pi;
 
@@ -193,9 +200,11 @@ class QiblaCompassService {
     }
 
     // Calculate variance in magnetic readings
-    final double mean = _magneticReadings.reduce((a, b) => a + b) / _magneticReadings.length;
+    final double mean =
+        _magneticReadings.reduce((a, b) => a + b) / _magneticReadings.length;
     final double variance =
-        _magneticReadings.map((x) => pow(x - mean, 2)).reduce((a, b) => a + b) / _magneticReadings.length;
+        _magneticReadings.map((x) => pow(x - mean, 2)).reduce((a, b) => a + b) /
+        _magneticReadings.length;
 
     // Determine quality based on variance
     if (variance < 5) {
@@ -215,7 +224,8 @@ class QiblaCompassService {
 
     final LocationAccuracy accuracy = _getLocationAccuracy();
     final bool needsCalibration =
-        _calibrationQuality == CalibrationQuality.poor || _calibrationQuality == CalibrationQuality.uncalibrated;
+        _calibrationQuality == CalibrationQuality.poor ||
+        _calibrationQuality == CalibrationQuality.uncalibrated;
 
     final compass = QiblaCompass(
       qiblaDirection: _qiblaDirection,
@@ -299,7 +309,10 @@ class QiblaCompassService {
   /// Save calibration data to secure storage
   Future<void> _saveCalibrationData() async {
     try {
-      await _secureStorage.saveValue(_calibrationKey, DateTime.now().toIso8601String());
+      await _secureStorage.saveValue(
+        _calibrationKey,
+        DateTime.now().toIso8601String(),
+      );
       _lastCalibration = DateTime.now();
     } catch (e) {
       print('Failed to save calibration data: $e');
@@ -326,7 +339,8 @@ class QiblaCompassService {
       // Save calibration
       await _saveCalibrationData();
 
-      return _calibrationQuality == CalibrationQuality.good || _calibrationQuality == CalibrationQuality.excellent;
+      return _calibrationQuality == CalibrationQuality.good ||
+          _calibrationQuality == CalibrationQuality.excellent;
     } catch (e) {
       print('Calibration failed: $e');
       return false;
@@ -334,7 +348,9 @@ class QiblaCompassService {
   }
 
   /// Find nearby mosques with Qibla alignment info
-  Future<List<MosqueLocation>> findNearbyMosques({double radiusKm = 5.0}) async {
+  Future<List<MosqueLocation>> findNearbyMosques({
+    double radiusKm = 5.0,
+  }) async {
     if (_currentPosition == null) return [];
 
     try {
@@ -369,7 +385,8 @@ class QiblaCompassService {
       accuracy: _getLocationAccuracy(),
       lastUpdated: DateTime.now(),
       isCalibrationNeeded:
-          _calibrationQuality == CalibrationQuality.poor || _calibrationQuality == CalibrationQuality.uncalibrated,
+          _calibrationQuality == CalibrationQuality.poor ||
+          _calibrationQuality == CalibrationQuality.uncalibrated,
       distanceToKaaba: _calculateDistanceToKaaba(),
       calibrationData: _getCalibrationData(),
     );

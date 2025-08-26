@@ -86,7 +86,12 @@ class RagPerformanceTracker {
     }
   }
 
-  Future<void> complete({bool success = true, String? errorMessage, int? resultCount, bool? cacheHit}) async {
+  Future<void> complete({
+    bool success = true,
+    String? errorMessage,
+    int? resultCount,
+    bool? cacheHit,
+  }) async {
     if (_isCompleted) return;
 
     _stopwatch.stop();
@@ -95,7 +100,8 @@ class RagPerformanceTracker {
     // Set final attributes
     addAttribute('success', success.toString());
     if (errorMessage != null) addAttribute('error_message', errorMessage);
-    if (resultCount != null) addAttribute('result_count', resultCount.toString());
+    if (resultCount != null)
+      addAttribute('result_count', resultCount.toString());
     if (cacheHit != null) addAttribute('cache_hit', cacheHit.toString());
 
     // Set metrics
@@ -163,11 +169,22 @@ class ProductionPerformanceMonitor {
         'performance_monitor_init',
         Duration.zero, // No duration for initialization
         success: true,
-        attributes: {'timestamp': DateTime.now().toIso8601String(), 'platform': Platform.operatingSystem},
+        attributes: {
+          'timestamp': DateTime.now().toIso8601String(),
+          'platform': Platform.operatingSystem,
+        },
       );
     } catch (e, stackTrace) {
-      _logger.e('Failed to initialize ProductionPerformanceMonitor', error: e, stackTrace: stackTrace);
-      await ProductionCrashReporter.recordError(e, stackTrace, context: 'PerformanceMonitor.initialize');
+      _logger.e(
+        'Failed to initialize ProductionPerformanceMonitor',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      await ProductionCrashReporter.recordError(
+        e,
+        stackTrace,
+        context: 'PerformanceMonitor.initialize',
+      );
     }
   }
 
@@ -183,15 +200,24 @@ class ProductionPerformanceMonitor {
 
       if (queryType != null) tracker.addAttribute('query_type', queryType);
       if (modelName != null) tracker.addAttribute('model_name', modelName);
-      if (inputTokens != null) tracker.addAttribute('input_tokens', inputTokens.toString());
+      if (inputTokens != null)
+        tracker.addAttribute('input_tokens', inputTokens.toString());
 
       _activeTrackers[queryId] = tracker;
 
       _logger.d('Started RAG query performance tracking: $queryId');
       return tracker;
     } catch (e, stackTrace) {
-      _logger.e('Failed to start RAG query tracking', error: e, stackTrace: stackTrace);
-      await ProductionCrashReporter.recordError(e, stackTrace, context: 'PerformanceMonitor.startRagQuery');
+      _logger.e(
+        'Failed to start RAG query tracking',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      await ProductionCrashReporter.recordError(
+        e,
+        stackTrace,
+        context: 'PerformanceMonitor.startRagQuery',
+      );
 
       // Return a no-op tracker on error
       final trace = _performance.newTrace('rag_query_error');
@@ -212,7 +238,8 @@ class ProductionPerformanceMonitor {
     try {
       final tracker = _activeTrackers.remove(queryId);
       if (tracker != null) {
-        if (outputTokens != null) tracker.addAttribute('output_tokens', outputTokens.toString());
+        if (outputTokens != null)
+          tracker.addAttribute('output_tokens', outputTokens.toString());
 
         await tracker.complete(
           success: success,
@@ -221,11 +248,21 @@ class ProductionPerformanceMonitor {
           cacheHit: cacheHit,
         );
 
-        _logger.d('Completed RAG query performance tracking: $queryId (${tracker.elapsed.inMilliseconds}ms)');
+        _logger.d(
+          'Completed RAG query performance tracking: $queryId (${tracker.elapsed.inMilliseconds}ms)',
+        );
       }
     } catch (e, stackTrace) {
-      _logger.e('Failed to complete RAG query tracking', error: e, stackTrace: stackTrace);
-      await ProductionCrashReporter.recordError(e, stackTrace, context: 'PerformanceMonitor.completeRagQuery');
+      _logger.e(
+        'Failed to complete RAG query tracking',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      await ProductionCrashReporter.recordError(
+        e,
+        stackTrace,
+        context: 'PerformanceMonitor.completeRagQuery',
+      );
     }
   }
 
@@ -245,7 +282,8 @@ class ProductionPerformanceMonitor {
       // Add attributes
       trace.putAttribute('operation_type', operationType);
       trace.putAttribute('success', success.toString());
-      if (errorMessage != null) trace.putAttribute('error_message', errorMessage);
+      if (errorMessage != null)
+        trace.putAttribute('error_message', errorMessage);
 
       if (attributes != null) {
         for (final entry in attributes.entries) {
@@ -270,10 +308,20 @@ class ProductionPerformanceMonitor {
       _metricsBuffer.add(metrics);
       await _cacheMetric(metrics);
 
-      _logger.d('Tracked custom metric: $operationType (${duration.inMilliseconds}ms)');
+      _logger.d(
+        'Tracked custom metric: $operationType (${duration.inMilliseconds}ms)',
+      );
     } catch (e, stackTrace) {
-      _logger.e('Failed to track custom metric', error: e, stackTrace: stackTrace);
-      await ProductionCrashReporter.recordError(e, stackTrace, context: 'PerformanceMonitor.trackCustomMetric');
+      _logger.e(
+        'Failed to track custom metric',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      await ProductionCrashReporter.recordError(
+        e,
+        stackTrace,
+        context: 'PerformanceMonitor.trackCustomMetric',
+      );
     }
   }
 
@@ -315,8 +363,16 @@ class ProductionPerformanceMonitor {
         'error_message': errorMessage,
       });
     } catch (e, stackTrace) {
-      _logger.e('Failed to track network request', error: e, stackTrace: stackTrace);
-      await ProductionCrashReporter.recordError(e, stackTrace, context: 'PerformanceMonitor.trackNetworkRequest');
+      _logger.e(
+        'Failed to track network request',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      await ProductionCrashReporter.recordError(
+        e,
+        stackTrace,
+        context: 'PerformanceMonitor.trackNetworkRequest',
+      );
     }
   }
 
@@ -334,8 +390,15 @@ class ProductionPerformanceMonitor {
   }
 
   /// Track screen render performance
-  static Future<void> trackScreenRender(String screenName, Duration renderDuration) async {
-    await trackCustomMetric('screen_render', renderDuration, attributes: {'screen_name': screenName});
+  static Future<void> trackScreenRender(
+    String screenName,
+    Duration renderDuration,
+  ) async {
+    await trackCustomMetric(
+      'screen_render',
+      renderDuration,
+      attributes: {'screen_name': screenName},
+    );
   }
 
   /// Track memory usage
@@ -352,7 +415,11 @@ class ProductionPerformanceMonitor {
 
       await ProductionAnalytics.trackEvent('memory_usage', memoryMetrics);
     } catch (e, stackTrace) {
-      _logger.e('Failed to track memory usage', error: e, stackTrace: stackTrace);
+      _logger.e(
+        'Failed to track memory usage',
+        error: e,
+        stackTrace: stackTrace,
+      );
     }
   }
 
@@ -424,12 +491,17 @@ class ProductionPerformanceMonitor {
       final cachedMetrics = _prefs?.getStringList(_performanceDataKey) ?? [];
 
       if (cachedMetrics.isNotEmpty) {
-        _logger.i('Processing ${cachedMetrics.length} cached performance metrics');
+        _logger.i(
+          'Processing ${cachedMetrics.length} cached performance metrics',
+        );
 
         for (final metricJson in cachedMetrics) {
           try {
             final metricData = json.decode(metricJson) as Map<String, dynamic>;
-            await ProductionAnalytics.trackEvent('cached_performance_metric', metricData);
+            await ProductionAnalytics.trackEvent(
+              'cached_performance_metric',
+              metricData,
+            );
           } catch (e) {
             _logger.w('Failed to process cached metric', error: e);
           }
@@ -472,10 +544,12 @@ class PerformanceMonitoredWidget extends StatefulWidget {
   });
 
   @override
-  State<PerformanceMonitoredWidget> createState() => _PerformanceMonitoredWidgetState();
+  State<PerformanceMonitoredWidget> createState() =>
+      _PerformanceMonitoredWidgetState();
 }
 
-class _PerformanceMonitoredWidgetState extends State<PerformanceMonitoredWidget> {
+class _PerformanceMonitoredWidgetState
+    extends State<PerformanceMonitoredWidget> {
   late final Stopwatch _stopwatch;
 
   @override
@@ -491,7 +565,10 @@ class _PerformanceMonitoredWidgetState extends State<PerformanceMonitoredWidget>
     super.didChangeDependencies();
     if (widget.trackRenderTime && _stopwatch.isRunning) {
       _stopwatch.stop();
-      ProductionPerformanceMonitor.trackScreenRender(widget.widgetName, _stopwatch.elapsed);
+      ProductionPerformanceMonitor.trackScreenRender(
+        widget.widgetName,
+        _stopwatch.elapsed,
+      );
     }
   }
 
@@ -503,7 +580,10 @@ class _PerformanceMonitoredWidgetState extends State<PerformanceMonitoredWidget>
 
 /// Extensions for easy performance tracking
 extension PerformanceTrackingExtension<T> on Future<T> Function() {
-  Future<T> trackPerformance(String operationType, {Map<String, dynamic>? attributes}) async {
+  Future<T> trackPerformance(
+    String operationType, {
+    Map<String, dynamic>? attributes,
+  }) async {
     final stopwatch = Stopwatch()..start();
     String? errorMessage;
     bool success = true;

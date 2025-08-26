@@ -25,7 +25,9 @@ import '../../presentation/screens/settings/settings_screen.dart';
 import '../../presentation/screens/subscription/subscription_screen.dart';
 
 // Core navigation keys
-final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
+final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(
+  debugLabel: 'root',
+);
 
 /// Professional GoRouter configuration for DuaCopilot
 /// Handles all navigation including premium features, deep linking, and security
@@ -37,14 +39,19 @@ final goRouterProvider = Provider<GoRouter>((ref) {
     initialLocation: '/',
 
     // Error handling
-    errorBuilder: (context, state) => ErrorScreen(error: state.error.toString()),
+    errorBuilder:
+        (context, state) => ErrorScreen(error: state.error.toString()),
 
     // Route definitions
     routes: [
       // ═══════════════════════════════════════════════════════════════════════════
       // 🏠 HOME ROUTES
       // ═══════════════════════════════════════════════════════════════════════════
-      GoRoute(path: '/', name: 'home', builder: (context, state) => const ProfessionalHomeScreen()),
+      GoRoute(
+        path: '/',
+        name: 'home',
+        builder: (context, state) => const ProfessionalHomeScreen(),
+      ),
 
       GoRoute(
         path: '/revolutionary-home',
@@ -55,13 +62,29 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       // ═══════════════════════════════════════════════════════════════════════════
       // 🕌 ISLAMIC CORE FEATURES
       // ═══════════════════════════════════════════════════════════════════════════
-      GoRoute(path: '/quran', name: 'quran', builder: (context, state) => const QuranExplorerScreen()),
+      GoRoute(
+        path: '/quran',
+        name: 'quran',
+        builder: (context, state) => const QuranExplorerScreen(),
+      ),
 
-      GoRoute(path: '/prayer-times', name: 'prayer_times', builder: (context, state) => const PrayerTimesScreen()),
+      GoRoute(
+        path: '/prayer-times',
+        name: 'prayer_times',
+        builder: (context, state) => const PrayerTimesScreen(),
+      ),
 
-      GoRoute(path: '/qibla', name: 'qibla', builder: (context, state) => const QiblaCompassScreen()),
+      GoRoute(
+        path: '/qibla',
+        name: 'qibla',
+        builder: (context, state) => const QiblaCompassScreen(),
+      ),
 
-      GoRoute(path: '/tasbih', name: 'tasbih', builder: (context, state) => const DigitalTasbihScreen()),
+      GoRoute(
+        path: '/tasbih',
+        name: 'tasbih',
+        builder: (context, state) => const DigitalTasbihScreen(),
+      ),
 
       GoRoute(
         path: '/islamic-calendar',
@@ -182,7 +205,11 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         name: 'subscription',
         builder: (context, state) => const SubscriptionScreen(),
         routes: [
-          GoRoute(path: '/billing', name: 'billing', builder: (context, state) => const BillingScreen()),
+          GoRoute(
+            path: '/billing',
+            name: 'billing',
+            builder: (context, state) => const BillingScreen(),
+          ),
           GoRoute(
             path: '/upgrade/:tier',
             name: 'upgrade',
@@ -225,7 +252,11 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         ],
       ),
 
-      GoRoute(path: '/help', name: 'help', builder: (context, state) => const ScreenAssistance()),
+      GoRoute(
+        path: '/help',
+        name: 'help',
+        builder: (context, state) => const ScreenAssistance(),
+      ),
 
       // ═══════════════════════════════════════════════════════════════════════════
       // 🔗 DEEP LINKING ROUTES
@@ -291,11 +322,17 @@ class ErrorScreen extends StatelessWidget {
           children: [
             const Icon(Icons.error_outline, size: 64, color: Colors.red),
             const SizedBox(height: 16),
-            Text('Navigation Error', style: Theme.of(context).textTheme.headlineMedium),
+            Text(
+              'Navigation Error',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
             const SizedBox(height: 8),
             Text(error, textAlign: TextAlign.center),
             const SizedBox(height: 24),
-            ElevatedButton(onPressed: () => context.go('/'), child: const Text('Go Home')),
+            ElevatedButton(
+              onPressed: () => context.go('/'),
+              child: const Text('Go Home'),
+            ),
           ],
         ),
       ),
@@ -319,10 +356,16 @@ class QariDetailScreen extends StatelessWidget {
           children: [
             const Icon(Icons.person, size: 64),
             const SizedBox(height: 16),
-            Text('Qari Details', style: Theme.of(context).textTheme.headlineMedium),
+            Text(
+              'Qari Details',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
             Text('Qari ID: $qariId'),
             const SizedBox(height: 24),
-            ElevatedButton(onPressed: () => context.pop(), child: const Text('Back')),
+            ElevatedButton(
+              onPressed: () => context.pop(),
+              child: const Text('Back'),
+            ),
           ],
         ),
       ),
@@ -346,10 +389,16 @@ class PlaylistDetailScreen extends StatelessWidget {
           children: [
             const Icon(Icons.playlist_play, size: 64),
             const SizedBox(height: 16),
-            Text('Playlist Details', style: Theme.of(context).textTheme.headlineMedium),
+            Text(
+              'Playlist Details',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
             Text('Playlist ID: $playlistId'),
             const SizedBox(height: 24),
-            ElevatedButton(onPressed: () => context.pop(), child: const Text('Back')),
+            ElevatedButton(
+              onPressed: () => context.pop(),
+              child: const Text('Back'),
+            ),
           ],
         ),
       ),
@@ -373,10 +422,16 @@ class CourseDetailScreen extends StatelessWidget {
           children: [
             const Icon(Icons.school, size: 64),
             const SizedBox(height: 16),
-            Text('Course Details', style: Theme.of(context).textTheme.headlineMedium),
+            Text(
+              'Course Details',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
             Text('Course ID: $courseId'),
             const SizedBox(height: 24),
-            ElevatedButton(onPressed: () => context.pop(), child: const Text('Back')),
+            ElevatedButton(
+              onPressed: () => context.pop(),
+              child: const Text('Back'),
+            ),
           ],
         ),
       ),
@@ -400,10 +455,16 @@ class LiveSessionScreen extends StatelessWidget {
           children: [
             const Icon(Icons.live_tv, size: 64),
             const SizedBox(height: 16),
-            Text('Live Session', style: Theme.of(context).textTheme.headlineMedium),
+            Text(
+              'Live Session',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
             Text('Session ID: $sessionId'),
             const SizedBox(height: 24),
-            ElevatedButton(onPressed: () => context.pop(), child: const Text('Back')),
+            ElevatedButton(
+              onPressed: () => context.pop(),
+              child: const Text('Back'),
+            ),
           ],
         ),
       ),
@@ -555,10 +616,16 @@ class DuaDetailScreen extends StatelessWidget {
           children: [
             const Icon(Icons.favorite, size: 64),
             const SizedBox(height: 16),
-            Text('Dua Details', style: Theme.of(context).textTheme.headlineMedium),
+            Text(
+              'Dua Details',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
             Text('Dua ID: $duaId'),
             const SizedBox(height: 24),
-            ElevatedButton(onPressed: () => context.pop(), child: const Text('Back')),
+            ElevatedButton(
+              onPressed: () => context.pop(),
+              child: const Text('Back'),
+            ),
           ],
         ),
       ),
@@ -570,7 +637,11 @@ class SharedContentScreen extends StatelessWidget {
   final String contentType;
   final String contentId;
 
-  const SharedContentScreen({super.key, required this.contentType, required this.contentId});
+  const SharedContentScreen({
+    super.key,
+    required this.contentType,
+    required this.contentId,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -582,11 +653,17 @@ class SharedContentScreen extends StatelessWidget {
           children: [
             const Icon(Icons.share, size: 64),
             const SizedBox(height: 16),
-            Text('Shared Content', style: Theme.of(context).textTheme.headlineMedium),
+            Text(
+              'Shared Content',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
             Text('Type: $contentType'),
             Text('ID: $contentId'),
             const SizedBox(height: 24),
-            ElevatedButton(onPressed: () => context.go('/'), child: const Text('Go Home')),
+            ElevatedButton(
+              onPressed: () => context.go('/'),
+              child: const Text('Go Home'),
+            ),
           ],
         ),
       ),
@@ -601,12 +678,22 @@ class WebWrapperScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _buildComingSoonScreen(context, 'Web View', 'Enhanced web wrapper for external content', Icons.web);
+    return _buildComingSoonScreen(
+      context,
+      'Web View',
+      'Enhanced web wrapper for external content',
+      Icons.web,
+    );
   }
 }
 
 /// Helper function to build "coming soon" screens
-Widget _buildComingSoonScreen(BuildContext context, String title, String description, IconData icon) {
+Widget _buildComingSoonScreen(
+  BuildContext context,
+  String title,
+  String description,
+  IconData icon,
+) {
   return Scaffold(
     appBar: AppBar(
       title: Text(title),
@@ -619,8 +706,12 @@ Widget _buildComingSoonScreen(BuildContext context, String title, String descrip
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            Theme.of(context).colorScheme.primaryContainer.withValues(alpha: 0.1),
-            Theme.of(context).colorScheme.secondaryContainer.withValues(alpha: 0.1),
+            Theme.of(
+              context,
+            ).colorScheme.primaryContainer.withValues(alpha: 0.1),
+            Theme.of(
+              context,
+            ).colorScheme.secondaryContainer.withValues(alpha: 0.1),
           ],
         ),
       ),
@@ -636,7 +727,11 @@ Widget _buildComingSoonScreen(BuildContext context, String title, String descrip
                   color: Theme.of(context).colorScheme.primaryContainer,
                   shape: BoxShape.circle,
                 ),
-                child: Icon(icon, size: 64, color: Theme.of(context).colorScheme.onPrimaryContainer),
+                child: Icon(
+                  icon,
+                  size: 64,
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                ),
               ),
               const SizedBox(height: 32),
               Text(
@@ -650,14 +745,17 @@ Widget _buildComingSoonScreen(BuildContext context, String title, String descrip
               const SizedBox(height: 16),
               Text(
                 description,
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyLarge?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 32),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.secondaryContainer,
                   borderRadius: BorderRadius.circular(20),
@@ -678,14 +776,24 @@ Widget _buildComingSoonScreen(BuildContext context, String title, String descrip
                     onPressed: () => context.pop(),
                     icon: const Icon(Icons.arrow_back),
                     label: const Text('Go Back'),
-                    style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12)),
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 12,
+                      ),
+                    ),
                   ),
                   const SizedBox(width: 16),
                   FilledButton.icon(
                     onPressed: () => context.go('/premium'),
                     icon: const Icon(Icons.star),
                     label: const Text('View Premium'),
-                    style: FilledButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12)),
+                    style: FilledButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 12,
+                      ),
+                    ),
                   ),
                 ],
               ),

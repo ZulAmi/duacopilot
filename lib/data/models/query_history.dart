@@ -28,7 +28,8 @@ class QueryHistory with _$QueryHistory {
     int? accessCount,
   }) = _QueryHistory;
 
-  factory QueryHistory.fromJson(Map<String, dynamic> json) => _$QueryHistoryFromJson(json);
+  factory QueryHistory.fromJson(Map<String, dynamic> json) =>
+      _$QueryHistoryFromJson(json);
 }
 
 // Helper extension for database operations
@@ -61,7 +62,8 @@ extension QueryHistoryExtension on QueryHistory {
 // Static helper methods
 /// QueryHistoryHelper class implementation
 class QueryHistoryHelper {
-  static Future<Database> get _database async => RagDatabaseHelper.instance.database;
+  static Future<Database> get _database async =>
+      RagDatabaseHelper.instance.database;
 
   static QueryHistory fromDatabase(Map<String, dynamic> map) {
     return QueryHistory(
@@ -71,15 +73,30 @@ class QueryHistoryHelper {
       timestamp: DateTime.fromMillisecondsSinceEpoch(map['timestamp'] as int),
       responseTime: map['response_time'] as int,
       semanticHash: map['semantic_hash'] as String,
-      confidence: map['confidence'] != null ? (map['confidence'] as num).toDouble() : null,
+      confidence:
+          map['confidence'] != null
+              ? (map['confidence'] as num).toDouble()
+              : null,
       sessionId: map['session_id'] as String?,
-      tags: map['tags'] != null ? (map['tags'] as String).split(',').where((t) => t.isNotEmpty).toList() : null,
-      context: map['context'] != null ? _decodeJson(map['context'] as String) : null,
-      metadata: map['metadata'] != null ? _decodeJson(map['metadata'] as String) : null,
+      tags:
+          map['tags'] != null
+              ? (map['tags'] as String)
+                  .split(',')
+                  .where((t) => t.isNotEmpty)
+                  .toList()
+              : null,
+      context:
+          map['context'] != null ? _decodeJson(map['context'] as String) : null,
+      metadata:
+          map['metadata'] != null
+              ? _decodeJson(map['metadata'] as String)
+              : null,
       isFavorite: (map['is_favorite'] as int) == 1,
       isFromCache: (map['is_from_cache'] as int) == 1,
       lastAccessed:
-          map['last_accessed'] != null ? DateTime.fromMillisecondsSinceEpoch(map['last_accessed'] as int) : null,
+          map['last_accessed'] != null
+              ? DateTime.fromMillisecondsSinceEpoch(map['last_accessed'] as int)
+              : null,
       accessCount: map['access_count'] as int?,
     );
   }
@@ -90,7 +107,9 @@ class QueryHistoryHelper {
     await db.insert('query_history', queryHistory.toDatabase());
   }
 
-  static Future<List<QueryHistory>> findBySemanticHash(String semanticHash) async {
+  static Future<List<QueryHistory>> findBySemanticHash(
+    String semanticHash,
+  ) async {
     final db = await _database;
     final maps = await db.query(
       'query_history',
@@ -105,7 +124,10 @@ class QueryHistoryHelper {
     final db = await _database;
     await db.update(
       'query_history',
-      {'last_accessed': DateTime.now().millisecondsSinceEpoch, 'access_count': 'access_count + 1'},
+      {
+        'last_accessed': DateTime.now().millisecondsSinceEpoch,
+        'access_count': 'access_count + 1',
+      },
       where: 'id = ?',
       whereArgs: [id],
     );
@@ -145,7 +167,10 @@ class QueryHistoryHelper {
   // Semantic similarity helper
   static String generateSemanticHash(String query) {
     // Simple hash generation - in production, use semantic embeddings
-    final normalized = query.toLowerCase().trim().replaceAll(RegExp(r'\s+'), ' ');
+    final normalized = query.toLowerCase().trim().replaceAll(
+      RegExp(r'\s+'),
+      ' ',
+    );
     return normalized.hashCode.toString();
   }
 

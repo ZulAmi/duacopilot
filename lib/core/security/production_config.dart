@@ -5,9 +5,18 @@ import 'package:flutter/foundation.dart';
 /// Enterprise production configuration with security hardening
 class ProductionConfig {
   // Build configuration
-  static const bool isProduction = bool.fromEnvironment('PRODUCTION', defaultValue: false);
-  static const bool enableAnalytics = bool.fromEnvironment('ENABLE_ANALYTICS', defaultValue: true);
-  static const bool enableLogging = bool.fromEnvironment('ENABLE_LOGGING', defaultValue: false);
+  static const bool isProduction = bool.fromEnvironment(
+    'PRODUCTION',
+    defaultValue: false,
+  );
+  static const bool enableAnalytics = bool.fromEnvironment(
+    'ENABLE_ANALYTICS',
+    defaultValue: true,
+  );
+  static const bool enableLogging = bool.fromEnvironment(
+    'ENABLE_LOGGING',
+    defaultValue: false,
+  );
 
   // Security configuration
   static const bool enableDebugFeatures = false; // Always false in production
@@ -26,9 +35,18 @@ class ProductionConfig {
   );
 
   // App configuration
-  static const String appVersion = String.fromEnvironment('APP_VERSION', defaultValue: '1.0.0');
-  static const String buildNumber = String.fromEnvironment('BUILD_NUMBER', defaultValue: '1');
-  static const String flavor = String.fromEnvironment('FLAVOR', defaultValue: 'production');
+  static const String appVersion = String.fromEnvironment(
+    'APP_VERSION',
+    defaultValue: '1.0.0',
+  );
+  static const String buildNumber = String.fromEnvironment(
+    'BUILD_NUMBER',
+    defaultValue: '1',
+  );
+  static const String flavor = String.fromEnvironment(
+    'FLAVOR',
+    defaultValue: 'production',
+  );
 
   /// Check if running in secure production environment
   static bool get isSecureProduction {
@@ -115,14 +133,20 @@ class ProductionSecurityAssertion {
   static void assertProductionSecurity() {
     if (ProductionConfig.isProduction) {
       // Critical security assertions
-      assert(!ProductionConfig.enableAdminAccess, 'SECURITY VIOLATION: Admin access must be disabled in production');
+      assert(
+        !ProductionConfig.enableAdminAccess,
+        'SECURITY VIOLATION: Admin access must be disabled in production',
+      );
 
       assert(
         !ProductionConfig.enableDebugFeatures,
         'SECURITY VIOLATION: Debug features must be disabled in production',
       );
 
-      assert(kReleaseMode, 'SECURITY VIOLATION: Must use release mode in production');
+      assert(
+        kReleaseMode,
+        'SECURITY VIOLATION: Must use release mode in production',
+      );
 
       // Validate admin routes are blocked
       _validateAdminRoutesBlocked();
@@ -130,7 +154,9 @@ class ProductionSecurityAssertion {
       // Log security validation
       debugPrint('✅ SECURITY: Production security requirements validated');
     } else {
-      debugPrint('⚠️ DEVELOPMENT: Running in development mode - security checks relaxed');
+      debugPrint(
+        '⚠️ DEVELOPMENT: Running in development mode - security checks relaxed',
+      );
     }
   }
 

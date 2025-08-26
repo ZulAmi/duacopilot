@@ -156,7 +156,8 @@ class SmartChipWidget extends StatefulWidget {
 }
 
 /// _SmartChipWidgetState class implementation
-class _SmartChipWidgetState extends State<SmartChipWidget> with SingleTickerProviderStateMixin {
+class _SmartChipWidgetState extends State<SmartChipWidget>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _scaleAnimation;
   bool _isPressed = false;
@@ -164,11 +165,13 @@ class _SmartChipWidgetState extends State<SmartChipWidget> with SingleTickerProv
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(duration: const Duration(milliseconds: 150), vsync: this);
-    _scaleAnimation = Tween<double>(
-      begin: 1.0,
-      end: 0.95,
-    ).animate(CurvedAnimation(parent: _animationController, curve: Curves.easeInOut));
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 150),
+      vsync: this,
+    );
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
   }
 
   @override
@@ -205,8 +208,10 @@ class _SmartChipWidgetState extends State<SmartChipWidget> with SingleTickerProv
     final textTheme = Theme.of(context).textTheme;
 
     final chipColor = widget.chipData.color ?? colorScheme.primary;
-    final backgroundColor = widget.isSelected ? chipColor : chipColor.withOpacity(0.1);
-    final foregroundColor = widget.isSelected ? colorScheme.onPrimary : chipColor;
+    final backgroundColor =
+        widget.isSelected ? chipColor : chipColor.withOpacity(0.1);
+    final foregroundColor =
+        widget.isSelected ? colorScheme.onPrimary : chipColor;
 
     return AnimatedBuilder(
       animation: _scaleAnimation,
@@ -223,10 +228,22 @@ class _SmartChipWidgetState extends State<SmartChipWidget> with SingleTickerProv
               decoration: BoxDecoration(
                 color: backgroundColor,
                 borderRadius: BorderRadius.circular(20),
-                border: widget.isSelected ? null : Border.all(color: chipColor.withOpacity(0.3), width: 1),
+                border:
+                    widget.isSelected
+                        ? null
+                        : Border.all(
+                          color: chipColor.withOpacity(0.3),
+                          width: 1,
+                        ),
                 boxShadow:
                     widget.isSelected || _isPressed
-                        ? [BoxShadow(color: chipColor.withOpacity(0.3), blurRadius: 8, offset: const Offset(0, 2))]
+                        ? [
+                          BoxShadow(
+                            color: chipColor.withOpacity(0.3),
+                            blurRadius: 8,
+                            offset: const Offset(0, 2),
+                          ),
+                        ]
                         : null,
               ),
               child: Row(
@@ -238,13 +255,18 @@ class _SmartChipWidgetState extends State<SmartChipWidget> with SingleTickerProv
                     widget.chipData.label,
                     style: textTheme.labelMedium?.copyWith(
                       color: foregroundColor,
-                      fontWeight: widget.isSelected ? FontWeight.w600 : FontWeight.w500,
+                      fontWeight:
+                          widget.isSelected ? FontWeight.w600 : FontWeight.w500,
                     ),
                   ),
-                  if (widget.showUsageIndicator && widget.chipData.usageCount > 0) ...[
+                  if (widget.showUsageIndicator &&
+                      widget.chipData.usageCount > 0) ...[
                     const SizedBox(width: 6),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 2,
+                      ),
                       decoration: BoxDecoration(
                         color: foregroundColor.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(8),
@@ -300,13 +322,19 @@ class _SmartChipsSectionState extends State<SmartChipsSection> {
     if (widget.chips.isEmpty) return const SizedBox.shrink();
 
     final sortedChips = _getSortedChips();
-    final visibleChips = _showAll ? sortedChips : sortedChips.take(widget.maxVisibleChips).toList();
+    final visibleChips =
+        _showAll
+            ? sortedChips
+            : sortedChips.take(widget.maxVisibleChips).toList();
 
     if (widget.groupByCategory) {
       return _buildGroupedChips(sortedChips);
     }
 
-    return _buildLinearChips(visibleChips, sortedChips.length > widget.maxVisibleChips);
+    return _buildLinearChips(
+      visibleChips,
+      sortedChips.length > widget.maxVisibleChips,
+    );
   }
 
   List<SmartChipData> _getSortedChips() {
@@ -369,9 +397,9 @@ class _SmartChipsSectionState extends State<SmartChipsSection> {
                   const SizedBox(width: 4),
                   Text(
                     _showAll ? 'Show Less' : 'Show More',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.labelSmall?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
+                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
                   ),
                 ],
               ),
@@ -533,7 +561,10 @@ class ContextualQuickActions {
     ];
   }
 
-  static List<SmartChipData> getPersonalizedActions(List<String> recentQueries, Map<String, int> queryFrequency) {
+  static List<SmartChipData> getPersonalizedActions(
+    List<String> recentQueries,
+    Map<String, int> queryFrequency,
+  ) {
     final actions = <SmartChipData>[];
     final now = DateTime.now();
 

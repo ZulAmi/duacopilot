@@ -198,7 +198,11 @@ class SemanticHashService {
   };
 
   /// Generate semantic hash for a query
-  static SemanticHash generateSemanticHash(String query, String language, {double similarityThreshold = 0.8}) {
+  static SemanticHash generateSemanticHash(
+    String query,
+    String language, {
+    double similarityThreshold = 0.8,
+  }) {
     // Step 1: Normalize the query
     final normalizedQuery = _normalizeQuery(query, language);
 
@@ -221,7 +225,11 @@ class SemanticHashService {
   }
 
   /// Check if two queries are semantically similar
-  static bool areSimilar(SemanticHash hash1, SemanticHash hash2, {double threshold = 0.8}) {
+  static bool areSimilar(
+    SemanticHash hash1,
+    SemanticHash hash2, {
+    double threshold = 0.8,
+  }) {
     // Same language check
     if (hash1.language != hash2.language) {
       return false;
@@ -233,7 +241,11 @@ class SemanticHashService {
     }
 
     // Semantic similarity calculation
-    final similarity = _calculateSemanticSimilarity(hash1.semanticTokens, hash2.semanticTokens, hash1.language);
+    final similarity = _calculateSemanticSimilarity(
+      hash1.semanticTokens,
+      hash2.semanticTokens,
+      hash1.language,
+    );
 
     return similarity >= threshold;
   }
@@ -275,7 +287,10 @@ class SemanticHashService {
         });
 
         // Remove diacritics
-        normalized = normalized.replaceAll(RegExp(r'[\u064B-\u065F\u0670\u06D6-\u06ED]'), '');
+        normalized = normalized.replaceAll(
+          RegExp(r'[\u064B-\u065F\u0670\u06D6-\u06ED]'),
+          '',
+        );
 
         // Normalize whitespace
         normalized = normalized.replaceAll(RegExp(r'\s+'), ' ');
@@ -303,12 +318,20 @@ class SemanticHashService {
   }
 
   /// Extract semantic tokens from normalized query
-  static List<String> _extractSemanticTokens(String normalized, String language) {
-    final words = normalized.split(RegExp(r'\s+')).where((word) => word.isNotEmpty).toList();
+  static List<String> _extractSemanticTokens(
+    String normalized,
+    String language,
+  ) {
+    final words =
+        normalized
+            .split(RegExp(r'\s+'))
+            .where((word) => word.isNotEmpty)
+            .toList();
 
     // Remove stop words
     final stopWords = _stopWords[language] ?? _stopWords['en']!;
-    final meaningfulWords = words.where((word) => !stopWords.contains(word.toLowerCase())).toList();
+    final meaningfulWords =
+        words.where((word) => !stopWords.contains(word.toLowerCase())).toList();
 
     // Expand with synonyms
     final expandedTokens = <String>[];
@@ -363,7 +386,11 @@ class SemanticHashService {
   }
 
   /// Calculate semantic similarity between token lists
-  static double _calculateSemanticSimilarity(List<String> tokens1, List<String> tokens2, String language) {
+  static double _calculateSemanticSimilarity(
+    List<String> tokens1,
+    List<String> tokens2,
+    String language,
+  ) {
     if (tokens1.isEmpty && tokens2.isEmpty) return 1.0;
     if (tokens1.isEmpty || tokens2.isEmpty) return 0.0;
 
@@ -399,7 +426,8 @@ class SemanticHashService {
   /// Check if two tokens are synonyms
   static bool _areSynonyms(String token1, String token2) {
     for (final synonymGroup in _islamicSynonyms.values) {
-      if (synonymGroup.contains(token1.toLowerCase()) && synonymGroup.contains(token2.toLowerCase())) {
+      if (synonymGroup.contains(token1.toLowerCase()) &&
+          synonymGroup.contains(token2.toLowerCase())) {
         return true;
       }
     }
@@ -428,13 +456,19 @@ class SemanticHashService {
   }
 
   /// Generate normalized variants
-  static List<String> _generateNormalizedVariants(String query, String language) {
+  static List<String> _generateNormalizedVariants(
+    String query,
+    String language,
+  ) {
     final variants = <String>[];
 
     switch (language) {
       case 'ar':
         // Remove diacritics variant
-        var noDiacritics = query.replaceAll(RegExp(r'[\u064B-\u065F\u0670\u06D6-\u06ED]'), '');
+        var noDiacritics = query.replaceAll(
+          RegExp(r'[\u064B-\u065F\u0670\u06D6-\u06ED]'),
+          '',
+        );
         variants.add(noDiacritics);
 
         // Normalize alif variants

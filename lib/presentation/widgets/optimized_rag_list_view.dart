@@ -21,7 +21,8 @@ class OptimizedRagListView extends StatefulWidget {
   });
 
   final List<RagResponse> responses;
-  final Widget Function(BuildContext context, RagResponse response, int index) itemBuilder;
+  final Widget Function(BuildContext context, RagResponse response, int index)
+  itemBuilder;
   final Future<void> Function()? onRefresh;
   final Future<void> Function()? onLoadMore;
   final bool isLoading;
@@ -37,7 +38,8 @@ class OptimizedRagListView extends StatefulWidget {
 }
 
 /// _OptimizedRagListViewState class implementation
-class _OptimizedRagListViewState extends State<OptimizedRagListView> with AutomaticKeepAliveClientMixin {
+class _OptimizedRagListViewState extends State<OptimizedRagListView>
+    with AutomaticKeepAliveClientMixin {
   late ScrollController _scrollController;
   final Set<int> _visibleItems = <int>{};
   bool _isLoadingMore = false;
@@ -65,7 +67,8 @@ class _OptimizedRagListViewState extends State<OptimizedRagListView> with Automa
     if (!_isLoadingMore &&
         widget.hasMore &&
         widget.onLoadMore != null &&
-        _scrollController.position.pixels >= _scrollController.position.maxScrollExtent - 200) {
+        _scrollController.position.pixels >=
+            _scrollController.position.maxScrollExtent - 200) {
       _loadMore();
     }
 
@@ -80,8 +83,14 @@ class _OptimizedRagListViewState extends State<OptimizedRagListView> with Automa
     final offset = _scrollController.offset;
     final itemHeight = widget.itemExtent ?? 80.0;
 
-    final startIndex = (offset / itemHeight).floor().clamp(0, widget.responses.length - 1);
-    final endIndex = ((offset + viewport) / itemHeight).ceil().clamp(0, widget.responses.length - 1);
+    final startIndex = (offset / itemHeight).floor().clamp(
+      0,
+      widget.responses.length - 1,
+    );
+    final endIndex = ((offset + viewport) / itemHeight).ceil().clamp(
+      0,
+      widget.responses.length - 1,
+    );
 
     // Update visible items set
     _visibleItems.clear();
@@ -119,7 +128,10 @@ class _OptimizedRagListViewState extends State<OptimizedRagListView> with Automa
     return ArabicScrollUtils.wrapWithArabicScrolling(
       isRTL: widget.isRTL,
       isLargeDataset: widget.responses.length > 100,
-      child: RefreshIndicator(onRefresh: widget.onRefresh ?? () async {}, child: _buildOptimizedListView()),
+      child: RefreshIndicator(
+        onRefresh: widget.onRefresh ?? () async {},
+        child: _buildOptimizedListView(),
+      ),
     );
   }
 
@@ -151,7 +163,10 @@ class _OptimizedRagListViewState extends State<OptimizedRagListView> with Automa
 
         // Memory optimization: only build visible items when virtualization is enabled
         if (widget.enableVirtualization && !_visibleItems.contains(index)) {
-          return SizedBox(height: widget.itemExtent ?? 80.0, child: const SizedBox.shrink());
+          return SizedBox(
+            height: widget.itemExtent ?? 80.0,
+            child: const SizedBox.shrink(),
+          );
         }
 
         return _buildOptimizedItem(context, widget.responses[index], index);
@@ -184,7 +199,11 @@ class _OptimizedRagListViewState extends State<OptimizedRagListView> with Automa
     // iOS-specific optimizations for very large lists
     return CustomScrollView(
       controller: _scrollController,
-      physics: ArabicScrollUtils.getOptimalPhysics(isRTL: widget.isRTL, isLargeDataset: true, isArabicText: true),
+      physics: ArabicScrollUtils.getOptimalPhysics(
+        isRTL: widget.isRTL,
+        isLargeDataset: true,
+        isArabicText: true,
+      ),
       cacheExtent: widget.cacheExtent * 0.5, // Reduced cache for iOS
       slivers: [
         SliverList(
@@ -194,22 +213,37 @@ class _OptimizedRagListViewState extends State<OptimizedRagListView> with Automa
                 return _buildLoadingIndicator();
               }
 
-              return _buildOptimizedItem(context, widget.responses[index], index);
+              return _buildOptimizedItem(
+                context,
+                widget.responses[index],
+                index,
+              );
             },
             childCount: widget.responses.length + (widget.hasMore ? 1 : 0),
-            addAutomaticKeepAlives: false, // Disable automatic keep alives for memory efficiency
-            addRepaintBoundaries: true, // Enable repaint boundaries for performance
+            addAutomaticKeepAlives:
+                false, // Disable automatic keep alives for memory efficiency
+            addRepaintBoundaries:
+                true, // Enable repaint boundaries for performance
           ),
         ),
       ],
     );
   }
 
-  Widget _buildOptimizedItem(BuildContext context, RagResponse response, int index) {
+  Widget _buildOptimizedItem(
+    BuildContext context,
+    RagResponse response,
+    int index,
+  ) {
     // Wrap item in RepaintBoundary for better performance
     return RepaintBoundary(
       key: ValueKey('rag_${response.id}'),
-      child: _OptimizedRagItem(response: response, index: index, builder: widget.itemBuilder, isRTL: widget.isRTL),
+      child: _OptimizedRagItem(
+        response: response,
+        index: index,
+        builder: widget.itemBuilder,
+        isRTL: widget.isRTL,
+      ),
     );
   }
 
@@ -219,13 +253,20 @@ class _OptimizedRagListViewState extends State<OptimizedRagListView> with Automa
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       alignment: Alignment.center,
-      child: widget.isLoading || _isLoadingMore ? _buildPlatformLoadingIndicator() : const SizedBox.shrink(),
+      child:
+          widget.isLoading || _isLoadingMore
+              ? _buildPlatformLoadingIndicator()
+              : const SizedBox.shrink(),
     );
   }
 
   Widget _buildPlatformLoadingIndicator() {
     if (Platform.isIOS) {
-      return const SizedBox(height: 20, width: 20, child: CircularProgressIndicator.adaptive());
+      return const SizedBox(
+        height: 20,
+        width: 20,
+        child: CircularProgressIndicator.adaptive(),
+      );
     } else {
       return const CircularProgressIndicator();
     }
@@ -236,11 +277,17 @@ class _OptimizedRagListViewState extends State<OptimizedRagListView> with Automa
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.search_off, size: 64, color: Theme.of(context).disabledColor),
+          Icon(
+            Icons.search_off,
+            size: 64,
+            color: Theme.of(context).disabledColor,
+          ),
           const SizedBox(height: 16),
           Text(
             'No responses available',
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).disabledColor),
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              color: Theme.of(context).disabledColor,
+            ),
           ),
         ],
       ),
@@ -250,11 +297,17 @@ class _OptimizedRagListViewState extends State<OptimizedRagListView> with Automa
 
 /// Optimized individual RAG item widget
 class _OptimizedRagItem extends StatefulWidget {
-  const _OptimizedRagItem({required this.response, required this.index, required this.builder, required this.isRTL});
+  const _OptimizedRagItem({
+    required this.response,
+    required this.index,
+    required this.builder,
+    required this.isRTL,
+  });
 
   final RagResponse response;
   final int index;
-  final Widget Function(BuildContext context, RagResponse response, int index) builder;
+  final Widget Function(BuildContext context, RagResponse response, int index)
+  builder;
   final bool isRTL;
 
   @override
@@ -262,7 +315,8 @@ class _OptimizedRagItem extends StatefulWidget {
 }
 
 /// _OptimizedRagItemState class implementation
-class _OptimizedRagItemState extends State<_OptimizedRagItem> with AutomaticKeepAliveClientMixin {
+class _OptimizedRagItemState extends State<_OptimizedRagItem>
+    with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => false; // Don't keep alive by default for memory efficiency
 
@@ -298,7 +352,8 @@ class OptimizedRagGridView extends StatelessWidget {
   });
 
   final List<RagResponse> responses;
-  final Widget Function(BuildContext context, RagResponse response, int index) itemBuilder;
+  final Widget Function(BuildContext context, RagResponse response, int index)
+  itemBuilder;
   final int crossAxisCount;
   final double childAspectRatio;
   final double mainAxisSpacing;
@@ -350,7 +405,8 @@ class OptimizedRagSliverList extends StatelessWidget {
   });
 
   final List<RagResponse> responses;
-  final Widget Function(BuildContext context, RagResponse response, int index) itemBuilder;
+  final Widget Function(BuildContext context, RagResponse response, int index)
+  itemBuilder;
   final double? itemExtent;
   final bool isRTL;
 
@@ -416,7 +472,10 @@ class RagListOptimization {
   }
 
   /// Determine if fixed extent should be used
-  static bool shouldUseFixedExtent({required int itemCount, required bool hasUniformHeight}) {
+  static bool shouldUseFixedExtent({
+    required int itemCount,
+    required bool hasUniformHeight,
+  }) {
     return hasUniformHeight && itemCount > 50;
   }
 

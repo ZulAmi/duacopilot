@@ -39,7 +39,10 @@ class UltraModernComponents {
             decoration: BoxDecoration(
               color: backgroundColor ?? Colors.white.withOpacity(0.8),
               borderRadius: BorderRadius.circular(borderRadius),
-              border: Border.all(color: Colors.white.withOpacity(0.3), width: 1),
+              border: Border.all(
+                color: Colors.white.withOpacity(0.3),
+                width: 1,
+              ),
             ),
             child: child,
           ),
@@ -126,8 +129,16 @@ class UltraModernComponents {
   }
 
   /// Animated Loading Indicator
-  static Widget modernLoadingIndicator({double size = 50, Color? color, double strokeWidth = 4}) {
-    return ModernLoadingIndicator(size: size, color: color, strokeWidth: strokeWidth);
+  static Widget modernLoadingIndicator({
+    double size = 50,
+    Color? color,
+    double strokeWidth = 4,
+  }) {
+    return ModernLoadingIndicator(
+      size: size,
+      color: color,
+      strokeWidth: strokeWidth,
+    );
   }
 
   /// Floating Action Button with glow effect
@@ -167,8 +178,15 @@ class UltraModernComponents {
   }
 
   /// Parallax Scroll Effect
-  static Widget parallaxEffect({required Widget child, required double offset, double factor = 0.5}) {
-    return Transform.translate(offset: Offset(0, offset * factor), child: child);
+  static Widget parallaxEffect({
+    required Widget child,
+    required double offset,
+    double factor = 0.5,
+  }) {
+    return Transform.translate(
+      offset: Offset(0, offset * factor),
+      child: child,
+    );
   }
 }
 
@@ -200,10 +218,13 @@ class AnimatedGradientButtonWidget extends StatefulWidget {
   });
 
   @override
-  State<AnimatedGradientButtonWidget> createState() => _AnimatedGradientButtonWidgetState();
+  State<AnimatedGradientButtonWidget> createState() =>
+      _AnimatedGradientButtonWidgetState();
 }
 
-class _AnimatedGradientButtonWidgetState extends State<AnimatedGradientButtonWidget> with TickerProviderStateMixin {
+class _AnimatedGradientButtonWidgetState
+    extends State<AnimatedGradientButtonWidget>
+    with TickerProviderStateMixin {
   late AnimationController _scaleController;
   late AnimationController _shimmerController;
   late Animation<double> _scaleAnimation;
@@ -213,19 +234,26 @@ class _AnimatedGradientButtonWidgetState extends State<AnimatedGradientButtonWid
   void initState() {
     super.initState();
 
-    _scaleController = AnimationController(duration: UltraModernTheme.fastDuration, vsync: this);
+    _scaleController = AnimationController(
+      duration: UltraModernTheme.fastDuration,
+      vsync: this,
+    );
 
-    _shimmerController = AnimationController(duration: const Duration(milliseconds: 2000), vsync: this)..repeat();
+    _shimmerController = AnimationController(
+      duration: const Duration(milliseconds: 2000),
+      vsync: this,
+    )..repeat();
 
-    _scaleAnimation = Tween<double>(
-      begin: 1.0,
-      end: 0.95,
-    ).animate(CurvedAnimation(parent: _scaleController, curve: UltraModernTheme.primaryCurve));
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
+      CurvedAnimation(
+        parent: _scaleController,
+        curve: UltraModernTheme.primaryCurve,
+      ),
+    );
 
-    _shimmerAnimation = Tween<double>(
-      begin: -2.0,
-      end: 2.0,
-    ).animate(CurvedAnimation(parent: _shimmerController, curve: Curves.easeInOut));
+    _shimmerAnimation = Tween<double>(begin: -2.0, end: 2.0).animate(
+      CurvedAnimation(parent: _shimmerController, curve: Curves.easeInOut),
+    );
   }
 
   @override
@@ -263,9 +291,15 @@ class _AnimatedGradientButtonWidgetState extends State<AnimatedGradientButtonWid
                           return LinearGradient(
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,
-                            colors: const [Colors.transparent, Colors.white24, Colors.transparent],
+                            colors: const [
+                              Colors.transparent,
+                              Colors.white24,
+                              Colors.transparent,
+                            ],
                             stops: const [0.0, 0.5, 1.0],
-                            transform: GradientRotation(_shimmerAnimation.value),
+                            transform: GradientRotation(
+                              _shimmerAnimation.value,
+                            ),
                           ).createShader(bounds);
                         },
                         child: Container(color: Colors.white),
@@ -291,7 +325,11 @@ class _AnimatedGradientButtonWidgetState extends State<AnimatedGradientButtonWid
                     child: Container(
                       width: widget.width,
                       height: widget.height,
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(widget.borderRadius)),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          widget.borderRadius,
+                        ),
+                      ),
                       child: Center(
                         child:
                             widget.isLoading
@@ -301,7 +339,9 @@ class _AnimatedGradientButtonWidgetState extends State<AnimatedGradientButtonWid
                                   child: CircularProgressIndicator(
                                     strokeWidth: 2,
                                     valueColor: AlwaysStoppedAnimation<Color>(
-                                      widget.enabled ? Colors.white : Colors.grey.shade500,
+                                      widget.enabled
+                                          ? Colors.white
+                                          : Colors.grey.shade500,
                                     ),
                                   ),
                                 )
@@ -311,7 +351,10 @@ class _AnimatedGradientButtonWidgetState extends State<AnimatedGradientButtonWid
                                     if (widget.icon != null) ...[
                                       Icon(
                                         widget.icon,
-                                        color: widget.enabled ? Colors.white : Colors.grey.shade500,
+                                        color:
+                                            widget.enabled
+                                                ? Colors.white
+                                                : Colors.grey.shade500,
                                         size: 20,
                                       ),
                                       const SizedBox(width: 8),
@@ -319,7 +362,10 @@ class _AnimatedGradientButtonWidgetState extends State<AnimatedGradientButtonWid
                                     Text(
                                       widget.text,
                                       style: TextStyle(
-                                        color: widget.enabled ? Colors.white : Colors.grey.shade500,
+                                        color:
+                                            widget.enabled
+                                                ? Colors.white
+                                                : Colors.grey.shade500,
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600,
                                         letterSpacing: 0.2,
@@ -364,10 +410,12 @@ class FloatingSearchBarWidget extends StatefulWidget {
   });
 
   @override
-  State<FloatingSearchBarWidget> createState() => _FloatingSearchBarWidgetState();
+  State<FloatingSearchBarWidget> createState() =>
+      _FloatingSearchBarWidgetState();
 }
 
-class _FloatingSearchBarWidgetState extends State<FloatingSearchBarWidget> with SingleTickerProviderStateMixin {
+class _FloatingSearchBarWidgetState extends State<FloatingSearchBarWidget>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _scaleAnimation;
   bool _isFocused = false;
@@ -375,11 +423,16 @@ class _FloatingSearchBarWidgetState extends State<FloatingSearchBarWidget> with 
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(duration: UltraModernTheme.normalDuration, vsync: this);
-    _scaleAnimation = Tween<double>(
-      begin: 1.0,
-      end: 1.02,
-    ).animate(CurvedAnimation(parent: _animationController, curve: UltraModernTheme.smoothCurve));
+    _animationController = AnimationController(
+      duration: UltraModernTheme.normalDuration,
+      vsync: this,
+    );
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.02).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: UltraModernTheme.smoothCurve,
+      ),
+    );
   }
 
   @override
@@ -399,7 +452,10 @@ class _FloatingSearchBarWidgetState extends State<FloatingSearchBarWidget> with 
             margin: widget.margin ?? const EdgeInsets.all(16),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24),
-              boxShadow: _isFocused ? UltraModernTheme.elevatedShadow : UltraModernTheme.softShadow,
+              boxShadow:
+                  _isFocused
+                      ? UltraModernTheme.elevatedShadow
+                      : UltraModernTheme.softShadow,
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(24),
@@ -410,14 +466,21 @@ class _FloatingSearchBarWidgetState extends State<FloatingSearchBarWidget> with 
                     color: Colors.white.withOpacity(0.9),
                     borderRadius: BorderRadius.circular(24),
                     border: Border.all(
-                      color: _isFocused ? context.colorScheme.primary.withOpacity(0.5) : Colors.white.withOpacity(0.3),
+                      color:
+                          _isFocused
+                              ? context.colorScheme.primary.withOpacity(0.5)
+                              : Colors.white.withOpacity(0.3),
                       width: 1.5,
                     ),
                   ),
                   child: Row(
                     children: [
                       const SizedBox(width: 20),
-                      Icon(Icons.search_rounded, color: Colors.grey.shade600, size: 24),
+                      Icon(
+                        Icons.search_rounded,
+                        color: Colors.grey.shade600,
+                        size: 24,
+                      ),
                       const SizedBox(width: 12),
                       Expanded(
                         child: TextField(
@@ -439,9 +502,14 @@ class _FloatingSearchBarWidgetState extends State<FloatingSearchBarWidget> with 
                               fontWeight: FontWeight.w400,
                             ),
                             border: InputBorder.none,
-                            contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                            contentPadding: const EdgeInsets.symmetric(
+                              vertical: 16,
+                            ),
                           ),
-                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ),
                       if (widget.showFilter) ...[
@@ -450,7 +518,11 @@ class _FloatingSearchBarWidgetState extends State<FloatingSearchBarWidget> with 
                             HapticFeedback.lightImpact();
                             widget.onFilterPressed?.call();
                           },
-                          icon: Icon(Icons.tune_rounded, color: Colors.grey.shade600, size: 24),
+                          icon: Icon(
+                            Icons.tune_rounded,
+                            color: Colors.grey.shade600,
+                            size: 24,
+                          ),
                         ),
                       ],
                       if (widget.showMicrophone) ...[
@@ -466,13 +538,18 @@ class _FloatingSearchBarWidgetState extends State<FloatingSearchBarWidget> with 
                               borderRadius: BorderRadius.circular(12),
                               boxShadow: [
                                 BoxShadow(
-                                  color: context.colorScheme.primary.withOpacity(0.3),
+                                  color: context.colorScheme.primary
+                                      .withOpacity(0.3),
                                   blurRadius: 8,
                                   offset: const Offset(0, 2),
                                 ),
                               ],
                             ),
-                            child: const Icon(Icons.mic_rounded, color: Colors.white, size: 20),
+                            child: const Icon(
+                              Icons.mic_rounded,
+                              color: Colors.white,
+                              size: 20,
+                            ),
                           ),
                         ),
                       ],
@@ -520,7 +597,8 @@ class ModernCardWidget extends StatefulWidget {
   State<ModernCardWidget> createState() => _ModernCardWidgetState();
 }
 
-class _ModernCardWidgetState extends State<ModernCardWidget> with SingleTickerProviderStateMixin {
+class _ModernCardWidgetState extends State<ModernCardWidget>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _scaleAnimation;
   bool _isHovered = false;
@@ -528,12 +606,17 @@ class _ModernCardWidgetState extends State<ModernCardWidget> with SingleTickerPr
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(duration: widget.animationDuration, vsync: this);
+    _animationController = AnimationController(
+      duration: widget.animationDuration,
+      vsync: this,
+    );
 
-    _scaleAnimation = Tween<double>(
-      begin: 1.0,
-      end: 1.02,
-    ).animate(CurvedAnimation(parent: _animationController, curve: UltraModernTheme.smoothCurve));
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.02).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: UltraModernTheme.smoothCurve,
+      ),
+    );
   }
 
   @override
@@ -555,7 +638,10 @@ class _ModernCardWidgetState extends State<ModernCardWidget> with SingleTickerPr
             margin: widget.margin,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(widget.borderRadius),
-              boxShadow: _isHovered ? UltraModernTheme.elevatedShadow : widget.boxShadow,
+              boxShadow:
+                  _isHovered
+                      ? UltraModernTheme.elevatedShadow
+                      : widget.boxShadow,
               gradient: widget.gradient,
             ),
             child: Material(
@@ -593,13 +679,19 @@ class ModernLoadingIndicator extends StatefulWidget {
   final Color? color;
   final double strokeWidth;
 
-  const ModernLoadingIndicator({super.key, required this.size, this.color, required this.strokeWidth});
+  const ModernLoadingIndicator({
+    super.key,
+    required this.size,
+    this.color,
+    required this.strokeWidth,
+  });
 
   @override
   State<ModernLoadingIndicator> createState() => _ModernLoadingIndicatorState();
 }
 
-class _ModernLoadingIndicatorState extends State<ModernLoadingIndicator> with TickerProviderStateMixin {
+class _ModernLoadingIndicatorState extends State<ModernLoadingIndicator>
+    with TickerProviderStateMixin {
   late AnimationController _rotationController;
   late AnimationController _scaleController;
   late Animation<double> _rotationAnimation;
@@ -609,20 +701,23 @@ class _ModernLoadingIndicatorState extends State<ModernLoadingIndicator> with Ti
   void initState() {
     super.initState();
 
-    _rotationController = AnimationController(duration: const Duration(milliseconds: 1500), vsync: this)..repeat();
+    _rotationController = AnimationController(
+      duration: const Duration(milliseconds: 1500),
+      vsync: this,
+    )..repeat();
 
-    _scaleController = AnimationController(duration: const Duration(milliseconds: 1000), vsync: this)
-      ..repeat(reverse: true);
+    _scaleController = AnimationController(
+      duration: const Duration(milliseconds: 1000),
+      vsync: this,
+    )..repeat(reverse: true);
 
-    _rotationAnimation = Tween<double>(
-      begin: 0.0,
-      end: 2 * math.pi,
-    ).animate(CurvedAnimation(parent: _rotationController, curve: Curves.easeInOut));
+    _rotationAnimation = Tween<double>(begin: 0.0, end: 2 * math.pi).animate(
+      CurvedAnimation(parent: _rotationController, curve: Curves.easeInOut),
+    );
 
-    _scaleAnimation = Tween<double>(
-      begin: 0.8,
-      end: 1.2,
-    ).animate(CurvedAnimation(parent: _scaleController, curve: Curves.easeInOut));
+    _scaleAnimation = Tween<double>(begin: 0.8, end: 1.2).animate(
+      CurvedAnimation(parent: _scaleController, curve: Curves.easeInOut),
+    );
   }
 
   @override
@@ -675,7 +770,10 @@ class ModernLoadingPainter extends CustomPainter {
     final Offset center = Offset(radius, radius);
 
     // Draw gradient arc
-    final Rect rect = Rect.fromCircle(center: center, radius: radius - strokeWidth / 2);
+    final Rect rect = Rect.fromCircle(
+      center: center,
+      radius: radius - strokeWidth / 2,
+    );
 
     const double startAngle = -math.pi / 2;
     const double sweepAngle = math.pi * 1.5;
@@ -717,19 +815,22 @@ class GlowingFABWidget extends StatefulWidget {
   State<GlowingFABWidget> createState() => _GlowingFABWidgetState();
 }
 
-class _GlowingFABWidgetState extends State<GlowingFABWidget> with SingleTickerProviderStateMixin {
+class _GlowingFABWidgetState extends State<GlowingFABWidget>
+    with SingleTickerProviderStateMixin {
   late AnimationController _pulseController;
   late Animation<double> _pulseAnimation;
 
   @override
   void initState() {
     super.initState();
-    _pulseController = AnimationController(duration: const Duration(seconds: 2), vsync: this)..repeat();
+    _pulseController = AnimationController(
+      duration: const Duration(seconds: 2),
+      vsync: this,
+    )..repeat();
 
-    _pulseAnimation = Tween<double>(
-      begin: 1.0,
-      end: 1.1,
-    ).animate(CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut));
+    _pulseAnimation = Tween<double>(begin: 1.0, end: 1.1).animate(
+      CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
+    );
   }
 
   @override
@@ -756,7 +857,8 @@ class _GlowingFABWidgetState extends State<GlowingFABWidget> with SingleTickerPr
                 end: Alignment.bottomRight,
                 colors: [
                   widget.backgroundColor ?? context.colorScheme.primary,
-                  (widget.backgroundColor ?? context.colorScheme.primary).withOpacity(0.8),
+                  (widget.backgroundColor ?? context.colorScheme.primary)
+                      .withOpacity(0.8),
                 ],
               ),
             ),
@@ -767,7 +869,11 @@ class _GlowingFABWidgetState extends State<GlowingFABWidget> with SingleTickerPr
               },
               backgroundColor: Colors.transparent,
               elevation: 0,
-              child: Icon(widget.icon, color: widget.foregroundColor ?? Colors.white, size: widget.size * 0.4),
+              child: Icon(
+                widget.icon,
+                color: widget.foregroundColor ?? Colors.white,
+                size: widget.size * 0.4,
+              ),
             ),
           ),
         );

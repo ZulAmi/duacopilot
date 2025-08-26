@@ -19,7 +19,8 @@ class DuaEmbedding with _$DuaEmbedding {
     required DateTime updatedAt,
   }) = _DuaEmbedding;
 
-  factory DuaEmbedding.fromJson(Map<String, dynamic> json) => _$DuaEmbeddingFromJson(json);
+  factory DuaEmbedding.fromJson(Map<String, dynamic> json) =>
+      _$DuaEmbeddingFromJson(json);
 }
 
 /// Local search query with embedding
@@ -35,7 +36,8 @@ class LocalSearchQuery with _$LocalSearchQuery {
     String? location,
   }) = _LocalSearchQuery;
 
-  factory LocalSearchQuery.fromJson(Map<String, dynamic> json) => _$LocalSearchQueryFromJson(json);
+  factory LocalSearchQuery.fromJson(Map<String, dynamic> json) =>
+      _$LocalSearchQueryFromJson(json);
 }
 
 /// Offline search result with quality indicators
@@ -52,7 +54,8 @@ class OfflineSearchResult with _$OfflineSearchResult {
     @Default({}) Map<String, dynamic> metadata,
   }) = _OfflineSearchResult;
 
-  factory OfflineSearchResult.fromJson(Map<String, dynamic> json) => _$OfflineSearchResultFromJson(json);
+  factory OfflineSearchResult.fromJson(Map<String, dynamic> json) =>
+      _$OfflineSearchResultFromJson(json);
 }
 
 /// Individual offline Du'a match
@@ -70,7 +73,8 @@ class OfflineDuaMatch with _$OfflineDuaMatch {
     @Default({}) Map<String, dynamic> metadata,
   }) = _OfflineDuaMatch;
 
-  factory OfflineDuaMatch.fromJson(Map<String, dynamic> json) => _$OfflineDuaMatchFromJson(json);
+  factory OfflineDuaMatch.fromJson(Map<String, dynamic> json) =>
+      _$OfflineDuaMatchFromJson(json);
 }
 
 /// Queue item for pending online queries
@@ -88,7 +92,8 @@ class PendingQuery with _$PendingQuery {
     String? fallbackResultId,
   }) = _PendingQuery;
 
-  factory PendingQuery.fromJson(Map<String, dynamic> json) => _$PendingQueryFromJson(json);
+  factory PendingQuery.fromJson(Map<String, dynamic> json) =>
+      _$PendingQueryFromJson(json);
 }
 
 /// Fallback response template for offline use
@@ -105,7 +110,8 @@ class FallbackTemplate with _$FallbackTemplate {
     required DateTime createdAt,
   }) = _FallbackTemplate;
 
-  factory FallbackTemplate.fromJson(Map<String, dynamic> json) => _$FallbackTemplateFromJson(json);
+  factory FallbackTemplate.fromJson(Map<String, dynamic> json) =>
+      _$FallbackTemplateFromJson(json);
 }
 
 /// Search quality indicators
@@ -155,5 +161,6 @@ class OfflineSyncStatus with _$OfflineSyncStatus {
     String? lastError,
   }) = _OfflineSyncStatus;
 
-  factory OfflineSyncStatus.fromJson(Map<String, dynamic> json) => _$OfflineSyncStatusFromJson(json);
+  factory OfflineSyncStatus.fromJson(Map<String, dynamic> json) =>
+      _$OfflineSyncStatusFromJson(json);
 }

@@ -49,7 +49,9 @@ void main() {
           enhancedRagService = GetIt.instance<EnhancedRagService>();
         }
       } catch (e) {
-        print('Service registration error (expected in some test environments): $e');
+        print(
+          'Service registration error (expected in some test environments): $e',
+        );
       }
     });
 
@@ -67,7 +69,10 @@ void main() {
 
         // Verify core services are available
         expect(GetIt.instance.isRegistered<LocalEmbeddingService>(), isTrue);
-        expect(GetIt.instance.isRegistered<LocalVectorStorageService>(), isTrue);
+        expect(
+          GetIt.instance.isRegistered<LocalVectorStorageService>(),
+          isTrue,
+        );
         expect(GetIt.instance.isRegistered<QueryQueueService>(), isTrue);
         expect(GetIt.instance.isRegistered<FallbackTemplateService>(), isTrue);
       });
@@ -96,8 +101,14 @@ void main() {
         final embedding2 = List.generate(384, (i) => (i + 1) / 384.0);
         final embedding3 = List.generate(384, (i) => 1.0);
 
-        final similarity1 = embeddingService.calculateSimilarity(embedding1, embedding2);
-        final similarity2 = embeddingService.calculateSimilarity(embedding1, embedding3);
+        final similarity1 = embeddingService.calculateSimilarity(
+          embedding1,
+          embedding2,
+        );
+        final similarity2 = embeddingService.calculateSimilarity(
+          embedding1,
+          embedding3,
+        );
 
         expect(similarity1, greaterThan(similarity2));
         expect(similarity1, greaterThan(0.5));
@@ -106,7 +117,10 @@ void main() {
 
       test('should find top similar embeddings', () {
         final queryEmbedding = List.generate(384, (i) => i / 384.0);
-        final candidateEmbeddings = [List.generate(384, (i) => i / 384.0), List.generate(384, (i) => (i + 1) / 384.0)];
+        final candidateEmbeddings = [
+          List.generate(384, (i) => i / 384.0),
+          List.generate(384, (i) => (i + 1) / 384.0),
+        ];
 
         final results = embeddingService.findTopSimilar(
           queryEmbedding: queryEmbedding,
@@ -136,7 +150,9 @@ void main() {
         );
 
         await vectorStorageService.storeEmbedding(testEmbedding);
-        final retrieved = await vectorStorageService.getEmbedding(testEmbedding.id);
+        final retrieved = await vectorStorageService.getEmbedding(
+          testEmbedding.id,
+        );
 
         expect(retrieved, isNotNull);
         expect(retrieved!.id, equals(testEmbedding.id));
@@ -145,7 +161,10 @@ void main() {
       });
 
       test('should search by keywords', () async {
-        final results = await vectorStorageService.searchEmbeddingsByKeywords(['morning', 'prayer']);
+        final results = await vectorStorageService.searchEmbeddingsByKeywords([
+          'morning',
+          'prayer',
+        ]);
         expect(results, isNotNull);
       });
 
@@ -158,7 +177,10 @@ void main() {
           timestamp: DateTime.now(),
         );
 
-        expect(() async => await vectorStorageService.storeQuery(testQuery), returnsNormally);
+        expect(
+          () async => await vectorStorageService.storeQuery(testQuery),
+          returnsNormally,
+        );
       });
     });
 
@@ -176,7 +198,10 @@ void main() {
       });
 
       test('should process queue safely', () async {
-        expect(() async => await queryQueueService.processQueue(), returnsNormally);
+        expect(
+          () async => await queryQueueService.processQueue(),
+          returnsNormally,
+        );
       });
     });
 
@@ -216,7 +241,12 @@ void main() {
         expect(result.confidence, greaterThan(0.0));
         expect(
           result.quality,
-          isIn([SearchQuality.high, SearchQuality.medium, SearchQuality.low, SearchQuality.cached]),
+          isIn([
+            SearchQuality.high,
+            SearchQuality.medium,
+            SearchQuality.low,
+            SearchQuality.cached,
+          ]),
         );
         expect(result.timestamp, isA<DateTime>());
       });
@@ -241,7 +271,9 @@ void main() {
           expect(result.recommendations, isNotEmpty);
           expect(result.metadata, isNotNull);
         } catch (e) {
-          print('Enhanced RAG search failed as expected in test environment: $e');
+          print(
+            'Enhanced RAG search failed as expected in test environment: $e',
+          );
         }
       });
 
@@ -320,7 +352,11 @@ void main() {
           query: 'fixed pending test query',
           language: 'en',
           timestamp: DateTime.now(),
-          context: {'source': 'fixed_test', 'priority': 'normal', 'user_id': 'fixed_test_user'},
+          context: {
+            'source': 'fixed_test',
+            'priority': 'normal',
+            'user_id': 'fixed_test_user',
+          },
         );
 
         expect(query.id, equals('fixed_pending_test'));

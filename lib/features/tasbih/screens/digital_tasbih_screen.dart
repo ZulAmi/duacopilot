@@ -11,10 +11,12 @@ class DigitalTasbihScreen extends ConsumerStatefulWidget {
   const DigitalTasbihScreen({super.key});
 
   @override
-  ConsumerState<DigitalTasbihScreen> createState() => _DigitalTasbihScreenState();
+  ConsumerState<DigitalTasbihScreen> createState() =>
+      _DigitalTasbihScreenState();
 }
 
-class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with TickerProviderStateMixin {
+class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen>
+    with TickerProviderStateMixin {
   late AnimationController _rippleController;
   late AnimationController _countController;
   late AnimationController _progressController;
@@ -22,9 +24,18 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
   @override
   void initState() {
     super.initState();
-    _rippleController = AnimationController(duration: const Duration(milliseconds: 800), vsync: this);
-    _countController = AnimationController(duration: const Duration(milliseconds: 200), vsync: this);
-    _progressController = AnimationController(duration: const Duration(milliseconds: 500), vsync: this);
+    _rippleController = AnimationController(
+      duration: const Duration(milliseconds: 800),
+      vsync: this,
+    );
+    _countController = AnimationController(
+      duration: const Duration(milliseconds: 200),
+      vsync: this,
+    );
+    _progressController = AnimationController(
+      duration: const Duration(milliseconds: 500),
+      vsync: this,
+    );
   }
 
   @override
@@ -70,7 +81,11 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
             style: IconButton.styleFrom(
               backgroundColor: RevolutionaryIslamicTheme.neutralGray100,
               foregroundColor: RevolutionaryIslamicTheme.textSecondary,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusXl)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(
+                  RevolutionaryIslamicTheme.radiusXl,
+                ),
+              ),
             ),
           ),
           IconButton(
@@ -79,7 +94,11 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
             style: IconButton.styleFrom(
               backgroundColor: RevolutionaryIslamicTheme.neutralGray100,
               foregroundColor: RevolutionaryIslamicTheme.textSecondary,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusXl)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(
+                  RevolutionaryIslamicTheme.radiusXl,
+                ),
+              ),
             ),
           ),
           const SizedBox(width: RevolutionaryIslamicTheme.space2),
@@ -90,7 +109,11 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
             () => const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [CircularProgressIndicator(), SizedBox(height: 16), Text('Initializing Digital Tasbih...')],
+                children: [
+                  CircularProgressIndicator(),
+                  SizedBox(height: 16),
+                  Text('Initializing Digital Tasbih...'),
+                ],
               ),
             ),
         error:
@@ -102,7 +125,10 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
                   const SizedBox(height: 16),
                   Text('Error: $error'),
                   const SizedBox(height: 16),
-                  ElevatedButton(onPressed: () => ref.invalidate(tasbihInitProvider), child: const Text('Retry')),
+                  ElevatedButton(
+                    onPressed: () => ref.invalidate(tasbihInitProvider),
+                    child: const Text('Retry'),
+                  ),
                 ],
               ),
             ),
@@ -110,10 +136,18 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
           return Column(
             children: [
               // Header with progress
-              _buildHeader(currentCount, targetCount, sessionProgress, isActive),
+              _buildHeader(
+                currentCount,
+                targetCount,
+                sessionProgress,
+                isActive,
+              ),
 
               // Main counter area
-              Expanded(flex: 3, child: _buildCounterArea(dhikrText, currentCount, isActive)),
+              Expanded(
+                flex: 3,
+                child: _buildCounterArea(dhikrText, currentCount, isActive),
+              ),
 
               // Dhikr text display
               _buildDhikrDisplay(dhikrText),
@@ -130,7 +164,12 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
     );
   }
 
-  Widget _buildHeader(int currentCount, int targetCount, double progress, bool isActive) {
+  Widget _buildHeader(
+    int currentCount,
+    int targetCount,
+    double progress,
+    bool isActive,
+  ) {
     return Container(
       padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space5),
       decoration: BoxDecoration(
@@ -155,10 +194,15 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
             builder: (context, child) {
               return LinearProgressIndicator(
                 value: _progressController.value,
-                backgroundColor: RevolutionaryIslamicTheme.textOnColor.withOpacity(0.3),
-                valueColor: const AlwaysStoppedAnimation<Color>(RevolutionaryIslamicTheme.textOnColor),
+                backgroundColor: RevolutionaryIslamicTheme.textOnColor
+                    .withOpacity(0.3),
+                valueColor: const AlwaysStoppedAnimation<Color>(
+                  RevolutionaryIslamicTheme.textOnColor,
+                ),
                 minHeight: 6,
-                borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusSm),
+                borderRadius: BorderRadius.circular(
+                  RevolutionaryIslamicTheme.radiusSm,
+                ),
               );
             },
           ),
@@ -190,7 +234,9 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(1 - _rippleController.value),
+                    color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(
+                      1 - _rippleController.value,
+                    ),
                     width: 3,
                   ),
                 ),
@@ -214,14 +260,22 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
                       shape: BoxShape.circle,
                       gradient: RadialGradient(
                         colors: [
-                          RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1),
-                          RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.3),
+                          RevolutionaryIslamicTheme.primaryEmerald.withOpacity(
+                            0.1,
+                          ),
+                          RevolutionaryIslamicTheme.primaryEmerald.withOpacity(
+                            0.3,
+                          ),
                         ],
                       ),
-                      border: Border.all(color: RevolutionaryIslamicTheme.primaryEmerald, width: 4),
+                      border: Border.all(
+                        color: RevolutionaryIslamicTheme.primaryEmerald,
+                        width: 4,
+                      ),
                       boxShadow: [
                         BoxShadow(
-                          color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.3),
+                          color: RevolutionaryIslamicTheme.primaryEmerald
+                              .withOpacity(0.3),
                           blurRadius: 20,
                           spreadRadius: 5,
                         ),
@@ -260,13 +314,20 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
 
   Widget _buildDhikrDisplay(String dhikrText) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: RevolutionaryIslamicTheme.space6),
+      margin: const EdgeInsets.symmetric(
+        horizontal: RevolutionaryIslamicTheme.space6,
+      ),
       padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space5),
       decoration: BoxDecoration(
         color: RevolutionaryIslamicTheme.backgroundSecondary,
-        borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radius2Xl),
+        borderRadius: BorderRadius.circular(
+          RevolutionaryIslamicTheme.radius2Xl,
+        ),
         boxShadow: RevolutionaryIslamicTheme.shadowMd,
-        border: Border.all(color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.2), width: 1),
+        border: Border.all(
+          color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.2),
+          width: 1,
+        ),
       ),
       child: Center(
         child: Text(
@@ -306,8 +367,12 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
         width: 120,
         decoration: BoxDecoration(
           color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusXl),
-          border: Border.all(color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.3)),
+          borderRadius: BorderRadius.circular(
+            RevolutionaryIslamicTheme.radiusXl,
+          ),
+          border: Border.all(
+            color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.3),
+          ),
           boxShadow: RevolutionaryIslamicTheme.shadowSm,
         ),
         child: Column(
@@ -323,7 +388,9 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
             const SizedBox(height: RevolutionaryIslamicTheme.space1),
             Text(
               _getTasbihTypeName(type),
-              style: RevolutionaryIslamicTheme.caption.copyWith(color: RevolutionaryIslamicTheme.textSecondary),
+              style: RevolutionaryIslamicTheme.caption.copyWith(
+                color: RevolutionaryIslamicTheme.textSecondary,
+              ),
               textAlign: TextAlign.center,
             ),
           ],
@@ -346,9 +413,13 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
                 style: ElevatedButton.styleFrom(
                   backgroundColor: RevolutionaryIslamicTheme.errorRose,
                   foregroundColor: RevolutionaryIslamicTheme.textOnColor,
-                  padding: const EdgeInsets.symmetric(vertical: RevolutionaryIslamicTheme.space3),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: RevolutionaryIslamicTheme.space3,
+                  ),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusXl),
+                    borderRadius: BorderRadius.circular(
+                      RevolutionaryIslamicTheme.radiusXl,
+                    ),
                   ),
                   elevation: 0,
                 ),
@@ -363,9 +434,13 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
                 style: ElevatedButton.styleFrom(
                   backgroundColor: RevolutionaryIslamicTheme.primaryEmerald,
                   foregroundColor: RevolutionaryIslamicTheme.textOnColor,
-                  padding: const EdgeInsets.symmetric(vertical: RevolutionaryIslamicTheme.space3),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: RevolutionaryIslamicTheme.space3,
+                  ),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusXl),
+                    borderRadius: BorderRadius.circular(
+                      RevolutionaryIslamicTheme.radiusXl,
+                    ),
                   ),
                   elevation: 0,
                 ),
@@ -380,9 +455,13 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
                 style: ElevatedButton.styleFrom(
                   backgroundColor: RevolutionaryIslamicTheme.primaryEmerald,
                   foregroundColor: RevolutionaryIslamicTheme.textOnColor,
-                  padding: const EdgeInsets.symmetric(vertical: RevolutionaryIslamicTheme.space3),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: RevolutionaryIslamicTheme.space3,
+                  ),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusXl),
+                    borderRadius: BorderRadius.circular(
+                      RevolutionaryIslamicTheme.radiusXl,
+                    ),
                   ),
                   elevation: 0,
                 ),
@@ -413,7 +492,11 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
         content: const Text('Session completed! Well done.'),
         backgroundColor: RevolutionaryIslamicTheme.primaryEmerald,
         behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusLg)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            RevolutionaryIslamicTheme.radiusLg,
+          ),
+        ),
       ),
     );
   }
@@ -430,23 +513,35 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
                 const Text('Select dhikr type and target count:'),
                 const SizedBox(height: 16),
                 DropdownButtonFormField<TasbihType>(
-                  decoration: const InputDecoration(labelText: 'Dhikr Type', border: OutlineInputBorder()),
+                  decoration: const InputDecoration(
+                    labelText: 'Dhikr Type',
+                    border: OutlineInputBorder(),
+                  ),
                   items:
                       TasbihType.values.map((type) {
-                        return DropdownMenuItem(value: type, child: Text(_getTasbihTypeName(type)));
+                        return DropdownMenuItem(
+                          value: type,
+                          child: Text(_getTasbihTypeName(type)),
+                        );
                       }).toList(),
                   onChanged: (value) {},
                 ),
                 const SizedBox(height: 12),
                 TextFormField(
-                  decoration: const InputDecoration(labelText: 'Target Count', border: OutlineInputBorder()),
+                  decoration: const InputDecoration(
+                    labelText: 'Target Count',
+                    border: OutlineInputBorder(),
+                  ),
                   keyboardType: TextInputType.number,
                   initialValue: '33',
                 ),
               ],
             ),
             actions: [
-              TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Cancel')),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('Cancel'),
+              ),
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -474,12 +569,18 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
                 ListTile(
                   leading: const Icon(Icons.timer),
                   title: const Text('Duration'),
-                  subtitle: Text(_formatDuration(DateTime.now().difference(session.startTime))),
+                  subtitle: Text(
+                    _formatDuration(
+                      DateTime.now().difference(session.startTime),
+                    ),
+                  ),
                 ),
                 ListTile(
                   leading: const Icon(Icons.trending_up),
                   title: const Text('Progress'),
-                  subtitle: Text('${session.currentCount}/${session.targetCount}'),
+                  subtitle: Text(
+                    '${session.currentCount}/${session.targetCount}',
+                  ),
                 ),
                 ListTile(
                   leading: const Icon(Icons.touch_app),
@@ -488,7 +589,12 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
                 ),
               ],
             ),
-            actions: [TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Close'))],
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('Close'),
+              ),
+            ],
           ),
     );
   }
@@ -527,7 +633,12 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
                 ),
               ],
             ),
-            actions: [TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Close'))],
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('Close'),
+              ),
+            ],
           ),
     );
   }
@@ -568,7 +679,12 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
                 ),
               ],
             ),
-            actions: [TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Close'))],
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('Close'),
+              ),
+            ],
           ),
     );
   }

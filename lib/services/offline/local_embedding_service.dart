@@ -50,7 +50,10 @@ class LocalEmbeddingService {
       final input = _prepareInputTensor(tokens);
 
       // Run inference
-      final output = List.filled(_embeddingDimension, 0.0).reshape([1, _embeddingDimension]);
+      final output = List.filled(
+        _embeddingDimension,
+        0.0,
+      ).reshape([1, _embeddingDimension]);
       _interpreter!.run(input, output);
 
       // Extract and normalize the embedding
@@ -110,7 +113,10 @@ class LocalEmbeddingService {
     final similarities = <MapEntry<int, double>>[];
 
     for (int i = 0; i < candidateEmbeddings.length; i++) {
-      final similarity = calculateSimilarity(queryEmbedding, candidateEmbeddings[i]);
+      final similarity = calculateSimilarity(
+        queryEmbedding,
+        candidateEmbeddings[i],
+      );
       if (similarity >= minSimilarity) {
         similarities.add(MapEntry(i, similarity));
       }
@@ -138,7 +144,9 @@ class LocalEmbeddingService {
     } catch (e) {
       // If model doesn't exist, create a minimal placeholder
       // In production, you'd download or bundle a real model
-      throw Exception('Semantic search model not found. Please ensure the model is placed in $_modelPath');
+      throw Exception(
+        'Semantic search model not found. Please ensure the model is placed in $_modelPath',
+      );
     }
   }
 
@@ -169,7 +177,11 @@ class LocalEmbeddingService {
       'strength', 'health', 'family', 'success', 'gratitude', 'patience',
       'knowledge', 'wisdom', 'faith', 'hope', 'love', 'help', 'support',
       // Arabic transliterations
-      'bismillah', 'alhamdulillah', 'subhanallah', 'astaghfirullah', 'inshallah',
+      'bismillah',
+      'alhamdulillah',
+      'subhanallah',
+      'astaghfirullah',
+      'inshallah',
       'mashallah', 'barakallahu', 'rabbana', 'rabbighfir', 'allahuma',
     ];
 
