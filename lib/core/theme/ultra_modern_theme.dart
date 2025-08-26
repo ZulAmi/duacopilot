@@ -79,17 +79,38 @@ class UltraModernTheme {
 
   // Shadow System
   static List<BoxShadow> get softShadow => [
-    BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 4)),
-    BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 6, offset: const Offset(0, 2)),
+    BoxShadow(
+      color: Colors.black.withOpacity(0.04),
+      blurRadius: 12,
+      offset: const Offset(0, 4),
+    ),
+    BoxShadow(
+      color: Colors.black.withOpacity(0.02),
+      blurRadius: 6,
+      offset: const Offset(0, 2),
+    ),
   ];
 
   static List<BoxShadow> get elevatedShadow => [
-    BoxShadow(color: deepEmerald.withOpacity(0.15), blurRadius: 20, offset: const Offset(0, 8)),
-    BoxShadow(color: Colors.black.withOpacity(0.08), blurRadius: 12, offset: const Offset(0, 4)),
+    BoxShadow(
+      color: deepEmerald.withOpacity(0.15),
+      blurRadius: 20,
+      offset: const Offset(0, 8),
+    ),
+    BoxShadow(
+      color: Colors.black.withOpacity(0.08),
+      blurRadius: 12,
+      offset: const Offset(0, 4),
+    ),
   ];
 
   static List<BoxShadow> get glowShadow => [
-    BoxShadow(color: primaryGold.withOpacity(0.3), blurRadius: 24, spreadRadius: -4, offset: const Offset(0, 0)),
+    BoxShadow(
+      color: primaryGold.withOpacity(0.3),
+      blurRadius: 24,
+      spreadRadius: -4,
+      offset: const Offset(0, 0),
+    ),
   ];
 
   // Light Theme
@@ -121,7 +142,12 @@ class UltraModernTheme {
         foregroundColor: deepEmerald,
         surfaceTintColor: Colors.transparent,
         systemOverlayStyle: SystemUiOverlayStyle.dark,
-        titleTextStyle: TextStyle(fontSize: 24, fontWeight: FontWeight.w700, color: deepEmerald, letterSpacing: -0.5),
+        titleTextStyle: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.w700,
+          color: deepEmerald,
+          letterSpacing: -0.5,
+        ),
       ),
 
       // Card Theme with Glassmorphism
@@ -140,10 +166,16 @@ class UltraModernTheme {
         style: ElevatedButton.styleFrom(
           elevation: 0,
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
           backgroundColor: deepEmerald,
           foregroundColor: pureWhite,
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, letterSpacing: 0.5),
+          textStyle: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+            letterSpacing: 0.5,
+          ),
         ),
       ),
 
@@ -151,7 +183,9 @@ class UltraModernTheme {
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
           foregroundColor: deepEmerald,
           textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
         ),
@@ -163,11 +197,17 @@ class UltraModernTheme {
         fillColor: pureWhite.withOpacity(0.9),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: deepEmerald.withOpacity(0.2), width: 1.5),
+          borderSide: BorderSide(
+            color: deepEmerald.withOpacity(0.2),
+            width: 1.5,
+          ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: deepEmerald.withOpacity(0.2), width: 1.5),
+          borderSide: BorderSide(
+            color: deepEmerald.withOpacity(0.2),
+            width: 1.5,
+          ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
@@ -177,8 +217,14 @@ class UltraModernTheme {
           borderRadius: BorderRadius.circular(16),
           borderSide: const BorderSide(color: crimsonRed, width: 1.5),
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-        hintStyle: TextStyle(color: charcoalBlack.withOpacity(0.6), fontSize: 16),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 16,
+        ),
+        hintStyle: TextStyle(
+          color: charcoalBlack.withOpacity(0.6),
+          fontSize: 16,
+        ),
       ),
 
       // Typography
@@ -284,11 +330,17 @@ class UltraModernTheme {
         elevation: 8,
         backgroundColor: primaryGold,
         foregroundColor: charcoalBlack,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16))),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(16)),
+        ),
       ),
 
       // Divider Theme
-      dividerTheme: DividerThemeData(color: deepEmerald.withOpacity(0.1), thickness: 1, space: 24),
+      dividerTheme: DividerThemeData(
+        color: deepEmerald.withOpacity(0.1),
+        thickness: 1,
+        space: 24,
+      ),
     );
   }
 
@@ -319,7 +371,12 @@ class UltraModernTheme {
         foregroundColor: primaryGold,
         surfaceTintColor: Colors.transparent,
         systemOverlayStyle: SystemUiOverlayStyle.light,
-        titleTextStyle: TextStyle(fontSize: 24, fontWeight: FontWeight.w700, color: primaryGold, letterSpacing: -0.5),
+        titleTextStyle: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.w700,
+          color: primaryGold,
+          letterSpacing: -0.5,
+        ),
       ),
 
       cardTheme: CardTheme(
@@ -336,10 +393,16 @@ class UltraModernTheme {
         style: ElevatedButton.styleFrom(
           elevation: 0,
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
           backgroundColor: primaryGold,
           foregroundColor: charcoalBlack,
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, letterSpacing: 0.5),
+          textStyle: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+            letterSpacing: 0.5,
+          ),
         ),
       ),
 
@@ -348,17 +411,26 @@ class UltraModernTheme {
         fillColor: const Color(0xFF2A2A2A).withOpacity(0.9),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: primaryGold.withOpacity(0.3), width: 1.5),
+          borderSide: BorderSide(
+            color: primaryGold.withOpacity(0.3),
+            width: 1.5,
+          ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: primaryGold.withOpacity(0.3), width: 1.5),
+          borderSide: BorderSide(
+            color: primaryGold.withOpacity(0.3),
+            width: 1.5,
+          ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
           borderSide: const BorderSide(color: primaryGold, width: 2.0),
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 16,
+        ),
         hintStyle: TextStyle(color: pureWhite.withOpacity(0.6), fontSize: 16),
       ),
 
@@ -368,7 +440,9 @@ class UltraModernTheme {
         elevation: 8,
         backgroundColor: primaryGold,
         foregroundColor: charcoalBlack,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16))),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(16)),
+        ),
       ),
     );
   }
@@ -398,22 +472,43 @@ class UltraModernTheme {
 
 /// Custom decorations for glassmorphism effects
 class GlassmorphicDecoration {
-  static BoxDecoration light({double borderRadius = 24, double blur = 20, double opacity = 0.2}) {
+  static BoxDecoration light({
+    double borderRadius = 24,
+    double blur = 20,
+    double opacity = 0.2,
+  }) {
     return BoxDecoration(
       borderRadius: BorderRadius.circular(borderRadius),
       color: Colors.white.withOpacity(opacity),
       border: Border.all(color: Colors.white.withOpacity(0.3), width: 1.5),
-      boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: blur, offset: const Offset(0, 8))],
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.1),
+          blurRadius: blur,
+          offset: const Offset(0, 8),
+        ),
+      ],
     );
   }
 
-  static BoxDecoration dark({double borderRadius = 24, double blur = 20, double opacity = 0.2}) {
+  static BoxDecoration dark({
+    double borderRadius = 24,
+    double blur = 20,
+    double opacity = 0.2,
+  }) {
     return BoxDecoration(
       borderRadius: BorderRadius.circular(borderRadius),
       color: Colors.black.withOpacity(opacity),
-      border: Border.all(color: UltraModernTheme.primaryGold.withOpacity(0.3), width: 1.5),
+      border: Border.all(
+        color: UltraModernTheme.primaryGold.withOpacity(0.3),
+        width: 1.5,
+      ),
       boxShadow: [
-        BoxShadow(color: UltraModernTheme.primaryGold.withOpacity(0.1), blurRadius: blur, offset: const Offset(0, 8)),
+        BoxShadow(
+          color: UltraModernTheme.primaryGold.withOpacity(0.1),
+          blurRadius: blur,
+          offset: const Offset(0, 8),
+        ),
       ],
     );
   }

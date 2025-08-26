@@ -23,7 +23,9 @@ void main() {
       expect(MonitoringIntegration.recordRagException, isNotNull);
     });
 
-    testWidgets('MonitoredApp widget should render child correctly', (tester) async {
+    testWidgets('MonitoredApp widget should render child correctly', (
+      tester,
+    ) async {
       // Create a simple test widget
       const testChild = Text('Test Child');
 
@@ -41,34 +43,47 @@ void main() {
       expect(find.text('Test Child'), findsOneWidget);
     });
 
-    testWidgets('MonitoredApp should show initialization status', (tester) async {
+    testWidgets('MonitoredApp should show initialization status', (
+      tester,
+    ) async {
       // Create test widget with monitoring enabled
-      await tester.pumpWidget(const MaterialApp(home: MonitoredApp(enableMonitoring: true, child: Text('Test Child'))));
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: MonitoredApp(enableMonitoring: true, child: Text('Test Child')),
+        ),
+      );
 
       // Should show initialization indicator
       expect(find.text('Initializing monitoring...'), findsOneWidget);
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
     });
 
-    test('MonitoringInitializationService status should provide debug info', () {
-      final status = MonitoringInitializationService.instance.monitoringStatus;
+    test(
+      'MonitoringInitializationService status should provide debug info',
+      () {
+        final status =
+            MonitoringInitializationService.instance.monitoringStatus;
 
-      expect(status, isA<Map<String, dynamic>>());
-      expect(status.containsKey('initialized'), isTrue);
-      expect(status.containsKey('platform_service'), isTrue);
-      expect(status.containsKey('timestamp'), isTrue);
-    });
+        expect(status, isA<Map<String, dynamic>>());
+        expect(status.containsKey('initialized'), isTrue);
+        expect(status.containsKey('platform_service'), isTrue);
+        expect(status.containsKey('timestamp'), isTrue);
+      },
+    );
   });
 
   group('Monitoring Service Integration', () {
-    test('MonitoringInitializationService should have proper lifecycle methods', () {
-      // Test that the monitoring initialization service has required methods
-      final initService = MonitoringInitializationService.instance;
+    test(
+      'MonitoringInitializationService should have proper lifecycle methods',
+      () {
+        // Test that the monitoring initialization service has required methods
+        final initService = MonitoringInitializationService.instance;
 
-      expect(initService, isNotNull);
-      expect(initService.monitoringStatus, isA<Map<String, dynamic>>());
-      expect(initService.isInitialized, isFalse);
-    });
+        expect(initService, isNotNull);
+        expect(initService.monitoringStatus, isA<Map<String, dynamic>>());
+        expect(initService.isInitialized, isFalse);
+      },
+    );
 
     test('MonitoringIntegration should have A/B testing methods', () {
       // Test A/B testing variant methods exist

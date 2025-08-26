@@ -17,9 +17,11 @@ void main() {
 
   group('♿ Accessibility Tests', () {
     group('🔊 Screen Reader Support', () {
-      testWidgets('Arabic text should have proper semantics', (WidgetTester tester) async {
+      testWidgets('Arabic text should have proper semantics', (
+        WidgetTester tester,
+      ) async {
         final arabicText = TestConfig.sampleArabicQueries.first;
-        
+
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -42,15 +44,17 @@ void main() {
 
         // Verify semantics are properly set
         expect(find.bySemanticsLabel('Arabic prayer text'), findsOneWidget);
-        
+
         // Check that RTL text is accessible
         final semantics = tester.getSemantics(find.text(arabicText));
         expect(semantics.label, contains('Arabic prayer'));
-        
+
         print('✅ Arabic text semantics verified');
       });
 
-      testWidgets('Search interface should be screen reader accessible', (WidgetTester tester) async {
+      testWidgets('Search interface should be screen reader accessible', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -64,7 +68,10 @@ void main() {
                       decoration: InputDecoration(
                         labelText: 'Search for prayers',
                         hintText: 'Enter prayer topic...',
-                        prefixIcon: Icon(Icons.search, semanticLabel: 'Search icon'),
+                        prefixIcon: Icon(
+                          Icons.search,
+                          semanticLabel: 'Search icon',
+                        ),
                       ),
                     ),
                   ),
@@ -97,10 +104,20 @@ void main() {
         print('✅ Search interface accessibility verified');
       });
 
-      testWidgets('Prayer results should be accessible', (WidgetTester tester) async {
+      testWidgets('Prayer results should be accessible', (
+        WidgetTester tester,
+      ) async {
         final mockPrayers = [
-          {'title': 'Morning Prayer', 'arabic': TestConfig.sampleArabicQueries[0], 'confidence': 0.95},
-          {'title': 'Evening Prayer', 'arabic': TestConfig.sampleArabicQueries[1], 'confidence': 0.88},
+          {
+            'title': 'Morning Prayer',
+            'arabic': TestConfig.sampleArabicQueries[0],
+            'confidence': 0.95,
+          },
+          {
+            'title': 'Evening Prayer',
+            'arabic': TestConfig.sampleArabicQueries[1],
+            'confidence': 0.88,
+          },
         ];
 
         await tester.pumpWidget(
@@ -111,7 +128,8 @@ void main() {
                 itemBuilder: (context, index) {
                   final prayer = mockPrayers[index];
                   return Semantics(
-                    label: 'Prayer result ${index + 1} of ${mockPrayers.length}',
+                    label:
+                        'Prayer result ${index + 1} of ${mockPrayers.length}',
                     hint: 'Double tap to view full prayer details',
                     button: true,
                     child: Card(
@@ -125,7 +143,8 @@ void main() {
                           children: [
                             Semantics(
                               label: 'Arabic text: ${prayer['arabic']}',
-                              hint: 'Arabic prayer text in right-to-left reading direction',
+                              hint:
+                                  'Arabic prayer text in right-to-left reading direction',
                               child: Directionality(
                                 textDirection: TextDirection.rtl,
                                 child: Text(
@@ -136,8 +155,11 @@ void main() {
                             ),
                             SizedBox(height: 8),
                             Semantics(
-                              label: 'Confidence score: ${((prayer['confidence'] as double) * 100).round()} percent',
-                              child: Text('Confidence: ${((prayer['confidence'] as double) * 100).round()}%'),
+                              label:
+                                  'Confidence score: ${((prayer['confidence'] as double) * 100).round()} percent',
+                              child: Text(
+                                'Confidence: ${((prayer['confidence'] as double) * 100).round()}%',
+                              ),
                             ),
                           ],
                         ),
@@ -163,13 +185,18 @@ void main() {
         // Verify prayer results accessibility
         expect(find.bySemanticsLabel('Prayer result 1 of 2'), findsOneWidget);
         expect(find.bySemanticsLabel('Prayer result 2 of 2'), findsOneWidget);
-        expect(find.bySemanticsLabel('Prayer title: Morning Prayer'), findsOneWidget);
+        expect(
+          find.bySemanticsLabel('Prayer title: Morning Prayer'),
+          findsOneWidget,
+        );
         expect(find.bySemanticsLabel('Favorite prayer'), findsNWidgets(2));
 
         print('✅ Prayer results accessibility verified');
       });
 
-      testWidgets('Navigation should be screen reader friendly', (WidgetTester tester) async {
+      testWidgets('Navigation should be screen reader friendly', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -183,10 +210,7 @@ void main() {
                   label: 'Menu button',
                   hint: 'Opens navigation drawer',
                   button: true,
-                  child: IconButton(
-                    icon: Icon(Icons.menu),
-                    onPressed: () {},
-                  ),
+                  child: IconButton(icon: Icon(Icons.menu), onPressed: () {}),
                 ),
                 actions: [
                   Semantics(
@@ -216,7 +240,10 @@ void main() {
         await tester.pumpAndSettle();
 
         // Verify navigation accessibility
-        expect(find.bySemanticsLabel('DuaCopilot Islamic AI Assistant'), findsOneWidget);
+        expect(
+          find.bySemanticsLabel('DuaCopilot Islamic AI Assistant'),
+          findsOneWidget,
+        );
         expect(find.bySemanticsLabel('Menu button'), findsOneWidget);
         expect(find.bySemanticsLabel('Settings'), findsOneWidget);
         expect(find.bySemanticsLabel('Voice search'), findsOneWidget);
@@ -230,7 +257,9 @@ void main() {
     });
 
     group('📱 High Contrast Support', () {
-      testWidgets('High contrast mode should be supported', (WidgetTester tester) async {
+      testWidgets('High contrast mode should be supported', (
+        WidgetTester tester,
+      ) async {
         // Simulate high contrast mode with custom colors
         final highContrastTheme = ThemeData(
           colorScheme: ColorScheme.fromSeed(
@@ -288,7 +317,9 @@ void main() {
         print('✅ High contrast mode support verified');
       });
 
-      testWidgets('Text should have sufficient contrast ratios', (WidgetTester tester) async {
+      testWidgets('Text should have sufficient contrast ratios', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -330,7 +361,9 @@ void main() {
     });
 
     group('🔍 Font Size and Scaling', () {
-      testWidgets('Large text sizes should be supported', (WidgetTester tester) async {
+      testWidgets('Large text sizes should be supported', (
+        WidgetTester tester,
+      ) async {
         // Test with large text scale factor
         await tester.pumpWidget(
           MaterialApp(
@@ -374,23 +407,27 @@ void main() {
         expect(find.text('Large Button'), findsOneWidget);
 
         // Verify widgets are still accessible at large text sizes
-        final buttonWidget = tester.widget<ElevatedButton>(find.byType(ElevatedButton));
+        final buttonWidget = tester.widget<ElevatedButton>(
+          find.byType(ElevatedButton),
+        );
         expect(buttonWidget.child, isNotNull);
 
         print('✅ Large text size support verified');
       });
 
-      testWidgets('Arabic text should scale properly', (WidgetTester tester) async {
+      testWidgets('Arabic text should scale properly', (
+        WidgetTester tester,
+      ) async {
         const scaleFactor = 1.5;
-        
+
         await tester.pumpWidget(
           MaterialApp(
             home: Builder(
               builder: (context) {
                 return MediaQuery(
-                  data: MediaQuery.of(context).copyWith(
-                    textScaler: TextScaler.linear(scaleFactor),
-                  ),
+                  data: MediaQuery.of(
+                    context,
+                  ).copyWith(textScaler: TextScaler.linear(scaleFactor)),
                   child: Scaffold(
                     body: Directionality(
                       textDirection: TextDirection.rtl,
@@ -424,15 +461,22 @@ void main() {
         expect(find.byType(Card), findsWidgets);
 
         // Verify Arabic text renders at scaled size
-        final firstTextWidget = tester.widget<Text>(find.text(TestConfig.sampleArabicQueries.first));
-        expect(firstTextWidget.data, equals(TestConfig.sampleArabicQueries.first));
+        final firstTextWidget = tester.widget<Text>(
+          find.text(TestConfig.sampleArabicQueries.first),
+        );
+        expect(
+          firstTextWidget.data,
+          equals(TestConfig.sampleArabicQueries.first),
+        );
 
         print('✅ Arabic text scaling verified (${scaleFactor}x scale)');
       });
     });
 
     group('⌨️ Keyboard Navigation', () {
-      testWidgets('Tab navigation should work properly', (WidgetTester tester) async {
+      testWidgets('Tab navigation should work properly', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -447,10 +491,7 @@ void main() {
                     child: Text('Search Button'),
                   ),
                   SizedBox(height: 20),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text('Clear Button'),
-                  ),
+                  TextButton(onPressed: () {}, child: Text('Clear Button')),
                 ],
               ),
             ),
@@ -477,7 +518,9 @@ void main() {
         print('✅ Keyboard navigation support verified');
       });
 
-      testWidgets('RTL navigation should work with keyboard', (WidgetTester tester) async {
+      testWidgets('RTL navigation should work with keyboard', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Directionality(
@@ -527,9 +570,11 @@ void main() {
     });
 
     group('🎯 Focus Management', () {
-      testWidgets('Focus should be managed properly in search flow', (WidgetTester tester) async {
+      testWidgets('Focus should be managed properly in search flow', (
+        WidgetTester tester,
+      ) async {
         bool searchPressed = false;
-        
+
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -577,20 +622,17 @@ void main() {
         print('✅ Focus management in search flow verified');
       });
 
-      testWidgets('Focus should return to appropriate element after actions', (WidgetTester tester) async {
+      testWidgets('Focus should return to appropriate element after actions', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
               body: Column(
                 children: [
-                  TextField(
-                    decoration: InputDecoration(labelText: 'Search'),
-                  ),
+                  TextField(decoration: InputDecoration(labelText: 'Search')),
                   SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Text('Submit'),
-                  ),
+                  ElevatedButton(onPressed: () {}, child: Text('Submit')),
                   SizedBox(height: 20),
                   Card(
                     child: ListTile(
@@ -611,7 +653,7 @@ void main() {
 
         // Test focus management
         final favoriteButton = find.byIcon(Icons.favorite_border);
-        
+
         await tester.tap(favoriteButton);
         await tester.pumpAndSettle();
 
@@ -623,7 +665,9 @@ void main() {
     });
 
     group('🌍 Internationalization Accessibility', () {
-      testWidgets('Mixed language content should be accessible', (WidgetTester tester) async {
+      testWidgets('Mixed language content should be accessible', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -635,7 +679,10 @@ void main() {
                     label: 'Prayer title in English',
                     child: Text(
                       'Morning Prayer',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   SizedBox(height: 10),
@@ -656,7 +703,10 @@ void main() {
                     label: 'Pronunciation guide in English letters',
                     child: Text(
                       'Pronunciation: Alhamdulillahi rabbil alameen',
-                      style: TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontStyle: FontStyle.italic,
+                      ),
                     ),
                   ),
                   SizedBox(height: 10),
@@ -676,15 +726,29 @@ void main() {
         await tester.pumpAndSettle();
 
         // Verify all text elements are accessible
-        expect(find.bySemanticsLabel('Prayer title in English'), findsOneWidget);
-        expect(find.bySemanticsLabel('Prayer text in Arabic, right-to-left reading'), findsOneWidget);
-        expect(find.bySemanticsLabel('Pronunciation guide in English letters'), findsOneWidget);
-        expect(find.bySemanticsLabel('English translation of Arabic text'), findsOneWidget);
+        expect(
+          find.bySemanticsLabel('Prayer title in English'),
+          findsOneWidget,
+        );
+        expect(
+          find.bySemanticsLabel('Prayer text in Arabic, right-to-left reading'),
+          findsOneWidget,
+        );
+        expect(
+          find.bySemanticsLabel('Pronunciation guide in English letters'),
+          findsOneWidget,
+        );
+        expect(
+          find.bySemanticsLabel('English translation of Arabic text'),
+          findsOneWidget,
+        );
 
         print('✅ Mixed language accessibility verified');
       });
 
-      testWidgets('Arabic numbers and dates should be accessible', (WidgetTester tester) async {
+      testWidgets('Arabic numbers and dates should be accessible', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -695,17 +759,26 @@ void main() {
                   children: [
                     Semantics(
                       label: 'Prayer number 1 in Arabic format',
-                      child: Text('الدعاء رقم ١', style: TextStyle(fontSize: 18)),
+                      child: Text(
+                        'الدعاء رقم ١',
+                        style: TextStyle(fontSize: 18),
+                      ),
                     ),
                     SizedBox(height: 10),
                     Semantics(
                       label: 'Islamic date: 15th of Ramadan, 1445',
-                      child: Text('١٥ رمضان ١٤٤٥', style: TextStyle(fontSize: 16)),
+                      child: Text(
+                        '١٥ رمضان ١٤٤٥',
+                        style: TextStyle(fontSize: 16),
+                      ),
                     ),
                     SizedBox(height: 10),
                     Semantics(
                       label: 'Prayer time: 5:30 AM',
-                      child: Text('الوقت: ٥:٣٠ صباحاً', style: TextStyle(fontSize: 16)),
+                      child: Text(
+                        'الوقت: ٥:٣٠ صباحاً',
+                        style: TextStyle(fontSize: 16),
+                      ),
                     ),
                   ],
                 ),
@@ -715,8 +788,14 @@ void main() {
         );
         await tester.pumpAndSettle();
 
-        expect(find.bySemanticsLabel('Prayer number 1 in Arabic format'), findsOneWidget);
-        expect(find.bySemanticsLabel('Islamic date: 15th of Ramadan, 1445'), findsOneWidget);
+        expect(
+          find.bySemanticsLabel('Prayer number 1 in Arabic format'),
+          findsOneWidget,
+        );
+        expect(
+          find.bySemanticsLabel('Islamic date: 15th of Ramadan, 1445'),
+          findsOneWidget,
+        );
         expect(find.bySemanticsLabel('Prayer time: 5:30 AM'), findsOneWidget);
 
         print('✅ Arabic numbers and dates accessibility verified');
@@ -724,7 +803,9 @@ void main() {
     });
 
     group('🔊 Audio Accessibility', () {
-      testWidgets('Audio controls should be accessible', (WidgetTester tester) async {
+      testWidgets('Audio controls should be accessible', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -748,7 +829,8 @@ void main() {
                             children: [
                               Semantics(
                                 label: 'Play audio',
-                                hint: 'Plays Arabic pronunciation of the prayer',
+                                hint:
+                                    'Plays Arabic pronunciation of the prayer',
                                 button: true,
                                 child: IconButton(
                                   icon: Icon(Icons.play_arrow),
@@ -797,7 +879,10 @@ void main() {
         expect(find.bySemanticsLabel('Play audio'), findsOneWidget);
         expect(find.bySemanticsLabel('Stop audio'), findsOneWidget);
         expect(find.bySemanticsLabel('Repeat audio'), findsOneWidget);
-        expect(find.bySemanticsLabel('Audio playback progress'), findsOneWidget);
+        expect(
+          find.bySemanticsLabel('Audio playback progress'),
+          findsOneWidget,
+        );
 
         // Test play button interaction
         await tester.tap(find.bySemanticsLabel('Play audio'));

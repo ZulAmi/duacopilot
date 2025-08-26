@@ -13,7 +13,8 @@ import '../secure_storage/secure_storage_service.dart';
 /// Provides region-specific Islamic guidance and cultural context awareness
 class CulturalAdaptationService {
   static CulturalAdaptationService? _instance;
-  static CulturalAdaptationService get instance => _instance ??= CulturalAdaptationService._();
+  static CulturalAdaptationService get instance =>
+      _instance ??= CulturalAdaptationService._();
 
   CulturalAdaptationService._();
 
@@ -33,12 +34,16 @@ class CulturalAdaptationService {
   DateTime? _lastLocationUpdate;
 
   // Stream controllers
-  final _culturalContextController = StreamController<CulturalContext>.broadcast();
-  final _locationUpdateController = StreamController<LocationUpdate>.broadcast();
+  final _culturalContextController =
+      StreamController<CulturalContext>.broadcast();
+  final _locationUpdateController =
+      StreamController<LocationUpdate>.broadcast();
 
   // Public streams
-  Stream<CulturalContext> get culturalContextStream => _culturalContextController.stream;
-  Stream<LocationUpdate> get locationUpdateStream => _locationUpdateController.stream;
+  Stream<CulturalContext> get culturalContextStream =>
+      _culturalContextController.stream;
+  Stream<LocationUpdate> get locationUpdateStream =>
+      _locationUpdateController.stream;
 
   // Islamic school mappings by region
   static const Map<String, Map<String, dynamic>> _regionalIslamicSchools = {
@@ -225,24 +230,34 @@ class CulturalAdaptationService {
   };
 
   // Regional Du'a adaptations
-  static const Map<String, Map<String, List<String>>> _regionalDuaAdaptations = {
-    'travel': {
-      'SA': ['اللهم إنا نسألك في سفرنا هذا البر والتقوى', 'Travel Du\'a with emphasis on Hajj/Umrah context'],
-      'PK': ['اللهم إنا نسألك في سفرنا هذا البر والتقوى', 'یا اللہ ہماری اس سفر میں بھلائی اور تقویٰ عطا فرما'],
-      'ID': [
-        'اللهم إنا نسألك في سفرنا هذا البر والتقوى',
-        'Ya Allah, dalam perjalanan ini berikanlah kebaikan dan takwa',
-      ],
-    },
-    'work': {
-      'US': [
-        'اللهم بارك لنا فيما رزقتنا',
-        'O Allah, bless us in what You have provided',
-        'Professional success with Islamic ethics emphasis',
-      ],
-      'SA': ['اللهم بارك لنا فيما رزقتنا وقنا عذاب النار', 'Work Du\'a with traditional Arabic emphasis'],
-    },
-  };
+  static const Map<String, Map<String, List<String>>> _regionalDuaAdaptations =
+      {
+        'travel': {
+          'SA': [
+            'اللهم إنا نسألك في سفرنا هذا البر والتقوى',
+            'Travel Du\'a with emphasis on Hajj/Umrah context',
+          ],
+          'PK': [
+            'اللهم إنا نسألك في سفرنا هذا البر والتقوى',
+            'یا اللہ ہماری اس سفر میں بھلائی اور تقویٰ عطا فرما',
+          ],
+          'ID': [
+            'اللهم إنا نسألك في سفرنا هذا البر والتقوى',
+            'Ya Allah, dalam perjalanan ini berikanlah kebaikan dan takwa',
+          ],
+        },
+        'work': {
+          'US': [
+            'اللهم بارك لنا فيما رزقتنا',
+            'O Allah, bless us in what You have provided',
+            'Professional success with Islamic ethics emphasis',
+          ],
+          'SA': [
+            'اللهم بارك لنا فيما رزقتنا وقنا عذاب النار',
+            'Work Du\'a with traditional Arabic emphasis',
+          ],
+        },
+      };
 
   /// Initialize cultural adaptation service
   Future<void> initialize() async {
@@ -303,12 +318,15 @@ class CulturalAdaptationService {
 
     // Get regional adaptations
     final regionalAdaptations = _regionalDuaAdaptations[category];
-    if (regionalAdaptations != null && regionalAdaptations.containsKey(countryCode)) {
+    if (regionalAdaptations != null &&
+        regionalAdaptations.containsKey(countryCode)) {
       recommendations.addAll(regionalAdaptations[countryCode]!);
     }
 
     // Add language-specific recommendations
-    final languagePriorities = _culturalPreferences['language_priority']?[countryCode] as List<String>?;
+    final languagePriorities =
+        _culturalPreferences['language_priority']?[countryCode]
+            as List<String>?;
     if (languagePriorities != null) {
       for (final lang in languagePriorities) {
         final langSpecific = await _getLanguageSpecificDua(category, lang);
@@ -338,7 +356,8 @@ class CulturalAdaptationService {
     final context = _currentContext;
     if (context == null) return null;
 
-    return _culturalPreferences['prayer_calculation']?[context.country] as String?;
+    return _culturalPreferences['prayer_calculation']?[context.country]
+        as String?;
   }
 
   /// Get preferred languages for user's region
@@ -348,7 +367,10 @@ class CulturalAdaptationService {
     final context = _currentContext;
     if (context == null) return ['en'];
 
-    return (_culturalPreferences['language_priority']?[context.country] as List<dynamic>?)?.cast<String>() ?? ['en'];
+    return (_culturalPreferences['language_priority']?[context.country]
+                as List<dynamic>?)
+            ?.cast<String>() ??
+        ['en'];
   }
 
   /// Get regional Islamic celebrations
@@ -358,7 +380,10 @@ class CulturalAdaptationService {
     final context = _currentContext;
     if (context == null) return [];
 
-    return (_culturalPreferences['celebrations']?[context.country] as List<dynamic>?)?.cast<String>() ?? [];
+    return (_culturalPreferences['celebrations']?[context.country]
+                as List<dynamic>?)
+            ?.cast<String>() ??
+        [];
   }
 
   /// Set manual cultural context (for users who prefer to specify)
@@ -379,7 +404,11 @@ class CulturalAdaptationService {
       primaryLanguage: primaryLanguage,
       preferredLanguages: preferredLanguages,
       islamicSchool: islamicSchool,
-      culturalPreferences: {'manual_override': true, 'source': 'user_specified', ...?additionalPreferences},
+      culturalPreferences: {
+        'manual_override': true,
+        'source': 'user_specified',
+        ...?additionalPreferences,
+      },
       lastUpdated: DateTime.now(),
     );
 
@@ -409,10 +438,14 @@ class CulturalAdaptationService {
         permission = await Geolocator.requestPermission();
       }
 
-      _hasLocationPermission = permission == LocationPermission.whileInUse || permission == LocationPermission.always;
+      _hasLocationPermission =
+          permission == LocationPermission.whileInUse ||
+          permission == LocationPermission.always;
 
       if (!_hasLocationPermission) {
-        AppLogger.warning('Location permission not granted - cultural adaptation will be limited');
+        AppLogger.warning(
+          'Location permission not granted - cultural adaptation will be limited',
+        );
       }
     } catch (e) {
       AppLogger.error('Error checking location permissions: $e');
@@ -430,7 +463,9 @@ class CulturalAdaptationService {
         final lastUpdate = _currentContext?.lastUpdated;
         _lastLocationUpdate = lastUpdate;
 
-        AppLogger.debug('Loaded cached cultural context: ${_currentContext?.country}/${_currentContext?.region}');
+        AppLogger.debug(
+          'Loaded cached cultural context: ${_currentContext?.country}/${_currentContext?.region}',
+        );
       }
     } catch (e) {
       AppLogger.warning('Failed to load cached cultural context: $e');
@@ -441,7 +476,10 @@ class CulturalAdaptationService {
     if (!_hasLocationPermission) return false;
     if (_lastLocationUpdate == null) return true;
 
-    return DateTime.now().difference(_lastLocationUpdate!).compareTo(_locationCacheExpiry) > 0;
+    return DateTime.now()
+            .difference(_lastLocationUpdate!)
+            .compareTo(_locationCacheExpiry) >
+        0;
   }
 
   Future<void> _updateLocationAndContext() async {
@@ -454,19 +492,28 @@ class CulturalAdaptationService {
       AppLogger.info('Updating location and cultural context...');
 
       // Get current position
-      final position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
+      final position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.low,
+      );
 
       _lastKnownPosition = position;
 
       // Get address from coordinates
-      final placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
+      final placemarks = await placemarkFromCoordinates(
+        position.latitude,
+        position.longitude,
+      );
 
       if (placemarks.isNotEmpty) {
         final placemark = placemarks.first;
         await _buildCulturalContextFromLocation(placemark);
 
         _locationUpdateController.add(
-          LocationUpdate(position: position, placemark: placemark, timestamp: DateTime.now()),
+          LocationUpdate(
+            position: position,
+            placemark: placemark,
+            timestamp: DateTime.now(),
+          ),
         );
       }
 
@@ -480,14 +527,17 @@ class CulturalAdaptationService {
     try {
       final countryCode = placemark.isoCountryCode ?? 'XX';
       final country = placemark.country ?? 'Unknown';
-      final region = placemark.administrativeArea ?? placemark.locality ?? 'Unknown';
+      final region =
+          placemark.administrativeArea ?? placemark.locality ?? 'Unknown';
 
       // Determine primary language based on country
       final primaryLanguage = _determinePrimaryLanguage(countryCode);
 
       // Get preferred languages for region
       final preferredLanguages =
-          (_culturalPreferences['language_priority']?[countryCode] as List<dynamic>?)?.cast<String>() ??
+          (_culturalPreferences['language_priority']?[countryCode]
+                  as List<dynamic>?)
+              ?.cast<String>() ??
           [primaryLanguage];
 
       // Determine Islamic school
@@ -497,10 +547,17 @@ class CulturalAdaptationService {
       final culturalPreferences = <String, dynamic>{
         'source': 'geocoding',
         'location_accuracy': 'city',
-        'prayer_method': _culturalPreferences['prayer_calculation']?[countryCode] ?? 'isna',
-        'dua_style': _culturalPreferences['dua_style']?[countryCode] ?? 'english_focused',
-        'celebrations': _culturalPreferences['celebrations']?[countryCode] ?? [],
-        'coordinates': {'latitude': _lastKnownPosition?.latitude, 'longitude': _lastKnownPosition?.longitude},
+        'prayer_method':
+            _culturalPreferences['prayer_calculation']?[countryCode] ?? 'isna',
+        'dua_style':
+            _culturalPreferences['dua_style']?[countryCode] ??
+            'english_focused',
+        'celebrations':
+            _culturalPreferences['celebrations']?[countryCode] ?? [],
+        'coordinates': {
+          'latitude': _lastKnownPosition?.latitude,
+          'longitude': _lastKnownPosition?.longitude,
+        },
       };
 
       final context = CulturalContext(
@@ -515,7 +572,9 @@ class CulturalAdaptationService {
       );
 
       await _updateCulturalContext(context);
-      AppLogger.info('Cultural context updated: $country ($countryCode) - $islamicSchool school');
+      AppLogger.info(
+        'Cultural context updated: $country ($countryCode) - $islamicSchool school',
+      );
     } catch (e) {
       AppLogger.error('Failed to build cultural context from location: $e');
     }
@@ -569,8 +628,14 @@ class CulturalAdaptationService {
         'اللهم إنا نسألك في سفرنا هذا البر والتقوى',
         'O Allah, we ask You for righteousness and piety in this journey',
       ],
-      'work': ['اللهم بارك لنا فيما رزقتنا', 'O Allah, bless us in what You have provided'],
-      'health': ['اللهم اشفني فإنك الشافي', 'O Allah, heal me, for You are the Healer'],
+      'work': [
+        'اللهم بارك لنا فيما رزقتنا',
+        'O Allah, bless us in what You have provided',
+      ],
+      'health': [
+        'اللهم اشفني فإنك الشافي',
+        'O Allah, heal me, for You are the Healer',
+      ],
       'guidance': [
         'اللهم أرني الحق حقاً وارزقني اتباعه',
         'O Allah, show me the truth and grant me the ability to follow it',
@@ -578,10 +643,16 @@ class CulturalAdaptationService {
     };
 
     return genericRecommendations[category] ??
-        ['بسم الله الرحمن الرحيم', 'In the name of Allah, the Most Gracious, the Most Merciful'];
+        [
+          'بسم الله الرحمن الرحيم',
+          'In the name of Allah, the Most Gracious, the Most Merciful',
+        ];
   }
 
-  Future<List<String>> _getLanguageSpecificDua(String category, String language) async {
+  Future<List<String>> _getLanguageSpecificDua(
+    String category,
+    String language,
+  ) async {
     // This would be enhanced with a proper multilingual Du'a database
     switch (language) {
       case 'ar':
@@ -599,7 +670,10 @@ class CulturalAdaptationService {
     }
   }
 
-  Future<List<String>> _getSchoolSpecificDua(String category, Map<String, dynamic> schoolInfo) async {
+  Future<List<String>> _getSchoolSpecificDua(
+    String category,
+    Map<String, dynamic> schoolInfo,
+  ) async {
     final primarySchool = schoolInfo['primary'] as String;
 
     // This would be enhanced with school-specific Du'a variations
@@ -619,5 +693,9 @@ class LocationUpdate {
   final Placemark placemark;
   final DateTime timestamp;
 
-  LocationUpdate({required this.position, required this.placemark, required this.timestamp});
+  LocationUpdate({
+    required this.position,
+    required this.placemark,
+    required this.timestamp,
+  });
 }

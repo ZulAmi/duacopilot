@@ -26,7 +26,9 @@ class RevolutionaryComponents {
                   backgroundColor: RevolutionaryIslamicTheme.neutralGray100,
                   foregroundColor: RevolutionaryIslamicTheme.textPrimary,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusXl),
+                    borderRadius: BorderRadius.circular(
+                      RevolutionaryIslamicTheme.radiusXl,
+                    ),
                   ),
                 ),
               )
@@ -38,24 +40,38 @@ class RevolutionaryComponents {
                   backgroundColor: RevolutionaryIslamicTheme.neutralGray100,
                   foregroundColor: RevolutionaryIslamicTheme.textPrimary,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusXl),
+                    borderRadius: BorderRadius.circular(
+                      RevolutionaryIslamicTheme.radiusXl,
+                    ),
                   ),
                 ),
               )
               : null),
       title: Row(
         children: [
-          if (showBackButton || showHamburger) const SizedBox(width: RevolutionaryIslamicTheme.space2),
+          if (showBackButton || showHamburger)
+            const SizedBox(width: RevolutionaryIslamicTheme.space2),
           Container(
             padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space2),
             decoration: BoxDecoration(
               gradient: RevolutionaryIslamicTheme.heroGradient,
-              borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusLg),
+              borderRadius: BorderRadius.circular(
+                RevolutionaryIslamicTheme.radiusLg,
+              ),
             ),
-            child: const Icon(Icons.mosque_rounded, color: RevolutionaryIslamicTheme.textOnColor, size: 20),
+            child: const Icon(
+              Icons.mosque_rounded,
+              color: RevolutionaryIslamicTheme.textOnColor,
+              size: 20,
+            ),
           ),
           const SizedBox(width: RevolutionaryIslamicTheme.space3),
-          Text(title, style: RevolutionaryIslamicTheme.headline3.copyWith(fontWeight: FontWeight.w700)),
+          Text(
+            title,
+            style: RevolutionaryIslamicTheme.headline3.copyWith(
+              fontWeight: FontWeight.w700,
+            ),
+          ),
         ],
       ),
       actions:
@@ -67,7 +83,11 @@ class RevolutionaryComponents {
               style: IconButton.styleFrom(
                 backgroundColor: RevolutionaryIslamicTheme.neutralGray100,
                 foregroundColor: RevolutionaryIslamicTheme.textSecondary,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusXl)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(
+                    RevolutionaryIslamicTheme.radiusXl,
+                  ),
+                ),
               ),
             ),
             const SizedBox(width: RevolutionaryIslamicTheme.space2),
@@ -95,11 +115,15 @@ class RevolutionaryComponents {
             // Header Section
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(20), // Reduced from space6 (32px) to 20px
+              padding: const EdgeInsets.all(
+                20,
+              ), // Reduced from space6 (32px) to 20px
               decoration: BoxDecoration(
                 gradient: RevolutionaryIslamicTheme.heroGradient,
                 borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(20), // Reduced radius for cleaner look
+                  bottomLeft: Radius.circular(
+                    20,
+                  ), // Reduced radius for cleaner look
                   bottomRight: Radius.circular(20),
                 ),
               ),
@@ -109,10 +133,16 @@ class RevolutionaryComponents {
                   Container(
                     width: 48, // Fixed compact size
                     height: 48, // Fixed compact size
-                    padding: const EdgeInsets.all(12), // Reduced from space4 (16px) to 12px
+                    padding: const EdgeInsets.all(
+                      12,
+                    ), // Reduced from space4 (16px) to 12px
                     decoration: BoxDecoration(
-                      color: RevolutionaryIslamicTheme.textOnColor.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusFull),
+                      color: RevolutionaryIslamicTheme.textOnColor.withOpacity(
+                        0.2,
+                      ),
+                      borderRadius: BorderRadius.circular(
+                        RevolutionaryIslamicTheme.radiusFull,
+                      ),
                     ),
                     child: const Icon(
                       Icons.mosque_rounded,
@@ -120,7 +150,9 @@ class RevolutionaryComponents {
                       size: 24, // Reduced from 32 to 24
                     ),
                   ),
-                  const SizedBox(height: 12), // Reduced from space4 (16px) to 12px
+                  const SizedBox(
+                    height: 12,
+                  ), // Reduced from space4 (16px) to 12px
                   Text(
                     'DuaCopilot',
                     style: RevolutionaryIslamicTheme.headline3.copyWith(
@@ -133,7 +165,9 @@ class RevolutionaryComponents {
                   Text(
                     'Your AI Islamic Companion',
                     style: RevolutionaryIslamicTheme.body2.copyWith(
-                      color: RevolutionaryIslamicTheme.textOnColor.withOpacity(0.9),
+                      color: RevolutionaryIslamicTheme.textOnColor.withOpacity(
+                        0.9,
+                      ),
                     ),
                   ),
                 ],
@@ -143,9 +177,17 @@ class RevolutionaryComponents {
             // Menu Items
             Expanded(
               child: ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8), // More compact padding
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
+                ), // More compact padding
                 children: [
-                  _modernDrawerItem(icon: Icons.home_rounded, title: 'Home', onTap: onHomePressed, isSelected: true),
+                  _modernDrawerItem(
+                    icon: Icons.home_rounded,
+                    title: 'Home',
+                    onTap: onHomePressed,
+                    isSelected: true,
+                  ),
                   ...menuItems.map(
                     (item) => _modernDrawerItem(
                       icon: item.icon,
@@ -161,12 +203,19 @@ class RevolutionaryComponents {
 
             // Footer
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8), // More compact padding
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 8,
+              ), // More compact padding
               child: Column(
                 children: [
                   const Divider(),
                   const SizedBox(height: 4), // Reduced spacing
-                  _modernDrawerItem(icon: Icons.settings_rounded, title: 'Settings', onTap: onSettingsPressed ?? () {}),
+                  _modernDrawerItem(
+                    icon: Icons.settings_rounded,
+                    title: 'Settings',
+                    onTap: onSettingsPressed ?? () {},
+                  ),
                   _modernDrawerItem(
                     icon: Icons.help_outline_rounded,
                     title: 'Help & Support',
@@ -192,13 +241,19 @@ class RevolutionaryComponents {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 1), // Minimal margin
       child: Material(
-        color: isSelected ? RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.05) : Colors.transparent,
+        color:
+            isSelected
+                ? RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.05)
+                : Colors.transparent,
         borderRadius: BorderRadius.circular(8),
         child: InkWell(
           onTap: onTap,
           borderRadius: BorderRadius.circular(8),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6), // Very compact padding
+            padding: const EdgeInsets.symmetric(
+              horizontal: 12,
+              vertical: 6,
+            ), // Very compact padding
             child: Row(
               children: [
                 // Icon container
@@ -209,14 +264,17 @@ class RevolutionaryComponents {
                   decoration: BoxDecoration(
                     color:
                         isSelected
-                            ? RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1)
+                            ? RevolutionaryIslamicTheme.primaryEmerald
+                                .withOpacity(0.1)
                             : RevolutionaryIslamicTheme.neutralGray100,
                     borderRadius: BorderRadius.circular(6), // Smaller radius
                   ),
                   child: Icon(
                     icon,
                     color:
-                        isSelected ? RevolutionaryIslamicTheme.primaryEmerald : RevolutionaryIslamicTheme.textSecondary,
+                        isSelected
+                            ? RevolutionaryIslamicTheme.primaryEmerald
+                            : RevolutionaryIslamicTheme.textSecondary,
                     size: 16, // Smaller icon
                   ),
                 ),
@@ -234,13 +292,16 @@ class RevolutionaryComponents {
                               isSelected
                                   ? RevolutionaryIslamicTheme.primaryEmerald
                                   : RevolutionaryIslamicTheme.textPrimary,
-                          fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                          fontWeight:
+                              isSelected ? FontWeight.w600 : FontWeight.w500,
                           fontSize: 14, // Smaller title text
                         ),
                       ),
                       if (subtitle != null)
                         Padding(
-                          padding: const EdgeInsets.only(top: 1), // Minimal spacing
+                          padding: const EdgeInsets.only(
+                            top: 1,
+                          ), // Minimal spacing
                           child: Text(
                             subtitle,
                             style: RevolutionaryIslamicTheme.caption.copyWith(
@@ -255,10 +316,15 @@ class RevolutionaryComponents {
                 // Badge or chevron
                 if (badge != null)
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 2,
+                    ),
                     decoration: BoxDecoration(
                       color: RevolutionaryIslamicTheme.accentPurple,
-                      borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusFull),
+                      borderRadius: BorderRadius.circular(
+                        RevolutionaryIslamicTheme.radiusFull,
+                      ),
                     ),
                     child: Text(
                       badge,
@@ -296,7 +362,9 @@ class RevolutionaryComponents {
     return Container(
       decoration: BoxDecoration(
         color: RevolutionaryIslamicTheme.backgroundSecondary,
-        borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radius3Xl),
+        borderRadius: BorderRadius.circular(
+          RevolutionaryIslamicTheme.radius3Xl,
+        ),
         border: Border.all(color: RevolutionaryIslamicTheme.borderLight),
         boxShadow: RevolutionaryIslamicTheme.shadowSm,
       ),
@@ -307,31 +375,45 @@ class RevolutionaryComponents {
         style: RevolutionaryIslamicTheme.body1,
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: RevolutionaryIslamicTheme.body2.copyWith(color: RevolutionaryIslamicTheme.textTertiary),
+          hintStyle: RevolutionaryIslamicTheme.body2.copyWith(
+            color: RevolutionaryIslamicTheme.textTertiary,
+          ),
           prefixIcon: Container(
             margin: const EdgeInsets.all(RevolutionaryIslamicTheme.space3),
             padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space2),
             decoration: BoxDecoration(
               gradient: RevolutionaryIslamicTheme.heroGradient,
-              borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusFull),
+              borderRadius: BorderRadius.circular(
+                RevolutionaryIslamicTheme.radiusFull,
+              ),
             ),
-            child: const Icon(Icons.search_rounded, color: RevolutionaryIslamicTheme.textOnColor, size: 20),
+            child: const Icon(
+              Icons.search_rounded,
+              color: RevolutionaryIslamicTheme.textOnColor,
+              size: 20,
+            ),
           ),
           suffixIcon:
               isLoading
                   ? Container(
-                    margin: const EdgeInsets.all(RevolutionaryIslamicTheme.space4),
+                    margin: const EdgeInsets.all(
+                      RevolutionaryIslamicTheme.space4,
+                    ),
                     width: 20,
                     height: 20,
                     child: const CircularProgressIndicator(
                       strokeWidth: 2,
-                      valueColor: AlwaysStoppedAnimation(RevolutionaryIslamicTheme.primaryEmerald),
+                      valueColor: AlwaysStoppedAnimation(
+                        RevolutionaryIslamicTheme.primaryEmerald,
+                      ),
                     ),
                   )
                   : onVoiceSearch != null
                   ? IconButton(
                     icon: Icon(
-                      isVoiceListening ? Icons.mic_rounded : Icons.mic_none_rounded,
+                      isVoiceListening
+                          ? Icons.mic_rounded
+                          : Icons.mic_none_rounded,
                       color:
                           isVoiceListening
                               ? RevolutionaryIslamicTheme.errorRose
@@ -341,7 +423,9 @@ class RevolutionaryComponents {
                     style: IconButton.styleFrom(
                       backgroundColor:
                           isVoiceListening
-                              ? RevolutionaryIslamicTheme.errorRose.withOpacity(0.1)
+                              ? RevolutionaryIslamicTheme.errorRose.withOpacity(
+                                0.1,
+                              )
                               : RevolutionaryIslamicTheme.neutralGray100,
                       foregroundColor:
                           isVoiceListening
@@ -374,7 +458,9 @@ class RevolutionaryComponents {
       child: Container(
         decoration: BoxDecoration(
           color: RevolutionaryIslamicTheme.backgroundSecondary,
-          borderRadius: BorderRadius.circular(16), // Reduced from radius3Xl to 16px
+          borderRadius: BorderRadius.circular(
+            16,
+          ), // Reduced from radius3Xl to 16px
           border: Border.all(color: RevolutionaryIslamicTheme.borderLight),
           boxShadow: RevolutionaryIslamicTheme.shadowSm,
         ),
@@ -383,30 +469,45 @@ class RevolutionaryComponents {
           children: [
             // Header with Icon and Badge - Much more compact
             Container(
-              padding: const EdgeInsets.all(12), // Reduced from space4 (16px) to 12px
+              padding: const EdgeInsets.all(
+                12,
+              ), // Reduced from space4 (16px) to 12px
               child: Row(
                 children: [
                   Container(
                     width: 40, // Fixed compact size
                     height: 40, // Fixed compact size
-                    padding: const EdgeInsets.all(8), // Reduced from space3 (12px) to 8px
+                    padding: const EdgeInsets.all(
+                      8,
+                    ), // Reduced from space3 (12px) to 8px
                     decoration: BoxDecoration(
                       gradient:
                           gradientColors != null
                               ? LinearGradient(colors: gradientColors)
                               : RevolutionaryIslamicTheme.heroGradient,
-                      borderRadius: BorderRadius.circular(12), // Reduced from radius2Xl to 12px
+                      borderRadius: BorderRadius.circular(
+                        12,
+                      ), // Reduced from radius2Xl to 12px
                       boxShadow: RevolutionaryIslamicTheme.shadowXs,
                     ),
-                    child: Icon(icon, color: RevolutionaryIslamicTheme.textOnColor, size: 20), // Reduced from 24 to 20
+                    child: Icon(
+                      icon,
+                      color: RevolutionaryIslamicTheme.textOnColor,
+                      size: 20,
+                    ), // Reduced from 24 to 20
                   ),
                   const Spacer(),
                   if (badge != null)
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2), // Reduced padding
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 2,
+                      ), // Reduced padding
                       decoration: BoxDecoration(
                         color: RevolutionaryIslamicTheme.accentPurple,
-                        borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusFull),
+                        borderRadius: BorderRadius.circular(
+                          RevolutionaryIslamicTheme.radiusFull,
+                        ),
                       ),
                       child: Text(
                         badge,
@@ -424,7 +525,12 @@ class RevolutionaryComponents {
             // Content - More compact spacing
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(12, 0, 12, 12), // Reduced all padding from 16px to 12px
+                padding: const EdgeInsets.fromLTRB(
+                  12,
+                  0,
+                  12,
+                  12,
+                ), // Reduced all padding from 16px to 12px
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -436,7 +542,9 @@ class RevolutionaryComponents {
                         color: RevolutionaryIslamicTheme.textPrimary,
                       ),
                     ),
-                    const SizedBox(height: 6), // Reduced from space2 (8px) to 6px
+                    const SizedBox(
+                      height: 6,
+                    ), // Reduced from space2 (8px) to 6px
                     Expanded(
                       child: Text(
                         description,
@@ -449,7 +557,9 @@ class RevolutionaryComponents {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    const SizedBox(height: 8), // Reduced from space3 (12px) to 8px
+                    const SizedBox(
+                      height: 8,
+                    ), // Reduced from space3 (12px) to 8px
                     Row(
                       children: [
                         Text(
@@ -489,7 +599,9 @@ class RevolutionaryComponents {
       padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space4),
       decoration: BoxDecoration(
         color: RevolutionaryIslamicTheme.backgroundSecondary,
-        borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radius2Xl),
+        borderRadius: BorderRadius.circular(
+          RevolutionaryIslamicTheme.radius2Xl,
+        ),
         border: Border.all(color: RevolutionaryIslamicTheme.borderLight),
         boxShadow: RevolutionaryIslamicTheme.shadowXs,
       ),
@@ -501,10 +613,19 @@ class RevolutionaryComponents {
               Container(
                 padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space2),
                 decoration: BoxDecoration(
-                  color: (accentColor ?? RevolutionaryIslamicTheme.primaryEmerald).withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusLg),
+                  color: (accentColor ??
+                          RevolutionaryIslamicTheme.primaryEmerald)
+                      .withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(
+                    RevolutionaryIslamicTheme.radiusLg,
+                  ),
                 ),
-                child: Icon(icon, color: accentColor ?? RevolutionaryIslamicTheme.primaryEmerald, size: 16),
+                child: Icon(
+                  icon,
+                  color:
+                      accentColor ?? RevolutionaryIslamicTheme.primaryEmerald,
+                  size: 16,
+                ),
               ),
             ],
           ),
@@ -546,9 +667,15 @@ class RevolutionaryComponents {
             padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space2),
             decoration: BoxDecoration(
               color: RevolutionaryIslamicTheme.textOnColor.withOpacity(0.2),
-              borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusLg),
+              borderRadius: BorderRadius.circular(
+                RevolutionaryIslamicTheme.radiusLg,
+              ),
             ),
-            child: Icon(icon, color: RevolutionaryIslamicTheme.textOnColor, size: 20),
+            child: Icon(
+              icon,
+              color: RevolutionaryIslamicTheme.textOnColor,
+              size: 20,
+            ),
           ),
           const SizedBox(width: RevolutionaryIslamicTheme.space3),
           Expanded(
@@ -562,9 +689,14 @@ class RevolutionaryComponents {
           ),
         ],
       ),
-      backgroundColor: backgroundColor ?? RevolutionaryIslamicTheme.primaryEmerald,
+      backgroundColor:
+          backgroundColor ?? RevolutionaryIslamicTheme.primaryEmerald,
       duration: duration,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radius2Xl)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(
+          RevolutionaryIslamicTheme.radius2Xl,
+        ),
+      ),
       behavior: SnackBarBehavior.floating,
       margin: const EdgeInsets.all(RevolutionaryIslamicTheme.space4),
     );
@@ -581,5 +713,11 @@ class DrawerMenuItem {
   final VoidCallback onTap;
   final String? badge;
 
-  DrawerMenuItem({required this.icon, required this.title, this.subtitle, required this.onTap, this.badge});
+  DrawerMenuItem({
+    required this.icon,
+    required this.title,
+    this.subtitle,
+    required this.onTap,
+    this.badge,
+  });
 }

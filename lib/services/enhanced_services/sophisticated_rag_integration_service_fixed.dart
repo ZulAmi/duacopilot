@@ -27,12 +27,15 @@ class SophisticatedRagIntegrationServiceFixed {
   CulturalContext? _currentCulturalContext;
 
   // Stream controllers
-  final _queryProcessedController = StreamController<SophisticatedQueryResult>.broadcast();
+  final _queryProcessedController =
+      StreamController<SophisticatedQueryResult>.broadcast();
   final _contextUpdateController = StreamController<ContextUpdate>.broadcast();
 
   // Public streams
-  Stream<SophisticatedQueryResult> get queryProcessedStream => _queryProcessedController.stream;
-  Stream<ContextUpdate> get contextUpdateStream => _contextUpdateController.stream;
+  Stream<SophisticatedQueryResult> get queryProcessedStream =>
+      _queryProcessedController.stream;
+  Stream<ContextUpdate> get contextUpdateStream =>
+      _contextUpdateController.stream;
 
   // Singleton pattern
   static SophisticatedRagIntegrationServiceFixed? _instance;
@@ -48,7 +51,9 @@ class SophisticatedRagIntegrationServiceFixed {
     if (_isInitialized) return;
 
     try {
-      AppLogger.info('Initializing Fixed Sophisticated RAG Integration Service...');
+      AppLogger.info(
+        'Initializing Fixed Sophisticated RAG Integration Service...',
+      );
 
       // Initialize core services
       _secureStorage = SecureStorageService.instance;
@@ -65,12 +70,17 @@ class SophisticatedRagIntegrationServiceFixed {
       await _backgroundService.startService();
 
       // Load current cultural context
-      _currentCulturalContext = await _culturalService.getCurrentCulturalContext();
+      _currentCulturalContext =
+          await _culturalService.getCurrentCulturalContext();
 
       _isInitialized = true;
-      AppLogger.info('Fixed Sophisticated RAG Integration Service initialized successfully');
+      AppLogger.info(
+        'Fixed Sophisticated RAG Integration Service initialized successfully',
+      );
     } catch (e) {
-      AppLogger.error('Failed to initialize Fixed Sophisticated RAG Integration Service: $e');
+      AppLogger.error(
+        'Failed to initialize Fixed Sophisticated RAG Integration Service: $e',
+      );
       rethrow;
     }
   }
@@ -85,7 +95,9 @@ class SophisticatedRagIntegrationServiceFixed {
     await _ensureInitialized();
 
     try {
-      AppLogger.info('Processing sophisticated query: ${query.substring(0, 50)}...');
+      AppLogger.info(
+        'Processing sophisticated query: ${query.substring(0, 50)}...',
+      );
 
       final startTime = DateTime.now();
       final queryId = 'query_${startTime.millisecondsSinceEpoch}';
@@ -93,22 +105,28 @@ class SophisticatedRagIntegrationServiceFixed {
 
       // Start or continue conversation using existing API
       if (_currentConversationId == null) {
-        final context = await _conversationMemory.startConversation(userIdFinal);
+        final context = await _conversationMemory.startConversation(
+          userIdFinal,
+        );
         _currentConversationId = context.conversationId;
       }
 
       // Detect emotion using correct API
-      final emotionResult = await _emotionService.detectEmotion(text: query, userId: userIdFinal);
+      final emotionResult = await _emotionService.detectEmotion(
+        text: query,
+        userId: userIdFinal,
+      );
 
       // Get calendar context using correct API
       final calendarContext = await _calendarService.getContextualSuggestions();
 
       // Get cultural adaptations using existing API
-      final culturalRecommendations = await _culturalService.getCulturalDuaRecommendations(
-        category: _categorizeQuery(query),
-        userId: userIdFinal,
-        emotionalState: emotionResult.detectedEmotion,
-      );
+      final culturalRecommendations = await _culturalService
+          .getCulturalDuaRecommendations(
+            category: _categorizeQuery(query),
+            userId: userIdFinal,
+            emotionalState: emotionResult.detectedEmotion,
+          );
 
       // Add conversation turn using correct API
       await _conversationMemory.addConversationTurn(
@@ -134,7 +152,12 @@ class SophisticatedRagIntegrationServiceFixed {
         voiceResult: null,
         calendarContext: calendarContext,
         culturalRecommendations: culturalRecommendations,
-        contextualPrompt: _buildContextualPrompt(query, emotionResult, calendarContext, culturalRecommendations),
+        contextualPrompt: _buildContextualPrompt(
+          query,
+          emotionResult,
+          calendarContext,
+          culturalRecommendations,
+        ),
         culturalContext: _currentCulturalContext,
         processingTime: DateTime.now().difference(startTime),
         timestamp: startTime,
@@ -146,7 +169,9 @@ class SophisticatedRagIntegrationServiceFixed {
       // Emit result
       _queryProcessedController.add(result);
 
-      AppLogger.info('Sophisticated query processed successfully in ${result.processingTime.inMilliseconds}ms');
+      AppLogger.info(
+        'Sophisticated query processed successfully in ${result.processingTime.inMilliseconds}ms',
+      );
       return result;
     } catch (e) {
       AppLogger.error('Failed to process sophisticated query: $e');
@@ -158,7 +183,9 @@ class SophisticatedRagIntegrationServiceFixed {
   Future<String> startNewConversation({String? userId}) async {
     await _ensureInitialized();
 
-    final context = await _conversationMemory.startConversation(userId ?? 'anonymous');
+    final context = await _conversationMemory.startConversation(
+      userId ?? 'anonymous',
+    );
     _currentConversationId = context.conversationId;
 
     AppLogger.info('Started new conversation: $_currentConversationId');
@@ -166,7 +193,9 @@ class SophisticatedRagIntegrationServiceFixed {
   }
 
   /// Get conversation history
-  Future<List<ConversationTurn>> getConversationHistory({String? conversationId}) async {
+  Future<List<ConversationTurn>> getConversationHistory({
+    String? conversationId,
+  }) async {
     await _ensureInitialized();
 
     final id = conversationId ?? _currentConversationId;
@@ -181,9 +210,13 @@ class SophisticatedRagIntegrationServiceFixed {
 
     // Get preferred language from cultural context
     final culturalLanguages = await _culturalService.getPreferredLanguages();
-    final primaryLanguage = culturalLanguages.isNotEmpty ? culturalLanguages.first : 'en-US';
+    final primaryLanguage =
+        culturalLanguages.isNotEmpty ? culturalLanguages.first : 'en-US';
 
-    await _voiceService.startListening(language: primaryLanguage, enableArabicEnhancements: true);
+    await _voiceService.startListening(
+      language: primaryLanguage,
+      enableArabicEnhancements: true,
+    );
   }
 
   /// Stop voice listening
@@ -193,7 +226,8 @@ class SophisticatedRagIntegrationServiceFixed {
   }
 
   /// Get voice service status
-  VoiceStatus get voiceStatus => _voiceService.isListening ? VoiceStatus.listening : VoiceStatus.stopped;
+  VoiceStatus get voiceStatus =>
+      _voiceService.isListening ? VoiceStatus.listening : VoiceStatus.stopped;
 
   /// Get upcoming Islamic events
   Future<List<CalendarEvent>> getUpcomingIslamicEvents() async {
@@ -221,7 +255,8 @@ class SophisticatedRagIntegrationServiceFixed {
         additionalPreferences: additionalPreferences,
       );
 
-      _currentCulturalContext = await _culturalService.getCurrentCulturalContext();
+      _currentCulturalContext =
+          await _culturalService.getCurrentCulturalContext();
 
       _contextUpdateController.add(
         ContextUpdate(
@@ -272,11 +307,16 @@ class SophisticatedRagIntegrationServiceFixed {
   String _categorizeQuery(String query) {
     final lowerQuery = query.toLowerCase();
 
-    if (lowerQuery.contains('travel') || lowerQuery.contains('journey')) return 'travel';
-    if (lowerQuery.contains('work') || lowerQuery.contains('job')) return 'work';
-    if (lowerQuery.contains('health') || lowerQuery.contains('sick')) return 'health';
-    if (lowerQuery.contains('guidance') || lowerQuery.contains('help')) return 'guidance';
-    if (lowerQuery.contains('gratitude') || lowerQuery.contains('thank')) return 'gratitude';
+    if (lowerQuery.contains('travel') || lowerQuery.contains('journey'))
+      return 'travel';
+    if (lowerQuery.contains('work') || lowerQuery.contains('job'))
+      return 'work';
+    if (lowerQuery.contains('health') || lowerQuery.contains('sick'))
+      return 'health';
+    if (lowerQuery.contains('guidance') || lowerQuery.contains('help'))
+      return 'guidance';
+    if (lowerQuery.contains('gratitude') || lowerQuery.contains('thank'))
+      return 'gratitude';
 
     return 'general';
   }
@@ -293,24 +333,35 @@ class SophisticatedRagIntegrationServiceFixed {
     buffer.writeln('Confidence: ${emotionResult.confidence}');
 
     if (calendarContext.isNotEmpty) {
-      buffer.writeln('Calendar Context: ${calendarContext.map((s) => s.suggestionText).join(', ')}');
+      buffer.writeln(
+        'Calendar Context: ${calendarContext.map((s) => s.suggestionText).join(', ')}',
+      );
     }
 
     if (culturalRecommendations.isNotEmpty) {
-      buffer.writeln('Cultural Recommendations: ${culturalRecommendations.join(', ')}');
+      buffer.writeln(
+        'Cultural Recommendations: ${culturalRecommendations.join(', ')}',
+      );
     }
 
     return buffer.toString();
   }
 
-  Future<void> _recordInteraction(String query, EmotionalState? emotion, QueryType queryType) async {
+  Future<void> _recordInteraction(
+    String query,
+    EmotionalState? emotion,
+    QueryType queryType,
+  ) async {
     final interaction = proactive.UserInteraction(
       id: 'interaction_${DateTime.now().millisecondsSinceEpoch}',
       category: _categorizeQuery(query),
       action: 'query_processed',
       timestamp: DateTime.now(),
       emotionalState: emotion,
-      metadata: {'query_type': queryType.toString(), 'query_length': query.length},
+      metadata: {
+        'query_type': queryType.toString(),
+        'query_length': query.length,
+      },
     );
 
     await _backgroundService.recordInteraction(interaction);
@@ -386,5 +437,9 @@ class ContextUpdate {
   final Map<String, dynamic> data;
   final DateTime timestamp;
 
-  ContextUpdate({required this.type, required this.data, required this.timestamp});
+  ContextUpdate({
+    required this.type,
+    required this.data,
+    required this.timestamp,
+  });
 }

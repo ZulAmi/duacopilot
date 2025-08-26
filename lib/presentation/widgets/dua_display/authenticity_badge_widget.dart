@@ -8,7 +8,12 @@ class AuthenticityBadgeWidget extends StatelessWidget {
   final bool showDetailed;
   final VoidCallback? onTap;
 
-  const AuthenticityBadgeWidget({super.key, required this.authenticity, this.showDetailed = false, this.onTap});
+  const AuthenticityBadgeWidget({
+    super.key,
+    required this.authenticity,
+    this.showDetailed = false,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +24,10 @@ class AuthenticityBadgeWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: _getAuthenticityColor().withOpacity(0.1),
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: _getAuthenticityColor().withOpacity(0.3), width: 1.5),
+          border: Border.all(
+            color: _getAuthenticityColor().withOpacity(0.3),
+            width: 1.5,
+          ),
           boxShadow: [
             BoxShadow(
               color: _getAuthenticityColor().withOpacity(0.1),
@@ -34,7 +42,10 @@ class AuthenticityBadgeWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             _buildHeader(context),
-            if (showDetailed) ...[const SizedBox(height: 12), _buildDetailedInfo(context)],
+            if (showDetailed) ...[
+              const SizedBox(height: 12),
+              _buildDetailedInfo(context),
+            ],
           ],
         ),
       ),
@@ -48,7 +59,10 @@ class AuthenticityBadgeWidget extends StatelessWidget {
         // Custom Islamic authenticity icon
         CustomPaint(
           size: const Size(20, 20),
-          painter: IslamicAuthenticityPainter(color: _getAuthenticityColor(), level: authenticity.level),
+          painter: IslamicAuthenticityPainter(
+            color: _getAuthenticityColor(),
+            level: authenticity.level,
+          ),
         ),
         const SizedBox(width: 8),
 
@@ -57,7 +71,11 @@ class AuthenticityBadgeWidget extends StatelessWidget {
           children: [
             Text(
               _getShortDisplayName(),
-              style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: _getAuthenticityColor()),
+              style: GoogleFonts.inter(
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+                color: _getAuthenticityColor(),
+              ),
             ),
             Text(
               authenticity.source,
@@ -72,7 +90,11 @@ class AuthenticityBadgeWidget extends StatelessWidget {
 
         if (onTap != null) ...[
           const SizedBox(width: 8),
-          Icon(Icons.info_outline_rounded, size: 14, color: Theme.of(context).colorScheme.onSurfaceVariant),
+          Icon(
+            Icons.info_outline_rounded,
+            size: 14,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+          ),
         ],
       ],
     );
@@ -81,36 +103,62 @@ class AuthenticityBadgeWidget extends StatelessWidget {
   Widget _buildDetailedInfo(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(color: Colors.white.withOpacity(0.5), borderRadius: BorderRadius.circular(8)),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.5),
+        borderRadius: BorderRadius.circular(8),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Description
           Text(
             authenticity.level.description,
-            style: GoogleFonts.inter(fontSize: 11, color: Theme.of(context).colorScheme.onSurfaceVariant, height: 1.4),
+            style: GoogleFonts.inter(
+              fontSize: 11,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+              height: 1.4,
+            ),
           ),
 
           const SizedBox(height: 8),
 
           // Reference
-          _buildInfoRow(context, 'Reference:', authenticity.reference, Icons.book_outlined),
+          _buildInfoRow(
+            context,
+            'Reference:',
+            authenticity.reference,
+            Icons.book_outlined,
+          ),
 
           if (authenticity.hadithGrade != null) ...[
             const SizedBox(height: 6),
-            _buildInfoRow(context, 'Grade:', authenticity.hadithGrade!, Icons.grade_rounded),
+            _buildInfoRow(
+              context,
+              'Grade:',
+              authenticity.hadithGrade!,
+              Icons.grade_rounded,
+            ),
           ],
 
           if (authenticity.scholar != null) ...[
             const SizedBox(height: 6),
-            _buildInfoRow(context, 'Scholar:', authenticity.scholar!, Icons.person_outline_rounded),
+            _buildInfoRow(
+              context,
+              'Scholar:',
+              authenticity.scholar!,
+              Icons.person_outline_rounded,
+            ),
           ],
 
           // Confidence score
           const SizedBox(height: 8),
           Row(
             children: [
-              Icon(Icons.trending_up_rounded, size: 12, color: Theme.of(context).colorScheme.primary),
+              Icon(
+                Icons.trending_up_rounded,
+                size: 12,
+                color: Theme.of(context).colorScheme.primary,
+              ),
               const SizedBox(width: 4),
               Text(
                 'Confidence: ',
@@ -122,7 +170,11 @@ class AuthenticityBadgeWidget extends StatelessWidget {
               ),
               Text(
                 '${(authenticity.confidenceScore * 100).toInt()}%',
-                style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, color: _getAuthenticityColor()),
+                style: GoogleFonts.inter(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w700,
+                  color: _getAuthenticityColor(),
+                ),
               ),
             ],
           ),
@@ -131,7 +183,12 @@ class AuthenticityBadgeWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildInfoRow(BuildContext context, String label, String value, IconData icon) {
+  Widget _buildInfoRow(
+    BuildContext context,
+    String label,
+    String value,
+    IconData icon,
+  ) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -149,7 +206,10 @@ class AuthenticityBadgeWidget extends StatelessWidget {
         Expanded(
           child: Text(
             value,
-            style: GoogleFonts.inter(fontSize: 10, color: Theme.of(context).colorScheme.onSurfaceVariant),
+            style: GoogleFonts.inter(
+              fontSize: 10,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
         ),
       ],
@@ -258,23 +318,47 @@ class IslamicAuthenticityPainter extends CustomPainter {
   }
 
   void _drawCrescent(Canvas canvas, Offset center, double radius, Paint paint) {
-    final outerCircle = Path()..addOval(Rect.fromCircle(center: center, radius: radius - 2));
+    final outerCircle =
+        Path()..addOval(Rect.fromCircle(center: center, radius: radius - 2));
 
-    final innerCircle = Path()..addOval(Rect.fromCircle(center: Offset(center.dx + 3, center.dy), radius: radius - 4));
+    final innerCircle =
+        Path()..addOval(
+          Rect.fromCircle(
+            center: Offset(center.dx + 3, center.dy),
+            radius: radius - 4,
+          ),
+        );
 
-    final crescentPath = Path.combine(PathOperation.difference, outerCircle, innerCircle);
+    final crescentPath = Path.combine(
+      PathOperation.difference,
+      outerCircle,
+      innerCircle,
+    );
 
     canvas.drawPath(crescentPath, paint);
   }
 
   void _drawQuestionMark(Canvas canvas, Offset center, Paint paint) {
     final textPainter = TextPainter(
-      text: TextSpan(text: '?', style: TextStyle(color: paint.color, fontSize: 12, fontWeight: FontWeight.bold)),
+      text: TextSpan(
+        text: '?',
+        style: TextStyle(
+          color: paint.color,
+          fontSize: 12,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
       textDirection: TextDirection.ltr,
     );
 
     textPainter.layout();
-    textPainter.paint(canvas, Offset(center.dx - textPainter.width / 2, center.dy - textPainter.height / 2));
+    textPainter.paint(
+      canvas,
+      Offset(
+        center.dx - textPainter.width / 2,
+        center.dy - textPainter.height / 2,
+      ),
+    );
   }
 
   void _drawX(Canvas canvas, Offset center, double radius, Paint paint) {
@@ -295,5 +379,7 @@ class IslamicAuthenticityPainter extends CustomPainter {
 }
 
 // Helper function for star drawing
-double cos(double angle) => (angle * 180 / 3.14159).toString().length.toDouble();
-double sin(double angle) => (angle * 180 / 3.14159).toString().length.toDouble();
+double cos(double angle) =>
+    (angle * 180 / 3.14159).toString().length.toDouble();
+double sin(double angle) =>
+    (angle * 180 / 3.14159).toString().length.toDouble();

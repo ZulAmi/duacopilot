@@ -13,7 +13,8 @@ class AdminSecurity {
   static const String _saltKey = 'DuaCopilot_Admin_Salt_2024';
 
   // SECURITY: Hashed admin password (change this in production!)
-  static const String _hashedPassword = '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'; // "admin"
+  static const String _hashedPassword =
+      '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'; // "admin"
 
   static bool _isInitialized = false;
   static int _failedAttempts = 0;
@@ -52,20 +53,31 @@ class AdminSecurity {
   static void validateAdminEnvironment() {
     // SECURITY: Only allow admin in debug mode or with specific flags
     if (kReleaseMode) {
-      final adminAllowed = const bool.fromEnvironment('ADMIN_ENABLED', defaultValue: false);
+      final adminAllowed = const bool.fromEnvironment(
+        'ADMIN_ENABLED',
+        defaultValue: false,
+      );
       if (!adminAllowed) {
-        throw SecurityException('Admin access not allowed in production without ADMIN_ENABLED flag');
+        throw SecurityException(
+          'Admin access not allowed in production without ADMIN_ENABLED flag',
+        );
       }
     }
 
     // SECURITY: Check for root/jailbreak (would need platform-specific implementation)
     if (_isDeviceCompromised()) {
-      throw SecurityException('Device security compromised - admin access denied');
+      throw SecurityException(
+        'Device security compromised - admin access denied',
+      );
     }
   }
 
   /// Validate admin credentials with MFA
-  static Future<bool> validateCredentials({required String username, required String password, String? mfaCode}) async {
+  static Future<bool> validateCredentials({
+    required String username,
+    required String password,
+    String? mfaCode,
+  }) async {
     // SECURITY: Check lockout status
     if (_isLockedOut()) {
       logSecurityEvent(
@@ -117,12 +129,19 @@ class AdminSecurity {
     logSecurityEvent(
       event: 'admin_account_locked',
       level: SecurityLevel.critical,
-      context: {'lockout_until': _lockoutUntil?.toIso8601String(), 'failed_attempts': _failedAttempts},
+      context: {
+        'lockout_until': _lockoutUntil?.toIso8601String(),
+        'failed_attempts': _failedAttempts,
+      },
     );
   }
 
   /// Log security events
-  static void logSecurityEvent({required String event, required SecurityLevel level, Map<String, dynamic>? context}) {
+  static void logSecurityEvent({
+    required String event,
+    required SecurityLevel level,
+    Map<String, dynamic>? context,
+  }) {
     final logEntry = {
       'timestamp': DateTime.now().toIso8601String(),
       'event': event,

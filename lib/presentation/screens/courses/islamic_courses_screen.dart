@@ -14,7 +14,8 @@ class IslamicCoursesScreen extends StatefulWidget {
   State<IslamicCoursesScreen> createState() => _IslamicCoursesScreenState();
 }
 
-class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with TickerProviderStateMixin {
+class _IslamicCoursesScreenState extends State<IslamicCoursesScreen>
+    with TickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
@@ -46,17 +47,27 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
   }
 
   void _initializeAnimations() {
-    _controller = AnimationController(duration: const Duration(milliseconds: 1000), vsync: this);
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 1000),
+      vsync: this,
+    );
 
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(parent: _controller, curve: const Interval(0.0, 0.8, curve: Curves.easeOut)));
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.0, 0.8, curve: Curves.easeOut),
+      ),
+    );
 
     _slideAnimation = Tween<Offset>(
       begin: const Offset(0, 0.2),
       end: Offset.zero,
-    ).animate(CurvedAnimation(parent: _controller, curve: const Interval(0.2, 1.0, curve: Curves.easeOutCubic)));
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.2, 1.0, curve: Curves.easeOutCubic),
+      ),
+    );
 
     _controller.forward();
   }
@@ -83,12 +94,14 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
             }
 
             // Category filter
-            if (_selectedCategory != null && course.category != _selectedCategory) {
+            if (_selectedCategory != null &&
+                course.category != _selectedCategory) {
               return false;
             }
 
             // Difficulty filter
-            if (_selectedDifficulty != null && course.difficulty != _selectedDifficulty) {
+            if (_selectedDifficulty != null &&
+                course.difficulty != _selectedDifficulty) {
               return false;
             }
 
@@ -161,7 +174,11 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
                 SizedBox(height: 16),
                 Text(
                   'Islamic Courses',
-                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
                 SizedBox(height: 8),
                 Text(
@@ -213,7 +230,12 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Filters', style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+          Text(
+            'Filters',
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+          ),
           const SizedBox(height: 16),
           _buildCategoryFilter(),
           const SizedBox(height: 12),
@@ -229,7 +251,12 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Category', style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600)),
+        Text(
+          'Category',
+          style: Theme.of(
+            context,
+          ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+        ),
         const SizedBox(height: 8),
         Wrap(
           spacing: 8,
@@ -267,7 +294,12 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Difficulty', style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600)),
+        Text(
+          'Difficulty',
+          style: Theme.of(
+            context,
+          ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+        ),
         const SizedBox(height: 8),
         Wrap(
           spacing: 8,
@@ -306,7 +338,9 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
       children: [
         Text(
           'Show only free courses',
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+          style: Theme.of(
+            context,
+          ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
         ),
         Switch(
           value: _showOnlyFree,
@@ -329,7 +363,9 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
       children: [
         Text(
           'Popular Courses',
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+          style: Theme.of(
+            context,
+          ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 16),
         SizedBox(
@@ -340,8 +376,13 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
             itemBuilder: (context, index) {
               return Container(
                 width: 300,
-                margin: EdgeInsets.only(right: index < popularCourses.length - 1 ? 16 : 0),
-                child: _buildCourseCard(popularCourses[index], isHorizontal: true),
+                margin: EdgeInsets.only(
+                  right: index < popularCourses.length - 1 ? 16 : 0,
+                ),
+                child: _buildCourseCard(
+                  popularCourses[index],
+                  isHorizontal: true,
+                ),
               );
             },
           ),
@@ -356,7 +397,9 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
       children: [
         Text(
           'All Courses (${_filteredCourses.length})',
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+          style: Theme.of(
+            context,
+          ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 16),
         ListView.builder(
@@ -376,7 +419,9 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
 
   Widget _buildCourseCard(IslamicCourse course, {bool isHorizontal = false}) {
     final theme = Theme.of(context);
-    final hasAccess = _subscriptionService.isFeatureAvailable('islamic_courses') || course.price == 0;
+    final hasAccess =
+        _subscriptionService.isFeatureAvailable('islamic_courses') ||
+        course.price == 0;
     final isEnrolled = _courseService.isEnrolledInCourse(course.id);
     final progress = _courseService.getCourseProgress(course.id);
 
@@ -390,15 +435,26 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
             height: isHorizontal ? 120 : 160,
             width: double.infinity,
             decoration: BoxDecoration(
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(12),
+              ),
               gradient: LinearGradient(
-                colors: [theme.colorScheme.primary.withOpacity(0.8), theme.colorScheme.secondary.withOpacity(0.8)],
+                colors: [
+                  theme.colorScheme.primary.withOpacity(0.8),
+                  theme.colorScheme.secondary.withOpacity(0.8),
+                ],
               ),
             ),
             child: Stack(
               children: [
                 // Placeholder for thumbnail image
-                const Center(child: Icon(Icons.play_circle_outline, size: 48, color: Colors.white)),
+                const Center(
+                  child: Icon(
+                    Icons.play_circle_outline,
+                    size: 48,
+                    color: Colors.white,
+                  ),
+                ),
                 // Course badges
                 Positioned(
                   top: 8,
@@ -408,20 +464,40 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
                     children: [
                       if (course.isNew)
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                          decoration: BoxDecoration(color: Colors.green, borderRadius: BorderRadius.circular(8)),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
                           child: const Text(
                             'NEW',
-                            style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       if (course.isPopular)
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                          decoration: BoxDecoration(color: Colors.orange, borderRadius: BorderRadius.circular(8)),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.orange,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
                           child: const Text(
                             'POPULAR',
-                            style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                     ],
@@ -432,9 +508,18 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
                   bottom: 8,
                   right: 8,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                    decoration: BoxDecoration(color: Colors.black54, borderRadius: BorderRadius.circular(8)),
-                    child: Text(course.formattedDuration, style: const TextStyle(color: Colors.white, fontSize: 12)),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 2,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.black54,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      course.formattedDuration,
+                      style: const TextStyle(color: Colors.white, fontSize: 12),
+                    ),
                   ),
                 ),
               ],
@@ -450,7 +535,9 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
                 // Title and category
                 Text(
                   course.title,
-                  style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -470,7 +557,11 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
                     const Icon(Icons.person, size: 16),
                     const SizedBox(width: 4),
                     Expanded(
-                      child: Text(course.instructor, style: theme.textTheme.bodySmall, overflow: TextOverflow.ellipsis),
+                      child: Text(
+                        course.instructor,
+                        style: theme.textTheme.bodySmall,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                   ],
                 ),
@@ -484,7 +575,10 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
                       children: [
                         const Icon(Icons.star, size: 16, color: Colors.amber),
                         const SizedBox(width: 4),
-                        Text(course.rating.toStringAsFixed(1), style: theme.textTheme.bodySmall),
+                        Text(
+                          course.rating.toStringAsFixed(1),
+                          style: theme.textTheme.bodySmall,
+                        ),
                       ],
                     ),
                     const SizedBox(width: 16),
@@ -493,7 +587,10 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
                       children: [
                         const Icon(Icons.people, size: 16),
                         const SizedBox(width: 4),
-                        Text('${course.enrolledCount}', style: theme.textTheme.bodySmall),
+                        Text(
+                          '${course.enrolledCount}',
+                          style: theme.textTheme.bodySmall,
+                        ),
                       ],
                     ),
                     const SizedBox(width: 16),
@@ -502,7 +599,10 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
                       children: [
                         const Icon(Icons.play_lesson, size: 16),
                         const SizedBox(width: 4),
-                        Text('${course.lessonCount} lessons', style: theme.textTheme.bodySmall),
+                        Text(
+                          '${course.lessonCount} lessons',
+                          style: theme.textTheme.bodySmall,
+                        ),
                       ],
                     ),
                   ],
@@ -535,7 +635,9 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
                           ] else ...[
                             Text(
                               '\$${course.price.toStringAsFixed(2)}',
-                              style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                              style: theme.textTheme.titleMedium?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ],
                         ] else ...[
@@ -549,7 +651,10 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
                         ],
                         // Difficulty
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 2,
+                          ),
                           decoration: BoxDecoration(
                             color: theme.colorScheme.primary.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(8),
@@ -566,18 +671,25 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
                       ],
                     ),
                     ElevatedButton(
-                      onPressed: hasAccess ? () => _handleCourseSelection(course) : _showSubscriptionDialog,
+                      onPressed:
+                          hasAccess
+                              ? () => _handleCourseSelection(course)
+                              : _showSubscriptionDialog,
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
                             isEnrolled
-                                ? (progress >= 100 ? Colors.green : theme.colorScheme.primary)
+                                ? (progress >= 100
+                                    ? Colors.green
+                                    : theme.colorScheme.primary)
                                 : hasAccess
                                 ? theme.colorScheme.primary
                                 : Colors.grey,
                       ),
                       child: Text(
                         isEnrolled
-                            ? (progress >= 100 ? 'Completed' : 'Continue ${progress.toInt()}%')
+                            ? (progress >= 100
+                                ? 'Completed'
+                                : 'Continue ${progress.toInt()}%')
                             : hasAccess
                             ? (course.price > 0 ? 'Enroll' : 'Start')
                             : 'Premium',
@@ -649,7 +761,10 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
                   child: Container(
                     width: 40,
                     height: 4,
-                    decoration: BoxDecoration(color: Colors.grey[400], borderRadius: BorderRadius.circular(2)),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[400],
+                      borderRadius: BorderRadius.circular(2),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -663,29 +778,45 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
                         // Title and basic info
                         Text(
                           course.title,
-                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+                          style: Theme.of(context).textTheme.headlineSmall
+                              ?.copyWith(fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 8),
                         Text(
                           'by ${course.instructor}',
                           style: Theme.of(
                             context,
-                          ).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.primary),
+                          ).textTheme.titleMedium?.copyWith(
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
                         ),
                         Text(
                           course.instructorTitle,
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(color: Colors.grey[600]),
                         ),
                         const SizedBox(height: 16),
 
                         // Course stats
                         Row(
                           children: [
-                            _buildStatItem(Icons.star, '${course.rating}', Colors.amber),
+                            _buildStatItem(
+                              Icons.star,
+                              '${course.rating}',
+                              Colors.amber,
+                            ),
                             const SizedBox(width: 16),
-                            _buildStatItem(Icons.people, '${course.enrolledCount}', Colors.blue),
+                            _buildStatItem(
+                              Icons.people,
+                              '${course.enrolledCount}',
+                              Colors.blue,
+                            ),
                             const SizedBox(width: 16),
-                            _buildStatItem(Icons.access_time, course.formattedDuration, Colors.green),
+                            _buildStatItem(
+                              Icons.access_time,
+                              course.formattedDuration,
+                              Colors.green,
+                            ),
                           ],
                         ),
                         const SizedBox(height: 20),
@@ -693,16 +824,21 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
                         // Description
                         Text(
                           'About this course',
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                          style: Theme.of(context).textTheme.titleMedium
+                              ?.copyWith(fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 8),
-                        Text(course.description, style: Theme.of(context).textTheme.bodyMedium),
+                        Text(
+                          course.description,
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
                         const SizedBox(height: 20),
 
                         // What you'll learn
                         Text(
                           'What you\'ll learn',
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                          style: Theme.of(context).textTheme.titleMedium
+                              ?.copyWith(fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 8),
                         ...course.features.map(
@@ -710,7 +846,11 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
                             padding: const EdgeInsets.symmetric(vertical: 2),
                             child: Row(
                               children: [
-                                Icon(Icons.check_circle, size: 16, color: Colors.green),
+                                Icon(
+                                  Icons.check_circle,
+                                  size: 16,
+                                  color: Colors.green,
+                                ),
                                 const SizedBox(width: 8),
                                 Expanded(child: Text(feature)),
                               ],
@@ -723,7 +863,8 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
                         if (course.topics.isNotEmpty) ...[
                           Text(
                             'Topics covered',
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                            style: Theme.of(context).textTheme.titleMedium
+                                ?.copyWith(fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(height: 8),
                           Wrap(
@@ -734,7 +875,9 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
                                     .map(
                                       (topic) => Chip(
                                         label: Text(topic),
-                                        backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                                        backgroundColor: Theme.of(
+                                          context,
+                                        ).colorScheme.primary.withOpacity(0.1),
                                       ),
                                     )
                                     .toList(),
@@ -746,7 +889,8 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
                         if (course.prerequisites.isNotEmpty) ...[
                           Text(
                             'Prerequisites',
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                            style: Theme.of(context).textTheme.titleMedium
+                                ?.copyWith(fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(height: 8),
                           ...course.prerequisites.map(
@@ -769,7 +913,10 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
                 ),
 
                 // Enrollment button at bottom
-                Container(padding: const EdgeInsets.only(top: 16), child: _buildEnrollmentButton(course)),
+                Container(
+                  padding: const EdgeInsets.only(top: 16),
+                  child: _buildEnrollmentButton(course),
+                ),
               ],
             ),
           ),
@@ -783,14 +930,21 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
       children: [
         Icon(icon, size: 16, color: color),
         const SizedBox(width: 4),
-        Text(value, style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w600)),
+        Text(
+          value,
+          style: Theme.of(
+            context,
+          ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w600),
+        ),
       ],
     );
   }
 
   Widget _buildEnrollmentButton(IslamicCourse course) {
     final theme = Theme.of(context);
-    final hasAccess = _subscriptionService.isFeatureAvailable('islamic_courses') || course.price == 0;
+    final hasAccess =
+        _subscriptionService.isFeatureAvailable('islamic_courses') ||
+        course.price == 0;
     final isEnrolled = _courseService.isEnrolledInCourse(course.id);
     final progress = _courseService.getCourseProgress(course.id);
 
@@ -801,7 +955,10 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
         child: ElevatedButton(
           onPressed: _showSubscriptionDialog,
           style: ElevatedButton.styleFrom(backgroundColor: Colors.grey),
-          child: const Text('Upgrade to Premium', style: TextStyle(color: Colors.white, fontSize: 16)),
+          child: const Text(
+            'Upgrade to Premium',
+            style: TextStyle(color: Colors.white, fontSize: 16),
+          ),
         ),
       );
     }
@@ -815,7 +972,10 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
             Navigator.pop(context);
             _startCourse(course);
           },
-          style: ElevatedButton.styleFrom(backgroundColor: progress >= 100 ? Colors.green : theme.colorScheme.primary),
+          style: ElevatedButton.styleFrom(
+            backgroundColor:
+                progress >= 100 ? Colors.green : theme.colorScheme.primary,
+          ),
           child: Text(
             progress >= 100 ? 'View Certificate' : 'Continue Learning',
             style: const TextStyle(color: Colors.white, fontSize: 16),
@@ -829,9 +989,13 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
       height: 50,
       child: ElevatedButton(
         onPressed: () => _enrollInCourse(course),
-        style: ElevatedButton.styleFrom(backgroundColor: theme.colorScheme.primary),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: theme.colorScheme.primary,
+        ),
         child: Text(
-          course.price > 0 ? 'Enroll Now - \$${course.price.toStringAsFixed(2)}' : 'Start Free Course',
+          course.price > 0
+              ? 'Enroll Now - \$${course.price.toStringAsFixed(2)}'
+              : 'Start Free Course',
           style: const TextStyle(color: Colors.white, fontSize: 16),
         ),
       ),
@@ -848,29 +1012,40 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
           setState(() {}); // Refresh the UI
           Navigator.pop(context);
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Successfully enrolled in ${course.title}'), backgroundColor: Colors.green),
+            SnackBar(
+              content: Text('Successfully enrolled in ${course.title}'),
+              backgroundColor: Colors.green,
+            ),
           );
           _startCourse(course);
         }
       } else {
         if (mounted) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(const SnackBar(content: Text('Failed to enroll in course'), backgroundColor: Colors.red));
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Failed to enroll in course'),
+              backgroundColor: Colors.red,
+            ),
+          );
         }
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error: $e'), backgroundColor: Colors.red));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: $e'), backgroundColor: Colors.red),
+        );
       }
     }
   }
 
   void _startCourse(IslamicCourse course) {
     // Navigate to course player/viewer
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text('Starting course: ${course.title}'), duration: const Duration(seconds: 2)));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Starting course: ${course.title}'),
+        duration: const Duration(seconds: 2),
+      ),
+    );
     // TODO: Navigate to course player screen
   }
 
@@ -884,11 +1059,18 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen> with Ticker
               'Access to Islamic courses requires a Premium subscription. Upgrade now to unlock unlimited learning!',
             ),
             actions: [
-              TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Cancel')),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('Cancel'),
+              ),
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SubscriptionScreen()));
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const SubscriptionScreen(),
+                    ),
+                  );
                 },
                 child: const Text('Upgrade'),
               ),

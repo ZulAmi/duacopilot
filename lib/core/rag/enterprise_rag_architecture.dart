@@ -56,10 +56,12 @@ class EnterpriseRagClient {
   final Map<String, List<DateTime>> _requestTimes = {};
   static const int _maxRequestsPerMinute = 60;
 
-  EnterpriseRagClient({required Logger logger, required SecureStorageService secureStorage})
-    : _logger = logger,
-      _secureStorage = secureStorage,
-      _dio = Dio() {
+  EnterpriseRagClient({
+    required Logger logger,
+    required SecureStorageService secureStorage,
+  }) : _logger = logger,
+       _secureStorage = secureStorage,
+       _dio = Dio() {
     _initializeDioClient();
   }
 
@@ -123,7 +125,9 @@ class EnterpriseRagClient {
         onResponse: (response, handler) {
           final startTime = response.requestOptions.extra['start_time'] as int;
           final duration = DateTime.now().millisecondsSinceEpoch - startTime;
-          _logger.i('[PERFORMANCE] ${response.requestOptions.path}: ${duration}ms');
+          _logger.i(
+            '[PERFORMANCE] ${response.requestOptions.path}: ${duration}ms',
+          );
           handler.next(response);
         },
       ),
@@ -143,7 +147,11 @@ class EnterpriseRagClient {
       }
     } catch (e) {
       _logger.e('[AUTH_ERROR] Failed to inject authentication: $e');
-      throw DioException(requestOptions: options, message: 'Authentication failed', type: DioExceptionType.unknown);
+      throw DioException(
+        requestOptions: options,
+        message: 'Authentication failed',
+        type: DioExceptionType.unknown,
+      );
     }
   }
 
@@ -153,12 +161,15 @@ class EnterpriseRagClient {
     final endpoint = options.path;
 
     _requestTimes.putIfAbsent(endpoint, () => []);
-    _requestTimes[endpoint]!.removeWhere((time) => now.difference(time).inMinutes > 1);
+    _requestTimes[endpoint]!.removeWhere(
+      (time) => now.difference(time).inMinutes > 1,
+    );
 
     if (_requestTimes[endpoint]!.length >= _maxRequestsPerMinute) {
       throw DioException(
         requestOptions: options,
-        message: 'Rate limit exceeded. Please wait before making more requests.',
+        message:
+            'Rate limit exceeded. Please wait before making more requests.',
         type: DioExceptionType.unknown,
       );
     }
@@ -167,7 +178,10 @@ class EnterpriseRagClient {
   }
 
   /// Military-grade error handling with circuit breaker
-  Future<void> _handleSecureError(DioException error, ErrorInterceptorHandler handler) async {
+  Future<void> _handleSecureError(
+    DioException error,
+    ErrorInterceptorHandler handler,
+  ) async {
     _updateCircuitBreakerFailure();
 
     // Check if circuit breaker should be opened
@@ -219,43 +233,83 @@ class EnterpriseRagClient {
         );
 
       case DioExceptionType.receiveTimeout:
-        return _createSecureError(error, 'Server response timeout - please try again', 'RECEIVE_TIMEOUT');
+        return _createSecureError(
+          error,
+          'Server response timeout - please try again',
+          'RECEIVE_TIMEOUT',
+        );
 
       case DioExceptionType.badResponse:
         if (statusCode != null) {
           switch (statusCode) {
             case 400:
-              return _createSecureError(error, 'Invalid request format', 'BAD_REQUEST');
+              return _createSecureError(
+                error,
+                'Invalid request format',
+                'BAD_REQUEST',
+              );
             case 401:
               await _handleTokenExpiration();
-              return _createSecureError(error, 'Authentication required', 'UNAUTHORIZED');
+              return _createSecureError(
+                error,
+                'Authentication required',
+                'UNAUTHORIZED',
+              );
             case 403:
               return _createSecureError(error, 'Access forbidden', 'FORBIDDEN');
             case 404:
-              return _createSecureError(error, 'RAG service not found', 'NOT_FOUND');
+              return _createSecureError(
+                error,
+                'RAG service not found',
+                'NOT_FOUND',
+              );
             case 429:
-              return _createSecureError(error, 'Rate limit exceeded', 'RATE_LIMITED');
+              return _createSecureError(
+                error,
+                'Rate limit exceeded',
+                'RATE_LIMITED',
+              );
             case 500:
-              return _createSecureError(error, 'Internal server error', 'SERVER_ERROR');
+              return _createSecureError(
+                error,
+                'Internal server error',
+                'SERVER_ERROR',
+              );
             case 502:
             case 503:
             case 504:
-              return _createSecureError(error, 'Service temporarily unavailable', 'SERVICE_UNAVAILABLE');
+              return _createSecureError(
+                error,
+                'Service temporarily unavailable',
+                'SERVICE_UNAVAILABLE',
+              );
           }
         }
         break;
 
       case DioExceptionType.connectionError:
-        return _createSecureError(error, 'Network connection failed', 'NETWORK_ERROR');
+        return _createSecureError(
+          error,
+          'Network connection failed',
+          'NETWORK_ERROR',
+        );
 
       default:
         break;
     }
 
-    return _createSecureError(error, 'Unexpected error occurred', 'UNKNOWN_ERROR');
+    return _createSecureError(
+      error,
+      'Unexpected error occurred',
+      'UNKNOWN_ERROR',
+    );
   }
 
-  DioException _createSecureError(DioException original, String message, String errorCode) {
+  DioException _createSecureError(
+    DioException original,
+    String message,
+    String errorCode,
+  ) {
     return DioException(
       requestOptions: original.requestOptions,
       message: message,
@@ -293,10 +347,16 @@ class EnterpriseRagClient {
       if (token == null) return null;
 
       // Check token expiration
-      final tokenData = json.decode(utf8.decode(base64.decode(token.split('.')[1])));
-      final expiresAt = DateTime.fromMillisecondsSinceEpoch(tokenData['exp'] * 1000);
+      final tokenData = json.decode(
+        utf8.decode(base64.decode(token.split('.')[1])),
+      );
+      final expiresAt = DateTime.fromMillisecondsSinceEpoch(
+        tokenData['exp'] * 1000,
+      );
 
-      if (DateTime.now().isAfter(expiresAt.subtract(const Duration(minutes: 5)))) {
+      if (DateTime.now().isAfter(
+        expiresAt.subtract(const Duration(minutes: 5)),
+      )) {
         return await _refreshSecureToken();
       }
 
@@ -312,7 +372,10 @@ class EnterpriseRagClient {
       final refreshToken = await _secureStorage.getValue('rag_refresh_token');
       if (refreshToken == null) return null;
 
-      final response = await _dio.post('/auth/refresh', data: {'refresh_token': refreshToken});
+      final response = await _dio.post(
+        '/auth/refresh',
+        data: {'refresh_token': refreshToken},
+      );
 
       final newToken = response.data['access_token'];
       await _secureStorage.saveValue('rag_access_token', newToken);
@@ -325,17 +388,25 @@ class EnterpriseRagClient {
   }
 
   Future<String> _getSigningKey() async {
-    return await _secureStorage.getValue('rag_signing_key') ?? 'default_signing_key';
+    return await _secureStorage.getValue('rag_signing_key') ??
+        'default_signing_key';
   }
 
   String _generateRequestId() {
-    return DateTime.now().millisecondsSinceEpoch.toString() + (1000 + (DateTime.now().microsecond % 9000)).toString();
+    return DateTime.now().millisecondsSinceEpoch.toString() +
+        (1000 + (DateTime.now().microsecond % 9000)).toString();
   }
 
   String _sanitizePII(String input) {
     return input
-        .replaceAll(RegExp(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'), '[EMAIL]')
-        .replaceAll(RegExp(r'\b\d{4}[- ]?\d{4}[- ]?\d{4}[- ]?\d{4}\b'), '[CARD]')
+        .replaceAll(
+          RegExp(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'),
+          '[EMAIL]',
+        )
+        .replaceAll(
+          RegExp(r'\b\d{4}[- ]?\d{4}[- ]?\d{4}[- ]?\d{4}\b'),
+          '[CARD]',
+        )
         .replaceAll(RegExp(r'\b\d{3}-?\d{2}-?\d{4}\b'), '[SSN]');
   }
 
@@ -345,7 +416,8 @@ class EnterpriseRagClient {
     return error.type == DioExceptionType.connectionTimeout ||
         error.type == DioExceptionType.receiveTimeout ||
         error.type == DioExceptionType.connectionError ||
-        (error.response?.statusCode != null && [500, 502, 503, 504].contains(error.response!.statusCode));
+        (error.response?.statusCode != null &&
+            [500, 502, 503, 504].contains(error.response!.statusCode));
   }
 
   bool _shouldOpenCircuitBreaker() {
@@ -357,7 +429,8 @@ class EnterpriseRagClient {
     if (_circuitBreakerOpen &&
             _circuitBreakerOpenedAt != null &&
             DateTime.now().difference(_circuitBreakerOpenedAt!).isNegative ||
-        DateTime.now().difference(_circuitBreakerOpenedAt!) > _circuitBreakerTimeout) {
+        DateTime.now().difference(_circuitBreakerOpenedAt!) >
+            _circuitBreakerTimeout) {
       _circuitBreakerOpen = false;
       _circuitBreakerOpenedAt = null;
     }
@@ -388,7 +461,9 @@ class EnterpriseRagClient {
     }
 
     try {
-      _logger.i('[RAG_QUERY] Executing secure query: ${request.query.substring(0, 50)}...');
+      _logger.i(
+        '[RAG_QUERY] Executing secure query: ${request.query.substring(0, 50)}...',
+      );
 
       final response = await _dio.post('/rag/query', data: request.toJson());
 
@@ -420,7 +495,10 @@ class IntelligentOfflineManager {
   // ML-powered query similarity threshold
   static const double _semanticSimilarityThreshold = 0.85;
 
-  IntelligentOfflineManager({required Logger logger, required IntelligentCacheService cacheService}) : _logger = logger;
+  IntelligentOfflineManager({
+    required Logger logger,
+    required IntelligentCacheService cacheService,
+  }) : _logger = logger;
 
   Future<void> initialize() async {
     try {
@@ -440,7 +518,9 @@ class IntelligentOfflineManager {
         _embeddingsBox = Hive.box(_hiveBoxName);
       }
 
-      _logger.i('[OFFLINE_MANAGER] Initialized with database and embeddings storage');
+      _logger.i(
+        '[OFFLINE_MANAGER] Initialized with database and embeddings storage',
+      );
 
       // Perform maintenance tasks
       await _performMaintenance();
@@ -500,7 +580,11 @@ class IntelligentOfflineManager {
     ''');
   }
 
-  Future<void> _upgradeDatabase(Database db, int oldVersion, int newVersion) async {
+  Future<void> _upgradeDatabase(
+    Database db,
+    int oldVersion,
+    int newVersion,
+  ) async {
     // Handle database schema upgrades
     _logger.i('[DATABASE] Upgrading from version $oldVersion to $newVersion');
   }
@@ -536,7 +620,9 @@ class IntelligentOfflineManager {
       // Store query embedding for semantic search
       await _storeQueryEmbedding(query, language);
 
-      _logger.d('[OFFLINE_STORE] Stored response for query: ${query.substring(0, 50)}...');
+      _logger.d(
+        '[OFFLINE_STORE] Stored response for query: ${query.substring(0, 50)}...',
+      );
     } catch (e) {
       _logger.e('[OFFLINE_STORE] Failed to store response: $e');
     }
@@ -565,7 +651,11 @@ class IntelligentOfflineManager {
       }
 
       // Fallback to semantic similarity search
-      final semanticMatch = await _findSemanticMatch(query, language, minConfidence);
+      final semanticMatch = await _findSemanticMatch(
+        query,
+        language,
+        minConfidence,
+      );
       if (semanticMatch != null) {
         await _updateAccessCount(semanticMatch['id'] as String);
         return _buildResponseFromRow(semanticMatch);
@@ -579,12 +669,23 @@ class IntelligentOfflineManager {
   }
 
   /// Advanced semantic similarity search using embeddings
-  Future<Map<String, dynamic>?> _findSemanticMatch(String query, String language, double? minConfidence) async {
+  Future<Map<String, dynamic>?> _findSemanticMatch(
+    String query,
+    String language,
+    double? minConfidence,
+  ) async {
     try {
       // Get all cached queries for the language
       final cachedQueries = await _database.query(
         'rag_cache',
-        columns: ['id', 'query', 'confidence', 'response', 'sources', 'metadata'],
+        columns: [
+          'id',
+          'query',
+          'confidence',
+          'response',
+          'sources',
+          'metadata',
+        ],
         where: 'language = ? AND expires_at > ?',
         whereArgs: [language, DateTime.now().millisecondsSinceEpoch],
       );
@@ -597,14 +698,21 @@ class IntelligentOfflineManager {
 
       for (final cached in cachedQueries) {
         final cachedQuery = cached['query'] as String;
-        final cachedEmbedding = await _getStoredEmbedding(cachedQuery, language);
+        final cachedEmbedding = await _getStoredEmbedding(
+          cachedQuery,
+          language,
+        );
 
         if (cachedEmbedding != null) {
-          final similarity = _calculateCosineSimilarity(queryEmbedding, cachedEmbedding);
+          final similarity = _calculateCosineSimilarity(
+            queryEmbedding,
+            cachedEmbedding,
+          );
 
           if (similarity >= _semanticSimilarityThreshold &&
               similarity > bestSimilarity &&
-              (minConfidence == null || (cached['confidence'] as double) >= minConfidence)) {
+              (minConfidence == null ||
+                  (cached['confidence'] as double) >= minConfidence)) {
             bestSimilarity = similarity;
             bestMatch = cached;
           }
@@ -612,7 +720,9 @@ class IntelligentOfflineManager {
       }
 
       if (bestMatch != null) {
-        _logger.d('[SEMANTIC_MATCH] Found match with similarity: $bestSimilarity');
+        _logger.d(
+          '[SEMANTIC_MATCH] Found match with similarity: $bestSimilarity',
+        );
       }
 
       return bestMatch;
@@ -651,7 +761,11 @@ class IntelligentOfflineManager {
   /// Retrieve user personalization context
   Future<Map<String, dynamic>> getPersonalizationContext(String userId) async {
     try {
-      final results = await _database.query('personalization_data', where: 'user_id = ?', whereArgs: [userId]);
+      final results = await _database.query(
+        'personalization_data',
+        where: 'user_id = ?',
+        whereArgs: [userId],
+      );
 
       final context = <String, dynamic>{};
 
@@ -706,7 +820,10 @@ class IntelligentOfflineManager {
     }
   }
 
-  Future<List<double>?> _getStoredEmbedding(String query, String language) async {
+  Future<List<double>?> _getStoredEmbedding(
+    String query,
+    String language,
+  ) async {
     try {
       final embeddingKey = _generateQueryHash(query, language);
       final stored = await _embeddingsBox.get(embeddingKey);
@@ -722,7 +839,10 @@ class IntelligentOfflineManager {
     }
   }
 
-  Future<List<double>> _generateQueryEmbedding(String query, String language) async {
+  Future<List<double>> _generateQueryEmbedding(
+    String query,
+    String language,
+  ) async {
     // Placeholder for ML embedding generation
     // In production, this would use TensorFlow Lite or similar
     return List.generate(384, (index) => (query.hashCode + index) / 1000000.0);
@@ -756,15 +876,17 @@ class IntelligentOfflineManager {
       timestamp: DateTime.fromMillisecondsSinceEpoch(row['created_at'] as int),
       responseTime: 0,
       sources: List<String>.from(json.decode(row['sources'] as String)),
-      metadata: Map<String, dynamic>.from(json.decode(row['metadata'] as String)),
+      metadata: Map<String, dynamic>.from(
+        json.decode(row['metadata'] as String),
+      ),
     );
   }
 
   Future<void> _updateAccessCount(String id) async {
-    await _database.rawUpdate('UPDATE rag_cache SET access_count = access_count + 1, last_accessed = ? WHERE id = ?', [
-      DateTime.now().millisecondsSinceEpoch,
-      id,
-    ]);
+    await _database.rawUpdate(
+      'UPDATE rag_cache SET access_count = access_count + 1, last_accessed = ? WHERE id = ?',
+      [DateTime.now().millisecondsSinceEpoch, id],
+    );
   }
 
   Future<void> _cleanUnusedEmbeddings() async {
@@ -811,11 +933,19 @@ final enterpriseRagServiceProvider = Provider<EnterpriseRagService>((ref) {
 });
 
 final enterpriseRagClientProvider = Provider<EnterpriseRagClient>((ref) {
-  return EnterpriseRagClient(logger: ref.watch(loggerProvider), secureStorage: SecureStorageService());
+  return EnterpriseRagClient(
+    logger: ref.watch(loggerProvider),
+    secureStorage: SecureStorageService(),
+  );
 });
 
-final intelligentOfflineManagerProvider = Provider<IntelligentOfflineManager>((ref) {
-  return IntelligentOfflineManager(logger: ref.watch(loggerProvider), cacheService: IntelligentCacheService.instance);
+final intelligentOfflineManagerProvider = Provider<IntelligentOfflineManager>((
+  ref,
+) {
+  return IntelligentOfflineManager(
+    logger: ref.watch(loggerProvider),
+    cacheService: IntelligentCacheService.instance,
+  );
 });
 
 final loggerProvider = Provider<Logger>((ref) => Logger());
@@ -862,7 +992,11 @@ class EnterpriseRagService {
           final response = await _client.queryRag(request);
 
           // Store in offline cache for future use
-          await _offlineManager.storeResponse(query: query, response: response, language: language);
+          await _offlineManager.storeResponse(
+            query: query,
+            response: response,
+            language: language,
+          );
 
           stopwatch.stop();
           _recordPerformanceMetric('online_success', stopwatch.elapsed);
@@ -878,7 +1012,9 @@ class EnterpriseRagService {
             metadata: response.metadata,
           );
         } catch (e) {
-          _logger.w('[ONLINE_FALLBACK] Online request failed, trying offline: $e');
+          _logger.w(
+            '[ONLINE_FALLBACK] Online request failed, trying offline: $e',
+          );
         }
       }
 
@@ -901,7 +1037,11 @@ class EnterpriseRagService {
           responseTime: cachedResponse.responseTime,
           confidence: cachedResponse.confidence,
           sources: cachedResponse.sources,
-          metadata: {...?cachedResponse.metadata, 'from_cache': true, 'cache_type': 'offline_semantic'},
+          metadata: {
+            ...?cachedResponse.metadata,
+            'from_cache': true,
+            'cache_type': 'offline_semantic',
+          },
         );
       }
 
@@ -939,16 +1079,24 @@ class EnterpriseRagService {
   double _calculateAverageResponseTime() {
     if (_responseTimes.isEmpty) return 0.0;
 
-    final totalMs = _responseTimes.fold<int>(0, (sum, duration) => sum + duration.inMilliseconds);
+    final totalMs = _responseTimes.fold<int>(
+      0,
+      (sum, duration) => sum + duration.inMilliseconds,
+    );
 
     return totalMs / _responseTimes.length;
   }
 
   double _calculateSuccessRate() {
-    final total = _performanceMetrics.values.fold(0, (sum, count) => sum + count);
+    final total = _performanceMetrics.values.fold(
+      0,
+      (sum, count) => sum + count,
+    );
     if (total == 0) return 0.0;
 
-    final successCount = (_performanceMetrics['online_success'] ?? 0) + (_performanceMetrics['offline_success'] ?? 0);
+    final successCount =
+        (_performanceMetrics['online_success'] ?? 0) +
+        (_performanceMetrics['offline_success'] ?? 0);
 
     return (successCount / total) * 100;
   }

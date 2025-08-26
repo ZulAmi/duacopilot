@@ -57,7 +57,9 @@ Future<void> init() async {
     sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
 
     // Secure storage (mock implementation for development)
-    sl.registerLazySingleton<SecureStorageService>(() => SecureStorageService());
+    sl.registerLazySingleton<SecureStorageService>(
+      () => SecureStorageService(),
+    );
 
     // Database initialization with platform awareness
     if (kIsWeb) {
@@ -76,29 +78,42 @@ Future<void> init() async {
         sl.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper.instance);
 
         // Register real local data source for desktop/mobile
-        sl.registerLazySingleton<LocalDataSource>(() => LocalDataSourceImpl(sl()));
-        AppLogger.debug('✅ Database and local data source initialized successfully');
+        sl.registerLazySingleton<LocalDataSource>(
+          () => LocalDataSourceImpl(sl()),
+        );
+        AppLogger.debug(
+          '✅ Database and local data source initialized successfully',
+        );
       } catch (e) {
         AppLogger.debug('⚠️  Database initialization failed: $e');
         // Fallback to mock implementation
         try {
-          sl.registerLazySingleton<LocalDataSource>(() => MockLocalDataSource());
+          sl.registerLazySingleton<LocalDataSource>(
+            () => MockLocalDataSource(),
+          );
           AppLogger.debug('✅ Fallback to mock local data source');
         } catch (mockError) {
-          AppLogger.debug('❌ Mock local data source fallback failed: $mockError');
+          AppLogger.debug(
+            '❌ Mock local data source fallback failed: $mockError',
+          );
         }
       }
     }
 
     // Data sources
     try {
-      sl.registerLazySingleton<RagRemoteDataSource>(() => RagRemoteDataSourceImpl(sl<Dio>()));
+      sl.registerLazySingleton<RagRemoteDataSource>(
+        () => RagRemoteDataSourceImpl(sl<Dio>()),
+      );
 
       // Islamic services for TRUE RAG
       sl.registerLazySingleton<QuranApiService>(() => QuranApiService());
       sl.registerLazySingleton<RagCacheService>(() => RagCacheService());
       sl.registerLazySingleton<IslamicRagService>(
-        () => IslamicRagService(quranApi: sl<QuranApiService>(), cacheService: sl<RagCacheService>()),
+        () => IslamicRagService(
+          quranApi: sl<QuranApiService>(),
+          cacheService: sl<RagCacheService>(),
+        ),
       );
 
       // TRUE RAG API Service with Islamic knowledge retrieval
@@ -111,7 +126,9 @@ Future<void> init() async {
         ),
       );
 
-      AppLogger.debug('✅ Remote data sources and TRUE RAG services initialized');
+      AppLogger.debug(
+        '✅ Remote data sources and TRUE RAG services initialized',
+      );
     } catch (e) {
       AppLogger.debug('⚠️  Data source initialization error: $e');
     }
@@ -121,14 +138,18 @@ Future<void> init() async {
       sl.registerLazySingleton<RagRepository>(
         () => RagRepositoryImpl(
           remoteDataSource: sl<RagRemoteDataSource>(),
-          localDataSource: sl.isRegistered<LocalDataSource>() ? sl<LocalDataSource>() : null,
+          localDataSource:
+              sl.isRegistered<LocalDataSource>() ? sl<LocalDataSource>() : null,
           networkInfo: sl<NetworkInfo>(),
         ),
       );
 
       if (sl.isRegistered<LocalDataSource>()) {
         sl.registerLazySingleton<AudioRepository>(
-          () => AudioRepositoryImpl(localDataSource: sl<LocalDataSource>(), networkInfo: sl<NetworkInfo>()),
+          () => AudioRepositoryImpl(
+            localDataSource: sl<LocalDataSource>(),
+            networkInfo: sl<NetworkInfo>(),
+          ),
         );
         sl.registerLazySingleton<FavoritesRepository>(
           () => FavoritesRepositoryImpl(localDataSource: sl<LocalDataSource>()),
@@ -144,12 +165,24 @@ Future<void> init() async {
       sl.registerLazySingleton<SearchRag>(() => SearchRag(sl<RagRepository>()));
 
       if (sl.isRegistered<LocalDataSource>()) {
-        sl.registerLazySingleton<GetQueryHistory>(() => GetQueryHistory(sl<RagRepository>()));
-        sl.registerLazySingleton<SaveQueryHistory>(() => SaveQueryHistory(sl<RagRepository>()));
-        sl.registerLazySingleton<DownloadAudio>(() => DownloadAudio(sl<AudioRepository>()));
-        sl.registerLazySingleton<GetFavorites>(() => GetFavorites(sl<FavoritesRepository>()));
-        sl.registerLazySingleton<AddFavorite>(() => AddFavorite(sl<FavoritesRepository>()));
-        sl.registerLazySingleton<RemoveFavorite>(() => RemoveFavorite(sl<FavoritesRepository>()));
+        sl.registerLazySingleton<GetQueryHistory>(
+          () => GetQueryHistory(sl<RagRepository>()),
+        );
+        sl.registerLazySingleton<SaveQueryHistory>(
+          () => SaveQueryHistory(sl<RagRepository>()),
+        );
+        sl.registerLazySingleton<DownloadAudio>(
+          () => DownloadAudio(sl<AudioRepository>()),
+        );
+        sl.registerLazySingleton<GetFavorites>(
+          () => GetFavorites(sl<FavoritesRepository>()),
+        );
+        sl.registerLazySingleton<AddFavorite>(
+          () => AddFavorite(sl<FavoritesRepository>()),
+        );
+        sl.registerLazySingleton<RemoveFavorite>(
+          () => RemoveFavorite(sl<FavoritesRepository>()),
+        );
       }
       AppLogger.debug('✅ Use cases initialized');
     } catch (e) {
@@ -159,18 +192,32 @@ Future<void> init() async {
     // Revolutionary AI Services - Islamic Spiritual Companion
     try {
       // Notification service for proactive messaging
-      sl.registerLazySingleton<NotificationService>(() => NotificationService.instance);
+      sl.registerLazySingleton<NotificationService>(
+        () => NotificationService.instance,
+      );
 
       // Core AI services
-      sl.registerLazySingleton<IslamicPersonalityService>(() => IslamicPersonalityService.instance);
-      sl.registerLazySingleton<ConversationalMemoryService>(() => ConversationalMemoryService.instance);
-      sl.registerLazySingleton<ProactiveSpiritualCompanionService>(() => ProactiveSpiritualCompanionService.instance);
-      sl.registerLazySingleton<InteractiveLearningCompanionService>(() => InteractiveLearningCompanionService.instance);
+      sl.registerLazySingleton<IslamicPersonalityService>(
+        () => IslamicPersonalityService.instance,
+      );
+      sl.registerLazySingleton<ConversationalMemoryService>(
+        () => ConversationalMemoryService.instance,
+      );
+      sl.registerLazySingleton<ProactiveSpiritualCompanionService>(
+        () => ProactiveSpiritualCompanionService.instance,
+      );
+      sl.registerLazySingleton<InteractiveLearningCompanionService>(
+        () => InteractiveLearningCompanionService.instance,
+      );
 
       // Voice service
-      sl.registerLazySingleton<EnhancedVoiceService>(() => EnhancedVoiceService.instance);
+      sl.registerLazySingleton<EnhancedVoiceService>(
+        () => EnhancedVoiceService.instance,
+      );
 
-      AppLogger.debug('✅ Revolutionary AI Services initialized - Islamic Spiritual Companion ready!');
+      AppLogger.debug(
+        '✅ Revolutionary AI Services initialized - Islamic Spiritual Companion ready!',
+      );
     } catch (e) {
       AppLogger.debug('⚠️  AI Services initialization error: $e');
     }

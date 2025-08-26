@@ -43,7 +43,9 @@ void main() {
           await OfflineSearchInitializationService.populateInitialEmbeddings();
           print('✅ Initial embeddings populated successfully');
         } catch (e) {
-          print('ℹ️ Initial embeddings population: $e (may be normal if no initial data)');
+          print(
+            'ℹ️ Initial embeddings population: $e (may be normal if no initial data)',
+          );
           // This may fail if no initial data is available, which is acceptable
         }
       });
@@ -101,7 +103,10 @@ void main() {
           );
 
           expect(result, isNotNull);
-          expect(result.recommendations, isNotEmpty); // Should have fallback templates
+          expect(
+            result.recommendations,
+            isNotEmpty,
+          ); // Should have fallback templates
 
           print('✅ Graceful fallback handled');
           print('   - Fallback results: ${result.recommendations.length}');
@@ -141,8 +146,12 @@ void main() {
           expect(stats['capabilities']['offline_available'], isTrue);
 
           print('✅ End-to-end workflow completed successfully');
-          print('   - Search completed with ${searchResult.recommendations.length} results');
-          print('   - Offline capabilities confirmed: ${stats['capabilities']['offline_available']}');
+          print(
+            '   - Search completed with ${searchResult.recommendations.length} results',
+          );
+          print(
+            '   - Offline capabilities confirmed: ${stats['capabilities']['offline_available']}',
+          );
         } catch (e) {
           print('❌ End-to-end workflow failed: $e');
           rethrow;
@@ -150,17 +159,31 @@ void main() {
       });
 
       test('should demonstrate quality indicators', () async {
-        final queries = ['morning prayer', 'forgiveness', 'travel safety', 'very_specific_unusual_query_xyz'];
+        final queries = [
+          'morning prayer',
+          'forgiveness',
+          'travel safety',
+          'very_specific_unusual_query_xyz',
+        ];
 
         for (final query in queries) {
           try {
-            final result = await enhancedRagService.searchDuas(query: query, language: 'en', preferOffline: true);
+            final result = await enhancedRagService.searchDuas(
+              query: query,
+              language: 'en',
+              preferOffline: true,
+            );
 
             final quality = result.metadata?['quality'];
-            print('✅ Query: "$query" -> Quality: $quality, Results: ${result.recommendations.length}');
+            print(
+              '✅ Query: "$query" -> Quality: $quality, Results: ${result.recommendations.length}',
+            );
 
             expect(result, isNotNull);
-            expect(quality, isIn(['high', 'medium', 'low', 'template', 'cached']));
+            expect(
+              quality,
+              isIn(['high', 'medium', 'low', 'template', 'cached']),
+            );
           } catch (e) {
             print('❌ Quality test failed for "$query": $e');
           }
@@ -174,7 +197,13 @@ void main() {
         final queries = ['morning', 'evening', 'travel', 'food', 'sleep'];
 
         for (final query in queries) {
-          futures.add(enhancedRagService.searchDuas(query: '$query prayer', language: 'en', preferOffline: true));
+          futures.add(
+            enhancedRagService.searchDuas(
+              query: '$query prayer',
+              language: 'en',
+              preferOffline: true,
+            ),
+          );
         }
 
         try {
@@ -201,19 +230,27 @@ void main() {
           final stopwatch = Stopwatch()..start();
 
           try {
-            await enhancedRagService.searchDuas(query: query, language: 'en', preferOffline: true);
+            await enhancedRagService.searchDuas(
+              query: query,
+              language: 'en',
+              preferOffline: true,
+            );
 
             stopwatch.stop();
             times.add(stopwatch.elapsed);
 
-            print('✅ Search ${i + 1} completed in ${stopwatch.elapsedMilliseconds}ms');
+            print(
+              '✅ Search ${i + 1} completed in ${stopwatch.elapsedMilliseconds}ms',
+            );
           } catch (e) {
             print('❌ Performance test iteration ${i + 1} failed: $e');
           }
         }
 
         if (times.isNotEmpty) {
-          final avgTime = times.map((t) => t.inMilliseconds).reduce((a, b) => a + b) / times.length;
+          final avgTime =
+              times.map((t) => t.inMilliseconds).reduce((a, b) => a + b) /
+              times.length;
           print('✅ Average response time: ${avgTime.toStringAsFixed(1)}ms');
 
           // Reasonable expectation: under 5 seconds for offline search

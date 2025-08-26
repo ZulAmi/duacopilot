@@ -106,27 +106,46 @@ class ProductionAnalytics {
         'debug_mode': kDebugMode,
       });
     } catch (e, stackTrace) {
-      _logger.e('Failed to initialize ProductionAnalytics', error: e, stackTrace: stackTrace);
+      _logger.e(
+        'Failed to initialize ProductionAnalytics',
+        error: e,
+        stackTrace: stackTrace,
+      );
       FirebaseCrashlytics.instance.recordError(e, stackTrace);
     }
   }
 
   static Future<void> _setUserProperties() async {
     try {
-      await _analytics.setUserProperty(name: 'app_version', value: _packageInfo?.version ?? 'unknown');
+      await _analytics.setUserProperty(
+        name: 'app_version',
+        value: _packageInfo?.version ?? 'unknown',
+      );
 
-      await _analytics.setUserProperty(name: 'build_number', value: _packageInfo?.buildNumber ?? 'unknown');
+      await _analytics.setUserProperty(
+        name: 'build_number',
+        value: _packageInfo?.buildNumber ?? 'unknown',
+      );
 
-      await _analytics.setUserProperty(name: 'platform', value: defaultTargetPlatform.name);
+      await _analytics.setUserProperty(
+        name: 'platform',
+        value: defaultTargetPlatform.name,
+      );
 
-      await _analytics.setUserProperty(name: 'debug_mode', value: kDebugMode.toString());
+      await _analytics.setUserProperty(
+        name: 'debug_mode',
+        value: kDebugMode.toString(),
+      );
 
       // Load and set custom user properties
       final savedProperties = _prefs?.getString(_userPropertiesKey);
       if (savedProperties != null) {
         final properties = json.decode(savedProperties) as Map<String, dynamic>;
         for (final entry in properties.entries) {
-          await _analytics.setUserProperty(name: entry.key, value: entry.value?.toString());
+          await _analytics.setUserProperty(
+            name: entry.key,
+            value: entry.value?.toString(),
+          );
         }
       }
     } catch (e) {
@@ -140,14 +159,22 @@ class ProductionAnalytics {
 
     await _prefs?.setString(
       _sessionKey,
-      json.encode({'session_id': _sessionId, 'start_time': _sessionStart?.millisecondsSinceEpoch}),
+      json.encode({
+        'session_id': _sessionId,
+        'start_time': _sessionStart?.millisecondsSinceEpoch,
+      }),
     );
   }
 
   /// Track an analytics event
-  static Future<void> trackEvent(String eventName, [Map<String, Object?>? parameters]) async {
+  static Future<void> trackEvent(
+    String eventName, [
+    Map<String, Object?>? parameters,
+  ]) async {
     if (!_isInitialized) {
-      _logger.w('ProductionAnalytics not initialized, skipping event: $eventName');
+      _logger.w(
+        'ProductionAnalytics not initialized, skipping event: $eventName',
+      );
       return;
     }
 
@@ -174,13 +201,22 @@ class ProductionAnalytics {
         }
       }
 
-      await _analytics.logEvent(name: _sanitizeEventName(eventName), parameters: filteredParameters);
+      await _analytics.logEvent(
+        name: _sanitizeEventName(eventName),
+        parameters: filteredParameters,
+      );
 
       if (kDebugMode) {
-        _logger.d('Analytics event tracked: $eventName with ${filteredParameters.length} parameters');
+        _logger.d(
+          'Analytics event tracked: $eventName with ${filteredParameters.length} parameters',
+        );
       }
     } catch (e, stackTrace) {
-      _logger.e('Failed to track analytics event: $eventName', error: e, stackTrace: stackTrace);
+      _logger.e(
+        'Failed to track analytics event: $eventName',
+        error: e,
+        stackTrace: stackTrace,
+      );
       FirebaseCrashlytics.instance.recordError(e, stackTrace);
     }
   }
@@ -194,16 +230,21 @@ class ProductionAnalytics {
     bool? cacheHit,
     String? errorMessage,
   }) async {
-    await trackEvent(errorMessage == null ? AnalyticsEvent.ragQueryCompleted : AnalyticsEvent.ragQueryFailed, {
-      'category': AnalyticsCategory.rag,
-      'query_id': queryId,
-      'duration_ms': duration.inMilliseconds,
-      'result_count': resultCount,
-      'query_type': queryType,
-      'cache_hit': cacheHit,
-      'error_message': errorMessage,
-      'performance_category': _categorizePerformance(duration),
-    });
+    await trackEvent(
+      errorMessage == null
+          ? AnalyticsEvent.ragQueryCompleted
+          : AnalyticsEvent.ragQueryFailed,
+      {
+        'category': AnalyticsCategory.rag,
+        'query_id': queryId,
+        'duration_ms': duration.inMilliseconds,
+        'result_count': resultCount,
+        'query_type': queryType,
+        'cache_hit': cacheHit,
+        'error_message': errorMessage,
+        'performance_category': _categorizePerformance(duration),
+      },
+    );
   }
 
   /// Track user engagement metrics
@@ -224,13 +265,19 @@ class ProductionAnalytics {
   }
 
   /// Track screen views
-  static Future<void> trackScreenView(String screenName, [Map<String, Object?>? parameters]) async {
+  static Future<void> trackScreenView(
+    String screenName, [
+    Map<String, Object?>? parameters,
+  ]) async {
     await _analytics.logScreenView(screenName: screenName);
 
     await trackEvent(AnalyticsEvent.screenViewed, {
       'category': AnalyticsCategory.navigation,
       'screen_name': screenName,
-      'session_time': _sessionStart != null ? DateTime.now().difference(_sessionStart!).inSeconds : 0,
+      'session_time':
+          _sessionStart != null
+              ? DateTime.now().difference(_sessionStart!).inSeconds
+              : 0,
       ...?parameters,
     });
   }
@@ -267,11 +314,18 @@ class ProductionAnalytics {
   }
 
   /// Track errors
-  static Future<void> trackError(String errorType, String errorMessage, [Map<String, Object?>? errorContext]) async {
+  static Future<void> trackError(
+    String errorType,
+    String errorMessage, [
+    Map<String, Object?>? errorContext,
+  ]) async {
     await trackEvent(AnalyticsEvent.errorOccurred, {
       'category': AnalyticsCategory.error,
       'error_type': errorType,
-      'error_message': errorMessage.length > 100 ? '${errorMessage.substring(0, 100)}...' : errorMessage,
+      'error_message':
+          errorMessage.length > 100
+              ? '${errorMessage.substring(0, 100)}...'
+              : errorMessage,
       'timestamp': DateTime.now().toIso8601String(),
       ...?errorContext,
     });
@@ -345,7 +399,9 @@ class ProductionAnalytics {
   /// End current session
   static Future<void> endSession() async {
     if (_sessionStart != null) {
-      await trackEvent('session_ended', {'session_duration_seconds': sessionDuration.inSeconds});
+      await trackEvent('session_ended', {
+        'session_duration_seconds': sessionDuration.inSeconds,
+      });
     }
   }
 
@@ -363,7 +419,8 @@ class ProductionAnalytics {
 
   static String _categorizeEngagement(Duration timeSpent, int? interactions) {
     final seconds = timeSpent.inSeconds;
-    final interactionRate = interactions != null && seconds > 0 ? interactions / seconds : 0.0;
+    final interactionRate =
+        interactions != null && seconds > 0 ? interactions / seconds : 0.0;
 
     if (seconds < 10) return 'brief';
     if (seconds < 60 && interactionRate > 0.1) return 'engaged';
@@ -414,8 +471,12 @@ class CustomAnalyticsEvent {
   final Map<String, Object?> parameters;
   final DateTime timestamp;
 
-  CustomAnalyticsEvent({required this.name, required this.category, required this.parameters, DateTime? timestamp})
-    : timestamp = timestamp ?? DateTime.now();
+  CustomAnalyticsEvent({
+    required this.name,
+    required this.category,
+    required this.parameters,
+    DateTime? timestamp,
+  }) : timestamp = timestamp ?? DateTime.now();
 
   Map<String, Object?> toMap() {
     return {

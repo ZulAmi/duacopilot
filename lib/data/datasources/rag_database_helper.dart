@@ -44,7 +44,9 @@ class RagDatabaseHelper {
 
   // Handle database upgrades with proper migration strategies
   Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
-    AppLogger.debug('🔄 Upgrading RAG database from version $oldVersion to $newVersion');
+    AppLogger.debug(
+      '🔄 Upgrading RAG database from version $oldVersion to $newVersion',
+    );
 
     // Migration strategy: progressive upgrades
     for (int version = oldVersion + 1; version <= newVersion; version++) {

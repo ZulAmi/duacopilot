@@ -29,7 +29,13 @@ class _SmartBannerAdState extends State<SmartBannerAd> {
       decoration: BoxDecoration(
         color: widget.backgroundColor ?? Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(8),
-        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.1), blurRadius: 4, offset: const Offset(0, 2))],
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.1),
+            blurRadius: 4,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
       child: ClipRRect(borderRadius: BorderRadius.circular(8), child: adWidget),
     );
@@ -70,7 +76,8 @@ class InterstitialAdTrigger extends StatelessWidget {
         if (AdService.instance.shouldShowAds) {
           await AdService.instance.showInterstitialAd(
             onAdClosed: onAdClosed,
-            onPremiumPrompt: showUpgradePrompt ? () => _showUpgradeDialog(context) : null,
+            onPremiumPrompt:
+                showUpgradePrompt ? () => _showUpgradeDialog(context) : null,
           );
         }
       },
@@ -79,7 +86,10 @@ class InterstitialAdTrigger extends StatelessWidget {
   }
 
   void _showUpgradeDialog(BuildContext context) {
-    showDialog(context: context, builder: (context) => const PremiumUpgradeDialog());
+    showDialog(
+      context: context,
+      builder: (context) => const PremiumUpgradeDialog(),
+    );
   }
 }
 
@@ -111,7 +121,13 @@ class _RewardedAdButtonState extends State<RewardedAdButton> {
     return ElevatedButton.icon(
       onPressed: isAvailable ? _showRewardedAd : null,
       icon: const Icon(Icons.play_circle_filled),
-      label: widget.child ?? Text(isAvailable ? 'Watch Ad for ${widget.rewardDescription}' : 'Loading...'),
+      label:
+          widget.child ??
+          Text(
+            isAvailable
+                ? 'Watch Ad for ${widget.rewardDescription}'
+                : 'Loading...',
+          ),
       style: ElevatedButton.styleFrom(
         backgroundColor: isAvailable ? Colors.green : Colors.grey,
         foregroundColor: Colors.white,
@@ -120,7 +136,10 @@ class _RewardedAdButtonState extends State<RewardedAdButton> {
   }
 
   Future<void> _showRewardedAd() async {
-    await AdService.instance.showRewardedAd(onUserEarnedReward: widget.onRewardEarned, onAdClosed: widget.onAdClosed);
+    await AdService.instance.showRewardedAd(
+      onUserEarnedReward: widget.onRewardEarned,
+      onAdClosed: widget.onAdClosed,
+    );
   }
 }
 
@@ -135,23 +154,39 @@ class PremiumUpgradeDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Row(
-        children: [Icon(Icons.star, color: Colors.amber), SizedBox(width: 8), Text('Upgrade to Premium')],
+        children: [
+          Icon(Icons.star, color: Colors.amber),
+          SizedBox(width: 8),
+          Text('Upgrade to Premium'),
+        ],
       ),
       content: const Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Enjoy an ad-free experience with premium features:', style: TextStyle(fontWeight: FontWeight.w500)),
+          Text(
+            'Enjoy an ad-free experience with premium features:',
+            style: TextStyle(fontWeight: FontWeight.w500),
+          ),
           SizedBox(height: 16),
-          FeatureItem(icon: Icons.search, text: 'Unlimited AI-powered searches'),
-          FeatureItem(icon: Icons.offline_bolt, text: 'Full offline semantic search'),
+          FeatureItem(
+            icon: Icons.search,
+            text: 'Unlimited AI-powered searches',
+          ),
+          FeatureItem(
+            icon: Icons.offline_bolt,
+            text: 'Full offline semantic search',
+          ),
           FeatureItem(icon: Icons.audiotrack, text: 'Premium audio features'),
           FeatureItem(icon: Icons.analytics, text: 'Advanced habit tracking'),
           FeatureItem(icon: Icons.block, text: 'No advertisements'),
         ],
       ),
       actions: [
-        TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Maybe Later')),
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Maybe Later'),
+        ),
         if (onWatchAd != null)
           TextButton(
             onPressed: () {
@@ -165,7 +200,10 @@ class PremiumUpgradeDialog extends StatelessWidget {
             Navigator.of(context).pop();
             onUpgrade?.call();
           },
-          style: ElevatedButton.styleFrom(backgroundColor: Colors.amber, foregroundColor: Colors.black),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.amber,
+            foregroundColor: Colors.black,
+          ),
           child: const Text('Upgrade Now'),
         ),
       ],
@@ -208,7 +246,10 @@ class AdConfigWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Ad Configuration', style: Theme.of(context).textTheme.titleLarge),
+            Text(
+              'Ad Configuration',
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
             const SizedBox(height: 16),
             FutureBuilder<Map<String, dynamic>>(
               future: Future.value(AdService.instance.getAdStats()),
@@ -222,11 +263,18 @@ class AdConfigWidget extends StatelessWidget {
                   children:
                       stats.entries.map((entry) {
                         return ListTile(
-                          title: Text(entry.key.replaceAll('_', ' ').toUpperCase()),
+                          title: Text(
+                            entry.key.replaceAll('_', ' ').toUpperCase(),
+                          ),
                           trailing: Text(
                             entry.value.toString(),
                             style: TextStyle(
-                              color: entry.value is bool ? (entry.value ? Colors.green : Colors.red) : null,
+                              color:
+                                  entry.value is bool
+                                      ? (entry.value
+                                          ? Colors.green
+                                          : Colors.red)
+                                      : null,
                             ),
                           ),
                         );
@@ -242,9 +290,9 @@ class AdConfigWidget extends StatelessWidget {
                     onPressed: () async {
                       await AdService.instance.setPremiumUser(true);
                       if (context.mounted) {
-                        ScaffoldMessenger.of(
-                          context,
-                        ).showSnackBar(const SnackBar(content: Text('Premium mode enabled')));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Premium mode enabled')),
+                        );
                       }
                     },
                     child: const Text('Enable Premium'),
@@ -256,9 +304,11 @@ class AdConfigWidget extends StatelessWidget {
                     onPressed: () async {
                       await AdService.instance.setPremiumUser(false);
                       if (context.mounted) {
-                        ScaffoldMessenger.of(
-                          context,
-                        ).showSnackBar(const SnackBar(content: Text('Premium mode disabled')));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Premium mode disabled'),
+                          ),
+                        );
                       }
                     },
                     child: const Text('Disable Premium'),

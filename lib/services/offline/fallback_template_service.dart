@@ -5,8 +5,10 @@ import 'local_vector_storage_service.dart';
 
 /// Service for managing fallback response templates
 class FallbackTemplateService {
-  static const String _templatesEnPath = 'assets/offline_data/templates_en.json';
-  static const String _templatesArPath = 'assets/offline_data/templates_ar.json';
+  static const String _templatesEnPath =
+      'assets/offline_data/templates_en.json';
+  static const String _templatesArPath =
+      'assets/offline_data/templates_ar.json';
 
   final LocalVectorStorageService _storageService;
   final Map<String, List<FallbackTemplate>> _memoryCache = {};
@@ -42,14 +44,22 @@ class FallbackTemplateService {
       final keywords = _extractKeywords(query);
 
       // Find best matching template
-      final template = await _findBestTemplate(keywords: keywords, language: language, category: category);
+      final template = await _findBestTemplate(
+        keywords: keywords,
+        language: language,
+        category: category,
+      );
 
       if (template == null) {
         return _createGenericFallback(query, language);
       }
 
       // Generate response from template
-      final response = _generateResponseFromTemplate(template, keywords, context);
+      final response = _generateResponseFromTemplate(
+        template,
+        keywords,
+        context,
+      );
 
       return OfflineSearchResult(
         queryId: _generateQueryId(),
@@ -75,7 +85,9 @@ class FallbackTemplateService {
   Future<List<String>> getAvailableCategories(String language) async {
     if (!isReady) return [];
 
-    final templates = await _storageService.getFallbackTemplates(language: language);
+    final templates = await _storageService.getFallbackTemplates(
+      language: language,
+    );
     return templates.map((t) => t.category).toSet().toList();
   }
 
@@ -89,8 +101,10 @@ class FallbackTemplateService {
     final categoryCount = <String, int>{};
 
     for (final template in allTemplates) {
-      languageCount[template.language] = (languageCount[template.language] ?? 0) + 1;
-      categoryCount[template.category] = (categoryCount[template.category] ?? 0) + 1;
+      languageCount[template.language] =
+          (languageCount[template.language] ?? 0) + 1;
+      categoryCount[template.category] =
+          (categoryCount[template.category] ?? 0) + 1;
     }
 
     return {
@@ -100,12 +114,15 @@ class FallbackTemplateService {
       'average_priority':
           allTemplates.isEmpty
               ? 0.0
-              : allTemplates.map((t) => t.priority).reduce((a, b) => a + b) / allTemplates.length,
+              : allTemplates.map((t) => t.priority).reduce((a, b) => a + b) /
+                  allTemplates.length,
     };
   }
 
   /// Update templates from remote source (for progressive enhancement)
-  Future<void> updateTemplatesFromRemote(Map<String, dynamic> remoteTemplates) async {
+  Future<void> updateTemplatesFromRemote(
+    Map<String, dynamic> remoteTemplates,
+  ) async {
     try {
       final templates = <FallbackTemplate>[];
 
@@ -119,7 +136,9 @@ class FallbackTemplateService {
           template: templateData['template'] as String,
           keywords: List<String>.from(templateData['keywords'] as List),
           priority: (templateData['priority'] as num).toDouble(),
-          variations: Map<String, dynamic>.from(templateData['variations'] as Map? ?? {}),
+          variations: Map<String, dynamic>.from(
+            templateData['variations'] as Map? ?? {},
+          ),
           createdAt: DateTime.now(),
         );
 
@@ -171,7 +190,9 @@ class FallbackTemplateService {
           template: templateData['template'] as String,
           keywords: List<String>.from(templateData['keywords'] as List),
           priority: (templateData['priority'] as num?)?.toDouble() ?? 1.0,
-          variations: Map<String, dynamic>.from(templateData['variations'] as Map? ?? {}),
+          variations: Map<String, dynamic>.from(
+            templateData['variations'] as Map? ?? {},
+          ),
           createdAt: DateTime.now(),
         );
 
@@ -197,7 +218,8 @@ class FallbackTemplateService {
         id: 'en_general_prayer',
         category: 'general',
         language: 'en',
-        template: 'Here are some general prayers that might help with your request.',
+        template:
+            'Here are some general prayers that might help with your request.',
         keywords: ['prayer', 'dua', 'help', 'guidance'],
         priority: 1.0,
         createdAt: DateTime.now(),
@@ -253,17 +275,28 @@ class FallbackTemplateService {
   }) async {
     // Try memory cache first
     if (_memoryCache.containsKey(language)) {
-      final template = _findBestFromList(_memoryCache[language]!, keywords, category);
+      final template = _findBestFromList(
+        _memoryCache[language]!,
+        keywords,
+        category,
+      );
       if (template != null) return template;
     }
 
     // Get from storage
-    final templates = await _storageService.getFallbackTemplates(language: language, category: category);
+    final templates = await _storageService.getFallbackTemplates(
+      language: language,
+      category: category,
+    );
 
     return _findBestFromList(templates, keywords, category);
   }
 
-  FallbackTemplate? _findBestFromList(List<FallbackTemplate> templates, List<String> keywords, String? category) {
+  FallbackTemplate? _findBestFromList(
+    List<FallbackTemplate> templates,
+    List<String> keywords,
+    String? category,
+  ) {
     if (templates.isEmpty) return null;
 
     FallbackTemplate? bestTemplate;
@@ -274,13 +307,16 @@ class FallbackTemplateService {
 
       // Keyword matching score
       for (final keyword in keywords) {
-        if (template.keywords.any((k) => k.toLowerCase().contains(keyword.toLowerCase()))) {
+        if (template.keywords.any(
+          (k) => k.toLowerCase().contains(keyword.toLowerCase()),
+        )) {
           score += 2.0;
         }
       }
 
       // Category matching bonus
-      if (category != null && template.category.toLowerCase() == category.toLowerCase()) {
+      if (category != null &&
+          template.category.toLowerCase() == category.toLowerCase()) {
         score += 5.0;
       }
 
@@ -368,7 +404,11 @@ class FallbackTemplateService {
         similarityScore: 0.3, // Low similarity for fallback
         matchedKeywords: keywords.take(3).toList(),
         matchReason: 'Matched fallback template for ${template.category}',
-        metadata: {'template_id': template.id, 'is_fallback': true, 'template_priority': template.priority},
+        metadata: {
+          'template_id': template.id,
+          'is_fallback': true,
+          'template_priority': template.priority,
+        },
       ),
     );
 

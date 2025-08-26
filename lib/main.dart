@@ -79,7 +79,9 @@ class SecureDuaCopilotApp extends ConsumerWidget {
           child: MediaQuery(
             data: MediaQuery.of(context).copyWith(
               // Ensure text scaling is reasonable for Islamic content
-              textScaler: TextScaler.linear(MediaQuery.of(context).textScaler.scale(1.0).clamp(0.8, 1.3)),
+              textScaler: TextScaler.linear(
+                MediaQuery.of(context).textScaler.scale(1.0).clamp(0.8, 1.3),
+              ),
             ),
             child: child!,
           ),
@@ -114,7 +116,11 @@ class SecureDuaCopilotApp extends ConsumerWidget {
         elevation: 0,
         centerTitle: true,
         systemOverlayStyle: SystemUiOverlayStyle.dark,
-        titleTextStyle: TextStyle(color: ProfessionalTheme.textPrimary, fontSize: 20, fontWeight: FontWeight.w600),
+        titleTextStyle: TextStyle(
+          color: ProfessionalTheme.textPrimary,
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+        ),
         iconTheme: IconThemeData(color: ProfessionalTheme.textPrimary),
       ),
 
@@ -124,18 +130,30 @@ class SecureDuaCopilotApp extends ConsumerWidget {
         fillColor: ProfessionalTheme.surfaceColor,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(ProfessionalTheme.radiusLg),
-          borderSide: const BorderSide(color: ProfessionalTheme.borderLight, width: 1),
+          borderSide: const BorderSide(
+            color: ProfessionalTheme.borderLight,
+            width: 1,
+          ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(ProfessionalTheme.radiusLg),
-          borderSide: const BorderSide(color: ProfessionalTheme.borderLight, width: 1),
+          borderSide: const BorderSide(
+            color: ProfessionalTheme.borderLight,
+            width: 1,
+          ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(ProfessionalTheme.radiusLg),
-          borderSide: const BorderSide(color: ProfessionalTheme.primaryEmerald, width: 2),
+          borderSide: const BorderSide(
+            color: ProfessionalTheme.primaryEmerald,
+            width: 2,
+          ),
         ),
         contentPadding: const EdgeInsets.all(ProfessionalTheme.spaceMd),
-        hintStyle: const TextStyle(color: ProfessionalTheme.textTertiary, fontSize: 16),
+        hintStyle: const TextStyle(
+          color: ProfessionalTheme.textTertiary,
+          fontSize: 16,
+        ),
       ),
 
       // Elevated button theme
@@ -144,8 +162,13 @@ class SecureDuaCopilotApp extends ConsumerWidget {
           backgroundColor: ProfessionalTheme.primaryEmerald,
           foregroundColor: ProfessionalTheme.surfaceColor,
           elevation: 0,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(ProfessionalTheme.radiusMd)),
-          padding: const EdgeInsets.symmetric(horizontal: ProfessionalTheme.spaceMd, vertical: 12),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(ProfessionalTheme.radiusMd),
+          ),
+          padding: const EdgeInsets.symmetric(
+            horizontal: ProfessionalTheme.spaceMd,
+            vertical: 12,
+          ),
         ),
       ),
     );

@@ -18,12 +18,14 @@ class EnhancedRagService {
   OfflineSemanticSearchService? _offlineService;
   bool _offlineInitialized = false;
 
-  final StreamController<RagSearchResponse> _searchResultsController = StreamController<RagSearchResponse>.broadcast();
+  final StreamController<RagSearchResponse> _searchResultsController =
+      StreamController<RagSearchResponse>.broadcast();
 
   EnhancedRagService(this._onlineRagService, this._connectivity);
 
   /// Stream of search results for reactive UI updates
-  Stream<RagSearchResponse> get searchResults => _searchResultsController.stream;
+  Stream<RagSearchResponse> get searchResults =>
+      _searchResultsController.stream;
 
   /// Initialize both online and offline capabilities
   Future<void> initialize() async {
@@ -139,7 +141,8 @@ class EnhancedRagService {
   /// Get search capabilities status
   Map<String, dynamic> getSearchCapabilities() {
     return {
-      'online_available': true, // _onlineRagService is never null in this context
+      'online_available':
+          true, // _onlineRagService is never null in this context
       'offline_available': _offlineInitialized,
       'offline_service_ready': _offlineService?.isReady ?? false,
       'has_embeddings': _offlineInitialized, // Simplified check
@@ -150,7 +153,10 @@ class EnhancedRagService {
 
   /// Get comprehensive search statistics
   Future<Map<String, dynamic>> getSearchStatistics() async {
-    final stats = <String, dynamic>{'capabilities': getSearchCapabilities(), 'connection_status': await _isConnected()};
+    final stats = <String, dynamic>{
+      'capabilities': getSearchCapabilities(),
+      'connection_status': await _isConnected(),
+    };
 
     if (_offlineInitialized && _offlineService != null) {
       try {
@@ -234,7 +240,11 @@ class EnhancedRagService {
     required Map<String, dynamic> context,
   }) async {
     if (!_offlineInitialized || _offlineService == null) {
-      return _createNoResultsResponse(query, language, 'Offline search not available');
+      return _createNoResultsResponse(
+        query,
+        language,
+        'Offline search not available',
+      );
     }
 
     try {
@@ -248,11 +258,19 @@ class EnhancedRagService {
       return _convertOfflineToRagResponse(offlineResult, query, language);
     } catch (e) {
       print('Offline search failed: $e');
-      return _createNoResultsResponse(query, language, 'Offline search failed: $e');
+      return _createNoResultsResponse(
+        query,
+        language,
+        'Offline search failed: $e',
+      );
     }
   }
 
-  RagSearchResponse _convertOfflineToRagResponse(OfflineSearchResult offlineResult, String query, String language) {
+  RagSearchResponse _convertOfflineToRagResponse(
+    OfflineSearchResult offlineResult,
+    String query,
+    String language,
+  ) {
     final recommendations =
         offlineResult.matches.map((match) {
           return DuaRecommendation(
@@ -264,7 +282,8 @@ class EnhancedRagService {
               category: match.category,
               tags: match.matchedKeywords,
               authenticity: SourceAuthenticity(
-                level: AuthenticityLevel.verified, // Default for offline content
+                level:
+                    AuthenticityLevel.verified, // Default for offline content
                 source: 'offline_database',
                 reference: 'Local storage',
               ),
@@ -295,7 +314,8 @@ class EnhancedRagService {
     return RagSearchResponse(
       recommendations: recommendations,
       confidence: offlineResult.confidence,
-      reasoning: '${offlineResult.reasoning} (${offlineResult.quality.name} quality)',
+      reasoning:
+          '${offlineResult.reasoning} (${offlineResult.quality.name} quality)',
       queryId: offlineResult.queryId,
       metadata: {
         'search_type': 'offline',
@@ -323,7 +343,9 @@ class EnhancedRagService {
           );
         }).toList();
 
-    final enhancedMetadata = Map<String, dynamic>.from(onlineResult.metadata ?? {});
+    final enhancedMetadata = Map<String, dynamic>.from(
+      onlineResult.metadata ?? {},
+    );
     enhancedMetadata['search_type'] = 'online';
     enhancedMetadata['quality'] = 'high';
 
@@ -350,7 +372,10 @@ class EnhancedRagService {
     }
   }
 
-  Future<PopularDuasResponse> _getOfflinePopularDuas({String? category, int limit = 20}) async {
+  Future<PopularDuasResponse> _getOfflinePopularDuas({
+    String? category,
+    int limit = 20,
+  }) async {
     // This would be implemented based on your offline data structure
     // For now, return an empty response
     return PopularDuasResponse(
@@ -364,11 +389,19 @@ class EnhancedRagService {
         hasPrevious: false,
       ),
       timeframe: 'offline',
-      metadata: {'source': 'offline', 'message': 'Popular Du\'as from offline storage (feature under development)'},
+      metadata: {
+        'source': 'offline',
+        'message':
+            'Popular Du\'as from offline storage (feature under development)',
+      },
     );
   }
 
-  RagSearchResponse _createNoResultsResponse(String query, String language, String reason) {
+  RagSearchResponse _createNoResultsResponse(
+    String query,
+    String language,
+    String reason,
+  ) {
     return RagSearchResponse(
       recommendations: [],
       confidence: 0.0,
@@ -383,7 +416,11 @@ class EnhancedRagService {
     );
   }
 
-  RagSearchResponse _createErrorResult(String query, String language, String error) {
+  RagSearchResponse _createErrorResult(
+    String query,
+    String language,
+    String error,
+  ) {
     return RagSearchResponse(
       recommendations: [],
       confidence: 0.0,

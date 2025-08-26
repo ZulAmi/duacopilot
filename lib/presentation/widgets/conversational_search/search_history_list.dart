@@ -30,7 +30,12 @@ class SemanticGroup {
   final double similarity;
   final String category;
 
-  const SemanticGroup({required this.title, required this.items, required this.similarity, required this.category});
+  const SemanticGroup({
+    required this.title,
+    required this.items,
+    required this.similarity,
+    required this.category,
+  });
 }
 
 /// SearchHistoryListView class implementation
@@ -78,7 +83,12 @@ class _SearchHistoryListViewState extends State<SearchHistoryListView> {
   void _buildSemanticGroups() {
     if (!widget.groupBySemantic) {
       _semanticGroups = [
-        SemanticGroup(title: 'All Searches', items: widget.historyItems, similarity: 1.0, category: 'general'),
+        SemanticGroup(
+          title: 'All Searches',
+          items: widget.historyItems,
+          similarity: 1.0,
+          category: 'general',
+        ),
       ];
       return;
     }
@@ -108,8 +118,10 @@ class _SearchHistoryListViewState extends State<SearchHistoryListView> {
 
     // Sort groups by most recent item in each group
     _semanticGroups.sort((a, b) {
-      final aLatest = a.items.isNotEmpty ? a.items.first.timestamp : DateTime(1970);
-      final bLatest = b.items.isNotEmpty ? b.items.first.timestamp : DateTime(1970);
+      final aLatest =
+          a.items.isNotEmpty ? a.items.first.timestamp : DateTime(1970);
+      final bLatest =
+          b.items.isNotEmpty ? b.items.first.timestamp : DateTime(1970);
       return bLatest.compareTo(aLatest);
     });
   }
@@ -120,31 +132,47 @@ class _SearchHistoryListViewState extends State<SearchHistoryListView> {
     if (lowerQuery.contains('morning') || lowerQuery.contains('fajr')) {
       return 'morning_prayers';
     }
-    if (lowerQuery.contains('evening') || lowerQuery.contains('maghrib') || lowerQuery.contains('isha')) {
+    if (lowerQuery.contains('evening') ||
+        lowerQuery.contains('maghrib') ||
+        lowerQuery.contains('isha')) {
       return 'evening_prayers';
     }
-    if (lowerQuery.contains('prayer') || lowerQuery.contains('salah') || lowerQuery.contains('namaz')) {
+    if (lowerQuery.contains('prayer') ||
+        lowerQuery.contains('salah') ||
+        lowerQuery.contains('namaz')) {
       return 'prayer_related';
     }
     if (lowerQuery.contains('travel') || lowerQuery.contains('journey')) {
       return 'travel';
     }
-    if (lowerQuery.contains('food') || lowerQuery.contains('eating') || lowerQuery.contains('meal')) {
+    if (lowerQuery.contains('food') ||
+        lowerQuery.contains('eating') ||
+        lowerQuery.contains('meal')) {
       return 'food_duas';
     }
-    if (lowerQuery.contains('sleep') || lowerQuery.contains('night') || lowerQuery.contains('bed')) {
+    if (lowerQuery.contains('sleep') ||
+        lowerQuery.contains('night') ||
+        lowerQuery.contains('bed')) {
       return 'sleep_duas';
     }
-    if (lowerQuery.contains('forgive') || lowerQuery.contains('istighfar') || lowerQuery.contains('repent')) {
+    if (lowerQuery.contains('forgive') ||
+        lowerQuery.contains('istighfar') ||
+        lowerQuery.contains('repent')) {
       return 'forgiveness';
     }
-    if (lowerQuery.contains('protect') || lowerQuery.contains('safety') || lowerQuery.contains('evil')) {
+    if (lowerQuery.contains('protect') ||
+        lowerQuery.contains('safety') ||
+        lowerQuery.contains('evil')) {
       return 'protection';
     }
-    if (lowerQuery.contains('quran') || lowerQuery.contains('verse') || lowerQuery.contains('ayah')) {
+    if (lowerQuery.contains('quran') ||
+        lowerQuery.contains('verse') ||
+        lowerQuery.contains('ayah')) {
       return 'quran';
     }
-    if (lowerQuery.contains('dhikr') || lowerQuery.contains('remembr') || lowerQuery.contains('tasbih')) {
+    if (lowerQuery.contains('dhikr') ||
+        lowerQuery.contains('remembr') ||
+        lowerQuery.contains('tasbih')) {
       return 'remembrance';
     }
 
@@ -254,20 +282,28 @@ class _SearchHistoryListViewState extends State<SearchHistoryListView> {
       padding: const EdgeInsets.all(32),
       child: Column(
         children: [
-          Icon(Icons.history, size: 64, color: Theme.of(context).colorScheme.onSurfaceVariant.withOpacity(0.5)),
+          Icon(
+            Icons.history,
+            size: 64,
+            color: Theme.of(
+              context,
+            ).colorScheme.onSurfaceVariant.withOpacity(0.5),
+          ),
           const SizedBox(height: 16),
           Text(
             'No Search History',
-            style: Theme.of(
-              context,
-            ).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
           const SizedBox(height: 8),
           Text(
             'Your search history will appear here',
-            style: Theme.of(
-              context,
-            ).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant.withOpacity(0.7)),
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: Theme.of(
+                context,
+              ).colorScheme.onSurfaceVariant.withOpacity(0.7),
+            ),
             textAlign: TextAlign.center,
           ),
         ],
@@ -296,7 +332,11 @@ class _SearchHistoryListViewState extends State<SearchHistoryListView> {
                       color: categoryColor.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Icon(_getCategoryIcon(group.category), size: 16, color: categoryColor),
+                    child: Icon(
+                      _getCategoryIcon(group.category),
+                      size: 16,
+                      color: categoryColor,
+                    ),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
@@ -309,7 +349,10 @@ class _SearchHistoryListViewState extends State<SearchHistoryListView> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: colorScheme.surfaceContainerHighest,
                       borderRadius: BorderRadius.circular(12),
@@ -333,7 +376,9 @@ class _SearchHistoryListViewState extends State<SearchHistoryListView> {
 
             if (index >= widget.maxItemsPerGroup && !_isExpanded) {
               if (index == widget.maxItemsPerGroup) {
-                return _buildExpandButton(group.items.length - widget.maxItemsPerGroup);
+                return _buildExpandButton(
+                  group.items.length - widget.maxItemsPerGroup,
+                );
               }
               return const SizedBox.shrink();
             }
@@ -358,7 +403,9 @@ class _SearchHistoryListViewState extends State<SearchHistoryListView> {
         child: Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            border: Border.all(color: Theme.of(context).colorScheme.outline.withOpacity(0.3)),
+            border: Border.all(
+              color: Theme.of(context).colorScheme.outline.withOpacity(0.3),
+            ),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Row(
@@ -372,9 +419,9 @@ class _SearchHistoryListViewState extends State<SearchHistoryListView> {
               const SizedBox(width: 8),
               Text(
                 _isExpanded ? 'Show Less' : 'Show $hiddenCount More',
-                style: Theme.of(
-                  context,
-                ).textTheme.labelMedium?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
               ),
             ],
           ),
@@ -420,26 +467,41 @@ class _SearchHistoryListViewState extends State<SearchHistoryListView> {
                     if (widget.onItemDeleted != null)
                       IconButton(
                         onPressed: () => widget.onItemDeleted!(item.id),
-                        icon: Icon(Icons.close, size: 16, color: colorScheme.onSurfaceVariant),
-                        constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                        icon: Icon(
+                          Icons.close,
+                          size: 16,
+                          color: colorScheme.onSurfaceVariant,
+                        ),
+                        constraints: const BoxConstraints(
+                          minWidth: 32,
+                          minHeight: 32,
+                        ),
                       ),
                   ],
                 ),
                 const SizedBox(height: 8),
                 Text(
                   item.response,
-                  style: textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant),
+                  style: textTheme.bodySmall?.copyWith(
+                    color: colorScheme.onSurfaceVariant,
+                  ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 12),
                 Row(
                   children: [
-                    Icon(Icons.access_time, size: 12, color: colorScheme.onSurfaceVariant),
+                    Icon(
+                      Icons.access_time,
+                      size: 12,
+                      color: colorScheme.onSurfaceVariant,
+                    ),
                     const SizedBox(width: 4),
                     Text(
                       _formatTimestamp(item.timestamp),
-                      style: textTheme.labelSmall?.copyWith(color: colorScheme.onSurfaceVariant),
+                      style: textTheme.labelSmall?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                      ),
                     ),
                     if (item.confidence != null) ...[
                       const SizedBox(width: 16),
@@ -447,23 +509,37 @@ class _SearchHistoryListViewState extends State<SearchHistoryListView> {
                       const SizedBox(width: 4),
                       Text(
                         '${(item.confidence! * 100).toInt()}%',
-                        style: textTheme.labelSmall?.copyWith(color: categoryColor),
+                        style: textTheme.labelSmall?.copyWith(
+                          color: categoryColor,
+                        ),
                       ),
                     ],
                     if (item.responseTime != null) ...[
                       const SizedBox(width: 16),
-                      Icon(Icons.speed, size: 12, color: colorScheme.onSurfaceVariant),
+                      Icon(
+                        Icons.speed,
+                        size: 12,
+                        color: colorScheme.onSurfaceVariant,
+                      ),
                       const SizedBox(width: 4),
                       Text(
                         '${item.responseTime}ms',
-                        style: textTheme.labelSmall?.copyWith(color: colorScheme.onSurfaceVariant),
+                        style: textTheme.labelSmall?.copyWith(
+                          color: colorScheme.onSurfaceVariant,
+                        ),
                       ),
                     ],
                     const Spacer(),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 2,
+                      ),
                       decoration: BoxDecoration(
-                        color: item.success ? Colors.green.withOpacity(0.1) : Colors.red.withOpacity(0.1),
+                        color:
+                            item.success
+                                ? Colors.green.withOpacity(0.1)
+                                : Colors.red.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text(

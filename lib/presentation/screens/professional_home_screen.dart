@@ -16,10 +16,12 @@ class ProfessionalHomeScreen extends ConsumerStatefulWidget {
   const ProfessionalHomeScreen({super.key});
 
   @override
-  ConsumerState<ProfessionalHomeScreen> createState() => _ProfessionalHomeScreenState();
+  ConsumerState<ProfessionalHomeScreen> createState() =>
+      _ProfessionalHomeScreenState();
 }
 
-class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen> with TickerProviderStateMixin {
+class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
+    with TickerProviderStateMixin {
   final TextEditingController _searchController = TextEditingController();
   late AnimationController _fadeController;
   late AnimationController _slideController;
@@ -29,8 +31,14 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
   @override
   void initState() {
     super.initState();
-    _fadeController = AnimationController(duration: const Duration(milliseconds: 600), vsync: this);
-    _slideController = AnimationController(duration: const Duration(milliseconds: 800), vsync: this);
+    _fadeController = AnimationController(
+      duration: const Duration(milliseconds: 600),
+      vsync: this,
+    );
+    _slideController = AnimationController(
+      duration: const Duration(milliseconds: 800),
+      vsync: this,
+    );
 
     // Start animations
     _fadeController.forward();
@@ -49,7 +57,10 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ProfessionalIslamicTheme.backgroundPrimary,
-      appBar: ProfessionalComponents.appBar(title: 'DuaCopilot', onMenuPressed: () => _showDrawer(context)),
+      appBar: ProfessionalComponents.appBar(
+        title: 'DuaCopilot',
+        onMenuPressed: () => _showDrawer(context),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(ProfessionalIslamicTheme.space4),
@@ -94,7 +105,9 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
         position: Tween<Offset>(
           begin: const Offset(0, -0.3),
           end: Offset.zero,
-        ).animate(CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic)),
+        ).animate(
+          CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -104,10 +117,16 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: ProfessionalIslamicTheme.islamicGreen,
-                    borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusLg),
+                    borderRadius: BorderRadius.circular(
+                      ProfessionalIslamicTheme.radiusLg,
+                    ),
                     boxShadow: ProfessionalIslamicTheme.shadowMedium,
                   ),
-                  child: const Icon(Icons.mosque_rounded, color: ProfessionalIslamicTheme.pureWhite, size: 32),
+                  child: const Icon(
+                    Icons.mosque_rounded,
+                    color: ProfessionalIslamicTheme.pureWhite,
+                    size: 32,
+                  ),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
@@ -142,17 +161,29 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
               padding: const EdgeInsets.all(ProfessionalIslamicTheme.space4),
               decoration: BoxDecoration(
                 color: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.05),
-                borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusMd),
-                border: Border.all(color: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.1)),
+                borderRadius: BorderRadius.circular(
+                  ProfessionalIslamicTheme.radiusMd,
+                ),
+                border: Border.all(
+                  color: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.1),
+                ),
               ),
               child: Row(
                 children: [
-                  Icon(Icons.lightbulb_outline_rounded, color: ProfessionalIslamicTheme.islamicGreen, size: 20),
+                  Icon(
+                    Icons.lightbulb_outline_rounded,
+                    color: ProfessionalIslamicTheme.islamicGreen,
+                    size: 20,
+                  ),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
                       'Ask me anything about Islam, get Quranic guidance, or find the perfect Dua',
-                      style: TextStyle(fontSize: 14, color: ProfessionalIslamicTheme.textSecondary, height: 1.3),
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: ProfessionalIslamicTheme.textSecondary,
+                        height: 1.3,
+                      ),
                     ),
                   ),
                 ],
@@ -171,13 +202,19 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
         position: Tween<Offset>(
           begin: const Offset(0, 0.3),
           end: Offset.zero,
-        ).animate(CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic)),
+        ).animate(
+          CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               'Search & Explore',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: ProfessionalIslamicTheme.textPrimary),
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: ProfessionalIslamicTheme.textPrimary,
+              ),
             ),
             const SizedBox(height: ProfessionalIslamicTheme.space4),
             ProfessionalComponents.searchBar(
@@ -213,7 +250,9 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
           color: ProfessionalIslamicTheme.gray100,
-          borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusSm),
+          borderRadius: BorderRadius.circular(
+            ProfessionalIslamicTheme.radiusSm,
+          ),
           border: Border.all(color: ProfessionalIslamicTheme.borderLight),
         ),
         child: Text(
@@ -236,7 +275,11 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
         children: [
           Text(
             'Today\'s Islamic Insights',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: ProfessionalIslamicTheme.textPrimary),
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: ProfessionalIslamicTheme.textPrimary,
+            ),
           ),
           const SizedBox(height: ProfessionalIslamicTheme.space4),
           Row(
@@ -293,7 +336,12 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
               ),
               TextButton(
                 onPressed: () => _showDrawer(context),
-                child: const Text('View All →', style: TextStyle(color: ProfessionalIslamicTheme.islamicGreen)),
+                child: const Text(
+                  'View All →',
+                  style: TextStyle(
+                    color: ProfessionalIslamicTheme.islamicGreen,
+                  ),
+                ),
               ),
             ],
           ),
@@ -338,7 +386,11 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
           // Additional Premium Features Row
           Text(
             'Premium Features',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: ProfessionalIslamicTheme.textPrimary),
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: ProfessionalIslamicTheme.textPrimary,
+            ),
           ),
           const SizedBox(height: ProfessionalIslamicTheme.space4),
 
@@ -407,7 +459,11 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
         children: [
           Text(
             'Islamic Tools',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: ProfessionalIslamicTheme.textPrimary),
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: ProfessionalIslamicTheme.textPrimary,
+            ),
           ),
           const SizedBox(height: ProfessionalIslamicTheme.space4),
           ProfessionalComponents.featureCard(
@@ -496,33 +552,51 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
 
   // Navigation Methods
   void _navigateToSearch() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfessionalIslamicSearchScreen()));
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const ProfessionalIslamicSearchScreen(),
+      ),
+    );
   }
 
   void _navigateToQuran() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const QuranExplorerScreen()));
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => const QuranExplorerScreen()),
+    );
   }
 
   void _navigateToDuas() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const DigitalTasbihScreen()));
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => const DigitalTasbihScreen()),
+    );
   }
 
   void _navigateToPrayerTimes() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PrayerTimesScreen()));
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (context) => const PrayerTimesScreen()));
   }
 
   void _navigateToQibla() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const QiblaCompassScreen()));
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (context) => const QiblaCompassScreen()));
   }
 
   void _navigateToCalendar() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const IslamicCalendarScreen()));
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => const IslamicCalendarScreen()),
+    );
   }
 
   void _navigateToVoiceAssistant() {
-    Navigator.of(
-      context,
-    ).push(MaterialPageRoute(builder: (context) => const ConversationalSearchScreen(enableVoiceSearch: true)));
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder:
+            (context) =>
+                const ConversationalSearchScreen(enableVoiceSearch: true),
+      ),
+    );
   }
 
   void _navigateToIslamicCourses() {
@@ -553,6 +627,8 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
   }
 
   void _showDrawer(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PremiumFeaturesHub()));
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (context) => const PremiumFeaturesHub()));
   }
 }

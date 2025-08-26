@@ -8,7 +8,8 @@ import '../../core/storage/secure_storage_adapter.dart';
 /// Enterprise-grade secure storage service with encryption
 class SecureStorageService {
   static SecureStorageService? _instance;
-  static SecureStorageService get instance => _instance ??= SecureStorageService._();
+  static SecureStorageService get instance =>
+      _instance ??= SecureStorageService._();
 
   SecureStorageService._();
 
@@ -36,7 +37,10 @@ class SecureStorageService {
 
     try {
       final encryptedValue = _encryptValue(value);
-      await SecureStorageAdapter.write(key: '$_encryptionKeyPrefix$key', value: encryptedValue);
+      await SecureStorageAdapter.write(
+        key: '$_encryptionKeyPrefix$key',
+        value: encryptedValue,
+      );
     } catch (e) {
       AppLogger.error('Failed to write secure data for key $key: $e');
       rethrow;
@@ -48,7 +52,9 @@ class SecureStorageService {
     if (!_isInitialized) await initialize();
 
     try {
-      final encryptedValue = await SecureStorageAdapter.read(key: '$_encryptionKeyPrefix$key');
+      final encryptedValue = await SecureStorageAdapter.read(
+        key: '$_encryptionKeyPrefix$key',
+      );
 
       if (encryptedValue == null) return null;
 
@@ -76,7 +82,9 @@ class SecureStorageService {
     if (!_isInitialized) await initialize();
 
     try {
-      return await SecureStorageAdapter.containsKey(key: '$_encryptionKeyPrefix$key');
+      return await SecureStorageAdapter.containsKey(
+        key: '$_encryptionKeyPrefix$key',
+      );
     } catch (e) {
       AppLogger.error('Failed to check key existence for $key: $e');
       return false;

@@ -485,7 +485,9 @@ class LocalVectorStorage {
         await _embeddingsBox!.delete(key);
       }
 
-      AppLogger.debug('Maintenance completed: removed ${toRemove.length} old embeddings');
+      AppLogger.debug(
+        'Maintenance completed: removed ${toRemove.length} old embeddings',
+      );
     } catch (e) {
       AppLogger.debug('Error during maintenance: $e');
     }

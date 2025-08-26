@@ -54,20 +54,28 @@ class PremiumFeaturesHub extends ConsumerWidget {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [Theme.of(context).primaryColor.withOpacity(0.1), Theme.of(context).scaffoldBackgroundColor],
+          colors: [
+            Theme.of(context).primaryColor.withOpacity(0.1),
+            Theme.of(context).scaffoldBackgroundColor,
+          ],
         ),
       ),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.star_outline, size: 80, color: Theme.of(context).primaryColor),
+            Icon(
+              Icons.star_outline,
+              size: 80,
+              color: Theme.of(context).primaryColor,
+            ),
             const SizedBox(height: 24),
             Text(
               'Premium Subscription Required',
-              style: Theme.of(
-                context,
-              ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor),
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).primaryColor,
+              ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
@@ -75,7 +83,9 @@ class PremiumFeaturesHub extends ConsumerWidget {
               padding: const EdgeInsets.symmetric(horizontal: 32),
               child: Text(
                 'Unlock exclusive Islamic content with famous Qaris, Islamic Knowledge University, and advanced spiritual features.',
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.grey[600]),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyLarge?.copyWith(color: Colors.grey[600]),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -87,8 +97,14 @@ class PremiumFeaturesHub extends ConsumerWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Theme.of(context).primaryColor,
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-                textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 32,
+                  vertical: 16,
+                ),
+                textStyle: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ],
@@ -104,7 +120,10 @@ class PremiumFeaturesHub extends ConsumerWidget {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [Theme.of(context).primaryColor.withOpacity(0.05), Theme.of(context).scaffoldBackgroundColor],
+          colors: [
+            Theme.of(context).primaryColor.withOpacity(0.05),
+            Theme.of(context).scaffoldBackgroundColor,
+          ],
         ),
       ),
       child: SingleChildScrollView(
@@ -149,10 +168,17 @@ class PremiumFeaturesHub extends ConsumerWidget {
             children: [
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(color: tierColor, borderRadius: BorderRadius.circular(8)),
+                decoration: BoxDecoration(
+                  color: tierColor,
+                  borderRadius: BorderRadius.circular(8),
+                ),
                 child: Text(
                   '$tierName MEMBER',
-                  style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               const Spacer(),
@@ -162,14 +188,17 @@ class PremiumFeaturesHub extends ConsumerWidget {
           const SizedBox(height: 12),
           Text(
             'Welcome to Premium Islamic Experience',
-            style: Theme.of(
-              context,
-            ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor),
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).primaryColor,
+            ),
           ),
           const SizedBox(height: 8),
           Text(
             'Access exclusive content from world-renowned Islamic scholars and Qaris',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
           ),
         ],
       ),
@@ -183,7 +212,9 @@ class PremiumFeaturesHub extends ConsumerWidget {
       children: [
         Text(
           'Premium Features',
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+          style: Theme.of(
+            context,
+          ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 16),
         GridView.count(
@@ -199,36 +230,76 @@ class PremiumFeaturesHub extends ConsumerWidget {
               title: 'Premium Audio',
               subtitle: 'Famous Qaris & Advanced Audio Features',
               icon: Icons.headphones,
-              gradient: const LinearGradient(colors: [Color(0xFF667eea), Color(0xFF764ba2)]),
-              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const PremiumAudioScreen())),
-              features: ['Al-Afasy', 'Sudais', 'Minshawi', 'Sleep Timer', 'Offline Downloads'],
+              gradient: const LinearGradient(
+                colors: [Color(0xFF667eea), Color(0xFF764ba2)],
+              ),
+              onTap:
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const PremiumAudioScreen(),
+                    ),
+                  ),
+              features: [
+                'Al-Afasy',
+                'Sudais',
+                'Minshawi',
+                'Sleep Timer',
+                'Offline Downloads',
+              ],
             ),
             _buildFeatureCard(
               context: context,
               title: 'Islamic University',
               subtitle: 'Learn from Renowned Scholars',
               icon: Icons.school,
-              gradient: const LinearGradient(colors: [Color(0xFFf093fb), Color(0xFFf5576c)]),
-              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const IslamicUniversityScreen())),
-              features: ['Video Courses', 'Live Q&A', 'Certificates', 'Personal Curriculum', 'Expert Guidance'],
+              gradient: const LinearGradient(
+                colors: [Color(0xFFf093fb), Color(0xFFf5576c)],
+              ),
+              onTap:
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const IslamicUniversityScreen(),
+                    ),
+                  ),
+              features: [
+                'Video Courses',
+                'Live Q&A',
+                'Certificates',
+                'Personal Curriculum',
+                'Expert Guidance',
+              ],
             ),
             _buildFeatureCard(
               context: context,
               title: 'Advanced Analytics',
               subtitle: 'Track Your Spiritual Journey',
               icon: Icons.analytics,
-              gradient: const LinearGradient(colors: [Color(0xFF4facfe), Color(0xFF00f2fe)]),
+              gradient: const LinearGradient(
+                colors: [Color(0xFF4facfe), Color(0xFF00f2fe)],
+              ),
               onTap: () => context.push('/premium/analytics'),
-              features: ['Prayer Tracking', 'Learning Progress', 'Goals & Achievements'],
+              features: [
+                'Prayer Tracking',
+                'Learning Progress',
+                'Goals & Achievements',
+              ],
             ),
             _buildFeatureCard(
               context: context,
               title: 'AI Islamic Assistant',
               subtitle: 'Personalized Islamic Guidance',
               icon: Icons.psychology,
-              gradient: const LinearGradient(colors: [Color(0xFF43e97b), Color(0xFF38f9d7)]),
+              gradient: const LinearGradient(
+                colors: [Color(0xFF43e97b), Color(0xFF38f9d7)],
+              ),
               onTap: () => context.push('/premium/ai-assistant'),
-              features: ['Smart Q&A', 'Personalized Duas', 'Islamic Decision Support'],
+              features: [
+                'Smart Q&A',
+                'Personalized Duas',
+                'Islamic Decision Support',
+              ],
             ),
           ],
         ),
@@ -254,7 +325,10 @@ class PremiumFeaturesHub extends ConsumerWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(16),
         child: Container(
-          decoration: BoxDecoration(gradient: gradient, borderRadius: BorderRadius.circular(16)),
+          decoration: BoxDecoration(
+            gradient: gradient,
+            borderRadius: BorderRadius.circular(16),
+          ),
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -264,13 +338,27 @@ class PremiumFeaturesHub extends ConsumerWidget {
                   children: [
                     Icon(icon, color: Colors.white, size: 28),
                     const Spacer(),
-                    const Icon(Icons.arrow_forward_ios, color: Colors.white70, size: 16),
+                    const Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.white70,
+                      size: 16,
+                    ),
                   ],
                 ),
                 const SizedBox(height: 12),
-                Text(title, style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 const SizedBox(height: 4),
-                Text(subtitle, style: const TextStyle(color: Colors.white70, fontSize: 12)),
+                Text(
+                  subtitle,
+                  style: const TextStyle(color: Colors.white70, fontSize: 12),
+                ),
                 const SizedBox(height: 8),
                 Expanded(
                   child: Column(
@@ -283,12 +371,19 @@ class PremiumFeaturesHub extends ConsumerWidget {
                                 padding: const EdgeInsets.only(bottom: 2),
                                 child: Row(
                                   children: [
-                                    const Icon(Icons.check_circle, color: Colors.white70, size: 14),
+                                    const Icon(
+                                      Icons.check_circle,
+                                      color: Colors.white70,
+                                      size: 14,
+                                    ),
                                     const SizedBox(width: 4),
                                     Expanded(
                                       child: Text(
                                         feature,
-                                        style: const TextStyle(color: Colors.white70, fontSize: 11),
+                                        style: const TextStyle(
+                                          color: Colors.white70,
+                                          fontSize: 11,
+                                        ),
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                       ),
@@ -313,7 +408,12 @@ class PremiumFeaturesHub extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Quick Access', style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
+        Text(
+          'Quick Access',
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+        ),
         const SizedBox(height: 12),
         Row(
           children: [
@@ -361,8 +461,18 @@ class PremiumFeaturesHub extends ConsumerWidget {
             children: [
               Icon(icon, color: Theme.of(context).primaryColor, size: 24),
               const SizedBox(height: 8),
-              Text(title, style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold)),
-              Text(subtitle, style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.grey[600])),
+              Text(
+                title,
+                style: Theme.of(
+                  context,
+                ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+              ),
+              Text(
+                subtitle,
+                style: Theme.of(
+                  context,
+                ).textTheme.bodySmall?.copyWith(color: Colors.grey[600]),
+              ),
             ],
           ),
         ),
@@ -377,7 +487,9 @@ class PremiumFeaturesHub extends ConsumerWidget {
       children: [
         Text(
           'Recommended for You',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 12),
         SizedBox(
@@ -436,12 +548,21 @@ class PremiumFeaturesHub extends ConsumerWidget {
                 child: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                    borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(12),
+                    ),
                     gradient: LinearGradient(
-                      colors: [Theme.of(context).primaryColor.withOpacity(0.8), Theme.of(context).primaryColor],
+                      colors: [
+                        Theme.of(context).primaryColor.withOpacity(0.8),
+                        Theme.of(context).primaryColor,
+                      ],
                     ),
                   ),
-                  child: const Icon(Icons.play_circle_outline, color: Colors.white, size: 40),
+                  child: const Icon(
+                    Icons.play_circle_outline,
+                    color: Colors.white,
+                    size: 40,
+                  ),
                 ),
               ),
               Expanded(
@@ -453,13 +574,18 @@ class PremiumFeaturesHub extends ConsumerWidget {
                     children: [
                       Text(
                         title,
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
                         instructor,
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.grey[600], fontSize: 11),
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Colors.grey[600],
+                          fontSize: 11,
+                        ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),

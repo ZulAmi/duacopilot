@@ -22,10 +22,14 @@ void main() async {
   try {
     // Initialize Firebase first (required for monitoring)
     try {
-      await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
       AppLogger.debug('✅ Firebase initialized successfully');
     } catch (e) {
-      AppLogger.debug('⚠️  Firebase initialization failed: $e - continuing without Firebase features');
+      AppLogger.debug(
+        '⚠️  Firebase initialization failed: $e - continuing without Firebase features',
+      );
     }
 
     // Initialize dependency injection with platform awareness
@@ -39,13 +43,20 @@ void main() async {
     // Initialize simple monitoring system (will gracefully handle Firebase issues)
     try {
       await SimpleMonitoringService.initialize();
-      await SimpleMonitoringService.trackUserAction(action: 'app_launch', category: 'dev');
+      await SimpleMonitoringService.trackUserAction(
+        action: 'app_launch',
+        category: 'dev',
+      );
       AppLogger.debug('✅ Simple monitoring system initialized');
     } catch (e) {
-      AppLogger.debug('⚠️  Monitoring initialization failed: $e - continuing without monitoring');
+      AppLogger.debug(
+        '⚠️  Monitoring initialization failed: $e - continuing without monitoring',
+      );
     }
 
-    AppLogger.debug('✅ DuaCopilot Professional Islamic AI initialized successfully');
+    AppLogger.debug(
+      '✅ DuaCopilot Professional Islamic AI initialized successfully',
+    );
   } catch (e) {
     AppLogger.debug('⚠️  DuaCopilot initialization error: $e');
     // Continue anyway with limited functionality
@@ -73,13 +84,16 @@ class RevolutionaryDuaCopilotDevApp extends StatelessWidget {
           value: SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
             statusBarIconBrightness: Brightness.light,
-            systemNavigationBarColor: ProfessionalIslamicTheme.backgroundSecondary,
+            systemNavigationBarColor:
+                ProfessionalIslamicTheme.backgroundSecondary,
             systemNavigationBarIconBrightness: Brightness.dark,
           ),
           child: MediaQuery(
             data: MediaQuery.of(context).copyWith(
               // Ensure text scaling is reasonable for Islamic content
-              textScaler: TextScaler.linear(MediaQuery.of(context).textScaleFactor.clamp(0.8, 1.3)),
+              textScaler: TextScaler.linear(
+                MediaQuery.of(context).textScaleFactor.clamp(0.8, 1.3),
+              ),
             ),
             child: child!,
           ),
@@ -94,17 +108,22 @@ class RevolutionaryAppWrapper extends StatefulWidget {
   const RevolutionaryAppWrapper({super.key});
 
   @override
-  State<RevolutionaryAppWrapper> createState() => _RevolutionaryAppWrapperState();
+  State<RevolutionaryAppWrapper> createState() =>
+      _RevolutionaryAppWrapperState();
 }
 
-class _RevolutionaryAppWrapperState extends State<RevolutionaryAppWrapper> with SingleTickerProviderStateMixin {
+class _RevolutionaryAppWrapperState extends State<RevolutionaryAppWrapper>
+    with SingleTickerProviderStateMixin {
   bool _showSplash = true;
   late AnimationController _animationController;
 
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(duration: ProfessionalIslamicTheme.animationSlow, vsync: this);
+    _animationController = AnimationController(
+      duration: ProfessionalIslamicTheme.animationSlow,
+      vsync: this,
+    );
 
     // Auto-complete splash after 3 seconds
     Timer(const Duration(seconds: 3), _onSplashComplete);
@@ -135,26 +154,39 @@ class _RevolutionaryAppWrapperState extends State<RevolutionaryAppWrapper> with 
     // Use professional Islamic splash screen for native platforms
     if (_showSplash) {
       return Container(
-        decoration: const BoxDecoration(color: ProfessionalIslamicTheme.islamicGreen),
+        decoration: const BoxDecoration(
+          color: ProfessionalIslamicTheme.islamicGreen,
+        ),
         child: Center(
           child: FadeTransition(
             opacity: _animationController,
             child: ScaleTransition(
-              scale: Tween<double>(
-                begin: 0.8,
-                end: 1.0,
-              ).animate(CurvedAnimation(parent: _animationController, curve: Curves.elasticOut)),
+              scale: Tween<double>(begin: 0.8, end: 1.0).animate(
+                CurvedAnimation(
+                  parent: _animationController,
+                  curve: Curves.elasticOut,
+                ),
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(ProfessionalIslamicTheme.space8),
+                    padding: const EdgeInsets.all(
+                      ProfessionalIslamicTheme.space8,
+                    ),
                     decoration: BoxDecoration(
-                      color: ProfessionalIslamicTheme.backgroundSecondary.withOpacity(0.95),
-                      borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radius3Xl),
+                      color: ProfessionalIslamicTheme.backgroundSecondary
+                          .withOpacity(0.95),
+                      borderRadius: BorderRadius.circular(
+                        ProfessionalIslamicTheme.radius3Xl,
+                      ),
                       boxShadow: ProfessionalIslamicTheme.shadowMedium,
                     ),
-                    child: const Icon(Icons.mosque_rounded, size: 80, color: ProfessionalIslamicTheme.islamicGreen),
+                    child: const Icon(
+                      Icons.mosque_rounded,
+                      size: 80,
+                      color: ProfessionalIslamicTheme.islamicGreen,
+                    ),
                   ),
                   const SizedBox(height: ProfessionalIslamicTheme.space8),
                   Text(
@@ -168,7 +200,9 @@ class _RevolutionaryAppWrapperState extends State<RevolutionaryAppWrapper> with 
                   Text(
                     'Professional Islamic AI Assistant',
                     style: ProfessionalIslamicTheme.body1.copyWith(
-                      color: ProfessionalIslamicTheme.textOnIslamic.withOpacity(0.9),
+                      color: ProfessionalIslamicTheme.textOnIslamic.withOpacity(
+                        0.9,
+                      ),
                     ),
                   ),
                   const SizedBox(height: ProfessionalIslamicTheme.space8),
@@ -177,7 +211,9 @@ class _RevolutionaryAppWrapperState extends State<RevolutionaryAppWrapper> with 
                     height: 40,
                     child: CircularProgressIndicator(
                       strokeWidth: 3,
-                      valueColor: AlwaysStoppedAnimation<Color>(ProfessionalIslamicTheme.textOnIslamic),
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        ProfessionalIslamicTheme.textOnIslamic,
+                      ),
                     ),
                   ),
                 ],

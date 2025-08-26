@@ -4,16 +4,19 @@ import 'personalization_models.dart';
 import 'user_personalization_service.dart';
 
 /// Provider for UserPersonalizationService
-final userPersonalizationServiceProvider = Provider<UserPersonalizationService>((ref) {
-  return UserPersonalizationService.instance;
-});
+final userPersonalizationServiceProvider = Provider<UserPersonalizationService>(
+  (ref) {
+    return UserPersonalizationService.instance;
+  },
+);
 
 /// StateNotifier for managing personalization state
 class PersonalizationNotifier extends StateNotifier<PersonalizationState> {
   final UserPersonalizationService _service;
   final String? _userId;
 
-  PersonalizationNotifier(this._service, this._userId) : super(const PersonalizationState.initial());
+  PersonalizationNotifier(this._service, this._userId)
+    : super(const PersonalizationState.initial());
 
   /// Initialize personalization for user
   Future<void> initialize(String userId) async {
@@ -24,7 +27,9 @@ class PersonalizationNotifier extends StateNotifier<PersonalizationState> {
 
       // Load initial data
       final usagePatterns = await _service.usageAnalyzer.getPatterns(userId);
-      final culturalPreferences = await _service.culturalEngine.getPreferences(userId);
+      final culturalPreferences = await _service.culturalEngine.getPreferences(
+        userId,
+      );
 
       state = PersonalizationState.loaded(
         usagePatterns: usagePatterns,
@@ -37,7 +42,9 @@ class PersonalizationNotifier extends StateNotifier<PersonalizationState> {
   }
 
   /// Update cultural preferences
-  Future<void> updateCulturalPreferences(CulturalPreferenceUpdate update) async {
+  Future<void> updateCulturalPreferences(
+    CulturalPreferenceUpdate update,
+  ) async {
     try {
       await _service.updateCulturalPreferences(
         preferredLanguages: update.preferredLanguages,
@@ -49,7 +56,9 @@ class PersonalizationNotifier extends StateNotifier<PersonalizationState> {
 
       // Refresh state
       if (_userId != null) {
-        final updatedPrefs = await _service.culturalEngine.getPreferences(_userId);
+        final updatedPrefs = await _service.culturalEngine.getPreferences(
+          _userId,
+        );
         state = state.maybeWhen(
           loaded:
               (
@@ -85,7 +94,12 @@ class PersonalizationNotifier extends StateNotifier<PersonalizationState> {
     Map<String, dynamic>? metadata,
   }) async {
     try {
-      await _service.trackDuaInteraction(duaId: duaId, type: type, duration: duration, metadata: metadata);
+      await _service.trackDuaInteraction(
+        duaId: duaId,
+        type: type,
+        duration: duration,
+        metadata: metadata,
+      );
     } catch (error) {
       // Log error but don't change state for tracking failures
       print('Error tracking interaction: $error');
@@ -109,52 +123,67 @@ class PersonalizationNotifier extends StateNotifier<PersonalizationState> {
 }
 
 /// Provider for PersonalizationNotifier
-final personalizationNotifierProvider =
-    StateNotifierProvider.family<PersonalizationNotifier, PersonalizationState, String?>((ref, userId) {
-      final service = ref.watch(userPersonalizationServiceProvider);
-      return PersonalizationNotifier(service, userId);
-    });
+final personalizationNotifierProvider = StateNotifierProvider.family<
+  PersonalizationNotifier,
+  PersonalizationState,
+  String?
+>((ref, userId) {
+  final service = ref.watch(userPersonalizationServiceProvider);
+  return PersonalizationNotifier(service, userId);
+});
 
 /// Provider for usage patterns
-final usagePatternsProvider = FutureProvider.family<UsagePatterns, String>((ref, userId) async {
+final usagePatternsProvider = FutureProvider.family<UsagePatterns, String>((
+  ref,
+  userId,
+) async {
   final service = ref.watch(userPersonalizationServiceProvider);
   return service.usageAnalyzer.getPatterns(userId);
 });
 
 /// Provider for cultural preferences
-final culturalPreferencesProvider = FutureProvider.family<CulturalPreferences, String>((ref, userId) async {
-  final service = ref.watch(userPersonalizationServiceProvider);
-  return service.culturalEngine.getPreferences(userId);
-});
+final culturalPreferencesProvider =
+    FutureProvider.family<CulturalPreferences, String>((ref, userId) async {
+      final service = ref.watch(userPersonalizationServiceProvider);
+      return service.culturalEngine.getPreferences(userId);
+    });
 
 /// Provider for temporal patterns
-final temporalPatternsProvider = FutureProvider.family<TemporalPatterns, String>((ref, userId) async {
-  final service = ref.watch(userPersonalizationServiceProvider);
-  return service.temporalAnalyzer.analyzePatterns(userId, DateTime.now());
-});
+final temporalPatternsProvider =
+    FutureProvider.family<TemporalPatterns, String>((ref, userId) async {
+      final service = ref.watch(userPersonalizationServiceProvider);
+      return service.temporalAnalyzer.analyzePatterns(userId, DateTime.now());
+    });
 
 /// Provider for contextual suggestions
-final contextualSuggestionsProvider = FutureProvider.family<List<EnhancedRecommendation>, String>((ref, userId) async {
-  final service = ref.watch(userPersonalizationServiceProvider);
-  return service.getContextualSuggestions(limit: 10);
-});
+final contextualSuggestionsProvider =
+    FutureProvider.family<List<EnhancedRecommendation>, String>((
+      ref,
+      userId,
+    ) async {
+      final service = ref.watch(userPersonalizationServiceProvider);
+      return service.getContextualSuggestions(limit: 10);
+    });
 
 /// Provider for personalization updates stream
-final personalizationUpdatesProvider = StreamProvider.family<PersonalizationUpdate, String>((ref, userId) {
-  final service = ref.watch(userPersonalizationServiceProvider);
-  return service.updateStream;
-});
+final personalizationUpdatesProvider =
+    StreamProvider.family<PersonalizationUpdate, String>((ref, userId) {
+      final service = ref.watch(userPersonalizationServiceProvider);
+      return service.updateStream;
+    });
 
 /// Provider for recommendations stream
-final recommendationsStreamProvider = StreamProvider.family<List<EnhancedRecommendation>, String>((ref, userId) {
-  final service = ref.watch(userPersonalizationServiceProvider);
-  return service.recommendationsStream;
-});
+final recommendationsStreamProvider =
+    StreamProvider.family<List<EnhancedRecommendation>, String>((ref, userId) {
+      final service = ref.watch(userPersonalizationServiceProvider);
+      return service.recommendationsStream;
+    });
 
 /// Session context provider for maintaining session state
-final sessionContextProvider = StateNotifierProvider<SessionContextNotifier, Map<String, dynamic>>(
-  (ref) => SessionContextNotifier(),
-);
+final sessionContextProvider =
+    StateNotifierProvider<SessionContextNotifier, Map<String, dynamic>>(
+      (ref) => SessionContextNotifier(),
+    );
 
 class SessionContextNotifier extends StateNotifier<Map<String, dynamic>> {
   SessionContextNotifier() : super({});
@@ -176,14 +205,18 @@ class SessionContextNotifier extends StateNotifier<Map<String, dynamic>> {
 final currentUserIdProvider = StateProvider<String?>((ref) => null);
 
 /// Provider for privacy level settings
-final privacyLevelProvider = StateProvider<PrivacyLevel>((ref) => PrivacyLevel.balanced);
-
-/// Provider for personalization settings
-final personalizationSettingsProvider = StateNotifierProvider<PersonalizationSettingsNotifier, PersonalizationSettings>(
-  (ref) => PersonalizationSettingsNotifier(),
+final privacyLevelProvider = StateProvider<PrivacyLevel>(
+  (ref) => PrivacyLevel.balanced,
 );
 
-class PersonalizationSettingsNotifier extends StateNotifier<PersonalizationSettings> {
+/// Provider for personalization settings
+final personalizationSettingsProvider = StateNotifierProvider<
+  PersonalizationSettingsNotifier,
+  PersonalizationSettings
+>((ref) => PersonalizationSettingsNotifier());
+
+class PersonalizationSettingsNotifier
+    extends StateNotifier<PersonalizationSettings> {
   PersonalizationSettingsNotifier() : super(PersonalizationSettings.defaults());
 
   void updateSettings(PersonalizationSettings settings) {
@@ -204,13 +237,17 @@ class PersonalizationSettingsNotifier extends StateNotifier<PersonalizationSetti
 }
 
 /// Provider for Islamic calendar integration
-final islamicCalendarProvider = FutureProvider<Map<String, dynamic>>((ref) async {
+final islamicCalendarProvider = FutureProvider<Map<String, dynamic>>((
+  ref,
+) async {
   // This would integrate with the Islamic time service
   return {};
 });
 
 /// Provider for location-based personalization
-final locationPersonalizationProvider = FutureProvider<LocationContext?>((ref) async {
+final locationPersonalizationProvider = FutureProvider<LocationContext?>((
+  ref,
+) async {
   final settings = ref.watch(personalizationSettingsProvider);
 
   if (!settings.locationEnabled) {

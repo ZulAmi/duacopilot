@@ -31,12 +31,12 @@ final ragServiceProvider = Provider<RagService>((ref) {
 });
 
 /// Example of how to configure providers in main.dart:
-/// 
+///
 /// void main() async {
 ///   WidgetsFlutterBinding.ensureInitialized();
-///   
+///
 ///   final sharedPreferences = await SharedPreferences.getInstance();
-///   
+///
 ///   runApp(
 ///     ProviderScope(
 ///       overrides: [

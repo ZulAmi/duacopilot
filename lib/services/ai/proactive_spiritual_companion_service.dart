@@ -11,7 +11,8 @@ import 'conversational_memory_service.dart';
 /// Features: Spiritual reminders, growth suggestions, personalized guidance
 class ProactiveSpiritualCompanionService {
   static ProactiveSpiritualCompanionService? _instance;
-  static ProactiveSpiritualCompanionService get instance => _instance ??= ProactiveSpiritualCompanionService._();
+  static ProactiveSpiritualCompanionService get instance =>
+      _instance ??= ProactiveSpiritualCompanionService._();
 
   ProactiveSpiritualCompanionService._();
 
@@ -63,7 +64,9 @@ class ProactiveSpiritualCompanionService {
     });
 
     // Learning opportunity timer - suggest learning moments
-    _learningOpportunityTimer = Timer.periodic(const Duration(hours: 4), (timer) {
+    _learningOpportunityTimer = Timer.periodic(const Duration(hours: 4), (
+      timer,
+    ) {
       _suggestLearningOpportunity();
     });
 
@@ -82,7 +85,11 @@ class ProactiveSpiritualCompanionService {
       final checkInMessage = await _generateCheckInMessage(context);
 
       if (checkInMessage != null) {
-        await _sendProactiveMessage(title: '🤲 Spiritual Check-In', message: checkInMessage, type: 'spiritual_checkin');
+        await _sendProactiveMessage(
+          title: '🤲 Spiritual Check-In',
+          message: checkInMessage,
+          type: 'spiritual_checkin',
+        );
       }
     } catch (e) {
       AppLogger.error('Failed to perform spiritual check-in: $e');
@@ -116,7 +123,11 @@ class ProactiveSpiritualCompanionService {
       final reminder = await _generateContextualReminder();
 
       if (reminder != null) {
-        await _sendProactiveMessage(title: '🌙 Spiritual Reminder', message: reminder, type: 'spiritual_reminder');
+        await _sendProactiveMessage(
+          title: '🌙 Spiritual Reminder',
+          message: reminder,
+          type: 'spiritual_reminder',
+        );
       }
     } catch (e) {
       AppLogger.error('Failed to provide spiritual reminder: $e');
@@ -127,7 +138,9 @@ class ProactiveSpiritualCompanionService {
   Future<String?> _generateCheckInMessage(ConversationalContext context) async {
     // Analyze recent emotional patterns
     final recentEmotions = context.emotionalProgression.take(10).toList();
-    final hasNegativeEmotions = recentEmotions.any((e) => ['sadness', 'anxiety', 'distress', 'anger'].contains(e));
+    final hasNegativeEmotions = recentEmotions.any(
+      (e) => ['sadness', 'anxiety', 'distress', 'anger'].contains(e),
+    );
 
     // Generate appropriate check-in
     if (hasNegativeEmotions) {
@@ -181,7 +194,8 @@ class ProactiveSpiritualCompanionService {
   /// Identify learning opportunities
   Future<String?> _identifyLearningOpportunity() async {
     final context = await _memoryService.getConversationalContext();
-    final recentTopics = context.recentTurns.map((t) => t.topic).toSet().toList();
+    final recentTopics =
+        context.recentTurns.map((t) => t.topic).toSet().toList();
 
     // Suggest deepening knowledge in recent topics
     if (recentTopics.contains('prayer')) {
@@ -193,7 +207,8 @@ class ProactiveSpiritualCompanionService {
     }
 
     // Suggest new areas based on spiritual profile gaps
-    final learningEngagement = _spiritualProfile['learning_engagement'] as double;
+    final learningEngagement =
+        _spiritualProfile['learning_engagement'] as double;
     if (learningEngagement < 0.5) {
       return _suggestNewLearningArea();
     }
@@ -263,14 +278,22 @@ class ProactiveSpiritualCompanionService {
       (21, 0), // Evening dhikr
     ];
 
-    return specialTimes.any((time) => hour == time.$1 && (minute - time.$2).abs() <= 5);
+    return specialTimes.any(
+      (time) => hour == time.$1 && (minute - time.$2).abs() <= 5,
+    );
   }
 
   /// Send proactive message to user
-  Future<void> _sendProactiveMessage({required String title, required String message, required String type}) async {
+  Future<void> _sendProactiveMessage({
+    required String title,
+    required String message,
+    required String type,
+  }) async {
     try {
       // Check user preferences for proactive messaging
-      final allowProactive = await _secureStorage.read('allow_proactive_messages');
+      final allowProactive = await _secureStorage.read(
+        'allow_proactive_messages',
+      );
       if (allowProactive == 'false') return;
 
       // Send notification
@@ -300,11 +323,15 @@ class ProactiveSpiritualCompanionService {
       // Update learning engagement
       if (interaction.contains('question') || interaction.contains('learn')) {
         final current = _spiritualProfile['learning_engagement'] as double;
-        _spiritualProfile['learning_engagement'] = (current + 0.1).clamp(0.0, 1.0);
+        _spiritualProfile['learning_engagement'] = (current + 0.1).clamp(
+          0.0,
+          1.0,
+        );
       }
 
       // Track emotional patterns
-      final emotionalPatterns = _spiritualProfile['emotional_patterns'] as List<String>;
+      final emotionalPatterns =
+          _spiritualProfile['emotional_patterns'] as List<String>;
       emotionalPatterns.add(emotion);
       if (emotionalPatterns.length > 50) {
         emotionalPatterns.removeRange(0, emotionalPatterns.length - 50);

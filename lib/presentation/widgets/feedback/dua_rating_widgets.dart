@@ -22,10 +22,12 @@ class DuaRelevanceRatingWidget extends StatefulWidget {
   });
 
   @override
-  State<DuaRelevanceRatingWidget> createState() => _DuaRelevanceRatingWidgetState();
+  State<DuaRelevanceRatingWidget> createState() =>
+      _DuaRelevanceRatingWidgetState();
 }
 
-class _DuaRelevanceRatingWidgetState extends State<DuaRelevanceRatingWidget> with SingleTickerProviderStateMixin {
+class _DuaRelevanceRatingWidgetState extends State<DuaRelevanceRatingWidget>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _scaleAnimation;
   double _currentRating = 0.0;
@@ -37,12 +39,14 @@ class _DuaRelevanceRatingWidgetState extends State<DuaRelevanceRatingWidget> wit
     _currentRating = widget.initialRating;
     _hasRated = widget.initialRating > 0;
 
-    _animationController = AnimationController(duration: const Duration(milliseconds: 300), vsync: this);
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 300),
+      vsync: this,
+    );
 
-    _scaleAnimation = Tween<double>(
-      begin: 1.0,
-      end: 1.1,
-    ).animate(CurvedAnimation(parent: _animationController, curve: Curves.elasticOut));
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.1).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.elasticOut),
+    );
   }
 
   @override
@@ -78,10 +82,16 @@ class _DuaRelevanceRatingWidgetState extends State<DuaRelevanceRatingWidget> wit
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [theme.primaryColor.withOpacity(0.1), theme.primaryColor.withOpacity(0.05)],
+          colors: [
+            theme.primaryColor.withOpacity(0.1),
+            theme.primaryColor.withOpacity(0.05),
+          ],
         ),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: theme.primaryColor.withOpacity(0.2), width: 1),
+        border: Border.all(
+          color: theme.primaryColor.withOpacity(0.2),
+          width: 1,
+        ),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -89,7 +99,10 @@ class _DuaRelevanceRatingWidgetState extends State<DuaRelevanceRatingWidget> wit
           // Title
           Text(
             'How relevant was this Du\'a to your query?',
-            style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600, color: theme.primaryColor),
+            style: theme.textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.w600,
+              color: theme.primaryColor,
+            ),
             textAlign: TextAlign.center,
           ),
 
@@ -99,7 +112,10 @@ class _DuaRelevanceRatingWidgetState extends State<DuaRelevanceRatingWidget> wit
           AnimatedBuilder(
             animation: _scaleAnimation,
             builder:
-                (context, child) => Transform.scale(scale: _scaleAnimation.value, child: _buildRatingWidget(theme)),
+                (context, child) => Transform.scale(
+                  scale: _scaleAnimation.value,
+                  child: _buildRatingWidget(theme),
+                ),
           ),
 
           const SizedBox(height: 12),
@@ -162,10 +178,17 @@ class _DuaRelevanceRatingWidgetState extends State<DuaRelevanceRatingWidget> wit
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [theme.primaryColor, theme.primaryColor.withOpacity(0.7)],
+                colors: [
+                  theme.primaryColor,
+                  theme.primaryColor.withOpacity(0.7),
+                ],
               ),
               boxShadow: [
-                BoxShadow(color: theme.primaryColor.withOpacity(0.3), blurRadius: 8, offset: const Offset(0, 2)),
+                BoxShadow(
+                  color: theme.primaryColor.withOpacity(0.3),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
+                ),
               ],
             ),
             child: Icon(Icons.star_rounded, color: Colors.white, size: 24),
@@ -271,7 +294,12 @@ class QuickDuaRatingWidget extends StatelessWidget {
   final String? duaId;
   final bool showLabel;
 
-  const QuickDuaRatingWidget({super.key, required this.onRatingUpdate, this.duaId, this.showLabel = true});
+  const QuickDuaRatingWidget({
+    super.key,
+    required this.onRatingUpdate,
+    this.duaId,
+    this.showLabel = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -280,7 +308,10 @@ class QuickDuaRatingWidget extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (showLabel) ...[Text('Rate:', style: theme.textTheme.bodySmall), const SizedBox(width: 8)],
+        if (showLabel) ...[
+          Text('Rate:', style: theme.textTheme.bodySmall),
+          const SizedBox(width: 8),
+        ],
         RatingBar.builder(
           initialRating: 0,
           minRating: 1,
@@ -288,7 +319,8 @@ class QuickDuaRatingWidget extends StatelessWidget {
           allowHalfRating: false,
           itemCount: 5,
           itemSize: 20,
-          itemBuilder: (context, _) => Icon(Icons.star, color: theme.primaryColor),
+          itemBuilder:
+              (context, _) => Icon(Icons.star, color: theme.primaryColor),
           onRatingUpdate: (rating) {
             HapticFeedback.selectionClick();
             onRatingUpdate(rating);
@@ -306,20 +338,31 @@ class AnimatedRatingDisplayWidget extends StatefulWidget {
   final int totalRatings;
   final String? contentId;
 
-  const AnimatedRatingDisplayWidget({super.key, required this.rating, required this.totalRatings, this.contentId});
+  const AnimatedRatingDisplayWidget({
+    super.key,
+    required this.rating,
+    required this.totalRatings,
+    this.contentId,
+  });
 
   @override
-  State<AnimatedRatingDisplayWidget> createState() => _AnimatedRatingDisplayWidgetState();
+  State<AnimatedRatingDisplayWidget> createState() =>
+      _AnimatedRatingDisplayWidgetState();
 }
 
-class _AnimatedRatingDisplayWidgetState extends State<AnimatedRatingDisplayWidget> with SingleTickerProviderStateMixin {
+class _AnimatedRatingDisplayWidgetState
+    extends State<AnimatedRatingDisplayWidget>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _ratingAnimation;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(duration: const Duration(milliseconds: 1500), vsync: this);
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 1500),
+      vsync: this,
+    );
 
     _ratingAnimation = Tween<double>(
       begin: 0.0,
@@ -342,7 +385,9 @@ class _AnimatedRatingDisplayWidgetState extends State<AnimatedRatingDisplayWidge
       _ratingAnimation = Tween<double>(
         begin: oldWidget.rating,
         end: widget.rating,
-      ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic));
+      ).animate(
+        CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic),
+      );
       _controller.reset();
       _controller.forward();
     }
@@ -360,7 +405,8 @@ class _AnimatedRatingDisplayWidgetState extends State<AnimatedRatingDisplayWidge
           children: [
             RatingBarIndicator(
               rating: _ratingAnimation.value,
-              itemBuilder: (context, _) => Icon(Icons.star, color: theme.primaryColor),
+              itemBuilder:
+                  (context, _) => Icon(Icons.star, color: theme.primaryColor),
               itemCount: 5,
               itemSize: 16,
               unratedColor: theme.primaryColor.withOpacity(0.3),
@@ -368,7 +414,9 @@ class _AnimatedRatingDisplayWidgetState extends State<AnimatedRatingDisplayWidge
             const SizedBox(width: 8),
             Text(
               '${_ratingAnimation.value.toStringAsFixed(1)} (${widget.totalRatings})',
-              style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurface.withOpacity(0.7)),
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: theme.colorScheme.onSurface.withOpacity(0.7),
+              ),
             ),
           ],
         );

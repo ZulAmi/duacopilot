@@ -23,9 +23,17 @@ void main() {
 
   // Test configuration constants
   const Duration maxResponseTime = Duration(seconds: 5);
-  const List<String> sampleArabicQueries = ['بسم الله الرحمن الرحيم', 'الحمد لله رب العالمين', 'صلاة الصباح'];
+  const List<String> sampleArabicQueries = [
+    'بسم الله الرحمن الرحيم',
+    'الحمد لله رب العالمين',
+    'صلاة الصباح',
+  ];
 
-  const List<String> mixedLanguageQueries = ['morning prayer صباح', 'guidance الهداية', 'forgiveness استغفار'];
+  const List<String> mixedLanguageQueries = [
+    'morning prayer صباح',
+    'guidance الهداية',
+    'forgiveness استغفار',
+  ];
 
   // Mock data generators for integration tests
   List<Map<String, dynamic>> createMockDuaResponses() {
@@ -80,7 +88,9 @@ void main() {
 
   group('RAG Integration Tests - Complete Workflows', () {
     group('🚀 App Initialization Tests', () {
-      testWidgets('App should initialize and load main screen', (WidgetTester tester) async {
+      testWidgets('App should initialize and load main screen', (
+        WidgetTester tester,
+      ) async {
         app.main();
         await tester.pumpAndSettle(Duration(seconds: 3));
 
@@ -94,7 +104,9 @@ void main() {
         print('✅ App initialization completed successfully');
       });
 
-      testWidgets('Theme and branding should be applied', (WidgetTester tester) async {
+      testWidgets('Theme and branding should be applied', (
+        WidgetTester tester,
+      ) async {
         app.main();
         await tester.pumpAndSettle(Duration(seconds: 2));
 
@@ -109,7 +121,9 @@ void main() {
     });
 
     group('🔍 Search Workflow Integration Tests', () {
-      testWidgets('Complete English search workflow', (WidgetTester tester) async {
+      testWidgets('Complete English search workflow', (
+        WidgetTester tester,
+      ) async {
         app.main();
         await tester.pumpAndSettle(Duration(seconds: 3));
 
@@ -147,7 +161,9 @@ void main() {
         }
       });
 
-      testWidgets('Complete Arabic search workflow', (WidgetTester tester) async {
+      testWidgets('Complete Arabic search workflow', (
+        WidgetTester tester,
+      ) async {
         app.main();
         await tester.pumpAndSettle(Duration(seconds: 3));
 
@@ -178,7 +194,9 @@ void main() {
         }
       });
 
-      testWidgets('Mixed language search workflow', (WidgetTester tester) async {
+      testWidgets('Mixed language search workflow', (
+        WidgetTester tester,
+      ) async {
         app.main();
         await tester.pumpAndSettle(Duration(seconds: 3));
 
@@ -233,7 +251,9 @@ void main() {
         print('✅ Portrait orientation workflow completed');
       });
 
-      testWidgets('Landscape orientation workflow', (WidgetTester tester) async {
+      testWidgets('Landscape orientation workflow', (
+        WidgetTester tester,
+      ) async {
         // Set landscape orientation
         await tester.binding.setSurfaceSize(Size(896, 414));
 
@@ -256,7 +276,9 @@ void main() {
         await tester.binding.setSurfaceSize(null);
       });
 
-      testWidgets('Multi-screen size responsiveness', (WidgetTester tester) async {
+      testWidgets('Multi-screen size responsiveness', (
+        WidgetTester tester,
+      ) async {
         final testSizes = [
           Size(360, 640), // Small phone
           Size(768, 1024), // Tablet
@@ -279,7 +301,9 @@ void main() {
     });
 
     group('🎯 User Interaction Integration Tests', () {
-      testWidgets('Favorite functionality workflow', (WidgetTester tester) async {
+      testWidgets('Favorite functionality workflow', (
+        WidgetTester tester,
+      ) async {
         app.main();
         await tester.pumpAndSettle(Duration(seconds: 3));
 
@@ -337,7 +361,9 @@ void main() {
         print('✅ Navigation workflow completed');
       });
 
-      testWidgets('Voice search workflow (UI only)', (WidgetTester tester) async {
+      testWidgets('Voice search workflow (UI only)', (
+        WidgetTester tester,
+      ) async {
         app.main();
         await tester.pumpAndSettle(Duration(seconds: 3));
 
@@ -411,7 +437,9 @@ void main() {
         expect(find.byType(MaterialApp), findsOneWidget);
       });
 
-      testWidgets('Memory stability during extended use', (WidgetTester tester) async {
+      testWidgets('Memory stability during extended use', (
+        WidgetTester tester,
+      ) async {
         app.main();
         await tester.pumpAndSettle(Duration(seconds: 3));
 
@@ -531,7 +559,9 @@ void main() {
     });
 
     group('🌍 Accessibility Integration Tests', () {
-      testWidgets('Screen reader navigation workflow', (WidgetTester tester) async {
+      testWidgets('Screen reader navigation workflow', (
+        WidgetTester tester,
+      ) async {
         app.main();
         await tester.pumpAndSettle(Duration(seconds: 3));
 
@@ -548,7 +578,8 @@ void main() {
         }
 
         // Test semantic navigation
-        final semanticsNodes = binding.pipelineOwner.semanticsOwner!.rootSemanticsNode;
+        final semanticsNodes =
+            binding.pipelineOwner.semanticsOwner!.rootSemanticsNode;
         expect(semanticsNodes, isNotNull);
 
         print('✅ Semantics tree available for screen readers');
@@ -558,7 +589,8 @@ void main() {
         if (textFields.hasFound) {
           final textFieldWidget = tester.widget<TextField>(textFields.first);
           final decoration = textFieldWidget.decoration;
-          if (decoration?.hintText?.isNotEmpty == true || decoration?.labelText?.isNotEmpty == true) {
+          if (decoration?.hintText?.isNotEmpty == true ||
+              decoration?.labelText?.isNotEmpty == true) {
             print('✅ Text fields have semantic labels');
           }
         }
@@ -571,7 +603,10 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF2E7D32), brightness: Brightness.light).copyWith(
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: Color(0xFF2E7D32),
+                brightness: Brightness.light,
+              ).copyWith(
                 surface: Colors.white,
                 onSurface: Colors.black,
                 primary: Color(0xFF2E7D32),
@@ -603,7 +638,11 @@ void main() {
         final iconButtons = find.byType(IconButton);
         final fabs = find.byType(FloatingActionButton);
 
-        final allInteractiveElements = [...buttons.evaluate(), ...iconButtons.evaluate(), ...fabs.evaluate()];
+        final allInteractiveElements = [
+          ...buttons.evaluate(),
+          ...iconButtons.evaluate(),
+          ...fabs.evaluate(),
+        ];
 
         for (final element in allInteractiveElements.take(5)) {
           final renderBox = element.renderObject as RenderBox?;
@@ -612,12 +651,14 @@ void main() {
             expect(
               size.width,
               greaterThanOrEqualTo(44.0 - 4), // Allow small tolerance
-              reason: 'Interactive element too small: ${element.widget.runtimeType}',
+              reason:
+                  'Interactive element too small: ${element.widget.runtimeType}',
             );
             expect(
               size.height,
               greaterThanOrEqualTo(44.0 - 4),
-              reason: 'Interactive element too small: ${element.widget.runtimeType}',
+              reason:
+                  'Interactive element too small: ${element.widget.runtimeType}',
             );
           }
         }
@@ -627,7 +668,9 @@ void main() {
     });
 
     group('🔄 Data Flow Integration Tests', () {
-      testWidgets('Complete search-to-display workflow', (WidgetTester tester) async {
+      testWidgets('Complete search-to-display workflow', (
+        WidgetTester tester,
+      ) async {
         app.main();
         await tester.pumpAndSettle(Duration(seconds: 3));
 
@@ -658,7 +701,9 @@ void main() {
           if (cards.hasFound || listTiles.hasFound || containers.hasFound) {
             print('✅ Step 3: Results displayed');
           } else {
-            print('ℹ️ Step 3: No specific result widgets found, but app stable');
+            print(
+              'ℹ️ Step 3: No specific result widgets found, but app stable',
+            );
           }
         }
 
@@ -689,7 +734,8 @@ void main() {
           }
 
           // Check if text is still there (depends on implementation)
-          final currentText = tester.widget<TextField>(searchFields.first).controller?.text;
+          final currentText =
+              tester.widget<TextField>(searchFields.first).controller?.text;
           if (currentText != null) {
             print('✅ Text field state: $currentText');
           }
@@ -726,29 +772,43 @@ void main() {
         expect(response['query']?.isNotEmpty, isTrue);
         expect(response['response']?.isNotEmpty, isTrue);
         expect(response['responseTime'], greaterThan(0));
-        expect(response['responseTime'], lessThan(maxResponseTime.inMilliseconds));
+        expect(
+          response['responseTime'],
+          lessThan(maxResponseTime.inMilliseconds),
+        );
       }
 
       print('✅ Mock RAG responses validated: ${mockRagResponses.length} items');
     });
 
-    testWidgets('Arabic content validation in mocks', (WidgetTester tester) async {
+    testWidgets('Arabic content validation in mocks', (
+      WidgetTester tester,
+    ) async {
       final mockResponses = createMockDuaResponses();
       final arabicRegex = RegExp(r'[\u0600-\u06FF]');
 
       bool hasArabicContent = false;
       for (final response in mockResponses) {
-        if (arabicRegex.hasMatch(response['response'] ?? '') || arabicRegex.hasMatch(response['query'] ?? '')) {
+        if (arabicRegex.hasMatch(response['response'] ?? '') ||
+            arabicRegex.hasMatch(response['query'] ?? '')) {
           hasArabicContent = true;
           break;
         }
       }
-      expect(hasArabicContent, isTrue, reason: 'Mock data should contain Arabic content');
+      expect(
+        hasArabicContent,
+        isTrue,
+        reason: 'Mock data should contain Arabic content',
+      );
       print('✅ Arabic content found in mock responses');
 
       // Test Arabic queries from config
       for (final query in sampleArabicQueries.take(3)) {
-        expect(arabicRegex.hasMatch(query), isTrue, reason: 'Arabic query should contain Arabic text: $query');
+        expect(
+          arabicRegex.hasMatch(query),
+          isTrue,
+          reason: 'Arabic query should contain Arabic text: $query',
+        );
       }
 
       print('✅ Arabic test queries validated');

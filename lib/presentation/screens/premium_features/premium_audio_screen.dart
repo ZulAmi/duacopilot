@@ -15,7 +15,8 @@ class PremiumAudioScreen extends ConsumerStatefulWidget {
   ConsumerState<PremiumAudioScreen> createState() => _PremiumAudioScreenState();
 }
 
-class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen> with TickerProviderStateMixin {
+class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen>
+    with TickerProviderStateMixin {
   late TabController _tabController;
   final PremiumAudioService _audioService = PremiumAudioService.instance;
 
@@ -83,7 +84,8 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen> with Ti
     return Scaffold(
       appBar: _buildAppBar(),
       body: _isLoading ? _buildLoading() : _buildContent(),
-      bottomNavigationBar: _currentRecitation != null ? _buildMiniPlayer() : null,
+      bottomNavigationBar:
+          _currentRecitation != null ? _buildMiniPlayer() : null,
     );
   }
 
@@ -103,7 +105,11 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen> with Ti
       foregroundColor: Colors.white,
       elevation: 0,
       actions: [
-        IconButton(icon: const Icon(Icons.bedtime), onPressed: _showSleepTimerDialog, tooltip: 'Sleep Timer'),
+        IconButton(
+          icon: const Icon(Icons.bedtime),
+          onPressed: _showSleepTimerDialog,
+          tooltip: 'Sleep Timer',
+        ),
         IconButton(
           icon: const Icon(Icons.download),
           onPressed: () => _showDownloadManager(),
@@ -130,7 +136,11 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen> with Ti
     return const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [CircularProgressIndicator(), SizedBox(height: 16), Text('Loading Premium Audio Content...')],
+        children: [
+          CircularProgressIndicator(),
+          SizedBox(height: 16),
+          Text('Loading Premium Audio Content...'),
+        ],
       ),
     );
   }
@@ -147,7 +157,12 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen> with Ti
       ),
       child: TabBarView(
         controller: _tabController,
-        children: [_buildQarisTab(), _buildRecitationsTab(), _buildPlaylistsTab(), _buildDownloadsTab()],
+        children: [
+          _buildQarisTab(),
+          _buildRecitationsTab(),
+          _buildPlaylistsTab(),
+          _buildDownloadsTab(),
+        ],
       ),
     );
   }
@@ -180,7 +195,10 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen> with Ti
               // Qari Avatar
               Hero(
                 tag: 'qari_${qari.id}',
-                child: CircleAvatar(radius: 40, backgroundImage: NetworkImage(qari.profileImageUrl)),
+                child: CircleAvatar(
+                  radius: 40,
+                  backgroundImage: NetworkImage(qari.profileImageUrl),
+                ),
               ),
               const SizedBox(width: 16),
 
@@ -192,9 +210,20 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen> with Ti
                     Row(
                       children: [
                         Expanded(
-                          child: Text(qari.name, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                          child: Text(
+                            qari.name,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
-                        if (qari.isVerified) const Icon(Icons.verified, color: Colors.blue, size: 20),
+                        if (qari.isVerified)
+                          const Icon(
+                            Icons.verified,
+                            color: Colors.blue,
+                            size: 20,
+                          ),
                       ],
                     ),
                     const SizedBox(height: 4),
@@ -213,7 +242,11 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen> with Ti
                         const SizedBox(width: 4),
                         Text(qari.rating.toStringAsFixed(1)),
                         const SizedBox(width: 16),
-                        Icon(Icons.audiotrack, color: Colors.grey[600], size: 16),
+                        Icon(
+                          Icons.audiotrack,
+                          color: Colors.grey[600],
+                          size: 16,
+                        ),
                         const SizedBox(width: 4),
                         Text('${qari.totalRecitations} Recitations'),
                       ],
@@ -250,7 +283,8 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen> with Ti
 
   /// Build recitation tile
   Widget _buildRecitationTile(PremiumRecitation recitation) {
-    final isCurrentlyPlaying = _currentRecitation?.id == recitation.id && _isPlaying;
+    final isCurrentlyPlaying =
+        _currentRecitation?.id == recitation.id && _isPlaying;
 
     return Card(
       margin: const EdgeInsets.only(bottom: 8),
@@ -352,9 +386,15 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen> with Ti
                 height: 60,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  gradient: const LinearGradient(colors: [Color(0xFF667eea), Color(0xFF764ba2)]),
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFF667eea), Color(0xFF764ba2)],
+                  ),
                 ),
-                child: const Icon(Icons.queue_music, color: Colors.white, size: 30),
+                child: const Icon(
+                  Icons.queue_music,
+                  color: Colors.white,
+                  size: 30,
+                ),
               ),
               const SizedBox(width: 16),
 
@@ -363,9 +403,18 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen> with Ti
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(playlist.name, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                    Text(
+                      playlist.name,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     const SizedBox(height: 4),
-                    Text('${playlist.recitationIds.length} recitations', style: TextStyle(color: Colors.grey[600])),
+                    Text(
+                      '${playlist.recitationIds.length} recitations',
+                      style: TextStyle(color: Colors.grey[600]),
+                    ),
                     const SizedBox(height: 4),
                     Text(
                       playlist.description,
@@ -382,10 +431,16 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen> with Ti
                 onSelected: (value) => _handlePlaylistAction(value, playlist),
                 itemBuilder:
                     (context) => [
-                      const PopupMenuItem(value: 'play', child: Text('Play All')),
+                      const PopupMenuItem(
+                        value: 'play',
+                        child: Text('Play All'),
+                      ),
                       const PopupMenuItem(value: 'edit', child: Text('Edit')),
                       const PopupMenuItem(value: 'share', child: Text('Share')),
-                      const PopupMenuItem(value: 'delete', child: Text('Delete')),
+                      const PopupMenuItem(
+                        value: 'delete',
+                        child: Text('Delete'),
+                      ),
                     ],
               ),
             ],
@@ -403,9 +458,15 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen> with Ti
         children: [
           Icon(Icons.download_done, size: 80, color: Colors.grey),
           SizedBox(height: 16),
-          Text('Downloaded Recitations', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          Text(
+            'Downloaded Recitations',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
           SizedBox(height: 8),
-          Text('Your offline recitations will appear here', style: TextStyle(color: Colors.grey)),
+          Text(
+            'Your offline recitations will appear here',
+            style: TextStyle(color: Colors.grey),
+          ),
         ],
       ),
     );
@@ -417,7 +478,13 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen> with Ti
       height: 80,
       decoration: BoxDecoration(
         color: Colors.white,
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 10, offset: const Offset(0, -5))],
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0, -5),
+          ),
+        ],
       ),
       child: Column(
         children: [
@@ -425,7 +492,8 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen> with Ti
           LinearProgressIndicator(
             value:
                 _totalDuration.inMilliseconds > 0
-                    ? _currentPosition.inMilliseconds / _totalDuration.inMilliseconds
+                    ? _currentPosition.inMilliseconds /
+                        _totalDuration.inMilliseconds
                     : 0.0,
             backgroundColor: Colors.grey[300],
             valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF667eea)),
@@ -450,8 +518,13 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen> with Ti
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                          _currentRecitation != null ? _getQariName(_currentRecitation!.qariId) : '',
-                          style: TextStyle(color: Colors.grey[600], fontSize: 12),
+                          _currentRecitation != null
+                              ? _getQariName(_currentRecitation!.qariId)
+                              : '',
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                            fontSize: 12,
+                          ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -460,13 +533,19 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen> with Ti
                   ),
 
                   // Control buttons
-                  IconButton(onPressed: _previousTrack, icon: const Icon(Icons.skip_previous)),
+                  IconButton(
+                    onPressed: _previousTrack,
+                    icon: const Icon(Icons.skip_previous),
+                  ),
                   IconButton(
                     onPressed: _togglePlayPause,
                     icon: Icon(_isPlaying ? Icons.pause : Icons.play_arrow),
                     iconSize: 32,
                   ),
-                  IconButton(onPressed: _nextTrack, icon: const Icon(Icons.skip_next)),
+                  IconButton(
+                    onPressed: _nextTrack,
+                    icon: const Icon(Icons.skip_next),
+                  ),
 
                   // Time display
                   Text(
@@ -547,7 +626,10 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen> with Ti
             width: 40,
             height: 4,
             margin: const EdgeInsets.symmetric(vertical: 12),
-            decoration: BoxDecoration(color: Colors.grey[300], borderRadius: BorderRadius.circular(2)),
+            decoration: BoxDecoration(
+              color: Colors.grey[300],
+              borderRadius: BorderRadius.circular(2),
+            ),
           ),
 
           // Qari header
@@ -557,15 +639,30 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen> with Ti
               children: [
                 Hero(
                   tag: 'qari_${qari.id}',
-                  child: CircleAvatar(radius: 50, backgroundImage: NetworkImage(qari.profileImageUrl)),
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundImage: NetworkImage(qari.profileImageUrl),
+                  ),
                 ),
                 const SizedBox(width: 20),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(qari.name, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-                      Text(qari.arabicName, style: const TextStyle(fontSize: 18, color: Colors.grey)),
+                      Text(
+                        qari.name,
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        qari.arabicName,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: Colors.grey,
+                        ),
+                      ),
                       const SizedBox(height: 8),
                       Row(
                         children: [
@@ -574,7 +671,11 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen> with Ti
                           Text(qari.rating.toStringAsFixed(1)),
                           const SizedBox(width: 16),
                           if (qari.isVerified) ...[
-                            const Icon(Icons.verified, color: Colors.blue, size: 20),
+                            const Icon(
+                              Icons.verified,
+                              color: Colors.blue,
+                              size: 20,
+                            ),
                             const SizedBox(width: 4),
                             const Text('Verified'),
                           ],
@@ -594,7 +695,10 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen> with Ti
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Biography', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const Text(
+                    'Biography',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
                   const SizedBox(height: 8),
                   Text(qari.bioEnglish),
                 ],
@@ -636,7 +740,10 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen> with Ti
   }
 
   void _showSleepTimerDialog() {
-    showDialog(context: context, builder: (context) => _buildSleepTimerDialog());
+    showDialog(
+      context: context,
+      builder: (context) => _buildSleepTimerDialog(),
+    );
   }
 
   Widget _buildSleepTimerDialog() {
@@ -660,8 +767,15 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen> with Ti
         ],
       ),
       actions: [
-        TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-        if (_sleepTimer != null) TextButton(onPressed: _cancelSleepTimer, child: const Text('Stop Timer')),
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text('Cancel'),
+        ),
+        if (_sleepTimer != null)
+          TextButton(
+            onPressed: _cancelSleepTimer,
+            child: const Text('Stop Timer'),
+          ),
       ],
     );
   }
@@ -682,7 +796,11 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen> with Ti
 
   void _setSleepTimer(int minutes) {
     setState(() {
-      _sleepTimer = SleepTimerConfig(duration: Duration(minutes: minutes), isActive: true, startTime: DateTime.now());
+      _sleepTimer = SleepTimerConfig(
+        duration: Duration(minutes: minutes),
+        isActive: true,
+        startTime: DateTime.now(),
+      );
     });
 
     // Start countdown timer
@@ -690,14 +808,18 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen> with Ti
       _stopPlaybackAndDisableTimer();
     });
 
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Sleep timer set for $minutes minutes')));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Sleep timer set for $minutes minutes')),
+    );
   }
 
   void _cancelSleepTimer() {
     setState(() => _sleepTimer = null);
     _sleepCountdownTimer?.cancel();
     Navigator.pop(context);
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Sleep timer cancelled')));
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Sleep timer cancelled')));
   }
 
   void _stopPlaybackAndDisableTimer() {
@@ -740,7 +862,9 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen> with Ti
 
   void _downloadRecitation(PremiumRecitation recitation) {
     // Implement download functionality
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Downloading ${recitation.title}...')));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Downloading ${recitation.title}...')),
+    );
   }
 
   void _addToPlaylist(PremiumRecitation recitation) {
@@ -767,7 +891,10 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen> with Ti
               'Upgrade now to access world-class Quranic recitations from famous Qaris.',
             ),
             actions: [
-              TextButton(onPressed: () => Navigator.pop(context), child: const Text('Later')),
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Later'),
+              ),
               ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);

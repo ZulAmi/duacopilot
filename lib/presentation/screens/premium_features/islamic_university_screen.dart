@@ -10,12 +10,16 @@ class IslamicUniversityScreen extends ConsumerStatefulWidget {
   const IslamicUniversityScreen({super.key});
 
   @override
-  ConsumerState<IslamicUniversityScreen> createState() => _IslamicUniversityScreenState();
+  ConsumerState<IslamicUniversityScreen> createState() =>
+      _IslamicUniversityScreenState();
 }
 
-class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScreen> with TickerProviderStateMixin {
+class _IslamicUniversityScreenState
+    extends ConsumerState<IslamicUniversityScreen>
+    with TickerProviderStateMixin {
   late TabController _tabController;
-  final IslamicUniversityService _universityService = IslamicUniversityService.instance;
+  final IslamicUniversityService _universityService =
+      IslamicUniversityService.instance;
 
   // Data state
   bool _isLoading = false;
@@ -90,8 +94,16 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
       foregroundColor: Colors.white,
       elevation: 0,
       actions: [
-        IconButton(icon: const Icon(Icons.analytics), onPressed: _showLearningAnalytics, tooltip: 'Learning Analytics'),
-        IconButton(icon: const Icon(Icons.workspace_premium), onPressed: _showCertificates, tooltip: 'My Certificates'),
+        IconButton(
+          icon: const Icon(Icons.analytics),
+          onPressed: _showLearningAnalytics,
+          tooltip: 'Learning Analytics',
+        ),
+        IconButton(
+          icon: const Icon(Icons.workspace_premium),
+          onPressed: _showCertificates,
+          tooltip: 'My Certificates',
+        ),
       ],
       bottom: TabBar(
         controller: _tabController,
@@ -115,7 +127,11 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
     return const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [CircularProgressIndicator(), SizedBox(height: 16), Text('Loading Islamic University...')],
+        children: [
+          CircularProgressIndicator(),
+          SizedBox(height: 16),
+          Text('Loading Islamic University...'),
+        ],
       ),
     );
   }
@@ -152,7 +168,10 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
         children: [
           _buildWelcomeHeader(),
           const SizedBox(height: 24),
-          if (_userCurriculum != null) ...[_buildPersonalizedCurriculum(_userCurriculum!), const SizedBox(height: 24)],
+          if (_userCurriculum != null) ...[
+            _buildPersonalizedCurriculum(_userCurriculum!),
+            const SizedBox(height: 24),
+          ],
           _buildLearningProgress(),
           const SizedBox(height: 24),
           _buildRecommendedCourses(),
@@ -170,7 +189,10 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [const Color(0xFFf093fb).withOpacity(0.1), const Color(0xFFf5576c).withOpacity(0.1)],
+          colors: [
+            const Color(0xFFf093fb).withOpacity(0.1),
+            const Color(0xFFf5576c).withOpacity(0.1),
+          ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -192,11 +214,16 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
                       'Welcome to Islamic University',
                       style: Theme.of(
                         context,
-                      ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold, color: const Color(0xFFf093fb)),
+                      ).textTheme.headlineSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: const Color(0xFFf093fb),
+                      ),
                     ),
                     Text(
                       'Learn from world-renowned Islamic scholars',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
                     ),
                   ],
                 ),
@@ -207,11 +234,20 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
           if (_analytics != null) ...[
             Row(
               children: [
-                _buildStatCard('Courses Completed', _analytics!.completedCourses.toString()),
+                _buildStatCard(
+                  'Courses Completed',
+                  _analytics!.completedCourses.toString(),
+                ),
                 const SizedBox(width: 16),
-                _buildStatCard('Study Hours', '${_analytics!.totalStudyTime ~/ 60}h'),
+                _buildStatCard(
+                  'Study Hours',
+                  '${_analytics!.totalStudyTime ~/ 60}h',
+                ),
                 const SizedBox(width: 16),
-                _buildStatCard('Certificates', _analytics!.certificatesEarned.toString()),
+                _buildStatCard(
+                  'Certificates',
+                  _analytics!.certificatesEarned.toString(),
+                ),
               ],
             ),
           ],
@@ -232,9 +268,20 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
         ),
         child: Column(
           children: [
-            Text(value, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFFf093fb))),
+            Text(
+              value,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFf093fb),
+              ),
+            ),
             const SizedBox(height: 4),
-            Text(label, style: TextStyle(fontSize: 12, color: Colors.grey[600]), textAlign: TextAlign.center),
+            Text(
+              label,
+              style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+              textAlign: TextAlign.center,
+            ),
           ],
         ),
       ),
@@ -255,10 +302,15 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
                 const SizedBox(width: 8),
                 Text(
                   'My Learning Journey',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
                 ),
                 const Spacer(),
-                TextButton(onPressed: _editCurriculum, child: const Text('Edit')),
+                TextButton(
+                  onPressed: _editCurriculum,
+                  child: const Text('Edit'),
+                ),
               ],
             ),
             const SizedBox(height: 12),
@@ -276,7 +328,9 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
             LinearProgressIndicator(
               value: _calculateCurriculumProgress(curriculum),
               backgroundColor: Colors.grey[300],
-              valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFFf093fb)),
+              valueColor: const AlwaysStoppedAnimation<Color>(
+                Color(0xFFf093fb),
+              ),
             ),
             const SizedBox(height: 8),
             Text(
@@ -299,14 +353,20 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
           children: [
             Text(
               'Learning Progress',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+              style: Theme.of(
+                context,
+              ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
             _buildProgressItem('Arabic Foundations', 0.75, 'Continue Learning'),
             const SizedBox(height: 8),
             _buildProgressItem('Islamic Creed', 0.45, 'Resume Course'),
             const SizedBox(height: 8),
-            _buildProgressItem('Spiritual Development', 0.90, 'Nearly Complete'),
+            _buildProgressItem(
+              'Spiritual Development',
+              0.90,
+              'Nearly Complete',
+            ),
           ],
         ),
       ),
@@ -322,7 +382,10 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(title, style: const TextStyle(fontWeight: FontWeight.w500)),
-            Text('${(progress * 100).toInt()}%', style: TextStyle(color: Colors.grey[600], fontSize: 12)),
+            Text(
+              '${(progress * 100).toInt()}%',
+              style: TextStyle(color: Colors.grey[600], fontSize: 12),
+            ),
           ],
         ),
         const SizedBox(height: 8),
@@ -334,7 +397,10 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
         const SizedBox(height: 4),
         Align(
           alignment: Alignment.centerRight,
-          child: TextButton(onPressed: () => _continueLearning(title), child: Text(action)),
+          child: TextButton(
+            onPressed: () => _continueLearning(title),
+            child: Text(action),
+          ),
         ),
       ],
     );
@@ -347,7 +413,9 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
       children: [
         Text(
           'Recommended Courses',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 12),
         SizedBox(
@@ -383,12 +451,21 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
                 child: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                    borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(12),
+                    ),
                     gradient: LinearGradient(
-                      colors: [const Color(0xFFf093fb).withOpacity(0.8), const Color(0xFFf5576c)],
+                      colors: [
+                        const Color(0xFFf093fb).withOpacity(0.8),
+                        const Color(0xFFf5576c),
+                      ],
                     ),
                   ),
-                  child: const Icon(Icons.play_lesson, color: Colors.white, size: 40),
+                  child: const Icon(
+                    Icons.play_lesson,
+                    color: Colors.white,
+                    size: 40,
+                  ),
                 ),
               ),
 
@@ -418,9 +495,18 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
                         children: [
                           Icon(Icons.star, color: Colors.amber, size: 12),
                           const SizedBox(width: 2),
-                          Text(course.rating.toString(), style: const TextStyle(fontSize: 12)),
+                          Text(
+                            course.rating.toString(),
+                            style: const TextStyle(fontSize: 12),
+                          ),
                           const Spacer(),
-                          Text('${course.duration ~/ 60}h', style: TextStyle(color: Colors.grey[600], fontSize: 12)),
+                          Text(
+                            '${course.duration ~/ 60}h',
+                            style: TextStyle(
+                              color: Colors.grey[600],
+                              fontSize: 12,
+                            ),
+                          ),
                         ],
                       ),
                     ],
@@ -441,7 +527,9 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
       children: [
         Text(
           'Upcoming Live Sessions',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 12),
         _buildSessionCard(
@@ -460,7 +548,11 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
   }
 
   /// Build session card
-  Widget _buildSessionCard({required String title, required String time, required String topic}) {
+  Widget _buildSessionCard({
+    required String title,
+    required String time,
+    required String topic,
+  }) {
     return Card(
       child: ListTile(
         leading: const CircleAvatar(
@@ -470,11 +562,20 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
         title: Text(title),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [Text(time), Text(topic, style: TextStyle(color: Colors.grey[600], fontSize: 12))],
+          children: [
+            Text(time),
+            Text(
+              topic,
+              style: TextStyle(color: Colors.grey[600], fontSize: 12),
+            ),
+          ],
         ),
         trailing: ElevatedButton(
           onPressed: () => _joinSession(title),
-          style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFf093fb), foregroundColor: Colors.white),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFFf093fb),
+            foregroundColor: Colors.white,
+          ),
           child: const Text('Join'),
         ),
       ),
@@ -506,8 +607,14 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
             children: [
               CircleAvatar(
                 radius: 30,
-                backgroundImage: scholar.profileImageUrl.isNotEmpty ? NetworkImage(scholar.profileImageUrl) : null,
-                child: scholar.profileImageUrl.isEmpty ? Text(scholar.name[0]) : null,
+                backgroundImage:
+                    scholar.profileImageUrl.isNotEmpty
+                        ? NetworkImage(scholar.profileImageUrl)
+                        : null,
+                child:
+                    scholar.profileImageUrl.isEmpty
+                        ? Text(scholar.name[0])
+                        : null,
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -517,30 +624,56 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
                     Row(
                       children: [
                         Expanded(
-                          child: Text(scholar.name, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                          child: Text(
+                            scholar.name,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
-                        if (scholar.isVerified) const Icon(Icons.verified, color: Colors.blue, size: 18),
+                        if (scholar.isVerified)
+                          const Icon(
+                            Icons.verified,
+                            color: Colors.blue,
+                            size: 18,
+                          ),
                       ],
                     ),
-                    Text(scholar.arabicName, style: const TextStyle(fontSize: 14, color: Colors.grey)),
+                    Text(
+                      scholar.arabicName,
+                      style: const TextStyle(fontSize: 14, color: Colors.grey),
+                    ),
                     const SizedBox(height: 4),
-                    Text(scholar.specialization, style: TextStyle(color: Colors.grey[600], fontSize: 12)),
+                    Text(
+                      scholar.specialization,
+                      style: TextStyle(color: Colors.grey[600], fontSize: 12),
+                    ),
                     const SizedBox(height: 8),
                     Row(
                       children: [
                         Icon(Icons.star, color: Colors.amber, size: 14),
                         const SizedBox(width: 4),
-                        Text(scholar.rating.toString(), style: const TextStyle(fontSize: 12)),
+                        Text(
+                          scholar.rating.toString(),
+                          style: const TextStyle(fontSize: 12),
+                        ),
                         const SizedBox(width: 16),
                         Icon(Icons.people, color: Colors.grey[600], size: 14),
                         const SizedBox(width: 4),
-                        Text('${scholar.totalStudents} students', style: const TextStyle(fontSize: 12)),
+                        Text(
+                          '${scholar.totalStudents} students',
+                          style: const TextStyle(fontSize: 12),
+                        ),
                       ],
                     ),
                   ],
                 ),
               ),
-              IconButton(onPressed: () => _viewScholarCourses(scholar), icon: const Icon(Icons.arrow_forward_ios)),
+              IconButton(
+                onPressed: () => _viewScholarCourses(scholar),
+                icon: const Icon(Icons.arrow_forward_ios),
+              ),
             ],
           ),
         ),
@@ -580,10 +713,16 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
               child: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(12),
+                  ),
                   gradient: _getCategoryGradient(course.category),
                 ),
-                child: const Icon(Icons.play_lesson, color: Colors.white, size: 40),
+                child: const Icon(
+                  Icons.play_lesson,
+                  color: Colors.white,
+                  size: 40,
+                ),
               ),
             ),
             Expanded(
@@ -611,17 +750,27 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
                       children: [
                         Icon(Icons.star, color: Colors.amber, size: 12),
                         const SizedBox(width: 2),
-                        Text(course.rating.toString(), style: const TextStyle(fontSize: 12)),
+                        Text(
+                          course.rating.toString(),
+                          style: const TextStyle(fontSize: 12),
+                        ),
                         const Spacer(),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
                           decoration: BoxDecoration(
                             color: const Color(0xFFf093fb),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
                             course.level.name.toUpperCase(),
-                            style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ],
@@ -665,7 +814,10 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
                   Container(
                     width: 40,
                     height: 40,
-                    decoration: BoxDecoration(color: const Color(0xFFf093fb), borderRadius: BorderRadius.circular(8)),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFf093fb),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                     child: const Icon(Icons.route, color: Colors.white),
                   ),
                   const SizedBox(width: 12),
@@ -673,23 +825,39 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(path.title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                        Text(
+                          path.title,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                         Text(
                           '${path.estimatedHours} hours • ${path.courseIds.length} courses',
-                          style: TextStyle(color: Colors.grey[600], fontSize: 12),
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                            fontSize: 12,
+                          ),
                         ),
                       ],
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: const Color(0xFFf093fb).withOpacity(0.1),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
                       path.level.name.toUpperCase(),
-                      style: const TextStyle(color: Color(0xFFf093fb), fontSize: 10, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        color: Color(0xFFf093fb),
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],
@@ -747,7 +915,10 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
         children: [
           Icon(Icons.live_tv, size: 80, color: Colors.grey),
           SizedBox(height: 16),
-          Text('Live Q&A Sessions', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          Text(
+            'Live Q&A Sessions',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
           SizedBox(height: 8),
           Text(
             'Join live sessions with renowned Islamic scholars',
@@ -806,13 +977,21 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
   LinearGradient _getCategoryGradient(CourseCategory category) {
     switch (category) {
       case CourseCategory.arabic:
-        return const LinearGradient(colors: [Color(0xFF667eea), Color(0xFF764ba2)]);
+        return const LinearGradient(
+          colors: [Color(0xFF667eea), Color(0xFF764ba2)],
+        );
       case CourseCategory.aqeedah:
-        return const LinearGradient(colors: [Color(0xFFf093fb), Color(0xFFf5576c)]);
+        return const LinearGradient(
+          colors: [Color(0xFFf093fb), Color(0xFFf5576c)],
+        );
       case CourseCategory.spirituality:
-        return const LinearGradient(colors: [Color(0xFF43e97b), Color(0xFF38f9d7)]);
+        return const LinearGradient(
+          colors: [Color(0xFF43e97b), Color(0xFF38f9d7)],
+        );
       default:
-        return const LinearGradient(colors: [Color(0xFF4facfe), Color(0xFF00f2fe)]);
+        return const LinearGradient(
+          colors: [Color(0xFF4facfe), Color(0xFF00f2fe)],
+        );
     }
   }
 
@@ -857,7 +1036,10 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
 
   void _createPersonalizedCurriculum() {
     // Show curriculum creation wizard
-    showDialog(context: context, builder: (context) => _buildCurriculumCreationDialog());
+    showDialog(
+      context: context,
+      builder: (context) => _buildCurriculumCreationDialog(),
+    );
   }
 
   Widget _buildCurriculumCreationDialog() {
@@ -866,14 +1048,22 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
       content: const Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('Let us create a personalized Islamic learning curriculum for you'),
+          Text(
+            'Let us create a personalized Islamic learning curriculum for you',
+          ),
           SizedBox(height: 16),
           // Add form fields for interests, level, etc.
         ],
       ),
       actions: [
-        TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-        ElevatedButton(onPressed: _processCurriculumCreation, child: const Text('Create')),
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text('Cancel'),
+        ),
+        ElevatedButton(
+          onPressed: _processCurriculumCreation,
+          child: const Text('Create'),
+        ),
       ],
     );
   }
@@ -892,9 +1082,11 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
         _userCurriculum = curriculum;
       });
 
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('Personal curriculum created successfully!')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Personal curriculum created successfully!'),
+        ),
+      );
     } catch (e) {
       _showError('Failed to create curriculum: $e');
     }
@@ -919,7 +1111,10 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
               'Upgrade now to access courses from world-renowned scholars.',
             ),
             actions: [
-              TextButton(onPressed: () => Navigator.pop(context), child: const Text('Later')),
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Later'),
+              ),
               ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);

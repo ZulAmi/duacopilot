@@ -5,7 +5,9 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('Screen Assistance Unit Tests', () {
-    testWidgets('ScreenAssistance widget can be instantiated', (WidgetTester tester) async {
+    testWidgets('ScreenAssistance widget can be instantiated', (
+      WidgetTester tester,
+    ) async {
       // Build the screen assistance
       const widget = ScreenAssistance();
 
@@ -13,13 +15,20 @@ void main() {
       expect(widget, isA<ScreenAssistance>());
     });
 
-    testWidgets('ScreenAssistance builds without runtime errors', (WidgetTester tester) async {
+    testWidgets('ScreenAssistance builds without runtime errors', (
+      WidgetTester tester,
+    ) async {
       // This test just ensures the widget builds without throwing exceptions
       bool didBuildSuccessfully = false;
 
       try {
         await tester.pumpWidget(
-          ProviderScope(child: MaterialApp(home: const ScreenAssistance(), debugShowCheckedModeBanner: false)),
+          ProviderScope(
+            child: MaterialApp(
+              home: const ScreenAssistance(),
+              debugShowCheckedModeBanner: false,
+            ),
+          ),
         );
 
         // Pump and settle to handle animations

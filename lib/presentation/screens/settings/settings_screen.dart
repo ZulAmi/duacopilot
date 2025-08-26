@@ -14,7 +14,8 @@ class SettingsScreen extends ConsumerStatefulWidget {
   ConsumerState<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProviderStateMixin {
+class _SettingsScreenState extends ConsumerState<SettingsScreen>
+    with TickerProviderStateMixin {
   late AnimationController _fadeController;
   late AnimationController _slideController;
 
@@ -38,9 +39,26 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
   String _prayerCalculationMethod = 'Muslim World League';
   String _madhab = 'Hanafi';
 
-  final List<String> _availableLanguages = ['English', 'Arabic', 'Urdu', 'Indonesian', 'Turkish', 'French'];
-  final List<String> _availableThemes = ['Islamic Green', 'Deep Navy', 'Gold Accent', 'Classic White'];
-  final List<String> _availableFontSizes = ['Small', 'Medium', 'Large', 'Extra Large'];
+  final List<String> _availableLanguages = [
+    'English',
+    'Arabic',
+    'Urdu',
+    'Indonesian',
+    'Turkish',
+    'French',
+  ];
+  final List<String> _availableThemes = [
+    'Islamic Green',
+    'Deep Navy',
+    'Gold Accent',
+    'Classic White',
+  ];
+  final List<String> _availableFontSizes = [
+    'Small',
+    'Medium',
+    'Large',
+    'Extra Large',
+  ];
   final List<String> _availableReciters = [
     'Abdul Rahman As-Sudais',
     'Maher Al Mueaqly',
@@ -67,8 +85,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
   @override
   void initState() {
     super.initState();
-    _fadeController = AnimationController(duration: ProfessionalIslamicTheme.animationNormal, vsync: this);
-    _slideController = AnimationController(duration: ProfessionalIslamicTheme.animationSlow, vsync: this);
+    _fadeController = AnimationController(
+      duration: ProfessionalIslamicTheme.animationNormal,
+      vsync: this,
+    );
+    _slideController = AnimationController(
+      duration: ProfessionalIslamicTheme.animationSlow,
+      vsync: this,
+    );
 
     _loadSettings();
     _startAnimations();
@@ -108,7 +132,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
       final fontSize = await storage.read('settings_font_size');
       final reciter = await storage.read('settings_reciter');
       final translation = await storage.read('settings_translation');
-      final calculationMethod = await storage.read('settings_calculation_method');
+      final calculationMethod = await storage.read(
+        'settings_calculation_method',
+      );
       final madhab = await storage.read('settings_madhab');
 
       if (mounted) {
@@ -143,23 +169,47 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
     try {
       final storage = SecureStorageService.instance;
 
-      await storage.write('settings_notifications', _notificationsEnabled.toString());
-      await storage.write('settings_voice_search', _voiceSearchEnabled.toString());
+      await storage.write(
+        'settings_notifications',
+        _notificationsEnabled.toString(),
+      );
+      await storage.write(
+        'settings_voice_search',
+        _voiceSearchEnabled.toString(),
+      );
       await storage.write('settings_dark_mode', _darkModeEnabled.toString());
       await storage.write('settings_arabic', _arabicEnabled.toString());
-      await storage.write('settings_offline_mode', _offlineModeEnabled.toString());
+      await storage.write(
+        'settings_offline_mode',
+        _offlineModeEnabled.toString(),
+      );
       await storage.write('settings_analytics', _analyticsEnabled.toString());
-      await storage.write('settings_crash_reporting', _crashReportingEnabled.toString());
-      await storage.write('settings_prayer_reminders', _prayerReminders.toString());
-      await storage.write('settings_dhikr_reminders', _dhikrReminders.toString());
-      await storage.write('settings_quran_reminders', _quranReminders.toString());
+      await storage.write(
+        'settings_crash_reporting',
+        _crashReportingEnabled.toString(),
+      );
+      await storage.write(
+        'settings_prayer_reminders',
+        _prayerReminders.toString(),
+      );
+      await storage.write(
+        'settings_dhikr_reminders',
+        _dhikrReminders.toString(),
+      );
+      await storage.write(
+        'settings_quran_reminders',
+        _quranReminders.toString(),
+      );
 
       await storage.write('settings_language', _selectedLanguage);
       await storage.write('settings_theme', _selectedTheme);
       await storage.write('settings_font_size', _selectedFontSize);
       await storage.write('settings_reciter', _selectedReciter);
       await storage.write('settings_translation', _selectedTranslation);
-      await storage.write('settings_calculation_method', _prayerCalculationMethod);
+      await storage.write(
+        'settings_calculation_method',
+        _prayerCalculationMethod,
+      );
       await storage.write('settings_madhab', _madhab);
 
       if (mounted) {
@@ -228,13 +278,17 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
       position: Tween<Offset>(
         begin: const Offset(0, -0.3),
         end: Offset.zero,
-      ).animate(CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic)),
+      ).animate(
+        CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic),
+      ),
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(ProfessionalIslamicTheme.space6),
         decoration: BoxDecoration(
           gradient: ProfessionalIslamicTheme.islamicGradient,
-          borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radius3Xl),
+          borderRadius: BorderRadius.circular(
+            ProfessionalIslamicTheme.radius3Xl,
+          ),
           boxShadow: ProfessionalIslamicTheme.shadowMedium,
         ),
         child: Column(
@@ -243,12 +297,22 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
             Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.all(ProfessionalIslamicTheme.space3),
-                  decoration: BoxDecoration(
-                    color: ProfessionalIslamicTheme.textOnIslamic.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radius2Xl),
+                  padding: const EdgeInsets.all(
+                    ProfessionalIslamicTheme.space3,
                   ),
-                  child: const Icon(Icons.settings_rounded, color: ProfessionalIslamicTheme.textOnIslamic, size: 32),
+                  decoration: BoxDecoration(
+                    color: ProfessionalIslamicTheme.textOnIslamic.withOpacity(
+                      0.2,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      ProfessionalIslamicTheme.radius2Xl,
+                    ),
+                  ),
+                  child: const Icon(
+                    Icons.settings_rounded,
+                    color: ProfessionalIslamicTheme.textOnIslamic,
+                    size: 32,
+                  ),
                 ),
                 const SizedBox(width: ProfessionalIslamicTheme.space4),
                 Expanded(
@@ -266,7 +330,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
                       Text(
                         'Customize DuaCopilot to match your Islamic preferences and spiritual journey',
                         style: ProfessionalIslamicTheme.body2.copyWith(
-                          color: ProfessionalIslamicTheme.textOnIslamic.withOpacity(0.9),
+                          color: ProfessionalIslamicTheme.textOnIslamic
+                              .withOpacity(0.9),
                         ),
                       ),
                     ],
@@ -297,7 +362,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
           title: 'Subscription',
           subtitle: 'Premium • View subscription details',
           onTap: () => _showSubscriptionDialog(),
-          trailing: const Icon(Icons.star, color: ProfessionalIslamicTheme.goldAccent),
+          trailing: const Icon(
+            Icons.star,
+            color: ProfessionalIslamicTheme.goldAccent,
+          ),
         ),
         _buildSettingsItem(
           icon: Icons.sync_rounded,
@@ -329,7 +397,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
           subtitle: 'Choose method for prayer time calculations',
           value: _prayerCalculationMethod,
           items: _calculationMethods,
-          onChanged: (value) => setState(() => _prayerCalculationMethod = value!),
+          onChanged:
+              (value) => setState(() => _prayerCalculationMethod = value!),
         ),
         _buildDropdownItem(
           icon: Icons.headphones_rounded,
@@ -522,8 +591,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
             style: ElevatedButton.styleFrom(
               backgroundColor: ProfessionalIslamicTheme.islamicGreen,
               foregroundColor: ProfessionalIslamicTheme.textOnIslamic,
-              padding: const EdgeInsets.symmetric(vertical: ProfessionalIslamicTheme.space4),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radius2Xl)),
+              padding: const EdgeInsets.symmetric(
+                vertical: ProfessionalIslamicTheme.space4,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(
+                  ProfessionalIslamicTheme.radius2Xl,
+                ),
+              ),
             ),
           ),
         ),
@@ -537,8 +612,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
             style: OutlinedButton.styleFrom(
               foregroundColor: ProfessionalIslamicTheme.error,
               side: BorderSide(color: ProfessionalIslamicTheme.error),
-              padding: const EdgeInsets.symmetric(vertical: ProfessionalIslamicTheme.space4),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radius2Xl)),
+              padding: const EdgeInsets.symmetric(
+                vertical: ProfessionalIslamicTheme.space4,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(
+                  ProfessionalIslamicTheme.radius2Xl,
+                ),
+              ),
             ),
           ),
         ),
@@ -547,17 +628,25 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
   }
 
   /// Build settings section container
-  Widget _buildSettingsSection({required String title, required IconData icon, required List<Widget> children}) {
+  Widget _buildSettingsSection({
+    required String title,
+    required IconData icon,
+    required List<Widget> children,
+  }) {
     return SlideTransition(
       position: Tween<Offset>(
         begin: const Offset(0.1, 0),
         end: Offset.zero,
-      ).animate(CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic)),
+      ).animate(
+        CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic),
+      ),
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
           color: ProfessionalIslamicTheme.backgroundSecondary,
-          borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radius2Xl),
+          borderRadius: BorderRadius.circular(
+            ProfessionalIslamicTheme.radius2Xl,
+          ),
           border: Border.all(color: ProfessionalIslamicTheme.borderLight),
           boxShadow: ProfessionalIslamicTheme.shadowSoft,
         ),
@@ -569,15 +658,30 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
               child: Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(ProfessionalIslamicTheme.space2),
-                    decoration: BoxDecoration(
-                      color: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radius2Xl),
+                    padding: const EdgeInsets.all(
+                      ProfessionalIslamicTheme.space2,
                     ),
-                    child: Icon(icon, color: ProfessionalIslamicTheme.islamicGreen, size: 20),
+                    decoration: BoxDecoration(
+                      color: ProfessionalIslamicTheme.islamicGreen.withOpacity(
+                        0.1,
+                      ),
+                      borderRadius: BorderRadius.circular(
+                        ProfessionalIslamicTheme.radius2Xl,
+                      ),
+                    ),
+                    child: Icon(
+                      icon,
+                      color: ProfessionalIslamicTheme.islamicGreen,
+                      size: 20,
+                    ),
                   ),
                   const SizedBox(width: ProfessionalIslamicTheme.space3),
-                  Text(title, style: ProfessionalIslamicTheme.heading3.copyWith(fontWeight: FontWeight.w600)),
+                  Text(
+                    title,
+                    style: ProfessionalIslamicTheme.heading3.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -612,17 +716,28 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: ProfessionalIslamicTheme.body1.copyWith(fontWeight: FontWeight.w500)),
+                  Text(
+                    title,
+                    style: ProfessionalIslamicTheme.body1.copyWith(
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                   const SizedBox(height: ProfessionalIslamicTheme.space1),
                   Text(
                     subtitle,
-                    style: ProfessionalIslamicTheme.body2.copyWith(color: ProfessionalIslamicTheme.textSecondary),
+                    style: ProfessionalIslamicTheme.body2.copyWith(
+                      color: ProfessionalIslamicTheme.textSecondary,
+                    ),
                   ),
                 ],
               ),
             ),
             trailing ??
-                const Icon(Icons.arrow_forward_ios_rounded, size: 16, color: ProfessionalIslamicTheme.textMuted),
+                const Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 16,
+                  color: ProfessionalIslamicTheme.textMuted,
+                ),
           ],
         ),
       ),
@@ -650,11 +765,18 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: ProfessionalIslamicTheme.body1.copyWith(fontWeight: FontWeight.w500)),
+                Text(
+                  title,
+                  style: ProfessionalIslamicTheme.body1.copyWith(
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
                 const SizedBox(height: ProfessionalIslamicTheme.space1),
                 Text(
                   subtitle,
-                  style: ProfessionalIslamicTheme.body2.copyWith(color: ProfessionalIslamicTheme.textSecondary),
+                  style: ProfessionalIslamicTheme.body2.copyWith(
+                    color: ProfessionalIslamicTheme.textSecondary,
+                  ),
                 ),
               ],
             ),
@@ -692,18 +814,31 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: ProfessionalIslamicTheme.body1.copyWith(fontWeight: FontWeight.w500)),
+                Text(
+                  title,
+                  style: ProfessionalIslamicTheme.body1.copyWith(
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
                 const SizedBox(height: ProfessionalIslamicTheme.space1),
                 Text(
                   subtitle,
-                  style: ProfessionalIslamicTheme.body2.copyWith(color: ProfessionalIslamicTheme.textSecondary),
+                  style: ProfessionalIslamicTheme.body2.copyWith(
+                    color: ProfessionalIslamicTheme.textSecondary,
+                  ),
                 ),
                 const SizedBox(height: ProfessionalIslamicTheme.space2),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: ProfessionalIslamicTheme.space3),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: ProfessionalIslamicTheme.space3,
+                  ),
                   decoration: BoxDecoration(
-                    border: Border.all(color: ProfessionalIslamicTheme.borderLight),
-                    borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusXl),
+                    border: Border.all(
+                      color: ProfessionalIslamicTheme.borderLight,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      ProfessionalIslamicTheme.radiusXl,
+                    ),
                   ),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton<String>(
@@ -714,7 +849,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
                           items.map((String item) {
                             return DropdownMenuItem<String>(
                               value: item,
-                              child: Text(item, style: ProfessionalIslamicTheme.body2),
+                              child: Text(
+                                item,
+                                style: ProfessionalIslamicTheme.body2,
+                              ),
                             );
                           }).toList(),
                     ),
@@ -746,7 +884,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
             content: const Text(
               'Premium Plan Active\n\n✓ Unlimited AI queries\n✓ Advanced features\n✓ Premium audio content\n✓ Family sharing',
             ),
-            actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('Close'))],
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Close'),
+              ),
+            ],
           ),
     );
   }
@@ -776,7 +919,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
             title: const Text('Clear Cache'),
             content: const Text('This will free up storage space. Continue?'),
             actions: [
-              TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Cancel'),
+              ),
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
@@ -807,9 +953,15 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
       context: context,
       applicationName: 'DuaCopilot',
       applicationVersion: '2.0.0',
-      applicationIcon: const Icon(Icons.mosque_rounded, size: 48, color: ProfessionalIslamicTheme.islamicGreen),
+      applicationIcon: const Icon(
+        Icons.mosque_rounded,
+        size: 48,
+        color: ProfessionalIslamicTheme.islamicGreen,
+      ),
       children: [
-        const Text('Your intelligent Islamic companion for spiritual guidance, Quranic wisdom, and daily prayers.'),
+        const Text(
+          'Your intelligent Islamic companion for spiritual guidance, Quranic wisdom, and daily prayers.',
+        ),
         const SizedBox(height: 16),
         const Text('Built with ❤️ for the Muslim community.'),
       ],
@@ -822,9 +974,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
       builder:
           (context) => AlertDialog(
             title: const Text('Reset to Defaults'),
-            content: const Text('This will reset all settings to their default values. Continue?'),
+            content: const Text(
+              'This will reset all settings to their default values. Continue?',
+            ),
             actions: [
-              TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Cancel'),
+              ),
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);

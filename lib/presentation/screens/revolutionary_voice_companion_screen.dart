@@ -13,10 +13,12 @@ class RevolutionaryVoiceCompanionScreen extends ConsumerStatefulWidget {
   const RevolutionaryVoiceCompanionScreen({super.key});
 
   @override
-  ConsumerState<RevolutionaryVoiceCompanionScreen> createState() => _RevolutionaryVoiceCompanionScreenState();
+  ConsumerState<RevolutionaryVoiceCompanionScreen> createState() =>
+      _RevolutionaryVoiceCompanionScreenState();
 }
 
-class _RevolutionaryVoiceCompanionScreenState extends ConsumerState<RevolutionaryVoiceCompanionScreen>
+class _RevolutionaryVoiceCompanionScreenState
+    extends ConsumerState<RevolutionaryVoiceCompanionScreen>
     with SingleTickerProviderStateMixin {
   // Services
   late IslamicPersonalityService _personalityService;
@@ -64,17 +66,21 @@ class _RevolutionaryVoiceCompanionScreenState extends ConsumerState<Revolutionar
 
   /// Setup animations
   void _setupAnimations() {
-    _animationController = AnimationController(duration: const Duration(seconds: 2), vsync: this);
+    _animationController = AnimationController(
+      duration: const Duration(seconds: 2),
+      vsync: this,
+    );
 
-    _pulseAnimation = Tween<double>(
-      begin: 1.0,
-      end: 1.2,
-    ).animate(CurvedAnimation(parent: _animationController, curve: Curves.easeInOut));
+    _pulseAnimation = Tween<double>(begin: 1.0, end: 1.2).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
 
     _colorAnimation = ColorTween(
       begin: ProfessionalTheme.primaryEmerald,
       end: ProfessionalTheme.secondaryGold,
-    ).animate(CurvedAnimation(parent: _animationController, curve: Curves.easeInOut));
+    ).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
 
     _animationController.repeat(reverse: true);
   }
@@ -175,14 +181,24 @@ How may I serve your soul today? 🤲
 
     switch (_currentMode) {
       case CompanionMode.learning:
-        final learningResponse = await _learningService.processLearningInteraction(input);
+        final learningResponse = await _learningService
+            .processLearningInteraction(input);
         response = learningResponse.response;
         suggestions = learningResponse.suggestedResponses ?? [];
         break;
 
       case CompanionMode.companion:
-        response = await _generateCompanionResponse(input, emotion, topic, context);
-        suggestions = await _generateContextualSuggestions(context, emotion, topic);
+        response = await _generateCompanionResponse(
+          input,
+          emotion,
+          topic,
+          context,
+        );
+        suggestions = await _generateContextualSuggestions(
+          context,
+          emotion,
+          topic,
+        );
         break;
 
       case CompanionMode.guidance:
@@ -192,12 +208,13 @@ How may I serve your soul today? 🤲
     }
 
     // Personalize response with Islamic personality
-    final personalizedResponse = await _personalityService.generatePersonalizedResponse(
-      originalResponse: response,
-      userQuery: input,
-      detectedEmotion: emotion,
-      timeContext: _getTimeContext(),
-    );
+    final personalizedResponse = await _personalityService
+        .generatePersonalizedResponse(
+          originalResponse: response,
+          userQuery: input,
+          detectedEmotion: emotion,
+          timeContext: _getTimeContext(),
+        );
 
     // Add to conversation memory
     await _memoryService.addConversationTurn(
@@ -205,19 +222,28 @@ How may I serve your soul today? 🤲
       assistantResponse: personalizedResponse,
       detectedEmotion: emotion,
       topic: topic,
-      metadata: {'mode': _currentMode.name, 'timestamp': DateTime.now().toIso8601String()},
+      metadata: {
+        'mode': _currentMode.name,
+        'timestamp': DateTime.now().toIso8601String(),
+      },
     );
 
     // Update UI
     setState(() {
       _companionResponse = personalizedResponse;
       _suggestionChips = suggestions;
-      _conversationHistory.add('Companion: ${personalizedResponse.substring(0, 100)}...');
+      _conversationHistory.add(
+        'Companion: ${personalizedResponse.substring(0, 100)}...',
+      );
       _isProcessing = false;
     });
 
     // Update spiritual profile
-    await _companionService.updateSpiritualProfile(interaction: input, topic: topic, emotion: emotion);
+    await _companionService.updateSpiritualProfile(
+      interaction: input,
+      topic: topic,
+      emotion: emotion,
+    );
   }
 
   /// Generate companion response
@@ -255,7 +281,11 @@ What resonates most with your soul from what we've discussed?
   }
 
   /// Generate guidance response
-  Future<String> _generateGuidanceResponse(String input, String emotion, String topic) async {
+  Future<String> _generateGuidanceResponse(
+    String input,
+    String emotion,
+    String topic,
+  ) async {
     if (emotion == 'sadness' || emotion == 'distress') {
       return '''
 My dear friend, I hear the pain in your heart. Allah knows every tear you shed.
@@ -285,7 +315,9 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
 
     if (lowerInput.contains(RegExp(r'sad|depressed|down|difficult|hard'))) {
       return 'sadness';
-    } else if (lowerInput.contains(RegExp(r'happy|grateful|blessed|alhamdulillah'))) {
+    } else if (lowerInput.contains(
+      RegExp(r'happy|grateful|blessed|alhamdulillah'),
+    )) {
       return 'joy';
     } else if (lowerInput.contains(RegExp(r'worried|anxious|afraid|scared'))) {
       return 'anxiety';
@@ -325,14 +357,16 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
     String modeMessage;
     switch (mode) {
       case CompanionMode.companion:
-        modeMessage = '🤲 I\'m here as your spiritual companion. Let\'s have a heart-to-heart conversation.';
+        modeMessage =
+            '🤲 I\'m here as your spiritual companion. Let\'s have a heart-to-heart conversation.';
         break;
       case CompanionMode.learning:
         modeMessage =
             '📚 Learning mode activated! I\'m excited to teach you about Islam. What would you like to explore?';
         break;
       case CompanionMode.guidance:
-        modeMessage = '🌙 Guidance mode ready. Share what\'s troubling your heart, and I\'ll provide Islamic wisdom.';
+        modeMessage =
+            '🌙 Guidance mode ready. Share what\'s troubling your heart, and I\'ll provide Islamic wisdom.';
         break;
     }
 
@@ -389,7 +423,11 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
                 color: ProfessionalTheme.primaryEmerald,
                 tooltip: 'Go back',
               ),
-              Icon(Icons.mosque, color: ProfessionalTheme.primaryEmerald, size: 32),
+              Icon(
+                Icons.mosque,
+                color: ProfessionalTheme.primaryEmerald,
+                size: 32,
+              ),
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
@@ -407,11 +445,29 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
           // Mode selection
           Row(
             children: [
-              Expanded(child: _buildModeButton(CompanionMode.companion, '🤲 Companion', 'Spiritual friendship')),
+              Expanded(
+                child: _buildModeButton(
+                  CompanionMode.companion,
+                  '🤲 Companion',
+                  'Spiritual friendship',
+                ),
+              ),
               const SizedBox(width: 8),
-              Expanded(child: _buildModeButton(CompanionMode.learning, '📚 Learning', 'Islamic education')),
+              Expanded(
+                child: _buildModeButton(
+                  CompanionMode.learning,
+                  '📚 Learning',
+                  'Islamic education',
+                ),
+              ),
               const SizedBox(width: 8),
-              Expanded(child: _buildModeButton(CompanionMode.guidance, '🌙 Guidance', 'Seek Islamic advice')),
+              Expanded(
+                child: _buildModeButton(
+                  CompanionMode.guidance,
+                  '🌙 Guidance',
+                  'Seek Islamic advice',
+                ),
+              ),
             ],
           ),
         ],
@@ -428,9 +484,15 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: isSelected ? ProfessionalTheme.primaryEmerald.withOpacity(0.1) : Colors.grey.withOpacity(0.1),
+          color:
+              isSelected
+                  ? ProfessionalTheme.primaryEmerald.withOpacity(0.1)
+                  : Colors.grey.withOpacity(0.1),
           borderRadius: BorderRadius.circular(12),
-          border: isSelected ? Border.all(color: ProfessionalTheme.primaryEmerald) : null,
+          border:
+              isSelected
+                  ? Border.all(color: ProfessionalTheme.primaryEmerald)
+                  : null,
         ),
         child: Column(
           children: [
@@ -438,10 +500,17 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
               title,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: isSelected ? ProfessionalTheme.primaryEmerald : Colors.grey[600],
+                color:
+                    isSelected
+                        ? ProfessionalTheme.primaryEmerald
+                        : Colors.grey[600],
               ),
             ),
-            Text(subtitle, style: TextStyle(fontSize: 10, color: Colors.grey[600]), textAlign: TextAlign.center),
+            Text(
+              subtitle,
+              style: TextStyle(fontSize: 10, color: Colors.grey[600]),
+              textAlign: TextAlign.center,
+            ),
           ],
         ),
       ),
@@ -462,7 +531,13 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(16),
-              boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.1), blurRadius: 10, offset: const Offset(0, 4))],
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.1),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -470,14 +545,19 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
                 Row(
                   children: [
                     CircleAvatar(
-                      backgroundColor: ProfessionalTheme.primaryEmerald.withOpacity(0.1),
-                      child: Icon(Icons.psychology, color: ProfessionalTheme.primaryEmerald),
+                      backgroundColor: ProfessionalTheme.primaryEmerald
+                          .withOpacity(0.1),
+                      child: Icon(
+                        Icons.psychology,
+                        color: ProfessionalTheme.primaryEmerald,
+                      ),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(
                         'Your Islamic Companion',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                        style: Theme.of(context).textTheme.titleMedium
+                            ?.copyWith(fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
@@ -487,7 +567,12 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
                 if (_isProcessing)
                   const Center(child: CircularProgressIndicator())
                 else
-                  Text(_companionResponse, style: Theme.of(context).textTheme.bodyLarge?.copyWith(height: 1.6)),
+                  Text(
+                    _companionResponse,
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyLarge?.copyWith(height: 1.6),
+                  ),
               ],
             ),
           ),
@@ -511,7 +596,12 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Suggestions:', style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold)),
+        Text(
+          'Suggestions:',
+          style: Theme.of(
+            context,
+          ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+        ),
         const SizedBox(height: 8),
         Wrap(
           spacing: 8,
@@ -522,15 +612,27 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
                     (suggestion) => GestureDetector(
                       onTap: () => _processUserInput(suggestion),
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 8,
+                        ),
                         decoration: BoxDecoration(
-                          color: ProfessionalTheme.secondaryGold.withOpacity(0.1),
+                          color: ProfessionalTheme.secondaryGold.withOpacity(
+                            0.1,
+                          ),
                           borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: ProfessionalTheme.secondaryGold.withOpacity(0.3)),
+                          border: Border.all(
+                            color: ProfessionalTheme.secondaryGold.withOpacity(
+                              0.3,
+                            ),
+                          ),
                         ),
                         child: Text(
                           suggestion,
-                          style: TextStyle(color: ProfessionalTheme.secondaryGold, fontWeight: FontWeight.w500),
+                          style: TextStyle(
+                            color: ProfessionalTheme.secondaryGold,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ),
@@ -548,7 +650,9 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
       children: [
         Text(
           'Recent Conversation:',
-          style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+          style: Theme.of(
+            context,
+          ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
         SizedBox(
@@ -563,10 +667,16 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
                 margin: const EdgeInsets.only(bottom: 8),
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: isUser ? Colors.grey[100] : ProfessionalTheme.primaryEmerald.withOpacity(0.1),
+                  color:
+                      isUser
+                          ? Colors.grey[100]
+                          : ProfessionalTheme.primaryEmerald.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Text(message, style: TextStyle(fontSize: 12, color: Colors.grey[700])),
+                child: Text(
+                  message,
+                  style: TextStyle(fontSize: 12, color: Colors.grey[700]),
+                ),
               );
             },
           ),
@@ -593,19 +703,27 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
                     width: 80,
                     height: 80,
                     decoration: BoxDecoration(
-                      color: _isListening ? _colorAnimation.value : ProfessionalTheme.primaryEmerald,
+                      color:
+                          _isListening
+                              ? _colorAnimation.value
+                              : ProfessionalTheme.primaryEmerald,
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color: (_isListening ? _colorAnimation.value : ProfessionalTheme.primaryEmerald)!.withOpacity(
-                            0.3,
-                          ),
+                          color: (_isListening
+                                  ? _colorAnimation.value
+                                  : ProfessionalTheme.primaryEmerald)!
+                              .withOpacity(0.3),
                           blurRadius: 20,
                           spreadRadius: 5,
                         ),
                       ],
                     ),
-                    child: Icon(_isListening ? Icons.mic : Icons.mic_none, color: Colors.white, size: 36),
+                    child: Icon(
+                      _isListening ? Icons.mic : Icons.mic_none,
+                      color: Colors.white,
+                      size: 36,
+                    ),
                   ),
                 ),
               );
@@ -620,7 +738,9 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
                 : _isProcessing
                 ? 'Processing your words...'
                 : 'Tap to speak with your companion',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
             textAlign: TextAlign.center,
           ),
 
@@ -629,7 +749,11 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
               padding: const EdgeInsets.only(top: 8),
               child: Text(
                 'You said: "$_userInput"',
-                style: TextStyle(fontSize: 12, color: Colors.grey[500], fontStyle: FontStyle.italic),
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey[500],
+                  fontStyle: FontStyle.italic,
+                ),
                 textAlign: TextAlign.center,
               ),
             ),

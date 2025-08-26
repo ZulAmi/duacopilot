@@ -55,8 +55,11 @@ class RevolutionaryIslamicTheme {
     end: Alignment.bottomRight,
   );
 
-  static LinearGradient get cardGradient =>
-      LinearGradient(colors: [neutralWhite, neutralGray50], begin: Alignment.topCenter, end: Alignment.bottomCenter);
+  static LinearGradient get cardGradient => LinearGradient(
+    colors: [neutralWhite, neutralGray50],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
 
   static LinearGradient get accentGradient => const LinearGradient(
     colors: [accentPurple, primaryEmeraldLight],
@@ -90,27 +93,63 @@ class RevolutionaryIslamicTheme {
 
   // Professional Shadow System
   static List<BoxShadow> get shadowXs => [
-    BoxShadow(color: neutralGray900.withOpacity(0.05), blurRadius: 1, offset: const Offset(0, 1)),
+    BoxShadow(
+      color: neutralGray900.withOpacity(0.05),
+      blurRadius: 1,
+      offset: const Offset(0, 1),
+    ),
   ];
 
   static List<BoxShadow> get shadowSm => [
-    BoxShadow(color: neutralGray900.withOpacity(0.05), blurRadius: 2, offset: const Offset(0, 1)),
-    BoxShadow(color: neutralGray900.withOpacity(0.1), blurRadius: 3, offset: const Offset(0, 1)),
+    BoxShadow(
+      color: neutralGray900.withOpacity(0.05),
+      blurRadius: 2,
+      offset: const Offset(0, 1),
+    ),
+    BoxShadow(
+      color: neutralGray900.withOpacity(0.1),
+      blurRadius: 3,
+      offset: const Offset(0, 1),
+    ),
   ];
 
   static List<BoxShadow> get shadowMd => [
-    BoxShadow(color: neutralGray900.withOpacity(0.1), blurRadius: 6, offset: const Offset(0, 4)),
-    BoxShadow(color: neutralGray900.withOpacity(0.06), blurRadius: 4, offset: const Offset(0, 2)),
+    BoxShadow(
+      color: neutralGray900.withOpacity(0.1),
+      blurRadius: 6,
+      offset: const Offset(0, 4),
+    ),
+    BoxShadow(
+      color: neutralGray900.withOpacity(0.06),
+      blurRadius: 4,
+      offset: const Offset(0, 2),
+    ),
   ];
 
   static List<BoxShadow> get shadowLg => [
-    BoxShadow(color: neutralGray900.withOpacity(0.1), blurRadius: 15, offset: const Offset(0, 10)),
-    BoxShadow(color: neutralGray900.withOpacity(0.04), blurRadius: 6, offset: const Offset(0, 4)),
+    BoxShadow(
+      color: neutralGray900.withOpacity(0.1),
+      blurRadius: 15,
+      offset: const Offset(0, 10),
+    ),
+    BoxShadow(
+      color: neutralGray900.withOpacity(0.04),
+      blurRadius: 6,
+      offset: const Offset(0, 4),
+    ),
   ];
 
   static List<BoxShadow> get shadowXl => [
-    BoxShadow(color: neutralGray900.withOpacity(0.1), blurRadius: 25, offset: const Offset(0, 20)),
-    BoxShadow(color: neutralGray900.withOpacity(0.04), blurRadius: 10, offset: const Offset(0, 8)),
+    BoxShadow(
+      color: neutralGray900.withOpacity(0.1),
+      blurRadius: 25,
+      offset: const Offset(0, 20),
+    ),
+    BoxShadow(
+      color: neutralGray900.withOpacity(0.04),
+      blurRadius: 10,
+      offset: const Offset(0, 8),
+    ),
   ];
 
   // Typography System - Modern & Accessible
@@ -283,9 +322,14 @@ class RevolutionaryIslamicTheme {
           foregroundColor: textOnColor,
           elevation: 0,
           shadowColor: Colors.transparent,
-          padding: const EdgeInsets.symmetric(horizontal: space6, vertical: space4),
+          padding: const EdgeInsets.symmetric(
+            horizontal: space6,
+            vertical: space4,
+          ),
           minimumSize: const Size(0, 48),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radiusXl)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(radiusXl),
+          ),
           textStyle: button,
         ),
       ),
@@ -293,9 +337,14 @@ class RevolutionaryIslamicTheme {
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: primaryEmerald,
-          padding: const EdgeInsets.symmetric(horizontal: space4, vertical: space3),
+          padding: const EdgeInsets.symmetric(
+            horizontal: space4,
+            vertical: space3,
+          ),
           minimumSize: const Size(0, 40),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radiusLg)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(radiusLg),
+          ),
           textStyle: button.copyWith(color: primaryEmerald),
         ),
       ),
@@ -304,9 +353,14 @@ class RevolutionaryIslamicTheme {
         style: OutlinedButton.styleFrom(
           foregroundColor: textPrimary,
           side: const BorderSide(color: borderMedium, width: 1),
-          padding: const EdgeInsets.symmetric(horizontal: space6, vertical: space4),
+          padding: const EdgeInsets.symmetric(
+            horizontal: space6,
+            vertical: space4,
+          ),
           minimumSize: const Size(0, 48),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radiusXl)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(radiusXl),
+          ),
           textStyle: button.copyWith(color: textPrimary),
         ),
       ),
@@ -331,7 +385,10 @@ class RevolutionaryIslamicTheme {
           borderRadius: BorderRadius.circular(radius2Xl),
           borderSide: const BorderSide(color: errorRose),
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: space4, vertical: space4),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: space4,
+          vertical: space4,
+        ),
         hintStyle: body2.copyWith(color: textTertiary),
         labelStyle: body2.copyWith(color: textSecondary),
       ),
@@ -344,7 +401,10 @@ class RevolutionaryIslamicTheme {
         backgroundColor: backgroundTertiary,
         selectedColor: primaryEmerald.withOpacity(0.1),
         labelStyle: caption.copyWith(color: textPrimary),
-        padding: const EdgeInsets.symmetric(horizontal: space3, vertical: space1),
+        padding: const EdgeInsets.symmetric(
+          horizontal: space3,
+          vertical: space1,
+        ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radiusFull),
           side: const BorderSide(color: borderLight),
@@ -352,7 +412,11 @@ class RevolutionaryIslamicTheme {
       ),
 
       // Divider Theme
-      dividerTheme: const DividerThemeData(color: borderLight, thickness: 1, space: space4),
+      dividerTheme: const DividerThemeData(
+        color: borderLight,
+        thickness: 1,
+        space: space4,
+      ),
 
       // Bottom Navigation Bar Theme
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(

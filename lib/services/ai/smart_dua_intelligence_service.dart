@@ -13,7 +13,8 @@ import '../subscription/subscription_service.dart';
 /// Enterprise-grade security with encrypted emotional data processing
 class SmartDuaIntelligenceService {
   static SmartDuaIntelligenceService? _instance;
-  static SmartDuaIntelligenceService get instance => _instance ??= SmartDuaIntelligenceService._();
+  static SmartDuaIntelligenceService get instance =>
+      _instance ??= SmartDuaIntelligenceService._();
 
   SmartDuaIntelligenceService._();
 
@@ -33,14 +34,20 @@ class SmartDuaIntelligenceService {
   final Map<String, EmotionalPattern> _patternsCache = {};
 
   // Stream controllers for real-time updates
-  final _recommendationsController = StreamController<List<SmartDuaRecommendation>>.broadcast();
-  final _emotionalStateController = StreamController<EmotionalState>.broadcast();
-  final _collectionsController = StreamController<List<SmartDuaCollection>>.broadcast();
+  final _recommendationsController =
+      StreamController<List<SmartDuaRecommendation>>.broadcast();
+  final _emotionalStateController =
+      StreamController<EmotionalState>.broadcast();
+  final _collectionsController =
+      StreamController<List<SmartDuaCollection>>.broadcast();
 
   // Public streams
-  Stream<List<SmartDuaRecommendation>> get recommendationsStream => _recommendationsController.stream;
-  Stream<EmotionalState> get emotionalStateStream => _emotionalStateController.stream;
-  Stream<List<SmartDuaCollection>> get collectionsStream => _collectionsController.stream;
+  Stream<List<SmartDuaRecommendation>> get recommendationsStream =>
+      _recommendationsController.stream;
+  Stream<EmotionalState> get emotionalStateStream =>
+      _emotionalStateController.stream;
+  Stream<List<SmartDuaCollection>> get collectionsStream =>
+      _collectionsController.stream;
 
   bool _isInitialized = false;
   Timer? _patternAnalysisTimer;
@@ -80,10 +87,14 @@ class SmartDuaIntelligenceService {
   /// Validate premium subscription access
   Future<void> _validatePremiumAccess() async {
     final hasSubscription = _subscriptionService.hasActiveSubscription;
-    final isPremium = _subscriptionService.hasTierOrHigher(SubscriptionTier.premium);
+    final isPremium = _subscriptionService.hasTierOrHigher(
+      SubscriptionTier.premium,
+    );
 
     if (!hasSubscription || !isPremium) {
-      throw Exception('Premium subscription required for Smart Dua Intelligence');
+      throw Exception(
+        'Premium subscription required for Smart Dua Intelligence',
+      );
     }
   }
 
@@ -112,7 +123,10 @@ class SmartDuaIntelligenceService {
         _modelEncryptionKey = _generateEncryptionKey();
         _userDataKey = _generateEncryptionKey();
 
-        await _secureStorage.write('model_encryption_key', _modelEncryptionKey!);
+        await _secureStorage.write(
+          'model_encryption_key',
+          _modelEncryptionKey!,
+        );
         await _secureStorage.write('user_data_encryption_key', _userDataKey!);
       }
     } catch (e) {
@@ -145,8 +159,21 @@ class SmartDuaIntelligenceService {
     return {
       'version': '1.0',
       'keywords': {
-        'anxious': ['anxiety', 'nervous', 'worried', 'tense', 'restless', 'uneasy'],
-        'stressed': ['stress', 'overwhelmed', 'pressure', 'burden', 'exhausted'],
+        'anxious': [
+          'anxiety',
+          'nervous',
+          'worried',
+          'tense',
+          'restless',
+          'uneasy',
+        ],
+        'stressed': [
+          'stress',
+          'overwhelmed',
+          'pressure',
+          'burden',
+          'exhausted',
+        ],
         'hopeful': ['hope', 'optimistic', 'positive', 'faith', 'trust'],
         'grateful': ['grateful', 'thankful', 'blessed', 'appreciate'],
         'worried': ['worry', 'concern', 'troubled', 'apprehensive'],
@@ -156,9 +183,19 @@ class SmartDuaIntelligenceService {
         'fearful': ['fear', 'scared', 'afraid', 'terrified', 'frightened'],
         'confident': ['confident', 'sure', 'certain', 'strong', 'determined'],
         'uncertain': ['uncertain', 'confused', 'doubtful', 'hesitant', 'lost'],
-        'seeking_guidance': ['guidance', 'help', 'direction', 'lost', 'searching'],
+        'seeking_guidance': [
+          'guidance',
+          'help',
+          'direction',
+          'lost',
+          'searching',
+        ],
       },
-      'weights': {'keyword_match': 0.4, 'context_relevance': 0.3, 'historical_pattern': 0.3},
+      'weights': {
+        'keyword_match': 0.4,
+        'context_relevance': 0.3,
+        'historical_pattern': 0.3,
+      },
     };
   }
 
@@ -168,11 +205,39 @@ class SmartDuaIntelligenceService {
       'version': '1.0',
       'contexts': {
         'travel': ['travel', 'journey', 'trip', 'flight', 'destination'],
-        'health': ['health', 'sick', 'illness', 'doctor', 'medicine', 'healing'],
-        'work_career': ['work', 'job', 'career', 'interview', 'promotion', 'boss'],
+        'health': [
+          'health',
+          'sick',
+          'illness',
+          'doctor',
+          'medicine',
+          'healing',
+        ],
+        'work_career': [
+          'work',
+          'job',
+          'career',
+          'interview',
+          'promotion',
+          'boss',
+        ],
         'family': ['family', 'parents', 'children', 'spouse', 'relatives'],
-        'education': ['education', 'exam', 'study', 'school', 'university', 'test'],
-        'financial': ['money', 'financial', 'debt', 'wealth', 'business', 'income'],
+        'education': [
+          'education',
+          'exam',
+          'study',
+          'school',
+          'university',
+          'test',
+        ],
+        'financial': [
+          'money',
+          'financial',
+          'debt',
+          'wealth',
+          'business',
+          'income',
+        ],
         'spiritual': ['spiritual', 'prayer', 'faith', 'worship', 'religion'],
         'relationships': ['relationship', 'marriage', 'friendship', 'love'],
         'protection': ['protection', 'safety', 'danger', 'security', 'harm'],
@@ -184,7 +249,9 @@ class SmartDuaIntelligenceService {
   }
 
   /// Analyze user input and generate contextual recommendations
-  Future<List<SmartDuaRecommendation>> analyzeContextualInput(String input) async {
+  Future<List<SmartDuaRecommendation>> analyzeContextualInput(
+    String input,
+  ) async {
     await _validatePremiumAccess();
 
     try {
@@ -196,7 +263,11 @@ class SmartDuaIntelligenceService {
       final context = contextualInput.detectedContext;
 
       // Generate personalized recommendations
-      final recommendations = await _generateRecommendations(emotion, context, contextualInput);
+      final recommendations = await _generateRecommendations(
+        emotion,
+        context,
+        contextualInput,
+      );
 
       // Cache recommendations
       _recommendationsCache[contextualInput.userId] = recommendations;
@@ -205,7 +276,9 @@ class SmartDuaIntelligenceService {
       _recommendationsController.add(recommendations);
       _emotionalStateController.add(emotion);
 
-      AppLogger.info('Generated ${recommendations.length} contextual recommendations');
+      AppLogger.info(
+        'Generated ${recommendations.length} contextual recommendations',
+      );
       return recommendations;
     } catch (e) {
       AppLogger.error('Failed to analyze contextual input: $e');
@@ -253,7 +326,8 @@ class SmartDuaIntelligenceService {
 
   /// Extract relevant keywords from input
   List<String> _extractKeywords(String input) {
-    final words = input.split(RegExp(r'\W+')).where((word) => word.length > 2).toList();
+    final words =
+        input.split(RegExp(r'\W+')).where((word) => word.length > 2).toList();
 
     // Remove common stop words
     final stopWords = {
@@ -286,7 +360,8 @@ class SmartDuaIntelligenceService {
     // Calculate scores for each emotion
     for (final emotion in EmotionalState.values) {
       final emotionKey = emotion.toString().split('.').last;
-      final relatedKeywords = (emotionKeywords[emotionKey] as List<dynamic>?)?.cast<String>() ?? [];
+      final relatedKeywords =
+          (emotionKeywords[emotionKey] as List<dynamic>?)?.cast<String>() ?? [];
 
       double score = 0.0;
       for (final keyword in keywords) {
@@ -294,7 +369,8 @@ class SmartDuaIntelligenceService {
           if (input.contains(emotionKeyword) || keyword == emotionKeyword) {
             score += 1.0;
           }
-          if (keyword.contains(emotionKeyword) || emotionKeyword.contains(keyword)) {
+          if (keyword.contains(emotionKeyword) ||
+              emotionKeyword.contains(keyword)) {
             score += 0.5;
           }
         }
@@ -304,7 +380,9 @@ class SmartDuaIntelligenceService {
     }
 
     // Return emotion with highest score
-    return emotionScores.entries.reduce((a, b) => a.value > b.value ? a : b).key;
+    return emotionScores.entries
+        .reduce((a, b) => a.value > b.value ? a : b)
+        .key;
   }
 
   /// Detect context from input
@@ -315,7 +393,8 @@ class SmartDuaIntelligenceService {
     // Calculate scores for each context
     for (final context in DuaContext.values) {
       final contextKey = context.toString().split('.').last;
-      final relatedKeywords = (contextKeywords[contextKey] as List<dynamic>?)?.cast<String>() ?? [];
+      final relatedKeywords =
+          (contextKeywords[contextKey] as List<dynamic>?)?.cast<String>() ?? [];
 
       double score = 0.0;
       for (final keyword in keywords) {
@@ -323,7 +402,8 @@ class SmartDuaIntelligenceService {
           if (input.contains(contextKeyword) || keyword == contextKeyword) {
             score += 1.0;
           }
-          if (keyword.contains(contextKeyword) || contextKeyword.contains(keyword)) {
+          if (keyword.contains(contextKeyword) ||
+              contextKeyword.contains(keyword)) {
             score += 0.5;
           }
         }
@@ -333,11 +413,16 @@ class SmartDuaIntelligenceService {
     }
 
     // Return context with highest score
-    return contextScores.entries.reduce((a, b) => a.value > b.value ? a : b).key;
+    return contextScores.entries
+        .reduce((a, b) => a.value > b.value ? a : b)
+        .key;
   }
 
   /// Calculate emotion detection confidence
-  double _calculateEmotionConfidence(EmotionalState emotion, List<String> keywords) {
+  double _calculateEmotionConfidence(
+    EmotionalState emotion,
+    List<String> keywords,
+  ) {
     final relatedKeywords = emotion.relatedKeywords;
     int matches = 0;
 
@@ -351,7 +436,10 @@ class SmartDuaIntelligenceService {
   }
 
   /// Calculate context detection confidence
-  double _calculateContextConfidence(DuaContext context, List<String> keywords) {
+  double _calculateContextConfidence(
+    DuaContext context,
+    List<String> keywords,
+  ) {
     final relatedKeywords = context.contextKeywords;
     int matches = 0;
 
@@ -366,8 +454,24 @@ class SmartDuaIntelligenceService {
 
   /// Calculate sentiment score
   double _calculateSentiment(String input) {
-    final positiveWords = ['good', 'great', 'happy', 'blessed', 'grateful', 'thankful', 'hopeful'];
-    final negativeWords = ['bad', 'terrible', 'sad', 'worried', 'anxious', 'scared', 'stressed'];
+    final positiveWords = [
+      'good',
+      'great',
+      'happy',
+      'blessed',
+      'grateful',
+      'thankful',
+      'hopeful',
+    ];
+    final negativeWords = [
+      'bad',
+      'terrible',
+      'sad',
+      'worried',
+      'anxious',
+      'scared',
+      'stressed',
+    ];
 
     int positiveScore = 0;
     int negativeScore = 0;
@@ -386,7 +490,14 @@ class SmartDuaIntelligenceService {
 
   /// Calculate urgency level
   double _calculateUrgency(String input) {
-    final urgentWords = ['urgent', 'emergency', 'immediately', 'now', 'quickly', 'help'];
+    final urgentWords = [
+      'urgent',
+      'emergency',
+      'immediately',
+      'now',
+      'quickly',
+      'help',
+    ];
     int urgencyScore = 0;
 
     final lowerInput = input.toLowerCase();
@@ -414,8 +525,17 @@ class SmartDuaIntelligenceService {
 
     for (final dua in relevantDuas.take(5)) {
       // Limit to top 5 recommendations
-      final relevanceScore = _calculateRelevanceScore(dua, emotion, context, userPattern);
-      final confidence = _determineConfidenceLevel(relevanceScore, input.emotionConfidence, input.contextConfidence);
+      final relevanceScore = _calculateRelevanceScore(
+        dua,
+        emotion,
+        context,
+        userPattern,
+      );
+      final confidence = _determineConfidenceLevel(
+        relevanceScore,
+        input.emotionConfidence,
+        input.contextConfidence,
+      );
 
       final recommendation = SmartDuaRecommendation(
         id: 'rec_${DateTime.now().millisecondsSinceEpoch}_${dua.id}',
@@ -443,20 +563,28 @@ class SmartDuaIntelligenceService {
     }
 
     // Sort by relevance score
-    recommendations.sort((a, b) => b.relevanceScore.compareTo(a.relevanceScore));
+    recommendations.sort(
+      (a, b) => b.relevanceScore.compareTo(a.relevanceScore),
+    );
 
     return recommendations;
   }
 
   /// Get relevant duas based on emotion and context
-  Future<List<DuaEntity>> _getRelevantDuas(EmotionalState emotion, DuaContext context) async {
+  Future<List<DuaEntity>> _getRelevantDuas(
+    EmotionalState emotion,
+    DuaContext context,
+  ) async {
     // This would typically query a database
     // For now, return mock data based on emotion and context
     return _getMockDuasForEmotionAndContext(emotion, context);
   }
 
   /// Mock duas for demonstration (replace with database query)
-  List<DuaEntity> _getMockDuasForEmotionAndContext(EmotionalState emotion, DuaContext context) {
+  List<DuaEntity> _getMockDuasForEmotionAndContext(
+    EmotionalState emotion,
+    DuaContext context,
+  ) {
     // Return relevant duas based on emotion and context
     // This is simplified for demo purposes
     return [
@@ -544,7 +672,8 @@ class SmartDuaIntelligenceService {
     double emotionConfidence,
     double contextConfidence,
   ) {
-    final averageConfidence = (relevanceScore / 10.0 + emotionConfidence + contextConfidence) / 3.0;
+    final averageConfidence =
+        (relevanceScore / 10.0 + emotionConfidence + contextConfidence) / 3.0;
 
     if (averageConfidence >= 0.8) return AIConfidenceLevel.veryHigh;
     if (averageConfidence >= 0.6) return AIConfidenceLevel.high;
@@ -553,7 +682,11 @@ class SmartDuaIntelligenceService {
   }
 
   /// Generate human-readable recommendation reason
-  String _generateRecommendationReason(EmotionalState emotion, DuaContext context, double relevanceScore) {
+  String _generateRecommendationReason(
+    EmotionalState emotion,
+    DuaContext context,
+    double relevanceScore,
+  ) {
     final emotionDesc = emotion.displayName.toLowerCase();
     final contextDesc = context.displayName.toLowerCase();
 
@@ -573,7 +706,9 @@ class SmartDuaIntelligenceService {
 
     for (final inputKeyword in inputKeywords) {
       for (final duaKeyword in duaKeywords) {
-        if (inputKeyword == duaKeyword || inputKeyword.contains(duaKeyword) || duaKeyword.contains(inputKeyword)) {
+        if (inputKeyword == duaKeyword ||
+            inputKeyword.contains(duaKeyword) ||
+            duaKeyword.contains(inputKeyword)) {
           matches.add(inputKeyword);
         }
       }
@@ -607,7 +742,10 @@ class SmartDuaIntelligenceService {
   }
 
   /// Calculate user preference score
-  double _calculateUserPreference(DuaEntity dua, EmotionalPattern? userPattern) {
+  double _calculateUserPreference(
+    DuaEntity dua,
+    EmotionalPattern? userPattern,
+  ) {
     if (userPattern == null) return 0.5; // Neutral if no pattern
 
     // Check if user frequently uses similar duas
@@ -662,7 +800,10 @@ class SmartDuaIntelligenceService {
 
   /// Start background pattern analysis
   void _startPatternAnalysis() {
-    _patternAnalysisTimer = Timer.periodic(const Duration(hours: 6), (_) => _analyzeUserPatterns());
+    _patternAnalysisTimer = Timer.periodic(
+      const Duration(hours: 6),
+      (_) => _analyzeUserPatterns(),
+    );
   }
 
   /// Analyze user patterns for better recommendations
@@ -688,8 +829,16 @@ class SmartDuaIntelligenceService {
     final pattern = EmotionalPattern(
       userId: userId,
       dominantEmotion: EmotionalState.peaceful,
-      emotionFrequency: {EmotionalState.anxious: 0.3, EmotionalState.grateful: 0.4, EmotionalState.peaceful: 0.3},
-      contextPreferences: {DuaContext.spiritual: 5, DuaContext.gratitude: 3, DuaContext.protection: 2},
+      emotionFrequency: {
+        EmotionalState.anxious: 0.3,
+        EmotionalState.grateful: 0.4,
+        EmotionalState.peaceful: 0.3,
+      },
+      contextPreferences: {
+        DuaContext.spiritual: 5,
+        DuaContext.gratitude: 3,
+        DuaContext.protection: 2,
+      },
       frequentTriggers: ['anxiety', 'gratitude', 'peace'],
       timePatterns: {'morning': 0.4, 'evening': 0.6},
       stressLevel: 0.4,
@@ -754,7 +903,11 @@ class SmartDuaIntelligenceService {
           final frequency = userPattern.emotionFrequency[emotion]!;
           if (frequency > 0.2) {
             // Only create collections for frequent emotions
-            final collection = await _createSmartCollection(userId, emotion, frequency);
+            final collection = await _createSmartCollection(
+              userId,
+              emotion,
+              frequency,
+            );
             collections.add(collection);
           }
         }
@@ -769,7 +922,11 @@ class SmartDuaIntelligenceService {
   }
 
   /// Create smart collection based on emotional patterns
-  Future<SmartDuaCollection> _createSmartCollection(String userId, EmotionalState emotion, double frequency) async {
+  Future<SmartDuaCollection> _createSmartCollection(
+    String userId,
+    EmotionalState emotion,
+    double frequency,
+  ) async {
     final relevantDuas = await _getRelevantDuas(emotion, DuaContext.spiritual);
     final duaIds = relevantDuas.map((dua) => dua.id).take(10).toList();
 
@@ -777,7 +934,8 @@ class SmartDuaIntelligenceService {
       id: 'smart_${emotion.name}_$userId',
       userId: userId,
       name: '${emotion.displayName} Collection',
-      description: 'Personalized duas for when you\'re ${emotion.displayName.toLowerCase()}',
+      description:
+          'Personalized duas for when you\'re ${emotion.displayName.toLowerCase()}',
       duaIds: duaIds,
       primaryEmotion: emotion,
       secondaryEmotions: _getRelatedEmotions(emotion),
@@ -859,11 +1017,14 @@ class SmartDuaIntelligenceService {
   Future<void> _processFeedbackForModelImprovement(AIFeedback feedback) async {
     // In production, this would update ML models
     // For demo, just log the feedback processing
-    AppLogger.info('Processing feedback for model improvement: ${feedback.rating}/5');
+    AppLogger.info(
+      'Processing feedback for model improvement: ${feedback.rating}/5',
+    );
   }
 
   /// Get current emotional state
-  EmotionalState? get currentEmotionalState => _patternsCache.values.firstOrNull?.dominantEmotion;
+  EmotionalState? get currentEmotionalState =>
+      _patternsCache.values.firstOrNull?.dominantEmotion;
 
   /// Get user analytics
   Future<ContextualAnalytics> getUserAnalytics(String userId) async {
@@ -872,13 +1033,25 @@ class SmartDuaIntelligenceService {
     // Load or create analytics
     return ContextualAnalytics(
       userId: userId,
-      emotionSuccessRate: {EmotionalState.anxious: 8, EmotionalState.grateful: 9, EmotionalState.peaceful: 10},
-      contextEffectiveness: {DuaContext.spiritual: 0.9, DuaContext.gratitude: 0.95, DuaContext.protection: 0.8},
+      emotionSuccessRate: {
+        EmotionalState.anxious: 8,
+        EmotionalState.grateful: 9,
+        EmotionalState.peaceful: 10,
+      },
+      contextEffectiveness: {
+        DuaContext.spiritual: 0.9,
+        DuaContext.gratitude: 0.95,
+        DuaContext.protection: 0.8,
+      },
       totalRecommendations: 50,
       acceptedRecommendations: 38,
       dismissedRecommendations: 12,
       overallSatisfaction: 0.85,
-      improvementAreas: {'emotion_detection': 0.9, 'context_analysis': 0.8, 'personalization': 0.85},
+      improvementAreas: {
+        'emotion_detection': 0.9,
+        'context_analysis': 0.8,
+        'personalization': 0.85,
+      },
       lastUpdated: DateTime.now(),
     );
   }

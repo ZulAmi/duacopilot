@@ -2,7 +2,18 @@
 enum CourseDifficulty { beginner, intermediate, advanced }
 
 /// Course categories for Islamic learning
-enum CourseCategory { quran, hadith, fiqh, aqeedah, history, duas, arabic, family, children, spirituality }
+enum CourseCategory {
+  quran,
+  hadith,
+  fiqh,
+  aqeedah,
+  history,
+  duas,
+  arabic,
+  family,
+  children,
+  spirituality,
+}
 
 /// Islamic course model for education marketplace
 class IslamicCourse {
@@ -110,8 +121,12 @@ class IslamicCourse {
     instructorImageUrl: json['instructorImageUrl'],
     thumbnailUrl: json['thumbnailUrl'],
     videoPreviewUrl: json['videoPreviewUrl'],
-    category: CourseCategory.values.firstWhere((e) => e.name == json['category']),
-    difficulty: CourseDifficulty.values.firstWhere((e) => e.name == json['difficulty']),
+    category: CourseCategory.values.firstWhere(
+      (e) => e.name == json['category'],
+    ),
+    difficulty: CourseDifficulty.values.firstWhere(
+      (e) => e.name == json['difficulty'],
+    ),
     price: (json['price'] as num).toDouble(),
     originalPrice: (json['originalPrice'] as num).toDouble(),
     durationMinutes: json['durationMinutes'],
@@ -125,7 +140,8 @@ class IslamicCourse {
     isPopular: json['isPopular'] ?? false,
     isNew: json['isNew'] ?? false,
     createdAt: DateTime.parse(json['createdAt']),
-    updatedAt: json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
+    updatedAt:
+        json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
     language: json['language'] ?? 'English',
     hasSubtitles: json['hasSubtitles'] ?? false,
     hasCertificate: json['hasCertificate'] ?? false,
@@ -231,18 +247,25 @@ class CourseEnrollment {
     'certificateData': certificateData,
   };
 
-  factory CourseEnrollment.fromJson(Map<String, dynamic> json) => CourseEnrollment(
-    id: json['id'],
-    userId: json['userId'],
-    courseId: json['courseId'],
-    enrolledAt: DateTime.parse(json['enrolledAt']),
-    progress: (json['progress'] as num?)?.toDouble() ?? 0.0,
-    completedAt: json['completedAt'] != null ? DateTime.parse(json['completedAt']) : null,
-    isFavorite: json['isFavorite'] ?? false,
-    lastAccessedAt: json['lastAccessedAt'] != null ? DateTime.parse(json['lastAccessedAt']) : null,
-    currentLessonIndex: json['currentLessonIndex'] ?? 0,
-    certificateData: json['certificateData'],
-  );
+  factory CourseEnrollment.fromJson(Map<String, dynamic> json) =>
+      CourseEnrollment(
+        id: json['id'],
+        userId: json['userId'],
+        courseId: json['courseId'],
+        enrolledAt: DateTime.parse(json['enrolledAt']),
+        progress: (json['progress'] as num?)?.toDouble() ?? 0.0,
+        completedAt:
+            json['completedAt'] != null
+                ? DateTime.parse(json['completedAt'])
+                : null,
+        isFavorite: json['isFavorite'] ?? false,
+        lastAccessedAt:
+            json['lastAccessedAt'] != null
+                ? DateTime.parse(json['lastAccessedAt'])
+                : null,
+        currentLessonIndex: json['currentLessonIndex'] ?? 0,
+        certificateData: json['certificateData'],
+      );
 
   /// Check if course is completed
   bool get isCompleted => completedAt != null || progress >= 100.0;
@@ -300,7 +323,10 @@ class CourseReview {
     review: json['review'],
     createdAt: DateTime.parse(json['createdAt']),
     isVerifiedPurchase: json['isVerifiedPurchase'] ?? false,
-    helpfulUserIds: json['helpfulUserIds'] != null ? List<String>.from(json['helpfulUserIds']) : null,
+    helpfulUserIds:
+        json['helpfulUserIds'] != null
+            ? List<String>.from(json['helpfulUserIds'])
+            : null,
   );
 
   /// Get formatted time ago
@@ -498,7 +524,12 @@ class SampleIslamicCourses {
         'Conflict resolution',
         'Community resources',
       ],
-      topics: ['Spousal rights in Islam', 'Islamic child-rearing', 'Extended family relations', 'Household management'],
+      topics: [
+        'Spousal rights in Islam',
+        'Islamic child-rearing',
+        'Extended family relations',
+        'Household management',
+      ],
       prerequisites: [],
       createdAt: DateTime.now().subtract(const Duration(days: 45)),
       hasCertificate: true,
@@ -526,7 +557,9 @@ class SampleIslamicCourses {
   }
 
   /// Get courses by difficulty
-  static List<IslamicCourse> getCoursesByDifficulty(CourseDifficulty difficulty) {
+  static List<IslamicCourse> getCoursesByDifficulty(
+    CourseDifficulty difficulty,
+  ) {
     return courses.where((course) => course.difficulty == difficulty).toList();
   }
 
@@ -539,7 +572,9 @@ class SampleIslamicCourses {
               course.title.toLowerCase().contains(lowercaseQuery) ||
               course.description.toLowerCase().contains(lowercaseQuery) ||
               course.instructor.toLowerCase().contains(lowercaseQuery) ||
-              course.topics.any((topic) => topic.toLowerCase().contains(lowercaseQuery)),
+              course.topics.any(
+                (topic) => topic.toLowerCase().contains(lowercaseQuery),
+              ),
         )
         .toList();
   }

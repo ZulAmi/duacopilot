@@ -10,7 +10,8 @@ import 'conversational_memory_service.dart';
 /// Features: Personalized curriculum, Socratic questioning, progress tracking
 class InteractiveLearningCompanionService {
   static InteractiveLearningCompanionService? _instance;
-  static InteractiveLearningCompanionService get instance => _instance ??= InteractiveLearningCompanionService._();
+  static InteractiveLearningCompanionService get instance =>
+      _instance ??= InteractiveLearningCompanionService._();
 
   InteractiveLearningCompanionService._();
 
@@ -39,7 +40,9 @@ class InteractiveLearningCompanionService {
 
       AppLogger.info('Interactive Learning Companion initialized');
     } catch (e) {
-      AppLogger.error('Failed to initialize Interactive Learning Companion: $e');
+      AppLogger.error(
+        'Failed to initialize Interactive Learning Companion: $e',
+      );
       rethrow;
     }
   }
@@ -79,9 +82,15 @@ class InteractiveLearningCompanionService {
 
     if (_currentSession == null) {
       return LearningResponse(
-        response: 'Assalamu Alaikum! I\'d love to teach you about Islam. What would you like to learn today?',
+        response:
+            'Assalamu Alaikum! I\'d love to teach you about Islam. What would you like to learn today?',
         responseType: 'invitation',
-        suggestedTopics: ['Prayer', 'Quran', 'Prophet\'s Life', 'Islamic Values'],
+        suggestedTopics: [
+          'Prayer',
+          'Quran',
+          'Prophet\'s Life',
+          'Islamic Values',
+        ],
       );
     }
 
@@ -90,14 +99,22 @@ class InteractiveLearningCompanionService {
       final currentLesson = module.lessons[_currentSession!.currentStep];
 
       // Process user's response to current lesson
-      final understanding = await _assessUnderstanding(userInput, currentLesson);
+      final understanding = await _assessUnderstanding(
+        userInput,
+        currentLesson,
+      );
 
       // Generate appropriate response based on understanding
-      return await _generateLearningResponse(understanding: understanding, lesson: currentLesson, userInput: userInput);
+      return await _generateLearningResponse(
+        understanding: understanding,
+        lesson: currentLesson,
+        userInput: userInput,
+      );
     } catch (e) {
       AppLogger.error('Failed to process learning interaction: $e');
       return LearningResponse(
-        response: 'I apologize, I had trouble understanding. Could you please repeat that?',
+        response:
+            'I apologize, I had trouble understanding. Could you please repeat that?',
         responseType: 'clarification',
       );
     }
@@ -112,7 +129,11 @@ class InteractiveLearningCompanionService {
       final suggestions = <String>[];
 
       // Based on conversation history
-      final recentTopics = context.recentTurns.map((turn) => turn.topic).where((topic) => topic != 'general').toSet();
+      final recentTopics =
+          context.recentTurns
+              .map((turn) => turn.topic)
+              .where((topic) => topic != 'general')
+              .toSet();
 
       for (final topic in recentTopics) {
         final deeperTopics = _getRelatedLearningTopics(topic);
@@ -146,7 +167,8 @@ class InteractiveLearningCompanionService {
         LearningLesson(
           id: 'shahada',
           title: 'The Declaration of Faith (Shahada)',
-          content: 'The Shahada is the first and most important pillar of Islam',
+          content:
+              'The Shahada is the first and most important pillar of Islam',
           questions: [
             'What does "La ilaha illa Allah" mean to you personally?',
             'How does believing in one God change how we live?',
@@ -250,7 +272,10 @@ class InteractiveLearningCompanionService {
   }
 
   /// Generate opening response for learning session
-  Future<LearningResponse> _generateOpeningResponse(LearningModule module, String? specificSubject) async {
+  Future<LearningResponse> _generateOpeningResponse(
+    LearningModule module,
+    String? specificSubject,
+  ) async {
     final firstLesson = module.lessons.first;
 
     final response = '''
@@ -285,7 +310,10 @@ What excites you most about learning this topic?
   }
 
   /// Assess user's understanding
-  Future<UnderstandingAssessment> _assessUnderstanding(String userInput, LearningLesson lesson) async {
+  Future<UnderstandingAssessment> _assessUnderstanding(
+    String userInput,
+    LearningLesson lesson,
+  ) async {
     final input = userInput.toLowerCase();
 
     // Simple understanding assessment
@@ -300,7 +328,14 @@ What excites you most about learning this topic?
     }
 
     // Check for engagement indicators
-    final engagementWords = ['because', 'why', 'how', 'what', 'interesting', 'beautiful'];
+    final engagementWords = [
+      'because',
+      'why',
+      'how',
+      'what',
+      'interesting',
+      'beautiful',
+    ];
     if (engagementWords.any((word) => input.contains(word))) {
       understanding += 0.1;
     }
@@ -344,7 +379,8 @@ What excites you most about learning this topic?
     }
 
     // Check if ready to move to next lesson
-    final readyToAdvance = understanding.level > 0.7 && understanding.showsEngagement;
+    final readyToAdvance =
+        understanding.level > 0.7 && understanding.showsEngagement;
 
     return LearningResponse(
       response: response,
@@ -356,7 +392,10 @@ What excites you most about learning this topic?
   }
 
   /// Handle learning questions
-  Future<String> _handleLearningQuestion(String userInput, LearningLesson lesson) async {
+  Future<String> _handleLearningQuestion(
+    String userInput,
+    LearningLesson lesson,
+  ) async {
     // This would integrate with your RAG system for detailed answers
     return '''
 SubhanAllah, what a thoughtful question! 
@@ -385,7 +424,10 @@ Does this make it clearer? What part would you like me to elaborate on?
   }
 
   /// Deepen understanding
-  Future<String> _deepenUnderstanding(String userInput, LearningLesson lesson) async {
+  Future<String> _deepenUnderstanding(
+    String userInput,
+    LearningLesson lesson,
+  ) async {
     return '''
 MashaAllah! I can see you're really reflecting on this.
 
@@ -408,7 +450,8 @@ What do you think about this connection?
       'Does this remind you of anything from your experience?',
     ];
 
-    final encouragement = encouragements[Random().nextInt(encouragements.length)];
+    final encouragement =
+        encouragements[Random().nextInt(encouragements.length)];
 
     return '''
 This is a beautiful topic to reflect upon.
@@ -422,9 +465,16 @@ Remember, there are no wrong questions in learning - only opportunities to grow!
   }
 
   /// Generate suggested responses
-  List<String> _generateSuggestedResponses(LearningLesson lesson, UnderstandingAssessment understanding) {
+  List<String> _generateSuggestedResponses(
+    LearningLesson lesson,
+    UnderstandingAssessment understanding,
+  ) {
     if (understanding.needsClarification) {
-      return ['Can you explain that differently?', 'Give me an example please', 'What does that mean exactly?'];
+      return [
+        'Can you explain that differently?',
+        'Give me an example please',
+        'What does that mean exactly?',
+      ];
     } else if (understanding.showsEngagement) {
       return [
         'Tell me more about this',
@@ -433,7 +483,12 @@ Remember, there are no wrong questions in learning - only opportunities to grow!
         'Can you share a story about this?',
       ];
     } else {
-      return ['That\'s interesting', 'I have a question', 'Can you give an example?', 'How do I apply this?'];
+      return [
+        'That\'s interesting',
+        'I have a question',
+        'Can you give an example?',
+        'How do I apply this?',
+      ];
     }
   }
 
@@ -442,7 +497,11 @@ Remember, there are no wrong questions in learning - only opportunities to grow!
     final relatedTopics = {
       'prayer': ['Prayer times', 'Prayer meanings', 'Spiritual purification'],
       'quran': ['Quranic stories', 'Verses for daily life', 'Quranic Arabic'],
-      'prophet': ['Prophetic traditions', 'Companion stories', 'Islamic history'],
+      'prophet': [
+        'Prophetic traditions',
+        'Companion stories',
+        'Islamic history',
+      ],
       'faith': ['Pillars of Islam', 'Islamic beliefs', 'Spiritual development'],
     };
 
@@ -452,8 +511,15 @@ Remember, there are no wrong questions in learning - only opportunities to grow!
   /// Identify knowledge gaps
   List<String> _identifyKnowledgeGaps() {
     // Based on learning progress, identify what hasn't been covered
-    final allTopics = ['Prayer basics', 'Quran understanding', 'Prophet\'s character', 'Islamic values'];
-    return allTopics.where((topic) => _learningProgress[topic] == null).toList();
+    final allTopics = [
+      'Prayer basics',
+      'Quran understanding',
+      'Prophet\'s character',
+      'Islamic values',
+    ];
+    return allTopics
+        .where((topic) => _learningProgress[topic] == null)
+        .toList();
   }
 
   /// Load learning progress
@@ -469,7 +535,10 @@ Remember, there are no wrong questions in learning - only opportunities to grow!
   }
 
   /// Get or create learning module
-  Future<LearningModule> _getOrCreateLearningModule(String topic, String level) async {
+  Future<LearningModule> _getOrCreateLearningModule(
+    String topic,
+    String level,
+  ) async {
     // Find existing module or create new one
     final moduleKey = '${topic.toLowerCase()}_$level';
 

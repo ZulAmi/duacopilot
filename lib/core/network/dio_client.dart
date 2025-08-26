@@ -18,15 +18,21 @@ class DioClient {
       InterceptorsWrapper(
         onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
           // Add auth headers, API keys, etc.
-          AppLogger.debug('REQUEST[${options.method}] => PATH: ${options.path}');
+          AppLogger.debug(
+            'REQUEST[${options.method}] => PATH: ${options.path}',
+          );
           handler.next(options);
         },
         onResponse: (Response response, ResponseInterceptorHandler handler) {
-          AppLogger.debug('RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}',);
+          AppLogger.debug(
+            'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}',
+          );
           handler.next(response);
         },
         onError: (DioException error, ErrorInterceptorHandler handler) {
-          AppLogger.debug('ERROR[${error.response?.statusCode}] => PATH: ${error.requestOptions.path}',);
+          AppLogger.debug(
+            'ERROR[${error.response?.statusCode}] => PATH: ${error.requestOptions.path}',
+          );
           handler.next(error);
         },
       ),

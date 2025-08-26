@@ -11,7 +11,8 @@ class PrayerTimesScreen extends ConsumerStatefulWidget {
   ConsumerState<PrayerTimesScreen> createState() => _PrayerTimesScreenState();
 }
 
-class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen> with TickerProviderStateMixin {
+class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen>
+    with TickerProviderStateMixin {
   late AnimationController _fadeController;
   late AnimationController _slideController;
   bool _isLoading = true;
@@ -21,8 +22,14 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen> with Tick
   @override
   void initState() {
     super.initState();
-    _fadeController = AnimationController(duration: RevolutionaryIslamicTheme.animationMedium, vsync: this);
-    _slideController = AnimationController(duration: RevolutionaryIslamicTheme.animationSlow, vsync: this);
+    _fadeController = AnimationController(
+      duration: RevolutionaryIslamicTheme.animationMedium,
+      vsync: this,
+    );
+    _slideController = AnimationController(
+      duration: RevolutionaryIslamicTheme.animationSlow,
+      vsync: this,
+    );
     _loadPrayerTimes();
   }
 
@@ -52,9 +59,27 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen> with Tick
     return [
       PrayerTime('Fajr', '05:30', 'Dawn Prayer', Icons.wb_twilight, false),
       PrayerTime('Dhuhr', '12:45', 'Noon Prayer', Icons.wb_sunny, true),
-      PrayerTime('Asr', '16:20', 'Afternoon Prayer', Icons.wb_sunny_outlined, false),
-      PrayerTime('Maghrib', '19:15', 'Sunset Prayer', Icons.wb_twighlight, false),
-      PrayerTime('Isha', '21:00', 'Night Prayer', Icons.nightlight_round, false),
+      PrayerTime(
+        'Asr',
+        '16:20',
+        'Afternoon Prayer',
+        Icons.wb_sunny_outlined,
+        false,
+      ),
+      PrayerTime(
+        'Maghrib',
+        '19:15',
+        'Sunset Prayer',
+        Icons.wb_twighlight,
+        false,
+      ),
+      PrayerTime(
+        'Isha',
+        '21:00',
+        'Night Prayer',
+        Icons.nightlight_round,
+        false,
+      ),
     ];
   }
 
@@ -82,19 +107,29 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen> with Tick
             padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space6),
             decoration: BoxDecoration(
               gradient: RevolutionaryIslamicTheme.heroGradient,
-              borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radius3Xl),
+              borderRadius: BorderRadius.circular(
+                RevolutionaryIslamicTheme.radius3Xl,
+              ),
               boxShadow: RevolutionaryIslamicTheme.shadowLg,
             ),
-            child: const Icon(Icons.access_time_rounded, color: RevolutionaryIslamicTheme.textOnColor, size: 48),
+            child: const Icon(
+              Icons.access_time_rounded,
+              color: RevolutionaryIslamicTheme.textOnColor,
+              size: 48,
+            ),
           ),
           const SizedBox(height: RevolutionaryIslamicTheme.space6),
           const CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(RevolutionaryIslamicTheme.primaryEmerald),
+            valueColor: AlwaysStoppedAnimation<Color>(
+              RevolutionaryIslamicTheme.primaryEmerald,
+            ),
           ),
           const SizedBox(height: RevolutionaryIslamicTheme.space4),
           Text(
             'Loading prayer times...',
-            style: RevolutionaryIslamicTheme.body1.copyWith(color: RevolutionaryIslamicTheme.textSecondary),
+            style: RevolutionaryIslamicTheme.body1.copyWith(
+              color: RevolutionaryIslamicTheme.textSecondary,
+            ),
           ),
         ],
       ),
@@ -135,7 +170,9 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen> with Tick
         padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space5),
         decoration: BoxDecoration(
           gradient: RevolutionaryIslamicTheme.heroGradient,
-          borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radius3Xl),
+          borderRadius: BorderRadius.circular(
+            RevolutionaryIslamicTheme.radius3Xl,
+          ),
           boxShadow: RevolutionaryIslamicTheme.shadowMd,
         ),
         child: Row(
@@ -144,9 +181,15 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen> with Tick
               padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space3),
               decoration: BoxDecoration(
                 color: RevolutionaryIslamicTheme.textOnColor.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radius2Xl),
+                borderRadius: BorderRadius.circular(
+                  RevolutionaryIslamicTheme.radius2Xl,
+                ),
               ),
-              child: const Icon(Icons.location_on_rounded, color: RevolutionaryIslamicTheme.textOnColor, size: 24),
+              child: const Icon(
+                Icons.location_on_rounded,
+                color: RevolutionaryIslamicTheme.textOnColor,
+                size: 24,
+              ),
             ),
             const SizedBox(width: RevolutionaryIslamicTheme.space4),
             Expanded(
@@ -156,7 +199,9 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen> with Tick
                   Text(
                     'Current Location',
                     style: RevolutionaryIslamicTheme.body2.copyWith(
-                      color: RevolutionaryIslamicTheme.textOnColor.withOpacity(0.8),
+                      color: RevolutionaryIslamicTheme.textOnColor.withOpacity(
+                        0.8,
+                      ),
                     ),
                   ),
                   const SizedBox(height: RevolutionaryIslamicTheme.space1),
@@ -172,8 +217,14 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen> with Tick
             ),
             IconButton(
               onPressed: () => _loadPrayerTimes(),
-              icon: const Icon(Icons.refresh_rounded, color: RevolutionaryIslamicTheme.textOnColor),
-              style: IconButton.styleFrom(backgroundColor: RevolutionaryIslamicTheme.textOnColor.withOpacity(0.2)),
+              icon: const Icon(
+                Icons.refresh_rounded,
+                color: RevolutionaryIslamicTheme.textOnColor,
+              ),
+              style: IconButton.styleFrom(
+                backgroundColor: RevolutionaryIslamicTheme.textOnColor
+                    .withOpacity(0.2),
+              ),
             ),
           ],
         ),
@@ -182,19 +233,26 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen> with Tick
   }
 
   Widget _buildNextPrayerCard() {
-    final nextPrayer = _prayerTimes.firstWhere((prayer) => !prayer.isPassed, orElse: () => _prayerTimes.first);
+    final nextPrayer = _prayerTimes.firstWhere(
+      (prayer) => !prayer.isPassed,
+      orElse: () => _prayerTimes.first,
+    );
 
     return SlideTransition(
       position: Tween<Offset>(
         begin: const Offset(-0.3, 0),
         end: Offset.zero,
-      ).animate(CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic)),
+      ).animate(
+        CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic),
+      ),
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space5),
         decoration: BoxDecoration(
           color: RevolutionaryIslamicTheme.backgroundSecondary,
-          borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radius3Xl),
+          borderRadius: BorderRadius.circular(
+            RevolutionaryIslamicTheme.radius3Xl,
+          ),
           border: Border.all(color: RevolutionaryIslamicTheme.borderLight),
           boxShadow: RevolutionaryIslamicTheme.shadowSm,
         ),
@@ -204,17 +262,29 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen> with Tick
             Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space2),
-                  decoration: BoxDecoration(
-                    color: RevolutionaryIslamicTheme.accentPurple.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusXl),
+                  padding: const EdgeInsets.all(
+                    RevolutionaryIslamicTheme.space2,
                   ),
-                  child: Icon(nextPrayer.icon, color: RevolutionaryIslamicTheme.accentPurple, size: 20),
+                  decoration: BoxDecoration(
+                    color: RevolutionaryIslamicTheme.accentPurple.withOpacity(
+                      0.1,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      RevolutionaryIslamicTheme.radiusXl,
+                    ),
+                  ),
+                  child: Icon(
+                    nextPrayer.icon,
+                    color: RevolutionaryIslamicTheme.accentPurple,
+                    size: 20,
+                  ),
                 ),
                 const SizedBox(width: RevolutionaryIslamicTheme.space3),
                 Text(
                   'Next Prayer',
-                  style: RevolutionaryIslamicTheme.body2.copyWith(color: RevolutionaryIslamicTheme.textSecondary),
+                  style: RevolutionaryIslamicTheme.body2.copyWith(
+                    color: RevolutionaryIslamicTheme.textSecondary,
+                  ),
                 ),
                 const Spacer(),
                 Container(
@@ -223,8 +293,12 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen> with Tick
                     vertical: RevolutionaryIslamicTheme.space1,
                   ),
                   decoration: BoxDecoration(
-                    color: RevolutionaryIslamicTheme.successGreen.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusFull),
+                    color: RevolutionaryIslamicTheme.successGreen.withOpacity(
+                      0.1,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      RevolutionaryIslamicTheme.radiusFull,
+                    ),
                   ),
                   child: Text(
                     'In 2h 15m',
@@ -237,7 +311,12 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen> with Tick
               ],
             ),
             const SizedBox(height: RevolutionaryIslamicTheme.space4),
-            Text(nextPrayer.name, style: RevolutionaryIslamicTheme.headline2.copyWith(fontWeight: FontWeight.w800)),
+            Text(
+              nextPrayer.name,
+              style: RevolutionaryIslamicTheme.headline2.copyWith(
+                fontWeight: FontWeight.w800,
+              ),
+            ),
             const SizedBox(height: RevolutionaryIslamicTheme.space1),
             Text(
               nextPrayer.time,
@@ -260,19 +339,33 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen> with Tick
         children: [
           Text(
             'Today\'s Prayer Schedule',
-            style: RevolutionaryIslamicTheme.headline3.copyWith(fontWeight: FontWeight.w700),
+            style: RevolutionaryIslamicTheme.headline3.copyWith(
+              fontWeight: FontWeight.w700,
+            ),
           ),
           const SizedBox(height: RevolutionaryIslamicTheme.space4),
           ...(_prayerTimes.asMap().entries.map((entry) {
             final index = entry.key;
             final prayer = entry.value;
             return Padding(
-              padding: EdgeInsets.only(bottom: index < _prayerTimes.length - 1 ? RevolutionaryIslamicTheme.space3 : 0),
+              padding: EdgeInsets.only(
+                bottom:
+                    index < _prayerTimes.length - 1
+                        ? RevolutionaryIslamicTheme.space3
+                        : 0,
+              ),
               child: SlideTransition(
-                position: Tween<Offset>(begin: Offset(0.3, 0), end: Offset.zero).animate(
+                position: Tween<Offset>(
+                  begin: Offset(0.3, 0),
+                  end: Offset.zero,
+                ).animate(
                   CurvedAnimation(
                     parent: _slideController,
-                    curve: Interval(index * 0.1, (index * 0.1) + 0.3, curve: Curves.easeOutCubic),
+                    curve: Interval(
+                      index * 0.1,
+                      (index * 0.1) + 0.3,
+                      curve: Curves.easeOutCubic,
+                    ),
                   ),
                 ),
                 child: _buildPrayerTimeCard(prayer),
@@ -289,8 +382,12 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen> with Tick
       padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space4),
       decoration: BoxDecoration(
         color:
-            prayer.isPassed ? RevolutionaryIslamicTheme.neutralGray100 : RevolutionaryIslamicTheme.backgroundSecondary,
-        borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radius2Xl),
+            prayer.isPassed
+                ? RevolutionaryIslamicTheme.neutralGray100
+                : RevolutionaryIslamicTheme.backgroundSecondary,
+        borderRadius: BorderRadius.circular(
+          RevolutionaryIslamicTheme.radius2Xl,
+        ),
         border: Border.all(
           color:
               prayer.isPassed
@@ -307,13 +404,19 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen> with Tick
               color:
                   prayer.isPassed
                       ? RevolutionaryIslamicTheme.neutralGray300
-                      : RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusXl),
+                      : RevolutionaryIslamicTheme.primaryEmerald.withOpacity(
+                        0.1,
+                      ),
+              borderRadius: BorderRadius.circular(
+                RevolutionaryIslamicTheme.radiusXl,
+              ),
             ),
             child: Icon(
               prayer.icon,
               color:
-                  prayer.isPassed ? RevolutionaryIslamicTheme.textTertiary : RevolutionaryIslamicTheme.primaryEmerald,
+                  prayer.isPassed
+                      ? RevolutionaryIslamicTheme.textTertiary
+                      : RevolutionaryIslamicTheme.primaryEmerald,
               size: 24,
             ),
           ),
@@ -360,14 +463,18 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen> with Tick
               ),
               if (prayer.isPassed)
                 Container(
-                  margin: const EdgeInsets.only(top: RevolutionaryIslamicTheme.space1),
+                  margin: const EdgeInsets.only(
+                    top: RevolutionaryIslamicTheme.space1,
+                  ),
                   padding: const EdgeInsets.symmetric(
                     horizontal: RevolutionaryIslamicTheme.space2,
                     vertical: RevolutionaryIslamicTheme.space1,
                   ),
                   decoration: BoxDecoration(
                     color: RevolutionaryIslamicTheme.neutralGray400,
-                    borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusFull),
+                    borderRadius: BorderRadius.circular(
+                      RevolutionaryIslamicTheme.radiusFull,
+                    ),
                   ),
                   child: Text(
                     'Completed',
@@ -389,12 +496,16 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen> with Tick
       position: Tween<Offset>(
         begin: const Offset(0, 0.3),
         end: Offset.zero,
-      ).animate(CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic)),
+      ).animate(
+        CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic),
+      ),
       child: Container(
         padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space5),
         decoration: BoxDecoration(
           color: RevolutionaryIslamicTheme.backgroundSecondary,
-          borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radius3Xl),
+          borderRadius: BorderRadius.circular(
+            RevolutionaryIslamicTheme.radius3Xl,
+          ),
           border: Border.all(color: RevolutionaryIslamicTheme.borderLight),
           boxShadow: RevolutionaryIslamicTheme.shadowSm,
         ),
@@ -403,7 +514,9 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen> with Tick
           children: [
             Text(
               'Prayer Information',
-              style: RevolutionaryIslamicTheme.subtitle1.copyWith(fontWeight: FontWeight.w700),
+              style: RevolutionaryIslamicTheme.subtitle1.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
             ),
             const SizedBox(height: RevolutionaryIslamicTheme.space3),
             _buildInfoRow(Icons.wb_sunny_outlined, 'Sunrise', '06:45 AM'),
@@ -425,7 +538,9 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen> with Tick
         Expanded(
           child: Text(
             label,
-            style: RevolutionaryIslamicTheme.body2.copyWith(color: RevolutionaryIslamicTheme.textSecondary),
+            style: RevolutionaryIslamicTheme.body2.copyWith(
+              color: RevolutionaryIslamicTheme.textSecondary,
+            ),
           ),
         ),
         Text(

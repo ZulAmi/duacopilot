@@ -10,10 +10,12 @@ class SmartDuaCollectionsScreen extends ConsumerStatefulWidget {
   const SmartDuaCollectionsScreen({super.key});
 
   @override
-  ConsumerState<SmartDuaCollectionsScreen> createState() => _SmartDuaCollectionsScreenState();
+  ConsumerState<SmartDuaCollectionsScreen> createState() =>
+      _SmartDuaCollectionsScreenState();
 }
 
-class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsScreen>
+class _SmartDuaCollectionsScreenState
+    extends ConsumerState<SmartDuaCollectionsScreen>
     with SingleTickerProviderStateMixin {
   final _inputController = TextEditingController();
   final _scrollController = ScrollController();
@@ -31,12 +33,14 @@ class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsS
   void initState() {
     super.initState();
 
-    _animationController = AnimationController(duration: const Duration(milliseconds: 800), vsync: this);
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 800),
+      vsync: this,
+    );
 
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(parent: _animationController, curve: Curves.easeInOut));
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
 
     _initializeSmartFeatures();
   }
@@ -66,7 +70,9 @@ class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsS
       }
     } catch (e) {
       if (mounted) {
-        _showErrorMessage('Failed to load smart features. Please ensure you have a premium subscription.');
+        _showErrorMessage(
+          'Failed to load smart features. Please ensure you have a premium subscription.',
+        );
       }
     }
   }
@@ -90,18 +96,27 @@ class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsS
           _recommendations = recommendations;
           _isAnalyzing = false;
           _showRecommendations = true;
-          _currentEmotion = recommendations.isNotEmpty ? recommendations.first.targetEmotion : null;
+          _currentEmotion =
+              recommendations.isNotEmpty
+                  ? recommendations.first.targetEmotion
+                  : null;
         });
 
         // Auto-scroll to recommendations
-        _scrollController.animateTo(300.0, duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+        _scrollController.animateTo(
+          300.0,
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
+        );
       }
     } catch (e) {
       if (mounted) {
         setState(() {
           _isAnalyzing = false;
         });
-        _showErrorMessage('Analysis failed. Please try again or check your subscription.');
+        _showErrorMessage(
+          'Analysis failed. Please try again or check your subscription.',
+        );
       }
     }
   }
@@ -113,7 +128,11 @@ class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsS
         content: Text(message),
         backgroundColor: Colors.red.shade600,
         behavior: SnackBarBehavior.floating,
-        action: SnackBarAction(label: 'Retry', onPressed: _initializeSmartFeatures, textColor: Colors.white),
+        action: SnackBarAction(
+          label: 'Retry',
+          onPressed: _initializeSmartFeatures,
+          textColor: Colors.white,
+        ),
       ),
     );
   }
@@ -128,7 +147,10 @@ class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsS
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Smart Dua Collections'),
-            Text('AI-Powered Contextual Guidance', style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal)),
+            Text(
+              'AI-Powered Contextual Guidance',
+              style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal),
+            ),
           ],
         ),
         backgroundColor: AppColors.islamicGreen,
@@ -150,7 +172,11 @@ class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsS
             onPressed: () => _showAIInfoDialog(),
             tooltip: 'About AI Intelligence',
           ),
-          IconButton(icon: const Icon(Icons.analytics), onPressed: () => _showAnalytics(), tooltip: 'View Analytics'),
+          IconButton(
+            icon: const Icon(Icons.analytics),
+            onPressed: () => _showAnalytics(),
+            tooltip: 'View Analytics',
+          ),
         ],
       ),
       body: FadeTransition(
@@ -162,7 +188,9 @@ class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsS
             SliverToBoxAdapter(child: _buildHeaderSection(theme)),
 
             // Analysis results
-            if (_showRecommendations) ...[SliverToBoxAdapter(child: _buildRecommendationsSection(theme))],
+            if (_showRecommendations) ...[
+              SliverToBoxAdapter(child: _buildRecommendationsSection(theme)),
+            ],
 
             // Smart Collections
             SliverToBoxAdapter(child: _buildSmartCollectionsSection(theme)),
@@ -180,7 +208,10 @@ class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsS
                 ? const SizedBox(
                   width: 20,
                   height: 20,
-                  child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                    strokeWidth: 2,
+                  ),
                 )
                 : const Icon(Icons.psychology),
         label: Text(_isAnalyzing ? 'Analyzing...' : 'Analyze Feelings'),
@@ -198,12 +229,17 @@ class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsS
           // Welcome message
           Text(
             'How are you feeling today?',
-            style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold, color: AppColors.islamicGreen),
+            style: theme.textTheme.headlineSmall?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: AppColors.islamicGreen,
+            ),
           ),
           const SizedBox(height: 8),
           Text(
             'Describe your emotions, situation, or what\'s on your heart. Our AI will recommend perfect duas for you.',
-            style: theme.textTheme.bodyMedium?.copyWith(color: Colors.grey.shade600),
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: Colors.grey.shade600,
+            ),
           ),
           const SizedBox(height: 20),
 
@@ -211,19 +247,32 @@ class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsS
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 4))],
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
             ),
             child: TextField(
               controller: _inputController,
               decoration: InputDecoration(
-                hintText: 'e.g., "Feeling anxious about job interview tomorrow" or "Grateful for family"',
-                prefixIcon: Icon(Icons.chat_bubble_outline, color: AppColors.islamicGreen),
+                hintText:
+                    'e.g., "Feeling anxious about job interview tomorrow" or "Grateful for family"',
+                prefixIcon: Icon(
+                  Icons.chat_bubble_outline,
+                  color: AppColors.islamicGreen,
+                ),
                 suffixIcon: IconButton(
                   icon: const Icon(Icons.send),
                   onPressed: _analyzeInput,
                   color: AppColors.islamicGreen,
                 ),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide.none,
+                ),
                 filled: true,
                 fillColor: Colors.white,
                 contentPadding: const EdgeInsets.all(16),
@@ -240,7 +289,10 @@ class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsS
             const SizedBox(height: 16),
             Text(
               'Try these examples:',
-              style: theme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w500, color: Colors.grey.shade700),
+              style: theme.textTheme.bodySmall?.copyWith(
+                fontWeight: FontWeight.w500,
+                color: Colors.grey.shade700,
+              ),
             ),
             const SizedBox(height: 8),
             Wrap(
@@ -287,14 +339,22 @@ class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsS
               const SizedBox(width: 8),
               Text(
                 'AI Recommendations',
-                style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: AppColors.islamicGreen),
+                style: theme.textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.islamicGreen,
+                ),
               ),
               const Spacer(),
               if (_currentEmotion != null)
                 Chip(
                   label: Text(_currentEmotion!.displayName),
-                  backgroundColor: _getEmotionColor(_currentEmotion!).withOpacity(0.1),
-                  labelStyle: TextStyle(color: _getEmotionColor(_currentEmotion!), fontSize: 12),
+                  backgroundColor: _getEmotionColor(
+                    _currentEmotion!,
+                  ).withOpacity(0.1),
+                  labelStyle: TextStyle(
+                    color: _getEmotionColor(_currentEmotion!),
+                    fontSize: 12,
+                  ),
                 ),
             ],
           ),
@@ -316,7 +376,10 @@ class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsS
   }
 
   /// Build recommendation card
-  Widget _buildRecommendationCard(SmartDuaRecommendation recommendation, ThemeData theme) {
+  Widget _buildRecommendationCard(
+    SmartDuaRecommendation recommendation,
+    ThemeData theme,
+  ) {
     final confidenceColor = _getConfidenceColor(recommendation.confidence);
 
     return Container(
@@ -338,18 +401,27 @@ class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsS
                     Expanded(
                       child: Text(
                         recommendation.title,
-                        style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                        style: theme.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
                       decoration: BoxDecoration(
                         color: confidenceColor.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
                         recommendation.confidence.name.toUpperCase(),
-                        style: TextStyle(color: confidenceColor, fontSize: 10, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          color: confidenceColor,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],
@@ -371,13 +443,26 @@ class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsS
                 // AI reasoning
                 Container(
                   padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(color: Colors.blue.shade50, borderRadius: BorderRadius.circular(8)),
+                  decoration: BoxDecoration(
+                    color: Colors.blue.shade50,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: Row(
                     children: [
-                      Icon(Icons.lightbulb_outline, color: Colors.blue.shade700, size: 16),
+                      Icon(
+                        Icons.lightbulb_outline,
+                        color: Colors.blue.shade700,
+                        size: 16,
+                      ),
                       const SizedBox(width: 8),
                       Expanded(
-                        child: Text(recommendation.reason, style: TextStyle(color: Colors.blue.shade700, fontSize: 12)),
+                        child: Text(
+                          recommendation.reason,
+                          style: TextStyle(
+                            color: Colors.blue.shade700,
+                            fontSize: 12,
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -403,11 +488,13 @@ class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsS
                       children: [
                         IconButton(
                           icon: const Icon(Icons.thumb_up_outlined, size: 16),
-                          onPressed: () => _provideFeedback(recommendation, true),
+                          onPressed:
+                              () => _provideFeedback(recommendation, true),
                         ),
                         IconButton(
                           icon: const Icon(Icons.thumb_down_outlined, size: 16),
-                          onPressed: () => _provideFeedback(recommendation, false),
+                          onPressed:
+                              () => _provideFeedback(recommendation, false),
                         ),
                       ],
                     ),
@@ -432,12 +519,16 @@ class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsS
             const SizedBox(height: 16),
             Text(
               'Building Your Smart Collections',
-              style: theme.textTheme.titleMedium?.copyWith(color: Colors.grey.shade600),
+              style: theme.textTheme.titleMedium?.copyWith(
+                color: Colors.grey.shade600,
+              ),
             ),
             const SizedBox(height: 8),
             Text(
               'Use the AI analysis feature to create personalized dua collections based on your emotions and situations.',
-              style: theme.textTheme.bodyMedium?.copyWith(color: Colors.grey.shade500),
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: Colors.grey.shade500,
+              ),
               textAlign: TextAlign.center,
             ),
           ],
@@ -452,7 +543,10 @@ class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsS
         children: [
           Text(
             'Your Smart Collections',
-            style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: AppColors.islamicGreen),
+            style: theme.textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: AppColors.islamicGreen,
+            ),
           ),
           const SizedBox(height: 16),
 
@@ -490,7 +584,10 @@ class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsS
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             gradient: LinearGradient(
-              colors: [emotionColor.withOpacity(0.1), emotionColor.withOpacity(0.05)],
+              colors: [
+                emotionColor.withOpacity(0.1),
+                emotionColor.withOpacity(0.05),
+              ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -505,19 +602,33 @@ class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsS
                     Container(
                       width: 40,
                       height: 40,
-                      decoration: BoxDecoration(color: emotionColor.withOpacity(0.2), shape: BoxShape.circle),
-                      child: Icon(_getEmotionIcon(collection.primaryEmotion), color: emotionColor, size: 20),
+                      decoration: BoxDecoration(
+                        color: emotionColor.withOpacity(0.2),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        _getEmotionIcon(collection.primaryEmotion),
+                        color: emotionColor,
+                        size: 20,
+                      ),
                     ),
                     const Spacer(),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 2,
+                      ),
                       decoration: BoxDecoration(
                         color: emotionColor.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
                         '${collection.duaIds.length}',
-                        style: TextStyle(color: emotionColor, fontSize: 10, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          color: emotionColor,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],
@@ -526,7 +637,9 @@ class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsS
 
                 Text(
                   collection.name,
-                  style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -534,7 +647,9 @@ class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsS
 
                 Text(
                   collection.description,
-                  style: theme.textTheme.bodySmall?.copyWith(color: Colors.grey.shade600),
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: Colors.grey.shade600,
+                  ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -564,7 +679,10 @@ class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsS
         children: [
           Text(
             'Quick Access',
-            style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: AppColors.islamicGreen),
+            style: theme.textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: AppColors.islamicGreen,
+            ),
           ),
           const SizedBox(height: 16),
 
@@ -600,7 +718,10 @@ class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsS
           children: [
             Icon(_getEmotionIcon(emotion), color: color, size: 16),
             const SizedBox(width: 8),
-            Text(emotion.displayName, style: TextStyle(color: color, fontWeight: FontWeight.w500)),
+            Text(
+              emotion.displayName,
+              style: TextStyle(color: color, fontWeight: FontWeight.w500),
+            ),
           ],
         ),
       ),
@@ -701,7 +822,12 @@ class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsS
               'The system learns from your preferences to provide increasingly accurate recommendations over time.\n\n'
               'All emotional data is encrypted and processed securely on your device.',
             ),
-            actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('Got it'))],
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Got it'),
+              ),
+            ],
           ),
     );
   }
@@ -710,7 +836,10 @@ class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsS
   void _showAnalytics() {
     // Navigate to analytics screen
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Analytics feature coming soon!'), behavior: SnackBarBehavior.floating),
+      const SnackBar(
+        content: Text('Analytics feature coming soon!'),
+        behavior: SnackBarBehavior.floating,
+      ),
     );
   }
 
@@ -727,7 +856,10 @@ class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsS
   /// Save recommendation
   void _saveRecommendation(SmartDuaRecommendation recommendation) {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Recommendation saved to your collections'), behavior: SnackBarBehavior.floating),
+      const SnackBar(
+        content: Text('Recommendation saved to your collections'),
+        behavior: SnackBarBehavior.floating,
+      ),
     );
   }
 
@@ -748,7 +880,11 @@ class _SmartDuaCollectionsScreenState extends ConsumerState<SmartDuaCollectionsS
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(helpful ? 'Thank you for your feedback!' : 'We\'ll improve our recommendations'),
+        content: Text(
+          helpful
+              ? 'Thank you for your feedback!'
+              : 'We\'ll improve our recommendations',
+        ),
         behavior: SnackBarBehavior.floating,
       ),
     );

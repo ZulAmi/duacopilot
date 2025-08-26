@@ -27,11 +27,13 @@ class ConversationalSearchField extends StatefulWidget {
   });
 
   @override
-  State<ConversationalSearchField> createState() => _ConversationalSearchFieldState();
+  State<ConversationalSearchField> createState() =>
+      _ConversationalSearchFieldState();
 }
 
 /// _ConversationalSearchFieldState class implementation
-class _ConversationalSearchFieldState extends State<ConversationalSearchField> with TickerProviderStateMixin {
+class _ConversationalSearchFieldState extends State<ConversationalSearchField>
+    with TickerProviderStateMixin {
   late TextEditingController _controller;
   late FocusNode _focusNode;
   late AnimationController _micAnimationController;
@@ -51,12 +53,14 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField> w
     _controller = widget.controller ?? TextEditingController();
     _focusNode = FocusNode();
 
-    _micAnimationController = AnimationController(duration: const Duration(milliseconds: 1000), vsync: this);
+    _micAnimationController = AnimationController(
+      duration: const Duration(milliseconds: 1000),
+      vsync: this,
+    );
 
-    _micAnimation = Tween<double>(
-      begin: 1.0,
-      end: 1.3,
-    ).animate(CurvedAnimation(parent: _micAnimationController, curve: Curves.easeInOut));
+    _micAnimation = Tween<double>(begin: 1.0, end: 1.3).animate(
+      CurvedAnimation(parent: _micAnimationController, curve: Curves.easeInOut),
+    );
 
     _initSpeech();
     _setupListeners();
@@ -140,7 +144,9 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField> w
         widget.suggestions
             .where(
               (suggestion) =>
-                  suggestion.toLowerCase().contains(_controller.text.toLowerCase()) ||
+                  suggestion.toLowerCase().contains(
+                    _controller.text.toLowerCase(),
+                  ) ||
                   _isArabicSimilar(suggestion, _controller.text),
             )
             .take(5)
@@ -164,7 +170,12 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField> w
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                     color: Theme.of(context).colorScheme.surface,
-                    border: Border.all(color: Theme.of(context).colorScheme.outline.withOpacity(0.1), width: 1),
+                    border: Border.all(
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.outline.withOpacity(0.1),
+                      width: 1,
+                    ),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.08),
@@ -197,28 +208,41 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField> w
                           borderRadius: BorderRadius.circular(8),
                           child: Container(
                             margin: const EdgeInsets.symmetric(horizontal: 8),
-                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 14,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
                             child: Row(
                               children: [
                                 Container(
                                   padding: const EdgeInsets.all(6),
                                   decoration: BoxDecoration(
-                                    color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.primary.withOpacity(0.1),
                                     borderRadius: BorderRadius.circular(6),
                                   ),
                                   child: Icon(
                                     Icons.search_rounded,
                                     size: 16,
-                                    color: Theme.of(context).colorScheme.primary,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                   ),
                                 ),
                                 const SizedBox(width: 12),
                                 Expanded(
                                   child: Text(
                                     suggestion,
-                                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                      color: Theme.of(context).colorScheme.onSurface,
+                                    style: Theme.of(
+                                      context,
+                                    ).textTheme.bodyMedium?.copyWith(
+                                      color:
+                                          Theme.of(
+                                            context,
+                                          ).colorScheme.onSurface,
                                       fontWeight: FontWeight.w500,
                                     ),
                                     maxLines: 2,
@@ -229,7 +253,10 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField> w
                                 Icon(
                                   Icons.arrow_outward_rounded,
                                   size: 16,
-                                  color: Theme.of(context).colorScheme.onSurfaceVariant.withOpacity(0.5),
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSurfaceVariant
+                                      .withOpacity(0.5),
                                 ),
                               ],
                             ),
@@ -298,7 +325,10 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField> w
           borderRadius: BorderRadius.circular(24),
           color: colorScheme.surface,
           border: Border.all(
-            color: _focusNode.hasFocus ? colorScheme.primary : colorScheme.outline.withOpacity(0.2),
+            color:
+                _focusNode.hasFocus
+                    ? colorScheme.primary
+                    : colorScheme.outline.withOpacity(0.2),
             width: _focusNode.hasFocus ? 2 : 1,
           ),
           boxShadow:
@@ -348,7 +378,12 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField> w
             widget.onTextChanged?.call(text);
           },
           style: textTheme.bodyLarge
-              ?.copyWith(color: colorScheme.onSurface, fontSize: 16, fontWeight: FontWeight.w400, height: 1.5)
+              ?.copyWith(
+                color: colorScheme.onSurface,
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                height: 1.5,
+              )
               .merge(
                 ArabicTypography.containsArabic(_controller.text)
                     ? ArabicTextStyles.bodyLarge(context, fontType: 'readable')
@@ -366,15 +401,26 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField> w
                   fontWeight: FontWeight.w400,
                 )
                 .merge(
-                  widget.supportArabic && ArabicTypography.containsArabic(_controller.text)
-                      ? ArabicTextStyles.bodyMedium(context, fontType: 'readable')
+                  widget.supportArabic &&
+                          ArabicTypography.containsArabic(_controller.text)
+                      ? ArabicTextStyles.bodyMedium(
+                        context,
+                        fontType: 'readable',
+                      )
                       : null,
                 ),
             border: InputBorder.none,
-            contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 24,
+              vertical: 20,
+            ),
             prefixIcon: Container(
               padding: const EdgeInsets.all(16),
-              child: Icon(Icons.search_rounded, color: colorScheme.onSurfaceVariant.withOpacity(0.6), size: 24),
+              child: Icon(
+                Icons.search_rounded,
+                color: colorScheme.onSurfaceVariant.withOpacity(0.6),
+                size: 24,
+              ),
             ),
             suffixIcon: Row(
               mainAxisSize: MainAxisSize.min,
@@ -387,7 +433,9 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField> w
                       height: 20,
                       child: CircularProgressIndicator(
                         strokeWidth: 2.5,
-                        valueColor: AlwaysStoppedAnimation<Color>(colorScheme.primary),
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          colorScheme.primary,
+                        ),
                       ),
                     ),
                   )
@@ -403,11 +451,22 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField> w
                             padding: const EdgeInsets.all(16),
                             decoration:
                                 _isListening
-                                    ? BoxDecoration(color: colorScheme.primary.withOpacity(0.1), shape: BoxShape.circle)
+                                    ? BoxDecoration(
+                                      color: colorScheme.primary.withOpacity(
+                                        0.1,
+                                      ),
+                                      shape: BoxShape.circle,
+                                    )
                                     : null,
                             child: Icon(
-                              _isListening ? Icons.mic_rounded : Icons.mic_none_rounded,
-                              color: _isListening ? colorScheme.primary : colorScheme.onSurfaceVariant.withOpacity(0.6),
+                              _isListening
+                                  ? Icons.mic_rounded
+                                  : Icons.mic_none_rounded,
+                              color:
+                                  _isListening
+                                      ? colorScheme.primary
+                                      : colorScheme.onSurfaceVariant
+                                          .withOpacity(0.6),
                               size: 24,
                             ),
                           ),
@@ -424,7 +483,11 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField> w
                     },
                     child: Container(
                       padding: const EdgeInsets.all(16),
-                      child: Icon(Icons.close_rounded, color: colorScheme.onSurfaceVariant.withOpacity(0.6), size: 20),
+                      child: Icon(
+                        Icons.close_rounded,
+                        color: colorScheme.onSurfaceVariant.withOpacity(0.6),
+                        size: 20,
+                      ),
                     ),
                   ),
                 const SizedBox(width: 8),

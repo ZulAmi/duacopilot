@@ -52,8 +52,10 @@ class OptimizedRagImage extends StatelessWidget {
       memCacheWidth: maxWidth,
       memCacheHeight: maxHeight,
       placeholder: (context, url) => placeholder ?? _buildDefaultPlaceholder(),
-      errorWidget: (context, url, error) => errorWidget ?? _buildDefaultErrorWidget(),
-      imageBuilder: (context, imageProvider) => _buildOptimizedImage(imageProvider),
+      errorWidget:
+          (context, url, error) => errorWidget ?? _buildDefaultErrorWidget(),
+      imageBuilder:
+          (context, imageProvider) => _buildOptimizedImage(imageProvider),
     );
   }
 
@@ -73,7 +75,10 @@ class OptimizedRagImage extends StatelessWidget {
     return Container(
       width: width,
       height: height,
-      decoration: BoxDecoration(color: Colors.grey[200], borderRadius: BorderRadius.circular(8)),
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(8),
+      ),
       child: const Center(child: CircularProgressIndicator(strokeWidth: 2)),
     );
   }
@@ -82,7 +87,10 @@ class OptimizedRagImage extends StatelessWidget {
     return Container(
       width: width,
       height: height,
-      decoration: BoxDecoration(color: Colors.grey[300], borderRadius: BorderRadius.circular(8)),
+      decoration: BoxDecoration(
+        color: Colors.grey[300],
+        borderRadius: BorderRadius.circular(8),
+      ),
       child: const Icon(Icons.error_outline, color: Colors.grey),
     );
   }
@@ -214,7 +222,9 @@ class RagImageCompressor {
     required CompressFormat format,
   }) async {
     final tempDir = await getTemporaryDirectory();
-    final tempFile = File('${tempDir.path}/temp_${DateTime.now().millisecondsSinceEpoch}.tmp');
+    final tempFile = File(
+      '${tempDir.path}/temp_${DateTime.now().millisecondsSinceEpoch}.tmp',
+    );
 
     await tempFile.writeAsBytes(imageBytes);
 
@@ -246,7 +256,12 @@ class RagImageCompressor {
     // Resize if dimensions are specified
     img.Image resizedImage = image;
     if (maxWidth != null || maxHeight != null) {
-      resizedImage = img.copyResize(image, width: maxWidth, height: maxHeight, interpolation: img.Interpolation.linear);
+      resizedImage = img.copyResize(
+        image,
+        width: maxWidth,
+        height: maxHeight,
+        interpolation: img.Interpolation.linear,
+      );
     }
 
     // Encode with specified quality
@@ -355,7 +370,8 @@ class RagMediaCacheStrategy {
     required int contentSizeBytes,
   }) {
     // Don't cache very large files on mobile
-    if ((Platform.isAndroid || Platform.isIOS) && contentSizeBytes > 50 * 1024 * 1024) {
+    if ((Platform.isAndroid || Platform.isIOS) &&
+        contentSizeBytes > 50 * 1024 * 1024) {
       return false;
     }
 
@@ -373,7 +389,11 @@ class RagMediaCacheStrategy {
   }
 
   /// Get cache priority (higher number = higher priority)
-  static int getCachePriority({required String contentType, required int accessCount, required DateTime lastAccessed}) {
+  static int getCachePriority({
+    required String contentType,
+    required int accessCount,
+    required DateTime lastAccessed,
+  }) {
     int priority = 0;
 
     // Content type priority
@@ -399,12 +419,17 @@ class RagMediaCacheStrategy {
   }
 
   /// Generate cache key for content
-  static String generateCacheKey(String url, {Map<String, String>? parameters}) {
+  static String generateCacheKey(
+    String url, {
+    Map<String, String>? parameters,
+  }) {
     final uri = Uri.parse(url);
     final baseKey = '${uri.host}${uri.path}';
 
     if (parameters != null && parameters.isNotEmpty) {
-      final paramString = parameters.entries.map((e) => '${e.key}=${e.value}').join('&');
+      final paramString = parameters.entries
+          .map((e) => '${e.key}=${e.value}')
+          .join('&');
       return '${baseKey}_${md5.convert(utf8.encode(paramString)).toString()}';
     }
 
@@ -477,7 +502,10 @@ class OptimizedRagMediaWidget extends StatelessWidget {
     return Container(
       width: width,
       height: height ?? 60,
-      decoration: BoxDecoration(color: Colors.grey[200], borderRadius: BorderRadius.circular(8)),
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(8),
+      ),
       child: const Center(child: Icon(Icons.attachment, color: Colors.grey)),
     );
   }

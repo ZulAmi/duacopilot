@@ -47,7 +47,8 @@ class SimpleMonitoringService {
           'query_type': queryType,
           'success': success,
           'query_length': query.length,
-          if (processingTime != null) 'processing_time_ms': processingTime.inMilliseconds,
+          if (processingTime != null)
+            'processing_time_ms': processingTime.inMilliseconds,
           if (resultCount != null) 'result_count': resultCount,
         },
       );
@@ -85,7 +86,11 @@ class SimpleMonitoringService {
         exception,
         stackTrace,
         reason: context,
-        information: additionalData?.entries.map((e) => '${e.key}: ${e.value}').toList() ?? [],
+        information:
+            additionalData?.entries
+                .map((e) => '${e.key}: ${e.value}')
+                .toList() ??
+            [],
       );
     } catch (e) {
       // Silent fail - crash reporting shouldn't crash the app
@@ -106,7 +111,11 @@ class SimpleMonitoringService {
     try {
       await _analytics.logEvent(
         name: 'user_action',
-        parameters: {'action': action, if (category != null) 'category': category, ...?parameters},
+        parameters: {
+          'action': action,
+          if (category != null) 'category': category,
+          ...?parameters,
+        },
       );
     } catch (e) {
       // Silent fail

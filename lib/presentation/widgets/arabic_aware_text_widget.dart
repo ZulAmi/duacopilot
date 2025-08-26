@@ -31,12 +31,16 @@ class ArabicAwareTextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     // Determine text direction and alignment automatically
     final textDirection = ArabicTypography.getTextDirection(text);
-    final alignment = textAlign ?? ArabicTypography.getTextAlign(text, textDirection);
+    final alignment =
+        textAlign ?? ArabicTypography.getTextAlign(text, textDirection);
 
     // Use Arabic typography for Arabic content
     final effectiveStyle =
         ArabicTypography.containsArabic(text)
-            ? ArabicTextStyles.bodyLarge(context, fontType: 'readable').merge(style)
+            ? ArabicTextStyles.bodyLarge(
+              context,
+              fontType: 'readable',
+            ).merge(style)
             : style ?? Theme.of(context).textTheme.bodyLarge;
 
     Widget textWidget = Text(
@@ -51,12 +55,20 @@ class ArabicAwareTextWidget extends StatelessWidget {
 
     // Apply RTL-aware container if needed
     if (padding != null) {
-      textWidget = RTLAwareContainer(content: text, padding: padding as EdgeInsets?, child: textWidget);
+      textWidget = RTLAwareContainer(
+        content: text,
+        padding: padding as EdgeInsets?,
+        child: textWidget,
+      );
     }
 
     // Apply accessibility features for Arabic content
     if (enableAccessibility && ArabicTypography.containsArabic(text)) {
-      textWidget = ArabicAccessibility.createAccessibleText(context: context, text: text, style: effectiveStyle);
+      textWidget = ArabicAccessibility.createAccessibleText(
+        context: context,
+        text: text,
+        style: effectiveStyle,
+      );
     }
 
     return textWidget;
@@ -130,28 +142,51 @@ class _ArabicAwareSearchFieldState extends State<ArabicAwareSearchField> {
     // Build hint text with both languages
     final effectiveHintText = widget.hintText ?? 'Search Islamic content';
     final fullHintText =
-        widget.arabicHintText != null ? '$effectiveHintText | ${widget.arabicHintText}' : effectiveHintText;
+        widget.arabicHintText != null
+            ? '$effectiveHintText | ${widget.arabicHintText}'
+            : effectiveHintText;
 
     return Container(
       decoration: BoxDecoration(
         color: colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: colorScheme.outline.withOpacity(0.2)),
-        boxShadow: [BoxShadow(color: colorScheme.shadow.withOpacity(0.05), blurRadius: 8, offset: const Offset(0, 2))],
+        boxShadow: [
+          BoxShadow(
+            color: colorScheme.shadow.withOpacity(0.05),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
       child: TextField(
         controller: _controller,
         textDirection: _currentDirection,
-        textAlign: hasArabic ? ArabicTypography.getTextAlign(currentText, _currentDirection) : TextAlign.start,
+        textAlign:
+            hasArabic
+                ? ArabicTypography.getTextAlign(currentText, _currentDirection)
+                : TextAlign.start,
         onSubmitted: widget.onSubmitted,
-        style: textTheme.bodyLarge?.merge(hasArabic ? ArabicTextStyles.bodyLarge(context, fontType: 'readable') : null),
+        style: textTheme.bodyLarge?.merge(
+          hasArabic
+              ? ArabicTextStyles.bodyLarge(context, fontType: 'readable')
+              : null,
+        ),
         decoration: InputDecoration(
           hintText: fullHintText,
-          hintStyle: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant.withOpacity(0.7)),
+          hintStyle: textTheme.bodyMedium?.copyWith(
+            color: colorScheme.onSurfaceVariant.withOpacity(0.7),
+          ),
           border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 16,
+          ),
           prefixIcon: Icon(Icons.search, color: colorScheme.onSurfaceVariant),
-          suffixIcon: hasArabic ? Icon(Icons.translate, color: colorScheme.primary, size: 20) : null,
+          suffixIcon:
+              hasArabic
+                  ? Icon(Icons.translate, color: colorScheme.primary, size: 20)
+                  : null,
         ),
       ),
     );
@@ -161,14 +196,22 @@ class _ArabicAwareSearchFieldState extends State<ArabicAwareSearchField> {
 /// Extension to easily integrate Arabic awareness into existing widgets
 extension ArabicAwareExtensions on Widget {
   /// Wrap any widget with Arabic/RTL awareness
-  Widget withArabicSupport({required String content, EdgeInsetsGeometry? padding, bool enableAccessibility = true}) {
+  Widget withArabicSupport({
+    required String content,
+    EdgeInsetsGeometry? padding,
+    bool enableAccessibility = true,
+  }) {
     return Builder(
       builder: (context) {
         Widget result = this;
 
         // Apply RTL-aware padding
         if (padding != null) {
-          result = RTLAwareContainer(content: content, padding: padding as EdgeInsets?, child: result);
+          result = RTLAwareContainer(
+            content: content,
+            padding: padding as EdgeInsets?,
+            child: result,
+          );
         }
 
         // Apply directionality based on content

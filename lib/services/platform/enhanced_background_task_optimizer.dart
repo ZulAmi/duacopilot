@@ -10,11 +10,13 @@ import 'platform_optimization_service.dart';
 /// Enhanced background task optimizer with platform-specific optimizations
 class EnhancedBackgroundTaskOptimizer {
   static EnhancedBackgroundTaskOptimizer? _instance;
-  static EnhancedBackgroundTaskOptimizer get instance => _instance ??= EnhancedBackgroundTaskOptimizer._();
+  static EnhancedBackgroundTaskOptimizer get instance =>
+      _instance ??= EnhancedBackgroundTaskOptimizer._();
 
   EnhancedBackgroundTaskOptimizer._();
 
-  final PlatformOptimizationService _platformService = PlatformOptimizationService.instance;
+  final PlatformOptimizationService _platformService =
+      PlatformOptimizationService.instance;
 
   // Background task configuration
   Map<String, dynamic> _backgroundConfig = {};
@@ -83,7 +85,8 @@ class EnhancedBackgroundTaskOptimizer {
   }
 
   Future<void> _configureAndroidBackground() async {
-    final apiLevel = _platformService.deviceInfo.capabilities['apiLevel'] as int? ?? 21;
+    final apiLevel =
+        _platformService.deviceInfo.capabilities['apiLevel'] as int? ?? 21;
 
     _backgroundConfig = {
       'foregroundService': true,
@@ -96,7 +99,9 @@ class EnhancedBackgroundTaskOptimizer {
       'batteryOptimizationWhitelist': apiLevel >= 23,
     };
 
-    AppLogger.info('🤖 Android background configuration applied (API $apiLevel)');
+    AppLogger.info(
+      '🤖 Android background configuration applied (API $apiLevel)',
+    );
   }
 
   Future<void> _configureWebBackground() async {
@@ -112,7 +117,11 @@ class EnhancedBackgroundTaskOptimizer {
   }
 
   Future<void> _configureDefaultBackground() async {
-    _backgroundConfig = {'basicTasking': true, 'maxConcurrentTasks': 1, 'adaptiveBatching': false};
+    _backgroundConfig = {
+      'basicTasking': true,
+      'maxConcurrentTasks': 1,
+      'adaptiveBatching': false,
+    };
   }
 
   Future<void> _initializeBackgroundServices() async {
@@ -161,7 +170,9 @@ class EnhancedBackgroundTaskOptimizer {
 
       AppLogger.debug('🔄 Android background services initialized');
     } catch (e) {
-      AppLogger.warning('⚠️ Android background services initialization failed: $e');
+      AppLogger.warning(
+        '⚠️ Android background services initialization failed: $e',
+      );
     }
   }
 
@@ -180,7 +191,10 @@ class EnhancedBackgroundTaskOptimizer {
   Future<void> _initializeWorkManager() async {
     if (!kIsWeb) {
       try {
-        await Workmanager().initialize(_workManagerCallbackDispatcher, isInDebugMode: kDebugMode);
+        await Workmanager().initialize(
+          _workManagerCallbackDispatcher,
+          isInDebugMode: kDebugMode,
+        );
         AppLogger.info('📋 WorkManager initialized');
       } catch (e) {
         AppLogger.warning('⚠️ WorkManager initialization failed: $e');
@@ -193,7 +207,11 @@ class EnhancedBackgroundTaskOptimizer {
       final service = FlutterBackgroundService();
 
       await service.configure(
-        iosConfiguration: IosConfiguration(autoStart: false, onForeground: _onStart, onBackground: _onIosBackground),
+        iosConfiguration: IosConfiguration(
+          autoStart: false,
+          onForeground: _onStart,
+          onBackground: _onIosBackground,
+        ),
         androidConfiguration: AndroidConfiguration(
           onStart: _onStart,
           autoStart: false,
@@ -230,7 +248,9 @@ class EnhancedBackgroundTaskOptimizer {
     return true;
   }
 
-  static Future<void> _handleBackgroundTask(Map<String, dynamic> taskData) async {
+  static Future<void> _handleBackgroundTask(
+    Map<String, dynamic> taskData,
+  ) async {
     final taskId = taskData['taskId'] as String?;
     final taskType = taskData['taskType'] as String?;
 
@@ -268,7 +288,9 @@ class EnhancedBackgroundTaskOptimizer {
     AppLogger.debug('✅ Background cache update completed');
   }
 
-  static Future<void> _performNotificationCheck(Map<String, dynamic> taskData) async {
+  static Future<void> _performNotificationCheck(
+    Map<String, dynamic> taskData,
+  ) async {
     AppLogger.debug('🔔 Performing background notification check');
     // Implement notification check logic
     await Future.delayed(const Duration(milliseconds: 500));
@@ -347,16 +369,21 @@ class EnhancedBackgroundTaskOptimizer {
           frequency: taskInfo.interval,
           constraints: Constraints(
             networkType: NetworkType.connected,
-            requiresBatteryNotLow: taskInfo.priority == BackgroundTaskPriority.low,
+            requiresBatteryNotLow:
+                taskInfo.priority == BackgroundTaskPriority.low,
             requiresCharging: false,
             requiresDeviceIdle: taskInfo.priority == BackgroundTaskPriority.low,
           ),
           inputData: taskInfo.data,
         );
 
-        AppLogger.debug('🤖 Scheduled Android WorkManager task: ${taskInfo.id}');
+        AppLogger.debug(
+          '🤖 Scheduled Android WorkManager task: ${taskInfo.id}',
+        );
       } catch (e) {
-        AppLogger.warning('⚠️ WorkManager scheduling failed, using timer fallback: $e');
+        AppLogger.warning(
+          '⚠️ WorkManager scheduling failed, using timer fallback: $e',
+        );
         await _scheduleTimerTask(taskInfo);
       }
     } else {
@@ -392,7 +419,9 @@ class EnhancedBackgroundTaskOptimizer {
 
       // Update last executed time
       if (_activeTasks.containsKey(taskId)) {
-        _activeTasks[taskId] = _activeTasks[taskId]!.copyWith(lastExecuted: DateTime.now());
+        _activeTasks[taskId] = _activeTasks[taskId]!.copyWith(
+          lastExecuted: DateTime.now(),
+        );
       }
 
       // Execute task based on platform
@@ -404,33 +433,58 @@ class EnhancedBackgroundTaskOptimizer {
     }
   }
 
-  Future<void> _executeTaskForPlatform(String taskId, Map<String, dynamic> data) async {
+  Future<void> _executeTaskForPlatform(
+    String taskId,
+    Map<String, dynamic> data,
+  ) async {
     final platformType = _platformService.platformType;
 
-    if (_backgroundConfig['foregroundService'] == true && platformType == PlatformType.android) {
+    if (_backgroundConfig['foregroundService'] == true &&
+        platformType == PlatformType.android) {
       // Use foreground service for Android
       await _executeThroughForegroundService(taskId, data);
     } else {
       // Execute directly
-      await _handleBackgroundTask({'taskId': taskId, 'taskType': data['taskType'] ?? 'unknown', ...data});
+      await _handleBackgroundTask({
+        'taskId': taskId,
+        'taskType': data['taskType'] ?? 'unknown',
+        ...data,
+      });
     }
   }
 
-  Future<void> _executeThroughForegroundService(String taskId, Map<String, dynamic> data) async {
+  Future<void> _executeThroughForegroundService(
+    String taskId,
+    Map<String, dynamic> data,
+  ) async {
     try {
       final service = FlutterBackgroundService();
 
       if (await service.isRunning()) {
-        service.invoke('background_task', {'taskId': taskId, 'taskType': data['taskType'] ?? 'unknown', ...data});
+        service.invoke('background_task', {
+          'taskId': taskId,
+          'taskType': data['taskType'] ?? 'unknown',
+          ...data,
+        });
       } else {
         // Start service and then execute
         await service.startService();
         await Future.delayed(const Duration(seconds: 1));
-        service.invoke('background_task', {'taskId': taskId, 'taskType': data['taskType'] ?? 'unknown', ...data});
+        service.invoke('background_task', {
+          'taskId': taskId,
+          'taskType': data['taskType'] ?? 'unknown',
+          ...data,
+        });
       }
     } catch (e) {
-      AppLogger.warning('⚠️ Foreground service execution failed, using direct execution: $e');
-      await _handleBackgroundTask({'taskId': taskId, 'taskType': data['taskType'] ?? 'unknown', ...data});
+      AppLogger.warning(
+        '⚠️ Foreground service execution failed, using direct execution: $e',
+      );
+      await _handleBackgroundTask({
+        'taskId': taskId,
+        'taskType': data['taskType'] ?? 'unknown',
+        ...data,
+      });
     }
   }
 

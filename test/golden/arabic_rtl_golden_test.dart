@@ -15,7 +15,9 @@ void main() {
 
   group('Arabic RTL Golden Tests', () {
     group('Basic Arabic Text Rendering', () {
-      testWidgets('Single Arabic text should render RTL', (WidgetTester tester) async {
+      testWidgets('Single Arabic text should render RTL', (
+        WidgetTester tester,
+      ) async {
         const arabicText = 'بسم الله الرحمن الرحيم';
 
         await tester.pumpWidget(
@@ -24,7 +26,10 @@ void main() {
               body: Center(
                 child: Directionality(
                   textDirection: TextDirection.rtl,
-                  child: Text(arabicText, style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500)),
+                  child: Text(
+                    arabicText,
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+                  ),
                 ),
               ),
             ),
@@ -36,7 +41,9 @@ void main() {
         expect(find.text(arabicText), findsOneWidget);
 
         // Check directionality
-        final directionality = tester.widget<Directionality>(find.byType(Directionality));
+        final directionality = tester.widget<Directionality>(
+          find.byType(Directionality),
+        );
         expect(directionality.textDirection, equals(TextDirection.rtl));
 
         // This would normally be a golden test comparison
@@ -45,7 +52,9 @@ void main() {
         print('✅ Single Arabic text RTL rendering verified');
       });
 
-      testWidgets('Arabic paragraph should flow RTL', (WidgetTester tester) async {
+      testWidgets('Arabic paragraph should flow RTL', (
+        WidgetTester tester,
+      ) async {
         const arabicParagraph = '''
 بسم الله الرحمن الرحيم
 الحمد لله رب العالمين
@@ -60,7 +69,10 @@ void main() {
                 padding: EdgeInsets.all(16.0),
                 child: Directionality(
                   textDirection: TextDirection.rtl,
-                  child: Text(arabicParagraph, style: TextStyle(fontSize: 18, height: 1.5)),
+                  child: Text(
+                    arabicParagraph,
+                    style: TextStyle(fontSize: 18, height: 1.5),
+                  ),
                 ),
               ),
             ),
@@ -76,7 +88,9 @@ void main() {
         print('✅ Arabic paragraph RTL flow verified');
       });
 
-      testWidgets('Arabic with diacritics should render correctly', (WidgetTester tester) async {
+      testWidgets('Arabic with diacritics should render correctly', (
+        WidgetTester tester,
+      ) async {
         const arabicWithDiacritics = 'بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ';
 
         await tester.pumpWidget(
@@ -109,7 +123,9 @@ void main() {
     });
 
     group('Mixed Language Content', () {
-      testWidgets('English-Arabic mixed content should handle direction', (WidgetTester tester) async {
+      testWidgets('English-Arabic mixed content should handle direction', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -120,7 +136,10 @@ void main() {
                     padding: EdgeInsets.all(16.0),
                     child: Directionality(
                       textDirection: TextDirection.ltr,
-                      child: Text('Search for: صلاة الصباح (Morning Prayer)', style: TextStyle(fontSize: 16)),
+                      child: Text(
+                        'Search for: صلاة الصباح (Morning Prayer)',
+                        style: TextStyle(fontSize: 16),
+                      ),
                     ),
                   ),
                   // RTL version
@@ -128,7 +147,10 @@ void main() {
                     padding: EdgeInsets.all(16.0),
                     child: Directionality(
                       textDirection: TextDirection.rtl,
-                      child: Text('البحث عن: Morning Prayer (صلاة الصباح)', style: TextStyle(fontSize: 16)),
+                      child: Text(
+                        'البحث عن: Morning Prayer (صلاة الصباح)',
+                        style: TextStyle(fontSize: 16),
+                      ),
                     ),
                   ),
                 ],
@@ -138,8 +160,14 @@ void main() {
         );
         await tester.pumpAndSettle();
 
-        expect(find.text('Search for: صلاة الصباح (Morning Prayer)'), findsOneWidget);
-        expect(find.text('البحث عن: Morning Prayer (صلاة الصباح)'), findsOneWidget);
+        expect(
+          find.text('Search for: صلاة الصباح (Morning Prayer)'),
+          findsOneWidget,
+        );
+        expect(
+          find.text('البحث عن: Morning Prayer (صلاة الصباح)'),
+          findsOneWidget,
+        );
 
         // Golden test would show different text flow
         // await expectLater(find.byType(Scaffold), matchesGoldenFile('mixed_content.png'));
@@ -147,7 +175,9 @@ void main() {
         print('✅ Mixed language content direction handling verified');
       });
 
-      testWidgets('Numbers in Arabic context should display correctly', (WidgetTester tester) async {
+      testWidgets('Numbers in Arabic context should display correctly', (
+        WidgetTester tester,
+      ) async {
         const textWithNumbers = 'الصفحة ١٢٣ من ٤٥٦ - Page 123 of 456';
 
         await tester.pumpWidget(
@@ -174,7 +204,9 @@ void main() {
     });
 
     group('UI Components with Arabic Content', () {
-      testWidgets('TextField with Arabic placeholder should be RTL', (WidgetTester tester) async {
+      testWidgets('TextField with Arabic placeholder should be RTL', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -206,7 +238,9 @@ void main() {
         print('✅ Arabic TextField RTL layout verified');
       });
 
-      testWidgets('Card with Arabic content should align RTL', (WidgetTester tester) async {
+      testWidgets('Card with Arabic content should align RTL', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -220,7 +254,13 @@ void main() {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('دعاء الصباح', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                          Text(
+                            'دعاء الصباح',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                           SizedBox(height: 8),
                           Text(
                             'بسم الله الذي لا يضر مع اسمه شيء في الأرض ولا في السماء وهو السميع العليم',
@@ -231,7 +271,10 @@ void main() {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text('المصدر: أبو داود'),
-                              IconButton(icon: Icon(Icons.favorite_border), onPressed: () {}),
+                              IconButton(
+                                icon: Icon(Icons.favorite_border),
+                                onPressed: () {},
+                              ),
                             ],
                           ),
                         ],
@@ -255,7 +298,9 @@ void main() {
         print('✅ Arabic Card RTL alignment verified');
       });
 
-      testWidgets('ListTile with Arabic content should be RTL', (WidgetTester tester) async {
+      testWidgets('ListTile with Arabic content should be RTL', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -295,7 +340,9 @@ void main() {
     });
 
     group('Complex Layout Tests', () {
-      testWidgets('AppBar with Arabic title should be centered RTL', (WidgetTester tester) async {
+      testWidgets('AppBar with Arabic title should be centered RTL', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Directionality(
@@ -325,7 +372,9 @@ void main() {
         print('✅ Arabic AppBar RTL layout verified');
       });
 
-      testWidgets('Drawer with Arabic menu items should be RTL', (WidgetTester tester) async {
+      testWidgets('Drawer with Arabic menu items should be RTL', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Directionality(
@@ -337,12 +386,31 @@ void main() {
                     children: [
                       DrawerHeader(
                         decoration: BoxDecoration(color: Color(0xFF2E7D32)),
-                        child: Text('مساعد الأدعية', style: TextStyle(color: Colors.white, fontSize: 24)),
+                        child: Text(
+                          'مساعد الأدعية',
+                          style: TextStyle(color: Colors.white, fontSize: 24),
+                        ),
                       ),
-                      ListTile(leading: Icon(Icons.home), title: Text('الرئيسية'), onTap: () {}),
-                      ListTile(leading: Icon(Icons.favorite), title: Text('المفضلة'), onTap: () {}),
-                      ListTile(leading: Icon(Icons.history), title: Text('السجل'), onTap: () {}),
-                      ListTile(leading: Icon(Icons.settings), title: Text('الإعدادات'), onTap: () {}),
+                      ListTile(
+                        leading: Icon(Icons.home),
+                        title: Text('الرئيسية'),
+                        onTap: () {},
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.favorite),
+                        title: Text('المفضلة'),
+                        onTap: () {},
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.history),
+                        title: Text('السجل'),
+                        onTap: () {},
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.settings),
+                        title: Text('الإعدادات'),
+                        onTap: () {},
+                      ),
                     ],
                   ),
                 ),
@@ -370,7 +438,9 @@ void main() {
     });
 
     group('Accessibility with Arabic Content', () {
-      testWidgets('Arabic text should have proper semantics', (WidgetTester tester) async {
+      testWidgets('Arabic text should have proper semantics', (
+        WidgetTester tester,
+      ) async {
         const arabicLabel = 'زر البحث عن الأدعية';
 
         await tester.pumpWidget(
@@ -380,10 +450,19 @@ void main() {
                 textDirection: TextDirection.rtl,
                 child: Column(
                   children: [
-                    Semantics(label: arabicLabel, child: ElevatedButton(onPressed: () {}, child: Text('ابحث'))),
+                    Semantics(
+                      label: arabicLabel,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        child: Text('ابحث'),
+                      ),
+                    ),
                     Semantics(
                       hint: 'اضغط للإضافة إلى المفضلة',
-                      child: IconButton(icon: Icon(Icons.favorite_border), onPressed: () {}),
+                      child: IconButton(
+                        icon: Icon(Icons.favorite_border),
+                        onPressed: () {},
+                      ),
                     ),
                   ],
                 ),
@@ -403,7 +482,9 @@ void main() {
         print('✅ Arabic semantic labels verified');
       });
 
-      testWidgets('High contrast Arabic text should be readable', (WidgetTester tester) async {
+      testWidgets('High contrast Arabic text should be readable', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             theme: ThemeData(
@@ -422,15 +503,25 @@ void main() {
                       // High contrast text
                       Container(
                         padding: EdgeInsets.all(16.0),
-                        decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(8.0)),
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
                         child: Text(
                           'بسم الله الرحمن الرحيم',
-                          style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       SizedBox(height: 16),
                       // Regular contrast
-                      Text('نص عادي بتباين طبيعي', style: TextStyle(fontSize: 16, color: Colors.black87)),
+                      Text(
+                        'نص عادي بتباين طبيعي',
+                        style: TextStyle(fontSize: 16, color: Colors.black87),
+                      ),
                     ],
                   ),
                 ),
@@ -451,7 +542,9 @@ void main() {
     });
 
     group('Performance Tests with Arabic Content', () {
-      testWidgets('Large Arabic text should render smoothly', (WidgetTester tester) async {
+      testWidgets('Large Arabic text should render smoothly', (
+        WidgetTester tester,
+      ) async {
         // Generate large Arabic text
         final largeArabicText = TestConfig.sampleArabicQueries.join(' ') * 50;
 
@@ -465,7 +558,10 @@ void main() {
                   padding: EdgeInsets.all(16.0),
                   child: Directionality(
                     textDirection: TextDirection.rtl,
-                    child: Text(largeArabicText, style: TextStyle(fontSize: 16, height: 1.6)),
+                    child: Text(
+                      largeArabicText,
+                      style: TextStyle(fontSize: 16, height: 1.6),
+                    ),
                   ),
                 ),
               ),
@@ -477,13 +573,18 @@ void main() {
         stopwatch.stop();
         final renderTime = stopwatch.elapsedMilliseconds;
 
-        expect(renderTime, lessThan(TestConfig.maxWidgetRenderTime.inMilliseconds));
+        expect(
+          renderTime,
+          lessThan(TestConfig.maxWidgetRenderTime.inMilliseconds),
+        );
         expect(find.byType(SingleChildScrollView), findsOneWidget);
 
         print('✅ Large Arabic text render time: ${renderTime}ms');
       });
 
-      testWidgets('Arabic text list should scroll smoothly', (WidgetTester tester) async {
+      testWidgets('Arabic text list should scroll smoothly', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -492,8 +593,13 @@ void main() {
                 child: ListView.builder(
                   itemCount: 100,
                   itemBuilder: (context, index) {
-                    final arabicText = TestConfig.sampleArabicQueries[index % TestConfig.sampleArabicQueries.length];
-                    return ListTile(title: Text('$arabicText - $index'), subtitle: Text('عنصر رقم $index في القائمة'));
+                    final arabicText =
+                        TestConfig.sampleArabicQueries[index %
+                            TestConfig.sampleArabicQueries.length];
+                    return ListTile(
+                      title: Text('$arabicText - $index'),
+                      subtitle: Text('عنصر رقم $index في القائمة'),
+                    );
                   },
                 ),
               ),
@@ -519,7 +625,9 @@ void main() {
   });
 
   group('RTL Layout Specific Tests', () {
-    testWidgets('Row with Arabic content should reverse order in RTL', (WidgetTester tester) async {
+    testWidgets('Row with Arabic content should reverse order in RTL', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -570,7 +678,9 @@ void main() {
       print('✅ RTL Row layout order verified');
     });
 
-    testWidgets('Floating Action Button should be positioned RTL', (WidgetTester tester) async {
+    testWidgets('Floating Action Button should be positioned RTL', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Directionality(

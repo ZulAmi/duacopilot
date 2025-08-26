@@ -31,7 +31,8 @@ class DuaRecommendation with _$DuaRecommendation {
     DateTime? lastAccessed,
   }) = _DuaRecommendation;
 
-  factory DuaRecommendation.fromJson(Map<String, dynamic> json) => _$DuaRecommendationFromJson(json);
+  factory DuaRecommendation.fromJson(Map<String, dynamic> json) =>
+      _$DuaRecommendationFromJson(json);
 }
 
 // Helper extension for database operations
@@ -67,7 +68,8 @@ extension DuaRecommendationExtension on DuaRecommendation {
 // Static helper methods
 /// DuaRecommendationHelper class implementation
 class DuaRecommendationHelper {
-  static Future<Database> get _database async => RagDatabaseHelper.instance.database;
+  static Future<Database> get _database async =>
+      RagDatabaseHelper.instance.database;
 
   static DuaRecommendation fromDatabase(Map<String, dynamic> map) {
     return DuaRecommendation(
@@ -82,14 +84,28 @@ class DuaRecommendationHelper {
       audioUrl: map['audio_url'] as String?,
       audioFileName: map['audio_file_name'] as String?,
       repetitions: map['repetitions'] as int?,
-      tags: map['tags'] != null ? (map['tags'] as String).split(',').where((t) => t.isNotEmpty).toList() : null,
-      metadata: map['metadata'] != null ? _decodeMetadata(map['metadata'] as String) : null,
+      tags:
+          map['tags'] != null
+              ? (map['tags'] as String)
+                  .split(',')
+                  .where((t) => t.isNotEmpty)
+                  .toList()
+              : null,
+      metadata:
+          map['metadata'] != null
+              ? _decodeMetadata(map['metadata'] as String)
+              : null,
       isFavorite: (map['is_favorite'] as int) == 1,
       hasAudio: (map['has_audio'] as int) == 1,
       isDownloaded: (map['is_downloaded'] as int) == 1,
-      createdAt: map['created_at'] != null ? DateTime.fromMillisecondsSinceEpoch(map['created_at'] as int) : null,
+      createdAt:
+          map['created_at'] != null
+              ? DateTime.fromMillisecondsSinceEpoch(map['created_at'] as int)
+              : null,
       lastAccessed:
-          map['last_accessed'] != null ? DateTime.fromMillisecondsSinceEpoch(map['last_accessed'] as int) : null,
+          map['last_accessed'] != null
+              ? DateTime.fromMillisecondsSinceEpoch(map['last_accessed'] as int)
+              : null,
     );
   }
 

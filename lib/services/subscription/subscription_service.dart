@@ -49,7 +49,8 @@ enum PurchaseStatus { purchased, error, pending, canceled, restored }
 /// Subscription service for managing user subscriptions
 class SubscriptionService {
   static SubscriptionService? _instance;
-  static SubscriptionService get instance => _instance ??= SubscriptionService._();
+  static SubscriptionService get instance =>
+      _instance ??= SubscriptionService._();
 
   SubscriptionService._();
 
@@ -149,11 +150,16 @@ class SubscriptionService {
   }
 
   /// Purchase a subscription (mock implementation for development)
-  Future<bool> purchaseSubscription(SubscriptionTier tier, {bool yearly = false}) async {
+  Future<bool> purchaseSubscription(
+    SubscriptionTier tier, {
+    bool yearly = false,
+  }) async {
     try {
-      final String productId = yearly ? _yearlyProductIds[tier]! : _productIds[tier]!;
+      final String productId =
+          yearly ? _yearlyProductIds[tier]! : _productIds[tier]!;
 
-      final ProductDetails? product = _availableProducts.where((p) => p.id == productId).firstOrNull;
+      final ProductDetails? product =
+          _availableProducts.where((p) => p.id == productId).firstOrNull;
 
       if (product == null) {
         AppLogger.error('Product not found: $productId');
@@ -182,12 +188,22 @@ class SubscriptionService {
   }
 
   /// Process successful purchase
-  Future<void> _processPurchase(PurchaseDetails purchase, SubscriptionTier tier, bool yearly) async {
+  Future<void> _processPurchase(
+    PurchaseDetails purchase,
+    SubscriptionTier tier,
+    bool yearly,
+  ) async {
     try {
       final now = DateTime.now();
-      final endDate = yearly ? now.add(const Duration(days: 365)) : now.add(const Duration(days: 30));
+      final endDate =
+          yearly
+              ? now.add(const Duration(days: 365))
+              : now.add(const Duration(days: 30));
 
-      final product = _availableProducts.where((p) => p.id == purchase.productID).firstOrNull;
+      final product =
+          _availableProducts
+              .where((p) => p.id == purchase.productID)
+              .firstOrNull;
 
       _currentSubscription = UserSubscription(
         userId: 'current_user', // Replace with actual user ID
@@ -239,9 +255,18 @@ class SubscriptionService {
     try {
       if (_currentSubscription != null) {
         final prefs = await SharedPreferences.getInstance();
-        await prefs.setInt('subscription_tier', _currentSubscription!.tier.index);
-        await prefs.setInt('subscription_start_date', _currentSubscription!.startDate.millisecondsSinceEpoch);
-        await prefs.setInt('subscription_end_date', _currentSubscription!.endDate.millisecondsSinceEpoch);
+        await prefs.setInt(
+          'subscription_tier',
+          _currentSubscription!.tier.index,
+        );
+        await prefs.setInt(
+          'subscription_start_date',
+          _currentSubscription!.startDate.millisecondsSinceEpoch,
+        );
+        await prefs.setInt(
+          'subscription_end_date',
+          _currentSubscription!.endDate.millisecondsSinceEpoch,
+        );
 
         AppLogger.debug('Subscription saved successfully');
       }
@@ -267,7 +292,8 @@ class SubscriptionService {
   UserSubscription? get currentSubscription => _currentSubscription;
 
   /// Get current subscription tier
-  SubscriptionTier get currentTier => _currentSubscription?.tier ?? SubscriptionTier.free;
+  SubscriptionTier get currentTier =>
+      _currentSubscription?.tier ?? SubscriptionTier.free;
 
   /// Check if user has active subscription
   bool get hasActiveSubscription => _currentSubscription?.isValid ?? false;
@@ -284,8 +310,12 @@ class SubscriptionService {
   List<ProductDetails> get availableProducts => _availableProducts;
 
   /// Get product details for specific tier
-  ProductDetails? getProductDetails(SubscriptionTier tier, {bool yearly = false}) {
-    final String productId = yearly ? _yearlyProductIds[tier]! : _productIds[tier]!;
+  ProductDetails? getProductDetails(
+    SubscriptionTier tier, {
+    bool yearly = false,
+  }) {
+    final String productId =
+        yearly ? _yearlyProductIds[tier]! : _productIds[tier]!;
 
     return _availableProducts.where((p) => p.id == productId).firstOrNull;
   }
@@ -347,7 +377,8 @@ class SubscriptionService {
       'kids_content': SubscriptionTier.family,
     };
 
-    final requiredTier = featureRequirements[featureId] ?? SubscriptionTier.free;
+    final requiredTier =
+        featureRequirements[featureId] ?? SubscriptionTier.free;
     return hasTierOrHigher(requiredTier);
   }
 
@@ -399,7 +430,9 @@ class SubscriptionService {
 
     if (price == 0.0) return 'Free';
 
-    return yearly ? '\$${price.toStringAsFixed(2)}/year' : '\$${price.toStringAsFixed(2)}/month';
+    return yearly
+        ? '\$${price.toStringAsFixed(2)}/year'
+        : '\$${price.toStringAsFixed(2)}/month';
   }
 
   /// Dispose resources

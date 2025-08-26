@@ -28,7 +28,9 @@ class QueryQueueService {
   Future<void> initialize() async {
     await _loadQueueFromStorage();
     _startConnectivityMonitoring();
-    print('QueryQueueService initialized with ${_pendingQueries.length} pending queries');
+    print(
+      'QueryQueueService initialized with ${_pendingQueries.length} pending queries',
+    );
   }
 
   /// Add a query to the pending queue
@@ -64,8 +66,14 @@ class QueryQueueService {
       'pending_count': _pendingQueries.length,
       'failed_count': _failedQueries.length,
       'is_processing': _isProcessing,
-      'oldest_pending': _pendingQueries.isNotEmpty ? _pendingQueries.first.timestamp.toIso8601String() : null,
-      'total_retry_attempts': _failedQueries.fold<int>(0, (sum, query) => sum + query.retryCount),
+      'oldest_pending':
+          _pendingQueries.isNotEmpty
+              ? _pendingQueries.first.timestamp.toIso8601String()
+              : null,
+      'total_retry_attempts': _failedQueries.fold<int>(
+        0,
+        (sum, query) => sum + query.retryCount,
+      ),
     };
   }
 
@@ -89,13 +97,19 @@ class QueryQueueService {
     final now = DateTime.now();
 
     // Remove old failed queries
-    _failedQueries.removeWhere((query) => now.difference(query.timestamp) > maxAge);
+    _failedQueries.removeWhere(
+      (query) => now.difference(query.timestamp) > maxAge,
+    );
 
     // Remove expired pending queries
-    _pendingQueries.removeWhere((query) => now.difference(query.timestamp) > maxAge);
+    _pendingQueries.removeWhere(
+      (query) => now.difference(query.timestamp) > maxAge,
+    );
 
     await _saveQueueToStorage();
-    print('Queue cleaned: ${_pendingQueries.length} pending, ${_failedQueries.length} failed');
+    print(
+      'Queue cleaned: ${_pendingQueries.length} pending, ${_failedQueries.length} failed',
+    );
   }
 
   /// Remove a specific query from the queue
@@ -130,7 +144,8 @@ class QueryQueueService {
     if (_failedQueries.isEmpty) return;
 
     // Move failed queries back to pending with incremented retry count
-    final toRetry = _failedQueries.where((q) => q.retryCount < _maxRetryAttempts).toList();
+    final toRetry =
+        _failedQueries.where((q) => q.retryCount < _maxRetryAttempts).toList();
 
     for (final query in toRetry) {
       final retryQuery = PendingQuery(
@@ -166,14 +181,26 @@ class QueryQueueService {
       final pendingJson = _prefs.getString(_pendingQueriesKey);
       if (pendingJson != null) {
         final List<dynamic> pendingList = json.decode(pendingJson);
-        _pendingQueries = pendingList.map((item) => PendingQuery.fromJson(Map<String, dynamic>.from(item))).toList();
+        _pendingQueries =
+            pendingList
+                .map(
+                  (item) =>
+                      PendingQuery.fromJson(Map<String, dynamic>.from(item)),
+                )
+                .toList();
       }
 
       // Load failed queries
       final failedJson = _prefs.getString(_failedQueriesKey);
       if (failedJson != null) {
         final List<dynamic> failedList = json.decode(failedJson);
-        _failedQueries = failedList.map((item) => PendingQuery.fromJson(Map<String, dynamic>.from(item))).toList();
+        _failedQueries =
+            failedList
+                .map(
+                  (item) =>
+                      PendingQuery.fromJson(Map<String, dynamic>.from(item)),
+                )
+                .toList();
       }
 
       // Clean expired queries on load
@@ -188,11 +215,15 @@ class QueryQueueService {
   Future<void> _saveQueueToStorage() async {
     try {
       // Save pending queries
-      final pendingJson = json.encode(_pendingQueries.map((q) => q.toJson()).toList());
+      final pendingJson = json.encode(
+        _pendingQueries.map((q) => q.toJson()).toList(),
+      );
       await _prefs.setString(_pendingQueriesKey, pendingJson);
 
       // Save failed queries
-      final failedJson = json.encode(_failedQueries.map((q) => q.toJson()).toList());
+      final failedJson = json.encode(
+        _failedQueries.map((q) => q.toJson()).toList(),
+      );
       await _prefs.setString(_failedQueriesKey, failedJson);
     } catch (e) {
       print('Error saving queue to storage: $e');
@@ -331,7 +362,10 @@ class QueryQueueService {
     // Calculate average queue time for failed queries
     double avgQueueTime = 0.0;
     if (_failedQueries.isNotEmpty) {
-      final totalTime = _failedQueries.fold<int>(0, (sum, query) => sum + now.difference(query.timestamp).inMinutes);
+      final totalTime = _failedQueries.fold<int>(
+        0,
+        (sum, query) => sum + now.difference(query.timestamp).inMinutes,
+      );
       avgQueueTime = totalTime / _failedQueries.length;
     }
 
@@ -347,7 +381,9 @@ class QueryQueueService {
       'retry_statistics': retryStats,
       'languages_in_queue': _getAllLanguagesInQueue(),
       'oldest_query_age_hours':
-          _pendingQueries.isNotEmpty ? now.difference(_pendingQueries.first.timestamp).inHours : 0,
+          _pendingQueries.isNotEmpty
+              ? now.difference(_pendingQueries.first.timestamp).inHours
+              : 0,
     };
   }
 

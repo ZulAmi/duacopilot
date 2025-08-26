@@ -108,7 +108,9 @@ class RagApiService {
         throw NetworkException('No internet connection');
       }
 
-      _logger.i('🤖 Making RAG query to ${RagConfig.currentProvider}: ${request.query}');
+      _logger.i(
+        '🤖 Making RAG query to ${RagConfig.currentProvider}: ${request.query}',
+      );
 
       final startTime = DateTime.now();
       final response = await _makeProviderRequest(request);
@@ -135,7 +137,9 @@ class RagApiService {
     }
   }
 
-  Future<Map<String, dynamic>> _makeProviderRequest(RagRequestModel request) async {
+  Future<Map<String, dynamic>> _makeProviderRequest(
+    RagRequestModel request,
+  ) async {
     switch (RagConfig.currentProvider) {
       case 'openai':
         return await _makeOpenAiRequest(request);
@@ -152,7 +156,9 @@ class RagApiService {
     }
   }
 
-  Future<Map<String, dynamic>> _makeOpenAiRequest(RagRequestModel request) async {
+  Future<Map<String, dynamic>> _makeOpenAiRequest(
+    RagRequestModel request,
+  ) async {
     _logger.i('🔍 Starting TRUE RAG process for OpenAI...');
 
     // STEP 1: RETRIEVE - Get Islamic knowledge from Quran/Hadith
@@ -190,7 +196,9 @@ class RagApiService {
       sources: retrievedSources,
     );
 
-    _logger.i('🔗 Built augmented prompt with ${retrievedContext.isEmpty ? 'general' : 'specific'} Islamic context');
+    _logger.i(
+      '🔗 Built augmented prompt with ${retrievedContext.isEmpty ? 'general' : 'specific'} Islamic context',
+    );
 
     // STEP 3: GENERATE - Send augmented prompt to OpenAI
     final response = await _dio.post(
@@ -216,7 +224,10 @@ class RagApiService {
 
     return {
       'content': content,
-      'confidence': retrievedContext.isNotEmpty ? 0.95 : 0.85, // Higher confidence with retrieved context
+      'confidence':
+          retrievedContext.isNotEmpty
+              ? 0.95
+              : 0.85, // Higher confidence with retrieved context
       'sources': ragSources,
       'metadata': {
         'provider': 'openai',
@@ -230,7 +241,9 @@ class RagApiService {
     };
   }
 
-  Future<Map<String, dynamic>> _makeClaudeRequest(RagRequestModel request) async {
+  Future<Map<String, dynamic>> _makeClaudeRequest(
+    RagRequestModel request,
+  ) async {
     _logger.i('🔍 Starting TRUE RAG process for Claude...');
 
     // STEP 1: RETRIEVE - Get Islamic knowledge
@@ -306,7 +319,9 @@ class RagApiService {
     };
   }
 
-  Future<Map<String, dynamic>> _makeGeminiRequest(RagRequestModel request) async {
+  Future<Map<String, dynamic>> _makeGeminiRequest(
+    RagRequestModel request,
+  ) async {
     _logger.i('🔍 Starting TRUE RAG process for Gemini...');
 
     // STEP 1: RETRIEVE - Get Islamic knowledge
@@ -359,7 +374,8 @@ class RagApiService {
       },
     );
 
-    final content = response.data['candidates'][0]['content']['parts'][0]['text'];
+    final content =
+        response.data['candidates'][0]['content']['parts'][0]['text'];
 
     // Enhanced response with TRUE RAG metadata
     final ragSources = ['Google Gemini (RAG Enhanced)'];
@@ -382,12 +398,15 @@ class RagApiService {
     };
   }
 
-  Future<Map<String, dynamic>> _makeOllamaRequest(RagRequestModel request) async {
+  Future<Map<String, dynamic>> _makeOllamaRequest(
+    RagRequestModel request,
+  ) async {
     final response = await _dio.post(
       '/generate',
       data: {
         'model': RagConfig.ollamaModel,
-        'prompt': '${RagConfig.islamicSystemPrompt}\n\nUser Query: ${request.query}',
+        'prompt':
+            '${RagConfig.islamicSystemPrompt}\n\nUser Query: ${request.query}',
         'stream': false,
       },
     );
@@ -400,11 +419,14 @@ class RagApiService {
     };
   }
 
-  Future<Map<String, dynamic>> _makeHuggingFaceRequest(RagRequestModel request) async {
+  Future<Map<String, dynamic>> _makeHuggingFaceRequest(
+    RagRequestModel request,
+  ) async {
     final response = await _dio.post(
       '/${RagConfig.huggingFaceModel}',
       data: {
-        'inputs': '${RagConfig.islamicSystemPrompt}\n\nUser Query: ${request.query}',
+        'inputs':
+            '${RagConfig.islamicSystemPrompt}\n\nUser Query: ${request.query}',
         'parameters': {'max_length': 1000, 'temperature': 0.7},
       },
     );
@@ -413,13 +435,18 @@ class RagApiService {
       'content': response.data[0]['generated_text'],
       'confidence': 0.75,
       'sources': ['Hugging Face'],
-      'metadata': {'provider': 'huggingface', 'model': RagConfig.huggingFaceModel},
+      'metadata': {
+        'provider': 'huggingface',
+        'model': RagConfig.huggingFaceModel,
+      },
     };
   }
 
   Future<String?> _getApiKey() async {
     try {
-      return await _secureStorage.getValue('${RagConfig.currentProvider}_api_key');
+      return await _secureStorage.getValue(
+        '${RagConfig.currentProvider}_api_key',
+      );
     } catch (e) {
       _logger.e('🔐 Failed to get API key: $e');
       return null;
@@ -428,7 +455,10 @@ class RagApiService {
 
   Future<void> setApiKey(String key) async {
     try {
-      await _secureStorage.saveValue('${RagConfig.currentProvider}_api_key', key);
+      await _secureStorage.saveValue(
+        '${RagConfig.currentProvider}_api_key',
+        key,
+      );
       _logger.d('🔐 API key saved for ${RagConfig.currentProvider}');
     } catch (e) {
       _logger.e('🔐 Failed to save API key: $e');
@@ -443,7 +473,8 @@ class RagApiService {
         return ServerException('Receive timeout');
       case DioExceptionType.badResponse:
         final status = e.response?.statusCode;
-        final message = e.response?.data?['error']?['message'] ?? 'Server error';
+        final message =
+            e.response?.data?['error']?['message'] ?? 'Server error';
         return ServerException('Server error ($status): $message');
       case DioExceptionType.cancel:
         return ServerException('Request cancelled');

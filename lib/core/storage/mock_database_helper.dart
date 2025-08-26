@@ -20,14 +20,20 @@ class MockDatabaseHelper {
   }
 
   Future<Database> get database async {
-    throw UnsupportedError('MockDatabaseHelper does not provide actual Database instance');
+    throw UnsupportedError(
+      'MockDatabaseHelper does not provide actual Database instance',
+    );
   }
 
   // Mock query history operations
-  Future<List<Map<String, dynamic>>> getQueryHistory({int? limit, int? offset}) async {
+  Future<List<Map<String, dynamic>>> getQueryHistory({
+    int? limit,
+    int? offset,
+  }) async {
     final table = _tables['query_history'] ?? [];
-    final sortedTable = List<Map<String, dynamic>>.from(table)
-      ..sort((a, b) => (b['timestamp'] as int).compareTo(a['timestamp'] as int));
+    final sortedTable = List<Map<String, dynamic>>.from(
+      table,
+    )..sort((a, b) => (b['timestamp'] as int).compareTo(a['timestamp'] as int));
 
     int start = offset ?? 0;
     int end = limit != null ? start + limit : sortedTable.length;
@@ -42,8 +48,10 @@ class MockDatabaseHelper {
     final table = _tables['query_history']!;
 
     // Generate an ID if not present
-    queryHistory['id'] = queryHistory['id'] ?? DateTime.now().millisecondsSinceEpoch;
-    queryHistory['timestamp'] = queryHistory['timestamp'] ?? DateTime.now().millisecondsSinceEpoch;
+    queryHistory['id'] =
+        queryHistory['id'] ?? DateTime.now().millisecondsSinceEpoch;
+    queryHistory['timestamp'] =
+        queryHistory['timestamp'] ?? DateTime.now().millisecondsSinceEpoch;
 
     // Remove existing entry with same query to avoid duplicates
     table.removeWhere((item) => item['query'] == queryHistory['query']);
@@ -53,7 +61,9 @@ class MockDatabaseHelper {
 
     // Keep only last 100 entries to prevent memory bloat
     if (table.length > 100) {
-      table.sort((a, b) => (b['timestamp'] as int).compareTo(a['timestamp'] as int));
+      table.sort(
+        (a, b) => (b['timestamp'] as int).compareTo(a['timestamp'] as int),
+      );
       _tables['query_history'] = table.take(100).toList();
     }
   }
@@ -68,10 +78,14 @@ class MockDatabaseHelper {
   }
 
   // Mock favorites operations
-  Future<List<Map<String, dynamic>>> getFavorites({int? limit, int? offset}) async {
+  Future<List<Map<String, dynamic>>> getFavorites({
+    int? limit,
+    int? offset,
+  }) async {
     final table = _tables['favorites'] ?? [];
-    final sortedTable = List<Map<String, dynamic>>.from(table)
-      ..sort((a, b) => (b['created_at'] as int).compareTo(a['created_at'] as int));
+    final sortedTable = List<Map<String, dynamic>>.from(table)..sort(
+      (a, b) => (b['created_at'] as int).compareTo(a['created_at'] as int),
+    );
 
     int start = offset ?? 0;
     int end = limit != null ? start + limit : sortedTable.length;
@@ -87,7 +101,8 @@ class MockDatabaseHelper {
 
     // Generate an ID if not present
     favorite['id'] = favorite['id'] ?? DateTime.now().millisecondsSinceEpoch;
-    favorite['created_at'] = favorite['created_at'] ?? DateTime.now().millisecondsSinceEpoch;
+    favorite['created_at'] =
+        favorite['created_at'] ?? DateTime.now().millisecondsSinceEpoch;
 
     // Check if already exists
     if (!table.any((item) => item['query'] == favorite['query'])) {
@@ -129,20 +144,29 @@ class MockDatabaseHelper {
     return null;
   }
 
-  Future<void> cacheRagResponse(String query, Map<String, dynamic> response) async {
+  Future<void> cacheRagResponse(
+    String query,
+    Map<String, dynamic> response,
+  ) async {
     final table = _tables['rag_cache']!;
 
     // Remove existing cache for this query
     table.removeWhere((item) => item['query'] == query);
 
     // Add new cache entry
-    final cacheEntry = {'query': query, 'response': response, 'timestamp': DateTime.now().millisecondsSinceEpoch};
+    final cacheEntry = {
+      'query': query,
+      'response': response,
+      'timestamp': DateTime.now().millisecondsSinceEpoch,
+    };
 
     table.add(cacheEntry);
 
     // Keep only last 50 cached responses to prevent memory bloat
     if (table.length > 50) {
-      table.sort((a, b) => (b['timestamp'] as int).compareTo(a['timestamp'] as int));
+      table.sort(
+        (a, b) => (b['timestamp'] as int).compareTo(a['timestamp'] as int),
+      );
       _tables['rag_cache'] = table.take(50).toList();
     }
   }

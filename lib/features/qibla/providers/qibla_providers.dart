@@ -39,7 +39,9 @@ final qiblaCompassInitProvider = FutureProvider.autoDispose<bool>((ref) async {
   return await service.initialize();
 });
 
-final nearbyMosquesProvider = FutureProvider.autoDispose<List<MosqueLocation>>((ref) async {
+final nearbyMosquesProvider = FutureProvider.autoDispose<List<MosqueLocation>>((
+  ref,
+) async {
   final service = ref.watch(qiblaCompassServiceProvider);
   return await service.findNearbyMosques();
 });
@@ -55,16 +57,18 @@ final prayerTrackerInitProvider = FutureProvider.autoDispose<bool>((ref) async {
   return await service.initialize();
 });
 
-final todayPrayersProvider = StreamProvider.autoDispose<Map<PrayerType, PrayerCompletion>?>((ref) {
-  final service = ref.watch(prayerTrackerServiceProvider);
-  return service.prayersStream;
-});
+final todayPrayersProvider =
+    StreamProvider.autoDispose<Map<PrayerType, PrayerCompletion>?>((ref) {
+      final service = ref.watch(prayerTrackerServiceProvider);
+      return service.prayersStream;
+    });
 
 // Compass Calibration Provider
 class CompassCalibrationNotifier extends StateNotifier<AsyncValue<bool>> {
   final QiblaCompassService _service;
 
-  CompassCalibrationNotifier(this._service) : super(const AsyncValue.data(true));
+  CompassCalibrationNotifier(this._service)
+    : super(const AsyncValue.data(true));
 
   Future<void> calibrateCompass() async {
     state = const AsyncValue.loading();
@@ -77,9 +81,10 @@ class CompassCalibrationNotifier extends StateNotifier<AsyncValue<bool>> {
   }
 }
 
-final compassCalibrationProvider = StateNotifierProvider.autoDispose<CompassCalibrationNotifier, AsyncValue<bool>>((
-  ref,
-) {
+final compassCalibrationProvider = StateNotifierProvider.autoDispose<
+  CompassCalibrationNotifier,
+  AsyncValue<bool>
+>((ref) {
   final service = ref.watch(qiblaCompassServiceProvider);
   return CompassCalibrationNotifier(service);
 });
@@ -116,7 +121,10 @@ class PrayerActionsNotifier extends StateNotifier<AsyncValue<void>> {
     }
   }
 
-  Future<void> markPrayerMissed({required PrayerType prayerType, String? reason}) async {
+  Future<void> markPrayerMissed({
+    required PrayerType prayerType,
+    String? reason,
+  }) async {
     state = const AsyncValue.loading();
     try {
       await _service.markPrayerMissed(prayerType: prayerType, reason: reason);
@@ -126,10 +134,16 @@ class PrayerActionsNotifier extends StateNotifier<AsyncValue<void>> {
     }
   }
 
-  Future<void> scheduleMakeupPrayer({required PrayerType prayerType, required DateTime makeupTime}) async {
+  Future<void> scheduleMakeupPrayer({
+    required PrayerType prayerType,
+    required DateTime makeupTime,
+  }) async {
     state = const AsyncValue.loading();
     try {
-      await _service.scheduleMakeupPrayer(prayerType: prayerType, makeupTime: makeupTime);
+      await _service.scheduleMakeupPrayer(
+        prayerType: prayerType,
+        makeupTime: makeupTime,
+      );
       state = const AsyncValue.data(null);
     } catch (error, stackTrace) {
       state = AsyncValue.error(error, stackTrace);
@@ -137,15 +151,22 @@ class PrayerActionsNotifier extends StateNotifier<AsyncValue<void>> {
   }
 }
 
-final prayerActionsProvider = StateNotifierProvider.autoDispose<PrayerActionsNotifier, AsyncValue<void>>((ref) {
-  final service = ref.watch(prayerTrackerServiceProvider);
-  return PrayerActionsNotifier(service);
-});
+final prayerActionsProvider =
+    StateNotifierProvider.autoDispose<PrayerActionsNotifier, AsyncValue<void>>((
+      ref,
+    ) {
+      final service = ref.watch(prayerTrackerServiceProvider);
+      return PrayerActionsNotifier(service);
+    });
 
 // Prayer Statistics Provider
 final prayerStatsProvider = Provider.autoDispose<PrayerStats?>((ref) {
   final trackerAsync = ref.watch(prayerTrackerProvider);
-  return trackerAsync.when(data: (tracker) => tracker?.dailyStats, loading: () => null, error: (_, __) => null);
+  return trackerAsync.when(
+    data: (tracker) => tracker?.dailyStats,
+    loading: () => null,
+    error: (_, __) => null,
+  );
 });
 
 // Prayer Completion Rate Provider
@@ -157,14 +178,22 @@ final todayCompletionRateProvider = Provider.autoDispose<double>((ref) {
 // Next Prayer Provider
 final nextPrayerProvider = Provider.autoDispose<PrayerCompletion?>((ref) {
   final prayersAsync = ref.watch(todayPrayersProvider);
-  final prayers = prayersAsync.when(data: (prayers) => prayers, loading: () => null, error: (_, __) => null);
+  final prayers = prayersAsync.when(
+    data: (prayers) => prayers,
+    loading: () => null,
+    error: (_, __) => null,
+  );
 
   if (prayers == null) return null;
 
   final now = DateTime.now();
   final upcomingPrayers =
       prayers.values
-          .where((prayer) => prayer.status != PrayerCompletionStatus.completed && prayer.scheduledTime.isAfter(now))
+          .where(
+            (prayer) =>
+                prayer.status != PrayerCompletionStatus.completed &&
+                prayer.scheduledTime.isAfter(now),
+          )
           .toList()
         ..sort((a, b) => a.scheduledTime.compareTo(b.scheduledTime));
 
@@ -174,20 +203,27 @@ final nextPrayerProvider = Provider.autoDispose<PrayerCompletion?>((ref) {
 // Current Prayer Provider (for prayer time)
 final currentPrayerProvider = Provider.autoDispose<PrayerCompletion?>((ref) {
   final prayersAsync = ref.watch(todayPrayersProvider);
-  final prayers = prayersAsync.when(data: (prayers) => prayers, loading: () => null, error: (_, __) => null);
+  final prayers = prayersAsync.when(
+    data: (prayers) => prayers,
+    loading: () => null,
+    error: (_, __) => null,
+  );
 
   if (prayers == null) return null;
 
   final now = DateTime.now();
 
   // Find current prayer time slot
-  final prayerList = prayers.values.toList()..sort((a, b) => a.scheduledTime.compareTo(b.scheduledTime));
+  final prayerList =
+      prayers.values.toList()
+        ..sort((a, b) => a.scheduledTime.compareTo(b.scheduledTime));
 
   for (int i = 0; i < prayerList.length; i++) {
     final prayer = prayerList[i];
     final nextPrayer = i < prayerList.length - 1 ? prayerList[i + 1] : null;
 
-    if (now.isAfter(prayer.scheduledTime) && (nextPrayer == null || now.isBefore(nextPrayer.scheduledTime))) {
+    if (now.isAfter(prayer.scheduledTime) &&
+        (nextPrayer == null || now.isBefore(nextPrayer.scheduledTime))) {
       return prayer;
     }
   }
@@ -198,19 +234,31 @@ final currentPrayerProvider = Provider.autoDispose<PrayerCompletion?>((ref) {
 // Qibla Direction Provider (simplified access)
 final qiblaDirectionProvider = Provider.autoDispose<double?>((ref) {
   final compassAsync = ref.watch(qiblaCompassProvider);
-  return compassAsync.when(data: (compass) => compass?.qiblaDirection, loading: () => null, error: (_, __) => null);
+  return compassAsync.when(
+    data: (compass) => compass?.qiblaDirection,
+    loading: () => null,
+    error: (_, __) => null,
+  );
 });
 
 // Device Heading Provider
 final deviceHeadingProvider = Provider.autoDispose<double?>((ref) {
   final compassAsync = ref.watch(qiblaCompassProvider);
-  return compassAsync.when(data: (compass) => compass?.deviceHeading, loading: () => null, error: (_, __) => null);
+  return compassAsync.when(
+    data: (compass) => compass?.deviceHeading,
+    loading: () => null,
+    error: (_, __) => null,
+  );
 });
 
 // Compass Accuracy Provider
 final compassAccuracyProvider = Provider.autoDispose<LocationAccuracy?>((ref) {
   final compassAsync = ref.watch(qiblaCompassProvider);
-  return compassAsync.when(data: (compass) => compass?.accuracy, loading: () => null, error: (_, __) => null);
+  return compassAsync.when(
+    data: (compass) => compass?.accuracy,
+    loading: () => null,
+    error: (_, __) => null,
+  );
 });
 
 // Calibration Status Provider
@@ -226,5 +274,9 @@ final needsCalibrationProvider = Provider.autoDispose<bool>((ref) {
 // Distance to Kaaba Provider
 final distanceToKaabaProvider = Provider.autoDispose<double?>((ref) {
   final compassAsync = ref.watch(qiblaCompassProvider);
-  return compassAsync.when(data: (compass) => compass?.distanceToKaaba, loading: () => null, error: (_, __) => null);
+  return compassAsync.when(
+    data: (compass) => compass?.distanceToKaaba,
+    loading: () => null,
+    error: (_, __) => null,
+  );
 });

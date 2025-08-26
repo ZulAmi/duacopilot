@@ -82,13 +82,16 @@ class TestConfig {
 
   /// Setup for Islamic feature tests (prayer times, Qibla, etc.)
   static Future<void> setupIslamicFeatureTests() async {
-    AppLogger.info('Islamic Feature Tests Setup - Location: Mecca ($testLatitude, $testLongitude)');
+    AppLogger.info(
+      'Islamic Feature Tests Setup - Location: Mecca ($testLatitude, $testLongitude)',
+    );
   }
 }
 
 /// Helper class for integration testing with Islamic app considerations
 class IntegrationTestHelper {
-  static final IntegrationTestWidgetsFlutterBinding binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  static final IntegrationTestWidgetsFlutterBinding binding =
+      IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   static Future<void> initializeApp() async {
     try {
@@ -122,13 +125,17 @@ class IntegrationTestHelper {
   }
 
   /// Wait for prayer time calculations to complete
-  static Future<void> waitForPrayerCalculation({Duration timeout = const Duration(seconds: 5)}) async {
+  static Future<void> waitForPrayerCalculation({
+    Duration timeout = const Duration(seconds: 5),
+  }) async {
     AppLogger.info('Waiting for prayer time calculation');
     await delay(timeout);
   }
 
   /// Wait for Qibla direction calculation
-  static Future<void> waitForQiblaCalculation({Duration timeout = const Duration(seconds: 3)}) async {
+  static Future<void> waitForQiblaCalculation({
+    Duration timeout = const Duration(seconds: 3),
+  }) async {
     AppLogger.info('Waiting for Qibla calculation');
     await delay(timeout);
   }

@@ -88,21 +88,46 @@ class ProfessionalTheme {
 
   // Shadow System
   static List<BoxShadow> get subtleShadow => [
-    BoxShadow(color: gray900.withOpacity(0.05), blurRadius: 4, offset: const Offset(0, 1)),
+    BoxShadow(
+      color: gray900.withOpacity(0.05),
+      blurRadius: 4,
+      offset: const Offset(0, 1),
+    ),
   ];
 
   static List<BoxShadow> get cardShadow => [
-    BoxShadow(color: gray900.withOpacity(0.08), blurRadius: 8, offset: const Offset(0, 2)),
-    BoxShadow(color: gray900.withOpacity(0.04), blurRadius: 2, offset: const Offset(0, 1)),
+    BoxShadow(
+      color: gray900.withOpacity(0.08),
+      blurRadius: 8,
+      offset: const Offset(0, 2),
+    ),
+    BoxShadow(
+      color: gray900.withOpacity(0.04),
+      blurRadius: 2,
+      offset: const Offset(0, 1),
+    ),
   ];
 
   static List<BoxShadow> get elevatedShadow => [
-    BoxShadow(color: gray900.withOpacity(0.12), blurRadius: 16, offset: const Offset(0, 4)),
-    BoxShadow(color: gray900.withOpacity(0.08), blurRadius: 6, offset: const Offset(0, 2)),
+    BoxShadow(
+      color: gray900.withOpacity(0.12),
+      blurRadius: 16,
+      offset: const Offset(0, 4),
+    ),
+    BoxShadow(
+      color: gray900.withOpacity(0.08),
+      blurRadius: 6,
+      offset: const Offset(0, 2),
+    ),
   ];
 
   static List<BoxShadow> get focusShadow => [
-    BoxShadow(color: primaryEmerald.withOpacity(0.15), blurRadius: 12, offset: const Offset(0, 0), spreadRadius: 2),
+    BoxShadow(
+      color: primaryEmerald.withOpacity(0.15),
+      blurRadius: 12,
+      offset: const Offset(0, 0),
+      spreadRadius: 2,
+    ),
   ];
 
   // Light Theme
@@ -135,7 +160,10 @@ class ProfessionalTheme {
         surfaceTintColor: surfaceColor,
         foregroundColor: textPrimary,
         systemOverlayStyle: SystemUiOverlayStyle.dark,
-        titleTextStyle: _buildTextTheme().headlineSmall?.copyWith(fontWeight: FontWeight.w600, color: textPrimary),
+        titleTextStyle: _buildTextTheme().headlineSmall?.copyWith(
+          fontWeight: FontWeight.w600,
+          color: textPrimary,
+        ),
       ),
 
       // Card Theme
@@ -157,8 +185,13 @@ class ProfessionalTheme {
           foregroundColor: surfaceColor,
           elevation: 0,
           shadowColor: Colors.transparent,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radiusMd)),
-          padding: const EdgeInsets.symmetric(horizontal: spaceLg, vertical: spaceMd),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(radiusMd),
+          ),
+          padding: const EdgeInsets.symmetric(
+            horizontal: spaceLg,
+            vertical: spaceMd,
+          ),
           textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
         ),
       ),
@@ -167,8 +200,13 @@ class ProfessionalTheme {
         style: OutlinedButton.styleFrom(
           foregroundColor: primaryEmerald,
           side: const BorderSide(color: borderMedium),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radiusMd)),
-          padding: const EdgeInsets.symmetric(horizontal: spaceLg, vertical: spaceMd),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(radiusMd),
+          ),
+          padding: const EdgeInsets.symmetric(
+            horizontal: spaceLg,
+            vertical: spaceMd,
+          ),
           textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
         ),
       ),
@@ -176,8 +214,13 @@ class ProfessionalTheme {
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: primaryEmerald,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radiusMd)),
-          padding: const EdgeInsets.symmetric(horizontal: spaceMd, vertical: spaceSm),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(radiusMd),
+          ),
+          padding: const EdgeInsets.symmetric(
+            horizontal: spaceMd,
+            vertical: spaceSm,
+          ),
           textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
         ),
       ),
@@ -208,7 +251,11 @@ class ProfessionalTheme {
       ),
 
       // Divider Theme
-      dividerTheme: const DividerThemeData(color: borderLight, thickness: 1, space: 1),
+      dividerTheme: const DividerThemeData(
+        color: borderLight,
+        thickness: 1,
+        space: 1,
+      ),
 
       // Chip Theme
       chipTheme: ChipThemeData(
@@ -217,8 +264,13 @@ class ProfessionalTheme {
         secondarySelectedColor: primaryEmerald.withOpacity(0.12),
         labelStyle: TextStyle(color: textPrimary),
         secondaryLabelStyle: TextStyle(color: primaryEmerald),
-        padding: const EdgeInsets.symmetric(horizontal: spaceSm, vertical: spaceXs),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radiusSm)),
+        padding: const EdgeInsets.symmetric(
+          horizontal: spaceSm,
+          vertical: spaceXs,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(radiusSm),
+        ),
         side: const BorderSide(color: borderLight),
       ),
 
@@ -236,9 +288,16 @@ class ProfessionalTheme {
         backgroundColor: surfaceColor,
         elevation: 24,
         shadowColor: gray900.withOpacity(0.25),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radiusXl)),
-        titleTextStyle: _buildTextTheme().headlineSmall?.copyWith(fontWeight: FontWeight.w600, color: textPrimary),
-        contentTextStyle: _buildTextTheme().bodyMedium?.copyWith(color: textSecondary),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(radiusXl),
+        ),
+        titleTextStyle: _buildTextTheme().headlineSmall?.copyWith(
+          fontWeight: FontWeight.w600,
+          color: textPrimary,
+        ),
+        contentTextStyle: _buildTextTheme().bodyMedium?.copyWith(
+          color: textSecondary,
+        ),
       ),
 
       // Floating Action Button Theme
@@ -288,7 +347,9 @@ class ProfessionalTheme {
       cardTheme: CardTheme(
         elevation: 0,
         color: darkSurface,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radiusLg)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(radiusLg),
+        ),
       ),
     );
   }
@@ -308,20 +369,85 @@ class ProfessionalTheme {
         letterSpacing: -0.25,
         color: textColor,
       ),
-      displayMedium: GoogleFonts.inter(fontSize: 45, fontWeight: FontWeight.w400, color: textColor),
-      displaySmall: GoogleFonts.inter(fontSize: 36, fontWeight: FontWeight.w400, color: textColor),
-      headlineLarge: GoogleFonts.inter(fontSize: 32, fontWeight: FontWeight.w600, color: textColor),
-      headlineMedium: GoogleFonts.inter(fontSize: 28, fontWeight: FontWeight.w600, color: textColor),
-      headlineSmall: GoogleFonts.inter(fontSize: 24, fontWeight: FontWeight.w600, color: textColor),
-      titleLarge: GoogleFonts.inter(fontSize: 22, fontWeight: FontWeight.w600, letterSpacing: 0, color: textColor),
-      titleMedium: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w500, letterSpacing: 0.15, color: textColor),
-      titleSmall: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w500, letterSpacing: 0.1, color: textColor),
-      bodyLarge: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w400, letterSpacing: 0.5, color: textColor),
-      bodyMedium: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w400, letterSpacing: 0.25, color: textColor),
-      bodySmall: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w400, letterSpacing: 0.4, color: textColor),
-      labelLarge: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w500, letterSpacing: 0.1, color: textColor),
-      labelMedium: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w500, letterSpacing: 0.5, color: textColor),
-      labelSmall: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w500, letterSpacing: 0.5, color: textColor),
+      displayMedium: GoogleFonts.inter(
+        fontSize: 45,
+        fontWeight: FontWeight.w400,
+        color: textColor,
+      ),
+      displaySmall: GoogleFonts.inter(
+        fontSize: 36,
+        fontWeight: FontWeight.w400,
+        color: textColor,
+      ),
+      headlineLarge: GoogleFonts.inter(
+        fontSize: 32,
+        fontWeight: FontWeight.w600,
+        color: textColor,
+      ),
+      headlineMedium: GoogleFonts.inter(
+        fontSize: 28,
+        fontWeight: FontWeight.w600,
+        color: textColor,
+      ),
+      headlineSmall: GoogleFonts.inter(
+        fontSize: 24,
+        fontWeight: FontWeight.w600,
+        color: textColor,
+      ),
+      titleLarge: GoogleFonts.inter(
+        fontSize: 22,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 0,
+        color: textColor,
+      ),
+      titleMedium: GoogleFonts.inter(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.15,
+        color: textColor,
+      ),
+      titleSmall: GoogleFonts.inter(
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.1,
+        color: textColor,
+      ),
+      bodyLarge: GoogleFonts.inter(
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.5,
+        color: textColor,
+      ),
+      bodyMedium: GoogleFonts.inter(
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.25,
+        color: textColor,
+      ),
+      bodySmall: GoogleFonts.inter(
+        fontSize: 12,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.4,
+        color: textColor,
+      ),
+      labelLarge: GoogleFonts.inter(
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.1,
+        color: textColor,
+      ),
+      labelMedium: GoogleFonts.inter(
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.5,
+        color: textColor,
+      ),
+      labelSmall: GoogleFonts.inter(
+        fontSize: 11,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.5,
+        color: textColor,
+      ),
     );
   }
 

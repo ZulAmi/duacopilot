@@ -18,10 +18,13 @@ class RevolutionaryHomeScreen extends ConsumerStatefulWidget {
   const RevolutionaryHomeScreen({super.key});
 
   @override
-  ConsumerState<RevolutionaryHomeScreen> createState() => _RevolutionaryHomeScreenState();
+  ConsumerState<RevolutionaryHomeScreen> createState() =>
+      _RevolutionaryHomeScreenState();
 }
 
-class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScreen> with TickerProviderStateMixin {
+class _RevolutionaryHomeScreenState
+    extends ConsumerState<RevolutionaryHomeScreen>
+    with TickerProviderStateMixin {
   final TextEditingController _searchController = TextEditingController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -35,9 +38,18 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
   @override
   void initState() {
     super.initState();
-    _fadeController = AnimationController(duration: ProfessionalIslamicTheme.animationNormal, vsync: this);
-    _slideController = AnimationController(duration: ProfessionalIslamicTheme.animationSlow, vsync: this);
-    _scaleController = AnimationController(duration: ProfessionalIslamicTheme.animationSlow, vsync: this);
+    _fadeController = AnimationController(
+      duration: ProfessionalIslamicTheme.animationNormal,
+      vsync: this,
+    );
+    _slideController = AnimationController(
+      duration: ProfessionalIslamicTheme.animationSlow,
+      vsync: this,
+    );
+    _scaleController = AnimationController(
+      duration: ProfessionalIslamicTheme.animationSlow,
+      vsync: this,
+    );
 
     // Start animations with stagger
     _startAnimations();
@@ -175,13 +187,17 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
         position: Tween<Offset>(
           begin: const Offset(0, -0.5),
           end: Offset.zero,
-        ).animate(CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic)),
+        ).animate(
+          CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic),
+        ),
         child: Container(
           width: double.infinity,
           padding: const EdgeInsets.all(ProfessionalIslamicTheme.space6),
           decoration: BoxDecoration(
             gradient: ProfessionalIslamicTheme.islamicGradient,
-            borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radius3Xl),
+            borderRadius: BorderRadius.circular(
+              ProfessionalIslamicTheme.radius3Xl,
+            ),
             boxShadow: ProfessionalIslamicTheme.shadowMedium,
           ),
           child: Column(
@@ -190,12 +206,22 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
               Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(ProfessionalIslamicTheme.space4),
-                    decoration: BoxDecoration(
-                      color: ProfessionalIslamicTheme.textOnIslamic.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radius2Xl),
+                    padding: const EdgeInsets.all(
+                      ProfessionalIslamicTheme.space4,
                     ),
-                    child: const Icon(Icons.mosque_rounded, color: ProfessionalIslamicTheme.textOnIslamic, size: 32),
+                    decoration: BoxDecoration(
+                      color: ProfessionalIslamicTheme.textOnIslamic.withOpacity(
+                        0.2,
+                      ),
+                      borderRadius: BorderRadius.circular(
+                        ProfessionalIslamicTheme.radius2Xl,
+                      ),
+                    ),
+                    child: const Icon(
+                      Icons.mosque_rounded,
+                      color: ProfessionalIslamicTheme.textOnIslamic,
+                      size: 32,
+                    ),
                   ),
                   const Spacer(),
                   Container(
@@ -204,13 +230,21 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
                       vertical: ProfessionalIslamicTheme.space2,
                     ),
                     decoration: BoxDecoration(
-                      color: ProfessionalIslamicTheme.textOnIslamic.withOpacity(0.15),
-                      borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusFull),
+                      color: ProfessionalIslamicTheme.textOnIslamic.withOpacity(
+                        0.15,
+                      ),
+                      borderRadius: BorderRadius.circular(
+                        ProfessionalIslamicTheme.radiusFull,
+                      ),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(Icons.auto_awesome_rounded, color: ProfessionalIslamicTheme.textOnIslamic, size: 16),
+                        const Icon(
+                          Icons.auto_awesome_rounded,
+                          color: ProfessionalIslamicTheme.textOnIslamic,
+                          size: 16,
+                        ),
                         const SizedBox(width: ProfessionalIslamicTheme.space1),
                         Text(
                           'AI Powered',
@@ -236,7 +270,9 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
               Text(
                 'Your intelligent Islamic companion for spiritual guidance, Quranic wisdom, and daily prayers.',
                 style: ProfessionalIslamicTheme.body1.copyWith(
-                  color: ProfessionalIslamicTheme.textOnIslamic.withOpacity(0.9),
+                  color: ProfessionalIslamicTheme.textOnIslamic.withOpacity(
+                    0.9,
+                  ),
                   height: 1.5,
                 ),
               ),
@@ -252,7 +288,9 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
                         backgroundColor: ProfessionalIslamicTheme.textOnIslamic,
                         foregroundColor: ProfessionalIslamicTheme.islamicGreen,
                         elevation: 0,
-                        padding: const EdgeInsets.symmetric(vertical: ProfessionalIslamicTheme.space4),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: ProfessionalIslamicTheme.space4,
+                        ),
                       ),
                     ),
                   ),
@@ -260,12 +298,17 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
                   IconButton(
                     onPressed: _toggleVoiceSearch,
                     icon: Icon(
-                      _isVoiceListening ? Icons.mic_rounded : Icons.mic_none_rounded,
+                      _isVoiceListening
+                          ? Icons.mic_rounded
+                          : Icons.mic_none_rounded,
                       color: ProfessionalIslamicTheme.textOnIslamic,
                     ),
                     style: IconButton.styleFrom(
-                      backgroundColor: ProfessionalIslamicTheme.textOnIslamic.withOpacity(0.2),
-                      padding: const EdgeInsets.all(ProfessionalIslamicTheme.space3),
+                      backgroundColor: ProfessionalIslamicTheme.textOnIslamic
+                          .withOpacity(0.2),
+                      padding: const EdgeInsets.all(
+                        ProfessionalIslamicTheme.space3,
+                      ),
                     ),
                   ),
                 ],
@@ -284,11 +327,18 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
         position: Tween<Offset>(
           begin: const Offset(-0.3, 0),
           end: Offset.zero,
-        ).animate(CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic)),
+        ).animate(
+          CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Search & Discover', style: ProfessionalIslamicTheme.heading2.copyWith(fontWeight: FontWeight.w800)),
+            Text(
+              'Search & Discover',
+              style: ProfessionalIslamicTheme.heading2.copyWith(
+                fontWeight: FontWeight.w800,
+              ),
+            ),
             const SizedBox(height: ProfessionalIslamicTheme.space4),
             RevolutionaryComponents.modernSearchBar(
               controller: _searchController,
@@ -305,9 +355,15 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
                 children: [
                   _buildQuickSearchChip('Morning Duas', Icons.wb_sunny_rounded),
                   const SizedBox(width: ProfessionalIslamicTheme.space2),
-                  _buildQuickSearchChip('Prayer Times', Icons.access_time_rounded),
+                  _buildQuickSearchChip(
+                    'Prayer Times',
+                    Icons.access_time_rounded,
+                  ),
                   const SizedBox(width: ProfessionalIslamicTheme.space2),
-                  _buildQuickSearchChip('Quran Verses', Icons.menu_book_rounded),
+                  _buildQuickSearchChip(
+                    'Quran Verses',
+                    Icons.menu_book_rounded,
+                  ),
                   const SizedBox(width: ProfessionalIslamicTheme.space2),
                   _buildQuickSearchChip('Hadith', Icons.auto_stories_rounded),
                 ],
@@ -329,7 +385,9 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
         ),
         decoration: BoxDecoration(
           color: ProfessionalIslamicTheme.backgroundSecondary,
-          borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusFull),
+          borderRadius: BorderRadius.circular(
+            ProfessionalIslamicTheme.radiusFull,
+          ),
           border: Border.all(color: ProfessionalIslamicTheme.borderLight),
           boxShadow: ProfessionalIslamicTheme.shadowSoft,
         ),
@@ -353,10 +411,9 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
 
   Widget _buildDailyInsightsSection() {
     return ScaleTransition(
-      scale: Tween<double>(
-        begin: 0.8,
-        end: 1.0,
-      ).animate(CurvedAnimation(parent: _scaleController, curve: Curves.elasticOut)),
+      scale: Tween<double>(begin: 0.8, end: 1.0).animate(
+        CurvedAnimation(parent: _scaleController, curve: Curves.elasticOut),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -364,7 +421,9 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
             children: [
               Text(
                 'Today\'s Islamic Insights',
-                style: ProfessionalIslamicTheme.heading3.copyWith(fontWeight: FontWeight.w700),
+                style: ProfessionalIslamicTheme.heading3.copyWith(
+                  fontWeight: FontWeight.w700,
+                ),
               ),
               const Spacer(),
               Container(
@@ -374,7 +433,9 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
                 ),
                 decoration: BoxDecoration(
                   color: ProfessionalIslamicTheme.success.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusFull),
+                  borderRadius: BorderRadius.circular(
+                    ProfessionalIslamicTheme.radiusFull,
+                  ),
                 ),
                 child: Text(
                   'Live',
@@ -431,13 +492,19 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Core Features', style: ProfessionalIslamicTheme.heading3.copyWith(fontWeight: FontWeight.w700)),
+              Text(
+                'Core Features',
+                style: ProfessionalIslamicTheme.heading3.copyWith(
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
               TextButton.icon(
                 onPressed: () => _scaffoldKey.currentState?.openDrawer(),
                 icon: const Icon(Icons.grid_view_rounded, size: 18),
                 label: const Text('View All'),
                 style: TextButton.styleFrom(
-                  backgroundColor: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.1),
+                  backgroundColor: ProfessionalIslamicTheme.islamicGreen
+                      .withOpacity(0.1),
                   foregroundColor: ProfessionalIslamicTheme.islamicGreen,
                 ),
               ),
@@ -448,39 +515,56 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
             crossAxisCount: 2,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            childAspectRatio: 0.95, // Increased from 0.85 to 0.95 for less vertical height
+            childAspectRatio:
+                0.95, // Increased from 0.85 to 0.95 for less vertical height
             mainAxisSpacing: 10, // Reduced from space3 (12px) to 10px
             crossAxisSpacing: 10, // Reduced from space3 (12px) to 10px
             children: [
               RevolutionaryComponents.modernFeatureCard(
                 icon: Icons.search_rounded,
                 title: 'Smart Search',
-                description: 'AI-powered Islamic knowledge search with contextual understanding',
+                description:
+                    'AI-powered Islamic knowledge search with contextual understanding',
                 onTap: _navigateToSearch,
                 badge: 'AI',
-                gradientColors: [ProfessionalIslamicTheme.islamicGreen, ProfessionalIslamicTheme.islamicGreenLight],
+                gradientColors: [
+                  ProfessionalIslamicTheme.islamicGreen,
+                  ProfessionalIslamicTheme.islamicGreenLight,
+                ],
               ),
               RevolutionaryComponents.modernFeatureCard(
                 icon: Icons.menu_book_rounded,
                 title: 'Quran Explorer',
-                description: 'Browse, search and study the Holy Quran with translations',
+                description:
+                    'Browse, search and study the Holy Quran with translations',
                 onTap: _navigateToQuran,
-                gradientColors: [ProfessionalIslamicTheme.deepNavy, ProfessionalIslamicTheme.islamicGreenLight],
+                gradientColors: [
+                  ProfessionalIslamicTheme.deepNavy,
+                  ProfessionalIslamicTheme.islamicGreenLight,
+                ],
               ),
               RevolutionaryComponents.modernFeatureCard(
                 icon: Icons.favorite_rounded,
                 title: 'Digital Tasbih',
-                description: 'Beautiful collection of daily prayers and supplications',
+                description:
+                    'Beautiful collection of daily prayers and supplications',
                 onTap: _navigateToDuas,
-                gradientColors: [ProfessionalIslamicTheme.goldAccent, ProfessionalIslamicTheme.islamicGreenLight],
+                gradientColors: [
+                  ProfessionalIslamicTheme.goldAccent,
+                  ProfessionalIslamicTheme.islamicGreenLight,
+                ],
               ),
               RevolutionaryComponents.modernFeatureCard(
                 icon: Icons.mic_rounded,
                 title: 'Voice Assistant',
-                description: 'Ask Islamic questions using voice in any language',
+                description:
+                    'Ask Islamic questions using voice in any language',
                 onTap: _navigateToVoiceAssistant,
                 badge: 'NEW',
-                gradientColors: [ProfessionalIslamicTheme.warning, ProfessionalIslamicTheme.islamicGreenLight],
+                gradientColors: [
+                  ProfessionalIslamicTheme.warning,
+                  ProfessionalIslamicTheme.islamicGreenLight,
+                ],
               ),
             ],
           ),
@@ -494,11 +578,18 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
       position: Tween<Offset>(
         begin: const Offset(0.3, 0),
         end: Offset.zero,
-      ).animate(CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic)),
+      ).animate(
+        CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Islamic Tools', style: ProfessionalIslamicTheme.heading3.copyWith(fontWeight: FontWeight.w700)),
+          Text(
+            'Islamic Tools',
+            style: ProfessionalIslamicTheme.heading3.copyWith(
+              fontWeight: FontWeight.w700,
+            ),
+          ),
           const SizedBox(height: ProfessionalIslamicTheme.space4),
           _buildToolRow(
             Icons.access_time_rounded,
@@ -528,14 +619,22 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
     );
   }
 
-  Widget _buildToolRow(IconData icon, String title, String description, VoidCallback onTap, Color accentColor) {
+  Widget _buildToolRow(
+    IconData icon,
+    String title,
+    String description,
+    VoidCallback onTap,
+    Color accentColor,
+  ) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.all(ProfessionalIslamicTheme.space4),
         decoration: BoxDecoration(
           color: ProfessionalIslamicTheme.backgroundSecondary,
-          borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radius2Xl),
+          borderRadius: BorderRadius.circular(
+            ProfessionalIslamicTheme.radius2Xl,
+          ),
           border: Border.all(color: ProfessionalIslamicTheme.borderLight),
           boxShadow: ProfessionalIslamicTheme.shadowSoft,
         ),
@@ -545,7 +644,9 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
               padding: const EdgeInsets.all(ProfessionalIslamicTheme.space3),
               decoration: BoxDecoration(
                 color: accentColor.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radius2Xl),
+                borderRadius: BorderRadius.circular(
+                  ProfessionalIslamicTheme.radius2Xl,
+                ),
               ),
               child: Icon(icon, color: accentColor, size: 24),
             ),
@@ -554,16 +655,27 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: ProfessionalIslamicTheme.body1.copyWith(fontWeight: FontWeight.w600)),
+                  Text(
+                    title,
+                    style: ProfessionalIslamicTheme.body1.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                   const SizedBox(height: ProfessionalIslamicTheme.space1),
                   Text(
                     description,
-                    style: ProfessionalIslamicTheme.body2.copyWith(color: ProfessionalIslamicTheme.textSecondary),
+                    style: ProfessionalIslamicTheme.body2.copyWith(
+                      color: ProfessionalIslamicTheme.textSecondary,
+                    ),
                   ),
                 ],
               ),
             ),
-            const Icon(Icons.arrow_forward_ios_rounded, color: ProfessionalIslamicTheme.textMuted, size: 16),
+            const Icon(
+              Icons.arrow_forward_ios_rounded,
+              color: ProfessionalIslamicTheme.textMuted,
+              size: 16,
+            ),
           ],
         ),
       ),
@@ -572,15 +684,16 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
 
   Widget _buildPremiumFeaturesSection() {
     return ScaleTransition(
-      scale: Tween<double>(
-        begin: 0.9,
-        end: 1.0,
-      ).animate(CurvedAnimation(parent: _scaleController, curve: Curves.elasticOut)),
+      scale: Tween<double>(begin: 0.9, end: 1.0).animate(
+        CurvedAnimation(parent: _scaleController, curve: Curves.elasticOut),
+      ),
       child: Container(
         padding: const EdgeInsets.all(ProfessionalIslamicTheme.space6),
         decoration: BoxDecoration(
           gradient: ProfessionalIslamicTheme.goldAccentGradient,
-          borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radius3Xl),
+          borderRadius: BorderRadius.circular(
+            ProfessionalIslamicTheme.radius3Xl,
+          ),
           boxShadow: ProfessionalIslamicTheme.shadowMedium,
         ),
         child: Column(
@@ -588,10 +701,16 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
             Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.all(ProfessionalIslamicTheme.space3),
+                  padding: const EdgeInsets.all(
+                    ProfessionalIslamicTheme.space3,
+                  ),
                   decoration: BoxDecoration(
-                    color: ProfessionalIslamicTheme.textOnIslamic.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radius2Xl),
+                    color: ProfessionalIslamicTheme.textOnIslamic.withOpacity(
+                      0.2,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      ProfessionalIslamicTheme.radius2Xl,
+                    ),
                   ),
                   child: const Icon(
                     Icons.workspace_premium_rounded,
@@ -615,7 +734,8 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
                       Text(
                         'Advanced Islamic learning tools & personalized content',
                         style: ProfessionalIslamicTheme.body2.copyWith(
-                          color: ProfessionalIslamicTheme.textOnIslamic.withOpacity(0.9),
+                          color: ProfessionalIslamicTheme.textOnIslamic
+                              .withOpacity(0.9),
                         ),
                       ),
                     ],
@@ -663,7 +783,11 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
       icon: const Icon(Icons.auto_awesome_rounded),
       label: const Text('Ask AI'),
       elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusFull)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(
+          ProfessionalIslamicTheme.radiusFull,
+        ),
+      ),
     );
   }
 
@@ -735,43 +859,69 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
 
   // Navigation Methods - Uniform Implementation
   void _navigateToSearch() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfessionalIslamicSearchScreen()));
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const ProfessionalIslamicSearchScreen(),
+      ),
+    );
   }
 
   void _navigateToQuran() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const QuranExplorerScreen()));
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => const QuranExplorerScreen()),
+    );
   }
 
   void _navigateToDuas() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const DigitalTasbihScreen()));
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => const DigitalTasbihScreen()),
+    );
   }
 
   void _navigateToPrayerTimes() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RevolutionaryPrayerTimesScreen()));
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const RevolutionaryPrayerTimesScreen(),
+      ),
+    );
   }
 
   void _navigateToQibla() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const QiblaCompassScreen()));
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (context) => const QiblaCompassScreen()));
   }
 
   void _navigateToCalendar() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const IslamicCalendarScreen()));
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => const IslamicCalendarScreen()),
+    );
   }
 
   void _navigateToVoiceAssistant() {
     // Launch Revolutionary AI Islamic Companion instead of basic conversational search
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RevolutionaryVoiceCompanionScreen()));
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const RevolutionaryVoiceCompanionScreen(),
+      ),
+    );
   }
 
   void _navigateToPremiumHub() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PremiumFeaturesHub()));
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (context) => const PremiumFeaturesHub()));
   }
 
   void _navigateToSettings() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SettingsScreen()));
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (context) => const SettingsScreen()));
   }
 
   void _navigateToHelp() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ScreenAssistance()));
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (context) => const ScreenAssistance()));
   }
 }

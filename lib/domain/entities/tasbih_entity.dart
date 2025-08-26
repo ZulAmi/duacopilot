@@ -22,7 +22,8 @@ class TasbihSession with _$TasbihSession {
     Map<String, dynamic>? metadata,
   }) = _TasbihSession;
 
-  factory TasbihSession.fromJson(Map<String, dynamic> json) => _$TasbihSessionFromJson(json);
+  factory TasbihSession.fromJson(Map<String, dynamic> json) =>
+      _$TasbihSessionFromJson(json);
 }
 
 @freezed
@@ -38,7 +39,8 @@ class TasbihEntry with _$TasbihEntry {
     double? confidence,
   }) = _TasbihEntry;
 
-  factory TasbihEntry.fromJson(Map<String, dynamic> json) => _$TasbihEntryFromJson(json);
+  factory TasbihEntry.fromJson(Map<String, dynamic> json) =>
+      _$TasbihEntryFromJson(json);
 }
 
 @freezed
@@ -57,7 +59,8 @@ class TasbihSettings with _$TasbihSettings {
     VibrationPattern? vibrationPattern,
   }) = _TasbihSettings;
 
-  factory TasbihSettings.fromJson(Map<String, dynamic> json) => _$TasbihSettingsFromJson(json);
+  factory TasbihSettings.fromJson(Map<String, dynamic> json) =>
+      _$TasbihSettingsFromJson(json);
 }
 
 @freezed
@@ -80,7 +83,8 @@ class TasbihGoal with _$TasbihGoal {
     GoalStatus? status,
   }) = _TasbihGoal;
 
-  factory TasbihGoal.fromJson(Map<String, dynamic> json) => _$TasbihGoalFromJson(json);
+  factory TasbihGoal.fromJson(Map<String, dynamic> json) =>
+      _$TasbihGoalFromJson(json);
 }
 
 @freezed
@@ -101,7 +105,8 @@ class TasbihStats with _$TasbihStats {
     FamilyStats? familyStats,
   }) = _TasbihStats;
 
-  factory TasbihStats.fromJson(Map<String, dynamic> json) => _$TasbihStatsFromJson(json);
+  factory TasbihStats.fromJson(Map<String, dynamic> json) =>
+      _$TasbihStatsFromJson(json);
 }
 
 @freezed
@@ -119,7 +124,8 @@ class Achievement with _$Achievement {
     Map<String, dynamic>? criteria,
   }) = _Achievement;
 
-  factory Achievement.fromJson(Map<String, dynamic> json) => _$AchievementFromJson(json);
+  factory Achievement.fromJson(Map<String, dynamic> json) =>
+      _$AchievementFromJson(json);
 }
 
 @freezed
@@ -135,7 +141,8 @@ class FamilyStats with _$FamilyStats {
     List<FamilyChallenge>? activeChallenges,
   }) = _FamilyStats;
 
-  factory FamilyStats.fromJson(Map<String, dynamic> json) => _$FamilyStatsFromJson(json);
+  factory FamilyStats.fromJson(Map<String, dynamic> json) =>
+      _$FamilyStatsFromJson(json);
 }
 
 @freezed
@@ -152,7 +159,8 @@ class FamilyMember with _$FamilyMember {
     Map<String, dynamic>? preferences,
   }) = _FamilyMember;
 
-  factory FamilyMember.fromJson(Map<String, dynamic> json) => _$FamilyMemberFromJson(json);
+  factory FamilyMember.fromJson(Map<String, dynamic> json) =>
+      _$FamilyMemberFromJson(json);
 }
 
 @freezed
@@ -170,7 +178,8 @@ class FamilyGoal with _$FamilyGoal {
     bool? isActive,
   }) = _FamilyGoal;
 
-  factory FamilyGoal.fromJson(Map<String, dynamic> json) => _$FamilyGoalFromJson(json);
+  factory FamilyGoal.fromJson(Map<String, dynamic> json) =>
+      _$FamilyGoalFromJson(json);
 }
 
 @freezed
@@ -189,7 +198,8 @@ class FamilyChallenge with _$FamilyChallenge {
     List<String>? prizes,
   }) = _FamilyChallenge;
 
-  factory FamilyChallenge.fromJson(Map<String, dynamic> json) => _$FamilyChallengeFromJson(json);
+  factory FamilyChallenge.fromJson(Map<String, dynamic> json) =>
+      _$FamilyChallengeFromJson(json);
 }
 
 @freezed
@@ -206,7 +216,8 @@ class VoiceRecognition with _$VoiceRecognition {
     List<String>? customPhrases,
   }) = _VoiceRecognition;
 
-  factory VoiceRecognition.fromJson(Map<String, dynamic> json) => _$VoiceRecognitionFromJson(json);
+  factory VoiceRecognition.fromJson(Map<String, dynamic> json) =>
+      _$VoiceRecognitionFromJson(json);
 }
 
 @freezed
@@ -223,7 +234,8 @@ class SmartReminder with _$SmartReminder {
     Map<String, dynamic>? personalizedData,
   }) = _SmartReminder;
 
-  factory SmartReminder.fromJson(Map<String, dynamic> json) => _$SmartReminderFromJson(json);
+  factory SmartReminder.fromJson(Map<String, dynamic> json) =>
+      _$SmartReminderFromJson(json);
 }
 
 // Enums for Tasbih System

@@ -12,7 +12,8 @@ import '../secure_storage/secure_storage_service.dart';
 /// Maintains conversation context, user preferences, and semantic understanding
 class ConversationMemoryService {
   static ConversationMemoryService? _instance;
-  static ConversationMemoryService get instance => _instance ??= ConversationMemoryService._();
+  static ConversationMemoryService get instance =>
+      _instance ??= ConversationMemoryService._();
 
   ConversationMemoryService._();
 
@@ -38,12 +39,16 @@ class ConversationMemoryService {
   final Map<String, List<SemanticMemory>> _semanticMemories = {};
 
   // Stream controllers
-  final _conversationUpdateController = StreamController<ConversationUpdate>.broadcast();
-  final _contextChangeController = StreamController<ConversationContext>.broadcast();
+  final _conversationUpdateController =
+      StreamController<ConversationUpdate>.broadcast();
+  final _contextChangeController =
+      StreamController<ConversationContext>.broadcast();
 
   // Public streams
-  Stream<ConversationUpdate> get conversationUpdates => _conversationUpdateController.stream;
-  Stream<ConversationContext> get contextChanges => _contextChangeController.stream;
+  Stream<ConversationUpdate> get conversationUpdates =>
+      _conversationUpdateController.stream;
+  Stream<ConversationContext> get contextChanges =>
+      _contextChangeController.stream;
 
   bool _isInitialized = false;
 
@@ -71,10 +76,14 @@ class ConversationMemoryService {
   }
 
   /// Start a new conversation or get existing context
-  Future<ConversationContext> startConversation(String userId, {String? sessionId}) async {
+  Future<ConversationContext> startConversation(
+    String userId, {
+    String? sessionId,
+  }) async {
     await _ensureInitialized();
 
-    final conversationId = sessionId ?? 'conv_${DateTime.now().millisecondsSinceEpoch}';
+    final conversationId =
+        sessionId ?? 'conv_${DateTime.now().millisecondsSinceEpoch}';
 
     final context = ConversationContext(
       conversationId: conversationId,
@@ -129,7 +138,8 @@ class ConversationMemoryService {
     _conversationHistory.putIfAbsent(conversationId, () => []).add(turn);
 
     // Maintain conversation window size
-    if (_conversationHistory[conversationId]!.length > _maxConversationHistory) {
+    if (_conversationHistory[conversationId]!.length >
+        _maxConversationHistory) {
       _conversationHistory[conversationId]!.removeRange(
         0,
         _conversationHistory[conversationId]!.length - _maxConversationHistory,
@@ -140,7 +150,10 @@ class ConversationMemoryService {
     final updatedContext = context.copyWith(
       lastActivity: DateTime.now(),
       turnCount: context.turnCount + 1,
-      currentTopic: turn.topicTags.isNotEmpty ? turn.topicTags.first : context.currentTopic,
+      currentTopic:
+          turn.topicTags.isNotEmpty
+              ? turn.topicTags.first
+              : context.currentTopic,
       emotionalState: turn.emotionalState,
       contextTags: _updateContextTags(context.contextTags, turn.topicTags),
       semanticContext: _updateSemanticContext(context.semanticContext, turn),
@@ -169,13 +182,18 @@ class ConversationMemoryService {
   }
 
   /// Get conversation context for follow-up processing
-  Future<ConversationContext?> getConversationContext(String conversationId) async {
+  Future<ConversationContext?> getConversationContext(
+    String conversationId,
+  ) async {
     await _ensureInitialized();
     return _activeContexts[conversationId];
   }
 
   /// Get recent conversation history for context
-  Future<List<ConversationTurn>> getRecentHistory(String conversationId, {int limit = 5}) async {
+  Future<List<ConversationTurn>> getRecentHistory(
+    String conversationId, {
+    int limit = 5,
+  }) async {
     await _ensureInitialized();
 
     final history = _conversationHistory[conversationId] ?? [];
@@ -196,7 +214,10 @@ class ConversationMemoryService {
     final similarities = <SimilarConversation>[];
 
     for (final memory in userMemories) {
-      final similarity = _calculateCosineSimilarity(currentEmbedding, memory.embedding);
+      final similarity = _calculateCosineSimilarity(
+        currentEmbedding,
+        memory.embedding,
+      );
       if (similarity > _semanticSimilarityThreshold) {
         similarities.add(
           SimilarConversation(
@@ -227,8 +248,15 @@ class ConversationMemoryService {
     final context = await getConversationContext(conversationId);
     if (context == null) return basePrompt;
 
-    final recentHistory = await getRecentHistory(conversationId, limit: _contextWindowSize);
-    final similarConversations = await findSimilarConversations(context.userId, currentInput, limit: 3);
+    final recentHistory = await getRecentHistory(
+      conversationId,
+      limit: _contextWindowSize,
+    );
+    final similarConversations = await findSimilarConversations(
+      context.userId,
+      currentInput,
+      limit: 3,
+    );
 
     // Build enhanced prompt
     final promptBuilder = StringBuffer(basePrompt);
@@ -268,7 +296,10 @@ class ConversationMemoryService {
   }
 
   /// Update user profile based on conversation patterns
-  Future<void> updateUserProfile(String userId, Map<String, dynamic> profileUpdates) async {
+  Future<void> updateUserProfile(
+    String userId,
+    Map<String, dynamic> profileUpdates,
+  ) async {
     await _ensureInitialized();
 
     final existingProfile = _userProfiles[userId] ?? {};
@@ -286,7 +317,10 @@ class ConversationMemoryService {
 
     final context = _activeContexts[conversationId];
     if (context != null) {
-      final endedContext = context.copyWith(endTime: DateTime.now(), isActive: false);
+      final endedContext = context.copyWith(
+        endTime: DateTime.now(),
+        isActive: false,
+      );
 
       await _saveConversationContext(endedContext);
       _activeContexts.remove(conversationId);
@@ -301,12 +335,18 @@ class ConversationMemoryService {
     await _ensureInitialized();
 
     final userConversations =
-        _conversationHistory.entries.where((entry) => _activeContexts[entry.key]?.userId == userId).toList();
+        _conversationHistory.entries
+            .where((entry) => _activeContexts[entry.key]?.userId == userId)
+            .toList();
 
     final totalConversations = userConversations.length;
-    final totalTurns = userConversations.fold<int>(0, (sum, entry) => sum + entry.value.length);
+    final totalTurns = userConversations.fold<int>(
+      0,
+      (sum, entry) => sum + entry.value.length,
+    );
 
-    final avgTurnsPerConversation = totalConversations > 0 ? totalTurns / totalConversations : 0.0;
+    final avgTurnsPerConversation =
+        totalConversations > 0 ? totalTurns / totalConversations : 0.0;
 
     // Calculate topic distribution
     final topicCounts = <String, int>{};
@@ -324,9 +364,14 @@ class ConversationMemoryService {
       totalTurns: totalTurns,
       averageTurnsPerConversation: avgTurnsPerConversation,
       mostDiscussedTopics:
-          topicCounts.entries.map((e) => TopicFrequency(topic: e.key, frequency: e.value)).toList()
+          topicCounts.entries
+              .map((e) => TopicFrequency(topic: e.key, frequency: e.value))
+              .toList()
             ..sort((a, b) => b.frequency.compareTo(a.frequency)),
-      lastConversationDate: userConversations.isNotEmpty ? userConversations.last.value.last.timestamp : null,
+      lastConversationDate:
+          userConversations.isNotEmpty
+              ? userConversations.last.value.last.timestamp
+              : null,
     );
   }
 
@@ -345,7 +390,9 @@ class ConversationMemoryService {
         final data = jsonDecode(historyJson) as Map<String, dynamic>;
         data.forEach((conversationId, turns) {
           _conversationHistory[conversationId] =
-              (turns as List<dynamic>).map((turn) => ConversationTurn.fromJson(turn)).toList();
+              (turns as List<dynamic>)
+                  .map((turn) => ConversationTurn.fromJson(turn))
+                  .toList();
         });
       }
     } catch (e) {
@@ -358,7 +405,9 @@ class ConversationMemoryService {
       final profilesJson = _prefs?.getString(_userPreferencesKey);
       if (profilesJson != null) {
         final data = jsonDecode(profilesJson) as Map<String, dynamic>;
-        _userProfiles.addAll(data.map((k, v) => MapEntry(k, v as Map<String, dynamic>)));
+        _userProfiles.addAll(
+          data.map((k, v) => MapEntry(k, v as Map<String, dynamic>)),
+        );
       }
     } catch (e) {
       AppLogger.warning('Failed to load user profiles: $e');
@@ -372,7 +421,9 @@ class ConversationMemoryService {
         final data = jsonDecode(memoriesJson) as Map<String, dynamic>;
         data.forEach((userId, memories) {
           _semanticMemories[userId] =
-              (memories as List<dynamic>).map((memory) => SemanticMemory.fromJson(memory)).toList();
+              (memories as List<dynamic>)
+                  .map((memory) => SemanticMemory.fromJson(memory))
+                  .toList();
         });
       }
     } catch (e) {
@@ -386,8 +437,11 @@ class ConversationMemoryService {
       userId: userId,
       preferences: profileData,
       conversationStyle: profileData['conversation_style'] ?? 'balanced',
-      topicInterests: (profileData['topic_interests'] as List<dynamic>?)?.cast<String>() ?? [],
-      emotionalPatterns: (profileData['emotional_patterns'] as Map<String, dynamic>?) ?? {},
+      topicInterests:
+          (profileData['topic_interests'] as List<dynamic>?)?.cast<String>() ??
+          [],
+      emotionalPatterns:
+          (profileData['emotional_patterns'] as Map<String, dynamic>?) ?? {},
     );
   }
 
@@ -397,7 +451,9 @@ class ConversationMemoryService {
 
     if (lowerInput.contains(RegExp(r'\b(anxious|worried|nervous|scared)\b'))) {
       return EmotionalState.anxious;
-    } else if (lowerInput.contains(RegExp(r'\b(happy|joyful|excited|grateful)\b'))) {
+    } else if (lowerInput.contains(
+      RegExp(r'\b(happy|joyful|excited|grateful)\b'),
+    )) {
       return EmotionalState.grateful;
     } else if (lowerInput.contains(RegExp(r'\b(sad|depressed|down|upset)\b'))) {
       return EmotionalState.sad;
@@ -450,7 +506,10 @@ class ConversationMemoryService {
     return embedding;
   }
 
-  double _calculateCosineSimilarity(List<double> embedding1, List<double> embedding2) {
+  double _calculateCosineSimilarity(
+    List<double> embedding1,
+    List<double> embedding2,
+  ) {
     if (embedding1.length != embedding2.length) return 0.0;
 
     double dotProduct = 0.0;
@@ -468,12 +527,18 @@ class ConversationMemoryService {
     return dotProduct / (sqrt(norm1) * sqrt(norm2));
   }
 
-  List<String> _updateContextTags(List<String> existingTags, List<String> newTags) {
+  List<String> _updateContextTags(
+    List<String> existingTags,
+    List<String> newTags,
+  ) {
     final updatedTags = Set<String>.from(existingTags)..addAll(newTags);
     return updatedTags.take(10).toList(); // Keep only top 10 most recent tags
   }
 
-  Map<String, dynamic> _updateSemanticContext(Map<String, dynamic> existingContext, ConversationTurn turn) {
+  Map<String, dynamic> _updateSemanticContext(
+    Map<String, dynamic> existingContext,
+    ConversationTurn turn,
+  ) {
     final updatedContext = Map<String, dynamic>.from(existingContext);
     updatedContext['last_intent'] = turn.intent;
     updatedContext['last_topics'] = turn.topicTags;
@@ -482,7 +547,10 @@ class ConversationMemoryService {
     return updatedContext;
   }
 
-  Future<void> _storeSemanticMemory(String userId, ConversationTurn turn) async {
+  Future<void> _storeSemanticMemory(
+    String userId,
+    ConversationTurn turn,
+  ) async {
     final memory = SemanticMemory(
       userId: userId,
       conversationId: turn.conversationId,
@@ -499,7 +567,10 @@ class ConversationMemoryService {
 
     // Maintain memory size limit
     if (_semanticMemories[userId]!.length > 500) {
-      _semanticMemories[userId]!.removeRange(0, _semanticMemories[userId]!.length - 500);
+      _semanticMemories[userId]!.removeRange(
+        0,
+        _semanticMemories[userId]!.length - 500,
+      );
     }
   }
 
@@ -510,14 +581,18 @@ class ConversationMemoryService {
 
   Future<void> _saveConversationContext(ConversationContext context) async {
     final contextJson = jsonEncode(context.toJson());
-    await _prefs?.setString('${_contextWindowKey}_${context.conversationId}', contextJson);
+    await _prefs?.setString(
+      '${_contextWindowKey}_${context.conversationId}',
+      contextJson,
+    );
   }
 
   Future<void> _saveConversationHistory() async {
     try {
       final historyData = <String, dynamic>{};
       _conversationHistory.forEach((conversationId, turns) {
-        historyData[conversationId] = turns.map((turn) => turn.toJson()).toList();
+        historyData[conversationId] =
+            turns.map((turn) => turn.toJson()).toList();
       });
       await _prefs?.setString(_conversationHistoryKey, jsonEncode(historyData));
     } catch (e) {
@@ -525,7 +600,10 @@ class ConversationMemoryService {
     }
   }
 
-  Future<void> _saveUserProfile(String userId, Map<String, dynamic> profile) async {
+  Future<void> _saveUserProfile(
+    String userId,
+    Map<String, dynamic> profile,
+  ) async {
     try {
       _userProfiles[userId] = profile;
       await _prefs?.setString(_userPreferencesKey, jsonEncode(_userProfiles));

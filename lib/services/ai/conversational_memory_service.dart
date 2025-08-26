@@ -9,7 +9,8 @@ import '../secure_storage/secure_storage_service.dart';
 /// and creates truly conversational AI interactions
 class ConversationalMemoryService {
   static ConversationalMemoryService? _instance;
-  static ConversationalMemoryService get instance => _instance ??= ConversationalMemoryService._();
+  static ConversationalMemoryService get instance =>
+      _instance ??= ConversationalMemoryService._();
 
   ConversationalMemoryService._();
 
@@ -20,7 +21,8 @@ class ConversationalMemoryService {
   String? _currentSessionId;
   final Map<String, ConversationSession> _activeSessions = {};
   // ignore: unused_field
-  final Map<String, UserProfile> _userProfiles = {}; // For future user profiling
+  final Map<String, UserProfile> _userProfiles =
+      {}; // For future user profiling
 
   // Memory types
   final List<ConversationTurn> _shortTermMemory = []; // Current session
@@ -103,7 +105,9 @@ class ConversationalMemoryService {
       emotionalProgression: emotionalState,
       userPreferences: userPreferences,
       conversationFlow: conversationFlow,
-      sessionDuration: DateTime.now().difference(_activeSessions[_currentSessionId]?.startTime ?? DateTime.now()),
+      sessionDuration: DateTime.now().difference(
+        _activeSessions[_currentSessionId]?.startTime ?? DateTime.now(),
+      ),
     );
   }
 
@@ -139,9 +143,13 @@ class ConversationalMemoryService {
 
     // Emotional state-based suggestions
     if (context.emotionalProgression.contains('sadness')) {
-      suggestions.add('Would you like me to share some verses that bring comfort?');
+      suggestions.add(
+        'Would you like me to share some verses that bring comfort?',
+      );
     } else if (context.emotionalProgression.contains('joy')) {
-      suggestions.add('MashaAllah! Shall we express gratitude through some duas?');
+      suggestions.add(
+        'MashaAllah! Shall we express gratitude through some duas?',
+      );
     }
 
     // Preference-based suggestions
@@ -274,10 +282,14 @@ class ConversationalMemoryService {
 
   /// Classify response type
   String _classifyResponseType(String response) {
-    if (response.contains('Quran') || response.contains('verse')) return 'quranic_guidance';
-    if (response.contains('Prophet') || response.contains('hadith')) return 'prophetic_guidance';
-    if (response.contains('dua') || response.contains('prayer')) return 'spiritual_practice';
-    if (response.contains('Allah') && response.contains('mercy')) return 'divine_comfort';
+    if (response.contains('Quran') || response.contains('verse'))
+      return 'quranic_guidance';
+    if (response.contains('Prophet') || response.contains('hadith'))
+      return 'prophetic_guidance';
+    if (response.contains('dua') || response.contains('prayer'))
+      return 'spiritual_practice';
+    if (response.contains('Allah') && response.contains('mercy'))
+      return 'divine_comfort';
     return 'general_guidance';
   }
 
@@ -288,7 +300,9 @@ class ConversationalMemoryService {
       final longTermData = await _secureStorage.read('long_term_memory');
       if (longTermData != null) {
         final patterns = jsonDecode(longTermData) as List;
-        _longTermMemory.addAll(patterns.map((p) => ConversationPattern.fromJson(p)).toList());
+        _longTermMemory.addAll(
+          patterns.map((p) => ConversationPattern.fromJson(p)).toList(),
+        );
       }
 
       // Load user preferences
@@ -306,10 +320,16 @@ class ConversationalMemoryService {
     try {
       // Save long-term memory (last 500 patterns)
       final recentPatterns = _longTermMemory.take(500).toList();
-      await _secureStorage.write('long_term_memory', jsonEncode(recentPatterns.map((p) => p.toJson()).toList()));
+      await _secureStorage.write(
+        'long_term_memory',
+        jsonEncode(recentPatterns.map((p) => p.toJson()).toList()),
+      );
 
       // Save user preferences
-      await _secureStorage.write('conversation_preferences', jsonEncode(_userPreferences));
+      await _secureStorage.write(
+        'conversation_preferences',
+        jsonEncode(_userPreferences),
+      );
     } catch (e) {
       AppLogger.error('Failed to save conversation memory: $e');
     }
@@ -353,7 +373,12 @@ class ConversationSession {
   final List<ConversationTurn> turns;
   DateTime? endTime;
 
-  ConversationSession({required this.id, required this.startTime, required this.turns, this.endTime});
+  ConversationSession({
+    required this.id,
+    required this.startTime,
+    required this.turns,
+    this.endTime,
+  });
 }
 
 /// Represents a conversation pattern
@@ -383,14 +408,15 @@ class ConversationPattern {
     'timestamp': timestamp.toIso8601String(),
   };
 
-  factory ConversationPattern.fromJson(Map<String, dynamic> json) => ConversationPattern(
-    id: json['id'],
-    userQuery: json['userQuery'],
-    topic: json['topic'],
-    emotion: json['emotion'],
-    responseType: json['responseType'],
-    timestamp: DateTime.parse(json['timestamp']),
-  );
+  factory ConversationPattern.fromJson(Map<String, dynamic> json) =>
+      ConversationPattern(
+        id: json['id'],
+        userQuery: json['userQuery'],
+        topic: json['topic'],
+        emotion: json['emotion'],
+        responseType: json['responseType'],
+        timestamp: DateTime.parse(json['timestamp']),
+      );
 }
 
 /// Represents user profile information

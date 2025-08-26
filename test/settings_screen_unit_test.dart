@@ -4,7 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('Settings Screen Unit Tests', () {
-    testWidgets('SettingsScreen widget can be instantiated', (WidgetTester tester) async {
+    testWidgets('SettingsScreen widget can be instantiated', (
+      WidgetTester tester,
+    ) async {
       // Build the settings screen
       const widget = SettingsScreen();
 
@@ -12,7 +14,9 @@ void main() {
       expect(widget, isA<SettingsScreen>());
     });
 
-    testWidgets('SettingsScreen builds without runtime errors', (WidgetTester tester) async {
+    testWidgets('SettingsScreen builds without runtime errors', (
+      WidgetTester tester,
+    ) async {
       // This test just ensures the widget builds without throwing exceptions
       bool didBuildSuccessfully = false;
 

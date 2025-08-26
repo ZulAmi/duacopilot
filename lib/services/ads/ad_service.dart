@@ -15,12 +15,18 @@ class AdService {
   AdService._();
 
   // Ad Unit IDs
-  static const String _bannerAdUnitIdAndroid = 'ca-app-pub-3940256099942544/6300978111'; // Test ID
-  static const String _bannerAdUnitIdiOS = 'ca-app-pub-3940256099942544/2934735716'; // Test ID
-  static const String _interstitialAdUnitIdAndroid = 'ca-app-pub-3940256099942544/1033173712'; // Test ID
-  static const String _interstitialAdUnitIdiOS = 'ca-app-pub-3940256099942544/4411468910'; // Test ID
-  static const String _rewardedAdUnitIdAndroid = 'ca-app-pub-3940256099942544/5224354917'; // Test ID
-  static const String _rewardedAdUnitIdiOS = 'ca-app-pub-3940256099942544/1712485313'; // Test ID
+  static const String _bannerAdUnitIdAndroid =
+      'ca-app-pub-3940256099942544/6300978111'; // Test ID
+  static const String _bannerAdUnitIdiOS =
+      'ca-app-pub-3940256099942544/2934735716'; // Test ID
+  static const String _interstitialAdUnitIdAndroid =
+      'ca-app-pub-3940256099942544/1033173712'; // Test ID
+  static const String _interstitialAdUnitIdiOS =
+      'ca-app-pub-3940256099942544/4411468910'; // Test ID
+  static const String _rewardedAdUnitIdAndroid =
+      'ca-app-pub-3940256099942544/5224354917'; // Test ID
+  static const String _rewardedAdUnitIdiOS =
+      'ca-app-pub-3940256099942544/1712485313'; // Test ID
 
   // Ad instances
   BannerAd? _bannerAd;
@@ -59,7 +65,9 @@ class AdService {
         }
       } else {
         // For unsupported platforms (Windows, Web, etc.), just load preferences
-        AppLogger.debug('AdService: Ads not supported on this platform, skipping ad initialization');
+        AppLogger.debug(
+          'AdService: Ads not supported on this platform, skipping ad initialization',
+        );
         await _loadUserPreferences();
       }
 
@@ -114,7 +122,8 @@ class AdService {
     return _adsEnabled &&
         !_isPremiumUser &&
         _isInitialized &&
-        (Platform.isAndroid || Platform.isIOS); // Only show ads on supported mobile platforms
+        (Platform.isAndroid ||
+            Platform.isIOS); // Only show ads on supported mobile platforms
   }
 
   /// Get platform-specific ad unit IDs
@@ -254,7 +263,10 @@ class AdService {
   }
 
   /// Show interstitial ad with frequency control
-  Future<void> showInterstitialAd({VoidCallback? onAdClosed, VoidCallback? onPremiumPrompt}) async {
+  Future<void> showInterstitialAd({
+    VoidCallback? onAdClosed,
+    VoidCallback? onPremiumPrompt,
+  }) async {
     if (!shouldShowAds) return;
 
     _interstitialClickCount++;
@@ -271,14 +283,19 @@ class AdService {
     if (_interstitialClickCount % _interstitialFrequency == 0) {
       if (_isInterstitialAdLoaded && _interstitialAd != null) {
         _interstitialAd?.fullScreenContentCallback = FullScreenContentCallback(
-          onAdShowedFullScreenContent: (InterstitialAd ad) => print('Interstitial ad showed full screen content'),
+          onAdShowedFullScreenContent:
+              (InterstitialAd ad) =>
+                  print('Interstitial ad showed full screen content'),
           onAdDismissedFullScreenContent: (InterstitialAd ad) {
             AppLogger.debug('Interstitial ad dismissed');
             ad.dispose();
             _loadInterstitialAd(); // Load next ad
             onAdClosed?.call();
           },
-          onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+          onAdFailedToShowFullScreenContent: (
+            InterstitialAd ad,
+            AdError error,
+          ) {
             AppLogger.debug('Interstitial ad failed to show: $error');
             ad.dispose();
             _loadInterstitialAd(); // Load next ad
@@ -303,7 +320,8 @@ class AdService {
     }
 
     _rewardedAd?.fullScreenContentCallback = FullScreenContentCallback(
-      onAdShowedFullScreenContent: (RewardedAd ad) => print('Rewarded ad showed full screen content'),
+      onAdShowedFullScreenContent:
+          (RewardedAd ad) => print('Rewarded ad showed full screen content'),
       onAdDismissedFullScreenContent: (RewardedAd ad) {
         AppLogger.debug('Rewarded ad dismissed');
         ad.dispose();
@@ -317,11 +335,14 @@ class AdService {
       },
     );
 
-    await _rewardedAd?.show(onUserEarnedReward: (ad, reward) => onUserEarnedReward(reward));
+    await _rewardedAd?.show(
+      onUserEarnedReward: (ad, reward) => onUserEarnedReward(reward),
+    );
   }
 
   /// Check if rewarded ad is available
-  bool get isRewardedAdAvailable => _isRewardedAdLoaded && _rewardedAd != null && shouldShowAds;
+  bool get isRewardedAdAvailable =>
+      _isRewardedAdLoaded && _rewardedAd != null && shouldShowAds;
 
   /// Check if premium upgrade should be shown
   Future<bool> shouldShowPremiumUpgrade() async {
@@ -408,6 +429,9 @@ extension AdServiceExtension on AdService {
     required VoidCallback onShowUpgradeDialog,
     VoidCallback? onAdClosed,
   }) async {
-    await showInterstitialAd(onAdClosed: onAdClosed, onPremiumPrompt: onShowUpgradeDialog);
+    await showInterstitialAd(
+      onAdClosed: onAdClosed,
+      onPremiumPrompt: onShowUpgradeDialog,
+    );
   }
 }

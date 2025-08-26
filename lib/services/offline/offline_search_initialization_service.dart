@@ -56,7 +56,9 @@ class OfflineSearchInitializationService {
       await _offlineSearchService!.initialize();
 
       // Register in DI container
-      GetIt.instance.registerSingleton<OfflineSemanticSearchService>(_offlineSearchService!);
+      GetIt.instance.registerSingleton<OfflineSemanticSearchService>(
+        _offlineSearchService!,
+      );
 
       // Mark as initialized
       await prefs.setBool(_isInitializedKey, true);
@@ -73,7 +75,8 @@ class OfflineSearchInitializationService {
   }
 
   /// Get the offline search service instance
-  static OfflineSemanticSearchService? get offlineSearchService => _offlineSearchService;
+  static OfflineSemanticSearchService? get offlineSearchService =>
+      _offlineSearchService;
 
   /// Check if offline search is initialized
   static bool get isInitialized => _isInitialized;
@@ -113,7 +116,9 @@ class OfflineSearchInitializationService {
         final dua = initialDuas[i];
 
         try {
-          final embedding = await embeddingService.generateEmbedding(dua['text'] as String);
+          final embedding = await embeddingService.generateEmbedding(
+            dua['text'] as String,
+          );
 
           final duaEmbedding = DuaEmbedding(
             id: 'initial_${dua['id']}',
@@ -174,7 +179,9 @@ class OfflineSearchInitializationService {
 
   // Private helper methods
 
-  static Future<void> _performInitialSyncIfNeeded(SharedPreferences prefs) async {
+  static Future<void> _performInitialSyncIfNeeded(
+    SharedPreferences prefs,
+  ) async {
     final lastSync = prefs.getString(_lastSyncKey);
 
     if (lastSync == null) {
@@ -199,7 +206,8 @@ class OfflineSearchInitializationService {
         'text': 'اللهم بك أصبحنا وبك أمسينا وبك نحيا وبك نموت وإليك النشور',
         'translation':
             'O Allah, by You we enter the morning and by You we enter the evening, by You we live and by You we die, and to You is the resurrection.',
-        'transliteration': 'Allahumma bika asbahna wa bika amsayna wa bika nahya wa bika namutu wa ilayka an-nushur',
+        'transliteration':
+            'Allahumma bika asbahna wa bika amsayna wa bika nahya wa bika namutu wa ilayka an-nushur',
         'language': 'ar',
         'category': 'morning',
         'keywords': ['صباح', 'morning', 'أصبحنا', 'awakening', 'protection'],
@@ -210,27 +218,38 @@ class OfflineSearchInitializationService {
             'O Allah, by You we enter the morning and by You we enter the evening, by You we live and by You we die, and to You is the resurrection.',
         'translation':
             'O Allah, by You we enter the morning and by You we enter the evening, by You we live and by You we die, and to You is the resurrection.',
-        'transliteration': 'Allahumma bika asbahna wa bika amsayna wa bika nahya wa bika namutu wa ilayka an-nushur',
+        'transliteration':
+            'Allahumma bika asbahna wa bika amsayna wa bika nahya wa bika namutu wa ilayka an-nushur',
         'language': 'en',
         'category': 'morning',
-        'keywords': ['morning', 'dawn', 'awakening', 'protection', 'start', 'day'],
+        'keywords': [
+          'morning',
+          'dawn',
+          'awakening',
+          'protection',
+          'start',
+          'day',
+        ],
       },
       {
         'id': 'istighfar_1',
         'text': 'أستغفر الله الذي لا إله إلا هو الحي القيوم وأتوب إليه',
         'translation':
             'I seek forgiveness from Allah, there is no god but Him, the Living, the Eternal, and I repent to Him.',
-        'transliteration': 'Astaghfir Allah al-ladhi la ilaha illa huwa al-hayy al-qayyum wa atubu ilayh',
+        'transliteration':
+            'Astaghfir Allah al-ladhi la ilaha illa huwa al-hayy al-qayyum wa atubu ilayh',
         'language': 'ar',
         'category': 'forgiveness',
         'keywords': ['استغفار', 'forgiveness', 'repentance', 'mercy', 'توبة'],
       },
       {
         'id': 'istighfar_1_en',
-        'text': 'I seek forgiveness from Allah, there is no god but Him, the Living, the Eternal, and I repent to Him.',
+        'text':
+            'I seek forgiveness from Allah, there is no god but Him, the Living, the Eternal, and I repent to Him.',
         'translation':
             'I seek forgiveness from Allah, there is no god but Him, the Living, the Eternal, and I repent to Him.',
-        'transliteration': 'Astaghfir Allah al-ladhi la ilaha illa huwa al-hayy al-qayyum wa atubu ilayh',
+        'transliteration':
+            'Astaghfir Allah al-ladhi la ilaha illa huwa al-hayy al-qayyum wa atubu ilayh',
         'language': 'en',
         'category': 'forgiveness',
         'keywords': ['forgiveness', 'repentance', 'mercy', 'seeking', 'pardon'],
@@ -238,17 +257,22 @@ class OfflineSearchInitializationService {
       {
         'id': 'travel_dua_1',
         'text': 'بسم الله، توكلت على الله، لا حول ولا قوة إلا بالله',
-        'translation': 'In the name of Allah, I place my trust in Allah, there is no power except with Allah.',
-        'transliteration': 'Bismillah, tawakkaltu ala Allah, la hawla wa la quwwata illa billah',
+        'translation':
+            'In the name of Allah, I place my trust in Allah, there is no power except with Allah.',
+        'transliteration':
+            'Bismillah, tawakkaltu ala Allah, la hawla wa la quwwata illa billah',
         'language': 'ar',
         'category': 'travel',
         'keywords': ['سفر', 'travel', 'بسم الله', 'protection', 'توكل'],
       },
       {
         'id': 'travel_dua_1_en',
-        'text': 'In the name of Allah, I place my trust in Allah, there is no power except with Allah.',
-        'translation': 'In the name of Allah, I place my trust in Allah, there is no power except with Allah.',
-        'transliteration': 'Bismillah, tawakkaltu ala Allah, la hawla wa la quwwata illa billah',
+        'text':
+            'In the name of Allah, I place my trust in Allah, there is no power except with Allah.',
+        'translation':
+            'In the name of Allah, I place my trust in Allah, there is no power except with Allah.',
+        'transliteration':
+            'Bismillah, tawakkaltu ala Allah, la hawla wa la quwwata illa billah',
         'language': 'en',
         'category': 'travel',
         'keywords': ['travel', 'journey', 'trust', 'protection', 'bismillah'],
@@ -276,7 +300,8 @@ class OfflineSearchInitializationService {
         'text': 'الحمد لله الذي أطعمني هذا ورزقنيه من غير حول مني ولا قوة',
         'translation':
             'All praise is due to Allah who fed me this and provided it for me without any strength or power on my part.',
-        'transliteration': 'Alhamdulillahi alladhi at\'amani hadha wa razaqanihi min ghayri hawlin minni wa la quwwah',
+        'transliteration':
+            'Alhamdulillahi alladhi at\'amani hadha wa razaqanihi min ghayri hawlin minni wa la quwwah',
         'language': 'ar',
         'category': 'food',
         'keywords': ['طعام', 'food', 'الحمد لله', 'gratitude', 'thanks'],
@@ -287,7 +312,8 @@ class OfflineSearchInitializationService {
             'All praise is due to Allah who fed me this and provided it for me without any strength or power on my part.',
         'translation':
             'All praise is due to Allah who fed me this and provided it for me without any strength or power on my part.',
-        'transliteration': 'Alhamdulillahi alladhi at\'amani hadha wa razaqanihi min ghayri hawlin minni wa la quwwah',
+        'transliteration':
+            'Alhamdulillahi alladhi at\'amani hadha wa razaqanihi min ghayri hawlin minni wa la quwwah',
         'language': 'en',
         'category': 'food',
         'keywords': ['food', 'gratitude', 'thanks', 'meal', 'praise'],
@@ -315,7 +341,8 @@ class OfflineSearchInitializationService {
         'text': 'ربنا آتنا في الدنيا حسنة وفي الآخرة حسنة وقنا عذاب النار',
         'translation':
             'Our Lord, give us good in this world and good in the next world, and save us from the punishment of the Fire.',
-        'transliteration': 'Rabbana atina fi\'d-dunya hasanatan wa fi\'l-akhirati hasanatan wa qina \'adhab an-nar',
+        'transliteration':
+            'Rabbana atina fi\'d-dunya hasanatan wa fi\'l-akhirati hasanatan wa qina \'adhab an-nar',
         'language': 'ar',
         'category': 'general',
         'keywords': ['عام', 'general', 'دعاء', 'prayer', 'خير'],
@@ -326,7 +353,8 @@ class OfflineSearchInitializationService {
             'Our Lord, give us good in this world and good in the next world, and save us from the punishment of the Fire.',
         'translation':
             'Our Lord, give us good in this world and good in the next world, and save us from the punishment of the Fire.',
-        'transliteration': 'Rabbana atina fi\'d-dunya hasanatan wa fi\'l-akhirati hasanatan wa qina \'adhab an-nar',
+        'transliteration':
+            'Rabbana atina fi\'d-dunya hasanatan wa fi\'l-akhirati hasanatan wa qina \'adhab an-nar',
         'language': 'en',
         'category': 'general',
         'keywords': ['general', 'prayer', 'good', 'blessing', 'comprehensive'],

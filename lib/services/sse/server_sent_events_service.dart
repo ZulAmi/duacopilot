@@ -12,7 +12,8 @@ import '../secure_storage/secure_storage_service.dart';
 /// Handles real-time updates from scholars and content approvals
 class ServerSentEventsService {
   static ServerSentEventsService? _instance;
-  static ServerSentEventsService get instance => _instance ??= ServerSentEventsService._();
+  static ServerSentEventsService get instance =>
+      _instance ??= ServerSentEventsService._();
 
   ServerSentEventsService._();
 
@@ -40,16 +41,24 @@ class ServerSentEventsService {
   DateTime? _lastEventTime;
 
   // Stream controllers for different event types
-  final _scholarApprovalController = StreamController<ScholarApprovalEvent>.broadcast();
-  final _contentUpdateController = StreamController<ContentUpdateEvent>.broadcast();
-  final _systemNotificationController = StreamController<SystemNotificationEvent>.broadcast();
-  final _connectionStateController = StreamController<SSEConnectionState>.broadcast();
+  final _scholarApprovalController =
+      StreamController<ScholarApprovalEvent>.broadcast();
+  final _contentUpdateController =
+      StreamController<ContentUpdateEvent>.broadcast();
+  final _systemNotificationController =
+      StreamController<SystemNotificationEvent>.broadcast();
+  final _connectionStateController =
+      StreamController<SSEConnectionState>.broadcast();
 
   // Public event streams
-  Stream<ScholarApprovalEvent> get scholarApprovalStream => _scholarApprovalController.stream;
-  Stream<ContentUpdateEvent> get contentUpdateStream => _contentUpdateController.stream;
-  Stream<SystemNotificationEvent> get systemNotificationStream => _systemNotificationController.stream;
-  Stream<SSEConnectionState> get connectionStateStream => _connectionStateController.stream;
+  Stream<ScholarApprovalEvent> get scholarApprovalStream =>
+      _scholarApprovalController.stream;
+  Stream<ContentUpdateEvent> get contentUpdateStream =>
+      _contentUpdateController.stream;
+  Stream<SystemNotificationEvent> get systemNotificationStream =>
+      _systemNotificationController.stream;
+  Stream<SSEConnectionState> get connectionStateStream =>
+      _connectionStateController.stream;
 
   /// Initialize the SSE service
   Future<void> initialize() async {
@@ -80,9 +89,12 @@ class ServerSentEventsService {
   /// Setup connectivity monitoring
   Future<void> _setupConnectivityMonitoring() async {
     final connectivity = Connectivity();
-    _isOnline = await connectivity.checkConnectivity() != ConnectivityResult.none;
+    _isOnline =
+        await connectivity.checkConnectivity() != ConnectivityResult.none;
 
-    _connectivitySubscription = connectivity.onConnectivityChanged.listen((result) {
+    _connectivitySubscription = connectivity.onConnectivityChanged.listen((
+      result,
+    ) {
       final wasOnline = _isOnline;
       _isOnline = result != ConnectivityResult.none;
 
@@ -125,13 +137,21 @@ class ServerSentEventsService {
       _httpClient = http.Client();
 
       final uri = Uri.parse(_sseEndpoint).replace(
-        queryParameters: {if (token != null) 'token': token, if (userId != null) 'user_id': userId, 'stream': 'true'},
+        queryParameters: {
+          if (token != null) 'token': token,
+          if (userId != null) 'user_id': userId,
+          'stream': 'true',
+        },
       );
 
       AppLogger.info('🔌 Connecting to SSE endpoint: $uri');
 
       final request = http.Request('GET', uri)
-        ..headers.addAll({'Accept': 'text/event-stream', 'Cache-Control': 'no-cache', 'Connection': 'keep-alive'});
+        ..headers.addAll({
+          'Accept': 'text/event-stream',
+          'Cache-Control': 'no-cache',
+          'Connection': 'keep-alive',
+        });
 
       final streamedResponse = await _httpClient!.send(request);
 
@@ -145,12 +165,18 @@ class ServerSentEventsService {
         _sseSubscription = streamedResponse.stream
             .transform(utf8.decoder)
             .transform(const LineSplitter())
-            .listen(_handleSSEMessage, onError: _handleSSEError, onDone: _handleSSEDisconnection);
+            .listen(
+              _handleSSEMessage,
+              onError: _handleSSEError,
+              onDone: _handleSSEDisconnection,
+            );
 
         // Start heartbeat monitoring
         _startHeartbeatMonitoring();
       } else {
-        throw Exception('SSE connection failed with status: ${streamedResponse.statusCode}');
+        throw Exception(
+          'SSE connection failed with status: ${streamedResponse.statusCode}',
+        );
       }
     } catch (e) {
       AppLogger.error('❌ Failed to start SSE connection: $e');
@@ -251,17 +277,28 @@ class ServerSentEventsService {
   }
 
   /// Save notification for offline viewing
-  Future<void> _saveNotificationForOffline(String type, Map<String, dynamic> data) async {
+  Future<void> _saveNotificationForOffline(
+    String type,
+    Map<String, dynamic> data,
+  ) async {
     try {
       final notifications = await _getOfflineNotifications();
-      notifications.add({'type': type, 'data': data, 'timestamp': DateTime.now().toIso8601String(), 'read': false});
+      notifications.add({
+        'type': type,
+        'data': data,
+        'timestamp': DateTime.now().toIso8601String(),
+        'read': false,
+      });
 
       // Keep only last 100 notifications
       if (notifications.length > 100) {
         notifications.removeAt(0);
       }
 
-      await _prefs.setString('offline_notifications', jsonEncode(notifications));
+      await _prefs.setString(
+        'offline_notifications',
+        jsonEncode(notifications),
+      );
     } catch (e) {
       AppLogger.error('❌ Failed to save offline notification: $e');
     }
@@ -285,8 +322,11 @@ class ServerSentEventsService {
     _heartbeatTimer?.cancel();
     _heartbeatTimer = Timer.periodic(Duration(seconds: 30), (_) {
       final now = DateTime.now();
-      if (_lastEventTime != null && now.difference(_lastEventTime!).inSeconds > 60) {
-        AppLogger.warning('⚠️ No SSE events received for 60 seconds, reconnecting...');
+      if (_lastEventTime != null &&
+          now.difference(_lastEventTime!).inSeconds > 60) {
+        AppLogger.warning(
+          '⚠️ No SSE events received for 60 seconds, reconnecting...',
+        );
         _scheduleReconnect();
       }
     });
@@ -318,11 +358,16 @@ class ServerSentEventsService {
 
     _reconnectTimer?.cancel();
 
-    final delay = Duration(seconds: _reconnectDelay.inSeconds * (1 << _reconnectAttempts.clamp(0, 5)));
+    final delay = Duration(
+      seconds:
+          _reconnectDelay.inSeconds * (1 << _reconnectAttempts.clamp(0, 5)),
+    );
 
     _reconnectTimer = Timer(delay, () {
       _reconnectAttempts++;
-      AppLogger.info('🔄 Attempting SSE reconnection ($_reconnectAttempts/$_maxReconnectAttempts)');
+      AppLogger.info(
+        '🔄 Attempting SSE reconnection ($_reconnectAttempts/$_maxReconnectAttempts)',
+      );
       _connectionStateController.add(SSEConnectionState.reconnecting);
       _startSSEConnection();
     });
@@ -366,7 +411,10 @@ class ServerSentEventsService {
           break;
         }
       }
-      await _prefs.setString('offline_notifications', jsonEncode(notifications));
+      await _prefs.setString(
+        'offline_notifications',
+        jsonEncode(notifications),
+      );
     } catch (e) {
       AppLogger.error('❌ Failed to mark notification as read: $e');
     }
@@ -463,7 +511,8 @@ class ContentUpdateEvent {
   final String title;
   final String description;
   final String category;
-  final String updateType; // 'new_content', 'updated_content', 'removed_content'
+  final String
+  updateType; // 'new_content', 'updated_content', 'removed_content'
   final DateTime timestamp;
   final Map<String, dynamic>? data;
 
@@ -530,7 +579,10 @@ class SystemNotificationEvent {
       priority: json['priority'],
       timestamp: DateTime.parse(json['timestamp']),
       actionUrl: json['action_url'],
-      expiresAt: json['expires_at'] != null ? DateTime.parse(json['expires_at']) : null,
+      expiresAt:
+          json['expires_at'] != null
+              ? DateTime.parse(json['expires_at'])
+              : null,
       metadata: json['metadata'],
     );
   }
@@ -548,4 +600,12 @@ class SystemNotificationEvent {
 }
 
 /// SSE Connection State
-enum SSEConnectionState { disconnected, connecting, connected, reconnecting, offline, error, failed }
+enum SSEConnectionState {
+  disconnected,
+  connecting,
+  connected,
+  reconnecting,
+  offline,
+  error,
+  failed,
+}

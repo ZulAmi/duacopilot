@@ -1,7 +1,10 @@
 /// Application Configuration Management
 /// Handles environment-specific settings while maintaining app parity
 class AppConfig {
-  static const String _environment = String.fromEnvironment('ENVIRONMENT', defaultValue: 'development');
+  static const String _environment = String.fromEnvironment(
+    'ENVIRONMENT',
+    defaultValue: 'development',
+  );
 
   /// Current environment (development, staging, production)
   static AppEnvironment get environment {
@@ -78,7 +81,8 @@ class AppConfig {
       case AppEnvironment.development:
         return const FeatureFlags(
           showRevolutionaryUI: false, // Use professional Islamic theme instead
-          useProfessionalIslamicTheme: true, // Enable professional Islamic green & white theme
+          useProfessionalIslamicTheme:
+              true, // Enable professional Islamic green & white theme
           enableExperimentalFeatures: true,
           showPerformanceMetrics: true,
           enableDebugTools: true,

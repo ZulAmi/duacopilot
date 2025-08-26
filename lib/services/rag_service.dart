@@ -16,12 +16,14 @@ class RagService {
   final RagApiClient _apiClient;
   final SharedPreferences _prefs;
   final Map<String, RagSearchResponse> _memoryCache = {};
-  final StreamController<RagSearchResponse> _searchResultsController = StreamController<RagSearchResponse>.broadcast();
+  final StreamController<RagSearchResponse> _searchResultsController =
+      StreamController<RagSearchResponse>.broadcast();
 
   RagService(this._apiClient, this._prefs);
 
   /// Stream of search results for reactive UI updates
-  Stream<RagSearchResponse> get searchResults => _searchResultsController.stream;
+  Stream<RagSearchResponse> get searchResults =>
+      _searchResultsController.stream;
 
   /// Initialize the service and sync offline cache if needed
   Future<void> initialize() async {
@@ -106,7 +108,10 @@ class RagService {
       // Cache the response
       await _prefs.setString(
         cacheKey,
-        json.encode({'data': response.toJson(), 'cached_at': DateTime.now().toIso8601String()}),
+        json.encode({
+          'data': response.toJson(),
+          'cached_at': DateTime.now().toIso8601String(),
+        }),
       );
 
       return response;
@@ -162,7 +167,8 @@ class RagService {
     String? timeframe,
     bool forceRefresh = false,
   }) async {
-    final cacheKey = 'popular_duas_${page}_${limit}_${category ?? 'all'}_${timeframe ?? 'week'}';
+    final cacheKey =
+        'popular_duas_${page}_${limit}_${category ?? 'all'}_${timeframe ?? 'week'}';
 
     if (!forceRefresh) {
       final cachedResponse = await _getCachedPopularDuas(cacheKey);
@@ -228,12 +234,17 @@ class RagService {
   Future<void> syncOfflineCache({bool force = false}) async {
     final lastSync = _prefs.getString(_lastSyncKey);
     final shouldSync =
-        force || lastSync == null || DateTime.now().difference(DateTime.parse(lastSync)) > _offlineCacheExpiry;
+        force ||
+        lastSync == null ||
+        DateTime.now().difference(DateTime.parse(lastSync)) >
+            _offlineCacheExpiry;
 
     if (!shouldSync) return;
 
     try {
-      final response = await _apiClient.getOfflineCache(lastSyncTimestamp: lastSync);
+      final response = await _apiClient.getOfflineCache(
+        lastSyncTimestamp: lastSync,
+      );
 
       await _saveOfflineCache(response);
       await _prefs.setString(_lastSyncKey, DateTime.now().toIso8601String());
@@ -311,9 +322,15 @@ class RagService {
     return null;
   }
 
-  Future<void> _cacheResponse(String cacheKey, RagSearchResponse response) async {
+  Future<void> _cacheResponse(
+    String cacheKey,
+    RagSearchResponse response,
+  ) async {
     try {
-      final cacheData = {'data': response.toJson(), 'cached_at': DateTime.now().toIso8601String()};
+      final cacheData = {
+        'data': response.toJson(),
+        'cached_at': DateTime.now().toIso8601String(),
+      };
       await _prefs.setString(cacheKey, json.encode(cacheData));
     } catch (e) {
       debugPrint('Error caching response: $e');
@@ -331,8 +348,13 @@ class RagService {
       // Simple keyword matching for offline search
       final matchingDuas =
           offlineCache.duas.where((item) {
-            final duaText = '${item.dua.arabicText} ${item.dua.translation} ${item.dua.transliteration}'.toLowerCase();
-            return query.toLowerCase().split(' ').any((word) => duaText.contains(word));
+            final duaText =
+                '${item.dua.arabicText} ${item.dua.translation} ${item.dua.transliteration}'
+                    .toLowerCase();
+            return query
+                .toLowerCase()
+                .split(' ')
+                .any((word) => duaText.contains(word));
           }).toList();
 
       if (matchingDuas.isNotEmpty) {
@@ -389,9 +411,15 @@ class RagService {
     return null;
   }
 
-  Future<void> _cachePopularDuas(String cacheKey, PopularDuasResponse response) async {
+  Future<void> _cachePopularDuas(
+    String cacheKey,
+    PopularDuasResponse response,
+  ) async {
     try {
-      final cacheData = {'data': response.toJson(), 'cached_at': DateTime.now().toIso8601String()};
+      final cacheData = {
+        'data': response.toJson(),
+        'cached_at': DateTime.now().toIso8601String(),
+      };
       await _prefs.setString(cacheKey, json.encode(cacheData));
     } catch (e) {
       debugPrint('Error caching popular duas: $e');
@@ -436,7 +464,9 @@ class RagService {
           await _apiClient.submitFeedback(
             duaId: feedback['dua_id'],
             queryId: feedback['query_id'],
-            feedbackType: FeedbackType.values.firstWhere((e) => e.name == feedback['feedback_type']),
+            feedbackType: FeedbackType.values.firstWhere(
+              (e) => e.name == feedback['feedback_type'],
+            ),
             rating: feedback['rating']?.toDouble(),
             comment: feedback['comment'],
             metadata: feedback['metadata'],
@@ -460,11 +490,15 @@ class RagService {
       final preferences = json.decode(queuedJson);
 
       await _apiClient.updatePersonalization(
-        preferredCategories: preferences['preferred_categories']?.cast<String>(),
+        preferredCategories:
+            preferences['preferred_categories']?.cast<String>(),
         preferredLanguages: preferences['preferred_languages']?.cast<String>(),
-        topicPreferences: preferences['topic_preferences']?.cast<String, double>(),
+        topicPreferences:
+            preferences['topic_preferences']?.cast<String, double>(),
         demographics:
-            preferences['demographics'] != null ? UserDemographics.fromJson(preferences['demographics']) : null,
+            preferences['demographics'] != null
+                ? UserDemographics.fromJson(preferences['demographics'])
+                : null,
         customPreferences: preferences['custom_preferences'],
       );
 

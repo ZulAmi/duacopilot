@@ -36,7 +36,13 @@ class _ContextualFeedbackFormState extends State<ContextualFeedbackForm> {
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
         borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 10, offset: const Offset(0, -5))],
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0, -5),
+          ),
+        ],
       ),
       child: FormBuilder(
         key: _formKey,
@@ -53,10 +59,16 @@ class _ContextualFeedbackFormState extends State<ContextualFeedbackForm> {
                 Expanded(
                   child: Text(
                     'Content Feedback',
-                    style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                    style: theme.textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-                if (widget.onCancel != null) IconButton(icon: const Icon(Icons.close), onPressed: widget.onCancel),
+                if (widget.onCancel != null)
+                  IconButton(
+                    icon: const Icon(Icons.close),
+                    onPressed: widget.onCancel,
+                  ),
               ],
             ),
 
@@ -64,7 +76,9 @@ class _ContextualFeedbackFormState extends State<ContextualFeedbackForm> {
 
             Text(
               'Help us improve the quality of ${widget.contentType} content',
-              style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurface.withOpacity(0.7)),
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: theme.colorScheme.onSurface.withOpacity(0.7),
+              ),
             ),
 
             const SizedBox(height: 24),
@@ -72,13 +86,19 @@ class _ContextualFeedbackFormState extends State<ContextualFeedbackForm> {
             // Feedback Type
             FormBuilderDropdown<String>(
               name: 'feedback_type',
-              decoration: _buildInputDecoration(context, 'Feedback Type', Icons.category),
+              decoration: _buildInputDecoration(
+                context,
+                'Feedback Type',
+                Icons.category,
+              ),
               validator: FormBuilderValidators.required(),
               items:
                   _getFeedbackTypeItems(widget.contentType)
                       .map(
-                        (type) =>
-                            DropdownMenuItem(value: type['value'] as String, child: Text(type['label'] as String)),
+                        (type) => DropdownMenuItem(
+                          value: type['value'] as String,
+                          child: Text(type['label'] as String),
+                        ),
                       )
                       .toList(),
             ),
@@ -88,7 +108,11 @@ class _ContextualFeedbackFormState extends State<ContextualFeedbackForm> {
             // Quality Rating
             FormBuilderSlider(
               name: 'quality_rating',
-              decoration: _buildInputDecoration(context, 'Content Quality', Icons.star),
+              decoration: _buildInputDecoration(
+                context,
+                'Content Quality',
+                Icons.star,
+              ),
               min: 1.0,
               max: 5.0,
               divisions: 4,
@@ -105,7 +129,11 @@ class _ContextualFeedbackFormState extends State<ContextualFeedbackForm> {
             // Specific Issues
             FormBuilderCheckboxGroup<String>(
               name: 'specific_issues',
-              decoration: _buildInputDecoration(context, 'Specific Issues (Optional)', Icons.warning),
+              decoration: _buildInputDecoration(
+                context,
+                'Specific Issues (Optional)',
+                Icons.warning,
+              ),
               options:
                   _getIssueOptions(widget.contentType)
                       .map(
@@ -123,9 +151,15 @@ class _ContextualFeedbackFormState extends State<ContextualFeedbackForm> {
             // Comments
             FormBuilderTextField(
               name: 'comments',
-              decoration: _buildInputDecoration(context, 'Additional Comments', Icons.comment),
+              decoration: _buildInputDecoration(
+                context,
+                'Additional Comments',
+                Icons.comment,
+              ),
               maxLines: 4,
-              validator: FormBuilderValidators.compose([FormBuilderValidators.maxLength(500)]),
+              validator: FormBuilderValidators.compose([
+                FormBuilderValidators.maxLength(500),
+              ]),
             ),
 
             const SizedBox(height: 16),
@@ -133,11 +167,24 @@ class _ContextualFeedbackFormState extends State<ContextualFeedbackForm> {
             // Context Information
             FormBuilderCheckboxGroup<String>(
               name: 'context',
-              decoration: _buildInputDecoration(context, 'When did you notice this issue?', Icons.access_time),
+              decoration: _buildInputDecoration(
+                context,
+                'When did you notice this issue?',
+                Icons.access_time,
+              ),
               options: const [
-                FormBuilderFieldOption(value: 'first_time', child: Text('First time viewing')),
-                FormBuilderFieldOption(value: 'multiple_times', child: Text('Multiple times')),
-                FormBuilderFieldOption(value: 'after_update', child: Text('After recent update')),
+                FormBuilderFieldOption(
+                  value: 'first_time',
+                  child: Text('First time viewing'),
+                ),
+                FormBuilderFieldOption(
+                  value: 'multiple_times',
+                  child: Text('Multiple times'),
+                ),
+                FormBuilderFieldOption(
+                  value: 'after_update',
+                  child: Text('After recent update'),
+                ),
               ],
             ),
 
@@ -150,13 +197,21 @@ class _ContextualFeedbackFormState extends State<ContextualFeedbackForm> {
                 const SizedBox(height: 8),
                 FormBuilderTextField(
                   name: 'user_expertise',
-                  decoration: _buildInputDecoration(context, 'Your knowledge level on this topic', Icons.school),
+                  decoration: _buildInputDecoration(
+                    context,
+                    'Your knowledge level on this topic',
+                    Icons.school,
+                  ),
                   validator: FormBuilderValidators.maxLength(100),
                 ),
                 const SizedBox(height: 12),
                 FormBuilderTextField(
                   name: 'suggestion',
-                  decoration: _buildInputDecoration(context, 'Suggestion for improvement', Icons.lightbulb),
+                  decoration: _buildInputDecoration(
+                    context,
+                    'Suggestion for improvement',
+                    Icons.lightbulb,
+                  ),
                   maxLines: 2,
                   validator: FormBuilderValidators.maxLength(200),
                 ),
@@ -173,7 +228,9 @@ class _ContextualFeedbackFormState extends State<ContextualFeedbackForm> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: theme.primaryColor,
                   foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                   elevation: 2,
                 ),
                 child:
@@ -183,10 +240,18 @@ class _ContextualFeedbackFormState extends State<ContextualFeedbackForm> {
                           width: 20,
                           child: CircularProgressIndicator(
                             strokeWidth: 2,
-                            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              Colors.white,
+                            ),
                           ),
                         )
-                        : const Text('Submit Feedback', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                        : const Text(
+                          'Submit Feedback',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
               ),
             ),
 
@@ -207,7 +272,11 @@ class _ContextualFeedbackFormState extends State<ContextualFeedbackForm> {
     );
   }
 
-  InputDecoration _buildInputDecoration(BuildContext context, String label, IconData icon) {
+  InputDecoration _buildInputDecoration(
+    BuildContext context,
+    String label,
+    IconData icon,
+  ) {
     final theme = Theme.of(context);
 
     return InputDecoration(
@@ -303,7 +372,9 @@ class _ContextualFeedbackFormState extends State<ContextualFeedbackForm> {
         'form_version': '2.0',
       };
 
-      await Future.delayed(const Duration(milliseconds: 500)); // Simulate processing
+      await Future.delayed(
+        const Duration(milliseconds: 500),
+      ); // Simulate processing
       widget.onSubmit(enhancedData);
 
       if (mounted) {
@@ -318,7 +389,9 @@ class _ContextualFeedbackFormState extends State<ContextualFeedbackForm> {
             ),
             backgroundColor: Colors.green,
             behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
           ),
         );
       }
@@ -335,7 +408,9 @@ class _ContextualFeedbackFormState extends State<ContextualFeedbackForm> {
             ),
             backgroundColor: Colors.red,
             behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
           ),
         );
       }
@@ -355,7 +430,12 @@ class QuickFeedbackWidget extends StatefulWidget {
   final String contentType;
   final Function(Map<String, dynamic>) onSubmit;
 
-  const QuickFeedbackWidget({super.key, required this.contentId, required this.contentType, required this.onSubmit});
+  const QuickFeedbackWidget({
+    super.key,
+    required this.contentId,
+    required this.contentType,
+    required this.onSubmit,
+  });
 
   @override
   State<QuickFeedbackWidget> createState() => _QuickFeedbackWidgetState();
@@ -366,10 +446,30 @@ class _QuickFeedbackWidgetState extends State<QuickFeedbackWidget> {
   bool _isSubmitting = false;
 
   final List<Map<String, dynamic>> _quickOptions = [
-    {'id': 'helpful', 'label': 'Helpful', 'icon': Icons.thumb_up, 'color': Colors.green},
-    {'id': 'not_helpful', 'label': 'Not Helpful', 'icon': Icons.thumb_down, 'color': Colors.red},
-    {'id': 'need_more_info', 'label': 'Need More Info', 'icon': Icons.info, 'color': Colors.blue},
-    {'id': 'report_issue', 'label': 'Report Issue', 'icon': Icons.flag, 'color': Colors.orange},
+    {
+      'id': 'helpful',
+      'label': 'Helpful',
+      'icon': Icons.thumb_up,
+      'color': Colors.green,
+    },
+    {
+      'id': 'not_helpful',
+      'label': 'Not Helpful',
+      'icon': Icons.thumb_down,
+      'color': Colors.red,
+    },
+    {
+      'id': 'need_more_info',
+      'label': 'Need More Info',
+      'icon': Icons.info,
+      'color': Colors.blue,
+    },
+    {
+      'id': 'report_issue',
+      'label': 'Report Issue',
+      'icon': Icons.flag,
+      'color': Colors.orange,
+    },
   ];
 
   @override
@@ -386,7 +486,12 @@ class _QuickFeedbackWidgetState extends State<QuickFeedbackWidget> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('Was this helpful?', style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500)),
+          Text(
+            'Was this helpful?',
+            style: theme.textTheme.bodyMedium?.copyWith(
+              fontWeight: FontWeight.w500,
+            ),
+          ),
           const SizedBox(height: 8),
           Wrap(
             spacing: 8,
@@ -394,12 +499,21 @@ class _QuickFeedbackWidgetState extends State<QuickFeedbackWidget> {
                 _quickOptions.map((option) {
                   final isSelected = _selectedFeedback == option['id'];
                   return GestureDetector(
-                    onTap: _isSubmitting ? null : () => _selectOption(option['id'] as String),
+                    onTap:
+                        _isSubmitting
+                            ? null
+                            : () => _selectOption(option['id'] as String),
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 200),
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
                       decoration: BoxDecoration(
-                        color: isSelected ? option['color'] as Color : Colors.transparent,
+                        color:
+                            isSelected
+                                ? option['color'] as Color
+                                : Colors.transparent,
                         border: Border.all(color: option['color'] as Color),
                         borderRadius: BorderRadius.circular(16),
                       ),
@@ -409,13 +523,19 @@ class _QuickFeedbackWidgetState extends State<QuickFeedbackWidget> {
                           Icon(
                             option['icon'] as IconData,
                             size: 16,
-                            color: isSelected ? Colors.white : option['color'] as Color,
+                            color:
+                                isSelected
+                                    ? Colors.white
+                                    : option['color'] as Color,
                           ),
                           const SizedBox(width: 4),
                           Text(
                             option['label'] as String,
                             style: TextStyle(
-                              color: isSelected ? Colors.white : option['color'] as Color,
+                              color:
+                                  isSelected
+                                      ? Colors.white
+                                      : option['color'] as Color,
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
                             ),
@@ -428,7 +548,11 @@ class _QuickFeedbackWidgetState extends State<QuickFeedbackWidget> {
           ),
           if (_isSubmitting) ...[
             const SizedBox(height: 8),
-            const SizedBox(height: 16, width: 16, child: CircularProgressIndicator(strokeWidth: 2)),
+            const SizedBox(
+              height: 16,
+              width: 16,
+              child: CircularProgressIndicator(strokeWidth: 2),
+            ),
           ],
         ],
       ),

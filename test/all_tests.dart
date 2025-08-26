@@ -81,7 +81,9 @@ void main() {
       expect(performance_tests.main, isNotNull);
       expect(accessibility_tests.main, isNotNull);
       print('✅ All test files imported successfully');
-      print('📝 Note: Integration tests run separately via integration_test/ folder');
+      print(
+        '📝 Note: Integration tests run separately via integration_test/ folder',
+      );
     });
 
     test('Testing framework versions should be compatible', () {

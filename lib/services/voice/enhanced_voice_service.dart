@@ -12,7 +12,8 @@ import '../secure_storage/secure_storage_service.dart';
 /// Provides high-quality speech-to-text with contextual awareness for Islamic queries
 class EnhancedVoiceService {
   static EnhancedVoiceService? _instance;
-  static EnhancedVoiceService get instance => _instance ??= EnhancedVoiceService._();
+  static EnhancedVoiceService get instance =>
+      _instance ??= EnhancedVoiceService._();
 
   EnhancedVoiceService._();
 
@@ -51,12 +52,15 @@ class EnhancedVoiceService {
   // Stream controllers
   final _voiceStatusController = StreamController<VoiceStatus>.broadcast();
   final _voiceResultController = StreamController<VoiceQueryResult>.broadcast();
-  final _languageDetectionController = StreamController<LanguageDetection>.broadcast();
+  final _languageDetectionController =
+      StreamController<LanguageDetection>.broadcast();
 
   // Public streams
   Stream<VoiceStatus> get voiceStatusStream => _voiceStatusController.stream;
-  Stream<VoiceQueryResult> get voiceResultStream => _voiceResultController.stream;
-  Stream<LanguageDetection> get languageDetectionStream => _languageDetectionController.stream;
+  Stream<VoiceQueryResult> get voiceResultStream =>
+      _voiceResultController.stream;
+  Stream<LanguageDetection> get languageDetectionStream =>
+      _languageDetectionController.stream;
 
   // Arabic language processing
   final _arabicPreprocessor = ArabicTextPreprocessor();
@@ -202,7 +206,9 @@ class EnhancedVoiceService {
       final locales = await _speechToText.locales();
 
       // Filter to supported languages
-      return locales.where((locale) => _supportedLanguages.containsKey(locale.localeId)).toList();
+      return locales
+          .where((locale) => _supportedLanguages.containsKey(locale.localeId))
+          .toList();
     } catch (e) {
       AppLogger.error('Failed to get available languages: $e');
       return [];
@@ -262,8 +268,11 @@ class EnhancedVoiceService {
 
   Future<void> _loadUserPreferences() async {
     try {
-      final savedLanguage = await _secureStorage.read('preferred_voice_language');
-      if (savedLanguage != null && _supportedLanguages.containsKey(savedLanguage)) {
+      final savedLanguage = await _secureStorage.read(
+        'preferred_voice_language',
+      );
+      if (savedLanguage != null &&
+          _supportedLanguages.containsKey(savedLanguage)) {
         _preferredLanguage = savedLanguage;
       }
       AppLogger.debug('Loaded preferred language: $_preferredLanguage');
@@ -274,7 +283,10 @@ class EnhancedVoiceService {
 
   Future<void> _saveUserPreferences() async {
     try {
-      await _secureStorage.write('preferred_voice_language', _preferredLanguage);
+      await _secureStorage.write(
+        'preferred_voice_language',
+        _preferredLanguage,
+      );
     } catch (e) {
       AppLogger.error('Failed to save user preferences: $e');
     }
@@ -285,7 +297,9 @@ class EnhancedVoiceService {
       final locales = await _speechToText.locales();
       final availableSupported =
           locales
-              .where((locale) => _supportedLanguages.containsKey(locale.localeId))
+              .where(
+                (locale) => _supportedLanguages.containsKey(locale.localeId),
+              )
               .map((locale) => locale.localeId)
               .toList();
 
@@ -309,13 +323,22 @@ class EnhancedVoiceService {
     // For now, we'll use a simple heuristic based on speech patterns
   }
 
-  void _onSpeechResult(dynamic result, {bool enableArabicEnhancements = true, bool enableIslamicTerms = true}) async {
+  void _onSpeechResult(
+    dynamic result, {
+    bool enableArabicEnhancements = true,
+    bool enableIslamicTerms = true,
+  }) async {
     try {
       var transcription = result.recognizedWords as String;
       final confidence = result.confidence as double;
-      final alternatives = (result.alternates as List<dynamic>).map((alt) => alt.recognizedWords as String).toList();
+      final alternatives =
+          (result.alternates as List<dynamic>)
+              .map((alt) => alt.recognizedWords as String)
+              .toList();
 
-      AppLogger.debug('Raw transcription: $transcription (confidence: $confidence)');
+      AppLogger.debug(
+        'Raw transcription: $transcription (confidence: $confidence)',
+      );
 
       // Apply Arabic text preprocessing if enabled
       if (enableArabicEnhancements && _isArabicLanguage(_currentLanguage)) {
@@ -324,7 +347,10 @@ class EnhancedVoiceService {
 
       // Apply Islamic terms enhancement
       if (enableIslamicTerms) {
-        transcription = _islamicTermsEnhancer.enhanceText(transcription, _currentLanguage);
+        transcription = _islamicTermsEnhancer.enhanceText(
+          transcription,
+          _currentLanguage,
+        );
       }
 
       // Detect if text contains Arabic
@@ -346,7 +372,9 @@ class EnhancedVoiceService {
         transcription: transcription,
         confidence: confidence,
         detectedLanguage: detectedLanguage,
-        duration: Duration(milliseconds: result.finalResult ? 0 : 100), // Approximate
+        duration: Duration(
+          milliseconds: result.finalResult ? 0 : 100,
+        ), // Approximate
         containsArabic: containsArabic,
         alternatives: alternatives,
         audioMetadata: {
@@ -488,7 +516,11 @@ class LanguageDetection {
   final double confidence;
   final String originalLanguage;
 
-  LanguageDetection({required this.detectedLanguage, required this.confidence, required this.originalLanguage});
+  LanguageDetection({
+    required this.detectedLanguage,
+    required this.confidence,
+    required this.originalLanguage,
+  });
 }
 
 /// Arabic text preprocessor for better recognition
@@ -501,7 +533,11 @@ class ArabicTextPreprocessor {
     processed = processed.replaceAll(RegExp(r'[\u064B-\u0652]'), '');
 
     // Normalize Arabic letters
-    processed = processed.replaceAll('أ', 'ا').replaceAll('إ', 'ا').replaceAll('آ', 'ا').replaceAll('ة', 'ه');
+    processed = processed
+        .replaceAll('أ', 'ا')
+        .replaceAll('إ', 'ا')
+        .replaceAll('آ', 'ا')
+        .replaceAll('ة', 'ه');
 
     // Clean extra whitespace
     processed = processed.replaceAll(RegExp(r'\s+'), ' ').trim();

@@ -23,7 +23,8 @@ class RagException implements Exception {
   const RagException(this.message, {this.queryId, this.context});
 
   @override
-  String toString() => 'RagException: $message${queryId != null ? ' (Query: $queryId)' : ''}';
+  String toString() =>
+      'RagException: $message${queryId != null ? ' (Query: $queryId)' : ''}';
 }
 
 class NetworkException implements Exception {
@@ -34,7 +35,8 @@ class NetworkException implements Exception {
   const NetworkException(this.message, {this.statusCode, this.endpoint});
 
   @override
-  String toString() => 'NetworkException: $message${statusCode != null ? ' (Status: $statusCode)' : ''}';
+  String toString() =>
+      'NetworkException: $message${statusCode != null ? ' (Status: $statusCode)' : ''}';
 }
 
 class ValidationException implements Exception {
@@ -45,7 +47,8 @@ class ValidationException implements Exception {
   const ValidationException(this.message, {this.field, this.value});
 
   @override
-  String toString() => 'ValidationException: $message${field != null ? ' (Field: $field)' : ''}';
+  String toString() =>
+      'ValidationException: $message${field != null ? ' (Field: $field)' : ''}';
 }
 
 class PerformanceException implements Exception {
@@ -53,10 +56,15 @@ class PerformanceException implements Exception {
   final Duration? executionTime;
   final String? operationType;
 
-  const PerformanceException(this.message, {this.executionTime, this.operationType});
+  const PerformanceException(
+    this.message, {
+    this.executionTime,
+    this.operationType,
+  });
 
   @override
-  String toString() => 'PerformanceException: $message${operationType != null ? ' (Operation: $operationType)' : ''}';
+  String toString() =>
+      'PerformanceException: $message${operationType != null ? ' (Operation: $operationType)' : ''}';
 }
 
 /// Production Crash Reporter
@@ -97,7 +105,11 @@ class ProductionCrashReporter {
       _isInitialized = true;
       _logger.i('ProductionCrashReporter initialized successfully');
     } catch (e, stackTrace) {
-      _logger.e('Failed to initialize ProductionCrashReporter', error: e, stackTrace: stackTrace);
+      _logger.e(
+        'Failed to initialize ProductionCrashReporter',
+        error: e,
+        stackTrace: stackTrace,
+      );
       // Can't use crashlytics here as it's not initialized
     }
   }
@@ -116,7 +128,11 @@ class ProductionCrashReporter {
       _trackCrashAnalytics('flutter_error', details.exception, details.stack);
 
       // Cache crash report for offline scenarios
-      _cacheCrashReport('flutter_error', details.exception.toString(), details.stack);
+      _cacheCrashReport(
+        'flutter_error',
+        details.exception.toString(),
+        details.stack,
+      );
     };
   }
 
@@ -142,11 +158,20 @@ class ProductionCrashReporter {
 
   static Future<void> _setCustomKeys() async {
     try {
-      await _crashlytics.setCustomKey('app_version', _packageInfo?.version ?? 'unknown');
-      await _crashlytics.setCustomKey('build_number', _packageInfo?.buildNumber ?? 'unknown');
+      await _crashlytics.setCustomKey(
+        'app_version',
+        _packageInfo?.version ?? 'unknown',
+      );
+      await _crashlytics.setCustomKey(
+        'build_number',
+        _packageInfo?.buildNumber ?? 'unknown',
+      );
       await _crashlytics.setCustomKey('platform', Platform.operatingSystem);
       await _crashlytics.setCustomKey('debug_mode', kDebugMode);
-      await _crashlytics.setCustomKey('initialization_time', DateTime.now().toIso8601String());
+      await _crashlytics.setCustomKey(
+        'initialization_time',
+        DateTime.now().toIso8601String(),
+      );
 
       // Set device info
       if (Platform.isAndroid || Platform.isIOS) {
@@ -176,18 +201,29 @@ class ProductionCrashReporter {
 
       if (additionalData != null) {
         for (final entry in additionalData.entries) {
-          await _crashlytics.setCustomKey('custom_${entry.key}', entry.value?.toString() ?? 'null');
+          await _crashlytics.setCustomKey(
+            'custom_${entry.key}',
+            entry.value?.toString() ?? 'null',
+          );
         }
       }
 
       await _crashlytics.setCustomKey('error_severity', severity.name);
-      await _crashlytics.setCustomKey('error_timestamp', DateTime.now().toIso8601String());
+      await _crashlytics.setCustomKey(
+        'error_timestamp',
+        DateTime.now().toIso8601String(),
+      );
 
       // Record the error
       await _crashlytics.recordError(error, stackTrace, fatal: fatal);
 
       // Track in analytics
-      _trackCrashAnalytics('recorded_error', error, stackTrace, context: context);
+      _trackCrashAnalytics(
+        'recorded_error',
+        error,
+        stackTrace,
+        context: context,
+      );
 
       // Cache for offline scenarios
       _cacheCrashReport(
@@ -203,7 +239,11 @@ class ProductionCrashReporter {
 
       _logger.w('Error recorded: $error', error: error, stackTrace: stackTrace);
     } catch (e, stack) {
-      _logger.e('Failed to record error to crashlytics', error: e, stackTrace: stack);
+      _logger.e(
+        'Failed to record error to crashlytics',
+        error: e,
+        stackTrace: stack,
+      );
     }
   }
 
@@ -243,7 +283,9 @@ class ProductionCrashReporter {
     final context = <String, dynamic>{
       'status_code': networkError.statusCode,
       'endpoint': networkError.endpoint,
-      'headers': headers?.keys.join(', '), // Don't log header values for security
+      'headers': headers?.keys.join(
+        ', ',
+      ), // Don't log header values for security
       'request_body_length': requestBody?.length,
       'request_duration_ms': requestDuration?.inMilliseconds,
     };
@@ -322,7 +364,12 @@ class ProductionCrashReporter {
       return {
         'total_crashes': crashCount,
         'last_crash_timestamp': lastCrash,
-        'last_crash_date': lastCrash != null ? DateTime.fromMillisecondsSinceEpoch(lastCrash).toIso8601String() : null,
+        'last_crash_date':
+            lastCrash != null
+                ? DateTime.fromMillisecondsSinceEpoch(
+                  lastCrash,
+                ).toIso8601String()
+                : null,
         'crashes_this_session': 0, // Reset on app start
         'crashlytics_enabled': await isCrashlyticsEnabled(),
       };
@@ -340,7 +387,10 @@ class ProductionCrashReporter {
           Exception('Test crash report'),
           StackTrace.current,
           context: 'debug_test',
-          additionalData: {'test_type': 'manual_test', 'timestamp': DateTime.now().toIso8601String()},
+          additionalData: {
+            'test_type': 'manual_test',
+            'timestamp': DateTime.now().toIso8601String(),
+          },
         );
         _logger.i('Test crash report sent');
       } catch (e) {
@@ -350,7 +400,12 @@ class ProductionCrashReporter {
   }
 
   // Private helper methods
-  static void _trackCrashAnalytics(String errorType, dynamic error, StackTrace? stackTrace, {String? context}) {
+  static void _trackCrashAnalytics(
+    String errorType,
+    dynamic error,
+    StackTrace? stackTrace, {
+    String? context,
+  }) {
     // Note: This would integrate with ProductionAnalytics
     // Keeping it simple to avoid circular dependencies
     if (kDebugMode) {
@@ -404,7 +459,9 @@ class ProductionCrashReporter {
             final report = json.decode(reportJson) as Map<String, dynamic>;
 
             // Process the cached report
-            await log('Cached crash: ${report['error_type']} - ${report['error_message']}');
+            await log(
+              'Cached crash: ${report['error_type']} - ${report['error_message']}',
+            );
           } catch (e) {
             _logger.w('Failed to process cached crash report', error: e);
           }
@@ -423,7 +480,10 @@ class ProductionCrashReporter {
     try {
       final currentCount = _prefs?.getInt(_crashCountKey) ?? 0;
       await _prefs?.setInt(_crashCountKey, currentCount + 1);
-      await _prefs?.setInt(_lastCrashKey, DateTime.now().millisecondsSinceEpoch);
+      await _prefs?.setInt(
+        _lastCrashKey,
+        DateTime.now().millisecondsSinceEpoch,
+      );
     } catch (e) {
       _logger.w('Failed to update crash statistics', error: e);
     }
@@ -440,12 +500,21 @@ class ProductionCrashReporter {
 
 /// Exception handler wrapper
 class ExceptionHandler {
-  static T? handleSync<T>(T Function() operation, {String? context, T? fallback, bool recordError = true}) {
+  static T? handleSync<T>(
+    T Function() operation, {
+    String? context,
+    T? fallback,
+    bool recordError = true,
+  }) {
     try {
       return operation();
     } catch (e, stackTrace) {
       if (recordError) {
-        ProductionCrashReporter.recordError(e, stackTrace, context: context ?? 'sync_operation');
+        ProductionCrashReporter.recordError(
+          e,
+          stackTrace,
+          context: context ?? 'sync_operation',
+        );
       }
       return fallback;
     }
@@ -461,7 +530,11 @@ class ExceptionHandler {
       return await operation();
     } catch (e, stackTrace) {
       if (recordError) {
-        ProductionCrashReporter.recordError(e, stackTrace, context: context ?? 'async_operation');
+        ProductionCrashReporter.recordError(
+          e,
+          stackTrace,
+          context: context ?? 'async_operation',
+        );
       }
       return fallback;
     }
@@ -474,16 +547,31 @@ class SafeWidget extends StatelessWidget {
   final Widget? errorWidget;
   final String? context;
 
-  const SafeWidget({super.key, required this.child, this.errorWidget, this.context});
+  const SafeWidget({
+    super.key,
+    required this.child,
+    this.errorWidget,
+    this.context,
+  });
 
   @override
   Widget build(BuildContext context) {
     try {
       return child;
     } catch (error, stackTrace) {
-      ProductionCrashReporter.recordError(error, stackTrace, context: this.context ?? 'widget_error');
+      ProductionCrashReporter.recordError(
+        error,
+        stackTrace,
+        context: this.context ?? 'widget_error',
+      );
 
-      return errorWidget ?? const Center(child: Text('Something went wrong', style: TextStyle(color: Colors.red)));
+      return errorWidget ??
+          const Center(
+            child: Text(
+              'Something went wrong',
+              style: TextStyle(color: Colors.red),
+            ),
+          );
     }
   }
 }

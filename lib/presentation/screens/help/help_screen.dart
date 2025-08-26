@@ -12,7 +12,8 @@ class ScreenAssistance extends ConsumerStatefulWidget {
   ConsumerState<ScreenAssistance> createState() => _ScreenAssistanceState();
 }
 
-class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with TickerProviderStateMixin {
+class _ScreenAssistanceState extends ConsumerState<ScreenAssistance>
+    with TickerProviderStateMixin {
   late AnimationController _fadeController;
   late AnimationController _slideController;
 
@@ -22,8 +23,14 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
   @override
   void initState() {
     super.initState();
-    _fadeController = AnimationController(duration: ProfessionalIslamicTheme.animationNormal, vsync: this);
-    _slideController = AnimationController(duration: ProfessionalIslamicTheme.animationSlow, vsync: this);
+    _fadeController = AnimationController(
+      duration: ProfessionalIslamicTheme.animationNormal,
+      vsync: this,
+    );
+    _slideController = AnimationController(
+      duration: ProfessionalIslamicTheme.animationSlow,
+      vsync: this,
+    );
     _startAnimations();
   }
 
@@ -53,7 +60,12 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
             width: 280,
             decoration: BoxDecoration(
               color: ProfessionalIslamicTheme.backgroundPrimary,
-              border: Border(right: BorderSide(color: ProfessionalIslamicTheme.gray200, width: 1)),
+              border: Border(
+                right: BorderSide(
+                  color: ProfessionalIslamicTheme.gray200,
+                  width: 1,
+                ),
+              ),
             ),
             child: _buildNavigationPanel(context),
           ),
@@ -70,11 +82,18 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
       elevation: 0,
       scrolledUnderElevation: 1,
       leading: IconButton(
-        icon: Icon(Icons.arrow_back_ios_rounded, color: ProfessionalIslamicTheme.textPrimary),
+        icon: Icon(
+          Icons.arrow_back_ios_rounded,
+          color: ProfessionalIslamicTheme.textPrimary,
+        ),
         onPressed: () => Navigator.of(context).pop(),
         style: IconButton.styleFrom(
           backgroundColor: ProfessionalIslamicTheme.gray100,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusXl)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(
+              ProfessionalIslamicTheme.radiusXl,
+            ),
+          ),
         ),
       ),
       title: Row(
@@ -83,9 +102,15 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
             padding: const EdgeInsets.all(ProfessionalIslamicTheme.space4),
             decoration: BoxDecoration(
               color: ProfessionalIslamicTheme.islamicGreen,
-              borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusLg),
+              borderRadius: BorderRadius.circular(
+                ProfessionalIslamicTheme.radiusLg,
+              ),
             ),
-            child: Icon(Icons.help_outline_rounded, color: ProfessionalIslamicTheme.textOnIslamic, size: 20),
+            child: Icon(
+              Icons.help_outline_rounded,
+              color: ProfessionalIslamicTheme.textOnIslamic,
+              size: 20,
+            ),
           ),
           const SizedBox(width: ProfessionalIslamicTheme.space6),
           Text(
@@ -117,17 +142,29 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
-              border: Border(bottom: BorderSide(color: ProfessionalIslamicTheme.gray200, width: 1)),
+              border: Border(
+                bottom: BorderSide(
+                  color: ProfessionalIslamicTheme.gray200,
+                  width: 1,
+                ),
+              ),
             ),
             child: Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.all(ProfessionalIslamicTheme.space4),
+                  padding: const EdgeInsets.all(
+                    ProfessionalIslamicTheme.space4,
+                  ),
                   decoration: BoxDecoration(
                     color: ProfessionalIslamicTheme.islamicGreen,
-                    borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusLg),
+                    borderRadius: BorderRadius.circular(
+                      ProfessionalIslamicTheme.radiusLg,
+                    ),
                   ),
-                  child: Icon(Icons.support_agent_rounded, color: ProfessionalIslamicTheme.textOnIslamic),
+                  child: Icon(
+                    Icons.support_agent_rounded,
+                    color: ProfessionalIslamicTheme.textOnIslamic,
+                  ),
                 ),
                 const SizedBox(width: ProfessionalIslamicTheme.space6),
                 Expanded(
@@ -136,16 +173,18 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
                     children: [
                       Text(
                         'Support Center',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.w600,
                           color: ProfessionalIslamicTheme.textPrimary,
                         ),
                       ),
                       Text(
                         'Get help with DuaCopilot',
-                        style: Theme.of(
-                          context,
-                        ).textTheme.bodySmall?.copyWith(color: ProfessionalIslamicTheme.textSecondary),
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: ProfessionalIslamicTheme.textSecondary,
+                        ),
                       ),
                     ],
                   ),
@@ -158,10 +197,34 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
             child: ListView(
               padding: const EdgeInsets.all(ProfessionalIslamicTheme.space6),
               children: [
-                _buildNavigationItem(context, 0, Icons.quiz_rounded, 'FAQ', 'Frequently Asked Questions'),
-                _buildNavigationItem(context, 1, Icons.menu_book_rounded, 'User Guide', 'Step-by-step tutorials'),
-                _buildNavigationItem(context, 2, Icons.contact_support_rounded, 'Contact Support', 'Get direct help'),
-                _buildNavigationItem(context, 3, Icons.feedback_rounded, 'Send Feedback', 'Help us improve'),
+                _buildNavigationItem(
+                  context,
+                  0,
+                  Icons.quiz_rounded,
+                  'FAQ',
+                  'Frequently Asked Questions',
+                ),
+                _buildNavigationItem(
+                  context,
+                  1,
+                  Icons.menu_book_rounded,
+                  'User Guide',
+                  'Step-by-step tutorials',
+                ),
+                _buildNavigationItem(
+                  context,
+                  2,
+                  Icons.contact_support_rounded,
+                  'Contact Support',
+                  'Get direct help',
+                ),
+                _buildNavigationItem(
+                  context,
+                  3,
+                  Icons.feedback_rounded,
+                  'Send Feedback',
+                  'Help us improve',
+                ),
               ],
             ),
           ),
@@ -170,26 +233,49 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
     );
   }
 
-  Widget _buildNavigationItem(BuildContext context, int index, IconData icon, String title, String subtitle) {
+  Widget _buildNavigationItem(
+    BuildContext context,
+    int index,
+    IconData icon,
+    String title,
+    String subtitle,
+  ) {
     final isSelected = _selectedSection == index;
 
     return Container(
       margin: const EdgeInsets.only(bottom: ProfessionalIslamicTheme.space4),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusLg),
-        color: isSelected ? ProfessionalIslamicTheme.islamicGreen.withOpacity(0.1) : null,
-        border: isSelected ? Border.all(color: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.3), width: 1) : null,
+        color:
+            isSelected
+                ? ProfessionalIslamicTheme.islamicGreen.withOpacity(0.1)
+                : null,
+        border:
+            isSelected
+                ? Border.all(
+                  color: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.3),
+                  width: 1,
+                )
+                : null,
       ),
       child: ListTile(
         leading: Container(
           padding: const EdgeInsets.all(ProfessionalIslamicTheme.space2),
           decoration: BoxDecoration(
-            color: isSelected ? ProfessionalIslamicTheme.islamicGreen : ProfessionalIslamicTheme.gray200,
-            borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusMd),
+            color:
+                isSelected
+                    ? ProfessionalIslamicTheme.islamicGreen
+                    : ProfessionalIslamicTheme.gray200,
+            borderRadius: BorderRadius.circular(
+              ProfessionalIslamicTheme.radiusMd,
+            ),
           ),
           child: Icon(
             icon,
-            color: isSelected ? ProfessionalIslamicTheme.textOnIslamic : ProfessionalIslamicTheme.textSecondary,
+            color:
+                isSelected
+                    ? ProfessionalIslamicTheme.textOnIslamic
+                    : ProfessionalIslamicTheme.textSecondary,
             size: 20,
           ),
         ),
@@ -197,12 +283,17 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
           title,
           style: Theme.of(context).textTheme.titleSmall?.copyWith(
             fontWeight: FontWeight.w600,
-            color: isSelected ? ProfessionalIslamicTheme.islamicGreen : ProfessionalIslamicTheme.textPrimary,
+            color:
+                isSelected
+                    ? ProfessionalIslamicTheme.islamicGreen
+                    : ProfessionalIslamicTheme.textPrimary,
           ),
         ),
         subtitle: Text(
           subtitle,
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(color: ProfessionalIslamicTheme.textSecondary),
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+            color: ProfessionalIslamicTheme.textSecondary,
+          ),
         ),
         onTap: () {
           setState(() {
@@ -216,7 +307,10 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
   Widget _buildMainContent(BuildContext context) {
     return FadeTransition(
       opacity: _fadeController,
-      child: Container(padding: const EdgeInsets.all(ProfessionalIslamicTheme.space8), child: _buildSectionContent()),
+      child: Container(
+        padding: const EdgeInsets.all(ProfessionalIslamicTheme.space8),
+        child: _buildSectionContent(),
+      ),
     );
   }
 
@@ -278,7 +372,10 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
             controller: _scrollController,
             itemCount: faqs.length,
             itemBuilder: (context, index) {
-              return _buildFAQItem(faqs[index]['question']!, faqs[index]['answer']!);
+              return _buildFAQItem(
+                faqs[index]['question']!,
+                faqs[index]['answer']!,
+              );
             },
           ),
         ),
@@ -298,18 +395,20 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
       child: ExpansionTile(
         title: Text(
           question,
-          style: Theme.of(
-            context,
-          ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600, color: ProfessionalIslamicTheme.textPrimary),
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.w600,
+            color: ProfessionalIslamicTheme.textPrimary,
+          ),
         ),
         children: [
           Padding(
             padding: const EdgeInsets.all(ProfessionalIslamicTheme.space6),
             child: Text(
               answer,
-              style: Theme.of(
-                context,
-              ).textTheme.bodyMedium?.copyWith(color: ProfessionalIslamicTheme.textSecondary, height: 1.6),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: ProfessionalIslamicTheme.textSecondary,
+                height: 1.6,
+              ),
             ),
           ),
         ],
@@ -332,12 +431,17 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
             controller: _scrollController,
             child: Column(
               children: [
-                _buildGuideCard('Getting Started', 'Learn the basics of using DuaCopilot', Icons.play_arrow_rounded, [
-                  'Set up your profile and Islamic preferences',
-                  'Configure prayer times for your location',
-                  'Explore voice search for Islamic queries',
-                  'Set up prayer and dhikr reminders',
-                ]),
+                _buildGuideCard(
+                  'Getting Started',
+                  'Learn the basics of using DuaCopilot',
+                  Icons.play_arrow_rounded,
+                  [
+                    'Set up your profile and Islamic preferences',
+                    'Configure prayer times for your location',
+                    'Explore voice search for Islamic queries',
+                    'Set up prayer and dhikr reminders',
+                  ],
+                ),
                 const SizedBox(height: ProfessionalIslamicTheme.space6),
                 _buildGuideCard(
                   'Prayer Features',
@@ -370,7 +474,12 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
     );
   }
 
-  Widget _buildGuideCard(String title, String description, IconData icon, List<String> steps) {
+  Widget _buildGuideCard(
+    String title,
+    String description,
+    IconData icon,
+    List<String> steps,
+  ) {
     return Container(
       decoration: BoxDecoration(
         color: ProfessionalIslamicTheme.backgroundPrimary,
@@ -386,12 +495,21 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
             Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.all(ProfessionalIslamicTheme.space4),
-                  decoration: BoxDecoration(
-                    color: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusLg),
+                  padding: const EdgeInsets.all(
+                    ProfessionalIslamicTheme.space4,
                   ),
-                  child: Icon(icon, color: ProfessionalIslamicTheme.islamicGreen),
+                  decoration: BoxDecoration(
+                    color: ProfessionalIslamicTheme.islamicGreen.withOpacity(
+                      0.1,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      ProfessionalIslamicTheme.radiusLg,
+                    ),
+                  ),
+                  child: Icon(
+                    icon,
+                    color: ProfessionalIslamicTheme.islamicGreen,
+                  ),
                 ),
                 const SizedBox(width: ProfessionalIslamicTheme.space6),
                 Expanded(
@@ -407,9 +525,9 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
                       ),
                       Text(
                         description,
-                        style: Theme.of(
-                          context,
-                        ).textTheme.bodyMedium?.copyWith(color: ProfessionalIslamicTheme.textSecondary),
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: ProfessionalIslamicTheme.textSecondary,
+                        ),
                       ),
                     ],
                   ),
@@ -421,18 +539,25 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
               final index = entry.key;
               final step = entry.value;
               return Padding(
-                padding: const EdgeInsets.only(bottom: ProfessionalIslamicTheme.space4),
+                padding: const EdgeInsets.only(
+                  bottom: ProfessionalIslamicTheme.space4,
+                ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
                       width: 24,
                       height: 24,
-                      decoration: BoxDecoration(color: ProfessionalIslamicTheme.islamicGreen, shape: BoxShape.circle),
+                      decoration: BoxDecoration(
+                        color: ProfessionalIslamicTheme.islamicGreen,
+                        shape: BoxShape.circle,
+                      ),
                       child: Center(
                         child: Text(
                           '${index + 1}',
-                          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                          style: Theme.of(
+                            context,
+                          ).textTheme.labelSmall?.copyWith(
                             color: ProfessionalIslamicTheme.textOnIslamic,
                             fontWeight: FontWeight.w600,
                           ),
@@ -443,9 +568,9 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
                     Expanded(
                       child: Text(
                         step,
-                        style: Theme.of(
-                          context,
-                        ).textTheme.bodyMedium?.copyWith(color: ProfessionalIslamicTheme.textPrimary),
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: ProfessionalIslamicTheme.textPrimary,
+                        ),
                       ),
                     ),
                   ],
@@ -462,7 +587,11 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildSectionHeader('Contact Support', 'Get direct help from our support team', Icons.contact_support_rounded),
+        _buildSectionHeader(
+          'Contact Support',
+          'Get direct help from our support team',
+          Icons.contact_support_rounded,
+        ),
         const SizedBox(height: ProfessionalIslamicTheme.space8),
         Expanded(
           child: SingleChildScrollView(
@@ -520,9 +649,15 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
                 padding: const EdgeInsets.all(ProfessionalIslamicTheme.space6),
                 decoration: BoxDecoration(
                   color: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusLg),
+                  borderRadius: BorderRadius.circular(
+                    ProfessionalIslamicTheme.radiusLg,
+                  ),
                 ),
-                child: Icon(icon, color: ProfessionalIslamicTheme.islamicGreen, size: 28),
+                child: Icon(
+                  icon,
+                  color: ProfessionalIslamicTheme.islamicGreen,
+                  size: 28,
+                ),
               ),
               const SizedBox(width: ProfessionalIslamicTheme.space6),
               Expanded(
@@ -539,9 +674,9 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
                     const SizedBox(height: ProfessionalIslamicTheme.space2),
                     Text(
                       description,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodyMedium?.copyWith(color: ProfessionalIslamicTheme.textSecondary),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: ProfessionalIslamicTheme.textSecondary,
+                      ),
                     ),
                     const SizedBox(height: ProfessionalIslamicTheme.space2),
                     Text(
@@ -553,12 +688,18 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
                     ),
                     Text(
                       availability,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(color: ProfessionalIslamicTheme.textMuted),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: ProfessionalIslamicTheme.textMuted,
+                      ),
                     ),
                   ],
                 ),
               ),
-              Icon(Icons.arrow_forward_ios_rounded, color: ProfessionalIslamicTheme.textSecondary, size: 16),
+              Icon(
+                Icons.arrow_forward_ios_rounded,
+                color: ProfessionalIslamicTheme.textSecondary,
+                size: 16,
+              ),
             ],
           ),
         ),
@@ -616,7 +757,12 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
     );
   }
 
-  Widget _buildFeedbackOption(String title, String description, IconData icon, VoidCallback onTap) {
+  Widget _buildFeedbackOption(
+    String title,
+    String description,
+    IconData icon,
+    VoidCallback onTap,
+  ) {
     return Container(
       decoration: BoxDecoration(
         color: ProfessionalIslamicTheme.backgroundPrimary,
@@ -631,7 +777,11 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
           padding: const EdgeInsets.all(ProfessionalIslamicTheme.space6),
           child: Row(
             children: [
-              Icon(icon, color: ProfessionalIslamicTheme.islamicGreen, size: 24),
+              Icon(
+                icon,
+                color: ProfessionalIslamicTheme.islamicGreen,
+                size: 24,
+              ),
               const SizedBox(width: ProfessionalIslamicTheme.space6),
               Expanded(
                 child: Column(
@@ -646,14 +796,18 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
                     ),
                     Text(
                       description,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodySmall?.copyWith(color: ProfessionalIslamicTheme.textSecondary),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: ProfessionalIslamicTheme.textSecondary,
+                      ),
                     ),
                   ],
                 ),
               ),
-              Icon(Icons.arrow_forward_ios_rounded, color: ProfessionalIslamicTheme.textSecondary, size: 16),
+              Icon(
+                Icons.arrow_forward_ios_rounded,
+                color: ProfessionalIslamicTheme.textSecondary,
+                size: 16,
+              ),
             ],
           ),
         ),
@@ -674,7 +828,10 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusLg),
-        border: Border.all(color: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.2), width: 1),
+        border: Border.all(
+          color: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.2),
+          width: 1,
+        ),
       ),
       child: Row(
         children: [
@@ -682,9 +839,15 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
             padding: const EdgeInsets.all(ProfessionalIslamicTheme.space6),
             decoration: BoxDecoration(
               color: ProfessionalIslamicTheme.islamicGreen,
-              borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusLg),
+              borderRadius: BorderRadius.circular(
+                ProfessionalIslamicTheme.radiusLg,
+              ),
             ),
-            child: Icon(icon, color: ProfessionalIslamicTheme.textOnIslamic, size: 28),
+            child: Icon(
+              icon,
+              color: ProfessionalIslamicTheme.textOnIslamic,
+              size: 28,
+            ),
           ),
           const SizedBox(width: ProfessionalIslamicTheme.space6),
           Expanded(
@@ -701,9 +864,9 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
                 const SizedBox(height: ProfessionalIslamicTheme.space2),
                 Text(
                   subtitle,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodyMedium?.copyWith(color: ProfessionalIslamicTheme.textSecondary),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: ProfessionalIslamicTheme.textSecondary,
+                  ),
                 ),
               ],
             ),

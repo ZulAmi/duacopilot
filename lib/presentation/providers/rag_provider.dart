@@ -42,7 +42,13 @@ class RagApiNotifier extends AsyncNotifier<RagStateData> {
 
     try {
       // Update state to loading
-      state = AsyncValue.data(state.value!.copyWith(apiState: RagApiState.loading, currentQuery: query, error: null));
+      state = AsyncValue.data(
+        state.value!.copyWith(
+          apiState: RagApiState.loading,
+          currentQuery: query,
+          error: null,
+        ),
+      );
 
       // Step 1: Enhance the query with smart processing
       final enhancedQuery = await _queryEnhancer.enhanceQuery(
@@ -55,7 +61,9 @@ class RagApiNotifier extends AsyncNotifier<RagStateData> {
       // Check cache first if enabled (using enhanced query)
       if (useCache) {
         final cacheNotifier = ref.read(ragCacheProvider.notifier);
-        final cachedResponse = await cacheNotifier.get(enhancedQuery.processedQuery);
+        final cachedResponse = await cacheNotifier.get(
+          enhancedQuery.processedQuery,
+        );
         if (cachedResponse != null) {
           state = AsyncValue.data(
             state.value!.copyWith(
@@ -135,14 +143,24 @@ class RagApiNotifier extends AsyncNotifier<RagStateData> {
 
       // Cache the response (using enhanced query as key)
       if (useCache) {
-        await ref.read(ragCacheProvider.notifier).put(enhancedQuery.processedQuery, response);
+        await ref
+            .read(ragCacheProvider.notifier)
+            .put(enhancedQuery.processedQuery, response);
       }
 
       // Persist state
       await _persistState();
     } catch (error, stackTrace) {
       // Handle error with retry logic
-      await _handleError(error, stackTrace, query, useCache, language, context, userPreferences);
+      await _handleError(
+        error,
+        stackTrace,
+        query,
+        useCache,
+        language,
+        context,
+        userPreferences,
+      );
     }
   }
 
@@ -167,7 +185,10 @@ class RagApiNotifier extends AsyncNotifier<RagStateData> {
 
       // Update state with retry count
       state = AsyncValue.data(
-        currentState.copyWith(retryCount: retryCount + 1, error: 'Retrying... (${retryCount + 1}/3)'),
+        currentState.copyWith(
+          retryCount: retryCount + 1,
+          error: 'Retrying... (${retryCount + 1}/3)',
+        ),
       );
 
       // Retry the query with enhanced parameters
@@ -181,7 +202,11 @@ class RagApiNotifier extends AsyncNotifier<RagStateData> {
     } else {
       // Max retries reached or non-retryable error
       state = AsyncValue.data(
-        currentState.copyWith(apiState: RagApiState.error, error: _formatError(error), retryCount: retryCount),
+        currentState.copyWith(
+          apiState: RagApiState.error,
+          error: _formatError(error),
+          retryCount: retryCount,
+        ),
       );
 
       await _persistState();
@@ -223,7 +248,13 @@ class RagApiNotifier extends AsyncNotifier<RagStateData> {
   /// Clear current query and reset state
   void clearQuery() {
     state = AsyncValue.data(
-      state.value!.copyWith(apiState: RagApiState.idle, response: null, currentQuery: null, error: null, retryCount: 0),
+      state.value!.copyWith(
+        apiState: RagApiState.idle,
+        response: null,
+        currentQuery: null,
+        error: null,
+        retryCount: 0,
+      ),
     );
     _persistState();
   }
@@ -325,7 +356,9 @@ class RagCacheNotifier extends StateNotifier<Map<String, CachedRagEntry>> {
   Future<void> _evictOldest() async {
     if (state.isEmpty) return;
 
-    final sortedEntries = state.entries.toList()..sort((a, b) => a.value.timestamp.compareTo(b.value.timestamp));
+    final sortedEntries =
+        state.entries.toList()
+          ..sort((a, b) => a.value.timestamp.compareTo(b.value.timestamp));
 
     final entriesToRemove = (state.length * 0.2).ceil(); // Remove 20%
     final newState = <String, CachedRagEntry>{};
@@ -371,10 +404,15 @@ class RagCacheNotifier extends StateNotifier<Map<String, CachedRagEntry>> {
 }
 
 /// Provider for RAG response caching
-final ragCacheProvider = StateNotifierProvider<RagCacheNotifier, Map<String, CachedRagEntry>>((ref) {
-  const config = RagCacheConfig(maxEntries: 100, maxAge: Duration(hours: 1), enablePersistence: true);
-  return RagCacheNotifier(config);
-});
+final ragCacheProvider =
+    StateNotifierProvider<RagCacheNotifier, Map<String, CachedRagEntry>>((ref) {
+      const config = RagCacheConfig(
+        maxEntries: 100,
+        maxAge: Duration(hours: 1),
+        enablePersistence: true,
+      );
+      return RagCacheNotifier(config);
+    });
 
 /// StateNotifier for complex RAG response processing and filtering
 class RagFilterNotifier extends StateNotifier<RagFilterConfig> {
@@ -448,12 +486,14 @@ class RagFilterNotifier extends StateNotifier<RagFilterConfig> {
   List<RagResponse> filterResponses(List<RagResponse> responses) {
     return responses.where((response) {
       // Confidence filter
-      if (response.confidence != null && response.confidence! < state.minConfidence) {
+      if (response.confidence != null &&
+          response.confidence! < state.minConfidence) {
         return false;
       }
 
       // Length filter
-      if (state.maxResponseLength != null && response.response.length > state.maxResponseLength!) {
+      if (state.maxResponseLength != null &&
+          response.response.length > state.maxResponseLength!) {
         return false;
       }
 
@@ -468,7 +508,9 @@ class RagFilterNotifier extends StateNotifier<RagFilterConfig> {
       // Required keywords filter
       if (state.requiredKeywords.isNotEmpty) {
         final responseText = response.response.toLowerCase();
-        final hasAllKeywords = state.requiredKeywords.every((keyword) => responseText.contains(keyword.toLowerCase()));
+        final hasAllKeywords = state.requiredKeywords.every(
+          (keyword) => responseText.contains(keyword.toLowerCase()),
+        );
         if (!hasAllKeywords) return false;
       }
 
@@ -502,9 +544,10 @@ class RagFilterNotifier extends StateNotifier<RagFilterConfig> {
 }
 
 /// Provider for RAG response filtering
-final ragFilterProvider = StateNotifierProvider<RagFilterNotifier, RagFilterConfig>((ref) {
-  return RagFilterNotifier();
-});
+final ragFilterProvider =
+    StateNotifierProvider<RagFilterNotifier, RagFilterConfig>((ref) {
+      return RagFilterNotifier();
+    });
 
 /// StreamProvider for real-time updates from WebSocket connections
 class RagWebSocketNotifier extends StateNotifier<WebSocketState> {
@@ -524,7 +567,9 @@ class RagWebSocketNotifier extends StateNotifier<WebSocketState> {
     if (state.connectionState == WebSocketConnectionState.connected) return;
 
     try {
-      state = state.copyWith(connectionState: WebSocketConnectionState.connecting);
+      state = state.copyWith(
+        connectionState: WebSocketConnectionState.connecting,
+      );
 
       // Replace with your actual WebSocket URL
       const wsUrl = 'wss://api.duacopilot.com/ws';
@@ -537,9 +582,16 @@ class RagWebSocketNotifier extends StateNotifier<WebSocketState> {
       );
 
       // Listen for messages
-      _channel!.stream.listen(_handleMessage, onError: _handleError, onDone: _handleDisconnect);
+      _channel!.stream.listen(
+        _handleMessage,
+        onError: _handleError,
+        onDone: _handleDisconnect,
+      );
     } catch (error) {
-      state = state.copyWith(connectionState: WebSocketConnectionState.error, error: error.toString());
+      state = state.copyWith(
+        connectionState: WebSocketConnectionState.error,
+        error: error.toString(),
+      );
     }
   }
 
@@ -547,7 +599,10 @@ class RagWebSocketNotifier extends StateNotifier<WebSocketState> {
   Future<void> disconnect() async {
     await _channel?.sink.close();
     _channel = null;
-    state = state.copyWith(connectionState: WebSocketConnectionState.disconnected, lastDisconnected: DateTime.now());
+    state = state.copyWith(
+      connectionState: WebSocketConnectionState.disconnected,
+      lastDisconnected: DateTime.now(),
+    );
   }
 
   /// Send message through WebSocket
@@ -570,7 +625,10 @@ class RagWebSocketNotifier extends StateNotifier<WebSocketState> {
 
   /// Handle WebSocket errors
   void _handleError(Object error) {
-    state = state.copyWith(connectionState: WebSocketConnectionState.error, error: error.toString());
+    state = state.copyWith(
+      connectionState: WebSocketConnectionState.error,
+      error: error.toString(),
+    );
 
     // Attempt reconnection after delay
     Future.delayed(const Duration(seconds: 5), () {
@@ -582,7 +640,10 @@ class RagWebSocketNotifier extends StateNotifier<WebSocketState> {
 
   /// Handle WebSocket disconnection
   void _handleDisconnect() {
-    state = state.copyWith(connectionState: WebSocketConnectionState.disconnected, lastDisconnected: DateTime.now());
+    state = state.copyWith(
+      connectionState: WebSocketConnectionState.disconnected,
+      lastDisconnected: DateTime.now(),
+    );
 
     // Attempt reconnection after delay
     Future.delayed(const Duration(seconds: 3), () {
@@ -600,9 +661,10 @@ class RagWebSocketNotifier extends StateNotifier<WebSocketState> {
 }
 
 /// Provider for WebSocket state management
-final ragWebSocketProvider = StateNotifierProvider<RagWebSocketNotifier, WebSocketState>((ref) {
-  return RagWebSocketNotifier();
-});
+final ragWebSocketProvider =
+    StateNotifierProvider<RagWebSocketNotifier, WebSocketState>((ref) {
+      return RagWebSocketNotifier();
+    });
 
 /// Stream provider for real-time RAG updates
 final ragUpdatesStreamProvider = StreamProvider<RagResponse>((ref) {

@@ -20,9 +20,12 @@ class DigitalTasbihService {
   final SecureStorageService _secureStorage;
   final SpeechToText _speechToText = SpeechToText();
 
-  final StreamController<TasbihSession> _sessionController = StreamController<TasbihSession>.broadcast();
-  final StreamController<TasbihStats> _statsController = StreamController<TasbihStats>.broadcast();
-  final StreamController<List<Achievement>> _achievementsController = StreamController<List<Achievement>>.broadcast();
+  final StreamController<TasbihSession> _sessionController =
+      StreamController<TasbihSession>.broadcast();
+  final StreamController<TasbihStats> _statsController =
+      StreamController<TasbihStats>.broadcast();
+  final StreamController<List<Achievement>> _achievementsController =
+      StreamController<List<Achievement>>.broadcast();
 
   TasbihSession? _currentSession;
   TasbihSettings? _currentSettings;
@@ -39,8 +42,16 @@ class DigitalTasbihService {
     TasbihType.subhanallah: ['subhanallah', 'subhan allah', 'سبحان الله'],
     TasbihType.alhamdulillah: ['alhamdulillah', 'alhamdu lillah', 'الحمد لله'],
     TasbihType.allahuakbar: ['allahu akbar', 'allah hu akbar', 'الله أكبر'],
-    TasbihType.lailahaillallah: ['la ilaha illallah', 'la ilaha illa allah', 'لا إله إلا الله'],
-    TasbihType.astaghfirullah: ['astaghfirullah', 'astagh firullah', 'أستغفر الله'],
+    TasbihType.lailahaillallah: [
+      'la ilaha illallah',
+      'la ilaha illa allah',
+      'لا إله إلا الله',
+    ],
+    TasbihType.astaghfirullah: [
+      'astaghfirullah',
+      'astagh firullah',
+      'أستغفر الله',
+    ],
   };
 
   DigitalTasbihService(this._secureStorage);
@@ -48,7 +59,8 @@ class DigitalTasbihService {
   // Getters for streams
   Stream<TasbihSession> get sessionStream => _sessionController.stream;
   Stream<TasbihStats> get statsStream => _statsController.stream;
-  Stream<List<Achievement>> get achievementsStream => _achievementsController.stream;
+  Stream<List<Achievement>> get achievementsStream =>
+      _achievementsController.stream;
 
   /// Initialize the tasbih service
   Future<bool> initialize() async {
@@ -77,7 +89,10 @@ class DigitalTasbihService {
   /// Initialize speech recognition for voice counting
   Future<void> _initializeSpeechRecognition() async {
     try {
-      final available = await _speechToText.initialize(onStatus: _onSpeechStatus, onError: _onSpeechError);
+      final available = await _speechToText.initialize(
+        onStatus: _onSpeechStatus,
+        onError: _onSpeechError,
+      );
 
       if (!available) {
         print('Speech recognition not available');
@@ -99,7 +114,11 @@ class DigitalTasbihService {
   }
 
   /// Start a new tasbih session
-  Future<TasbihSession> startSession({required TasbihType type, required int targetCount, TasbihGoal? goal}) async {
+  Future<TasbihSession> startSession({
+    required TasbihType type,
+    required int targetCount,
+    TasbihGoal? goal,
+  }) async {
     try {
       // End current session if exists
       if (_currentSession != null && _currentSession!.isCompleted != true) {
@@ -160,7 +179,10 @@ class DigitalTasbihService {
       final updatedEntries = [..._currentSession!.entries, entry];
       final newCount = _currentSession!.currentCount + 1;
 
-      _currentSession = _currentSession!.copyWith(currentCount: newCount, entries: updatedEntries);
+      _currentSession = _currentSession!.copyWith(
+        currentCount: newCount,
+        entries: updatedEntries,
+      );
 
       // Provide feedback
       await _provideFeedback();
@@ -224,7 +246,9 @@ class DigitalTasbihService {
     try {
       // Haptic feedback
       if (_currentSettings!.hapticFeedback) {
-        final pattern = _getVibrationPattern(_currentSettings!.vibrationPattern);
+        final pattern = _getVibrationPattern(
+          _currentSettings!.vibrationPattern,
+        );
         if (await Vibration.hasVibrator() == true) {
           await Vibration.vibrate(pattern: pattern);
         } else {
@@ -303,7 +327,10 @@ class DigitalTasbihService {
   /// Complete a goal
   Future<void> _completeGoal(TasbihGoal goal) async {
     try {
-      final completedGoal = goal.copyWith(status: GoalStatus.completed, endDate: DateTime.now());
+      final completedGoal = goal.copyWith(
+        status: GoalStatus.completed,
+        endDate: DateTime.now(),
+      );
 
       // Save completed goal
       await _saveGoal(completedGoal);
@@ -344,7 +371,9 @@ class DigitalTasbihService {
     }
 
     // Speed achievements (if completed quickly)
-    final sessionDuration = DateTime.now().difference(_currentSession!.startTime);
+    final sessionDuration = DateTime.now().difference(
+      _currentSession!.startTime,
+    );
     if (count >= 33 && sessionDuration.inMinutes < 2) {
       await _awardAchievement(
         id: 'speed_demon',
@@ -459,7 +488,9 @@ class DigitalTasbihService {
     _sessionTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (_currentSession != null) {
         final duration = DateTime.now().difference(_currentSession!.startTime);
-        final updatedSession = _currentSession!.copyWith(totalDuration: duration);
+        final updatedSession = _currentSession!.copyWith(
+          totalDuration: duration,
+        );
         _currentSession = updatedSession;
         _sessionController.add(_currentSession!);
       }
@@ -474,10 +505,14 @@ class DigitalTasbihService {
       final updatedStats = currentStats.copyWith(
         totalSessions: currentStats.totalSessions + 1,
         totalCount: currentStats.totalCount + session.currentCount,
-        totalTime: currentStats.totalTime + (session.totalDuration ?? Duration.zero),
+        totalTime:
+            currentStats.totalTime + (session.totalDuration ?? Duration.zero),
         lastSession: session.endTime ?? session.startTime,
         countsByType: _updateCountsByType(currentStats.countsByType, session),
-        dailyProgress: _updateDailyProgress(currentStats.dailyProgress, session),
+        dailyProgress: _updateDailyProgress(
+          currentStats.dailyProgress,
+          session,
+        ),
       );
 
       _currentStats = updatedStats;
@@ -489,15 +524,25 @@ class DigitalTasbihService {
   }
 
   /// Update counts by type
-  Map<TasbihType, int> _updateCountsByType(Map<TasbihType, int> currentCounts, TasbihSession session) {
+  Map<TasbihType, int> _updateCountsByType(
+    Map<TasbihType, int> currentCounts,
+    TasbihSession session,
+  ) {
     final updated = Map<TasbihType, int>.from(currentCounts);
     updated[session.type] = (updated[session.type] ?? 0) + session.currentCount;
     return updated;
   }
 
   /// Update daily progress
-  Map<DateTime, int> _updateDailyProgress(Map<DateTime, int> currentProgress, TasbihSession session) {
-    final today = DateTime(session.startTime.year, session.startTime.month, session.startTime.day);
+  Map<DateTime, int> _updateDailyProgress(
+    Map<DateTime, int> currentProgress,
+    TasbihSession session,
+  ) {
+    final today = DateTime(
+      session.startTime.year,
+      session.startTime.month,
+      session.startTime.day,
+    );
 
     final updated = Map<DateTime, int>.from(currentProgress);
     updated[today] = (updated[today] ?? 0) + session.currentCount;
@@ -507,8 +552,12 @@ class DigitalTasbihService {
   /// Save session to secure storage
   Future<void> _saveSession(TasbihSession session) async {
     try {
-      final sessionsJson = await _secureStorage.getValue(_sessionStorageKey) ?? '[]';
-      final sessions = (jsonDecode(sessionsJson) as List).map((s) => TasbihSession.fromJson(s)).toList();
+      final sessionsJson =
+          await _secureStorage.getValue(_sessionStorageKey) ?? '[]';
+      final sessions =
+          (jsonDecode(sessionsJson) as List)
+              .map((s) => TasbihSession.fromJson(s))
+              .toList();
 
       sessions.add(session);
 
@@ -611,7 +660,10 @@ class DigitalTasbihService {
   Future<void> _loadGoals() async {
     try {
       final goalsJson = await _secureStorage.getValue(_goalsStorageKey) ?? '[]';
-      final goalsList = (jsonDecode(goalsJson) as List).map((g) => TasbihGoal.fromJson(g)).toList();
+      final goalsList =
+          (jsonDecode(goalsJson) as List)
+              .map((g) => TasbihGoal.fromJson(g))
+              .toList();
 
       _activeGoals = goalsList.where((g) => g.isActive == true).toList();
     } catch (e) {
@@ -624,7 +676,10 @@ class DigitalTasbihService {
   Future<void> _saveGoal(TasbihGoal goal) async {
     try {
       final goalsJson = await _secureStorage.getValue(_goalsStorageKey) ?? '[]';
-      final goals = (jsonDecode(goalsJson) as List).map((g) => TasbihGoal.fromJson(g)).toList();
+      final goals =
+          (jsonDecode(goalsJson) as List)
+              .map((g) => TasbihGoal.fromJson(g))
+              .toList();
 
       // Update existing or add new goal
       final index = goals.indexWhere((g) => g.id == goal.id);
@@ -647,8 +702,12 @@ class DigitalTasbihService {
   /// Load achievements from storage
   Future<void> _loadAchievements() async {
     try {
-      final achievementsJson = await _secureStorage.getValue(_achievementsStorageKey) ?? '[]';
-      _achievements = (jsonDecode(achievementsJson) as List).map((a) => Achievement.fromJson(a)).toList();
+      final achievementsJson =
+          await _secureStorage.getValue(_achievementsStorageKey) ?? '[]';
+      _achievements =
+          (jsonDecode(achievementsJson) as List)
+              .map((a) => Achievement.fromJson(a))
+              .toList();
     } catch (e) {
       print('Failed to load achievements: $e');
       _achievements = [];
@@ -658,7 +717,9 @@ class DigitalTasbihService {
   /// Save achievements to storage
   Future<void> _saveAchievements() async {
     try {
-      final achievementsJson = jsonEncode(_achievements.map((a) => a.toJson()).toList());
+      final achievementsJson = jsonEncode(
+        _achievements.map((a) => a.toJson()).toList(),
+      );
       await _secureStorage.saveValue(_achievementsStorageKey, achievementsJson);
     } catch (e) {
       print('Failed to save achievements: $e');

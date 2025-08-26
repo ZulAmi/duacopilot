@@ -39,7 +39,10 @@ class PlatformArabicFontConfig {
     // iOS has excellent built-in Arabic font support
     // Configure system settings for optimal Arabic rendering
     SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(statusBarBrightness: Brightness.light, statusBarIconBrightness: Brightness.dark),
+      const SystemUiOverlayStyle(
+        statusBarBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.dark,
+      ),
     );
   }
 
@@ -60,7 +63,10 @@ class PlatformArabicFontConfig {
   static Future<void> _configureWindowsFonts() async {
     // Windows benefits from Segoe UI Arabic or Tahoma
     SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness: Brightness.dark),
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+      ),
     );
   }
 
@@ -68,14 +74,20 @@ class PlatformArabicFontConfig {
   static Future<void> _configureMacOSFonts() async {
     // macOS has excellent Arabic font support with SF Arabic
     SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(statusBarBrightness: Brightness.light, statusBarIconBrightness: Brightness.dark),
+      const SystemUiOverlayStyle(
+        statusBarBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.dark,
+      ),
     );
   }
 
   /// Configure system UI for optimal Arabic text display
   static void _configureSystemUI() {
     // Configure preferred orientations for RTL content
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
   }
 
   /// Get platform-optimized TextStyle for Arabic content
@@ -100,7 +112,12 @@ class PlatformArabicFontConfig {
   }
 
   /// iOS-optimized Arabic text style
-  static TextStyle _getIOSArabicStyle(double fontSize, FontWeight fontWeight, Color? color, String fontType) {
+  static TextStyle _getIOSArabicStyle(
+    double fontSize,
+    FontWeight fontWeight,
+    Color? color,
+    String fontType,
+  ) {
     try {
       return ArabicTypography.getArabicGoogleFont(
         fontType,
@@ -125,7 +142,12 @@ class PlatformArabicFontConfig {
   }
 
   /// Android-optimized Arabic text style
-  static TextStyle _getAndroidArabicStyle(double fontSize, FontWeight fontWeight, Color? color, String fontType) {
+  static TextStyle _getAndroidArabicStyle(
+    double fontSize,
+    FontWeight fontWeight,
+    Color? color,
+    String fontType,
+  ) {
     try {
       return ArabicTypography.getArabicGoogleFont(
         fontType,
@@ -150,7 +172,12 @@ class PlatformArabicFontConfig {
   }
 
   /// Windows-optimized Arabic text style
-  static TextStyle _getWindowsArabicStyle(double fontSize, FontWeight fontWeight, Color? color, String fontType) {
+  static TextStyle _getWindowsArabicStyle(
+    double fontSize,
+    FontWeight fontWeight,
+    Color? color,
+    String fontType,
+  ) {
     try {
       return ArabicTypography.getArabicGoogleFont(
         fontType,
@@ -175,7 +202,12 @@ class PlatformArabicFontConfig {
   }
 
   /// macOS-optimized Arabic text style
-  static TextStyle _getMacOSArabicStyle(double fontSize, FontWeight fontWeight, Color? color, String fontType) {
+  static TextStyle _getMacOSArabicStyle(
+    double fontSize,
+    FontWeight fontWeight,
+    Color? color,
+    String fontType,
+  ) {
     try {
       return ArabicTypography.getArabicGoogleFont(
         fontType,
@@ -200,7 +232,12 @@ class PlatformArabicFontConfig {
   }
 
   /// Web-optimized Arabic text style
-  static TextStyle _getWebArabicStyle(double fontSize, FontWeight fontWeight, Color? color, String fontType) {
+  static TextStyle _getWebArabicStyle(
+    double fontSize,
+    FontWeight fontWeight,
+    Color? color,
+    String fontType,
+  ) {
     try {
       return ArabicTypography.getArabicGoogleFont(
         fontType,
@@ -226,7 +263,13 @@ class PlatformArabicFontConfig {
   /// Get platform-specific font rendering settings
   static Map<String, dynamic> getPlatformFontRenderingSettings() {
     if (Platform.isIOS) {
-      return {'antialiasing': true, 'subpixelRendering': true, 'hinting': 'auto', 'kerning': true, 'ligatures': true};
+      return {
+        'antialiasing': true,
+        'subpixelRendering': true,
+        'hinting': 'auto',
+        'kerning': true,
+        'ligatures': true,
+      };
     } else if (Platform.isAndroid) {
       return {
         'antialiasing': true,
@@ -245,10 +288,22 @@ class PlatformArabicFontConfig {
         'clearType': true,
       };
     } else if (Platform.isMacOS) {
-      return {'antialiasing': true, 'subpixelRendering': true, 'hinting': 'auto', 'kerning': true, 'ligatures': true};
+      return {
+        'antialiasing': true,
+        'subpixelRendering': true,
+        'hinting': 'auto',
+        'kerning': true,
+        'ligatures': true,
+      };
     } else {
       // Web
-      return {'antialiasing': true, 'subpixelRendering': false, 'hinting': 'auto', 'kerning': true, 'ligatures': true};
+      return {
+        'antialiasing': true,
+        'subpixelRendering': false,
+        'hinting': 'auto',
+        'kerning': true,
+        'ligatures': true,
+      };
     }
   }
 
@@ -304,7 +359,13 @@ class PlatformArabicFontConfig {
   /// Configure font fallback chain for Arabic text
   static List<String> getArabicFontFallbackChain() {
     final platformFonts = getRecommendedArabicFonts();
-    const universalFallbacks = ['Noto Sans Arabic', 'Arial Unicode MS', 'Tahoma', 'Arial', 'sans-serif'];
+    const universalFallbacks = [
+      'Noto Sans Arabic',
+      'Arial Unicode MS',
+      'Tahoma',
+      'Arial',
+      'sans-serif',
+    ];
 
     return <String>{...platformFonts, ...universalFallbacks}.toList();
   }

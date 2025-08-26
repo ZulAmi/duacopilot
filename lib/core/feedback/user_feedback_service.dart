@@ -69,7 +69,10 @@ class UserFeedback {
   factory UserFeedback.fromMap(Map<String, dynamic> map) {
     return UserFeedback(
       id: map['id'] ?? '',
-      type: FeedbackType.values.firstWhere((e) => e.name == map['type'], orElse: () => FeedbackType.general),
+      type: FeedbackType.values.firstWhere(
+        (e) => e.name == map['type'],
+        orElse: () => FeedbackType.general,
+      ),
       severity: FeedbackSeverity.values.firstWhere(
         (e) => e.name == map['severity'],
         orElse: () => FeedbackSeverity.medium,
@@ -98,7 +101,8 @@ class UserFeedbackService {
   static const String _feedbackStatsKey = 'feedback_stats';
   static const String _lastFeedbackPromptKey = 'last_feedback_prompt';
 
-  static final StreamController<UserFeedback> _feedbackController = StreamController<UserFeedback>.broadcast();
+  static final StreamController<UserFeedback> _feedbackController =
+      StreamController<UserFeedback>.broadcast();
 
   /// Initialize feedback service
   static Future<void> initialize() async {
@@ -114,8 +118,16 @@ class UserFeedbackService {
       _isInitialized = true;
       _logger.i('UserFeedbackService initialized successfully');
     } catch (e, stackTrace) {
-      _logger.e('Failed to initialize UserFeedbackService', error: e, stackTrace: stackTrace);
-      await ProductionCrashReporter.recordError(e, stackTrace, context: 'UserFeedbackService.initialize');
+      _logger.e(
+        'Failed to initialize UserFeedbackService',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      await ProductionCrashReporter.recordError(
+        e,
+        stackTrace,
+        context: 'UserFeedbackService.initialize',
+      );
     }
   }
 
@@ -143,7 +155,11 @@ class UserFeedbackService {
         timestamp: DateTime.now(),
         appVersion: _packageInfo?.version ?? 'unknown',
         platform: defaultTargetPlatform.name,
-        metadata: {'build_number': _packageInfo?.buildNumber ?? 'unknown', 'debug_mode': kDebugMode, ...?metadata},
+        metadata: {
+          'build_number': _packageInfo?.buildNumber ?? 'unknown',
+          'debug_mode': kDebugMode,
+          ...?metadata,
+        },
       );
 
       // Cache feedback for offline scenarios
@@ -166,12 +182,18 @@ class UserFeedbackService {
       // Update statistics
       await _updateFeedbackStats(feedback);
 
-      _logger.i('Feedback submitted: ${feedback.id} (Type: ${type.name}, Rating: $rating)');
+      _logger.i(
+        'Feedback submitted: ${feedback.id} (Type: ${type.name}, Rating: $rating)',
+      );
 
       return submitted;
     } catch (e, stackTrace) {
       _logger.e('Failed to submit feedback', error: e, stackTrace: stackTrace);
-      await ProductionCrashReporter.recordError(e, stackTrace, context: 'UserFeedbackService.submitFeedback');
+      await ProductionCrashReporter.recordError(
+        e,
+        stackTrace,
+        context: 'UserFeedbackService.submitFeedback',
+      );
       return false;
     }
   }
@@ -185,7 +207,12 @@ class UserFeedbackService {
   }) async {
     return showDialog<bool>(
       context: context,
-      builder: (context) => FeedbackDialog(type: type, title: title, initialDescription: initialDescription),
+      builder:
+          (context) => FeedbackDialog(
+            type: type,
+            title: title,
+            initialDescription: initialDescription,
+          ),
     );
   }
 
@@ -208,7 +235,11 @@ class UserFeedbackService {
   }
 
   /// Show quick feedback snackbar
-  static void showQuickFeedbackSnackbar(BuildContext context, {required String message, VoidCallback? onFeedbackTap}) {
+  static void showQuickFeedbackSnackbar(
+    BuildContext context, {
+    required String message,
+    VoidCallback? onFeedbackTap,
+  }) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Row(
@@ -216,7 +247,13 @@ class UserFeedbackService {
             const Icon(Icons.feedback_outlined, color: Colors.white),
             const SizedBox(width: 8),
             Expanded(child: Text(message)),
-            TextButton(onPressed: onFeedbackTap, child: const Text('FEEDBACK', style: TextStyle(color: Colors.white))),
+            TextButton(
+              onPressed: onFeedbackTap,
+              child: const Text(
+                'FEEDBACK',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
           ],
         ),
         duration: const Duration(seconds: 5),
@@ -237,7 +274,10 @@ class UserFeedbackService {
       final lastPrompt = _prefs?.getInt(_lastFeedbackPromptKey);
       if (lastPrompt == null) return true;
 
-      final daysSinceLastPrompt = DateTime.now().difference(DateTime.fromMillisecondsSinceEpoch(lastPrompt)).inDays;
+      final daysSinceLastPrompt =
+          DateTime.now()
+              .difference(DateTime.fromMillisecondsSinceEpoch(lastPrompt))
+              .inDays;
 
       return daysSinceLastPrompt >= 7; // Prompt once per week max
     } catch (e) {
@@ -249,7 +289,10 @@ class UserFeedbackService {
   /// Mark feedback prompt as shown
   static Future<void> markFeedbackPromptShown() async {
     try {
-      await _prefs?.setInt(_lastFeedbackPromptKey, DateTime.now().millisecondsSinceEpoch);
+      await _prefs?.setInt(
+        _lastFeedbackPromptKey,
+        DateTime.now().millisecondsSinceEpoch,
+      );
     } catch (e) {
       _logger.w('Failed to mark feedback prompt as shown', error: e);
     }
@@ -266,7 +309,12 @@ class UserFeedbackService {
       _logger.w('Failed to get feedback stats', error: e);
     }
 
-    return {'total_feedback': 0, 'average_rating': 0.0, 'feedback_by_type': <String, int>{}, 'last_feedback': null};
+    return {
+      'total_feedback': 0,
+      'average_rating': 0.0,
+      'feedback_by_type': <String, int>{},
+      'last_feedback': null,
+    };
   }
 
   /// Stream of feedback submissions
@@ -326,7 +374,8 @@ class UserFeedbackService {
 
         for (final feedbackJson in cachedFeedback) {
           try {
-            final feedbackData = json.decode(feedbackJson) as Map<String, dynamic>;
+            final feedbackData =
+                json.decode(feedbackJson) as Map<String, dynamic>;
             final feedback = UserFeedback.fromMap(feedbackData);
 
             // Try to submit cached feedback
@@ -350,10 +399,15 @@ class UserFeedbackService {
 
       final totalFeedback = (stats['total_feedback'] as int) + 1;
       final currentAverage = (stats['average_rating'] as num).toDouble();
-      final newAverage = ((currentAverage * (totalFeedback - 1)) + feedback.rating) / totalFeedback;
+      final newAverage =
+          ((currentAverage * (totalFeedback - 1)) + feedback.rating) /
+          totalFeedback;
 
-      final feedbackByType = Map<String, int>.from(stats['feedback_by_type'] as Map<String, dynamic>);
-      feedbackByType[feedback.type.name] = (feedbackByType[feedback.type.name] ?? 0) + 1;
+      final feedbackByType = Map<String, int>.from(
+        stats['feedback_by_type'] as Map<String, dynamic>,
+      );
+      feedbackByType[feedback.type.name] =
+          (feedbackByType[feedback.type.name] ?? 0) + 1;
 
       final updatedStats = {
         'total_feedback': totalFeedback,
@@ -375,7 +429,12 @@ class FeedbackDialog extends StatefulWidget {
   final String? title;
   final String? initialDescription;
 
-  const FeedbackDialog({super.key, required this.type, this.title, this.initialDescription});
+  const FeedbackDialog({
+    super.key,
+    required this.type,
+    this.title,
+    this.initialDescription,
+  });
 
   @override
   State<FeedbackDialog> createState() => _FeedbackDialogState();
@@ -410,7 +469,10 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Rating
-            const Text('Rating:', style: TextStyle(fontWeight: FontWeight.w600)),
+            const Text(
+              'Rating:',
+              style: TextStyle(fontWeight: FontWeight.w600),
+            ),
             const SizedBox(height: 8),
             RatingBar.builder(
               initialRating: _rating,
@@ -419,7 +481,8 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
               allowHalfRating: true,
               itemCount: 5,
               itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-              itemBuilder: (context, _) => const Icon(Icons.star, color: Colors.amber),
+              itemBuilder:
+                  (context, _) => const Icon(Icons.star, color: Colors.amber),
               onRatingUpdate: (rating) {
                 setState(() => _rating = rating);
               },
@@ -468,12 +531,19 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
         ),
       ),
       actions: [
-        TextButton(onPressed: _isSubmitting ? null : () => Navigator.pop(context, false), child: const Text('Cancel')),
+        TextButton(
+          onPressed: _isSubmitting ? null : () => Navigator.pop(context, false),
+          child: const Text('Cancel'),
+        ),
         ElevatedButton(
           onPressed: _isSubmitting ? null : _submitFeedback,
           child:
               _isSubmitting
-                  ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2))
+                  ? const SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
                   : const Text('Submit'),
         ),
       ],
@@ -481,9 +551,13 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
   }
 
   Future<void> _submitFeedback() async {
-    if (_titleController.text.trim().isEmpty || _descriptionController.text.trim().isEmpty) {
+    if (_titleController.text.trim().isEmpty ||
+        _descriptionController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please fill in both title and description'), backgroundColor: Colors.red),
+        const SnackBar(
+          content: Text('Please fill in both title and description'),
+          backgroundColor: Colors.red,
+        ),
       );
       return;
     }
@@ -496,14 +570,20 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
         rating: _rating,
         title: _titleController.text.trim(),
         description: _descriptionController.text.trim(),
-        email: _emailController.text.trim().isNotEmpty ? _emailController.text.trim() : null,
+        email:
+            _emailController.text.trim().isNotEmpty
+                ? _emailController.text.trim()
+                : null,
       );
 
       if (mounted) {
         if (success) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(const SnackBar(content: Text('Thank you for your feedback!'), backgroundColor: Colors.green));
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Thank you for your feedback!'),
+              backgroundColor: Colors.green,
+            ),
+          );
           Navigator.pop(context, true);
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -518,7 +598,10 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Failed to submit feedback. Please try again.'), backgroundColor: Colors.red),
+          const SnackBar(
+            content: Text('Failed to submit feedback. Please try again.'),
+            backgroundColor: Colors.red,
+          ),
         );
       }
     } finally {
@@ -562,7 +645,12 @@ class RatingDialog extends StatefulWidget {
   final String description;
   final VoidCallback? onRatingComplete;
 
-  const RatingDialog({super.key, required this.title, required this.description, this.onRatingComplete});
+  const RatingDialog({
+    super.key,
+    required this.title,
+    required this.description,
+    this.onRatingComplete,
+  });
 
   @override
   State<RatingDialog> createState() => _RatingDialogState();
@@ -589,7 +677,8 @@ class _RatingDialogState extends State<RatingDialog> {
             itemCount: 5,
             itemSize: 40,
             itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-            itemBuilder: (context, _) => const Icon(Icons.star, color: Colors.amber),
+            itemBuilder:
+                (context, _) => const Icon(Icons.star, color: Colors.amber),
             onRatingUpdate: (rating) {
               setState(() => _rating = rating);
             },
@@ -605,7 +694,11 @@ class _RatingDialogState extends State<RatingDialog> {
           onPressed: _isSubmitting || _rating == 0 ? null : _submitRating,
           child:
               _isSubmitting
-                  ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2))
+                  ? const SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
                   : const Text('Submit'),
         ),
       ],
@@ -620,21 +713,28 @@ class _RatingDialogState extends State<RatingDialog> {
         type: FeedbackType.rating,
         rating: _rating,
         title: 'App Rating',
-        description: 'User provided a ${_rating.toStringAsFixed(1)} star rating',
+        description:
+            'User provided a ${_rating.toStringAsFixed(1)} star rating',
       );
 
       widget.onRatingComplete?.call();
 
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text('Thank you for your rating!'), backgroundColor: Colors.green));
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Thank you for your rating!'),
+            backgroundColor: Colors.green,
+          ),
+        );
         Navigator.pop(context, true);
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Failed to submit rating. Please try again.'), backgroundColor: Colors.red),
+          const SnackBar(
+            content: Text('Failed to submit rating. Please try again.'),
+            backgroundColor: Colors.red,
+          ),
         );
       }
     } finally {

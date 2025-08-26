@@ -11,22 +11,28 @@ import 'platform_optimization_service.dart';
 /// Orchestrates all platform-specific optimizations for Flutter RAG integration
 class PlatformIntegrationService {
   static PlatformIntegrationService? _instance;
-  static PlatformIntegrationService get instance => _instance ??= PlatformIntegrationService._();
+  static PlatformIntegrationService get instance =>
+      _instance ??= PlatformIntegrationService._();
 
   PlatformIntegrationService._();
 
   // Core services
-  final PlatformOptimizationService _platformService = PlatformOptimizationService.instance;
-  final EnhancedAudioSessionManager _audioManager = EnhancedAudioSessionManager.instance;
-  final EnhancedNotificationStrategyManager _notificationManager = EnhancedNotificationStrategyManager.instance;
-  final EnhancedBackgroundTaskOptimizer _backgroundOptimizer = EnhancedBackgroundTaskOptimizer.instance;
+  final PlatformOptimizationService _platformService =
+      PlatformOptimizationService.instance;
+  final EnhancedAudioSessionManager _audioManager =
+      EnhancedAudioSessionManager.instance;
+  final EnhancedNotificationStrategyManager _notificationManager =
+      EnhancedNotificationStrategyManager.instance;
+  final EnhancedBackgroundTaskOptimizer _backgroundOptimizer =
+      EnhancedBackgroundTaskOptimizer.instance;
 
   // Service state
   bool _isInitialized = false;
   final Map<String, dynamic> _integrationConfig = {};
 
   // Event streams
-  final StreamController<PlatformEvent> _eventController = StreamController<PlatformEvent>.broadcast();
+  final StreamController<PlatformEvent> _eventController =
+      StreamController<PlatformEvent>.broadcast();
   Stream<PlatformEvent> get eventStream => _eventController.stream;
 
   /// Initialize platform integration service
@@ -34,7 +40,9 @@ class PlatformIntegrationService {
     if (_isInitialized) return;
 
     try {
-      AppLogger.info('🚀 Initializing comprehensive platform integration service...');
+      AppLogger.info(
+        '🚀 Initializing comprehensive platform integration service...',
+      );
 
       // Initialize core platform service
       await _platformService.initialize();
@@ -55,7 +63,9 @@ class PlatformIntegrationService {
 
       _emitEvent(PlatformEvent.initialized(_platformService.platformType));
     } catch (e) {
-      AppLogger.error('❌ Failed to initialize platform integration service: $e');
+      AppLogger.error(
+        '❌ Failed to initialize platform integration service: $e',
+      );
       rethrow;
     }
   }
@@ -79,7 +89,9 @@ class PlatformIntegrationService {
 
   Future<Map<String, dynamic>> _configureAudioIntegration() async {
     final config = {
-      'backgroundAudioEnabled': _platformService.isFeatureSupported('supportsBackgroundAudio'),
+      'backgroundAudioEnabled': _platformService.isFeatureSupported(
+        'supportsBackgroundAudio',
+      ),
       'interruptionHandling': true,
       'airPlaySupport': _platformService.platformType == PlatformType.ios,
       'carPlaySupport': _platformService.platformType == PlatformType.ios,
@@ -100,7 +112,9 @@ class PlatformIntegrationService {
 
   Future<Map<String, dynamic>> _configureNotificationIntegration() async {
     final config = {
-      'strategicNotifications': _platformService.isFeatureSupported('supportsNotifications'),
+      'strategicNotifications': _platformService.isFeatureSupported(
+        'supportsNotifications',
+      ),
       'channelStrategy': _notificationManager.getOptimalConfiguration(),
       'reminderSupport': true,
       'prayerTimeNotifications': true,
@@ -113,8 +127,10 @@ class PlatformIntegrationService {
   Future<Map<String, dynamic>> _configureBackgroundIntegration() async {
     final config = {
       'backgroundTasksEnabled': true,
-      'foregroundServiceSupport': _platformService.platformType == PlatformType.android,
-      'backgroundRefreshSupport': _platformService.platformType == PlatformType.ios,
+      'foregroundServiceSupport':
+          _platformService.platformType == PlatformType.android,
+      'backgroundRefreshSupport':
+          _platformService.platformType == PlatformType.ios,
       'dataSync': true,
       'cacheManagement': true,
       'smartPreloading': true,
@@ -141,7 +157,8 @@ class PlatformIntegrationService {
   Future<Map<String, dynamic>> _configureDeepLinkingIntegration() async {
     final config = {
       'customSchemeSupport': true,
-      'universalLinksSupport': _platformService.platformType == PlatformType.ios,
+      'universalLinksSupport':
+          _platformService.platformType == PlatformType.ios,
       'appLinksSupport': _platformService.platformType == PlatformType.android,
       'duaDeepLinks': true,
       'searchDeepLinks': true,
@@ -215,11 +232,17 @@ class PlatformIntegrationService {
 
       // Configure audio session
       await _audioManager.configureForPlayback(
-        backgroundPlayback: enableBackgroundPlayback && _platformService.isFeatureSupported('supportsBackgroundAudio'),
+        backgroundPlayback:
+            enableBackgroundPlayback &&
+            _platformService.isFeatureSupported('supportsBackgroundAudio'),
         interruptionHandling: true,
         customConfig: {
-          'enableAirPlay': enableAirPlay && _platformService.platformType == PlatformType.ios,
-          'enableCarPlay': enableCarPlay && _platformService.platformType == PlatformType.ios,
+          'enableAirPlay':
+              enableAirPlay &&
+              _platformService.platformType == PlatformType.ios,
+          'enableCarPlay':
+              enableCarPlay &&
+              _platformService.platformType == PlatformType.ios,
         },
       );
 
@@ -291,7 +314,11 @@ class PlatformIntegrationService {
     try {
       AppLogger.info('📤 Sharing Du\'a with platform optimizations...');
 
-      await _platformService.shareOptimized(dua: dua, customMessage: customMessage, target: target);
+      await _platformService.shareOptimized(
+        dua: dua,
+        customMessage: customMessage,
+        target: target,
+      );
 
       AppLogger.info('✅ Du\'a shared successfully');
       _emitEvent(PlatformEvent.duaShared(dua.id, target.name));
@@ -316,7 +343,10 @@ class PlatformIntegrationService {
       AppLogger.debug('🌐 Network optimizations: $networkOptimizations');
 
       // Apply optimizations (this would integrate with actual services)
-      await _applyPerformanceOptimizations(memoryOptimizations, networkOptimizations);
+      await _applyPerformanceOptimizations(
+        memoryOptimizations,
+        networkOptimizations,
+      );
 
       AppLogger.info('✅ Performance optimizations applied');
       _emitEvent(PlatformEvent.performanceOptimized());
@@ -453,23 +483,38 @@ class PlatformEvent {
   PlatformEvent._(this.type, this.data, this.timestamp);
 
   static PlatformEvent initialized(PlatformType platformType) {
-    return PlatformEvent._('initialized', {'platformType': platformType.name}, DateTime.now());
+    return PlatformEvent._('initialized', {
+      'platformType': platformType.name,
+    }, DateTime.now());
   }
 
   static PlatformEvent audioConfigured(int playlistSize) {
-    return PlatformEvent._('audioConfigured', {'playlistSize': playlistSize}, DateTime.now());
+    return PlatformEvent._('audioConfigured', {
+      'playlistSize': playlistSize,
+    }, DateTime.now());
   }
 
   static PlatformEvent notificationsConfigured(int reminderCount) {
-    return PlatformEvent._('notificationsConfigured', {'reminderCount': reminderCount}, DateTime.now());
+    return PlatformEvent._('notificationsConfigured', {
+      'reminderCount': reminderCount,
+    }, DateTime.now());
   }
 
   static PlatformEvent duaShared(String duaId, String method) {
-    return PlatformEvent._('duaShared', {'duaId': duaId, 'method': method}, DateTime.now());
+    return PlatformEvent._('duaShared', {
+      'duaId': duaId,
+      'method': method,
+    }, DateTime.now());
   }
 
-  static PlatformEvent deepLinkReceived(String linkType, Map<String, dynamic> params) {
-    return PlatformEvent._('deepLinkReceived', {'linkType': linkType, 'params': params}, DateTime.now());
+  static PlatformEvent deepLinkReceived(
+    String linkType,
+    Map<String, dynamic> params,
+  ) {
+    return PlatformEvent._('deepLinkReceived', {
+      'linkType': linkType,
+      'params': params,
+    }, DateTime.now());
   }
 
   static PlatformEvent performanceOptimized() {
@@ -477,9 +522,17 @@ class PlatformEvent {
   }
 
   static PlatformEvent lifecycleHandled(PlatformLifecycleEvent lifecycle) {
-    return PlatformEvent._('lifecycleHandled', {'lifecycle': lifecycle.name}, DateTime.now());
+    return PlatformEvent._('lifecycleHandled', {
+      'lifecycle': lifecycle.name,
+    }, DateTime.now());
   }
 }
 
 /// Platform lifecycle events
-enum PlatformLifecycleEvent { appLaunched, appResumed, appPaused, appDetached, memoryWarning }
+enum PlatformLifecycleEvent {
+  appLaunched,
+  appResumed,
+  appPaused,
+  appDetached,
+  memoryWarning,
+}

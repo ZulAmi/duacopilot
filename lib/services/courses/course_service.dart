@@ -35,7 +35,9 @@ class CourseService {
   List<CourseEnrollment> getEnrolledCourses() {
     try {
       final enrollmentsJson = _prefs.getStringList(_enrollmentsKey) ?? [];
-      return enrollmentsJson.map((json) => CourseEnrollment.fromJson(jsonDecode(json))).toList();
+      return enrollmentsJson
+          .map((json) => CourseEnrollment.fromJson(jsonDecode(json)))
+          .toList();
     } catch (e) {
       print('Failed to get enrolled courses: $e');
       return [];
@@ -52,7 +54,9 @@ class CourseService {
   CourseEnrollment? getEnrollment(String courseId) {
     final enrollments = getEnrolledCourses();
     try {
-      return enrollments.firstWhere((enrollment) => enrollment.courseId == courseId);
+      return enrollments.firstWhere(
+        (enrollment) => enrollment.courseId == courseId,
+      );
     } catch (e) {
       return null;
     }
@@ -78,7 +82,8 @@ class CourseService {
       final enrollments = getEnrolledCourses();
       enrollments.add(enrollment);
 
-      final enrollmentsJson = enrollments.map((e) => jsonEncode(e.toJson())).toList();
+      final enrollmentsJson =
+          enrollments.map((e) => jsonEncode(e.toJson())).toList();
 
       await _prefs.setStringList(_enrollmentsKey, enrollmentsJson);
 
@@ -94,7 +99,9 @@ class CourseService {
   Future<bool> updateCourseProgress(String courseId, double progress) async {
     try {
       final enrollments = getEnrolledCourses();
-      final enrollmentIndex = enrollments.indexWhere((e) => e.courseId == courseId);
+      final enrollmentIndex = enrollments.indexWhere(
+        (e) => e.courseId == courseId,
+      );
 
       if (enrollmentIndex == -1) {
         print('No enrollment found for course: $courseId');
@@ -115,7 +122,8 @@ class CourseService {
         certificateData: enrollments[enrollmentIndex].certificateData,
       );
 
-      final enrollmentsJson = enrollments.map((e) => jsonEncode(e.toJson())).toList();
+      final enrollmentsJson =
+          enrollments.map((e) => jsonEncode(e.toJson())).toList();
 
       await _prefs.setStringList(_enrollmentsKey, enrollmentsJson);
 
@@ -153,7 +161,10 @@ class CourseService {
   Map<String, dynamic> getCompletionStats() {
     final enrollments = getEnrolledCourses();
     final completed = enrollments.where((e) => e.completedAt != null).length;
-    final inProgress = enrollments.where((e) => e.completedAt == null && e.progress > 0).length;
+    final inProgress =
+        enrollments
+            .where((e) => e.completedAt == null && e.progress > 0)
+            .length;
     final notStarted = enrollments.where((e) => e.progress == 0).length;
 
     return {
@@ -161,7 +172,8 @@ class CourseService {
       'completed': completed,
       'inProgress': inProgress,
       'notStarted': notStarted,
-      'completionRate': enrollments.isNotEmpty ? (completed / enrollments.length) * 100 : 0,
+      'completionRate':
+          enrollments.isNotEmpty ? (completed / enrollments.length) * 100 : 0,
     };
   }
 
@@ -169,7 +181,9 @@ class CourseService {
   Future<bool> toggleCourseFavorite(String courseId) async {
     try {
       final enrollments = getEnrolledCourses();
-      final enrollmentIndex = enrollments.indexWhere((e) => e.courseId == courseId);
+      final enrollmentIndex = enrollments.indexWhere(
+        (e) => e.courseId == courseId,
+      );
 
       if (enrollmentIndex == -1) {
         print('No enrollment found for course: $courseId');
@@ -190,7 +204,8 @@ class CourseService {
         certificateData: currentEnrollment.certificateData,
       );
 
-      final enrollmentsJson = enrollments.map((e) => jsonEncode(e.toJson())).toList();
+      final enrollmentsJson =
+          enrollments.map((e) => jsonEncode(e.toJson())).toList();
 
       await _prefs.setStringList(_enrollmentsKey, enrollmentsJson);
 

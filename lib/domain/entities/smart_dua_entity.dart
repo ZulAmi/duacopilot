@@ -99,7 +99,8 @@ class SmartDuaCollection with _$SmartDuaCollection {
     @Default(true) bool isPersonalized,
   }) = _SmartDuaCollection;
 
-  factory SmartDuaCollection.fromJson(Map<String, dynamic> json) => _$SmartDuaCollectionFromJson(json);
+  factory SmartDuaCollection.fromJson(Map<String, dynamic> json) =>
+      _$SmartDuaCollectionFromJson(json);
 }
 
 /// User emotional pattern analysis
@@ -121,7 +122,8 @@ class EmotionalPattern with _$EmotionalPattern {
     @Default(0.0) double predictionAccuracy,
   }) = _EmotionalPattern;
 
-  factory EmotionalPattern.fromJson(Map<String, dynamic> json) => _$EmotionalPatternFromJson(json);
+  factory EmotionalPattern.fromJson(Map<String, dynamic> json) =>
+      _$EmotionalPatternFromJson(json);
 }
 
 /// AI-powered dua recommendation
@@ -148,7 +150,8 @@ class SmartDuaRecommendation with _$SmartDuaRecommendation {
     String? userFeedback,
   }) = _SmartDuaRecommendation;
 
-  factory SmartDuaRecommendation.fromJson(Map<String, dynamic> json) => _$SmartDuaRecommendationFromJson(json);
+  factory SmartDuaRecommendation.fromJson(Map<String, dynamic> json) =>
+      _$SmartDuaRecommendationFromJson(json);
 }
 
 /// User input for contextual analysis
@@ -169,7 +172,8 @@ class ContextualInput with _$ContextualInput {
     String? encryptionKey,
   }) = _ContextualInput;
 
-  factory ContextualInput.fromJson(Map<String, dynamic> json) => _$ContextualInputFromJson(json);
+  factory ContextualInput.fromJson(Map<String, dynamic> json) =>
+      _$ContextualInputFromJson(json);
 }
 
 /// AI learning feedback for model improvement
@@ -187,7 +191,8 @@ class AIFeedback with _$AIFeedback {
     DateTime? providedAt,
   }) = _AIFeedback;
 
-  factory AIFeedback.fromJson(Map<String, dynamic> json) => _$AIFeedbackFromJson(json);
+  factory AIFeedback.fromJson(Map<String, dynamic> json) =>
+      _$AIFeedbackFromJson(json);
 }
 
 /// Contextual dua analytics for privacy-compliant tracking
@@ -205,7 +210,8 @@ class ContextualAnalytics with _$ContextualAnalytics {
     required DateTime lastUpdated,
   }) = _ContextualAnalytics;
 
-  factory ContextualAnalytics.fromJson(Map<String, dynamic> json) => _$ContextualAnalyticsFromJson(json);
+  factory ContextualAnalytics.fromJson(Map<String, dynamic> json) =>
+      _$ContextualAnalyticsFromJson(json);
 }
 
 /// Extension methods for emotional state analysis
@@ -297,7 +303,13 @@ extension EmotionalStateExtensions on EmotionalState {
       case EmotionalState.uncertain:
         return ['confused', 'doubtful', 'hesitant', 'indecisive', 'lost'];
       case EmotionalState.overwhelmed:
-        return ['too much', 'overloaded', 'stressed', 'can\'t cope', 'exhausted'];
+        return [
+          'too much',
+          'overloaded',
+          'stressed',
+          'can\'t cope',
+          'exhausted',
+        ];
       case EmotionalState.seekingGuidance:
         return ['lost', 'searching', 'guidance', 'direction', 'help'];
     }

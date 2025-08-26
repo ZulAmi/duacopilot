@@ -6,11 +6,13 @@ import 'platform_optimization_service.dart';
 /// Enhanced audio session manager with platform-specific optimizations
 class EnhancedAudioSessionManager {
   static EnhancedAudioSessionManager? _instance;
-  static EnhancedAudioSessionManager get instance => _instance ??= EnhancedAudioSessionManager._();
+  static EnhancedAudioSessionManager get instance =>
+      _instance ??= EnhancedAudioSessionManager._();
 
   EnhancedAudioSessionManager._();
 
-  final PlatformOptimizationService _platformService = PlatformOptimizationService.instance;
+  final PlatformOptimizationService _platformService =
+      PlatformOptimizationService.instance;
 
   // Audio session configuration
   Map<String, dynamic> _currentConfig = {};
@@ -83,14 +85,16 @@ class EnhancedAudioSessionManager {
   }
 
   Future<void> _configureAndroidAudio() async {
-    final apiLevel = _platformService.deviceInfo.capabilities['apiLevel'] as int? ?? 21;
+    final apiLevel =
+        _platformService.deviceInfo.capabilities['apiLevel'] as int? ?? 21;
 
     _currentConfig = {
       'audioFocus': 'AUDIOFOCUS_GAIN',
       'contentType': 'AUDIO_CONTENT_TYPE_SPEECH',
       'usage': 'AUDIO_USAGE_MEDIA',
       'streamType': 'STREAM_MUSIC',
-      'foregroundServiceType': apiLevel >= 29 ? 'FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK' : null,
+      'foregroundServiceType':
+          apiLevel >= 29 ? 'FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK' : null,
       'backgroundAudio': true,
       'wakeLockEnabled': true,
       'becomingNoisyHandling': true,
@@ -114,7 +118,11 @@ class EnhancedAudioSessionManager {
   }
 
   Future<void> _configureDefaultAudio() async {
-    _currentConfig = {'basicPlayback': true, 'backgroundAudio': false, 'interruptionHandling': false};
+    _currentConfig = {
+      'basicPlayback': true,
+      'backgroundAudio': false,
+      'interruptionHandling': false,
+    };
   }
 
   Future<void> _setIOSAudioSession() async {
@@ -152,7 +160,9 @@ class EnhancedAudioSessionManager {
       // Configure foreground service for background playback
       if (_currentConfig['backgroundAudio'] == true) {
         _isBackgroundAudioEnabled = true;
-        AppLogger.info('🎵 Android background audio with foreground service enabled');
+        AppLogger.info(
+          '🎵 Android background audio with foreground service enabled',
+        );
 
         final serviceType = _currentConfig['foregroundServiceType'];
         if (serviceType != null) {
@@ -235,7 +245,9 @@ class EnhancedAudioSessionManager {
 
     try {
       AppLogger.info('🎵 Configuring audio session for playback...');
-      AppLogger.debug('🔧 Background: $backgroundPlayback, Interruption: $interruptionHandling');
+      AppLogger.debug(
+        '🔧 Background: $backgroundPlayback, Interruption: $interruptionHandling',
+      );
 
       // Update configuration
       final newConfig = Map<String, dynamic>.from(_currentConfig);
@@ -297,7 +309,10 @@ class EnhancedAudioSessionManager {
   }
 
   /// Handle audio interruption (phone calls, other apps, etc.)
-  Future<void> handleAudioInterruption({required bool shouldPause, required bool shouldResume}) async {
+  Future<void> handleAudioInterruption({
+    required bool shouldPause,
+    required bool shouldResume,
+  }) async {
     if (!_isInitialized) return;
 
     try {
@@ -332,9 +347,14 @@ class EnhancedAudioSessionManager {
     if (_isBackgroundAudioEnabled == enabled) return;
 
     try {
-      AppLogger.info('🎵 ${enabled ? 'Enabling' : 'Disabling'} background audio...');
+      AppLogger.info(
+        '🎵 ${enabled ? 'Enabling' : 'Disabling'} background audio...',
+      );
 
-      await configureForPlayback(backgroundPlayback: enabled, interruptionHandling: enabled);
+      await configureForPlayback(
+        backgroundPlayback: enabled,
+        interruptionHandling: enabled,
+      );
 
       AppLogger.info('✅ Background audio ${enabled ? 'enabled' : 'disabled'}');
     } catch (e) {
@@ -380,10 +400,19 @@ class EnhancedAudioSessionManager {
         };
 
       case PlatformType.web:
-        return {'backgroundAudio': false, 'mediaSession': true, 'autoplay': false, 'quality': 'medium'};
+        return {
+          'backgroundAudio': false,
+          'mediaSession': true,
+          'autoplay': false,
+          'quality': 'medium',
+        };
 
       default:
-        return {'backgroundAudio': false, 'interruptionHandling': false, 'quality': 'low'};
+        return {
+          'backgroundAudio': false,
+          'interruptionHandling': false,
+          'quality': 'low',
+        };
     }
   }
 

@@ -23,14 +23,22 @@ class SecureTelemetry {
   }
 
   /// Send encrypted telemetry data
-  static Future<void> trackEvent({required String event, Map<String, dynamic>? parameters, String? userId}) async {
+  static Future<void> trackEvent({
+    required String event,
+    Map<String, dynamic>? parameters,
+    String? userId,
+  }) async {
     if (!kReleaseMode) {
       debugPrint('🔍 DEV: Event tracked - $event');
       return; // No telemetry in debug mode
     }
 
     try {
-      final payload = await _createSecurePayload(event: event, parameters: parameters, userId: userId);
+      final payload = await _createSecurePayload(
+        event: event,
+        parameters: parameters,
+        userId: userId,
+      );
 
       await _sendSecureRequest(payload);
     } catch (e) {
@@ -67,7 +75,11 @@ class SecureTelemetry {
 
     await trackEvent(
       event: 'user_action',
-      parameters: {'action': action, 'category': category ?? 'general', 'properties': sanitizedProperties},
+      parameters: {
+        'action': action,
+        'category': category ?? 'general',
+        'properties': sanitizedProperties,
+      },
     );
   }
 
@@ -98,7 +110,11 @@ class SecureTelemetry {
     final payloadJson = json.encode(payload);
     final integrity = _calculateIntegrityHash(payloadJson, nonce);
 
-    return {'data': _encryptPayload(payloadJson), 'integrity': integrity, 'version': '1.0'};
+    return {
+      'data': _encryptPayload(payloadJson),
+      'integrity': integrity,
+      'version': '1.0',
+    };
   }
 
   /// Send secure HTTP request with retry logic
@@ -194,7 +210,18 @@ class SecureTelemetry {
   /// Sanitize user data to remove PII
   static Map<String, dynamic> _sanitizeUserData(Map<String, dynamic> data) {
     final sanitized = <String, dynamic>{};
-    final blockedKeys = {'email', 'phone', 'name', 'address', 'location', 'password', 'token', 'key', 'secret', 'auth'};
+    final blockedKeys = {
+      'email',
+      'phone',
+      'name',
+      'address',
+      'location',
+      'password',
+      'token',
+      'key',
+      'secret',
+      'auth',
+    };
 
     for (final entry in data.entries) {
       final key = entry.key.toLowerCase();
@@ -209,7 +236,10 @@ class SecureTelemetry {
       if (value is String) {
         // Remove potential PII patterns
         final sanitizedValue = value
-            .replaceAll(RegExp(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'), '[EMAIL]')
+            .replaceAll(
+              RegExp(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'),
+              '[EMAIL]',
+            )
             .replaceAll(RegExp(r'\b\d{3}-?\d{3}-?\d{4}\b'), '[PHONE]')
             .replaceAll(RegExp(r'\b\d{16}\b'), '[CARD]');
 
@@ -282,7 +312,9 @@ enum SecurityLevel { info, warning, error, critical }
 class ProductionSecurity {
   /// Verify app is running in secure production mode
   static bool isSecureProduction() {
-    return kReleaseMode && !kDebugMode && const bool.fromEnvironment('dart.vm.product', defaultValue: false);
+    return kReleaseMode &&
+        !kDebugMode &&
+        const bool.fromEnvironment('dart.vm.product', defaultValue: false);
   }
 
   /// Get security status

@@ -15,10 +15,12 @@ class MonitoringDashboard {
   static const Duration _refreshInterval = Duration(minutes: 5);
 
   static MonitoringDashboard? _instance;
-  static MonitoringDashboard get instance => _instance ??= MonitoringDashboard._();
+  static MonitoringDashboard get instance =>
+      _instance ??= MonitoringDashboard._();
   MonitoringDashboard._();
 
-  final StreamController<DashboardData> _dataController = StreamController<DashboardData>.broadcast();
+  final StreamController<DashboardData> _dataController =
+      StreamController<DashboardData>.broadcast();
   Timer? _refreshTimer;
   DashboardData? _lastData;
 
@@ -47,7 +49,10 @@ class MonitoringDashboard {
     } catch (e, stackTrace) {
       debugPrint('MonitoringDashboard: Initialization error - $e');
       await FirebaseCrashlytics.instance.recordError(
-        MonitoringException('Failed to initialize monitoring dashboard', e.toString()),
+        MonitoringException(
+          'Failed to initialize monitoring dashboard',
+          e.toString(),
+        ),
         stackTrace,
       );
     }
@@ -113,7 +118,11 @@ class MonitoringDashboard {
     // Calculate uptime
     final launchTime = prefs.getInt('app_launch_time');
     final uptime =
-        launchTime != null ? DateTime.now().difference(DateTime.fromMillisecondsSinceEpoch(launchTime)) : Duration.zero;
+        launchTime != null
+            ? DateTime.now().difference(
+              DateTime.fromMillisecondsSinceEpoch(launchTime),
+            )
+            : Duration.zero;
 
     return AppMetrics(
       version: appVersion,
@@ -201,7 +210,9 @@ class MonitoringDashboard {
 
     return UserMetrics(
       dailyActiveUsers: prefs.getInt('daily_active_users') ?? 0,
-      sessionDuration: Duration(milliseconds: prefs.getInt('avg_session_duration') ?? 0),
+      sessionDuration: Duration(
+        milliseconds: prefs.getInt('avg_session_duration') ?? 0,
+      ),
       screenViews: prefs.getInt('total_screen_views') ?? 0,
       userActions: prefs.getInt('total_user_actions') ?? 0,
       retentionRate: prefs.getDouble('user_retention_rate') ?? 0.0,
@@ -384,7 +395,10 @@ class MonitoringDashboard {
   /// Check crash reporting health
   Future<bool> _checkCrashReportingHealth() async {
     try {
-      await FirebaseCrashlytics.instance.setCustomKey('health_check', DateTime.now().toIso8601String());
+      await FirebaseCrashlytics.instance.setCustomKey(
+        'health_check',
+        DateTime.now().toIso8601String(),
+      );
       return true;
     } catch (e) {
       return false;
@@ -539,7 +553,10 @@ class RAGMetrics {
     successRate: json['successRate'],
     averageResponseTime: json['averageResponseTime'],
     cacheHitRate: json['cacheHitRate'],
-    recentQueries: (json['recentQueries'] as List).map((q) => RAGQueryInfo.fromJson(q)).toList(),
+    recentQueries:
+        (json['recentQueries'] as List)
+            .map((q) => RAGQueryInfo.fromJson(q))
+            .toList(),
     indexHealth: json['indexHealth'],
   );
 }
@@ -577,7 +594,10 @@ class ErrorMetrics {
     networkErrors: json['networkErrors'],
     ragErrors: json['ragErrors'],
     errorRate: json['errorRate'],
-    recentErrors: (json['recentErrors'] as List).map((e) => ErrorInfo.fromJson(e)).toList(),
+    recentErrors:
+        (json['recentErrors'] as List)
+            .map((e) => ErrorInfo.fromJson(e))
+            .toList(),
   );
 }
 
@@ -608,14 +628,15 @@ class PerformanceMetrics {
     'networkType': networkType,
   };
 
-  factory PerformanceMetrics.fromJson(Map<String, dynamic> json) => PerformanceMetrics(
-    appStartTime: json['appStartTime'],
-    averageFrameRenderTime: json['averageFrameRenderTime'],
-    networkLatency: json['networkLatency'],
-    cpuUsage: json['cpuUsage'],
-    batteryLevel: json['batteryLevel'],
-    networkType: json['networkType'],
-  );
+  factory PerformanceMetrics.fromJson(Map<String, dynamic> json) =>
+      PerformanceMetrics(
+        appStartTime: json['appStartTime'],
+        averageFrameRenderTime: json['averageFrameRenderTime'],
+        networkLatency: json['networkLatency'],
+        cpuUsage: json['cpuUsage'],
+        batteryLevel: json['batteryLevel'],
+        networkType: json['networkType'],
+      );
 }
 
 /// User engagement metrics
@@ -689,12 +710,23 @@ class MemoryUsage {
   final double available;
   final double percentage;
 
-  MemoryUsage({required this.used, required this.available, required this.percentage});
+  MemoryUsage({
+    required this.used,
+    required this.available,
+    required this.percentage,
+  });
 
-  Map<String, dynamic> toJson() => {'used': used, 'available': available, 'percentage': percentage};
+  Map<String, dynamic> toJson() => {
+    'used': used,
+    'available': available,
+    'percentage': percentage,
+  };
 
-  factory MemoryUsage.fromJson(Map<String, dynamic> json) =>
-      MemoryUsage(used: json['used'], available: json['available'], percentage: json['percentage']);
+  factory MemoryUsage.fromJson(Map<String, dynamic> json) => MemoryUsage(
+    used: json['used'],
+    available: json['available'],
+    percentage: json['percentage'],
+  );
 }
 
 class PlatformInfo {
@@ -702,12 +734,23 @@ class PlatformInfo {
   final String version;
   final String device;
 
-  PlatformInfo({required this.platform, required this.version, required this.device});
+  PlatformInfo({
+    required this.platform,
+    required this.version,
+    required this.device,
+  });
 
-  Map<String, dynamic> toJson() => {'platform': platform, 'version': version, 'device': device};
+  Map<String, dynamic> toJson() => {
+    'platform': platform,
+    'version': version,
+    'device': device,
+  };
 
-  factory PlatformInfo.fromJson(Map<String, dynamic> json) =>
-      PlatformInfo(platform: json['platform'], version: json['version'], device: json['device']);
+  factory PlatformInfo.fromJson(Map<String, dynamic> json) => PlatformInfo(
+    platform: json['platform'],
+    version: json['version'],
+    device: json['device'],
+  );
 }
 
 class RAGQueryInfo {
@@ -716,7 +759,12 @@ class RAGQueryInfo {
   final bool success;
   final DateTime timestamp;
 
-  RAGQueryInfo({required this.query, required this.responseTime, required this.success, required this.timestamp});
+  RAGQueryInfo({
+    required this.query,
+    required this.responseTime,
+    required this.success,
+    required this.timestamp,
+  });
 
   Map<String, dynamic> toJson() => {
     'query': query,
@@ -739,7 +787,12 @@ class ErrorInfo {
   final String type;
   final DateTime timestamp;
 
-  ErrorInfo({required this.error, required this.stackTrace, required this.type, required this.timestamp});
+  ErrorInfo({
+    required this.error,
+    required this.stackTrace,
+    required this.type,
+    required this.timestamp,
+  });
 
   Map<String, dynamic> toJson() => {
     'error': error,
@@ -764,5 +817,6 @@ class MonitoringException implements Exception {
   MonitoringException(this.message, [this.details]);
 
   @override
-  String toString() => 'MonitoringException: $message${details != null ? ' - $details' : ''}';
+  String toString() =>
+      'MonitoringException: $message${details != null ? ' - $details' : ''}';
 }

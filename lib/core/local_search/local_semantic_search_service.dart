@@ -259,7 +259,9 @@ class LocalSemanticSearchService {
 
         if (embeddings.isNotEmpty) {
           await _vectorStorage.storeBatchEmbeddings(embeddings);
-          AppLogger.debug('Preloaded ${embeddings.length} embeddings for $lang');
+          AppLogger.debug(
+            'Preloaded ${embeddings.length} embeddings for $lang',
+          );
         }
       }
     } catch (e) {
@@ -313,7 +315,9 @@ class LocalSemanticSearchService {
         _isOnline = result != ConnectivityResult.none;
 
         if (_isOnline != wasOnline) {
-          AppLogger.debug('Connectivity changed: ${_isOnline ? 'Online' : 'Offline'}');
+          AppLogger.debug(
+            'Connectivity changed: ${_isOnline ? 'Online' : 'Offline'}',
+          );
           _onConnectivityChanged?.call(_isOnline);
 
           if (_isOnline) {

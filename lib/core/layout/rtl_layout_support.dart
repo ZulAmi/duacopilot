@@ -20,7 +20,10 @@ class RTLLayoutSupport {
   }
 
   /// Get the optimal text direction for the current context
-  static TextDirection getContextDirection(BuildContext context, [String? content]) {
+  static TextDirection getContextDirection(
+    BuildContext context, [
+    String? content,
+  ]) {
     if (content != null && content.isNotEmpty) {
       return ArabicTypography.getTextDirection(content);
     }
@@ -35,7 +38,8 @@ class RTLLayoutSupport {
     TextDirection? explicitDirection,
     String? content,
   }) {
-    final direction = explicitDirection ?? getContextDirection(context, content);
+    final direction =
+        explicitDirection ?? getContextDirection(context, content);
 
     return Directionality(textDirection: direction, child: child);
   }
@@ -56,7 +60,10 @@ class RTLLayoutSupport {
     }
 
     if (horizontal != null || vertical != null) {
-      return EdgeInsets.symmetric(horizontal: horizontal ?? 0, vertical: vertical ?? 0);
+      return EdgeInsets.symmetric(
+        horizontal: horizontal ?? 0,
+        vertical: vertical ?? 0,
+      );
     }
 
     final isRTL = getContextDirection(context) == TextDirection.rtl;
@@ -70,7 +77,10 @@ class RTLLayoutSupport {
   }
 
   /// Create RTL-aware alignment
-  static Alignment createRTLAwareAlignment(BuildContext context, AlignmentGeometry alignment) {
+  static Alignment createRTLAwareAlignment(
+    BuildContext context,
+    AlignmentGeometry alignment,
+  ) {
     if (getContextDirection(context) == TextDirection.rtl) {
       if (alignment == Alignment.centerLeft) return Alignment.centerRight;
       if (alignment == Alignment.centerRight) return Alignment.centerLeft;
@@ -84,7 +94,10 @@ class RTLLayoutSupport {
   }
 
   /// Create RTL-aware CrossAxisAlignment
-  static CrossAxisAlignment createRTLAwareCrossAxisAlignment(BuildContext context, CrossAxisAlignment alignment) {
+  static CrossAxisAlignment createRTLAwareCrossAxisAlignment(
+    BuildContext context,
+    CrossAxisAlignment alignment,
+  ) {
     if (getContextDirection(context) == TextDirection.rtl) {
       if (alignment == CrossAxisAlignment.start) return CrossAxisAlignment.end;
       if (alignment == CrossAxisAlignment.end) return CrossAxisAlignment.start;
@@ -94,7 +107,10 @@ class RTLLayoutSupport {
   }
 
   /// Create RTL-aware MainAxisAlignment
-  static MainAxisAlignment createRTLAwareMainAxisAlignment(BuildContext context, MainAxisAlignment alignment) {
+  static MainAxisAlignment createRTLAwareMainAxisAlignment(
+    BuildContext context,
+    MainAxisAlignment alignment,
+  ) {
     if (getContextDirection(context) == TextDirection.rtl) {
       if (alignment == MainAxisAlignment.start) return MainAxisAlignment.end;
       if (alignment == MainAxisAlignment.end) return MainAxisAlignment.start;
@@ -130,7 +146,8 @@ class MixedTextDirectionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textDirection = ArabicTypography.getTextDirection(text);
-    final alignment = textAlign ?? ArabicTypography.getTextAlign(text, textDirection);
+    final alignment =
+        textAlign ?? ArabicTypography.getTextAlign(text, textDirection);
 
     Widget textWidget;
 
@@ -157,7 +174,10 @@ class MixedTextDirectionWidget extends StatelessWidget {
       );
     }
 
-    return Padding(padding: padding, child: Directionality(textDirection: textDirection, child: textWidget));
+    return Padding(
+      padding: padding,
+      child: Directionality(textDirection: textDirection, child: textWidget),
+    );
   }
 }
 
@@ -187,7 +207,10 @@ class RTLAwareContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final direction = RTLLayoutSupport.getContextDirection(context, content);
-    final adaptedAlignment = alignment != null ? RTLLayoutSupport.createRTLAwareAlignment(context, alignment!) : null;
+    final adaptedAlignment =
+        alignment != null
+            ? RTLLayoutSupport.createRTLAwareAlignment(context, alignment!)
+            : null;
 
     return Directionality(
       textDirection: direction,
@@ -224,8 +247,14 @@ class RTLAwareRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final direction = RTLLayoutSupport.getContextDirection(context, content);
-    final adaptedMainAxis = RTLLayoutSupport.createRTLAwareMainAxisAlignment(context, mainAxisAlignment);
-    final adaptedCrossAxis = RTLLayoutSupport.createRTLAwareCrossAxisAlignment(context, crossAxisAlignment);
+    final adaptedMainAxis = RTLLayoutSupport.createRTLAwareMainAxisAlignment(
+      context,
+      mainAxisAlignment,
+    );
+    final adaptedCrossAxis = RTLLayoutSupport.createRTLAwareCrossAxisAlignment(
+      context,
+      crossAxisAlignment,
+    );
 
     return Directionality(
       textDirection: direction,
@@ -233,7 +262,10 @@ class RTLAwareRow extends StatelessWidget {
         mainAxisAlignment: adaptedMainAxis,
         crossAxisAlignment: adaptedCrossAxis,
         mainAxisSize: mainAxisSize,
-        children: direction == TextDirection.rtl ? children.reversed.toList() : children,
+        children:
+            direction == TextDirection.rtl
+                ? children.reversed.toList()
+                : children,
       ),
     );
   }
@@ -259,7 +291,10 @@ class RTLAwareColumn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final direction = RTLLayoutSupport.getContextDirection(context, content);
-    final adaptedCrossAxis = RTLLayoutSupport.createRTLAwareCrossAxisAlignment(context, crossAxisAlignment);
+    final adaptedCrossAxis = RTLLayoutSupport.createRTLAwareCrossAxisAlignment(
+      context,
+      crossAxisAlignment,
+    );
 
     return Directionality(
       textDirection: direction,
@@ -280,15 +315,29 @@ class RTLAwareFlex extends StatelessWidget {
   final Widget child;
   final String? content;
 
-  const RTLAwareFlex({super.key, this.flex = 1, this.fit = FlexFit.loose, required this.child, this.content});
+  const RTLAwareFlex({
+    super.key,
+    this.flex = 1,
+    this.fit = FlexFit.loose,
+    required this.child,
+    this.content,
+  });
 
-  const RTLAwareFlex.expanded({super.key, this.flex = 1, required this.child, this.content}) : fit = FlexFit.tight;
+  const RTLAwareFlex.expanded({
+    super.key,
+    this.flex = 1,
+    required this.child,
+    this.content,
+  }) : fit = FlexFit.tight;
 
   @override
   Widget build(BuildContext context) {
     final direction = RTLLayoutSupport.getContextDirection(context, content);
 
-    return Directionality(textDirection: direction, child: Flexible(flex: flex, fit: fit, child: child));
+    return Directionality(
+      textDirection: direction,
+      child: Flexible(flex: flex, fit: fit, child: child),
+    );
   }
 }
 
@@ -360,7 +409,8 @@ class AccessibleArabicText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textDirection = ArabicTypography.getTextDirection(text);
-    final alignment = textAlign ?? ArabicTypography.getTextAlign(text, textDirection);
+    final alignment =
+        textAlign ?? ArabicTypography.getTextAlign(text, textDirection);
 
     Widget textWidget =
         selectable
@@ -385,11 +435,19 @@ class AccessibleArabicText extends StatelessWidget {
             );
 
     // Add semantics for screen readers
-    textWidget = Semantics(label: semanticsLabel ?? text, textDirection: textDirection, child: textWidget);
+    textWidget = Semantics(
+      label: semanticsLabel ?? text,
+      textDirection: textDirection,
+      child: textWidget,
+    );
 
     // Add tooltip if provided
     if (tooltip != null) {
-      textWidget = Tooltip(message: tooltip!, textStyle: style, child: textWidget);
+      textWidget = Tooltip(
+        message: tooltip!,
+        textStyle: style,
+        child: textWidget,
+      );
     }
 
     return Directionality(textDirection: textDirection, child: textWidget);
@@ -399,7 +457,12 @@ class AccessibleArabicText extends StatelessWidget {
 /// Custom text selection controls for Arabic content
 class ArabicTextSelectionControls extends MaterialTextSelectionControls {
   @override
-  Widget buildHandle(BuildContext context, TextSelectionHandleType type, double textLineHeight, [VoidCallback? onTap]) {
+  Widget buildHandle(
+    BuildContext context,
+    TextSelectionHandleType type,
+    double textLineHeight, [
+    VoidCallback? onTap,
+  ]) {
     final isRTL = Directionality.of(context) == TextDirection.rtl;
 
     // Adjust handle position for RTL text
@@ -509,7 +572,10 @@ class PlatformRTLOptimizations {
     if (RTLLayoutSupport.shouldUseRTL(context)) {
       // iOS-specific RTL optimizations
       if (Theme.of(context).platform == TargetPlatform.iOS) {
-        SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.portraitUp,
+          DeviceOrientation.portraitDown,
+        ]);
       }
 
       // Android-specific RTL optimizations

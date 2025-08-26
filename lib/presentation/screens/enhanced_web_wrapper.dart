@@ -11,10 +11,13 @@ class EnhancedWebSplashScreen extends ConsumerStatefulWidget {
   const EnhancedWebSplashScreen({super.key, required this.onAnimationComplete});
 
   @override
-  ConsumerState<EnhancedWebSplashScreen> createState() => _EnhancedWebSplashScreenState();
+  ConsumerState<EnhancedWebSplashScreen> createState() =>
+      _EnhancedWebSplashScreenState();
 }
 
-class _EnhancedWebSplashScreenState extends ConsumerState<EnhancedWebSplashScreen> with SingleTickerProviderStateMixin {
+class _EnhancedWebSplashScreenState
+    extends ConsumerState<EnhancedWebSplashScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
   late Animation<double> _scaleAnimation;
@@ -23,7 +26,10 @@ class _EnhancedWebSplashScreenState extends ConsumerState<EnhancedWebSplashScree
   void initState() {
     super.initState();
 
-    _controller = AnimationController(duration: RevolutionaryIslamicTheme.animationMedium, vsync: this);
+    _controller = AnimationController(
+      duration: RevolutionaryIslamicTheme.animationMedium,
+      vsync: this,
+    );
 
     _fadeAnimation = Tween<double>(
       begin: 0.0,
@@ -70,7 +76,9 @@ class _EnhancedWebSplashScreenState extends ConsumerState<EnhancedWebSplashScree
     return Scaffold(
       backgroundColor: RevolutionaryIslamicTheme.backgroundPrimary,
       body: Container(
-        decoration: const BoxDecoration(color: RevolutionaryIslamicTheme.backgroundPrimary),
+        decoration: const BoxDecoration(
+          color: RevolutionaryIslamicTheme.backgroundPrimary,
+        ),
         child: Center(
           child: AnimatedBuilder(
             animation: _controller,
@@ -88,10 +96,16 @@ class _EnhancedWebSplashScreenState extends ConsumerState<EnhancedWebSplashScree
                         height: 120,
                         decoration: BoxDecoration(
                           gradient: RevolutionaryIslamicTheme.heroGradient,
-                          borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radius2Xl),
+                          borderRadius: BorderRadius.circular(
+                            RevolutionaryIslamicTheme.radius2Xl,
+                          ),
                           boxShadow: RevolutionaryIslamicTheme.shadowLg,
                         ),
-                        child: const Icon(Icons.mosque_rounded, size: 56, color: RevolutionaryIslamicTheme.textOnColor),
+                        child: const Icon(
+                          Icons.mosque_rounded,
+                          size: 56,
+                          color: RevolutionaryIslamicTheme.textOnColor,
+                        ),
                       ),
 
                       const SizedBox(height: RevolutionaryIslamicTheme.space8),
@@ -124,19 +138,27 @@ class _EnhancedWebSplashScreenState extends ConsumerState<EnhancedWebSplashScree
 
                       // Enhanced Loading Indicator
                       Container(
-                        padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space4),
+                        padding: const EdgeInsets.all(
+                          RevolutionaryIslamicTheme.space4,
+                        ),
                         decoration: BoxDecoration(
                           color: RevolutionaryIslamicTheme.backgroundSecondary,
-                          borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusXl),
+                          borderRadius: BorderRadius.circular(
+                            RevolutionaryIslamicTheme.radiusXl,
+                          ),
                           boxShadow: RevolutionaryIslamicTheme.shadowMd,
                         ),
                         child: Column(
                           children: [
                             const CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(RevolutionaryIslamicTheme.primaryEmerald),
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                RevolutionaryIslamicTheme.primaryEmerald,
+                              ),
                               strokeWidth: 3,
                             ),
-                            const SizedBox(height: RevolutionaryIslamicTheme.space4),
+                            const SizedBox(
+                              height: RevolutionaryIslamicTheme.space4,
+                            ),
                             Text(
                               'Loading Islamic Knowledge...',
                               style: RevolutionaryIslamicTheme.body1.copyWith(
@@ -151,15 +173,30 @@ class _EnhancedWebSplashScreenState extends ConsumerState<EnhancedWebSplashScree
 
                       // Professional Features Preview
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: RevolutionaryIslamicTheme.space8),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: RevolutionaryIslamicTheme.space8,
+                        ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            _buildFeaturePreview(Icons.search_rounded, 'AI Search'),
-                            const SizedBox(width: RevolutionaryIslamicTheme.space8),
-                            _buildFeaturePreview(Icons.menu_book_rounded, 'Quran'),
-                            const SizedBox(width: RevolutionaryIslamicTheme.space8),
-                            _buildFeaturePreview(Icons.mosque_rounded, 'Prayer Times'),
+                            _buildFeaturePreview(
+                              Icons.search_rounded,
+                              'AI Search',
+                            ),
+                            const SizedBox(
+                              width: RevolutionaryIslamicTheme.space8,
+                            ),
+                            _buildFeaturePreview(
+                              Icons.menu_book_rounded,
+                              'Quran',
+                            ),
+                            const SizedBox(
+                              width: RevolutionaryIslamicTheme.space8,
+                            ),
+                            _buildFeaturePreview(
+                              Icons.mosque_rounded,
+                              'Prayer Times',
+                            ),
                           ],
                         ),
                       ),
@@ -181,12 +218,23 @@ class _EnhancedWebSplashScreenState extends ConsumerState<EnhancedWebSplashScree
           padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space2),
           decoration: BoxDecoration(
             color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusLg),
+            borderRadius: BorderRadius.circular(
+              RevolutionaryIslamicTheme.radiusLg,
+            ),
           ),
-          child: Icon(icon, color: RevolutionaryIslamicTheme.primaryEmerald, size: 20),
+          child: Icon(
+            icon,
+            color: RevolutionaryIslamicTheme.primaryEmerald,
+            size: 20,
+          ),
         ),
         const SizedBox(height: RevolutionaryIslamicTheme.space2),
-        Text(label, style: RevolutionaryIslamicTheme.caption.copyWith(color: RevolutionaryIslamicTheme.textTertiary)),
+        Text(
+          label,
+          style: RevolutionaryIslamicTheme.caption.copyWith(
+            color: RevolutionaryIslamicTheme.textTertiary,
+          ),
+        ),
       ],
     );
   }
@@ -197,7 +245,8 @@ class EnhancedWebAppWrapper extends ConsumerStatefulWidget {
   const EnhancedWebAppWrapper({super.key});
 
   @override
-  ConsumerState<EnhancedWebAppWrapper> createState() => _EnhancedWebAppWrapperState();
+  ConsumerState<EnhancedWebAppWrapper> createState() =>
+      _EnhancedWebAppWrapperState();
 }
 
 class _EnhancedWebAppWrapperState extends ConsumerState<EnhancedWebAppWrapper> {
@@ -222,7 +271,9 @@ class _EnhancedWebAppWrapperState extends ConsumerState<EnhancedWebAppWrapper> {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(
         // Optimize for web viewing while maintaining identical functionality
-        textScaler: TextScaler.linear(MediaQuery.of(context).textScaleFactor.clamp(0.9, 1.2)),
+        textScaler: TextScaler.linear(
+          MediaQuery.of(context).textScaleFactor.clamp(0.9, 1.2),
+        ),
       ),
       child: const RevolutionaryHomeScreen(
         // Both platforms use identical revolutionary components and drawer
@@ -244,7 +295,10 @@ class WebOptimizedProfessionalHome extends ConsumerWidget {
       return Scaffold(
         backgroundColor: RevolutionaryIslamicTheme.backgroundPrimary,
         body: Center(
-          child: Container(constraints: const BoxConstraints(maxWidth: 1200), child: const RevolutionaryHomeScreen()),
+          child: Container(
+            constraints: const BoxConstraints(maxWidth: 1200),
+            child: const RevolutionaryHomeScreen(),
+          ),
         ),
       );
     }

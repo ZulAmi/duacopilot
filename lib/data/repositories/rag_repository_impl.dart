@@ -30,7 +30,9 @@ class RagRepositoryImpl implements RagRepository {
     try {
       // First check cache (if available)
       if (localDataSource != null) {
-        final cachedResponse = await localDataSource!.getCachedRagResponse(query);
+        final cachedResponse = await localDataSource!.getCachedRagResponse(
+          query,
+        );
         if (cachedResponse != null) {
           // Track cache hit
           final processingTime = DateTime.now().difference(startTime);
@@ -68,13 +70,21 @@ class RagRepositoryImpl implements RagRepository {
         return Right(remoteResponse);
       } else {
         // Track network failure
-        SimpleMonitoringService.trackRagQuery(query: query, queryType: 'network_failure', success: false);
+        SimpleMonitoringService.trackRagQuery(
+          query: query,
+          queryType: 'network_failure',
+          success: false,
+        );
 
         return const Left(NetworkFailure('No internet connection'));
       }
     } on ServerException catch (e) {
       // Track server error
-      SimpleMonitoringService.trackRagQuery(query: query, queryType: 'server_error', success: false);
+      SimpleMonitoringService.trackRagQuery(
+        query: query,
+        queryType: 'server_error',
+        success: false,
+      );
 
       SimpleMonitoringService.recordError(
         e,
@@ -86,7 +96,11 @@ class RagRepositoryImpl implements RagRepository {
       return Left(ServerFailure(e.message));
     } on CacheException catch (e) {
       // Track cache error
-      SimpleMonitoringService.trackRagQuery(query: query, queryType: 'cache_error', success: false);
+      SimpleMonitoringService.trackRagQuery(
+        query: query,
+        queryType: 'cache_error',
+        success: false,
+      );
 
       SimpleMonitoringService.recordError(
         e,
@@ -98,7 +112,11 @@ class RagRepositoryImpl implements RagRepository {
       return Left(CacheFailure(e.message));
     } catch (e) {
       // Track unexpected error
-      SimpleMonitoringService.trackRagQuery(query: query, queryType: 'unexpected_error', success: false);
+      SimpleMonitoringService.trackRagQuery(
+        query: query,
+        queryType: 'unexpected_error',
+        success: false,
+      );
 
       SimpleMonitoringService.recordError(
         e,
@@ -112,13 +130,19 @@ class RagRepositoryImpl implements RagRepository {
   }
 
   @override
-  Future<Either<Failure, List<QueryHistory>>> getQueryHistory({int? limit, int? offset}) async {
+  Future<Either<Failure, List<QueryHistory>>> getQueryHistory({
+    int? limit,
+    int? offset,
+  }) async {
     try {
       if (localDataSource == null) {
         return const Left(CacheFailure('Local storage not available'));
       }
 
-      final queryHistoryModels = await localDataSource!.getQueryHistory(limit: limit, offset: offset);
+      final queryHistoryModels = await localDataSource!.getQueryHistory(
+        limit: limit,
+        offset: offset,
+      );
       return Right(queryHistoryModels);
     } on CacheException catch (e) {
       return Left(CacheFailure(e.message));
@@ -128,7 +152,9 @@ class RagRepositoryImpl implements RagRepository {
   }
 
   @override
-  Future<Either<Failure, void>> saveQueryHistory(QueryHistory queryHistory) async {
+  Future<Either<Failure, void>> saveQueryHistory(
+    QueryHistory queryHistory,
+  ) async {
     try {
       if (localDataSource == null) {
         return const Left(CacheFailure('Local storage not available'));

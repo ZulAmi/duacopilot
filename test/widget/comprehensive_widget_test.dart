@@ -17,16 +17,24 @@ void main() {
 
   group('Comprehensive Widget Tests', () {
     group('Main App Structure Tests', () {
-      testWidgets('SecureDuaCopilotApp should build without crashing', (WidgetTester tester) async {
-        await tester.pumpWidget(const ProviderScope(child: app.SecureDuaCopilotApp()));
+      testWidgets('SecureDuaCopilotApp should build without crashing', (
+        WidgetTester tester,
+      ) async {
+        await tester.pumpWidget(
+          const ProviderScope(child: app.SecureDuaCopilotApp()),
+        );
         await TestUtils.waitForAnimation(tester);
 
         expect(find.byType(MaterialApp), findsOneWidget);
         expect(find.byType(ProviderScope), findsOneWidget);
       });
 
-      testWidgets('App should have correct theme configuration', (WidgetTester tester) async {
-        await tester.pumpWidget(const ProviderScope(child: app.SecureDuaCopilotApp()));
+      testWidgets('App should have correct theme configuration', (
+        WidgetTester tester,
+      ) async {
+        await tester.pumpWidget(
+          const ProviderScope(child: app.SecureDuaCopilotApp()),
+        );
         await TestUtils.waitForAnimation(tester);
 
         final context = tester.element(find.byType(MaterialApp));
@@ -37,8 +45,12 @@ void main() {
         expect(theme.textTheme, isNotNull);
       });
 
-      testWidgets('App should handle navigation correctly', (WidgetTester tester) async {
-        await tester.pumpWidget(const ProviderScope(child: app.SecureDuaCopilotApp()));
+      testWidgets('App should handle navigation correctly', (
+        WidgetTester tester,
+      ) async {
+        await tester.pumpWidget(
+          const ProviderScope(child: app.SecureDuaCopilotApp()),
+        );
         await TestUtils.waitForAnimation(tester);
 
         // Test that the app builds and shows initial content
@@ -51,12 +63,17 @@ void main() {
     });
 
     group('Search Interface Widget Tests', () {
-      testWidgets('Search field should accept text input', (WidgetTester tester) async {
+      testWidgets('Search field should accept text input', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
               body: TextField(
-                decoration: InputDecoration(hintText: 'Search for duas...', prefixIcon: Icon(Icons.search)),
+                decoration: InputDecoration(
+                  hintText: 'Search for duas...',
+                  prefixIcon: Icon(Icons.search),
+                ),
               ),
             ),
           ),
@@ -70,13 +87,17 @@ void main() {
         expect(find.text('morning prayer'), findsOneWidget);
       });
 
-      testWidgets('Search field should handle Arabic input', (WidgetTester tester) async {
+      testWidgets('Search field should handle Arabic input', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
               body: Directionality(
                 textDirection: TextDirection.rtl,
-                child: TextField(decoration: InputDecoration(hintText: 'البحث عن الأدعية...')),
+                child: TextField(
+                  decoration: InputDecoration(hintText: 'البحث عن الأدعية...'),
+                ),
               ),
             ),
           ),
@@ -91,7 +112,9 @@ void main() {
         expect(find.text(arabicQuery), findsOneWidget);
       });
 
-      testWidgets('Search button should be tappable', (WidgetTester tester) async {
+      testWidgets('Search button should be tappable', (
+        WidgetTester tester,
+      ) async {
         bool wasPressed = false;
 
         await tester.pumpWidget(
@@ -115,10 +138,18 @@ void main() {
         expect(wasPressed, isTrue);
       });
 
-      testWidgets('Voice search button should be accessible', (WidgetTester tester) async {
+      testWidgets('Voice search button should be accessible', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
-            home: Scaffold(body: IconButton(icon: Icon(Icons.mic), onPressed: () {}, tooltip: 'Voice Search')),
+            home: Scaffold(
+              body: IconButton(
+                icon: Icon(Icons.mic),
+                onPressed: () {},
+                tooltip: 'Voice Search',
+              ),
+            ),
           ),
         );
         await TestUtils.waitForAnimation(tester);
@@ -132,7 +163,9 @@ void main() {
     });
 
     group('Response Display Widget Tests', () {
-      testWidgets('Dua cards should display correctly', (WidgetTester tester) async {
+      testWidgets('Dua cards should display correctly', (
+        WidgetTester tester,
+      ) async {
         final mockDuaResponse = TestConfig.createMockDuaResponses().first;
 
         await tester.pumpWidget(
@@ -144,14 +177,22 @@ void main() {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(mockDuaResponse.query, style: TextStyle(fontWeight: FontWeight.bold)),
+                      Text(
+                        mockDuaResponse.query,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                       SizedBox(height: 8),
                       Directionality(
                         textDirection: TextDirection.rtl,
-                        child: Text(mockDuaResponse.response, style: TextStyle(fontSize: 18)),
+                        child: Text(
+                          mockDuaResponse.response,
+                          style: TextStyle(fontSize: 18),
+                        ),
                       ),
                       SizedBox(height: 8),
-                      Text('Confidence: ${(mockDuaResponse.confidence * 100).round()}%'),
+                      Text(
+                        'Confidence: ${(mockDuaResponse.confidence * 100).round()}%',
+                      ),
                     ],
                   ),
                 ),
@@ -167,7 +208,9 @@ void main() {
         expect(find.textContaining('Confidence:'), findsOneWidget);
       });
 
-      testWidgets('Source information should be displayed', (WidgetTester tester) async {
+      testWidgets('Source information should be displayed', (
+        WidgetTester tester,
+      ) async {
         final mockDuaResponse = TestConfig.createMockDuaResponses().first;
         final source = mockDuaResponse.sources.first;
 
@@ -177,7 +220,8 @@ void main() {
               body: Column(
                 children: [
                   Text('Source: ${source.title}'),
-                  if (source.reference != null) Text('Reference: ${source.reference}'),
+                  if (source.reference != null)
+                    Text('Reference: ${source.reference}'),
                   Text('Relevance: ${(source.relevanceScore * 100).round()}%'),
                 ],
               ),
@@ -191,7 +235,9 @@ void main() {
         expect(find.textContaining('Relevance:'), findsOneWidget);
       });
 
-      testWidgets('Favorite button should toggle correctly', (WidgetTester tester) async {
+      testWidgets('Favorite button should toggle correctly', (
+        WidgetTester tester,
+      ) async {
         bool isFavorite = false;
 
         await tester.pumpWidget(
@@ -238,7 +284,9 @@ void main() {
     });
 
     group('Arabic RTL Widget Tests', () {
-      testWidgets('Arabic text should be right-to-left', (WidgetTester tester) async {
+      testWidgets('Arabic text should be right-to-left', (
+        WidgetTester tester,
+      ) async {
         const arabicText = 'بسم الله الرحمن الرحيم';
 
         await tester.pumpWidget(
@@ -256,11 +304,15 @@ void main() {
         expect(find.text(arabicText), findsOneWidget);
         expect(find.byType(Directionality), findsOneWidget);
 
-        final directionality = tester.widget<Directionality>(find.byType(Directionality));
+        final directionality = tester.widget<Directionality>(
+          find.byType(Directionality),
+        );
         expect(directionality.textDirection, equals(TextDirection.rtl));
       });
 
-      testWidgets('Mixed content should handle direction correctly', (WidgetTester tester) async {
+      testWidgets('Mixed content should handle direction correctly', (
+        WidgetTester tester,
+      ) async {
         const mixedText = 'Search البحث';
 
         await tester.pumpWidget(
@@ -268,8 +320,14 @@ void main() {
             home: Scaffold(
               body: Column(
                 children: [
-                  Directionality(textDirection: TextDirection.ltr, child: Text(mixedText)),
-                  Directionality(textDirection: TextDirection.rtl, child: Text(mixedText)),
+                  Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: Text(mixedText),
+                  ),
+                  Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: Text(mixedText),
+                  ),
                 ],
               ),
             ),
@@ -281,13 +339,17 @@ void main() {
         expect(find.byType(Directionality), findsNWidgets(2));
       });
 
-      testWidgets('Arabic input field should have correct direction', (WidgetTester tester) async {
+      testWidgets('Arabic input field should have correct direction', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
               body: Directionality(
                 textDirection: TextDirection.rtl,
-                child: TextField(decoration: InputDecoration(hintText: 'أدخل النص هنا')),
+                child: TextField(
+                  decoration: InputDecoration(hintText: 'أدخل النص هنا'),
+                ),
               ),
             ),
           ),
@@ -304,13 +366,20 @@ void main() {
     });
 
     group('Responsive Design Widget Tests', () {
-      testWidgets('Layout should adapt to screen size', (WidgetTester tester) async {
+      testWidgets('Layout should adapt to screen size', (
+        WidgetTester tester,
+      ) async {
         final testWidget = Scaffold(
           body: LayoutBuilder(
             builder: (context, constraints) {
               final isWide = constraints.maxWidth > 600;
               return isWide
-                  ? Row(children: [Expanded(child: Text('Left Panel')), Expanded(child: Text('Right Panel'))])
+                  ? Row(
+                    children: [
+                      Expanded(child: Text('Left Panel')),
+                      Expanded(child: Text('Right Panel')),
+                    ],
+                  )
                   : Column(children: [Text('Top Panel'), Text('Bottom Panel')]);
             },
           ),
@@ -322,13 +391,18 @@ void main() {
         ]);
       });
 
-      testWidgets('Navigation should adapt to screen size', (WidgetTester tester) async {
+      testWidgets('Navigation should adapt to screen size', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
               appBar: AppBar(title: Text('DuaCopilot')),
               drawer:
-                  MediaQuery.of(tester.element(find.byType(Scaffold))).size.width < 600
+                  MediaQuery.of(
+                            tester.element(find.byType(Scaffold)),
+                          ).size.width <
+                          600
                       ? Drawer(child: Text('Navigation Drawer'))
                       : null,
               body: Text('Main Content'),
@@ -343,15 +417,25 @@ void main() {
     });
 
     group('Accessibility Widget Tests', () {
-      testWidgets('Buttons should have proper semantics', (WidgetTester tester) async {
+      testWidgets('Buttons should have proper semantics', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
               body: Column(
                 children: [
                   ElevatedButton(onPressed: () {}, child: Text('Search')),
-                  IconButton(icon: Icon(Icons.favorite), onPressed: () {}, tooltip: 'Add to favorites'),
-                  FloatingActionButton(onPressed: () {}, tooltip: 'Record voice', child: Icon(Icons.mic)),
+                  IconButton(
+                    icon: Icon(Icons.favorite),
+                    onPressed: () {},
+                    tooltip: 'Add to favorites',
+                  ),
+                  FloatingActionButton(
+                    onPressed: () {},
+                    tooltip: 'Record voice',
+                    child: Icon(Icons.mic),
+                  ),
                 ],
               ),
             ),
@@ -365,7 +449,9 @@ void main() {
         expect(find.byTooltip('Record voice'), findsOneWidget);
       });
 
-      testWidgets('Text should have appropriate contrast', (WidgetTester tester) async {
+      testWidgets('Text should have appropriate contrast', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             theme: ThemeData(
@@ -378,10 +464,16 @@ void main() {
               body: Column(
                 children: [
                   Text('Primary Text', style: TextStyle(color: Colors.black87)),
-                  Text('Secondary Text', style: TextStyle(color: Colors.black54)),
+                  Text(
+                    'Secondary Text',
+                    style: TextStyle(color: Colors.black54),
+                  ),
                   Container(
                     color: Color(0xFF2E7D32),
-                    child: Text('White on Green', style: TextStyle(color: Colors.white)),
+                    child: Text(
+                      'White on Green',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ],
               ),
@@ -395,20 +487,30 @@ void main() {
         expect(find.text('White on Green'), findsOneWidget);
       });
 
-      testWidgets('Interactive elements should meet touch target size', (WidgetTester tester) async {
+      testWidgets('Interactive elements should meet touch target size', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
               body: Column(
                 children: [
                   // Standard button - should pass
-                  ElevatedButton(onPressed: () {}, child: Text('Standard Button')),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: Text('Standard Button'),
+                  ),
                   // Icon button - should pass
                   IconButton(icon: Icon(Icons.search), onPressed: () {}),
                   // Custom tap area
                   GestureDetector(
                     onTap: () {},
-                    child: Container(width: 48, height: 48, color: Colors.blue, child: Icon(Icons.star)),
+                    child: Container(
+                      width: 48,
+                      height: 48,
+                      color: Colors.blue,
+                      child: Icon(Icons.star),
+                    ),
                   ),
                 ],
               ),
@@ -431,7 +533,9 @@ void main() {
     });
 
     group('Performance Widget Tests', () {
-      testWidgets('Large lists should scroll smoothly', (WidgetTester tester) async {
+      testWidgets('Large lists should scroll smoothly', (
+        WidgetTester tester,
+      ) async {
         final items = List.generate(1000, (index) => 'Item $index');
 
         await tester.pumpWidget(
@@ -458,7 +562,9 @@ void main() {
         expect(find.byType(ListView), findsOneWidget);
       });
 
-      testWidgets('Image loading should not block UI', (WidgetTester tester) async {
+      testWidgets('Image loading should not block UI', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -487,7 +593,9 @@ void main() {
     });
 
     group('Error Handling Widget Tests', () {
-      testWidgets('Error states should display appropriately', (WidgetTester tester) async {
+      testWidgets('Error states should display appropriately', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -497,7 +605,13 @@ void main() {
                   children: [
                     Icon(Icons.error_outline, size: 64, color: Colors.red),
                     SizedBox(height: 16),
-                    Text('Something went wrong', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    Text(
+                      'Something went wrong',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     SizedBox(height: 8),
                     Text('Please try again later'),
                     SizedBox(height: 16),
@@ -516,7 +630,9 @@ void main() {
         expect(find.text('Retry'), findsOneWidget);
       });
 
-      testWidgets('Empty state should be user-friendly', (WidgetTester tester) async {
+      testWidgets('Empty state should be user-friendly', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -526,7 +642,13 @@ void main() {
                   children: [
                     Icon(Icons.search_off, size: 64, color: Colors.grey),
                     SizedBox(height: 16),
-                    Text('No results found', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    Text(
+                      'No results found',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     SizedBox(height: 8),
                     Text('Try different search terms'),
                   ],
@@ -544,7 +666,9 @@ void main() {
     });
 
     group('Theme and Styling Widget Tests', () {
-      testWidgets('Islamic theme should be applied correctly', (WidgetTester tester) async {
+      testWidgets('Islamic theme should be applied correctly', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             theme: ThemeData(
@@ -577,11 +701,16 @@ void main() {
         expect(find.text('Islamic Content'), findsOneWidget);
       });
 
-      testWidgets('Dark theme should work correctly', (WidgetTester tester) async {
+      testWidgets('Dark theme should work correctly', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF2E7D32), brightness: Brightness.dark),
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: Color(0xFF2E7D32),
+                brightness: Brightness.dark,
+              ),
               useMaterial3: true,
             ),
             home: Scaffold(body: Text('Dark theme content')),
@@ -599,7 +728,9 @@ void main() {
   });
 
   group('Integration Widget Tests', () {
-    testWidgets('Complete user workflow should work', (WidgetTester tester) async {
+    testWidgets('Complete user workflow should work', (
+      WidgetTester tester,
+    ) async {
       bool searchPerformed = false;
       String searchQuery = '';
 
@@ -635,11 +766,17 @@ void main() {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Search Results for: $searchQuery', style: TextStyle(fontWeight: FontWeight.bold)),
+                            Text(
+                              'Search Results for: $searchQuery',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
                             SizedBox(height: 8),
                             Directionality(
                               textDirection: TextDirection.rtl,
-                              child: Text('اللهم أعني على ذكرك وشكرك وحسن عبادتك', style: TextStyle(fontSize: 18)),
+                              child: Text(
+                                'اللهم أعني على ذكرك وشكرك وحسن عبادتك',
+                                style: TextStyle(fontSize: 18),
+                              ),
                             ),
                           ],
                         ),
@@ -668,7 +805,10 @@ void main() {
 
       // Verify results appear
       expect(find.textContaining('Search Results'), findsOneWidget);
-      expect(find.text('اللهم أعني على ذكرك وشكرك وحسن عبادتك'), findsOneWidget);
+      expect(
+        find.text('اللهم أعني على ذكرك وشكرك وحسن عبادتك'),
+        findsOneWidget,
+      );
     });
   });
 }

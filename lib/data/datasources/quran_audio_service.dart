@@ -162,7 +162,9 @@ class QuranAudioService {
 
         onProgress?.call(i + 1, verseNumbers.length);
       } catch (e) {
-        AppLogger.debug('Failed to download audio for verse ${verseNumbers[i]}: $e');
+        AppLogger.debug(
+          'Failed to download audio for verse ${verseNumbers[i]}: $e',
+        );
       }
     }
 

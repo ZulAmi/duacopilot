@@ -30,7 +30,10 @@ class MockLocalDataSource implements LocalDataSource {
   }
 
   @override
-  Future<List<QueryHistoryModel>> getQueryHistory({int? limit, int? offset}) async {
+  Future<List<QueryHistoryModel>> getQueryHistory({
+    int? limit,
+    int? offset,
+  }) async {
     try {
       final sortedHistory = List<QueryHistoryModel>.from(_queryHistory)
         ..sort((a, b) => b.timestamp.compareTo(a.timestamp));
@@ -87,7 +90,9 @@ class MockLocalDataSource implements LocalDataSource {
 
       return null;
     } catch (e) {
-      throw CacheException('Failed to get cached RAG response: ${e.toString()}');
+      throw CacheException(
+        'Failed to get cached RAG response: ${e.toString()}',
+      );
     }
   }
 
@@ -112,6 +117,9 @@ class MockLocalDataSource implements LocalDataSource {
 
   // Get statistics for debugging
   Map<String, int> getStats() {
-    return {'query_history_count': _queryHistory.length, 'rag_cache_count': _ragCache.length};
+    return {
+      'query_history_count': _queryHistory.length,
+      'rag_cache_count': _ragCache.length,
+    };
   }
 }
