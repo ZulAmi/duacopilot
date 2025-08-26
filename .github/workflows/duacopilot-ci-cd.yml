@@ -33,8 +33,8 @@ on:
         type: boolean
 
 env:
-  FLUTTER_VERSION: "3.29.1"
-  DART_VERSION: "3.5.1"
+  FLUTTER_VERSION: "3.24.0"
+  DART_VERSION: "3.5.0"
 
 # ==================== JOB MATRIX ====================
 jobs:
