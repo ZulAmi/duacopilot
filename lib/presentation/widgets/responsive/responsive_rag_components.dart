@@ -9,7 +9,7 @@ import '../../../core/rag/enterprise_rag_architecture.dart';
 /// High-performance RAG response state notifier
 class ResponsiveRagNotifier extends StateNotifier<ResponsiveRagState> {
   final EnterpriseRagService _ragService;
-  
+
   ResponsiveRagNotifier(this._ragService) : super(const ResponsiveRagState());
 
   /// Execute intelligent query with personalization
@@ -19,11 +19,7 @@ class ResponsiveRagNotifier extends StateNotifier<ResponsiveRagState> {
     Map<String, dynamic>? userContext,
     Map<String, dynamic>? personalizationData,
   }) async {
-    state = state.copyWith(
-      isLoading: true,
-      error: null,
-      currentQuery: query,
-    );
+    state = state.copyWith(isLoading: true, error: null, currentQuery: query);
 
     try {
       // Enhance query with personalization context
@@ -37,11 +33,7 @@ class ResponsiveRagNotifier extends StateNotifier<ResponsiveRagState> {
         },
       };
 
-      final response = await _ragService.queryRag(
-        query: query,
-        language: language,
-        context: enhancedContext,
-      );
+      final response = await _ragService.queryRag(query: query, language: language, context: enhancedContext);
 
       state = state.copyWith(
         isLoading: false,
@@ -49,51 +41,40 @@ class ResponsiveRagNotifier extends StateNotifier<ResponsiveRagState> {
         responses: [...state.responses, response],
         performanceMetrics: _ragService.getPerformanceAnalytics(),
       );
-
     } catch (error, stackTrace) {
-      state = state.copyWith(
-        isLoading: false,
-        error: error.toString(),
-        stackTrace: stackTrace,
-      );
+      state = state.copyWith(isLoading: false, error: error.toString(), stackTrace: stackTrace);
     }
   }
 
   /// Clear conversation history
   void clearHistory() {
-    state = state.copyWith(
-      responses: [],
-      response: null,
-      error: null,
-    );
+    state = state.copyWith(responses: [], response: null, error: null);
   }
 
   /// Filter responses based on user preferences
-  void filterResponses({
-    double? minConfidence,
-    List<String>? categories,
-    String? searchTerm,
-  }) {
+  void filterResponses({double? minConfidence, List<String>? categories, String? searchTerm}) {
     var filteredResponses = state.allResponses;
 
     if (minConfidence != null) {
-      filteredResponses = filteredResponses
-          .where((r) => (r.confidence ?? 0.0) >= minConfidence)
-          .toList();
+      filteredResponses = filteredResponses.where((r) => (r.confidence ?? 0.0) >= minConfidence).toList();
     }
 
     if (categories != null && categories.isNotEmpty) {
-      filteredResponses = filteredResponses
-          .where((r) => r.metadata?['category'] != null &&
-                      categories.contains(r.metadata!['category']))
-          .toList();
+      filteredResponses =
+          filteredResponses
+              .where((r) => r.metadata?['category'] != null && categories.contains(r.metadata!['category']))
+              .toList();
     }
 
     if (searchTerm != null && searchTerm.isNotEmpty) {
-      filteredResponses = filteredResponses
-          .where((r) => r.response.toLowerCase().contains(searchTerm.toLowerCase()) ||
-                      r.query.toLowerCase().contains(searchTerm.toLowerCase()))
-          .toList();
+      filteredResponses =
+          filteredResponses
+              .where(
+                (r) =>
+                    r.response.toLowerCase().contains(searchTerm.toLowerCase()) ||
+                    r.query.toLowerCase().contains(searchTerm.toLowerCase()),
+              )
+              .toList();
     }
 
     state = state.copyWith(responses: filteredResponses);
@@ -180,12 +161,7 @@ class AdaptiveRagResponseCard extends ConsumerWidget {
   final VoidCallback? onTap;
   final bool showMetadata;
 
-  const AdaptiveRagResponseCard({
-    super.key,
-    required this.response,
-    this.onTap,
-    this.showMetadata = true,
-  });
+  const AdaptiveRagResponseCard({super.key, required this.response, this.onTap, this.showMetadata = true});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -195,10 +171,7 @@ class AdaptiveRagResponseCard extends ConsumerWidget {
 
     return Card(
       elevation: 2,
-      margin: EdgeInsets.symmetric(
-        horizontal: isCompact ? 8.0 : 16.0,
-        vertical: 4.0,
-      ),
+      margin: EdgeInsets.symmetric(horizontal: isCompact ? 8.0 : 16.0, vertical: 4.0),
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(8),
@@ -209,16 +182,13 @@ class AdaptiveRagResponseCard extends ConsumerWidget {
             children: [
               // Query section
               _buildQuerySection(theme, isCompact),
-              
+
               const SizedBox(height: 12),
-              
+
               // Response section
               _buildResponseSection(theme, isCompact),
-              
-              if (showMetadata) ...[
-                const SizedBox(height: 12),
-                _buildMetadataSection(theme, isCompact),
-              ],
+
+              if (showMetadata) ...[const SizedBox(height: 12), _buildMetadataSection(theme, isCompact)],
             ],
           ),
         ),
@@ -229,17 +199,12 @@ class AdaptiveRagResponseCard extends ConsumerWidget {
   Widget _buildQuerySection(ThemeData theme, bool isCompact) {
     return Row(
       children: [
-        Icon(
-          Icons.question_answer,
-          size: isCompact ? 18 : 20,
-          color: theme.colorScheme.primary,
-        ),
+        Icon(Icons.question_answer, size: isCompact ? 18 : 20, color: theme.colorScheme.primary),
         const SizedBox(width: 8),
         Expanded(
           child: Text(
             response.query,
-            style: (isCompact ? theme.textTheme.bodyMedium : theme.textTheme.titleSmall)
-                ?.copyWith(
+            style: (isCompact ? theme.textTheme.bodyMedium : theme.textTheme.titleSmall)?.copyWith(
               fontWeight: FontWeight.w600,
               color: theme.colorScheme.onSurface,
             ),
@@ -249,10 +214,7 @@ class AdaptiveRagResponseCard extends ConsumerWidget {
         ),
         if ((response.confidence ?? 0.0) > 0) ...[
           const SizedBox(width: 8),
-          _ConfidenceBadge(
-            confidence: response.confidence ?? 0.0,
-            isCompact: isCompact,
-          ),
+          _ConfidenceBadge(confidence: response.confidence ?? 0.0, isCompact: isCompact),
         ],
       ],
     );
@@ -263,16 +225,13 @@ class AdaptiveRagResponseCard extends ConsumerWidget {
       width: double.infinity,
       padding: EdgeInsets.all(isCompact ? 8.0 : 12.0),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceVariant.withOpacity(0.3),
+        color: theme.colorScheme.surfaceContainerHighest.withOpacity(0.3),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: theme.colorScheme.outline.withOpacity(0.2),
-        ),
+        border: Border.all(color: theme.colorScheme.outline.withOpacity(0.2)),
       ),
       child: Text(
         response.response,
-        style: (isCompact ? theme.textTheme.bodySmall : theme.textTheme.bodyMedium)
-            ?.copyWith(
+        style: (isCompact ? theme.textTheme.bodySmall : theme.textTheme.bodyMedium)?.copyWith(
           color: theme.colorScheme.onSurfaceVariant,
           height: 1.4,
         ),
@@ -292,24 +251,19 @@ class AdaptiveRagResponseCard extends ConsumerWidget {
             label: '${response.sources!.length} source${response.sources!.length != 1 ? 's' : ''}',
             isCompact: isCompact,
           ),
-        
+
         const SizedBox(width: 8),
-        
+
         // Response time
         if (response.responseTime > 0)
-          _MetadataChip(
-            icon: Icons.schedule,
-            label: '${response.responseTime}ms',
-            isCompact: isCompact,
-          ),
+          _MetadataChip(icon: Icons.schedule, label: '${response.responseTime}ms', isCompact: isCompact),
 
         const Spacer(),
-        
+
         // Timestamp
         Text(
           _formatTimestamp(response.timestamp),
-          style: (isCompact ? theme.textTheme.labelSmall : theme.textTheme.bodySmall)
-              ?.copyWith(
+          style: (isCompact ? theme.textTheme.labelSmall : theme.textTheme.bodySmall)?.copyWith(
             color: theme.colorScheme.onSurfaceVariant.withOpacity(0.7),
           ),
         ),
@@ -338,21 +292,15 @@ class _ConfidenceBadge extends StatelessWidget {
   final double confidence;
   final bool isCompact;
 
-  const _ConfidenceBadge({
-    required this.confidence,
-    required this.isCompact,
-  });
+  const _ConfidenceBadge({required this.confidence, required this.isCompact});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final color = _getConfidenceColor(confidence, theme);
-    
+
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: isCompact ? 4.0 : 6.0,
-        vertical: 2.0,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: isCompact ? 4.0 : 6.0, vertical: 2.0),
       decoration: BoxDecoration(
         color: color.withOpacity(0.1),
         borderRadius: BorderRadius.circular(4),
@@ -360,8 +308,7 @@ class _ConfidenceBadge extends StatelessWidget {
       ),
       child: Text(
         '${(confidence * 100).round()}%',
-        style: (isCompact ? theme.textTheme.labelSmall : theme.textTheme.bodySmall)
-            ?.copyWith(
+        style: (isCompact ? theme.textTheme.labelSmall : theme.textTheme.bodySmall)?.copyWith(
           color: color,
           fontWeight: FontWeight.w600,
           fontSize: isCompact ? 10 : 11,
@@ -387,38 +334,26 @@ class _MetadataChip extends StatelessWidget {
   final String label;
   final bool isCompact;
 
-  const _MetadataChip({
-    required this.icon,
-    required this.label,
-    required this.isCompact,
-  });
+  const _MetadataChip({required this.icon, required this.label, required this.isCompact});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: isCompact ? 4.0 : 6.0,
-        vertical: 2.0,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: isCompact ? 4.0 : 6.0, vertical: 2.0),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceVariant.withOpacity(0.5),
+        color: theme.colorScheme.surfaceContainerHighest.withOpacity(0.5),
         borderRadius: BorderRadius.circular(4),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
-            icon,
-            size: isCompact ? 12 : 14,
-            color: theme.colorScheme.onSurfaceVariant,
-          ),
+          Icon(icon, size: isCompact ? 12 : 14, color: theme.colorScheme.onSurfaceVariant),
           const SizedBox(width: 2),
           Text(
             label,
-            style: (isCompact ? theme.textTheme.labelSmall : theme.textTheme.bodySmall)
-                ?.copyWith(
+            style: (isCompact ? theme.textTheme.labelSmall : theme.textTheme.bodySmall)?.copyWith(
               color: theme.colorScheme.onSurfaceVariant,
               fontSize: isCompact ? 10 : 11,
             ),
@@ -433,10 +368,7 @@ class _MetadataChip extends StatelessWidget {
 class ResponsiveLoadingWidget extends ConsumerWidget {
   final String? loadingText;
 
-  const ResponsiveLoadingWidget({
-    super.key,
-    this.loadingText,
-  });
+  const ResponsiveLoadingWidget({super.key, this.loadingText});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -456,9 +388,7 @@ class ResponsiveLoadingWidget extends ConsumerWidget {
             height: isCompact ? 32 : 40,
             child: CircularProgressIndicator(
               strokeWidth: isCompact ? 2.5 : 3.0,
-              valueColor: AlwaysStoppedAnimation<Color>(
-                theme.colorScheme.primary,
-              ),
+              valueColor: AlwaysStoppedAnimation<Color>(theme.colorScheme.primary),
             ),
           ),
 
@@ -467,8 +397,7 @@ class ResponsiveLoadingWidget extends ConsumerWidget {
           // Loading text
           Text(
             loadingText ?? 'Processing your request...',
-            style: (isCompact ? theme.textTheme.bodyMedium : theme.textTheme.titleSmall)
-                ?.copyWith(
+            style: (isCompact ? theme.textTheme.bodyMedium : theme.textTheme.titleSmall)?.copyWith(
               color: theme.colorScheme.onSurface,
               fontWeight: FontWeight.w500,
             ),
@@ -478,10 +407,7 @@ class ResponsiveLoadingWidget extends ConsumerWidget {
           // Performance metrics (if available)
           if (ragState.performanceMetrics != null) ...[
             SizedBox(height: isCompact ? 8 : 12),
-            _PerformanceMetricsWidget(
-              metrics: ragState.performanceMetrics!,
-              isCompact: isCompact,
-            ),
+            _PerformanceMetricsWidget(metrics: ragState.performanceMetrics!, isCompact: isCompact),
           ],
         ],
       ),
@@ -494,29 +420,22 @@ class _PerformanceMetricsWidget extends StatelessWidget {
   final Map<String, dynamic> metrics;
   final bool isCompact;
 
-  const _PerformanceMetricsWidget({
-    required this.metrics,
-    required this.isCompact,
-  });
+  const _PerformanceMetricsWidget({required this.metrics, required this.isCompact});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: isCompact ? 8.0 : 12.0,
-        vertical: isCompact ? 4.0 : 6.0,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: isCompact ? 8.0 : 12.0, vertical: isCompact ? 4.0 : 6.0),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceVariant.withOpacity(0.3),
+        color: theme.colorScheme.surfaceContainerHighest.withOpacity(0.3),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(
         'Avg: ${metrics['average_response_time']?.toStringAsFixed(0) ?? 0}ms • '
         'Success: ${metrics['success_rate']?.toStringAsFixed(1) ?? 0}%',
-        style: (isCompact ? theme.textTheme.labelSmall : theme.textTheme.bodySmall)
-            ?.copyWith(
+        style: (isCompact ? theme.textTheme.labelSmall : theme.textTheme.bodySmall)?.copyWith(
           color: theme.colorScheme.onSurfaceVariant.withOpacity(0.8),
           fontFamily: 'monospace',
         ),
@@ -530,11 +449,7 @@ class ResponsiveErrorWidget extends ConsumerWidget {
   final String error;
   final VoidCallback? onRetry;
 
-  const ResponsiveErrorWidget({
-    super.key,
-    required this.error,
-    this.onRetry,
-  });
+  const ResponsiveErrorWidget({super.key, required this.error, this.onRetry});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -548,19 +463,14 @@ class ResponsiveErrorWidget extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // Error icon
-          Icon(
-            Icons.error_outline,
-            size: isCompact ? 48 : 64,
-            color: theme.colorScheme.error,
-          ),
+          Icon(Icons.error_outline, size: isCompact ? 48 : 64, color: theme.colorScheme.error),
 
           SizedBox(height: isCompact ? 12 : 16),
 
           // Error title
           Text(
             'Something went wrong',
-            style: (isCompact ? theme.textTheme.titleMedium : theme.textTheme.titleLarge)
-                ?.copyWith(
+            style: (isCompact ? theme.textTheme.titleMedium : theme.textTheme.titleLarge)?.copyWith(
               color: theme.colorScheme.error,
               fontWeight: FontWeight.w600,
             ),
@@ -575,14 +485,11 @@ class ResponsiveErrorWidget extends ConsumerWidget {
             decoration: BoxDecoration(
               color: theme.colorScheme.errorContainer.withOpacity(0.1),
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(
-                color: theme.colorScheme.error.withOpacity(0.2),
-              ),
+              border: Border.all(color: theme.colorScheme.error.withOpacity(0.2)),
             ),
             child: Text(
               error,
-              style: (isCompact ? theme.textTheme.bodySmall : theme.textTheme.bodyMedium)
-                  ?.copyWith(
+              style: (isCompact ? theme.textTheme.bodySmall : theme.textTheme.bodyMedium)?.copyWith(
                 color: theme.colorScheme.onErrorContainer,
               ),
               textAlign: TextAlign.center,
@@ -598,10 +505,7 @@ class ResponsiveErrorWidget extends ConsumerWidget {
               icon: const Icon(Icons.refresh),
               label: const Text('Retry'),
               style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(
-                  horizontal: isCompact ? 16.0 : 24.0,
-                  vertical: isCompact ? 8.0 : 12.0,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: isCompact ? 16.0 : 24.0, vertical: isCompact ? 8.0 : 12.0),
               ),
             ),
           ],
