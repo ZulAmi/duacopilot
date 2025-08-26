@@ -13,8 +13,7 @@ import '../secure_storage/secure_storage_service.dart';
 /// Handles offline data synchronization with smart scheduling
 class IntelligentBackgroundSyncService {
   static IntelligentBackgroundSyncService? _instance;
-  static IntelligentBackgroundSyncService get instance =>
-      _instance ??= IntelligentBackgroundSyncService._();
+  static IntelligentBackgroundSyncService get instance => _instance ??= IntelligentBackgroundSyncService._();
 
   IntelligentBackgroundSyncService._();
 
@@ -31,7 +30,6 @@ class IntelligentBackgroundSyncService {
   static const Duration _minSyncInterval = Duration(minutes: 15);
   static const Duration _maxSyncInterval = Duration(hours: 4);
   static const Duration _urgentSyncDelay = Duration(minutes: 2);
-  static const int _maxRetryAttempts = 3;
 
   // State tracking
   bool _isInitialized = false;
@@ -103,10 +101,7 @@ class IntelligentBackgroundSyncService {
         _periodicSyncTask,
         frequency: optimalInterval,
         initialDelay: Duration(minutes: 5),
-        constraints: Constraints(
-          networkType: NetworkType.connected,
-          requiresBatteryNotLow: true,
-        ),
+        constraints: Constraints(networkType: NetworkType.connected, requiresBatteryNotLow: true),
         inputData: {'sync_type': 'periodic', 'priority': 'normal'},
       );
 
@@ -115,9 +110,7 @@ class IntelligentBackgroundSyncService {
         await _scheduleContentUpdateChecks();
       }
 
-      AppLogger.info(
-        '📅 Intelligent sync scheduled (${optimalInterval.inMinutes}min intervals)',
-      );
+      AppLogger.info('📅 Intelligent sync scheduled (${optimalInterval.inMinutes}min intervals)');
     } catch (e) {
       AppLogger.error('❌ Failed to schedule intelligent sync: $e');
     }
@@ -129,15 +122,9 @@ class IntelligentBackgroundSyncService {
       await Workmanager().registerPeriodicTask(
         _contentUpdateTask,
         _contentUpdateTask,
-        frequency: Duration(
-          hours: 2,
-        ), // Check every 2 hours during active periods
+        frequency: Duration(hours: 2), // Check every 2 hours during active periods
         constraints: Constraints(networkType: NetworkType.connected),
-        inputData: {
-          'sync_type': 'content_update',
-          'priority': 'low',
-          'active_hours': _activeHours,
-        },
+        inputData: {'sync_type': 'content_update', 'priority': 'low', 'active_hours': _activeHours},
       );
 
       AppLogger.info('📚 Content update checks scheduled');
@@ -153,10 +140,7 @@ class IntelligentBackgroundSyncService {
 
     // Analyze usage frequency
     final now = DateTime.now();
-    final recentUsage =
-        _usagePatterns.entries
-            .where((entry) => now.difference(entry.value).inDays <= 7)
-            .length;
+    final recentUsage = _usagePatterns.entries.where((entry) => now.difference(entry.value).inDays <= 7).length;
 
     if (recentUsage > 20) {
       // Heavy usage - sync more frequently
@@ -183,10 +167,7 @@ class IntelligentBackgroundSyncService {
   }
 
   /// Schedule urgent sync for critical updates
-  Future<void> scheduleUrgentSync({
-    required String reason,
-    Map<String, dynamic>? data,
-  }) async {
+  Future<void> scheduleUrgentSync({required String reason, Map<String, dynamic>? data}) async {
     if (!_isEnabled) return;
 
     try {
@@ -195,12 +176,7 @@ class IntelligentBackgroundSyncService {
         _urgentSyncTask,
         initialDelay: _urgentSyncDelay,
         constraints: Constraints(networkType: NetworkType.connected),
-        inputData: {
-          'sync_type': 'urgent',
-          'priority': 'high',
-          'reason': reason,
-          'data': data ?? {},
-        },
+        inputData: {'sync_type': 'urgent', 'priority': 'high', 'reason': reason, 'data': data ?? {}},
       );
 
       AppLogger.info('🚨 Urgent sync scheduled: $reason');
@@ -210,10 +186,7 @@ class IntelligentBackgroundSyncService {
   }
 
   /// Schedule family sync for collaborative features
-  Future<void> scheduleFamilySync({
-    required String familyId,
-    required String action,
-  }) async {
+  Future<void> scheduleFamilySync({required String familyId, required String action}) async {
     if (!_isEnabled) return;
 
     try {
@@ -222,12 +195,7 @@ class IntelligentBackgroundSyncService {
         _familySyncTask,
         initialDelay: Duration(seconds: 30), // Quick sync for family actions
         constraints: Constraints(networkType: NetworkType.connected),
-        inputData: {
-          'sync_type': 'family',
-          'priority': 'high',
-          'family_id': familyId,
-          'action': action,
-        },
+        inputData: {'sync_type': 'family', 'priority': 'high', 'family_id': familyId, 'action': action},
       );
 
       AppLogger.info('👨‍👩‍👧‍👦 Family sync scheduled: $action');
@@ -258,36 +226,6 @@ class IntelligentBackgroundSyncService {
     }
   }
 
-  /// Check if current time is during user's active hours
-  bool _isDuringActiveHours() {
-    if (_activeHours.isEmpty) return true; // Default to active if no data
-
-    final currentHour = DateTime.now().hour;
-    return _activeHours.contains(currentHour);
-  }
-
-  /// Handle sync success
-  void _handleSyncSuccess(String taskType) {
-    _lastSyncTime = DateTime.now();
-    _consecutiveFailures = 0;
-    _saveState();
-
-    AppLogger.info('✅ Background sync completed: $taskType');
-  }
-
-  /// Handle sync failure
-  void _handleSyncFailure(String taskType, String error) {
-    _consecutiveFailures++;
-    _saveState();
-
-    AppLogger.error('❌ Background sync failed: $taskType - $error');
-
-    // Reschedule with exponential backoff if needed
-    if (_consecutiveFailures >= _maxRetryAttempts) {
-      _scheduleIntelligentSync(); // Reschedule with longer interval
-    }
-  }
-
   /// Load saved state from preferences
   Future<void> _loadState() async {
     try {
@@ -307,10 +245,7 @@ class IntelligentBackgroundSyncService {
   Future<void> _saveState() async {
     try {
       if (_lastSyncTime != null) {
-        await _prefs.setString(
-          'last_sync_time',
-          _lastSyncTime!.toIso8601String(),
-        );
+        await _prefs.setString('last_sync_time', _lastSyncTime!.toIso8601String());
       }
 
       await _prefs.setInt('consecutive_failures', _consecutiveFailures);
@@ -461,10 +396,7 @@ Future<void> _executePeriodicSync(Map<String, dynamic>? inputData) async {
     }
 
     // Perform incremental sync
-    await _performBackgroundSync(
-      syncType: 'incremental',
-      priority: inputData?['priority'] as String? ?? 'normal',
-    );
+    await _performBackgroundSync(syncType: 'incremental', priority: inputData?['priority'] as String? ?? 'normal');
 
     // Update last sync time
     await prefs.setString('last_sync_time', DateTime.now().toIso8601String());
@@ -518,15 +450,9 @@ Future<void> _executeFamilySync(Map<String, dynamic>? inputData) async {
     final familyId = inputData?['family_id'] as String?;
     final action = inputData?['action'] as String?;
 
-    AppLogger.info(
-      '👨‍👩‍👧‍👦 Executing family sync: $action for family $familyId',
-    );
+    AppLogger.info('👨‍👩‍👧‍👦 Executing family sync: $action for family $familyId');
 
-    await _performBackgroundSync(
-      syncType: 'family',
-      priority: 'high',
-      data: inputData,
-    );
+    await _performBackgroundSync(syncType: 'family', priority: 'high', data: inputData);
   } catch (e) {
     AppLogger.error('❌ Family sync failed: $e');
     rethrow;
@@ -540,9 +466,7 @@ Future<void> _performBackgroundSync({
   Map<String, dynamic>? data,
 }) async {
   try {
-    AppLogger.info(
-      '🔄 Performing background sync: $syncType ($priority priority)',
-    );
+    AppLogger.info('🔄 Performing background sync: $syncType ($priority priority)');
 
     // Simulate sync operations based on type
     switch (syncType) {

@@ -1,9 +1,10 @@
 import 'package:intl/intl.dart';
+
 import '../../../domain/entities/enhanced_query.dart';
 import '../../../domain/entities/query_context.dart';
+import 'intent_classifier.dart';
 import 'islamic_terminology_mapper.dart';
 import 'query_validator.dart';
-import 'intent_classifier.dart';
 
 /// Comprehensive query enhancement service for RAG API calls
 class QueryEnhancementService {
@@ -52,17 +53,10 @@ class QueryEnhancementService {
       final enhancedContext = await _enhanceContext(context ?? QueryContext());
 
       // Step 4: Classify intent
-      final intent = await _intentClassifier.classifyIntent(
-        normalizedQuery,
-        language,
-      );
+      final intent = await _intentClassifier.classifyIntent(normalizedQuery, language);
 
       // Step 5: Expand query with Islamic terminology
-      final expandedQuery = await _terminologyMapper.expandQuery(
-        normalizedQuery,
-        language,
-        intent: intent,
-      );
+      final expandedQuery = await _terminologyMapper.expandQuery(normalizedQuery, language, intent: intent);
 
       // Step 6: Inject contextual information
       final contextualizedQuery = await _injectContextualInfo(
@@ -73,11 +67,7 @@ class QueryEnhancementService {
       );
 
       // Step 7: Generate semantic tags and keywords
-      final semanticTags = await _generateSemanticTags(
-        contextualizedQuery,
-        intent,
-        language,
-      );
+      final semanticTags = await _generateSemanticTags(contextualizedQuery, intent, language);
 
       // Step 8: Create enhanced query object
       final enhancedQuery = EnhancedQuery(
@@ -87,11 +77,7 @@ class QueryEnhancementService {
         intent: intent,
         context: enhancedContext,
         semanticTags: semanticTags,
-        confidence: _calculateConfidence(
-          normalizedQuery,
-          intent,
-          enhancedContext,
-        ),
+        confidence: _calculateConfidence(normalizedQuery, intent, enhancedContext),
         processingSteps: [
           'validation',
           'sanitization',
@@ -162,10 +148,17 @@ class QueryEnhancementService {
   Future<QueryContext> _enhanceContext(QueryContext baseContext) async {
     final now = DateTime.now();
 
+    // Generate formatted time and date information
+    final formattedTime = _timeFormat.format(now);
+    final islamicDateString = _getIslamicDate(now);
+
+    // Log the enhanced context for debugging
+    print('Enhanced context: time=$formattedTime, islamic_date=$islamicDateString');
+
     return baseContext.copyWith(
       timestamp: now,
       timeOfDay: _getTimeOfDay(now),
-      islamicDate: _getIslamicDate(now),
+      islamicDate: islamicDateString,
       prayerTime: await _getCurrentPrayerTime(now, baseContext.location),
       seasonalContext: _getSeasonalContext(now),
       weekday: _getIslamicWeekday(now.weekday),
@@ -181,39 +174,40 @@ class QueryEnhancementService {
   ) async {
     final contextualPhrases = <String>[];
 
-    // Time-based context
+    // Time-based context with formatted time
     if (context.timeOfDay != null) {
-      contextualPhrases.add(
-        _getTimeContextPhrase(context.timeOfDay!, language),
-      );
+      contextualPhrases.add(_getTimeContextPhrase(context.timeOfDay!, language));
+
+      // Add specific formatted time using the time formatter
+      if (context.timestamp != null) {
+        final formattedTime = _timeFormat.format(context.timestamp!);
+        contextualPhrases.add(_getFormattedTimeContext(formattedTime, language));
+      }
+    }
+
+    // Islamic date context
+    if (context.islamicDate != null) {
+      contextualPhrases.add(_getIslamicDateContext(context.islamicDate!, language));
     }
 
     // Prayer time context
     if (context.prayerTime != null) {
-      contextualPhrases.add(
-        _getPrayerContextPhrase(context.prayerTime!, language),
-      );
+      contextualPhrases.add(_getPrayerContextPhrase(context.prayerTime!, language));
     }
 
     // Seasonal context
     if (context.seasonalContext != null) {
-      contextualPhrases.add(
-        _getSeasonalContextPhrase(context.seasonalContext!, language),
-      );
+      contextualPhrases.add(_getSeasonalContextPhrase(context.seasonalContext!, language));
     }
 
     // Location context
     if (context.location != null) {
-      contextualPhrases.add(
-        _getLocationContextPhrase(context.location!, language),
-      );
+      contextualPhrases.add(_getLocationContextPhrase(context.location!, language));
     }
 
     // User preferences context
     if (userPreferences != null) {
-      contextualPhrases.addAll(
-        _getUserPreferenceContextPhrases(userPreferences, language),
-      );
+      contextualPhrases.addAll(_getUserPreferenceContextPhrases(userPreferences, language));
     }
 
     // Combine original query with context
@@ -226,11 +220,7 @@ class QueryEnhancementService {
   }
 
   /// Generate semantic tags for the query
-  Future<List<String>> _generateSemanticTags(
-    String query,
-    QueryIntent intent,
-    String language,
-  ) async {
+  Future<List<String>> _generateSemanticTags(String query, QueryIntent intent, String language) async {
     final tags = <String>[];
 
     // Intent-based tags
@@ -248,21 +238,14 @@ class QueryEnhancementService {
     tags.addAll(emotionalTags);
 
     // Topic tags using Islamic terminology
-    final topicTags = await _terminologyMapper.extractTopicTags(
-      query,
-      language,
-    );
+    final topicTags = await _terminologyMapper.extractTopicTags(query, language);
     tags.addAll(topicTags);
 
     return tags.toSet().toList(); // Remove duplicates
   }
 
   /// Calculate confidence score for the enhanced query
-  double _calculateConfidence(
-    String query,
-    QueryIntent intent,
-    QueryContext context,
-  ) {
+  double _calculateConfidence(String query, QueryIntent intent, QueryContext context) {
     double confidence = 0.5; // Base confidence
 
     // Query length factor
@@ -301,10 +284,7 @@ class QueryEnhancementService {
   String _normalizeUnicode(String text) {
     // Normalize Arabic diacritics and variants
     return text
-        .replaceAll(
-          RegExp(r'[\u064B-\u065F\u0670\u06D6-\u06ED]'),
-          '',
-        ) // Remove diacritics
+        .replaceAll(RegExp(r'[\u064B-\u065F\u0670\u06D6-\u06ED]'), '') // Remove diacritics
         .replaceAll('أ', 'ا') // Normalize Alif variants
         .replaceAll('إ', 'ا')
         .replaceAll('آ', 'ا')
@@ -329,10 +309,7 @@ class QueryEnhancementService {
   }
 
   String _preprocessUrdu(String text) {
-    return text
-        .replaceAll('ﷺ', 'صلی اللہ علیہ وسلم')
-        .replaceAll('ؑ', 'علیہ السلام')
-        .replaceAll('ؓ', 'رضی اللہ عنہ');
+    return text.replaceAll('ﷺ', 'صلی اللہ علیہ وسلم').replaceAll('ؑ', 'علیہ السلام').replaceAll('ؓ', 'رضی اللہ عنہ');
   }
 
   String _preprocessIndonesian(String text) {
@@ -361,27 +338,55 @@ class QueryEnhancementService {
   }
 
   String _getIslamicDate(DateTime date) {
-    // Simplified Islamic date calculation
-    // In production, use a proper Hijri calendar library
-    final daysSinceEpoch = date.difference(DateTime(622, 7, 16)).inDays;
-    final islamicYear = 1 + (daysSinceEpoch / 354.37).floor();
-    return 'السنة الهجرية $islamicYear';
+    // Use the Islamic date formatter for proper Hijri representation
+    try {
+      // For more accurate Islamic date, this would integrate with a Hijri calendar library
+      final daysSinceEpoch = date.difference(DateTime(622, 7, 16)).inDays;
+      final islamicYear = 1 + (daysSinceEpoch / 354.37).floor();
+      final islamicMonth = ((daysSinceEpoch % 354.37) / 29.5).floor() + 1;
+      final islamicDay = ((daysSinceEpoch % 354.37) % 29.5).floor() + 1;
+
+      // Use the Islamic date formatter
+      final formattedDate = _islamicDateFormat.format(date);
+      return 'التاريخ الهجري: $islamicDay/$islamicMonth/$islamicYear ($formattedDate)';
+    } catch (e) {
+      // Fallback to simple Islamic year calculation
+      final daysSinceEpoch = date.difference(DateTime(622, 7, 16)).inDays;
+      final islamicYear = 1 + (daysSinceEpoch / 354.37).floor();
+      return 'السنة الهجرية $islamicYear';
+    }
   }
 
-  Future<PrayerTime?> _getCurrentPrayerTime(
-    DateTime time,
-    String? location,
-  ) async {
-    // Simplified prayer time calculation
+  Future<PrayerTime?> _getCurrentPrayerTime(DateTime time, String? location) async {
+    // Use the time formatter for consistent time representation
+    final formattedTime = _timeFormat.format(time);
+
+    // Simplified prayer time calculation with formatted time logging
     // In production, integrate with a proper prayer time API
     final hour = time.hour;
-    if (hour >= 4 && hour < 6) return PrayerTime.fajr;
-    if (hour >= 6 && hour < 12) return PrayerTime.duha;
-    if (hour >= 12 && hour < 15) return PrayerTime.dhuhr;
-    if (hour >= 15 && hour < 18) return PrayerTime.asr;
-    if (hour >= 18 && hour < 20) return PrayerTime.maghrib;
-    if (hour >= 20 || hour < 4) return PrayerTime.isha;
-    return null;
+    PrayerTime? prayerTime;
+
+    if (hour >= 4 && hour < 6) {
+      prayerTime = PrayerTime.fajr;
+    } else if (hour >= 6 && hour < 12) {
+      prayerTime = PrayerTime.duha;
+    } else if (hour >= 12 && hour < 15) {
+      prayerTime = PrayerTime.dhuhr;
+    } else if (hour >= 15 && hour < 18) {
+      prayerTime = PrayerTime.asr;
+    } else if (hour >= 18 && hour < 20) {
+      prayerTime = PrayerTime.maghrib;
+    } else if (hour >= 20 || hour < 4) {
+      prayerTime = PrayerTime.isha;
+    }
+
+    // Log formatted time for debugging/context
+    if (prayerTime != null) {
+      // This formatted time can be used for context injection
+      print('Prayer time ${prayerTime.name} detected at $formattedTime${location != null ? ' in $location' : ''}');
+    }
+
+    return prayerTime;
   }
 
   String _getSeasonalContext(DateTime date) {
@@ -393,15 +398,7 @@ class QueryEnhancementService {
   }
 
   String _getIslamicWeekday(int weekday) {
-    const islamicWeekdays = [
-      'الإثنين',
-      'الثلاثاء',
-      'الأربعاء',
-      'الخميس',
-      'الجمعة',
-      'السبت',
-      'الأحد',
-    ];
+    const islamicWeekdays = ['الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت', 'الأحد'];
     return islamicWeekdays[weekday - 1];
   }
 
@@ -452,6 +449,34 @@ class QueryEnhancementService {
           case TimeOfDay.night:
             return 'at night';
         }
+    }
+  }
+
+  /// Get formatted time string for context injection
+  String _getFormattedTimeContext(String formattedTime, String language) {
+    switch (language) {
+      case 'ar':
+        return 'الوقت: $formattedTime';
+      case 'ur':
+        return 'وقت: $formattedTime';
+      case 'id':
+        return 'waktu: $formattedTime';
+      default:
+        return 'time: $formattedTime';
+    }
+  }
+
+  /// Get Islamic date context phrase
+  String _getIslamicDateContext(String islamicDate, String language) {
+    switch (language) {
+      case 'ar':
+        return islamicDate; // Already in Arabic
+      case 'ur':
+        return 'اسلامی تاریخ: $islamicDate';
+      case 'id':
+        return 'tanggal Islam: $islamicDate';
+      default:
+        return 'Islamic date: $islamicDate';
     }
   }
 
@@ -579,10 +604,7 @@ class QueryEnhancementService {
     }
   }
 
-  List<String> _getUserPreferenceContextPhrases(
-    Map<String, dynamic> preferences,
-    String language,
-  ) {
+  List<String> _getUserPreferenceContextPhrases(Map<String, dynamic> preferences, String language) {
     final phrases = <String>[];
 
     if (preferences['preferred_school'] != null) {
@@ -625,10 +647,7 @@ class QueryEnhancementService {
   }
 
   // Content analysis methods
-  Future<List<String>> _extractContentTags(
-    String query,
-    String language,
-  ) async {
+  Future<List<String>> _extractContentTags(String query, String language) async {
     final tags = <String>[];
     final lowerQuery = query.toLowerCase();
 
@@ -661,23 +680,10 @@ class QueryEnhancementService {
 
     // Emotional indicators
     final emotions = {
-      'distressed': [
-        'help',
-        'problem',
-        'difficulty',
-        'trouble',
-        'مشكلة',
-        'مساعدة',
-      ],
+      'distressed': ['help', 'problem', 'difficulty', 'trouble', 'مشكلة', 'مساعدة'],
       'grateful': ['thank', 'grateful', 'blessing', 'شكر', 'حمد'],
       'seeking': ['want', 'need', 'seeking', 'looking for', 'أريد', 'أحتاج'],
-      'confused': [
-        'confused',
-        'don\'t understand',
-        'unclear',
-        'محتار',
-        'لا أفهم',
-      ],
+      'confused': ['confused', 'don\'t understand', 'unclear', 'محتار', 'لا أفهم'],
     };
 
     for (final entry in emotions.entries) {

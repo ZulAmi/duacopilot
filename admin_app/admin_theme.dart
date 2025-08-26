@@ -49,12 +49,10 @@ class AdminTheme {
         primary: primaryRed,
         secondary: warningOrange,
         surface: surfaceColor,
-        background: backgroundColor,
         error: errorRed,
         onPrimary: textOnRed,
         onSecondary: textOnRed,
         onSurface: textPrimary,
-        onBackground: textPrimary,
         onError: textOnRed,
       ),
 
@@ -68,11 +66,7 @@ class AdminTheme {
         elevation: 4,
         centerTitle: true,
         systemOverlayStyle: SystemUiOverlayStyle.light,
-        titleTextStyle: TextStyle(
-          color: textOnRed,
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
+        titleTextStyle: TextStyle(color: textOnRed, fontSize: 20, fontWeight: FontWeight.bold),
         iconTheme: IconThemeData(color: textOnRed),
       ),
 
@@ -80,10 +74,8 @@ class AdminTheme {
       cardTheme: CardTheme(
         color: surfaceColor,
         elevation: 2,
-        shadowColor: Colors.black.withOpacity(0.1),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(radiusLg),
-        ),
+        shadowColor: Colors.black.withValues(alpha: 0.1),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radiusLg)),
         margin: const EdgeInsets.all(spaceMd),
       ),
 
@@ -118,14 +110,9 @@ class AdminTheme {
           backgroundColor: primaryRed,
           foregroundColor: textOnRed,
           elevation: 2,
-          shadowColor: Colors.black.withOpacity(0.3),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(radiusMd),
-          ),
-          padding: const EdgeInsets.symmetric(
-            horizontal: spaceLg,
-            vertical: spaceMd,
-          ),
+          shadowColor: Colors.black.withValues(alpha: 0.3),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radiusMd)),
+          padding: const EdgeInsets.symmetric(horizontal: spaceLg, vertical: spaceMd),
           textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
         ),
       ),
@@ -134,13 +121,8 @@ class AdminTheme {
         style: OutlinedButton.styleFrom(
           foregroundColor: primaryRed,
           side: const BorderSide(color: primaryRed, width: 2),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(radiusMd),
-          ),
-          padding: const EdgeInsets.symmetric(
-            horizontal: spaceLg,
-            vertical: spaceMd,
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radiusMd)),
+          padding: const EdgeInsets.symmetric(horizontal: spaceLg, vertical: spaceMd),
         ),
       ),
 
@@ -148,13 +130,8 @@ class AdminTheme {
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: primaryRed,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(radiusMd),
-          ),
-          padding: const EdgeInsets.symmetric(
-            horizontal: spaceMd,
-            vertical: spaceSm,
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radiusMd)),
+          padding: const EdgeInsets.symmetric(horizontal: spaceMd, vertical: spaceSm),
         ),
       ),
 
@@ -191,11 +168,7 @@ class AdminTheme {
           }
           return surfaceColor;
         }),
-        headingTextStyle: const TextStyle(
-          color: textPrimary,
-          fontWeight: FontWeight.bold,
-          fontSize: 14,
-        ),
+        headingTextStyle: const TextStyle(color: textPrimary, fontWeight: FontWeight.bold, fontSize: 14),
         dataTextStyle: const TextStyle(color: textPrimary, fontSize: 14),
       ),
 
@@ -204,81 +177,21 @@ class AdminTheme {
 
       // Text theme
       textTheme: const TextTheme(
-        displayLarge: TextStyle(
-          color: textPrimary,
-          fontSize: 32,
-          fontWeight: FontWeight.bold,
-        ),
-        displayMedium: TextStyle(
-          color: textPrimary,
-          fontSize: 28,
-          fontWeight: FontWeight.w600,
-        ),
-        displaySmall: TextStyle(
-          color: textPrimary,
-          fontSize: 24,
-          fontWeight: FontWeight.w600,
-        ),
-        headlineLarge: TextStyle(
-          color: textPrimary,
-          fontSize: 22,
-          fontWeight: FontWeight.w600,
-        ),
-        headlineMedium: TextStyle(
-          color: textPrimary,
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
-        ),
-        headlineSmall: TextStyle(
-          color: textPrimary,
-          fontSize: 18,
-          fontWeight: FontWeight.w600,
-        ),
-        titleLarge: TextStyle(
-          color: textPrimary,
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-        ),
-        titleMedium: TextStyle(
-          color: textPrimary,
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-        ),
-        titleSmall: TextStyle(
-          color: textSecondary,
-          fontSize: 12,
-          fontWeight: FontWeight.w500,
-        ),
-        bodyLarge: TextStyle(
-          color: textPrimary,
-          fontSize: 16,
-          fontWeight: FontWeight.normal,
-        ),
-        bodyMedium: TextStyle(
-          color: textPrimary,
-          fontSize: 14,
-          fontWeight: FontWeight.normal,
-        ),
-        bodySmall: TextStyle(
-          color: textSecondary,
-          fontSize: 12,
-          fontWeight: FontWeight.normal,
-        ),
-        labelLarge: TextStyle(
-          color: textPrimary,
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-        ),
-        labelMedium: TextStyle(
-          color: textSecondary,
-          fontSize: 12,
-          fontWeight: FontWeight.w500,
-        ),
-        labelSmall: TextStyle(
-          color: textSecondary,
-          fontSize: 10,
-          fontWeight: FontWeight.w400,
-        ),
+        displayLarge: TextStyle(color: textPrimary, fontSize: 32, fontWeight: FontWeight.bold),
+        displayMedium: TextStyle(color: textPrimary, fontSize: 28, fontWeight: FontWeight.w600),
+        displaySmall: TextStyle(color: textPrimary, fontSize: 24, fontWeight: FontWeight.w600),
+        headlineLarge: TextStyle(color: textPrimary, fontSize: 22, fontWeight: FontWeight.w600),
+        headlineMedium: TextStyle(color: textPrimary, fontSize: 20, fontWeight: FontWeight.w600),
+        headlineSmall: TextStyle(color: textPrimary, fontSize: 18, fontWeight: FontWeight.w600),
+        titleLarge: TextStyle(color: textPrimary, fontSize: 16, fontWeight: FontWeight.w600),
+        titleMedium: TextStyle(color: textPrimary, fontSize: 14, fontWeight: FontWeight.w500),
+        titleSmall: TextStyle(color: textSecondary, fontSize: 12, fontWeight: FontWeight.w500),
+        bodyLarge: TextStyle(color: textPrimary, fontSize: 16, fontWeight: FontWeight.normal),
+        bodyMedium: TextStyle(color: textPrimary, fontSize: 14, fontWeight: FontWeight.normal),
+        bodySmall: TextStyle(color: textSecondary, fontSize: 12, fontWeight: FontWeight.normal),
+        labelLarge: TextStyle(color: textPrimary, fontSize: 14, fontWeight: FontWeight.w500),
+        labelMedium: TextStyle(color: textSecondary, fontSize: 12, fontWeight: FontWeight.w500),
+        labelSmall: TextStyle(color: textSecondary, fontSize: 10, fontWeight: FontWeight.w400),
       ),
     );
   }
@@ -293,22 +206,18 @@ class AdminTheme {
         primary: primaryRed,
         secondary: warningOrange,
         surface: const Color(0xFF1E1E1E),
-        background: const Color(0xFF121212),
         error: errorRed,
         onPrimary: textOnRed,
         onSecondary: textOnRed,
         onSurface: Colors.white,
-        onBackground: Colors.white,
         onError: textOnRed,
       ),
       scaffoldBackgroundColor: const Color(0xFF121212),
       cardTheme: CardTheme(
         color: const Color(0xFF1E1E1E),
         elevation: 4,
-        shadowColor: Colors.black.withOpacity(0.3),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(radiusLg),
-        ),
+        shadowColor: Colors.black.withValues(alpha: 0.3),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radiusLg)),
         margin: const EdgeInsets.all(spaceMd),
       ),
     );

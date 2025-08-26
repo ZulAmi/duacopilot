@@ -1,15 +1,16 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../domain/entities/dua_entity.dart';
+
 import '../../domain/entities/context_entity.dart';
+import '../../domain/entities/dua_entity.dart';
 
 /// HabitTrackingService class implementation
 class HabitTrackingService {
   static HabitTrackingService? _instance;
-  static HabitTrackingService get instance =>
-      _instance ??= HabitTrackingService._();
+  static HabitTrackingService get instance => _instance ??= HabitTrackingService._();
 
   HabitTrackingService._();
 
@@ -19,19 +20,13 @@ class HabitTrackingService {
   /// Stream of habit-based Du'a suggestions
   final StreamController<List<SmartSuggestion>> _suggestionsController =
       StreamController<List<SmartSuggestion>>.broadcast();
-  Stream<List<SmartSuggestion>> get suggestionStream =>
-      _suggestionsController.stream;
+  Stream<List<SmartSuggestion>> get suggestionStream => _suggestionsController.stream;
 
   /// Stream of habit statistics updates
-  final StreamController<HabitStats> _statsController =
-      StreamController<HabitStats>.broadcast();
+  final StreamController<HabitStats> _statsController = StreamController<HabitStats>.broadcast();
   Stream<HabitStats> get statsStream => _statsController.stream;
 
   static const String _habitStatsKey = 'habit_stats';
-  static const String _practiceHistoryKey = 'practice_history';
-  static const String _preferencesKey = 'user_preferences';
-  static const String _goalNotificationsKey = 'goal_notifications';
-  static const String _remindersKey = 'habit_reminders';
   static const String _practicedDuasKey = 'practiced_duas_';
 
   Future<void> initialize() async {
@@ -82,8 +77,7 @@ class HabitTrackingService {
       // Update practice data
       if (practiceData.containsKey(duaId)) {
         practiceData[duaId]['count'] = (practiceData[duaId]['count'] ?? 0) + 1;
-        practiceData[duaId]['totalDuration'] =
-            (practiceData[duaId]['totalDuration'] ?? 0) + duration;
+        practiceData[duaId]['totalDuration'] = (practiceData[duaId]['totalDuration'] ?? 0) + duration;
       } else {
         practiceData[duaId] = {
           'count': 1,
@@ -96,10 +90,7 @@ class HabitTrackingService {
       practiceData[duaId]['lastPractice'] = today.toIso8601String();
 
       // Save updated practice data
-      await prefs.setString(
-        '$_practicedDuasKey$todayKey',
-        json.encode(practiceData),
-      );
+      await prefs.setString('$_practicedDuasKey$todayKey', json.encode(practiceData));
 
       // Update habit statistics
       await _updateHabitStats(today, practiceData);
@@ -189,9 +180,7 @@ class HabitTrackingService {
   }
 
   /// Get habit-based Du'a suggestions
-  Future<List<SmartSuggestion>> getHabitBasedSuggestions(
-    List<DuaEntity> allDuas,
-  ) async {
+  Future<List<SmartSuggestion>> getHabitBasedSuggestions(List<DuaEntity> allDuas) async {
     await _ensureInitialized();
 
     final suggestions = <SmartSuggestion>[];
@@ -205,13 +194,7 @@ class HabitTrackingService {
       if (lastActivityDaysAgo >= 1) {
         // User hasn't practiced today, suggest to maintain streak
         final favoriteCategories = await _getFavoriteCategories();
-        final suggestedDuas =
-            allDuas
-                .where(
-                  (dua) =>
-                      favoriteCategories.contains(dua.category.toLowerCase()),
-                )
-                .toList();
+        final suggestedDuas = allDuas.where((dua) => favoriteCategories.contains(dua.category.toLowerCase())).toList();
 
         for (final dua in suggestedDuas.take(3)) {
           suggestions.add(
@@ -236,9 +219,7 @@ class HabitTrackingService {
       final quickDuas =
           allDuas
               .where(
-                (dua) =>
-                    dua.category.toLowerCase().contains('daily') ||
-                    dua.category.toLowerCase().contains('short'),
+                (dua) => dua.category.toLowerCase().contains('daily') || dua.category.toLowerCase().contains('short'),
               )
               .toList();
 
@@ -260,20 +241,12 @@ class HabitTrackingService {
     final categoriesUsedThisWeek = await _getCategoriesUsedThisWeek();
     final allCategories = allDuas.map((dua) => dua.category).toSet().toList();
     final underusedCategories =
-        allCategories
-            .where((cat) => !categoriesUsedThisWeek.contains(cat.toLowerCase()))
-            .toList();
+        allCategories.where((cat) => !categoriesUsedThisWeek.contains(cat.toLowerCase())).toList();
 
     if (underusedCategories.isNotEmpty) {
       final categoryToExplore = underusedCategories.first;
       final categoryDuas =
-          allDuas
-              .where(
-                (dua) =>
-                    dua.category.toLowerCase() ==
-                    categoryToExplore.toLowerCase(),
-              )
-              .toList();
+          allDuas.where((dua) => dua.category.toLowerCase() == categoryToExplore.toLowerCase()).toList();
 
       for (final dua in categoryDuas.take(1)) {
         suggestions.add(
@@ -281,8 +254,7 @@ class HabitTrackingService {
             duaId: dua.id,
             type: SuggestionType.habitBased,
             confidence: 0.7,
-            reason:
-                'Explore $categoryToExplore Du\'as to diversify your practice',
+            reason: 'Explore $categoryToExplore Du\'as to diversify your practice',
             timestamp: now,
             trigger: SuggestionTrigger.habitReminder,
           ),
@@ -291,14 +263,12 @@ class HabitTrackingService {
     }
 
     // Milestone celebration suggestions
-    if (stats.currentStreak > 0 &&
-        (stats.currentStreak % 7 == 0 || stats.currentStreak % 30 == 0)) {
+    if (stats.currentStreak > 0 && (stats.currentStreak % 7 == 0 || stats.currentStreak % 30 == 0)) {
       final celebratoryDuas =
           allDuas
               .where(
                 (dua) =>
-                    dua.category.toLowerCase().contains('gratitude') ||
-                    dua.category.toLowerCase().contains('praise'),
+                    dua.category.toLowerCase().contains('gratitude') || dua.category.toLowerCase().contains('praise'),
               )
               .toList();
 
@@ -320,9 +290,7 @@ class HabitTrackingService {
   }
 
   /// Get personalized Du'a recommendations based on practice history
-  Future<List<String>> getPersonalizedRecommendations(
-    List<DuaEntity> allDuas,
-  ) async {
+  Future<List<String>> getPersonalizedRecommendations(List<DuaEntity> allDuas) async {
     await _ensureInitialized();
 
     final favoriteCategories = await _getFavoriteCategories();
@@ -338,19 +306,14 @@ class HabitTrackingService {
 
       if (practiceCount >= 3) {
         // Find the Du'a entity
-        final practicedDua = allDuas.firstWhere(
-          (dua) => dua.id == duaId,
-          orElse: () => allDuas.first,
-        );
+        final practicedDua = allDuas.firstWhere((dua) => dua.id == duaId, orElse: () => allDuas.first);
 
         // Find similar Du'as in the same category
         final similarDuas =
             allDuas
                 .where(
                   (dua) =>
-                      dua.category == practicedDua.category &&
-                      dua.id != duaId &&
-                      !mostPracticed.containsKey(dua.id),
+                      dua.category == practicedDua.category && dua.id != duaId && !mostPracticed.containsKey(dua.id),
                 )
                 .toList();
 
@@ -384,8 +347,7 @@ class HabitTrackingService {
     if (stats.weeklyGoal <= 0) return false;
 
     final todayProgress = await _getTodayProgress();
-    return todayProgress >=
-        (stats.weeklyGoal / 7).round(); // Daily portion of weekly goal
+    return todayProgress >= (stats.weeklyGoal / 7).round(); // Daily portion of weekly goal
   }
 
   /// Get current streak information
@@ -396,8 +358,7 @@ class HabitTrackingService {
       'currentStreak': stats.currentStreak,
       'longestStreak': stats.longestStreak,
       'lastActivity': stats.lastActivity,
-      'daysSinceLastActivity':
-          DateTime.now().difference(stats.lastActivity).inDays,
+      'daysSinceLastActivity': DateTime.now().difference(stats.lastActivity).inDays,
       'isActiveToday': _isSameDay(DateTime.now(), stats.lastActivity),
     };
   }
@@ -450,10 +411,7 @@ class HabitTrackingService {
     }
   }
 
-  Future<void> _updateHabitStats(
-    DateTime practiceDate,
-    Map<String, dynamic> todayPractice,
-  ) async {
+  Future<void> _updateHabitStats(DateTime practiceDate, Map<String, dynamic> todayPractice) async {
     if (_currentStats == null) return;
 
     try {
@@ -481,10 +439,7 @@ class HabitTrackingService {
       final updatedStats = _currentStats!.copyWith(
         totalDuas: _currentStats!.totalDuas + todaySessions,
         currentStreak: newStreak,
-        longestStreak:
-            newStreak > _currentStats!.longestStreak
-                ? newStreak
-                : _currentStats!.longestStreak,
+        longestStreak: newStreak > _currentStats!.longestStreak ? newStreak : _currentStats!.longestStreak,
         lastActivity: practiceDate,
       );
 
@@ -523,9 +478,7 @@ class HabitTrackingService {
     }
 
     // Sort by practice count and return top categories
-    final sortedCategories =
-        categoryCounts.entries.toList()
-          ..sort((a, b) => b.value.compareTo(a.value));
+    final sortedCategories = categoryCounts.entries.toList()..sort((a, b) => b.value.compareTo(a.value));
 
     return sortedCategories.take(5).map((e) => e.key).toList();
   }
