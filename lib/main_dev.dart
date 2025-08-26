@@ -3,7 +3,7 @@ import 'dart:io' show Platform;
 
 import 'package:duacopilot/core/logging/app_logger.dart';
 import 'package:duacopilot/core/monitoring/simple_monitoring_service.dart';
-import 'package:duacopilot/core/theme/revolutionary_islamic_theme.dart';
+import 'package:duacopilot/core/theme/professional_islamic_theme.dart';
 import 'package:duacopilot/presentation/screens/enhanced_web_wrapper.dart';
 import 'package:duacopilot/presentation/screens/revolutionary_home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -45,7 +45,7 @@ void main() async {
       AppLogger.debug('⚠️  Monitoring initialization failed: $e - continuing without monitoring');
     }
 
-    AppLogger.debug('✅ DuaCopilot Revolutionary Islamic AI initialized successfully');
+    AppLogger.debug('✅ DuaCopilot Professional Islamic AI initialized successfully');
   } catch (e) {
     AppLogger.debug('⚠️  DuaCopilot initialization error: $e');
     // Continue anyway with limited functionality
@@ -54,26 +54,26 @@ void main() async {
   runApp(const ProviderScope(child: RevolutionaryDuaCopilotDevApp()));
 }
 
-/// Revolutionary Development Version with Next-Generation Islamic UI/UX
+/// Professional Development Version with Clean Islamic UI/UX
 class RevolutionaryDuaCopilotDevApp extends StatelessWidget {
   const RevolutionaryDuaCopilotDevApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     // Track screen view
-    SimpleMonitoringService.trackScreenView('RevolutionaryHome');
+    SimpleMonitoringService.trackScreenView('ProfessionalIslamicHome');
 
     return MaterialApp(
-      title: 'DuaCopilot Dev - Revolutionary Islamic AI Assistant',
+      title: 'DuaCopilot Dev - Professional Islamic AI Assistant',
       debugShowCheckedModeBanner: false,
-      theme: RevolutionaryIslamicTheme.revolutionaryTheme,
+      theme: ProfessionalIslamicTheme.professionalIslamicTheme,
       home: const RevolutionaryAppWrapper(),
       builder: (context, child) {
         return AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
-            statusBarIconBrightness: Brightness.dark,
-            systemNavigationBarColor: RevolutionaryIslamicTheme.backgroundSecondary,
+            statusBarIconBrightness: Brightness.light,
+            systemNavigationBarColor: ProfessionalIslamicTheme.backgroundSecondary,
             systemNavigationBarIconBrightness: Brightness.dark,
           ),
           child: MediaQuery(
@@ -104,7 +104,7 @@ class _RevolutionaryAppWrapperState extends State<RevolutionaryAppWrapper> with 
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(duration: RevolutionaryIslamicTheme.animationExtraSlow, vsync: this);
+    _animationController = AnimationController(duration: ProfessionalIslamicTheme.animationSlow, vsync: this);
 
     // Auto-complete splash after 3 seconds
     Timer(const Duration(seconds: 3), _onSplashComplete);
@@ -132,10 +132,10 @@ class _RevolutionaryAppWrapperState extends State<RevolutionaryAppWrapper> with 
       return const EnhancedWebAppWrapper();
     }
 
-    // Use revolutionary splash screen for native platforms
+    // Use professional Islamic splash screen for native platforms
     if (_showSplash) {
       return Container(
-        decoration: BoxDecoration(gradient: RevolutionaryIslamicTheme.heroGradient),
+        decoration: const BoxDecoration(color: ProfessionalIslamicTheme.islamicGreen),
         child: Center(
           child: FadeTransition(
             opacity: _animationController,
@@ -148,36 +148,36 @@ class _RevolutionaryAppWrapperState extends State<RevolutionaryAppWrapper> with 
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space8),
+                    padding: const EdgeInsets.all(ProfessionalIslamicTheme.space8),
                     decoration: BoxDecoration(
-                      color: RevolutionaryIslamicTheme.backgroundSecondary.withOpacity(0.9),
-                      borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radius3Xl),
-                      boxShadow: RevolutionaryIslamicTheme.shadowXl,
+                      color: ProfessionalIslamicTheme.backgroundSecondary.withOpacity(0.95),
+                      borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radius3Xl),
+                      boxShadow: ProfessionalIslamicTheme.shadowMedium,
                     ),
-                    child: const Icon(Icons.mosque_rounded, size: 80, color: RevolutionaryIslamicTheme.primaryEmerald),
+                    child: const Icon(Icons.mosque_rounded, size: 80, color: ProfessionalIslamicTheme.islamicGreen),
                   ),
-                  const SizedBox(height: RevolutionaryIslamicTheme.space8),
+                  const SizedBox(height: ProfessionalIslamicTheme.space8),
                   Text(
                     'DuaCopilot',
-                    style: RevolutionaryIslamicTheme.display1.copyWith(
-                      color: RevolutionaryIslamicTheme.textOnColor,
-                      fontWeight: FontWeight.w900,
+                    style: ProfessionalIslamicTheme.display1.copyWith(
+                      color: ProfessionalIslamicTheme.textOnIslamic,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
-                  const SizedBox(height: RevolutionaryIslamicTheme.space2),
+                  const SizedBox(height: ProfessionalIslamicTheme.space2),
                   Text(
-                    'Revolutionary Islamic AI Assistant',
-                    style: RevolutionaryIslamicTheme.body1.copyWith(
-                      color: RevolutionaryIslamicTheme.textOnColor.withOpacity(0.9),
+                    'Professional Islamic AI Assistant',
+                    style: ProfessionalIslamicTheme.body1.copyWith(
+                      color: ProfessionalIslamicTheme.textOnIslamic.withOpacity(0.9),
                     ),
                   ),
-                  const SizedBox(height: RevolutionaryIslamicTheme.space8),
+                  const SizedBox(height: ProfessionalIslamicTheme.space8),
                   SizedBox(
                     width: 40,
                     height: 40,
                     child: CircularProgressIndicator(
                       strokeWidth: 3,
-                      valueColor: AlwaysStoppedAnimation<Color>(RevolutionaryIslamicTheme.textOnColor),
+                      valueColor: AlwaysStoppedAnimation<Color>(ProfessionalIslamicTheme.textOnIslamic),
                     ),
                   ),
                 ],
@@ -188,7 +188,7 @@ class _RevolutionaryAppWrapperState extends State<RevolutionaryAppWrapper> with 
       );
     }
 
-    // Show the revolutionary home screen
+    // Show the revolutionary Islamic home screen with ultra-modern functionality
     return const RevolutionaryHomeScreen();
   }
 }

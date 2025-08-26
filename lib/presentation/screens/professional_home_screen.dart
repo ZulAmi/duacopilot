@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../core/theme/professional_theme.dart';
+import '../../core/theme/professional_islamic_theme.dart';
 import '../../features/qibla/screens/qibla_compass_screen.dart';
 import '../../features/tasbih/screens/digital_tasbih_screen.dart';
 import '../widgets/professional_components.dart';
@@ -10,6 +10,7 @@ import 'islamic/islamic_calendar_screen.dart';
 import 'islamic/prayer_times_screen.dart';
 import 'islamic/quran_explorer_screen.dart';
 import 'premium_features/premium_features_hub.dart';
+import 'professional_islamic_search_screen.dart';
 
 class ProfessionalHomeScreen extends ConsumerStatefulWidget {
   const ProfessionalHomeScreen({super.key});
@@ -47,38 +48,38 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ProfessionalTheme.backgroundColor,
+      backgroundColor: ProfessionalIslamicTheme.backgroundPrimary,
       appBar: ProfessionalComponents.appBar(title: 'DuaCopilot', onMenuPressed: () => _showDrawer(context)),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(ProfessionalTheme.spaceMd),
+          padding: const EdgeInsets.all(ProfessionalIslamicTheme.space4),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Welcome Header
               _buildWelcomeSection(),
 
-              const SizedBox(height: ProfessionalTheme.space2Xl),
+              const SizedBox(height: ProfessionalIslamicTheme.space12),
 
               // Search Bar
               _buildSearchSection(),
 
-              const SizedBox(height: ProfessionalTheme.space2Xl),
+              const SizedBox(height: ProfessionalIslamicTheme.space12),
 
               // Quick Stats
               _buildQuickStats(),
 
-              const SizedBox(height: ProfessionalTheme.space2Xl),
+              const SizedBox(height: ProfessionalIslamicTheme.space12),
 
               // Main Features
               _buildMainFeatures(),
 
-              const SizedBox(height: ProfessionalTheme.space2Xl),
+              const SizedBox(height: ProfessionalIslamicTheme.space12),
 
               // Islamic Tools
               _buildIslamicTools(),
 
-              const SizedBox(height: ProfessionalTheme.spaceXl),
+              const SizedBox(height: ProfessionalIslamicTheme.space10),
             ],
           ),
         ),
@@ -102,15 +103,11 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [ProfessionalTheme.primaryEmerald, ProfessionalTheme.primaryEmerald.withOpacity(0.8)],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                    borderRadius: BorderRadius.circular(ProfessionalTheme.radiusLg),
-                    boxShadow: ProfessionalTheme.elevatedShadow,
+                    color: ProfessionalIslamicTheme.islamicGreen,
+                    borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusLg),
+                    boxShadow: ProfessionalIslamicTheme.shadowMedium,
                   ),
-                  child: const Icon(Icons.mosque_rounded, color: ProfessionalTheme.surfaceColor, size: 32),
+                  child: const Icon(Icons.mosque_rounded, color: ProfessionalIslamicTheme.pureWhite, size: 32),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
@@ -122,7 +119,7 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.w700,
-                          color: ProfessionalTheme.textPrimary,
+                          color: ProfessionalIslamicTheme.textPrimary,
                           height: 1.2,
                         ),
                       ),
@@ -131,7 +128,7 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
                         'Your AI Islamic Companion',
                         style: TextStyle(
                           fontSize: 16,
-                          color: ProfessionalTheme.textSecondary,
+                          color: ProfessionalIslamicTheme.textSecondary,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -140,22 +137,22 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
                 ),
               ],
             ),
-            const SizedBox(height: ProfessionalTheme.spaceMd),
+            const SizedBox(height: ProfessionalIslamicTheme.space4),
             Container(
-              padding: const EdgeInsets.all(ProfessionalTheme.spaceMd),
+              padding: const EdgeInsets.all(ProfessionalIslamicTheme.space4),
               decoration: BoxDecoration(
-                color: ProfessionalTheme.primaryEmerald.withOpacity(0.05),
-                borderRadius: BorderRadius.circular(ProfessionalTheme.radiusMd),
-                border: Border.all(color: ProfessionalTheme.primaryEmerald.withOpacity(0.1)),
+                color: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.05),
+                borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusMd),
+                border: Border.all(color: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.1)),
               ),
               child: Row(
                 children: [
-                  Icon(Icons.lightbulb_outline_rounded, color: ProfessionalTheme.primaryEmerald, size: 20),
+                  Icon(Icons.lightbulb_outline_rounded, color: ProfessionalIslamicTheme.islamicGreen, size: 20),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
                       'Ask me anything about Islam, get Quranic guidance, or find the perfect Dua',
-                      style: TextStyle(fontSize: 14, color: ProfessionalTheme.textSecondary, height: 1.3),
+                      style: TextStyle(fontSize: 14, color: ProfessionalIslamicTheme.textSecondary, height: 1.3),
                     ),
                   ),
                 ],
@@ -180,9 +177,9 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
           children: [
             Text(
               'Search & Explore',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: ProfessionalTheme.textPrimary),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: ProfessionalIslamicTheme.textPrimary),
             ),
-            const SizedBox(height: ProfessionalTheme.spaceMd),
+            const SizedBox(height: ProfessionalIslamicTheme.space4),
             ProfessionalComponents.searchBar(
               controller: _searchController,
               onSubmitted: _handleSearch,
@@ -191,7 +188,7 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
               onVoiceSearch: _toggleVoiceSearch,
               isVoiceListening: _isVoiceListening,
             ),
-            const SizedBox(height: ProfessionalTheme.spaceSm),
+            const SizedBox(height: ProfessionalIslamicTheme.space2),
             Wrap(
               spacing: 8,
               runSpacing: 8,
@@ -211,17 +208,21 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
   Widget _buildQuickSearchChip(String label) {
     return InkWell(
       onTap: () => _handleQuickSearch(label),
-      borderRadius: BorderRadius.circular(ProfessionalTheme.radiusSm),
+      borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusSm),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: ProfessionalTheme.gray100,
-          borderRadius: BorderRadius.circular(ProfessionalTheme.radiusSm),
-          border: Border.all(color: ProfessionalTheme.borderLight),
+          color: ProfessionalIslamicTheme.gray100,
+          borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusSm),
+          border: Border.all(color: ProfessionalIslamicTheme.borderLight),
         ),
         child: Text(
           label,
-          style: const TextStyle(fontSize: 12, color: ProfessionalTheme.textSecondary, fontWeight: FontWeight.w500),
+          style: const TextStyle(
+            fontSize: 12,
+            color: ProfessionalIslamicTheme.textSecondary,
+            fontWeight: FontWeight.w500,
+          ),
         ),
       ),
     );
@@ -235,9 +236,9 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
         children: [
           Text(
             'Today\'s Islamic Insights',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: ProfessionalTheme.textPrimary),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: ProfessionalIslamicTheme.textPrimary),
           ),
-          const SizedBox(height: ProfessionalTheme.spaceMd),
+          const SizedBox(height: ProfessionalIslamicTheme.space4),
           Row(
             children: [
               Expanded(
@@ -245,25 +246,25 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
                   value: '5',
                   label: 'Daily Prayers',
                   icon: Icons.schedule_rounded,
-                  accentColor: ProfessionalTheme.primaryEmerald,
+                  accentColor: ProfessionalIslamicTheme.islamicGreen,
                 ),
               ),
-              const SizedBox(width: ProfessionalTheme.spaceSm),
+              const SizedBox(width: ProfessionalIslamicTheme.space2),
               Expanded(
                 child: ProfessionalComponents.statsCard(
                   value: '114',
                   label: 'Quran Suras',
                   icon: Icons.menu_book_rounded,
-                  accentColor: ProfessionalTheme.secondaryGold,
+                  accentColor: ProfessionalIslamicTheme.goldAccent,
                 ),
               ),
-              const SizedBox(width: ProfessionalTheme.spaceSm),
+              const SizedBox(width: ProfessionalIslamicTheme.space2),
               Expanded(
                 child: ProfessionalComponents.statsCard(
                   value: '6236',
                   label: 'Verses',
                   icon: Icons.lightbulb_rounded,
-                  accentColor: ProfessionalTheme.primaryEmerald,
+                  accentColor: ProfessionalIslamicTheme.islamicGreen,
                 ),
               ),
             ],
@@ -284,22 +285,26 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
             children: [
               Text(
                 'Main Features',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: ProfessionalTheme.textPrimary),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: ProfessionalIslamicTheme.textPrimary,
+                ),
               ),
               TextButton(
                 onPressed: () => _showDrawer(context),
-                child: const Text('View All →', style: TextStyle(color: ProfessionalTheme.primaryEmerald)),
+                child: const Text('View All →', style: TextStyle(color: ProfessionalIslamicTheme.islamicGreen)),
               ),
             ],
           ),
-          const SizedBox(height: ProfessionalTheme.spaceMd),
+          const SizedBox(height: ProfessionalIslamicTheme.space4),
           GridView.count(
             crossAxisCount: 2,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             childAspectRatio: 0.95,
-            mainAxisSpacing: ProfessionalTheme.spaceSm,
-            crossAxisSpacing: ProfessionalTheme.spaceSm,
+            mainAxisSpacing: ProfessionalIslamicTheme.space2,
+            crossAxisSpacing: ProfessionalIslamicTheme.space2,
             children: [
               ProfessionalComponents.featureCard(
                 icon: Icons.search_rounded,
@@ -328,14 +333,14 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
               ),
             ],
           ),
-          const SizedBox(height: ProfessionalTheme.space2Xl),
+          const SizedBox(height: ProfessionalIslamicTheme.space12),
 
           // Additional Premium Features Row
           Text(
             'Premium Features',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: ProfessionalTheme.textPrimary),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: ProfessionalIslamicTheme.textPrimary),
           ),
-          const SizedBox(height: ProfessionalTheme.spaceMd),
+          const SizedBox(height: ProfessionalIslamicTheme.space4),
 
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -347,21 +352,21 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
                   description: 'Learn from scholars',
                   onTap: () => _navigateToIslamicCourses(),
                 ),
-                const SizedBox(width: ProfessionalTheme.spaceSm),
+                const SizedBox(width: ProfessionalIslamicTheme.space2),
                 _buildPremiumFeatureCard(
                   icon: Icons.headphones_rounded,
                   title: 'Premium Audio',
                   description: 'Quran recitations',
                   onTap: () => _navigateToPremiumAudio(),
                 ),
-                const SizedBox(width: ProfessionalTheme.spaceSm),
+                const SizedBox(width: ProfessionalIslamicTheme.space2),
                 _buildPremiumFeatureCard(
                   icon: Icons.psychology_rounded,
                   title: 'Smart Collections',
                   description: 'AI Dua suggestions',
                   onTap: () => _navigateToSmartCollections(),
                 ),
-                const SizedBox(width: ProfessionalTheme.spaceSm),
+                const SizedBox(width: ProfessionalIslamicTheme.space2),
                 _buildPremiumFeatureCard(
                   icon: Icons.workspace_premium_rounded,
                   title: 'All Features',
@@ -402,23 +407,23 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
         children: [
           Text(
             'Islamic Tools',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: ProfessionalTheme.textPrimary),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: ProfessionalIslamicTheme.textPrimary),
           ),
-          const SizedBox(height: ProfessionalTheme.spaceMd),
+          const SizedBox(height: ProfessionalIslamicTheme.space4),
           ProfessionalComponents.featureCard(
             icon: Icons.access_time_rounded,
             title: 'Prayer Times',
             description: 'Accurate prayer times for your location',
             onTap: () => _navigateToPrayerTimes(),
           ),
-          const SizedBox(height: ProfessionalTheme.spaceSm),
+          const SizedBox(height: ProfessionalIslamicTheme.space2),
           ProfessionalComponents.featureCard(
             icon: Icons.compass_calibration_rounded,
             title: 'Qibla Direction',
             description: 'Find the direction to Kaaba from anywhere',
             onTap: () => _navigateToQibla(),
           ),
-          const SizedBox(height: ProfessionalTheme.spaceSm),
+          const SizedBox(height: ProfessionalIslamicTheme.space2),
           ProfessionalComponents.featureCard(
             icon: Icons.calendar_today_rounded,
             title: 'Islamic Calendar',
@@ -477,7 +482,7 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
         context: context,
         message: 'Listening... Speak now',
         icon: Icons.mic_rounded,
-        backgroundColor: ProfessionalTheme.primaryEmerald,
+        backgroundColor: ProfessionalIslamicTheme.islamicGreen,
       );
 
       // Simulate voice input
@@ -491,7 +496,7 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
 
   // Navigation Methods
   void _navigateToSearch() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ConversationalSearchScreen()));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfessionalIslamicSearchScreen()));
   }
 
   void _navigateToQuran() {
