@@ -32,11 +32,39 @@ class _IslamicCalendarScreenState extends ConsumerState<IslamicCalendarScreen> w
   }
 
   void _loadEvents() {
-    // Mock Islamic events
+    // Enhanced Islamic events with more dates throughout the year
+    final now = DateTime.now();
     _events = [
+      // Current month events
+      IslamicEvent(
+        'Friday Prayer',
+        DateTime(now.year, now.month, _getNextFriday(now)),
+        'Weekly congregational prayer',
+        Icons.mosque_rounded,
+        Colors.green,
+        false,
+      ),
+      IslamicEvent(
+        'Islamic Study Circle',
+        DateTime(now.year, now.month, now.day + 3),
+        'Community learning session',
+        Icons.book_rounded,
+        Colors.blue,
+        false,
+      ),
+      IslamicEvent(
+        'Charity Drive',
+        DateTime(now.year, now.month, now.day + 7),
+        'Monthly community outreach',
+        Icons.favorite_rounded,
+        Colors.orange,
+        false,
+      ),
+
+      // Major Islamic events
       IslamicEvent(
         'Ramadan Begins',
-        DateTime.now().add(const Duration(days: 30)),
+        DateTime(now.year, 3, 10), // Approximate date
         'The holy month of fasting begins',
         Icons.mosque_rounded,
         Colors.green,
@@ -44,7 +72,7 @@ class _IslamicCalendarScreenState extends ConsumerState<IslamicCalendarScreen> w
       ),
       IslamicEvent(
         'Laylat al-Qadr',
-        DateTime.now().add(const Duration(days: 57)),
+        DateTime(now.year, 4, 6), // Approximate date
         'The Night of Power - last 10 nights of Ramadan',
         Icons.star_rounded,
         Colors.amber,
@@ -52,37 +80,59 @@ class _IslamicCalendarScreenState extends ConsumerState<IslamicCalendarScreen> w
       ),
       IslamicEvent(
         'Eid al-Fitr',
-        DateTime.now().add(const Duration(days: 60)),
+        DateTime(now.year, 4, 9), // Approximate date
         'Festival marking the end of Ramadan',
         Icons.celebration_rounded,
         Colors.orange,
         true,
       ),
       IslamicEvent(
-        'Eid al-Adha',
-        DateTime.now().add(const Duration(days: 130)),
-        'Festival of Sacrifice during Hajj',
-        Icons.favorite_rounded,
-        Colors.red,
-        true,
-      ),
-      IslamicEvent(
         'Day of Arafah',
-        DateTime.now().add(const Duration(days: 129)),
+        DateTime(now.year, 6, 15), // Approximate date
         'The most important day of Hajj',
         Icons.landscape_rounded,
         Colors.brown,
         true,
       ),
       IslamicEvent(
+        'Eid al-Adha',
+        DateTime(now.year, 6, 16), // Approximate date
+        'Festival of Sacrifice during Hajj',
+        Icons.favorite_rounded,
+        Colors.red,
+        true,
+      ),
+      IslamicEvent(
         'Islamic New Year',
-        DateTime.now().add(const Duration(days: 200)),
+        DateTime(now.year, 7, 17), // Approximate date
         'Beginning of the Hijri calendar year',
         Icons.calendar_today_rounded,
         Colors.blue,
         false,
       ),
+      IslamicEvent(
+        'Day of Ashura',
+        DateTime(now.year, 7, 27), // Approximate date
+        '10th day of Muharram - day of fasting',
+        Icons.water_drop_rounded,
+        Colors.purple,
+        true,
+      ),
+      IslamicEvent(
+        'Mawlid an-Nabi',
+        DateTime(now.year, 9, 15), // Approximate date
+        'Birthday of Prophet Muhammad (PBUH)',
+        Icons.auto_stories_rounded,
+        Colors.teal,
+        true,
+      ),
     ];
+  }
+
+  int _getNextFriday(DateTime date) {
+    final daysUntilFriday = (5 - date.weekday) % 7;
+    final nextFriday = date.add(Duration(days: daysUntilFriday == 0 ? 7 : daysUntilFriday));
+    return nextFriday.day;
   }
 
   @override
@@ -211,9 +261,37 @@ class _IslamicCalendarScreenState extends ConsumerState<IslamicCalendarScreen> w
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Calendar View',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: RevolutionaryIslamicTheme.textPrimary),
+        Row(
+          children: [
+            const Text(
+              'Calendar View',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: RevolutionaryIslamicTheme.textPrimary),
+            ),
+            const Spacer(),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.3)),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.event_available_rounded, size: 16, color: RevolutionaryIslamicTheme.primaryEmerald),
+                  const SizedBox(width: 4),
+                  Text(
+                    '${_getEventsInMonth()} events',
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: RevolutionaryIslamicTheme.primaryEmerald,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
         const SizedBox(height: 16),
 
@@ -226,41 +304,89 @@ class _IslamicCalendarScreenState extends ConsumerState<IslamicCalendarScreen> w
             boxShadow: [
               BoxShadow(
                 color: RevolutionaryIslamicTheme.neutralGray300.withOpacity(0.5),
-                blurRadius: 8,
-                offset: const Offset(0, 2),
+                blurRadius: 12,
+                offset: const Offset(0, 4),
               ),
             ],
           ),
           child: Column(
             children: [
-              // Month/Year Header
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    onPressed: () => _previousMonth(),
-                    icon: const Icon(Icons.chevron_left_rounded),
-                    color: RevolutionaryIslamicTheme.primaryEmerald,
-                  ),
-                  Text(
-                    _formatMonthYear(_selectedDate),
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: RevolutionaryIslamicTheme.textPrimary,
+              // Enhanced Month/Year Header
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Row(
+                  children: [
+                    // Previous month button
+                    Container(
+                      decoration: BoxDecoration(
+                        color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: IconButton(
+                        onPressed: () => _previousMonth(),
+                        icon: const Icon(Icons.chevron_left_rounded),
+                        color: RevolutionaryIslamicTheme.primaryEmerald,
+                        iconSize: 24,
+                      ),
                     ),
-                  ),
-                  IconButton(
-                    onPressed: () => _nextMonth(),
-                    icon: const Icon(Icons.chevron_right_rounded),
-                    color: RevolutionaryIslamicTheme.primaryEmerald,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
 
-              // Simplified calendar grid
+                    // Month/Year display
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () => _showMonthYearPicker(),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          child: Column(
+                            children: [
+                              Text(
+                                _formatMonthYear(_selectedDate),
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700,
+                                  color: RevolutionaryIslamicTheme.textPrimary,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                '${_currentHijriDate.monthName} ${_currentHijriDate.year} AH',
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: RevolutionaryIslamicTheme.textSecondary,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    // Next month button
+                    Container(
+                      decoration: BoxDecoration(
+                        color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: IconButton(
+                        onPressed: () => _nextMonth(),
+                        icon: const Icon(Icons.chevron_right_rounded),
+                        color: RevolutionaryIslamicTheme.primaryEmerald,
+                        iconSize: 24,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              const Divider(color: RevolutionaryIslamicTheme.borderLight),
+              const SizedBox(height: 8),
+
+              // Full calendar grid
               _buildMiniCalendar(),
+
+              // Calendar legend
+              const SizedBox(height: 16),
+              _buildCalendarLegend(),
             ],
           ),
         ),
@@ -269,6 +395,15 @@ class _IslamicCalendarScreenState extends ConsumerState<IslamicCalendarScreen> w
   }
 
   Widget _buildMiniCalendar() {
+    final firstDayOfMonth = DateTime(_selectedDate.year, _selectedDate.month, 1);
+    final lastDayOfMonth = DateTime(_selectedDate.year, _selectedDate.month + 1, 0);
+    final firstDayWeekday = firstDayOfMonth.weekday % 7; // Adjust for Sunday = 0
+    final daysInMonth = lastDayOfMonth.day;
+
+    // Calculate total cells needed (6 weeks max)
+    final totalCells = ((daysInMonth + firstDayWeekday - 1) ~/ 7 + 1) * 7;
+    final weeksToShow = (totalCells / 7).ceil();
+
     return Container(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -293,45 +428,116 @@ class _IslamicCalendarScreenState extends ConsumerState<IslamicCalendarScreen> w
                     )
                     .toList(),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
 
-          // Simplified calendar days (just show current week)
-          for (int week = 0; week < 2; week++)
+          // Full calendar grid
+          for (int week = 0; week < weeksToShow; week++)
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4),
+              padding: const EdgeInsets.symmetric(vertical: 2),
               child: Row(
                 children: List.generate(7, (dayIndex) {
-                  final dayNum = (week * 7) + dayIndex + 1;
-                  final isToday = dayNum == DateTime.now().day;
-                  final hasEvent = dayNum <= 30 && (dayNum % 5 == 0); // Mock events
+                  final cellIndex = (week * 7) + dayIndex;
+                  final dayNum = cellIndex - firstDayWeekday + 1;
+
+                  // Check if this cell should show a day from current month
+                  final isValidDay = dayNum > 0 && dayNum <= daysInMonth;
+                  final cellDate = isValidDay ? DateTime(_selectedDate.year, _selectedDate.month, dayNum) : null;
+
+                  // Check states
+                  final isToday =
+                      cellDate != null &&
+                      cellDate.year == DateTime.now().year &&
+                      cellDate.month == DateTime.now().month &&
+                      cellDate.day == DateTime.now().day;
+                  final isSelected =
+                      cellDate != null &&
+                      cellDate.year == _selectedDate.year &&
+                      cellDate.month == _selectedDate.month &&
+                      cellDate.day == _selectedDate.day;
+                  final hasEvent = isValidDay && _hasEventOnDay(dayNum);
+
+                  // Previous/next month days
+                  final isPrevMonth = dayNum <= 0;
+                  final isNextMonth = dayNum > daysInMonth;
+
+                  String displayText = '';
+                  if (isPrevMonth) {
+                    final prevMonth = DateTime(_selectedDate.year, _selectedDate.month, 0);
+                    displayText = (prevMonth.day + dayNum).toString();
+                  } else if (isNextMonth) {
+                    displayText = (dayNum - daysInMonth).toString();
+                  } else if (isValidDay) {
+                    displayText = dayNum.toString();
+                  }
 
                   return Expanded(
-                    child: Center(
+                    child: GestureDetector(
+                      onTap: isValidDay ? () => _onDateSelected(cellDate!) : null,
                       child: Container(
-                        width: 32,
-                        height: 32,
-                        decoration: BoxDecoration(
-                          color:
-                              isToday
-                                  ? RevolutionaryIslamicTheme.primaryEmerald
-                                  : hasEvent
-                                  ? RevolutionaryIslamicTheme.secondaryNavy.withOpacity(0.2)
-                                  : null,
-                          borderRadius: BorderRadius.circular(16),
-                          border:
-                              hasEvent && !isToday ? Border.all(color: RevolutionaryIslamicTheme.secondaryNavy) : null,
-                        ),
-                        child: Center(
-                          child: Text(
-                            dayNum <= 31 ? dayNum.toString() : '',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color:
-                                  isToday
-                                      ? RevolutionaryIslamicTheme.neutralWhite
-                                      : RevolutionaryIslamicTheme.textPrimary,
-                            ),
+                        margin: const EdgeInsets.all(2),
+                        child: Container(
+                          width: 36,
+                          height: 36,
+                          decoration: BoxDecoration(
+                            color:
+                                isToday
+                                    ? RevolutionaryIslamicTheme.primaryEmerald
+                                    : isSelected
+                                    ? RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.3)
+                                    : hasEvent
+                                    ? RevolutionaryIslamicTheme.secondaryNavy.withOpacity(0.15)
+                                    : null,
+                            borderRadius: BorderRadius.circular(18),
+                            border:
+                                hasEvent && !isToday && !isSelected
+                                    ? Border.all(
+                                      color: RevolutionaryIslamicTheme.secondaryNavy.withOpacity(0.4),
+                                      width: 1,
+                                    )
+                                    : isSelected && !isToday
+                                    ? Border.all(color: RevolutionaryIslamicTheme.primaryEmerald, width: 2)
+                                    : null,
+                          ),
+                          child: Stack(
+                            children: [
+                              Center(
+                                child: Text(
+                                  displayText,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: isToday || isSelected ? FontWeight.w600 : FontWeight.w500,
+                                    color:
+                                        isToday
+                                            ? RevolutionaryIslamicTheme.neutralWhite
+                                            : (isPrevMonth || isNextMonth)
+                                            ? RevolutionaryIslamicTheme.textSecondary.withOpacity(0.4)
+                                            : isSelected
+                                            ? RevolutionaryIslamicTheme.primaryEmerald
+                                            : RevolutionaryIslamicTheme.textPrimary,
+                                  ),
+                                ),
+                              ),
+                              // Event indicator dot
+                              if (hasEvent && !isToday)
+                                Positioned(
+                                  bottom: 4,
+                                  right: 0,
+                                  left: 0,
+                                  child: Center(
+                                    child: Container(
+                                      width: 4,
+                                      height: 4,
+                                      decoration: BoxDecoration(
+                                        color:
+                                            isSelected
+                                                ? RevolutionaryIslamicTheme.primaryEmerald
+                                                : RevolutionaryIslamicTheme.secondaryNavy,
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                            ],
                           ),
                         ),
                       ),
@@ -570,6 +776,282 @@ class _IslamicCalendarScreenState extends ConsumerState<IslamicCalendarScreen> w
     setState(() {
       _selectedDate = DateTime(_selectedDate.year, _selectedDate.month + 1);
     });
+  }
+
+  bool _hasEventOnDay(int day) {
+    final targetDate = DateTime(_selectedDate.year, _selectedDate.month, day);
+    return _events.any(
+      (event) =>
+          event.date.year == targetDate.year &&
+          event.date.month == targetDate.month &&
+          event.date.day == targetDate.day,
+    );
+  }
+
+  void _onDateSelected(DateTime date) {
+    setState(() {
+      _selectedDate = date;
+    });
+
+    // Show events for selected date if any
+    final dayEvents =
+        _events
+            .where(
+              (event) => event.date.year == date.year && event.date.month == date.month && event.date.day == date.day,
+            )
+            .toList();
+
+    if (dayEvents.isNotEmpty) {
+      _showEventsDialog(date, dayEvents);
+    }
+  }
+
+  void _showEventsDialog(DateTime date, List<IslamicEvent> events) {
+    showDialog(
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            backgroundColor: RevolutionaryIslamicTheme.backgroundSecondary,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            title: Text(
+              _formatGregorianDate(date),
+              style: const TextStyle(color: RevolutionaryIslamicTheme.textPrimary, fontWeight: FontWeight.w600),
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children:
+                  events
+                      .map(
+                        (event) => ListTile(
+                          leading: Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: event.color.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Icon(event.icon, color: event.color, size: 20),
+                          ),
+                          title: Text(
+                            event.title,
+                            style: const TextStyle(
+                              color: RevolutionaryIslamicTheme.textPrimary,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          subtitle: Text(
+                            event.description,
+                            style: const TextStyle(color: RevolutionaryIslamicTheme.textSecondary),
+                          ),
+                        ),
+                      )
+                      .toList(),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('Close', style: TextStyle(color: RevolutionaryIslamicTheme.primaryEmerald)),
+              ),
+            ],
+          ),
+    );
+  }
+
+  int _getEventsInMonth() {
+    return _events
+        .where((event) => event.date.year == _selectedDate.year && event.date.month == _selectedDate.month)
+        .length;
+  }
+
+  Widget _buildCalendarLegend() {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(color: RevolutionaryIslamicTheme.neutralGray50, borderRadius: BorderRadius.circular(8)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          _legendItem(RevolutionaryIslamicTheme.primaryEmerald, 'Today'),
+          _legendItem(RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.3), 'Selected'),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 4,
+                height: 4,
+                decoration: const BoxDecoration(color: RevolutionaryIslamicTheme.secondaryNavy, shape: BoxShape.circle),
+              ),
+              const SizedBox(width: 4),
+              const Text(
+                'Event',
+                style: TextStyle(
+                  fontSize: 10,
+                  color: RevolutionaryIslamicTheme.textSecondary,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _legendItem(Color color, String label) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 12,
+          height: 12,
+          decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(6)),
+        ),
+        const SizedBox(width: 4),
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 10,
+            color: RevolutionaryIslamicTheme.textSecondary,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ],
+    );
+  }
+
+  void _showMonthYearPicker() {
+    showDialog(
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            backgroundColor: RevolutionaryIslamicTheme.backgroundSecondary,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            title: const Text(
+              'Select Month & Year',
+              style: TextStyle(color: RevolutionaryIslamicTheme.textPrimary, fontWeight: FontWeight.w600),
+            ),
+            content: SizedBox(
+              width: 300,
+              height: 300,
+              child: Column(
+                children: [
+                  // Year selector
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        onPressed:
+                            () => setState(() {
+                              _selectedDate = DateTime(_selectedDate.year - 1, _selectedDate.month);
+                            }),
+                        icon: const Icon(Icons.remove),
+                        color: RevolutionaryIslamicTheme.primaryEmerald,
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          _selectedDate.year.toString(),
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            color: RevolutionaryIslamicTheme.primaryEmerald,
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        onPressed:
+                            () => setState(() {
+                              _selectedDate = DateTime(_selectedDate.year + 1, _selectedDate.month);
+                            }),
+                        icon: const Icon(Icons.add),
+                        color: RevolutionaryIslamicTheme.primaryEmerald,
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 16),
+                  const Divider(),
+                  const SizedBox(height: 16),
+
+                  // Month grid
+                  Expanded(
+                    child: GridView.builder(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        childAspectRatio: 2,
+                        crossAxisSpacing: 8,
+                        mainAxisSpacing: 8,
+                      ),
+                      itemCount: 12,
+                      itemBuilder: (context, index) {
+                        final monthNames = [
+                          'Jan',
+                          'Feb',
+                          'Mar',
+                          'Apr',
+                          'May',
+                          'Jun',
+                          'Jul',
+                          'Aug',
+                          'Sep',
+                          'Oct',
+                          'Nov',
+                          'Dec',
+                        ];
+                        final isSelected = index + 1 == _selectedDate.month;
+
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _selectedDate = DateTime(_selectedDate.year, index + 1, 1);
+                            });
+                            Navigator.of(context).pop();
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color:
+                                  isSelected
+                                      ? RevolutionaryIslamicTheme.primaryEmerald
+                                      : RevolutionaryIslamicTheme.backgroundSecondary,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color:
+                                    isSelected
+                                        ? RevolutionaryIslamicTheme.primaryEmerald
+                                        : RevolutionaryIslamicTheme.borderLight,
+                              ),
+                            ),
+                            child: Center(
+                              child: Text(
+                                monthNames[index],
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color:
+                                      isSelected
+                                          ? RevolutionaryIslamicTheme.neutralWhite
+                                          : RevolutionaryIslamicTheme.textPrimary,
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('Close', style: TextStyle(color: RevolutionaryIslamicTheme.primaryEmerald)),
+              ),
+            ],
+          ),
+    );
   }
 }
 
