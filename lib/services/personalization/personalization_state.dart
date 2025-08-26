@@ -25,10 +25,7 @@ abstract class PersonalizationState {
   }) = PersonalizationLoaded;
 
   /// Error state when personalization fails
-  const factory PersonalizationState.error(
-    Object error,
-    StackTrace stackTrace,
-  ) = PersonalizationError;
+  const factory PersonalizationState.error(Object error, StackTrace stackTrace) = PersonalizationError;
 
   /// Pattern matching method
   T when<T>({
