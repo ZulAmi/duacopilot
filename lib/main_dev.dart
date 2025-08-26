@@ -2,27 +2,47 @@ import 'dart:async';
 import 'dart:io' show Platform;
 
 import 'package:duacopilot/core/logging/app_logger.dart';
+import 'package:duacopilot/core/monitoring/simple_monitoring_service.dart';
 import 'package:duacopilot/core/theme/revolutionary_islamic_theme.dart';
 import 'package:duacopilot/presentation/screens/enhanced_web_wrapper.dart';
 import 'package:duacopilot/presentation/screens/revolutionary_home_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'core/di/injection_container.dart' as di;
+import 'firebase_options.dart';
 import 'services/ads/ad_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   try {
+    // Initialize Firebase first (required for monitoring)
+    try {
+      await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+      AppLogger.debug('✅ Firebase initialized successfully');
+    } catch (e) {
+      AppLogger.debug('⚠️  Firebase initialization failed: $e - continuing without Firebase features');
+    }
+
     // Initialize dependency injection with platform awareness
     await di.init();
 
     // Initialize ad service only on supported platforms
     if (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) {
       await AdService.instance.initialize();
+    }
+
+    // Initialize simple monitoring system (will gracefully handle Firebase issues)
+    try {
+      await SimpleMonitoringService.initialize();
+      await SimpleMonitoringService.trackUserAction(action: 'app_launch', category: 'dev');
+      AppLogger.debug('✅ Simple monitoring system initialized');
+    } catch (e) {
+      AppLogger.debug('⚠️  Monitoring initialization failed: $e - continuing without monitoring');
     }
 
     AppLogger.debug('✅ DuaCopilot Revolutionary Islamic AI initialized successfully');
@@ -40,6 +60,9 @@ class RevolutionaryDuaCopilotDevApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Track screen view
+    SimpleMonitoringService.trackScreenView('RevolutionaryHome');
+
     return MaterialApp(
       title: 'DuaCopilot Dev - Revolutionary Islamic AI Assistant',
       debugShowCheckedModeBanner: false,

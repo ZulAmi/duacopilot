@@ -31,13 +31,13 @@ void main() {
     expect(find.byType(ConversationalSearchScreen), findsOneWidget);
   });
 
-  testWidgets('ProfessionalDuaCopilotApp material app test', (WidgetTester tester) async {
+  testWidgets('SecureDuaCopilotApp material app test', (WidgetTester tester) async {
     // Test that the app structure is correct
-    const app = ProfessionalDuaCopilotApp();
+    const app = SecureDuaCopilotApp();
 
     await tester.pumpWidget(const ProviderScope(child: app));
 
     // The app should create a MaterialApp
-    expect(find.byType(ProfessionalDuaCopilotApp), findsOneWidget);
+    expect(find.byType(SecureDuaCopilotApp), findsOneWidget);
   });
 }
