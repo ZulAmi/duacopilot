@@ -19,15 +19,15 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Target Environment'
+        description: "Target Environment"
         required: true
-        default: 'staging'
+        default: "staging"
         type: choice
         options:
-        - staging
-        - production
+          - staging
+          - production
       skip_tests:
-        description: 'Skip tests (emergency only)'
+        description: "Skip tests (emergency only)"
         required: false
         default: false
         type: boolean
@@ -38,7 +38,6 @@ env:
 
 # ==================== JOB MATRIX ====================
 jobs:
-  
   # 📊 FAST ANALYSIS (runs on all branches)
   analyze:
     name: 📊 Code Analysis
@@ -368,7 +367,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     if: needs.analyze.outputs.should-deploy == 'true'
-    environment: 
+    environment:
       name: ${{ needs.analyze.outputs.environment }}
       url: ${{ steps.deployment.outputs.url }}
     steps:
@@ -405,7 +404,8 @@ jobs:
   # 📋 PIPELINE SUMMARY
   summary:
     name: 📋 Pipeline Summary
-    needs: [analyze, test, build, islamic-features, security, performance, deploy]
+    needs:
+      [analyze, test, build, islamic-features, security, performance, deploy]
     runs-on: ubuntu-latest
     if: always()
     steps:
@@ -422,7 +422,7 @@ jobs:
           echo "- ⚡ Performance: ${{ needs.performance.result }}" >> $GITHUB_STEP_SUMMARY
           echo "- 🚢 Deployment: ${{ needs.deploy.result }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          
+
           if [[ "${{ needs.analyze.result }}" == "success" && "${{ needs.test.result }}" == "success" && "${{ needs.build.result }}" == "success" && "${{ needs.islamic-features.result }}" == "success" ]]; then
             echo "## ✅ Pipeline Status: SUCCESS" >> $GITHUB_STEP_SUMMARY
             echo "All core jobs completed successfully. DuaCopilot is ready! 🎉" >> $GITHUB_STEP_SUMMARY
@@ -430,7 +430,7 @@ jobs:
             echo "## ❌ Pipeline Status: FAILED" >> $GITHUB_STEP_SUMMARY
             echo "Some jobs failed. Please check the logs above. 🔍" >> $GITHUB_STEP_SUMMARY
           fi
-          
+
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "---" >> $GITHUB_STEP_SUMMARY
           echo "🕌 **Built with love for the Ummah** 🤲" >> $GITHUB_STEP_SUMMARY
