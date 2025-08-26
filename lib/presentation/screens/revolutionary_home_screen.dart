@@ -5,12 +5,14 @@ import '../../core/theme/professional_islamic_theme.dart';
 import '../../features/qibla/screens/qibla_compass_screen.dart';
 import '../../features/tasbih/screens/digital_tasbih_screen.dart';
 import '../widgets/revolutionary_components.dart';
-import 'conversational_search_screen.dart';
+import 'assistance/screen_assistance.dart';
 import 'islamic/islamic_calendar_screen.dart';
 import 'islamic/quran_explorer_screen.dart';
 import 'islamic/revolutionary_prayer_times_screen.dart';
 import 'premium_features/premium_features_hub.dart';
 import 'professional_islamic_search_screen.dart';
+import 'revolutionary_voice_companion_screen.dart';
+import 'settings/settings_screen.dart';
 
 class RevolutionaryHomeScreen extends ConsumerStatefulWidget {
   const RevolutionaryHomeScreen({super.key});
@@ -757,9 +759,8 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
   }
 
   void _navigateToVoiceAssistant() {
-    Navigator.of(
-      context,
-    ).push(MaterialPageRoute(builder: (context) => const ConversationalSearchScreen(enableVoiceSearch: true)));
+    // Launch Revolutionary AI Islamic Companion instead of basic conversational search
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RevolutionaryVoiceCompanionScreen()));
   }
 
   void _navigateToPremiumHub() {
@@ -767,12 +768,10 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
   }
 
   void _navigateToSettings() {
-    // TODO: Create SettingsScreen
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Settings screen coming soon!')));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SettingsScreen()));
   }
 
   void _navigateToHelp() {
-    // TODO: Create HelpScreen
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Help & Support screen coming soon!')));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ScreenAssistance()));
   }
 }

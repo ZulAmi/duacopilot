@@ -4,11 +4,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'core/di/injection_container.dart' as di;
+import 'core/routing/app_router.dart';
 import 'core/security/production_config.dart';
 import 'core/security/secure_telemetry.dart';
 import 'core/theme/professional_theme.dart';
 import 'firebase_options.dart';
-import 'presentation/screens/professional_home_screen.dart';
 import 'services/ads/ad_service.dart';
 
 void main() async {
@@ -47,25 +47,25 @@ void main() async {
 }
 
 /// Secure DuaCopilot App with Production Security Hardening
-class SecureDuaCopilotApp extends StatelessWidget {
+class SecureDuaCopilotApp extends ConsumerWidget {
   const SecureDuaCopilotApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // SECURITY: Track screen view with secure telemetry only
     SecureTelemetry.trackUserAction(
       action: 'screen_view',
       category: 'navigation',
-      properties: {'screen_name': 'home', 'environment': 'production'},
+      properties: {'screen_name': 'app_start', 'environment': 'production'},
     );
 
-    return MaterialApp(
+    final router = ref.watch(goRouterProvider);
+
+    return MaterialApp.router(
       title: 'DuaCopilot - Professional Islamic AI Assistant',
       debugShowCheckedModeBanner: false,
       theme: _buildAppTheme(),
-      home: const ProfessionalHomeScreen(),
-      // SECURITY: Remove any admin routes in production
-      onGenerateRoute: _generateSecureRoute,
+      routerConfig: router,
 
       // App-wide configuration for better UX
       builder: (context, child) {
@@ -79,26 +79,13 @@ class SecureDuaCopilotApp extends StatelessWidget {
           child: MediaQuery(
             data: MediaQuery.of(context).copyWith(
               // Ensure text scaling is reasonable for Islamic content
-              textScaler: TextScaler.linear(MediaQuery.of(context).textScaleFactor.clamp(0.8, 1.3)),
+              textScaler: TextScaler.linear(MediaQuery.of(context).textScaler.scale(1.0).clamp(0.8, 1.3)),
             ),
             child: child!,
           ),
         );
       },
     );
-  }
-
-  Route<dynamic>? _generateSecureRoute(RouteSettings settings) {
-    // SECURITY: Block any admin routes in production
-    if (settings.name?.startsWith('/admin') == true) {
-      SecurityAuditLogger.logSecurityEvent(
-        event: 'unauthorized_admin_access_attempt',
-        level: SecurityLevel.warning,
-        context: {'route': settings.name},
-      );
-      return null; // Block admin routes
-    }
-    return null; // Let MaterialApp handle normal routes
   }
 
   ThemeData _buildAppTheme() {
@@ -112,11 +99,9 @@ class SecureDuaCopilotApp extends StatelessWidget {
         primary: ProfessionalTheme.primaryEmerald,
         secondary: ProfessionalTheme.secondaryGold,
         surface: ProfessionalTheme.surfaceColor,
-        background: ProfessionalTheme.backgroundColor,
         onPrimary: ProfessionalTheme.surfaceColor,
         onSecondary: ProfessionalTheme.surfaceColor,
         onSurface: ProfessionalTheme.textPrimary,
-        onBackground: ProfessionalTheme.textPrimary,
       ),
 
       // Scaffold theme
