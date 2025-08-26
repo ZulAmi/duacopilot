@@ -18,12 +18,14 @@ This project is automatically deployed to GitHub Pages using GitHub Actions when
 ### 2. Repository Settings
 
 Make sure your repository has the following settings:
+
 - **Repository name:** `duacopilot` (or update the `--base-href` in the workflow)
 - **Visibility:** Public (required for free GitHub Pages)
 
 ### 3. Workflow Configuration
 
 The deployment workflow (`.github/workflows/deploy-web.yml`) includes:
+
 - ✅ Flutter web build with proper base href
 - ✅ Code analysis and testing
 - ✅ Automatic deployment to GitHub Pages
@@ -89,6 +91,7 @@ flutter run --target lib/main_dev.dart -d chrome --web-port 8080
 ## Security Note
 
 The web deployment includes:
+
 - 🔒 Content Security Policy headers
 - 🔒 Secure asset loading
 - 🔒 Privacy-first approach (no tracking)
