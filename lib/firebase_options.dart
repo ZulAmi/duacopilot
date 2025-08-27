@@ -41,45 +41,47 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDmgqH8s4N7x3YjGvZ8FQQ6C6j8m4W6tYo',
-    appId: '1:123456789012:web:abcdef123456789012345678',
-    messagingSenderId: '123456789012',
-    projectId: 'duacopilot-dev',
-    authDomain: 'duacopilot-dev.firebaseapp.com',
-    storageBucket: 'duacopilot-dev.appspot.com',
+    apiKey: 'AIzaSyDP3Eb9pvq20cgWG1RWRQViM-M52zsU-tU',
+    appId: '1:387572746273:web:b776634dfccf1bffb7fb60',
+    messagingSenderId: '387572746273',
+    projectId: 'duacopilot',
+    authDomain: 'duacopilot.firebaseapp.com',
+    storageBucket: 'duacopilot.firebasestorage.app',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDmgqH8s4N7x3YjGvZ8FQQ6C6j8m4W6tYo',
-    appId: '1:123456789012:android:abcdef123456789012345678',
-    messagingSenderId: '123456789012',
-    projectId: 'duacopilot-dev',
-    storageBucket: 'duacopilot-dev.appspot.com',
+    apiKey: 'AIzaSyAabJKgqwpZX3JLCx-r8-92vEwE8Zk9150',
+    appId: '1:387572746273:android:ed6536fb9e94e08ab7fb60',
+    messagingSenderId: '387572746273',
+    projectId: 'duacopilot',
+    storageBucket: 'duacopilot.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDmgqH8s4N7x3YjGvZ8FQQ6C6j8m4W6tYo',
-    appId: '1:123456789012:ios:abcdef123456789012345678',
-    messagingSenderId: '123456789012',
-    projectId: 'duacopilot-dev',
-    iosBundleId: 'com.duacopilot.dev',
-    storageBucket: 'duacopilot-dev.appspot.com',
+    apiKey: 'AIzaSyBDk95pODkpFZtxT-h5FaP2NrDETlV8KKM',
+    appId: '1:387572746273:ios:b7088570834c4b7cb7fb60',
+    messagingSenderId: '387572746273',
+    projectId: 'duacopilot',
+    storageBucket: 'duacopilot.firebasestorage.app',
+    iosBundleId: 'com.duacopilot.app',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDmgqH8s4N7x3YjGvZ8FQQ6C6j8m4W6tYo',
-    appId: '1:123456789012:macos:abcdef123456789012345678',
-    messagingSenderId: '123456789012',
-    projectId: 'duacopilot-dev',
-    iosBundleId: 'com.duacopilot.dev',
-    storageBucket: 'duacopilot-dev.appspot.com',
+    apiKey: 'AIzaSyBDk95pODkpFZtxT-h5FaP2NrDETlV8KKM',
+    appId: '1:387572746273:ios:e8bb5f92e0444f2cb7fb60',
+    messagingSenderId: '387572746273',
+    projectId: 'duacopilot',
+    storageBucket: 'duacopilot.firebasestorage.app',
+    iosBundleId: 'com.example.duacopilot',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyDmgqH8s4N7x3YjGvZ8FQQ6C6j8m4W6tYo',
-    appId: '1:123456789012:windows:abcdef123456789012345678',
-    messagingSenderId: '123456789012',
-    projectId: 'duacopilot-dev',
-    storageBucket: 'duacopilot-dev.appspot.com',
+    apiKey: 'AIzaSyDP3Eb9pvq20cgWG1RWRQViM-M52zsU-tU',
+    appId: '1:387572746273:web:dac43603ec934590b7fb60',
+    messagingSenderId: '387572746273',
+    projectId: 'duacopilot',
+    authDomain: 'duacopilot.firebaseapp.com',
+    storageBucket: 'duacopilot.firebasestorage.app',
   );
+
 }

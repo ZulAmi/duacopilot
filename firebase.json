@@ -1,0 +1,59 @@
+{
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "/",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache, no-store, must-revalidate"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(js|css)",
+        "headers": [
+          {
+            "key": "Cache-Control", 
+            "value": "no-cache"
+          }
+        ]
+      }
+    ]
+  },
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "duacopilot",
+          "appId": "1:387572746273:android:ed6536fb9e94e08ab7fb60",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "duacopilot",
+          "configurations": {
+            "android": "1:387572746273:android:ed6536fb9e94e08ab7fb60",
+            "ios": "1:387572746273:ios:b7088570834c4b7cb7fb60",
+            "macos": "1:387572746273:ios:e8bb5f92e0444f2cb7fb60",
+            "web": "1:387572746273:web:b776634dfccf1bffb7fb60",
+            "windows": "1:387572746273:web:dac43603ec934590b7fb60"
+          }
+        }
+      }
+    }
+  }
+}

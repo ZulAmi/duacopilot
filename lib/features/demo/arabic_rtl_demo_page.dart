@@ -22,8 +22,7 @@ class ArabicRTLDemoPage extends StatefulWidget {
   State<ArabicRTLDemoPage> createState() => _ArabicRTLDemoPageState();
 }
 
-class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage>
-    with TickerProviderStateMixin {
+class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProviderStateMixin {
   late TabController _tabController;
   final TextEditingController _textController = TextEditingController();
   bool _showHighContrast = false;
@@ -44,17 +43,14 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage>
 
   @override
   Widget build(BuildContext context) {
-    final theme = _showHighContrast
-        ? ArabicAccessibility.createHighContrastTheme(context)
-        : Theme.of(context);
+    final theme = _showHighContrast ? ArabicAccessibility.createHighContrastTheme(context) : Theme.of(context);
 
     return Theme(
       data: theme,
       child: Scaffold(
         appBar: AppBar(
           title: const MixedTextDirectionWidget(
-            text:
-                'Arabic Text & RTL Support Demo - Ø¹Ø±Ø¶ Ø§Ù„Ù†Øµ Ø§Ù„Ø¹Ø±Ø¨ÙŠ',
+            text: 'Arabic Text & RTL Support Demo - Ø¹Ø±Ø¶ Ø§Ù„Ù†Øµ Ø§Ù„Ø¹Ø±Ø¨ÙŠ',
           ),
           actions: [
             IconButton(
@@ -99,14 +95,12 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage>
 
   Widget _buildTypographyDemo() {
     const arabicTexts = {
-      'Quran':
-          'Ø¨ÙØ³Ù’Ù…Ù Ø§Ù„Ù„ÙŽÙ‘Ù‡Ù Ø§Ù„Ø±ÙŽÙ‘Ø­Ù’Ù…ÙŽÙ°Ù†Ù Ø§Ù„Ø±ÙŽÙ‘Ø­ÙÙŠÙ…Ù',
+      'Quran': 'Ø¨ÙØ³Ù’Ù…Ù Ø§Ù„Ù„ÙŽÙ‘Ù‡Ù Ø§Ù„Ø±ÙŽÙ‘Ø­Ù’Ù…ÙŽÙ°Ù†Ù Ø§Ù„Ø±ÙŽÙ‘Ø­ÙÙŠÙ…Ù',
       'Du\'a':
           'Ø±ÙŽØ¨ÙŽÙ‘Ù†ÙŽØ§ Ø¢ØªÙÙ†ÙŽØ§ ÙÙÙŠ Ø§Ù„Ø¯ÙÙ‘Ù†Ù’ÙŠÙŽØ§ Ø­ÙŽØ³ÙŽÙ†ÙŽØ©Ù‹ ÙˆÙŽÙÙÙŠ Ø§Ù„Ù’Ø¢Ø®ÙØ±ÙŽØ©Ù Ø­ÙŽØ³ÙŽÙ†ÙŽØ©Ù‹',
       'Dhikr':
           'Ø³ÙØ¨Ù’Ø­ÙŽØ§Ù†ÙŽ Ø§Ù„Ù„ÙŽÙ‘Ù‡Ù ÙˆÙŽØ¨ÙØ­ÙŽÙ…Ù’Ø¯ÙÙ‡Ù Ø³ÙØ¨Ù’Ø­ÙŽØ§Ù†ÙŽ Ø§Ù„Ù„ÙŽÙ‘Ù‡Ù Ø§Ù„Ù’Ø¹ÙŽØ¸ÙÙŠÙ…Ù',
-      'Hadith':
-          'Ø¥ÙÙ†ÙŽÙ‘Ù…ÙŽØ§ Ø§Ù„Ù’Ø£ÙŽØ¹Ù’Ù…ÙŽØ§Ù„Ù Ø¨ÙØ§Ù„Ù†ÙÙ‘ÙŠÙŽÙ‘Ø§ØªÙ',
+      'Hadith': 'Ø¥ÙÙ†ÙŽÙ‘Ù…ÙŽØ§ Ø§Ù„Ù’Ø£ÙŽØ¹Ù’Ù…ÙŽØ§Ù„Ù Ø¨ÙØ§Ù„Ù†ÙÙ‘ÙŠÙŽÙ‘Ø§ØªÙ',
     };
 
     return ListView(
@@ -114,8 +108,7 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage>
       children: [
         // Typography Section Header
         ArabicAccessibility.createAccessibleText(
-          text:
-              'Arabic Typography Styles - Ø£Ù†Ù…Ø§Ø· Ø§Ù„Ø®Ø·ÙˆØ· Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©',
+          text: 'Arabic Typography Styles - Ø£Ù†Ù…Ø§Ø· Ø§Ù„Ø®Ø·ÙˆØ· Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©',
           context: context,
           isHeading: true,
         ),
@@ -422,8 +415,7 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage>
                 const SizedBox(height: 16),
                 ArabicTextInputWidget(
                   controller: _textController,
-                  hintText:
-                      'Ø£Ø¯Ø®Ù„ Ø§Ù„Ù†Øµ Ø§Ù„Ø¹Ø±Ø¨ÙŠ Ø£Ùˆ Ø§Ù„Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠ',
+                  hintText: 'Ø£Ø¯Ø®Ù„ Ø§Ù„Ù†Øµ Ø§Ù„Ø¹Ø±Ø¨ÙŠ Ø£Ùˆ Ø§Ù„Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠ',
                   labelText: 'Ø§Ù„Ù†Øµ Ø§Ù„Ù…Ø®ØªÙ„Ø·',
                   maxLines: 3,
                 ),
@@ -621,8 +613,7 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage>
                       'Date: 2024/12/25',
                       'Ø§Ù„ØªØ§Ø±ÙŠØ®: Ù¢Ù Ù¢Ù¤/Ù¡Ù¢/Ù¢Ù¥',
                     ),
-                    _NumberFormattingRow(
-                        'Time: 14:30', 'Ø§Ù„ÙˆÙ‚Øª: Ù¡Ù¤:Ù£Ù '),
+                    _NumberFormattingRow('Time: 14:30', 'Ø§Ù„ÙˆÙ‚Øª: Ù¡Ù¤:Ù£Ù '),
                   ],
                 ),
               ],
@@ -639,8 +630,7 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage>
       children: [
         // Accessibility Header
         ArabicAccessibility.createAccessibleText(
-          text:
-              'Accessibility Features - Ù…ÙŠØ²Ø§Øª Ø¥Ù…ÙƒØ§Ù†ÙŠØ© Ø§Ù„ÙˆØµÙˆÙ„',
+          text: 'Accessibility Features - Ù…ÙŠØ²Ø§Øª Ø¥Ù…ÙƒØ§Ù†ÙŠØ© Ø§Ù„ÙˆØµÙˆÙ„',
           context: context,
           isHeading: true,
         ),
@@ -659,11 +649,9 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage>
                 ),
                 const SizedBox(height: 16),
                 ArabicAccessibility.createIslamicContentWidget(
-                  arabicText:
-                      'Ø¨ÙØ³Ù’Ù…Ù Ø§Ù„Ù„ÙŽÙ‘Ù‡Ù Ø§Ù„Ø±ÙŽÙ‘Ø­Ù’Ù…ÙŽÙ°Ù†Ù Ø§Ù„Ø±ÙŽÙ‘Ø­ÙÙŠÙ…Ù',
+                  arabicText: 'Ø¨ÙØ³Ù’Ù…Ù Ø§Ù„Ù„ÙŽÙ‘Ù‡Ù Ø§Ù„Ø±ÙŽÙ‘Ø­Ù’Ù…ÙŽÙ°Ù†Ù Ø§Ù„Ø±ÙŽÙ‘Ø­ÙÙŠÙ…Ù',
                   transliteration: 'Bismillahir Rahmanir Raheem',
-                  translation:
-                      'In the name of Allah, the Most Gracious, the Most Merciful',
+                  translation: 'In the name of Allah, the Most Gracious, the Most Merciful',
                   context: context,
                   contentType: IslamicContentType.quranVerse,
                 ),
@@ -753,10 +741,8 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage>
                 ),
                 const SizedBox(height: 16),
                 const ScreenReaderOptimizedText(
-                  text:
-                      'Ø§Ù„Ù„ÙŽÙ‘Ù‡ÙÙ…ÙŽÙ‘ Ø§Ù‡Ù’Ø¯ÙÙ†ÙŽØ§ ÙÙÙŠÙ…ÙŽÙ†Ù’ Ù‡ÙŽØ¯ÙŽÙŠÙ’ØªÙŽ',
-                  alternativeText:
-                      'Islamic supplication: O Allah, guide us among those You have guided',
+                  text: 'Ø§Ù„Ù„ÙŽÙ‘Ù‡ÙÙ…ÙŽÙ‘ Ø§Ù‡Ù’Ø¯ÙÙ†ÙŽØ§ ÙÙÙŠÙ…ÙŽÙ†Ù’ Ù‡ÙŽØ¯ÙŽÙŠÙ’ØªÙŽ',
+                  alternativeText: 'Islamic supplication: O Allah, guide us among those You have guided',
                   isLive: true,
                 ),
               ],
@@ -848,17 +834,9 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage>
 
   List<Widget> _buildTextDirectionTests() {
     const testCases = [
-      (
-        'Pure Arabic',
-        'Ø¨Ø³Ù… Ø§Ù„Ù„Ù‡ Ø§Ù„Ø±Ø­Ù…Ù† Ø§Ù„Ø±Ø­ÙŠÙ…',
-        TextDirection.rtl
-      ),
+      ('Pure Arabic', 'Ø¨Ø³Ù… Ø§Ù„Ù„Ù‡ Ø§Ù„Ø±Ø­Ù…Ù† Ø§Ù„Ø±Ø­ÙŠÙ…', TextDirection.rtl),
       ('Pure English', 'Hello World', TextDirection.ltr),
-      (
-        'Mixed (Arabic majority)',
-        'Ù…Ø±Ø­Ø¨Ø§ Hello Ø£Ù‡Ù„Ø§',
-        TextDirection.rtl
-      ),
+      ('Mixed (Arabic majority)', 'Ù…Ø±Ø­Ø¨Ø§ Hello Ø£Ù‡Ù„Ø§', TextDirection.rtl),
       ('Mixed (English majority)', 'Hello Ù…Ø±Ø­Ø¨Ø§ World', TextDirection.ltr),
       ('Numbers', 'Ù¡Ù¢Ù£ ABC Ù¤Ù¥Ù¦', TextDirection.rtl),
     ];
