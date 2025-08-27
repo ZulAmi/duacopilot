@@ -112,7 +112,7 @@ class EnhancedEmotionDetectionService {
       'urdu': ['شک', 'تذبذب', 'کنفیوزڈ', 'الجھن', 'بے یقینی'],
       'contextual': ['don\'t know what to do', 'which path', 'need guidance', 'torn between', 'can\'t decide'],
     },
-    EmotionalState.seeking_guidance: {
+    EmotionalState.seekingGuidance: {
       'english': ['guidance', 'help', 'direction', 'advice', 'support', 'assistance', 'counsel', 'wisdom', 'insight'],
       'arabic': ['هداية', 'إرشاد', 'نصح', 'مساعدة', 'دعم', 'توجيه', 'حكمة'],
       'urdu': ['ہدایت', 'رہنمائی', 'مدد', 'نصیحت', 'راہ', 'سپورٹ'],
@@ -157,9 +157,9 @@ class EnhancedEmotionDetectionService {
     'mashallah': EmotionalState.grateful,
     'astaghfirullah': EmotionalState.worried,
     'inshallah': EmotionalState.hopeful,
-    'la hawla wa la quwwata illa billah': EmotionalState.seeking_guidance,
-    'allah yehdik': EmotionalState.seeking_guidance,
-    'rabbi ishurni': EmotionalState.seeking_guidance,
+    'la hawla wa la quwwata illa billah': EmotionalState.seekingGuidance,
+    'allah yehdik': EmotionalState.seekingGuidance,
+    'rabbi ishurni': EmotionalState.seekingGuidance,
     'hasbi allah': EmotionalState.peaceful,
     'allahu a\'lam': EmotionalState.uncertain,
   };
@@ -315,7 +315,7 @@ class EnhancedEmotionDetectionService {
           'وَمَنْ يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ',
         ]);
         break;
-      case EmotionalState.seeking_guidance:
+      case EmotionalState.seekingGuidance:
         recommendations.addAll([
           'رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي',
           'اللَّهُمَّ أَرِنِي الْحَقَّ حَقًّا وَارْزُقْنِي اتِّبَاعَهُ',

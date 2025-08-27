@@ -10,16 +10,12 @@ class IslamicUniversityScreen extends ConsumerStatefulWidget {
   const IslamicUniversityScreen({super.key});
 
   @override
-  ConsumerState<IslamicUniversityScreen> createState() =>
-      _IslamicUniversityScreenState();
+  ConsumerState<IslamicUniversityScreen> createState() => _IslamicUniversityScreenState();
 }
 
-class _IslamicUniversityScreenState
-    extends ConsumerState<IslamicUniversityScreen>
-    with TickerProviderStateMixin {
+class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScreen> with TickerProviderStateMixin {
   late TabController _tabController;
-  final IslamicUniversityService _universityService =
-      IslamicUniversityService.instance;
+  final IslamicUniversityService _universityService = IslamicUniversityService.instance;
 
   // Data state
   bool _isLoading = false;
@@ -143,7 +139,7 @@ class _IslamicUniversityScreenState
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [const Color(0xFFf093fb).withOpacity(0.1), Colors.white],
+          colors: [const Color(0xFFf093fb).withValues(alpha: 0.1), Colors.white],
         ),
       ),
       child: TabBarView(
@@ -190,14 +186,14 @@ class _IslamicUniversityScreenState
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            const Color(0xFFf093fb).withOpacity(0.1),
-            const Color(0xFFf5576c).withOpacity(0.1),
+            const Color(0xFFf093fb).withValues(alpha: 0.1),
+            const Color(0xFFf5576c).withValues(alpha: 0.1),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFf093fb).withOpacity(0.3)),
+        border: Border.all(color: const Color(0xFFf093fb).withValues(alpha: 0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -215,9 +211,9 @@ class _IslamicUniversityScreenState
                       style: Theme.of(
                         context,
                       ).textTheme.headlineSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: const Color(0xFFf093fb),
-                      ),
+                            fontWeight: FontWeight.bold,
+                            color: const Color(0xFFf093fb),
+                          ),
                     ),
                     Text(
                       'Learn from world-renowned Islamic scholars',
@@ -456,7 +452,7 @@ class _IslamicUniversityScreenState
                     ),
                     gradient: LinearGradient(
                       colors: [
-                        const Color(0xFFf093fb).withOpacity(0.8),
+                        const Color(0xFFf093fb).withValues(alpha: 0.8),
                         const Color(0xFFf5576c),
                       ],
                     ),
@@ -607,14 +603,8 @@ class _IslamicUniversityScreenState
             children: [
               CircleAvatar(
                 radius: 30,
-                backgroundImage:
-                    scholar.profileImageUrl.isNotEmpty
-                        ? NetworkImage(scholar.profileImageUrl)
-                        : null,
-                child:
-                    scholar.profileImageUrl.isEmpty
-                        ? Text(scholar.name[0])
-                        : null,
+                backgroundImage: scholar.profileImageUrl.isNotEmpty ? NetworkImage(scholar.profileImageUrl) : null,
+                child: scholar.profileImageUrl.isEmpty ? Text(scholar.name[0]) : null,
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -848,7 +838,7 @@ class _IslamicUniversityScreenState
                       vertical: 4,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFf093fb).withOpacity(0.1),
+                      color: const Color(0xFFf093fb).withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
@@ -868,16 +858,15 @@ class _IslamicUniversityScreenState
               Wrap(
                 spacing: 8,
                 runSpacing: 4,
-                children:
-                    path.skills
-                        .map(
-                          (skill) => Chip(
-                            label: Text(skill),
-                            backgroundColor: Colors.grey[100],
-                            labelStyle: const TextStyle(fontSize: 10),
-                          ),
-                        )
-                        .toList(),
+                children: path.skills
+                    .map(
+                      (skill) => Chip(
+                        label: Text(skill),
+                        backgroundColor: Colors.grey[100],
+                        labelStyle: const TextStyle(fontSize: 10),
+                      ),
+                    )
+                    .toList(),
               ),
               const SizedBox(height: 12),
               Row(
@@ -947,29 +936,28 @@ class _IslamicUniversityScreenState
   String _getScholarName(String scholarId) {
     final scholar = _scholars.firstWhere(
       (s) => s.id == scholarId,
-      orElse:
-          () => IslamicScholar(
-            id: '',
-            name: 'Unknown',
-            arabicName: '',
-            title: '',
-            institution: '',
-            country: '',
-            specialization: '',
-            biography: '',
-            arabicBiography: '',
-            isVerified: false,
-            profileImageUrl: '',
-            credentials: [],
-            languages: [],
-            subjects: [],
-            rating: 0,
-            totalStudents: 0,
-            coursesCount: 0,
-            sessionsCount: 0,
-            verifiedAt: DateTime.now(),
-            createdAt: DateTime.now(),
-          ),
+      orElse: () => IslamicScholar(
+        id: '',
+        name: 'Unknown',
+        arabicName: '',
+        title: '',
+        institution: '',
+        country: '',
+        specialization: '',
+        biography: '',
+        arabicBiography: '',
+        isVerified: false,
+        profileImageUrl: '',
+        credentials: [],
+        languages: [],
+        subjects: [],
+        rating: 0,
+        totalStudents: 0,
+        coursesCount: 0,
+        sessionsCount: 0,
+        verifiedAt: DateTime.now(),
+        createdAt: DateTime.now(),
+      ),
     );
     return scholar.name;
   }
@@ -1082,11 +1070,13 @@ class _IslamicUniversityScreenState
         _userCurriculum = curriculum;
       });
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Personal curriculum created successfully!'),
-        ),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Personal curriculum created successfully!'),
+          ),
+        );
+      }
     } catch (e) {
       _showError('Failed to create curriculum: $e');
     }
@@ -1103,27 +1093,26 @@ class _IslamicUniversityScreenState
   void _showSubscriptionRequired() {
     showDialog(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('Premium Subscription Required'),
-            content: const Text(
-              'Islamic University features require an active subscription. '
-              'Upgrade now to access courses from world-renowned scholars.',
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Later'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  // Navigate to subscription screen
-                },
-                child: const Text('Upgrade Now'),
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        title: const Text('Premium Subscription Required'),
+        content: const Text(
+          'Islamic University features require an active subscription. '
+          'Upgrade now to access courses from world-renowned scholars.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Later'),
           ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              // Navigate to subscription screen
+            },
+            child: const Text('Upgrade Now'),
+          ),
+        ],
+      ),
     );
   }
 

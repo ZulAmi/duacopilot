@@ -12,8 +12,7 @@ part of 'qibla_entity.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 QiblaCompass _$QiblaCompassFromJson(Map<String, dynamic> json) {
   return _QiblaCompass.fromJson(json);
@@ -45,21 +44,19 @@ mixin _$QiblaCompass {
 /// @nodoc
 abstract class $QiblaCompassCopyWith<$Res> {
   factory $QiblaCompassCopyWith(
-    QiblaCompass value,
-    $Res Function(QiblaCompass) then,
-  ) = _$QiblaCompassCopyWithImpl<$Res, QiblaCompass>;
+          QiblaCompass value, $Res Function(QiblaCompass) then) =
+      _$QiblaCompassCopyWithImpl<$Res, QiblaCompass>;
   @useResult
-  $Res call({
-    double qiblaDirection,
-    double currentDirection,
-    double deviceHeading,
-    LocationAccuracy accuracy,
-    DateTime lastUpdated,
-    bool isCalibrationNeeded,
-    String? nearestMosque,
-    double? distanceToKaaba,
-    QiblaCalibrationData? calibrationData,
-  });
+  $Res call(
+      {double qiblaDirection,
+      double currentDirection,
+      double deviceHeading,
+      LocationAccuracy accuracy,
+      DateTime lastUpdated,
+      bool isCalibrationNeeded,
+      String? nearestMosque,
+      double? distanceToKaaba,
+      QiblaCalibrationData? calibrationData});
 
   $QiblaCalibrationDataCopyWith<$Res>? get calibrationData;
 }
@@ -89,56 +86,44 @@ class _$QiblaCompassCopyWithImpl<$Res, $Val extends QiblaCompass>
     Object? distanceToKaaba = freezed,
     Object? calibrationData = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            qiblaDirection:
-                null == qiblaDirection
-                    ? _value.qiblaDirection
-                    : qiblaDirection // ignore: cast_nullable_to_non_nullable
-                        as double,
-            currentDirection:
-                null == currentDirection
-                    ? _value.currentDirection
-                    : currentDirection // ignore: cast_nullable_to_non_nullable
-                        as double,
-            deviceHeading:
-                null == deviceHeading
-                    ? _value.deviceHeading
-                    : deviceHeading // ignore: cast_nullable_to_non_nullable
-                        as double,
-            accuracy:
-                null == accuracy
-                    ? _value.accuracy
-                    : accuracy // ignore: cast_nullable_to_non_nullable
-                        as LocationAccuracy,
-            lastUpdated:
-                null == lastUpdated
-                    ? _value.lastUpdated
-                    : lastUpdated // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            isCalibrationNeeded:
-                null == isCalibrationNeeded
-                    ? _value.isCalibrationNeeded
-                    : isCalibrationNeeded // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            nearestMosque:
-                freezed == nearestMosque
-                    ? _value.nearestMosque
-                    : nearestMosque // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            distanceToKaaba:
-                freezed == distanceToKaaba
-                    ? _value.distanceToKaaba
-                    : distanceToKaaba // ignore: cast_nullable_to_non_nullable
-                        as double?,
-            calibrationData:
-                freezed == calibrationData
-                    ? _value.calibrationData
-                    : calibrationData // ignore: cast_nullable_to_non_nullable
-                        as QiblaCalibrationData?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      qiblaDirection: null == qiblaDirection
+          ? _value.qiblaDirection
+          : qiblaDirection // ignore: cast_nullable_to_non_nullable
+              as double,
+      currentDirection: null == currentDirection
+          ? _value.currentDirection
+          : currentDirection // ignore: cast_nullable_to_non_nullable
+              as double,
+      deviceHeading: null == deviceHeading
+          ? _value.deviceHeading
+          : deviceHeading // ignore: cast_nullable_to_non_nullable
+              as double,
+      accuracy: null == accuracy
+          ? _value.accuracy
+          : accuracy // ignore: cast_nullable_to_non_nullable
+              as LocationAccuracy,
+      lastUpdated: null == lastUpdated
+          ? _value.lastUpdated
+          : lastUpdated // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      isCalibrationNeeded: null == isCalibrationNeeded
+          ? _value.isCalibrationNeeded
+          : isCalibrationNeeded // ignore: cast_nullable_to_non_nullable
+              as bool,
+      nearestMosque: freezed == nearestMosque
+          ? _value.nearestMosque
+          : nearestMosque // ignore: cast_nullable_to_non_nullable
+              as String?,
+      distanceToKaaba: freezed == distanceToKaaba
+          ? _value.distanceToKaaba
+          : distanceToKaaba // ignore: cast_nullable_to_non_nullable
+              as double?,
+      calibrationData: freezed == calibrationData
+          ? _value.calibrationData
+          : calibrationData // ignore: cast_nullable_to_non_nullable
+              as QiblaCalibrationData?,
+    ) as $Val);
   }
 
   /// Create a copy of QiblaCompass
@@ -150,9 +135,8 @@ class _$QiblaCompassCopyWithImpl<$Res, $Val extends QiblaCompass>
       return null;
     }
 
-    return $QiblaCalibrationDataCopyWith<$Res>(_value.calibrationData!, (
-      value,
-    ) {
+    return $QiblaCalibrationDataCopyWith<$Res>(_value.calibrationData!,
+        (value) {
       return _then(_value.copyWith(calibrationData: value) as $Val);
     });
   }
@@ -162,22 +146,20 @@ class _$QiblaCompassCopyWithImpl<$Res, $Val extends QiblaCompass>
 abstract class _$$QiblaCompassImplCopyWith<$Res>
     implements $QiblaCompassCopyWith<$Res> {
   factory _$$QiblaCompassImplCopyWith(
-    _$QiblaCompassImpl value,
-    $Res Function(_$QiblaCompassImpl) then,
-  ) = __$$QiblaCompassImplCopyWithImpl<$Res>;
+          _$QiblaCompassImpl value, $Res Function(_$QiblaCompassImpl) then) =
+      __$$QiblaCompassImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    double qiblaDirection,
-    double currentDirection,
-    double deviceHeading,
-    LocationAccuracy accuracy,
-    DateTime lastUpdated,
-    bool isCalibrationNeeded,
-    String? nearestMosque,
-    double? distanceToKaaba,
-    QiblaCalibrationData? calibrationData,
-  });
+  $Res call(
+      {double qiblaDirection,
+      double currentDirection,
+      double deviceHeading,
+      LocationAccuracy accuracy,
+      DateTime lastUpdated,
+      bool isCalibrationNeeded,
+      String? nearestMosque,
+      double? distanceToKaaba,
+      QiblaCalibrationData? calibrationData});
 
   @override
   $QiblaCalibrationDataCopyWith<$Res>? get calibrationData;
@@ -188,9 +170,8 @@ class __$$QiblaCompassImplCopyWithImpl<$Res>
     extends _$QiblaCompassCopyWithImpl<$Res, _$QiblaCompassImpl>
     implements _$$QiblaCompassImplCopyWith<$Res> {
   __$$QiblaCompassImplCopyWithImpl(
-    _$QiblaCompassImpl _value,
-    $Res Function(_$QiblaCompassImpl) _then,
-  ) : super(_value, _then);
+      _$QiblaCompassImpl _value, $Res Function(_$QiblaCompassImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of QiblaCompass
   /// with the given fields replaced by the non-null parameter values.
@@ -207,72 +188,60 @@ class __$$QiblaCompassImplCopyWithImpl<$Res>
     Object? distanceToKaaba = freezed,
     Object? calibrationData = freezed,
   }) {
-    return _then(
-      _$QiblaCompassImpl(
-        qiblaDirection:
-            null == qiblaDirection
-                ? _value.qiblaDirection
-                : qiblaDirection // ignore: cast_nullable_to_non_nullable
-                    as double,
-        currentDirection:
-            null == currentDirection
-                ? _value.currentDirection
-                : currentDirection // ignore: cast_nullable_to_non_nullable
-                    as double,
-        deviceHeading:
-            null == deviceHeading
-                ? _value.deviceHeading
-                : deviceHeading // ignore: cast_nullable_to_non_nullable
-                    as double,
-        accuracy:
-            null == accuracy
-                ? _value.accuracy
-                : accuracy // ignore: cast_nullable_to_non_nullable
-                    as LocationAccuracy,
-        lastUpdated:
-            null == lastUpdated
-                ? _value.lastUpdated
-                : lastUpdated // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        isCalibrationNeeded:
-            null == isCalibrationNeeded
-                ? _value.isCalibrationNeeded
-                : isCalibrationNeeded // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        nearestMosque:
-            freezed == nearestMosque
-                ? _value.nearestMosque
-                : nearestMosque // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        distanceToKaaba:
-            freezed == distanceToKaaba
-                ? _value.distanceToKaaba
-                : distanceToKaaba // ignore: cast_nullable_to_non_nullable
-                    as double?,
-        calibrationData:
-            freezed == calibrationData
-                ? _value.calibrationData
-                : calibrationData // ignore: cast_nullable_to_non_nullable
-                    as QiblaCalibrationData?,
-      ),
-    );
+    return _then(_$QiblaCompassImpl(
+      qiblaDirection: null == qiblaDirection
+          ? _value.qiblaDirection
+          : qiblaDirection // ignore: cast_nullable_to_non_nullable
+              as double,
+      currentDirection: null == currentDirection
+          ? _value.currentDirection
+          : currentDirection // ignore: cast_nullable_to_non_nullable
+              as double,
+      deviceHeading: null == deviceHeading
+          ? _value.deviceHeading
+          : deviceHeading // ignore: cast_nullable_to_non_nullable
+              as double,
+      accuracy: null == accuracy
+          ? _value.accuracy
+          : accuracy // ignore: cast_nullable_to_non_nullable
+              as LocationAccuracy,
+      lastUpdated: null == lastUpdated
+          ? _value.lastUpdated
+          : lastUpdated // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      isCalibrationNeeded: null == isCalibrationNeeded
+          ? _value.isCalibrationNeeded
+          : isCalibrationNeeded // ignore: cast_nullable_to_non_nullable
+              as bool,
+      nearestMosque: freezed == nearestMosque
+          ? _value.nearestMosque
+          : nearestMosque // ignore: cast_nullable_to_non_nullable
+              as String?,
+      distanceToKaaba: freezed == distanceToKaaba
+          ? _value.distanceToKaaba
+          : distanceToKaaba // ignore: cast_nullable_to_non_nullable
+              as double?,
+      calibrationData: freezed == calibrationData
+          ? _value.calibrationData
+          : calibrationData // ignore: cast_nullable_to_non_nullable
+              as QiblaCalibrationData?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$QiblaCompassImpl implements _QiblaCompass {
-  const _$QiblaCompassImpl({
-    required this.qiblaDirection,
-    required this.currentDirection,
-    required this.deviceHeading,
-    required this.accuracy,
-    required this.lastUpdated,
-    required this.isCalibrationNeeded,
-    this.nearestMosque,
-    this.distanceToKaaba,
-    this.calibrationData,
-  });
+  const _$QiblaCompassImpl(
+      {required this.qiblaDirection,
+      required this.currentDirection,
+      required this.deviceHeading,
+      required this.accuracy,
+      required this.lastUpdated,
+      required this.isCalibrationNeeded,
+      this.nearestMosque,
+      this.distanceToKaaba,
+      this.calibrationData});
 
   factory _$QiblaCompassImpl.fromJson(Map<String, dynamic> json) =>
       _$$QiblaCompassImplFromJson(json);
@@ -329,17 +298,16 @@ class _$QiblaCompassImpl implements _QiblaCompass {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    qiblaDirection,
-    currentDirection,
-    deviceHeading,
-    accuracy,
-    lastUpdated,
-    isCalibrationNeeded,
-    nearestMosque,
-    distanceToKaaba,
-    calibrationData,
-  );
+      runtimeType,
+      qiblaDirection,
+      currentDirection,
+      deviceHeading,
+      accuracy,
+      lastUpdated,
+      isCalibrationNeeded,
+      nearestMosque,
+      distanceToKaaba,
+      calibrationData);
 
   /// Create a copy of QiblaCompass
   /// with the given fields replaced by the non-null parameter values.
@@ -351,22 +319,23 @@ class _$QiblaCompassImpl implements _QiblaCompass {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$QiblaCompassImplToJson(this);
+    return _$$QiblaCompassImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _QiblaCompass implements QiblaCompass {
-  const factory _QiblaCompass({
-    required final double qiblaDirection,
-    required final double currentDirection,
-    required final double deviceHeading,
-    required final LocationAccuracy accuracy,
-    required final DateTime lastUpdated,
-    required final bool isCalibrationNeeded,
-    final String? nearestMosque,
-    final double? distanceToKaaba,
-    final QiblaCalibrationData? calibrationData,
-  }) = _$QiblaCompassImpl;
+  const factory _QiblaCompass(
+      {required final double qiblaDirection,
+      required final double currentDirection,
+      required final double deviceHeading,
+      required final LocationAccuracy accuracy,
+      required final DateTime lastUpdated,
+      required final bool isCalibrationNeeded,
+      final String? nearestMosque,
+      final double? distanceToKaaba,
+      final QiblaCalibrationData? calibrationData}) = _$QiblaCompassImpl;
 
   factory _QiblaCompass.fromJson(Map<String, dynamic> json) =
       _$QiblaCompassImpl.fromJson;
@@ -423,26 +392,22 @@ mixin _$QiblaCalibrationData {
 
 /// @nodoc
 abstract class $QiblaCalibrationDataCopyWith<$Res> {
-  factory $QiblaCalibrationDataCopyWith(
-    QiblaCalibrationData value,
-    $Res Function(QiblaCalibrationData) then,
-  ) = _$QiblaCalibrationDataCopyWithImpl<$Res, QiblaCalibrationData>;
+  factory $QiblaCalibrationDataCopyWith(QiblaCalibrationData value,
+          $Res Function(QiblaCalibrationData) then) =
+      _$QiblaCalibrationDataCopyWithImpl<$Res, QiblaCalibrationData>;
   @useResult
-  $Res call({
-    double magneticDeclination,
-    DateTime lastCalibration,
-    CalibrationQuality quality,
-    List<double> calibrationReadings,
-    String? deviceModel,
-    Map<String, dynamic>? sensorInfo,
-  });
+  $Res call(
+      {double magneticDeclination,
+      DateTime lastCalibration,
+      CalibrationQuality quality,
+      List<double> calibrationReadings,
+      String? deviceModel,
+      Map<String, dynamic>? sensorInfo});
 }
 
 /// @nodoc
-class _$QiblaCalibrationDataCopyWithImpl<
-  $Res,
-  $Val extends QiblaCalibrationData
->
+class _$QiblaCalibrationDataCopyWithImpl<$Res,
+        $Val extends QiblaCalibrationData>
     implements $QiblaCalibrationDataCopyWith<$Res> {
   _$QiblaCalibrationDataCopyWithImpl(this._value, this._then);
 
@@ -463,71 +428,59 @@ class _$QiblaCalibrationDataCopyWithImpl<
     Object? deviceModel = freezed,
     Object? sensorInfo = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            magneticDeclination:
-                null == magneticDeclination
-                    ? _value.magneticDeclination
-                    : magneticDeclination // ignore: cast_nullable_to_non_nullable
-                        as double,
-            lastCalibration:
-                null == lastCalibration
-                    ? _value.lastCalibration
-                    : lastCalibration // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            quality:
-                null == quality
-                    ? _value.quality
-                    : quality // ignore: cast_nullable_to_non_nullable
-                        as CalibrationQuality,
-            calibrationReadings:
-                null == calibrationReadings
-                    ? _value.calibrationReadings
-                    : calibrationReadings // ignore: cast_nullable_to_non_nullable
-                        as List<double>,
-            deviceModel:
-                freezed == deviceModel
-                    ? _value.deviceModel
-                    : deviceModel // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            sensorInfo:
-                freezed == sensorInfo
-                    ? _value.sensorInfo
-                    : sensorInfo // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      magneticDeclination: null == magneticDeclination
+          ? _value.magneticDeclination
+          : magneticDeclination // ignore: cast_nullable_to_non_nullable
+              as double,
+      lastCalibration: null == lastCalibration
+          ? _value.lastCalibration
+          : lastCalibration // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      quality: null == quality
+          ? _value.quality
+          : quality // ignore: cast_nullable_to_non_nullable
+              as CalibrationQuality,
+      calibrationReadings: null == calibrationReadings
+          ? _value.calibrationReadings
+          : calibrationReadings // ignore: cast_nullable_to_non_nullable
+              as List<double>,
+      deviceModel: freezed == deviceModel
+          ? _value.deviceModel
+          : deviceModel // ignore: cast_nullable_to_non_nullable
+              as String?,
+      sensorInfo: freezed == sensorInfo
+          ? _value.sensorInfo
+          : sensorInfo // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$QiblaCalibrationDataImplCopyWith<$Res>
     implements $QiblaCalibrationDataCopyWith<$Res> {
-  factory _$$QiblaCalibrationDataImplCopyWith(
-    _$QiblaCalibrationDataImpl value,
-    $Res Function(_$QiblaCalibrationDataImpl) then,
-  ) = __$$QiblaCalibrationDataImplCopyWithImpl<$Res>;
+  factory _$$QiblaCalibrationDataImplCopyWith(_$QiblaCalibrationDataImpl value,
+          $Res Function(_$QiblaCalibrationDataImpl) then) =
+      __$$QiblaCalibrationDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    double magneticDeclination,
-    DateTime lastCalibration,
-    CalibrationQuality quality,
-    List<double> calibrationReadings,
-    String? deviceModel,
-    Map<String, dynamic>? sensorInfo,
-  });
+  $Res call(
+      {double magneticDeclination,
+      DateTime lastCalibration,
+      CalibrationQuality quality,
+      List<double> calibrationReadings,
+      String? deviceModel,
+      Map<String, dynamic>? sensorInfo});
 }
 
 /// @nodoc
 class __$$QiblaCalibrationDataImplCopyWithImpl<$Res>
     extends _$QiblaCalibrationDataCopyWithImpl<$Res, _$QiblaCalibrationDataImpl>
     implements _$$QiblaCalibrationDataImplCopyWith<$Res> {
-  __$$QiblaCalibrationDataImplCopyWithImpl(
-    _$QiblaCalibrationDataImpl _value,
-    $Res Function(_$QiblaCalibrationDataImpl) _then,
-  ) : super(_value, _then);
+  __$$QiblaCalibrationDataImplCopyWithImpl(_$QiblaCalibrationDataImpl _value,
+      $Res Function(_$QiblaCalibrationDataImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of QiblaCalibrationData
   /// with the given fields replaced by the non-null parameter values.
@@ -541,55 +494,47 @@ class __$$QiblaCalibrationDataImplCopyWithImpl<$Res>
     Object? deviceModel = freezed,
     Object? sensorInfo = freezed,
   }) {
-    return _then(
-      _$QiblaCalibrationDataImpl(
-        magneticDeclination:
-            null == magneticDeclination
-                ? _value.magneticDeclination
-                : magneticDeclination // ignore: cast_nullable_to_non_nullable
-                    as double,
-        lastCalibration:
-            null == lastCalibration
-                ? _value.lastCalibration
-                : lastCalibration // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        quality:
-            null == quality
-                ? _value.quality
-                : quality // ignore: cast_nullable_to_non_nullable
-                    as CalibrationQuality,
-        calibrationReadings:
-            null == calibrationReadings
-                ? _value._calibrationReadings
-                : calibrationReadings // ignore: cast_nullable_to_non_nullable
-                    as List<double>,
-        deviceModel:
-            freezed == deviceModel
-                ? _value.deviceModel
-                : deviceModel // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        sensorInfo:
-            freezed == sensorInfo
-                ? _value._sensorInfo
-                : sensorInfo // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>?,
-      ),
-    );
+    return _then(_$QiblaCalibrationDataImpl(
+      magneticDeclination: null == magneticDeclination
+          ? _value.magneticDeclination
+          : magneticDeclination // ignore: cast_nullable_to_non_nullable
+              as double,
+      lastCalibration: null == lastCalibration
+          ? _value.lastCalibration
+          : lastCalibration // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      quality: null == quality
+          ? _value.quality
+          : quality // ignore: cast_nullable_to_non_nullable
+              as CalibrationQuality,
+      calibrationReadings: null == calibrationReadings
+          ? _value._calibrationReadings
+          : calibrationReadings // ignore: cast_nullable_to_non_nullable
+              as List<double>,
+      deviceModel: freezed == deviceModel
+          ? _value.deviceModel
+          : deviceModel // ignore: cast_nullable_to_non_nullable
+              as String?,
+      sensorInfo: freezed == sensorInfo
+          ? _value._sensorInfo
+          : sensorInfo // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$QiblaCalibrationDataImpl implements _QiblaCalibrationData {
-  const _$QiblaCalibrationDataImpl({
-    required this.magneticDeclination,
-    required this.lastCalibration,
-    required this.quality,
-    required final List<double> calibrationReadings,
-    this.deviceModel,
-    final Map<String, dynamic>? sensorInfo,
-  }) : _calibrationReadings = calibrationReadings,
-       _sensorInfo = sensorInfo;
+  const _$QiblaCalibrationDataImpl(
+      {required this.magneticDeclination,
+      required this.lastCalibration,
+      required this.quality,
+      required final List<double> calibrationReadings,
+      this.deviceModel,
+      final Map<String, dynamic>? sensorInfo})
+      : _calibrationReadings = calibrationReadings,
+        _sensorInfo = sensorInfo;
 
   factory _$QiblaCalibrationDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$QiblaCalibrationDataImplFromJson(json);
@@ -636,29 +581,24 @@ class _$QiblaCalibrationDataImpl implements _QiblaCalibrationData {
             (identical(other.lastCalibration, lastCalibration) ||
                 other.lastCalibration == lastCalibration) &&
             (identical(other.quality, quality) || other.quality == quality) &&
-            const DeepCollectionEquality().equals(
-              other._calibrationReadings,
-              _calibrationReadings,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._calibrationReadings, _calibrationReadings) &&
             (identical(other.deviceModel, deviceModel) ||
                 other.deviceModel == deviceModel) &&
-            const DeepCollectionEquality().equals(
-              other._sensorInfo,
-              _sensorInfo,
-            ));
+            const DeepCollectionEquality()
+                .equals(other._sensorInfo, _sensorInfo));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    magneticDeclination,
-    lastCalibration,
-    quality,
-    const DeepCollectionEquality().hash(_calibrationReadings),
-    deviceModel,
-    const DeepCollectionEquality().hash(_sensorInfo),
-  );
+      runtimeType,
+      magneticDeclination,
+      lastCalibration,
+      quality,
+      const DeepCollectionEquality().hash(_calibrationReadings),
+      deviceModel,
+      const DeepCollectionEquality().hash(_sensorInfo));
 
   /// Create a copy of QiblaCalibrationData
   /// with the given fields replaced by the non-null parameter values.
@@ -666,27 +606,26 @@ class _$QiblaCalibrationDataImpl implements _QiblaCalibrationData {
   @override
   @pragma('vm:prefer-inline')
   _$$QiblaCalibrationDataImplCopyWith<_$QiblaCalibrationDataImpl>
-  get copyWith =>
-      __$$QiblaCalibrationDataImplCopyWithImpl<_$QiblaCalibrationDataImpl>(
-        this,
-        _$identity,
-      );
+      get copyWith =>
+          __$$QiblaCalibrationDataImplCopyWithImpl<_$QiblaCalibrationDataImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$QiblaCalibrationDataImplToJson(this);
+    return _$$QiblaCalibrationDataImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _QiblaCalibrationData implements QiblaCalibrationData {
-  const factory _QiblaCalibrationData({
-    required final double magneticDeclination,
-    required final DateTime lastCalibration,
-    required final CalibrationQuality quality,
-    required final List<double> calibrationReadings,
-    final String? deviceModel,
-    final Map<String, dynamic>? sensorInfo,
-  }) = _$QiblaCalibrationDataImpl;
+  const factory _QiblaCalibrationData(
+      {required final double magneticDeclination,
+      required final DateTime lastCalibration,
+      required final CalibrationQuality quality,
+      required final List<double> calibrationReadings,
+      final String? deviceModel,
+      final Map<String, dynamic>? sensorInfo}) = _$QiblaCalibrationDataImpl;
 
   factory _QiblaCalibrationData.fromJson(Map<String, dynamic> json) =
       _$QiblaCalibrationDataImpl.fromJson;
@@ -709,7 +648,7 @@ abstract class _QiblaCalibrationData implements QiblaCalibrationData {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$QiblaCalibrationDataImplCopyWith<_$QiblaCalibrationDataImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 PrayerTracker _$PrayerTrackerFromJson(Map<String, dynamic> json) {
@@ -740,19 +679,17 @@ mixin _$PrayerTracker {
 /// @nodoc
 abstract class $PrayerTrackerCopyWith<$Res> {
   factory $PrayerTrackerCopyWith(
-    PrayerTracker value,
-    $Res Function(PrayerTracker) then,
-  ) = _$PrayerTrackerCopyWithImpl<$Res, PrayerTracker>;
+          PrayerTracker value, $Res Function(PrayerTracker) then) =
+      _$PrayerTrackerCopyWithImpl<$Res, PrayerTracker>;
   @useResult
-  $Res call({
-    String id,
-    String userId,
-    DateTime date,
-    Map<PrayerType, PrayerCompletion> prayers,
-    PrayerStats dailyStats,
-    List<PrayerReminder>? reminders,
-    Map<String, dynamic>? metadata,
-  });
+  $Res call(
+      {String id,
+      String userId,
+      DateTime date,
+      Map<PrayerType, PrayerCompletion> prayers,
+      PrayerStats dailyStats,
+      List<PrayerReminder>? reminders,
+      Map<String, dynamic>? metadata});
 
   $PrayerStatsCopyWith<$Res> get dailyStats;
 }
@@ -780,46 +717,36 @@ class _$PrayerTrackerCopyWithImpl<$Res, $Val extends PrayerTracker>
     Object? reminders = freezed,
     Object? metadata = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            userId:
-                null == userId
-                    ? _value.userId
-                    : userId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            date:
-                null == date
-                    ? _value.date
-                    : date // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            prayers:
-                null == prayers
-                    ? _value.prayers
-                    : prayers // ignore: cast_nullable_to_non_nullable
-                        as Map<PrayerType, PrayerCompletion>,
-            dailyStats:
-                null == dailyStats
-                    ? _value.dailyStats
-                    : dailyStats // ignore: cast_nullable_to_non_nullable
-                        as PrayerStats,
-            reminders:
-                freezed == reminders
-                    ? _value.reminders
-                    : reminders // ignore: cast_nullable_to_non_nullable
-                        as List<PrayerReminder>?,
-            metadata:
-                freezed == metadata
-                    ? _value.metadata
-                    : metadata // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      prayers: null == prayers
+          ? _value.prayers
+          : prayers // ignore: cast_nullable_to_non_nullable
+              as Map<PrayerType, PrayerCompletion>,
+      dailyStats: null == dailyStats
+          ? _value.dailyStats
+          : dailyStats // ignore: cast_nullable_to_non_nullable
+              as PrayerStats,
+      reminders: freezed == reminders
+          ? _value.reminders
+          : reminders // ignore: cast_nullable_to_non_nullable
+              as List<PrayerReminder>?,
+      metadata: freezed == metadata
+          ? _value.metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ) as $Val);
   }
 
   /// Create a copy of PrayerTracker
@@ -837,20 +764,18 @@ class _$PrayerTrackerCopyWithImpl<$Res, $Val extends PrayerTracker>
 abstract class _$$PrayerTrackerImplCopyWith<$Res>
     implements $PrayerTrackerCopyWith<$Res> {
   factory _$$PrayerTrackerImplCopyWith(
-    _$PrayerTrackerImpl value,
-    $Res Function(_$PrayerTrackerImpl) then,
-  ) = __$$PrayerTrackerImplCopyWithImpl<$Res>;
+          _$PrayerTrackerImpl value, $Res Function(_$PrayerTrackerImpl) then) =
+      __$$PrayerTrackerImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String userId,
-    DateTime date,
-    Map<PrayerType, PrayerCompletion> prayers,
-    PrayerStats dailyStats,
-    List<PrayerReminder>? reminders,
-    Map<String, dynamic>? metadata,
-  });
+  $Res call(
+      {String id,
+      String userId,
+      DateTime date,
+      Map<PrayerType, PrayerCompletion> prayers,
+      PrayerStats dailyStats,
+      List<PrayerReminder>? reminders,
+      Map<String, dynamic>? metadata});
 
   @override
   $PrayerStatsCopyWith<$Res> get dailyStats;
@@ -861,9 +786,8 @@ class __$$PrayerTrackerImplCopyWithImpl<$Res>
     extends _$PrayerTrackerCopyWithImpl<$Res, _$PrayerTrackerImpl>
     implements _$$PrayerTrackerImplCopyWith<$Res> {
   __$$PrayerTrackerImplCopyWithImpl(
-    _$PrayerTrackerImpl _value,
-    $Res Function(_$PrayerTrackerImpl) _then,
-  ) : super(_value, _then);
+      _$PrayerTrackerImpl _value, $Res Function(_$PrayerTrackerImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of PrayerTracker
   /// with the given fields replaced by the non-null parameter values.
@@ -878,62 +802,53 @@ class __$$PrayerTrackerImplCopyWithImpl<$Res>
     Object? reminders = freezed,
     Object? metadata = freezed,
   }) {
-    return _then(
-      _$PrayerTrackerImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        userId:
-            null == userId
-                ? _value.userId
-                : userId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        date:
-            null == date
-                ? _value.date
-                : date // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        prayers:
-            null == prayers
-                ? _value._prayers
-                : prayers // ignore: cast_nullable_to_non_nullable
-                    as Map<PrayerType, PrayerCompletion>,
-        dailyStats:
-            null == dailyStats
-                ? _value.dailyStats
-                : dailyStats // ignore: cast_nullable_to_non_nullable
-                    as PrayerStats,
-        reminders:
-            freezed == reminders
-                ? _value._reminders
-                : reminders // ignore: cast_nullable_to_non_nullable
-                    as List<PrayerReminder>?,
-        metadata:
-            freezed == metadata
-                ? _value._metadata
-                : metadata // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>?,
-      ),
-    );
+    return _then(_$PrayerTrackerImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      prayers: null == prayers
+          ? _value._prayers
+          : prayers // ignore: cast_nullable_to_non_nullable
+              as Map<PrayerType, PrayerCompletion>,
+      dailyStats: null == dailyStats
+          ? _value.dailyStats
+          : dailyStats // ignore: cast_nullable_to_non_nullable
+              as PrayerStats,
+      reminders: freezed == reminders
+          ? _value._reminders
+          : reminders // ignore: cast_nullable_to_non_nullable
+              as List<PrayerReminder>?,
+      metadata: freezed == metadata
+          ? _value._metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$PrayerTrackerImpl implements _PrayerTracker {
-  const _$PrayerTrackerImpl({
-    required this.id,
-    required this.userId,
-    required this.date,
-    required final Map<PrayerType, PrayerCompletion> prayers,
-    required this.dailyStats,
-    final List<PrayerReminder>? reminders,
-    final Map<String, dynamic>? metadata,
-  }) : _prayers = prayers,
-       _reminders = reminders,
-       _metadata = metadata;
+  const _$PrayerTrackerImpl(
+      {required this.id,
+      required this.userId,
+      required this.date,
+      required final Map<PrayerType, PrayerCompletion> prayers,
+      required this.dailyStats,
+      final List<PrayerReminder>? reminders,
+      final Map<String, dynamic>? metadata})
+      : _prayers = prayers,
+        _reminders = reminders,
+        _metadata = metadata;
 
   factory _$PrayerTrackerImpl.fromJson(Map<String, dynamic> json) =>
       _$$PrayerTrackerImplFromJson(json);
@@ -990,25 +905,22 @@ class _$PrayerTrackerImpl implements _PrayerTracker {
             const DeepCollectionEquality().equals(other._prayers, _prayers) &&
             (identical(other.dailyStats, dailyStats) ||
                 other.dailyStats == dailyStats) &&
-            const DeepCollectionEquality().equals(
-              other._reminders,
-              _reminders,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._reminders, _reminders) &&
             const DeepCollectionEquality().equals(other._metadata, _metadata));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    userId,
-    date,
-    const DeepCollectionEquality().hash(_prayers),
-    dailyStats,
-    const DeepCollectionEquality().hash(_reminders),
-    const DeepCollectionEquality().hash(_metadata),
-  );
+      runtimeType,
+      id,
+      userId,
+      date,
+      const DeepCollectionEquality().hash(_prayers),
+      dailyStats,
+      const DeepCollectionEquality().hash(_reminders),
+      const DeepCollectionEquality().hash(_metadata));
 
   /// Create a copy of PrayerTracker
   /// with the given fields replaced by the non-null parameter values.
@@ -1020,20 +932,21 @@ class _$PrayerTrackerImpl implements _PrayerTracker {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PrayerTrackerImplToJson(this);
+    return _$$PrayerTrackerImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _PrayerTracker implements PrayerTracker {
-  const factory _PrayerTracker({
-    required final String id,
-    required final String userId,
-    required final DateTime date,
-    required final Map<PrayerType, PrayerCompletion> prayers,
-    required final PrayerStats dailyStats,
-    final List<PrayerReminder>? reminders,
-    final Map<String, dynamic>? metadata,
-  }) = _$PrayerTrackerImpl;
+  const factory _PrayerTracker(
+      {required final String id,
+      required final String userId,
+      required final DateTime date,
+      required final Map<PrayerType, PrayerCompletion> prayers,
+      required final PrayerStats dailyStats,
+      final List<PrayerReminder>? reminders,
+      final Map<String, dynamic>? metadata}) = _$PrayerTrackerImpl;
 
   factory _PrayerTracker.fromJson(Map<String, dynamic> json) =
       _$PrayerTrackerImpl.fromJson;
@@ -1090,21 +1003,19 @@ mixin _$PrayerCompletion {
 /// @nodoc
 abstract class $PrayerCompletionCopyWith<$Res> {
   factory $PrayerCompletionCopyWith(
-    PrayerCompletion value,
-    $Res Function(PrayerCompletion) then,
-  ) = _$PrayerCompletionCopyWithImpl<$Res, PrayerCompletion>;
+          PrayerCompletion value, $Res Function(PrayerCompletion) then) =
+      _$PrayerCompletionCopyWithImpl<$Res, PrayerCompletion>;
   @useResult
-  $Res call({
-    PrayerType type,
-    DateTime scheduledTime,
-    DateTime? completedAt,
-    PrayerCompletionStatus? status,
-    String? location,
-    bool? isInCongregation,
-    Duration? duration,
-    String? notes,
-    double? qiblaAccuracy,
-  });
+  $Res call(
+      {PrayerType type,
+      DateTime scheduledTime,
+      DateTime? completedAt,
+      PrayerCompletionStatus? status,
+      String? location,
+      bool? isInCongregation,
+      Duration? duration,
+      String? notes,
+      double? qiblaAccuracy});
 }
 
 /// @nodoc
@@ -1132,89 +1043,74 @@ class _$PrayerCompletionCopyWithImpl<$Res, $Val extends PrayerCompletion>
     Object? notes = freezed,
     Object? qiblaAccuracy = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            type:
-                null == type
-                    ? _value.type
-                    : type // ignore: cast_nullable_to_non_nullable
-                        as PrayerType,
-            scheduledTime:
-                null == scheduledTime
-                    ? _value.scheduledTime
-                    : scheduledTime // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            completedAt:
-                freezed == completedAt
-                    ? _value.completedAt
-                    : completedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            status:
-                freezed == status
-                    ? _value.status
-                    : status // ignore: cast_nullable_to_non_nullable
-                        as PrayerCompletionStatus?,
-            location:
-                freezed == location
-                    ? _value.location
-                    : location // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            isInCongregation:
-                freezed == isInCongregation
-                    ? _value.isInCongregation
-                    : isInCongregation // ignore: cast_nullable_to_non_nullable
-                        as bool?,
-            duration:
-                freezed == duration
-                    ? _value.duration
-                    : duration // ignore: cast_nullable_to_non_nullable
-                        as Duration?,
-            notes:
-                freezed == notes
-                    ? _value.notes
-                    : notes // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            qiblaAccuracy:
-                freezed == qiblaAccuracy
-                    ? _value.qiblaAccuracy
-                    : qiblaAccuracy // ignore: cast_nullable_to_non_nullable
-                        as double?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as PrayerType,
+      scheduledTime: null == scheduledTime
+          ? _value.scheduledTime
+          : scheduledTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      completedAt: freezed == completedAt
+          ? _value.completedAt
+          : completedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as PrayerCompletionStatus?,
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isInCongregation: freezed == isInCongregation
+          ? _value.isInCongregation
+          : isInCongregation // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      duration: freezed == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as Duration?,
+      notes: freezed == notes
+          ? _value.notes
+          : notes // ignore: cast_nullable_to_non_nullable
+              as String?,
+      qiblaAccuracy: freezed == qiblaAccuracy
+          ? _value.qiblaAccuracy
+          : qiblaAccuracy // ignore: cast_nullable_to_non_nullable
+              as double?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$PrayerCompletionImplCopyWith<$Res>
     implements $PrayerCompletionCopyWith<$Res> {
-  factory _$$PrayerCompletionImplCopyWith(
-    _$PrayerCompletionImpl value,
-    $Res Function(_$PrayerCompletionImpl) then,
-  ) = __$$PrayerCompletionImplCopyWithImpl<$Res>;
+  factory _$$PrayerCompletionImplCopyWith(_$PrayerCompletionImpl value,
+          $Res Function(_$PrayerCompletionImpl) then) =
+      __$$PrayerCompletionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    PrayerType type,
-    DateTime scheduledTime,
-    DateTime? completedAt,
-    PrayerCompletionStatus? status,
-    String? location,
-    bool? isInCongregation,
-    Duration? duration,
-    String? notes,
-    double? qiblaAccuracy,
-  });
+  $Res call(
+      {PrayerType type,
+      DateTime scheduledTime,
+      DateTime? completedAt,
+      PrayerCompletionStatus? status,
+      String? location,
+      bool? isInCongregation,
+      Duration? duration,
+      String? notes,
+      double? qiblaAccuracy});
 }
 
 /// @nodoc
 class __$$PrayerCompletionImplCopyWithImpl<$Res>
     extends _$PrayerCompletionCopyWithImpl<$Res, _$PrayerCompletionImpl>
     implements _$$PrayerCompletionImplCopyWith<$Res> {
-  __$$PrayerCompletionImplCopyWithImpl(
-    _$PrayerCompletionImpl _value,
-    $Res Function(_$PrayerCompletionImpl) _then,
-  ) : super(_value, _then);
+  __$$PrayerCompletionImplCopyWithImpl(_$PrayerCompletionImpl _value,
+      $Res Function(_$PrayerCompletionImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of PrayerCompletion
   /// with the given fields replaced by the non-null parameter values.
@@ -1231,72 +1127,60 @@ class __$$PrayerCompletionImplCopyWithImpl<$Res>
     Object? notes = freezed,
     Object? qiblaAccuracy = freezed,
   }) {
-    return _then(
-      _$PrayerCompletionImpl(
-        type:
-            null == type
-                ? _value.type
-                : type // ignore: cast_nullable_to_non_nullable
-                    as PrayerType,
-        scheduledTime:
-            null == scheduledTime
-                ? _value.scheduledTime
-                : scheduledTime // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        completedAt:
-            freezed == completedAt
-                ? _value.completedAt
-                : completedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        status:
-            freezed == status
-                ? _value.status
-                : status // ignore: cast_nullable_to_non_nullable
-                    as PrayerCompletionStatus?,
-        location:
-            freezed == location
-                ? _value.location
-                : location // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        isInCongregation:
-            freezed == isInCongregation
-                ? _value.isInCongregation
-                : isInCongregation // ignore: cast_nullable_to_non_nullable
-                    as bool?,
-        duration:
-            freezed == duration
-                ? _value.duration
-                : duration // ignore: cast_nullable_to_non_nullable
-                    as Duration?,
-        notes:
-            freezed == notes
-                ? _value.notes
-                : notes // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        qiblaAccuracy:
-            freezed == qiblaAccuracy
-                ? _value.qiblaAccuracy
-                : qiblaAccuracy // ignore: cast_nullable_to_non_nullable
-                    as double?,
-      ),
-    );
+    return _then(_$PrayerCompletionImpl(
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as PrayerType,
+      scheduledTime: null == scheduledTime
+          ? _value.scheduledTime
+          : scheduledTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      completedAt: freezed == completedAt
+          ? _value.completedAt
+          : completedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as PrayerCompletionStatus?,
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isInCongregation: freezed == isInCongregation
+          ? _value.isInCongregation
+          : isInCongregation // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      duration: freezed == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as Duration?,
+      notes: freezed == notes
+          ? _value.notes
+          : notes // ignore: cast_nullable_to_non_nullable
+              as String?,
+      qiblaAccuracy: freezed == qiblaAccuracy
+          ? _value.qiblaAccuracy
+          : qiblaAccuracy // ignore: cast_nullable_to_non_nullable
+              as double?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$PrayerCompletionImpl implements _PrayerCompletion {
-  const _$PrayerCompletionImpl({
-    required this.type,
-    required this.scheduledTime,
-    this.completedAt,
-    this.status,
-    this.location,
-    this.isInCongregation,
-    this.duration,
-    this.notes,
-    this.qiblaAccuracy,
-  });
+  const _$PrayerCompletionImpl(
+      {required this.type,
+      required this.scheduledTime,
+      this.completedAt,
+      this.status,
+      this.location,
+      this.isInCongregation,
+      this.duration,
+      this.notes,
+      this.qiblaAccuracy});
 
   factory _$PrayerCompletionImpl.fromJson(Map<String, dynamic> json) =>
       _$$PrayerCompletionImplFromJson(json);
@@ -1349,18 +1233,8 @@ class _$PrayerCompletionImpl implements _PrayerCompletion {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    type,
-    scheduledTime,
-    completedAt,
-    status,
-    location,
-    isInCongregation,
-    duration,
-    notes,
-    qiblaAccuracy,
-  );
+  int get hashCode => Object.hash(runtimeType, type, scheduledTime, completedAt,
+      status, location, isInCongregation, duration, notes, qiblaAccuracy);
 
   /// Create a copy of PrayerCompletion
   /// with the given fields replaced by the non-null parameter values.
@@ -1369,28 +1243,27 @@ class _$PrayerCompletionImpl implements _PrayerCompletion {
   @pragma('vm:prefer-inline')
   _$$PrayerCompletionImplCopyWith<_$PrayerCompletionImpl> get copyWith =>
       __$$PrayerCompletionImplCopyWithImpl<_$PrayerCompletionImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PrayerCompletionImplToJson(this);
+    return _$$PrayerCompletionImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _PrayerCompletion implements PrayerCompletion {
-  const factory _PrayerCompletion({
-    required final PrayerType type,
-    required final DateTime scheduledTime,
-    final DateTime? completedAt,
-    final PrayerCompletionStatus? status,
-    final String? location,
-    final bool? isInCongregation,
-    final Duration? duration,
-    final String? notes,
-    final double? qiblaAccuracy,
-  }) = _$PrayerCompletionImpl;
+  const factory _PrayerCompletion(
+      {required final PrayerType type,
+      required final DateTime scheduledTime,
+      final DateTime? completedAt,
+      final PrayerCompletionStatus? status,
+      final String? location,
+      final bool? isInCongregation,
+      final Duration? duration,
+      final String? notes,
+      final double? qiblaAccuracy}) = _$PrayerCompletionImpl;
 
   factory _PrayerCompletion.fromJson(Map<String, dynamic> json) =
       _$PrayerCompletionImpl.fromJson;
@@ -1450,20 +1323,18 @@ mixin _$PrayerStats {
 /// @nodoc
 abstract class $PrayerStatsCopyWith<$Res> {
   factory $PrayerStatsCopyWith(
-    PrayerStats value,
-    $Res Function(PrayerStats) then,
-  ) = _$PrayerStatsCopyWithImpl<$Res, PrayerStats>;
+          PrayerStats value, $Res Function(PrayerStats) then) =
+      _$PrayerStatsCopyWithImpl<$Res, PrayerStats>;
   @useResult
-  $Res call({
-    int totalPrayers,
-    int completedPrayers,
-    int missedPrayers,
-    double completionRate,
-    Duration totalPrayerTime,
-    Map<PrayerType, int> prayerCounts,
-    String? bestStreak,
-    DateTime? lastPrayerTime,
-  });
+  $Res call(
+      {int totalPrayers,
+      int completedPrayers,
+      int missedPrayers,
+      double completionRate,
+      Duration totalPrayerTime,
+      Map<PrayerType, int> prayerCounts,
+      String? bestStreak,
+      DateTime? lastPrayerTime});
 }
 
 /// @nodoc
@@ -1490,51 +1361,40 @@ class _$PrayerStatsCopyWithImpl<$Res, $Val extends PrayerStats>
     Object? bestStreak = freezed,
     Object? lastPrayerTime = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            totalPrayers:
-                null == totalPrayers
-                    ? _value.totalPrayers
-                    : totalPrayers // ignore: cast_nullable_to_non_nullable
-                        as int,
-            completedPrayers:
-                null == completedPrayers
-                    ? _value.completedPrayers
-                    : completedPrayers // ignore: cast_nullable_to_non_nullable
-                        as int,
-            missedPrayers:
-                null == missedPrayers
-                    ? _value.missedPrayers
-                    : missedPrayers // ignore: cast_nullable_to_non_nullable
-                        as int,
-            completionRate:
-                null == completionRate
-                    ? _value.completionRate
-                    : completionRate // ignore: cast_nullable_to_non_nullable
-                        as double,
-            totalPrayerTime:
-                null == totalPrayerTime
-                    ? _value.totalPrayerTime
-                    : totalPrayerTime // ignore: cast_nullable_to_non_nullable
-                        as Duration,
-            prayerCounts:
-                null == prayerCounts
-                    ? _value.prayerCounts
-                    : prayerCounts // ignore: cast_nullable_to_non_nullable
-                        as Map<PrayerType, int>,
-            bestStreak:
-                freezed == bestStreak
-                    ? _value.bestStreak
-                    : bestStreak // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            lastPrayerTime:
-                freezed == lastPrayerTime
-                    ? _value.lastPrayerTime
-                    : lastPrayerTime // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      totalPrayers: null == totalPrayers
+          ? _value.totalPrayers
+          : totalPrayers // ignore: cast_nullable_to_non_nullable
+              as int,
+      completedPrayers: null == completedPrayers
+          ? _value.completedPrayers
+          : completedPrayers // ignore: cast_nullable_to_non_nullable
+              as int,
+      missedPrayers: null == missedPrayers
+          ? _value.missedPrayers
+          : missedPrayers // ignore: cast_nullable_to_non_nullable
+              as int,
+      completionRate: null == completionRate
+          ? _value.completionRate
+          : completionRate // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalPrayerTime: null == totalPrayerTime
+          ? _value.totalPrayerTime
+          : totalPrayerTime // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      prayerCounts: null == prayerCounts
+          ? _value.prayerCounts
+          : prayerCounts // ignore: cast_nullable_to_non_nullable
+              as Map<PrayerType, int>,
+      bestStreak: freezed == bestStreak
+          ? _value.bestStreak
+          : bestStreak // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastPrayerTime: freezed == lastPrayerTime
+          ? _value.lastPrayerTime
+          : lastPrayerTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
   }
 }
 
@@ -1542,21 +1402,19 @@ class _$PrayerStatsCopyWithImpl<$Res, $Val extends PrayerStats>
 abstract class _$$PrayerStatsImplCopyWith<$Res>
     implements $PrayerStatsCopyWith<$Res> {
   factory _$$PrayerStatsImplCopyWith(
-    _$PrayerStatsImpl value,
-    $Res Function(_$PrayerStatsImpl) then,
-  ) = __$$PrayerStatsImplCopyWithImpl<$Res>;
+          _$PrayerStatsImpl value, $Res Function(_$PrayerStatsImpl) then) =
+      __$$PrayerStatsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    int totalPrayers,
-    int completedPrayers,
-    int missedPrayers,
-    double completionRate,
-    Duration totalPrayerTime,
-    Map<PrayerType, int> prayerCounts,
-    String? bestStreak,
-    DateTime? lastPrayerTime,
-  });
+  $Res call(
+      {int totalPrayers,
+      int completedPrayers,
+      int missedPrayers,
+      double completionRate,
+      Duration totalPrayerTime,
+      Map<PrayerType, int> prayerCounts,
+      String? bestStreak,
+      DateTime? lastPrayerTime});
 }
 
 /// @nodoc
@@ -1564,9 +1422,8 @@ class __$$PrayerStatsImplCopyWithImpl<$Res>
     extends _$PrayerStatsCopyWithImpl<$Res, _$PrayerStatsImpl>
     implements _$$PrayerStatsImplCopyWith<$Res> {
   __$$PrayerStatsImplCopyWithImpl(
-    _$PrayerStatsImpl _value,
-    $Res Function(_$PrayerStatsImpl) _then,
-  ) : super(_value, _then);
+      _$PrayerStatsImpl _value, $Res Function(_$PrayerStatsImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of PrayerStats
   /// with the given fields replaced by the non-null parameter values.
@@ -1582,66 +1439,56 @@ class __$$PrayerStatsImplCopyWithImpl<$Res>
     Object? bestStreak = freezed,
     Object? lastPrayerTime = freezed,
   }) {
-    return _then(
-      _$PrayerStatsImpl(
-        totalPrayers:
-            null == totalPrayers
-                ? _value.totalPrayers
-                : totalPrayers // ignore: cast_nullable_to_non_nullable
-                    as int,
-        completedPrayers:
-            null == completedPrayers
-                ? _value.completedPrayers
-                : completedPrayers // ignore: cast_nullable_to_non_nullable
-                    as int,
-        missedPrayers:
-            null == missedPrayers
-                ? _value.missedPrayers
-                : missedPrayers // ignore: cast_nullable_to_non_nullable
-                    as int,
-        completionRate:
-            null == completionRate
-                ? _value.completionRate
-                : completionRate // ignore: cast_nullable_to_non_nullable
-                    as double,
-        totalPrayerTime:
-            null == totalPrayerTime
-                ? _value.totalPrayerTime
-                : totalPrayerTime // ignore: cast_nullable_to_non_nullable
-                    as Duration,
-        prayerCounts:
-            null == prayerCounts
-                ? _value._prayerCounts
-                : prayerCounts // ignore: cast_nullable_to_non_nullable
-                    as Map<PrayerType, int>,
-        bestStreak:
-            freezed == bestStreak
-                ? _value.bestStreak
-                : bestStreak // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        lastPrayerTime:
-            freezed == lastPrayerTime
-                ? _value.lastPrayerTime
-                : lastPrayerTime // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-      ),
-    );
+    return _then(_$PrayerStatsImpl(
+      totalPrayers: null == totalPrayers
+          ? _value.totalPrayers
+          : totalPrayers // ignore: cast_nullable_to_non_nullable
+              as int,
+      completedPrayers: null == completedPrayers
+          ? _value.completedPrayers
+          : completedPrayers // ignore: cast_nullable_to_non_nullable
+              as int,
+      missedPrayers: null == missedPrayers
+          ? _value.missedPrayers
+          : missedPrayers // ignore: cast_nullable_to_non_nullable
+              as int,
+      completionRate: null == completionRate
+          ? _value.completionRate
+          : completionRate // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalPrayerTime: null == totalPrayerTime
+          ? _value.totalPrayerTime
+          : totalPrayerTime // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      prayerCounts: null == prayerCounts
+          ? _value._prayerCounts
+          : prayerCounts // ignore: cast_nullable_to_non_nullable
+              as Map<PrayerType, int>,
+      bestStreak: freezed == bestStreak
+          ? _value.bestStreak
+          : bestStreak // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastPrayerTime: freezed == lastPrayerTime
+          ? _value.lastPrayerTime
+          : lastPrayerTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$PrayerStatsImpl implements _PrayerStats {
-  const _$PrayerStatsImpl({
-    required this.totalPrayers,
-    required this.completedPrayers,
-    required this.missedPrayers,
-    required this.completionRate,
-    required this.totalPrayerTime,
-    required final Map<PrayerType, int> prayerCounts,
-    this.bestStreak,
-    this.lastPrayerTime,
-  }) : _prayerCounts = prayerCounts;
+  const _$PrayerStatsImpl(
+      {required this.totalPrayers,
+      required this.completedPrayers,
+      required this.missedPrayers,
+      required this.completionRate,
+      required this.totalPrayerTime,
+      required final Map<PrayerType, int> prayerCounts,
+      this.bestStreak,
+      this.lastPrayerTime})
+      : _prayerCounts = prayerCounts;
 
   factory _$PrayerStatsImpl.fromJson(Map<String, dynamic> json) =>
       _$$PrayerStatsImplFromJson(json);
@@ -1689,10 +1536,8 @@ class _$PrayerStatsImpl implements _PrayerStats {
                 other.completionRate == completionRate) &&
             (identical(other.totalPrayerTime, totalPrayerTime) ||
                 other.totalPrayerTime == totalPrayerTime) &&
-            const DeepCollectionEquality().equals(
-              other._prayerCounts,
-              _prayerCounts,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._prayerCounts, _prayerCounts) &&
             (identical(other.bestStreak, bestStreak) ||
                 other.bestStreak == bestStreak) &&
             (identical(other.lastPrayerTime, lastPrayerTime) ||
@@ -1702,16 +1547,15 @@ class _$PrayerStatsImpl implements _PrayerStats {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    totalPrayers,
-    completedPrayers,
-    missedPrayers,
-    completionRate,
-    totalPrayerTime,
-    const DeepCollectionEquality().hash(_prayerCounts),
-    bestStreak,
-    lastPrayerTime,
-  );
+      runtimeType,
+      totalPrayers,
+      completedPrayers,
+      missedPrayers,
+      completionRate,
+      totalPrayerTime,
+      const DeepCollectionEquality().hash(_prayerCounts),
+      bestStreak,
+      lastPrayerTime);
 
   /// Create a copy of PrayerStats
   /// with the given fields replaced by the non-null parameter values.
@@ -1723,21 +1567,22 @@ class _$PrayerStatsImpl implements _PrayerStats {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PrayerStatsImplToJson(this);
+    return _$$PrayerStatsImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _PrayerStats implements PrayerStats {
-  const factory _PrayerStats({
-    required final int totalPrayers,
-    required final int completedPrayers,
-    required final int missedPrayers,
-    required final double completionRate,
-    required final Duration totalPrayerTime,
-    required final Map<PrayerType, int> prayerCounts,
-    final String? bestStreak,
-    final DateTime? lastPrayerTime,
-  }) = _$PrayerStatsImpl;
+  const factory _PrayerStats(
+      {required final int totalPrayers,
+      required final int completedPrayers,
+      required final int missedPrayers,
+      required final double completionRate,
+      required final Duration totalPrayerTime,
+      required final Map<PrayerType, int> prayerCounts,
+      final String? bestStreak,
+      final DateTime? lastPrayerTime}) = _$PrayerStatsImpl;
 
   factory _PrayerStats.fromJson(Map<String, dynamic> json) =
       _$PrayerStatsImpl.fromJson;
@@ -1795,20 +1640,18 @@ mixin _$PrayerReminder {
 /// @nodoc
 abstract class $PrayerReminderCopyWith<$Res> {
   factory $PrayerReminderCopyWith(
-    PrayerReminder value,
-    $Res Function(PrayerReminder) then,
-  ) = _$PrayerReminderCopyWithImpl<$Res, PrayerReminder>;
+          PrayerReminder value, $Res Function(PrayerReminder) then) =
+      _$PrayerReminderCopyWithImpl<$Res, PrayerReminder>;
   @useResult
-  $Res call({
-    String id,
-    PrayerType prayerType,
-    DateTime scheduledTime,
-    bool isEnabled,
-    Duration? advanceNotification,
-    String? customMessage,
-    ReminderRepeat? repeatType,
-    Map<String, dynamic>? soundSettings,
-  });
+  $Res call(
+      {String id,
+      PrayerType prayerType,
+      DateTime scheduledTime,
+      bool isEnabled,
+      Duration? advanceNotification,
+      String? customMessage,
+      ReminderRepeat? repeatType,
+      Map<String, dynamic>? soundSettings});
 }
 
 /// @nodoc
@@ -1835,73 +1678,60 @@ class _$PrayerReminderCopyWithImpl<$Res, $Val extends PrayerReminder>
     Object? repeatType = freezed,
     Object? soundSettings = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            prayerType:
-                null == prayerType
-                    ? _value.prayerType
-                    : prayerType // ignore: cast_nullable_to_non_nullable
-                        as PrayerType,
-            scheduledTime:
-                null == scheduledTime
-                    ? _value.scheduledTime
-                    : scheduledTime // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            isEnabled:
-                null == isEnabled
-                    ? _value.isEnabled
-                    : isEnabled // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            advanceNotification:
-                freezed == advanceNotification
-                    ? _value.advanceNotification
-                    : advanceNotification // ignore: cast_nullable_to_non_nullable
-                        as Duration?,
-            customMessage:
-                freezed == customMessage
-                    ? _value.customMessage
-                    : customMessage // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            repeatType:
-                freezed == repeatType
-                    ? _value.repeatType
-                    : repeatType // ignore: cast_nullable_to_non_nullable
-                        as ReminderRepeat?,
-            soundSettings:
-                freezed == soundSettings
-                    ? _value.soundSettings
-                    : soundSettings // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      prayerType: null == prayerType
+          ? _value.prayerType
+          : prayerType // ignore: cast_nullable_to_non_nullable
+              as PrayerType,
+      scheduledTime: null == scheduledTime
+          ? _value.scheduledTime
+          : scheduledTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      isEnabled: null == isEnabled
+          ? _value.isEnabled
+          : isEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      advanceNotification: freezed == advanceNotification
+          ? _value.advanceNotification
+          : advanceNotification // ignore: cast_nullable_to_non_nullable
+              as Duration?,
+      customMessage: freezed == customMessage
+          ? _value.customMessage
+          : customMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      repeatType: freezed == repeatType
+          ? _value.repeatType
+          : repeatType // ignore: cast_nullable_to_non_nullable
+              as ReminderRepeat?,
+      soundSettings: freezed == soundSettings
+          ? _value.soundSettings
+          : soundSettings // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$PrayerReminderImplCopyWith<$Res>
     implements $PrayerReminderCopyWith<$Res> {
-  factory _$$PrayerReminderImplCopyWith(
-    _$PrayerReminderImpl value,
-    $Res Function(_$PrayerReminderImpl) then,
-  ) = __$$PrayerReminderImplCopyWithImpl<$Res>;
+  factory _$$PrayerReminderImplCopyWith(_$PrayerReminderImpl value,
+          $Res Function(_$PrayerReminderImpl) then) =
+      __$$PrayerReminderImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    PrayerType prayerType,
-    DateTime scheduledTime,
-    bool isEnabled,
-    Duration? advanceNotification,
-    String? customMessage,
-    ReminderRepeat? repeatType,
-    Map<String, dynamic>? soundSettings,
-  });
+  $Res call(
+      {String id,
+      PrayerType prayerType,
+      DateTime scheduledTime,
+      bool isEnabled,
+      Duration? advanceNotification,
+      String? customMessage,
+      ReminderRepeat? repeatType,
+      Map<String, dynamic>? soundSettings});
 }
 
 /// @nodoc
@@ -1909,9 +1739,8 @@ class __$$PrayerReminderImplCopyWithImpl<$Res>
     extends _$PrayerReminderCopyWithImpl<$Res, _$PrayerReminderImpl>
     implements _$$PrayerReminderImplCopyWith<$Res> {
   __$$PrayerReminderImplCopyWithImpl(
-    _$PrayerReminderImpl _value,
-    $Res Function(_$PrayerReminderImpl) _then,
-  ) : super(_value, _then);
+      _$PrayerReminderImpl _value, $Res Function(_$PrayerReminderImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of PrayerReminder
   /// with the given fields replaced by the non-null parameter values.
@@ -1927,66 +1756,56 @@ class __$$PrayerReminderImplCopyWithImpl<$Res>
     Object? repeatType = freezed,
     Object? soundSettings = freezed,
   }) {
-    return _then(
-      _$PrayerReminderImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        prayerType:
-            null == prayerType
-                ? _value.prayerType
-                : prayerType // ignore: cast_nullable_to_non_nullable
-                    as PrayerType,
-        scheduledTime:
-            null == scheduledTime
-                ? _value.scheduledTime
-                : scheduledTime // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        isEnabled:
-            null == isEnabled
-                ? _value.isEnabled
-                : isEnabled // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        advanceNotification:
-            freezed == advanceNotification
-                ? _value.advanceNotification
-                : advanceNotification // ignore: cast_nullable_to_non_nullable
-                    as Duration?,
-        customMessage:
-            freezed == customMessage
-                ? _value.customMessage
-                : customMessage // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        repeatType:
-            freezed == repeatType
-                ? _value.repeatType
-                : repeatType // ignore: cast_nullable_to_non_nullable
-                    as ReminderRepeat?,
-        soundSettings:
-            freezed == soundSettings
-                ? _value._soundSettings
-                : soundSettings // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>?,
-      ),
-    );
+    return _then(_$PrayerReminderImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      prayerType: null == prayerType
+          ? _value.prayerType
+          : prayerType // ignore: cast_nullable_to_non_nullable
+              as PrayerType,
+      scheduledTime: null == scheduledTime
+          ? _value.scheduledTime
+          : scheduledTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      isEnabled: null == isEnabled
+          ? _value.isEnabled
+          : isEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      advanceNotification: freezed == advanceNotification
+          ? _value.advanceNotification
+          : advanceNotification // ignore: cast_nullable_to_non_nullable
+              as Duration?,
+      customMessage: freezed == customMessage
+          ? _value.customMessage
+          : customMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      repeatType: freezed == repeatType
+          ? _value.repeatType
+          : repeatType // ignore: cast_nullable_to_non_nullable
+              as ReminderRepeat?,
+      soundSettings: freezed == soundSettings
+          ? _value._soundSettings
+          : soundSettings // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$PrayerReminderImpl implements _PrayerReminder {
-  const _$PrayerReminderImpl({
-    required this.id,
-    required this.prayerType,
-    required this.scheduledTime,
-    required this.isEnabled,
-    this.advanceNotification,
-    this.customMessage,
-    this.repeatType,
-    final Map<String, dynamic>? soundSettings,
-  }) : _soundSettings = soundSettings;
+  const _$PrayerReminderImpl(
+      {required this.id,
+      required this.prayerType,
+      required this.scheduledTime,
+      required this.isEnabled,
+      this.advanceNotification,
+      this.customMessage,
+      this.repeatType,
+      final Map<String, dynamic>? soundSettings})
+      : _soundSettings = soundSettings;
 
   factory _$PrayerReminderImpl.fromJson(Map<String, dynamic> json) =>
       _$$PrayerReminderImplFromJson(json);
@@ -2038,25 +1857,22 @@ class _$PrayerReminderImpl implements _PrayerReminder {
                 other.customMessage == customMessage) &&
             (identical(other.repeatType, repeatType) ||
                 other.repeatType == repeatType) &&
-            const DeepCollectionEquality().equals(
-              other._soundSettings,
-              _soundSettings,
-            ));
+            const DeepCollectionEquality()
+                .equals(other._soundSettings, _soundSettings));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    prayerType,
-    scheduledTime,
-    isEnabled,
-    advanceNotification,
-    customMessage,
-    repeatType,
-    const DeepCollectionEquality().hash(_soundSettings),
-  );
+      runtimeType,
+      id,
+      prayerType,
+      scheduledTime,
+      isEnabled,
+      advanceNotification,
+      customMessage,
+      repeatType,
+      const DeepCollectionEquality().hash(_soundSettings));
 
   /// Create a copy of PrayerReminder
   /// with the given fields replaced by the non-null parameter values.
@@ -2065,27 +1881,26 @@ class _$PrayerReminderImpl implements _PrayerReminder {
   @pragma('vm:prefer-inline')
   _$$PrayerReminderImplCopyWith<_$PrayerReminderImpl> get copyWith =>
       __$$PrayerReminderImplCopyWithImpl<_$PrayerReminderImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PrayerReminderImplToJson(this);
+    return _$$PrayerReminderImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _PrayerReminder implements PrayerReminder {
-  const factory _PrayerReminder({
-    required final String id,
-    required final PrayerType prayerType,
-    required final DateTime scheduledTime,
-    required final bool isEnabled,
-    final Duration? advanceNotification,
-    final String? customMessage,
-    final ReminderRepeat? repeatType,
-    final Map<String, dynamic>? soundSettings,
-  }) = _$PrayerReminderImpl;
+  const factory _PrayerReminder(
+      {required final String id,
+      required final PrayerType prayerType,
+      required final DateTime scheduledTime,
+      required final bool isEnabled,
+      final Duration? advanceNotification,
+      final String? customMessage,
+      final ReminderRepeat? repeatType,
+      final Map<String, dynamic>? soundSettings}) = _$PrayerReminderImpl;
 
   factory _PrayerReminder.fromJson(Map<String, dynamic> json) =
       _$PrayerReminderImpl.fromJson;
@@ -2149,25 +1964,23 @@ mixin _$MosqueLocation {
 /// @nodoc
 abstract class $MosqueLocationCopyWith<$Res> {
   factory $MosqueLocationCopyWith(
-    MosqueLocation value,
-    $Res Function(MosqueLocation) then,
-  ) = _$MosqueLocationCopyWithImpl<$Res, MosqueLocation>;
+          MosqueLocation value, $Res Function(MosqueLocation) then) =
+      _$MosqueLocationCopyWithImpl<$Res, MosqueLocation>;
   @useResult
-  $Res call({
-    String id,
-    String name,
-    double latitude,
-    double longitude,
-    double distanceInMeters,
-    double qiblaDirection,
-    String? address,
-    String? phoneNumber,
-    String? website,
-    List<String>? amenities,
-    Map<PrayerType, DateTime>? prayerTimes,
-    MosqueRating? rating,
-    List<String>? images,
-  });
+  $Res call(
+      {String id,
+      String name,
+      double latitude,
+      double longitude,
+      double distanceInMeters,
+      double qiblaDirection,
+      String? address,
+      String? phoneNumber,
+      String? website,
+      List<String>? amenities,
+      Map<PrayerType, DateTime>? prayerTimes,
+      MosqueRating? rating,
+      List<String>? images});
 
   $MosqueRatingCopyWith<$Res>? get rating;
 }
@@ -2201,76 +2014,60 @@ class _$MosqueLocationCopyWithImpl<$Res, $Val extends MosqueLocation>
     Object? rating = freezed,
     Object? images = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            name:
-                null == name
-                    ? _value.name
-                    : name // ignore: cast_nullable_to_non_nullable
-                        as String,
-            latitude:
-                null == latitude
-                    ? _value.latitude
-                    : latitude // ignore: cast_nullable_to_non_nullable
-                        as double,
-            longitude:
-                null == longitude
-                    ? _value.longitude
-                    : longitude // ignore: cast_nullable_to_non_nullable
-                        as double,
-            distanceInMeters:
-                null == distanceInMeters
-                    ? _value.distanceInMeters
-                    : distanceInMeters // ignore: cast_nullable_to_non_nullable
-                        as double,
-            qiblaDirection:
-                null == qiblaDirection
-                    ? _value.qiblaDirection
-                    : qiblaDirection // ignore: cast_nullable_to_non_nullable
-                        as double,
-            address:
-                freezed == address
-                    ? _value.address
-                    : address // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            phoneNumber:
-                freezed == phoneNumber
-                    ? _value.phoneNumber
-                    : phoneNumber // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            website:
-                freezed == website
-                    ? _value.website
-                    : website // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            amenities:
-                freezed == amenities
-                    ? _value.amenities
-                    : amenities // ignore: cast_nullable_to_non_nullable
-                        as List<String>?,
-            prayerTimes:
-                freezed == prayerTimes
-                    ? _value.prayerTimes
-                    : prayerTimes // ignore: cast_nullable_to_non_nullable
-                        as Map<PrayerType, DateTime>?,
-            rating:
-                freezed == rating
-                    ? _value.rating
-                    : rating // ignore: cast_nullable_to_non_nullable
-                        as MosqueRating?,
-            images:
-                freezed == images
-                    ? _value.images
-                    : images // ignore: cast_nullable_to_non_nullable
-                        as List<String>?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      latitude: null == latitude
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as double,
+      longitude: null == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as double,
+      distanceInMeters: null == distanceInMeters
+          ? _value.distanceInMeters
+          : distanceInMeters // ignore: cast_nullable_to_non_nullable
+              as double,
+      qiblaDirection: null == qiblaDirection
+          ? _value.qiblaDirection
+          : qiblaDirection // ignore: cast_nullable_to_non_nullable
+              as double,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      website: freezed == website
+          ? _value.website
+          : website // ignore: cast_nullable_to_non_nullable
+              as String?,
+      amenities: freezed == amenities
+          ? _value.amenities
+          : amenities // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      prayerTimes: freezed == prayerTimes
+          ? _value.prayerTimes
+          : prayerTimes // ignore: cast_nullable_to_non_nullable
+              as Map<PrayerType, DateTime>?,
+      rating: freezed == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as MosqueRating?,
+      images: freezed == images
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+    ) as $Val);
   }
 
   /// Create a copy of MosqueLocation
@@ -2291,27 +2088,25 @@ class _$MosqueLocationCopyWithImpl<$Res, $Val extends MosqueLocation>
 /// @nodoc
 abstract class _$$MosqueLocationImplCopyWith<$Res>
     implements $MosqueLocationCopyWith<$Res> {
-  factory _$$MosqueLocationImplCopyWith(
-    _$MosqueLocationImpl value,
-    $Res Function(_$MosqueLocationImpl) then,
-  ) = __$$MosqueLocationImplCopyWithImpl<$Res>;
+  factory _$$MosqueLocationImplCopyWith(_$MosqueLocationImpl value,
+          $Res Function(_$MosqueLocationImpl) then) =
+      __$$MosqueLocationImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String name,
-    double latitude,
-    double longitude,
-    double distanceInMeters,
-    double qiblaDirection,
-    String? address,
-    String? phoneNumber,
-    String? website,
-    List<String>? amenities,
-    Map<PrayerType, DateTime>? prayerTimes,
-    MosqueRating? rating,
-    List<String>? images,
-  });
+  $Res call(
+      {String id,
+      String name,
+      double latitude,
+      double longitude,
+      double distanceInMeters,
+      double qiblaDirection,
+      String? address,
+      String? phoneNumber,
+      String? website,
+      List<String>? amenities,
+      Map<PrayerType, DateTime>? prayerTimes,
+      MosqueRating? rating,
+      List<String>? images});
 
   @override
   $MosqueRatingCopyWith<$Res>? get rating;
@@ -2322,9 +2117,8 @@ class __$$MosqueLocationImplCopyWithImpl<$Res>
     extends _$MosqueLocationCopyWithImpl<$Res, _$MosqueLocationImpl>
     implements _$$MosqueLocationImplCopyWith<$Res> {
   __$$MosqueLocationImplCopyWithImpl(
-    _$MosqueLocationImpl _value,
-    $Res Function(_$MosqueLocationImpl) _then,
-  ) : super(_value, _then);
+      _$MosqueLocationImpl _value, $Res Function(_$MosqueLocationImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of MosqueLocation
   /// with the given fields replaced by the non-null parameter values.
@@ -2345,98 +2139,83 @@ class __$$MosqueLocationImplCopyWithImpl<$Res>
     Object? rating = freezed,
     Object? images = freezed,
   }) {
-    return _then(
-      _$MosqueLocationImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        name:
-            null == name
-                ? _value.name
-                : name // ignore: cast_nullable_to_non_nullable
-                    as String,
-        latitude:
-            null == latitude
-                ? _value.latitude
-                : latitude // ignore: cast_nullable_to_non_nullable
-                    as double,
-        longitude:
-            null == longitude
-                ? _value.longitude
-                : longitude // ignore: cast_nullable_to_non_nullable
-                    as double,
-        distanceInMeters:
-            null == distanceInMeters
-                ? _value.distanceInMeters
-                : distanceInMeters // ignore: cast_nullable_to_non_nullable
-                    as double,
-        qiblaDirection:
-            null == qiblaDirection
-                ? _value.qiblaDirection
-                : qiblaDirection // ignore: cast_nullable_to_non_nullable
-                    as double,
-        address:
-            freezed == address
-                ? _value.address
-                : address // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        phoneNumber:
-            freezed == phoneNumber
-                ? _value.phoneNumber
-                : phoneNumber // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        website:
-            freezed == website
-                ? _value.website
-                : website // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        amenities:
-            freezed == amenities
-                ? _value._amenities
-                : amenities // ignore: cast_nullable_to_non_nullable
-                    as List<String>?,
-        prayerTimes:
-            freezed == prayerTimes
-                ? _value._prayerTimes
-                : prayerTimes // ignore: cast_nullable_to_non_nullable
-                    as Map<PrayerType, DateTime>?,
-        rating:
-            freezed == rating
-                ? _value.rating
-                : rating // ignore: cast_nullable_to_non_nullable
-                    as MosqueRating?,
-        images:
-            freezed == images
-                ? _value._images
-                : images // ignore: cast_nullable_to_non_nullable
-                    as List<String>?,
-      ),
-    );
+    return _then(_$MosqueLocationImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      latitude: null == latitude
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as double,
+      longitude: null == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as double,
+      distanceInMeters: null == distanceInMeters
+          ? _value.distanceInMeters
+          : distanceInMeters // ignore: cast_nullable_to_non_nullable
+              as double,
+      qiblaDirection: null == qiblaDirection
+          ? _value.qiblaDirection
+          : qiblaDirection // ignore: cast_nullable_to_non_nullable
+              as double,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      website: freezed == website
+          ? _value.website
+          : website // ignore: cast_nullable_to_non_nullable
+              as String?,
+      amenities: freezed == amenities
+          ? _value._amenities
+          : amenities // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      prayerTimes: freezed == prayerTimes
+          ? _value._prayerTimes
+          : prayerTimes // ignore: cast_nullable_to_non_nullable
+              as Map<PrayerType, DateTime>?,
+      rating: freezed == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as MosqueRating?,
+      images: freezed == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$MosqueLocationImpl implements _MosqueLocation {
-  const _$MosqueLocationImpl({
-    required this.id,
-    required this.name,
-    required this.latitude,
-    required this.longitude,
-    required this.distanceInMeters,
-    required this.qiblaDirection,
-    this.address,
-    this.phoneNumber,
-    this.website,
-    final List<String>? amenities,
-    final Map<PrayerType, DateTime>? prayerTimes,
-    this.rating,
-    final List<String>? images,
-  }) : _amenities = amenities,
-       _prayerTimes = prayerTimes,
-       _images = images;
+  const _$MosqueLocationImpl(
+      {required this.id,
+      required this.name,
+      required this.latitude,
+      required this.longitude,
+      required this.distanceInMeters,
+      required this.qiblaDirection,
+      this.address,
+      this.phoneNumber,
+      this.website,
+      final List<String>? amenities,
+      final Map<PrayerType, DateTime>? prayerTimes,
+      this.rating,
+      final List<String>? images})
+      : _amenities = amenities,
+        _prayerTimes = prayerTimes,
+        _images = images;
 
   factory _$MosqueLocationImpl.fromJson(Map<String, dynamic> json) =>
       _$$MosqueLocationImplFromJson(json);
@@ -2515,14 +2294,10 @@ class _$MosqueLocationImpl implements _MosqueLocation {
             (identical(other.phoneNumber, phoneNumber) ||
                 other.phoneNumber == phoneNumber) &&
             (identical(other.website, website) || other.website == website) &&
-            const DeepCollectionEquality().equals(
-              other._amenities,
-              _amenities,
-            ) &&
-            const DeepCollectionEquality().equals(
-              other._prayerTimes,
-              _prayerTimes,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._amenities, _amenities) &&
+            const DeepCollectionEquality()
+                .equals(other._prayerTimes, _prayerTimes) &&
             (identical(other.rating, rating) || other.rating == rating) &&
             const DeepCollectionEquality().equals(other._images, _images));
   }
@@ -2530,21 +2305,20 @@ class _$MosqueLocationImpl implements _MosqueLocation {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    name,
-    latitude,
-    longitude,
-    distanceInMeters,
-    qiblaDirection,
-    address,
-    phoneNumber,
-    website,
-    const DeepCollectionEquality().hash(_amenities),
-    const DeepCollectionEquality().hash(_prayerTimes),
-    rating,
-    const DeepCollectionEquality().hash(_images),
-  );
+      runtimeType,
+      id,
+      name,
+      latitude,
+      longitude,
+      distanceInMeters,
+      qiblaDirection,
+      address,
+      phoneNumber,
+      website,
+      const DeepCollectionEquality().hash(_amenities),
+      const DeepCollectionEquality().hash(_prayerTimes),
+      rating,
+      const DeepCollectionEquality().hash(_images));
 
   /// Create a copy of MosqueLocation
   /// with the given fields replaced by the non-null parameter values.
@@ -2553,32 +2327,31 @@ class _$MosqueLocationImpl implements _MosqueLocation {
   @pragma('vm:prefer-inline')
   _$$MosqueLocationImplCopyWith<_$MosqueLocationImpl> get copyWith =>
       __$$MosqueLocationImplCopyWithImpl<_$MosqueLocationImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$MosqueLocationImplToJson(this);
+    return _$$MosqueLocationImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _MosqueLocation implements MosqueLocation {
-  const factory _MosqueLocation({
-    required final String id,
-    required final String name,
-    required final double latitude,
-    required final double longitude,
-    required final double distanceInMeters,
-    required final double qiblaDirection,
-    final String? address,
-    final String? phoneNumber,
-    final String? website,
-    final List<String>? amenities,
-    final Map<PrayerType, DateTime>? prayerTimes,
-    final MosqueRating? rating,
-    final List<String>? images,
-  }) = _$MosqueLocationImpl;
+  const factory _MosqueLocation(
+      {required final String id,
+      required final String name,
+      required final double latitude,
+      required final double longitude,
+      required final double distanceInMeters,
+      required final double qiblaDirection,
+      final String? address,
+      final String? phoneNumber,
+      final String? website,
+      final List<String>? amenities,
+      final Map<PrayerType, DateTime>? prayerTimes,
+      final MosqueRating? rating,
+      final List<String>? images}) = _$MosqueLocationImpl;
 
   factory _MosqueLocation.fromJson(Map<String, dynamic> json) =
       _$MosqueLocationImpl.fromJson;
@@ -2642,16 +2415,14 @@ mixin _$MosqueRating {
 /// @nodoc
 abstract class $MosqueRatingCopyWith<$Res> {
   factory $MosqueRatingCopyWith(
-    MosqueRating value,
-    $Res Function(MosqueRating) then,
-  ) = _$MosqueRatingCopyWithImpl<$Res, MosqueRating>;
+          MosqueRating value, $Res Function(MosqueRating) then) =
+      _$MosqueRatingCopyWithImpl<$Res, MosqueRating>;
   @useResult
-  $Res call({
-    double averageRating,
-    int totalReviews,
-    Map<String, int> categoryRatings,
-    List<MosqueReview>? recentReviews,
-  });
+  $Res call(
+      {double averageRating,
+      int totalReviews,
+      Map<String, int> categoryRatings,
+      List<MosqueReview>? recentReviews});
 }
 
 /// @nodoc
@@ -2674,31 +2445,24 @@ class _$MosqueRatingCopyWithImpl<$Res, $Val extends MosqueRating>
     Object? categoryRatings = null,
     Object? recentReviews = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            averageRating:
-                null == averageRating
-                    ? _value.averageRating
-                    : averageRating // ignore: cast_nullable_to_non_nullable
-                        as double,
-            totalReviews:
-                null == totalReviews
-                    ? _value.totalReviews
-                    : totalReviews // ignore: cast_nullable_to_non_nullable
-                        as int,
-            categoryRatings:
-                null == categoryRatings
-                    ? _value.categoryRatings
-                    : categoryRatings // ignore: cast_nullable_to_non_nullable
-                        as Map<String, int>,
-            recentReviews:
-                freezed == recentReviews
-                    ? _value.recentReviews
-                    : recentReviews // ignore: cast_nullable_to_non_nullable
-                        as List<MosqueReview>?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      averageRating: null == averageRating
+          ? _value.averageRating
+          : averageRating // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalReviews: null == totalReviews
+          ? _value.totalReviews
+          : totalReviews // ignore: cast_nullable_to_non_nullable
+              as int,
+      categoryRatings: null == categoryRatings
+          ? _value.categoryRatings
+          : categoryRatings // ignore: cast_nullable_to_non_nullable
+              as Map<String, int>,
+      recentReviews: freezed == recentReviews
+          ? _value.recentReviews
+          : recentReviews // ignore: cast_nullable_to_non_nullable
+              as List<MosqueReview>?,
+    ) as $Val);
   }
 }
 
@@ -2706,17 +2470,15 @@ class _$MosqueRatingCopyWithImpl<$Res, $Val extends MosqueRating>
 abstract class _$$MosqueRatingImplCopyWith<$Res>
     implements $MosqueRatingCopyWith<$Res> {
   factory _$$MosqueRatingImplCopyWith(
-    _$MosqueRatingImpl value,
-    $Res Function(_$MosqueRatingImpl) then,
-  ) = __$$MosqueRatingImplCopyWithImpl<$Res>;
+          _$MosqueRatingImpl value, $Res Function(_$MosqueRatingImpl) then) =
+      __$$MosqueRatingImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    double averageRating,
-    int totalReviews,
-    Map<String, int> categoryRatings,
-    List<MosqueReview>? recentReviews,
-  });
+  $Res call(
+      {double averageRating,
+      int totalReviews,
+      Map<String, int> categoryRatings,
+      List<MosqueReview>? recentReviews});
 }
 
 /// @nodoc
@@ -2724,9 +2486,8 @@ class __$$MosqueRatingImplCopyWithImpl<$Res>
     extends _$MosqueRatingCopyWithImpl<$Res, _$MosqueRatingImpl>
     implements _$$MosqueRatingImplCopyWith<$Res> {
   __$$MosqueRatingImplCopyWithImpl(
-    _$MosqueRatingImpl _value,
-    $Res Function(_$MosqueRatingImpl) _then,
-  ) : super(_value, _then);
+      _$MosqueRatingImpl _value, $Res Function(_$MosqueRatingImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of MosqueRating
   /// with the given fields replaced by the non-null parameter values.
@@ -2738,43 +2499,37 @@ class __$$MosqueRatingImplCopyWithImpl<$Res>
     Object? categoryRatings = null,
     Object? recentReviews = freezed,
   }) {
-    return _then(
-      _$MosqueRatingImpl(
-        averageRating:
-            null == averageRating
-                ? _value.averageRating
-                : averageRating // ignore: cast_nullable_to_non_nullable
-                    as double,
-        totalReviews:
-            null == totalReviews
-                ? _value.totalReviews
-                : totalReviews // ignore: cast_nullable_to_non_nullable
-                    as int,
-        categoryRatings:
-            null == categoryRatings
-                ? _value._categoryRatings
-                : categoryRatings // ignore: cast_nullable_to_non_nullable
-                    as Map<String, int>,
-        recentReviews:
-            freezed == recentReviews
-                ? _value._recentReviews
-                : recentReviews // ignore: cast_nullable_to_non_nullable
-                    as List<MosqueReview>?,
-      ),
-    );
+    return _then(_$MosqueRatingImpl(
+      averageRating: null == averageRating
+          ? _value.averageRating
+          : averageRating // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalReviews: null == totalReviews
+          ? _value.totalReviews
+          : totalReviews // ignore: cast_nullable_to_non_nullable
+              as int,
+      categoryRatings: null == categoryRatings
+          ? _value._categoryRatings
+          : categoryRatings // ignore: cast_nullable_to_non_nullable
+              as Map<String, int>,
+      recentReviews: freezed == recentReviews
+          ? _value._recentReviews
+          : recentReviews // ignore: cast_nullable_to_non_nullable
+              as List<MosqueReview>?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$MosqueRatingImpl implements _MosqueRating {
-  const _$MosqueRatingImpl({
-    required this.averageRating,
-    required this.totalReviews,
-    required final Map<String, int> categoryRatings,
-    final List<MosqueReview>? recentReviews,
-  }) : _categoryRatings = categoryRatings,
-       _recentReviews = recentReviews;
+  const _$MosqueRatingImpl(
+      {required this.averageRating,
+      required this.totalReviews,
+      required final Map<String, int> categoryRatings,
+      final List<MosqueReview>? recentReviews})
+      : _categoryRatings = categoryRatings,
+        _recentReviews = recentReviews;
 
   factory _$MosqueRatingImpl.fromJson(Map<String, dynamic> json) =>
       _$$MosqueRatingImplFromJson(json);
@@ -2815,25 +2570,20 @@ class _$MosqueRatingImpl implements _MosqueRating {
                 other.averageRating == averageRating) &&
             (identical(other.totalReviews, totalReviews) ||
                 other.totalReviews == totalReviews) &&
-            const DeepCollectionEquality().equals(
-              other._categoryRatings,
-              _categoryRatings,
-            ) &&
-            const DeepCollectionEquality().equals(
-              other._recentReviews,
-              _recentReviews,
-            ));
+            const DeepCollectionEquality()
+                .equals(other._categoryRatings, _categoryRatings) &&
+            const DeepCollectionEquality()
+                .equals(other._recentReviews, _recentReviews));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    averageRating,
-    totalReviews,
-    const DeepCollectionEquality().hash(_categoryRatings),
-    const DeepCollectionEquality().hash(_recentReviews),
-  );
+      runtimeType,
+      averageRating,
+      totalReviews,
+      const DeepCollectionEquality().hash(_categoryRatings),
+      const DeepCollectionEquality().hash(_recentReviews));
 
   /// Create a copy of MosqueRating
   /// with the given fields replaced by the non-null parameter values.
@@ -2845,17 +2595,18 @@ class _$MosqueRatingImpl implements _MosqueRating {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$MosqueRatingImplToJson(this);
+    return _$$MosqueRatingImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _MosqueRating implements MosqueRating {
-  const factory _MosqueRating({
-    required final double averageRating,
-    required final int totalReviews,
-    required final Map<String, int> categoryRatings,
-    final List<MosqueReview>? recentReviews,
-  }) = _$MosqueRatingImpl;
+  const factory _MosqueRating(
+      {required final double averageRating,
+      required final int totalReviews,
+      required final Map<String, int> categoryRatings,
+      final List<MosqueReview>? recentReviews}) = _$MosqueRatingImpl;
 
   factory _MosqueRating.fromJson(Map<String, dynamic> json) =
       _$MosqueRatingImpl.fromJson;
@@ -2904,19 +2655,17 @@ mixin _$MosqueReview {
 /// @nodoc
 abstract class $MosqueReviewCopyWith<$Res> {
   factory $MosqueReviewCopyWith(
-    MosqueReview value,
-    $Res Function(MosqueReview) then,
-  ) = _$MosqueReviewCopyWithImpl<$Res, MosqueReview>;
+          MosqueReview value, $Res Function(MosqueReview) then) =
+      _$MosqueReviewCopyWithImpl<$Res, MosqueReview>;
   @useResult
-  $Res call({
-    String id,
-    String userId,
-    int rating,
-    DateTime reviewDate,
-    String? comment,
-    List<String>? categories,
-    bool? isVerified,
-  });
+  $Res call(
+      {String id,
+      String userId,
+      int rating,
+      DateTime reviewDate,
+      String? comment,
+      List<String>? categories,
+      bool? isVerified});
 }
 
 /// @nodoc
@@ -2942,46 +2691,36 @@ class _$MosqueReviewCopyWithImpl<$Res, $Val extends MosqueReview>
     Object? categories = freezed,
     Object? isVerified = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            userId:
-                null == userId
-                    ? _value.userId
-                    : userId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            rating:
-                null == rating
-                    ? _value.rating
-                    : rating // ignore: cast_nullable_to_non_nullable
-                        as int,
-            reviewDate:
-                null == reviewDate
-                    ? _value.reviewDate
-                    : reviewDate // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            comment:
-                freezed == comment
-                    ? _value.comment
-                    : comment // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            categories:
-                freezed == categories
-                    ? _value.categories
-                    : categories // ignore: cast_nullable_to_non_nullable
-                        as List<String>?,
-            isVerified:
-                freezed == isVerified
-                    ? _value.isVerified
-                    : isVerified // ignore: cast_nullable_to_non_nullable
-                        as bool?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      rating: null == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as int,
+      reviewDate: null == reviewDate
+          ? _value.reviewDate
+          : reviewDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      comment: freezed == comment
+          ? _value.comment
+          : comment // ignore: cast_nullable_to_non_nullable
+              as String?,
+      categories: freezed == categories
+          ? _value.categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      isVerified: freezed == isVerified
+          ? _value.isVerified
+          : isVerified // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ) as $Val);
   }
 }
 
@@ -2989,20 +2728,18 @@ class _$MosqueReviewCopyWithImpl<$Res, $Val extends MosqueReview>
 abstract class _$$MosqueReviewImplCopyWith<$Res>
     implements $MosqueReviewCopyWith<$Res> {
   factory _$$MosqueReviewImplCopyWith(
-    _$MosqueReviewImpl value,
-    $Res Function(_$MosqueReviewImpl) then,
-  ) = __$$MosqueReviewImplCopyWithImpl<$Res>;
+          _$MosqueReviewImpl value, $Res Function(_$MosqueReviewImpl) then) =
+      __$$MosqueReviewImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String userId,
-    int rating,
-    DateTime reviewDate,
-    String? comment,
-    List<String>? categories,
-    bool? isVerified,
-  });
+  $Res call(
+      {String id,
+      String userId,
+      int rating,
+      DateTime reviewDate,
+      String? comment,
+      List<String>? categories,
+      bool? isVerified});
 }
 
 /// @nodoc
@@ -3010,9 +2747,8 @@ class __$$MosqueReviewImplCopyWithImpl<$Res>
     extends _$MosqueReviewCopyWithImpl<$Res, _$MosqueReviewImpl>
     implements _$$MosqueReviewImplCopyWith<$Res> {
   __$$MosqueReviewImplCopyWithImpl(
-    _$MosqueReviewImpl _value,
-    $Res Function(_$MosqueReviewImpl) _then,
-  ) : super(_value, _then);
+      _$MosqueReviewImpl _value, $Res Function(_$MosqueReviewImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of MosqueReview
   /// with the given fields replaced by the non-null parameter values.
@@ -3027,60 +2763,51 @@ class __$$MosqueReviewImplCopyWithImpl<$Res>
     Object? categories = freezed,
     Object? isVerified = freezed,
   }) {
-    return _then(
-      _$MosqueReviewImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        userId:
-            null == userId
-                ? _value.userId
-                : userId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        rating:
-            null == rating
-                ? _value.rating
-                : rating // ignore: cast_nullable_to_non_nullable
-                    as int,
-        reviewDate:
-            null == reviewDate
-                ? _value.reviewDate
-                : reviewDate // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        comment:
-            freezed == comment
-                ? _value.comment
-                : comment // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        categories:
-            freezed == categories
-                ? _value._categories
-                : categories // ignore: cast_nullable_to_non_nullable
-                    as List<String>?,
-        isVerified:
-            freezed == isVerified
-                ? _value.isVerified
-                : isVerified // ignore: cast_nullable_to_non_nullable
-                    as bool?,
-      ),
-    );
+    return _then(_$MosqueReviewImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      rating: null == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as int,
+      reviewDate: null == reviewDate
+          ? _value.reviewDate
+          : reviewDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      comment: freezed == comment
+          ? _value.comment
+          : comment // ignore: cast_nullable_to_non_nullable
+              as String?,
+      categories: freezed == categories
+          ? _value._categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      isVerified: freezed == isVerified
+          ? _value.isVerified
+          : isVerified // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$MosqueReviewImpl implements _MosqueReview {
-  const _$MosqueReviewImpl({
-    required this.id,
-    required this.userId,
-    required this.rating,
-    required this.reviewDate,
-    this.comment,
-    final List<String>? categories,
-    this.isVerified,
-  }) : _categories = categories;
+  const _$MosqueReviewImpl(
+      {required this.id,
+      required this.userId,
+      required this.rating,
+      required this.reviewDate,
+      this.comment,
+      final List<String>? categories,
+      this.isVerified})
+      : _categories = categories;
 
   factory _$MosqueReviewImpl.fromJson(Map<String, dynamic> json) =>
       _$$MosqueReviewImplFromJson(json);
@@ -3124,26 +2851,16 @@ class _$MosqueReviewImpl implements _MosqueReview {
             (identical(other.reviewDate, reviewDate) ||
                 other.reviewDate == reviewDate) &&
             (identical(other.comment, comment) || other.comment == comment) &&
-            const DeepCollectionEquality().equals(
-              other._categories,
-              _categories,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._categories, _categories) &&
             (identical(other.isVerified, isVerified) ||
                 other.isVerified == isVerified));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    userId,
-    rating,
-    reviewDate,
-    comment,
-    const DeepCollectionEquality().hash(_categories),
-    isVerified,
-  );
+  int get hashCode => Object.hash(runtimeType, id, userId, rating, reviewDate,
+      comment, const DeepCollectionEquality().hash(_categories), isVerified);
 
   /// Create a copy of MosqueReview
   /// with the given fields replaced by the non-null parameter values.
@@ -3155,20 +2872,21 @@ class _$MosqueReviewImpl implements _MosqueReview {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$MosqueReviewImplToJson(this);
+    return _$$MosqueReviewImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _MosqueReview implements MosqueReview {
-  const factory _MosqueReview({
-    required final String id,
-    required final String userId,
-    required final int rating,
-    required final DateTime reviewDate,
-    final String? comment,
-    final List<String>? categories,
-    final bool? isVerified,
-  }) = _$MosqueReviewImpl;
+  const factory _MosqueReview(
+      {required final String id,
+      required final String userId,
+      required final int rating,
+      required final DateTime reviewDate,
+      final String? comment,
+      final List<String>? categories,
+      final bool? isVerified}) = _$MosqueReviewImpl;
 
   factory _MosqueReview.fromJson(Map<String, dynamic> json) =
       _$MosqueReviewImpl.fromJson;

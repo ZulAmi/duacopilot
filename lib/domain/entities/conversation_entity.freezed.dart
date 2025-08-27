@@ -12,8 +12,7 @@ part of 'conversation_entity.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UserProfile _$UserProfileFromJson(Map<String, dynamic> json) {
   return _UserProfile.fromJson(json);
@@ -41,17 +40,15 @@ mixin _$UserProfile {
 /// @nodoc
 abstract class $UserProfileCopyWith<$Res> {
   factory $UserProfileCopyWith(
-    UserProfile value,
-    $Res Function(UserProfile) then,
-  ) = _$UserProfileCopyWithImpl<$Res, UserProfile>;
+          UserProfile value, $Res Function(UserProfile) then) =
+      _$UserProfileCopyWithImpl<$Res, UserProfile>;
   @useResult
-  $Res call({
-    String userId,
-    Map<String, dynamic> preferences,
-    String conversationStyle,
-    List<String> topicInterests,
-    Map<String, dynamic> emotionalPatterns,
-  });
+  $Res call(
+      {String userId,
+      Map<String, dynamic> preferences,
+      String conversationStyle,
+      List<String> topicInterests,
+      Map<String, dynamic> emotionalPatterns});
 }
 
 /// @nodoc
@@ -75,36 +72,28 @@ class _$UserProfileCopyWithImpl<$Res, $Val extends UserProfile>
     Object? topicInterests = null,
     Object? emotionalPatterns = null,
   }) {
-    return _then(
-      _value.copyWith(
-            userId:
-                null == userId
-                    ? _value.userId
-                    : userId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            preferences:
-                null == preferences
-                    ? _value.preferences
-                    : preferences // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>,
-            conversationStyle:
-                null == conversationStyle
-                    ? _value.conversationStyle
-                    : conversationStyle // ignore: cast_nullable_to_non_nullable
-                        as String,
-            topicInterests:
-                null == topicInterests
-                    ? _value.topicInterests
-                    : topicInterests // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            emotionalPatterns:
-                null == emotionalPatterns
-                    ? _value.emotionalPatterns
-                    : emotionalPatterns // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      preferences: null == preferences
+          ? _value.preferences
+          : preferences // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      conversationStyle: null == conversationStyle
+          ? _value.conversationStyle
+          : conversationStyle // ignore: cast_nullable_to_non_nullable
+              as String,
+      topicInterests: null == topicInterests
+          ? _value.topicInterests
+          : topicInterests // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      emotionalPatterns: null == emotionalPatterns
+          ? _value.emotionalPatterns
+          : emotionalPatterns // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+    ) as $Val);
   }
 }
 
@@ -112,18 +101,16 @@ class _$UserProfileCopyWithImpl<$Res, $Val extends UserProfile>
 abstract class _$$UserProfileImplCopyWith<$Res>
     implements $UserProfileCopyWith<$Res> {
   factory _$$UserProfileImplCopyWith(
-    _$UserProfileImpl value,
-    $Res Function(_$UserProfileImpl) then,
-  ) = __$$UserProfileImplCopyWithImpl<$Res>;
+          _$UserProfileImpl value, $Res Function(_$UserProfileImpl) then) =
+      __$$UserProfileImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String userId,
-    Map<String, dynamic> preferences,
-    String conversationStyle,
-    List<String> topicInterests,
-    Map<String, dynamic> emotionalPatterns,
-  });
+  $Res call(
+      {String userId,
+      Map<String, dynamic> preferences,
+      String conversationStyle,
+      List<String> topicInterests,
+      Map<String, dynamic> emotionalPatterns});
 }
 
 /// @nodoc
@@ -131,9 +118,8 @@ class __$$UserProfileImplCopyWithImpl<$Res>
     extends _$UserProfileCopyWithImpl<$Res, _$UserProfileImpl>
     implements _$$UserProfileImplCopyWith<$Res> {
   __$$UserProfileImplCopyWithImpl(
-    _$UserProfileImpl _value,
-    $Res Function(_$UserProfileImpl) _then,
-  ) : super(_value, _then);
+      _$UserProfileImpl _value, $Res Function(_$UserProfileImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of UserProfile
   /// with the given fields replaced by the non-null parameter values.
@@ -146,50 +132,43 @@ class __$$UserProfileImplCopyWithImpl<$Res>
     Object? topicInterests = null,
     Object? emotionalPatterns = null,
   }) {
-    return _then(
-      _$UserProfileImpl(
-        userId:
-            null == userId
-                ? _value.userId
-                : userId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        preferences:
-            null == preferences
-                ? _value._preferences
-                : preferences // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>,
-        conversationStyle:
-            null == conversationStyle
-                ? _value.conversationStyle
-                : conversationStyle // ignore: cast_nullable_to_non_nullable
-                    as String,
-        topicInterests:
-            null == topicInterests
-                ? _value._topicInterests
-                : topicInterests // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        emotionalPatterns:
-            null == emotionalPatterns
-                ? _value._emotionalPatterns
-                : emotionalPatterns // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>,
-      ),
-    );
+    return _then(_$UserProfileImpl(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      preferences: null == preferences
+          ? _value._preferences
+          : preferences // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      conversationStyle: null == conversationStyle
+          ? _value.conversationStyle
+          : conversationStyle // ignore: cast_nullable_to_non_nullable
+              as String,
+      topicInterests: null == topicInterests
+          ? _value._topicInterests
+          : topicInterests // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      emotionalPatterns: null == emotionalPatterns
+          ? _value._emotionalPatterns
+          : emotionalPatterns // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$UserProfileImpl implements _UserProfile {
-  const _$UserProfileImpl({
-    required this.userId,
-    required final Map<String, dynamic> preferences,
-    required this.conversationStyle,
-    required final List<String> topicInterests,
-    required final Map<String, dynamic> emotionalPatterns,
-  }) : _preferences = preferences,
-       _topicInterests = topicInterests,
-       _emotionalPatterns = emotionalPatterns;
+  const _$UserProfileImpl(
+      {required this.userId,
+      required final Map<String, dynamic> preferences,
+      required this.conversationStyle,
+      required final List<String> topicInterests,
+      required final Map<String, dynamic> emotionalPatterns})
+      : _preferences = preferences,
+        _topicInterests = topicInterests,
+        _emotionalPatterns = emotionalPatterns;
 
   factory _$UserProfileImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserProfileImplFromJson(json);
@@ -234,32 +213,25 @@ class _$UserProfileImpl implements _UserProfile {
         (other.runtimeType == runtimeType &&
             other is _$UserProfileImpl &&
             (identical(other.userId, userId) || other.userId == userId) &&
-            const DeepCollectionEquality().equals(
-              other._preferences,
-              _preferences,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._preferences, _preferences) &&
             (identical(other.conversationStyle, conversationStyle) ||
                 other.conversationStyle == conversationStyle) &&
-            const DeepCollectionEquality().equals(
-              other._topicInterests,
-              _topicInterests,
-            ) &&
-            const DeepCollectionEquality().equals(
-              other._emotionalPatterns,
-              _emotionalPatterns,
-            ));
+            const DeepCollectionEquality()
+                .equals(other._topicInterests, _topicInterests) &&
+            const DeepCollectionEquality()
+                .equals(other._emotionalPatterns, _emotionalPatterns));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    userId,
-    const DeepCollectionEquality().hash(_preferences),
-    conversationStyle,
-    const DeepCollectionEquality().hash(_topicInterests),
-    const DeepCollectionEquality().hash(_emotionalPatterns),
-  );
+      runtimeType,
+      userId,
+      const DeepCollectionEquality().hash(_preferences),
+      conversationStyle,
+      const DeepCollectionEquality().hash(_topicInterests),
+      const DeepCollectionEquality().hash(_emotionalPatterns));
 
   /// Create a copy of UserProfile
   /// with the given fields replaced by the non-null parameter values.
@@ -271,18 +243,20 @@ class _$UserProfileImpl implements _UserProfile {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UserProfileImplToJson(this);
+    return _$$UserProfileImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _UserProfile implements UserProfile {
-  const factory _UserProfile({
-    required final String userId,
-    required final Map<String, dynamic> preferences,
-    required final String conversationStyle,
-    required final List<String> topicInterests,
-    required final Map<String, dynamic> emotionalPatterns,
-  }) = _$UserProfileImpl;
+  const factory _UserProfile(
+          {required final String userId,
+          required final Map<String, dynamic> preferences,
+          required final String conversationStyle,
+          required final List<String> topicInterests,
+          required final Map<String, dynamic> emotionalPatterns}) =
+      _$UserProfileImpl;
 
   factory _UserProfile.fromJson(Map<String, dynamic> json) =
       _$UserProfileImpl.fromJson;
@@ -339,24 +313,22 @@ mixin _$ConversationContext {
 /// @nodoc
 abstract class $ConversationContextCopyWith<$Res> {
   factory $ConversationContextCopyWith(
-    ConversationContext value,
-    $Res Function(ConversationContext) then,
-  ) = _$ConversationContextCopyWithImpl<$Res, ConversationContext>;
+          ConversationContext value, $Res Function(ConversationContext) then) =
+      _$ConversationContextCopyWithImpl<$Res, ConversationContext>;
   @useResult
-  $Res call({
-    String conversationId,
-    String userId,
-    DateTime startTime,
-    DateTime lastActivity,
-    int turnCount,
-    String? currentTopic,
-    EmotionalState emotionalState,
-    List<String> contextTags,
-    UserProfile userProfile,
-    Map<String, dynamic> semanticContext,
-    DateTime? endTime,
-    bool isActive,
-  });
+  $Res call(
+      {String conversationId,
+      String userId,
+      DateTime startTime,
+      DateTime lastActivity,
+      int turnCount,
+      String? currentTopic,
+      EmotionalState emotionalState,
+      List<String> contextTags,
+      UserProfile userProfile,
+      Map<String, dynamic> semanticContext,
+      DateTime? endTime,
+      bool isActive});
 
   $UserProfileCopyWith<$Res> get userProfile;
 }
@@ -389,71 +361,56 @@ class _$ConversationContextCopyWithImpl<$Res, $Val extends ConversationContext>
     Object? endTime = freezed,
     Object? isActive = null,
   }) {
-    return _then(
-      _value.copyWith(
-            conversationId:
-                null == conversationId
-                    ? _value.conversationId
-                    : conversationId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            userId:
-                null == userId
-                    ? _value.userId
-                    : userId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            startTime:
-                null == startTime
-                    ? _value.startTime
-                    : startTime // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            lastActivity:
-                null == lastActivity
-                    ? _value.lastActivity
-                    : lastActivity // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            turnCount:
-                null == turnCount
-                    ? _value.turnCount
-                    : turnCount // ignore: cast_nullable_to_non_nullable
-                        as int,
-            currentTopic:
-                freezed == currentTopic
-                    ? _value.currentTopic
-                    : currentTopic // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            emotionalState:
-                null == emotionalState
-                    ? _value.emotionalState
-                    : emotionalState // ignore: cast_nullable_to_non_nullable
-                        as EmotionalState,
-            contextTags:
-                null == contextTags
-                    ? _value.contextTags
-                    : contextTags // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            userProfile:
-                null == userProfile
-                    ? _value.userProfile
-                    : userProfile // ignore: cast_nullable_to_non_nullable
-                        as UserProfile,
-            semanticContext:
-                null == semanticContext
-                    ? _value.semanticContext
-                    : semanticContext // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>,
-            endTime:
-                freezed == endTime
-                    ? _value.endTime
-                    : endTime // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            isActive:
-                null == isActive
-                    ? _value.isActive
-                    : isActive // ignore: cast_nullable_to_non_nullable
-                        as bool,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      conversationId: null == conversationId
+          ? _value.conversationId
+          : conversationId // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      startTime: null == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      lastActivity: null == lastActivity
+          ? _value.lastActivity
+          : lastActivity // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      turnCount: null == turnCount
+          ? _value.turnCount
+          : turnCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      currentTopic: freezed == currentTopic
+          ? _value.currentTopic
+          : currentTopic // ignore: cast_nullable_to_non_nullable
+              as String?,
+      emotionalState: null == emotionalState
+          ? _value.emotionalState
+          : emotionalState // ignore: cast_nullable_to_non_nullable
+              as EmotionalState,
+      contextTags: null == contextTags
+          ? _value.contextTags
+          : contextTags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      userProfile: null == userProfile
+          ? _value.userProfile
+          : userProfile // ignore: cast_nullable_to_non_nullable
+              as UserProfile,
+      semanticContext: null == semanticContext
+          ? _value.semanticContext
+          : semanticContext // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      endTime: freezed == endTime
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      isActive: null == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
   }
 
   /// Create a copy of ConversationContext
@@ -470,26 +427,24 @@ class _$ConversationContextCopyWithImpl<$Res, $Val extends ConversationContext>
 /// @nodoc
 abstract class _$$ConversationContextImplCopyWith<$Res>
     implements $ConversationContextCopyWith<$Res> {
-  factory _$$ConversationContextImplCopyWith(
-    _$ConversationContextImpl value,
-    $Res Function(_$ConversationContextImpl) then,
-  ) = __$$ConversationContextImplCopyWithImpl<$Res>;
+  factory _$$ConversationContextImplCopyWith(_$ConversationContextImpl value,
+          $Res Function(_$ConversationContextImpl) then) =
+      __$$ConversationContextImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String conversationId,
-    String userId,
-    DateTime startTime,
-    DateTime lastActivity,
-    int turnCount,
-    String? currentTopic,
-    EmotionalState emotionalState,
-    List<String> contextTags,
-    UserProfile userProfile,
-    Map<String, dynamic> semanticContext,
-    DateTime? endTime,
-    bool isActive,
-  });
+  $Res call(
+      {String conversationId,
+      String userId,
+      DateTime startTime,
+      DateTime lastActivity,
+      int turnCount,
+      String? currentTopic,
+      EmotionalState emotionalState,
+      List<String> contextTags,
+      UserProfile userProfile,
+      Map<String, dynamic> semanticContext,
+      DateTime? endTime,
+      bool isActive});
 
   @override
   $UserProfileCopyWith<$Res> get userProfile;
@@ -499,10 +454,9 @@ abstract class _$$ConversationContextImplCopyWith<$Res>
 class __$$ConversationContextImplCopyWithImpl<$Res>
     extends _$ConversationContextCopyWithImpl<$Res, _$ConversationContextImpl>
     implements _$$ConversationContextImplCopyWith<$Res> {
-  __$$ConversationContextImplCopyWithImpl(
-    _$ConversationContextImpl _value,
-    $Res Function(_$ConversationContextImpl) _then,
-  ) : super(_value, _then);
+  __$$ConversationContextImplCopyWithImpl(_$ConversationContextImpl _value,
+      $Res Function(_$ConversationContextImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ConversationContext
   /// with the given fields replaced by the non-null parameter values.
@@ -522,91 +476,77 @@ class __$$ConversationContextImplCopyWithImpl<$Res>
     Object? endTime = freezed,
     Object? isActive = null,
   }) {
-    return _then(
-      _$ConversationContextImpl(
-        conversationId:
-            null == conversationId
-                ? _value.conversationId
-                : conversationId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        userId:
-            null == userId
-                ? _value.userId
-                : userId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        startTime:
-            null == startTime
-                ? _value.startTime
-                : startTime // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        lastActivity:
-            null == lastActivity
-                ? _value.lastActivity
-                : lastActivity // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        turnCount:
-            null == turnCount
-                ? _value.turnCount
-                : turnCount // ignore: cast_nullable_to_non_nullable
-                    as int,
-        currentTopic:
-            freezed == currentTopic
-                ? _value.currentTopic
-                : currentTopic // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        emotionalState:
-            null == emotionalState
-                ? _value.emotionalState
-                : emotionalState // ignore: cast_nullable_to_non_nullable
-                    as EmotionalState,
-        contextTags:
-            null == contextTags
-                ? _value._contextTags
-                : contextTags // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        userProfile:
-            null == userProfile
-                ? _value.userProfile
-                : userProfile // ignore: cast_nullable_to_non_nullable
-                    as UserProfile,
-        semanticContext:
-            null == semanticContext
-                ? _value._semanticContext
-                : semanticContext // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>,
-        endTime:
-            freezed == endTime
-                ? _value.endTime
-                : endTime // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        isActive:
-            null == isActive
-                ? _value.isActive
-                : isActive // ignore: cast_nullable_to_non_nullable
-                    as bool,
-      ),
-    );
+    return _then(_$ConversationContextImpl(
+      conversationId: null == conversationId
+          ? _value.conversationId
+          : conversationId // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      startTime: null == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      lastActivity: null == lastActivity
+          ? _value.lastActivity
+          : lastActivity // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      turnCount: null == turnCount
+          ? _value.turnCount
+          : turnCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      currentTopic: freezed == currentTopic
+          ? _value.currentTopic
+          : currentTopic // ignore: cast_nullable_to_non_nullable
+              as String?,
+      emotionalState: null == emotionalState
+          ? _value.emotionalState
+          : emotionalState // ignore: cast_nullable_to_non_nullable
+              as EmotionalState,
+      contextTags: null == contextTags
+          ? _value._contextTags
+          : contextTags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      userProfile: null == userProfile
+          ? _value.userProfile
+          : userProfile // ignore: cast_nullable_to_non_nullable
+              as UserProfile,
+      semanticContext: null == semanticContext
+          ? _value._semanticContext
+          : semanticContext // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      endTime: freezed == endTime
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      isActive: null == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ConversationContextImpl implements _ConversationContext {
-  const _$ConversationContextImpl({
-    required this.conversationId,
-    required this.userId,
-    required this.startTime,
-    required this.lastActivity,
-    required this.turnCount,
-    required this.currentTopic,
-    required this.emotionalState,
-    required final List<String> contextTags,
-    required this.userProfile,
-    required final Map<String, dynamic> semanticContext,
-    this.endTime,
-    this.isActive = true,
-  }) : _contextTags = contextTags,
-       _semanticContext = semanticContext;
+  const _$ConversationContextImpl(
+      {required this.conversationId,
+      required this.userId,
+      required this.startTime,
+      required this.lastActivity,
+      required this.turnCount,
+      required this.currentTopic,
+      required this.emotionalState,
+      required final List<String> contextTags,
+      required this.userProfile,
+      required final Map<String, dynamic> semanticContext,
+      this.endTime,
+      this.isActive = true})
+      : _contextTags = contextTags,
+        _semanticContext = semanticContext;
 
   factory _$ConversationContextImpl.fromJson(Map<String, dynamic> json) =>
       _$$ConversationContextImplFromJson(json);
@@ -672,16 +612,12 @@ class _$ConversationContextImpl implements _ConversationContext {
                 other.currentTopic == currentTopic) &&
             (identical(other.emotionalState, emotionalState) ||
                 other.emotionalState == emotionalState) &&
-            const DeepCollectionEquality().equals(
-              other._contextTags,
-              _contextTags,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._contextTags, _contextTags) &&
             (identical(other.userProfile, userProfile) ||
                 other.userProfile == userProfile) &&
-            const DeepCollectionEquality().equals(
-              other._semanticContext,
-              _semanticContext,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._semanticContext, _semanticContext) &&
             (identical(other.endTime, endTime) || other.endTime == endTime) &&
             (identical(other.isActive, isActive) ||
                 other.isActive == isActive));
@@ -690,20 +626,19 @@ class _$ConversationContextImpl implements _ConversationContext {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    conversationId,
-    userId,
-    startTime,
-    lastActivity,
-    turnCount,
-    currentTopic,
-    emotionalState,
-    const DeepCollectionEquality().hash(_contextTags),
-    userProfile,
-    const DeepCollectionEquality().hash(_semanticContext),
-    endTime,
-    isActive,
-  );
+      runtimeType,
+      conversationId,
+      userId,
+      startTime,
+      lastActivity,
+      turnCount,
+      currentTopic,
+      emotionalState,
+      const DeepCollectionEquality().hash(_contextTags),
+      userProfile,
+      const DeepCollectionEquality().hash(_semanticContext),
+      endTime,
+      isActive);
 
   /// Create a copy of ConversationContext
   /// with the given fields replaced by the non-null parameter values.
@@ -712,31 +647,30 @@ class _$ConversationContextImpl implements _ConversationContext {
   @pragma('vm:prefer-inline')
   _$$ConversationContextImplCopyWith<_$ConversationContextImpl> get copyWith =>
       __$$ConversationContextImplCopyWithImpl<_$ConversationContextImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ConversationContextImplToJson(this);
+    return _$$ConversationContextImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _ConversationContext implements ConversationContext {
-  const factory _ConversationContext({
-    required final String conversationId,
-    required final String userId,
-    required final DateTime startTime,
-    required final DateTime lastActivity,
-    required final int turnCount,
-    required final String? currentTopic,
-    required final EmotionalState emotionalState,
-    required final List<String> contextTags,
-    required final UserProfile userProfile,
-    required final Map<String, dynamic> semanticContext,
-    final DateTime? endTime,
-    final bool isActive,
-  }) = _$ConversationContextImpl;
+  const factory _ConversationContext(
+      {required final String conversationId,
+      required final String userId,
+      required final DateTime startTime,
+      required final DateTime lastActivity,
+      required final int turnCount,
+      required final String? currentTopic,
+      required final EmotionalState emotionalState,
+      required final List<String> contextTags,
+      required final UserProfile userProfile,
+      required final Map<String, dynamic> semanticContext,
+      final DateTime? endTime,
+      final bool isActive}) = _$ConversationContextImpl;
 
   factory _ConversationContext.fromJson(Map<String, dynamic> json) =
       _$ConversationContextImpl.fromJson;
@@ -804,22 +738,20 @@ mixin _$ConversationTurn {
 /// @nodoc
 abstract class $ConversationTurnCopyWith<$Res> {
   factory $ConversationTurnCopyWith(
-    ConversationTurn value,
-    $Res Function(ConversationTurn) then,
-  ) = _$ConversationTurnCopyWithImpl<$Res, ConversationTurn>;
+          ConversationTurn value, $Res Function(ConversationTurn) then) =
+      _$ConversationTurnCopyWithImpl<$Res, ConversationTurn>;
   @useResult
-  $Res call({
-    String turnId,
-    String conversationId,
-    String userInput,
-    String systemResponse,
-    String intent,
-    DateTime timestamp,
-    EmotionalState emotionalState,
-    List<String> topicTags,
-    List<double> semanticEmbedding,
-    Map<String, dynamic> metadata,
-  });
+  $Res call(
+      {String turnId,
+      String conversationId,
+      String userInput,
+      String systemResponse,
+      String intent,
+      DateTime timestamp,
+      EmotionalState emotionalState,
+      List<String> topicTags,
+      List<double> semanticEmbedding,
+      Map<String, dynamic> metadata});
 }
 
 /// @nodoc
@@ -848,95 +780,79 @@ class _$ConversationTurnCopyWithImpl<$Res, $Val extends ConversationTurn>
     Object? semanticEmbedding = null,
     Object? metadata = null,
   }) {
-    return _then(
-      _value.copyWith(
-            turnId:
-                null == turnId
-                    ? _value.turnId
-                    : turnId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            conversationId:
-                null == conversationId
-                    ? _value.conversationId
-                    : conversationId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            userInput:
-                null == userInput
-                    ? _value.userInput
-                    : userInput // ignore: cast_nullable_to_non_nullable
-                        as String,
-            systemResponse:
-                null == systemResponse
-                    ? _value.systemResponse
-                    : systemResponse // ignore: cast_nullable_to_non_nullable
-                        as String,
-            intent:
-                null == intent
-                    ? _value.intent
-                    : intent // ignore: cast_nullable_to_non_nullable
-                        as String,
-            timestamp:
-                null == timestamp
-                    ? _value.timestamp
-                    : timestamp // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            emotionalState:
-                null == emotionalState
-                    ? _value.emotionalState
-                    : emotionalState // ignore: cast_nullable_to_non_nullable
-                        as EmotionalState,
-            topicTags:
-                null == topicTags
-                    ? _value.topicTags
-                    : topicTags // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            semanticEmbedding:
-                null == semanticEmbedding
-                    ? _value.semanticEmbedding
-                    : semanticEmbedding // ignore: cast_nullable_to_non_nullable
-                        as List<double>,
-            metadata:
-                null == metadata
-                    ? _value.metadata
-                    : metadata // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      turnId: null == turnId
+          ? _value.turnId
+          : turnId // ignore: cast_nullable_to_non_nullable
+              as String,
+      conversationId: null == conversationId
+          ? _value.conversationId
+          : conversationId // ignore: cast_nullable_to_non_nullable
+              as String,
+      userInput: null == userInput
+          ? _value.userInput
+          : userInput // ignore: cast_nullable_to_non_nullable
+              as String,
+      systemResponse: null == systemResponse
+          ? _value.systemResponse
+          : systemResponse // ignore: cast_nullable_to_non_nullable
+              as String,
+      intent: null == intent
+          ? _value.intent
+          : intent // ignore: cast_nullable_to_non_nullable
+              as String,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      emotionalState: null == emotionalState
+          ? _value.emotionalState
+          : emotionalState // ignore: cast_nullable_to_non_nullable
+              as EmotionalState,
+      topicTags: null == topicTags
+          ? _value.topicTags
+          : topicTags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      semanticEmbedding: null == semanticEmbedding
+          ? _value.semanticEmbedding
+          : semanticEmbedding // ignore: cast_nullable_to_non_nullable
+              as List<double>,
+      metadata: null == metadata
+          ? _value.metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$ConversationTurnImplCopyWith<$Res>
     implements $ConversationTurnCopyWith<$Res> {
-  factory _$$ConversationTurnImplCopyWith(
-    _$ConversationTurnImpl value,
-    $Res Function(_$ConversationTurnImpl) then,
-  ) = __$$ConversationTurnImplCopyWithImpl<$Res>;
+  factory _$$ConversationTurnImplCopyWith(_$ConversationTurnImpl value,
+          $Res Function(_$ConversationTurnImpl) then) =
+      __$$ConversationTurnImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String turnId,
-    String conversationId,
-    String userInput,
-    String systemResponse,
-    String intent,
-    DateTime timestamp,
-    EmotionalState emotionalState,
-    List<String> topicTags,
-    List<double> semanticEmbedding,
-    Map<String, dynamic> metadata,
-  });
+  $Res call(
+      {String turnId,
+      String conversationId,
+      String userInput,
+      String systemResponse,
+      String intent,
+      DateTime timestamp,
+      EmotionalState emotionalState,
+      List<String> topicTags,
+      List<double> semanticEmbedding,
+      Map<String, dynamic> metadata});
 }
 
 /// @nodoc
 class __$$ConversationTurnImplCopyWithImpl<$Res>
     extends _$ConversationTurnCopyWithImpl<$Res, _$ConversationTurnImpl>
     implements _$$ConversationTurnImplCopyWith<$Res> {
-  __$$ConversationTurnImplCopyWithImpl(
-    _$ConversationTurnImpl _value,
-    $Res Function(_$ConversationTurnImpl) _then,
-  ) : super(_value, _then);
+  __$$ConversationTurnImplCopyWithImpl(_$ConversationTurnImpl _value,
+      $Res Function(_$ConversationTurnImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ConversationTurn
   /// with the given fields replaced by the non-null parameter values.
@@ -954,80 +870,68 @@ class __$$ConversationTurnImplCopyWithImpl<$Res>
     Object? semanticEmbedding = null,
     Object? metadata = null,
   }) {
-    return _then(
-      _$ConversationTurnImpl(
-        turnId:
-            null == turnId
-                ? _value.turnId
-                : turnId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        conversationId:
-            null == conversationId
-                ? _value.conversationId
-                : conversationId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        userInput:
-            null == userInput
-                ? _value.userInput
-                : userInput // ignore: cast_nullable_to_non_nullable
-                    as String,
-        systemResponse:
-            null == systemResponse
-                ? _value.systemResponse
-                : systemResponse // ignore: cast_nullable_to_non_nullable
-                    as String,
-        intent:
-            null == intent
-                ? _value.intent
-                : intent // ignore: cast_nullable_to_non_nullable
-                    as String,
-        timestamp:
-            null == timestamp
-                ? _value.timestamp
-                : timestamp // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        emotionalState:
-            null == emotionalState
-                ? _value.emotionalState
-                : emotionalState // ignore: cast_nullable_to_non_nullable
-                    as EmotionalState,
-        topicTags:
-            null == topicTags
-                ? _value._topicTags
-                : topicTags // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        semanticEmbedding:
-            null == semanticEmbedding
-                ? _value._semanticEmbedding
-                : semanticEmbedding // ignore: cast_nullable_to_non_nullable
-                    as List<double>,
-        metadata:
-            null == metadata
-                ? _value._metadata
-                : metadata // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>,
-      ),
-    );
+    return _then(_$ConversationTurnImpl(
+      turnId: null == turnId
+          ? _value.turnId
+          : turnId // ignore: cast_nullable_to_non_nullable
+              as String,
+      conversationId: null == conversationId
+          ? _value.conversationId
+          : conversationId // ignore: cast_nullable_to_non_nullable
+              as String,
+      userInput: null == userInput
+          ? _value.userInput
+          : userInput // ignore: cast_nullable_to_non_nullable
+              as String,
+      systemResponse: null == systemResponse
+          ? _value.systemResponse
+          : systemResponse // ignore: cast_nullable_to_non_nullable
+              as String,
+      intent: null == intent
+          ? _value.intent
+          : intent // ignore: cast_nullable_to_non_nullable
+              as String,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      emotionalState: null == emotionalState
+          ? _value.emotionalState
+          : emotionalState // ignore: cast_nullable_to_non_nullable
+              as EmotionalState,
+      topicTags: null == topicTags
+          ? _value._topicTags
+          : topicTags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      semanticEmbedding: null == semanticEmbedding
+          ? _value._semanticEmbedding
+          : semanticEmbedding // ignore: cast_nullable_to_non_nullable
+              as List<double>,
+      metadata: null == metadata
+          ? _value._metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ConversationTurnImpl implements _ConversationTurn {
-  const _$ConversationTurnImpl({
-    required this.turnId,
-    required this.conversationId,
-    required this.userInput,
-    required this.systemResponse,
-    required this.intent,
-    required this.timestamp,
-    required this.emotionalState,
-    required final List<String> topicTags,
-    required final List<double> semanticEmbedding,
-    required final Map<String, dynamic> metadata,
-  }) : _topicTags = topicTags,
-       _semanticEmbedding = semanticEmbedding,
-       _metadata = metadata;
+  const _$ConversationTurnImpl(
+      {required this.turnId,
+      required this.conversationId,
+      required this.userInput,
+      required this.systemResponse,
+      required this.intent,
+      required this.timestamp,
+      required this.emotionalState,
+      required final List<String> topicTags,
+      required final List<double> semanticEmbedding,
+      required final Map<String, dynamic> metadata})
+      : _topicTags = topicTags,
+        _semanticEmbedding = semanticEmbedding,
+        _metadata = metadata;
 
   factory _$ConversationTurnImpl.fromJson(Map<String, dynamic> json) =>
       _$$ConversationTurnImplFromJson(json);
@@ -1093,32 +997,27 @@ class _$ConversationTurnImpl implements _ConversationTurn {
                 other.timestamp == timestamp) &&
             (identical(other.emotionalState, emotionalState) ||
                 other.emotionalState == emotionalState) &&
-            const DeepCollectionEquality().equals(
-              other._topicTags,
-              _topicTags,
-            ) &&
-            const DeepCollectionEquality().equals(
-              other._semanticEmbedding,
-              _semanticEmbedding,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._topicTags, _topicTags) &&
+            const DeepCollectionEquality()
+                .equals(other._semanticEmbedding, _semanticEmbedding) &&
             const DeepCollectionEquality().equals(other._metadata, _metadata));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    turnId,
-    conversationId,
-    userInput,
-    systemResponse,
-    intent,
-    timestamp,
-    emotionalState,
-    const DeepCollectionEquality().hash(_topicTags),
-    const DeepCollectionEquality().hash(_semanticEmbedding),
-    const DeepCollectionEquality().hash(_metadata),
-  );
+      runtimeType,
+      turnId,
+      conversationId,
+      userInput,
+      systemResponse,
+      intent,
+      timestamp,
+      emotionalState,
+      const DeepCollectionEquality().hash(_topicTags),
+      const DeepCollectionEquality().hash(_semanticEmbedding),
+      const DeepCollectionEquality().hash(_metadata));
 
   /// Create a copy of ConversationTurn
   /// with the given fields replaced by the non-null parameter values.
@@ -1127,29 +1026,28 @@ class _$ConversationTurnImpl implements _ConversationTurn {
   @pragma('vm:prefer-inline')
   _$$ConversationTurnImplCopyWith<_$ConversationTurnImpl> get copyWith =>
       __$$ConversationTurnImplCopyWithImpl<_$ConversationTurnImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ConversationTurnImplToJson(this);
+    return _$$ConversationTurnImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _ConversationTurn implements ConversationTurn {
-  const factory _ConversationTurn({
-    required final String turnId,
-    required final String conversationId,
-    required final String userInput,
-    required final String systemResponse,
-    required final String intent,
-    required final DateTime timestamp,
-    required final EmotionalState emotionalState,
-    required final List<String> topicTags,
-    required final List<double> semanticEmbedding,
-    required final Map<String, dynamic> metadata,
-  }) = _$ConversationTurnImpl;
+  const factory _ConversationTurn(
+      {required final String turnId,
+      required final String conversationId,
+      required final String userInput,
+      required final String systemResponse,
+      required final String intent,
+      required final DateTime timestamp,
+      required final EmotionalState emotionalState,
+      required final List<String> topicTags,
+      required final List<double> semanticEmbedding,
+      required final Map<String, dynamic> metadata}) = _$ConversationTurnImpl;
 
   factory _ConversationTurn.fromJson(Map<String, dynamic> json) =
       _$ConversationTurnImpl.fromJson;
@@ -1212,21 +1110,19 @@ mixin _$SemanticMemory {
 /// @nodoc
 abstract class $SemanticMemoryCopyWith<$Res> {
   factory $SemanticMemoryCopyWith(
-    SemanticMemory value,
-    $Res Function(SemanticMemory) then,
-  ) = _$SemanticMemoryCopyWithImpl<$Res, SemanticMemory>;
+          SemanticMemory value, $Res Function(SemanticMemory) then) =
+      _$SemanticMemoryCopyWithImpl<$Res, SemanticMemory>;
   @useResult
-  $Res call({
-    String userId,
-    String conversationId,
-    String turnId,
-    String userInput,
-    String systemResponse,
-    List<double> embedding,
-    List<String> topics,
-    EmotionalState emotionalState,
-    DateTime timestamp,
-  });
+  $Res call(
+      {String userId,
+      String conversationId,
+      String turnId,
+      String userInput,
+      String systemResponse,
+      List<double> embedding,
+      List<String> topics,
+      EmotionalState emotionalState,
+      DateTime timestamp});
 }
 
 /// @nodoc
@@ -1254,79 +1150,65 @@ class _$SemanticMemoryCopyWithImpl<$Res, $Val extends SemanticMemory>
     Object? emotionalState = null,
     Object? timestamp = null,
   }) {
-    return _then(
-      _value.copyWith(
-            userId:
-                null == userId
-                    ? _value.userId
-                    : userId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            conversationId:
-                null == conversationId
-                    ? _value.conversationId
-                    : conversationId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            turnId:
-                null == turnId
-                    ? _value.turnId
-                    : turnId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            userInput:
-                null == userInput
-                    ? _value.userInput
-                    : userInput // ignore: cast_nullable_to_non_nullable
-                        as String,
-            systemResponse:
-                null == systemResponse
-                    ? _value.systemResponse
-                    : systemResponse // ignore: cast_nullable_to_non_nullable
-                        as String,
-            embedding:
-                null == embedding
-                    ? _value.embedding
-                    : embedding // ignore: cast_nullable_to_non_nullable
-                        as List<double>,
-            topics:
-                null == topics
-                    ? _value.topics
-                    : topics // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            emotionalState:
-                null == emotionalState
-                    ? _value.emotionalState
-                    : emotionalState // ignore: cast_nullable_to_non_nullable
-                        as EmotionalState,
-            timestamp:
-                null == timestamp
-                    ? _value.timestamp
-                    : timestamp // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      conversationId: null == conversationId
+          ? _value.conversationId
+          : conversationId // ignore: cast_nullable_to_non_nullable
+              as String,
+      turnId: null == turnId
+          ? _value.turnId
+          : turnId // ignore: cast_nullable_to_non_nullable
+              as String,
+      userInput: null == userInput
+          ? _value.userInput
+          : userInput // ignore: cast_nullable_to_non_nullable
+              as String,
+      systemResponse: null == systemResponse
+          ? _value.systemResponse
+          : systemResponse // ignore: cast_nullable_to_non_nullable
+              as String,
+      embedding: null == embedding
+          ? _value.embedding
+          : embedding // ignore: cast_nullable_to_non_nullable
+              as List<double>,
+      topics: null == topics
+          ? _value.topics
+          : topics // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      emotionalState: null == emotionalState
+          ? _value.emotionalState
+          : emotionalState // ignore: cast_nullable_to_non_nullable
+              as EmotionalState,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$SemanticMemoryImplCopyWith<$Res>
     implements $SemanticMemoryCopyWith<$Res> {
-  factory _$$SemanticMemoryImplCopyWith(
-    _$SemanticMemoryImpl value,
-    $Res Function(_$SemanticMemoryImpl) then,
-  ) = __$$SemanticMemoryImplCopyWithImpl<$Res>;
+  factory _$$SemanticMemoryImplCopyWith(_$SemanticMemoryImpl value,
+          $Res Function(_$SemanticMemoryImpl) then) =
+      __$$SemanticMemoryImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String userId,
-    String conversationId,
-    String turnId,
-    String userInput,
-    String systemResponse,
-    List<double> embedding,
-    List<String> topics,
-    EmotionalState emotionalState,
-    DateTime timestamp,
-  });
+  $Res call(
+      {String userId,
+      String conversationId,
+      String turnId,
+      String userInput,
+      String systemResponse,
+      List<double> embedding,
+      List<String> topics,
+      EmotionalState emotionalState,
+      DateTime timestamp});
 }
 
 /// @nodoc
@@ -1334,9 +1216,8 @@ class __$$SemanticMemoryImplCopyWithImpl<$Res>
     extends _$SemanticMemoryCopyWithImpl<$Res, _$SemanticMemoryImpl>
     implements _$$SemanticMemoryImplCopyWith<$Res> {
   __$$SemanticMemoryImplCopyWithImpl(
-    _$SemanticMemoryImpl _value,
-    $Res Function(_$SemanticMemoryImpl) _then,
-  ) : super(_value, _then);
+      _$SemanticMemoryImpl _value, $Res Function(_$SemanticMemoryImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of SemanticMemory
   /// with the given fields replaced by the non-null parameter values.
@@ -1353,73 +1234,62 @@ class __$$SemanticMemoryImplCopyWithImpl<$Res>
     Object? emotionalState = null,
     Object? timestamp = null,
   }) {
-    return _then(
-      _$SemanticMemoryImpl(
-        userId:
-            null == userId
-                ? _value.userId
-                : userId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        conversationId:
-            null == conversationId
-                ? _value.conversationId
-                : conversationId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        turnId:
-            null == turnId
-                ? _value.turnId
-                : turnId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        userInput:
-            null == userInput
-                ? _value.userInput
-                : userInput // ignore: cast_nullable_to_non_nullable
-                    as String,
-        systemResponse:
-            null == systemResponse
-                ? _value.systemResponse
-                : systemResponse // ignore: cast_nullable_to_non_nullable
-                    as String,
-        embedding:
-            null == embedding
-                ? _value._embedding
-                : embedding // ignore: cast_nullable_to_non_nullable
-                    as List<double>,
-        topics:
-            null == topics
-                ? _value._topics
-                : topics // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        emotionalState:
-            null == emotionalState
-                ? _value.emotionalState
-                : emotionalState // ignore: cast_nullable_to_non_nullable
-                    as EmotionalState,
-        timestamp:
-            null == timestamp
-                ? _value.timestamp
-                : timestamp // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-      ),
-    );
+    return _then(_$SemanticMemoryImpl(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      conversationId: null == conversationId
+          ? _value.conversationId
+          : conversationId // ignore: cast_nullable_to_non_nullable
+              as String,
+      turnId: null == turnId
+          ? _value.turnId
+          : turnId // ignore: cast_nullable_to_non_nullable
+              as String,
+      userInput: null == userInput
+          ? _value.userInput
+          : userInput // ignore: cast_nullable_to_non_nullable
+              as String,
+      systemResponse: null == systemResponse
+          ? _value.systemResponse
+          : systemResponse // ignore: cast_nullable_to_non_nullable
+              as String,
+      embedding: null == embedding
+          ? _value._embedding
+          : embedding // ignore: cast_nullable_to_non_nullable
+              as List<double>,
+      topics: null == topics
+          ? _value._topics
+          : topics // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      emotionalState: null == emotionalState
+          ? _value.emotionalState
+          : emotionalState // ignore: cast_nullable_to_non_nullable
+              as EmotionalState,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$SemanticMemoryImpl implements _SemanticMemory {
-  const _$SemanticMemoryImpl({
-    required this.userId,
-    required this.conversationId,
-    required this.turnId,
-    required this.userInput,
-    required this.systemResponse,
-    required final List<double> embedding,
-    required final List<String> topics,
-    required this.emotionalState,
-    required this.timestamp,
-  }) : _embedding = embedding,
-       _topics = topics;
+  const _$SemanticMemoryImpl(
+      {required this.userId,
+      required this.conversationId,
+      required this.turnId,
+      required this.userInput,
+      required this.systemResponse,
+      required final List<double> embedding,
+      required final List<String> topics,
+      required this.emotionalState,
+      required this.timestamp})
+      : _embedding = embedding,
+        _topics = topics;
 
   factory _$SemanticMemoryImpl.fromJson(Map<String, dynamic> json) =>
       _$$SemanticMemoryImplFromJson(json);
@@ -1473,10 +1343,8 @@ class _$SemanticMemoryImpl implements _SemanticMemory {
                 other.userInput == userInput) &&
             (identical(other.systemResponse, systemResponse) ||
                 other.systemResponse == systemResponse) &&
-            const DeepCollectionEquality().equals(
-              other._embedding,
-              _embedding,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._embedding, _embedding) &&
             const DeepCollectionEquality().equals(other._topics, _topics) &&
             (identical(other.emotionalState, emotionalState) ||
                 other.emotionalState == emotionalState) &&
@@ -1487,17 +1355,16 @@ class _$SemanticMemoryImpl implements _SemanticMemory {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    userId,
-    conversationId,
-    turnId,
-    userInput,
-    systemResponse,
-    const DeepCollectionEquality().hash(_embedding),
-    const DeepCollectionEquality().hash(_topics),
-    emotionalState,
-    timestamp,
-  );
+      runtimeType,
+      userId,
+      conversationId,
+      turnId,
+      userInput,
+      systemResponse,
+      const DeepCollectionEquality().hash(_embedding),
+      const DeepCollectionEquality().hash(_topics),
+      emotionalState,
+      timestamp);
 
   /// Create a copy of SemanticMemory
   /// with the given fields replaced by the non-null parameter values.
@@ -1506,28 +1373,27 @@ class _$SemanticMemoryImpl implements _SemanticMemory {
   @pragma('vm:prefer-inline')
   _$$SemanticMemoryImplCopyWith<_$SemanticMemoryImpl> get copyWith =>
       __$$SemanticMemoryImplCopyWithImpl<_$SemanticMemoryImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SemanticMemoryImplToJson(this);
+    return _$$SemanticMemoryImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _SemanticMemory implements SemanticMemory {
-  const factory _SemanticMemory({
-    required final String userId,
-    required final String conversationId,
-    required final String turnId,
-    required final String userInput,
-    required final String systemResponse,
-    required final List<double> embedding,
-    required final List<String> topics,
-    required final EmotionalState emotionalState,
-    required final DateTime timestamp,
-  }) = _$SemanticMemoryImpl;
+  const factory _SemanticMemory(
+      {required final String userId,
+      required final String conversationId,
+      required final String turnId,
+      required final String userInput,
+      required final String systemResponse,
+      required final List<double> embedding,
+      required final List<String> topics,
+      required final EmotionalState emotionalState,
+      required final DateTime timestamp}) = _$SemanticMemoryImpl;
 
   factory _SemanticMemory.fromJson(Map<String, dynamic> json) =
       _$SemanticMemoryImpl.fromJson;
@@ -1586,19 +1452,17 @@ mixin _$SimilarConversation {
 /// @nodoc
 abstract class $SimilarConversationCopyWith<$Res> {
   factory $SimilarConversationCopyWith(
-    SimilarConversation value,
-    $Res Function(SimilarConversation) then,
-  ) = _$SimilarConversationCopyWithImpl<$Res, SimilarConversation>;
+          SimilarConversation value, $Res Function(SimilarConversation) then) =
+      _$SimilarConversationCopyWithImpl<$Res, SimilarConversation>;
   @useResult
-  $Res call({
-    String conversationId,
-    String turnId,
-    double similarity,
-    String originalInput,
-    String response,
-    DateTime timestamp,
-    List<String> topics,
-  });
+  $Res call(
+      {String conversationId,
+      String turnId,
+      double similarity,
+      String originalInput,
+      String response,
+      DateTime timestamp,
+      List<String> topics});
 }
 
 /// @nodoc
@@ -1624,77 +1488,64 @@ class _$SimilarConversationCopyWithImpl<$Res, $Val extends SimilarConversation>
     Object? timestamp = null,
     Object? topics = null,
   }) {
-    return _then(
-      _value.copyWith(
-            conversationId:
-                null == conversationId
-                    ? _value.conversationId
-                    : conversationId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            turnId:
-                null == turnId
-                    ? _value.turnId
-                    : turnId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            similarity:
-                null == similarity
-                    ? _value.similarity
-                    : similarity // ignore: cast_nullable_to_non_nullable
-                        as double,
-            originalInput:
-                null == originalInput
-                    ? _value.originalInput
-                    : originalInput // ignore: cast_nullable_to_non_nullable
-                        as String,
-            response:
-                null == response
-                    ? _value.response
-                    : response // ignore: cast_nullable_to_non_nullable
-                        as String,
-            timestamp:
-                null == timestamp
-                    ? _value.timestamp
-                    : timestamp // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            topics:
-                null == topics
-                    ? _value.topics
-                    : topics // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      conversationId: null == conversationId
+          ? _value.conversationId
+          : conversationId // ignore: cast_nullable_to_non_nullable
+              as String,
+      turnId: null == turnId
+          ? _value.turnId
+          : turnId // ignore: cast_nullable_to_non_nullable
+              as String,
+      similarity: null == similarity
+          ? _value.similarity
+          : similarity // ignore: cast_nullable_to_non_nullable
+              as double,
+      originalInput: null == originalInput
+          ? _value.originalInput
+          : originalInput // ignore: cast_nullable_to_non_nullable
+              as String,
+      response: null == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as String,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      topics: null == topics
+          ? _value.topics
+          : topics // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$SimilarConversationImplCopyWith<$Res>
     implements $SimilarConversationCopyWith<$Res> {
-  factory _$$SimilarConversationImplCopyWith(
-    _$SimilarConversationImpl value,
-    $Res Function(_$SimilarConversationImpl) then,
-  ) = __$$SimilarConversationImplCopyWithImpl<$Res>;
+  factory _$$SimilarConversationImplCopyWith(_$SimilarConversationImpl value,
+          $Res Function(_$SimilarConversationImpl) then) =
+      __$$SimilarConversationImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String conversationId,
-    String turnId,
-    double similarity,
-    String originalInput,
-    String response,
-    DateTime timestamp,
-    List<String> topics,
-  });
+  $Res call(
+      {String conversationId,
+      String turnId,
+      double similarity,
+      String originalInput,
+      String response,
+      DateTime timestamp,
+      List<String> topics});
 }
 
 /// @nodoc
 class __$$SimilarConversationImplCopyWithImpl<$Res>
     extends _$SimilarConversationCopyWithImpl<$Res, _$SimilarConversationImpl>
     implements _$$SimilarConversationImplCopyWith<$Res> {
-  __$$SimilarConversationImplCopyWithImpl(
-    _$SimilarConversationImpl _value,
-    $Res Function(_$SimilarConversationImpl) _then,
-  ) : super(_value, _then);
+  __$$SimilarConversationImplCopyWithImpl(_$SimilarConversationImpl _value,
+      $Res Function(_$SimilarConversationImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of SimilarConversation
   /// with the given fields replaced by the non-null parameter values.
@@ -1709,60 +1560,51 @@ class __$$SimilarConversationImplCopyWithImpl<$Res>
     Object? timestamp = null,
     Object? topics = null,
   }) {
-    return _then(
-      _$SimilarConversationImpl(
-        conversationId:
-            null == conversationId
-                ? _value.conversationId
-                : conversationId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        turnId:
-            null == turnId
-                ? _value.turnId
-                : turnId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        similarity:
-            null == similarity
-                ? _value.similarity
-                : similarity // ignore: cast_nullable_to_non_nullable
-                    as double,
-        originalInput:
-            null == originalInput
-                ? _value.originalInput
-                : originalInput // ignore: cast_nullable_to_non_nullable
-                    as String,
-        response:
-            null == response
-                ? _value.response
-                : response // ignore: cast_nullable_to_non_nullable
-                    as String,
-        timestamp:
-            null == timestamp
-                ? _value.timestamp
-                : timestamp // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        topics:
-            null == topics
-                ? _value._topics
-                : topics // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-      ),
-    );
+    return _then(_$SimilarConversationImpl(
+      conversationId: null == conversationId
+          ? _value.conversationId
+          : conversationId // ignore: cast_nullable_to_non_nullable
+              as String,
+      turnId: null == turnId
+          ? _value.turnId
+          : turnId // ignore: cast_nullable_to_non_nullable
+              as String,
+      similarity: null == similarity
+          ? _value.similarity
+          : similarity // ignore: cast_nullable_to_non_nullable
+              as double,
+      originalInput: null == originalInput
+          ? _value.originalInput
+          : originalInput // ignore: cast_nullable_to_non_nullable
+              as String,
+      response: null == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as String,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      topics: null == topics
+          ? _value._topics
+          : topics // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$SimilarConversationImpl implements _SimilarConversation {
-  const _$SimilarConversationImpl({
-    required this.conversationId,
-    required this.turnId,
-    required this.similarity,
-    required this.originalInput,
-    required this.response,
-    required this.timestamp,
-    required final List<String> topics,
-  }) : _topics = topics;
+  const _$SimilarConversationImpl(
+      {required this.conversationId,
+      required this.turnId,
+      required this.similarity,
+      required this.originalInput,
+      required this.response,
+      required this.timestamp,
+      required final List<String> topics})
+      : _topics = topics;
 
   factory _$SimilarConversationImpl.fromJson(Map<String, dynamic> json) =>
       _$$SimilarConversationImplFromJson(json);
@@ -1814,15 +1656,14 @@ class _$SimilarConversationImpl implements _SimilarConversation {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    conversationId,
-    turnId,
-    similarity,
-    originalInput,
-    response,
-    timestamp,
-    const DeepCollectionEquality().hash(_topics),
-  );
+      runtimeType,
+      conversationId,
+      turnId,
+      similarity,
+      originalInput,
+      response,
+      timestamp,
+      const DeepCollectionEquality().hash(_topics));
 
   /// Create a copy of SimilarConversation
   /// with the given fields replaced by the non-null parameter values.
@@ -1831,26 +1672,25 @@ class _$SimilarConversationImpl implements _SimilarConversation {
   @pragma('vm:prefer-inline')
   _$$SimilarConversationImplCopyWith<_$SimilarConversationImpl> get copyWith =>
       __$$SimilarConversationImplCopyWithImpl<_$SimilarConversationImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SimilarConversationImplToJson(this);
+    return _$$SimilarConversationImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _SimilarConversation implements SimilarConversation {
-  const factory _SimilarConversation({
-    required final String conversationId,
-    required final String turnId,
-    required final double similarity,
-    required final String originalInput,
-    required final String response,
-    required final DateTime timestamp,
-    required final List<String> topics,
-  }) = _$SimilarConversationImpl;
+  const factory _SimilarConversation(
+      {required final String conversationId,
+      required final String turnId,
+      required final double similarity,
+      required final String originalInput,
+      required final String response,
+      required final DateTime timestamp,
+      required final List<String> topics}) = _$SimilarConversationImpl;
 
   factory _SimilarConversation.fromJson(Map<String, dynamic> json) =
       _$SimilarConversationImpl.fromJson;
@@ -1902,16 +1742,14 @@ mixin _$ConversationUpdate {
 /// @nodoc
 abstract class $ConversationUpdateCopyWith<$Res> {
   factory $ConversationUpdateCopyWith(
-    ConversationUpdate value,
-    $Res Function(ConversationUpdate) then,
-  ) = _$ConversationUpdateCopyWithImpl<$Res, ConversationUpdate>;
+          ConversationUpdate value, $Res Function(ConversationUpdate) then) =
+      _$ConversationUpdateCopyWithImpl<$Res, ConversationUpdate>;
   @useResult
-  $Res call({
-    String conversationId,
-    ConversationTurn turn,
-    ConversationContext updatedContext,
-    ConversationUpdateType updateType,
-  });
+  $Res call(
+      {String conversationId,
+      ConversationTurn turn,
+      ConversationContext updatedContext,
+      ConversationUpdateType updateType});
 
   $ConversationTurnCopyWith<$Res> get turn;
   $ConversationContextCopyWith<$Res> get updatedContext;
@@ -1937,31 +1775,24 @@ class _$ConversationUpdateCopyWithImpl<$Res, $Val extends ConversationUpdate>
     Object? updatedContext = null,
     Object? updateType = null,
   }) {
-    return _then(
-      _value.copyWith(
-            conversationId:
-                null == conversationId
-                    ? _value.conversationId
-                    : conversationId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            turn:
-                null == turn
-                    ? _value.turn
-                    : turn // ignore: cast_nullable_to_non_nullable
-                        as ConversationTurn,
-            updatedContext:
-                null == updatedContext
-                    ? _value.updatedContext
-                    : updatedContext // ignore: cast_nullable_to_non_nullable
-                        as ConversationContext,
-            updateType:
-                null == updateType
-                    ? _value.updateType
-                    : updateType // ignore: cast_nullable_to_non_nullable
-                        as ConversationUpdateType,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      conversationId: null == conversationId
+          ? _value.conversationId
+          : conversationId // ignore: cast_nullable_to_non_nullable
+              as String,
+      turn: null == turn
+          ? _value.turn
+          : turn // ignore: cast_nullable_to_non_nullable
+              as ConversationTurn,
+      updatedContext: null == updatedContext
+          ? _value.updatedContext
+          : updatedContext // ignore: cast_nullable_to_non_nullable
+              as ConversationContext,
+      updateType: null == updateType
+          ? _value.updateType
+          : updateType // ignore: cast_nullable_to_non_nullable
+              as ConversationUpdateType,
+    ) as $Val);
   }
 
   /// Create a copy of ConversationUpdate
@@ -1988,18 +1819,16 @@ class _$ConversationUpdateCopyWithImpl<$Res, $Val extends ConversationUpdate>
 /// @nodoc
 abstract class _$$ConversationUpdateImplCopyWith<$Res>
     implements $ConversationUpdateCopyWith<$Res> {
-  factory _$$ConversationUpdateImplCopyWith(
-    _$ConversationUpdateImpl value,
-    $Res Function(_$ConversationUpdateImpl) then,
-  ) = __$$ConversationUpdateImplCopyWithImpl<$Res>;
+  factory _$$ConversationUpdateImplCopyWith(_$ConversationUpdateImpl value,
+          $Res Function(_$ConversationUpdateImpl) then) =
+      __$$ConversationUpdateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String conversationId,
-    ConversationTurn turn,
-    ConversationContext updatedContext,
-    ConversationUpdateType updateType,
-  });
+  $Res call(
+      {String conversationId,
+      ConversationTurn turn,
+      ConversationContext updatedContext,
+      ConversationUpdateType updateType});
 
   @override
   $ConversationTurnCopyWith<$Res> get turn;
@@ -2011,10 +1840,9 @@ abstract class _$$ConversationUpdateImplCopyWith<$Res>
 class __$$ConversationUpdateImplCopyWithImpl<$Res>
     extends _$ConversationUpdateCopyWithImpl<$Res, _$ConversationUpdateImpl>
     implements _$$ConversationUpdateImplCopyWith<$Res> {
-  __$$ConversationUpdateImplCopyWithImpl(
-    _$ConversationUpdateImpl _value,
-    $Res Function(_$ConversationUpdateImpl) _then,
-  ) : super(_value, _then);
+  __$$ConversationUpdateImplCopyWithImpl(_$ConversationUpdateImpl _value,
+      $Res Function(_$ConversationUpdateImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ConversationUpdate
   /// with the given fields replaced by the non-null parameter values.
@@ -2026,42 +1854,35 @@ class __$$ConversationUpdateImplCopyWithImpl<$Res>
     Object? updatedContext = null,
     Object? updateType = null,
   }) {
-    return _then(
-      _$ConversationUpdateImpl(
-        conversationId:
-            null == conversationId
-                ? _value.conversationId
-                : conversationId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        turn:
-            null == turn
-                ? _value.turn
-                : turn // ignore: cast_nullable_to_non_nullable
-                    as ConversationTurn,
-        updatedContext:
-            null == updatedContext
-                ? _value.updatedContext
-                : updatedContext // ignore: cast_nullable_to_non_nullable
-                    as ConversationContext,
-        updateType:
-            null == updateType
-                ? _value.updateType
-                : updateType // ignore: cast_nullable_to_non_nullable
-                    as ConversationUpdateType,
-      ),
-    );
+    return _then(_$ConversationUpdateImpl(
+      conversationId: null == conversationId
+          ? _value.conversationId
+          : conversationId // ignore: cast_nullable_to_non_nullable
+              as String,
+      turn: null == turn
+          ? _value.turn
+          : turn // ignore: cast_nullable_to_non_nullable
+              as ConversationTurn,
+      updatedContext: null == updatedContext
+          ? _value.updatedContext
+          : updatedContext // ignore: cast_nullable_to_non_nullable
+              as ConversationContext,
+      updateType: null == updateType
+          ? _value.updateType
+          : updateType // ignore: cast_nullable_to_non_nullable
+              as ConversationUpdateType,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ConversationUpdateImpl implements _ConversationUpdate {
-  const _$ConversationUpdateImpl({
-    required this.conversationId,
-    required this.turn,
-    required this.updatedContext,
-    required this.updateType,
-  });
+  const _$ConversationUpdateImpl(
+      {required this.conversationId,
+      required this.turn,
+      required this.updatedContext,
+      required this.updateType});
 
   factory _$ConversationUpdateImpl.fromJson(Map<String, dynamic> json) =>
       _$$ConversationUpdateImplFromJson(json);
@@ -2097,12 +1918,7 @@ class _$ConversationUpdateImpl implements _ConversationUpdate {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    conversationId,
-    turn,
-    updatedContext,
-    updateType,
-  );
+      runtimeType, conversationId, turn, updatedContext, updateType);
 
   /// Create a copy of ConversationUpdate
   /// with the given fields replaced by the non-null parameter values.
@@ -2111,23 +1927,23 @@ class _$ConversationUpdateImpl implements _ConversationUpdate {
   @pragma('vm:prefer-inline')
   _$$ConversationUpdateImplCopyWith<_$ConversationUpdateImpl> get copyWith =>
       __$$ConversationUpdateImplCopyWithImpl<_$ConversationUpdateImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ConversationUpdateImplToJson(this);
+    return _$$ConversationUpdateImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _ConversationUpdate implements ConversationUpdate {
-  const factory _ConversationUpdate({
-    required final String conversationId,
-    required final ConversationTurn turn,
-    required final ConversationContext updatedContext,
-    required final ConversationUpdateType updateType,
-  }) = _$ConversationUpdateImpl;
+  const factory _ConversationUpdate(
+          {required final String conversationId,
+          required final ConversationTurn turn,
+          required final ConversationContext updatedContext,
+          required final ConversationUpdateType updateType}) =
+      _$ConversationUpdateImpl;
 
   factory _ConversationUpdate.fromJson(Map<String, dynamic> json) =
       _$ConversationUpdateImpl.fromJson;
@@ -2171,9 +1987,8 @@ mixin _$TopicFrequency {
 /// @nodoc
 abstract class $TopicFrequencyCopyWith<$Res> {
   factory $TopicFrequencyCopyWith(
-    TopicFrequency value,
-    $Res Function(TopicFrequency) then,
-  ) = _$TopicFrequencyCopyWithImpl<$Res, TopicFrequency>;
+          TopicFrequency value, $Res Function(TopicFrequency) then) =
+      _$TopicFrequencyCopyWithImpl<$Res, TopicFrequency>;
   @useResult
   $Res call({String topic, int frequency});
 }
@@ -2192,32 +2007,29 @@ class _$TopicFrequencyCopyWithImpl<$Res, $Val extends TopicFrequency>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? topic = null, Object? frequency = null}) {
-    return _then(
-      _value.copyWith(
-            topic:
-                null == topic
-                    ? _value.topic
-                    : topic // ignore: cast_nullable_to_non_nullable
-                        as String,
-            frequency:
-                null == frequency
-                    ? _value.frequency
-                    : frequency // ignore: cast_nullable_to_non_nullable
-                        as int,
-          )
-          as $Val,
-    );
+  $Res call({
+    Object? topic = null,
+    Object? frequency = null,
+  }) {
+    return _then(_value.copyWith(
+      topic: null == topic
+          ? _value.topic
+          : topic // ignore: cast_nullable_to_non_nullable
+              as String,
+      frequency: null == frequency
+          ? _value.frequency
+          : frequency // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$TopicFrequencyImplCopyWith<$Res>
     implements $TopicFrequencyCopyWith<$Res> {
-  factory _$$TopicFrequencyImplCopyWith(
-    _$TopicFrequencyImpl value,
-    $Res Function(_$TopicFrequencyImpl) then,
-  ) = __$$TopicFrequencyImplCopyWithImpl<$Res>;
+  factory _$$TopicFrequencyImplCopyWith(_$TopicFrequencyImpl value,
+          $Res Function(_$TopicFrequencyImpl) then) =
+      __$$TopicFrequencyImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String topic, int frequency});
@@ -2228,29 +2040,27 @@ class __$$TopicFrequencyImplCopyWithImpl<$Res>
     extends _$TopicFrequencyCopyWithImpl<$Res, _$TopicFrequencyImpl>
     implements _$$TopicFrequencyImplCopyWith<$Res> {
   __$$TopicFrequencyImplCopyWithImpl(
-    _$TopicFrequencyImpl _value,
-    $Res Function(_$TopicFrequencyImpl) _then,
-  ) : super(_value, _then);
+      _$TopicFrequencyImpl _value, $Res Function(_$TopicFrequencyImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of TopicFrequency
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? topic = null, Object? frequency = null}) {
-    return _then(
-      _$TopicFrequencyImpl(
-        topic:
-            null == topic
-                ? _value.topic
-                : topic // ignore: cast_nullable_to_non_nullable
-                    as String,
-        frequency:
-            null == frequency
-                ? _value.frequency
-                : frequency // ignore: cast_nullable_to_non_nullable
-                    as int,
-      ),
-    );
+  $Res call({
+    Object? topic = null,
+    Object? frequency = null,
+  }) {
+    return _then(_$TopicFrequencyImpl(
+      topic: null == topic
+          ? _value.topic
+          : topic // ignore: cast_nullable_to_non_nullable
+              as String,
+      frequency: null == frequency
+          ? _value.frequency
+          : frequency // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
   }
 }
 
@@ -2293,21 +2103,20 @@ class _$TopicFrequencyImpl implements _TopicFrequency {
   @pragma('vm:prefer-inline')
   _$$TopicFrequencyImplCopyWith<_$TopicFrequencyImpl> get copyWith =>
       __$$TopicFrequencyImplCopyWithImpl<_$TopicFrequencyImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$TopicFrequencyImplToJson(this);
+    return _$$TopicFrequencyImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _TopicFrequency implements TopicFrequency {
-  const factory _TopicFrequency({
-    required final String topic,
-    required final int frequency,
-  }) = _$TopicFrequencyImpl;
+  const factory _TopicFrequency(
+      {required final String topic,
+      required final int frequency}) = _$TopicFrequencyImpl;
 
   factory _TopicFrequency.fromJson(Map<String, dynamic> json) =
       _$TopicFrequencyImpl.fromJson;
@@ -2352,18 +2161,16 @@ mixin _$ConversationStats {
 /// @nodoc
 abstract class $ConversationStatsCopyWith<$Res> {
   factory $ConversationStatsCopyWith(
-    ConversationStats value,
-    $Res Function(ConversationStats) then,
-  ) = _$ConversationStatsCopyWithImpl<$Res, ConversationStats>;
+          ConversationStats value, $Res Function(ConversationStats) then) =
+      _$ConversationStatsCopyWithImpl<$Res, ConversationStats>;
   @useResult
-  $Res call({
-    String userId,
-    int totalConversations,
-    int totalTurns,
-    double averageTurnsPerConversation,
-    List<TopicFrequency> mostDiscussedTopics,
-    DateTime? lastConversationDate,
-  });
+  $Res call(
+      {String userId,
+      int totalConversations,
+      int totalTurns,
+      double averageTurnsPerConversation,
+      List<TopicFrequency> mostDiscussedTopics,
+      DateTime? lastConversationDate});
 }
 
 /// @nodoc
@@ -2388,71 +2195,59 @@ class _$ConversationStatsCopyWithImpl<$Res, $Val extends ConversationStats>
     Object? mostDiscussedTopics = null,
     Object? lastConversationDate = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            userId:
-                null == userId
-                    ? _value.userId
-                    : userId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            totalConversations:
-                null == totalConversations
-                    ? _value.totalConversations
-                    : totalConversations // ignore: cast_nullable_to_non_nullable
-                        as int,
-            totalTurns:
-                null == totalTurns
-                    ? _value.totalTurns
-                    : totalTurns // ignore: cast_nullable_to_non_nullable
-                        as int,
-            averageTurnsPerConversation:
-                null == averageTurnsPerConversation
-                    ? _value.averageTurnsPerConversation
-                    : averageTurnsPerConversation // ignore: cast_nullable_to_non_nullable
-                        as double,
-            mostDiscussedTopics:
-                null == mostDiscussedTopics
-                    ? _value.mostDiscussedTopics
-                    : mostDiscussedTopics // ignore: cast_nullable_to_non_nullable
-                        as List<TopicFrequency>,
-            lastConversationDate:
-                freezed == lastConversationDate
-                    ? _value.lastConversationDate
-                    : lastConversationDate // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      totalConversations: null == totalConversations
+          ? _value.totalConversations
+          : totalConversations // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalTurns: null == totalTurns
+          ? _value.totalTurns
+          : totalTurns // ignore: cast_nullable_to_non_nullable
+              as int,
+      averageTurnsPerConversation: null == averageTurnsPerConversation
+          ? _value.averageTurnsPerConversation
+          : averageTurnsPerConversation // ignore: cast_nullable_to_non_nullable
+              as double,
+      mostDiscussedTopics: null == mostDiscussedTopics
+          ? _value.mostDiscussedTopics
+          : mostDiscussedTopics // ignore: cast_nullable_to_non_nullable
+              as List<TopicFrequency>,
+      lastConversationDate: freezed == lastConversationDate
+          ? _value.lastConversationDate
+          : lastConversationDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$ConversationStatsImplCopyWith<$Res>
     implements $ConversationStatsCopyWith<$Res> {
-  factory _$$ConversationStatsImplCopyWith(
-    _$ConversationStatsImpl value,
-    $Res Function(_$ConversationStatsImpl) then,
-  ) = __$$ConversationStatsImplCopyWithImpl<$Res>;
+  factory _$$ConversationStatsImplCopyWith(_$ConversationStatsImpl value,
+          $Res Function(_$ConversationStatsImpl) then) =
+      __$$ConversationStatsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String userId,
-    int totalConversations,
-    int totalTurns,
-    double averageTurnsPerConversation,
-    List<TopicFrequency> mostDiscussedTopics,
-    DateTime? lastConversationDate,
-  });
+  $Res call(
+      {String userId,
+      int totalConversations,
+      int totalTurns,
+      double averageTurnsPerConversation,
+      List<TopicFrequency> mostDiscussedTopics,
+      DateTime? lastConversationDate});
 }
 
 /// @nodoc
 class __$$ConversationStatsImplCopyWithImpl<$Res>
     extends _$ConversationStatsCopyWithImpl<$Res, _$ConversationStatsImpl>
     implements _$$ConversationStatsImplCopyWith<$Res> {
-  __$$ConversationStatsImplCopyWithImpl(
-    _$ConversationStatsImpl _value,
-    $Res Function(_$ConversationStatsImpl) _then,
-  ) : super(_value, _then);
+  __$$ConversationStatsImplCopyWithImpl(_$ConversationStatsImpl _value,
+      $Res Function(_$ConversationStatsImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ConversationStats
   /// with the given fields replaced by the non-null parameter values.
@@ -2466,54 +2261,46 @@ class __$$ConversationStatsImplCopyWithImpl<$Res>
     Object? mostDiscussedTopics = null,
     Object? lastConversationDate = freezed,
   }) {
-    return _then(
-      _$ConversationStatsImpl(
-        userId:
-            null == userId
-                ? _value.userId
-                : userId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        totalConversations:
-            null == totalConversations
-                ? _value.totalConversations
-                : totalConversations // ignore: cast_nullable_to_non_nullable
-                    as int,
-        totalTurns:
-            null == totalTurns
-                ? _value.totalTurns
-                : totalTurns // ignore: cast_nullable_to_non_nullable
-                    as int,
-        averageTurnsPerConversation:
-            null == averageTurnsPerConversation
-                ? _value.averageTurnsPerConversation
-                : averageTurnsPerConversation // ignore: cast_nullable_to_non_nullable
-                    as double,
-        mostDiscussedTopics:
-            null == mostDiscussedTopics
-                ? _value._mostDiscussedTopics
-                : mostDiscussedTopics // ignore: cast_nullable_to_non_nullable
-                    as List<TopicFrequency>,
-        lastConversationDate:
-            freezed == lastConversationDate
-                ? _value.lastConversationDate
-                : lastConversationDate // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-      ),
-    );
+    return _then(_$ConversationStatsImpl(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      totalConversations: null == totalConversations
+          ? _value.totalConversations
+          : totalConversations // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalTurns: null == totalTurns
+          ? _value.totalTurns
+          : totalTurns // ignore: cast_nullable_to_non_nullable
+              as int,
+      averageTurnsPerConversation: null == averageTurnsPerConversation
+          ? _value.averageTurnsPerConversation
+          : averageTurnsPerConversation // ignore: cast_nullable_to_non_nullable
+              as double,
+      mostDiscussedTopics: null == mostDiscussedTopics
+          ? _value._mostDiscussedTopics
+          : mostDiscussedTopics // ignore: cast_nullable_to_non_nullable
+              as List<TopicFrequency>,
+      lastConversationDate: freezed == lastConversationDate
+          ? _value.lastConversationDate
+          : lastConversationDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ConversationStatsImpl implements _ConversationStats {
-  const _$ConversationStatsImpl({
-    required this.userId,
-    required this.totalConversations,
-    required this.totalTurns,
-    required this.averageTurnsPerConversation,
-    required final List<TopicFrequency> mostDiscussedTopics,
-    this.lastConversationDate,
-  }) : _mostDiscussedTopics = mostDiscussedTopics;
+  const _$ConversationStatsImpl(
+      {required this.userId,
+      required this.totalConversations,
+      required this.totalTurns,
+      required this.averageTurnsPerConversation,
+      required final List<TopicFrequency> mostDiscussedTopics,
+      this.lastConversationDate})
+      : _mostDiscussedTopics = mostDiscussedTopics;
 
   factory _$ConversationStatsImpl.fromJson(Map<String, dynamic> json) =>
       _$$ConversationStatsImplFromJson(json);
@@ -2553,16 +2340,12 @@ class _$ConversationStatsImpl implements _ConversationStats {
                 other.totalConversations == totalConversations) &&
             (identical(other.totalTurns, totalTurns) ||
                 other.totalTurns == totalTurns) &&
-            (identical(
-                  other.averageTurnsPerConversation,
-                  averageTurnsPerConversation,
-                ) ||
+            (identical(other.averageTurnsPerConversation,
+                    averageTurnsPerConversation) ||
                 other.averageTurnsPerConversation ==
                     averageTurnsPerConversation) &&
-            const DeepCollectionEquality().equals(
-              other._mostDiscussedTopics,
-              _mostDiscussedTopics,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._mostDiscussedTopics, _mostDiscussedTopics) &&
             (identical(other.lastConversationDate, lastConversationDate) ||
                 other.lastConversationDate == lastConversationDate));
   }
@@ -2570,14 +2353,13 @@ class _$ConversationStatsImpl implements _ConversationStats {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    userId,
-    totalConversations,
-    totalTurns,
-    averageTurnsPerConversation,
-    const DeepCollectionEquality().hash(_mostDiscussedTopics),
-    lastConversationDate,
-  );
+      runtimeType,
+      userId,
+      totalConversations,
+      totalTurns,
+      averageTurnsPerConversation,
+      const DeepCollectionEquality().hash(_mostDiscussedTopics),
+      lastConversationDate);
 
   /// Create a copy of ConversationStats
   /// with the given fields replaced by the non-null parameter values.
@@ -2586,25 +2368,24 @@ class _$ConversationStatsImpl implements _ConversationStats {
   @pragma('vm:prefer-inline')
   _$$ConversationStatsImplCopyWith<_$ConversationStatsImpl> get copyWith =>
       __$$ConversationStatsImplCopyWithImpl<_$ConversationStatsImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ConversationStatsImplToJson(this);
+    return _$$ConversationStatsImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _ConversationStats implements ConversationStats {
-  const factory _ConversationStats({
-    required final String userId,
-    required final int totalConversations,
-    required final int totalTurns,
-    required final double averageTurnsPerConversation,
-    required final List<TopicFrequency> mostDiscussedTopics,
-    final DateTime? lastConversationDate,
-  }) = _$ConversationStatsImpl;
+  const factory _ConversationStats(
+      {required final String userId,
+      required final int totalConversations,
+      required final int totalTurns,
+      required final double averageTurnsPerConversation,
+      required final List<TopicFrequency> mostDiscussedTopics,
+      final DateTime? lastConversationDate}) = _$ConversationStatsImpl;
 
   factory _ConversationStats.fromJson(Map<String, dynamic> json) =
       _$ConversationStatsImpl.fromJson;
@@ -2657,19 +2438,17 @@ mixin _$VoiceQueryResult {
 /// @nodoc
 abstract class $VoiceQueryResultCopyWith<$Res> {
   factory $VoiceQueryResultCopyWith(
-    VoiceQueryResult value,
-    $Res Function(VoiceQueryResult) then,
-  ) = _$VoiceQueryResultCopyWithImpl<$Res, VoiceQueryResult>;
+          VoiceQueryResult value, $Res Function(VoiceQueryResult) then) =
+      _$VoiceQueryResultCopyWithImpl<$Res, VoiceQueryResult>;
   @useResult
-  $Res call({
-    String transcription,
-    double confidence,
-    String detectedLanguage,
-    Duration duration,
-    bool containsArabic,
-    List<String> alternatives,
-    Map<String, dynamic> audioMetadata,
-  });
+  $Res call(
+      {String transcription,
+      double confidence,
+      String detectedLanguage,
+      Duration duration,
+      bool containsArabic,
+      List<String> alternatives,
+      Map<String, dynamic> audioMetadata});
 }
 
 /// @nodoc
@@ -2695,77 +2474,64 @@ class _$VoiceQueryResultCopyWithImpl<$Res, $Val extends VoiceQueryResult>
     Object? alternatives = null,
     Object? audioMetadata = null,
   }) {
-    return _then(
-      _value.copyWith(
-            transcription:
-                null == transcription
-                    ? _value.transcription
-                    : transcription // ignore: cast_nullable_to_non_nullable
-                        as String,
-            confidence:
-                null == confidence
-                    ? _value.confidence
-                    : confidence // ignore: cast_nullable_to_non_nullable
-                        as double,
-            detectedLanguage:
-                null == detectedLanguage
-                    ? _value.detectedLanguage
-                    : detectedLanguage // ignore: cast_nullable_to_non_nullable
-                        as String,
-            duration:
-                null == duration
-                    ? _value.duration
-                    : duration // ignore: cast_nullable_to_non_nullable
-                        as Duration,
-            containsArabic:
-                null == containsArabic
-                    ? _value.containsArabic
-                    : containsArabic // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            alternatives:
-                null == alternatives
-                    ? _value.alternatives
-                    : alternatives // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            audioMetadata:
-                null == audioMetadata
-                    ? _value.audioMetadata
-                    : audioMetadata // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      transcription: null == transcription
+          ? _value.transcription
+          : transcription // ignore: cast_nullable_to_non_nullable
+              as String,
+      confidence: null == confidence
+          ? _value.confidence
+          : confidence // ignore: cast_nullable_to_non_nullable
+              as double,
+      detectedLanguage: null == detectedLanguage
+          ? _value.detectedLanguage
+          : detectedLanguage // ignore: cast_nullable_to_non_nullable
+              as String,
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      containsArabic: null == containsArabic
+          ? _value.containsArabic
+          : containsArabic // ignore: cast_nullable_to_non_nullable
+              as bool,
+      alternatives: null == alternatives
+          ? _value.alternatives
+          : alternatives // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      audioMetadata: null == audioMetadata
+          ? _value.audioMetadata
+          : audioMetadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$VoiceQueryResultImplCopyWith<$Res>
     implements $VoiceQueryResultCopyWith<$Res> {
-  factory _$$VoiceQueryResultImplCopyWith(
-    _$VoiceQueryResultImpl value,
-    $Res Function(_$VoiceQueryResultImpl) then,
-  ) = __$$VoiceQueryResultImplCopyWithImpl<$Res>;
+  factory _$$VoiceQueryResultImplCopyWith(_$VoiceQueryResultImpl value,
+          $Res Function(_$VoiceQueryResultImpl) then) =
+      __$$VoiceQueryResultImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String transcription,
-    double confidence,
-    String detectedLanguage,
-    Duration duration,
-    bool containsArabic,
-    List<String> alternatives,
-    Map<String, dynamic> audioMetadata,
-  });
+  $Res call(
+      {String transcription,
+      double confidence,
+      String detectedLanguage,
+      Duration duration,
+      bool containsArabic,
+      List<String> alternatives,
+      Map<String, dynamic> audioMetadata});
 }
 
 /// @nodoc
 class __$$VoiceQueryResultImplCopyWithImpl<$Res>
     extends _$VoiceQueryResultCopyWithImpl<$Res, _$VoiceQueryResultImpl>
     implements _$$VoiceQueryResultImplCopyWith<$Res> {
-  __$$VoiceQueryResultImplCopyWithImpl(
-    _$VoiceQueryResultImpl _value,
-    $Res Function(_$VoiceQueryResultImpl) _then,
-  ) : super(_value, _then);
+  __$$VoiceQueryResultImplCopyWithImpl(_$VoiceQueryResultImpl _value,
+      $Res Function(_$VoiceQueryResultImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of VoiceQueryResult
   /// with the given fields replaced by the non-null parameter values.
@@ -2780,61 +2546,52 @@ class __$$VoiceQueryResultImplCopyWithImpl<$Res>
     Object? alternatives = null,
     Object? audioMetadata = null,
   }) {
-    return _then(
-      _$VoiceQueryResultImpl(
-        transcription:
-            null == transcription
-                ? _value.transcription
-                : transcription // ignore: cast_nullable_to_non_nullable
-                    as String,
-        confidence:
-            null == confidence
-                ? _value.confidence
-                : confidence // ignore: cast_nullable_to_non_nullable
-                    as double,
-        detectedLanguage:
-            null == detectedLanguage
-                ? _value.detectedLanguage
-                : detectedLanguage // ignore: cast_nullable_to_non_nullable
-                    as String,
-        duration:
-            null == duration
-                ? _value.duration
-                : duration // ignore: cast_nullable_to_non_nullable
-                    as Duration,
-        containsArabic:
-            null == containsArabic
-                ? _value.containsArabic
-                : containsArabic // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        alternatives:
-            null == alternatives
-                ? _value._alternatives
-                : alternatives // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        audioMetadata:
-            null == audioMetadata
-                ? _value._audioMetadata
-                : audioMetadata // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>,
-      ),
-    );
+    return _then(_$VoiceQueryResultImpl(
+      transcription: null == transcription
+          ? _value.transcription
+          : transcription // ignore: cast_nullable_to_non_nullable
+              as String,
+      confidence: null == confidence
+          ? _value.confidence
+          : confidence // ignore: cast_nullable_to_non_nullable
+              as double,
+      detectedLanguage: null == detectedLanguage
+          ? _value.detectedLanguage
+          : detectedLanguage // ignore: cast_nullable_to_non_nullable
+              as String,
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      containsArabic: null == containsArabic
+          ? _value.containsArabic
+          : containsArabic // ignore: cast_nullable_to_non_nullable
+              as bool,
+      alternatives: null == alternatives
+          ? _value._alternatives
+          : alternatives // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      audioMetadata: null == audioMetadata
+          ? _value._audioMetadata
+          : audioMetadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$VoiceQueryResultImpl implements _VoiceQueryResult {
-  const _$VoiceQueryResultImpl({
-    required this.transcription,
-    required this.confidence,
-    required this.detectedLanguage,
-    required this.duration,
-    required this.containsArabic,
-    required final List<String> alternatives,
-    required final Map<String, dynamic> audioMetadata,
-  }) : _alternatives = alternatives,
-       _audioMetadata = audioMetadata;
+  const _$VoiceQueryResultImpl(
+      {required this.transcription,
+      required this.confidence,
+      required this.detectedLanguage,
+      required this.duration,
+      required this.containsArabic,
+      required final List<String> alternatives,
+      required final Map<String, dynamic> audioMetadata})
+      : _alternatives = alternatives,
+        _audioMetadata = audioMetadata;
 
   factory _$VoiceQueryResultImpl.fromJson(Map<String, dynamic> json) =>
       _$$VoiceQueryResultImplFromJson(json);
@@ -2885,28 +2642,23 @@ class _$VoiceQueryResultImpl implements _VoiceQueryResult {
                 other.duration == duration) &&
             (identical(other.containsArabic, containsArabic) ||
                 other.containsArabic == containsArabic) &&
-            const DeepCollectionEquality().equals(
-              other._alternatives,
-              _alternatives,
-            ) &&
-            const DeepCollectionEquality().equals(
-              other._audioMetadata,
-              _audioMetadata,
-            ));
+            const DeepCollectionEquality()
+                .equals(other._alternatives, _alternatives) &&
+            const DeepCollectionEquality()
+                .equals(other._audioMetadata, _audioMetadata));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    transcription,
-    confidence,
-    detectedLanguage,
-    duration,
-    containsArabic,
-    const DeepCollectionEquality().hash(_alternatives),
-    const DeepCollectionEquality().hash(_audioMetadata),
-  );
+      runtimeType,
+      transcription,
+      confidence,
+      detectedLanguage,
+      duration,
+      containsArabic,
+      const DeepCollectionEquality().hash(_alternatives),
+      const DeepCollectionEquality().hash(_audioMetadata));
 
   /// Create a copy of VoiceQueryResult
   /// with the given fields replaced by the non-null parameter values.
@@ -2915,26 +2667,26 @@ class _$VoiceQueryResultImpl implements _VoiceQueryResult {
   @pragma('vm:prefer-inline')
   _$$VoiceQueryResultImplCopyWith<_$VoiceQueryResultImpl> get copyWith =>
       __$$VoiceQueryResultImplCopyWithImpl<_$VoiceQueryResultImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$VoiceQueryResultImplToJson(this);
+    return _$$VoiceQueryResultImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _VoiceQueryResult implements VoiceQueryResult {
-  const factory _VoiceQueryResult({
-    required final String transcription,
-    required final double confidence,
-    required final String detectedLanguage,
-    required final Duration duration,
-    required final bool containsArabic,
-    required final List<String> alternatives,
-    required final Map<String, dynamic> audioMetadata,
-  }) = _$VoiceQueryResultImpl;
+  const factory _VoiceQueryResult(
+          {required final String transcription,
+          required final double confidence,
+          required final String detectedLanguage,
+          required final Duration duration,
+          required final bool containsArabic,
+          required final List<String> alternatives,
+          required final Map<String, dynamic> audioMetadata}) =
+      _$VoiceQueryResultImpl;
 
   factory _VoiceQueryResult.fromJson(Map<String, dynamic> json) =
       _$VoiceQueryResultImpl.fromJson;
@@ -2994,24 +2746,22 @@ mixin _$ContextualInput {
 /// @nodoc
 abstract class $ContextualInputCopyWith<$Res> {
   factory $ContextualInputCopyWith(
-    ContextualInput value,
-    $Res Function(ContextualInput) then,
-  ) = _$ContextualInputCopyWithImpl<$Res, ContextualInput>;
+          ContextualInput value, $Res Function(ContextualInput) then) =
+      _$ContextualInputCopyWithImpl<$Res, ContextualInput>;
   @useResult
-  $Res call({
-    String id,
-    String userId,
-    String rawInput,
-    List<String> processedKeywords,
-    EmotionalState detectedEmotion,
-    String detectedContext,
-    double emotionConfidence,
-    double contextConfidence,
-    Map<String, dynamic> nlpAnalysis,
-    DateTime timestamp,
-    bool isEncrypted,
-    String? encryptionKey,
-  });
+  $Res call(
+      {String id,
+      String userId,
+      String rawInput,
+      List<String> processedKeywords,
+      EmotionalState detectedEmotion,
+      String detectedContext,
+      double emotionConfidence,
+      double contextConfidence,
+      Map<String, dynamic> nlpAnalysis,
+      DateTime timestamp,
+      bool isEncrypted,
+      String? encryptionKey});
 }
 
 /// @nodoc
@@ -3042,97 +2792,80 @@ class _$ContextualInputCopyWithImpl<$Res, $Val extends ContextualInput>
     Object? isEncrypted = null,
     Object? encryptionKey = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            userId:
-                null == userId
-                    ? _value.userId
-                    : userId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            rawInput:
-                null == rawInput
-                    ? _value.rawInput
-                    : rawInput // ignore: cast_nullable_to_non_nullable
-                        as String,
-            processedKeywords:
-                null == processedKeywords
-                    ? _value.processedKeywords
-                    : processedKeywords // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            detectedEmotion:
-                null == detectedEmotion
-                    ? _value.detectedEmotion
-                    : detectedEmotion // ignore: cast_nullable_to_non_nullable
-                        as EmotionalState,
-            detectedContext:
-                null == detectedContext
-                    ? _value.detectedContext
-                    : detectedContext // ignore: cast_nullable_to_non_nullable
-                        as String,
-            emotionConfidence:
-                null == emotionConfidence
-                    ? _value.emotionConfidence
-                    : emotionConfidence // ignore: cast_nullable_to_non_nullable
-                        as double,
-            contextConfidence:
-                null == contextConfidence
-                    ? _value.contextConfidence
-                    : contextConfidence // ignore: cast_nullable_to_non_nullable
-                        as double,
-            nlpAnalysis:
-                null == nlpAnalysis
-                    ? _value.nlpAnalysis
-                    : nlpAnalysis // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>,
-            timestamp:
-                null == timestamp
-                    ? _value.timestamp
-                    : timestamp // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            isEncrypted:
-                null == isEncrypted
-                    ? _value.isEncrypted
-                    : isEncrypted // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            encryptionKey:
-                freezed == encryptionKey
-                    ? _value.encryptionKey
-                    : encryptionKey // ignore: cast_nullable_to_non_nullable
-                        as String?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      rawInput: null == rawInput
+          ? _value.rawInput
+          : rawInput // ignore: cast_nullable_to_non_nullable
+              as String,
+      processedKeywords: null == processedKeywords
+          ? _value.processedKeywords
+          : processedKeywords // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      detectedEmotion: null == detectedEmotion
+          ? _value.detectedEmotion
+          : detectedEmotion // ignore: cast_nullable_to_non_nullable
+              as EmotionalState,
+      detectedContext: null == detectedContext
+          ? _value.detectedContext
+          : detectedContext // ignore: cast_nullable_to_non_nullable
+              as String,
+      emotionConfidence: null == emotionConfidence
+          ? _value.emotionConfidence
+          : emotionConfidence // ignore: cast_nullable_to_non_nullable
+              as double,
+      contextConfidence: null == contextConfidence
+          ? _value.contextConfidence
+          : contextConfidence // ignore: cast_nullable_to_non_nullable
+              as double,
+      nlpAnalysis: null == nlpAnalysis
+          ? _value.nlpAnalysis
+          : nlpAnalysis // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      isEncrypted: null == isEncrypted
+          ? _value.isEncrypted
+          : isEncrypted // ignore: cast_nullable_to_non_nullable
+              as bool,
+      encryptionKey: freezed == encryptionKey
+          ? _value.encryptionKey
+          : encryptionKey // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$ContextualInputImplCopyWith<$Res>
     implements $ContextualInputCopyWith<$Res> {
-  factory _$$ContextualInputImplCopyWith(
-    _$ContextualInputImpl value,
-    $Res Function(_$ContextualInputImpl) then,
-  ) = __$$ContextualInputImplCopyWithImpl<$Res>;
+  factory _$$ContextualInputImplCopyWith(_$ContextualInputImpl value,
+          $Res Function(_$ContextualInputImpl) then) =
+      __$$ContextualInputImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String userId,
-    String rawInput,
-    List<String> processedKeywords,
-    EmotionalState detectedEmotion,
-    String detectedContext,
-    double emotionConfidence,
-    double contextConfidence,
-    Map<String, dynamic> nlpAnalysis,
-    DateTime timestamp,
-    bool isEncrypted,
-    String? encryptionKey,
-  });
+  $Res call(
+      {String id,
+      String userId,
+      String rawInput,
+      List<String> processedKeywords,
+      EmotionalState detectedEmotion,
+      String detectedContext,
+      double emotionConfidence,
+      double contextConfidence,
+      Map<String, dynamic> nlpAnalysis,
+      DateTime timestamp,
+      bool isEncrypted,
+      String? encryptionKey});
 }
 
 /// @nodoc
@@ -3140,9 +2873,8 @@ class __$$ContextualInputImplCopyWithImpl<$Res>
     extends _$ContextualInputCopyWithImpl<$Res, _$ContextualInputImpl>
     implements _$$ContextualInputImplCopyWith<$Res> {
   __$$ContextualInputImplCopyWithImpl(
-    _$ContextualInputImpl _value,
-    $Res Function(_$ContextualInputImpl) _then,
-  ) : super(_value, _then);
+      _$ContextualInputImpl _value, $Res Function(_$ContextualInputImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ContextualInput
   /// with the given fields replaced by the non-null parameter values.
@@ -3162,91 +2894,77 @@ class __$$ContextualInputImplCopyWithImpl<$Res>
     Object? isEncrypted = null,
     Object? encryptionKey = freezed,
   }) {
-    return _then(
-      _$ContextualInputImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        userId:
-            null == userId
-                ? _value.userId
-                : userId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        rawInput:
-            null == rawInput
-                ? _value.rawInput
-                : rawInput // ignore: cast_nullable_to_non_nullable
-                    as String,
-        processedKeywords:
-            null == processedKeywords
-                ? _value._processedKeywords
-                : processedKeywords // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        detectedEmotion:
-            null == detectedEmotion
-                ? _value.detectedEmotion
-                : detectedEmotion // ignore: cast_nullable_to_non_nullable
-                    as EmotionalState,
-        detectedContext:
-            null == detectedContext
-                ? _value.detectedContext
-                : detectedContext // ignore: cast_nullable_to_non_nullable
-                    as String,
-        emotionConfidence:
-            null == emotionConfidence
-                ? _value.emotionConfidence
-                : emotionConfidence // ignore: cast_nullable_to_non_nullable
-                    as double,
-        contextConfidence:
-            null == contextConfidence
-                ? _value.contextConfidence
-                : contextConfidence // ignore: cast_nullable_to_non_nullable
-                    as double,
-        nlpAnalysis:
-            null == nlpAnalysis
-                ? _value._nlpAnalysis
-                : nlpAnalysis // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>,
-        timestamp:
-            null == timestamp
-                ? _value.timestamp
-                : timestamp // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        isEncrypted:
-            null == isEncrypted
-                ? _value.isEncrypted
-                : isEncrypted // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        encryptionKey:
-            freezed == encryptionKey
-                ? _value.encryptionKey
-                : encryptionKey // ignore: cast_nullable_to_non_nullable
-                    as String?,
-      ),
-    );
+    return _then(_$ContextualInputImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      rawInput: null == rawInput
+          ? _value.rawInput
+          : rawInput // ignore: cast_nullable_to_non_nullable
+              as String,
+      processedKeywords: null == processedKeywords
+          ? _value._processedKeywords
+          : processedKeywords // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      detectedEmotion: null == detectedEmotion
+          ? _value.detectedEmotion
+          : detectedEmotion // ignore: cast_nullable_to_non_nullable
+              as EmotionalState,
+      detectedContext: null == detectedContext
+          ? _value.detectedContext
+          : detectedContext // ignore: cast_nullable_to_non_nullable
+              as String,
+      emotionConfidence: null == emotionConfidence
+          ? _value.emotionConfidence
+          : emotionConfidence // ignore: cast_nullable_to_non_nullable
+              as double,
+      contextConfidence: null == contextConfidence
+          ? _value.contextConfidence
+          : contextConfidence // ignore: cast_nullable_to_non_nullable
+              as double,
+      nlpAnalysis: null == nlpAnalysis
+          ? _value._nlpAnalysis
+          : nlpAnalysis // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      isEncrypted: null == isEncrypted
+          ? _value.isEncrypted
+          : isEncrypted // ignore: cast_nullable_to_non_nullable
+              as bool,
+      encryptionKey: freezed == encryptionKey
+          ? _value.encryptionKey
+          : encryptionKey // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ContextualInputImpl implements _ContextualInput {
-  const _$ContextualInputImpl({
-    required this.id,
-    required this.userId,
-    required this.rawInput,
-    required final List<String> processedKeywords,
-    required this.detectedEmotion,
-    required this.detectedContext,
-    required this.emotionConfidence,
-    required this.contextConfidence,
-    required final Map<String, dynamic> nlpAnalysis,
-    required this.timestamp,
-    required this.isEncrypted,
-    this.encryptionKey,
-  }) : _processedKeywords = processedKeywords,
-       _nlpAnalysis = nlpAnalysis;
+  const _$ContextualInputImpl(
+      {required this.id,
+      required this.userId,
+      required this.rawInput,
+      required final List<String> processedKeywords,
+      required this.detectedEmotion,
+      required this.detectedContext,
+      required this.emotionConfidence,
+      required this.contextConfidence,
+      required final Map<String, dynamic> nlpAnalysis,
+      required this.timestamp,
+      required this.isEncrypted,
+      this.encryptionKey})
+      : _processedKeywords = processedKeywords,
+        _nlpAnalysis = nlpAnalysis;
 
   factory _$ContextualInputImpl.fromJson(Map<String, dynamic> json) =>
       _$$ContextualInputImplFromJson(json);
@@ -3303,10 +3021,8 @@ class _$ContextualInputImpl implements _ContextualInput {
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.rawInput, rawInput) ||
                 other.rawInput == rawInput) &&
-            const DeepCollectionEquality().equals(
-              other._processedKeywords,
-              _processedKeywords,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._processedKeywords, _processedKeywords) &&
             (identical(other.detectedEmotion, detectedEmotion) ||
                 other.detectedEmotion == detectedEmotion) &&
             (identical(other.detectedContext, detectedContext) ||
@@ -3315,10 +3031,8 @@ class _$ContextualInputImpl implements _ContextualInput {
                 other.emotionConfidence == emotionConfidence) &&
             (identical(other.contextConfidence, contextConfidence) ||
                 other.contextConfidence == contextConfidence) &&
-            const DeepCollectionEquality().equals(
-              other._nlpAnalysis,
-              _nlpAnalysis,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._nlpAnalysis, _nlpAnalysis) &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
             (identical(other.isEncrypted, isEncrypted) ||
@@ -3330,20 +3044,19 @@ class _$ContextualInputImpl implements _ContextualInput {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    userId,
-    rawInput,
-    const DeepCollectionEquality().hash(_processedKeywords),
-    detectedEmotion,
-    detectedContext,
-    emotionConfidence,
-    contextConfidence,
-    const DeepCollectionEquality().hash(_nlpAnalysis),
-    timestamp,
-    isEncrypted,
-    encryptionKey,
-  );
+      runtimeType,
+      id,
+      userId,
+      rawInput,
+      const DeepCollectionEquality().hash(_processedKeywords),
+      detectedEmotion,
+      detectedContext,
+      emotionConfidence,
+      contextConfidence,
+      const DeepCollectionEquality().hash(_nlpAnalysis),
+      timestamp,
+      isEncrypted,
+      encryptionKey);
 
   /// Create a copy of ContextualInput
   /// with the given fields replaced by the non-null parameter values.
@@ -3352,31 +3065,30 @@ class _$ContextualInputImpl implements _ContextualInput {
   @pragma('vm:prefer-inline')
   _$$ContextualInputImplCopyWith<_$ContextualInputImpl> get copyWith =>
       __$$ContextualInputImplCopyWithImpl<_$ContextualInputImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ContextualInputImplToJson(this);
+    return _$$ContextualInputImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _ContextualInput implements ContextualInput {
-  const factory _ContextualInput({
-    required final String id,
-    required final String userId,
-    required final String rawInput,
-    required final List<String> processedKeywords,
-    required final EmotionalState detectedEmotion,
-    required final String detectedContext,
-    required final double emotionConfidence,
-    required final double contextConfidence,
-    required final Map<String, dynamic> nlpAnalysis,
-    required final DateTime timestamp,
-    required final bool isEncrypted,
-    final String? encryptionKey,
-  }) = _$ContextualInputImpl;
+  const factory _ContextualInput(
+      {required final String id,
+      required final String userId,
+      required final String rawInput,
+      required final List<String> processedKeywords,
+      required final EmotionalState detectedEmotion,
+      required final String detectedContext,
+      required final double emotionConfidence,
+      required final double contextConfidence,
+      required final Map<String, dynamic> nlpAnalysis,
+      required final DateTime timestamp,
+      required final bool isEncrypted,
+      final String? encryptionKey}) = _$ContextualInputImpl;
 
   factory _ContextualInput.fromJson(Map<String, dynamic> json) =
       _$ContextualInputImpl.fromJson;
@@ -3446,24 +3158,22 @@ mixin _$ProactiveSuggestion {
 /// @nodoc
 abstract class $ProactiveSuggestionCopyWith<$Res> {
   factory $ProactiveSuggestionCopyWith(
-    ProactiveSuggestion value,
-    $Res Function(ProactiveSuggestion) then,
-  ) = _$ProactiveSuggestionCopyWithImpl<$Res, ProactiveSuggestion>;
+          ProactiveSuggestion value, $Res Function(ProactiveSuggestion) then) =
+      _$ProactiveSuggestionCopyWithImpl<$Res, ProactiveSuggestion>;
   @useResult
-  $Res call({
-    String id,
-    String userId,
-    String suggestionText,
-    String reason,
-    double relevanceScore,
-    DateTime suggestedAt,
-    String category,
-    Map<String, dynamic> context,
-    bool isShown,
-    bool isAccepted,
-    DateTime? shownAt,
-    DateTime? respondedAt,
-  });
+  $Res call(
+      {String id,
+      String userId,
+      String suggestionText,
+      String reason,
+      double relevanceScore,
+      DateTime suggestedAt,
+      String category,
+      Map<String, dynamic> context,
+      bool isShown,
+      bool isAccepted,
+      DateTime? shownAt,
+      DateTime? respondedAt});
 }
 
 /// @nodoc
@@ -3494,107 +3204,89 @@ class _$ProactiveSuggestionCopyWithImpl<$Res, $Val extends ProactiveSuggestion>
     Object? shownAt = freezed,
     Object? respondedAt = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            userId:
-                null == userId
-                    ? _value.userId
-                    : userId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            suggestionText:
-                null == suggestionText
-                    ? _value.suggestionText
-                    : suggestionText // ignore: cast_nullable_to_non_nullable
-                        as String,
-            reason:
-                null == reason
-                    ? _value.reason
-                    : reason // ignore: cast_nullable_to_non_nullable
-                        as String,
-            relevanceScore:
-                null == relevanceScore
-                    ? _value.relevanceScore
-                    : relevanceScore // ignore: cast_nullable_to_non_nullable
-                        as double,
-            suggestedAt:
-                null == suggestedAt
-                    ? _value.suggestedAt
-                    : suggestedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            category:
-                null == category
-                    ? _value.category
-                    : category // ignore: cast_nullable_to_non_nullable
-                        as String,
-            context:
-                null == context
-                    ? _value.context
-                    : context // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>,
-            isShown:
-                null == isShown
-                    ? _value.isShown
-                    : isShown // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            isAccepted:
-                null == isAccepted
-                    ? _value.isAccepted
-                    : isAccepted // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            shownAt:
-                freezed == shownAt
-                    ? _value.shownAt
-                    : shownAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            respondedAt:
-                freezed == respondedAt
-                    ? _value.respondedAt
-                    : respondedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      suggestionText: null == suggestionText
+          ? _value.suggestionText
+          : suggestionText // ignore: cast_nullable_to_non_nullable
+              as String,
+      reason: null == reason
+          ? _value.reason
+          : reason // ignore: cast_nullable_to_non_nullable
+              as String,
+      relevanceScore: null == relevanceScore
+          ? _value.relevanceScore
+          : relevanceScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      suggestedAt: null == suggestedAt
+          ? _value.suggestedAt
+          : suggestedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      isShown: null == isShown
+          ? _value.isShown
+          : isShown // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isAccepted: null == isAccepted
+          ? _value.isAccepted
+          : isAccepted // ignore: cast_nullable_to_non_nullable
+              as bool,
+      shownAt: freezed == shownAt
+          ? _value.shownAt
+          : shownAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      respondedAt: freezed == respondedAt
+          ? _value.respondedAt
+          : respondedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$ProactiveSuggestionImplCopyWith<$Res>
     implements $ProactiveSuggestionCopyWith<$Res> {
-  factory _$$ProactiveSuggestionImplCopyWith(
-    _$ProactiveSuggestionImpl value,
-    $Res Function(_$ProactiveSuggestionImpl) then,
-  ) = __$$ProactiveSuggestionImplCopyWithImpl<$Res>;
+  factory _$$ProactiveSuggestionImplCopyWith(_$ProactiveSuggestionImpl value,
+          $Res Function(_$ProactiveSuggestionImpl) then) =
+      __$$ProactiveSuggestionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String userId,
-    String suggestionText,
-    String reason,
-    double relevanceScore,
-    DateTime suggestedAt,
-    String category,
-    Map<String, dynamic> context,
-    bool isShown,
-    bool isAccepted,
-    DateTime? shownAt,
-    DateTime? respondedAt,
-  });
+  $Res call(
+      {String id,
+      String userId,
+      String suggestionText,
+      String reason,
+      double relevanceScore,
+      DateTime suggestedAt,
+      String category,
+      Map<String, dynamic> context,
+      bool isShown,
+      bool isAccepted,
+      DateTime? shownAt,
+      DateTime? respondedAt});
 }
 
 /// @nodoc
 class __$$ProactiveSuggestionImplCopyWithImpl<$Res>
     extends _$ProactiveSuggestionCopyWithImpl<$Res, _$ProactiveSuggestionImpl>
     implements _$$ProactiveSuggestionImplCopyWith<$Res> {
-  __$$ProactiveSuggestionImplCopyWithImpl(
-    _$ProactiveSuggestionImpl _value,
-    $Res Function(_$ProactiveSuggestionImpl) _then,
-  ) : super(_value, _then);
+  __$$ProactiveSuggestionImplCopyWithImpl(_$ProactiveSuggestionImpl _value,
+      $Res Function(_$ProactiveSuggestionImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ProactiveSuggestion
   /// with the given fields replaced by the non-null parameter values.
@@ -3614,90 +3306,76 @@ class __$$ProactiveSuggestionImplCopyWithImpl<$Res>
     Object? shownAt = freezed,
     Object? respondedAt = freezed,
   }) {
-    return _then(
-      _$ProactiveSuggestionImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        userId:
-            null == userId
-                ? _value.userId
-                : userId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        suggestionText:
-            null == suggestionText
-                ? _value.suggestionText
-                : suggestionText // ignore: cast_nullable_to_non_nullable
-                    as String,
-        reason:
-            null == reason
-                ? _value.reason
-                : reason // ignore: cast_nullable_to_non_nullable
-                    as String,
-        relevanceScore:
-            null == relevanceScore
-                ? _value.relevanceScore
-                : relevanceScore // ignore: cast_nullable_to_non_nullable
-                    as double,
-        suggestedAt:
-            null == suggestedAt
-                ? _value.suggestedAt
-                : suggestedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        category:
-            null == category
-                ? _value.category
-                : category // ignore: cast_nullable_to_non_nullable
-                    as String,
-        context:
-            null == context
-                ? _value._context
-                : context // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>,
-        isShown:
-            null == isShown
-                ? _value.isShown
-                : isShown // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        isAccepted:
-            null == isAccepted
-                ? _value.isAccepted
-                : isAccepted // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        shownAt:
-            freezed == shownAt
-                ? _value.shownAt
-                : shownAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        respondedAt:
-            freezed == respondedAt
-                ? _value.respondedAt
-                : respondedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-      ),
-    );
+    return _then(_$ProactiveSuggestionImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      suggestionText: null == suggestionText
+          ? _value.suggestionText
+          : suggestionText // ignore: cast_nullable_to_non_nullable
+              as String,
+      reason: null == reason
+          ? _value.reason
+          : reason // ignore: cast_nullable_to_non_nullable
+              as String,
+      relevanceScore: null == relevanceScore
+          ? _value.relevanceScore
+          : relevanceScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      suggestedAt: null == suggestedAt
+          ? _value.suggestedAt
+          : suggestedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+      context: null == context
+          ? _value._context
+          : context // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      isShown: null == isShown
+          ? _value.isShown
+          : isShown // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isAccepted: null == isAccepted
+          ? _value.isAccepted
+          : isAccepted // ignore: cast_nullable_to_non_nullable
+              as bool,
+      shownAt: freezed == shownAt
+          ? _value.shownAt
+          : shownAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      respondedAt: freezed == respondedAt
+          ? _value.respondedAt
+          : respondedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ProactiveSuggestionImpl implements _ProactiveSuggestion {
-  const _$ProactiveSuggestionImpl({
-    required this.id,
-    required this.userId,
-    required this.suggestionText,
-    required this.reason,
-    required this.relevanceScore,
-    required this.suggestedAt,
-    required this.category,
-    required final Map<String, dynamic> context,
-    this.isShown = false,
-    this.isAccepted = false,
-    this.shownAt,
-    this.respondedAt,
-  }) : _context = context;
+  const _$ProactiveSuggestionImpl(
+      {required this.id,
+      required this.userId,
+      required this.suggestionText,
+      required this.reason,
+      required this.relevanceScore,
+      required this.suggestedAt,
+      required this.category,
+      required final Map<String, dynamic> context,
+      this.isShown = false,
+      this.isAccepted = false,
+      this.shownAt,
+      this.respondedAt})
+      : _context = context;
 
   factory _$ProactiveSuggestionImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProactiveSuggestionImplFromJson(json);
@@ -3768,20 +3446,19 @@ class _$ProactiveSuggestionImpl implements _ProactiveSuggestion {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    userId,
-    suggestionText,
-    reason,
-    relevanceScore,
-    suggestedAt,
-    category,
-    const DeepCollectionEquality().hash(_context),
-    isShown,
-    isAccepted,
-    shownAt,
-    respondedAt,
-  );
+      runtimeType,
+      id,
+      userId,
+      suggestionText,
+      reason,
+      relevanceScore,
+      suggestedAt,
+      category,
+      const DeepCollectionEquality().hash(_context),
+      isShown,
+      isAccepted,
+      shownAt,
+      respondedAt);
 
   /// Create a copy of ProactiveSuggestion
   /// with the given fields replaced by the non-null parameter values.
@@ -3790,31 +3467,30 @@ class _$ProactiveSuggestionImpl implements _ProactiveSuggestion {
   @pragma('vm:prefer-inline')
   _$$ProactiveSuggestionImplCopyWith<_$ProactiveSuggestionImpl> get copyWith =>
       __$$ProactiveSuggestionImplCopyWithImpl<_$ProactiveSuggestionImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ProactiveSuggestionImplToJson(this);
+    return _$$ProactiveSuggestionImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _ProactiveSuggestion implements ProactiveSuggestion {
-  const factory _ProactiveSuggestion({
-    required final String id,
-    required final String userId,
-    required final String suggestionText,
-    required final String reason,
-    required final double relevanceScore,
-    required final DateTime suggestedAt,
-    required final String category,
-    required final Map<String, dynamic> context,
-    final bool isShown,
-    final bool isAccepted,
-    final DateTime? shownAt,
-    final DateTime? respondedAt,
-  }) = _$ProactiveSuggestionImpl;
+  const factory _ProactiveSuggestion(
+      {required final String id,
+      required final String userId,
+      required final String suggestionText,
+      required final String reason,
+      required final double relevanceScore,
+      required final DateTime suggestedAt,
+      required final String category,
+      required final Map<String, dynamic> context,
+      final bool isShown,
+      final bool isAccepted,
+      final DateTime? shownAt,
+      final DateTime? respondedAt}) = _$ProactiveSuggestionImpl;
 
   factory _ProactiveSuggestion.fromJson(Map<String, dynamic> json) =
       _$ProactiveSuggestionImpl.fromJson;
@@ -3881,21 +3557,19 @@ mixin _$CalendarEvent {
 /// @nodoc
 abstract class $CalendarEventCopyWith<$Res> {
   factory $CalendarEventCopyWith(
-    CalendarEvent value,
-    $Res Function(CalendarEvent) then,
-  ) = _$CalendarEventCopyWithImpl<$Res, CalendarEvent>;
+          CalendarEvent value, $Res Function(CalendarEvent) then) =
+      _$CalendarEventCopyWithImpl<$Res, CalendarEvent>;
   @useResult
-  $Res call({
-    String eventId,
-    String title,
-    DateTime startTime,
-    DateTime endTime,
-    String description,
-    String location,
-    bool isIslamicEvent,
-    Map<String, dynamic> metadata,
-    List<String>? suggestedDuas,
-  });
+  $Res call(
+      {String eventId,
+      String title,
+      DateTime startTime,
+      DateTime endTime,
+      String description,
+      String location,
+      bool isIslamicEvent,
+      Map<String, dynamic> metadata,
+      List<String>? suggestedDuas});
 }
 
 /// @nodoc
@@ -3923,56 +3597,44 @@ class _$CalendarEventCopyWithImpl<$Res, $Val extends CalendarEvent>
     Object? metadata = null,
     Object? suggestedDuas = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            eventId:
-                null == eventId
-                    ? _value.eventId
-                    : eventId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            title:
-                null == title
-                    ? _value.title
-                    : title // ignore: cast_nullable_to_non_nullable
-                        as String,
-            startTime:
-                null == startTime
-                    ? _value.startTime
-                    : startTime // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            endTime:
-                null == endTime
-                    ? _value.endTime
-                    : endTime // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            description:
-                null == description
-                    ? _value.description
-                    : description // ignore: cast_nullable_to_non_nullable
-                        as String,
-            location:
-                null == location
-                    ? _value.location
-                    : location // ignore: cast_nullable_to_non_nullable
-                        as String,
-            isIslamicEvent:
-                null == isIslamicEvent
-                    ? _value.isIslamicEvent
-                    : isIslamicEvent // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            metadata:
-                null == metadata
-                    ? _value.metadata
-                    : metadata // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>,
-            suggestedDuas:
-                freezed == suggestedDuas
-                    ? _value.suggestedDuas
-                    : suggestedDuas // ignore: cast_nullable_to_non_nullable
-                        as List<String>?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      eventId: null == eventId
+          ? _value.eventId
+          : eventId // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      startTime: null == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      endTime: null == endTime
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      location: null == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String,
+      isIslamicEvent: null == isIslamicEvent
+          ? _value.isIslamicEvent
+          : isIslamicEvent // ignore: cast_nullable_to_non_nullable
+              as bool,
+      metadata: null == metadata
+          ? _value.metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      suggestedDuas: freezed == suggestedDuas
+          ? _value.suggestedDuas
+          : suggestedDuas // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+    ) as $Val);
   }
 }
 
@@ -3980,22 +3642,20 @@ class _$CalendarEventCopyWithImpl<$Res, $Val extends CalendarEvent>
 abstract class _$$CalendarEventImplCopyWith<$Res>
     implements $CalendarEventCopyWith<$Res> {
   factory _$$CalendarEventImplCopyWith(
-    _$CalendarEventImpl value,
-    $Res Function(_$CalendarEventImpl) then,
-  ) = __$$CalendarEventImplCopyWithImpl<$Res>;
+          _$CalendarEventImpl value, $Res Function(_$CalendarEventImpl) then) =
+      __$$CalendarEventImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String eventId,
-    String title,
-    DateTime startTime,
-    DateTime endTime,
-    String description,
-    String location,
-    bool isIslamicEvent,
-    Map<String, dynamic> metadata,
-    List<String>? suggestedDuas,
-  });
+  $Res call(
+      {String eventId,
+      String title,
+      DateTime startTime,
+      DateTime endTime,
+      String description,
+      String location,
+      bool isIslamicEvent,
+      Map<String, dynamic> metadata,
+      List<String>? suggestedDuas});
 }
 
 /// @nodoc
@@ -4003,9 +3663,8 @@ class __$$CalendarEventImplCopyWithImpl<$Res>
     extends _$CalendarEventCopyWithImpl<$Res, _$CalendarEventImpl>
     implements _$$CalendarEventImplCopyWith<$Res> {
   __$$CalendarEventImplCopyWithImpl(
-    _$CalendarEventImpl _value,
-    $Res Function(_$CalendarEventImpl) _then,
-  ) : super(_value, _then);
+      _$CalendarEventImpl _value, $Res Function(_$CalendarEventImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of CalendarEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -4022,73 +3681,62 @@ class __$$CalendarEventImplCopyWithImpl<$Res>
     Object? metadata = null,
     Object? suggestedDuas = freezed,
   }) {
-    return _then(
-      _$CalendarEventImpl(
-        eventId:
-            null == eventId
-                ? _value.eventId
-                : eventId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        title:
-            null == title
-                ? _value.title
-                : title // ignore: cast_nullable_to_non_nullable
-                    as String,
-        startTime:
-            null == startTime
-                ? _value.startTime
-                : startTime // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        endTime:
-            null == endTime
-                ? _value.endTime
-                : endTime // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        description:
-            null == description
-                ? _value.description
-                : description // ignore: cast_nullable_to_non_nullable
-                    as String,
-        location:
-            null == location
-                ? _value.location
-                : location // ignore: cast_nullable_to_non_nullable
-                    as String,
-        isIslamicEvent:
-            null == isIslamicEvent
-                ? _value.isIslamicEvent
-                : isIslamicEvent // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        metadata:
-            null == metadata
-                ? _value._metadata
-                : metadata // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>,
-        suggestedDuas:
-            freezed == suggestedDuas
-                ? _value._suggestedDuas
-                : suggestedDuas // ignore: cast_nullable_to_non_nullable
-                    as List<String>?,
-      ),
-    );
+    return _then(_$CalendarEventImpl(
+      eventId: null == eventId
+          ? _value.eventId
+          : eventId // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      startTime: null == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      endTime: null == endTime
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      location: null == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String,
+      isIslamicEvent: null == isIslamicEvent
+          ? _value.isIslamicEvent
+          : isIslamicEvent // ignore: cast_nullable_to_non_nullable
+              as bool,
+      metadata: null == metadata
+          ? _value._metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      suggestedDuas: freezed == suggestedDuas
+          ? _value._suggestedDuas
+          : suggestedDuas // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$CalendarEventImpl implements _CalendarEvent {
-  const _$CalendarEventImpl({
-    required this.eventId,
-    required this.title,
-    required this.startTime,
-    required this.endTime,
-    required this.description,
-    required this.location,
-    required this.isIslamicEvent,
-    required final Map<String, dynamic> metadata,
-    final List<String>? suggestedDuas,
-  }) : _metadata = metadata,
-       _suggestedDuas = suggestedDuas;
+  const _$CalendarEventImpl(
+      {required this.eventId,
+      required this.title,
+      required this.startTime,
+      required this.endTime,
+      required this.description,
+      required this.location,
+      required this.isIslamicEvent,
+      required final Map<String, dynamic> metadata,
+      final List<String>? suggestedDuas})
+      : _metadata = metadata,
+        _suggestedDuas = suggestedDuas;
 
   factory _$CalendarEventImpl.fromJson(Map<String, dynamic> json) =>
       _$$CalendarEventImplFromJson(json);
@@ -4147,26 +3795,23 @@ class _$CalendarEventImpl implements _CalendarEvent {
             (identical(other.isIslamicEvent, isIslamicEvent) ||
                 other.isIslamicEvent == isIslamicEvent) &&
             const DeepCollectionEquality().equals(other._metadata, _metadata) &&
-            const DeepCollectionEquality().equals(
-              other._suggestedDuas,
-              _suggestedDuas,
-            ));
+            const DeepCollectionEquality()
+                .equals(other._suggestedDuas, _suggestedDuas));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    eventId,
-    title,
-    startTime,
-    endTime,
-    description,
-    location,
-    isIslamicEvent,
-    const DeepCollectionEquality().hash(_metadata),
-    const DeepCollectionEquality().hash(_suggestedDuas),
-  );
+      runtimeType,
+      eventId,
+      title,
+      startTime,
+      endTime,
+      description,
+      location,
+      isIslamicEvent,
+      const DeepCollectionEquality().hash(_metadata),
+      const DeepCollectionEquality().hash(_suggestedDuas));
 
   /// Create a copy of CalendarEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -4178,22 +3823,23 @@ class _$CalendarEventImpl implements _CalendarEvent {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$CalendarEventImplToJson(this);
+    return _$$CalendarEventImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _CalendarEvent implements CalendarEvent {
-  const factory _CalendarEvent({
-    required final String eventId,
-    required final String title,
-    required final DateTime startTime,
-    required final DateTime endTime,
-    required final String description,
-    required final String location,
-    required final bool isIslamicEvent,
-    required final Map<String, dynamic> metadata,
-    final List<String>? suggestedDuas,
-  }) = _$CalendarEventImpl;
+  const factory _CalendarEvent(
+      {required final String eventId,
+      required final String title,
+      required final DateTime startTime,
+      required final DateTime endTime,
+      required final String description,
+      required final String location,
+      required final bool isIslamicEvent,
+      required final Map<String, dynamic> metadata,
+      final List<String>? suggestedDuas}) = _$CalendarEventImpl;
 
   factory _CalendarEvent.fromJson(Map<String, dynamic> json) =
       _$CalendarEventImpl.fromJson;
@@ -4254,20 +3900,18 @@ mixin _$CulturalContext {
 /// @nodoc
 abstract class $CulturalContextCopyWith<$Res> {
   factory $CulturalContextCopyWith(
-    CulturalContext value,
-    $Res Function(CulturalContext) then,
-  ) = _$CulturalContextCopyWithImpl<$Res, CulturalContext>;
+          CulturalContext value, $Res Function(CulturalContext) then) =
+      _$CulturalContextCopyWithImpl<$Res, CulturalContext>;
   @useResult
-  $Res call({
-    String userId,
-    String country,
-    String region,
-    String primaryLanguage,
-    List<String> preferredLanguages,
-    String islamicSchool,
-    Map<String, dynamic> culturalPreferences,
-    DateTime lastUpdated,
-  });
+  $Res call(
+      {String userId,
+      String country,
+      String region,
+      String primaryLanguage,
+      List<String> preferredLanguages,
+      String islamicSchool,
+      Map<String, dynamic> culturalPreferences,
+      DateTime lastUpdated});
 }
 
 /// @nodoc
@@ -4294,73 +3938,60 @@ class _$CulturalContextCopyWithImpl<$Res, $Val extends CulturalContext>
     Object? culturalPreferences = null,
     Object? lastUpdated = null,
   }) {
-    return _then(
-      _value.copyWith(
-            userId:
-                null == userId
-                    ? _value.userId
-                    : userId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            country:
-                null == country
-                    ? _value.country
-                    : country // ignore: cast_nullable_to_non_nullable
-                        as String,
-            region:
-                null == region
-                    ? _value.region
-                    : region // ignore: cast_nullable_to_non_nullable
-                        as String,
-            primaryLanguage:
-                null == primaryLanguage
-                    ? _value.primaryLanguage
-                    : primaryLanguage // ignore: cast_nullable_to_non_nullable
-                        as String,
-            preferredLanguages:
-                null == preferredLanguages
-                    ? _value.preferredLanguages
-                    : preferredLanguages // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            islamicSchool:
-                null == islamicSchool
-                    ? _value.islamicSchool
-                    : islamicSchool // ignore: cast_nullable_to_non_nullable
-                        as String,
-            culturalPreferences:
-                null == culturalPreferences
-                    ? _value.culturalPreferences
-                    : culturalPreferences // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>,
-            lastUpdated:
-                null == lastUpdated
-                    ? _value.lastUpdated
-                    : lastUpdated // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      country: null == country
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String,
+      region: null == region
+          ? _value.region
+          : region // ignore: cast_nullable_to_non_nullable
+              as String,
+      primaryLanguage: null == primaryLanguage
+          ? _value.primaryLanguage
+          : primaryLanguage // ignore: cast_nullable_to_non_nullable
+              as String,
+      preferredLanguages: null == preferredLanguages
+          ? _value.preferredLanguages
+          : preferredLanguages // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      islamicSchool: null == islamicSchool
+          ? _value.islamicSchool
+          : islamicSchool // ignore: cast_nullable_to_non_nullable
+              as String,
+      culturalPreferences: null == culturalPreferences
+          ? _value.culturalPreferences
+          : culturalPreferences // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      lastUpdated: null == lastUpdated
+          ? _value.lastUpdated
+          : lastUpdated // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$CulturalContextImplCopyWith<$Res>
     implements $CulturalContextCopyWith<$Res> {
-  factory _$$CulturalContextImplCopyWith(
-    _$CulturalContextImpl value,
-    $Res Function(_$CulturalContextImpl) then,
-  ) = __$$CulturalContextImplCopyWithImpl<$Res>;
+  factory _$$CulturalContextImplCopyWith(_$CulturalContextImpl value,
+          $Res Function(_$CulturalContextImpl) then) =
+      __$$CulturalContextImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String userId,
-    String country,
-    String region,
-    String primaryLanguage,
-    List<String> preferredLanguages,
-    String islamicSchool,
-    Map<String, dynamic> culturalPreferences,
-    DateTime lastUpdated,
-  });
+  $Res call(
+      {String userId,
+      String country,
+      String region,
+      String primaryLanguage,
+      List<String> preferredLanguages,
+      String islamicSchool,
+      Map<String, dynamic> culturalPreferences,
+      DateTime lastUpdated});
 }
 
 /// @nodoc
@@ -4368,9 +3999,8 @@ class __$$CulturalContextImplCopyWithImpl<$Res>
     extends _$CulturalContextCopyWithImpl<$Res, _$CulturalContextImpl>
     implements _$$CulturalContextImplCopyWith<$Res> {
   __$$CulturalContextImplCopyWithImpl(
-    _$CulturalContextImpl _value,
-    $Res Function(_$CulturalContextImpl) _then,
-  ) : super(_value, _then);
+      _$CulturalContextImpl _value, $Res Function(_$CulturalContextImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of CulturalContext
   /// with the given fields replaced by the non-null parameter values.
@@ -4386,67 +4016,57 @@ class __$$CulturalContextImplCopyWithImpl<$Res>
     Object? culturalPreferences = null,
     Object? lastUpdated = null,
   }) {
-    return _then(
-      _$CulturalContextImpl(
-        userId:
-            null == userId
-                ? _value.userId
-                : userId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        country:
-            null == country
-                ? _value.country
-                : country // ignore: cast_nullable_to_non_nullable
-                    as String,
-        region:
-            null == region
-                ? _value.region
-                : region // ignore: cast_nullable_to_non_nullable
-                    as String,
-        primaryLanguage:
-            null == primaryLanguage
-                ? _value.primaryLanguage
-                : primaryLanguage // ignore: cast_nullable_to_non_nullable
-                    as String,
-        preferredLanguages:
-            null == preferredLanguages
-                ? _value._preferredLanguages
-                : preferredLanguages // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        islamicSchool:
-            null == islamicSchool
-                ? _value.islamicSchool
-                : islamicSchool // ignore: cast_nullable_to_non_nullable
-                    as String,
-        culturalPreferences:
-            null == culturalPreferences
-                ? _value._culturalPreferences
-                : culturalPreferences // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>,
-        lastUpdated:
-            null == lastUpdated
-                ? _value.lastUpdated
-                : lastUpdated // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-      ),
-    );
+    return _then(_$CulturalContextImpl(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      country: null == country
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String,
+      region: null == region
+          ? _value.region
+          : region // ignore: cast_nullable_to_non_nullable
+              as String,
+      primaryLanguage: null == primaryLanguage
+          ? _value.primaryLanguage
+          : primaryLanguage // ignore: cast_nullable_to_non_nullable
+              as String,
+      preferredLanguages: null == preferredLanguages
+          ? _value._preferredLanguages
+          : preferredLanguages // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      islamicSchool: null == islamicSchool
+          ? _value.islamicSchool
+          : islamicSchool // ignore: cast_nullable_to_non_nullable
+              as String,
+      culturalPreferences: null == culturalPreferences
+          ? _value._culturalPreferences
+          : culturalPreferences // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      lastUpdated: null == lastUpdated
+          ? _value.lastUpdated
+          : lastUpdated // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$CulturalContextImpl implements _CulturalContext {
-  const _$CulturalContextImpl({
-    required this.userId,
-    required this.country,
-    required this.region,
-    required this.primaryLanguage,
-    required final List<String> preferredLanguages,
-    required this.islamicSchool,
-    required final Map<String, dynamic> culturalPreferences,
-    required this.lastUpdated,
-  }) : _preferredLanguages = preferredLanguages,
-       _culturalPreferences = culturalPreferences;
+  const _$CulturalContextImpl(
+      {required this.userId,
+      required this.country,
+      required this.region,
+      required this.primaryLanguage,
+      required final List<String> preferredLanguages,
+      required this.islamicSchool,
+      required final Map<String, dynamic> culturalPreferences,
+      required this.lastUpdated})
+      : _preferredLanguages = preferredLanguages,
+        _culturalPreferences = culturalPreferences;
 
   factory _$CulturalContextImpl.fromJson(Map<String, dynamic> json) =>
       _$$CulturalContextImplFromJson(json);
@@ -4497,16 +4117,12 @@ class _$CulturalContextImpl implements _CulturalContext {
             (identical(other.region, region) || other.region == region) &&
             (identical(other.primaryLanguage, primaryLanguage) ||
                 other.primaryLanguage == primaryLanguage) &&
-            const DeepCollectionEquality().equals(
-              other._preferredLanguages,
-              _preferredLanguages,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._preferredLanguages, _preferredLanguages) &&
             (identical(other.islamicSchool, islamicSchool) ||
                 other.islamicSchool == islamicSchool) &&
-            const DeepCollectionEquality().equals(
-              other._culturalPreferences,
-              _culturalPreferences,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._culturalPreferences, _culturalPreferences) &&
             (identical(other.lastUpdated, lastUpdated) ||
                 other.lastUpdated == lastUpdated));
   }
@@ -4514,16 +4130,15 @@ class _$CulturalContextImpl implements _CulturalContext {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    userId,
-    country,
-    region,
-    primaryLanguage,
-    const DeepCollectionEquality().hash(_preferredLanguages),
-    islamicSchool,
-    const DeepCollectionEquality().hash(_culturalPreferences),
-    lastUpdated,
-  );
+      runtimeType,
+      userId,
+      country,
+      region,
+      primaryLanguage,
+      const DeepCollectionEquality().hash(_preferredLanguages),
+      islamicSchool,
+      const DeepCollectionEquality().hash(_culturalPreferences),
+      lastUpdated);
 
   /// Create a copy of CulturalContext
   /// with the given fields replaced by the non-null parameter values.
@@ -4532,27 +4147,26 @@ class _$CulturalContextImpl implements _CulturalContext {
   @pragma('vm:prefer-inline')
   _$$CulturalContextImplCopyWith<_$CulturalContextImpl> get copyWith =>
       __$$CulturalContextImplCopyWithImpl<_$CulturalContextImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$CulturalContextImplToJson(this);
+    return _$$CulturalContextImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _CulturalContext implements CulturalContext {
-  const factory _CulturalContext({
-    required final String userId,
-    required final String country,
-    required final String region,
-    required final String primaryLanguage,
-    required final List<String> preferredLanguages,
-    required final String islamicSchool,
-    required final Map<String, dynamic> culturalPreferences,
-    required final DateTime lastUpdated,
-  }) = _$CulturalContextImpl;
+  const factory _CulturalContext(
+      {required final String userId,
+      required final String country,
+      required final String region,
+      required final String primaryLanguage,
+      required final List<String> preferredLanguages,
+      required final String islamicSchool,
+      required final Map<String, dynamic> culturalPreferences,
+      required final DateTime lastUpdated}) = _$CulturalContextImpl;
 
   factory _CulturalContext.fromJson(Map<String, dynamic> json) =
       _$CulturalContextImpl.fromJson;

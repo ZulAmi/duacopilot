@@ -292,11 +292,9 @@ mixin FeedbackMixin<T extends StatefulWidget> on State<T> {
   }
 
   /// Quick access to feedback services
-  ComprehensiveFeedbackService get feedbackService =>
-      _feedbackIntegration.feedbackService;
+  ComprehensiveFeedbackService get feedbackService => _feedbackIntegration.feedbackService;
   ABTestingFramework get abTesting => _feedbackIntegration.abTestingFramework;
-  ScholarFeedbackSystem get scholarFeedback =>
-      _feedbackIntegration.scholarFeedbackSystem;
+  ScholarFeedbackSystem get scholarFeedback => _feedbackIntegration.scholarFeedbackSystem;
 
   /// Convenience methods
   Future<void> rateDua(String duaId, String queryId, double rating) async {
@@ -328,7 +326,7 @@ mixin FeedbackMixin<T extends StatefulWidget> on State<T> {
     );
   }
 
-  T getVariant<T>(String experiment, T defaultValue) {
+  V getVariant<V>(String experiment, V defaultValue) {
     return _feedbackIntegration.getABTestVariant(experiment, defaultValue);
   }
 }

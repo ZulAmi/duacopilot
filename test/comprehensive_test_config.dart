@@ -130,8 +130,7 @@ class TestConfig {
       DuaResponse(
         id: 'dua-1',
         query: 'morning prayer',
-        response:
-            'بسم الله الذي لا يضر مع اسمه شيء في الأرض ولا في السماء وهو السميع العليم',
+        response: 'بسم الله الذي لا يضر مع اسمه شيء في الأرض ولا في السماء وهو السميع العليم',
         timestamp: DateTime.now(),
         responseTime: 200,
         confidence: 0.95,
@@ -214,7 +213,7 @@ class TestConfig {
       await tester.pumpAndSettle();
 
       // Test semantic labels
-      expect(tester.binding.pipelineOwner.semanticsOwner, isNotNull);
+      expect(tester.binding.rootPipelineOwner.semanticsOwner, isNotNull);
 
       // Test minimum touch target sizes for interactive widgets
       final interactiveWidgets = [
@@ -283,7 +282,7 @@ class TestConfig {
       expect(find.byWidget(widget), findsOneWidget);
 
       // For now, just verify the widget renders without errors
-      expect(tester.binding.renderView, isNotNull);
+      expect(tester.binding.renderViews, isNotEmpty);
     });
   }
 
@@ -386,10 +385,7 @@ class TestUtils {
     Widget widget,
   ) async {
     for (final orientation in TestConfig.testOrientations) {
-      final size =
-          orientation == TestOrientation.portrait
-              ? const Size(414, 896)
-              : const Size(896, 414);
+      final size = orientation == TestOrientation.portrait ? const Size(414, 896) : const Size(896, 414);
 
       await tester.binding.setSurfaceSize(size);
       await tester.pumpWidget(MaterialApp(home: Scaffold(body: widget)));

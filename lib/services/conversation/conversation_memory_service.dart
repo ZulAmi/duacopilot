@@ -320,9 +320,8 @@ class ConversationMemoryService {
       totalConversations: totalConversations,
       totalTurns: totalTurns,
       averageTurnsPerConversation: avgTurnsPerConversation,
-      mostDiscussedTopics:
-          topicCounts.entries.map((e) => TopicFrequency(topic: e.key, frequency: e.value)).toList()
-            ..sort((a, b) => b.frequency.compareTo(a.frequency)),
+      mostDiscussedTopics: topicCounts.entries.map((e) => TopicFrequency(topic: e.key, frequency: e.value)).toList()
+        ..sort((a, b) => b.frequency.compareTo(a.frequency)),
       lastConversationDate: userConversations.isNotEmpty ? userConversations.last.value.last.timestamp : null,
     );
   }
@@ -401,7 +400,7 @@ class ConversationMemoryService {
     } else if (lowerInput.contains(RegExp(r'\b(confused|lost|uncertain)\b'))) {
       return EmotionalState.uncertain;
     } else if (lowerInput.contains(RegExp(r'\b(guidance|help|direction)\b'))) {
-      return EmotionalState.seeking_guidance;
+      return EmotionalState.seekingGuidance;
     }
 
     return EmotionalState.neutral;

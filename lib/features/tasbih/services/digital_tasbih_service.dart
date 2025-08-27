@@ -20,12 +20,9 @@ class DigitalTasbihService {
   final SecureStorageService _secureStorage;
   final SpeechToText _speechToText = SpeechToText();
 
-  final StreamController<TasbihSession> _sessionController =
-      StreamController<TasbihSession>.broadcast();
-  final StreamController<TasbihStats> _statsController =
-      StreamController<TasbihStats>.broadcast();
-  final StreamController<List<Achievement>> _achievementsController =
-      StreamController<List<Achievement>>.broadcast();
+  final StreamController<TasbihSession> _sessionController = StreamController<TasbihSession>.broadcast();
+  final StreamController<TasbihStats> _statsController = StreamController<TasbihStats>.broadcast();
+  final StreamController<List<Achievement>> _achievementsController = StreamController<List<Achievement>>.broadcast();
 
   TasbihSession? _currentSession;
   TasbihSettings? _currentSettings;
@@ -59,8 +56,7 @@ class DigitalTasbihService {
   // Getters for streams
   Stream<TasbihSession> get sessionStream => _sessionController.stream;
   Stream<TasbihStats> get statsStream => _statsController.stream;
-  Stream<List<Achievement>> get achievementsStream =>
-      _achievementsController.stream;
+  Stream<List<Achievement>> get achievementsStream => _achievementsController.stream;
 
   /// Initialize the tasbih service
   Future<bool> initialize() async {
@@ -216,7 +212,9 @@ class DigitalTasbihService {
         onResult: (result) => _onVoiceResult(result, type),
         listenFor: const Duration(minutes: 30), // Long session support
         pauseFor: const Duration(seconds: 3),
-        partialResults: true,
+        listenOptions: SpeechListenOptions(
+          partialResults: true,
+        ),
         localeId: 'ar-SA', // Arabic locale for better recognition
       );
     } catch (e) {
@@ -505,8 +503,7 @@ class DigitalTasbihService {
       final updatedStats = currentStats.copyWith(
         totalSessions: currentStats.totalSessions + 1,
         totalCount: currentStats.totalCount + session.currentCount,
-        totalTime:
-            currentStats.totalTime + (session.totalDuration ?? Duration.zero),
+        totalTime: currentStats.totalTime + (session.totalDuration ?? Duration.zero),
         lastSession: session.endTime ?? session.startTime,
         countsByType: _updateCountsByType(currentStats.countsByType, session),
         dailyProgress: _updateDailyProgress(
@@ -552,12 +549,8 @@ class DigitalTasbihService {
   /// Save session to secure storage
   Future<void> _saveSession(TasbihSession session) async {
     try {
-      final sessionsJson =
-          await _secureStorage.getValue(_sessionStorageKey) ?? '[]';
-      final sessions =
-          (jsonDecode(sessionsJson) as List)
-              .map((s) => TasbihSession.fromJson(s))
-              .toList();
+      final sessionsJson = await _secureStorage.getValue(_sessionStorageKey) ?? '[]';
+      final sessions = (jsonDecode(sessionsJson) as List).map((s) => TasbihSession.fromJson(s)).toList();
 
       sessions.add(session);
 
@@ -660,10 +653,7 @@ class DigitalTasbihService {
   Future<void> _loadGoals() async {
     try {
       final goalsJson = await _secureStorage.getValue(_goalsStorageKey) ?? '[]';
-      final goalsList =
-          (jsonDecode(goalsJson) as List)
-              .map((g) => TasbihGoal.fromJson(g))
-              .toList();
+      final goalsList = (jsonDecode(goalsJson) as List).map((g) => TasbihGoal.fromJson(g)).toList();
 
       _activeGoals = goalsList.where((g) => g.isActive == true).toList();
     } catch (e) {
@@ -676,10 +666,7 @@ class DigitalTasbihService {
   Future<void> _saveGoal(TasbihGoal goal) async {
     try {
       final goalsJson = await _secureStorage.getValue(_goalsStorageKey) ?? '[]';
-      final goals =
-          (jsonDecode(goalsJson) as List)
-              .map((g) => TasbihGoal.fromJson(g))
-              .toList();
+      final goals = (jsonDecode(goalsJson) as List).map((g) => TasbihGoal.fromJson(g)).toList();
 
       // Update existing or add new goal
       final index = goals.indexWhere((g) => g.id == goal.id);
@@ -702,12 +689,8 @@ class DigitalTasbihService {
   /// Load achievements from storage
   Future<void> _loadAchievements() async {
     try {
-      final achievementsJson =
-          await _secureStorage.getValue(_achievementsStorageKey) ?? '[]';
-      _achievements =
-          (jsonDecode(achievementsJson) as List)
-              .map((a) => Achievement.fromJson(a))
-              .toList();
+      final achievementsJson = await _secureStorage.getValue(_achievementsStorageKey) ?? '[]';
+      _achievements = (jsonDecode(achievementsJson) as List).map((a) => Achievement.fromJson(a)).toList();
     } catch (e) {
       print('Failed to load achievements: $e');
       _achievements = [];

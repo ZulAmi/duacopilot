@@ -55,7 +55,7 @@ class PremiumFeaturesHub extends ConsumerWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Theme.of(context).primaryColor.withOpacity(0.1),
+            Theme.of(context).primaryColor.withValues(alpha: 0.1),
             Theme.of(context).scaffoldBackgroundColor,
           ],
         ),
@@ -121,7 +121,7 @@ class PremiumFeaturesHub extends ConsumerWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Theme.of(context).primaryColor.withOpacity(0.05),
+            Theme.of(context).primaryColor.withValues(alpha: 0.05),
             Theme.of(context).scaffoldBackgroundColor,
           ],
         ),
@@ -154,12 +154,12 @@ class PremiumFeaturesHub extends ConsumerWidget {
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [tierColor.withOpacity(0.1), tierColor.withOpacity(0.05)],
+          colors: [tierColor.withValues(alpha: 0.1), tierColor.withValues(alpha: 0.05)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: tierColor.withOpacity(0.3)),
+        border: Border.all(color: tierColor.withValues(alpha: 0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -553,7 +553,7 @@ class PremiumFeaturesHub extends ConsumerWidget {
                     ),
                     gradient: LinearGradient(
                       colors: [
-                        Theme.of(context).primaryColor.withOpacity(0.8),
+                        Theme.of(context).primaryColor.withValues(alpha: 0.8),
                         Theme.of(context).primaryColor,
                       ],
                     ),

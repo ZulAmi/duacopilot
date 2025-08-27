@@ -1,9 +1,12 @@
-import 'package:duacopilot/core/logging/app_logger.dart';
+// ignore_for_file: avoid_print
 
 import 'dart:async';
 import 'dart:convert';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:duacopilot/core/logging/app_logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../models/local_search_models.dart';
 import '../storage/local_vector_storage.dart';
 
@@ -160,19 +163,14 @@ class QueryQueueService {
   /// Get queue statistics
   Map<String, dynamic> getQueueStats() {
     final now = DateTime.now();
-    final oldQueries =
-        _pendingQueries
-            .where((q) => now.difference(q.createdAt).inHours > 24)
-            .length;
+    final oldQueries = _pendingQueries.where((q) => now.difference(q.createdAt).inHours > 24).length;
 
     final priorityDistribution = <int, int>{};
     final languageDistribution = <String, int>{};
 
     for (final query in _pendingQueries) {
-      priorityDistribution[query.priority] =
-          (priorityDistribution[query.priority] ?? 0) + 1;
-      languageDistribution[query.language] =
-          (languageDistribution[query.language] ?? 0) + 1;
+      priorityDistribution[query.priority] = (priorityDistribution[query.priority] ?? 0) + 1;
+      languageDistribution[query.language] = (languageDistribution[query.language] ?? 0) + 1;
     }
 
     return {
@@ -323,19 +321,17 @@ class QueryQueueService {
 
       if (queueJson != null) {
         final queueData = jsonDecode(queueJson) as List;
-        final queries =
-            queueData
-                .map(
-                  (json) => PendingQuery.fromJson(json as Map<String, dynamic>),
-                )
-                .toList();
+        final queries = queueData
+            .map(
+              (json) => PendingQuery.fromJson(json as Map<String, dynamic>),
+            )
+            .toList();
 
         _pendingQueries.clear();
         _pendingQueries.addAll(queries);
 
         // Also load from local vector storage (backup)
-        final storageQueries = await LocalVectorStorage.instance
-            .getPendingQueries(unprocessedOnly: true);
+        final storageQueries = await LocalVectorStorage.instance.getPendingQueries(unprocessedOnly: true);
 
         // Merge and deduplicate
         final existingIds = _pendingQueries.map((q) => q.id).toSet();

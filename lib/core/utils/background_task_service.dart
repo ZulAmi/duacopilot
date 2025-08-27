@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 // Background task service (WorkManager disabled for compatibility)
 
 /// BackgroundTaskService class implementation

@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 part 'premium_audio_entity.freezed.dart';
 part 'premium_audio_entity.g.dart';
@@ -90,11 +89,11 @@ class PremiumRecitation with _$PremiumRecitation {
     String? downloadId,
     @Default(DownloadStatus.notDownloaded) DownloadStatus downloadStatus,
     @Default(0.0) double downloadProgress,
-
     DateTime? createdAt,
     DateTime? lastPlayed,
   }) = _PremiumRecitation;
 
+  // Custom JSON methods
   factory PremiumRecitation.fromJson(Map<String, dynamic> json) {
     return PremiumRecitation(
       id: json['id'] as String,
@@ -118,17 +117,17 @@ class PremiumRecitation with _$PremiumRecitation {
       // Offline capabilities
       localPath: json['localPath'] as String?,
       downloadId: json['downloadId'] as String?,
-      downloadStatus:
-          json['downloadStatus'] != null
-              ? DownloadStatus.values.byName(json['downloadStatus'] as String)
-              : DownloadStatus.notDownloaded,
+      downloadStatus: json['downloadStatus'] != null
+          ? DownloadStatus.values.byName(json['downloadStatus'] as String)
+          : DownloadStatus.notDownloaded,
       downloadProgress: (json['downloadProgress'] as num?)?.toDouble() ?? 0.0,
       createdAt: json['createdAt'] != null ? DateTime.parse(json['createdAt'] as String) : null,
       lastPlayed: json['lastPlayed'] != null ? DateTime.parse(json['lastPlayed'] as String) : null,
     );
   }
+}
 
-  @override
+extension PremiumRecitationX on PremiumRecitation {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -253,7 +252,6 @@ class PremiumAudioSettings with _$PremiumAudioSettings {
     @Default(5000) int maxStorageMB, // 5GB default
     @Default(AutoDeletePolicy.never) AutoDeletePolicy autoDelete,
     @Default(Duration(days: 30)) Duration unusedContentRetention,
-
     DateTime? lastUpdated,
   }) = _PremiumAudioSettings;
 

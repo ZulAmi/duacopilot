@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:socket_io_client/socket_io_client.dart' as IO;
-import 'package:web_socket_channel/web_socket_channel.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:socket_io_client/socket_io_client.dart' as socket_io;
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 import '../../core/logging/app_logger.dart';
 import '../secure_storage/secure_storage_service.dart';
@@ -13,8 +13,7 @@ import '../secure_storage/secure_storage_service.dart';
 /// Handles WebSockets, Server-Sent Events, Socket.IO, and real-time synchronization
 class RealTimeServiceManager {
   static RealTimeServiceManager? _instance;
-  static RealTimeServiceManager get instance =>
-      _instance ??= RealTimeServiceManager._();
+  static RealTimeServiceManager get instance => _instance ??= RealTimeServiceManager._();
 
   RealTimeServiceManager._();
 
@@ -24,7 +23,7 @@ class RealTimeServiceManager {
 
   // Connection management
   WebSocketChannel? _webSocketChannel;
-  IO.Socket? _socketIOClient;
+  socket_io.Socket? _socketIOClient;
   StreamSubscription? _connectivitySubscription;
 
   // Configuration
@@ -45,22 +44,16 @@ class RealTimeServiceManager {
   Timer? _reconnectTimer;
 
   // Stream controllers
-  final _realTimeUpdatesController =
-      StreamController<RealTimeUpdate>.broadcast();
-  final _connectionStateController =
-      StreamController<ConnectionState>.broadcast();
+  final _realTimeUpdatesController = StreamController<RealTimeUpdate>.broadcast();
+  final _connectionStateController = StreamController<ConnectionState>.broadcast();
   final _syncStatusController = StreamController<SyncStatus>.broadcast();
-  final _collaborativeUpdatesController =
-      StreamController<CollaborativeUpdate>.broadcast();
+  final _collaborativeUpdatesController = StreamController<CollaborativeUpdate>.broadcast();
 
   // Public streams
-  Stream<RealTimeUpdate> get realTimeUpdatesStream =>
-      _realTimeUpdatesController.stream;
-  Stream<ConnectionState> get connectionStateStream =>
-      _connectionStateController.stream;
+  Stream<RealTimeUpdate> get realTimeUpdatesStream => _realTimeUpdatesController.stream;
+  Stream<ConnectionState> get connectionStateStream => _connectionStateController.stream;
   Stream<SyncStatus> get syncStatusStream => _syncStatusController.stream;
-  Stream<CollaborativeUpdate> get collaborativeUpdatesStream =>
-      _collaborativeUpdatesController.stream;
+  Stream<CollaborativeUpdate> get collaborativeUpdatesStream => _collaborativeUpdatesController.stream;
 
   // Data queues for offline synchronization
   final List<PendingUpdate> _pendingUpdates = [];
@@ -99,8 +92,7 @@ class RealTimeServiceManager {
   /// Setup connectivity monitoring
   Future<void> _setupConnectivityMonitoring() async {
     final connectivity = Connectivity();
-    _isOnline =
-        await connectivity.checkConnectivity() != ConnectivityResult.none;
+    _isOnline = await connectivity.checkConnectivity() != ConnectivityResult.none;
 
     _connectivitySubscription = connectivity.onConnectivityChanged.listen((
       result,
@@ -187,9 +179,9 @@ class RealTimeServiceManager {
       final token = await _secureStorage.read('auth_token');
       final userId = await _secureStorage.getUserId();
 
-      _socketIOClient = IO.io(
+      _socketIOClient = socket_io.io(
         _socketIOUrl,
-        IO.OptionBuilder()
+        socket_io.OptionBuilder()
             .setTransports(['websocket'])
             .setAuth({
               if (token != null) 'token': token,
@@ -811,11 +803,11 @@ class RealTimeUpdate {
   }
 
   Map<String, dynamic> toJson() => {
-    'type': type.toString().split('.').last,
-    'data': data,
-    'timestamp': timestamp.toIso8601String(),
-    'user_id': userId,
-  };
+        'type': type.toString().split('.').last,
+        'data': data,
+        'timestamp': timestamp.toIso8601String(),
+        'user_id': userId,
+      };
 }
 
 /// Real-time update types
@@ -866,10 +858,10 @@ class PendingUpdate {
   }
 
   Map<String, dynamic> toJson() => {
-    'type': type.toString().split('.').last,
-    'data': data,
-    'timestamp': timestamp.toIso8601String(),
-  };
+        'type': type.toString().split('.').last,
+        'data': data,
+        'timestamp': timestamp.toIso8601String(),
+      };
 }
 
 /// Pending update types

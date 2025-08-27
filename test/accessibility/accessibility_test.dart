@@ -128,8 +128,7 @@ void main() {
                 itemBuilder: (context, index) {
                   final prayer = mockPrayers[index];
                   return Semantics(
-                    label:
-                        'Prayer result ${index + 1} of ${mockPrayers.length}',
+                    label: 'Prayer result ${index + 1} of ${mockPrayers.length}',
                     hint: 'Double tap to view full prayer details',
                     button: true,
                     child: Card(
@@ -143,8 +142,7 @@ void main() {
                           children: [
                             Semantics(
                               label: 'Arabic text: ${prayer['arabic']}',
-                              hint:
-                                  'Arabic prayer text in right-to-left reading direction',
+                              hint: 'Arabic prayer text in right-to-left reading direction',
                               child: Directionality(
                                 textDirection: TextDirection.rtl,
                                 child: Text(
@@ -155,8 +153,7 @@ void main() {
                             ),
                             SizedBox(height: 8),
                             Semantics(
-                              label:
-                                  'Confidence score: ${((prayer['confidence'] as double) * 100).round()} percent',
+                              label: 'Confidence score: ${((prayer['confidence'] as double) * 100).round()} percent',
                               child: Text(
                                 'Confidence: ${((prayer['confidence'] as double) * 100).round()}%',
                               ),
@@ -269,8 +266,8 @@ void main() {
             onPrimary: Colors.white,
             surface: Colors.white,
             onSurface: Colors.black,
-            background: Colors.white,
-            onBackground: Colors.black,
+            surfaceContainerLowest: Colors.white,
+            onSurfaceVariant: Colors.black,
           ),
         );
 
@@ -829,8 +826,7 @@ void main() {
                             children: [
                               Semantics(
                                 label: 'Play audio',
-                                hint:
-                                    'Plays Arabic pronunciation of the prayer',
+                                hint: 'Plays Arabic pronunciation of the prayer',
                                 button: true,
                                 child: IconButton(
                                   icon: Icon(Icons.play_arrow),

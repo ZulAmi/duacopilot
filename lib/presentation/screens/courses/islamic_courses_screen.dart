@@ -440,8 +440,8 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen>
               ),
               gradient: LinearGradient(
                 colors: [
-                  theme.colorScheme.primary.withOpacity(0.8),
-                  theme.colorScheme.secondary.withOpacity(0.8),
+                  theme.colorScheme.primary.withValues(alpha: 0.8),
+                  theme.colorScheme.secondary.withValues(alpha: 0.8),
                 ],
               ),
             ),
@@ -656,7 +656,7 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen>
                             vertical: 2,
                           ),
                           decoration: BoxDecoration(
-                            color: theme.colorScheme.primary.withOpacity(0.1),
+                            color: theme.colorScheme.primary.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
@@ -877,7 +877,7 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen>
                                         label: Text(topic),
                                         backgroundColor: Theme.of(
                                           context,
-                                        ).colorScheme.primary.withOpacity(0.1),
+                                        ).colorScheme.primary.withValues(alpha: 0.1),
                                       ),
                                     )
                                     .toList(),

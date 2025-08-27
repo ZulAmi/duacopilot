@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:audio_service/audio_service.dart';
+import 'package:flutter/material.dart';
+
 import '../../domain/entities/dua_entity.dart';
 import '../../services/audio/audio_service.dart';
 
@@ -107,8 +108,8 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                   child: Text(
                     'Smart Audio Player',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                 ),
                 if (_cacheStats != null)
@@ -136,15 +137,15 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                     Text(
                       _queue[_currentIndex!].title,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                            fontWeight: FontWeight.w600,
+                          ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       _queue[_currentIndex!].artist ?? 'Unknown Artist',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.grey.shade600,
-                      ),
+                            color: Colors.grey.shade600,
+                          ),
                     ),
                     if (_queue[_currentIndex!].extras?['ragScore'] != null)
                       Container(
@@ -162,9 +163,9 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                               style: Theme.of(
                                 context,
                               ).textTheme.bodySmall?.copyWith(
-                                color: Colors.purple,
-                                fontWeight: FontWeight.w500,
-                              ),
+                                    color: Colors.purple,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                             ),
                           ],
                         ),
@@ -285,10 +286,11 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                 // Smart cache button
                 ElevatedButton.icon(
                   onPressed: () async {
+                    final scaffoldMessenger = ScaffoldMessenger.of(context);
                     await _audioService.smartPreCache(widget.duas);
                     _updateCacheStats();
                     if (mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(
+                      scaffoldMessenger.showSnackBar(
                         const SnackBar(
                           content: Text('Smart pre-caching completed!'),
                         ),
@@ -326,9 +328,9 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                     Text(
                       'Smart Cache Statistics',
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: Colors.blue.shade700,
-                      ),
+                            fontWeight: FontWeight.w600,
+                            color: Colors.blue.shade700,
+                          ),
                     ),
                     const SizedBox(height: 8),
                     Row(
@@ -340,8 +342,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                     ),
                     const SizedBox(height: 4),
                     LinearProgressIndicator(
-                      value:
-                          (_cacheStats!['utilizationPercent'] as int) / 100.0,
+                      value: (_cacheStats!['utilizationPercent'] as int) / 100.0,
                       backgroundColor: Colors.grey.shade300,
                       valueColor: AlwaysStoppedAnimation<Color>(
                         Colors.blue.shade600,

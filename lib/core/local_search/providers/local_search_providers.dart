@@ -1,4 +1,7 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../local_semantic_search_service.dart';
 import '../models/local_search_models.dart';
 
@@ -8,11 +11,10 @@ final localSearchServiceProvider = Provider<LocalSemanticSearchService>((ref) {
 });
 
 /// Provider for search state management
-final searchStateProvider =
-    StateNotifierProvider<SearchStateNotifier, SearchState>((ref) {
-      final searchService = ref.watch(localSearchServiceProvider);
-      return SearchStateNotifier(searchService);
-    });
+final searchStateProvider = StateNotifierProvider<SearchStateNotifier, SearchState>((ref) {
+  final searchService = ref.watch(localSearchServiceProvider);
+  return SearchStateNotifier(searchService);
+});
 
 /// Provider for offline status
 final offlineStatusProvider = StateProvider<bool>((ref) => false);
@@ -21,18 +23,17 @@ final offlineStatusProvider = StateProvider<bool>((ref) => false);
 final queueSizeProvider = StateProvider<int>((ref) => 0);
 
 /// Provider for search suggestions
-final searchSuggestionsProvider =
-    FutureProvider.family<List<String>, SearchSuggestionsParams>((
-      ref,
-      params,
-    ) async {
-      final searchService = ref.watch(localSearchServiceProvider);
-      return await searchService.getSuggestions(
-        partialQuery: params.partialQuery,
-        language: params.language,
-        limit: params.limit,
-      );
-    });
+final searchSuggestionsProvider = FutureProvider.family<List<String>, SearchSuggestionsParams>((
+  ref,
+  params,
+) async {
+  final searchService = ref.watch(localSearchServiceProvider);
+  return await searchService.getSuggestions(
+    partialQuery: params.partialQuery,
+    language: params.language,
+    limit: params.limit,
+  );
+});
 
 /// Provider for search statistics
 final searchStatsProvider = FutureProvider<Map<String, dynamic>>((ref) async {
@@ -179,8 +180,7 @@ class SearchState {
 
   bool get hasResults => results.isNotEmpty;
   bool get hasError => error != null;
-  LocalSearchResult? get bestResult =>
-      results.isNotEmpty ? results.first : null;
+  LocalSearchResult? get bestResult => results.isNotEmpty ? results.first : null;
 }
 
 /// Parameters for search suggestions

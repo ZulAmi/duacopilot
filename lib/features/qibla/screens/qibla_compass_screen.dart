@@ -16,8 +16,7 @@ class QiblaCompassScreen extends ConsumerStatefulWidget {
   ConsumerState<QiblaCompassScreen> createState() => _QiblaCompassScreenState();
 }
 
-class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen>
-    with TickerProviderStateMixin {
+class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen> with TickerProviderStateMixin {
   late AnimationController _compassController;
   late AnimationController _pulseController;
 
@@ -72,33 +71,31 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen>
         ],
       ),
       body: compassInit.when(
-        loading:
-            () => const Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(),
-                  SizedBox(height: 16),
-                  Text('Initializing Qibla Compass...'),
-                ],
+        loading: () => const Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(height: 16),
+              Text('Initializing Qibla Compass...'),
+            ],
+          ),
+        ),
+        error: (error, stackTrace) => Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.error, color: Colors.red, size: 48),
+              const SizedBox(height: 16),
+              Text('Error: $error'),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () => ref.invalidate(qiblaCompassInitProvider),
+                child: const Text('Retry'),
               ),
-            ),
-        error:
-            (error, stackTrace) => Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(Icons.error, color: Colors.red, size: 48),
-                  const SizedBox(height: 16),
-                  Text('Error: $error'),
-                  const SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: () => ref.invalidate(qiblaCompassInitProvider),
-                    child: const Text('Retry'),
-                  ),
-                ],
-              ),
-            ),
+            ],
+          ),
+        ),
         data: (initialized) {
           if (!initialized) {
             return const Center(
@@ -115,37 +112,35 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen>
           }
 
           return compass.when(
-            loading:
-                () => const Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircularProgressIndicator(),
-                      SizedBox(height: 16),
-                      Text('Getting compass data...'),
-                    ],
+            loading: () => const Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                  SizedBox(height: 16),
+                  Text('Getting compass data...'),
+                ],
+              ),
+            ),
+            error: (error, stackTrace) => Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.compass_calibration,
+                    color: Colors.red,
+                    size: 48,
                   ),
-                ),
-            error:
-                (error, stackTrace) => Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.compass_calibration,
-                        color: Colors.red,
-                        size: 48,
-                      ),
-                      const SizedBox(height: 16),
-                      Text('Compass Error: $error'),
-                      const SizedBox(height: 16),
-                      ElevatedButton(
-                        onPressed: () => _calibrateCompass(),
-                        child: const Text('Calibrate Compass'),
-                      ),
-                    ],
+                  const SizedBox(height: 16),
+                  Text('Compass Error: $error'),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: () => _calibrateCompass(),
+                    child: const Text('Calibrate Compass'),
                   ),
-                ),
+                ],
+              ),
+            ),
             data: (compassData) {
               if (compassData == null) {
                 return const Center(child: Text('No compass data available'));
@@ -184,16 +179,12 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen>
       width: double.infinity,
       padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space4),
       decoration: BoxDecoration(
-        color:
-            needsCalibration
-                ? RevolutionaryIslamicTheme.warningAmber.withOpacity(0.1)
-                : RevolutionaryIslamicTheme.successGreen.withOpacity(0.1),
+        color: needsCalibration
+            ? RevolutionaryIslamicTheme.warningAmber.withValues(alpha: 0.1)
+            : RevolutionaryIslamicTheme.successGreen.withValues(alpha: 0.1),
         border: Border(
           bottom: BorderSide(
-            color:
-                needsCalibration
-                    ? RevolutionaryIslamicTheme.warningAmber
-                    : RevolutionaryIslamicTheme.successGreen,
+            color: needsCalibration ? RevolutionaryIslamicTheme.warningAmber : RevolutionaryIslamicTheme.successGreen,
             width: 2,
           ),
         ),
@@ -201,13 +192,8 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen>
       child: Row(
         children: [
           Icon(
-            needsCalibration
-                ? Icons.warning_rounded
-                : Icons.check_circle_rounded,
-            color:
-                needsCalibration
-                    ? RevolutionaryIslamicTheme.warningAmber
-                    : RevolutionaryIslamicTheme.successGreen,
+            needsCalibration ? Icons.warning_rounded : Icons.check_circle_rounded,
+            color: needsCalibration ? RevolutionaryIslamicTheme.warningAmber : RevolutionaryIslamicTheme.successGreen,
           ),
           const SizedBox(width: RevolutionaryIslamicTheme.space2),
           Expanded(
@@ -217,9 +203,7 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen>
                   : 'Compass calibrated - ${_getAccuracyText(compass.accuracy)}',
               style: RevolutionaryIslamicTheme.body1.copyWith(
                 color:
-                    needsCalibration
-                        ? RevolutionaryIslamicTheme.warningAmber
-                        : RevolutionaryIslamicTheme.successGreen,
+                    needsCalibration ? RevolutionaryIslamicTheme.warningAmber : RevolutionaryIslamicTheme.successGreen,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -243,8 +227,8 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen>
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
                   colors: [
-                    RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1),
-                    RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.3),
+                    RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.1),
+                    RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.3),
                   ],
                 ),
                 border: Border.all(
@@ -260,10 +244,7 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen>
 
             // Qibla Direction Indicator
             Transform.rotate(
-              angle:
-                  (compass.qiblaDirection - compass.deviceHeading) *
-                  math.pi /
-                  180,
+              angle: (compass.qiblaDirection - compass.deviceHeading) * math.pi / 180,
               child: Container(
                 width: 4,
                 height: 120,
@@ -274,8 +255,8 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen>
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: RevolutionaryIslamicTheme.successGreen.withOpacity(
-                        0.5,
+                      color: RevolutionaryIslamicTheme.successGreen.withValues(
+                        alpha: 0.5,
                       ),
                       blurRadius: 8,
                       spreadRadius: 2,
@@ -297,8 +278,7 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen>
                     color: RevolutionaryIslamicTheme.primaryEmerald,
                     boxShadow: [
                       BoxShadow(
-                        color: RevolutionaryIslamicTheme.primaryEmerald
-                            .withOpacity(0.3),
+                        color: RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.3),
                         blurRadius: 10 + (_pulseController.value * 5),
                         spreadRadius: 2,
                       ),
@@ -350,7 +330,7 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen>
         height: 30,
         margin: const EdgeInsets.only(bottom: 140),
         decoration: BoxDecoration(
-          color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.5),
+          color: RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.5),
           borderRadius: BorderRadius.circular(
             RevolutionaryIslamicTheme.radiusXs,
           ),
@@ -372,7 +352,7 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen>
         borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusXl),
         boxShadow: RevolutionaryIslamicTheme.shadowMd,
         border: Border.all(
-          color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.2),
+          color: RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.2),
           width: 1,
         ),
       ),
@@ -498,25 +478,24 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen>
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder:
-          (context) => AlertDialog(
-            title: const Row(
-              children: [
-                Icon(Icons.compass_calibration, color: Color(0xFF1B5E20)),
-                SizedBox(width: 8),
-                Text('Compass Calibration'),
-              ],
-            ),
-            content: const Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                CircularProgressIndicator(),
-                SizedBox(height: 16),
-                Text('Move your phone in a figure-8 pattern'),
-                Text('to calibrate the compass sensors.'),
-              ],
-            ),
-          ),
+      builder: (context) => AlertDialog(
+        title: const Row(
+          children: [
+            Icon(Icons.compass_calibration, color: Color(0xFF1B5E20)),
+            SizedBox(width: 8),
+            Text('Compass Calibration'),
+          ],
+        ),
+        content: const Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CircularProgressIndicator(),
+            SizedBox(height: 16),
+            Text('Move your phone in a figure-8 pattern'),
+            Text('to calibrate the compass sensors.'),
+          ],
+        ),
+      ),
     );
 
     // Perform calibration
@@ -539,31 +518,30 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen>
   void _showSettingsDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('Compass Settings'),
-            content: const Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ListTile(
-                  leading: Icon(Icons.vibration),
-                  title: Text('Haptic Feedback'),
-                  trailing: Switch(value: true, onChanged: null),
-                ),
-                ListTile(
-                  leading: Icon(Icons.volume_up),
-                  title: Text('Sound Alerts'),
-                  trailing: Switch(value: false, onChanged: null),
-                ),
-              ],
+      builder: (context) => AlertDialog(
+        title: const Text('Compass Settings'),
+        content: const Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: Icon(Icons.vibration),
+              title: Text('Haptic Feedback'),
+              trailing: Switch(value: true, onChanged: null),
             ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: const Text('Close'),
-              ),
-            ],
+            ListTile(
+              leading: Icon(Icons.volume_up),
+              title: Text('Sound Alerts'),
+              trailing: Switch(value: false, onChanged: null),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Close'),
           ),
+        ],
+      ),
     );
   }
 

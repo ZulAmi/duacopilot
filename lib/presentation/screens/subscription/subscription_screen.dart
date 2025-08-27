@@ -15,8 +15,7 @@ class SubscriptionScreen extends StatefulWidget {
   State<SubscriptionScreen> createState() => _SubscriptionScreenState();
 }
 
-class _SubscriptionScreenState extends State<SubscriptionScreen>
-    with TickerProviderStateMixin {
+class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
@@ -147,7 +146,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen>
                     width: 4,
                     height: 4,
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.3),
+                      color: Colors.white.withValues(alpha: 0.3),
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -247,9 +246,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen>
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.orange.withOpacity(0.1),
+                color: Colors.orange.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.orange.withOpacity(0.3)),
+                border: Border.all(color: Colors.orange.withValues(alpha: 0.3)),
               ),
               child: Row(
                 children: [
@@ -282,10 +281,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen>
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 decoration: BoxDecoration(
-                  color:
-                      !_isYearly
-                          ? theme.colorScheme.primary
-                          : Colors.transparent,
+                  color: !_isYearly ? theme.colorScheme.primary : Colors.transparent,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
@@ -306,10 +302,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen>
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 decoration: BoxDecoration(
-                  color:
-                      _isYearly
-                          ? theme.colorScheme.primary
-                          : Colors.transparent,
+                  color: _isYearly ? theme.colorScheme.primary : Colors.transparent,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
@@ -327,7 +320,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen>
                         'Save 17%',
                         style: TextStyle(
                           fontSize: 12,
-                          color: Colors.white.withOpacity(0.9),
+                          color: Colors.white.withValues(alpha: 0.9),
                         ),
                       ),
                   ],
@@ -350,10 +343,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen>
     final isCurrentPlan = _subscriptionService.currentTier == plan.tier;
     final theme = Theme.of(context);
     final price = _isYearly ? plan.yearlyPrice : plan.monthlyPrice;
-    final savingsText =
-        _isYearly && plan.discountPercentage > 0
-            ? 'Save ${plan.discountPercentage.toInt()}%'
-            : null;
+    final savingsText = _isYearly && plan.discountPercentage > 0 ? 'Save ${plan.discountPercentage.toInt()}%' : null;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
@@ -443,29 +433,28 @@ class _SubscriptionScreenState extends State<SubscriptionScreen>
                 Wrap(
                   spacing: 8,
                   runSpacing: 8,
-                  children:
-                      plan.features.take(6).map((feature) {
-                        return Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            color: theme.colorScheme.primary.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(
-                              color: theme.colorScheme.primary.withOpacity(0.2),
-                            ),
-                          ),
-                          child: Text(
-                            feature,
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: theme.colorScheme.primary,
-                            ),
-                          ),
-                        );
-                      }).toList(),
+                  children: plan.features.take(6).map((feature) {
+                    return Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.primary.withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(
+                          color: theme.colorScheme.primary.withValues(alpha: 0.2),
+                        ),
+                      ),
+                      child: Text(
+                        feature,
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: theme.colorScheme.primary,
+                        ),
+                      ),
+                    );
+                  }).toList(),
                 ),
                 if (plan.features.length > 6) ...[
                   const SizedBox(height: 8),
@@ -476,8 +465,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen>
                 ],
                 const SizedBox(height: 16),
                 ModernGradientButton(
-                  onPressed:
-                      () => isCurrentPlan ? null : _handlePlanSelection(plan),
+                  onPressed: () => isCurrentPlan ? null : _handlePlanSelection(plan),
                   text: isCurrentPlan ? 'Current Plan' : 'Choose Plan',
                 ),
               ],
@@ -588,40 +576,39 @@ class _SubscriptionScreenState extends State<SubscriptionScreen>
 
     return showDialog<bool>(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('Confirm Purchase'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('You are about to purchase:'),
-                const SizedBox(height: 8),
-                Text(
-                  '${plan.name} Plan',
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Text('\$${price.toStringAsFixed(2)}/$period'),
-                if (_isYearly && plan.discountPercentage > 0) ...[
-                  const SizedBox(height: 8),
-                  Text(
-                    'You save ${plan.discountPercentage.toInt()}% with yearly billing!',
-                    style: const TextStyle(color: Colors.green),
-                  ),
-                ],
-              ],
+      builder: (context) => AlertDialog(
+        title: const Text('Confirm Purchase'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('You are about to purchase:'),
+            const SizedBox(height: 8),
+            Text(
+              '${plan.name} Plan',
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                child: const Text('Cancel'),
-              ),
-              ElevatedButton(
-                onPressed: () => Navigator.of(context).pop(true),
-                child: const Text('Purchase'),
+            Text('\$${price.toStringAsFixed(2)}/$period'),
+            if (_isYearly && plan.discountPercentage > 0) ...[
+              const SizedBox(height: 8),
+              Text(
+                'You save ${plan.discountPercentage.toInt()}% with yearly billing!',
+                style: const TextStyle(color: Colors.green),
               ),
             ],
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Cancel'),
           ),
+          ElevatedButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('Purchase'),
+          ),
+        ],
+      ),
     );
   }
 

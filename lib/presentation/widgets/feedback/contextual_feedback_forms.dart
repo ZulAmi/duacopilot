@@ -38,7 +38,7 @@ class _ContextualFeedbackFormState extends State<ContextualFeedbackForm> {
         borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, -5),
           ),
@@ -77,7 +77,7 @@ class _ContextualFeedbackFormState extends State<ContextualFeedbackForm> {
             Text(
               'Help us improve the quality of ${widget.contentType} content',
               style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onSurface.withOpacity(0.7),
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
               ),
             ),
 
@@ -261,7 +261,7 @@ class _ContextualFeedbackFormState extends State<ContextualFeedbackForm> {
             Text(
               'Your feedback helps improve content quality for all users. Personal information is kept private.',
               style: theme.textTheme.bodySmall?.copyWith(
-                color: theme.colorScheme.onSurface.withOpacity(0.6),
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
                 fontStyle: FontStyle.italic,
               ),
               textAlign: TextAlign.center,
@@ -284,18 +284,18 @@ class _ContextualFeedbackFormState extends State<ContextualFeedbackForm> {
       prefixIcon: Icon(icon, color: theme.primaryColor),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: theme.primaryColor.withOpacity(0.3)),
+        borderSide: BorderSide(color: theme.primaryColor.withValues(alpha: 0.3)),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: theme.primaryColor.withOpacity(0.3)),
+        borderSide: BorderSide(color: theme.primaryColor.withValues(alpha: 0.3)),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
         borderSide: BorderSide(color: theme.primaryColor, width: 2),
       ),
       filled: true,
-      fillColor: theme.colorScheme.surface.withOpacity(0.5),
+      fillColor: theme.colorScheme.surface.withValues(alpha: 0.5),
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
     );
   }
@@ -479,9 +479,9 @@ class _QuickFeedbackWidgetState extends State<QuickFeedbackWidget> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surface.withOpacity(0.8),
+        color: theme.colorScheme.surface.withValues(alpha: 0.8),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: theme.primaryColor.withOpacity(0.2)),
+        border: Border.all(color: theme.primaryColor.withValues(alpha: 0.2)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,

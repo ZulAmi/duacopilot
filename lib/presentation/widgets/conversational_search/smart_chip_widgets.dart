@@ -209,7 +209,7 @@ class _SmartChipWidgetState extends State<SmartChipWidget>
 
     final chipColor = widget.chipData.color ?? colorScheme.primary;
     final backgroundColor =
-        widget.isSelected ? chipColor : chipColor.withOpacity(0.1);
+        widget.isSelected ? chipColor : chipColor.withValues(alpha: 0.1);
     final foregroundColor =
         widget.isSelected ? colorScheme.onPrimary : chipColor;
 
@@ -232,14 +232,14 @@ class _SmartChipWidgetState extends State<SmartChipWidget>
                     widget.isSelected
                         ? null
                         : Border.all(
-                          color: chipColor.withOpacity(0.3),
+                          color: chipColor.withValues(alpha: 0.3),
                           width: 1,
                         ),
                 boxShadow:
                     widget.isSelected || _isPressed
                         ? [
                           BoxShadow(
-                            color: chipColor.withOpacity(0.3),
+                            color: chipColor.withValues(alpha: 0.3),
                             blurRadius: 8,
                             offset: const Offset(0, 2),
                           ),
@@ -268,7 +268,7 @@ class _SmartChipWidgetState extends State<SmartChipWidget>
                         vertical: 2,
                       ),
                       decoration: BoxDecoration(
-                        color: foregroundColor.withOpacity(0.2),
+                        color: foregroundColor.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(

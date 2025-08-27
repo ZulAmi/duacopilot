@@ -14,10 +14,9 @@ _$DuaResponseImpl _$$DuaResponseImplFromJson(Map<String, dynamic> json) =>
       timestamp: DateTime.parse(json['timestamp'] as String),
       responseTime: (json['responseTime'] as num).toInt(),
       confidence: (json['confidence'] as num).toDouble(),
-      sources:
-          (json['sources'] as List<dynamic>)
-              .map((e) => DuaSource.fromJson(e as Map<String, dynamic>))
-              .toList(),
+      sources: (json['sources'] as List<dynamic>)
+          .map((e) => DuaSource.fromJson(e as Map<String, dynamic>))
+          .toList(),
       sessionId: json['sessionId'] as String?,
       tokensUsed: (json['tokensUsed'] as num?)?.toInt(),
       model: json['model'] as String?,

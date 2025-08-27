@@ -12,8 +12,7 @@ part of 'query_history.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 QueryHistory _$QueryHistoryFromJson(Map<String, dynamic> json) {
   return _QueryHistory.fromJson(json);
@@ -50,27 +49,25 @@ mixin _$QueryHistory {
 /// @nodoc
 abstract class $QueryHistoryCopyWith<$Res> {
   factory $QueryHistoryCopyWith(
-    QueryHistory value,
-    $Res Function(QueryHistory) then,
-  ) = _$QueryHistoryCopyWithImpl<$Res, QueryHistory>;
+          QueryHistory value, $Res Function(QueryHistory) then) =
+      _$QueryHistoryCopyWithImpl<$Res, QueryHistory>;
   @useResult
-  $Res call({
-    String id,
-    String query,
-    String response,
-    DateTime timestamp,
-    int responseTime,
-    String semanticHash,
-    double? confidence,
-    String? sessionId,
-    List<String>? tags,
-    Map<String, dynamic>? context,
-    Map<String, dynamic>? metadata,
-    bool isFavorite,
-    bool isFromCache,
-    DateTime? lastAccessed,
-    int? accessCount,
-  });
+  $Res call(
+      {String id,
+      String query,
+      String response,
+      DateTime timestamp,
+      int responseTime,
+      String semanticHash,
+      double? confidence,
+      String? sessionId,
+      List<String>? tags,
+      Map<String, dynamic>? context,
+      Map<String, dynamic>? metadata,
+      bool isFavorite,
+      bool isFromCache,
+      DateTime? lastAccessed,
+      int? accessCount});
 }
 
 /// @nodoc
@@ -104,86 +101,68 @@ class _$QueryHistoryCopyWithImpl<$Res, $Val extends QueryHistory>
     Object? lastAccessed = freezed,
     Object? accessCount = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            query:
-                null == query
-                    ? _value.query
-                    : query // ignore: cast_nullable_to_non_nullable
-                        as String,
-            response:
-                null == response
-                    ? _value.response
-                    : response // ignore: cast_nullable_to_non_nullable
-                        as String,
-            timestamp:
-                null == timestamp
-                    ? _value.timestamp
-                    : timestamp // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            responseTime:
-                null == responseTime
-                    ? _value.responseTime
-                    : responseTime // ignore: cast_nullable_to_non_nullable
-                        as int,
-            semanticHash:
-                null == semanticHash
-                    ? _value.semanticHash
-                    : semanticHash // ignore: cast_nullable_to_non_nullable
-                        as String,
-            confidence:
-                freezed == confidence
-                    ? _value.confidence
-                    : confidence // ignore: cast_nullable_to_non_nullable
-                        as double?,
-            sessionId:
-                freezed == sessionId
-                    ? _value.sessionId
-                    : sessionId // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            tags:
-                freezed == tags
-                    ? _value.tags
-                    : tags // ignore: cast_nullable_to_non_nullable
-                        as List<String>?,
-            context:
-                freezed == context
-                    ? _value.context
-                    : context // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>?,
-            metadata:
-                freezed == metadata
-                    ? _value.metadata
-                    : metadata // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>?,
-            isFavorite:
-                null == isFavorite
-                    ? _value.isFavorite
-                    : isFavorite // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            isFromCache:
-                null == isFromCache
-                    ? _value.isFromCache
-                    : isFromCache // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            lastAccessed:
-                freezed == lastAccessed
-                    ? _value.lastAccessed
-                    : lastAccessed // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            accessCount:
-                freezed == accessCount
-                    ? _value.accessCount
-                    : accessCount // ignore: cast_nullable_to_non_nullable
-                        as int?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      query: null == query
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+      response: null == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as String,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      responseTime: null == responseTime
+          ? _value.responseTime
+          : responseTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      semanticHash: null == semanticHash
+          ? _value.semanticHash
+          : semanticHash // ignore: cast_nullable_to_non_nullable
+              as String,
+      confidence: freezed == confidence
+          ? _value.confidence
+          : confidence // ignore: cast_nullable_to_non_nullable
+              as double?,
+      sessionId: freezed == sessionId
+          ? _value.sessionId
+          : sessionId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      tags: freezed == tags
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      context: freezed == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      metadata: freezed == metadata
+          ? _value.metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      isFavorite: null == isFavorite
+          ? _value.isFavorite
+          : isFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFromCache: null == isFromCache
+          ? _value.isFromCache
+          : isFromCache // ignore: cast_nullable_to_non_nullable
+              as bool,
+      lastAccessed: freezed == lastAccessed
+          ? _value.lastAccessed
+          : lastAccessed // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      accessCount: freezed == accessCount
+          ? _value.accessCount
+          : accessCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ) as $Val);
   }
 }
 
@@ -191,28 +170,26 @@ class _$QueryHistoryCopyWithImpl<$Res, $Val extends QueryHistory>
 abstract class _$$QueryHistoryImplCopyWith<$Res>
     implements $QueryHistoryCopyWith<$Res> {
   factory _$$QueryHistoryImplCopyWith(
-    _$QueryHistoryImpl value,
-    $Res Function(_$QueryHistoryImpl) then,
-  ) = __$$QueryHistoryImplCopyWithImpl<$Res>;
+          _$QueryHistoryImpl value, $Res Function(_$QueryHistoryImpl) then) =
+      __$$QueryHistoryImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String query,
-    String response,
-    DateTime timestamp,
-    int responseTime,
-    String semanticHash,
-    double? confidence,
-    String? sessionId,
-    List<String>? tags,
-    Map<String, dynamic>? context,
-    Map<String, dynamic>? metadata,
-    bool isFavorite,
-    bool isFromCache,
-    DateTime? lastAccessed,
-    int? accessCount,
-  });
+  $Res call(
+      {String id,
+      String query,
+      String response,
+      DateTime timestamp,
+      int responseTime,
+      String semanticHash,
+      double? confidence,
+      String? sessionId,
+      List<String>? tags,
+      Map<String, dynamic>? context,
+      Map<String, dynamic>? metadata,
+      bool isFavorite,
+      bool isFromCache,
+      DateTime? lastAccessed,
+      int? accessCount});
 }
 
 /// @nodoc
@@ -220,9 +197,8 @@ class __$$QueryHistoryImplCopyWithImpl<$Res>
     extends _$QueryHistoryCopyWithImpl<$Res, _$QueryHistoryImpl>
     implements _$$QueryHistoryImplCopyWith<$Res> {
   __$$QueryHistoryImplCopyWithImpl(
-    _$QueryHistoryImpl _value,
-    $Res Function(_$QueryHistoryImpl) _then,
-  ) : super(_value, _then);
+      _$QueryHistoryImpl _value, $Res Function(_$QueryHistoryImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of QueryHistory
   /// with the given fields replaced by the non-null parameter values.
@@ -245,110 +221,93 @@ class __$$QueryHistoryImplCopyWithImpl<$Res>
     Object? lastAccessed = freezed,
     Object? accessCount = freezed,
   }) {
-    return _then(
-      _$QueryHistoryImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        query:
-            null == query
-                ? _value.query
-                : query // ignore: cast_nullable_to_non_nullable
-                    as String,
-        response:
-            null == response
-                ? _value.response
-                : response // ignore: cast_nullable_to_non_nullable
-                    as String,
-        timestamp:
-            null == timestamp
-                ? _value.timestamp
-                : timestamp // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        responseTime:
-            null == responseTime
-                ? _value.responseTime
-                : responseTime // ignore: cast_nullable_to_non_nullable
-                    as int,
-        semanticHash:
-            null == semanticHash
-                ? _value.semanticHash
-                : semanticHash // ignore: cast_nullable_to_non_nullable
-                    as String,
-        confidence:
-            freezed == confidence
-                ? _value.confidence
-                : confidence // ignore: cast_nullable_to_non_nullable
-                    as double?,
-        sessionId:
-            freezed == sessionId
-                ? _value.sessionId
-                : sessionId // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        tags:
-            freezed == tags
-                ? _value._tags
-                : tags // ignore: cast_nullable_to_non_nullable
-                    as List<String>?,
-        context:
-            freezed == context
-                ? _value._context
-                : context // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>?,
-        metadata:
-            freezed == metadata
-                ? _value._metadata
-                : metadata // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>?,
-        isFavorite:
-            null == isFavorite
-                ? _value.isFavorite
-                : isFavorite // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        isFromCache:
-            null == isFromCache
-                ? _value.isFromCache
-                : isFromCache // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        lastAccessed:
-            freezed == lastAccessed
-                ? _value.lastAccessed
-                : lastAccessed // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        accessCount:
-            freezed == accessCount
-                ? _value.accessCount
-                : accessCount // ignore: cast_nullable_to_non_nullable
-                    as int?,
-      ),
-    );
+    return _then(_$QueryHistoryImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      query: null == query
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+      response: null == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as String,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      responseTime: null == responseTime
+          ? _value.responseTime
+          : responseTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      semanticHash: null == semanticHash
+          ? _value.semanticHash
+          : semanticHash // ignore: cast_nullable_to_non_nullable
+              as String,
+      confidence: freezed == confidence
+          ? _value.confidence
+          : confidence // ignore: cast_nullable_to_non_nullable
+              as double?,
+      sessionId: freezed == sessionId
+          ? _value.sessionId
+          : sessionId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      tags: freezed == tags
+          ? _value._tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      context: freezed == context
+          ? _value._context
+          : context // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      metadata: freezed == metadata
+          ? _value._metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      isFavorite: null == isFavorite
+          ? _value.isFavorite
+          : isFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFromCache: null == isFromCache
+          ? _value.isFromCache
+          : isFromCache // ignore: cast_nullable_to_non_nullable
+              as bool,
+      lastAccessed: freezed == lastAccessed
+          ? _value.lastAccessed
+          : lastAccessed // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      accessCount: freezed == accessCount
+          ? _value.accessCount
+          : accessCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$QueryHistoryImpl implements _QueryHistory {
-  const _$QueryHistoryImpl({
-    required this.id,
-    required this.query,
-    required this.response,
-    required this.timestamp,
-    required this.responseTime,
-    required this.semanticHash,
-    this.confidence,
-    this.sessionId,
-    final List<String>? tags,
-    final Map<String, dynamic>? context,
-    final Map<String, dynamic>? metadata,
-    this.isFavorite = false,
-    this.isFromCache = false,
-    this.lastAccessed,
-    this.accessCount,
-  }) : _tags = tags,
-       _context = context,
-       _metadata = metadata;
+  const _$QueryHistoryImpl(
+      {required this.id,
+      required this.query,
+      required this.response,
+      required this.timestamp,
+      required this.responseTime,
+      required this.semanticHash,
+      this.confidence,
+      this.sessionId,
+      final List<String>? tags,
+      final Map<String, dynamic>? context,
+      final Map<String, dynamic>? metadata,
+      this.isFavorite = false,
+      this.isFromCache = false,
+      this.lastAccessed,
+      this.accessCount})
+      : _tags = tags,
+        _context = context,
+        _metadata = metadata;
 
   factory _$QueryHistoryImpl.fromJson(Map<String, dynamic> json) =>
       _$$QueryHistoryImplFromJson(json);
@@ -450,23 +409,22 @@ class _$QueryHistoryImpl implements _QueryHistory {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    query,
-    response,
-    timestamp,
-    responseTime,
-    semanticHash,
-    confidence,
-    sessionId,
-    const DeepCollectionEquality().hash(_tags),
-    const DeepCollectionEquality().hash(_context),
-    const DeepCollectionEquality().hash(_metadata),
-    isFavorite,
-    isFromCache,
-    lastAccessed,
-    accessCount,
-  );
+      runtimeType,
+      id,
+      query,
+      response,
+      timestamp,
+      responseTime,
+      semanticHash,
+      confidence,
+      sessionId,
+      const DeepCollectionEquality().hash(_tags),
+      const DeepCollectionEquality().hash(_context),
+      const DeepCollectionEquality().hash(_metadata),
+      isFavorite,
+      isFromCache,
+      lastAccessed,
+      accessCount);
 
   /// Create a copy of QueryHistory
   /// with the given fields replaced by the non-null parameter values.
@@ -478,28 +436,29 @@ class _$QueryHistoryImpl implements _QueryHistory {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$QueryHistoryImplToJson(this);
+    return _$$QueryHistoryImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _QueryHistory implements QueryHistory {
-  const factory _QueryHistory({
-    required final String id,
-    required final String query,
-    required final String response,
-    required final DateTime timestamp,
-    required final int responseTime,
-    required final String semanticHash,
-    final double? confidence,
-    final String? sessionId,
-    final List<String>? tags,
-    final Map<String, dynamic>? context,
-    final Map<String, dynamic>? metadata,
-    final bool isFavorite,
-    final bool isFromCache,
-    final DateTime? lastAccessed,
-    final int? accessCount,
-  }) = _$QueryHistoryImpl;
+  const factory _QueryHistory(
+      {required final String id,
+      required final String query,
+      required final String response,
+      required final DateTime timestamp,
+      required final int responseTime,
+      required final String semanticHash,
+      final double? confidence,
+      final String? sessionId,
+      final List<String>? tags,
+      final Map<String, dynamic>? context,
+      final Map<String, dynamic>? metadata,
+      final bool isFavorite,
+      final bool isFromCache,
+      final DateTime? lastAccessed,
+      final int? accessCount}) = _$QueryHistoryImpl;
 
   factory _QueryHistory.fromJson(Map<String, dynamic> json) =
       _$QueryHistoryImpl.fromJson;

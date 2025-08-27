@@ -12,8 +12,7 @@ part of 'user_preference.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UserPreference _$UserPreferenceFromJson(Map<String, dynamic> json) {
   return _UserPreference.fromJson(json);
@@ -48,24 +47,22 @@ mixin _$UserPreference {
 /// @nodoc
 abstract class $UserPreferenceCopyWith<$Res> {
   factory $UserPreferenceCopyWith(
-    UserPreference value,
-    $Res Function(UserPreference) then,
-  ) = _$UserPreferenceCopyWithImpl<$Res, UserPreference>;
+          UserPreference value, $Res Function(UserPreference) then) =
+      _$UserPreferenceCopyWithImpl<$Res, UserPreference>;
   @useResult
-  $Res call({
-    String id,
-    String userId,
-    String key,
-    String value,
-    String type,
-    String? category,
-    String? description,
-    Map<String, dynamic>? metadata,
-    bool isSystem,
-    bool isActive,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-  });
+  $Res call(
+      {String id,
+      String userId,
+      String key,
+      String value,
+      String type,
+      String? category,
+      String? description,
+      Map<String, dynamic>? metadata,
+      bool isSystem,
+      bool isActive,
+      DateTime? createdAt,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -96,97 +93,80 @@ class _$UserPreferenceCopyWithImpl<$Res, $Val extends UserPreference>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            userId:
-                null == userId
-                    ? _value.userId
-                    : userId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            key:
-                null == key
-                    ? _value.key
-                    : key // ignore: cast_nullable_to_non_nullable
-                        as String,
-            value:
-                null == value
-                    ? _value.value
-                    : value // ignore: cast_nullable_to_non_nullable
-                        as String,
-            type:
-                null == type
-                    ? _value.type
-                    : type // ignore: cast_nullable_to_non_nullable
-                        as String,
-            category:
-                freezed == category
-                    ? _value.category
-                    : category // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            description:
-                freezed == description
-                    ? _value.description
-                    : description // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            metadata:
-                freezed == metadata
-                    ? _value.metadata
-                    : metadata // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>?,
-            isSystem:
-                null == isSystem
-                    ? _value.isSystem
-                    : isSystem // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            isActive:
-                null == isActive
-                    ? _value.isActive
-                    : isActive // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            createdAt:
-                freezed == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            updatedAt:
-                freezed == updatedAt
-                    ? _value.updatedAt
-                    : updatedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      key: null == key
+          ? _value.key
+          : key // ignore: cast_nullable_to_non_nullable
+              as String,
+      value: null == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      metadata: freezed == metadata
+          ? _value.metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      isSystem: null == isSystem
+          ? _value.isSystem
+          : isSystem // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isActive: null == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$UserPreferenceImplCopyWith<$Res>
     implements $UserPreferenceCopyWith<$Res> {
-  factory _$$UserPreferenceImplCopyWith(
-    _$UserPreferenceImpl value,
-    $Res Function(_$UserPreferenceImpl) then,
-  ) = __$$UserPreferenceImplCopyWithImpl<$Res>;
+  factory _$$UserPreferenceImplCopyWith(_$UserPreferenceImpl value,
+          $Res Function(_$UserPreferenceImpl) then) =
+      __$$UserPreferenceImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String userId,
-    String key,
-    String value,
-    String type,
-    String? category,
-    String? description,
-    Map<String, dynamic>? metadata,
-    bool isSystem,
-    bool isActive,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-  });
+  $Res call(
+      {String id,
+      String userId,
+      String key,
+      String value,
+      String type,
+      String? category,
+      String? description,
+      Map<String, dynamic>? metadata,
+      bool isSystem,
+      bool isActive,
+      DateTime? createdAt,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -194,9 +174,8 @@ class __$$UserPreferenceImplCopyWithImpl<$Res>
     extends _$UserPreferenceCopyWithImpl<$Res, _$UserPreferenceImpl>
     implements _$$UserPreferenceImplCopyWith<$Res> {
   __$$UserPreferenceImplCopyWithImpl(
-    _$UserPreferenceImpl _value,
-    $Res Function(_$UserPreferenceImpl) _then,
-  ) : super(_value, _then);
+      _$UserPreferenceImpl _value, $Res Function(_$UserPreferenceImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of UserPreference
   /// with the given fields replaced by the non-null parameter values.
@@ -216,90 +195,76 @@ class __$$UserPreferenceImplCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(
-      _$UserPreferenceImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        userId:
-            null == userId
-                ? _value.userId
-                : userId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        key:
-            null == key
-                ? _value.key
-                : key // ignore: cast_nullable_to_non_nullable
-                    as String,
-        value:
-            null == value
-                ? _value.value
-                : value // ignore: cast_nullable_to_non_nullable
-                    as String,
-        type:
-            null == type
-                ? _value.type
-                : type // ignore: cast_nullable_to_non_nullable
-                    as String,
-        category:
-            freezed == category
-                ? _value.category
-                : category // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        description:
-            freezed == description
-                ? _value.description
-                : description // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        metadata:
-            freezed == metadata
-                ? _value._metadata
-                : metadata // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>?,
-        isSystem:
-            null == isSystem
-                ? _value.isSystem
-                : isSystem // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        isActive:
-            null == isActive
-                ? _value.isActive
-                : isActive // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        createdAt:
-            freezed == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        updatedAt:
-            freezed == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-      ),
-    );
+    return _then(_$UserPreferenceImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      key: null == key
+          ? _value.key
+          : key // ignore: cast_nullable_to_non_nullable
+              as String,
+      value: null == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      metadata: freezed == metadata
+          ? _value._metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      isSystem: null == isSystem
+          ? _value.isSystem
+          : isSystem // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isActive: null == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$UserPreferenceImpl implements _UserPreference {
-  const _$UserPreferenceImpl({
-    required this.id,
-    required this.userId,
-    required this.key,
-    required this.value,
-    required this.type,
-    this.category,
-    this.description,
-    final Map<String, dynamic>? metadata,
-    this.isSystem = false,
-    this.isActive = true,
-    this.createdAt,
-    this.updatedAt,
-  }) : _metadata = metadata;
+  const _$UserPreferenceImpl(
+      {required this.id,
+      required this.userId,
+      required this.key,
+      required this.value,
+      required this.type,
+      this.category,
+      this.description,
+      final Map<String, dynamic>? metadata,
+      this.isSystem = false,
+      this.isActive = true,
+      this.createdAt,
+      this.updatedAt})
+      : _metadata = metadata;
 
   factory _$UserPreferenceImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserPreferenceImplFromJson(json);
@@ -314,7 +279,7 @@ class _$UserPreferenceImpl implements _UserPreference {
   final String value;
   @override
   final String type;
-  // Changed from PreferenceType to String
+// Changed from PreferenceType to String
   @override
   final String? category;
   @override
@@ -373,20 +338,19 @@ class _$UserPreferenceImpl implements _UserPreference {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    userId,
-    key,
-    value,
-    type,
-    category,
-    description,
-    const DeepCollectionEquality().hash(_metadata),
-    isSystem,
-    isActive,
-    createdAt,
-    updatedAt,
-  );
+      runtimeType,
+      id,
+      userId,
+      key,
+      value,
+      type,
+      category,
+      description,
+      const DeepCollectionEquality().hash(_metadata),
+      isSystem,
+      isActive,
+      createdAt,
+      updatedAt);
 
   /// Create a copy of UserPreference
   /// with the given fields replaced by the non-null parameter values.
@@ -395,31 +359,30 @@ class _$UserPreferenceImpl implements _UserPreference {
   @pragma('vm:prefer-inline')
   _$$UserPreferenceImplCopyWith<_$UserPreferenceImpl> get copyWith =>
       __$$UserPreferenceImplCopyWithImpl<_$UserPreferenceImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UserPreferenceImplToJson(this);
+    return _$$UserPreferenceImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _UserPreference implements UserPreference {
-  const factory _UserPreference({
-    required final String id,
-    required final String userId,
-    required final String key,
-    required final String value,
-    required final String type,
-    final String? category,
-    final String? description,
-    final Map<String, dynamic>? metadata,
-    final bool isSystem,
-    final bool isActive,
-    final DateTime? createdAt,
-    final DateTime? updatedAt,
-  }) = _$UserPreferenceImpl;
+  const factory _UserPreference(
+      {required final String id,
+      required final String userId,
+      required final String key,
+      required final String value,
+      required final String type,
+      final String? category,
+      final String? description,
+      final Map<String, dynamic>? metadata,
+      final bool isSystem,
+      final bool isActive,
+      final DateTime? createdAt,
+      final DateTime? updatedAt}) = _$UserPreferenceImpl;
 
   factory _UserPreference.fromJson(Map<String, dynamic> json) =
       _$UserPreferenceImpl.fromJson;

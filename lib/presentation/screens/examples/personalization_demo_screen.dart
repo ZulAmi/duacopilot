@@ -266,7 +266,7 @@ class _PersonalizationDemoScreenState extends ConsumerState<PersonalizationDemoS
                           Text(entry.key.toUpperCase()),
                           Chip(
                             label: Text('${entry.value}'),
-                            backgroundColor: ProfessionalTheme.primaryColor.withOpacity(0.1),
+                            backgroundColor: ProfessionalTheme.primaryColor.withValues(alpha: 0.1),
                           ),
                         ],
                       ),

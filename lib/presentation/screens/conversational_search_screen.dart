@@ -27,13 +27,10 @@ class ConversationalSearchScreen extends ConsumerStatefulWidget {
   });
 
   @override
-  ConsumerState<ConversationalSearchScreen> createState() =>
-      _ConversationalSearchScreenState();
+  ConsumerState<ConversationalSearchScreen> createState() => _ConversationalSearchScreenState();
 }
 
-class _ConversationalSearchScreenState
-    extends ConsumerState<ConversationalSearchScreen>
-    with TickerProviderStateMixin {
+class _ConversationalSearchScreenState extends ConsumerState<ConversationalSearchScreen> with TickerProviderStateMixin {
   late final TextEditingController _searchController;
   late final ScrollController _scrollController;
   late final AnimationController _searchAnimationController;
@@ -134,12 +131,14 @@ class _ConversationalSearchScreenState
         _showResults = false;
       });
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Search failed: ${e.toString()}'),
-          backgroundColor: Colors.red.shade600,
-        ),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Search failed: ${e.toString()}'),
+            backgroundColor: Colors.red.shade600,
+          ),
+        );
+      }
     }
   }
 
@@ -380,27 +379,26 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
   void _showPremiumUpgradeDialog() {
     showDialog(
       context: context,
-      builder:
-          (context) => PremiumUpgradeDialog(
-            onUpgrade: () {
-              Navigator.of(context).pop();
-              // Handle premium upgrade
-            },
-            onWatchAd: () async {
-              Navigator.of(context).pop();
-              await AdService.instance.showRewardedAd(
-                onUserEarnedReward: (reward) {
-                  // Grant temporary premium access
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Enjoy 30 minutes of ad-free searches!'),
-                      backgroundColor: Colors.green,
-                    ),
-                  );
-                },
+      builder: (context) => PremiumUpgradeDialog(
+        onUpgrade: () {
+          Navigator.of(context).pop();
+          // Handle premium upgrade
+        },
+        onWatchAd: () async {
+          Navigator.of(context).pop();
+          await AdService.instance.showRewardedAd(
+            onUserEarnedReward: (reward) {
+              // Grant temporary premium access
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Enjoy 30 minutes of ad-free searches!'),
+                  backgroundColor: Colors.green,
+                ),
               );
             },
-          ),
+          );
+        },
+      ),
     );
   }
 
@@ -433,8 +431,8 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1),
-            RevolutionaryIslamicTheme.secondaryNavy.withOpacity(0.1),
+            RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.1),
+            RevolutionaryIslamicTheme.secondaryNavy.withValues(alpha: 0.1),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -557,7 +555,7 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
           border: Border.all(color: RevolutionaryIslamicTheme.borderLight),
           boxShadow: [
             BoxShadow(
-              color: RevolutionaryIslamicTheme.neutralGray300.withOpacity(0.5),
+              color: RevolutionaryIslamicTheme.neutralGray300.withValues(alpha: 0.5),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -573,19 +571,18 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
               Icons.search_rounded,
               color: RevolutionaryIslamicTheme.textSecondary,
             ),
-            suffixIcon:
-                _currentQuery.isNotEmpty
-                    ? IconButton(
-                      onPressed: () {
-                        _searchController.clear();
-                        setState(() => _currentQuery = '');
-                      },
-                      icon: const Icon(
-                        Icons.clear,
-                        color: RevolutionaryIslamicTheme.textSecondary,
-                      ),
-                    )
-                    : null,
+            suffixIcon: _currentQuery.isNotEmpty
+                ? IconButton(
+                    onPressed: () {
+                      _searchController.clear();
+                      setState(() => _currentQuery = '');
+                    },
+                    icon: const Icon(
+                      Icons.clear,
+                      color: RevolutionaryIslamicTheme.textSecondary,
+                    ),
+                  )
+                : null,
             border: InputBorder.none,
             contentPadding: const EdgeInsets.all(16),
             hintStyle: const TextStyle(
@@ -714,7 +711,7 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
         border: Border.all(color: RevolutionaryIslamicTheme.borderLight),
         boxShadow: [
           BoxShadow(
-            color: RevolutionaryIslamicTheme.neutralGray300.withOpacity(0.5),
+            color: RevolutionaryIslamicTheme.neutralGray300.withValues(alpha: 0.5),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -734,8 +731,8 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
                     gradient: LinearGradient(
                       colors: [
                         RevolutionaryIslamicTheme.primaryEmerald,
-                        RevolutionaryIslamicTheme.primaryEmerald.withOpacity(
-                          0.8,
+                        RevolutionaryIslamicTheme.primaryEmerald.withValues(
+                          alpha: 0.8,
                         ),
                       ],
                       begin: Alignment.topLeft,
@@ -782,13 +779,12 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
                     vertical: 2,
                   ),
                   decoration: BoxDecoration(
-                    color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(
-                      0.1,
+                    color: RevolutionaryIslamicTheme.primaryEmerald.withValues(
+                      alpha: 0.1,
                     ),
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: RevolutionaryIslamicTheme.primaryEmerald
-                          .withOpacity(0.3),
+                      color: RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.3),
                     ),
                   ),
                   child: const Text(
@@ -837,7 +833,7 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
         border: Border.all(color: RevolutionaryIslamicTheme.borderLight),
         boxShadow: [
           BoxShadow(
-            color: RevolutionaryIslamicTheme.neutralGray300.withOpacity(0.5),
+            color: RevolutionaryIslamicTheme.neutralGray300.withValues(alpha: 0.5),
             blurRadius: 4,
             offset: const Offset(0, 1),
           ),
@@ -855,8 +851,8 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
                 Container(
                   padding: const EdgeInsets.all(6),
                   decoration: BoxDecoration(
-                    color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(
-                      0.1,
+                    color: RevolutionaryIslamicTheme.primaryEmerald.withValues(
+                      alpha: 0.1,
                     ),
                     borderRadius: BorderRadius.circular(6),
                   ),
@@ -899,7 +895,7 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
         border: Border.all(color: RevolutionaryIslamicTheme.borderLight),
         boxShadow: [
           BoxShadow(
-            color: RevolutionaryIslamicTheme.neutralGray300.withOpacity(0.3),
+            color: RevolutionaryIslamicTheme.neutralGray300.withValues(alpha: 0.3),
             blurRadius: 4,
             offset: const Offset(0, 1),
           ),
@@ -917,8 +913,8 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
                 Container(
                   padding: const EdgeInsets.all(6),
                   decoration: BoxDecoration(
-                    color: RevolutionaryIslamicTheme.secondaryNavy.withOpacity(
-                      0.1,
+                    color: RevolutionaryIslamicTheme.secondaryNavy.withValues(
+                      alpha: 0.1,
                     ),
                     borderRadius: BorderRadius.circular(6),
                   ),

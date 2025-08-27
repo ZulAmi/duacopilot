@@ -27,13 +27,11 @@ class ConversationalSearchField extends StatefulWidget {
   });
 
   @override
-  State<ConversationalSearchField> createState() =>
-      _ConversationalSearchFieldState();
+  State<ConversationalSearchField> createState() => _ConversationalSearchFieldState();
 }
 
 /// _ConversationalSearchFieldState class implementation
-class _ConversationalSearchFieldState extends State<ConversationalSearchField>
-    with TickerProviderStateMixin {
+class _ConversationalSearchFieldState extends State<ConversationalSearchField> with TickerProviderStateMixin {
   late TextEditingController _controller;
   late FocusNode _focusNode;
   late AnimationController _micAnimationController;
@@ -117,9 +115,11 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField>
       },
       listenFor: const Duration(seconds: 30),
       pauseFor: const Duration(seconds: 5),
-      partialResults: true,
+      listenOptions: stt.SpeechListenOptions(
+        partialResults: true,
+        listenMode: stt.ListenMode.confirmation,
+      ),
       localeId: widget.supportArabic ? 'ar-SA' : 'en-US',
-      listenMode: stt.ListenMode.confirmation,
     );
 
     setState(() {
@@ -140,135 +140,128 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField>
   void _showSuggestions() {
     _hideSuggestions();
 
-    final filteredSuggestions =
-        widget.suggestions
-            .where(
-              (suggestion) =>
-                  suggestion.toLowerCase().contains(
+    final filteredSuggestions = widget.suggestions
+        .where(
+          (suggestion) =>
+              suggestion.toLowerCase().contains(
                     _controller.text.toLowerCase(),
                   ) ||
-                  _isArabicSimilar(suggestion, _controller.text),
-            )
-            .take(5)
-            .toList();
+              _isArabicSimilar(suggestion, _controller.text),
+        )
+        .take(5)
+        .toList();
 
     if (filteredSuggestions.isEmpty) return;
 
     _suggestionsOverlay = OverlayEntry(
-      builder:
-          (context) => Positioned(
-            width: MediaQuery.of(context).size.width - 32,
-            child: CompositedTransformFollower(
-              link: _layerLink,
-              showWhenUnlinked: false,
-              offset: const Offset(0, 72),
-              child: Material(
-                elevation: 0,
+      builder: (context) => Positioned(
+        width: MediaQuery.of(context).size.width - 32,
+        child: CompositedTransformFollower(
+          link: _layerLink,
+          showWhenUnlinked: false,
+          offset: const Offset(0, 72),
+          child: Material(
+            elevation: 0,
+            borderRadius: BorderRadius.circular(16),
+            child: Container(
+              constraints: const BoxConstraints(maxHeight: 280),
+              decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                child: Container(
-                  constraints: const BoxConstraints(maxHeight: 280),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: Theme.of(context).colorScheme.surface,
-                    border: Border.all(
-                      color: Theme.of(
-                        context,
-                      ).colorScheme.outline.withOpacity(0.1),
-                      width: 1,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.08),
-                        blurRadius: 20,
-                        offset: const Offset(0, 8),
-                        spreadRadius: 0,
-                      ),
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.04),
-                        blurRadius: 40,
-                        offset: const Offset(0, 16),
-                        spreadRadius: 0,
-                      ),
-                    ],
+                color: Theme.of(context).colorScheme.surface,
+                border: Border.all(
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.outline.withValues(alpha: 0.3),
+                  width: 1,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.1),
+                    blurRadius: 20,
+                    offset: const Offset(0, 8),
+                    spreadRadius: 0,
                   ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      itemCount: filteredSuggestions.length,
-                      itemBuilder: (context, index) {
-                        final suggestion = filteredSuggestions[index];
-                        return InkWell(
-                          onTap: () {
-                            _controller.text = suggestion;
-                            _hideSuggestions();
-                            widget.onSearch(suggestion);
-                          },
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.05),
+                    blurRadius: 40,
+                    offset: const Offset(0, 16),
+                    spreadRadius: 0,
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  itemCount: filteredSuggestions.length,
+                  itemBuilder: (context, index) {
+                    final suggestion = filteredSuggestions[index];
+                    return InkWell(
+                      onTap: () {
+                        _controller.text = suggestion;
+                        _hideSuggestions();
+                        widget.onSearch(suggestion);
+                      },
+                      borderRadius: BorderRadius.circular(8),
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 8),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 14,
+                        ),
+                        decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 8),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 14,
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.primary.withValues(alpha: 0.1),
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: Icon(
+                                Icons.search_rounded,
+                                size: 16,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
                             ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Row(
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.all(6),
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(
-                                      context,
-                                    ).colorScheme.primary.withOpacity(0.1),
-                                    borderRadius: BorderRadius.circular(6),
-                                  ),
-                                  child: Icon(
-                                    Icons.search_rounded,
-                                    size: 16,
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
-                                  ),
-                                ),
-                                const SizedBox(width: 12),
-                                Expanded(
-                                  child: Text(
-                                    suggestion,
-                                    style: Theme.of(
-                                      context,
-                                    ).textTheme.bodyMedium?.copyWith(
-                                      color:
-                                          Theme.of(
-                                            context,
-                                          ).colorScheme.onSurface,
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Text(
+                                suggestion,
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.bodyMedium?.copyWith(
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.onSurface,
                                       fontWeight: FontWeight.w500,
                                     ),
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                                const SizedBox(width: 8),
-                                Icon(
-                                  Icons.arrow_outward_rounded,
-                                  size: 16,
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .onSurfaceVariant
-                                      .withOpacity(0.5),
-                                ),
-                              ],
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
+                            const SizedBox(width: 8),
+                            Icon(
+                              Icons.arrow_outward_rounded,
+                              size: 16,
+                              color: Theme.of(context).colorScheme.onSurfaceVariant.withValues(alpha: 0.6),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
           ),
+        ),
+      ),
     );
 
     Overlay.of(context).insert(_suggestionsOverlay!);
@@ -325,42 +318,38 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField>
           borderRadius: BorderRadius.circular(24),
           color: colorScheme.surface,
           border: Border.all(
-            color:
-                _focusNode.hasFocus
-                    ? colorScheme.primary
-                    : colorScheme.outline.withOpacity(0.2),
+            color: _focusNode.hasFocus ? colorScheme.primary : colorScheme.outline.withValues(alpha: 0.3),
             width: _focusNode.hasFocus ? 2 : 1,
           ),
-          boxShadow:
-              _focusNode.hasFocus
-                  ? [
-                    BoxShadow(
-                      color: colorScheme.primary.withOpacity(0.15),
-                      blurRadius: 20,
-                      offset: const Offset(0, 4),
-                      spreadRadius: 0,
-                    ),
-                    BoxShadow(
-                      color: colorScheme.primary.withOpacity(0.1),
-                      blurRadius: 40,
-                      offset: const Offset(0, 8),
-                      spreadRadius: 0,
-                    ),
-                  ]
-                  : [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.04),
-                      blurRadius: 8,
-                      offset: const Offset(0, 2),
-                      spreadRadius: 0,
-                    ),
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.04),
-                      blurRadius: 16,
-                      offset: const Offset(0, 4),
-                      spreadRadius: 0,
-                    ),
-                  ],
+          boxShadow: _focusNode.hasFocus
+              ? [
+                  BoxShadow(
+                    color: colorScheme.primary.withValues(alpha: 0.2),
+                    blurRadius: 20,
+                    offset: const Offset(0, 4),
+                    spreadRadius: 0,
+                  ),
+                  BoxShadow(
+                    color: colorScheme.primary.withValues(alpha: 0.1),
+                    blurRadius: 40,
+                    offset: const Offset(0, 8),
+                    spreadRadius: 0,
+                  ),
+                ]
+              : [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.05),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                    spreadRadius: 0,
+                  ),
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.03),
+                    blurRadius: 16,
+                    offset: const Offset(0, 4),
+                    spreadRadius: 0,
+                  ),
+                ],
         ),
         child: TextField(
           controller: _controller,
@@ -390,23 +379,21 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField>
                     : null,
               ),
           decoration: InputDecoration(
-            hintText:
-                widget.supportArabic
-                    ? 'Ask about duas, verses, and Islamic guidance... | اسأل عن الأدعية والآيات والإرشادات الإسلامية...'
-                    : 'Ask about duas, verses, and Islamic guidance...',
+            hintText: widget.supportArabic
+                ? 'Ask about duas, verses, and Islamic guidance... | اسأل عن الأدعية والآيات والإرشادات الإسلامية...'
+                : 'Ask about duas, verses, and Islamic guidance...',
             hintStyle: textTheme.bodyLarge
                 ?.copyWith(
-                  color: colorScheme.onSurfaceVariant.withOpacity(0.7),
+                  color: colorScheme.onSurfaceVariant.withValues(alpha: 0.6),
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                 )
                 .merge(
-                  widget.supportArabic &&
-                          ArabicTypography.containsArabic(_controller.text)
+                  widget.supportArabic && ArabicTypography.containsArabic(_controller.text)
                       ? ArabicTextStyles.bodyMedium(
-                        context,
-                        fontType: 'readable',
-                      )
+                          context,
+                          fontType: 'readable',
+                        )
                       : null,
                 ),
             border: InputBorder.none,
@@ -418,7 +405,7 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField>
               padding: const EdgeInsets.all(16),
               child: Icon(
                 Icons.search_rounded,
-                color: colorScheme.onSurfaceVariant.withOpacity(0.6),
+                color: colorScheme.onSurfaceVariant.withValues(alpha: 0.7),
                 size: 24,
               ),
             ),
@@ -449,24 +436,19 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField>
                           scale: _isListening ? _micAnimation.value : 1.0,
                           child: Container(
                             padding: const EdgeInsets.all(16),
-                            decoration:
-                                _isListening
-                                    ? BoxDecoration(
-                                      color: colorScheme.primary.withOpacity(
-                                        0.1,
-                                      ),
-                                      shape: BoxShape.circle,
-                                    )
-                                    : null,
+                            decoration: _isListening
+                                ? BoxDecoration(
+                                    color: colorScheme.primary.withValues(
+                                      alpha: 0.1,
+                                    ),
+                                    shape: BoxShape.circle,
+                                  )
+                                : null,
                             child: Icon(
-                              _isListening
-                                  ? Icons.mic_rounded
-                                  : Icons.mic_none_rounded,
-                              color:
-                                  _isListening
-                                      ? colorScheme.primary
-                                      : colorScheme.onSurfaceVariant
-                                          .withOpacity(0.6),
+                              _isListening ? Icons.mic_rounded : Icons.mic_none_rounded,
+                              color: _isListening
+                                  ? colorScheme.primary
+                                  : colorScheme.onSurfaceVariant.withValues(alpha: 0.7),
                               size: 24,
                             ),
                           ),
@@ -485,7 +467,7 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField>
                       padding: const EdgeInsets.all(16),
                       child: Icon(
                         Icons.close_rounded,
-                        color: colorScheme.onSurfaceVariant.withOpacity(0.6),
+                        color: colorScheme.onSurfaceVariant.withValues(alpha: 0.7),
                         size: 20,
                       ),
                     ),

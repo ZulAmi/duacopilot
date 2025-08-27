@@ -70,12 +70,12 @@ class _RAGConfidenceWidgetState extends State<RAGConfidenceWidget>
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: _getConfidenceColor().withOpacity(0.3),
+          color: _getConfidenceColor().withValues(alpha: 0.3),
           width: 1,
         ),
         boxShadow: [
           BoxShadow(
-            color: _getConfidenceColor().withOpacity(0.1),
+            color: _getConfidenceColor().withValues(alpha: 0.1),
             blurRadius: 8,
             offset: const Offset(0, 2),
             spreadRadius: 0,
@@ -122,7 +122,7 @@ class _RAGConfidenceWidgetState extends State<RAGConfidenceWidget>
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: _getConfidenceColor().withOpacity(0.1),
+                color: _getConfidenceColor().withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(
@@ -300,12 +300,12 @@ class _RAGConfidenceWidgetState extends State<RAGConfidenceWidget>
                   decoration: BoxDecoration(
                     color: Theme.of(
                       context,
-                    ).colorScheme.primary.withOpacity(0.1),
+                    ).colorScheme.primary.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                       color: Theme.of(
                         context,
-                      ).colorScheme.primary.withOpacity(0.2),
+                      ).colorScheme.primary.withValues(alpha: 0.2),
                       width: 1,
                     ),
                   ),
@@ -351,7 +351,7 @@ class _RAGConfidenceWidgetState extends State<RAGConfidenceWidget>
               decoration: BoxDecoration(
                 color: _getRelevanceColor(
                   contextMatch.relevanceScore,
-                ).withOpacity(0.1),
+                ).withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
@@ -427,10 +427,10 @@ class _RAGConfidenceWidgetState extends State<RAGConfidenceWidget>
               decoration: BoxDecoration(
                 color: Theme.of(
                   context,
-                ).colorScheme.surfaceContainerHighest.withOpacity(0.3),
+                ).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                  color: Theme.of(context).colorScheme.outline.withOpacity(0.1),
+                  color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.1),
                   width: 1,
                 ),
               ),

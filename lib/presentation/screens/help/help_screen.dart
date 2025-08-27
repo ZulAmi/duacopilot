@@ -12,8 +12,7 @@ class ScreenAssistance extends ConsumerStatefulWidget {
   ConsumerState<ScreenAssistance> createState() => _ScreenAssistanceState();
 }
 
-class _ScreenAssistanceState extends ConsumerState<ScreenAssistance>
-    with TickerProviderStateMixin {
+class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with TickerProviderStateMixin {
   late AnimationController _fadeController;
   late AnimationController _slideController;
 
@@ -116,9 +115,9 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance>
           Text(
             'Help & Support',
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              fontWeight: FontWeight.w700,
-              color: ProfessionalIslamicTheme.textPrimary,
-            ),
+                  fontWeight: FontWeight.w700,
+                  color: ProfessionalIslamicTheme.textPrimary,
+                ),
           ),
         ],
       ),
@@ -136,8 +135,8 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance>
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  ProfessionalIslamicTheme.islamicGreen.withOpacity(0.1),
-                  ProfessionalIslamicTheme.islamicGreenLight.withOpacity(0.1),
+                  ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.1),
+                  ProfessionalIslamicTheme.islamicGreenLight.withValues(alpha: 0.1),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -176,15 +175,15 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance>
                         style: Theme.of(
                           context,
                         ).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: ProfessionalIslamicTheme.textPrimary,
-                        ),
+                              fontWeight: FontWeight.w600,
+                              color: ProfessionalIslamicTheme.textPrimary,
+                            ),
                       ),
                       Text(
                         'Get help with DuaCopilot',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: ProfessionalIslamicTheme.textSecondary,
-                        ),
+                              color: ProfessionalIslamicTheme.textSecondary,
+                            ),
                       ),
                     ],
                   ),
@@ -246,54 +245,41 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance>
       margin: const EdgeInsets.only(bottom: ProfessionalIslamicTheme.space4),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusLg),
-        color:
-            isSelected
-                ? ProfessionalIslamicTheme.islamicGreen.withOpacity(0.1)
-                : null,
-        border:
-            isSelected
-                ? Border.all(
-                  color: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.3),
-                  width: 1,
-                )
-                : null,
+        color: isSelected ? ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.1) : null,
+        border: isSelected
+            ? Border.all(
+                color: ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.3),
+                width: 1,
+              )
+            : null,
       ),
       child: ListTile(
         leading: Container(
           padding: const EdgeInsets.all(ProfessionalIslamicTheme.space2),
           decoration: BoxDecoration(
-            color:
-                isSelected
-                    ? ProfessionalIslamicTheme.islamicGreen
-                    : ProfessionalIslamicTheme.gray200,
+            color: isSelected ? ProfessionalIslamicTheme.islamicGreen : ProfessionalIslamicTheme.gray200,
             borderRadius: BorderRadius.circular(
               ProfessionalIslamicTheme.radiusMd,
             ),
           ),
           child: Icon(
             icon,
-            color:
-                isSelected
-                    ? ProfessionalIslamicTheme.textOnIslamic
-                    : ProfessionalIslamicTheme.textSecondary,
+            color: isSelected ? ProfessionalIslamicTheme.textOnIslamic : ProfessionalIslamicTheme.textSecondary,
             size: 20,
           ),
         ),
         title: Text(
           title,
           style: Theme.of(context).textTheme.titleSmall?.copyWith(
-            fontWeight: FontWeight.w600,
-            color:
-                isSelected
-                    ? ProfessionalIslamicTheme.islamicGreen
-                    : ProfessionalIslamicTheme.textPrimary,
-          ),
+                fontWeight: FontWeight.w600,
+                color: isSelected ? ProfessionalIslamicTheme.islamicGreen : ProfessionalIslamicTheme.textPrimary,
+              ),
         ),
         subtitle: Text(
           subtitle,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: ProfessionalIslamicTheme.textSecondary,
-          ),
+                color: ProfessionalIslamicTheme.textSecondary,
+              ),
         ),
         onTap: () {
           setState(() {
@@ -396,9 +382,9 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance>
         title: Text(
           question,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w600,
-            color: ProfessionalIslamicTheme.textPrimary,
-          ),
+                fontWeight: FontWeight.w600,
+                color: ProfessionalIslamicTheme.textPrimary,
+              ),
         ),
         children: [
           Padding(
@@ -406,9 +392,9 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance>
             child: Text(
               answer,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: ProfessionalIslamicTheme.textSecondary,
-                height: 1.6,
-              ),
+                    color: ProfessionalIslamicTheme.textSecondary,
+                    height: 1.6,
+                  ),
             ),
           ),
         ],
@@ -499,8 +485,8 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance>
                     ProfessionalIslamicTheme.space4,
                   ),
                   decoration: BoxDecoration(
-                    color: ProfessionalIslamicTheme.islamicGreen.withOpacity(
-                      0.1,
+                    color: ProfessionalIslamicTheme.islamicGreen.withValues(
+                      alpha: 0.1,
                     ),
                     borderRadius: BorderRadius.circular(
                       ProfessionalIslamicTheme.radiusLg,
@@ -519,15 +505,15 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance>
                       Text(
                         title,
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.w700,
-                          color: ProfessionalIslamicTheme.islamicGreen,
-                        ),
+                              fontWeight: FontWeight.w700,
+                              color: ProfessionalIslamicTheme.islamicGreen,
+                            ),
                       ),
                       Text(
                         description,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: ProfessionalIslamicTheme.textSecondary,
-                        ),
+                              color: ProfessionalIslamicTheme.textSecondary,
+                            ),
                       ),
                     ],
                   ),
@@ -558,9 +544,9 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance>
                           style: Theme.of(
                             context,
                           ).textTheme.labelSmall?.copyWith(
-                            color: ProfessionalIslamicTheme.textOnIslamic,
-                            fontWeight: FontWeight.w600,
-                          ),
+                                color: ProfessionalIslamicTheme.textOnIslamic,
+                                fontWeight: FontWeight.w600,
+                              ),
                         ),
                       ),
                     ),
@@ -569,8 +555,8 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance>
                       child: Text(
                         step,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: ProfessionalIslamicTheme.textPrimary,
-                        ),
+                              color: ProfessionalIslamicTheme.textPrimary,
+                            ),
                       ),
                     ),
                   ],
@@ -648,7 +634,7 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance>
               Container(
                 padding: const EdgeInsets.all(ProfessionalIslamicTheme.space6),
                 decoration: BoxDecoration(
-                  color: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.1),
+                  color: ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(
                     ProfessionalIslamicTheme.radiusLg,
                   ),
@@ -667,30 +653,30 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance>
                     Text(
                       title,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: ProfessionalIslamicTheme.textPrimary,
-                      ),
+                            fontWeight: FontWeight.w600,
+                            color: ProfessionalIslamicTheme.textPrimary,
+                          ),
                     ),
                     const SizedBox(height: ProfessionalIslamicTheme.space2),
                     Text(
                       description,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: ProfessionalIslamicTheme.textSecondary,
-                      ),
+                            color: ProfessionalIslamicTheme.textSecondary,
+                          ),
                     ),
                     const SizedBox(height: ProfessionalIslamicTheme.space2),
                     Text(
                       contact,
                       style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        color: ProfessionalIslamicTheme.islamicGreen,
-                        fontWeight: FontWeight.w600,
-                      ),
+                            color: ProfessionalIslamicTheme.islamicGreen,
+                            fontWeight: FontWeight.w600,
+                          ),
                     ),
                     Text(
                       availability,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: ProfessionalIslamicTheme.textMuted,
-                      ),
+                            color: ProfessionalIslamicTheme.textMuted,
+                          ),
                     ),
                   ],
                 ),
@@ -790,15 +776,15 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance>
                     Text(
                       title,
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: ProfessionalIslamicTheme.textPrimary,
-                      ),
+                            fontWeight: FontWeight.w600,
+                            color: ProfessionalIslamicTheme.textPrimary,
+                          ),
                     ),
                     Text(
                       description,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: ProfessionalIslamicTheme.textSecondary,
-                      ),
+                            color: ProfessionalIslamicTheme.textSecondary,
+                          ),
                     ),
                   ],
                 ),
@@ -821,15 +807,15 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance>
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            ProfessionalIslamicTheme.islamicGreen.withOpacity(0.1),
-            ProfessionalIslamicTheme.goldAccent.withOpacity(0.1),
+            ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.1),
+            ProfessionalIslamicTheme.goldAccent.withValues(alpha: 0.1),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusLg),
         border: Border.all(
-          color: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.2),
+          color: ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.2),
           width: 1,
         ),
       ),
@@ -857,16 +843,16 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance>
                 Text(
                   title,
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.w700,
-                    color: ProfessionalIslamicTheme.islamicGreen,
-                  ),
+                        fontWeight: FontWeight.w700,
+                        color: ProfessionalIslamicTheme.islamicGreen,
+                      ),
                 ),
                 const SizedBox(height: ProfessionalIslamicTheme.space2),
                 Text(
                   subtitle,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: ProfessionalIslamicTheme.textSecondary,
-                  ),
+                        color: ProfessionalIslamicTheme.textSecondary,
+                      ),
                 ),
               ],
             ),

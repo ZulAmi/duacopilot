@@ -22,15 +22,15 @@ class AuthenticityBadgeWidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: _getAuthenticityColor().withOpacity(0.1),
+          color: _getAuthenticityColor().withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: _getAuthenticityColor().withOpacity(0.3),
+            color: _getAuthenticityColor().withValues(alpha: 0.3),
             width: 1.5,
           ),
           boxShadow: [
             BoxShadow(
-              color: _getAuthenticityColor().withOpacity(0.1),
+              color: _getAuthenticityColor().withValues(alpha: 0.1),
               blurRadius: 8,
               offset: const Offset(0, 2),
               spreadRadius: 0,
@@ -104,7 +104,7 @@ class AuthenticityBadgeWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.5),
+        color: Colors.white.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(

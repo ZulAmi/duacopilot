@@ -11,12 +11,10 @@ class DigitalTasbihScreen extends ConsumerStatefulWidget {
   const DigitalTasbihScreen({super.key});
 
   @override
-  ConsumerState<DigitalTasbihScreen> createState() =>
-      _DigitalTasbihScreenState();
+  ConsumerState<DigitalTasbihScreen> createState() => _DigitalTasbihScreenState();
 }
 
-class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen>
-    with TickerProviderStateMixin {
+class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with TickerProviderStateMixin {
   late AnimationController _rippleController;
   late AnimationController _countController;
   late AnimationController _progressController;
@@ -105,33 +103,31 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen>
         ],
       ),
       body: tasbihInit.when(
-        loading:
-            () => const Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(),
-                  SizedBox(height: 16),
-                  Text('Initializing Digital Tasbih...'),
-                ],
+        loading: () => const Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(height: 16),
+              Text('Initializing Digital Tasbih...'),
+            ],
+          ),
+        ),
+        error: (error, stackTrace) => Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.error, color: Colors.red, size: 48),
+              const SizedBox(height: 16),
+              Text('Error: $error'),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () => ref.invalidate(tasbihInitProvider),
+                child: const Text('Retry'),
               ),
-            ),
-        error:
-            (error, stackTrace) => Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(Icons.error, color: Colors.red, size: 48),
-                  const SizedBox(height: 16),
-                  Text('Error: $error'),
-                  const SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: () => ref.invalidate(tasbihInitProvider),
-                    child: const Text('Retry'),
-                  ),
-                ],
-              ),
-            ),
+            ],
+          ),
+        ),
         data: (initialized) {
           return Column(
             children: [
@@ -194,8 +190,7 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen>
             builder: (context, child) {
               return LinearProgressIndicator(
                 value: _progressController.value,
-                backgroundColor: RevolutionaryIslamicTheme.textOnColor
-                    .withOpacity(0.3),
+                backgroundColor: RevolutionaryIslamicTheme.textOnColor.withValues(alpha: 0.3),
                 valueColor: const AlwaysStoppedAnimation<Color>(
                   RevolutionaryIslamicTheme.textOnColor,
                 ),
@@ -210,7 +205,7 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen>
           Text(
             '${(progress * 100).toInt()}% Complete',
             style: RevolutionaryIslamicTheme.body1.copyWith(
-              color: RevolutionaryIslamicTheme.textOnColor.withOpacity(0.8),
+              color: RevolutionaryIslamicTheme.textOnColor.withValues(alpha: 0.8),
             ),
           ),
         ],
@@ -234,8 +229,8 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen>
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(
-                      1 - _rippleController.value,
+                    color: RevolutionaryIslamicTheme.primaryEmerald.withValues(
+                      alpha: 1 - _rippleController.value,
                     ),
                     width: 3,
                   ),
@@ -260,11 +255,11 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen>
                       shape: BoxShape.circle,
                       gradient: RadialGradient(
                         colors: [
-                          RevolutionaryIslamicTheme.primaryEmerald.withOpacity(
-                            0.1,
+                          RevolutionaryIslamicTheme.primaryEmerald.withValues(
+                            alpha: 0.1,
                           ),
-                          RevolutionaryIslamicTheme.primaryEmerald.withOpacity(
-                            0.3,
+                          RevolutionaryIslamicTheme.primaryEmerald.withValues(
+                            alpha: 0.3,
                           ),
                         ],
                       ),
@@ -274,8 +269,7 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen>
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: RevolutionaryIslamicTheme.primaryEmerald
-                              .withOpacity(0.3),
+                          color: RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.3),
                           blurRadius: 20,
                           spreadRadius: 5,
                         ),
@@ -325,7 +319,7 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen>
         ),
         boxShadow: RevolutionaryIslamicTheme.shadowMd,
         border: Border.all(
-          color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.2),
+          color: RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.2),
           width: 1,
         ),
       ),
@@ -366,12 +360,12 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen>
       child: Container(
         width: 120,
         decoration: BoxDecoration(
-          color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1),
+          color: RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(
             RevolutionaryIslamicTheme.radiusXl,
           ),
           border: Border.all(
-            color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.3),
+            color: RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.3),
           ),
           boxShadow: RevolutionaryIslamicTheme.shadowSm,
         ),
@@ -487,6 +481,8 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen>
     final sessionNotifier = ref.read(tasbihSessionProvider.notifier);
     await sessionNotifier.endSession();
 
+    if (!mounted) return;
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: const Text('Session completed! Well done.'),
@@ -504,53 +500,51 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen>
   void _showStartDialog() {
     showDialog(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('Start Tasbih Session'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text('Select dhikr type and target count:'),
-                const SizedBox(height: 16),
-                DropdownButtonFormField<TasbihType>(
-                  decoration: const InputDecoration(
-                    labelText: 'Dhikr Type',
-                    border: OutlineInputBorder(),
-                  ),
-                  items:
-                      TasbihType.values.map((type) {
-                        return DropdownMenuItem(
-                          value: type,
-                          child: Text(_getTasbihTypeName(type)),
-                        );
-                      }).toList(),
-                  onChanged: (value) {},
-                ),
-                const SizedBox(height: 12),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'Target Count',
-                    border: OutlineInputBorder(),
-                  ),
-                  keyboardType: TextInputType.number,
-                  initialValue: '33',
-                ),
-              ],
+      builder: (context) => AlertDialog(
+        title: const Text('Start Tasbih Session'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text('Select dhikr type and target count:'),
+            const SizedBox(height: 16),
+            DropdownButtonFormField<TasbihType>(
+              decoration: const InputDecoration(
+                labelText: 'Dhikr Type',
+                border: OutlineInputBorder(),
+              ),
+              items: TasbihType.values.map((type) {
+                return DropdownMenuItem(
+                  value: type,
+                  child: Text(_getTasbihTypeName(type)),
+                );
+              }).toList(),
+              onChanged: (value) {},
             ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: const Text('Cancel'),
+            const SizedBox(height: 12),
+            TextFormField(
+              decoration: const InputDecoration(
+                labelText: 'Target Count',
+                border: OutlineInputBorder(),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  _startQuickSession(TasbihType.subhanallah);
-                },
-                child: const Text('Start'),
-              ),
-            ],
+              keyboardType: TextInputType.number,
+              initialValue: '33',
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Cancel'),
           ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              _startQuickSession(TasbihType.subhanallah);
+            },
+            child: const Text('Start'),
+          ),
+        ],
+      ),
     );
   }
 
@@ -560,42 +554,41 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen>
 
     showDialog(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('Session Details'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ListTile(
-                  leading: const Icon(Icons.timer),
-                  title: const Text('Duration'),
-                  subtitle: Text(
-                    _formatDuration(
-                      DateTime.now().difference(session.startTime),
-                    ),
-                  ),
+      builder: (context) => AlertDialog(
+        title: const Text('Session Details'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.timer),
+              title: const Text('Duration'),
+              subtitle: Text(
+                _formatDuration(
+                  DateTime.now().difference(session.startTime),
                 ),
-                ListTile(
-                  leading: const Icon(Icons.trending_up),
-                  title: const Text('Progress'),
-                  subtitle: Text(
-                    '${session.currentCount}/${session.targetCount}',
-                  ),
-                ),
-                ListTile(
-                  leading: const Icon(Icons.touch_app),
-                  title: const Text('Input Method'),
-                  subtitle: const Text('Touch'),
-                ),
-              ],
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: const Text('Close'),
               ),
-            ],
+            ),
+            ListTile(
+              leading: const Icon(Icons.trending_up),
+              title: const Text('Progress'),
+              subtitle: Text(
+                '${session.currentCount}/${session.targetCount}',
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.touch_app),
+              title: const Text('Input Method'),
+              subtitle: const Text('Touch'),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Close'),
           ),
+        ],
+      ),
     );
   }
 
@@ -604,42 +597,41 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen>
 
     showDialog(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('Tasbih Settings'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SwitchListTile(
-                  title: const Text('Haptic Feedback'),
-                  value: settings?.hapticFeedback ?? true,
-                  onChanged: (value) {
-                    // Update settings
-                  },
-                ),
-                SwitchListTile(
-                  title: const Text('Sound Feedback'),
-                  value: settings?.soundFeedback ?? false,
-                  onChanged: (value) {
-                    // Update settings
-                  },
-                ),
-                SwitchListTile(
-                  title: const Text('Voice Recognition'),
-                  value: settings?.voiceRecognition ?? false,
-                  onChanged: (value) {
-                    // Update settings
-                  },
-                ),
-              ],
+      builder: (context) => AlertDialog(
+        title: const Text('Tasbih Settings'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SwitchListTile(
+              title: const Text('Haptic Feedback'),
+              value: settings?.hapticFeedback ?? true,
+              onChanged: (value) {
+                // Update settings
+              },
             ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: const Text('Close'),
-              ),
-            ],
+            SwitchListTile(
+              title: const Text('Sound Feedback'),
+              value: settings?.soundFeedback ?? false,
+              onChanged: (value) {
+                // Update settings
+              },
+            ),
+            SwitchListTile(
+              title: const Text('Voice Recognition'),
+              value: settings?.voiceRecognition ?? false,
+              onChanged: (value) {
+                // Update settings
+              },
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Close'),
           ),
+        ],
+      ),
     );
   }
 
@@ -651,41 +643,40 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen>
 
     showDialog(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('Tasbih Statistics'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ListTile(
-                  leading: const Icon(Icons.history),
-                  title: const Text('Total Sessions'),
-                  subtitle: Text('$totalSessions'),
-                ),
-                ListTile(
-                  leading: const Icon(Icons.format_list_numbered),
-                  title: const Text('Total Count'),
-                  subtitle: Text('$totalCount'),
-                ),
-                ListTile(
-                  leading: const Icon(Icons.timer),
-                  title: const Text('Total Time'),
-                  subtitle: Text(_formatDuration(totalTime)),
-                ),
-                ListTile(
-                  leading: const Icon(Icons.local_fire_department),
-                  title: const Text('Current Streak'),
-                  subtitle: Text('$currentStreak days'),
-                ),
-              ],
+      builder: (context) => AlertDialog(
+        title: const Text('Tasbih Statistics'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.history),
+              title: const Text('Total Sessions'),
+              subtitle: Text('$totalSessions'),
             ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: const Text('Close'),
-              ),
-            ],
+            ListTile(
+              leading: const Icon(Icons.format_list_numbered),
+              title: const Text('Total Count'),
+              subtitle: Text('$totalCount'),
+            ),
+            ListTile(
+              leading: const Icon(Icons.timer),
+              title: const Text('Total Time'),
+              subtitle: Text(_formatDuration(totalTime)),
+            ),
+            ListTile(
+              leading: const Icon(Icons.local_fire_department),
+              title: const Text('Current Streak'),
+              subtitle: Text('$currentStreak days'),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Close'),
           ),
+        ],
+      ),
     );
   }
 

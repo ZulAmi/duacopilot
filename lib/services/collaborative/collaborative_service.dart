@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:socket_io_client/socket_io_client.dart' as socket_io;
 
 import '../../core/logging/app_logger.dart';
 import '../secure_storage/secure_storage_service.dart';
@@ -21,7 +21,7 @@ class CollaborativeService {
   late SharedPreferences _prefs;
 
   // Socket.IO connection
-  IO.Socket? _socket;
+  socket_io.Socket? _socket;
 
   // State management
   bool _isInitialized = false;
@@ -124,9 +124,9 @@ class CollaborativeService {
     try {
       final token = await _secureStorage.read('auth_token');
 
-      _socket = IO.io(
+      _socket = socket_io.io(
         'https://api.duacopilot.com',
-        IO.OptionBuilder()
+        socket_io.OptionBuilder()
             .setTransports(['websocket'])
             .setAuth({if (token != null) 'token': token, 'user_id': _currentUserId, 'family_id': _currentFamilyId})
             .enableReconnection()
@@ -716,14 +716,14 @@ class FamilyMember {
   }
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'name': name,
-    'role': role,
-    'joined_at': joinedAt.toIso8601String(),
-    'is_online': isOnline,
-    'avatar_url': avatarUrl,
-    'preferences': preferences,
-  };
+        'id': id,
+        'name': name,
+        'role': role,
+        'joined_at': joinedAt.toIso8601String(),
+        'is_online': isOnline,
+        'avatar_url': avatarUrl,
+        'preferences': preferences,
+      };
 }
 
 /// Family Du'a Share model
@@ -765,16 +765,16 @@ class FamilyDuaShare {
   }
 
   Map<String, dynamic> toJson() => {
-    'dua_id': duaId,
-    'dua_title': duaTitle,
-    'dua_text': duaText,
-    'personal_note': personalNote,
-    'tags': tags,
-    'category': category,
-    'shared_by': sharedBy,
-    'shared_at': sharedAt.toIso8601String(),
-    'family_id': familyId,
-  };
+        'dua_id': duaId,
+        'dua_title': duaTitle,
+        'dua_text': duaText,
+        'personal_note': personalNote,
+        'tags': tags,
+        'category': category,
+        'shared_by': sharedBy,
+        'shared_at': sharedAt.toIso8601String(),
+        'family_id': familyId,
+      };
 }
 
 /// Family Member Joined event
@@ -869,14 +869,14 @@ class FamilyActivity {
   }
 
   Map<String, dynamic> toJson() => {
-    'type': type,
-    'actor_id': actorId,
-    'actor_name': actorName,
-    'timestamp': timestamp.toIso8601String(),
-    'target_id': targetId,
-    'target_name': targetName,
-    'metadata': metadata,
-  };
+        'type': type,
+        'actor_id': actorId,
+        'actor_name': actorName,
+        'timestamp': timestamp.toIso8601String(),
+        'target_id': targetId,
+        'target_name': targetName,
+        'metadata': metadata,
+      };
 }
 
 /// Prayer Session model
@@ -921,15 +921,15 @@ class PrayerSession {
   }
 
   Map<String, dynamic> toJson() => {
-    'session_id': sessionId,
-    'session_name': sessionName,
-    'dua_ids': duaIds,
-    'duration_minutes': durationMinutes,
-    'description': description,
-    'started_by': startedBy,
-    'started_at': startedAt.toIso8601String(),
-    'family_id': familyId,
-    'status': status,
-    'participants': participants,
-  };
+        'session_id': sessionId,
+        'session_name': sessionName,
+        'dua_ids': duaIds,
+        'duration_minutes': durationMinutes,
+        'description': description,
+        'started_by': startedBy,
+        'started_at': startedAt.toIso8601String(),
+        'family_id': familyId,
+        'status': status,
+        'participants': participants,
+      };
 }

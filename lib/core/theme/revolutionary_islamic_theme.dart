@@ -50,22 +50,22 @@ class RevolutionaryIslamicTheme {
 
   // Modern Gradients
   static LinearGradient get heroGradient => const LinearGradient(
-    colors: [primaryEmerald, secondaryNavy],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-  );
+        colors: [primaryEmerald, secondaryNavy],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      );
 
   static LinearGradient get cardGradient => LinearGradient(
-    colors: [neutralWhite, neutralGray50],
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter,
-  );
+        colors: [neutralWhite, neutralGray50],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+      );
 
   static LinearGradient get accentGradient => const LinearGradient(
-    colors: [accentPurple, primaryEmeraldLight],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-  );
+        colors: [accentPurple, primaryEmeraldLight],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      );
 
   // Spacing Scale - Perfect 8pt Grid
   static const double space1 = 4.0;
@@ -93,64 +93,64 @@ class RevolutionaryIslamicTheme {
 
   // Professional Shadow System
   static List<BoxShadow> get shadowXs => [
-    BoxShadow(
-      color: neutralGray900.withOpacity(0.05),
-      blurRadius: 1,
-      offset: const Offset(0, 1),
-    ),
-  ];
+        BoxShadow(
+          color: neutralGray900.withValues(alpha: 0.05),
+          blurRadius: 1,
+          offset: const Offset(0, 1),
+        ),
+      ];
 
   static List<BoxShadow> get shadowSm => [
-    BoxShadow(
-      color: neutralGray900.withOpacity(0.05),
-      blurRadius: 2,
-      offset: const Offset(0, 1),
-    ),
-    BoxShadow(
-      color: neutralGray900.withOpacity(0.1),
-      blurRadius: 3,
-      offset: const Offset(0, 1),
-    ),
-  ];
+        BoxShadow(
+          color: neutralGray900.withValues(alpha: 0.05),
+          blurRadius: 2,
+          offset: const Offset(0, 1),
+        ),
+        BoxShadow(
+          color: neutralGray900.withValues(alpha: 0.1),
+          blurRadius: 3,
+          offset: const Offset(0, 1),
+        ),
+      ];
 
   static List<BoxShadow> get shadowMd => [
-    BoxShadow(
-      color: neutralGray900.withOpacity(0.1),
-      blurRadius: 6,
-      offset: const Offset(0, 4),
-    ),
-    BoxShadow(
-      color: neutralGray900.withOpacity(0.06),
-      blurRadius: 4,
-      offset: const Offset(0, 2),
-    ),
-  ];
+        BoxShadow(
+          color: neutralGray900.withValues(alpha: 0.1),
+          blurRadius: 6,
+          offset: const Offset(0, 4),
+        ),
+        BoxShadow(
+          color: neutralGray900.withValues(alpha: 0.06),
+          blurRadius: 4,
+          offset: const Offset(0, 2),
+        ),
+      ];
 
   static List<BoxShadow> get shadowLg => [
-    BoxShadow(
-      color: neutralGray900.withOpacity(0.1),
-      blurRadius: 15,
-      offset: const Offset(0, 10),
-    ),
-    BoxShadow(
-      color: neutralGray900.withOpacity(0.04),
-      blurRadius: 6,
-      offset: const Offset(0, 4),
-    ),
-  ];
+        BoxShadow(
+          color: neutralGray900.withValues(alpha: 0.1),
+          blurRadius: 15,
+          offset: const Offset(0, 10),
+        ),
+        BoxShadow(
+          color: neutralGray900.withValues(alpha: 0.04),
+          blurRadius: 6,
+          offset: const Offset(0, 4),
+        ),
+      ];
 
   static List<BoxShadow> get shadowXl => [
-    BoxShadow(
-      color: neutralGray900.withOpacity(0.1),
-      blurRadius: 25,
-      offset: const Offset(0, 20),
-    ),
-    BoxShadow(
-      color: neutralGray900.withOpacity(0.04),
-      blurRadius: 10,
-      offset: const Offset(0, 8),
-    ),
-  ];
+        BoxShadow(
+          color: neutralGray900.withValues(alpha: 0.1),
+          blurRadius: 25,
+          offset: const Offset(0, 20),
+        ),
+        BoxShadow(
+          color: neutralGray900.withValues(alpha: 0.04),
+          blurRadius: 10,
+          offset: const Offset(0, 8),
+        ),
+      ];
 
   // Typography System - Modern & Accessible
   static const String fontFamily = 'Inter'; // Using Inter font for modern look
@@ -273,12 +273,10 @@ class RevolutionaryIslamicTheme {
         secondary: secondaryNavy,
         tertiary: accentPurple,
         surface: backgroundSecondary,
-        background: backgroundPrimary,
         error: errorRose,
         onPrimary: textOnColor,
         onSecondary: textOnColor,
         onSurface: textPrimary,
-        onBackground: textPrimary,
         onError: textOnColor,
       ),
 
@@ -399,7 +397,7 @@ class RevolutionaryIslamicTheme {
       // Chip Theme
       chipTheme: ChipThemeData(
         backgroundColor: backgroundTertiary,
-        selectedColor: primaryEmerald.withOpacity(0.1),
+        selectedColor: primaryEmerald.withValues(alpha: 0.1),
         labelStyle: caption.copyWith(color: textPrimary),
         padding: const EdgeInsets.symmetric(
           horizontal: space3,

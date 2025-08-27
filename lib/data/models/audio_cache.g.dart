@@ -21,18 +21,15 @@ _$AudioCacheImpl _$$AudioCacheImplFromJson(Map<String, dynamic> json) =>
       metadata: json['metadata'] as Map<String, dynamic>?,
       playCount: (json['playCount'] as num?)?.toInt() ?? 0,
       isFavorite: json['isFavorite'] as bool? ?? false,
-      downloadedAt:
-          json['downloadedAt'] == null
-              ? null
-              : DateTime.parse(json['downloadedAt'] as String),
-      lastPlayed:
-          json['lastPlayed'] == null
-              ? null
-              : DateTime.parse(json['lastPlayed'] as String),
-      expiresAt:
-          json['expiresAt'] == null
-              ? null
-              : DateTime.parse(json['expiresAt'] as String),
+      downloadedAt: json['downloadedAt'] == null
+          ? null
+          : DateTime.parse(json['downloadedAt'] as String),
+      lastPlayed: json['lastPlayed'] == null
+          ? null
+          : DateTime.parse(json['lastPlayed'] as String),
+      expiresAt: json['expiresAt'] == null
+          ? null
+          : DateTime.parse(json['expiresAt'] as String),
     );
 
 Map<String, dynamic> _$$AudioCacheImplToJson(_$AudioCacheImpl instance) =>
