@@ -39,9 +39,9 @@ final tasbihStatsProvider = StreamProvider.autoDispose<TasbihStats?>((ref) {
 // Achievements Stream Provider
 final tasbihAchievementsProvider =
     StreamProvider.autoDispose<List<Achievement>>((ref) {
-      final service = ref.watch(digitalTasbihServiceProvider);
-      return service.achievementsStream;
-    });
+  final service = ref.watch(digitalTasbihServiceProvider);
+  return service.achievementsStream;
+});
 
 // Session Actions Provider
 class TasbihSessionNotifier extends StateNotifier<AsyncValue<TasbihSession?>> {
@@ -87,9 +87,7 @@ class TasbihSessionNotifier extends StateNotifier<AsyncValue<TasbihSession?>> {
 }
 
 final tasbihSessionProvider = StateNotifierProvider.autoDispose<
-  TasbihSessionNotifier,
-  AsyncValue<TasbihSession?>
->((ref) {
+    TasbihSessionNotifier, AsyncValue<TasbihSession?>>((ref) {
   final service = ref.watch(digitalTasbihServiceProvider);
   return TasbihSessionNotifier(service);
 });
@@ -114,9 +112,9 @@ class TasbihSettingsNotifier extends StateNotifier<TasbihSettings?> {
 
 final tasbihSettingsProvider =
     StateNotifierProvider<TasbihSettingsNotifier, TasbihSettings?>((ref) {
-      final service = ref.watch(digitalTasbihServiceProvider);
-      return TasbihSettingsNotifier(service);
-    });
+  final service = ref.watch(digitalTasbihServiceProvider);
+  return TasbihSettingsNotifier(service);
+});
 
 // Current Session Simple Providers (for easier access)
 final currentSessionProvider = Provider.autoDispose<TasbihSession?>((ref) {
@@ -163,17 +161,17 @@ final currentDhikrTextProvider = Provider.autoDispose<String>((ref) {
 
   switch (session.type) {
     case TasbihType.subhanallah:
-      return 'سُبْحَانَ اللهِ';
+      return 'Ø³ÙØ¨Ù’Ø­ÙŽØ§Ù†ÙŽ Ø§Ù„Ù„Ù‡Ù';
     case TasbihType.alhamdulillah:
-      return 'اَلْحَمْدُ للهِ';
+      return 'Ø§ÙŽÙ„Ù’Ø­ÙŽÙ…Ù’Ø¯Ù Ù„Ù„Ù‡Ù';
     case TasbihType.allahuakbar:
-      return 'اَللهُ أَكْبَرُ';
+      return 'Ø§ÙŽÙ„Ù„Ù‡Ù Ø£ÙŽÙƒÙ’Ø¨ÙŽØ±Ù';
     case TasbihType.lailahaillallah:
-      return 'لَا إِلٰهَ إِلَّا اللهُ';
+      return 'Ù„ÙŽØ§ Ø¥ÙÙ„Ù°Ù‡ÙŽ Ø¥ÙÙ„ÙŽÙ‘Ø§ Ø§Ù„Ù„Ù‡Ù';
     case TasbihType.astaghfirullah:
-      return 'أَسْتَغْفِرُ اللهَ';
+      return 'Ø£ÙŽØ³Ù’ØªÙŽØºÙ’ÙÙØ±Ù Ø§Ù„Ù„Ù‡ÙŽ';
     default:
-      return 'ذِكْر';
+      return 'Ø°ÙÙƒÙ’Ø±';
   }
 });
 
@@ -278,11 +276,11 @@ final quickTasbihProvider = Provider.autoDispose<Map<TasbihType, String>>((
   ref,
 ) {
   return {
-    TasbihType.subhanallah: 'سُبْحَانَ اللهِ',
-    TasbihType.alhamdulillah: 'اَلْحَمْدُ للهِ',
-    TasbihType.allahuakbar: 'اَللهُ أَكْبَرُ',
-    TasbihType.lailahaillallah: 'لَا إِلٰهَ إِلَّا اللهُ',
-    TasbihType.astaghfirullah: 'أَسْتَغْفِرُ اللهَ',
+    TasbihType.subhanallah: 'Ø³ÙØ¨Ù’Ø­ÙŽØ§Ù†ÙŽ Ø§Ù„Ù„Ù‡Ù',
+    TasbihType.alhamdulillah: 'Ø§ÙŽÙ„Ù’Ø­ÙŽÙ…Ù’Ø¯Ù Ù„Ù„Ù‡Ù',
+    TasbihType.allahuakbar: 'Ø§ÙŽÙ„Ù„Ù‡Ù Ø£ÙŽÙƒÙ’Ø¨ÙŽØ±Ù',
+    TasbihType.lailahaillallah: 'Ù„ÙŽØ§ Ø¥ÙÙ„Ù°Ù‡ÙŽ Ø¥ÙÙ„ÙŽÙ‘Ø§ Ø§Ù„Ù„Ù‡Ù',
+    TasbihType.astaghfirullah: 'Ø£ÙŽØ³Ù’ØªÙŽØºÙ’ÙÙØ±Ù Ø§Ù„Ù„Ù‡ÙŽ',
   };
 });
 

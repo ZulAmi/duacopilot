@@ -25,9 +25,9 @@ class UsagePatternAnalyzer {
       // Start periodic analytics processing
       _startAnalyticsProcessing(userId);
 
-      debugPrint('✅ Usage pattern analyzer initialized for user: $userId');
+      debugPrint('âœ… Usage pattern analyzer initialized for user: $userId');
     } catch (e) {
-      debugPrint('❌ Error initializing usage pattern analyzer: $e');
+      debugPrint('âŒ Error initializing usage pattern analyzer: $e');
       rethrow;
     }
   }
@@ -59,10 +59,10 @@ class UsagePatternAnalyzer {
       await _updateDailyStats(interaction, prefs);
 
       debugPrint(
-        '📊 Recorded interaction: ${interaction.type} for ${interaction.duaId}',
+        'ðŸ“Š Recorded interaction: ${interaction.type} for ${interaction.duaId}',
       );
     } catch (e) {
-      debugPrint('❌ Error recording interaction: $e');
+      debugPrint('âŒ Error recording interaction: $e');
     }
   }
 
@@ -90,7 +90,7 @@ class UsagePatternAnalyzer {
 
       await prefs.setStringList('$_queryHistoryKey$userId', queryHistory);
     } catch (e) {
-      debugPrint('❌ Error tracking query: $e');
+      debugPrint('âŒ Error tracking query: $e');
     }
   }
 
@@ -108,9 +108,9 @@ class UsagePatternAnalyzer {
       // Calculate reading time patterns
       await _calculateReadingTimePatterns(userId, prefs);
 
-      debugPrint('📈 Processed analytics for user: $userId');
+      debugPrint('ðŸ“ˆ Processed analytics for user: $userId');
     } catch (e) {
-      debugPrint('❌ Error processing analytics: $e');
+      debugPrint('âŒ Error processing analytics: $e');
     }
   }
 
@@ -121,20 +121,20 @@ class UsagePatternAnalyzer {
 
       // Get all keys that contain user data
       final keys = prefs.getKeys().where(
-        (key) =>
-            key.contains('usage_patterns_') ||
-            key.contains('interaction_history_') ||
-            key.contains('query_history_') ||
-            key.contains('daily_stats_'),
-      );
+            (key) =>
+                key.contains('usage_patterns_') ||
+                key.contains('interaction_history_') ||
+                key.contains('query_history_') ||
+                key.contains('daily_stats_'),
+          );
 
       for (final key in keys) {
         await _cleanupDataForKey(key, cutoffDate, prefs);
       }
 
-      debugPrint('🧹 Cleaned up old usage data before: $cutoffDate');
+      debugPrint('ðŸ§¹ Cleaned up old usage data before: $cutoffDate');
     } catch (e) {
-      debugPrint('❌ Error cleaning up old data: $e');
+      debugPrint('âŒ Error cleaning up old data: $e');
     }
   }
 
@@ -158,7 +158,7 @@ class UsagePatternAnalyzer {
         return emptyPatterns;
       }
     } catch (e) {
-      debugPrint('❌ Error loading usage patterns: $e');
+      debugPrint('âŒ Error loading usage patterns: $e');
       return UsagePatterns.empty(userId);
     }
   }
@@ -176,7 +176,7 @@ class UsagePatternAnalyzer {
       );
       _patternsCache[patterns.userId] = patterns;
     } catch (e) {
-      debugPrint('❌ Error saving usage patterns: $e');
+      debugPrint('âŒ Error saving usage patterns: $e');
     }
   }
 
@@ -198,7 +198,7 @@ class UsagePatternAnalyzer {
 
       await prefs.setStringList(historyKey, history);
     } catch (e) {
-      debugPrint('❌ Error recording interaction history: $e');
+      debugPrint('âŒ Error recording interaction history: $e');
     }
   }
 
@@ -259,7 +259,7 @@ class UsagePatternAnalyzer {
 
       await _savePatterns(updatedPatterns, prefs);
     } catch (e) {
-      debugPrint('❌ Error updating usage patterns: $e');
+      debugPrint('âŒ Error updating usage patterns: $e');
     }
   }
 
@@ -289,7 +289,7 @@ class UsagePatternAnalyzer {
 
       await prefs.setString(statsKey, json.encode(stats));
     } catch (e) {
-      debugPrint('❌ Error updating daily stats: $e');
+      debugPrint('âŒ Error updating daily stats: $e');
     }
   }
 
@@ -331,9 +331,8 @@ class UsagePatternAnalyzer {
       final patterns = await _loadPatterns(userId, prefs);
 
       // Update frequent Du'as based on frequency analysis
-      final sortedDuas =
-          duaFrequency.entries.toList()
-            ..sort((a, b) => b.value.compareTo(a.value));
+      final sortedDuas = duaFrequency.entries.toList()
+        ..sort((a, b) => b.value.compareTo(a.value));
 
       final topDuas = sortedDuas.take(10).map((e) => e.key).toList();
 
@@ -345,10 +344,10 @@ class UsagePatternAnalyzer {
       await _savePatterns(updatedPatterns, prefs);
 
       debugPrint(
-        '🔍 Analyzed ${interactions.length} interactions for patterns',
+        'ðŸ” Analyzed ${interactions.length} interactions for patterns',
       );
     } catch (e) {
-      debugPrint('❌ Error analyzing interaction patterns: $e');
+      debugPrint('âŒ Error analyzing interaction patterns: $e');
     }
   }
 
@@ -360,9 +359,9 @@ class UsagePatternAnalyzer {
     try {
       // This would analyze which categories the user interacts with most
       // Implementation would examine Du'a categories from interactions
-      debugPrint('📊 Updated category preferences for user: $userId');
+      debugPrint('ðŸ“Š Updated category preferences for user: $userId');
     } catch (e) {
-      debugPrint('❌ Error updating category preferences: $e');
+      debugPrint('âŒ Error updating category preferences: $e');
     }
   }
 
@@ -377,15 +376,14 @@ class UsagePatternAnalyzer {
 
       if (history.isEmpty) return;
 
-      final readingInteractions =
-          history
-              .map((h) => DuaInteraction.fromJson(json.decode(h)))
-              .where(
-                (interaction) =>
-                    interaction.type == InteractionType.read ||
-                    interaction.type == InteractionType.view,
-              )
-              .toList();
+      final readingInteractions = history
+          .map((h) => DuaInteraction.fromJson(json.decode(h)))
+          .where(
+            (interaction) =>
+                interaction.type == InteractionType.read ||
+                interaction.type == InteractionType.view,
+          )
+          .toList();
 
       final readingTimes = <String, List<int>>{};
 
@@ -414,10 +412,10 @@ class UsagePatternAnalyzer {
       await _savePatterns(updatedPatterns, prefs);
 
       debugPrint(
-        '⏱️ Calculated reading time patterns for ${averageTimes.length} Du\'as',
+        'â±ï¸ Calculated reading time patterns for ${averageTimes.length} Du\'as',
       );
     } catch (e) {
-      debugPrint('❌ Error calculating reading time patterns: $e');
+      debugPrint('âŒ Error calculating reading time patterns: $e');
     }
   }
 
@@ -463,7 +461,7 @@ class UsagePatternAnalyzer {
         }
       }
     } catch (e) {
-      debugPrint('❌ Error cleaning up data for key $key: $e');
+      debugPrint('âŒ Error cleaning up data for key $key: $e');
     }
   }
 

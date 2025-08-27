@@ -209,7 +209,7 @@ class _SmartChipWidgetState extends State<SmartChipWidget>
 
     final chipColor = widget.chipData.color ?? colorScheme.primary;
     final backgroundColor =
-        widget.isSelected ? chipColor : chipColor.withValues(alpha: 0.1);
+        widget.isSelected ? chipColor : chipColor.withOpacity(0.1);
     final foregroundColor =
         widget.isSelected ? colorScheme.onPrimary : chipColor;
 
@@ -228,23 +228,21 @@ class _SmartChipWidgetState extends State<SmartChipWidget>
               decoration: BoxDecoration(
                 color: backgroundColor,
                 borderRadius: BorderRadius.circular(20),
-                border:
-                    widget.isSelected
-                        ? null
-                        : Border.all(
-                          color: chipColor.withValues(alpha: 0.3),
-                          width: 1,
+                border: widget.isSelected
+                    ? null
+                    : Border.all(
+                        color: chipColor.withOpacity(0.3),
+                        width: 1,
+                      ),
+                boxShadow: widget.isSelected || _isPressed
+                    ? [
+                        BoxShadow(
+                          color: chipColor.withOpacity(0.3),
+                          blurRadius: 8,
+                          offset: const Offset(0, 2),
                         ),
-                boxShadow:
-                    widget.isSelected || _isPressed
-                        ? [
-                          BoxShadow(
-                            color: chipColor.withValues(alpha: 0.3),
-                            blurRadius: 8,
-                            offset: const Offset(0, 2),
-                          ),
-                        ]
-                        : null,
+                      ]
+                    : null,
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -268,7 +266,7 @@ class _SmartChipWidgetState extends State<SmartChipWidget>
                         vertical: 2,
                       ),
                       decoration: BoxDecoration(
-                        color: foregroundColor.withValues(alpha: 0.2),
+                        color: foregroundColor.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
@@ -322,10 +320,9 @@ class _SmartChipsSectionState extends State<SmartChipsSection> {
     if (widget.chips.isEmpty) return const SizedBox.shrink();
 
     final sortedChips = _getSortedChips();
-    final visibleChips =
-        _showAll
-            ? sortedChips
-            : sortedChips.take(widget.maxVisibleChips).toList();
+    final visibleChips = _showAll
+        ? sortedChips
+        : sortedChips.take(widget.maxVisibleChips).toList();
 
     if (widget.groupByCategory) {
       return _buildGroupedChips(sortedChips);
@@ -358,19 +355,18 @@ class _SmartChipsSectionState extends State<SmartChipsSection> {
         Wrap(
           spacing: 8,
           runSpacing: 8,
-          children:
-              chips.map((chip) {
-                return SmartChipWidget(
-                  chipData: chip,
-                  isSelected: _selectedChipQuery == chip.query,
-                  onTap: () {
-                    setState(() {
-                      _selectedChipQuery = chip.query;
-                    });
-                    widget.onChipSelected(chip.query);
-                  },
-                );
-              }).toList(),
+          children: chips.map((chip) {
+            return SmartChipWidget(
+              chipData: chip,
+              isSelected: _selectedChipQuery == chip.query,
+              onTap: () {
+                setState(() {
+                  _selectedChipQuery = chip.query;
+                });
+                widget.onChipSelected(chip.query);
+              },
+            );
+          }).toList(),
         ),
         if (hasMore) ...[
           const SizedBox(height: 8),
@@ -398,8 +394,8 @@ class _SmartChipsSectionState extends State<SmartChipsSection> {
                   Text(
                     _showAll ? 'Show Less' : 'Show More',
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
                   ),
                 ],
               ),
@@ -419,45 +415,43 @@ class _SmartChipsSectionState extends State<SmartChipsSection> {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children:
-          groupedChips.entries.map((entry) {
-            final category = entry.key;
-            final categoryChips = entry.value;
+      children: groupedChips.entries.map((entry) {
+        final category = entry.key;
+        final categoryChips = entry.value;
 
-            return Container(
-              margin: const EdgeInsets.only(bottom: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    category,
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+        return Container(
+          margin: const EdgeInsets.only(bottom: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                category,
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: Theme.of(context).colorScheme.onSurfaceVariant,
                       fontWeight: FontWeight.w600,
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children:
-                        categoryChips.map((chip) {
-                          return SmartChipWidget(
-                            chipData: chip,
-                            isSelected: _selectedChipQuery == chip.query,
-                            onTap: () {
-                              setState(() {
-                                _selectedChipQuery = chip.query;
-                              });
-                              widget.onChipSelected(chip.query);
-                            },
-                          );
-                        }).toList(),
-                  ),
-                ],
               ),
-            );
-          }).toList(),
+              const SizedBox(height: 8),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: categoryChips.map((chip) {
+                  return SmartChipWidget(
+                    chipData: chip,
+                    isSelected: _selectedChipQuery == chip.query,
+                    onTap: () {
+                      setState(() {
+                        _selectedChipQuery = chip.query;
+                      });
+                      widget.onChipSelected(chip.query);
+                    },
+                  );
+                }).toList(),
+              ),
+            ],
+          ),
+        );
+      }).toList(),
     );
   }
 }

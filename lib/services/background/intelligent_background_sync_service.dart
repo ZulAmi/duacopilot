@@ -13,7 +13,8 @@ import '../secure_storage/secure_storage_service.dart';
 /// Handles offline data synchronization with smart scheduling
 class IntelligentBackgroundSyncService {
   static IntelligentBackgroundSyncService? _instance;
-  static IntelligentBackgroundSyncService get instance => _instance ??= IntelligentBackgroundSyncService._();
+  static IntelligentBackgroundSyncService get instance =>
+      _instance ??= IntelligentBackgroundSyncService._();
 
   IntelligentBackgroundSyncService._();
 
@@ -46,7 +47,8 @@ class IntelligentBackgroundSyncService {
     if (_isInitialized) return;
 
     try {
-      AppLogger.info('🔄 Initializing Intelligent Background Sync Service...');
+      AppLogger.info(
+          'ðŸ”„ Initializing Intelligent Background Sync Service...');
 
       _prefs = await SharedPreferences.getInstance();
 
@@ -63,9 +65,9 @@ class IntelligentBackgroundSyncService {
       await _loadUsagePatterns();
 
       _isInitialized = true;
-      AppLogger.info('✅ Intelligent Background Sync Service initialized');
+      AppLogger.info('âœ… Intelligent Background Sync Service initialized');
     } catch (e) {
-      AppLogger.error('❌ Failed to initialize background sync service: $e');
+      AppLogger.error('âŒ Failed to initialize background sync service: $e');
       rethrow;
     }
   }
@@ -77,9 +79,9 @@ class IntelligentBackgroundSyncService {
         _callbackDispatcher,
         isInDebugMode: false, // Set to true for debugging
       );
-      AppLogger.info('📱 WorkManager initialized');
+      AppLogger.info('ðŸ“± WorkManager initialized');
     } catch (e) {
-      AppLogger.error('❌ Failed to initialize WorkManager: $e');
+      AppLogger.error('âŒ Failed to initialize WorkManager: $e');
       // Continue without WorkManager if initialization fails
       _isEnabled = false;
     }
@@ -101,7 +103,8 @@ class IntelligentBackgroundSyncService {
         _periodicSyncTask,
         frequency: optimalInterval,
         initialDelay: Duration(minutes: 5),
-        constraints: Constraints(networkType: NetworkType.connected, requiresBatteryNotLow: true),
+        constraints: Constraints(
+            networkType: NetworkType.connected, requiresBatteryNotLow: true),
         inputData: {'sync_type': 'periodic', 'priority': 'normal'},
       );
 
@@ -110,9 +113,10 @@ class IntelligentBackgroundSyncService {
         await _scheduleContentUpdateChecks();
       }
 
-      AppLogger.info('📅 Intelligent sync scheduled (${optimalInterval.inMinutes}min intervals)');
+      AppLogger.info(
+          'ðŸ“… Intelligent sync scheduled (${optimalInterval.inMinutes}min intervals)');
     } catch (e) {
-      AppLogger.error('❌ Failed to schedule intelligent sync: $e');
+      AppLogger.error('âŒ Failed to schedule intelligent sync: $e');
     }
   }
 
@@ -122,14 +126,19 @@ class IntelligentBackgroundSyncService {
       await Workmanager().registerPeriodicTask(
         _contentUpdateTask,
         _contentUpdateTask,
-        frequency: Duration(hours: 2), // Check every 2 hours during active periods
+        frequency:
+            Duration(hours: 2), // Check every 2 hours during active periods
         constraints: Constraints(networkType: NetworkType.connected),
-        inputData: {'sync_type': 'content_update', 'priority': 'low', 'active_hours': _activeHours},
+        inputData: {
+          'sync_type': 'content_update',
+          'priority': 'low',
+          'active_hours': _activeHours
+        },
       );
 
-      AppLogger.info('📚 Content update checks scheduled');
+      AppLogger.info('ðŸ“š Content update checks scheduled');
     } catch (e) {
-      AppLogger.error('❌ Failed to schedule content updates: $e');
+      AppLogger.error('âŒ Failed to schedule content updates: $e');
     }
   }
 
@@ -140,7 +149,9 @@ class IntelligentBackgroundSyncService {
 
     // Analyze usage frequency
     final now = DateTime.now();
-    final recentUsage = _usagePatterns.entries.where((entry) => now.difference(entry.value).inDays <= 7).length;
+    final recentUsage = _usagePatterns.entries
+        .where((entry) => now.difference(entry.value).inDays <= 7)
+        .length;
 
     if (recentUsage > 20) {
       // Heavy usage - sync more frequently
@@ -167,7 +178,8 @@ class IntelligentBackgroundSyncService {
   }
 
   /// Schedule urgent sync for critical updates
-  Future<void> scheduleUrgentSync({required String reason, Map<String, dynamic>? data}) async {
+  Future<void> scheduleUrgentSync(
+      {required String reason, Map<String, dynamic>? data}) async {
     if (!_isEnabled) return;
 
     try {
@@ -176,17 +188,23 @@ class IntelligentBackgroundSyncService {
         _urgentSyncTask,
         initialDelay: _urgentSyncDelay,
         constraints: Constraints(networkType: NetworkType.connected),
-        inputData: {'sync_type': 'urgent', 'priority': 'high', 'reason': reason, 'data': data ?? {}},
+        inputData: {
+          'sync_type': 'urgent',
+          'priority': 'high',
+          'reason': reason,
+          'data': data ?? {}
+        },
       );
 
-      AppLogger.info('🚨 Urgent sync scheduled: $reason');
+      AppLogger.info('ðŸš¨ Urgent sync scheduled: $reason');
     } catch (e) {
-      AppLogger.error('❌ Failed to schedule urgent sync: $e');
+      AppLogger.error('âŒ Failed to schedule urgent sync: $e');
     }
   }
 
   /// Schedule family sync for collaborative features
-  Future<void> scheduleFamilySync({required String familyId, required String action}) async {
+  Future<void> scheduleFamilySync(
+      {required String familyId, required String action}) async {
     if (!_isEnabled) return;
 
     try {
@@ -195,12 +213,18 @@ class IntelligentBackgroundSyncService {
         _familySyncTask,
         initialDelay: Duration(seconds: 30), // Quick sync for family actions
         constraints: Constraints(networkType: NetworkType.connected),
-        inputData: {'sync_type': 'family', 'priority': 'high', 'family_id': familyId, 'action': action},
+        inputData: {
+          'sync_type': 'family',
+          'priority': 'high',
+          'family_id': familyId,
+          'action': action
+        },
       );
 
-      AppLogger.info('👨‍👩‍👧‍👦 Family sync scheduled: $action');
+      AppLogger.info(
+          'ðŸ‘¨â€ðŸ‘©â€ðŸ‘§â€ðŸ‘¦ Family sync scheduled: $action');
     } catch (e) {
-      AppLogger.error('❌ Failed to schedule family sync: $e');
+      AppLogger.error('âŒ Failed to schedule family sync: $e');
     }
   }
 
@@ -237,7 +261,7 @@ class IntelligentBackgroundSyncService {
       _consecutiveFailures = _prefs.getInt('consecutive_failures') ?? 0;
       _isEnabled = _prefs.getBool('sync_enabled') ?? true;
     } catch (e) {
-      AppLogger.error('❌ Failed to load sync state: $e');
+      AppLogger.error('âŒ Failed to load sync state: $e');
     }
   }
 
@@ -245,13 +269,14 @@ class IntelligentBackgroundSyncService {
   Future<void> _saveState() async {
     try {
       if (_lastSyncTime != null) {
-        await _prefs.setString('last_sync_time', _lastSyncTime!.toIso8601String());
+        await _prefs.setString(
+            'last_sync_time', _lastSyncTime!.toIso8601String());
       }
 
       await _prefs.setInt('consecutive_failures', _consecutiveFailures);
       await _prefs.setBool('sync_enabled', _isEnabled);
     } catch (e) {
-      AppLogger.error('❌ Failed to save sync state: $e');
+      AppLogger.error('âŒ Failed to save sync state: $e');
     }
   }
 
@@ -275,7 +300,7 @@ class IntelligentBackgroundSyncService {
         _activeHours.addAll(hours.cast<int>());
       }
     } catch (e) {
-      AppLogger.error('❌ Failed to load usage patterns: $e');
+      AppLogger.error('âŒ Failed to load usage patterns: $e');
     }
   }
 
@@ -290,7 +315,7 @@ class IntelligentBackgroundSyncService {
       await _prefs.setString('usage_patterns', jsonEncode(patterns));
       await _prefs.setString('active_hours', jsonEncode(_activeHours));
     } catch (e) {
-      AppLogger.error('❌ Failed to save usage patterns: $e');
+      AppLogger.error('âŒ Failed to save usage patterns: $e');
     }
   }
 
@@ -299,7 +324,7 @@ class IntelligentBackgroundSyncService {
     try {
       await Workmanager().cancelAll();
     } catch (e) {
-      AppLogger.error('❌ Failed to cancel tasks: $e');
+      AppLogger.error('âŒ Failed to cancel tasks: $e');
     }
   }
 
@@ -314,7 +339,8 @@ class IntelligentBackgroundSyncService {
       await _cancelAllTasks();
     }
 
-    AppLogger.info('⚙️ Background sync ${enabled ? 'enabled' : 'disabled'}');
+    AppLogger.info(
+        'âš™ï¸ Background sync ${enabled ? 'enabled' : 'disabled'}');
   }
 
   /// Get sync statistics
@@ -347,7 +373,7 @@ class IntelligentBackgroundSyncService {
 void _callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
     try {
-      AppLogger.info('🔄 Executing background task: $task');
+      AppLogger.info('ðŸ”„ Executing background task: $task');
 
       switch (task) {
         case IntelligentBackgroundSyncService._periodicSyncTask:
@@ -367,14 +393,14 @@ void _callbackDispatcher() {
           break;
 
         default:
-          AppLogger.warning('⚠️ Unknown background task: $task');
+          AppLogger.warning('âš ï¸ Unknown background task: $task');
           return false;
       }
 
-      AppLogger.info('✅ Background task completed: $task');
+      AppLogger.info('âœ… Background task completed: $task');
       return true;
     } catch (e) {
-      AppLogger.error('❌ Background task failed: $task - $e');
+      AppLogger.error('âŒ Background task failed: $task - $e');
       return false;
     }
   });
@@ -391,17 +417,19 @@ Future<void> _executePeriodicSync(Map<String, dynamic>? inputData) async {
     // Check connectivity
     final connectivity = await Connectivity().checkConnectivity();
     if (connectivity == ConnectivityResult.none) {
-      AppLogger.info('⚠️ No connectivity, skipping periodic sync');
+      AppLogger.info('âš ï¸ No connectivity, skipping periodic sync');
       return;
     }
 
     // Perform incremental sync
-    await _performBackgroundSync(syncType: 'incremental', priority: inputData?['priority'] as String? ?? 'normal');
+    await _performBackgroundSync(
+        syncType: 'incremental',
+        priority: inputData?['priority'] as String? ?? 'normal');
 
     // Update last sync time
     await prefs.setString('last_sync_time', DateTime.now().toIso8601String());
   } catch (e) {
-    AppLogger.error('❌ Periodic sync failed: $e');
+    AppLogger.error('âŒ Periodic sync failed: $e');
     rethrow;
   }
 }
@@ -410,7 +438,7 @@ Future<void> _executePeriodicSync(Map<String, dynamic>? inputData) async {
 Future<void> _executeUrgentSync(Map<String, dynamic>? inputData) async {
   try {
     final reason = inputData?['reason'] as String? ?? 'Unknown';
-    AppLogger.info('🚨 Executing urgent sync: $reason');
+    AppLogger.info('ðŸš¨ Executing urgent sync: $reason');
 
     await _performBackgroundSync(
       syncType: 'urgent',
@@ -418,7 +446,7 @@ Future<void> _executeUrgentSync(Map<String, dynamic>? inputData) async {
       data: inputData?['data'] as Map<String, dynamic>?,
     );
   } catch (e) {
-    AppLogger.error('❌ Urgent sync failed: $e');
+    AppLogger.error('âŒ Urgent sync failed: $e');
     rethrow;
   }
 }
@@ -432,14 +460,14 @@ Future<void> _executeContentUpdateTask(Map<String, dynamic>? inputData) async {
     // Only run during user's active hours if specified
     if (activeHours != null && activeHours.isNotEmpty) {
       if (!activeHours.contains(currentHour)) {
-        AppLogger.info('⏰ Outside active hours, skipping content update');
+        AppLogger.info('â° Outside active hours, skipping content update');
         return;
       }
     }
 
     await _performBackgroundSync(syncType: 'content_update', priority: 'low');
   } catch (e) {
-    AppLogger.error('❌ Content update task failed: $e');
+    AppLogger.error('âŒ Content update task failed: $e');
     rethrow;
   }
 }
@@ -450,11 +478,13 @@ Future<void> _executeFamilySync(Map<String, dynamic>? inputData) async {
     final familyId = inputData?['family_id'] as String?;
     final action = inputData?['action'] as String?;
 
-    AppLogger.info('👨‍👩‍👧‍👦 Executing family sync: $action for family $familyId');
+    AppLogger.info(
+        'ðŸ‘¨â€ðŸ‘©â€ðŸ‘§â€ðŸ‘¦ Executing family sync: $action for family $familyId');
 
-    await _performBackgroundSync(syncType: 'family', priority: 'high', data: inputData);
+    await _performBackgroundSync(
+        syncType: 'family', priority: 'high', data: inputData);
   } catch (e) {
-    AppLogger.error('❌ Family sync failed: $e');
+    AppLogger.error('âŒ Family sync failed: $e');
     rethrow;
   }
 }
@@ -466,7 +496,8 @@ Future<void> _performBackgroundSync({
   Map<String, dynamic>? data,
 }) async {
   try {
-    AppLogger.info('🔄 Performing background sync: $syncType ($priority priority)');
+    AppLogger.info(
+        'ðŸ”„ Performing background sync: $syncType ($priority priority)');
 
     // Simulate sync operations based on type
     switch (syncType) {
@@ -492,51 +523,51 @@ Future<void> _performBackgroundSync({
     // Add artificial delay to simulate real sync work
     await Future.delayed(Duration(seconds: 1 + Random().nextInt(3)));
 
-    AppLogger.info('✅ Background sync completed: $syncType');
+    AppLogger.info('âœ… Background sync completed: $syncType');
   } catch (e) {
-    AppLogger.error('❌ Background sync operation failed: $e');
+    AppLogger.error('âŒ Background sync operation failed: $e');
     rethrow;
   }
 }
 
 /// Sync user preferences
 Future<void> _syncUserPreferences() async {
-  AppLogger.debug('🔄 Syncing user preferences...');
+  AppLogger.debug('ðŸ”„ Syncing user preferences...');
   // Implementation would sync preferences with server
   await Future.delayed(Duration(milliseconds: 500));
 }
 
 /// Sync favorites
 Future<void> _syncFavorites() async {
-  AppLogger.debug('🔄 Syncing favorites...');
+  AppLogger.debug('ðŸ”„ Syncing favorites...');
   // Implementation would sync favorites with server
   await Future.delayed(Duration(milliseconds: 300));
 }
 
 /// Sync recent queries
 Future<void> _syncRecentQueries() async {
-  AppLogger.debug('🔄 Syncing recent queries...');
+  AppLogger.debug('ðŸ”„ Syncing recent queries...');
   // Implementation would sync query history with server
   await Future.delayed(Duration(milliseconds: 200));
 }
 
 /// Sync critical data for urgent updates
 Future<void> _syncCriticalData(Map<String, dynamic>? data) async {
-  AppLogger.debug('🚨 Syncing critical data...');
+  AppLogger.debug('ðŸš¨ Syncing critical data...');
   // Implementation would sync critical updates immediately
   await Future.delayed(Duration(milliseconds: 800));
 }
 
 /// Check for content updates from scholars
 Future<void> _checkForContentUpdates() async {
-  AppLogger.debug('📚 Checking for content updates...');
+  AppLogger.debug('ðŸ“š Checking for content updates...');
   // Implementation would check for new approved Du'as from scholars
   await Future.delayed(Duration(milliseconds: 600));
 }
 
 /// Sync family collaborative data
 Future<void> _syncFamilyData(Map<String, dynamic>? data) async {
-  AppLogger.debug('👨‍👩‍👧‍👦 Syncing family data...');
+  AppLogger.debug('ðŸ‘¨â€ðŸ‘©â€ðŸ‘§â€ðŸ‘¦ Syncing family data...');
   // Implementation would sync family sharing and collaborative features
   await Future.delayed(Duration(milliseconds: 400));
 }

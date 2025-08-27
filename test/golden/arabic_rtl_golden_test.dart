@@ -594,7 +594,8 @@ void main() {
                 child: ListView.builder(
                   itemCount: 100,
                   itemBuilder: (context, index) {
-                    final arabicText = TestConfig.sampleArabicQueries[index % TestConfig.sampleArabicQueries.length];
+                    final arabicText = TestConfig.sampleArabicQueries[
+                        index % TestConfig.sampleArabicQueries.length];
                     return ListTile(
                       title: Text('$arabicText - $index'),
                       subtitle: Text('عنصر رقم $index في القائمة'),

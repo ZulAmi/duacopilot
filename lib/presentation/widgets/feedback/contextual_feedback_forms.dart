@@ -38,7 +38,7 @@ class _ContextualFeedbackFormState extends State<ContextualFeedbackForm> {
         borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
+            color: Colors.black.withOpacity(0.1),
             blurRadius: 10,
             offset: const Offset(0, -5),
           ),
@@ -77,7 +77,7 @@ class _ContextualFeedbackFormState extends State<ContextualFeedbackForm> {
             Text(
               'Help us improve the quality of ${widget.contentType} content',
               style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                color: theme.colorScheme.onSurface.withOpacity(0.7),
               ),
             ),
 
@@ -92,15 +92,14 @@ class _ContextualFeedbackFormState extends State<ContextualFeedbackForm> {
                 Icons.category,
               ),
               validator: FormBuilderValidators.required(),
-              items:
-                  _getFeedbackTypeItems(widget.contentType)
-                      .map(
-                        (type) => DropdownMenuItem(
-                          value: type['value'] as String,
-                          child: Text(type['label'] as String),
-                        ),
-                      )
-                      .toList(),
+              items: _getFeedbackTypeItems(widget.contentType)
+                  .map(
+                    (type) => DropdownMenuItem(
+                      value: type['value'] as String,
+                      child: Text(type['label'] as String),
+                    ),
+                  )
+                  .toList(),
             ),
 
             const SizedBox(height: 16),
@@ -134,15 +133,14 @@ class _ContextualFeedbackFormState extends State<ContextualFeedbackForm> {
                 'Specific Issues (Optional)',
                 Icons.warning,
               ),
-              options:
-                  _getIssueOptions(widget.contentType)
-                      .map(
-                        (issue) => FormBuilderFieldOption(
-                          value: issue['value'] as String,
-                          child: Text(issue['label'] as String),
-                        ),
-                      )
-                      .toList(),
+              options: _getIssueOptions(widget.contentType)
+                  .map(
+                    (issue) => FormBuilderFieldOption(
+                      value: issue['value'] as String,
+                      child: Text(issue['label'] as String),
+                    ),
+                  )
+                  .toList(),
               wrapSpacing: 8,
             ),
 
@@ -233,25 +231,24 @@ class _ContextualFeedbackFormState extends State<ContextualFeedbackForm> {
                   ),
                   elevation: 2,
                 ),
-                child:
-                    _isSubmitting
-                        ? const SizedBox(
-                          height: 20,
-                          width: 20,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              Colors.white,
-                            ),
-                          ),
-                        )
-                        : const Text(
-                          'Submit Feedback',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
+                child: _isSubmitting
+                    ? const SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            Colors.white,
                           ),
                         ),
+                      )
+                    : const Text(
+                        'Submit Feedback',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
               ),
             ),
 
@@ -261,7 +258,7 @@ class _ContextualFeedbackFormState extends State<ContextualFeedbackForm> {
             Text(
               'Your feedback helps improve content quality for all users. Personal information is kept private.',
               style: theme.textTheme.bodySmall?.copyWith(
-                color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+                color: theme.colorScheme.onSurface.withOpacity(0.6),
                 fontStyle: FontStyle.italic,
               ),
               textAlign: TextAlign.center,
@@ -284,18 +281,18 @@ class _ContextualFeedbackFormState extends State<ContextualFeedbackForm> {
       prefixIcon: Icon(icon, color: theme.primaryColor),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: theme.primaryColor.withValues(alpha: 0.3)),
+        borderSide: BorderSide(color: theme.primaryColor.withOpacity(0.3)),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: theme.primaryColor.withValues(alpha: 0.3)),
+        borderSide: BorderSide(color: theme.primaryColor.withOpacity(0.3)),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
         borderSide: BorderSide(color: theme.primaryColor, width: 2),
       ),
       filled: true,
-      fillColor: theme.colorScheme.surface.withValues(alpha: 0.5),
+      fillColor: theme.colorScheme.surface.withOpacity(0.5),
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
     );
   }
@@ -479,9 +476,9 @@ class _QuickFeedbackWidgetState extends State<QuickFeedbackWidget> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surface.withValues(alpha: 0.8),
+        color: theme.colorScheme.surface.withOpacity(0.8),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: theme.primaryColor.withValues(alpha: 0.2)),
+        border: Border.all(color: theme.primaryColor.withOpacity(0.2)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -495,56 +492,51 @@ class _QuickFeedbackWidgetState extends State<QuickFeedbackWidget> {
           const SizedBox(height: 8),
           Wrap(
             spacing: 8,
-            children:
-                _quickOptions.map((option) {
-                  final isSelected = _selectedFeedback == option['id'];
-                  return GestureDetector(
-                    onTap:
-                        _isSubmitting
-                            ? null
-                            : () => _selectOption(option['id'] as String),
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 6,
+            children: _quickOptions.map((option) {
+              final isSelected = _selectedFeedback == option['id'];
+              return GestureDetector(
+                onTap: _isSubmitting
+                    ? null
+                    : () => _selectOption(option['id'] as String),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: isSelected
+                        ? option['color'] as Color
+                        : Colors.transparent,
+                    border: Border.all(color: option['color'] as Color),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        option['icon'] as IconData,
+                        size: 16,
+                        color: isSelected
+                            ? Colors.white
+                            : option['color'] as Color,
                       ),
-                      decoration: BoxDecoration(
-                        color:
-                            isSelected
-                                ? option['color'] as Color
-                                : Colors.transparent,
-                        border: Border.all(color: option['color'] as Color),
-                        borderRadius: BorderRadius.circular(16),
+                      const SizedBox(width: 4),
+                      Text(
+                        option['label'] as String,
+                        style: TextStyle(
+                          color: isSelected
+                              ? Colors.white
+                              : option['color'] as Color,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            option['icon'] as IconData,
-                            size: 16,
-                            color:
-                                isSelected
-                                    ? Colors.white
-                                    : option['color'] as Color,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            option['label'] as String,
-                            style: TextStyle(
-                              color:
-                                  isSelected
-                                      ? Colors.white
-                                      : option['color'] as Color,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                }).toList(),
+                    ],
+                  ),
+                ),
+              );
+            }).toList(),
           ),
           if (_isSubmitting) ...[
             const SizedBox(height: 8),

@@ -12,10 +12,12 @@ class FeedbackSystemDemoScreen extends StatefulWidget {
   const FeedbackSystemDemoScreen({super.key});
 
   @override
-  State<FeedbackSystemDemoScreen> createState() => _FeedbackSystemDemoScreenState();
+  State<FeedbackSystemDemoScreen> createState() =>
+      _FeedbackSystemDemoScreenState();
 }
 
-class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> with FeedbackMixin {
+class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen>
+    with FeedbackMixin {
   final String _selectedContentId = 'demo_dua_001';
   bool _showRatingWidget = false;
   double _currentRating = 0.0;
@@ -110,8 +112,8 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> wit
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              theme.primaryColor.withValues(alpha: 0.1),
-              theme.primaryColor.withValues(alpha: 0.05),
+              theme.primaryColor.withOpacity(0.1),
+              theme.primaryColor.withOpacity(0.05),
             ],
           ),
         ),
@@ -131,7 +133,7 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> wit
             Text(
               'Experience advanced feedback collection, analytics tracking, A/B testing, and scholar verification systems.',
               style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onSurface.withValues(alpha: 0.8),
+                color: theme.colorScheme.onSurface.withOpacity(0.8),
               ),
               textAlign: TextAlign.center,
             ),
@@ -170,14 +172,14 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> wit
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: theme.colorScheme.surface.withValues(alpha: 0.5),
+                color: theme.colorScheme.surface.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                  color: theme.colorScheme.outline.withValues(alpha: 0.2),
+                  color: theme.colorScheme.outline.withOpacity(0.2),
                 ),
               ),
               child: Text(
-                'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ\n\n'
+                'Ø±ÙŽØ¨ÙŽÙ‘Ù†ÙŽØ§ Ø¢ØªÙÙ†ÙŽØ§ ÙÙÙŠ Ø§Ù„Ø¯ÙÙ‘Ù†Ù’ÙŠÙŽØ§ Ø­ÙŽØ³ÙŽÙ†ÙŽØ©Ù‹ ÙˆÙŽÙÙÙŠ Ø§Ù„Ù’Ø¢Ø®ÙØ±ÙŽØ©Ù Ø­ÙŽØ³ÙŽÙ†ÙŽØ©Ù‹ ÙˆÙŽÙ‚ÙÙ†ÙŽØ§ Ø¹ÙŽØ°ÙŽØ§Ø¨ÙŽ Ø§Ù„Ù†ÙŽÙ‘Ø§Ø±Ù\n\n'
                 'Our Lord, give us good in this world and good in the next world, and save us from the punishment of the Fire.',
                 style: theme.textTheme.bodyMedium,
                 textAlign: TextAlign.center,
@@ -523,7 +525,8 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> wit
                   'View Analytics',
                   Icons.bar_chart,
                   () async {
-                    final analytics = await feedbackService.getAggregatedAnalytics();
+                    final analytics =
+                        await feedbackService.getAggregatedAnalytics();
                     debugPrint('Analytics: $analytics');
                     _showSnackbar('Analytics data retrieved!');
                   },
@@ -594,7 +597,7 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> wit
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
-              color: theme.primaryColor.withValues(alpha: 0.1),
+              color: theme.primaryColor.withOpacity(0.1),
               borderRadius: BorderRadius.circular(4),
             ),
             child: Text(

@@ -50,10 +50,9 @@ class ArabicAccessibility {
     final isArabic = ArabicTypography.containsArabic(text);
 
     // Create appropriate text style for Arabic content
-    final effectiveStyle =
-        isArabic
-            ? ArabicTextStyles.bodyLarge(context, fontType: 'readable')
-            : style;
+    final effectiveStyle = isArabic
+        ? ArabicTextStyles.bodyLarge(context, fontType: 'readable')
+        : style;
 
     Widget textWidget = Text(
       text,
@@ -123,9 +122,9 @@ class ArabicAccessibility {
                 Text(
                   transliteration,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    fontStyle: FontStyle.italic,
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
+                        fontStyle: FontStyle.italic,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
                   textAlign: TextAlign.left,
                 ),
               ],
@@ -136,8 +135,8 @@ class ArabicAccessibility {
                 Text(
                   translation,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
                   textAlign: TextAlign.left,
                 ),
               ],
@@ -162,7 +161,7 @@ class ArabicAccessibility {
     TextInputType? keyboardType,
     bool obscureText = false,
   }) {
-    final accessibleLabel = isRequired ? '$labelText (مطلوب)' : labelText;
+    final accessibleLabel = isRequired ? '$labelText (Ù…Ø·Ù„ÙˆØ¨)' : labelText;
 
     return Semantics(
       label: accessibleLabel,
@@ -183,10 +182,9 @@ class ArabicAccessibility {
           helperText: helperText,
           border: const OutlineInputBorder(),
           semanticCounterText: '',
-          suffixIcon:
-              isRequired
-                  ? const Icon(Icons.star, size: 8, color: Colors.red)
-                  : null,
+          suffixIcon: isRequired
+              ? const Icon(Icons.star, size: 8, color: Colors.red)
+              : null,
         ),
       ),
     );
@@ -215,10 +213,9 @@ class ArabicAccessibility {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
-              color:
-                  isActive
-                      ? Theme.of(context).colorScheme.primaryContainer
-                      : Colors.transparent,
+              color: isActive
+                  ? Theme.of(context).colorScheme.primaryContainer
+                  : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Directionality(
@@ -229,20 +226,18 @@ class ArabicAccessibility {
                   if (icon != null) ...[
                     Icon(
                       icon,
-                      color:
-                          isActive
-                              ? Theme.of(context).colorScheme.onPrimaryContainer
-                              : Theme.of(context).colorScheme.onSurface,
+                      color: isActive
+                          ? Theme.of(context).colorScheme.onPrimaryContainer
+                          : Theme.of(context).colorScheme.onSurface,
                     ),
                     const SizedBox(width: 8),
                   ],
                   Text(
                     label,
                     style: TextStyle(
-                      color:
-                          isActive
-                              ? Theme.of(context).colorScheme.onPrimaryContainer
-                              : Theme.of(context).colorScheme.onSurface,
+                      color: isActive
+                          ? Theme.of(context).colorScheme.onPrimaryContainer
+                          : Theme.of(context).colorScheme.onSurface,
                       fontWeight:
                           isActive ? FontWeight.w600 : FontWeight.normal,
                     ),
@@ -370,10 +365,9 @@ class AccessibleArabicListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final titleDirection = ArabicTypography.getTextDirection(title);
-    final subtitleDirection =
-        subtitle != null
-            ? ArabicTypography.getTextDirection(subtitle!)
-            : TextDirection.ltr;
+    final subtitleDirection = subtitle != null
+        ? ArabicTypography.getTextDirection(subtitle!)
+        : TextDirection.ltr;
 
     final semanticLabel = StringBuffer();
     semanticLabel.write(title);
@@ -401,37 +395,37 @@ class AccessibleArabicListTile extends StatelessWidget {
             textAlign: ArabicTypography.getTextAlign(title, titleDirection),
           ),
         ),
-        subtitle:
-            subtitle != null || transliteration != null
-                ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (subtitle != null)
-                      Directionality(
+        subtitle: subtitle != null || transliteration != null
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (subtitle != null)
+                    Directionality(
+                      textDirection: subtitleDirection,
+                      child: Text(
+                        subtitle!,
+                        style: Theme.of(context).textTheme.bodyMedium,
                         textDirection: subtitleDirection,
-                        child: Text(
+                        textAlign: ArabicTypography.getTextAlign(
                           subtitle!,
-                          style: Theme.of(context).textTheme.bodyMedium,
-                          textDirection: subtitleDirection,
-                          textAlign: ArabicTypography.getTextAlign(
-                            subtitle!,
-                            subtitleDirection,
+                          subtitleDirection,
+                        ),
+                      ),
+                    ),
+                  if (transliteration != null) ...[
+                    if (subtitle != null) const SizedBox(height: 4),
+                    Text(
+                      transliteration!,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            fontStyle: FontStyle.italic,
+                            color:
+                                Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
-                        ),
-                      ),
-                    if (transliteration != null) ...[
-                      if (subtitle != null) const SizedBox(height: 4),
-                      Text(
-                        transliteration!,
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          fontStyle: FontStyle.italic,
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                    ],
+                    ),
                   ],
-                )
-                : null,
+                ],
+              )
+            : null,
         trailing: trailing,
         isThreeLine: isThreeLine,
         onTap: onTap,
@@ -464,10 +458,9 @@ class ScreenReaderOptimizedText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textDirection = ArabicTypography.getTextDirection(text);
-    final effectiveStyle =
-        ArabicTypography.containsArabic(text)
-            ? ArabicTextStyles.bodyLarge(context, fontType: 'readable')
-            : style;
+    final effectiveStyle = ArabicTypography.containsArabic(text)
+        ? ArabicTextStyles.bodyLarge(context, fontType: 'readable')
+        : style;
 
     return Semantics(
       label: alternativeText ?? text,
@@ -514,19 +507,18 @@ class VoiceControlArabicButton extends StatelessWidget {
     final semanticHint =
         voiceCommand != null ? 'Voice command: $voiceCommand' : null;
 
-    Widget button =
-        icon != null
-            ? ElevatedButton.icon(
-              onPressed: onPressed,
-              icon: Icon(icon),
-              label: Text(label, textDirection: textDirection),
-              style: style,
-            )
-            : ElevatedButton(
-              onPressed: onPressed,
-              style: style,
-              child: Text(label, textDirection: textDirection),
-            );
+    Widget button = icon != null
+        ? ElevatedButton.icon(
+            onPressed: onPressed,
+            icon: Icon(icon),
+            label: Text(label, textDirection: textDirection),
+            style: style,
+          )
+        : ElevatedButton(
+            onPressed: onPressed,
+            style: style,
+            child: Text(label, textDirection: textDirection),
+          );
 
     button = Semantics(
       label: label,

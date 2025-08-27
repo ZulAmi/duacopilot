@@ -78,36 +78,36 @@ class PlatformService {
   }
 
   Map<String, dynamic> get platformInfo => {
-    'platform': platformName,
-    'isMobile': isMobile,
-    'isDesktop': isDesktop,
-    'isWeb': isWeb,
-    'features': availableFeatures,
-    'storage': {
-      'secure': supportsSecureStorage,
-      'sqlite': prefersSqlite,
-      'hive': prefersHive,
-      'filesystem': supportsFileSystem,
-    },
-    'capabilities': {
-      'ads': supportsAds,
-      'speech': supportsSpeechToText,
-      'vibration': supportsVibration,
-      'sensors': supportsSensors,
-      'location': supportsLocation,
-      'notifications': supportsNotifications,
-      'background': supportsBackgroundTasks,
-      'calendar': supportsCalendar,
-      'quickActions': supportsQuickActions,
-      'appLinks': supportsAppLinks,
-    },
-  };
+        'platform': platformName,
+        'isMobile': isMobile,
+        'isDesktop': isDesktop,
+        'isWeb': isWeb,
+        'features': availableFeatures,
+        'storage': {
+          'secure': supportsSecureStorage,
+          'sqlite': prefersSqlite,
+          'hive': prefersHive,
+          'filesystem': supportsFileSystem,
+        },
+        'capabilities': {
+          'ads': supportsAds,
+          'speech': supportsSpeechToText,
+          'vibration': supportsVibration,
+          'sensors': supportsSensors,
+          'location': supportsLocation,
+          'notifications': supportsNotifications,
+          'background': supportsBackgroundTasks,
+          'calendar': supportsCalendar,
+          'quickActions': supportsQuickActions,
+          'appLinks': supportsAppLinks,
+        },
+      };
 
   /// Initialize platform-specific services
   Future<void> initialize() async {
     if (kDebugMode) {
-      print('🚀 PlatformService initialized for $platformName');
-      print('📱 Available features: ${availableFeatures.join(', ')}');
+      print('ðŸš€ PlatformService initialized for $platformName');
+      print('ðŸ“± Available features: ${availableFeatures.join(', ')}');
     }
   }
 
@@ -196,7 +196,7 @@ class PlatformService {
       if (isDesktop && desktop != null) return await desktop();
     } catch (e) {
       if (kDebugMode) {
-        print('❌ Platform-specific execution failed: $e');
+        print('âŒ Platform-specific execution failed: $e');
       }
     }
     return null;

@@ -56,7 +56,7 @@ class FirebaseMessagingService {
     if (_isInitialized) return;
 
     try {
-      AppLogger.info('🔄 Initializing Firebase Messaging Service...');
+      AppLogger.info('ðŸ”„ Initializing Firebase Messaging Service...');
 
       _firebaseMessaging = FirebaseMessaging.instance;
       _secureStorage = SecureStorageService.instance;
@@ -80,9 +80,9 @@ class FirebaseMessagingService {
       _setupTokenRefreshListener();
 
       _isInitialized = true;
-      AppLogger.info('✅ Firebase Messaging Service initialized');
+      AppLogger.info('âœ… Firebase Messaging Service initialized');
     } catch (e) {
-      AppLogger.error('❌ Failed to initialize Firebase Messaging: $e');
+      AppLogger.error('âŒ Failed to initialize Firebase Messaging: $e');
       rethrow;
     }
   }
@@ -102,16 +102,17 @@ class FirebaseMessagingService {
 
       switch (settings.authorizationStatus) {
         case AuthorizationStatus.authorized:
-          AppLogger.info('✅ Push notifications authorized');
+          AppLogger.info('âœ… Push notifications authorized');
           break;
         case AuthorizationStatus.provisional:
-          AppLogger.info('⚠️ Push notifications provisionally authorized');
+          AppLogger.info('âš ï¸ Push notifications provisionally authorized');
           break;
         case AuthorizationStatus.denied:
-          AppLogger.warning('❌ Push notifications denied');
+          AppLogger.warning('âŒ Push notifications denied');
           break;
         case AuthorizationStatus.notDetermined:
-          AppLogger.warning('⚠️ Push notification permission not determined');
+          AppLogger.warning(
+              'âš ï¸ Push notification permission not determined');
           break;
       }
 
@@ -121,7 +122,7 @@ class FirebaseMessagingService {
         settings.authorizationStatus == AuthorizationStatus.authorized,
       );
     } catch (e) {
-      AppLogger.error('❌ Failed to request notification permissions: $e');
+      AppLogger.error('âŒ Failed to request notification permissions: $e');
     }
   }
 
@@ -131,7 +132,7 @@ class FirebaseMessagingService {
       _fcmToken = await _firebaseMessaging.getToken();
       if (_fcmToken != null) {
         AppLogger.info(
-          '📱 FCM Token obtained: ${_fcmToken!.substring(0, 20)}...',
+          'ðŸ“± FCM Token obtained: ${_fcmToken!.substring(0, 20)}...',
         );
 
         // Store token securely
@@ -140,10 +141,10 @@ class FirebaseMessagingService {
         // TODO: Send token to server for targeting
         await _sendTokenToServer(_fcmToken!);
       } else {
-        AppLogger.warning('⚠️ Failed to obtain FCM token');
+        AppLogger.warning('âš ï¸ Failed to obtain FCM token');
       }
     } catch (e) {
-      AppLogger.error('❌ Failed to get FCM token: $e');
+      AppLogger.error('âŒ Failed to get FCM token: $e');
     }
   }
 
@@ -152,7 +153,7 @@ class FirebaseMessagingService {
     // Handle messages when app is in foreground
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       AppLogger.info(
-        '📨 Foreground message received: ${message.notification?.title}',
+        'ðŸ“¨ Foreground message received: ${message.notification?.title}',
       );
       _handleMessage(message, MessageSource.foreground);
     });
@@ -160,7 +161,7 @@ class FirebaseMessagingService {
     // Handle messages when app is opened from background
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       AppLogger.info(
-        '📱 App opened from background message: ${message.notification?.title}',
+        'ðŸ“± App opened from background message: ${message.notification?.title}',
       );
       _handleMessage(message, MessageSource.background);
     });
@@ -169,7 +170,7 @@ class FirebaseMessagingService {
     _firebaseMessaging.getInitialMessage().then((RemoteMessage? message) {
       if (message != null) {
         AppLogger.info(
-          '🚀 App opened from terminated state message: ${message.notification?.title}',
+          'ðŸš€ App opened from terminated state message: ${message.notification?.title}',
         );
         _handleMessage(message, MessageSource.terminated);
       }
@@ -179,7 +180,7 @@ class FirebaseMessagingService {
   /// Setup FCM token refresh listener
   void _setupTokenRefreshListener() {
     _firebaseMessaging.onTokenRefresh.listen((String token) {
-      AppLogger.info('🔄 FCM Token refreshed');
+      AppLogger.info('ðŸ”„ FCM Token refreshed');
       _fcmToken = token;
       _secureStorage.write('fcm_token', token);
       _sendTokenToServer(token);
@@ -217,10 +218,11 @@ class FirebaseMessagingService {
           }
           break;
         default:
-          AppLogger.debug('🔄 Unhandled notification type: $notificationType');
+          AppLogger.debug(
+              'ðŸ”„ Unhandled notification type: $notificationType');
       }
     } catch (e) {
-      AppLogger.error('❌ Failed to handle push message: $e');
+      AppLogger.error('âŒ Failed to handle push message: $e');
     }
   }
 
@@ -238,8 +240,7 @@ class FirebaseMessagingService {
         duaText: message.data['dua_text'] ?? '',
         scholarName: message.data['scholar_name'] ?? '',
         scholarId: message.data['scholar_id'] ?? '',
-        approvedAt:
-            DateTime.tryParse(message.data['approved_at'] ?? '') ??
+        approvedAt: DateTime.tryParse(message.data['approved_at'] ?? '') ??
             DateTime.now(),
         messageSource: source,
         notificationBody: message.notification?.body,
@@ -248,10 +249,10 @@ class FirebaseMessagingService {
 
       _scholarApprovalController.add(notification);
       AppLogger.info(
-        '🎓 Scholar approval notification processed: ${notification.duaTitle}',
+        'ðŸŽ“ Scholar approval notification processed: ${notification.duaTitle}',
       );
     } catch (e) {
-      AppLogger.error('❌ Failed to handle scholar approval notification: $e');
+      AppLogger.error('âŒ Failed to handle scholar approval notification: $e');
     }
   }
 
@@ -265,14 +266,12 @@ class FirebaseMessagingService {
         id: message.data['id'] ?? message.messageId ?? '',
         title:
             message.data['content_title'] ?? message.notification?.title ?? '',
-        description:
-            message.data['content_description'] ??
+        description: message.data['content_description'] ??
             message.notification?.body ??
             '',
         category: message.data['category'] ?? '',
         updateType: message.data['update_type'] ?? 'new_content',
-        updatedAt:
-            DateTime.tryParse(message.data['updated_at'] ?? '') ??
+        updatedAt: DateTime.tryParse(message.data['updated_at'] ?? '') ??
             DateTime.now(),
         messageSource: source,
         imageUrl: message.notification?.android?.imageUrl,
@@ -281,10 +280,10 @@ class FirebaseMessagingService {
 
       _contentUpdateController.add(notification);
       AppLogger.info(
-        '📚 Content update notification processed: ${notification.title}',
+        'ðŸ“š Content update notification processed: ${notification.title}',
       );
     } catch (e) {
-      AppLogger.error('❌ Failed to handle content update notification: $e');
+      AppLogger.error('âŒ Failed to handle content update notification: $e');
     }
   }
 
@@ -301,8 +300,7 @@ class FirebaseMessagingService {
             message.data['family_title'] ?? message.notification?.title ?? '',
         message:
             message.data['family_message'] ?? message.notification?.body ?? '',
-        timestamp:
-            DateTime.tryParse(message.data['timestamp'] ?? '') ??
+        timestamp: DateTime.tryParse(message.data['timestamp'] ?? '') ??
             DateTime.now(),
         messageSource: source,
         data: message.data,
@@ -310,10 +308,10 @@ class FirebaseMessagingService {
 
       _familyNotificationController.add(notification);
       AppLogger.info(
-        '👨‍👩‍👧‍👦 Family notification processed: ${notification.title}',
+        'ðŸ‘¨â€ðŸ‘©â€ðŸ‘§â€ðŸ‘¦ Family notification processed: ${notification.title}',
       );
     } catch (e) {
-      AppLogger.error('❌ Failed to handle family notification: $e');
+      AppLogger.error('âŒ Failed to handle family notification: $e');
     }
   }
 
@@ -328,8 +326,7 @@ class FirebaseMessagingService {
             message.data['system_message'] ?? message.notification?.body ?? '',
         priority: message.data['priority'] ?? 'medium',
         category: message.data['category'] ?? 'general',
-        timestamp:
-            DateTime.tryParse(message.data['timestamp'] ?? '') ??
+        timestamp: DateTime.tryParse(message.data['timestamp'] ?? '') ??
             DateTime.now(),
         messageSource: source,
         actionUrl: message.data['action_url'],
@@ -338,9 +335,10 @@ class FirebaseMessagingService {
       );
 
       _systemNotificationController.add(notification);
-      AppLogger.info('📢 System notification processed: ${notification.title}');
+      AppLogger.info(
+          'ðŸ“¢ System notification processed: ${notification.title}');
     } catch (e) {
-      AppLogger.error('❌ Failed to handle system notification: $e');
+      AppLogger.error('âŒ Failed to handle system notification: $e');
     }
   }
 
@@ -372,7 +370,7 @@ class FirebaseMessagingService {
 
       await _prefs.setString('local_notifications', jsonEncode(notifications));
     } catch (e) {
-      AppLogger.error('❌ Failed to save notification locally: $e');
+      AppLogger.error('âŒ Failed to save notification locally: $e');
     }
   }
 
@@ -384,7 +382,7 @@ class FirebaseMessagingService {
         return jsonDecode(notificationsJson) as List<dynamic>;
       }
     } catch (e) {
-      AppLogger.error('❌ Failed to get local notifications: $e');
+      AppLogger.error('âŒ Failed to get local notifications: $e');
     }
     return [];
   }
@@ -397,14 +395,14 @@ class FirebaseMessagingService {
 
       final userId = await _secureStorage.getUserId();
 
-      AppLogger.debug('📤 Sending FCM token to server for user: $userId');
+      AppLogger.debug('ðŸ“¤ Sending FCM token to server for user: $userId');
 
       // Simulated server call
       await Future.delayed(Duration(milliseconds: 500));
 
-      AppLogger.info('✅ FCM token sent to server');
+      AppLogger.info('âœ… FCM token sent to server');
     } catch (e) {
-      AppLogger.error('❌ Failed to send FCM token to server: $e');
+      AppLogger.error('âŒ Failed to send FCM token to server: $e');
     }
   }
 
@@ -414,9 +412,9 @@ class FirebaseMessagingService {
       await _firebaseMessaging.subscribeToTopic('scholar_approvals');
       _scholarApprovalEnabled = true;
       await _saveNotificationPreferences();
-      AppLogger.info('📚 Subscribed to scholar approval notifications');
+      AppLogger.info('ðŸ“š Subscribed to scholar approval notifications');
     } catch (e) {
-      AppLogger.error('❌ Failed to subscribe to scholar approvals: $e');
+      AppLogger.error('âŒ Failed to subscribe to scholar approvals: $e');
     }
   }
 
@@ -426,9 +424,9 @@ class FirebaseMessagingService {
       await _firebaseMessaging.unsubscribeFromTopic('scholar_approvals');
       _scholarApprovalEnabled = false;
       await _saveNotificationPreferences();
-      AppLogger.info('🔕 Unsubscribed from scholar approval notifications');
+      AppLogger.info('ðŸ”• Unsubscribed from scholar approval notifications');
     } catch (e) {
-      AppLogger.error('❌ Failed to unsubscribe from scholar approvals: $e');
+      AppLogger.error('âŒ Failed to unsubscribe from scholar approvals: $e');
     }
   }
 
@@ -438,9 +436,9 @@ class FirebaseMessagingService {
       await _firebaseMessaging.subscribeToTopic('content_updates');
       _contentUpdateEnabled = true;
       await _saveNotificationPreferences();
-      AppLogger.info('📚 Subscribed to content update notifications');
+      AppLogger.info('ðŸ“š Subscribed to content update notifications');
     } catch (e) {
-      AppLogger.error('❌ Failed to subscribe to content updates: $e');
+      AppLogger.error('âŒ Failed to subscribe to content updates: $e');
     }
   }
 
@@ -450,9 +448,9 @@ class FirebaseMessagingService {
       await _firebaseMessaging.unsubscribeFromTopic('content_updates');
       _contentUpdateEnabled = false;
       await _saveNotificationPreferences();
-      AppLogger.info('🔕 Unsubscribed from content update notifications');
+      AppLogger.info('ðŸ”• Unsubscribed from content update notifications');
     } catch (e) {
-      AppLogger.error('❌ Failed to unsubscribe from content updates: $e');
+      AppLogger.error('âŒ Failed to unsubscribe from content updates: $e');
     }
   }
 
@@ -463,10 +461,10 @@ class FirebaseMessagingService {
       _familyNotificationsEnabled = true;
       await _saveNotificationPreferences();
       AppLogger.info(
-        '👨‍👩‍👧‍👦 Subscribed to family notifications: $familyId',
+        'ðŸ‘¨â€ðŸ‘©â€ðŸ‘§â€ðŸ‘¦ Subscribed to family notifications: $familyId',
       );
     } catch (e) {
-      AppLogger.error('❌ Failed to subscribe to family notifications: $e');
+      AppLogger.error('âŒ Failed to subscribe to family notifications: $e');
     }
   }
 
@@ -476,9 +474,10 @@ class FirebaseMessagingService {
       await _firebaseMessaging.unsubscribeFromTopic('family_$familyId');
       _familyNotificationsEnabled = false;
       await _saveNotificationPreferences();
-      AppLogger.info('🔕 Unsubscribed from family notifications: $familyId');
+      AppLogger.info('ðŸ”• Unsubscribed from family notifications: $familyId');
     } catch (e) {
-      AppLogger.error('❌ Failed to unsubscribe from family notifications: $e');
+      AppLogger.error(
+          'âŒ Failed to unsubscribe from family notifications: $e');
     }
   }
 
@@ -494,7 +493,7 @@ class FirebaseMessagingService {
       _systemNotificationsEnabled =
           _prefs.getBool('system_notifications') ?? true;
     } catch (e) {
-      AppLogger.error('❌ Failed to load notification preferences: $e');
+      AppLogger.error('âŒ Failed to load notification preferences: $e');
     }
   }
 
@@ -512,7 +511,7 @@ class FirebaseMessagingService {
       await _prefs.setBool('family_notifications', _familyNotificationsEnabled);
       await _prefs.setBool('system_notifications', _systemNotificationsEnabled);
     } catch (e) {
-      AppLogger.error('❌ Failed to save notification preferences: $e');
+      AppLogger.error('âŒ Failed to save notification preferences: $e');
     }
   }
 
@@ -522,7 +521,7 @@ class FirebaseMessagingService {
       final notifications = await _getLocalNotifications();
       return notifications.where((n) => n['read'] == false).length;
     } catch (e) {
-      AppLogger.error('❌ Failed to get unread notifications count: $e');
+      AppLogger.error('âŒ Failed to get unread notifications count: $e');
       return 0;
     }
   }
@@ -539,7 +538,7 @@ class FirebaseMessagingService {
       }
       await _prefs.setString('local_notifications', jsonEncode(notifications));
     } catch (e) {
-      AppLogger.error('❌ Failed to mark notification as read: $e');
+      AppLogger.error('âŒ Failed to mark notification as read: $e');
     }
   }
 
@@ -549,7 +548,7 @@ class FirebaseMessagingService {
       final notifications = await _getLocalNotifications();
       return notifications.cast<Map<String, dynamic>>();
     } catch (e) {
-      AppLogger.error('❌ Failed to get all notifications: $e');
+      AppLogger.error('âŒ Failed to get all notifications: $e');
       return [];
     }
   }
@@ -558,9 +557,9 @@ class FirebaseMessagingService {
   Future<void> clearAllNotifications() async {
     try {
       await _prefs.remove('local_notifications');
-      AppLogger.info('🗑️ All notifications cleared');
+      AppLogger.info('ðŸ—‘ï¸ All notifications cleared');
     } catch (e) {
-      AppLogger.error('❌ Failed to clear all notifications: $e');
+      AppLogger.error('âŒ Failed to clear all notifications: $e');
     }
   }
 

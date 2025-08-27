@@ -56,13 +56,16 @@ class LocalDataSourceImpl implements LocalDataSource {
       final expiresAt =
           DateTime.now().add(const Duration(hours: 24)).millisecondsSinceEpoch;
 
-      await database.insert('rag_cache', {
-        'query_hash': queryHash,
-        'query': response.query,
-        'response': response.response,
-        'created_at': DateTime.now().millisecondsSinceEpoch,
-        'expires_at': expiresAt,
-      }, conflictAlgorithm: ConflictAlgorithm.replace);
+      await database.insert(
+          'rag_cache',
+          {
+            'query_hash': queryHash,
+            'query': response.query,
+            'response': response.response,
+            'created_at': DateTime.now().millisecondsSinceEpoch,
+            'expires_at': expiresAt,
+          },
+          conflictAlgorithm: ConflictAlgorithm.replace);
     } catch (e) {
       throw CacheException('Failed to cache RAG response: ${e.toString()}');
     }

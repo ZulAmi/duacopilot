@@ -11,7 +11,8 @@ import '../subscription/subscription_service.dart';
 /// Islamic Knowledge University Service - Premier Islamic Learning Platform
 class IslamicUniversityService {
   static IslamicUniversityService? _instance;
-  static IslamicUniversityService get instance => _instance ??= IslamicUniversityService._();
+  static IslamicUniversityService get instance =>
+      _instance ??= IslamicUniversityService._();
 
   IslamicUniversityService._();
 
@@ -28,14 +29,18 @@ class IslamicUniversityService {
 
   // Stream controllers for real-time updates
   final _progressController = StreamController<LearningProgress>.broadcast();
-  final _certificateController = StreamController<IslamicCertificate>.broadcast();
-  final _liveSessionController = StreamController<List<LiveQASession>>.broadcast();
+  final _certificateController =
+      StreamController<IslamicCertificate>.broadcast();
+  final _liveSessionController =
+      StreamController<List<LiveQASession>>.broadcast();
   final _analyticsController = StreamController<LearningAnalytics>.broadcast();
 
   // Public streams
   Stream<LearningProgress> get progressStream => _progressController.stream;
-  Stream<IslamicCertificate> get certificateStream => _certificateController.stream;
-  Stream<List<LiveQASession>> get liveSessionStream => _liveSessionController.stream;
+  Stream<IslamicCertificate> get certificateStream =>
+      _certificateController.stream;
+  Stream<List<LiveQASession>> get liveSessionStream =>
+      _liveSessionController.stream;
   Stream<LearningAnalytics> get analyticsStream => _analyticsController.stream;
 
   /// Initialize the Islamic University service
@@ -69,7 +74,8 @@ class IslamicUniversityService {
   Future<void> _validatePremiumAccess() async {
     final hasSubscription = _subscriptionService.hasActiveSubscription;
     if (!hasSubscription) {
-      throw Exception('Premium subscription required for Islamic University access');
+      throw Exception(
+          'Premium subscription required for Islamic University access');
     }
   }
 
@@ -91,7 +97,7 @@ class IslamicUniversityService {
       IslamicScholar(
         id: 'scholar_yasir_qadhi',
         name: 'Dr. Yasir Qadhi',
-        arabicName: 'د. ياسر قاضي',
+        arabicName: 'Ø¯. ÙŠØ§Ø³Ø± Ù‚Ø§Ø¶ÙŠ',
         title: 'Dean of Academic Affairs',
         institution: 'Islamic Seminary of America',
         country: 'United States',
@@ -99,10 +105,14 @@ class IslamicUniversityService {
         biography:
             'Dr. Yasir Qadhi is a renowned Islamic scholar and educator with expertise in Islamic theology, history, and contemporary issues.',
         arabicBiography:
-            'الدكتور ياسر قاضي عالم إسلامي مشهور ومربي له خبرة في اللاهوت الإسلامي والتاريخ والقضايا المعاصرة',
+            'Ø§Ù„Ø¯ÙƒØªÙˆØ± ÙŠØ§Ø³Ø± Ù‚Ø§Ø¶ÙŠ Ø¹Ø§Ù„Ù… Ø¥Ø³Ù„Ø§Ù…ÙŠ Ù…Ø´Ù‡ÙˆØ± ÙˆÙ…Ø±Ø¨ÙŠ Ù„Ù‡ Ø®Ø¨Ø±Ø© ÙÙŠ Ø§Ù„Ù„Ø§Ù‡ÙˆØª Ø§Ù„Ø¥Ø³Ù„Ø§Ù…ÙŠ ÙˆØ§Ù„ØªØ§Ø±ÙŠØ® ÙˆØ§Ù„Ù‚Ø¶Ø§ÙŠØ§ Ø§Ù„Ù…Ø¹Ø§ØµØ±Ø©',
         isVerified: true,
-        profileImageUrl: 'https://secure-cdn.duacopilot.com/scholars/yasir_qadhi.jpg',
-        credentials: ['PhD in Islamic Studies - Yale University', 'BA in Islamic Studies - University of Medina'],
+        profileImageUrl:
+            'https://secure-cdn.duacopilot.com/scholars/yasir_qadhi.jpg',
+        credentials: [
+          'PhD in Islamic Studies - Yale University',
+          'BA in Islamic Studies - University of Medina'
+        ],
         languages: ['English', 'Arabic', 'Urdu'],
         subjects: ['Aqeedah', 'Seerah', 'Contemporary Islamic Issues'],
         rating: 4.9,
@@ -115,7 +125,7 @@ class IslamicUniversityService {
       IslamicScholar(
         id: 'scholar_omar_suleiman',
         name: 'Dr. Omar Suleiman',
-        arabicName: 'د. عمر سليمان',
+        arabicName: 'Ø¯. Ø¹Ù…Ø± Ø³Ù„ÙŠÙ…Ø§Ù†',
         title: 'Imam and Islamic Scholar',
         institution: 'Yaqeen Institute',
         country: 'United States',
@@ -123,9 +133,10 @@ class IslamicUniversityService {
         biography:
             'Dr. Omar Suleiman is a prominent Islamic scholar known for his work in spirituality, social justice, and contemporary Islamic thought.',
         arabicBiography:
-            'الدكتور عمر سليمان عالم إسلامي بارز معروف بعمله في الروحانية والعدالة الاجتماعية والفكر الإسلامي المعاصر',
+            'Ø§Ù„Ø¯ÙƒØªÙˆØ± Ø¹Ù…Ø± Ø³Ù„ÙŠÙ…Ø§Ù† Ø¹Ø§Ù„Ù… Ø¥Ø³Ù„Ø§Ù…ÙŠ Ø¨Ø§Ø±Ø² Ù…Ø¹Ø±ÙˆÙ Ø¨Ø¹Ù…Ù„Ù‡ ÙÙŠ Ø§Ù„Ø±ÙˆØ­Ø§Ù†ÙŠØ© ÙˆØ§Ù„Ø¹Ø¯Ø§Ù„Ø© Ø§Ù„Ø§Ø¬ØªÙ…Ø§Ø¹ÙŠØ© ÙˆØ§Ù„ÙÙƒØ± Ø§Ù„Ø¥Ø³Ù„Ø§Ù…ÙŠ Ø§Ù„Ù…Ø¹Ø§ØµØ±',
         isVerified: true,
-        profileImageUrl: 'https://secure-cdn.duacopilot.com/scholars/omar_suleiman.jpg',
+        profileImageUrl:
+            'https://secure-cdn.duacopilot.com/scholars/omar_suleiman.jpg',
         credentials: ['PhD in Islamic Studies', 'Masters in Islamic Finance'],
         languages: ['English', 'Arabic'],
         subjects: ['Spirituality', 'Social Justice', 'Islamic Ethics'],
@@ -139,7 +150,7 @@ class IslamicUniversityService {
       IslamicScholar(
         id: 'scholar_nouman_ali_khan',
         name: 'Nouman Ali Khan',
-        arabicName: 'نعمان علي خان',
+        arabicName: 'Ù†Ø¹Ù…Ø§Ù† Ø¹Ù„ÙŠ Ø®Ø§Ù†',
         title: 'Arabic and Quranic Studies Expert',
         institution: 'Bayyinah Institute',
         country: 'United States',
@@ -147,9 +158,10 @@ class IslamicUniversityService {
         biography:
             'Nouman Ali Khan is a renowned expert in Arabic language and Quranic studies, known for making Arabic accessible to English speakers.',
         arabicBiography:
-            'نعمان علي خان خبير مشهور في اللغة العربية والدراسات القرآنية، معروف بجعل العربية متاحة للناطقين بالإنجليزية',
+            'Ù†Ø¹Ù…Ø§Ù† Ø¹Ù„ÙŠ Ø®Ø§Ù† Ø®Ø¨ÙŠØ± Ù…Ø´Ù‡ÙˆØ± ÙÙŠ Ø§Ù„Ù„ØºØ© Ø§Ù„Ø¹Ø±Ø¨ÙŠØ© ÙˆØ§Ù„Ø¯Ø±Ø§Ø³Ø§Øª Ø§Ù„Ù‚Ø±Ø¢Ù†ÙŠØ©ØŒ Ù…Ø¹Ø±ÙˆÙ Ø¨Ø¬Ø¹Ù„ Ø§Ù„Ø¹Ø±Ø¨ÙŠØ© Ù…ØªØ§Ø­Ø© Ù„Ù„Ù†Ø§Ø·Ù‚ÙŠÙ† Ø¨Ø§Ù„Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠØ©',
         isVerified: true,
-        profileImageUrl: 'https://secure-cdn.duacopilot.com/scholars/nouman_ali_khan.jpg',
+        profileImageUrl:
+            'https://secure-cdn.duacopilot.com/scholars/nouman_ali_khan.jpg',
         credentials: ['Arabic Language Expert', 'Quranic Studies Specialist'],
         languages: ['English', 'Arabic', 'Urdu'],
         subjects: ['Arabic Language', 'Quran', 'Tajweed'],
@@ -181,8 +193,9 @@ class IslamicUniversityService {
       PremiumCourse(
         id: 'course_arabic_foundations',
         title: 'Arabic Language Foundations',
-        arabicTitle: 'أسس اللغة العربية',
-        description: 'Master the fundamentals of Arabic language for Quranic understanding',
+        arabicTitle: 'Ø£Ø³Ø³ Ø§Ù„Ù„ØºØ© Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©',
+        description:
+            'Master the fundamentals of Arabic language for Quranic understanding',
         shortDescription: 'Learn Arabic from scratch with expert guidance',
         scholarId: 'scholar_nouman_ali_khan',
         category: CourseCategory.arabic,
@@ -194,7 +207,8 @@ class IslamicUniversityService {
         isPublished: true,
         tags: ['arabic', 'foundation', 'beginner'],
         languages: ['English', 'Arabic'],
-        coverImageUrl: 'https://secure-cdn.duacopilot.com/courses/arabic_foundations.jpg',
+        coverImageUrl:
+            'https://secure-cdn.duacopilot.com/courses/arabic_foundations.jpg',
         rating: 4.8,
         reviewsCount: 1250,
         enrolledCount: 8500,
@@ -208,7 +222,7 @@ class IslamicUniversityService {
       PremiumCourse(
         id: 'course_aqeedah_mastery',
         title: 'Islamic Creed Mastery',
-        arabicTitle: 'إتقان العقيدة الإسلامية',
+        arabicTitle: 'Ø¥ØªÙ‚Ø§Ù† Ø§Ù„Ø¹Ù‚ÙŠØ¯Ø© Ø§Ù„Ø¥Ø³Ù„Ø§Ù…ÙŠØ©',
         description: 'Comprehensive study of Islamic beliefs and theology',
         shortDescription: 'Deep dive into Islamic creed and beliefs',
         scholarId: 'scholar_yasir_qadhi',
@@ -222,7 +236,8 @@ class IslamicUniversityService {
         isPublished: true,
         tags: ['aqeedah', 'theology', 'beliefs'],
         languages: ['English'],
-        coverImageUrl: 'https://secure-cdn.duacopilot.com/courses/aqeedah_mastery.jpg',
+        coverImageUrl:
+            'https://secure-cdn.duacopilot.com/courses/aqeedah_mastery.jpg',
         rating: 4.95,
         reviewsCount: 890,
         enrolledCount: 5200,
@@ -236,7 +251,7 @@ class IslamicUniversityService {
       PremiumCourse(
         id: 'course_spiritual_development',
         title: 'Islamic Spiritual Development',
-        arabicTitle: 'التطوير الروحي الإسلامي',
+        arabicTitle: 'Ø§Ù„ØªØ·ÙˆÙŠØ± Ø§Ù„Ø±ÙˆØ­ÙŠ Ø§Ù„Ø¥Ø³Ù„Ø§Ù…ÙŠ',
         description: 'Journey of spiritual growth through Islamic practices',
         shortDescription: 'Develop your Islamic spirituality',
         scholarId: 'scholar_omar_suleiman',
@@ -249,7 +264,8 @@ class IslamicUniversityService {
         isPublished: true,
         tags: ['spirituality', 'growth', 'practice'],
         languages: ['English'],
-        coverImageUrl: 'https://secure-cdn.duacopilot.com/courses/spiritual_development.jpg',
+        coverImageUrl:
+            'https://secure-cdn.duacopilot.com/courses/spiritual_development.jpg',
         rating: 4.9,
         reviewsCount: 1100,
         enrolledCount: 7200,
@@ -281,13 +297,19 @@ class IslamicUniversityService {
       IslamicLearningPath(
         id: 'path_islamic_foundations',
         title: 'Islamic Knowledge Foundations',
-        description: 'Complete beginner-friendly introduction to Islamic knowledge',
+        description:
+            'Complete beginner-friendly introduction to Islamic knowledge',
         level: LearningLevel.beginner,
         courseIds: ['course_aqeedah_mastery', 'course_spiritual_development'],
         estimatedHours: 45,
-        skills: ['Basic Islamic Knowledge', 'Spiritual Practice', 'Prayer Understanding'],
+        skills: [
+          'Basic Islamic Knowledge',
+          'Spiritual Practice',
+          'Prayer Understanding'
+        ],
         tags: ['foundations', 'beginner', 'comprehensive'],
-        coverImageUrl: 'https://secure-cdn.duacopilot.com/paths/foundations.jpg',
+        coverImageUrl:
+            'https://secure-cdn.duacopilot.com/paths/foundations.jpg',
         isPremium: true,
         rating: 4.8,
         enrolledCount: 3500,
@@ -303,7 +325,8 @@ class IslamicUniversityService {
         prerequisites: ['Basic Islamic Knowledge'],
         skills: ['Arabic Reading', 'Quranic Vocabulary', 'Grammar Basics'],
         tags: ['arabic', 'quran', 'language'],
-        coverImageUrl: 'https://secure-cdn.duacopilot.com/paths/arabic_quran.jpg',
+        coverImageUrl:
+            'https://secure-cdn.duacopilot.com/paths/arabic_quran.jpg',
         isPremium: true,
         rating: 4.9,
         enrolledCount: 2800,
@@ -315,7 +338,8 @@ class IslamicUniversityService {
   /// Load user's personalized curriculum
   Future<void> _loadUserCurriculum() async {
     try {
-      final curriculumJson = await _secureStorage.read('personalized_curriculum');
+      final curriculumJson =
+          await _secureStorage.read('personalized_curriculum');
       if (curriculumJson != null) {
         final Map<String, dynamic> json = jsonDecode(curriculumJson);
         _userCurriculum = PersonalizedCurriculum.fromJson(json);
@@ -346,7 +370,8 @@ class IslamicUniversityService {
   }
 
   /// Get courses by category
-  Future<List<PremiumCourse>> getCoursesByCategory(CourseCategory category) async {
+  Future<List<PremiumCourse>> getCoursesByCategory(
+      CourseCategory category) async {
     await _validatePremiumAccess();
     return _courses.where((course) => course.category == category).toList();
   }
@@ -387,7 +412,8 @@ class IslamicUniversityService {
       };
 
       // Save enrollment
-      final enrollmentsJson = await _secureStorage.read('course_enrollments') ?? '[]';
+      final enrollmentsJson =
+          await _secureStorage.read('course_enrollments') ?? '[]';
       final List<dynamic> enrollments = jsonDecode(enrollmentsJson);
       enrollments.add(enrollment);
 
@@ -407,13 +433,18 @@ class IslamicUniversityService {
 
     try {
       final userId = await _secureStorage.getUserId() ?? 'anonymous';
-      final enrollmentsJson = await _secureStorage.read('course_enrollments') ?? '[]';
+      final enrollmentsJson =
+          await _secureStorage.read('course_enrollments') ?? '[]';
       final List<dynamic> enrollments = jsonDecode(enrollmentsJson);
 
-      final userEnrollments =
-          enrollments.where((e) => e['userId'] == userId).map((e) => e['courseId'] as String).toList();
+      final userEnrollments = enrollments
+          .where((e) => e['userId'] == userId)
+          .map((e) => e['courseId'] as String)
+          .toList();
 
-      return _courses.where((course) => userEnrollments.contains(course.id)).toList();
+      return _courses
+          .where((course) => userEnrollments.contains(course.id))
+          .toList();
     } catch (e) {
       AppLogger.error('Failed to get enrolled courses: $e');
       return [];
@@ -433,8 +464,10 @@ class IslamicUniversityService {
       final userId = await _secureStorage.getUserId() ?? 'anonymous';
 
       // Generate AI-recommended courses based on interests
-      final recommendedCourses = _generateCourseRecommendations(interests, currentLevel);
-      final recommendedPaths = _generatePathRecommendations(interests, currentLevel);
+      final recommendedCourses =
+          _generateCourseRecommendations(interests, currentLevel);
+      final recommendedPaths =
+          _generatePathRecommendations(interests, currentLevel);
 
       final curriculum = PersonalizedCurriculum(
         id: 'curriculum_${DateTime.now().millisecondsSinceEpoch}',
@@ -463,20 +496,21 @@ class IslamicUniversityService {
   }
 
   /// Generate course recommendations based on interests
-  List<String> _generateCourseRecommendations(List<String> interests, LearningLevel level) {
+  List<String> _generateCourseRecommendations(
+      List<String> interests, LearningLevel level) {
     final recommendations = <String>[];
 
     for (final interest in interests) {
-      final matchingCourses =
-          _courses
-              .where(
-                (course) =>
-                    course.tags.any((tag) => tag.toLowerCase().contains(interest.toLowerCase())) &&
-                    _isLevelAppropriate(course.level, level),
-              )
-              .take(2)
-              .map((c) => c.id)
-              .toList();
+      final matchingCourses = _courses
+          .where(
+            (course) =>
+                course.tags.any((tag) =>
+                    tag.toLowerCase().contains(interest.toLowerCase())) &&
+                _isLevelAppropriate(course.level, level),
+          )
+          .take(2)
+          .map((c) => c.id)
+          .toList();
 
       recommendations.addAll(matchingCourses);
     }
@@ -485,12 +519,14 @@ class IslamicUniversityService {
   }
 
   /// Generate learning path recommendations
-  List<String> _generatePathRecommendations(List<String> interests, LearningLevel level) {
+  List<String> _generatePathRecommendations(
+      List<String> interests, LearningLevel level) {
     return _learningPaths
         .where(
           (path) =>
               path.level == level &&
-              path.tags.any((tag) => interests.any((interest) => tag.toLowerCase().contains(interest.toLowerCase()))),
+              path.tags.any((tag) => interests.any((interest) =>
+                  tag.toLowerCase().contains(interest.toLowerCase()))),
         )
         .take(2)
         .map((p) => p.id)
@@ -508,7 +544,8 @@ class IslamicUniversityService {
   }
 
   /// Generate study goals based on target level and daily goal
-  List<StudyGoal> _generateStudyGoals(LearningLevel targetLevel, Duration dailyGoal) {
+  List<StudyGoal> _generateStudyGoals(
+      LearningLevel targetLevel, Duration dailyGoal) {
     return [
       StudyGoal(
         id: 'goal_daily_study',
@@ -594,12 +631,16 @@ class IslamicUniversityService {
   /// Save progress record
   Future<void> _saveProgress(LearningProgress progress) async {
     try {
-      final progressJson = await _secureStorage.read('learning_progress') ?? '[]';
+      final progressJson =
+          await _secureStorage.read('learning_progress') ?? '[]';
       final List<dynamic> progressList = jsonDecode(progressJson);
 
       // Remove existing progress for same item
       progressList.removeWhere(
-        (p) => p['userId'] == progress.userId && p['itemId'] == progress.itemId && p['type'] == progress.type.name,
+        (p) =>
+            p['userId'] == progress.userId &&
+            p['itemId'] == progress.itemId &&
+            p['type'] == progress.type.name,
       );
 
       // Add new progress
@@ -625,19 +666,22 @@ class IslamicUniversityService {
       switch (progress.type) {
         case ProgressType.course:
           if (progress.progress >= 1.0) {
-            updatedAnalytics = updatedAnalytics.copyWith(completedCourses: analytics.completedCourses + 1);
+            updatedAnalytics = updatedAnalytics.copyWith(
+                completedCourses: analytics.completedCourses + 1);
           }
           break;
         case ProgressType.lesson:
           if (progress.progress >= 1.0) {
-            updatedAnalytics = updatedAnalytics.copyWith(completedLessons: analytics.completedLessons + 1);
+            updatedAnalytics = updatedAnalytics.copyWith(
+                completedLessons: analytics.completedLessons + 1);
           }
           break;
         case ProgressType.quiz:
           if (progress.progress >= 1.0) {
             updatedAnalytics = updatedAnalytics.copyWith(
               passedQuizzes: analytics.passedQuizzes + 1,
-              averageQuizScore: (analytics.averageQuizScore + progress.bestScore) / 2,
+              averageQuizScore:
+                  (analytics.averageQuizScore + progress.bestScore) / 2,
             );
           }
           break;
@@ -662,12 +706,18 @@ class IslamicUniversityService {
         return LearningAnalytics.fromJson(jsonDecode(analyticsJson));
       }
 
-      return LearningAnalytics(userId: userId, firstStudyDate: DateTime.now(), updatedAt: DateTime.now());
+      return LearningAnalytics(
+          userId: userId,
+          firstStudyDate: DateTime.now(),
+          updatedAt: DateTime.now());
     } catch (e) {
       AppLogger.error('Failed to load learning analytics: $e');
 
       final userId = await _secureStorage.getUserId() ?? 'anonymous';
-      return LearningAnalytics(userId: userId, firstStudyDate: DateTime.now(), updatedAt: DateTime.now());
+      return LearningAnalytics(
+          userId: userId,
+          firstStudyDate: DateTime.now(),
+          updatedAt: DateTime.now());
     }
   }
 
@@ -700,13 +750,16 @@ class IslamicUniversityService {
               updatedGoal = goal.copyWith(
                 currentValue: newValue,
                 isCompleted: newValue >= goal.targetValue,
-                completedAt: newValue >= goal.targetValue ? DateTime.now() : null,
+                completedAt:
+                    newValue >= goal.targetValue ? DateTime.now() : null,
               );
               hasUpdates = true;
             }
             break;
           case GoalType.courseCompletion:
-            if (!goal.isCompleted && progress.type == ProgressType.course && progress.progress >= 1.0) {
+            if (!goal.isCompleted &&
+                progress.type == ProgressType.course &&
+                progress.progress >= 1.0) {
               updatedGoal = goal.copyWith(
                 currentValue: goal.currentValue + 1,
                 isCompleted: true,
@@ -732,7 +785,8 @@ class IslamicUniversityService {
   }
 
   /// Generate certificate for course completion
-  Future<IslamicCertificate> generateCertificate({required String courseId, required double finalScore}) async {
+  Future<IslamicCertificate> generateCertificate(
+      {required String courseId, required double finalScore}) async {
     await _validatePremiumAccess();
 
     try {
@@ -741,8 +795,10 @@ class IslamicUniversityService {
       final scholar = _scholars.firstWhere((s) => s.id == course.scholarId);
 
       // Generate certificate hash for blockchain verification
-      final certificateData = '$userId:$courseId:$finalScore:${DateTime.now().millisecondsSinceEpoch}';
-      final certificateHash = sha256.convert(utf8.encode(certificateData)).toString();
+      final certificateData =
+          '$userId:$courseId:$finalScore:${DateTime.now().millisecondsSinceEpoch}';
+      final certificateHash =
+          sha256.convert(utf8.encode(certificateData)).toString();
       final blockchainId = _generateBlockchainId(certificateHash);
 
       final certificate = IslamicCertificate(
@@ -798,7 +854,8 @@ class IslamicUniversityService {
   /// Save certificate to secure storage
   Future<void> _saveCertificate(IslamicCertificate certificate) async {
     try {
-      final certificatesJson = await _secureStorage.read('user_certificates') ?? '[]';
+      final certificatesJson =
+          await _secureStorage.read('user_certificates') ?? '[]';
       final List<dynamic> certificates = jsonDecode(certificatesJson);
       certificates.add(certificate.toJson());
       await _secureStorage.write('user_certificates', jsonEncode(certificates));
@@ -812,10 +869,14 @@ class IslamicUniversityService {
   Future<List<IslamicCertificate>> getUserCertificates() async {
     try {
       final userId = await _secureStorage.getUserId() ?? 'anonymous';
-      final certificatesJson = await _secureStorage.read('user_certificates') ?? '[]';
+      final certificatesJson =
+          await _secureStorage.read('user_certificates') ?? '[]';
       final List<dynamic> certificates = jsonDecode(certificatesJson);
 
-      return certificates.where((c) => c['userId'] == userId).map((json) => IslamicCertificate.fromJson(json)).toList();
+      return certificates
+          .where((c) => c['userId'] == userId)
+          .map((json) => IslamicCertificate.fromJson(json))
+          .toList();
     } catch (e) {
       AppLogger.error('Failed to get user certificates: $e');
       return [];

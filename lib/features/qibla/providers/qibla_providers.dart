@@ -59,16 +59,16 @@ final prayerTrackerInitProvider = FutureProvider.autoDispose<bool>((ref) async {
 
 final todayPrayersProvider =
     StreamProvider.autoDispose<Map<PrayerType, PrayerCompletion>?>((ref) {
-      final service = ref.watch(prayerTrackerServiceProvider);
-      return service.prayersStream;
-    });
+  final service = ref.watch(prayerTrackerServiceProvider);
+  return service.prayersStream;
+});
 
 // Compass Calibration Provider
 class CompassCalibrationNotifier extends StateNotifier<AsyncValue<bool>> {
   final QiblaCompassService _service;
 
   CompassCalibrationNotifier(this._service)
-    : super(const AsyncValue.data(true));
+      : super(const AsyncValue.data(true));
 
   Future<void> calibrateCompass() async {
     state = const AsyncValue.loading();
@@ -82,9 +82,7 @@ class CompassCalibrationNotifier extends StateNotifier<AsyncValue<bool>> {
 }
 
 final compassCalibrationProvider = StateNotifierProvider.autoDispose<
-  CompassCalibrationNotifier,
-  AsyncValue<bool>
->((ref) {
+    CompassCalibrationNotifier, AsyncValue<bool>>((ref) {
   final service = ref.watch(qiblaCompassServiceProvider);
   return CompassCalibrationNotifier(service);
 });
@@ -153,11 +151,11 @@ class PrayerActionsNotifier extends StateNotifier<AsyncValue<void>> {
 
 final prayerActionsProvider =
     StateNotifierProvider.autoDispose<PrayerActionsNotifier, AsyncValue<void>>((
-      ref,
-    ) {
-      final service = ref.watch(prayerTrackerServiceProvider);
-      return PrayerActionsNotifier(service);
-    });
+  ref,
+) {
+  final service = ref.watch(prayerTrackerServiceProvider);
+  return PrayerActionsNotifier(service);
+});
 
 // Prayer Statistics Provider
 final prayerStatsProvider = Provider.autoDispose<PrayerStats?>((ref) {
@@ -187,15 +185,14 @@ final nextPrayerProvider = Provider.autoDispose<PrayerCompletion?>((ref) {
   if (prayers == null) return null;
 
   final now = DateTime.now();
-  final upcomingPrayers =
-      prayers.values
-          .where(
-            (prayer) =>
-                prayer.status != PrayerCompletionStatus.completed &&
-                prayer.scheduledTime.isAfter(now),
-          )
-          .toList()
-        ..sort((a, b) => a.scheduledTime.compareTo(b.scheduledTime));
+  final upcomingPrayers = prayers.values
+      .where(
+        (prayer) =>
+            prayer.status != PrayerCompletionStatus.completed &&
+            prayer.scheduledTime.isAfter(now),
+      )
+      .toList()
+    ..sort((a, b) => a.scheduledTime.compareTo(b.scheduledTime));
 
   return upcomingPrayers.isNotEmpty ? upcomingPrayers.first : null;
 });
@@ -214,9 +211,8 @@ final currentPrayerProvider = Provider.autoDispose<PrayerCompletion?>((ref) {
   final now = DateTime.now();
 
   // Find current prayer time slot
-  final prayerList =
-      prayers.values.toList()
-        ..sort((a, b) => a.scheduledTime.compareTo(b.scheduledTime));
+  final prayerList = prayers.values.toList()
+    ..sort((a, b) => a.scheduledTime.compareTo(b.scheduledTime));
 
   for (int i = 0; i < prayerList.length; i++) {
     final prayer = prayerList[i];

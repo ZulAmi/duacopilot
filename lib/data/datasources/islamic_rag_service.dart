@@ -24,8 +24,8 @@ class IslamicRagService {
   static const Duration cacheExpiry = Duration(days: 7);
 
   IslamicRagService({QuranApiService? quranApi, RagCacheService? cacheService})
-    : _quranApi = quranApi ?? QuranApiService(),
-      _cacheService = cacheService ?? RagCacheService();
+      : _quranApi = quranApi ?? QuranApiService(),
+        _cacheService = cacheService ?? RagCacheService();
 
   // ========== Core RAG Operations ==========
 
@@ -109,11 +109,9 @@ class IslamicRagService {
 
       final recommendations = <DuaRecommendation>[];
 
-      for (
-        int i = 0;
-        i < searchResults.length && recommendations.length < limit;
-        i++
-      ) {
+      for (int i = 0;
+          i < searchResults.length && recommendations.length < limit;
+          i++) {
         final match = searchResults[i];
 
         // Get Arabic text
@@ -199,10 +197,9 @@ class IslamicRagService {
         // Add top results, avoiding duplicates
         final uniqueResults = result.matches
             .where(
-              (match) =>
-                  !searchResults.any(
-                    (existing) => existing.number == match.number,
-                  ),
+              (match) => !searchResults.any(
+                (existing) => existing.number == match.number,
+              ),
             )
             .take(maxSearchResults ~/ editions.length);
 
@@ -241,7 +238,7 @@ class IslamicRagService {
       final match = searchResults[i];
       buffer.writeln('${i + 1}. "${match.text}"');
       buffer.writeln(
-        '   — Quran ${match.surah.englishName} ${match.numberInSurah}\n',
+        '   â€” Quran ${match.surah.englishName} ${match.numberInSurah}\n',
       );
     }
 
@@ -320,28 +317,25 @@ class IslamicRagService {
   ) {
     return {
       'search_results_count': searchResults.length,
-      'primary_surah':
-          searchResults.isNotEmpty
-              ? searchResults.first.surah.englishName
-              : null,
+      'primary_surah': searchResults.isNotEmpty
+          ? searchResults.first.surah.englishName
+          : null,
       'query_type': _classifyQuery(query),
       'timestamp': DateTime.now().toIso8601String(),
       'api_version': 'alquran.cloud/v1',
-      'sources':
-          searchResults
-              .map(
-                (match) => {
-                  'id': match.number.toString(),
-                  'title':
-                      'Quran ${match.surah.englishName} ${match.numberInSurah}',
-                  'content': match.text,
-                  'relevanceScore': _calculateRelevance(match, query),
-                  'reference':
-                      '${match.surah.englishName} ${match.numberInSurah}',
-                  'category': 'Quran',
-                },
-              )
-              .toList(),
+      'sources': searchResults
+          .map(
+            (match) => {
+              'id': match.number.toString(),
+              'title':
+                  'Quran ${match.surah.englishName} ${match.numberInSurah}',
+              'content': match.text,
+              'relevanceScore': _calculateRelevance(match, query),
+              'reference': '${match.surah.englishName} ${match.numberInSurah}',
+              'category': 'Quran',
+            },
+          )
+          .toList(),
     };
   }
 

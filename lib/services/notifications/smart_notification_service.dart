@@ -47,10 +47,10 @@ class SmartNotificationService {
       // iOS initialization
       const DarwinInitializationSettings iosInitSettings =
           DarwinInitializationSettings(
-            requestAlertPermission: true,
-            requestBadgePermission: true,
-            requestSoundPermission: true,
-          );
+        requestAlertPermission: true,
+        requestBadgePermission: true,
+        requestSoundPermission: true,
+      );
 
       const InitializationSettings initSettings = InitializationSettings(
         android: androidInitSettings,
@@ -117,8 +117,7 @@ class SmartNotificationService {
     for (final channel in channels) {
       await _notificationsPlugin
           .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin
-          >()
+              AndroidFlutterLocalNotificationsPlugin>()
           ?.createNotificationChannel(channel);
     }
   }
@@ -126,19 +125,15 @@ class SmartNotificationService {
   Future<void> _requestPermissions() async {
     if (Platform.isAndroid) {
       final AndroidFlutterLocalNotificationsPlugin? androidImplementation =
-          _notificationsPlugin
-              .resolvePlatformSpecificImplementation<
-                AndroidFlutterLocalNotificationsPlugin
-              >();
+          _notificationsPlugin.resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin>();
 
       await androidImplementation?.requestNotificationsPermission();
       await androidImplementation?.requestExactAlarmsPermission();
     } else if (Platform.isIOS) {
       final IOSFlutterLocalNotificationsPlugin? iosImplementation =
-          _notificationsPlugin
-              .resolvePlatformSpecificImplementation<
-                IOSFlutterLocalNotificationsPlugin
-              >();
+          _notificationsPlugin.resolvePlatformSpecificImplementation<
+              IOSFlutterLocalNotificationsPlugin>();
 
       await iosImplementation?.requestPermissions(
         alert: true,
@@ -316,14 +311,13 @@ class SmartNotificationService {
 
     // Time-based suggestions
     if (_isNearPrayerTime(userContext.time.prayerTimes)) {
-      final relevantDuas =
-          duas
-              .where(
-                (dua) =>
-                    dua.category.toLowerCase().contains('prayer') ||
-                    dua.category.toLowerCase().contains('salah'),
-              )
-              .toList();
+      final relevantDuas = duas
+          .where(
+            (dua) =>
+                dua.category.toLowerCase().contains('prayer') ||
+                dua.category.toLowerCase().contains('salah'),
+          )
+          .toList();
 
       for (final dua in relevantDuas.take(2)) {
         suggestions.add(
@@ -341,14 +335,13 @@ class SmartNotificationService {
 
     // Evening suggestions
     if (_isEvening(now)) {
-      final eveningDuas =
-          duas
-              .where(
-                (dua) =>
-                    dua.category.toLowerCase().contains('evening') ||
-                    dua.category.toLowerCase().contains('night'),
-              )
-              .toList();
+      final eveningDuas = duas
+          .where(
+            (dua) =>
+                dua.category.toLowerCase().contains('evening') ||
+                dua.category.toLowerCase().contains('night'),
+          )
+          .toList();
 
       for (final dua in eveningDuas.take(1)) {
         suggestions.add(

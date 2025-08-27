@@ -45,7 +45,7 @@ class RagDatabaseHelper {
   // Handle database upgrades with proper migration strategies
   Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
     AppLogger.debug(
-      '🔄 Upgrading RAG database from version $oldVersion to $newVersion',
+      'ðŸ”„ Upgrading RAG database from version $oldVersion to $newVersion',
     );
 
     // Migration strategy: progressive upgrades
@@ -63,13 +63,13 @@ class RagDatabaseHelper {
         await _migrateToV3(db);
         break;
       default:
-        AppLogger.debug('⚠️ No migration defined for version $toVersion');
+        AppLogger.debug('âš ï¸ No migration defined for version $toVersion');
     }
   }
 
   // Migration to version 2: Add semantic search and enhanced RAG features
   Future<void> _migrateToV2(Database db) async {
-    AppLogger.debug('📊 Migrating to version 2: Enhanced RAG features');
+    AppLogger.debug('ðŸ“Š Migrating to version 2: Enhanced RAG features');
 
     // Add semantic_hash column to query_history if not exists
     try {
@@ -122,7 +122,7 @@ class RagDatabaseHelper {
 
   // Migration to version 3: Add comprehensive RAG models
   Future<void> _migrateToV3(Database db) async {
-    AppLogger.debug('🚀 Migrating to version 3: Comprehensive RAG models');
+    AppLogger.debug('ðŸš€ Migrating to version 3: Comprehensive RAG models');
 
     // Create dua_recommendations table
     await db.execute('''
@@ -497,7 +497,7 @@ class RagDatabaseHelper {
       final result = await db.rawQuery('PRAGMA integrity_check');
       return result.isNotEmpty && result.first['integrity_check'] == 'ok';
     } catch (e) {
-      AppLogger.debug('❌ Database integrity check failed: $e');
+      AppLogger.debug('âŒ Database integrity check failed: $e');
       return false;
     }
   }

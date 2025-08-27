@@ -89,17 +89,17 @@ final nextPrayerProvider = Provider<PrayerType?>((ref) {
 /// Web-safe Qibla compass state notifier
 class WebSafeQiblaNotifier extends StateNotifier<QiblaCompass> {
   WebSafeQiblaNotifier()
-    : super(
-        QiblaCompass(
-          qiblaDirection: kIsWeb ? 45.0 : 0.0,
-          currentDirection: kIsWeb ? 42.0 : 0.0,
-          deviceHeading: kIsWeb ? 43.0 : 0.0,
-          accuracy: kIsWeb ? LocationAccuracy.high : LocationAccuracy.low,
-          lastUpdated: DateTime.now(),
-          isCalibrationNeeded: false,
-          distanceToKaaba: kIsWeb ? 11000000.0 : null, // ~11,000 km to Mecca
-        ),
-      );
+      : super(
+          QiblaCompass(
+            qiblaDirection: kIsWeb ? 45.0 : 0.0,
+            currentDirection: kIsWeb ? 42.0 : 0.0,
+            deviceHeading: kIsWeb ? 43.0 : 0.0,
+            accuracy: kIsWeb ? LocationAccuracy.high : LocationAccuracy.low,
+            lastUpdated: DateTime.now(),
+            isCalibrationNeeded: false,
+            distanceToKaaba: kIsWeb ? 11000000.0 : null, // ~11,000 km to Mecca
+          ),
+        );
 
   void updateDirection(double direction) {
     if (kIsWeb) {
@@ -136,5 +136,5 @@ class WebSafeQiblaNotifier extends StateNotifier<QiblaCompass> {
 
 final webSafeQiblaProvider =
     StateNotifierProvider<WebSafeQiblaNotifier, QiblaCompass>((ref) {
-      return WebSafeQiblaNotifier();
-    });
+  return WebSafeQiblaNotifier();
+});

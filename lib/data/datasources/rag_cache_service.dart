@@ -55,7 +55,7 @@ class RagCacheService {
       await QueryHistoryHelper.insert(queryHistory);
       await _maintainCacheSize();
     } catch (e) {
-      AppLogger.debug('❌ Error caching query response: $e');
+      AppLogger.debug('âŒ Error caching query response: $e');
     }
   }
 
@@ -82,7 +82,7 @@ class RagCacheService {
 
       return null;
     } catch (e) {
-      AppLogger.debug('❌ Error finding similar query: $e');
+      AppLogger.debug('âŒ Error finding similar query: $e');
       return null;
     }
   }
@@ -120,10 +120,9 @@ class RagCacheService {
         'session_id': duaResponse.sessionId,
         'tokens_used': duaResponse.tokensUsed,
         'model': duaResponse.model,
-        'metadata':
-            duaResponse.metadata != null
-                ? jsonEncode(duaResponse.metadata)
-                : null,
+        'metadata': duaResponse.metadata != null
+            ? jsonEncode(duaResponse.metadata)
+            : null,
         'is_favorite': duaResponse.isFavorite ? 1 : 0,
         'is_from_cache': duaResponse.isFromCache ? 1 : 0,
         'created_at': DateTime.now().millisecondsSinceEpoch,
@@ -145,7 +144,7 @@ class RagCacheService {
         });
       }
     } catch (e) {
-      AppLogger.debug('❌ Error caching Du\'a response: $e');
+      AppLogger.debug('âŒ Error caching Du\'a response: $e');
     }
   }
 
@@ -173,24 +172,22 @@ class RagCacheService {
         orderBy: 'relevance_score DESC',
       );
 
-      final sources =
-          sourceRows
-              .map(
-                (row) => DuaSource(
-                  id: row['id'] as String,
-                  title: row['title'] as String,
-                  content: row['content'] as String,
-                  relevanceScore: row['relevance_score'] as double,
-                  url: row['url'] as String?,
-                  reference: row['reference'] as String?,
-                  category: row['category'] as String?,
-                  metadata:
-                      row['metadata'] != null
-                          ? jsonDecode(row['metadata'] as String)
-                          : null,
-                ),
-              )
-              .toList();
+      final sources = sourceRows
+          .map(
+            (row) => DuaSource(
+              id: row['id'] as String,
+              title: row['title'] as String,
+              content: row['content'] as String,
+              relevanceScore: row['relevance_score'] as double,
+              url: row['url'] as String?,
+              reference: row['reference'] as String?,
+              category: row['category'] as String?,
+              metadata: row['metadata'] != null
+                  ? jsonDecode(row['metadata'] as String)
+                  : null,
+            ),
+          )
+          .toList();
 
       return DuaResponse(
         id: responseRow['id'] as String,
@@ -205,15 +202,14 @@ class RagCacheService {
         sessionId: responseRow['session_id'] as String?,
         tokensUsed: responseRow['tokens_used'] as int?,
         model: responseRow['model'] as String?,
-        metadata:
-            responseRow['metadata'] != null
-                ? jsonDecode(responseRow['metadata'] as String)
-                : null,
+        metadata: responseRow['metadata'] != null
+            ? jsonDecode(responseRow['metadata'] as String)
+            : null,
         isFavorite: (responseRow['is_favorite'] as int) == 1,
         isFromCache: (responseRow['is_from_cache'] as int) == 1,
       );
     } catch (e) {
-      AppLogger.debug('❌ Error retrieving cached Du\'a response: $e');
+      AppLogger.debug('âŒ Error retrieving cached Du\'a response: $e');
       return null;
     }
   }
@@ -225,7 +221,7 @@ class RagCacheService {
     try {
       await DuaRecommendationHelper.insert(recommendation);
     } catch (e) {
-      AppLogger.debug('❌ Error caching Du\'a recommendation: $e');
+      AppLogger.debug('âŒ Error caching Du\'a recommendation: $e');
     }
   }
 
@@ -270,7 +266,7 @@ class RagCacheService {
           return preference.value as T?;
       }
     } catch (e) {
-      AppLogger.debug('❌ Error getting user preference: $e');
+      AppLogger.debug('âŒ Error getting user preference: $e');
       return null;
     }
   }
@@ -303,7 +299,7 @@ class RagCacheService {
 
       await UserPreferenceHelper.insertOrUpdate(preference);
     } catch (e) {
-      AppLogger.debug('❌ Error setting user preference: $e');
+      AppLogger.debug('âŒ Error setting user preference: $e');
     }
   }
 
@@ -321,7 +317,7 @@ class RagCacheService {
 
       return ragContext;
     } catch (e) {
-      AppLogger.debug('❌ Error getting user RAG context: $e');
+      AppLogger.debug('âŒ Error getting user RAG context: $e');
       return {};
     }
   }
@@ -333,7 +329,7 @@ class RagCacheService {
     try {
       await AudioCacheHelper.insert(audioCache);
     } catch (e) {
-      AppLogger.debug('❌ Error caching audio file: $e');
+      AppLogger.debug('âŒ Error caching audio file: $e');
     }
   }
 
@@ -345,7 +341,7 @@ class RagCacheService {
     try {
       return await AudioCacheHelper.getByDuaId(duaId, quality: quality);
     } catch (e) {
-      AppLogger.debug('❌ Error getting cached audio: $e');
+      AppLogger.debug('âŒ Error getting cached audio: $e');
       return null;
     }
   }
@@ -355,7 +351,7 @@ class RagCacheService {
     try {
       await AudioCacheHelper.cleanupExpired();
     } catch (e) {
-      AppLogger.debug('❌ Error cleaning up expired audio: $e');
+      AppLogger.debug('âŒ Error cleaning up expired audio: $e');
     }
   }
 
@@ -389,7 +385,7 @@ class RagCacheService {
         );
       }
     } catch (e) {
-      AppLogger.debug('❌ Error maintaining cache size: $e');
+      AppLogger.debug('âŒ Error maintaining cache size: $e');
     }
   }
 
@@ -411,7 +407,7 @@ class RagCacheService {
         whereArgs: [cutoffTime],
       );
     } catch (e) {
-      AppLogger.debug('❌ Error cleaning up expired cache: $e');
+      AppLogger.debug('âŒ Error cleaning up expired cache: $e');
     }
   }
 
@@ -440,11 +436,10 @@ class RagCacheService {
         [dayAgo],
       );
 
-      final hitRate =
-          totalQueries.first['count'] as int > 0
-              ? (cacheHits.first['count'] as int) /
-                  (totalQueries.first['count'] as int)
-              : 0.0;
+      final hitRate = totalQueries.first['count'] as int > 0
+          ? (cacheHits.first['count'] as int) /
+              (totalQueries.first['count'] as int)
+          : 0.0;
 
       return {
         ...stats,
@@ -454,7 +449,7 @@ class RagCacheService {
         'max_cache_size': _maxCacheSize,
       };
     } catch (e) {
-      AppLogger.debug('❌ Error getting cache stats: $e');
+      AppLogger.debug('âŒ Error getting cache stats: $e');
       return {};
     }
   }
@@ -492,9 +487,9 @@ class RagCacheService {
       await db.delete('dua_sources');
       await db.delete('dua_recommendations');
       await db.delete('audio_cache');
-      AppLogger.debug('✅ All cache cleared');
+      AppLogger.debug('âœ… All cache cleared');
     } catch (e) {
-      AppLogger.debug('❌ Error clearing cache: $e');
+      AppLogger.debug('âŒ Error clearing cache: $e');
     }
   }
 }

@@ -203,14 +203,21 @@ class OfflineSearchInitializationService {
     return [
       {
         'id': 'morning_adhkar_1',
-        'text': 'اللهم بك أصبحنا وبك أمسينا وبك نحيا وبك نموت وإليك النشور',
+        'text':
+            'Ø§Ù„Ù„Ù‡Ù… Ø¨Ùƒ Ø£ØµØ¨Ø­Ù†Ø§ ÙˆØ¨Ùƒ Ø£Ù…Ø³ÙŠÙ†Ø§ ÙˆØ¨Ùƒ Ù†Ø­ÙŠØ§ ÙˆØ¨Ùƒ Ù†Ù…ÙˆØª ÙˆØ¥Ù„ÙŠÙƒ Ø§Ù„Ù†Ø´ÙˆØ±',
         'translation':
             'O Allah, by You we enter the morning and by You we enter the evening, by You we live and by You we die, and to You is the resurrection.',
         'transliteration':
             'Allahumma bika asbahna wa bika amsayna wa bika nahya wa bika namutu wa ilayka an-nushur',
         'language': 'ar',
         'category': 'morning',
-        'keywords': ['صباح', 'morning', 'أصبحنا', 'awakening', 'protection'],
+        'keywords': [
+          'ØµØ¨Ø§Ø­',
+          'morning',
+          'Ø£ØµØ¨Ø­Ù†Ø§',
+          'awakening',
+          'protection'
+        ],
       },
       {
         'id': 'morning_adhkar_1_en',
@@ -233,14 +240,21 @@ class OfflineSearchInitializationService {
       },
       {
         'id': 'istighfar_1',
-        'text': 'أستغفر الله الذي لا إله إلا هو الحي القيوم وأتوب إليه',
+        'text':
+            'Ø£Ø³ØªØºÙØ± Ø§Ù„Ù„Ù‡ Ø§Ù„Ø°ÙŠ Ù„Ø§ Ø¥Ù„Ù‡ Ø¥Ù„Ø§ Ù‡Ùˆ Ø§Ù„Ø­ÙŠ Ø§Ù„Ù‚ÙŠÙˆÙ… ÙˆØ£ØªÙˆØ¨ Ø¥Ù„ÙŠÙ‡',
         'translation':
             'I seek forgiveness from Allah, there is no god but Him, the Living, the Eternal, and I repent to Him.',
         'transliteration':
             'Astaghfir Allah al-ladhi la ilaha illa huwa al-hayy al-qayyum wa atubu ilayh',
         'language': 'ar',
         'category': 'forgiveness',
-        'keywords': ['استغفار', 'forgiveness', 'repentance', 'mercy', 'توبة'],
+        'keywords': [
+          'Ø§Ø³ØªØºÙØ§Ø±',
+          'forgiveness',
+          'repentance',
+          'mercy',
+          'ØªÙˆØ¨Ø©'
+        ],
       },
       {
         'id': 'istighfar_1_en',
@@ -256,14 +270,21 @@ class OfflineSearchInitializationService {
       },
       {
         'id': 'travel_dua_1',
-        'text': 'بسم الله، توكلت على الله، لا حول ولا قوة إلا بالله',
+        'text':
+            'Ø¨Ø³Ù… Ø§Ù„Ù„Ù‡ØŒ ØªÙˆÙƒÙ„Øª Ø¹Ù„Ù‰ Ø§Ù„Ù„Ù‡ØŒ Ù„Ø§ Ø­ÙˆÙ„ ÙˆÙ„Ø§ Ù‚ÙˆØ© Ø¥Ù„Ø§ Ø¨Ø§Ù„Ù„Ù‡',
         'translation':
             'In the name of Allah, I place my trust in Allah, there is no power except with Allah.',
         'transliteration':
             'Bismillah, tawakkaltu ala Allah, la hawla wa la quwwata illa billah',
         'language': 'ar',
         'category': 'travel',
-        'keywords': ['سفر', 'travel', 'بسم الله', 'protection', 'توكل'],
+        'keywords': [
+          'Ø³ÙØ±',
+          'travel',
+          'Ø¨Ø³Ù… Ø§Ù„Ù„Ù‡',
+          'protection',
+          'ØªÙˆÙƒÙ„'
+        ],
       },
       {
         'id': 'travel_dua_1_en',
@@ -279,12 +300,18 @@ class OfflineSearchInitializationService {
       },
       {
         'id': 'before_food_1',
-        'text': 'بسم الله',
+        'text': 'Ø¨Ø³Ù… Ø§Ù„Ù„Ù‡',
         'translation': 'In the name of Allah',
         'transliteration': 'Bismillah',
         'language': 'ar',
         'category': 'food',
-        'keywords': ['طعام', 'food', 'بسم الله', 'eating', 'blessing'],
+        'keywords': [
+          'Ø·Ø¹Ø§Ù…',
+          'food',
+          'Ø¨Ø³Ù… Ø§Ù„Ù„Ù‡',
+          'eating',
+          'blessing'
+        ],
       },
       {
         'id': 'before_food_1_en',
@@ -297,14 +324,21 @@ class OfflineSearchInitializationService {
       },
       {
         'id': 'after_food_1',
-        'text': 'الحمد لله الذي أطعمني هذا ورزقنيه من غير حول مني ولا قوة',
+        'text':
+            'Ø§Ù„Ø­Ù…Ø¯ Ù„Ù„Ù‡ Ø§Ù„Ø°ÙŠ Ø£Ø·Ø¹Ù…Ù†ÙŠ Ù‡Ø°Ø§ ÙˆØ±Ø²Ù‚Ù†ÙŠÙ‡ Ù…Ù† ØºÙŠØ± Ø­ÙˆÙ„ Ù…Ù†ÙŠ ÙˆÙ„Ø§ Ù‚ÙˆØ©',
         'translation':
             'All praise is due to Allah who fed me this and provided it for me without any strength or power on my part.',
         'transliteration':
             'Alhamdulillahi alladhi at\'amani hadha wa razaqanihi min ghayri hawlin minni wa la quwwah',
         'language': 'ar',
         'category': 'food',
-        'keywords': ['طعام', 'food', 'الحمد لله', 'gratitude', 'thanks'],
+        'keywords': [
+          'Ø·Ø¹Ø§Ù…',
+          'food',
+          'Ø§Ù„Ø­Ù…Ø¯ Ù„Ù„Ù‡',
+          'gratitude',
+          'thanks'
+        ],
       },
       {
         'id': 'after_food_1_en',
@@ -320,12 +354,12 @@ class OfflineSearchInitializationService {
       },
       {
         'id': 'sleep_dua_1',
-        'text': 'اللهم باسمك أموت وأحيا',
+        'text': 'Ø§Ù„Ù„Ù‡Ù… Ø¨Ø§Ø³Ù…Ùƒ Ø£Ù…ÙˆØª ÙˆØ£Ø­ÙŠØ§',
         'translation': 'O Allah, in Your name I die and I live.',
         'transliteration': 'Allahumma bismika amutu wa ahya',
         'language': 'ar',
         'category': 'sleep',
-        'keywords': ['نوم', 'sleep', 'راحة', 'rest', 'protection'],
+        'keywords': ['Ù†ÙˆÙ…', 'sleep', 'Ø±Ø§Ø­Ø©', 'rest', 'protection'],
       },
       {
         'id': 'sleep_dua_1_en',
@@ -338,14 +372,15 @@ class OfflineSearchInitializationService {
       },
       {
         'id': 'general_dua_1',
-        'text': 'ربنا آتنا في الدنيا حسنة وفي الآخرة حسنة وقنا عذاب النار',
+        'text':
+            'Ø±Ø¨Ù†Ø§ Ø¢ØªÙ†Ø§ ÙÙŠ Ø§Ù„Ø¯Ù†ÙŠØ§ Ø­Ø³Ù†Ø© ÙˆÙÙŠ Ø§Ù„Ø¢Ø®Ø±Ø© Ø­Ø³Ù†Ø© ÙˆÙ‚Ù†Ø§ Ø¹Ø°Ø§Ø¨ Ø§Ù„Ù†Ø§Ø±',
         'translation':
             'Our Lord, give us good in this world and good in the next world, and save us from the punishment of the Fire.',
         'transliteration':
             'Rabbana atina fi\'d-dunya hasanatan wa fi\'l-akhirati hasanatan wa qina \'adhab an-nar',
         'language': 'ar',
         'category': 'general',
-        'keywords': ['عام', 'general', 'دعاء', 'prayer', 'خير'],
+        'keywords': ['Ø¹Ø§Ù…', 'general', 'Ø¯Ø¹Ø§Ø¡', 'prayer', 'Ø®ÙŠØ±'],
       },
       {
         'id': 'general_dua_1_en',
@@ -361,12 +396,18 @@ class OfflineSearchInitializationService {
       },
       {
         'id': 'guidance_dua_1',
-        'text': 'اللهم اهدني فيمن هديت',
+        'text': 'Ø§Ù„Ù„Ù‡Ù… Ø§Ù‡Ø¯Ù†ÙŠ ÙÙŠÙ…Ù† Ù‡Ø¯ÙŠØª',
         'translation': 'O Allah, guide me among those You have guided.',
         'transliteration': 'Allahumma ahdini fiman hadayt',
         'language': 'ar',
         'category': 'guidance',
-        'keywords': ['هداية', 'guidance', 'اهدني', 'direction', 'path'],
+        'keywords': [
+          'Ù‡Ø¯Ø§ÙŠØ©',
+          'guidance',
+          'Ø§Ù‡Ø¯Ù†ÙŠ',
+          'direction',
+          'path'
+        ],
       },
       {
         'id': 'guidance_dua_1_en',

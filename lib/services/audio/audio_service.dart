@@ -270,18 +270,17 @@ class DuaAudioService {
     List<DuaEntity> allDuas,
   ) async {
     // Simple implementation - in production, this would use more sophisticated RAG
-    final relatedDuas =
-        allDuas
-            .where(
-              (dua) =>
-                  dua.id != currentDua.id &&
-                  dua.category == currentDua.category &&
-                  dua.ragConfidence.score > 0.5,
-            )
-            .toList()
-          ..sort(
-            (a, b) => b.ragConfidence.score.compareTo(a.ragConfidence.score),
-          );
+    final relatedDuas = allDuas
+        .where(
+          (dua) =>
+              dua.id != currentDua.id &&
+              dua.category == currentDua.category &&
+              dua.ragConfidence.score > 0.5,
+        )
+        .toList()
+      ..sort(
+        (a, b) => b.ragConfidence.score.compareTo(a.ragConfidence.score),
+      );
 
     return relatedDuas.take(10).toList();
   }

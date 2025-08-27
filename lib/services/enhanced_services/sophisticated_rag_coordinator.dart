@@ -157,16 +157,16 @@ class SophisticatedQueryResult {
   });
 
   Map<String, dynamic> toJson() => {
-    'query_id': queryId,
-    'original_query': originalQuery,
-    'processed_query': processedQuery,
-    'query_type': queryType.toString(),
-    'conversation_id': conversationId,
-    'contextual_prompt': contextualPrompt,
-    'processing_time_ms': processingTime.inMilliseconds,
-    'timestamp': timestamp.toIso8601String(),
-    'additional_context': additionalContext,
-  };
+        'query_id': queryId,
+        'original_query': originalQuery,
+        'processed_query': processedQuery,
+        'query_type': queryType.toString(),
+        'conversation_id': conversationId,
+        'contextual_prompt': contextualPrompt,
+        'processing_time_ms': processingTime.inMilliseconds,
+        'timestamp': timestamp.toIso8601String(),
+        'additional_context': additionalContext,
+      };
 }
 
 /// Proactive suggestion
@@ -190,14 +190,14 @@ class ProactiveSuggestion {
   });
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'category': category,
-    'trigger': trigger.toString(),
-    'content': content,
-    'confidence': confidence,
-    'timestamp': timestamp.toIso8601String(),
-    'metadata': metadata,
-  };
+        'id': id,
+        'category': category,
+        'trigger': trigger.toString(),
+        'content': content,
+        'confidence': confidence,
+        'timestamp': timestamp.toIso8601String(),
+        'metadata': metadata,
+      };
 }
 
 /// Types of suggestion triggers
@@ -223,10 +223,10 @@ class ContextUpdate {
   });
 
   Map<String, dynamic> toJson() => {
-    'type': type.toString(),
-    'data': data,
-    'timestamp': timestamp.toIso8601String(),
-  };
+        'type': type.toString(),
+        'data': data,
+        'timestamp': timestamp.toIso8601String(),
+      };
 }
 
 /// Types of context updates

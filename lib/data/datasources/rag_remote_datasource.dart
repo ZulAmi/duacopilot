@@ -33,10 +33,9 @@ class RagRemoteDataSourceImpl implements RagRemoteDataSource {
         'id': response['id'] as String,
         'query': response['query'] as String,
         'response': response['response'] as String,
-        'timestamp':
-            DateTime.parse(
-              response['timestamp'] as String,
-            ).millisecondsSinceEpoch,
+        'timestamp': DateTime.parse(
+          response['timestamp'] as String,
+        ).millisecondsSinceEpoch,
         'response_time': response['response_time'] as int,
         'metadata': null,
         'sources': (response['sources'] as List<String>).join(','),

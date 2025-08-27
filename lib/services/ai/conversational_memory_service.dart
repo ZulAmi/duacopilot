@@ -9,7 +9,8 @@ import '../secure_storage/secure_storage_service.dart';
 /// and creates truly conversational AI interactions
 class ConversationalMemoryService {
   static ConversationalMemoryService? _instance;
-  static ConversationalMemoryService get instance => _instance ??= ConversationalMemoryService._();
+  static ConversationalMemoryService get instance =>
+      _instance ??= ConversationalMemoryService._();
 
   ConversationalMemoryService._();
 
@@ -20,7 +21,8 @@ class ConversationalMemoryService {
   String? _currentSessionId;
   final Map<String, ConversationSession> _activeSessions = {};
   // ignore: unused_field
-  final Map<String, UserProfile> _userProfiles = {}; // For future user profiling
+  final Map<String, UserProfile> _userProfiles =
+      {}; // For future user profiling
 
   // Memory types
   final List<ConversationTurn> _shortTermMemory = []; // Current session
@@ -410,7 +412,8 @@ class ConversationPattern {
         'timestamp': timestamp.toIso8601String(),
       };
 
-  factory ConversationPattern.fromJson(Map<String, dynamic> json) => ConversationPattern(
+  factory ConversationPattern.fromJson(Map<String, dynamic> json) =>
+      ConversationPattern(
         id: json['id'],
         userQuery: json['userQuery'],
         topic: json['topic'],

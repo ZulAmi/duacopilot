@@ -59,12 +59,11 @@ class _ShimmerEffectState extends State<ShimmerEffect>
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [baseColor, highlightColor, baseColor],
-              stops:
-                  [
-                    _animation.value - 0.3,
-                    _animation.value,
-                    _animation.value + 0.3,
-                  ].map((stop) => stop.clamp(0.0, 1.0)).toList(),
+              stops: [
+                _animation.value - 0.3,
+                _animation.value,
+                _animation.value + 0.3,
+              ].map((stop) => stop.clamp(0.0, 1.0)).toList(),
             ).createShader(bounds);
           },
           child: widget.child,
@@ -128,7 +127,7 @@ class RAGLoadingWidget extends StatelessWidget {
               ),
               boxShadow: [
                 BoxShadow(
-                  color: colorScheme.primary.withValues(alpha: 0.3),
+                  color: colorScheme.primary.withOpacity(0.3),
                   blurRadius: 20,
                   spreadRadius: 2,
                 ),

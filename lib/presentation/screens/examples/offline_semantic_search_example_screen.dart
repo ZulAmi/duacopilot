@@ -10,10 +10,12 @@ class OfflineSemanticSearchExampleScreen extends StatefulWidget {
   const OfflineSemanticSearchExampleScreen({super.key});
 
   @override
-  State<OfflineSemanticSearchExampleScreen> createState() => _OfflineSemanticSearchExampleScreenState();
+  State<OfflineSemanticSearchExampleScreen> createState() =>
+      _OfflineSemanticSearchExampleScreenState();
 }
 
-class _OfflineSemanticSearchExampleScreenState extends State<OfflineSemanticSearchExampleScreen> {
+class _OfflineSemanticSearchExampleScreenState
+    extends State<OfflineSemanticSearchExampleScreen> {
   final TextEditingController _queryController = TextEditingController();
   bool _isLoading = false;
   bool _isInitialized = false;
@@ -120,7 +122,9 @@ class _OfflineSemanticSearchExampleScreenState extends State<OfflineSemanticSear
                         ),
                         const SizedBox(width: 8),
                         Text(
-                          _isInitialized ? 'Offline Search Ready' : 'Initializing...',
+                          _isInitialized
+                              ? 'Offline Search Ready'
+                              : 'Initializing...',
                         ),
                       ],
                     ),
@@ -158,7 +162,8 @@ class _OfflineSemanticSearchExampleScreenState extends State<OfflineSemanticSear
                     TextField(
                       controller: _queryController,
                       decoration: const InputDecoration(
-                        hintText: 'Enter your search query (e.g., "morning prayer", "forgiveness")',
+                        hintText:
+                            'Enter your search query (e.g., "morning prayer", "forgiveness")',
                         border: OutlineInputBorder(),
                       ),
                       onSubmitted: (_) => _performSearch(),
@@ -212,7 +217,9 @@ class _OfflineSemanticSearchExampleScreenState extends State<OfflineSemanticSear
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: _isInitialized && !_isLoading ? _performSearch : null,
+                        onPressed: _isInitialized && !_isLoading
+                            ? _performSearch
+                            : null,
                         child: _isLoading
                             ? const SizedBox(
                                 height: 20,
@@ -282,8 +289,12 @@ class _OfflineSemanticSearchExampleScreenState extends State<OfflineSemanticSear
             Row(
               children: [
                 Icon(
-                  result.metadata?['search_type'] == 'online' ? Icons.cloud_done : Icons.offline_bolt,
-                  color: result.metadata?['search_type'] == 'online' ? Colors.blue : Colors.green,
+                  result.metadata?['search_type'] == 'online'
+                      ? Icons.cloud_done
+                      : Icons.offline_bolt,
+                  color: result.metadata?['search_type'] == 'online'
+                      ? Colors.blue
+                      : Colors.green,
                 ),
                 const SizedBox(width: 8),
                 Expanded(
@@ -304,7 +315,8 @@ class _OfflineSemanticSearchExampleScreenState extends State<OfflineSemanticSear
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
-                    result.metadata?['quality']?.toString().toUpperCase() ?? 'UNKNOWN',
+                    result.metadata?['quality']?.toString().toUpperCase() ??
+                        'UNKNOWN',
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 12,
@@ -340,15 +352,22 @@ class _OfflineSemanticSearchExampleScreenState extends State<OfflineSemanticSear
                           // Du'a Text
                           Text(
                             recommendation.dua.arabicText,
-                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge
+                                ?.copyWith(fontWeight: FontWeight.bold),
                             textDirection: TextDirection.rtl,
                           ),
 
-                          if (recommendation.dua.transliteration.isNotEmpty) ...[
+                          if (recommendation
+                              .dua.transliteration.isNotEmpty) ...[
                             const SizedBox(height: 8),
                             Text(
                               recommendation.dua.transliteration,
-                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontStyle: FontStyle.italic),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(fontStyle: FontStyle.italic),
                             ),
                           ],
 
@@ -372,7 +391,7 @@ class _OfflineSemanticSearchExampleScreenState extends State<OfflineSemanticSear
                                 decoration: BoxDecoration(
                                   color: Theme.of(
                                     context,
-                                  ).primaryColor.withValues(alpha: 0.1),
+                                  ).primaryColor.withOpacity(0.1),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Text(
@@ -396,7 +415,10 @@ class _OfflineSemanticSearchExampleScreenState extends State<OfflineSemanticSear
                             const SizedBox(height: 4),
                             Text(
                               recommendation.matchReason,
-                              style: Theme.of(context).textTheme.bodySmall?.copyWith(fontStyle: FontStyle.italic),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
+                                  ?.copyWith(fontStyle: FontStyle.italic),
                             ),
                           ],
                         ],
@@ -434,7 +456,8 @@ class _OfflineSemanticSearchExampleScreenState extends State<OfflineSemanticSear
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Successfully synced with remote server')),
+          const SnackBar(
+              content: Text('Successfully synced with remote server')),
         );
       }
 

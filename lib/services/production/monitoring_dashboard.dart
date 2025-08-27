@@ -117,12 +117,11 @@ class MonitoringDashboard {
 
     // Calculate uptime
     final launchTime = prefs.getInt('app_launch_time');
-    final uptime =
-        launchTime != null
-            ? DateTime.now().difference(
-              DateTime.fromMillisecondsSinceEpoch(launchTime),
-            )
-            : Duration.zero;
+    final uptime = launchTime != null
+        ? DateTime.now().difference(
+            DateTime.fromMillisecondsSinceEpoch(launchTime),
+          )
+        : Duration.zero;
 
     return AppMetrics(
       version: appVersion,
@@ -452,24 +451,25 @@ class DashboardData {
       'Errors: ${errorMetrics.totalErrors}';
 
   Map<String, dynamic> toJson() => {
-    'timestamp': timestamp.toIso8601String(),
-    'appMetrics': appMetrics.toJson(),
-    'ragMetrics': ragMetrics.toJson(),
-    'errorMetrics': errorMetrics.toJson(),
-    'performanceMetrics': performanceMetrics.toJson(),
-    'userMetrics': userMetrics.toJson(),
-    'systemHealth': systemHealth.toJson(),
-  };
+        'timestamp': timestamp.toIso8601String(),
+        'appMetrics': appMetrics.toJson(),
+        'ragMetrics': ragMetrics.toJson(),
+        'errorMetrics': errorMetrics.toJson(),
+        'performanceMetrics': performanceMetrics.toJson(),
+        'userMetrics': userMetrics.toJson(),
+        'systemHealth': systemHealth.toJson(),
+      };
 
   factory DashboardData.fromJson(Map<String, dynamic> json) => DashboardData(
-    timestamp: DateTime.parse(json['timestamp']),
-    appMetrics: AppMetrics.fromJson(json['appMetrics']),
-    ragMetrics: RAGMetrics.fromJson(json['ragMetrics']),
-    errorMetrics: ErrorMetrics.fromJson(json['errorMetrics']),
-    performanceMetrics: PerformanceMetrics.fromJson(json['performanceMetrics']),
-    userMetrics: UserMetrics.fromJson(json['userMetrics']),
-    systemHealth: SystemHealth.fromJson(json['systemHealth']),
-  );
+        timestamp: DateTime.parse(json['timestamp']),
+        appMetrics: AppMetrics.fromJson(json['appMetrics']),
+        ragMetrics: RAGMetrics.fromJson(json['ragMetrics']),
+        errorMetrics: ErrorMetrics.fromJson(json['errorMetrics']),
+        performanceMetrics:
+            PerformanceMetrics.fromJson(json['performanceMetrics']),
+        userMetrics: UserMetrics.fromJson(json['userMetrics']),
+        systemHealth: SystemHealth.fromJson(json['systemHealth']),
+      );
 }
 
 /// Application metrics
@@ -493,24 +493,24 @@ class AppMetrics {
   });
 
   Map<String, dynamic> toJson() => {
-    'version': version,
-    'buildNumber': buildNumber,
-    'uptime': uptime.inMilliseconds,
-    'sessionCount': sessionCount,
-    'activeUsers': activeUsers,
-    'memoryUsage': memoryUsage.toJson(),
-    'platformInfo': platformInfo.toJson(),
-  };
+        'version': version,
+        'buildNumber': buildNumber,
+        'uptime': uptime.inMilliseconds,
+        'sessionCount': sessionCount,
+        'activeUsers': activeUsers,
+        'memoryUsage': memoryUsage.toJson(),
+        'platformInfo': platformInfo.toJson(),
+      };
 
   factory AppMetrics.fromJson(Map<String, dynamic> json) => AppMetrics(
-    version: json['version'],
-    buildNumber: json['buildNumber'],
-    uptime: Duration(milliseconds: json['uptime']),
-    sessionCount: json['sessionCount'],
-    activeUsers: json['activeUsers'],
-    memoryUsage: MemoryUsage.fromJson(json['memoryUsage']),
-    platformInfo: PlatformInfo.fromJson(json['platformInfo']),
-  );
+        version: json['version'],
+        buildNumber: json['buildNumber'],
+        uptime: Duration(milliseconds: json['uptime']),
+        sessionCount: json['sessionCount'],
+        activeUsers: json['activeUsers'],
+        memoryUsage: MemoryUsage.fromJson(json['memoryUsage']),
+        platformInfo: PlatformInfo.fromJson(json['platformInfo']),
+      );
 }
 
 /// RAG system metrics
@@ -536,29 +536,28 @@ class RAGMetrics {
   });
 
   Map<String, dynamic> toJson() => {
-    'totalQueries': totalQueries,
-    'successfulQueries': successfulQueries,
-    'failedQueries': failedQueries,
-    'successRate': successRate,
-    'averageResponseTime': averageResponseTime,
-    'cacheHitRate': cacheHitRate,
-    'recentQueries': recentQueries.map((q) => q.toJson()).toList(),
-    'indexHealth': indexHealth,
-  };
+        'totalQueries': totalQueries,
+        'successfulQueries': successfulQueries,
+        'failedQueries': failedQueries,
+        'successRate': successRate,
+        'averageResponseTime': averageResponseTime,
+        'cacheHitRate': cacheHitRate,
+        'recentQueries': recentQueries.map((q) => q.toJson()).toList(),
+        'indexHealth': indexHealth,
+      };
 
   factory RAGMetrics.fromJson(Map<String, dynamic> json) => RAGMetrics(
-    totalQueries: json['totalQueries'],
-    successfulQueries: json['successfulQueries'],
-    failedQueries: json['failedQueries'],
-    successRate: json['successRate'],
-    averageResponseTime: json['averageResponseTime'],
-    cacheHitRate: json['cacheHitRate'],
-    recentQueries:
-        (json['recentQueries'] as List)
+        totalQueries: json['totalQueries'],
+        successfulQueries: json['successfulQueries'],
+        failedQueries: json['failedQueries'],
+        successRate: json['successRate'],
+        averageResponseTime: json['averageResponseTime'],
+        cacheHitRate: json['cacheHitRate'],
+        recentQueries: (json['recentQueries'] as List)
             .map((q) => RAGQueryInfo.fromJson(q))
             .toList(),
-    indexHealth: json['indexHealth'],
-  );
+        indexHealth: json['indexHealth'],
+      );
 }
 
 /// Error metrics
@@ -580,25 +579,24 @@ class ErrorMetrics {
   });
 
   Map<String, dynamic> toJson() => {
-    'totalErrors': totalErrors,
-    'crashCount': crashCount,
-    'networkErrors': networkErrors,
-    'ragErrors': ragErrors,
-    'errorRate': errorRate,
-    'recentErrors': recentErrors.map((e) => e.toJson()).toList(),
-  };
+        'totalErrors': totalErrors,
+        'crashCount': crashCount,
+        'networkErrors': networkErrors,
+        'ragErrors': ragErrors,
+        'errorRate': errorRate,
+        'recentErrors': recentErrors.map((e) => e.toJson()).toList(),
+      };
 
   factory ErrorMetrics.fromJson(Map<String, dynamic> json) => ErrorMetrics(
-    totalErrors: json['totalErrors'],
-    crashCount: json['crashCount'],
-    networkErrors: json['networkErrors'],
-    ragErrors: json['ragErrors'],
-    errorRate: json['errorRate'],
-    recentErrors:
-        (json['recentErrors'] as List)
+        totalErrors: json['totalErrors'],
+        crashCount: json['crashCount'],
+        networkErrors: json['networkErrors'],
+        ragErrors: json['ragErrors'],
+        errorRate: json['errorRate'],
+        recentErrors: (json['recentErrors'] as List)
             .map((e) => ErrorInfo.fromJson(e))
             .toList(),
-  );
+      );
 }
 
 /// Performance metrics
@@ -620,13 +618,13 @@ class PerformanceMetrics {
   });
 
   Map<String, dynamic> toJson() => {
-    'appStartTime': appStartTime,
-    'averageFrameRenderTime': averageFrameRenderTime,
-    'networkLatency': networkLatency,
-    'cpuUsage': cpuUsage,
-    'batteryLevel': batteryLevel,
-    'networkType': networkType,
-  };
+        'appStartTime': appStartTime,
+        'averageFrameRenderTime': averageFrameRenderTime,
+        'networkLatency': networkLatency,
+        'cpuUsage': cpuUsage,
+        'batteryLevel': batteryLevel,
+        'networkType': networkType,
+      };
 
   factory PerformanceMetrics.fromJson(Map<String, dynamic> json) =>
       PerformanceMetrics(
@@ -656,20 +654,20 @@ class UserMetrics {
   });
 
   Map<String, dynamic> toJson() => {
-    'dailyActiveUsers': dailyActiveUsers,
-    'sessionDuration': sessionDuration.inMilliseconds,
-    'screenViews': screenViews,
-    'userActions': userActions,
-    'retentionRate': retentionRate,
-  };
+        'dailyActiveUsers': dailyActiveUsers,
+        'sessionDuration': sessionDuration.inMilliseconds,
+        'screenViews': screenViews,
+        'userActions': userActions,
+        'retentionRate': retentionRate,
+      };
 
   factory UserMetrics.fromJson(Map<String, dynamic> json) => UserMetrics(
-    dailyActiveUsers: json['dailyActiveUsers'],
-    sessionDuration: Duration(milliseconds: json['sessionDuration']),
-    screenViews: json['screenViews'],
-    userActions: json['userActions'],
-    retentionRate: json['retentionRate'],
-  );
+        dailyActiveUsers: json['dailyActiveUsers'],
+        sessionDuration: Duration(milliseconds: json['sessionDuration']),
+        screenViews: json['screenViews'],
+        userActions: json['userActions'],
+        retentionRate: json['retentionRate'],
+      );
 }
 
 /// System health indicators
@@ -684,13 +682,13 @@ class SystemHealth {
   SystemHealth();
 
   Map<String, dynamic> toJson() => {
-    'firebaseConnected': firebaseConnected,
-    'ragServiceHealthy': ragServiceHealthy,
-    'cacheHealthy': cacheHealthy,
-    'analyticsWorking': analyticsWorking,
-    'crashReportingWorking': crashReportingWorking,
-    'overallScore': overallScore,
-  };
+        'firebaseConnected': firebaseConnected,
+        'ragServiceHealthy': ragServiceHealthy,
+        'cacheHealthy': cacheHealthy,
+        'analyticsWorking': analyticsWorking,
+        'crashReportingWorking': crashReportingWorking,
+        'overallScore': overallScore,
+      };
 
   factory SystemHealth.fromJson(Map<String, dynamic> json) {
     final health = SystemHealth();
@@ -717,16 +715,16 @@ class MemoryUsage {
   });
 
   Map<String, dynamic> toJson() => {
-    'used': used,
-    'available': available,
-    'percentage': percentage,
-  };
+        'used': used,
+        'available': available,
+        'percentage': percentage,
+      };
 
   factory MemoryUsage.fromJson(Map<String, dynamic> json) => MemoryUsage(
-    used: json['used'],
-    available: json['available'],
-    percentage: json['percentage'],
-  );
+        used: json['used'],
+        available: json['available'],
+        percentage: json['percentage'],
+      );
 }
 
 class PlatformInfo {
@@ -741,16 +739,16 @@ class PlatformInfo {
   });
 
   Map<String, dynamic> toJson() => {
-    'platform': platform,
-    'version': version,
-    'device': device,
-  };
+        'platform': platform,
+        'version': version,
+        'device': device,
+      };
 
   factory PlatformInfo.fromJson(Map<String, dynamic> json) => PlatformInfo(
-    platform: json['platform'],
-    version: json['version'],
-    device: json['device'],
-  );
+        platform: json['platform'],
+        version: json['version'],
+        device: json['device'],
+      );
 }
 
 class RAGQueryInfo {
@@ -767,18 +765,18 @@ class RAGQueryInfo {
   });
 
   Map<String, dynamic> toJson() => {
-    'query': query,
-    'responseTime': responseTime,
-    'success': success,
-    'timestamp': timestamp.toIso8601String(),
-  };
+        'query': query,
+        'responseTime': responseTime,
+        'success': success,
+        'timestamp': timestamp.toIso8601String(),
+      };
 
   factory RAGQueryInfo.fromJson(Map<String, dynamic> json) => RAGQueryInfo(
-    query: json['query'],
-    responseTime: json['responseTime'],
-    success: json['success'],
-    timestamp: DateTime.parse(json['timestamp']),
-  );
+        query: json['query'],
+        responseTime: json['responseTime'],
+        success: json['success'],
+        timestamp: DateTime.parse(json['timestamp']),
+      );
 }
 
 class ErrorInfo {
@@ -795,18 +793,18 @@ class ErrorInfo {
   });
 
   Map<String, dynamic> toJson() => {
-    'error': error,
-    'stackTrace': stackTrace,
-    'type': type,
-    'timestamp': timestamp.toIso8601String(),
-  };
+        'error': error,
+        'stackTrace': stackTrace,
+        'type': type,
+        'timestamp': timestamp.toIso8601String(),
+      };
 
   factory ErrorInfo.fromJson(Map<String, dynamic> json) => ErrorInfo(
-    error: json['error'],
-    stackTrace: json['stackTrace'],
-    type: json['type'],
-    timestamp: DateTime.parse(json['timestamp']),
-  );
+        error: json['error'],
+        stackTrace: json['stackTrace'],
+        type: json['type'],
+        timestamp: DateTime.parse(json['timestamp']),
+      );
 }
 
 /// Custom exception for monitoring

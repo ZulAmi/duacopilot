@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 
 /// Cache entry with TTL and metadata
 @immutable
+
 /// CacheEntry class implementation
 class CacheEntry extends Equatable {
   final String key;
@@ -31,17 +32,17 @@ class CacheEntry extends Equatable {
 
   @override
   List<Object?> get props => [
-    key,
-    compressedData,
-    createdAt,
-    expiresAt,
-    strategy,
-    metadata,
-    accessCount,
-    lastAccessedAt,
-    semanticHash,
-    compressionRatio,
-  ];
+        key,
+        compressedData,
+        createdAt,
+        expiresAt,
+        strategy,
+        metadata,
+        accessCount,
+        lastAccessedAt,
+        semanticHash,
+        compressionRatio,
+      ];
 
   bool get isExpired => DateTime.now().isAfter(expiresAt);
 
@@ -119,6 +120,7 @@ class CacheEntry extends Equatable {
 
 /// Cache strategy configuration
 @immutable
+
 /// CacheStrategy class implementation
 class CacheStrategy extends Equatable {
   final String name;
@@ -145,16 +147,16 @@ class CacheStrategy extends Equatable {
 
   @override
   List<Object?> get props => [
-    name,
-    ttl,
-    nearExpiryThreshold,
-    maxSize,
-    evictionPolicy,
-    enablePrewarming,
-    enableCompression,
-    minCompressionRatio,
-    parameters,
-  ];
+        name,
+        ttl,
+        nearExpiryThreshold,
+        maxSize,
+        evictionPolicy,
+        enablePrewarming,
+        enableCompression,
+        minCompressionRatio,
+        parameters,
+      ];
 
   /// Predefined strategies for different query types
   static const CacheStrategy duaQueries = CacheStrategy(
@@ -259,6 +261,7 @@ enum QueryType {
 
 /// Semantic hash result for query deduplication
 @immutable
+
 /// SemanticHash class implementation
 class SemanticHash extends Equatable {
   final String hash;
@@ -277,12 +280,12 @@ class SemanticHash extends Equatable {
 
   @override
   List<Object?> get props => [
-    hash,
-    normalizedQuery,
-    semanticTokens,
-    language,
-    confidence,
-  ];
+        hash,
+        normalizedQuery,
+        semanticTokens,
+        language,
+        confidence,
+      ];
 
   Map<String, dynamic> toJson() {
     return {
@@ -307,6 +310,7 @@ class SemanticHash extends Equatable {
 
 /// Cache performance metrics
 @immutable
+
 /// CacheMetrics class implementation
 class CacheMetrics extends Equatable {
   final int hitCount;
@@ -335,17 +339,17 @@ class CacheMetrics extends Equatable {
 
   @override
   List<Object?> get props => [
-    hitCount,
-    missCount,
-    evictionCount,
-    hitRatio,
-    averageCompressionRatio,
-    averageRetrievalTime,
-    totalSize,
-    entryCount,
-    strategyUsage,
-    strategyPerformance,
-  ];
+        hitCount,
+        missCount,
+        evictionCount,
+        hitRatio,
+        averageCompressionRatio,
+        averageRetrievalTime,
+        totalSize,
+        entryCount,
+        strategyUsage,
+        strategyPerformance,
+      ];
 
   int get totalRequests => hitCount + missCount;
 
@@ -382,15 +386,16 @@ class CacheMetrics extends Equatable {
       strategyUsage: Map<String, int>.from(json['strategyUsage'] ?? {}),
       strategyPerformance:
           (json['strategyPerformance'] as Map<String, dynamic>?)?.map(
-            (k, v) => MapEntry(k, Duration(microseconds: v)),
-          ) ??
-          {},
+                (k, v) => MapEntry(k, Duration(microseconds: v)),
+              ) ??
+              {},
     );
   }
 }
 
 /// Cache invalidation event
 @immutable
+
 /// CacheInvalidationEvent class implementation
 class CacheInvalidationEvent extends Equatable {
   final String eventType;
@@ -409,12 +414,12 @@ class CacheInvalidationEvent extends Equatable {
 
   @override
   List<Object?> get props => [
-    eventType,
-    timestamp,
-    affectedKeys,
-    metadata,
-    reason,
-  ];
+        eventType,
+        timestamp,
+        affectedKeys,
+        metadata,
+        reason,
+      ];
 
   Map<String, dynamic> toJson() {
     return {

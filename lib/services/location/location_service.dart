@@ -188,15 +188,14 @@ class LocationService {
 
     // Mosque-related suggestions
     if (location.type == LocationType.mosque) {
-      final mosqueRelatedDuas =
-          allDuas
-              .where(
-                (dua) =>
-                    dua.category.toLowerCase().contains('mosque') ||
-                    dua.category.toLowerCase().contains('prayer') ||
-                    dua.category.toLowerCase().contains('salah'),
-              )
-              .toList();
+      final mosqueRelatedDuas = allDuas
+          .where(
+            (dua) =>
+                dua.category.toLowerCase().contains('mosque') ||
+                dua.category.toLowerCase().contains('prayer') ||
+                dua.category.toLowerCase().contains('salah'),
+          )
+          .toList();
 
       for (final dua in mosqueRelatedDuas.take(3)) {
         suggestions.add(
@@ -214,15 +213,14 @@ class LocationService {
 
     // Home-related suggestions
     if (location.type == LocationType.home) {
-      final homeDuas =
-          allDuas
-              .where(
-                (dua) =>
-                    dua.category.toLowerCase().contains('home') ||
-                    dua.category.toLowerCase().contains('entering') ||
-                    dua.category.toLowerCase().contains('leaving'),
-              )
-              .toList();
+      final homeDuas = allDuas
+          .where(
+            (dua) =>
+                dua.category.toLowerCase().contains('home') ||
+                dua.category.toLowerCase().contains('entering') ||
+                dua.category.toLowerCase().contains('leaving'),
+          )
+          .toList();
 
       for (final dua in homeDuas.take(2)) {
         suggestions.add(
@@ -240,15 +238,14 @@ class LocationService {
 
     // Travel-related suggestions
     if (location.type == LocationType.travel) {
-      final travelDuas =
-          allDuas
-              .where(
-                (dua) =>
-                    dua.category.toLowerCase().contains('travel') ||
-                    dua.category.toLowerCase().contains('journey') ||
-                    dua.category.toLowerCase().contains('vehicle'),
-              )
-              .toList();
+      final travelDuas = allDuas
+          .where(
+            (dua) =>
+                dua.category.toLowerCase().contains('travel') ||
+                dua.category.toLowerCase().contains('journey') ||
+                dua.category.toLowerCase().contains('vehicle'),
+          )
+          .toList();
 
       for (final dua in travelDuas.take(2)) {
         suggestions.add(
@@ -266,15 +263,14 @@ class LocationService {
 
     // Work-related suggestions
     if (location.type == LocationType.work) {
-      final workDuas =
-          allDuas
-              .where(
-                (dua) =>
-                    dua.category.toLowerCase().contains('work') ||
-                    dua.category.toLowerCase().contains('success') ||
-                    dua.category.toLowerCase().contains('knowledge'),
-              )
-              .toList();
+      final workDuas = allDuas
+          .where(
+            (dua) =>
+                dua.category.toLowerCase().contains('work') ||
+                dua.category.toLowerCase().contains('success') ||
+                dua.category.toLowerCase().contains('knowledge'),
+          )
+          .toList();
 
       for (final dua in workDuas.take(2)) {
         suggestions.add(
@@ -293,14 +289,13 @@ class LocationService {
     // General location-based suggestions
     if (suggestions.isEmpty) {
       // Suggest general Du'as if no specific location type is detected
-      final generalDuas =
-          allDuas
-              .where(
-                (dua) =>
-                    dua.category.toLowerCase().contains('general') ||
-                    dua.category.toLowerCase().contains('daily'),
-              )
-              .toList();
+      final generalDuas = allDuas
+          .where(
+            (dua) =>
+                dua.category.toLowerCase().contains('general') ||
+                dua.category.toLowerCase().contains('daily'),
+          )
+          .toList();
 
       for (final dua in generalDuas.take(1)) {
         suggestions.add(

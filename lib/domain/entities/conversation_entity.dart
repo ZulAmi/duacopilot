@@ -39,7 +39,8 @@ class UserProfile with _$UserProfile {
     required Map<String, dynamic> emotionalPatterns,
   }) = _UserProfile;
 
-  factory UserProfile.fromJson(Map<String, dynamic> json) => _$UserProfileFromJson(json);
+  factory UserProfile.fromJson(Map<String, dynamic> json) =>
+      _$UserProfileFromJson(json);
 }
 
 /// Conversation context for maintaining state
@@ -60,7 +61,8 @@ class ConversationContext with _$ConversationContext {
     @Default(true) bool isActive,
   }) = _ConversationContext;
 
-  factory ConversationContext.fromJson(Map<String, dynamic> json) => _$ConversationContextFromJson(json);
+  factory ConversationContext.fromJson(Map<String, dynamic> json) =>
+      _$ConversationContextFromJson(json);
 }
 
 /// Individual conversation turn
@@ -79,7 +81,8 @@ class ConversationTurn with _$ConversationTurn {
     required Map<String, dynamic> metadata,
   }) = _ConversationTurn;
 
-  factory ConversationTurn.fromJson(Map<String, dynamic> json) => _$ConversationTurnFromJson(json);
+  factory ConversationTurn.fromJson(Map<String, dynamic> json) =>
+      _$ConversationTurnFromJson(json);
 }
 
 /// Semantic memory for similar conversation finding
@@ -97,7 +100,8 @@ class SemanticMemory with _$SemanticMemory {
     required DateTime timestamp,
   }) = _SemanticMemory;
 
-  factory SemanticMemory.fromJson(Map<String, dynamic> json) => _$SemanticMemoryFromJson(json);
+  factory SemanticMemory.fromJson(Map<String, dynamic> json) =>
+      _$SemanticMemoryFromJson(json);
 }
 
 /// Similar conversation for context enhancement
@@ -113,7 +117,8 @@ class SimilarConversation with _$SimilarConversation {
     required List<String> topics,
   }) = _SimilarConversation;
 
-  factory SimilarConversation.fromJson(Map<String, dynamic> json) => _$SimilarConversationFromJson(json);
+  factory SimilarConversation.fromJson(Map<String, dynamic> json) =>
+      _$SimilarConversationFromJson(json);
 }
 
 /// Conversation update notification
@@ -126,7 +131,8 @@ class ConversationUpdate with _$ConversationUpdate {
     required ConversationUpdateType updateType,
   }) = _ConversationUpdate;
 
-  factory ConversationUpdate.fromJson(Map<String, dynamic> json) => _$ConversationUpdateFromJson(json);
+  factory ConversationUpdate.fromJson(Map<String, dynamic> json) =>
+      _$ConversationUpdateFromJson(json);
 }
 
 /// Topic frequency for statistics
@@ -137,7 +143,8 @@ class TopicFrequency with _$TopicFrequency {
     required int frequency,
   }) = _TopicFrequency;
 
-  factory TopicFrequency.fromJson(Map<String, dynamic> json) => _$TopicFrequencyFromJson(json);
+  factory TopicFrequency.fromJson(Map<String, dynamic> json) =>
+      _$TopicFrequencyFromJson(json);
 }
 
 /// Conversation statistics
@@ -152,7 +159,8 @@ class ConversationStats with _$ConversationStats {
     DateTime? lastConversationDate,
   }) = _ConversationStats;
 
-  factory ConversationStats.fromJson(Map<String, dynamic> json) => _$ConversationStatsFromJson(json);
+  factory ConversationStats.fromJson(Map<String, dynamic> json) =>
+      _$ConversationStatsFromJson(json);
 }
 
 /// Voice query result with audio context
@@ -168,7 +176,8 @@ class VoiceQueryResult with _$VoiceQueryResult {
     required Map<String, dynamic> audioMetadata,
   }) = _VoiceQueryResult;
 
-  factory VoiceQueryResult.fromJson(Map<String, dynamic> json) => _$VoiceQueryResultFromJson(json);
+  factory VoiceQueryResult.fromJson(Map<String, dynamic> json) =>
+      _$VoiceQueryResultFromJson(json);
 }
 
 /// Contextual input with emotion and intent analysis
@@ -189,7 +198,8 @@ class ContextualInput with _$ContextualInput {
     String? encryptionKey,
   }) = _ContextualInput;
 
-  factory ContextualInput.fromJson(Map<String, dynamic> json) => _$ContextualInputFromJson(json);
+  factory ContextualInput.fromJson(Map<String, dynamic> json) =>
+      _$ContextualInputFromJson(json);
 }
 
 /// Proactive suggestion with timing and relevance
@@ -210,7 +220,8 @@ class ProactiveSuggestion with _$ProactiveSuggestion {
     DateTime? respondedAt,
   }) = _ProactiveSuggestion;
 
-  factory ProactiveSuggestion.fromJson(Map<String, dynamic> json) => _$ProactiveSuggestionFromJson(json);
+  factory ProactiveSuggestion.fromJson(Map<String, dynamic> json) =>
+      _$ProactiveSuggestionFromJson(json);
 }
 
 /// Calendar event integration
@@ -228,7 +239,8 @@ class CalendarEvent with _$CalendarEvent {
     List<String>? suggestedDuas,
   }) = _CalendarEvent;
 
-  factory CalendarEvent.fromJson(Map<String, dynamic> json) => _$CalendarEventFromJson(json);
+  factory CalendarEvent.fromJson(Map<String, dynamic> json) =>
+      _$CalendarEventFromJson(json);
 }
 
 /// Cultural adaptation context
@@ -245,5 +257,6 @@ class CulturalContext with _$CulturalContext {
     required DateTime lastUpdated,
   }) = _CulturalContext;
 
-  factory CulturalContext.fromJson(Map<String, dynamic> json) => _$CulturalContextFromJson(json);
+  factory CulturalContext.fromJson(Map<String, dynamic> json) =>
+      _$CulturalContextFromJson(json);
 }

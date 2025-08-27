@@ -26,8 +26,8 @@ class ComprehensiveFeedbackService {
   ComprehensiveFeedbackService({
     FirebaseAnalytics? analytics,
     FirebaseRemoteConfig? remoteConfig,
-  }) : _analytics = analytics ?? FirebaseAnalytics.instance,
-       _remoteConfig = remoteConfig ?? FirebaseRemoteConfig.instance;
+  })  : _analytics = analytics ?? FirebaseAnalytics.instance,
+        _remoteConfig = remoteConfig ?? FirebaseRemoteConfig.instance;
 
   /// Initialize the feedback service
   Future<void> initialize() async {
@@ -227,10 +227,9 @@ class ComprehensiveFeedbackService {
       duration: playbackTime,
       additionalData: {
         'total_duration_ms': totalDuration?.inMilliseconds,
-        'completion_rate':
-            totalDuration != null
-                ? playbackTime.inMilliseconds / totalDuration.inMilliseconds
-                : null,
+        'completion_rate': totalDuration != null
+            ? playbackTime.inMilliseconds / totalDuration.inMilliseconds
+            : null,
         'completed': completed,
       },
     );
@@ -325,16 +324,15 @@ class ComprehensiveFeedbackService {
       final analytics = _analyticsBox.values.toList();
 
       // Filter by date range if provided
-      final filteredAnalytics =
-          analytics.where((data) {
-            final timestamp = data['timestamp'] as int;
-            final date = DateTime.fromMillisecondsSinceEpoch(timestamp);
+      final filteredAnalytics = analytics.where((data) {
+        final timestamp = data['timestamp'] as int;
+        final date = DateTime.fromMillisecondsSinceEpoch(timestamp);
 
-            if (startDate != null && date.isBefore(startDate)) return false;
-            if (endDate != null && date.isAfter(endDate)) return false;
+        if (startDate != null && date.isBefore(startDate)) return false;
+        if (endDate != null && date.isAfter(endDate)) return false;
 
-            return true;
-          }).toList();
+        return true;
+      }).toList();
 
       // Aggregate data
       return _aggregateAnalyticsData(filteredAnalytics);
@@ -359,16 +357,15 @@ class ComprehensiveFeedbackService {
     final feedback = _feedbackBox.values.toList();
 
     // Remove personally identifiable information
-    final anonymizedFeedback =
-        feedback
-            .map(
-              (data) => {
-                ...data,
-                'user_id': 'anonymized',
-                'timestamp': _roundTimestamp(data['timestamp'] as int),
-              },
-            )
-            .toList();
+    final anonymizedFeedback = feedback
+        .map(
+          (data) => {
+            ...data,
+            'user_id': 'anonymized',
+            'timestamp': _roundTimestamp(data['timestamp'] as int),
+          },
+        )
+        .toList();
 
     return {
       'analytics': analytics,

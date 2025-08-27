@@ -50,11 +50,11 @@ class EnhancedRagRepositoryImpl implements RagRepository {
     required NetworkInfo networkInfo,
     required Dio dioClient,
     Logger? logger,
-  }) : _ragApiService = ragApiService,
-       _localDataSource = localDataSource,
-       _islamicRagService = islamicRagService,
-       _networkInfo = networkInfo,
-       _logger = logger ?? Logger();
+  })  : _ragApiService = ragApiService,
+        _localDataSource = localDataSource,
+        _islamicRagService = islamicRagService,
+        _networkInfo = networkInfo,
+        _logger = logger ?? Logger();
 
   @override
   Future<Either<Failure, RagResponse>> searchRag(String query) async {
@@ -68,7 +68,7 @@ class EnhancedRagRepositoryImpl implements RagRepository {
 
     try {
       _logger.i(
-        '🔍 Processing RAG query: ${query.substring(0, min(50, query.length))}...',
+        'ðŸ” Processing RAG query: ${query.substring(0, min(50, query.length))}...',
       );
 
       // Record user behavior analytics
@@ -77,7 +77,7 @@ class EnhancedRagRepositoryImpl implements RagRepository {
       // 1. Check semantic cache first
       final cachedResult = await _findSimilarCachedQuery(query);
       if (cachedResult != null) {
-        _logger.i('💾 Cache hit for similar query');
+        _logger.i('ðŸ’¾ Cache hit for similar query');
         await _recordAnalytics('cache_hit', {'query_length': query.length});
 
         // Complete monitoring with cache hit
@@ -99,7 +99,7 @@ class EnhancedRagRepositoryImpl implements RagRepository {
             final response = ragResult.getOrElse(() => throw Exception());
             await _cacheResponse(query, response);
             _logger.i(
-              '✅ RAG query successful: ${stopwatch.elapsedMilliseconds}ms',
+              'âœ… RAG query successful: ${stopwatch.elapsedMilliseconds}ms',
             );
 
             // Complete monitoring with success
@@ -113,7 +113,7 @@ class EnhancedRagRepositoryImpl implements RagRepository {
             return ragResult;
           }
         } catch (e) {
-          _logger.w('⚠️ RAG API failed, trying Islamic RAG service: $e');
+          _logger.w('âš ï¸ RAG API failed, trying Islamic RAG service: $e');
           await MonitoringIntegration.recordRagException(
             exception: e,
             queryId: tracker.traceId,
@@ -130,7 +130,7 @@ class EnhancedRagRepositoryImpl implements RagRepository {
           final response = islamicResult.getOrElse(() => throw Exception());
           await _cacheResponse(query, response);
           _logger.i(
-            '🕌 Islamic RAG successful: ${stopwatch.elapsedMilliseconds}ms',
+            'ðŸ•Œ Islamic RAG successful: ${stopwatch.elapsedMilliseconds}ms',
           );
 
           // Complete monitoring with Islamic RAG success
@@ -144,7 +144,7 @@ class EnhancedRagRepositoryImpl implements RagRepository {
           return islamicResult;
         }
       } catch (e) {
-        _logger.w('⚠️ Islamic RAG failed, trying offline resolution: $e');
+        _logger.w('âš ï¸ Islamic RAG failed, trying offline resolution: $e');
         await MonitoringIntegration.recordRagException(
           exception: e,
           queryId: tracker.traceId,
@@ -157,7 +157,7 @@ class EnhancedRagRepositoryImpl implements RagRepository {
       final offlineResult = await _resolveOfflineQuery(query);
       if (offlineResult.isRight()) {
         _logger.i(
-          '📱 Offline resolution successful: ${stopwatch.elapsedMilliseconds}ms',
+          'ðŸ“± Offline resolution successful: ${stopwatch.elapsedMilliseconds}ms',
         );
         await _recordAnalytics('offline_resolution', {
           'query_length': query.length,
@@ -184,7 +184,7 @@ class EnhancedRagRepositoryImpl implements RagRepository {
 
       return Left(NetworkFailure(errorMessage));
     } catch (e) {
-      _logger.e('❌ RAG query failed: $e');
+      _logger.e('âŒ RAG query failed: $e');
       await _recordAnalytics('error', {'error': e.toString()});
 
       // Record comprehensive error
@@ -325,8 +325,7 @@ class EnhancedRagRepositoryImpl implements RagRepository {
 
         // Create RagResponse from query history
         final response = RagResponse(
-          id:
-              bestMatch.id?.toString() ??
+          id: bestMatch.id?.toString() ??
               DateTime.now().millisecondsSinceEpoch.toString(),
           query: query, // Use original query
           response: bestMatch.response!,
@@ -386,8 +385,7 @@ class EnhancedRagRepositoryImpl implements RagRepository {
         final similarity = _calculateQuerySimilarity(query, history.query);
         if (similarity >= _similarityThreshold && history.response != null) {
           final response = RagResponse(
-            id:
-                history.id?.toString() ??
+            id: history.id?.toString() ??
                 DateTime.now().millisecondsSinceEpoch.toString(),
             query: query,
             response: history.response!,
@@ -427,13 +425,11 @@ class EnhancedRagRepositoryImpl implements RagRepository {
 
       // Manage memory cache size
       if (_memoryCache.length > _maxMemoryCacheSize) {
-        final oldestKey =
-            _memoryCache.entries
-                .reduce(
-                  (a, b) =>
-                      a.value.timestamp.isBefore(b.value.timestamp) ? a : b,
-                )
-                .key;
+        final oldestKey = _memoryCache.entries
+            .reduce(
+              (a, b) => a.value.timestamp.isBefore(b.value.timestamp) ? a : b,
+            )
+            .key;
         _memoryCache.remove(oldestKey);
       }
 
@@ -628,19 +624,18 @@ class EnhancedRagRepositoryImpl implements RagRepository {
       );
 
       // Convert models to entities
-      final queryHistories =
-          queryHistoryModels
-              .map(
-                (model) => QueryHistory(
-                  id: model.id,
-                  query: model.query,
-                  response: model.response,
-                  timestamp: model.timestamp,
-                  responseTime: model.responseTime,
-                  success: model.success,
-                ),
-              )
-              .toList();
+      final queryHistories = queryHistoryModels
+          .map(
+            (model) => QueryHistory(
+              id: model.id,
+              query: model.query,
+              response: model.response,
+              timestamp: model.timestamp,
+              responseTime: model.responseTime,
+              success: model.success,
+            ),
+          )
+          .toList();
 
       return Right(queryHistories);
     } catch (e) {
@@ -711,7 +706,7 @@ class EnhancedRagRepositoryImpl implements RagRepository {
   /// Background sync for popular Du'as
   Future<void> backgroundSync() async {
     try {
-      _logger.i('🔄 Starting background sync...');
+      _logger.i('ðŸ”„ Starting background sync...');
 
       if (!await _networkInfo.isConnected) {
         _logger.w('No internet connection for background sync');
@@ -721,9 +716,9 @@ class EnhancedRagRepositoryImpl implements RagRepository {
       // Sync popular Du'as
       await _syncPopularDuas();
 
-      _logger.i('✅ Background sync completed');
+      _logger.i('âœ… Background sync completed');
     } catch (e) {
-      _logger.e('❌ Background sync failed: $e');
+      _logger.e('âŒ Background sync failed: $e');
     }
   }
 

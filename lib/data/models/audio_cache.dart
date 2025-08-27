@@ -8,6 +8,7 @@ part 'audio_cache.freezed.dart';
 part 'audio_cache.g.dart';
 
 @freezed
+
 /// AudioCache class implementation
 class AudioCache with _$AudioCache {
   const factory AudioCache({
@@ -117,24 +118,20 @@ class AudioCacheHelper {
       originalUrl: map['original_url'] as String?,
       reciter: map['reciter'] as String?,
       language: map['language'] as String?,
-      metadata:
-          map['metadata'] != null
-              ? _decodeJson(map['metadata'] as String)
-              : null,
+      metadata: map['metadata'] != null
+          ? _decodeJson(map['metadata'] as String)
+          : null,
       playCount: map['play_count'] as int? ?? 0,
       isFavorite: (map['is_favorite'] as int) == 1,
-      downloadedAt:
-          map['downloaded_at'] != null
-              ? DateTime.fromMillisecondsSinceEpoch(map['downloaded_at'] as int)
-              : null,
-      lastPlayed:
-          map['last_played'] != null
-              ? DateTime.fromMillisecondsSinceEpoch(map['last_played'] as int)
-              : null,
-      expiresAt:
-          map['expires_at'] != null
-              ? DateTime.fromMillisecondsSinceEpoch(map['expires_at'] as int)
-              : null,
+      downloadedAt: map['downloaded_at'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['downloaded_at'] as int)
+          : null,
+      lastPlayed: map['last_played'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['last_played'] as int)
+          : null,
+      expiresAt: map['expires_at'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['expires_at'] as int)
+          : null,
     );
   }
 

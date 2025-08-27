@@ -1,6 +1,6 @@
 import 'personalization_models.dart';
 
-/// 🏗️ PERSONALIZATION STATE MANAGEMENT
+/// ðŸ—ï¸ PERSONALIZATION STATE MANAGEMENT
 /// Comprehensive state models for personalization UI components
 
 /// Base personalization state

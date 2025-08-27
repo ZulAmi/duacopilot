@@ -33,11 +33,13 @@ class ArabicTextDisplayWidget extends StatefulWidget {
   });
 
   @override
-  State<ArabicTextDisplayWidget> createState() => _ArabicTextDisplayWidgetState();
+  State<ArabicTextDisplayWidget> createState() =>
+      _ArabicTextDisplayWidgetState();
 }
 
 /// _ArabicTextDisplayWidgetState class implementation
-class _ArabicTextDisplayWidgetState extends State<ArabicTextDisplayWidget> with SingleTickerProviderStateMixin {
+class _ArabicTextDisplayWidgetState extends State<ArabicTextDisplayWidget>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
 
@@ -77,12 +79,12 @@ class _ArabicTextDisplayWidgetState extends State<ArabicTextDisplayWidget> with 
           color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+            color: Theme.of(context).colorScheme.outline.withOpacity(0.3),
             width: 1,
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.1),
+              color: Colors.black.withOpacity(0.1),
               blurRadius: 20,
               offset: const Offset(0, 4),
               spreadRadius: 0,
@@ -173,19 +175,23 @@ class _ArabicTextDisplayWidgetState extends State<ArabicTextDisplayWidget> with 
         child: Container(
           padding: const EdgeInsets.all(6),
           decoration: BoxDecoration(
-            color: isActive ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.1) : Colors.transparent,
+            color: isActive
+                ? Theme.of(context).colorScheme.primary.withOpacity(0.1)
+                : Colors.transparent,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
               color: isActive
-                  ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.3)
-                  : Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+                  ? Theme.of(context).colorScheme.primary.withOpacity(0.3)
+                  : Theme.of(context).colorScheme.outline.withOpacity(0.2),
               width: 1,
             ),
           ),
           child: Icon(
             icon,
             size: 16,
-            color: isActive ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onSurfaceVariant,
+            color: isActive
+                ? Theme.of(context).colorScheme.primary
+                : Theme.of(context).colorScheme.onSurfaceVariant,
           ),
         ),
       ),
@@ -207,7 +213,7 @@ class _ArabicTextDisplayWidgetState extends State<ArabicTextDisplayWidget> with 
           decoration: BoxDecoration(
             color: Theme.of(
               context,
-            ).colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+            ).colorScheme.surfaceContainerHighest.withOpacity(0.5),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Icon(
@@ -230,13 +236,13 @@ class _ArabicTextDisplayWidgetState extends State<ArabicTextDisplayWidget> with 
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
-              Theme.of(context).colorScheme.secondary.withValues(alpha: 0.05),
+              Theme.of(context).colorScheme.primary.withOpacity(0.1),
+              Theme.of(context).colorScheme.secondary.withOpacity(0.05),
             ],
           ),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
+            color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
             width: 1,
           ),
         ),
@@ -250,7 +256,8 @@ class _ArabicTextDisplayWidgetState extends State<ArabicTextDisplayWidget> with 
             // Arabic text with enhanced typography
             ArabicAccessibility.createIslamicContentWidget(
               arabicText: widget.arabicText,
-              transliteration: _showTransliteration ? widget.transliteration : null,
+              transliteration:
+                  _showTransliteration ? widget.transliteration : null,
               translation: _showTranslation ? widget.translation : null,
               context: context,
               contentType: IslamicContentType.dua,
@@ -279,9 +286,9 @@ class _ArabicTextDisplayWidgetState extends State<ArabicTextDisplayWidget> with 
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
+                Theme.of(context).colorScheme.primary.withOpacity(0.3),
                 Theme.of(context).colorScheme.primary,
-                Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
+                Theme.of(context).colorScheme.primary.withOpacity(0.3),
               ],
             ),
             borderRadius: BorderRadius.circular(1),
@@ -311,10 +318,10 @@ class _ArabicTextDisplayWidgetState extends State<ArabicTextDisplayWidget> with 
       decoration: BoxDecoration(
         color: Theme.of(
           context,
-        ).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+        ).colorScheme.surfaceContainerHighest.withOpacity(0.3),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+          color: Theme.of(context).colorScheme.outline.withOpacity(0.2),
           width: 1,
         ),
       ),
@@ -361,10 +368,10 @@ class _ArabicTextDisplayWidgetState extends State<ArabicTextDisplayWidget> with 
       duration: const Duration(milliseconds: 200),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primaryContainer.withValues(alpha: 0.2),
+        color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.2),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
+          color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
           width: 1,
         ),
       ),

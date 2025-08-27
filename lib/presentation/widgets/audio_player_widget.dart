@@ -342,7 +342,8 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                     ),
                     const SizedBox(height: 4),
                     LinearProgressIndicator(
-                      value: (_cacheStats!['utilizationPercent'] as int) / 100.0,
+                      value:
+                          (_cacheStats!['utilizationPercent'] as int) / 100.0,
                       backgroundColor: Colors.grey.shade300,
                       valueColor: AlwaysStoppedAnimation<Color>(
                         Colors.blue.shade600,

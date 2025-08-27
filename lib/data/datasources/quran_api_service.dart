@@ -73,8 +73,7 @@ class QuranApiService {
     List<String>? editions,
   }) async {
     try {
-      final selectedEditions =
-          editions ??
+      final selectedEditions = editions ??
           [
             popularEditions['arabic_uthmani']!,
             popularEditions['english_sahih']!,
@@ -279,8 +278,7 @@ class QuranSearchResult {
     return QuranSearchResult(
       query: data['query'] ?? '',
       count: data['count'] ?? 0,
-      matches:
-          (data['matches'] as List<dynamic>?)
+      matches: (data['matches'] as List<dynamic>?)
               ?.map((match) => QuranSearchMatch.fromJson(match))
               .toList() ??
           [],
@@ -392,10 +390,9 @@ class QuranSurah {
       englishNameTranslation: json['englishNameTranslation'],
       revelationType: json['revelationType'],
       numberOfAyahs: json['numberOfAyahs'],
-      ayahs:
-          (json['ayahs'] as List<dynamic>)
-              .map((ayah) => QuranVerse.fromJson(ayah))
-              .toList(),
+      ayahs: (json['ayahs'] as List<dynamic>)
+          .map((ayah) => QuranVerse.fromJson(ayah))
+          .toList(),
     );
   }
 }

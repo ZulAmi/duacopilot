@@ -8,6 +8,7 @@ part 'user_preference.freezed.dart';
 part 'user_preference.g.dart';
 
 @freezed
+
 /// UserPreference class implementation
 class UserPreference with _$UserPreference {
   const factory UserPreference({
@@ -111,20 +112,17 @@ class UserPreferenceHelper {
       type: map['type'] as String,
       category: map['category'] as String?,
       description: map['description'] as String?,
-      metadata:
-          map['metadata'] != null
-              ? _decodeJson(map['metadata'] as String)
-              : null,
+      metadata: map['metadata'] != null
+          ? _decodeJson(map['metadata'] as String)
+          : null,
       isSystem: (map['is_system'] as int) == 1,
       isActive: (map['is_active'] as int) == 1,
-      createdAt:
-          map['created_at'] != null
-              ? DateTime.fromMillisecondsSinceEpoch(map['created_at'] as int)
-              : null,
-      updatedAt:
-          map['updated_at'] != null
-              ? DateTime.fromMillisecondsSinceEpoch(map['updated_at'] as int)
-              : null,
+      createdAt: map['created_at'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['created_at'] as int)
+          : null,
+      updatedAt: map['updated_at'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['updated_at'] as int)
+          : null,
     );
   }
 

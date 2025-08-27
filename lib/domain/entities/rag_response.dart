@@ -30,18 +30,18 @@ class RagResponse extends Equatable {
 
   @override
   List<Object?> get props => [
-    id,
-    query,
-    response,
-    timestamp,
-    responseTime,
-    metadata,
-    sources,
-    confidence,
-    sessionId,
-    tokensUsed,
-    model,
-  ];
+        id,
+        query,
+        response,
+        timestamp,
+        responseTime,
+        metadata,
+        sources,
+        confidence,
+        sessionId,
+        tokensUsed,
+        model,
+      ];
 
   /// Convert RagResponse to JSON
   Map<String, dynamic> toJson() {

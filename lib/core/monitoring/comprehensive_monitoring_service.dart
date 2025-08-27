@@ -51,10 +51,10 @@ class ComprehensiveMonitoringService {
       // Initialize Firebase services (with graceful fallback)
       try {
         await _initializeFirebaseServices();
-        AppLogger.info('✅ Firebase monitoring services initialized');
+        AppLogger.info('âœ… Firebase monitoring services initialized');
       } catch (e) {
         AppLogger.warning(
-          '⚠️  Firebase monitoring services failed - continuing with limited monitoring: $e',
+          'âš ï¸  Firebase monitoring services failed - continuing with limited monitoring: $e',
         );
         // Continue initialization even if Firebase fails
       }
@@ -62,9 +62,9 @@ class ComprehensiveMonitoringService {
       // Setup A/B testing (only if Firebase is available)
       try {
         await _setupABTesting();
-        AppLogger.info('✅ A/B testing setup completed');
+        AppLogger.info('âœ… A/B testing setup completed');
       } catch (e) {
-        AppLogger.warning('⚠️  A/B testing setup failed: $e');
+        AppLogger.warning('âš ï¸  A/B testing setup failed: $e');
       }
 
       // Start periodic data flush
@@ -74,12 +74,12 @@ class ComprehensiveMonitoringService {
       try {
         await _trackAppInitialization();
       } catch (e) {
-        AppLogger.warning('⚠️  App initialization tracking failed: $e');
+        AppLogger.warning('âš ï¸  App initialization tracking failed: $e');
       }
 
       _isInitialized = true;
       AppLogger.info(
-        '🚀 Comprehensive monitoring initialized for user: $userId',
+        'ðŸš€ Comprehensive monitoring initialized for user: $userId',
       );
     } catch (e) {
       AppLogger.error('Failed to initialize monitoring: $e');
@@ -266,7 +266,7 @@ class ComprehensiveMonitoringService {
       metrics.userRating = rating;
       metrics.userFeedback = feedback;
 
-      AppLogger.info('📊 User satisfaction tracked: $rating/5 for $traceId');
+      AppLogger.info('ðŸ“Š User satisfaction tracked: $rating/5 for $traceId');
     } catch (e) {
       AppLogger.error('Failed to track user satisfaction: $e');
     }
@@ -292,7 +292,7 @@ class ComprehensiveMonitoringService {
       );
 
       AppLogger.info(
-        '🧪 A/B test result tracked: $experimentName -> $variant = $outcome',
+        'ðŸ§ª A/B test result tracked: $experimentName -> $variant = $outcome',
       );
     } catch (e) {
       AppLogger.error('Failed to track A/B test result: $e');
@@ -385,7 +385,7 @@ class ComprehensiveMonitoringService {
         );
       }
 
-      AppLogger.error('🚨 Exception recorded: ${exception.toString()}');
+      AppLogger.error('ðŸš¨ Exception recorded: ${exception.toString()}');
     } catch (e) {
       AppLogger.error('Failed to record exception: $e');
     }
@@ -396,21 +396,18 @@ class ComprehensiveMonitoringService {
     Duration? timeWindow,
   }) async {
     try {
-      final cutoffTime =
-          timeWindow != null
-              ? DateTime.now().subtract(timeWindow)
-              : DateTime.now().subtract(const Duration(hours: 24));
+      final cutoffTime = timeWindow != null
+          ? DateTime.now().subtract(timeWindow)
+          : DateTime.now().subtract(const Duration(hours: 24));
 
       // Filter recent metrics
-      final recentMetrics =
-          _queryMetrics.values
-              .where((m) => m.startTime.isAfter(cutoffTime))
-              .toList();
+      final recentMetrics = _queryMetrics.values
+          .where((m) => m.startTime.isAfter(cutoffTime))
+          .toList();
 
-      final recentSatisfaction =
-          _satisfactionEvents
-              .where((s) => s.timestamp.isAfter(cutoffTime))
-              .toList();
+      final recentSatisfaction = _satisfactionEvents
+          .where((s) => s.timestamp.isAfter(cutoffTime))
+          .toList();
 
       // Calculate success rates
       final totalQueries = recentMetrics.length;
@@ -420,13 +417,10 @@ class ComprehensiveMonitoringService {
           totalQueries > 0 ? successfulQueries / totalQueries : 0.0;
 
       // Calculate satisfaction metrics
-      final avgRating =
-          recentSatisfaction.isNotEmpty
-              ? recentSatisfaction
-                      .map((s) => s.rating)
-                      .reduce((a, b) => a + b) /
-                  recentSatisfaction.length
-              : 0.0;
+      final avgRating = recentSatisfaction.isNotEmpty
+          ? recentSatisfaction.map((s) => s.rating).reduce((a, b) => a + b) /
+              recentSatisfaction.length
+          : 0.0;
 
       // Query type analysis
       final queryTypeStats = <String, Map<String, dynamic>>{};
@@ -447,15 +441,14 @@ class ComprehensiveMonitoringService {
           stats['success_count'] = stats['success_count'] + 1;
         }
         if (metric.endTime != null) {
-          stats['total_time_ms'] =
-              stats['total_time_ms'] +
+          stats['total_time_ms'] = stats['total_time_ms'] +
               metric.endTime!.difference(metric.startTime).inMilliseconds;
         }
         if (metric.confidence != null) {
           stats['avg_confidence'] =
               ((stats['avg_confidence'] * (stats['count'] - 1)) +
-                  metric.confidence!) /
-              stats['count'];
+                      metric.confidence!) /
+                  stats['count'];
         }
       }
 
@@ -478,24 +471,22 @@ class ComprehensiveMonitoringService {
           'total_satisfaction_responses': recentSatisfaction.length,
         },
         'query_types': queryTypeStats,
-        'trending_topics':
-            topicCounts.entries
-                .map((e) => {'topic': e.key, 'count': e.value})
-                .toList()
-              ..sort(
-                (a, b) => (b['count'] as int).compareTo(a['count'] as int),
-              ),
+        'trending_topics': topicCounts.entries
+            .map((e) => {'topic': e.key, 'count': e.value})
+            .toList()
+          ..sort(
+            (a, b) => (b['count'] as int).compareTo(a['count'] as int),
+          ),
         'geographic_data': await _getGeographicSummary(cutoffTime),
-        'ab_tests':
-            _activeABTests.entries
-                .map(
-                  (e) => {
-                    'experiment': e.key,
-                    'variant': e.value.variant,
-                    'assigned_at': e.value.assignmentTime.toIso8601String(),
-                  },
-                )
-                .toList(),
+        'ab_tests': _activeABTests.entries
+            .map(
+              (e) => {
+                'experiment': e.key,
+                'variant': e.value.variant,
+                'assigned_at': e.value.assignmentTime.toIso8601String(),
+              },
+            )
+            .toList(),
       };
     } catch (e) {
       AppLogger.error('Failed to get analytics summary: $e');
@@ -508,7 +499,7 @@ class ComprehensiveMonitoringService {
     _flushTimer?.cancel();
     await _flushPendingData();
     _isInitialized = false;
-    AppLogger.info('🧹 Comprehensive monitoring disposed');
+    AppLogger.info('ðŸ§¹ Comprehensive monitoring disposed');
   }
 
   // Private helper methods
@@ -518,9 +509,9 @@ class ComprehensiveMonitoringService {
       // Check if Firebase is initialized
       try {
         FirebaseAnalytics.instance;
-        AppLogger.info('✅ Firebase Analytics available');
+        AppLogger.info('âœ… Firebase Analytics available');
       } catch (e) {
-        AppLogger.warning('⚠️  Firebase Analytics not available: $e');
+        AppLogger.warning('âš ï¸  Firebase Analytics not available: $e');
         return; // Exit early if Firebase is not initialized
       }
 
@@ -545,27 +536,27 @@ class ComprehensiveMonitoringService {
 
         try {
           await _remoteConfig.fetchAndActivate();
-          AppLogger.info('✅ Firebase Remote Config initialized');
+          AppLogger.info('âœ… Firebase Remote Config initialized');
         } catch (e) {
           AppLogger.warning(
-            '⚠️  Remote Config fetch failed, using defaults: $e',
+            'âš ï¸  Remote Config fetch failed, using defaults: $e',
           );
         }
       } catch (e) {
-        AppLogger.warning('⚠️  Remote Config initialization failed: $e');
+        AppLogger.warning('âš ï¸  Remote Config initialization failed: $e');
       }
 
       // Initialize Crashlytics
       try {
         if (!kDebugMode) {
           FlutterError.onError = _crashlytics.recordFlutterError;
-          AppLogger.info('✅ Firebase Crashlytics initialized');
+          AppLogger.info('âœ… Firebase Crashlytics initialized');
         }
       } catch (e) {
-        AppLogger.warning('⚠️  Crashlytics initialization failed: $e');
+        AppLogger.warning('âš ï¸  Crashlytics initialization failed: $e');
       }
     } catch (e) {
-      AppLogger.error('❌ Firebase services initialization failed: $e');
+      AppLogger.error('âŒ Firebase services initialization failed: $e');
       throw Exception('Firebase not available - monitoring will be limited');
     }
   }
@@ -721,10 +712,9 @@ class ComprehensiveMonitoringService {
     DateTime cutoffTime,
   ) async {
     try {
-      final recentEvents =
-          _geographicEvents
-              .where((e) => e.timestamp.isAfter(cutoffTime))
-              .toList();
+      final recentEvents = _geographicEvents
+          .where((e) => e.timestamp.isAfter(cutoffTime))
+          .toList();
 
       final regionCounts = <String, int>{};
       for (final event in recentEvents) {
@@ -735,12 +725,11 @@ class ComprehensiveMonitoringService {
       return {
         'total_geographic_queries': recentEvents.length,
         'unique_regions': regionCounts.length,
-        'top_regions':
-            regionCounts.entries
-                .map((e) => {'region': e.key, 'count': e.value})
-                .toList()
-              ..sort((a, b) => (b['count'] as int).compareTo(a['count'] as int))
-              ..take(5).toList(),
+        'top_regions': regionCounts.entries
+            .map((e) => {'region': e.key, 'count': e.value})
+            .toList()
+          ..sort((a, b) => (b['count'] as int).compareTo(a['count'] as int))
+          ..take(5).toList(),
       };
     } catch (e) {
       return {'error': 'Failed to generate geographic summary'};
@@ -759,7 +748,7 @@ class ComprehensiveMonitoringService {
       if (_satisfactionEvents.isNotEmpty) {
         final avgRating =
             _satisfactionEvents.map((s) => s.rating).reduce((a, b) => a + b) /
-            _satisfactionEvents.length;
+                _satisfactionEvents.length;
 
         await _analytics.logEvent(
           name: 'satisfaction_batch_flush',
@@ -779,11 +768,10 @@ class ComprehensiveMonitoringService {
           name: 'geographic_batch_flush',
           parameters: {
             'batch_size': _geographicEvents.length,
-            'unique_regions':
-                _geographicEvents
-                    .map((e) => '${e.latitude},${e.longitude}')
-                    .toSet()
-                    .length,
+            'unique_regions': _geographicEvents
+                .map((e) => '${e.latitude},${e.longitude}')
+                .toSet()
+                .length,
             'session_id': _sessionId,
           },
         );

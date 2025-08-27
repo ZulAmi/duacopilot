@@ -100,21 +100,20 @@ class _SearchHistoryListViewState extends State<SearchHistoryListView> {
       groups.putIfAbsent(category, () => []).add(item);
     }
 
-    _semanticGroups =
-        groups.entries.map((entry) {
-          final category = entry.key;
-          final items = entry.value;
+    _semanticGroups = groups.entries.map((entry) {
+      final category = entry.key;
+      final items = entry.value;
 
-          // Sort items within group by timestamp (newest first)
-          items.sort((a, b) => b.timestamp.compareTo(a.timestamp));
+      // Sort items within group by timestamp (newest first)
+      items.sort((a, b) => b.timestamp.compareTo(a.timestamp));
 
-          return SemanticGroup(
-            title: _getCategoryDisplayName(category),
-            items: items,
-            similarity: 1.0,
-            category: category,
-          );
-        }).toList();
+      return SemanticGroup(
+        title: _getCategoryDisplayName(category),
+        items: items,
+        similarity: 1.0,
+        category: category,
+      );
+    }).toList();
 
     // Sort groups by most recent item in each group
     _semanticGroups.sort((a, b) {
@@ -287,23 +286,23 @@ class _SearchHistoryListViewState extends State<SearchHistoryListView> {
             size: 64,
             color: Theme.of(
               context,
-            ).colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+            ).colorScheme.onSurfaceVariant.withOpacity(0.5),
           ),
           const SizedBox(height: 16),
           Text(
             'No Search History',
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
-            ),
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
           ),
           const SizedBox(height: 8),
           Text(
             'Your search history will appear here',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: Theme.of(
-                context,
-              ).colorScheme.onSurfaceVariant.withValues(alpha: 0.7),
-            ),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onSurfaceVariant.withOpacity(0.7),
+                ),
             textAlign: TextAlign.center,
           ),
         ],
@@ -329,7 +328,7 @@ class _SearchHistoryListViewState extends State<SearchHistoryListView> {
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: categoryColor.withValues(alpha: 0.1),
+                      color: categoryColor.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Icon(
@@ -404,7 +403,7 @@ class _SearchHistoryListViewState extends State<SearchHistoryListView> {
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             border: Border.all(
-              color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+              color: Theme.of(context).colorScheme.outline.withOpacity(0.3),
             ),
             borderRadius: BorderRadius.circular(8),
           ),
@@ -420,8 +419,8 @@ class _SearchHistoryListViewState extends State<SearchHistoryListView> {
               Text(
                 _isExpanded ? 'Show Less' : 'Show $hiddenCount More',
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
               ),
             ],
           ),
@@ -446,7 +445,7 @@ class _SearchHistoryListViewState extends State<SearchHistoryListView> {
             decoration: BoxDecoration(
               color: colorScheme.surface,
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: colorScheme.outline.withValues(alpha: 0.1)),
+              border: Border.all(color: colorScheme.outline.withOpacity(0.1)),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -536,10 +535,9 @@ class _SearchHistoryListViewState extends State<SearchHistoryListView> {
                         vertical: 2,
                       ),
                       decoration: BoxDecoration(
-                        color:
-                            item.success
-                                ? Colors.green.withValues(alpha: 0.1)
-                                : Colors.red.withValues(alpha: 0.1),
+                        color: item.success
+                            ? Colors.green.withOpacity(0.1)
+                            : Colors.red.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text(

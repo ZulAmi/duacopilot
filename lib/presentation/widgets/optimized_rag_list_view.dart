@@ -22,7 +22,7 @@ class OptimizedRagListView extends StatefulWidget {
 
   final List<RagResponse> responses;
   final Widget Function(BuildContext context, RagResponse response, int index)
-  itemBuilder;
+      itemBuilder;
   final Future<void> Function()? onRefresh;
   final Future<void> Function()? onLoadMore;
   final bool isLoading;
@@ -84,13 +84,13 @@ class _OptimizedRagListViewState extends State<OptimizedRagListView>
     final itemHeight = widget.itemExtent ?? 80.0;
 
     final startIndex = (offset / itemHeight).floor().clamp(
-      0,
-      widget.responses.length - 1,
-    );
+          0,
+          widget.responses.length - 1,
+        );
     final endIndex = ((offset + viewport) / itemHeight).ceil().clamp(
-      0,
-      widget.responses.length - 1,
-    );
+          0,
+          widget.responses.length - 1,
+        );
 
     // Update visible items set
     _visibleItems.clear();
@@ -253,10 +253,9 @@ class _OptimizedRagListViewState extends State<OptimizedRagListView>
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       alignment: Alignment.center,
-      child:
-          widget.isLoading || _isLoadingMore
-              ? _buildPlatformLoadingIndicator()
-              : const SizedBox.shrink(),
+      child: widget.isLoading || _isLoadingMore
+          ? _buildPlatformLoadingIndicator()
+          : const SizedBox.shrink(),
     );
   }
 
@@ -286,8 +285,8 @@ class _OptimizedRagListViewState extends State<OptimizedRagListView>
           Text(
             'No responses available',
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              color: Theme.of(context).disabledColor,
-            ),
+                  color: Theme.of(context).disabledColor,
+                ),
           ),
         ],
       ),
@@ -307,7 +306,7 @@ class _OptimizedRagItem extends StatefulWidget {
   final RagResponse response;
   final int index;
   final Widget Function(BuildContext context, RagResponse response, int index)
-  builder;
+      builder;
   final bool isRTL;
 
   @override
@@ -318,7 +317,8 @@ class _OptimizedRagItem extends StatefulWidget {
 class _OptimizedRagItemState extends State<_OptimizedRagItem>
     with AutomaticKeepAliveClientMixin {
   @override
-  bool get wantKeepAlive => false; // Don't keep alive by default for memory efficiency
+  bool get wantKeepAlive =>
+      false; // Don't keep alive by default for memory efficiency
 
   @override
   Widget build(BuildContext context) {
@@ -353,7 +353,7 @@ class OptimizedRagGridView extends StatelessWidget {
 
   final List<RagResponse> responses;
   final Widget Function(BuildContext context, RagResponse response, int index)
-  itemBuilder;
+      itemBuilder;
   final int crossAxisCount;
   final double childAspectRatio;
   final double mainAxisSpacing;
@@ -406,7 +406,7 @@ class OptimizedRagSliverList extends StatelessWidget {
 
   final List<RagResponse> responses;
   final Widget Function(BuildContext context, RagResponse response, int index)
-  itemBuilder;
+      itemBuilder;
   final double? itemExtent;
   final bool isRTL;
 

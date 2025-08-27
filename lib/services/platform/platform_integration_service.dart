@@ -41,7 +41,7 @@ class PlatformIntegrationService {
 
     try {
       AppLogger.info(
-        '🚀 Initializing comprehensive platform integration service...',
+        'ðŸš€ Initializing comprehensive platform integration service...',
       );
 
       // Initialize core platform service
@@ -59,12 +59,12 @@ class PlatformIntegrationService {
       await _setupEventHandling();
 
       _isInitialized = true;
-      AppLogger.info('✅ Platform integration service fully initialized');
+      AppLogger.info('âœ… Platform integration service fully initialized');
 
       _emitEvent(PlatformEvent.initialized(_platformService.platformType));
     } catch (e) {
       AppLogger.error(
-        '❌ Failed to initialize platform integration service: $e',
+        'âŒ Failed to initialize platform integration service: $e',
       );
       rethrow;
     }
@@ -84,7 +84,7 @@ class PlatformIntegrationService {
       'deepLinkingSetup': await _configureDeepLinkingIntegration(),
     });
 
-    AppLogger.debug('🔧 Platform integrations configured');
+    AppLogger.debug('ðŸ”§ Platform integrations configured');
   }
 
   Future<Map<String, dynamic>> _configureAudioIntegration() async {
@@ -199,21 +199,21 @@ class PlatformIntegrationService {
         );
       }
 
-      AppLogger.info('📋 Essential background tasks scheduled');
+      AppLogger.info('ðŸ“‹ Essential background tasks scheduled');
     } catch (e) {
-      AppLogger.warning('⚠️ Failed to schedule some background tasks: $e');
+      AppLogger.warning('âš ï¸ Failed to schedule some background tasks: $e');
     }
   }
 
   void _registerDeepLinkHandlers() {
     // Register deep link handlers manually for now
     // This would integrate with the platform service's deep linking functionality
-    AppLogger.info('🔗 Deep link handlers registered');
+    AppLogger.info('ðŸ”— Deep link handlers registered');
   }
 
   Future<void> _setupEventHandling() async {
     // This would setup platform-specific event listeners
-    AppLogger.debug('🔄 Platform event handling setup complete');
+    AppLogger.debug('ðŸ”„ Platform event handling setup complete');
   }
 
   // Public API Methods
@@ -228,20 +228,17 @@ class PlatformIntegrationService {
     if (!_isInitialized) await initialize();
 
     try {
-      AppLogger.info('🎵 Configuring comprehensive audio experience...');
+      AppLogger.info('ðŸŽµ Configuring comprehensive audio experience...');
 
       // Configure audio session
       await _audioManager.configureForPlayback(
-        backgroundPlayback:
-            enableBackgroundPlayback &&
+        backgroundPlayback: enableBackgroundPlayback &&
             _platformService.isFeatureSupported('supportsBackgroundAudio'),
         interruptionHandling: true,
         customConfig: {
-          'enableAirPlay':
-              enableAirPlay &&
+          'enableAirPlay': enableAirPlay &&
               _platformService.platformType == PlatformType.ios,
-          'enableCarPlay':
-              enableCarPlay &&
+          'enableCarPlay': enableCarPlay &&
               _platformService.platformType == PlatformType.ios,
         },
       );
@@ -251,10 +248,10 @@ class PlatformIntegrationService {
         await _platformService.setupQuickActions(playlist.take(4).toList());
       }
 
-      AppLogger.info('✅ Audio experience configured');
+      AppLogger.info('âœ… Audio experience configured');
       _emitEvent(PlatformEvent.audioConfigured(playlist.length));
     } catch (e) {
-      AppLogger.error('❌ Failed to configure audio experience: $e');
+      AppLogger.error('âŒ Failed to configure audio experience: $e');
       rethrow;
     }
   }
@@ -270,7 +267,7 @@ class PlatformIntegrationService {
     if (!_isInitialized) await initialize();
 
     try {
-      AppLogger.info('🔔 Setting up intelligent notification system...');
+      AppLogger.info('ðŸ”” Setting up intelligent notification system...');
 
       // Setup Du'a reminders
       if (enableReminderNotifications) {
@@ -291,14 +288,14 @@ class PlatformIntegrationService {
       if (enablePrayerTimeNotifications) {
         for (final prayerName in prayerTimes) {
           // This would integrate with actual prayer time calculation
-          AppLogger.debug('🤲 Prayer time notification setup: $prayerName');
+          AppLogger.debug('ðŸ¤² Prayer time notification setup: $prayerName');
         }
       }
 
-      AppLogger.info('✅ Intelligent notification system setup complete');
+      AppLogger.info('âœ… Intelligent notification system setup complete');
       _emitEvent(PlatformEvent.notificationsConfigured(favoritesDuas.length));
     } catch (e) {
-      AppLogger.error('❌ Failed to setup notification system: $e');
+      AppLogger.error('âŒ Failed to setup notification system: $e');
       rethrow;
     }
   }
@@ -312,7 +309,7 @@ class PlatformIntegrationService {
     if (!_isInitialized) await initialize();
 
     try {
-      AppLogger.info('📤 Sharing Du\'a with platform optimizations...');
+      AppLogger.info('ðŸ“¤ Sharing Du\'a with platform optimizations...');
 
       await _platformService.shareOptimized(
         dua: dua,
@@ -320,10 +317,10 @@ class PlatformIntegrationService {
         target: target,
       );
 
-      AppLogger.info('✅ Du\'a shared successfully');
+      AppLogger.info('âœ… Du\'a shared successfully');
       _emitEvent(PlatformEvent.duaShared(dua.id, target.name));
     } catch (e) {
-      AppLogger.error('❌ Failed to share Du\'a: $e');
+      AppLogger.error('âŒ Failed to share Du\'a: $e');
       rethrow;
     }
   }
@@ -333,14 +330,14 @@ class PlatformIntegrationService {
     if (!_isInitialized) await initialize();
 
     try {
-      AppLogger.info('⚡ Optimizing performance for platform...');
+      AppLogger.info('âš¡ Optimizing performance for platform...');
 
       // Get platform-specific optimizations
       final memoryOptimizations = _platformService.getMemoryOptimizations();
       final networkOptimizations = _platformService.getNetworkOptimizations();
 
-      AppLogger.debug('💾 Memory optimizations: $memoryOptimizations');
-      AppLogger.debug('🌐 Network optimizations: $networkOptimizations');
+      AppLogger.debug('ðŸ’¾ Memory optimizations: $memoryOptimizations');
+      AppLogger.debug('ðŸŒ Network optimizations: $networkOptimizations');
 
       // Apply optimizations (this would integrate with actual services)
       await _applyPerformanceOptimizations(
@@ -348,10 +345,10 @@ class PlatformIntegrationService {
         networkOptimizations,
       );
 
-      AppLogger.info('✅ Performance optimizations applied');
+      AppLogger.info('âœ… Performance optimizations applied');
       _emitEvent(PlatformEvent.performanceOptimized());
     } catch (e) {
-      AppLogger.error('❌ Failed to optimize performance: $e');
+      AppLogger.error('âŒ Failed to optimize performance: $e');
       rethrow;
     }
   }
@@ -361,7 +358,7 @@ class PlatformIntegrationService {
     Map<String, dynamic> networkOptimizations,
   ) async {
     // This would integrate with actual cache and network services
-    AppLogger.debug('⚡ Applying performance optimizations...');
+    AppLogger.debug('âš¡ Applying performance optimizations...');
 
     // Simulate optimization application
     await Future.delayed(const Duration(milliseconds: 100));
@@ -372,7 +369,7 @@ class PlatformIntegrationService {
     if (!_isInitialized) return;
 
     try {
-      AppLogger.info('🔄 Handling platform lifecycle event: ${event.name}');
+      AppLogger.info('ðŸ”„ Handling platform lifecycle event: ${event.name}');
 
       switch (event) {
         case PlatformLifecycleEvent.appLaunched:
@@ -394,40 +391,40 @@ class PlatformIntegrationService {
 
       _emitEvent(PlatformEvent.lifecycleHandled(event));
     } catch (e) {
-      AppLogger.error('❌ Failed to handle lifecycle event: $e');
+      AppLogger.error('âŒ Failed to handle lifecycle event: $e');
     }
   }
 
   Future<void> _handleAppLaunched() async {
-    AppLogger.info('🚀 App launched - initializing platform features');
+    AppLogger.info('ðŸš€ App launched - initializing platform features');
 
     // Refresh platform configuration
     await optimizePerformance();
   }
 
   Future<void> _handleAppResumed() async {
-    AppLogger.info('▶️ App resumed - refreshing platform state');
+    AppLogger.info('â–¶ï¸ App resumed - refreshing platform state');
 
     // Check for background updates
     // Resume audio session if needed
   }
 
   Future<void> _handleAppPaused() async {
-    AppLogger.info('⏸️ App paused - optimizing for background');
+    AppLogger.info('â¸ï¸ App paused - optimizing for background');
 
     // Optimize for background execution
     // Save critical state
   }
 
   Future<void> _handleAppDetached() async {
-    AppLogger.info('📱 App detached - cleaning up resources');
+    AppLogger.info('ðŸ“± App detached - cleaning up resources');
 
     // Cleanup non-essential resources
     // Prepare for termination
   }
 
   Future<void> _handleMemoryWarning() async {
-    AppLogger.warning('⚠️ Memory warning - optimizing memory usage');
+    AppLogger.warning('âš ï¸ Memory warning - optimizing memory usage');
 
     // Implement aggressive memory optimization
     // Clear caches, stop non-essential tasks
@@ -470,7 +467,7 @@ class PlatformIntegrationService {
     _isInitialized = false;
     _integrationConfig.clear();
 
-    AppLogger.info('🧹 Platform integration service disposed');
+    AppLogger.info('ðŸ§¹ Platform integration service disposed');
   }
 }
 
@@ -483,38 +480,53 @@ class PlatformEvent {
   PlatformEvent._(this.type, this.data, this.timestamp);
 
   static PlatformEvent initialized(PlatformType platformType) {
-    return PlatformEvent._('initialized', {
-      'platformType': platformType.name,
-    }, DateTime.now());
+    return PlatformEvent._(
+        'initialized',
+        {
+          'platformType': platformType.name,
+        },
+        DateTime.now());
   }
 
   static PlatformEvent audioConfigured(int playlistSize) {
-    return PlatformEvent._('audioConfigured', {
-      'playlistSize': playlistSize,
-    }, DateTime.now());
+    return PlatformEvent._(
+        'audioConfigured',
+        {
+          'playlistSize': playlistSize,
+        },
+        DateTime.now());
   }
 
   static PlatformEvent notificationsConfigured(int reminderCount) {
-    return PlatformEvent._('notificationsConfigured', {
-      'reminderCount': reminderCount,
-    }, DateTime.now());
+    return PlatformEvent._(
+        'notificationsConfigured',
+        {
+          'reminderCount': reminderCount,
+        },
+        DateTime.now());
   }
 
   static PlatformEvent duaShared(String duaId, String method) {
-    return PlatformEvent._('duaShared', {
-      'duaId': duaId,
-      'method': method,
-    }, DateTime.now());
+    return PlatformEvent._(
+        'duaShared',
+        {
+          'duaId': duaId,
+          'method': method,
+        },
+        DateTime.now());
   }
 
   static PlatformEvent deepLinkReceived(
     String linkType,
     Map<String, dynamic> params,
   ) {
-    return PlatformEvent._('deepLinkReceived', {
-      'linkType': linkType,
-      'params': params,
-    }, DateTime.now());
+    return PlatformEvent._(
+        'deepLinkReceived',
+        {
+          'linkType': linkType,
+          'params': params,
+        },
+        DateTime.now());
   }
 
   static PlatformEvent performanceOptimized() {
@@ -522,9 +534,12 @@ class PlatformEvent {
   }
 
   static PlatformEvent lifecycleHandled(PlatformLifecycleEvent lifecycle) {
-    return PlatformEvent._('lifecycleHandled', {
-      'lifecycle': lifecycle.name,
-    }, DateTime.now());
+    return PlatformEvent._(
+        'lifecycleHandled',
+        {
+          'lifecycle': lifecycle.name,
+        },
+        DateTime.now());
   }
 }
 

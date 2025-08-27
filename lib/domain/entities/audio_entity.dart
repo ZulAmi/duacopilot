@@ -4,6 +4,7 @@ part 'audio_entity.freezed.dart';
 part 'audio_entity.g.dart';
 
 @freezed
+
 /// AudioTrack class implementation
 class AudioTrack with _$AudioTrack {
   const factory AudioTrack({
@@ -33,6 +34,7 @@ class AudioTrack with _$AudioTrack {
 }
 
 @freezed
+
 /// Playlist class implementation
 class Playlist with _$Playlist {
   const factory Playlist({
@@ -54,6 +56,7 @@ class Playlist with _$Playlist {
 }
 
 @freezed
+
 /// AudioCacheItem class implementation
 class AudioCacheItem with _$AudioCacheItem {
   const factory AudioCacheItem({
@@ -73,6 +76,7 @@ class AudioCacheItem with _$AudioCacheItem {
 }
 
 @freezed
+
 /// AudioDownloadJob class implementation
 class AudioDownloadJob with _$AudioDownloadJob {
   const factory AudioDownloadJob({
@@ -97,6 +101,7 @@ class AudioDownloadJob with _$AudioDownloadJob {
 }
 
 @freezed
+
 /// AudioPlaybackState class implementation
 class AudioPlaybackState with _$AudioPlaybackState {
   const factory AudioPlaybackState({

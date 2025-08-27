@@ -64,8 +64,8 @@ class AdvancedCalendarService {
       'asr',
       'maghrib',
       'isha',
-      'صلاة',
-      'نماز',
+      'ØµÙ„Ø§Ø©',
+      'Ù†Ù…Ø§Ø²',
       'prayer',
       'salah',
     ],
@@ -383,7 +383,7 @@ class AdvancedCalendarService {
         _isEnabled = prefs['enabled'] ?? false;
         _enabledCalendarIds =
             (prefs['enabled_calendars'] as List<dynamic>?)?.cast<String>() ??
-            [];
+                [];
       }
     } catch (e) {
       AppLogger.warning('Failed to load calendar preferences: $e');
@@ -407,10 +407,9 @@ class AdvancedCalendarService {
     try {
       final calendarsResult = await _deviceCalendar.retrieveCalendars();
       if (calendarsResult.isSuccess && calendarsResult.data != null) {
-        _availableCalendars =
-            calendarsResult.data!
-                .where((cal) => cal.isReadOnly == false)
-                .toList();
+        _availableCalendars = calendarsResult.data!
+            .where((cal) => cal.isReadOnly == false)
+            .toList();
         AppLogger.info(
           'Loaded ${_availableCalendars.length} available calendars',
         );
@@ -591,10 +590,9 @@ class AdvancedCalendarService {
   }
 
   String _buildSuggestionText(CalendarEvent event, Duration timeUntilEvent) {
-    final timeText =
-        timeUntilEvent.inMinutes < 60
-            ? '${timeUntilEvent.inMinutes} minutes'
-            : '${timeUntilEvent.inHours} hours';
+    final timeText = timeUntilEvent.inMinutes < 60
+        ? '${timeUntilEvent.inMinutes} minutes'
+        : '${timeUntilEvent.inHours} hours';
 
     if (event.suggestedDuas?.isNotEmpty == true) {
       return 'You have "${event.title}" in $timeText. Consider: ${event.suggestedDuas!.first}';

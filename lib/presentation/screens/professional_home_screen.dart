@@ -160,12 +160,12 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
             Container(
               padding: const EdgeInsets.all(ProfessionalIslamicTheme.space4),
               decoration: BoxDecoration(
-                color: ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.05),
+                color: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.05),
                 borderRadius: BorderRadius.circular(
                   ProfessionalIslamicTheme.radiusMd,
                 ),
                 border: Border.all(
-                  color: ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.1),
+                  color: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.1),
                 ),
               ),
               child: Row(
@@ -337,7 +337,7 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
               TextButton(
                 onPressed: () => _showDrawer(context),
                 child: const Text(
-                  'View All →',
+                  'View All â†’',
                   style: TextStyle(
                     color: ProfessionalIslamicTheme.islamicGreen,
                   ),
@@ -592,9 +592,8 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
   void _navigateToVoiceAssistant() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder:
-            (context) =>
-                const ConversationalSearchScreen(enableVoiceSearch: true),
+        builder: (context) =>
+            const ConversationalSearchScreen(enableVoiceSearch: true),
       ),
     );
   }

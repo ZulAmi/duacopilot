@@ -283,9 +283,8 @@ class AdService {
     if (_interstitialClickCount % _interstitialFrequency == 0) {
       if (_isInterstitialAdLoaded && _interstitialAd != null) {
         _interstitialAd?.fullScreenContentCallback = FullScreenContentCallback(
-          onAdShowedFullScreenContent:
-              (InterstitialAd ad) =>
-                  print('Interstitial ad showed full screen content'),
+          onAdShowedFullScreenContent: (InterstitialAd ad) =>
+              print('Interstitial ad showed full screen content'),
           onAdDismissedFullScreenContent: (InterstitialAd ad) {
             AppLogger.debug('Interstitial ad dismissed');
             ad.dispose();
@@ -320,8 +319,8 @@ class AdService {
     }
 
     _rewardedAd?.fullScreenContentCallback = FullScreenContentCallback(
-      onAdShowedFullScreenContent:
-          (RewardedAd ad) => print('Rewarded ad showed full screen content'),
+      onAdShowedFullScreenContent: (RewardedAd ad) =>
+          print('Rewarded ad showed full screen content'),
       onAdDismissedFullScreenContent: (RewardedAd ad) {
         AppLogger.debug('Rewarded ad dismissed');
         ad.dispose();

@@ -24,7 +24,7 @@ class RagApiService {
   final Dio _dio;
   final NetworkInfo _networkInfo;
   final SecureStorageService
-  _secureStorage; // Changed to use our mock implementation
+      _secureStorage; // Changed to use our mock implementation
   final Logger _logger;
   final Connectivity _connectivity;
 
@@ -40,13 +40,13 @@ class RagApiService {
   RagApiService({
     required NetworkInfo networkInfo,
     required SecureStorageService
-    secureStorage, // Changed to use our mock implementation
+        secureStorage, // Changed to use our mock implementation
     Logger? logger,
-  }) : _networkInfo = networkInfo,
-       _secureStorage = secureStorage,
-       _logger = logger ?? Logger(),
-       _connectivity = Connectivity(),
-       _dio = Dio() {
+  })  : _networkInfo = networkInfo,
+        _secureStorage = secureStorage,
+        _logger = logger ?? Logger(),
+        _connectivity = Connectivity(),
+        _dio = Dio() {
     _setupDio();
     _setupConnectivityMonitoring();
   }
@@ -71,21 +71,21 @@ class RagApiService {
           if (token != null) {
             options.headers['Authorization'] = 'Bearer $token';
           }
-          _logger.d('📤 Request: ${options.method} ${options.path}');
-          _logger.d('📤 Headers: ${options.headers}');
-          _logger.d('📤 Data: ${options.data}');
+          _logger.d('ðŸ“¤ Request: ${options.method} ${options.path}');
+          _logger.d('ðŸ“¤ Headers: ${options.headers}');
+          _logger.d('ðŸ“¤ Data: ${options.data}');
           handler.next(options);
         },
         onResponse: (response, handler) {
           _logger.d(
-            '📥 Response: ${response.statusCode} ${response.requestOptions.path}',
+            'ðŸ“¥ Response: ${response.statusCode} ${response.requestOptions.path}',
           );
-          _logger.d('📥 Data: ${response.data}');
+          _logger.d('ðŸ“¥ Data: ${response.data}');
           handler.next(response);
         },
         onError: (error, handler) {
-          _logger.e('❌ Error: ${error.message}');
-          _logger.e('❌ Response: ${error.response?.data}');
+          _logger.e('âŒ Error: ${error.message}');
+          _logger.e('âŒ Response: ${error.response?.data}');
           handler.next(error);
         },
       ),
@@ -96,14 +96,14 @@ class RagApiService {
       InterceptorsWrapper(
         onError: (error, handler) async {
           if (_shouldRetry(error)) {
-            _logger.w('🔄 Retrying request after error: ${error.message}');
+            _logger.w('ðŸ”„ Retrying request after error: ${error.message}');
             try {
               await Future.delayed(Duration(seconds: 1));
               final response = await _dio.fetch(error.requestOptions);
               handler.resolve(response);
               return;
             } catch (retryError) {
-              _logger.e('🔄 Retry failed: $retryError');
+              _logger.e('ðŸ”„ Retry failed: $retryError');
             }
           }
           handler.next(error);
@@ -120,7 +120,7 @@ class RagApiService {
             final cacheKey = _generateCacheKey(options);
             final cachedResponse = _getCachedResponse(cacheKey);
             if (cachedResponse != null) {
-              _logger.d('💾 Cache hit for: ${options.path}');
+              _logger.d('ðŸ’¾ Cache hit for: ${options.path}');
               handler.resolve(
                 Response(
                   requestOptions: options,
@@ -142,10 +142,10 @@ class RagApiService {
               final ragResponse = RagResponseModel.fromJson(response.data);
               _cacheResponse(cacheKey, ragResponse);
               _logger.d(
-                '💾 Cached response for: ${response.requestOptions.path}',
+                'ðŸ’¾ Cached response for: ${response.requestOptions.path}',
               );
             } catch (e) {
-              _logger.w('💾 Failed to cache response: $e');
+              _logger.w('ðŸ’¾ Failed to cache response: $e');
             }
           }
           handler.next(response);
@@ -176,7 +176,7 @@ class RagApiService {
     _connectivitySubscription = _connectivity.onConnectivityChanged.listen((
       ConnectivityResult result,
     ) {
-      _logger.i('📶 Connectivity changed: $result');
+      _logger.i('ðŸ“¶ Connectivity changed: $result');
       if (result == ConnectivityResult.none) {
         _onConnectionLost();
       } else {
@@ -186,12 +186,12 @@ class RagApiService {
   }
 
   void _onConnectionLost() {
-    _logger.w('📶 Connection lost - closing WebSocket');
+    _logger.w('ðŸ“¶ Connection lost - closing WebSocket');
     _closeWebSocket();
   }
 
   void _onConnectionRestored() {
-    _logger.i('📶 Connection restored');
+    _logger.i('ðŸ“¶ Connection restored');
     // Optionally reconnect WebSocket if it was previously connected
   }
 
@@ -202,7 +202,7 @@ class RagApiService {
         'rag_api_token',
       ); // Our SecureStorageService API
     } catch (e) {
-      _logger.e('🔐 Failed to get auth token: $e');
+      _logger.e('ðŸ” Failed to get auth token: $e');
       return null;
     }
   }
@@ -214,9 +214,9 @@ class RagApiService {
         'rag_api_token',
         token,
       ); // Our SecureStorageService API
-      _logger.d('🔐 Auth token saved');
+      _logger.d('ðŸ” Auth token saved');
     } catch (e) {
-      _logger.e('🔐 Failed to save auth token: $e');
+      _logger.e('ðŸ” Failed to save auth token: $e');
     }
   }
 
@@ -269,22 +269,22 @@ class RagApiService {
         throw NetworkException('No internet connection');
       }
 
-      _logger.i('🤖 Making RAG query: ${request.query}');
+      _logger.i('ðŸ¤– Making RAG query: ${request.query}');
 
       final response = await _dio.post('/rag/query', data: request.toJson());
 
       if (response.statusCode == 200) {
         final ragResponse = RagResponseModel.fromJson(response.data);
-        _logger.i('✅ RAG query successful: ${ragResponse.id}');
+        _logger.i('âœ… RAG query successful: ${ragResponse.id}');
         return ragResponse;
       } else {
         throw ServerException('Failed to query RAG: ${response.statusCode}');
       }
     } on DioException catch (e) {
-      _logger.e('❌ RAG query failed: ${e.message}');
+      _logger.e('âŒ RAG query failed: ${e.message}');
       throw _handleDioException(e);
     } catch (e) {
-      _logger.e('❌ Unexpected error during RAG query: $e');
+      _logger.e('âŒ Unexpected error during RAG query: $e');
       throw ServerException('Unexpected error: $e');
     }
   }
@@ -331,15 +331,15 @@ class RagApiService {
         },
       );
 
-      _logger.i('🔌 Connecting to WebSocket: $uri');
+      _logger.i('ðŸ”Œ Connecting to WebSocket: $uri');
       _wsChannel = WebSocketChannel.connect(uri);
 
       // Start heartbeat
       _startHeartbeat();
 
-      _logger.i('✅ WebSocket connected');
+      _logger.i('âœ… WebSocket connected');
     } catch (e) {
-      _logger.e('❌ Failed to connect WebSocket: $e');
+      _logger.e('âŒ Failed to connect WebSocket: $e');
       throw NetworkException('Failed to connect to real-time updates: $e');
     }
   }
@@ -351,7 +351,7 @@ class RagApiService {
         try {
           _wsChannel!.sink.add(json.encode({'type': 'ping'}));
         } catch (e) {
-          _logger.w('💓 Heartbeat failed: $e');
+          _logger.w('ðŸ’“ Heartbeat failed: $e');
           timer.cancel();
         }
       }
@@ -361,29 +361,27 @@ class RagApiService {
   Stream<RagResponseModel>? get realTimeUpdates {
     if (_wsChannel == null) return null;
 
-    return _wsChannel!.stream
-        .map((data) {
-          try {
-            final Map<String, dynamic> json = jsonDecode(data);
-            if (json['type'] == 'rag_response') {
-              return RagResponseModel.fromJson(json['data']);
-            }
-            throw FormatException('Invalid message type: ${json['type']}');
-          } catch (e) {
-            _logger.e('❌ Failed to parse WebSocket message: $e');
-            rethrow;
-          }
-        })
-        .handleError((error) {
-          _logger.e('❌ WebSocket stream error: $error');
-        });
+    return _wsChannel!.stream.map((data) {
+      try {
+        final Map<String, dynamic> json = jsonDecode(data);
+        if (json['type'] == 'rag_response') {
+          return RagResponseModel.fromJson(json['data']);
+        }
+        throw FormatException('Invalid message type: ${json['type']}');
+      } catch (e) {
+        _logger.e('âŒ Failed to parse WebSocket message: $e');
+        rethrow;
+      }
+    }).handleError((error) {
+      _logger.e('âŒ WebSocket stream error: $error');
+    });
   }
 
   void _closeWebSocket() {
     _heartbeatTimer?.cancel();
     _wsChannel?.sink.close();
     _wsChannel = null;
-    _logger.d('🔌 WebSocket closed');
+    _logger.d('ðŸ”Œ WebSocket closed');
   }
 
   Exception _handleDioException(DioException e) {
@@ -430,7 +428,7 @@ class RagApiService {
   void clearCache() {
     _responseCache.clear();
     _cacheTimestamps.clear();
-    _logger.d('💾 Cache cleared');
+    _logger.d('ðŸ’¾ Cache cleared');
   }
 
   Future<void> dispose() async {
@@ -438,6 +436,6 @@ class RagApiService {
     _connectivitySubscription?.cancel();
     _dio.close();
     clearCache();
-    _logger.d('🧹 RagApiService disposed');
+    _logger.d('ðŸ§¹ RagApiService disposed');
   }
 }

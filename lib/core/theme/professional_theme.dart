@@ -89,7 +89,7 @@ class ProfessionalTheme {
   // Shadow System
   static List<BoxShadow> get subtleShadow => [
         BoxShadow(
-          color: gray900.withValues(alpha: 0.05),
+          color: gray900.withOpacity(0.05),
           blurRadius: 4,
           offset: const Offset(0, 1),
         ),
@@ -97,12 +97,12 @@ class ProfessionalTheme {
 
   static List<BoxShadow> get cardShadow => [
         BoxShadow(
-          color: gray900.withValues(alpha: 0.08),
+          color: gray900.withOpacity(0.08),
           blurRadius: 8,
           offset: const Offset(0, 2),
         ),
         BoxShadow(
-          color: gray900.withValues(alpha: 0.04),
+          color: gray900.withOpacity(0.04),
           blurRadius: 2,
           offset: const Offset(0, 1),
         ),
@@ -110,12 +110,12 @@ class ProfessionalTheme {
 
   static List<BoxShadow> get elevatedShadow => [
         BoxShadow(
-          color: gray900.withValues(alpha: 0.12),
+          color: gray900.withOpacity(0.12),
           blurRadius: 16,
           offset: const Offset(0, 4),
         ),
         BoxShadow(
-          color: gray900.withValues(alpha: 0.08),
+          color: gray900.withOpacity(0.08),
           blurRadius: 6,
           offset: const Offset(0, 2),
         ),
@@ -123,7 +123,7 @@ class ProfessionalTheme {
 
   static List<BoxShadow> get focusShadow => [
         BoxShadow(
-          color: primaryEmerald.withValues(alpha: 0.15),
+          color: primaryEmerald.withOpacity(0.15),
           blurRadius: 12,
           offset: const Offset(0, 0),
           spreadRadius: 2,
@@ -260,8 +260,8 @@ class ProfessionalTheme {
       // Chip Theme
       chipTheme: ChipThemeData(
         backgroundColor: gray100,
-        selectedColor: primaryEmerald.withValues(alpha: 0.12),
-        secondarySelectedColor: primaryEmerald.withValues(alpha: 0.12),
+        selectedColor: primaryEmerald.withOpacity(0.12),
+        secondarySelectedColor: primaryEmerald.withOpacity(0.12),
         labelStyle: TextStyle(color: textPrimary),
         secondaryLabelStyle: TextStyle(color: primaryEmerald),
         padding: const EdgeInsets.symmetric(
@@ -287,7 +287,7 @@ class ProfessionalTheme {
       dialogTheme: DialogTheme(
         backgroundColor: surfaceColor,
         elevation: 24,
-        shadowColor: gray900.withValues(alpha: 0.25),
+        shadowColor: gray900.withOpacity(0.25),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radiusXl),
         ),

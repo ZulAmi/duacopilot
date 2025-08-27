@@ -590,7 +590,8 @@ class SmartDuaIntelligenceService {
     return [
       DuaEntity(
         id: 'anxiety_relief_1',
-        arabicText: 'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ',
+        arabicText:
+            'Ø§Ù„Ù„ÙŽÙ‘Ù‡ÙÙ…ÙŽÙ‘ Ø¥ÙÙ†ÙÙ‘ÙŠ Ø£ÙŽØ¹ÙÙˆØ°Ù Ø¨ÙÙƒÙŽ Ù…ÙÙ†ÙŽ Ø§Ù„Ù’Ù‡ÙŽÙ…ÙÙ‘ ÙˆÙŽØ§Ù„Ù’Ø­ÙŽØ²ÙŽÙ†Ù',
         transliteration: 'Allahumma inni a\'udhu bika min al-hammi wal-hazan',
         translation: 'O Allah, I seek refuge in You from anxiety and sorrow',
         category: 'Emotional Healing',
@@ -613,7 +614,8 @@ class SmartDuaIntelligenceService {
       ),
       DuaEntity(
         id: 'travel_protection',
-        arabicText: 'بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ',
+        arabicText:
+            'Ø¨ÙØ³Ù’Ù…Ù Ø§Ù„Ù„ÙŽÙ‘Ù‡Ù ØªÙŽÙˆÙŽÙƒÙŽÙ‘Ù„Ù’ØªÙ Ø¹ÙŽÙ„ÙŽÙ‰ Ø§Ù„Ù„ÙŽÙ‘Ù‡Ù',
         transliteration: 'Bismillahi tawakkaltu \'ala Allah',
         translation: 'In the name of Allah, I place my trust in Allah',
         category: 'Travel',
@@ -942,10 +944,9 @@ class SmartDuaIntelligenceService {
       context: _getPrimaryContext(emotion),
       triggers: emotion.relatedKeywords,
       keywords: [...emotion.relatedKeywords, emotion.displayName.toLowerCase()],
-      confidenceLevel:
-          frequency > 0.7
-              ? AIConfidenceLevel.veryHigh
-              : frequency > 0.5
+      confidenceLevel: frequency > 0.7
+          ? AIConfidenceLevel.veryHigh
+          : frequency > 0.5
               ? AIConfidenceLevel.high
               : AIConfidenceLevel.medium,
       relevanceScore: frequency * 10,

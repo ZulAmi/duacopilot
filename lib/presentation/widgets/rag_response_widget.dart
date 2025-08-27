@@ -29,8 +29,8 @@ class RagResponseWidget extends StatelessWidget {
                   child: Text(
                     'Query',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                 ),
                 IconButton(
@@ -67,8 +67,8 @@ class RagResponseWidget extends StatelessWidget {
                   child: Text(
                     'Response',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                 ),
                 IconButton(
@@ -88,7 +88,7 @@ class RagResponseWidget extends StatelessWidget {
                 border: Border.all(
                   color: Theme.of(
                     context,
-                  ).colorScheme.outline.withValues(alpha: 0.3),
+                  ).colorScheme.outline.withOpacity(0.3),
                 ),
               ),
               child: Text(
@@ -144,19 +144,17 @@ class RagResponseWidget extends StatelessWidget {
               Wrap(
                 spacing: 8,
                 runSpacing: 4,
-                children:
-                    response.sources!
-                        .map(
-                          (source) => Chip(
-                            label: Text(
-                              source,
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                            materialTapTargetSize:
-                                MaterialTapTargetSize.shrinkWrap,
-                          ),
-                        )
-                        .toList(),
+                children: response.sources!
+                    .map(
+                      (source) => Chip(
+                        label: Text(
+                          source,
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                    )
+                    .toList(),
               ),
             ],
           ],
@@ -193,27 +191,26 @@ class RagResponseWidget extends StatelessWidget {
   void _showDetails(BuildContext context) {
     showDialog(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('Response Details'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _DetailRow('ID', response.id),
-                _DetailRow('Response Time', '${response.responseTime}ms'),
-                _DetailRow('Timestamp', response.timestamp.toString()),
-                if (response.metadata != null && response.metadata!.isNotEmpty)
-                  _DetailRow('Metadata', response.metadata.toString()),
-              ],
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: const Text('Close'),
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        title: const Text('Response Details'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _DetailRow('ID', response.id),
+            _DetailRow('Response Time', '${response.responseTime}ms'),
+            _DetailRow('Timestamp', response.timestamp.toString()),
+            if (response.metadata != null && response.metadata!.isNotEmpty)
+              _DetailRow('Metadata', response.metadata.toString()),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Close'),
           ),
+        ],
+      ),
     );
   }
 }

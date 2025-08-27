@@ -33,8 +33,8 @@ class ABTestingFramework {
   ABTestingFramework({
     required FirebaseRemoteConfig remoteConfig,
     required ComprehensiveFeedbackService feedbackService,
-  }) : _remoteConfig = remoteConfig,
-       _feedbackService = feedbackService;
+  })  : _remoteConfig = remoteConfig,
+        _feedbackService = feedbackService;
 
   /// Initialize A/B testing framework
   Future<void> initialize() async {
@@ -183,18 +183,15 @@ class ABFeedbackButton extends StatelessWidget {
       experimentName: 'feedback_button_style',
       abTesting: abTesting,
       variants: {
-        'modern':
-            (context) =>
-                _ModernFeedbackButton(onPressed: onPressed, text: text),
-        'classic':
-            (context) =>
-                _ClassicFeedbackButton(onPressed: onPressed, text: text),
-        'minimal':
-            (context) =>
-                _MinimalFeedbackButton(onPressed: onPressed, text: text),
+        'modern': (context) =>
+            _ModernFeedbackButton(onPressed: onPressed, text: text),
+        'classic': (context) =>
+            _ClassicFeedbackButton(onPressed: onPressed, text: text),
+        'minimal': (context) =>
+            _MinimalFeedbackButton(onPressed: onPressed, text: text),
       },
-      fallback:
-          (context) => _ModernFeedbackButton(onPressed: onPressed, text: text),
+      fallback: (context) =>
+          _ModernFeedbackButton(onPressed: onPressed, text: text),
     );
   }
 }
@@ -212,12 +209,12 @@ class _ModernFeedbackButton extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [theme.primaryColor, theme.primaryColor.withValues(alpha: 0.8)],
+          colors: [theme.primaryColor, theme.primaryColor.withOpacity(0.8)],
         ),
         borderRadius: BorderRadius.circular(25),
         boxShadow: [
           BoxShadow(
-            color: theme.primaryColor.withValues(alpha: 0.3),
+            color: theme.primaryColor.withOpacity(0.3),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),

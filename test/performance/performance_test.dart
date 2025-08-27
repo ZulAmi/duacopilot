@@ -149,9 +149,8 @@ void main() {
           (index) => {
             'id': 'result-$index',
             'title': 'Prayer Result $index',
-            'arabic':
-                TestConfig.sampleArabicQueries[index %
-                    TestConfig.sampleArabicQueries.length],
+            'arabic': TestConfig.sampleArabicQueries[
+                index % TestConfig.sampleArabicQueries.length],
             'confidence': 0.9 - (index * 0.01),
           },
         );
@@ -226,8 +225,8 @@ void main() {
                   return ListTile(
                     title: Text('Prayer ${index + 1}'),
                     subtitle: Text(
-                      TestConfig.sampleArabicQueries[index %
-                          TestConfig.sampleArabicQueries.length],
+                      TestConfig.sampleArabicQueries[
+                          index % TestConfig.sampleArabicQueries.length],
                     ),
                     trailing: Text('${index + 1}'),
                   );
@@ -418,8 +417,8 @@ void main() {
                       return ListTile(
                         title: Text('Item $index'),
                         subtitle: Text(
-                          TestConfig.sampleArabicQueries[index %
-                              TestConfig.sampleArabicQueries.length],
+                          TestConfig.sampleArabicQueries[
+                              index % TestConfig.sampleArabicQueries.length],
                         ),
                       );
                     },
@@ -532,27 +531,26 @@ void main() {
                 return Scaffold(
                   body: AnimatedSwitcher(
                     duration: Duration(milliseconds: 300),
-                    child:
-                        showSecondScreen
-                            ? Container(
-                              key: ValueKey('second'),
-                              color: Colors.blue,
-                              child: Center(child: Text('Second Screen')),
-                            )
-                            : Container(
-                              key: ValueKey('first'),
-                              color: Colors.red,
-                              child: Center(
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      showSecondScreen = true;
-                                    });
-                                  },
-                                  child: Text('Animate'),
-                                ),
+                    child: showSecondScreen
+                        ? Container(
+                            key: ValueKey('second'),
+                            color: Colors.blue,
+                            child: Center(child: Text('Second Screen')),
+                          )
+                        : Container(
+                            key: ValueKey('first'),
+                            color: Colors.red,
+                            child: Center(
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    showSecondScreen = true;
+                                  });
+                                },
+                                child: Text('Animate'),
                               ),
                             ),
+                          ),
                   ),
                 );
               },
@@ -744,9 +742,8 @@ void main() {
               child: ListView.builder(
                 itemCount: TestConfig.sampleArabicQueries.length * 10,
                 itemBuilder: (context, index) {
-                  final text =
-                      TestConfig.sampleArabicQueries[index %
-                          TestConfig.sampleArabicQueries.length];
+                  final text = TestConfig.sampleArabicQueries[
+                      index % TestConfig.sampleArabicQueries.length];
                   return Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Card(

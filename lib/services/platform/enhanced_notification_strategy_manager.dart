@@ -35,7 +35,7 @@ class EnhancedNotificationStrategyManager {
 
     try {
       AppLogger.info(
-        '🔔 Initializing enhanced notification strategy manager...',
+        'ðŸ”” Initializing enhanced notification strategy manager...',
       );
 
       // Initialize platform-specific notifications
@@ -48,9 +48,9 @@ class EnhancedNotificationStrategyManager {
       await _setupNotificationChannels();
 
       _isInitialized = true;
-      AppLogger.info('✅ Enhanced notification strategy manager initialized');
+      AppLogger.info('âœ… Enhanced notification strategy manager initialized');
     } catch (e) {
-      AppLogger.error('❌ Failed to initialize notification manager: $e');
+      AppLogger.error('âŒ Failed to initialize notification manager: $e');
       rethrow;
     }
   }
@@ -97,33 +97,29 @@ class EnhancedNotificationStrategyManager {
 
   Future<void> _requestAndroidPermissions() async {
     final androidImplementation =
-        _localNotifications
-            .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin
-            >();
+        _localNotifications.resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>();
 
     if (androidImplementation != null) {
       final granted =
           await androidImplementation.requestNotificationsPermission();
       AppLogger.info(
-        '🤖 Android notifications permission: ${granted == true ? 'granted' : 'denied'}',
+        'ðŸ¤– Android notifications permission: ${granted == true ? 'granted' : 'denied'}',
       );
 
       // Request exact alarms permission for Android 12+
       final exactAlarmsGranted =
           await androidImplementation.requestExactAlarmsPermission();
       AppLogger.info(
-        '⏰ Android exact alarms permission: ${exactAlarmsGranted == true ? 'granted' : 'denied'}',
+        'â° Android exact alarms permission: ${exactAlarmsGranted == true ? 'granted' : 'denied'}',
       );
     }
   }
 
   Future<void> _requestIOSPermissions() async {
     final iosImplementation =
-        _localNotifications
-            .resolvePlatformSpecificImplementation<
-              IOSFlutterLocalNotificationsPlugin
-            >();
+        _localNotifications.resolvePlatformSpecificImplementation<
+            IOSFlutterLocalNotificationsPlugin>();
 
     if (iosImplementation != null) {
       final granted = await iosImplementation.requestPermissions(
@@ -133,7 +129,7 @@ class EnhancedNotificationStrategyManager {
         critical: false,
       );
       AppLogger.info(
-        '🍎 iOS notifications permission: ${granted == true ? 'granted' : 'denied'}',
+        'ðŸŽ iOS notifications permission: ${granted == true ? 'granted' : 'denied'}',
       );
     }
   }
@@ -158,7 +154,7 @@ class EnhancedNotificationStrategyManager {
     }
 
     AppLogger.info(
-      '📋 Selected notification strategy: ${_currentStrategy.runtimeType}',
+      'ðŸ“‹ Selected notification strategy: ${_currentStrategy.runtimeType}',
     );
   }
 
@@ -169,7 +165,7 @@ class EnhancedNotificationStrategyManager {
       await _createNotificationChannel(channel);
     }
 
-    AppLogger.info('📢 Setup ${channels.length} notification channels');
+    AppLogger.info('ðŸ“¢ Setup ${channels.length} notification channels');
   }
 
   Future<void> _createNotificationChannel(
@@ -179,10 +175,8 @@ class EnhancedNotificationStrategyManager {
 
     if (platformType == PlatformType.android) {
       final androidImplementation =
-          _localNotifications
-              .resolvePlatformSpecificImplementation<
-                AndroidFlutterLocalNotificationsPlugin
-              >();
+          _localNotifications.resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin>();
 
       if (androidImplementation != null) {
         final androidChannel = AndroidNotificationChannel(
@@ -192,16 +186,15 @@ class EnhancedNotificationStrategyManager {
           importance: _mapImportance(channel.importance),
           enableVibration: channel.enableVibration,
           playSound: channel.playSound,
-          sound:
-              channel.soundPath != null
-                  ? RawResourceAndroidNotificationSound(channel.soundPath!)
-                  : null,
+          sound: channel.soundPath != null
+              ? RawResourceAndroidNotificationSound(channel.soundPath!)
+              : null,
           enableLights: channel.enableLights,
           ledColor: channel.ledColor,
         );
 
         await androidImplementation.createNotificationChannel(androidChannel);
-        AppLogger.debug('🔔 Created Android channel: ${channel.id}');
+        AppLogger.debug('ðŸ”” Created Android channel: ${channel.id}');
       }
     }
   }
@@ -222,7 +215,7 @@ class EnhancedNotificationStrategyManager {
   }
 
   void _onNotificationTapped(NotificationResponse response) {
-    AppLogger.info('🔔 Notification tapped: ${response.payload}');
+    AppLogger.info('ðŸ”” Notification tapped: ${response.payload}');
 
     // Handle notification tap based on payload
     if (response.payload != null) {
@@ -239,24 +232,24 @@ class EnhancedNotificationStrategyManager {
 
       switch (action) {
         case 'dua':
-          AppLogger.info('📖 Opening Du\'a: $data');
+          AppLogger.info('ðŸ“– Opening Du\'a: $data');
           // Navigate to specific dua
           break;
         case 'prayer_reminder':
-          AppLogger.info('🤲 Opening prayer reminder: $data');
+          AppLogger.info('ðŸ¤² Opening prayer reminder: $data');
           // Navigate to prayer times
           break;
         case 'search':
-          AppLogger.info('🔍 Opening search: $data');
+          AppLogger.info('ðŸ” Opening search: $data');
           // Navigate to search with query
           break;
         default:
-          AppLogger.info('🏠 Opening home screen');
+          AppLogger.info('ðŸ  Opening home screen');
           // Navigate to home
           break;
       }
     } catch (e) {
-      AppLogger.warning('⚠️ Failed to handle notification payload: $e');
+      AppLogger.warning('âš ï¸ Failed to handle notification payload: $e');
     }
   }
 
@@ -299,12 +292,12 @@ class EnhancedNotificationStrategyManager {
         payload: notification.payload,
       );
 
-      AppLogger.info('🔔 Showed notification: $title');
+      AppLogger.info('ðŸ”” Showed notification: $title');
       AppLogger.debug(
-        '📋 Channel: $effectiveChannelId, Priority: ${priority.name}',
+        'ðŸ“‹ Channel: $effectiveChannelId, Priority: ${priority.name}',
       );
     } catch (e) {
-      AppLogger.error('❌ Failed to show notification: $e');
+      AppLogger.error('âŒ Failed to show notification: $e');
     }
   }
 
@@ -315,10 +308,9 @@ class EnhancedNotificationStrategyManager {
     NotificationPriority priority = NotificationPriority.normal,
   }) async {
     final title = customMessage ?? 'Time for Du\'a';
-    final body =
-        dua.category.isNotEmpty
-            ? dua.category
-            : 'Don\'t forget your supplications';
+    final body = dua.category.isNotEmpty
+        ? dua.category
+        : 'Don\'t forget your supplications';
 
     await showOptimizedNotification(
       title: title,
@@ -412,23 +404,23 @@ class EnhancedNotificationStrategyManager {
       );
 
       AppLogger.info(
-        '⏰ Scheduled notification: $title for ${scheduledDate.toLocal()}',
+        'â° Scheduled notification: $title for ${scheduledDate.toLocal()}',
       );
     } catch (e) {
-      AppLogger.error('❌ Failed to schedule notification: $e');
+      AppLogger.error('âŒ Failed to schedule notification: $e');
     }
   }
 
   /// Cancel notification by ID
   Future<void> cancelNotification(int id) async {
     await _localNotifications.cancel(id);
-    AppLogger.info('❌ Cancelled notification: $id');
+    AppLogger.info('âŒ Cancelled notification: $id');
   }
 
   /// Cancel all notifications
   Future<void> cancelAllNotifications() async {
     await _localNotifications.cancelAll();
-    AppLogger.info('❌ Cancelled all notifications');
+    AppLogger.info('âŒ Cancelled all notifications');
   }
 
   int _getNextNotificationId() {
@@ -457,7 +449,7 @@ class EnhancedNotificationStrategyManager {
   Future<void> dispose() async {
     _isInitialized = false;
     _notificationConfig.clear();
-    AppLogger.info('🧹 Enhanced notification strategy manager disposed');
+    AppLogger.info('ðŸ§¹ Enhanced notification strategy manager disposed');
   }
 }
 
@@ -661,10 +653,9 @@ class AndroidNotificationStrategy extends NotificationStrategy {
       importance: _mapPriorityToImportance(priority),
       priority: _mapPriorityToPriority(priority),
       icon: '@mipmap/ic_launcher',
-      largeIcon:
-          imageUrl != null
-              ? const DrawableResourceAndroidBitmap('@mipmap/ic_launcher')
-              : null,
+      largeIcon: imageUrl != null
+          ? const DrawableResourceAndroidBitmap('@mipmap/ic_launcher')
+          : null,
       styleInformation: _getStyleInformation(body, dua),
       actions: _getNotificationActions(channelId),
       groupKey: channelId,

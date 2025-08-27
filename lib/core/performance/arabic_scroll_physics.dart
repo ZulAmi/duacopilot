@@ -33,7 +33,8 @@ class ArabicScrollPhysics extends ClampingScrollPhysics {
     return ScrollSpringSimulation(
       _getOptimizedSpring(),
       position.pixels,
-      position.pixels + velocity * 0.35, // Adjusted for smoother Arabic text scrolling
+      position.pixels +
+          velocity * 0.35, // Adjusted for smoother Arabic text scrolling
       velocity,
       tolerance: tolerance,
     );
@@ -199,7 +200,7 @@ class ArabicScrollBehavior extends ScrollBehavior {
     } else if (Platform.isAndroid) {
       return GlowingOverscrollIndicator(
         axisDirection: details.direction,
-        color: Theme.of(context).primaryColor.withValues(alpha: 0.3),
+        color: Theme.of(context).primaryColor.withOpacity(0.3),
         child: child,
       );
     } else {

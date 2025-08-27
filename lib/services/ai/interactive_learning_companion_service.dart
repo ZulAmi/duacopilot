@@ -129,11 +129,10 @@ class InteractiveLearningCompanionService {
       final suggestions = <String>[];
 
       // Based on conversation history
-      final recentTopics =
-          context.recentTurns
-              .map((turn) => turn.topic)
-              .where((topic) => topic != 'general')
-              .toSet();
+      final recentTopics = context.recentTurns
+          .map((turn) => turn.topic)
+          .where((topic) => topic != 'general')
+          .toSet();
 
       for (final topic in recentTopics) {
         final deeperTopics = _getRelatedLearningTopics(topic);
@@ -172,11 +171,11 @@ class InteractiveLearningCompanionService {
           questions: [
             'What does "La ilaha illa Allah" mean to you personally?',
             'How does believing in one God change how we live?',
-            'What makes Prophet Muhammad ﷺ special as Allah\'s messenger?',
+            'What makes Prophet Muhammad ï·º special as Allah\'s messenger?',
           ],
           keyPoints: [
             'Monotheism (Tawhid) is central to Islam',
-            'Prophet Muhammad ﷺ is the final messenger',
+            'Prophet Muhammad ï·º is the final messenger',
             'The Shahada is both declaration and commitment',
           ],
           interactiveElements: [
@@ -242,19 +241,19 @@ class InteractiveLearningCompanionService {
     // Module 3: Prophet's Beautiful Life
     _availableModules['prophet_life'] = LearningModule(
       id: 'prophet_life',
-      title: 'The Life and Character of Prophet Muhammad ﷺ',
+      title: 'The Life and Character of Prophet Muhammad ï·º',
       description: 'Learning from the best example of human conduct',
       level: 'all_levels',
       estimatedDuration: Duration(hours: 2),
       lessons: [
         LearningLesson(
           id: 'prophet_character',
-          title: 'The Character of the Prophet ﷺ',
+          title: 'The Character of the Prophet ï·º',
           content: 'Even his enemies called him "Al-Amin" (The Trustworthy)',
           questions: [
-            'What character traits made the Prophet ﷺ so beloved?',
+            'What character traits made the Prophet ï·º so beloved?',
             'How can we apply his example in modern life?',
-            'What story about the Prophet ﷺ inspires you most?',
+            'What story about the Prophet ï·º inspires you most?',
           ],
           keyPoints: [
             'He was known for truthfulness even before prophethood',
@@ -279,14 +278,14 @@ class InteractiveLearningCompanionService {
     final firstLesson = module.lessons.first;
 
     final response = '''
-Assalamu Alaikum, my eager student! 📚✨
+Assalamu Alaikum, my eager student! ðŸ“šâœ¨
 
 I'm absolutely delighted you want to learn about ${module.title}! 
 MashaAllah, seeking knowledge is one of the most beloved acts to Allah.
 
 ${specificSubject != null ? 'Since you\'re interested in $specificSubject, we\'ll explore that deeply together.' : 'We\'ll start with ${firstLesson.title} and build from there.'}
 
-The Prophet ﷺ said: "Whoever follows a path in the pursuit of knowledge, Allah will make a path to Paradise easy for him."
+The Prophet ï·º said: "Whoever follows a path in the pursuit of knowledge, Allah will make a path to Paradise easy for him."
 
 Are you ready to begin this beautiful journey? Let me know if you prefer:
 - Interactive discussions (we explore together)
@@ -460,7 +459,7 @@ ${lesson.content}
 
 $encouragement
 
-Remember, there are no wrong questions in learning - only opportunities to grow! 🌱
+Remember, there are no wrong questions in learning - only opportunities to grow! ðŸŒ±
 ''';
   }
 

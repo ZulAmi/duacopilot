@@ -250,31 +250,31 @@ extension EmotionalStateExtensions on EmotionalState {
   String get arabicName {
     switch (this) {
       case EmotionalState.anxious:
-        return 'القلق';
+        return 'Ø§Ù„Ù‚Ù„Ù‚';
       case EmotionalState.stressed:
-        return 'التوتر';
+        return 'Ø§Ù„ØªÙˆØªØ±';
       case EmotionalState.hopeful:
-        return 'الأمل';
+        return 'Ø§Ù„Ø£Ù…Ù„';
       case EmotionalState.grateful:
-        return 'الامتنان';
+        return 'Ø§Ù„Ø§Ù…ØªÙ†Ø§Ù†';
       case EmotionalState.worried:
-        return 'الهم';
+        return 'Ø§Ù„Ù‡Ù…';
       case EmotionalState.excited:
-        return 'الفرح';
+        return 'Ø§Ù„ÙØ±Ø­';
       case EmotionalState.sad:
-        return 'الحزن';
+        return 'Ø§Ù„Ø­Ø²Ù†';
       case EmotionalState.peaceful:
-        return 'السكينة';
+        return 'Ø§Ù„Ø³ÙƒÙŠÙ†Ø©';
       case EmotionalState.fearful:
-        return 'الخوف';
+        return 'Ø§Ù„Ø®ÙˆÙ';
       case EmotionalState.confident:
-        return 'الثقة';
+        return 'Ø§Ù„Ø«Ù‚Ø©';
       case EmotionalState.uncertain:
-        return 'التردد';
+        return 'Ø§Ù„ØªØ±Ø¯Ø¯';
       case EmotionalState.overwhelmed:
-        return 'الإرهاق';
+        return 'Ø§Ù„Ø¥Ø±Ù‡Ø§Ù‚';
       case EmotionalState.seekingGuidance:
-        return 'طلب الهداية';
+        return 'Ø·Ù„Ø¨ Ø§Ù„Ù‡Ø¯Ø§ÙŠØ©';
     }
   }
 
@@ -350,29 +350,29 @@ extension DuaContextExtensions on DuaContext {
   String get arabicName {
     switch (this) {
       case DuaContext.travel:
-        return 'السفر والرحلة';
+        return 'Ø§Ù„Ø³ÙØ± ÙˆØ§Ù„Ø±Ø­Ù„Ø©';
       case DuaContext.health:
-        return 'الصحة والشفاء';
+        return 'Ø§Ù„ØµØ­Ø© ÙˆØ§Ù„Ø´ÙØ§Ø¡';
       case DuaContext.workCareer:
-        return 'العمل والمهنة';
+        return 'Ø§Ù„Ø¹Ù…Ù„ ÙˆØ§Ù„Ù…Ù‡Ù†Ø©';
       case DuaContext.family:
-        return 'الأسرة';
+        return 'Ø§Ù„Ø£Ø³Ø±Ø©';
       case DuaContext.education:
-        return 'التعلم والتعليم';
+        return 'Ø§Ù„ØªØ¹Ù„Ù… ÙˆØ§Ù„ØªØ¹Ù„ÙŠÙ…';
       case DuaContext.financial:
-        return 'الأمور المالية';
+        return 'Ø§Ù„Ø£Ù…ÙˆØ± Ø§Ù„Ù…Ø§Ù„ÙŠØ©';
       case DuaContext.spiritual:
-        return 'النمو الروحي';
+        return 'Ø§Ù„Ù†Ù…Ùˆ Ø§Ù„Ø±ÙˆØ­ÙŠ';
       case DuaContext.relationships:
-        return 'العلاقات';
+        return 'Ø§Ù„Ø¹Ù„Ø§Ù‚Ø§Øª';
       case DuaContext.protection:
-        return 'الحماية والأمان';
+        return 'Ø§Ù„Ø­Ù…Ø§ÙŠØ© ÙˆØ§Ù„Ø£Ù…Ø§Ù†';
       case DuaContext.guidance:
-        return 'الهداية الإلهية';
+        return 'Ø§Ù„Ù‡Ø¯Ø§ÙŠØ© Ø§Ù„Ø¥Ù„Ù‡ÙŠØ©';
       case DuaContext.gratitude:
-        return 'الامتنان والشكر';
+        return 'Ø§Ù„Ø§Ù…ØªÙ†Ø§Ù† ÙˆØ§Ù„Ø´ÙƒØ±';
       case DuaContext.forgiveness:
-        return 'المغفرة والرحمة';
+        return 'Ø§Ù„Ù…ØºÙØ±Ø© ÙˆØ§Ù„Ø±Ø­Ù…Ø©';
     }
   }
 

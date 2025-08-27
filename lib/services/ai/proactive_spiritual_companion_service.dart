@@ -86,7 +86,7 @@ class ProactiveSpiritualCompanionService {
 
       if (checkInMessage != null) {
         await _sendProactiveMessage(
-          title: '🤲 Spiritual Check-In',
+          title: 'ðŸ¤² Spiritual Check-In',
           message: checkInMessage,
           type: 'spiritual_checkin',
         );
@@ -105,7 +105,7 @@ class ProactiveSpiritualCompanionService {
 
       if (opportunity != null) {
         await _sendProactiveMessage(
-          title: '📚 Learning Opportunity',
+          title: 'ðŸ“š Learning Opportunity',
           message: opportunity,
           type: 'learning_opportunity',
         );
@@ -124,7 +124,7 @@ class ProactiveSpiritualCompanionService {
 
       if (reminder != null) {
         await _sendProactiveMessage(
-          title: '🌙 Spiritual Reminder',
+          title: 'ðŸŒ™ Spiritual Reminder',
           message: reminder,
           type: 'spiritual_reminder',
         );
@@ -157,9 +157,9 @@ class ProactiveSpiritualCompanionService {
   /// Generate supportive check-in for difficult times
   String _generateSupportiveCheckIn() {
     final supportiveMessages = [
-      'Assalamu Alaikum, my dear friend. I\'ve noticed you might be going through a challenging time. How is your heart today? Remember, Allah is always with you. 🤲',
-      'Peace be upon you. Your spiritual companion is here. Would you like to talk about what\'s on your mind? Sometimes sharing our burdens lightens them. ✨',
-      'I\'ve been thinking of you in my prayers. How are you feeling today? Remember, after every difficulty comes ease, just as Allah promises. 🌙',
+      'Assalamu Alaikum, my dear friend. I\'ve noticed you might be going through a challenging time. How is your heart today? Remember, Allah is always with you. ðŸ¤²',
+      'Peace be upon you. Your spiritual companion is here. Would you like to talk about what\'s on your mind? Sometimes sharing our burdens lightens them. âœ¨',
+      'I\'ve been thinking of you in my prayers. How are you feeling today? Remember, after every difficulty comes ease, just as Allah promises. ðŸŒ™',
     ];
 
     return supportiveMessages[Random().nextInt(supportiveMessages.length)];
@@ -168,9 +168,9 @@ class ProactiveSpiritualCompanionService {
   /// Generate reconnection check-in
   String _generateReconnectionCheckIn() {
     final reconnectionMessages = [
-      'Assalamu Alaikum! It\'s been a while since we connected. How has your spiritual journey been? I\'m here whenever you need guidance. 🕌',
-      'Peace and blessings! I hope you\'re thriving in your faith. Would you like to share any recent reflections or perhaps explore something new together? 📚',
-      'MashaAllah, time flies! How have you been connecting with Allah lately? I\'d love to hear about your spiritual experiences. 🌸',
+      'Assalamu Alaikum! It\'s been a while since we connected. How has your spiritual journey been? I\'m here whenever you need guidance. ðŸ•Œ',
+      'Peace and blessings! I hope you\'re thriving in your faith. Would you like to share any recent reflections or perhaps explore something new together? ðŸ“š',
+      'MashaAllah, time flies! How have you been connecting with Allah lately? I\'d love to hear about your spiritual experiences. ðŸŒ¸',
     ];
 
     return reconnectionMessages[Random().nextInt(reconnectionMessages.length)];
@@ -181,14 +181,14 @@ class ProactiveSpiritualCompanionService {
     final hour = DateTime.now().hour;
 
     if (hour >= 5 && hour < 8) {
-      return 'Blessed Fajr time! How did your morning prayer feel today? Starting the day with Allah\'s remembrance brings such peace. 🌅';
+      return 'Blessed Fajr time! How did your morning prayer feel today? Starting the day with Allah\'s remembrance brings such peace. ðŸŒ…';
     } else if (hour >= 18 && hour < 21) {
-      return 'As the day draws to a close, how has your heart been with Allah today? Maghrib is a beautiful time for reflection. 🌆';
+      return 'As the day draws to a close, how has your heart been with Allah today? Maghrib is a beautiful time for reflection. ðŸŒ†';
     } else if (hour >= 21 && hour < 23) {
-      return 'In these peaceful evening hours, would you like to end the day with some dhikr or reflection? Isha time is perfect for spiritual connection. 🌙';
+      return 'In these peaceful evening hours, would you like to end the day with some dhikr or reflection? Isha time is perfect for spiritual connection. ðŸŒ™';
     }
 
-    return 'Peace be upon you! How is your spiritual state today? I\'m here to accompany you on your journey with Allah. ✨';
+    return 'Peace be upon you! How is your spiritual state today? I\'m here to accompany you on your journey with Allah. âœ¨';
   }
 
   /// Identify learning opportunities
@@ -199,11 +199,11 @@ class ProactiveSpiritualCompanionService {
 
     // Suggest deepening knowledge in recent topics
     if (recentTopics.contains('prayer')) {
-      return 'I noticed you\'ve been asking about prayer recently. Would you like to explore the deeper spiritual meanings behind each prayer position? Each movement is a conversation with Allah. 🕌';
+      return 'I noticed you\'ve been asking about prayer recently. Would you like to explore the deeper spiritual meanings behind each prayer position? Each movement is a conversation with Allah. ðŸ•Œ';
     } else if (recentTopics.contains('quran')) {
-      return 'MashaAllah, your interest in the Quran is beautiful! Would you like to learn about the context behind a verse you\'ve been reflecting on? Understanding the circumstances of revelation can deepen our connection. 📖';
+      return 'MashaAllah, your interest in the Quran is beautiful! Would you like to learn about the context behind a verse you\'ve been reflecting on? Understanding the circumstances of revelation can deepen our connection. ðŸ“–';
     } else if (recentTopics.contains('dhikr')) {
-      return 'Your love for dhikr touches my heart! Shall we explore different forms of remembrance? I can teach you about the 99 Beautiful Names of Allah and their spiritual significance. ✨';
+      return 'Your love for dhikr touches my heart! Shall we explore different forms of remembrance? I can teach you about the 99 Beautiful Names of Allah and their spiritual significance. âœ¨';
     }
 
     // Suggest new areas based on spiritual profile gaps
@@ -219,10 +219,10 @@ class ProactiveSpiritualCompanionService {
   /// Suggest new learning areas
   String _suggestNewLearningArea() {
     final suggestions = [
-      'Would you like to explore the beautiful science of Islamic astronomy? Understanding how our ancestors calculated prayer times and Islamic calendar can deepen our appreciation for Allah\'s creation. 🌙',
-      'Shall we journey through the stories of the prophets? Each story holds timeless wisdom for our modern challenges. Which prophet\'s story speaks to your heart? 📚',
-      'Would you be interested in learning about Islamic ethics and how they apply to our daily decisions? Islam provides guidance for every aspect of life. 🤲',
-      'How about exploring the concept of Ihsan - excellence in worship? It\'s about worshipping Allah as if you see Him, and knowing that He sees you. ✨',
+      'Would you like to explore the beautiful science of Islamic astronomy? Understanding how our ancestors calculated prayer times and Islamic calendar can deepen our appreciation for Allah\'s creation. ðŸŒ™',
+      'Shall we journey through the stories of the prophets? Each story holds timeless wisdom for our modern challenges. Which prophet\'s story speaks to your heart? ðŸ“š',
+      'Would you be interested in learning about Islamic ethics and how they apply to our daily decisions? Islam provides guidance for every aspect of life. ðŸ¤²',
+      'How about exploring the concept of Ihsan - excellence in worship? It\'s about worshipping Allah as if you see Him, and knowing that He sees you. âœ¨',
     ];
 
     return suggestions[Random().nextInt(suggestions.length)];
@@ -235,16 +235,16 @@ class ProactiveSpiritualCompanionService {
 
     // Friday reminders
     if (dayOfWeek == DateTime.friday) {
-      return 'Jummah Mubarak! 🕌 Friday is the best day of the week. Have you sent blessings upon Prophet Muhammad ﷺ today? It\'s especially rewarded on Fridays.';
+      return 'Jummah Mubarak! ðŸ•Œ Friday is the best day of the week. Have you sent blessings upon Prophet Muhammad ï·º today? It\'s especially rewarded on Fridays.';
     }
 
     // Time-based reminders
     if (hour >= 6 && hour < 9) {
-      return 'Morning reflection: "And it is He who sends down rain from heaven, and We produce thereby the vegetation of every kind." (6:99) How will you grow spiritually today? 🌱';
+      return 'Morning reflection: "And it is He who sends down rain from heaven, and We produce thereby the vegetation of every kind." (6:99) How will you grow spiritually today? ðŸŒ±';
     } else if (hour >= 15 && hour < 17) {
-      return 'Afternoon pause: The Prophet ﷺ said, "Remember often the destroyer of pleasures: death." Let this reminder motivate us to do good while we can. 🤲';
+      return 'Afternoon pause: The Prophet ï·º said, "Remember often the destroyer of pleasures: death." Let this reminder motivate us to do good while we can. ðŸ¤²';
     } else if (hour >= 20 && hour < 22) {
-      return 'Evening gratitude: Before sleep, let\'s count three blessings Allah gave you today. Gratitude transforms our hearts and draws us closer to Him. ✨';
+      return 'Evening gratitude: Before sleep, let\'s count three blessings Allah gave you today. Gratitude transforms our hearts and draws us closer to Him. âœ¨';
     }
 
     // Random spiritual wisdom
@@ -254,10 +254,10 @@ class ProactiveSpiritualCompanionService {
   /// Get random spiritual wisdom
   String _getRandomSpiritualWisdom() {
     final wisdom = [
-      'Remember: "And Allah is with the patient ones." (2:153) Your perseverance in faith is seen and rewarded by Allah. 🤲',
-      'Reflect: "And give good tidings to the patient, Who, when disaster strikes them, say, \'Indeed we belong to Allah, and indeed to Him we will return.\'" (2:155-156) 🌙',
-      'Consider: The Prophet ﷺ said, "The believer is not one who eats his fill while his neighbor goes hungry." How can we serve others today? 🤝',
-      'Ponder: "And it is He who created the heavens and earth in truth. And the day He says, \'Be,\' and it is, His word is the truth." (6:73) SubhanAllah! ✨',
+      'Remember: "And Allah is with the patient ones." (2:153) Your perseverance in faith is seen and rewarded by Allah. ðŸ¤²',
+      'Reflect: "And give good tidings to the patient, Who, when disaster strikes them, say, \'Indeed we belong to Allah, and indeed to Him we will return.\'" (2:155-156) ðŸŒ™',
+      'Consider: The Prophet ï·º said, "The believer is not one who eats his fill while his neighbor goes hungry." How can we serve others today? ðŸ¤',
+      'Ponder: "And it is He who created the heavens and earth in truth. And the day He says, \'Be,\' and it is, His word is the truth." (6:73) SubhanAllah! âœ¨',
     ];
 
     return wisdom[Random().nextInt(wisdom.length)];

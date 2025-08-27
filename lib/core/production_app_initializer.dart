@@ -250,11 +250,10 @@ class ProductionAppInitializer {
         'crash_reporting': await ProductionCrashReporter.isCrashlyticsEnabled(),
       };
 
-      final failedServices =
-          validationResults.entries
-              .where((entry) => !entry.value)
-              .map((entry) => entry.key)
-              .toList();
+      final failedServices = validationResults.entries
+          .where((entry) => !entry.value)
+          .map((entry) => entry.key)
+          .toList();
 
       if (failedServices.isNotEmpty) {
         _logger.w(
@@ -483,21 +482,20 @@ class ProductionAppWrapper extends ConsumerWidget {
 
         return child;
       },
-      loading:
-          () => const MaterialApp(
-            home: Scaffold(
-              body: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircularProgressIndicator(),
-                    SizedBox(height: 16),
-                    Text('Loading production services...'),
-                  ],
-                ),
-              ),
+      loading: () => const MaterialApp(
+        home: Scaffold(
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(),
+                SizedBox(height: 16),
+                Text('Loading production services...'),
+              ],
             ),
           ),
+        ),
+      ),
       error: (error, stackTrace) {
         onInitializationError?.call();
 

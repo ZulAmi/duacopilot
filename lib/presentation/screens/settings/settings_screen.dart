@@ -14,7 +14,8 @@ class SettingsScreen extends ConsumerStatefulWidget {
   ConsumerState<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProviderStateMixin {
+class _SettingsScreenState extends ConsumerState<SettingsScreen>
+    with TickerProviderStateMixin {
   late AnimationController _fadeController;
   late AnimationController _slideController;
 
@@ -300,9 +301,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
                     ProfessionalIslamicTheme.space3,
                   ),
                   decoration: BoxDecoration(
-                    color: ProfessionalIslamicTheme.textOnIslamic.withValues(
-                      alpha: 0.2,
-                    ),
+                    color:
+                        ProfessionalIslamicTheme.textOnIslamic.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(
                       ProfessionalIslamicTheme.radius2Xl,
                     ),
@@ -329,7 +329,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
                       Text(
                         'Customize DuaCopilot to match your Islamic preferences and spiritual journey',
                         style: ProfessionalIslamicTheme.body2.copyWith(
-                          color: ProfessionalIslamicTheme.textOnIslamic.withValues(alpha: 0.9),
+                          color: ProfessionalIslamicTheme.textOnIslamic
+                              .withOpacity(0.9),
                         ),
                       ),
                     ],
@@ -358,7 +359,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
         _buildSettingsItem(
           icon: Icons.workspace_premium_rounded,
           title: 'Subscription',
-          subtitle: 'Premium • View subscription details',
+          subtitle: 'Premium â€¢ View subscription details',
           onTap: () => _showSubscriptionDialog(),
           trailing: const Icon(
             Icons.star,
@@ -395,7 +396,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
           subtitle: 'Choose method for prayer time calculations',
           value: _prayerCalculationMethod,
           items: _calculationMethods,
-          onChanged: (value) => setState(() => _prayerCalculationMethod = value!),
+          onChanged: (value) =>
+              setState(() => _prayerCalculationMethod = value!),
         ),
         _buildDropdownItem(
           icon: Icons.headphones_rounded,
@@ -568,7 +570,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
         _buildSettingsItem(
           icon: Icons.info_rounded,
           title: 'About DuaCopilot',
-          subtitle: 'Version 2.0.0 • Build 1001',
+          subtitle: 'Version 2.0.0 â€¢ Build 1001',
           onTap: () => _showAboutDialog(),
         ),
       ],
@@ -659,9 +661,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
                       ProfessionalIslamicTheme.space2,
                     ),
                     decoration: BoxDecoration(
-                      color: ProfessionalIslamicTheme.islamicGreen.withValues(
-                        alpha: 0.1,
-                      ),
+                      color: ProfessionalIslamicTheme.islamicGreen
+                          .withOpacity(0.1),
                       borderRadius: BorderRadius.circular(
                         ProfessionalIslamicTheme.radius2Xl,
                       ),
@@ -877,7 +878,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
       builder: (context) => AlertDialog(
         title: const Text('Subscription Status'),
         content: const Text(
-          'Premium Plan Active\n\n✓ Unlimited AI queries\n✓ Advanced features\n✓ Premium audio content\n✓ Family sharing',
+          'Premium Plan Active\n\nâœ“ Unlimited AI queries\nâœ“ Advanced features\nâœ“ Premium audio content\nâœ“ Family sharing',
         ),
         actions: [
           TextButton(
@@ -957,7 +958,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProv
           'Your intelligent Islamic companion for spiritual guidance, Quranic wisdom, and daily prayers.',
         ),
         const SizedBox(height: 16),
-        const Text('Built with ❤️ for the Muslim community.'),
+        const Text('Built with â¤ï¸ for the Muslim community.'),
       ],
     );
   }

@@ -31,7 +31,7 @@ class _SmartBannerAdState extends State<SmartBannerAd> {
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
+            color: Colors.black.withOpacity(0.1),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -121,8 +121,7 @@ class _RewardedAdButtonState extends State<RewardedAdButton> {
     return ElevatedButton.icon(
       onPressed: isAvailable ? _showRewardedAd : null,
       icon: const Icon(Icons.play_circle_filled),
-      label:
-          widget.child ??
+      label: widget.child ??
           Text(
             isAvailable
                 ? 'Watch Ad for ${widget.rewardDescription}'
@@ -260,25 +259,21 @@ class AdConfigWidget extends StatelessWidget {
 
                 final stats = snapshot.data!;
                 return Column(
-                  children:
-                      stats.entries.map((entry) {
-                        return ListTile(
-                          title: Text(
-                            entry.key.replaceAll('_', ' ').toUpperCase(),
-                          ),
-                          trailing: Text(
-                            entry.value.toString(),
-                            style: TextStyle(
-                              color:
-                                  entry.value is bool
-                                      ? (entry.value
-                                          ? Colors.green
-                                          : Colors.red)
-                                      : null,
-                            ),
-                          ),
-                        );
-                      }).toList(),
+                  children: stats.entries.map((entry) {
+                    return ListTile(
+                      title: Text(
+                        entry.key.replaceAll('_', ' ').toUpperCase(),
+                      ),
+                      trailing: Text(
+                        entry.value.toString(),
+                        style: TextStyle(
+                          color: entry.value is bool
+                              ? (entry.value ? Colors.green : Colors.red)
+                              : null,
+                        ),
+                      ),
+                    );
+                  }).toList(),
                 );
               },
             ),

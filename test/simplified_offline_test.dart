@@ -250,7 +250,7 @@ void main() {
         if (times.isNotEmpty) {
           final avgTime =
               times.map((t) => t.inMilliseconds).reduce((a, b) => a + b) /
-              times.length;
+                  times.length;
           print('✅ Average response time: ${avgTime.toStringAsFixed(1)}ms');
 
           // Reasonable expectation: under 5 seconds for offline search

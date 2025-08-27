@@ -80,10 +80,9 @@ class ProductionConfig {
       'admin_access_enabled': shouldEnableAdminFeatures,
       'telemetry_enabled': shouldEnableTelemetry,
       'debug_features_enabled': enableDebugFeatures,
-      'build_mode':
-          kReleaseMode
-              ? 'release'
-              : kDebugMode
+      'build_mode': kReleaseMode
+          ? 'release'
+          : kDebugMode
               ? 'debug'
               : 'profile',
       'flavor': flavor,
@@ -152,10 +151,10 @@ class ProductionSecurityAssertion {
       _validateAdminRoutesBlocked();
 
       // Log security validation
-      debugPrint('✅ SECURITY: Production security requirements validated');
+      debugPrint('âœ… SECURITY: Production security requirements validated');
     } else {
       debugPrint(
-        '⚠️ DEVELOPMENT: Running in development mode - security checks relaxed',
+        'âš ï¸ DEVELOPMENT: Running in development mode - security checks relaxed',
       );
     }
   }
@@ -164,7 +163,7 @@ class ProductionSecurityAssertion {
   static void _validateAdminRoutesBlocked() {
     if (kReleaseMode) {
       // SECURITY: In production, admin screens should be completely removed
-      debugPrint('✅ SECURITY: Admin screens removed from production build');
+      debugPrint('âœ… SECURITY: Admin screens removed from production build');
     }
   }
 }

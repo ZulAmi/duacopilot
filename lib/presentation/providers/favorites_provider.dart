@@ -39,7 +39,7 @@ class FavoritesNotifier extends StateNotifier<FavoritesState> {
   final RemoveFavorite removeFavorite;
 
   FavoritesNotifier(this.getFavorites, this.addFavorite, this.removeFavorite)
-    : super(const FavoritesState());
+      : super(const FavoritesState());
 
   Future<void> loadFavorites({FavoriteType? type}) async {
     state = state.copyWith(isLoading: true, error: null);
@@ -82,10 +82,9 @@ class FavoritesNotifier extends StateNotifier<FavoritesState> {
         state = state.copyWith(error: failure.toString());
       },
       (_) {
-        final updatedFavorites =
-            state.favorites
-                .where((favorite) => favorite.id != favoriteId)
-                .toList();
+        final updatedFavorites = state.favorites
+            .where((favorite) => favorite.id != favoriteId)
+            .toList();
         state = state.copyWith(favorites: updatedFavorites);
       },
     );
@@ -98,12 +97,12 @@ class FavoritesNotifier extends StateNotifier<FavoritesState> {
 
 final favoritesProvider =
     StateNotifierProvider<FavoritesNotifier, FavoritesState>((ref) {
-      return FavoritesNotifier(
-        di.sl<GetFavorites>(),
-        di.sl<AddFavorite>(),
-        di.sl<RemoveFavorite>(),
-      );
-    });
+  return FavoritesNotifier(
+    di.sl<GetFavorites>(),
+    di.sl<AddFavorite>(),
+    di.sl<RemoveFavorite>(),
+  );
+});
 
 // Filtered favorites by type
 final favoritesByTypeProvider = Provider.family<List<Favorite>, FavoriteType?>((

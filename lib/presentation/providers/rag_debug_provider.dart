@@ -58,7 +58,8 @@ class RagLogger {
     Duration duration,
     int? statusCode,
   ) {
-    final message = '$method $endpoint - ${statusCode ?? 'TIMEOUT'} (${duration.inMilliseconds}ms)';
+    final message =
+        '$method $endpoint - ${statusCode ?? 'TIMEOUT'} (${duration.inMilliseconds}ms)';
     if (statusCode != null && statusCode >= 200 && statusCode < 300) {
       info(message);
     } else {
@@ -237,10 +238,15 @@ class RagDebugNotifier extends StateNotifier<RagDebugState> {
       };
     }
 
-    final totalResponseTime = apiCalls.map((call) => call.duration.inMilliseconds).reduce((a, b) => a + b);
+    final totalResponseTime = apiCalls
+        .map((call) => call.duration.inMilliseconds)
+        .reduce((a, b) => a + b);
 
     final successfulCalls = apiCalls.where(
-      (call) => call.statusCode != null && call.statusCode! >= 200 && call.statusCode! < 300,
+      (call) =>
+          call.statusCode != null &&
+          call.statusCode! >= 200 &&
+          call.statusCode! < 300,
     );
 
     final cacheHits = cacheOps.where((op) => op.hit).length;
@@ -250,7 +256,8 @@ class RagDebugNotifier extends StateNotifier<RagDebugState> {
       'apiCalls': apiCalls.length,
       'averageResponseTime': totalResponseTime / apiCalls.length,
       'cacheHitRate': totalCacheOps > 0 ? (cacheHits / totalCacheOps) * 100 : 0,
-      'errorRate': ((apiCalls.length - successfulCalls.length) / apiCalls.length) * 100,
+      'errorRate':
+          ((apiCalls.length - successfulCalls.length) / apiCalls.length) * 100,
       'errors': state.errors.length,
     };
   }

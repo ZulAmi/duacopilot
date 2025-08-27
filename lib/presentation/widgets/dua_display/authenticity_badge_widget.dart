@@ -22,15 +22,15 @@ class AuthenticityBadgeWidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: _getAuthenticityColor().withValues(alpha: 0.1),
+          color: _getAuthenticityColor().withOpacity(0.1),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: _getAuthenticityColor().withValues(alpha: 0.3),
+            color: _getAuthenticityColor().withOpacity(0.3),
             width: 1.5,
           ),
           boxShadow: [
             BoxShadow(
-              color: _getAuthenticityColor().withValues(alpha: 0.1),
+              color: _getAuthenticityColor().withOpacity(0.1),
               blurRadius: 8,
               offset: const Offset(0, 2),
               spreadRadius: 0,
@@ -104,7 +104,7 @@ class AuthenticityBadgeWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.5),
+        color: Colors.white.withOpacity(0.5),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
@@ -258,16 +258,14 @@ class IslamicAuthenticityPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint =
-        Paint()
-          ..color = color
-          ..style = PaintingStyle.fill;
+    final paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.fill;
 
-    final strokePaint =
-        Paint()
-          ..color = color
-          ..style = PaintingStyle.stroke
-          ..strokeWidth = 1.5;
+    final strokePaint = Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.5;
 
     final center = Offset(size.width / 2, size.height / 2);
     final radius = size.width / 2;
@@ -318,16 +316,16 @@ class IslamicAuthenticityPainter extends CustomPainter {
   }
 
   void _drawCrescent(Canvas canvas, Offset center, double radius, Paint paint) {
-    final outerCircle =
-        Path()..addOval(Rect.fromCircle(center: center, radius: radius - 2));
+    final outerCircle = Path()
+      ..addOval(Rect.fromCircle(center: center, radius: radius - 2));
 
-    final innerCircle =
-        Path()..addOval(
-          Rect.fromCircle(
-            center: Offset(center.dx + 3, center.dy),
-            radius: radius - 4,
-          ),
-        );
+    final innerCircle = Path()
+      ..addOval(
+        Rect.fromCircle(
+          center: Offset(center.dx + 3, center.dy),
+          radius: radius - 4,
+        ),
+      );
 
     final crescentPath = Path.combine(
       PathOperation.difference,

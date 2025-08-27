@@ -19,7 +19,7 @@ class SecureTelemetry {
     _sessionId = _generateSecureSessionId();
     _deviceFingerprint = await _generateDeviceFingerprint();
 
-    debugPrint('🔐 SecureTelemetry initialized');
+    debugPrint('ðŸ” SecureTelemetry initialized');
   }
 
   /// Send encrypted telemetry data
@@ -29,7 +29,7 @@ class SecureTelemetry {
     String? userId,
   }) async {
     if (!kReleaseMode) {
-      debugPrint('🔍 DEV: Event tracked - $event');
+      debugPrint('ðŸ” DEV: Event tracked - $event');
       return; // No telemetry in debug mode
     }
 
@@ -43,7 +43,7 @@ class SecureTelemetry {
       await _sendSecureRequest(payload);
     } catch (e) {
       // Silent fail - never crash app due to telemetry
-      debugPrint('⚠️ Telemetry failed: $e');
+      debugPrint('âš ï¸ Telemetry failed: $e');
     }
   }
 
@@ -145,7 +145,7 @@ class SecureTelemetry {
       } catch (e) {
         attempt++;
         if (attempt >= maxRetries) {
-          debugPrint('⚠️ Telemetry failed after $maxRetries attempts');
+          debugPrint('âš ï¸ Telemetry failed after $maxRetries attempts');
           return;
         }
 
@@ -267,7 +267,7 @@ class SecureTelemetry {
   static void clearSession() {
     _sessionId = null;
     _deviceFingerprint = null;
-    debugPrint('🔐 SecureTelemetry session cleared');
+    debugPrint('ðŸ” SecureTelemetry session cleared');
   }
 }
 
@@ -301,7 +301,7 @@ class SecurityAuditLogger {
           )
           .timeout(const Duration(seconds: 5));
     } catch (e) {
-      debugPrint('⚠️ Security audit log failed: $e');
+      debugPrint('âš ï¸ Security audit log failed: $e');
     }
   }
 }

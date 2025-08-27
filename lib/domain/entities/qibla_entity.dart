@@ -4,6 +4,7 @@ part 'qibla_entity.freezed.dart';
 part 'qibla_entity.g.dart';
 
 @freezed
+
 /// QiblaCompass entity for prayer direction tracking
 class QiblaCompass with _$QiblaCompass {
   const factory QiblaCompass({
@@ -23,6 +24,7 @@ class QiblaCompass with _$QiblaCompass {
 }
 
 @freezed
+
 /// QiblaCalibrationData for compass accuracy
 class QiblaCalibrationData with _$QiblaCalibrationData {
   const factory QiblaCalibrationData({
@@ -39,6 +41,7 @@ class QiblaCalibrationData with _$QiblaCalibrationData {
 }
 
 @freezed
+
 /// PrayerTracker entity for tracking prayer completions
 class PrayerTracker with _$PrayerTracker {
   const factory PrayerTracker({
@@ -56,6 +59,7 @@ class PrayerTracker with _$PrayerTracker {
 }
 
 @freezed
+
 /// PrayerCompletion for individual prayer tracking
 class PrayerCompletion with _$PrayerCompletion {
   const factory PrayerCompletion({
@@ -75,6 +79,7 @@ class PrayerCompletion with _$PrayerCompletion {
 }
 
 @freezed
+
 /// PrayerStats for daily prayer statistics
 class PrayerStats with _$PrayerStats {
   const factory PrayerStats({
@@ -93,6 +98,7 @@ class PrayerStats with _$PrayerStats {
 }
 
 @freezed
+
 /// PrayerReminder for scheduled prayer notifications
 class PrayerReminder with _$PrayerReminder {
   const factory PrayerReminder({
@@ -111,6 +117,7 @@ class PrayerReminder with _$PrayerReminder {
 }
 
 @freezed
+
 /// MosqueLocation for nearby mosque tracking
 class MosqueLocation with _$MosqueLocation {
   const factory MosqueLocation({
@@ -134,6 +141,7 @@ class MosqueLocation with _$MosqueLocation {
 }
 
 @freezed
+
 /// MosqueRating for community feedback
 class MosqueRating with _$MosqueRating {
   const factory MosqueRating({
@@ -148,6 +156,7 @@ class MosqueRating with _$MosqueRating {
 }
 
 @freezed
+
 /// MosqueReview for individual mosque reviews
 class MosqueReview with _$MosqueReview {
   const factory MosqueReview({

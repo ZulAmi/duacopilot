@@ -61,8 +61,9 @@ class SecureStorageAdapter {
 
     if (kDebugMode) {
       final platform = PlatformService.instance;
-      print('🔐 SecureStorageAdapter initialized for ${platform.platformName}');
-      print('📱 Secure storage supported: ${platform.supportsSecureStorage}');
+      print(
+          'ðŸ” SecureStorageAdapter initialized for ${platform.platformName}');
+      print('ðŸ“± Secure storage supported: ${platform.supportsSecureStorage}');
     }
   }
 
@@ -81,7 +82,7 @@ class SecureStorageAdapter {
       } catch (e) {
         if (kDebugMode) {
           print(
-            '⚠️ Secure storage failed, falling back to SharedPreferences: $e',
+            'âš ï¸ Secure storage failed, falling back to SharedPreferences: $e',
           );
         }
       }
@@ -93,7 +94,7 @@ class SecureStorageAdapter {
 
     if (kDebugMode) {
       print(
-        '💾 Stored $key using ${platform.supportsSecureStorage && platform.isMobile ? 'secure storage (fallback: SharedPreferences)' : 'SharedPreferences'}',
+        'ðŸ’¾ Stored $key using ${platform.supportsSecureStorage && platform.isMobile ? 'secure storage (fallback: SharedPreferences)' : 'SharedPreferences'}',
       );
     }
   }
@@ -112,7 +113,7 @@ class SecureStorageAdapter {
       } catch (e) {
         if (kDebugMode) {
           print(
-            '⚠️ Secure storage read failed, checking SharedPreferences: $e',
+            'âš ï¸ Secure storage read failed, checking SharedPreferences: $e',
           );
         }
       }
@@ -123,7 +124,7 @@ class SecureStorageAdapter {
     final value = _prefs!.getString('secure_$key');
 
     if (kDebugMode && value != null) {
-      print('📖 Read $key from SharedPreferences');
+      print('ðŸ“– Read $key from SharedPreferences');
     }
 
     return value;
@@ -139,7 +140,7 @@ class SecureStorageAdapter {
         await _storage.delete(key: key);
       } catch (e) {
         if (kDebugMode) {
-          print('⚠️ Secure storage delete failed: $e');
+          print('âš ï¸ Secure storage delete failed: $e');
         }
       }
     }
@@ -149,7 +150,7 @@ class SecureStorageAdapter {
     await _prefs!.remove('secure_$key');
 
     if (kDebugMode) {
-      print('🗑️ Deleted $key from storage');
+      print('ðŸ—‘ï¸ Deleted $key from storage');
     }
   }
 
@@ -163,20 +164,21 @@ class SecureStorageAdapter {
         await _storage.deleteAll();
       } catch (e) {
         if (kDebugMode) {
-          print('⚠️ Secure storage deleteAll failed: $e');
+          print('âš ï¸ Secure storage deleteAll failed: $e');
         }
       }
     }
 
     // Clear secure keys from SharedPreferences
     _prefs ??= await SharedPreferences.getInstance();
-    final keys = _prefs!.getKeys().where((key) => key.startsWith('secure_')).toList();
+    final keys =
+        _prefs!.getKeys().where((key) => key.startsWith('secure_')).toList();
     for (final key in keys) {
       await _prefs!.remove(key);
     }
 
     if (kDebugMode) {
-      print('🧹 Cleared all secure storage data');
+      print('ðŸ§¹ Cleared all secure storage data');
     }
   }
 
@@ -192,7 +194,7 @@ class SecureStorageAdapter {
         }
       } catch (e) {
         if (kDebugMode) {
-          print('⚠️ Secure storage containsKey failed: $e');
+          print('âš ï¸ Secure storage containsKey failed: $e');
         }
       }
     }
@@ -214,7 +216,7 @@ class SecureStorageAdapter {
         allData.addAll(secureData);
       } catch (e) {
         if (kDebugMode) {
-          print('⚠️ Secure storage readAll failed: $e');
+          print('âš ï¸ Secure storage readAll failed: $e');
         }
       }
     }
@@ -240,7 +242,8 @@ class SecureStorageAdapter {
     final platform = PlatformService.instance;
     _prefs ??= await SharedPreferences.getInstance();
 
-    final secureKeys = _prefs!.getKeys().where((key) => key.startsWith('secure_')).length;
+    final secureKeys =
+        _prefs!.getKeys().where((key) => key.startsWith('secure_')).length;
     final info = {
       'platform': platform.platformName,
       'supportsSecureStorage': platform.supportsSecureStorage,

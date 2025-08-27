@@ -142,12 +142,11 @@ void main() {
       // Categorize queries
       final duaQueries =
           popularQueries.where((q) => q.contains('duas')).toList();
-      final arabicTerms =
-          popularQueries
-              .where(
-                (q) => ['istighfar', 'durood'].any((term) => q.contains(term)),
-              )
-              .toList();
+      final arabicTerms = popularQueries
+          .where(
+            (q) => ['istighfar', 'durood'].any((term) => q.contains(term)),
+          )
+          .toList();
 
       expect(duaQueries.length, equals(8)); // 8 dua categories
       expect(arabicTerms.length, equals(2)); // 2 Arabic terms

@@ -264,12 +264,11 @@ ProcessedTextResult _processTextInIsolate(TextProcessingTask task) {
     );
 
     // Sentence splitting
-    final sentences =
-        text
-            .split(RegExp(r'[.!?]+'))
-            .where((s) => s.trim().isNotEmpty)
-            .map((s) => s.trim())
-            .toList();
+    final sentences = text
+        .split(RegExp(r'[.!?]+'))
+        .where((s) => s.trim().isNotEmpty)
+        .map((s) => s.trim())
+        .toList();
 
     // Simple keyword extraction
     final keywords = _extractSimpleKeywords(text, options.maxKeywords);
@@ -389,13 +388,12 @@ ProcessedRagResponse _processRagResponse(RagProcessingTask task) {
 
 /// Helper functions
 List<String> _extractSimpleKeywords(String text, int maxKeywords) {
-  final words =
-      text
-          .toLowerCase()
-          .replaceAll(RegExp(r'[^\w\s]'), '')
-          .split(RegExp(r'\s+'))
-          .where((word) => word.length > 3) // Only words longer than 3 chars
-          .toList();
+  final words = text
+      .toLowerCase()
+      .replaceAll(RegExp(r'[^\w\s]'), '')
+      .split(RegExp(r'\s+'))
+      .where((word) => word.length > 3) // Only words longer than 3 chars
+      .toList();
 
   // Count word frequency
   final wordCount = <String, int>{};
@@ -404,8 +402,8 @@ List<String> _extractSimpleKeywords(String text, int maxKeywords) {
   }
 
   // Sort by frequency and return top keywords
-  final sortedWords =
-      wordCount.entries.toList()..sort((a, b) => b.value.compareTo(a.value));
+  final sortedWords = wordCount.entries.toList()
+    ..sort((a, b) => b.value.compareTo(a.value));
 
   return sortedWords.take(maxKeywords).map((e) => e.key).toList();
 }

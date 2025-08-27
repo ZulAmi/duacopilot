@@ -11,7 +11,8 @@ final localSearchServiceProvider = Provider<LocalSemanticSearchService>((ref) {
 });
 
 /// Provider for search state management
-final searchStateProvider = StateNotifierProvider<SearchStateNotifier, SearchState>((ref) {
+final searchStateProvider =
+    StateNotifierProvider<SearchStateNotifier, SearchState>((ref) {
   final searchService = ref.watch(localSearchServiceProvider);
   return SearchStateNotifier(searchService);
 });
@@ -23,7 +24,8 @@ final offlineStatusProvider = StateProvider<bool>((ref) => false);
 final queueSizeProvider = StateProvider<int>((ref) => 0);
 
 /// Provider for search suggestions
-final searchSuggestionsProvider = FutureProvider.family<List<String>, SearchSuggestionsParams>((
+final searchSuggestionsProvider =
+    FutureProvider.family<List<String>, SearchSuggestionsParams>((
   ref,
   params,
 ) async {
@@ -180,7 +182,8 @@ class SearchState {
 
   bool get hasResults => results.isNotEmpty;
   bool get hasError => error != null;
-  LocalSearchResult? get bestResult => results.isNotEmpty ? results.first : null;
+  LocalSearchResult? get bestResult =>
+      results.isNotEmpty ? results.first : null;
 }
 
 /// Parameters for search suggestions

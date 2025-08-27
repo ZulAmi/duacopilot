@@ -38,7 +38,8 @@ class RTLLayoutSupport {
     TextDirection? explicitDirection,
     String? content,
   }) {
-    final direction = explicitDirection ?? getContextDirection(context, content);
+    final direction =
+        explicitDirection ?? getContextDirection(context, content);
 
     return Directionality(textDirection: direction, child: child);
   }
@@ -145,7 +146,8 @@ class MixedTextDirectionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textDirection = ArabicTypography.getTextDirection(text);
-    final alignment = textAlign ?? ArabicTypography.getTextAlign(text, textDirection);
+    final alignment =
+        textAlign ?? ArabicTypography.getTextAlign(text, textDirection);
 
     Widget textWidget;
 
@@ -205,7 +207,9 @@ class RTLAwareContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final direction = RTLLayoutSupport.getContextDirection(context, content);
-    final adaptedAlignment = alignment != null ? RTLLayoutSupport.createRTLAwareAlignment(context, alignment!) : null;
+    final adaptedAlignment = alignment != null
+        ? RTLLayoutSupport.createRTLAwareAlignment(context, alignment!)
+        : null;
 
     return Directionality(
       textDirection: direction,
@@ -257,7 +261,9 @@ class RTLAwareRow extends StatelessWidget {
         mainAxisAlignment: adaptedMainAxis,
         crossAxisAlignment: adaptedCrossAxis,
         mainAxisSize: mainAxisSize,
-        children: direction == TextDirection.rtl ? children.reversed.toList() : children,
+        children: direction == TextDirection.rtl
+            ? children.reversed.toList()
+            : children,
       ),
     );
   }
@@ -401,7 +407,8 @@ class AccessibleArabicText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textDirection = ArabicTypography.getTextDirection(text);
-    final alignment = textAlign ?? ArabicTypography.getTextAlign(text, textDirection);
+    final alignment =
+        textAlign ?? ArabicTypography.getTextAlign(text, textDirection);
 
     Widget textWidget = selectable
         ? SelectableText(
@@ -521,7 +528,7 @@ class _ArabicTextSelectionToolbar extends StatelessWidget {
         if (delegate.cutEnabled)
           TextSelectionToolbarTextButton(
             padding: EdgeInsets.zero,
-            child: Text(isRTL ? 'قص' : 'Cut'),
+            child: Text(isRTL ? 'Ù‚Øµ' : 'Cut'),
             onPressed: () {
               delegate.cutSelection(SelectionChangedCause.toolbar);
             },
@@ -529,7 +536,7 @@ class _ArabicTextSelectionToolbar extends StatelessWidget {
         if (delegate.copyEnabled)
           TextSelectionToolbarTextButton(
             padding: EdgeInsets.zero,
-            child: Text(isRTL ? 'نسخ' : 'Copy'),
+            child: Text(isRTL ? 'Ù†Ø³Ø®' : 'Copy'),
             onPressed: () {
               delegate.copySelection(SelectionChangedCause.toolbar);
             },
@@ -537,7 +544,7 @@ class _ArabicTextSelectionToolbar extends StatelessWidget {
         if (delegate.pasteEnabled)
           TextSelectionToolbarTextButton(
             padding: EdgeInsets.zero,
-            child: Text(isRTL ? 'لصق' : 'Paste'),
+            child: Text(isRTL ? 'Ù„ØµÙ‚' : 'Paste'),
             onPressed: () {
               delegate.pasteText(SelectionChangedCause.toolbar);
             },
@@ -545,7 +552,7 @@ class _ArabicTextSelectionToolbar extends StatelessWidget {
         if (delegate.selectAllEnabled)
           TextSelectionToolbarTextButton(
             padding: EdgeInsets.zero,
-            child: Text(isRTL ? 'تحديد الكل' : 'Select All'),
+            child: Text(isRTL ? 'ØªØ­Ø¯ÙŠØ¯ Ø§Ù„ÙƒÙ„' : 'Select All'),
             onPressed: () {
               delegate.selectAll(SelectionChangedCause.toolbar);
             },

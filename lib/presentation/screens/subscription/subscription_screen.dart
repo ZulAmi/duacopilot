@@ -15,7 +15,8 @@ class SubscriptionScreen extends StatefulWidget {
   State<SubscriptionScreen> createState() => _SubscriptionScreenState();
 }
 
-class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProviderStateMixin {
+class _SubscriptionScreenState extends State<SubscriptionScreen>
+    with TickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
@@ -146,7 +147,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
                     width: 4,
                     height: 4,
                     decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.3),
+                      color: Colors.white.withOpacity(0.3),
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -246,9 +247,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.orange.withValues(alpha: 0.1),
+                color: Colors.orange.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.orange.withValues(alpha: 0.3)),
+                border: Border.all(color: Colors.orange.withOpacity(0.3)),
               ),
               child: Row(
                 children: [
@@ -281,7 +282,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 decoration: BoxDecoration(
-                  color: !_isYearly ? theme.colorScheme.primary : Colors.transparent,
+                  color: !_isYearly
+                      ? theme.colorScheme.primary
+                      : Colors.transparent,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
@@ -302,7 +305,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 decoration: BoxDecoration(
-                  color: _isYearly ? theme.colorScheme.primary : Colors.transparent,
+                  color: _isYearly
+                      ? theme.colorScheme.primary
+                      : Colors.transparent,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
@@ -320,7 +325,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
                         'Save 17%',
                         style: TextStyle(
                           fontSize: 12,
-                          color: Colors.white.withValues(alpha: 0.9),
+                          color: Colors.white.withOpacity(0.9),
                         ),
                       ),
                   ],
@@ -343,7 +348,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
     final isCurrentPlan = _subscriptionService.currentTier == plan.tier;
     final theme = Theme.of(context);
     final price = _isYearly ? plan.yearlyPrice : plan.monthlyPrice;
-    final savingsText = _isYearly && plan.discountPercentage > 0 ? 'Save ${plan.discountPercentage.toInt()}%' : null;
+    final savingsText = _isYearly && plan.discountPercentage > 0
+        ? 'Save ${plan.discountPercentage.toInt()}%'
+        : null;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
@@ -440,10 +447,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: theme.colorScheme.primary.withValues(alpha: 0.1),
+                        color: theme.colorScheme.primary.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(
-                          color: theme.colorScheme.primary.withValues(alpha: 0.2),
+                          color: theme.colorScheme.primary.withOpacity(0.2),
                         ),
                       ),
                       child: Text(
@@ -465,7 +472,8 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
                 ],
                 const SizedBox(height: 16),
                 ModernGradientButton(
-                  onPressed: () => isCurrentPlan ? null : _handlePlanSelection(plan),
+                  onPressed: () =>
+                      isCurrentPlan ? null : _handlePlanSelection(plan),
                   text: isCurrentPlan ? 'Current Plan' : 'Choose Plan',
                 ),
               ],

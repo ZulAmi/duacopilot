@@ -12,7 +12,8 @@ class ScreenAssistance extends ConsumerStatefulWidget {
   ConsumerState<ScreenAssistance> createState() => _ScreenAssistanceState();
 }
 
-class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with TickerProviderStateMixin {
+class _ScreenAssistanceState extends ConsumerState<ScreenAssistance>
+    with TickerProviderStateMixin {
   late AnimationController _fadeController;
   late AnimationController _slideController;
 
@@ -135,8 +136,8 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.1),
-                  ProfessionalIslamicTheme.islamicGreenLight.withValues(alpha: 0.1),
+                  ProfessionalIslamicTheme.islamicGreen.withOpacity(0.1),
+                  ProfessionalIslamicTheme.islamicGreenLight.withOpacity(0.1),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -245,10 +246,12 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
       margin: const EdgeInsets.only(bottom: ProfessionalIslamicTheme.space4),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusLg),
-        color: isSelected ? ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.1) : null,
+        color: isSelected
+            ? ProfessionalIslamicTheme.islamicGreen.withOpacity(0.1)
+            : null,
         border: isSelected
             ? Border.all(
-                color: ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.3),
+                color: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.3),
                 width: 1,
               )
             : null,
@@ -257,14 +260,18 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
         leading: Container(
           padding: const EdgeInsets.all(ProfessionalIslamicTheme.space2),
           decoration: BoxDecoration(
-            color: isSelected ? ProfessionalIslamicTheme.islamicGreen : ProfessionalIslamicTheme.gray200,
+            color: isSelected
+                ? ProfessionalIslamicTheme.islamicGreen
+                : ProfessionalIslamicTheme.gray200,
             borderRadius: BorderRadius.circular(
               ProfessionalIslamicTheme.radiusMd,
             ),
           ),
           child: Icon(
             icon,
-            color: isSelected ? ProfessionalIslamicTheme.textOnIslamic : ProfessionalIslamicTheme.textSecondary,
+            color: isSelected
+                ? ProfessionalIslamicTheme.textOnIslamic
+                : ProfessionalIslamicTheme.textSecondary,
             size: 20,
           ),
         ),
@@ -272,7 +279,9 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
           title,
           style: Theme.of(context).textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.w600,
-                color: isSelected ? ProfessionalIslamicTheme.islamicGreen : ProfessionalIslamicTheme.textPrimary,
+                color: isSelected
+                    ? ProfessionalIslamicTheme.islamicGreen
+                    : ProfessionalIslamicTheme.textPrimary,
               ),
         ),
         subtitle: Text(
@@ -485,9 +494,8 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
                     ProfessionalIslamicTheme.space4,
                   ),
                   decoration: BoxDecoration(
-                    color: ProfessionalIslamicTheme.islamicGreen.withValues(
-                      alpha: 0.1,
-                    ),
+                    color:
+                        ProfessionalIslamicTheme.islamicGreen.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(
                       ProfessionalIslamicTheme.radiusLg,
                     ),
@@ -634,7 +642,7 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
               Container(
                 padding: const EdgeInsets.all(ProfessionalIslamicTheme.space6),
                 decoration: BoxDecoration(
-                  color: ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.1),
+                  color: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(
                     ProfessionalIslamicTheme.radiusLg,
                   ),
@@ -807,15 +815,15 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance> with Ticker
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.1),
-            ProfessionalIslamicTheme.goldAccent.withValues(alpha: 0.1),
+            ProfessionalIslamicTheme.islamicGreen.withOpacity(0.1),
+            ProfessionalIslamicTheme.goldAccent.withOpacity(0.1),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusLg),
         border: Border.all(
-          color: ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.2),
+          color: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.2),
           width: 1,
         ),
       ),

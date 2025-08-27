@@ -22,9 +22,9 @@ class QuranAudioService {
     QuranApiService? quranApi,
     RagCacheService? cacheService,
     http.Client? httpClient,
-  }) : _quranApi = quranApi ?? QuranApiService(),
-       _cacheService = cacheService ?? RagCacheService(),
-       _httpClient = httpClient ?? http.Client();
+  })  : _quranApi = quranApi ?? QuranApiService(),
+        _cacheService = cacheService ?? RagCacheService(),
+        _httpClient = httpClient ?? http.Client();
 
   /// Download audio for a specific verse
   Future<AudioCache> downloadVerseAudio({

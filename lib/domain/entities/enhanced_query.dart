@@ -27,16 +27,16 @@ class EnhancedQuery extends Equatable {
 
   @override
   List<Object?> get props => [
-    originalQuery,
-    processedQuery,
-    language,
-    intent,
-    context,
-    semanticTags,
-    confidence,
-    processingSteps,
-    metadata,
-  ];
+        originalQuery,
+        processedQuery,
+        language,
+        intent,
+        context,
+        semanticTags,
+        confidence,
+        processingSteps,
+        metadata,
+      ];
 
   EnhancedQuery copyWith({
     String? originalQuery,

@@ -32,7 +32,8 @@ class EnhancedBackgroundTaskOptimizer {
     if (_isInitialized) return;
 
     try {
-      AppLogger.info('⚙️ Initializing enhanced background task optimizer...');
+      AppLogger.info(
+          'âš™ï¸ Initializing enhanced background task optimizer...');
 
       // Configure based on platform capabilities
       await _configurePlatformSpecificBackground();
@@ -41,9 +42,9 @@ class EnhancedBackgroundTaskOptimizer {
       await _initializeBackgroundServices();
 
       _isInitialized = true;
-      AppLogger.info('✅ Enhanced background task optimizer initialized');
+      AppLogger.info('âœ… Enhanced background task optimizer initialized');
     } catch (e) {
-      AppLogger.error('❌ Failed to initialize background task optimizer: $e');
+      AppLogger.error('âŒ Failed to initialize background task optimizer: $e');
       rethrow;
     }
   }
@@ -66,8 +67,8 @@ class EnhancedBackgroundTaskOptimizer {
         break;
     }
 
-    AppLogger.debug('⚙️ Background configured for: ${platformType.name}');
-    AppLogger.debug('🔧 Configuration: $_backgroundConfig');
+    AppLogger.debug('âš™ï¸ Background configured for: ${platformType.name}');
+    AppLogger.debug('ðŸ”§ Configuration: $_backgroundConfig');
   }
 
   Future<void> _configureIOSBackground() async {
@@ -81,7 +82,7 @@ class EnhancedBackgroundTaskOptimizer {
       'lowPowerModeHandling': true,
     };
 
-    AppLogger.info('🍎 iOS background configuration applied');
+    AppLogger.info('ðŸŽ iOS background configuration applied');
   }
 
   Future<void> _configureAndroidBackground() async {
@@ -100,7 +101,7 @@ class EnhancedBackgroundTaskOptimizer {
     };
 
     AppLogger.info(
-      '🤖 Android background configuration applied (API $apiLevel)',
+      'ðŸ¤– Android background configuration applied (API $apiLevel)',
     );
   }
 
@@ -113,7 +114,7 @@ class EnhancedBackgroundTaskOptimizer {
       'adaptiveBatching': false,
     };
 
-    AppLogger.info('🌐 Web background configuration applied');
+    AppLogger.info('ðŸŒ Web background configuration applied');
   }
 
   Future<void> _configureDefaultBackground() async {
@@ -144,19 +145,20 @@ class EnhancedBackgroundTaskOptimizer {
 
   Future<void> _initializeIOSBackgroundServices() async {
     try {
-      AppLogger.info('🍎 Initializing iOS background services...');
+      AppLogger.info('ðŸŽ Initializing iOS background services...');
 
       // For iOS, we would register background tasks with BGTaskScheduler
       // This is a placeholder implementation
-      AppLogger.debug('🔄 iOS background tasks registered');
+      AppLogger.debug('ðŸ”„ iOS background tasks registered');
     } catch (e) {
-      AppLogger.warning('⚠️ iOS background services initialization failed: $e');
+      AppLogger.warning(
+          'âš ï¸ iOS background services initialization failed: $e');
     }
   }
 
   Future<void> _initializeAndroidBackgroundServices() async {
     try {
-      AppLogger.info('🤖 Initializing Android background services...');
+      AppLogger.info('ðŸ¤– Initializing Android background services...');
 
       // Initialize WorkManager
       if (_backgroundConfig['workManager'] == true) {
@@ -168,23 +170,24 @@ class EnhancedBackgroundTaskOptimizer {
         await _initializeForegroundService();
       }
 
-      AppLogger.debug('🔄 Android background services initialized');
+      AppLogger.debug('ðŸ”„ Android background services initialized');
     } catch (e) {
       AppLogger.warning(
-        '⚠️ Android background services initialization failed: $e',
+        'âš ï¸ Android background services initialization failed: $e',
       );
     }
   }
 
   Future<void> _initializeWebBackgroundServices() async {
     try {
-      AppLogger.info('🌐 Initializing Web background services...');
+      AppLogger.info('ðŸŒ Initializing Web background services...');
 
       // For web, we would register service workers
       // This is a placeholder implementation
-      AppLogger.debug('🔄 Web background services initialized');
+      AppLogger.debug('ðŸ”„ Web background services initialized');
     } catch (e) {
-      AppLogger.warning('⚠️ Web background services initialization failed: $e');
+      AppLogger.warning(
+          'âš ï¸ Web background services initialization failed: $e');
     }
   }
 
@@ -195,9 +198,9 @@ class EnhancedBackgroundTaskOptimizer {
           _workManagerCallbackDispatcher,
           isInDebugMode: kDebugMode,
         );
-        AppLogger.info('📋 WorkManager initialized');
+        AppLogger.info('ðŸ“‹ WorkManager initialized');
       } catch (e) {
-        AppLogger.warning('⚠️ WorkManager initialization failed: $e');
+        AppLogger.warning('âš ï¸ WorkManager initialization failed: $e');
       }
     }
   }
@@ -223,15 +226,15 @@ class EnhancedBackgroundTaskOptimizer {
         ),
       );
 
-      AppLogger.info('🔋 Foreground service configured');
+      AppLogger.info('ðŸ”‹ Foreground service configured');
     } catch (e) {
-      AppLogger.warning('⚠️ Foreground service initialization failed: $e');
+      AppLogger.warning('âš ï¸ Foreground service initialization failed: $e');
     }
   }
 
   @pragma('vm:entry-point')
   static void _onStart(ServiceInstance service) async {
-    AppLogger.info('🔋 Background service started');
+    AppLogger.info('ðŸ”‹ Background service started');
 
     // Handle background tasks
     service.on('background_task').listen((event) async {
@@ -244,7 +247,7 @@ class EnhancedBackgroundTaskOptimizer {
 
   @pragma('vm:entry-point')
   static bool _onIosBackground(ServiceInstance service) {
-    AppLogger.info('🍎 iOS background service running');
+    AppLogger.info('ðŸŽ iOS background service running');
     return true;
   }
 
@@ -255,7 +258,7 @@ class EnhancedBackgroundTaskOptimizer {
     final taskType = taskData['taskType'] as String?;
 
     if (taskId != null && taskType != null) {
-      AppLogger.info('⚙️ Handling background task: $taskId ($taskType)');
+      AppLogger.info('âš™ï¸ Handling background task: $taskId ($taskType)');
 
       switch (taskType) {
         case 'sync_data':
@@ -268,33 +271,33 @@ class EnhancedBackgroundTaskOptimizer {
           await _performNotificationCheck(taskData);
           break;
         default:
-          AppLogger.warning('⚠️ Unknown background task type: $taskType');
+          AppLogger.warning('âš ï¸ Unknown background task type: $taskType');
           break;
       }
     }
   }
 
   static Future<void> _performDataSync(Map<String, dynamic> taskData) async {
-    AppLogger.debug('🔄 Performing background data sync');
+    AppLogger.debug('ðŸ”„ Performing background data sync');
     // Implement data synchronization logic
     await Future.delayed(const Duration(seconds: 2));
-    AppLogger.debug('✅ Background data sync completed');
+    AppLogger.debug('âœ… Background data sync completed');
   }
 
   static Future<void> _performCacheUpdate(Map<String, dynamic> taskData) async {
-    AppLogger.debug('🗄️ Performing background cache update');
+    AppLogger.debug('ðŸ—„ï¸ Performing background cache update');
     // Implement cache update logic
     await Future.delayed(const Duration(seconds: 1));
-    AppLogger.debug('✅ Background cache update completed');
+    AppLogger.debug('âœ… Background cache update completed');
   }
 
   static Future<void> _performNotificationCheck(
     Map<String, dynamic> taskData,
   ) async {
-    AppLogger.debug('🔔 Performing background notification check');
+    AppLogger.debug('ðŸ”” Performing background notification check');
     // Implement notification check logic
     await Future.delayed(const Duration(milliseconds: 500));
-    AppLogger.debug('✅ Background notification check completed');
+    AppLogger.debug('âœ… Background notification check completed');
   }
 
   /// Schedule a background task with platform-specific optimizations
@@ -309,8 +312,8 @@ class EnhancedBackgroundTaskOptimizer {
     }
 
     try {
-      AppLogger.info('📋 Scheduling background task: $taskId');
-      AppLogger.debug('⏱️ Interval: $interval, Priority: ${priority.name}');
+      AppLogger.info('ðŸ“‹ Scheduling background task: $taskId');
+      AppLogger.debug('â±ï¸ Interval: $interval, Priority: ${priority.name}');
 
       final taskInfo = BackgroundTaskInfo(
         id: taskId,
@@ -324,9 +327,9 @@ class EnhancedBackgroundTaskOptimizer {
       await _scheduleTaskForPlatform(taskInfo);
 
       _activeTasks[taskId] = taskInfo;
-      AppLogger.info('✅ Background task scheduled: $taskId');
+      AppLogger.info('âœ… Background task scheduled: $taskId');
     } catch (e) {
-      AppLogger.error('❌ Failed to schedule background task: $e');
+      AppLogger.error('âŒ Failed to schedule background task: $e');
       rethrow;
     }
   }
@@ -353,7 +356,7 @@ class EnhancedBackgroundTaskOptimizer {
   Future<void> _scheduleIOSTask(BackgroundTaskInfo taskInfo) async {
     // For iOS, we would use BGTaskScheduler
     // This is a simplified implementation
-    AppLogger.debug('🍎 Scheduling iOS background task: ${taskInfo.id}');
+    AppLogger.debug('ðŸŽ Scheduling iOS background task: ${taskInfo.id}');
 
     // Use timer as fallback
     await _scheduleTimerTask(taskInfo);
@@ -378,11 +381,11 @@ class EnhancedBackgroundTaskOptimizer {
         );
 
         AppLogger.debug(
-          '🤖 Scheduled Android WorkManager task: ${taskInfo.id}',
+          'ðŸ¤– Scheduled Android WorkManager task: ${taskInfo.id}',
         );
       } catch (e) {
         AppLogger.warning(
-          '⚠️ WorkManager scheduling failed, using timer fallback: $e',
+          'âš ï¸ WorkManager scheduling failed, using timer fallback: $e',
         );
         await _scheduleTimerTask(taskInfo);
       }
@@ -393,7 +396,7 @@ class EnhancedBackgroundTaskOptimizer {
 
   Future<void> _scheduleWebTask(BackgroundTaskInfo taskInfo) async {
     // For web, we use timers (service workers would be more appropriate)
-    AppLogger.debug('🌐 Scheduling Web timer task: ${taskInfo.id}');
+    AppLogger.debug('ðŸŒ Scheduling Web timer task: ${taskInfo.id}');
     await _scheduleTimerTask(taskInfo);
   }
 
@@ -410,12 +413,12 @@ class EnhancedBackgroundTaskOptimizer {
       await _executeTask(taskInfo.id, taskInfo.data);
     });
 
-    AppLogger.debug('⏰ Timer scheduled for task: ${taskInfo.id}');
+    AppLogger.debug('â° Timer scheduled for task: ${taskInfo.id}');
   }
 
   Future<void> _executeTask(String taskId, Map<String, dynamic> data) async {
     try {
-      AppLogger.debug('▶️ Executing background task: $taskId');
+      AppLogger.debug('â–¶ï¸ Executing background task: $taskId');
 
       // Update last executed time
       if (_activeTasks.containsKey(taskId)) {
@@ -427,9 +430,9 @@ class EnhancedBackgroundTaskOptimizer {
       // Execute task based on platform
       await _executeTaskForPlatform(taskId, data);
 
-      AppLogger.debug('✅ Background task completed: $taskId');
+      AppLogger.debug('âœ… Background task completed: $taskId');
     } catch (e) {
-      AppLogger.error('❌ Background task execution failed: $taskId - $e');
+      AppLogger.error('âŒ Background task execution failed: $taskId - $e');
     }
   }
 
@@ -478,7 +481,7 @@ class EnhancedBackgroundTaskOptimizer {
       }
     } catch (e) {
       AppLogger.warning(
-        '⚠️ Foreground service execution failed, using direct execution: $e',
+        'âš ï¸ Foreground service execution failed, using direct execution: $e',
       );
       await _handleBackgroundTask({
         'taskId': taskId,
@@ -491,7 +494,7 @@ class EnhancedBackgroundTaskOptimizer {
   /// Cancel a scheduled background task
   Future<void> cancelTask(String taskId) async {
     try {
-      AppLogger.info('❌ Cancelling background task: $taskId');
+      AppLogger.info('âŒ Cancelling background task: $taskId');
 
       // Cancel timer if exists
       _taskTimers[taskId]?.cancel();
@@ -505,16 +508,16 @@ class EnhancedBackgroundTaskOptimizer {
       // Remove from active tasks
       _activeTasks.remove(taskId);
 
-      AppLogger.info('✅ Background task cancelled: $taskId');
+      AppLogger.info('âœ… Background task cancelled: $taskId');
     } catch (e) {
-      AppLogger.error('❌ Failed to cancel background task: $e');
+      AppLogger.error('âŒ Failed to cancel background task: $e');
     }
   }
 
   /// Cancel all background tasks
   Future<void> cancelAllTasks() async {
     try {
-      AppLogger.info('❌ Cancelling all background tasks...');
+      AppLogger.info('âŒ Cancelling all background tasks...');
 
       // Cancel all timers
       for (final timer in _taskTimers.values) {
@@ -530,9 +533,9 @@ class EnhancedBackgroundTaskOptimizer {
       // Clear active tasks
       _activeTasks.clear();
 
-      AppLogger.info('✅ All background tasks cancelled');
+      AppLogger.info('âœ… All background tasks cancelled');
     } catch (e) {
-      AppLogger.error('❌ Failed to cancel all background tasks: $e');
+      AppLogger.error('âŒ Failed to cancel all background tasks: $e');
     }
   }
 
@@ -595,14 +598,14 @@ class EnhancedBackgroundTaskOptimizer {
         service.invoke('stop_service');
         _isBackgroundServiceRunning = false;
       } catch (e) {
-        AppLogger.warning('⚠️ Failed to stop background service: $e');
+        AppLogger.warning('âš ï¸ Failed to stop background service: $e');
       }
     }
 
     _isInitialized = false;
     _backgroundConfig.clear();
 
-    AppLogger.info('🧹 Enhanced background task optimizer disposed');
+    AppLogger.info('ðŸ§¹ Enhanced background task optimizer disposed');
   }
 }
 
@@ -648,7 +651,7 @@ class BackgroundTaskInfo {
 void _workManagerCallbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
     try {
-      AppLogger.info('🔄 Executing WorkManager task: $task');
+      AppLogger.info('ðŸ”„ Executing WorkManager task: $task');
 
       await EnhancedBackgroundTaskOptimizer._handleBackgroundTask({
         'taskId': task,
@@ -656,10 +659,10 @@ void _workManagerCallbackDispatcher() {
         ...?inputData,
       });
 
-      AppLogger.info('✅ WorkManager task completed: $task');
+      AppLogger.info('âœ… WorkManager task completed: $task');
       return true;
     } catch (e) {
-      AppLogger.error('❌ WorkManager task failed: $task - $e');
+      AppLogger.error('âŒ WorkManager task failed: $task - $e');
       return false;
     }
   });

@@ -220,7 +220,8 @@ void main() {
               body: Column(
                 children: [
                   Text('Source: ${source.title}'),
-                  if (source.reference != null) Text('Reference: ${source.reference}'),
+                  if (source.reference != null)
+                    Text('Reference: ${source.reference}'),
                   Text('Relevance: ${(source.relevanceScore * 100).round()}%'),
                 ],
               ),

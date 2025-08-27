@@ -27,10 +27,13 @@ class ConversationalSearchScreen extends ConsumerStatefulWidget {
   });
 
   @override
-  ConsumerState<ConversationalSearchScreen> createState() => _ConversationalSearchScreenState();
+  ConsumerState<ConversationalSearchScreen> createState() =>
+      _ConversationalSearchScreenState();
 }
 
-class _ConversationalSearchScreenState extends ConsumerState<ConversationalSearchScreen> with TickerProviderStateMixin {
+class _ConversationalSearchScreenState
+    extends ConsumerState<ConversationalSearchScreen>
+    with TickerProviderStateMixin {
   late final TextEditingController _searchController;
   late final ScrollController _scrollController;
   late final AnimationController _searchAnimationController;
@@ -165,7 +168,7 @@ class _ConversationalSearchScreenState extends ConsumerState<ConversationalSearc
       final recommendations = ragSearchResponse.recommendations ?? [];
 
       if (recommendations.isNotEmpty) {
-        formattedResponse.writeln('**🤖 AI Islamic Assistant Response**\n');
+        formattedResponse.writeln('**ðŸ¤– AI Islamic Assistant Response**\n');
 
         for (int i = 0; i < recommendations.length && i < 3; i++) {
           final recommendation = recommendations[i];
@@ -183,7 +186,7 @@ class _ConversationalSearchScreenState extends ConsumerState<ConversationalSearc
             // Add Islamic Citations
             if (dua.sourceAuthenticity != null) {
               formattedResponse.writeln(
-                '**📚 Islamic Source Authentication:**',
+                '**ðŸ“š Islamic Source Authentication:**',
               );
               final authenticity = dua.sourceAuthenticity!;
 
@@ -191,15 +194,15 @@ class _ConversationalSearchScreenState extends ConsumerState<ConversationalSearc
               switch (authenticity.level) {
                 case AuthenticityLevel.quran:
                   formattedResponse.writeln(
-                    '• **Source:** Holy Quran (القرآن الكريم)',
+                    'â€¢ **Source:** Holy Quran (Ø§Ù„Ù‚Ø±Ø¢Ù† Ø§Ù„ÙƒØ±ÙŠÙ…)',
                   );
                   if (authenticity.reference.isNotEmpty) {
                     formattedResponse.writeln(
-                      '• **Chapter & Verse:** ${authenticity.reference}',
+                      'â€¢ **Chapter & Verse:** ${authenticity.reference}',
                     );
                   }
                   formattedResponse.writeln(
-                    '• **Authentication:** Divinely Revealed',
+                    'â€¢ **Authentication:** Divinely Revealed',
                   );
                   break;
                 case AuthenticityLevel.sahih:
@@ -209,56 +212,56 @@ class _ConversationalSearchScreenState extends ConsumerState<ConversationalSearc
                   // Hadith sources
                   if (authenticity.source.isNotEmpty) {
                     formattedResponse.writeln(
-                      '• **Hadith Book:** ${authenticity.source}',
+                      'â€¢ **Hadith Book:** ${authenticity.source}',
                     );
                   }
                   if (authenticity.reference.isNotEmpty) {
                     formattedResponse.writeln(
-                      '• **Hadith Number:** ${authenticity.reference}',
+                      'â€¢ **Hadith Number:** ${authenticity.reference}',
                     );
                   }
                   if (authenticity.hadithGrade?.isNotEmpty == true) {
                     formattedResponse.writeln(
-                      '• **Grading:** ${authenticity.hadithGrade}',
+                      'â€¢ **Grading:** ${authenticity.hadithGrade}',
                     );
                   } else {
                     String grading = '';
                     switch (authenticity.level) {
                       case AuthenticityLevel.sahih:
-                        grading = 'Sahih (صحيح) - Authentic';
+                        grading = 'Sahih (ØµØ­ÙŠØ­) - Authentic';
                         break;
                       case AuthenticityLevel.hasan:
-                        grading = 'Hasan (حسن) - Good';
+                        grading = 'Hasan (Ø­Ø³Ù†) - Good';
                         break;
                       case AuthenticityLevel.daif:
-                        grading = 'Da\'if (ضعيف) - Weak';
+                        grading = 'Da\'if (Ø¶Ø¹ÙŠÙ) - Weak';
                         break;
                       case AuthenticityLevel.fabricated:
-                        grading = 'Mawdu\' (موضوع) - Fabricated';
+                        grading = 'Mawdu\' (Ù…ÙˆØ¶ÙˆØ¹) - Fabricated';
                         break;
                       default:
                         grading = 'Unknown grading';
                     }
-                    formattedResponse.writeln('• **Grading:** $grading');
+                    formattedResponse.writeln('â€¢ **Grading:** $grading');
                   }
                   if (authenticity.scholar?.isNotEmpty == true) {
                     formattedResponse.writeln(
-                      '• **Scholar:** ${authenticity.scholar}',
+                      'â€¢ **Scholar:** ${authenticity.scholar}',
                     );
                   }
                   break;
                 case AuthenticityLevel.verified:
                   formattedResponse.writeln(
-                    '• **Source:** Islamic Scholarly Consensus',
+                    'â€¢ **Source:** Islamic Scholarly Consensus',
                   );
                   if (authenticity.source.isNotEmpty) {
                     formattedResponse.writeln(
-                      '• **Reference:** ${authenticity.source}',
+                      'â€¢ **Reference:** ${authenticity.source}',
                     );
                   }
                   if (authenticity.scholar?.isNotEmpty == true) {
                     formattedResponse.writeln(
-                      '• **Scholar:** ${authenticity.scholar}',
+                      'â€¢ **Scholar:** ${authenticity.scholar}',
                     );
                   }
                   break;
@@ -269,7 +272,7 @@ class _ConversationalSearchScreenState extends ConsumerState<ConversationalSearc
             // Add confidence score if available
             if (recommendation.confidenceScore != null) {
               formattedResponse.writeln(
-                '**🎯 Relevance Score:** ${(recommendation.confidenceScore! * 100).toStringAsFixed(1)}%\n',
+                '**ðŸŽ¯ Relevance Score:** ${(recommendation.confidenceScore! * 100).toStringAsFixed(1)}%\n',
               );
             }
           }
@@ -298,81 +301,81 @@ class _ConversationalSearchScreenState extends ConsumerState<ConversationalSearc
 
     // Contextual responses based on query content with proper citations
     if (lowerQuery.contains('morning')) {
-      return '''**🌅 Morning Islamic Guidance**
+      return '''**ðŸŒ… Morning Islamic Guidance**
 
-**📖 Quran - Morning Remembrance**
+**ðŸ“– Quran - Morning Remembrance**
 
-أَوَلَمْ يَرَوْا أَنَّ اللَّهَ الَّذِي خَلَقَ السَّمَاوَاتِ وَالْأَرْضَ قَادِرٌ عَلَى أَن يَخْلُقَهُمْ مِثْلَهُمْ
+Ø£ÙŽÙˆÙŽÙ„ÙŽÙ…Ù’ ÙŠÙŽØ±ÙŽÙˆÙ’Ø§ Ø£ÙŽÙ†ÙŽÙ‘ Ø§Ù„Ù„ÙŽÙ‘Ù‡ÙŽ Ø§Ù„ÙŽÙ‘Ø°ÙÙŠ Ø®ÙŽÙ„ÙŽÙ‚ÙŽ Ø§Ù„Ø³ÙŽÙ‘Ù…ÙŽØ§ÙˆÙŽØ§ØªÙ ÙˆÙŽØ§Ù„Ù’Ø£ÙŽØ±Ù’Ø¶ÙŽ Ù‚ÙŽØ§Ø¯ÙØ±ÙŒ Ø¹ÙŽÙ„ÙŽÙ‰ Ø£ÙŽÙ† ÙŠÙŽØ®Ù’Ù„ÙÙ‚ÙŽÙ‡ÙÙ…Ù’ Ù…ÙØ«Ù’Ù„ÙŽÙ‡ÙÙ…Ù’
 
 *"Did they not see that Allah, who created the heavens and the earth, is capable of creating the like of them?"*
 
-**📚 Source & Authentication:**
-• **Source:** Holy Quran  
-• **Chapter & Verse:** Al-Isra 17:99
-• **Authenticity:** Quran (Divine Revelation)
+**ðŸ“š Source & Authentication:**
+â€¢ **Source:** Holy Quran  
+â€¢ **Chapter & Verse:** Al-Isra 17:99
+â€¢ **Authenticity:** Quran (Divine Revelation)
 
-**✅ Sahih Hadith - Morning Dua**
+**âœ… Sahih Hadith - Morning Dua**
 
-اللَّهُمَّ بِكَ أَصْبَحْنَا وَبِكَ أَمْسَيْنَا وَبِكَ نَحْيَا وَبِكَ نَمُوتُ وَإِلَيْكَ النُّشُورُ
+Ø§Ù„Ù„ÙŽÙ‘Ù‡ÙÙ…ÙŽÙ‘ Ø¨ÙÙƒÙŽ Ø£ÙŽØµÙ’Ø¨ÙŽØ­Ù’Ù†ÙŽØ§ ÙˆÙŽØ¨ÙÙƒÙŽ Ø£ÙŽÙ…Ù’Ø³ÙŽÙŠÙ’Ù†ÙŽØ§ ÙˆÙŽØ¨ÙÙƒÙŽ Ù†ÙŽØ­Ù’ÙŠÙŽØ§ ÙˆÙŽØ¨ÙÙƒÙŽ Ù†ÙŽÙ…ÙÙˆØªÙ ÙˆÙŽØ¥ÙÙ„ÙŽÙŠÙ’ÙƒÙŽ Ø§Ù„Ù†ÙÙ‘Ø´ÙÙˆØ±Ù
 
 *"O Allah, by You we enter the morning and by You we enter the evening, by You we live and by You we die, and to You is the resurrection."*
 
-**📚 Source & Authentication:**
-• **Hadith Collection:** Sunan Abu Dawud
-• **Hadith Number:** 5068
-• **Grading:** Sahih (Authentic)
-• **Verified by:** Sheikh Al-Albani
+**ðŸ“š Source & Authentication:**
+â€¢ **Hadith Collection:** Sunan Abu Dawud
+â€¢ **Hadith Number:** 5068
+â€¢ **Grading:** Sahih (Authentic)
+â€¢ **Verified by:** Sheikh Al-Albani
 
-**🕐 When to Use:** After Fajr prayer, upon waking
-**💎 Benefits:** Protection and blessings for the day ahead''';
+**ðŸ• When to Use:** After Fajr prayer, upon waking
+**ðŸ’Ž Benefits:** Protection and blessings for the day ahead''';
     }
 
     if (lowerQuery.contains('travel')) {
-      return '''**🚗 Travel Islamic Guidance**
+      return '''**ðŸš— Travel Islamic Guidance**
 
-**📖 Quran - Travel Verse**
+**ðŸ“– Quran - Travel Verse**
 
-سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَٰذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَىٰ رَبِّنَا لَمُنقَلِبُونَ
+Ø³ÙØ¨Ù’Ø­ÙŽØ§Ù†ÙŽ Ø§Ù„ÙŽÙ‘Ø°ÙÙŠ Ø³ÙŽØ®ÙŽÙ‘Ø±ÙŽ Ù„ÙŽÙ†ÙŽØ§ Ù‡ÙŽÙ°Ø°ÙŽØ§ ÙˆÙŽÙ…ÙŽØ§ ÙƒÙÙ†ÙŽÙ‘Ø§ Ù„ÙŽÙ‡Ù Ù…ÙÙ‚Ù’Ø±ÙÙ†ÙÙŠÙ†ÙŽ ÙˆÙŽØ¥ÙÙ†ÙŽÙ‘Ø§ Ø¥ÙÙ„ÙŽÙ‰Ù° Ø±ÙŽØ¨ÙÙ‘Ù†ÙŽØ§ Ù„ÙŽÙ…ÙÙ†Ù‚ÙŽÙ„ÙØ¨ÙÙˆÙ†ÙŽ
 
 *"Glory be to Him who has subjected this to us, and we could never have it (by our efforts). And to our Lord we will surely return."*
 
-**📚 Source & Authentication:**
-• **Source:** Holy Quran
-• **Chapter & Verse:** Az-Zukhruf 43:13-14  
-• **Authenticity:** Quran (Divine Revelation)
+**ðŸ“š Source & Authentication:**
+â€¢ **Source:** Holy Quran
+â€¢ **Chapter & Verse:** Az-Zukhruf 43:13-14  
+â€¢ **Authenticity:** Quran (Divine Revelation)
 
-**🕐 When to Use:** Before beginning any journey
-**💎 Benefits:** Divine protection during travel, remembrance of Allah''';
+**ðŸ• When to Use:** Before beginning any journey
+**ðŸ’Ž Benefits:** Divine protection during travel, remembrance of Allah''';
     }
 
-    return '''**🤖 Islamic AI Assistant**        
+    return '''**ðŸ¤– Islamic AI Assistant**        
 
 I apologize, but I encountered an issue accessing the full Islamic knowledge database: $error
 
-**📖 General Islamic Guidance**
+**ðŸ“– General Islamic Guidance**
 
 Based on your query about "$query", here's some general Islamic guidance:
 
 **Relevant Quranic Verse:**
 "And whoever relies upon Allah - then He is sufficient for him. Indeed, Allah will accomplish His purpose."
 
-**📚 Source & Authentication:**
-• **Source:** Holy Quran
-• **Chapter & Verse:** At-Talaq 65:3
-• **Authenticity:** Quran (Divine Revelation)
+**ðŸ“š Source & Authentication:**
+â€¢ **Source:** Holy Quran
+â€¢ **Chapter & Verse:** At-Talaq 65:3
+â€¢ **Authenticity:** Quran (Divine Revelation)
 
-**🟢 Hasan Hadith - Universal Dua**
+**ðŸŸ¢ Hasan Hadith - Universal Dua**
 
-رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ
+Ø±ÙŽØ¨ÙŽÙ‘Ù†ÙŽØ§ Ø¢ØªÙÙ†ÙŽØ§ ÙÙÙŠ Ø§Ù„Ø¯ÙÙ‘Ù†Ù’ÙŠÙŽØ§ Ø­ÙŽØ³ÙŽÙ†ÙŽØ©Ù‹ ÙˆÙŽÙÙÙŠ Ø§Ù„Ù’Ø¢Ø®ÙØ±ÙŽØ©Ù Ø­ÙŽØ³ÙŽÙ†ÙŽØ©Ù‹ ÙˆÙŽÙ‚ÙÙ†ÙŽØ§ Ø¹ÙŽØ°ÙŽØ§Ø¨ÙŽ Ø§Ù„Ù†ÙŽÙ‘Ø§Ø±Ù
 
 *"Our Lord, give us good in this world and good in the next world, and save us from the punishment of the Fire."*
 
-**📚 Source & Authentication:**
-• **Hadith Collection:** Sahih Al-Bukhari
-• **Hadith Number:** 4522
-• **Grading:** Hasan (Good)
+**ðŸ“š Source & Authentication:**
+â€¢ **Hadith Collection:** Sahih Al-Bukhari
+â€¢ **Hadith Number:** 4522
+â€¢ **Grading:** Hasan (Good)
 
-**🕊️ Islamic Reminder:**
+**ðŸ•Šï¸ Islamic Reminder:**
 Remember to maintain regular prayers, seek knowledge, and always turn to Allah in times of need. Please verify all Islamic guidance with qualified scholars.''';
   }
 
@@ -431,8 +434,8 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.1),
-            RevolutionaryIslamicTheme.secondaryNavy.withValues(alpha: 0.1),
+            RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1),
+            RevolutionaryIslamicTheme.secondaryNavy.withOpacity(0.1),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -555,7 +558,7 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
           border: Border.all(color: RevolutionaryIslamicTheme.borderLight),
           boxShadow: [
             BoxShadow(
-              color: RevolutionaryIslamicTheme.neutralGray300.withValues(alpha: 0.5),
+              color: RevolutionaryIslamicTheme.neutralGray300.withOpacity(0.5),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -711,7 +714,7 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
         border: Border.all(color: RevolutionaryIslamicTheme.borderLight),
         boxShadow: [
           BoxShadow(
-            color: RevolutionaryIslamicTheme.neutralGray300.withValues(alpha: 0.5),
+            color: RevolutionaryIslamicTheme.neutralGray300.withOpacity(0.5),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -731,9 +734,8 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
                     gradient: LinearGradient(
                       colors: [
                         RevolutionaryIslamicTheme.primaryEmerald,
-                        RevolutionaryIslamicTheme.primaryEmerald.withValues(
-                          alpha: 0.8,
-                        ),
+                        RevolutionaryIslamicTheme.primaryEmerald
+                            .withOpacity(0.8),
                       ],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
@@ -779,12 +781,12 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
                     vertical: 2,
                   ),
                   decoration: BoxDecoration(
-                    color: RevolutionaryIslamicTheme.primaryEmerald.withValues(
-                      alpha: 0.1,
-                    ),
+                    color: RevolutionaryIslamicTheme.primaryEmerald
+                        .withOpacity(0.1),
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.3),
+                      color: RevolutionaryIslamicTheme.primaryEmerald
+                          .withOpacity(0.3),
                     ),
                   ),
                   child: const Text(
@@ -833,7 +835,7 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
         border: Border.all(color: RevolutionaryIslamicTheme.borderLight),
         boxShadow: [
           BoxShadow(
-            color: RevolutionaryIslamicTheme.neutralGray300.withValues(alpha: 0.5),
+            color: RevolutionaryIslamicTheme.neutralGray300.withOpacity(0.5),
             blurRadius: 4,
             offset: const Offset(0, 1),
           ),
@@ -851,9 +853,8 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
                 Container(
                   padding: const EdgeInsets.all(6),
                   decoration: BoxDecoration(
-                    color: RevolutionaryIslamicTheme.primaryEmerald.withValues(
-                      alpha: 0.1,
-                    ),
+                    color: RevolutionaryIslamicTheme.primaryEmerald
+                        .withOpacity(0.1),
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Icon(
@@ -895,7 +896,7 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
         border: Border.all(color: RevolutionaryIslamicTheme.borderLight),
         boxShadow: [
           BoxShadow(
-            color: RevolutionaryIslamicTheme.neutralGray300.withValues(alpha: 0.3),
+            color: RevolutionaryIslamicTheme.neutralGray300.withOpacity(0.3),
             blurRadius: 4,
             offset: const Offset(0, 1),
           ),
@@ -913,9 +914,8 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
                 Container(
                   padding: const EdgeInsets.all(6),
                   decoration: BoxDecoration(
-                    color: RevolutionaryIslamicTheme.secondaryNavy.withValues(
-                      alpha: 0.1,
-                    ),
+                    color: RevolutionaryIslamicTheme.secondaryNavy
+                        .withOpacity(0.1),
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: const Icon(

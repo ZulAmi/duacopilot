@@ -50,11 +50,11 @@ class CacheMetricsNotifier extends StateNotifier<CacheMetrics> {
 /// Provider for cache metrics
 final cacheMetricsProvider =
     StateNotifierProvider<CacheMetricsNotifier, CacheMetrics>((ref) {
-      final cacheService = ref.read(intelligentCacheServiceProvider);
-      final notifier = CacheMetricsNotifier(cacheService);
-      notifier.startMetricsRefresh();
-      return notifier;
-    });
+  final cacheService = ref.read(intelligentCacheServiceProvider);
+  final notifier = CacheMetricsNotifier(cacheService);
+  notifier.startMetricsRefresh();
+  return notifier;
+});
 
 /// Cache analytics provider
 class CacheAnalyticsNotifier extends StateNotifier<CacheAnalyticsSummary?> {
@@ -80,19 +80,19 @@ class CacheAnalyticsNotifier extends StateNotifier<CacheAnalyticsSummary?> {
 /// Provider for cache analytics
 final cacheAnalyticsProvider =
     StateNotifierProvider<CacheAnalyticsNotifier, CacheAnalyticsSummary?>((
-      ref,
-    ) {
-      final notifier = CacheAnalyticsNotifier();
-      notifier.loadAnalytics();
-      return notifier;
-    });
+  ref,
+) {
+  final notifier = CacheAnalyticsNotifier();
+  notifier.loadAnalytics();
+  return notifier;
+});
 
 /// Cache operation provider for UI actions
 class CacheOperationsNotifier extends StateNotifier<CacheOperationState> {
   final IntelligentCacheService _cacheService;
 
   CacheOperationsNotifier(this._cacheService)
-    : super(const CacheOperationState());
+      : super(const CacheOperationState());
 
   /// Clear all cache
   Future<void> clearAllCache() async {
@@ -243,40 +243,39 @@ class CacheOperationState {
 /// Provider for cache operations
 final cacheOperationsProvider =
     StateNotifierProvider<CacheOperationsNotifier, CacheOperationState>((ref) {
-      final cacheService = ref.read(intelligentCacheServiceProvider);
-      return CacheOperationsNotifier(cacheService);
-    });
+  final cacheService = ref.read(intelligentCacheServiceProvider);
+  return CacheOperationsNotifier(cacheService);
+});
 
 /// Popular queries provider
 final popularQueriesProvider =
     FutureProvider.family<List<PopularQuery>, PopularQueriesRequest>((
-      ref,
-      request,
-    ) async {
-      return CacheAnalyticsService.getPopularQueries(
-        limit: request.limit,
-        language: request.language,
-        queryType: request.queryType,
-      );
-    });
+  ref,
+  request,
+) async {
+  return CacheAnalyticsService.getPopularQueries(
+    limit: request.limit,
+    language: request.language,
+    queryType: request.queryType,
+  );
+});
 
 /// Trending queries provider
 final trendingQueriesProvider =
     FutureProvider.family<List<TrendingQuery>, TrendingQueriesRequest>((
-      ref,
-      request,
-    ) async {
-      return CacheAnalyticsService.getTrendingQueries(
-        limit: request.limit,
-        trendWindow: request.trendWindow,
-      );
-    });
+  ref,
+  request,
+) async {
+  return CacheAnalyticsService.getTrendingQueries(
+    limit: request.limit,
+    trendWindow: request.trendWindow,
+  );
+});
 
 /// Cache performance provider
-final cachePerformanceProvider = FutureProvider.family<
-  CachePerformanceMetrics,
-  Duration?
->((ref, timeWindow) async {
+final cachePerformanceProvider =
+    FutureProvider.family<CachePerformanceMetrics, Duration?>(
+        (ref, timeWindow) async {
   return CacheAnalyticsService.getPerformanceMetrics(timeWindow: timeWindow);
 });
 

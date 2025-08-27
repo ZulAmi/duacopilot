@@ -93,54 +93,54 @@ class ArabicKeyboardWidget extends StatefulWidget {
 /// _ArabicKeyboardWidgetState class implementation
 class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
   final Map<String, String> _transliterationMap = {
-    'ا': 'a',
-    'ب': 'b',
-    'ت': 't',
-    'ث': 'th',
-    'ج': 'j',
-    'ح': 'h',
-    'خ': 'kh',
-    'د': 'd',
-    'ذ': 'dh',
-    'ر': 'r',
-    'ز': 'z',
-    'س': 's',
-    'ش': 'sh',
-    'ص': 's',
-    'ض': 'd',
-    'ط': 't',
-    'ظ': 'z',
-    'ع': 'a',
-    'غ': 'gh',
-    'ف': 'f',
-    'ق': 'q',
-    'ك': 'k',
-    'ل': 'l',
-    'م': 'm',
-    'ن': 'n',
-    'ه': 'h',
-    'و': 'w',
-    'ي': 'y',
-    'ة': 'h',
-    'ى': 'a',
-    'ء': "'",
-    'ئ': "'",
-    'ؤ': "'",
-    'لا': 'la',
+    'Ø§': 'a',
+    'Ø¨': 'b',
+    'Øª': 't',
+    'Ø«': 'th',
+    'Ø¬': 'j',
+    'Ø­': 'h',
+    'Ø®': 'kh',
+    'Ø¯': 'd',
+    'Ø°': 'dh',
+    'Ø±': 'r',
+    'Ø²': 'z',
+    'Ø³': 's',
+    'Ø´': 'sh',
+    'Øµ': 's',
+    'Ø¶': 'd',
+    'Ø·': 't',
+    'Ø¸': 'z',
+    'Ø¹': 'a',
+    'Øº': 'gh',
+    'Ù': 'f',
+    'Ù‚': 'q',
+    'Ùƒ': 'k',
+    'Ù„': 'l',
+    'Ù…': 'm',
+    'Ù†': 'n',
+    'Ù‡': 'h',
+    'Ùˆ': 'w',
+    'ÙŠ': 'y',
+    'Ø©': 'h',
+    'Ù‰': 'a',
+    'Ø¡': "'",
+    'Ø¦': "'",
+    'Ø¤': "'",
+    'Ù„Ø§': 'la',
   };
 
   final List<String> _diacritics = [
-    'ً',
-    'ٌ',
-    'ٍ',
-    'َ',
-    'ُ',
-    'ِ',
-    'ّ',
-    'ْ',
-    'ٓ',
-    'ٔ',
-    'ٕ',
+    'Ù‹',
+    'ÙŒ',
+    'Ù',
+    'ÙŽ',
+    'Ù',
+    'Ù',
+    'Ù‘',
+    'Ù’',
+    'Ù“',
+    'Ù”',
+    'Ù•',
   ];
 
   @override
@@ -153,7 +153,7 @@ class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
         color: colorScheme.surface,
         border: Border(
           top: BorderSide(
-            color: colorScheme.outline.withValues(alpha: 0.2),
+            color: colorScheme.outline.withOpacity(0.2),
             width: 1,
           ),
         ),
@@ -162,10 +162,9 @@ class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
         children: [
           _buildKeyboardHeader(),
           Expanded(
-            child:
-                widget.controller.isArabicMode
-                    ? _buildArabicKeyboard()
-                    : _buildEnglishKeyboard(),
+            child: widget.controller.isArabicMode
+                ? _buildArabicKeyboard()
+                : _buildEnglishKeyboard(),
           ),
         ],
       ),
@@ -178,10 +177,10 @@ class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+        color: colorScheme.surfaceContainerHighest.withOpacity(0.3),
         border: Border(
           bottom: BorderSide(
-            color: colorScheme.outline.withValues(alpha: 0.1),
+            color: colorScheme.outline.withOpacity(0.1),
             width: 1,
           ),
         ),
@@ -192,18 +191,17 @@ class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
             onPressed: widget.controller.toggleArabicMode,
             icon: Icon(
               Icons.language,
-              color:
-                  widget.controller.isArabicMode
-                      ? colorScheme.primary
-                      : colorScheme.onSurfaceVariant,
+              color: widget.controller.isArabicMode
+                  ? colorScheme.primary
+                  : colorScheme.onSurfaceVariant,
             ),
           ),
           Text(
-            widget.controller.isArabicMode ? 'عربي' : 'English',
+            widget.controller.isArabicMode ? 'Ø¹Ø±Ø¨ÙŠ' : 'English',
             style: Theme.of(context).textTheme.labelMedium?.copyWith(
-              color: colorScheme.onSurfaceVariant,
-              fontWeight: FontWeight.w500,
-            ),
+                  color: colorScheme.onSurfaceVariant,
+                  fontWeight: FontWeight.w500,
+                ),
           ),
           const Spacer(),
           if (widget.showTransliteration && widget.controller.isArabicMode)
@@ -216,8 +214,8 @@ class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
               child: Text(
                 'Transliteration',
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: colorScheme.onPrimaryContainer,
-                ),
+                      color: colorScheme.onPrimaryContainer,
+                    ),
               ),
             ),
           const SizedBox(width: 8),
@@ -241,33 +239,33 @@ class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
         children: [
           // First row
           _buildKeyboardRow([
-            'ض',
-            'ص',
-            'ث',
-            'ق',
-            'ف',
-            'غ',
-            'ع',
-            'ه',
-            'خ',
-            'ح',
-            'ج',
+            'Ø¶',
+            'Øµ',
+            'Ø«',
+            'Ù‚',
+            'Ù',
+            'Øº',
+            'Ø¹',
+            'Ù‡',
+            'Ø®',
+            'Ø­',
+            'Ø¬',
           ]),
           const SizedBox(height: 4),
 
           // Second row
           _buildKeyboardRow([
-            'ش',
-            'س',
-            'ي',
-            'ب',
-            'ل',
-            'ا',
-            'ت',
-            'ن',
-            'م',
-            'ك',
-            'ط',
+            'Ø´',
+            'Ø³',
+            'ÙŠ',
+            'Ø¨',
+            'Ù„',
+            'Ø§',
+            'Øª',
+            'Ù†',
+            'Ù…',
+            'Ùƒ',
+            'Ø·',
           ]),
           const SizedBox(height: 4),
 
@@ -286,16 +284,16 @@ class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
               ),
               const SizedBox(width: 4),
               ..._buildKeyboardRowKeys([
-                'ئ',
-                'ء',
-                'ؤ',
-                'ر',
-                'لا',
-                'ى',
-                'ة',
-                'و',
-                'ز',
-                'ظ',
+                'Ø¦',
+                'Ø¡',
+                'Ø¤',
+                'Ø±',
+                'Ù„Ø§',
+                'Ù‰',
+                'Ø©',
+                'Ùˆ',
+                'Ø²',
+                'Ø¸',
               ]),
               const SizedBox(width: 4),
               _buildActionKey(Icons.backspace, widget.controller.deleteText),
@@ -418,7 +416,7 @@ class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
             color: colorScheme.surfaceContainerHighest,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: colorScheme.outline.withValues(alpha: 0.2),
+              color: colorScheme.outline.withOpacity(0.2),
               width: 1,
             ),
           ),
@@ -429,9 +427,9 @@ class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
                 Text(
                   displayKey,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: colorScheme.onSurfaceVariant,
-                    fontWeight: FontWeight.w500,
-                  ),
+                        color: colorScheme.onSurfaceVariant,
+                        fontWeight: FontWeight.w500,
+                      ),
                 ),
                 if (widget.showTransliteration &&
                     widget.controller.isArabicMode &&
@@ -439,9 +437,9 @@ class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
                   Text(
                     _transliterationMap[key]!,
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: colorScheme.onSurfaceVariant.withValues(alpha: 0.6),
-                      fontSize: 10,
-                    ),
+                          color: colorScheme.onSurfaceVariant.withOpacity(0.6),
+                          fontSize: 10,
+                        ),
                   ),
               ],
             ),
@@ -471,22 +469,20 @@ class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
           width: 48,
           height: 48,
           decoration: BoxDecoration(
-            color:
-                isToggle && isActive
-                    ? colorScheme.primary
-                    : colorScheme.surfaceContainerHighest,
+            color: isToggle && isActive
+                ? colorScheme.primary
+                : colorScheme.surfaceContainerHighest,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: colorScheme.outline.withValues(alpha: 0.2),
+              color: colorScheme.outline.withOpacity(0.2),
               width: 1,
             ),
           ),
           child: Icon(
             icon,
-            color:
-                isToggle && isActive
-                    ? colorScheme.onPrimary
-                    : colorScheme.onSurfaceVariant,
+            color: isToggle && isActive
+                ? colorScheme.onPrimary
+                : colorScheme.onSurfaceVariant,
             size: 20,
           ),
         ),
@@ -513,7 +509,7 @@ class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
               color: colorScheme.surfaceContainerHighest,
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                color: colorScheme.outline.withValues(alpha: 0.2),
+                color: colorScheme.outline.withOpacity(0.2),
                 width: 1,
               ),
             ),
@@ -553,8 +549,10 @@ class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
                     child: Text(
                       diacritic,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.onPrimaryContainer,
-                      ),
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onPrimaryContainer,
+                          ),
                     ),
                   ),
                 ),
@@ -638,7 +636,7 @@ class _ArabicInputFieldState extends State<ArabicInputField> {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
               border: Border.all(
-                color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.5),
+                color: Theme.of(context).colorScheme.outline.withOpacity(0.5),
               ),
               borderRadius: BorderRadius.circular(12),
             ),
@@ -650,17 +648,15 @@ class _ArabicInputFieldState extends State<ArabicInputField> {
                         ? (widget.hintText ?? 'Type in Arabic or English...')
                         : _textController.text,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color:
-                          _textController.text.isEmpty
+                          color: _textController.text.isEmpty
                               ? Theme.of(
-                                context,
-                              ).colorScheme.onSurfaceVariant.withValues(alpha: 0.6)
+                                  context,
+                                ).colorScheme.onSurfaceVariant.withOpacity(0.6)
                               : Theme.of(context).colorScheme.onSurface,
-                    ),
-                    textDirection:
-                        _isArabicText(_textController.text)
-                            ? TextDirection.rtl
-                            : TextDirection.ltr,
+                        ),
+                    textDirection: _isArabicText(_textController.text)
+                        ? TextDirection.rtl
+                        : TextDirection.ltr,
                   ),
                 ),
                 if (widget.enableKeyboard)

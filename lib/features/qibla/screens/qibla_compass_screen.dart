@@ -16,7 +16,8 @@ class QiblaCompassScreen extends ConsumerStatefulWidget {
   ConsumerState<QiblaCompassScreen> createState() => _QiblaCompassScreenState();
 }
 
-class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen> with TickerProviderStateMixin {
+class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen>
+    with TickerProviderStateMixin {
   late AnimationController _compassController;
   late AnimationController _pulseController;
 
@@ -180,11 +181,13 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen> with Ti
       padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space4),
       decoration: BoxDecoration(
         color: needsCalibration
-            ? RevolutionaryIslamicTheme.warningAmber.withValues(alpha: 0.1)
-            : RevolutionaryIslamicTheme.successGreen.withValues(alpha: 0.1),
+            ? RevolutionaryIslamicTheme.warningAmber.withOpacity(0.1)
+            : RevolutionaryIslamicTheme.successGreen.withOpacity(0.1),
         border: Border(
           bottom: BorderSide(
-            color: needsCalibration ? RevolutionaryIslamicTheme.warningAmber : RevolutionaryIslamicTheme.successGreen,
+            color: needsCalibration
+                ? RevolutionaryIslamicTheme.warningAmber
+                : RevolutionaryIslamicTheme.successGreen,
             width: 2,
           ),
         ),
@@ -192,8 +195,12 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen> with Ti
       child: Row(
         children: [
           Icon(
-            needsCalibration ? Icons.warning_rounded : Icons.check_circle_rounded,
-            color: needsCalibration ? RevolutionaryIslamicTheme.warningAmber : RevolutionaryIslamicTheme.successGreen,
+            needsCalibration
+                ? Icons.warning_rounded
+                : Icons.check_circle_rounded,
+            color: needsCalibration
+                ? RevolutionaryIslamicTheme.warningAmber
+                : RevolutionaryIslamicTheme.successGreen,
           ),
           const SizedBox(width: RevolutionaryIslamicTheme.space2),
           Expanded(
@@ -202,8 +209,9 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen> with Ti
                   ? 'Compass needs calibration for accuracy'
                   : 'Compass calibrated - ${_getAccuracyText(compass.accuracy)}',
               style: RevolutionaryIslamicTheme.body1.copyWith(
-                color:
-                    needsCalibration ? RevolutionaryIslamicTheme.warningAmber : RevolutionaryIslamicTheme.successGreen,
+                color: needsCalibration
+                    ? RevolutionaryIslamicTheme.warningAmber
+                    : RevolutionaryIslamicTheme.successGreen,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -227,8 +235,8 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen> with Ti
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
                   colors: [
-                    RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.1),
-                    RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.3),
+                    RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1),
+                    RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.3),
                   ],
                 ),
                 border: Border.all(
@@ -244,7 +252,9 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen> with Ti
 
             // Qibla Direction Indicator
             Transform.rotate(
-              angle: (compass.qiblaDirection - compass.deviceHeading) * math.pi / 180,
+              angle: (compass.qiblaDirection - compass.deviceHeading) *
+                  math.pi /
+                  180,
               child: Container(
                 width: 4,
                 height: 120,
@@ -255,9 +265,8 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen> with Ti
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: RevolutionaryIslamicTheme.successGreen.withValues(
-                        alpha: 0.5,
-                      ),
+                      color: RevolutionaryIslamicTheme.successGreen
+                          .withOpacity(0.5),
                       blurRadius: 8,
                       spreadRadius: 2,
                     ),
@@ -278,7 +287,8 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen> with Ti
                     color: RevolutionaryIslamicTheme.primaryEmerald,
                     boxShadow: [
                       BoxShadow(
-                        color: RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.3),
+                        color: RevolutionaryIslamicTheme.primaryEmerald
+                            .withOpacity(0.3),
                         blurRadius: 10 + (_pulseController.value * 5),
                         spreadRadius: 2,
                       ),
@@ -330,7 +340,7 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen> with Ti
         height: 30,
         margin: const EdgeInsets.only(bottom: 140),
         decoration: BoxDecoration(
-          color: RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.5),
+          color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.5),
           borderRadius: BorderRadius.circular(
             RevolutionaryIslamicTheme.radiusXs,
           ),
@@ -352,7 +362,7 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen> with Ti
         borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusXl),
         boxShadow: RevolutionaryIslamicTheme.shadowMd,
         border: Border.all(
-          color: RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.2),
+          color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.2),
           width: 1,
         ),
       ),
@@ -363,7 +373,7 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen> with Ti
               Expanded(
                 child: _buildInfoItem(
                   'Qibla Direction',
-                  '${compass.qiblaDirection.toInt()}°',
+                  '${compass.qiblaDirection.toInt()}Â°',
                   Icons.navigation_rounded,
                 ),
               ),

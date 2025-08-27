@@ -294,16 +294,15 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: Builder(
-              builder:
-                  (context) => SelectableText(
-                    arabicText,
-                    style: ArabicTextStyles.bodyLarge(
-                      context,
-                      fontType: 'readable',
-                    ),
-                    textDirection: TextDirection.rtl,
-                    selectionControls: ArabicTextSelectionControls(),
-                  ),
+              builder: (context) => SelectableText(
+                arabicText,
+                style: ArabicTextStyles.bodyLarge(
+                  context,
+                  fontType: 'readable',
+                ),
+                textDirection: TextDirection.rtl,
+                selectionControls: ArabicTextSelectionControls(),
+              ),
             ),
           ),
         ),
@@ -376,11 +375,10 @@ void main() {
     testWidgets('High Contrast Theme Test', (WidgetTester tester) async {
       await tester.pumpWidget(
         Builder(
-          builder:
-              (context) => MaterialApp(
-                theme: ArabicAccessibility.createHighContrastTheme(context),
-                home: const Scaffold(body: Text('High Contrast Arabic Text')),
-              ),
+          builder: (context) => MaterialApp(
+            theme: ArabicAccessibility.createHighContrastTheme(context),
+            home: const Scaffold(body: Text('High Contrast Arabic Text')),
+          ),
         ),
       );
       await tester.pumpAndSettle();
@@ -471,15 +469,14 @@ void main() {
           home: Scaffold(
             body: SingleChildScrollView(
               child: Builder(
-                builder:
-                    (context) => Text(
-                      largeText,
-                      style: ArabicTextStyles.bodyLarge(
-                        context,
-                        fontType: 'readable',
-                      ),
-                      textDirection: TextDirection.rtl,
-                    ),
+                builder: (context) => Text(
+                  largeText,
+                  style: ArabicTextStyles.bodyLarge(
+                    context,
+                    fontType: 'readable',
+                  ),
+                  textDirection: TextDirection.rtl,
+                ),
               ),
             ),
           ),

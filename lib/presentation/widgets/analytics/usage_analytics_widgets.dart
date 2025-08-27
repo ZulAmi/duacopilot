@@ -273,13 +273,12 @@ class _AudioPlaybackTrackerState extends State<AudioPlaybackTracker> {
       duration: currentPlaybackTime,
       additionalData: {
         'total_duration_ms': widget.totalDuration?.inMilliseconds,
-        'completion_percentage':
-            widget.totalDuration != null
-                ? (currentPlaybackTime.inMilliseconds /
-                        widget.totalDuration!.inMilliseconds *
-                        100)
-                    .clamp(0, 100)
-                : null,
+        'completion_percentage': widget.totalDuration != null
+            ? (currentPlaybackTime.inMilliseconds /
+                    widget.totalDuration!.inMilliseconds *
+                    100)
+                .clamp(0, 100)
+            : null,
       },
     );
   }
@@ -368,11 +367,10 @@ class _ShareTrackingButtonState extends State<ShareTrackingButton>
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _scaleAnimation,
-      builder:
-          (context, child) => Transform.scale(
-            scale: _scaleAnimation.value,
-            child: GestureDetector(onTap: _handleShare, child: widget.child),
-          ),
+      builder: (context, child) => Transform.scale(
+        scale: _scaleAnimation.value,
+        child: GestureDetector(onTap: _handleShare, child: widget.child),
+      ),
     );
   }
 }

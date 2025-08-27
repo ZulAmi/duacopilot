@@ -51,12 +51,12 @@ class PersonalizationScore with _$PersonalizationScore {
 
   /// Create neutral personalization score
   factory PersonalizationScore.neutral() => const PersonalizationScore(
-    usage: 0.5,
-    cultural: 0.5,
-    temporal: 0.5,
-    contextual: 0.5,
-    overall: 0.5,
-  );
+        usage: 0.5,
+        cultural: 0.5,
+        temporal: 0.5,
+        contextual: 0.5,
+        overall: 0.5,
+      );
 }
 
 /// User session information
@@ -153,14 +153,14 @@ class UsagePatterns with _$UsagePatterns {
 
   /// Create empty usage patterns
   factory UsagePatterns.empty(String userId) => UsagePatterns(
-    userId: userId,
-    frequentDuas: [],
-    recentDuas: [],
-    categoryPreferences: {},
-    timeOfDayPatterns: {},
-    dailyUsageStats: {},
-    lastUpdated: DateTime.now(),
-  );
+        userId: userId,
+        frequentDuas: [],
+        recentDuas: [],
+        categoryPreferences: {},
+        timeOfDayPatterns: {},
+        dailyUsageStats: {},
+        lastUpdated: DateTime.now(),
+      );
 }
 
 /// Cultural preferences for personalization
@@ -183,13 +183,13 @@ class CulturalPreferences with _$CulturalPreferences {
 
   /// Create default cultural preferences
   factory CulturalPreferences.defaultFor(String userId) => CulturalPreferences(
-    userId: userId,
-    preferredLanguages: ['en'],
-    primaryLanguage: 'en',
-    culturalTags: [],
-    languagePreferences: {'en': 1.0},
-    lastUpdated: DateTime.now(),
-  );
+        userId: userId,
+        preferredLanguages: ['en'],
+        primaryLanguage: 'en',
+        culturalTags: [],
+        languagePreferences: {'en': 1.0},
+        lastUpdated: DateTime.now(),
+      );
 }
 
 /// Cultural preference update request
@@ -227,12 +227,12 @@ class TemporalPatterns with _$TemporalPatterns {
 
   /// Create empty temporal patterns
   factory TemporalPatterns.empty(String userId) => TemporalPatterns(
-    userId: userId,
-    hourlyPatterns: {},
-    dayOfWeekPatterns: {},
-    seasonalPatterns: {},
-    lastAnalyzed: DateTime.now(),
-  );
+        userId: userId,
+        hourlyPatterns: {},
+        dayOfWeekPatterns: {},
+        seasonalPatterns: {},
+        lastAnalyzed: DateTime.now(),
+      );
 }
 
 /// Hourly usage patterns
@@ -442,12 +442,12 @@ class PersonalizationSettings with _$PersonalizationSettings {
   }) = _PersonalizationSettings;
 
   factory PersonalizationSettings.defaults() => const PersonalizationSettings(
-    isEnabled: true,
-    privacyLevel: PrivacyLevel.balanced,
-    analyticsEnabled: true,
-    locationEnabled: false,
-    islamicCalendarEnabled: true,
-  );
+        isEnabled: true,
+        privacyLevel: PrivacyLevel.balanced,
+        analyticsEnabled: true,
+        locationEnabled: false,
+        islamicCalendarEnabled: true,
+      );
 
   factory PersonalizationSettings.fromJson(Map<String, dynamic> json) =>
       _$PersonalizationSettingsFromJson(json);
