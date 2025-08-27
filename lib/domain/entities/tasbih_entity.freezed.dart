@@ -12,8 +12,7 @@ part of 'tasbih_entity.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TasbihSession _$TasbihSessionFromJson(Map<String, dynamic> json) {
   return _TasbihSession.fromJson(json);
@@ -48,25 +47,23 @@ mixin _$TasbihSession {
 /// @nodoc
 abstract class $TasbihSessionCopyWith<$Res> {
   factory $TasbihSessionCopyWith(
-    TasbihSession value,
-    $Res Function(TasbihSession) then,
-  ) = _$TasbihSessionCopyWithImpl<$Res, TasbihSession>;
+          TasbihSession value, $Res Function(TasbihSession) then) =
+      _$TasbihSessionCopyWithImpl<$Res, TasbihSession>;
   @useResult
-  $Res call({
-    String id,
-    String userId,
-    DateTime startTime,
-    DateTime? endTime,
-    TasbihType type,
-    int targetCount,
-    int currentCount,
-    List<TasbihEntry> entries,
-    TasbihSettings settings,
-    TasbihGoal? goal,
-    Duration? totalDuration,
-    bool? isCompleted,
-    Map<String, dynamic>? metadata,
-  });
+  $Res call(
+      {String id,
+      String userId,
+      DateTime startTime,
+      DateTime? endTime,
+      TasbihType type,
+      int targetCount,
+      int currentCount,
+      List<TasbihEntry> entries,
+      TasbihSettings settings,
+      TasbihGoal? goal,
+      Duration? totalDuration,
+      bool? isCompleted,
+      Map<String, dynamic>? metadata});
 
   $TasbihSettingsCopyWith<$Res> get settings;
   $TasbihGoalCopyWith<$Res>? get goal;
@@ -101,76 +98,60 @@ class _$TasbihSessionCopyWithImpl<$Res, $Val extends TasbihSession>
     Object? isCompleted = freezed,
     Object? metadata = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            userId:
-                null == userId
-                    ? _value.userId
-                    : userId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            startTime:
-                null == startTime
-                    ? _value.startTime
-                    : startTime // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            endTime:
-                freezed == endTime
-                    ? _value.endTime
-                    : endTime // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            type:
-                null == type
-                    ? _value.type
-                    : type // ignore: cast_nullable_to_non_nullable
-                        as TasbihType,
-            targetCount:
-                null == targetCount
-                    ? _value.targetCount
-                    : targetCount // ignore: cast_nullable_to_non_nullable
-                        as int,
-            currentCount:
-                null == currentCount
-                    ? _value.currentCount
-                    : currentCount // ignore: cast_nullable_to_non_nullable
-                        as int,
-            entries:
-                null == entries
-                    ? _value.entries
-                    : entries // ignore: cast_nullable_to_non_nullable
-                        as List<TasbihEntry>,
-            settings:
-                null == settings
-                    ? _value.settings
-                    : settings // ignore: cast_nullable_to_non_nullable
-                        as TasbihSettings,
-            goal:
-                freezed == goal
-                    ? _value.goal
-                    : goal // ignore: cast_nullable_to_non_nullable
-                        as TasbihGoal?,
-            totalDuration:
-                freezed == totalDuration
-                    ? _value.totalDuration
-                    : totalDuration // ignore: cast_nullable_to_non_nullable
-                        as Duration?,
-            isCompleted:
-                freezed == isCompleted
-                    ? _value.isCompleted
-                    : isCompleted // ignore: cast_nullable_to_non_nullable
-                        as bool?,
-            metadata:
-                freezed == metadata
-                    ? _value.metadata
-                    : metadata // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      startTime: null == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      endTime: freezed == endTime
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as TasbihType,
+      targetCount: null == targetCount
+          ? _value.targetCount
+          : targetCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      currentCount: null == currentCount
+          ? _value.currentCount
+          : currentCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      entries: null == entries
+          ? _value.entries
+          : entries // ignore: cast_nullable_to_non_nullable
+              as List<TasbihEntry>,
+      settings: null == settings
+          ? _value.settings
+          : settings // ignore: cast_nullable_to_non_nullable
+              as TasbihSettings,
+      goal: freezed == goal
+          ? _value.goal
+          : goal // ignore: cast_nullable_to_non_nullable
+              as TasbihGoal?,
+      totalDuration: freezed == totalDuration
+          ? _value.totalDuration
+          : totalDuration // ignore: cast_nullable_to_non_nullable
+              as Duration?,
+      isCompleted: freezed == isCompleted
+          ? _value.isCompleted
+          : isCompleted // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      metadata: freezed == metadata
+          ? _value.metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ) as $Val);
   }
 
   /// Create a copy of TasbihSession
@@ -202,26 +183,24 @@ class _$TasbihSessionCopyWithImpl<$Res, $Val extends TasbihSession>
 abstract class _$$TasbihSessionImplCopyWith<$Res>
     implements $TasbihSessionCopyWith<$Res> {
   factory _$$TasbihSessionImplCopyWith(
-    _$TasbihSessionImpl value,
-    $Res Function(_$TasbihSessionImpl) then,
-  ) = __$$TasbihSessionImplCopyWithImpl<$Res>;
+          _$TasbihSessionImpl value, $Res Function(_$TasbihSessionImpl) then) =
+      __$$TasbihSessionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String userId,
-    DateTime startTime,
-    DateTime? endTime,
-    TasbihType type,
-    int targetCount,
-    int currentCount,
-    List<TasbihEntry> entries,
-    TasbihSettings settings,
-    TasbihGoal? goal,
-    Duration? totalDuration,
-    bool? isCompleted,
-    Map<String, dynamic>? metadata,
-  });
+  $Res call(
+      {String id,
+      String userId,
+      DateTime startTime,
+      DateTime? endTime,
+      TasbihType type,
+      int targetCount,
+      int currentCount,
+      List<TasbihEntry> entries,
+      TasbihSettings settings,
+      TasbihGoal? goal,
+      Duration? totalDuration,
+      bool? isCompleted,
+      Map<String, dynamic>? metadata});
 
   @override
   $TasbihSettingsCopyWith<$Res> get settings;
@@ -234,9 +213,8 @@ class __$$TasbihSessionImplCopyWithImpl<$Res>
     extends _$TasbihSessionCopyWithImpl<$Res, _$TasbihSessionImpl>
     implements _$$TasbihSessionImplCopyWith<$Res> {
   __$$TasbihSessionImplCopyWithImpl(
-    _$TasbihSessionImpl _value,
-    $Res Function(_$TasbihSessionImpl) _then,
-  ) : super(_value, _then);
+      _$TasbihSessionImpl _value, $Res Function(_$TasbihSessionImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of TasbihSession
   /// with the given fields replaced by the non-null parameter values.
@@ -257,97 +235,82 @@ class __$$TasbihSessionImplCopyWithImpl<$Res>
     Object? isCompleted = freezed,
     Object? metadata = freezed,
   }) {
-    return _then(
-      _$TasbihSessionImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        userId:
-            null == userId
-                ? _value.userId
-                : userId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        startTime:
-            null == startTime
-                ? _value.startTime
-                : startTime // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        endTime:
-            freezed == endTime
-                ? _value.endTime
-                : endTime // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        type:
-            null == type
-                ? _value.type
-                : type // ignore: cast_nullable_to_non_nullable
-                    as TasbihType,
-        targetCount:
-            null == targetCount
-                ? _value.targetCount
-                : targetCount // ignore: cast_nullable_to_non_nullable
-                    as int,
-        currentCount:
-            null == currentCount
-                ? _value.currentCount
-                : currentCount // ignore: cast_nullable_to_non_nullable
-                    as int,
-        entries:
-            null == entries
-                ? _value._entries
-                : entries // ignore: cast_nullable_to_non_nullable
-                    as List<TasbihEntry>,
-        settings:
-            null == settings
-                ? _value.settings
-                : settings // ignore: cast_nullable_to_non_nullable
-                    as TasbihSettings,
-        goal:
-            freezed == goal
-                ? _value.goal
-                : goal // ignore: cast_nullable_to_non_nullable
-                    as TasbihGoal?,
-        totalDuration:
-            freezed == totalDuration
-                ? _value.totalDuration
-                : totalDuration // ignore: cast_nullable_to_non_nullable
-                    as Duration?,
-        isCompleted:
-            freezed == isCompleted
-                ? _value.isCompleted
-                : isCompleted // ignore: cast_nullable_to_non_nullable
-                    as bool?,
-        metadata:
-            freezed == metadata
-                ? _value._metadata
-                : metadata // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>?,
-      ),
-    );
+    return _then(_$TasbihSessionImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      startTime: null == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      endTime: freezed == endTime
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as TasbihType,
+      targetCount: null == targetCount
+          ? _value.targetCount
+          : targetCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      currentCount: null == currentCount
+          ? _value.currentCount
+          : currentCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      entries: null == entries
+          ? _value._entries
+          : entries // ignore: cast_nullable_to_non_nullable
+              as List<TasbihEntry>,
+      settings: null == settings
+          ? _value.settings
+          : settings // ignore: cast_nullable_to_non_nullable
+              as TasbihSettings,
+      goal: freezed == goal
+          ? _value.goal
+          : goal // ignore: cast_nullable_to_non_nullable
+              as TasbihGoal?,
+      totalDuration: freezed == totalDuration
+          ? _value.totalDuration
+          : totalDuration // ignore: cast_nullable_to_non_nullable
+              as Duration?,
+      isCompleted: freezed == isCompleted
+          ? _value.isCompleted
+          : isCompleted // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      metadata: freezed == metadata
+          ? _value._metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$TasbihSessionImpl implements _TasbihSession {
-  const _$TasbihSessionImpl({
-    required this.id,
-    required this.userId,
-    required this.startTime,
-    this.endTime,
-    required this.type,
-    required this.targetCount,
-    required this.currentCount,
-    required final List<TasbihEntry> entries,
-    required this.settings,
-    this.goal,
-    this.totalDuration,
-    this.isCompleted,
-    final Map<String, dynamic>? metadata,
-  }) : _entries = entries,
-       _metadata = metadata;
+  const _$TasbihSessionImpl(
+      {required this.id,
+      required this.userId,
+      required this.startTime,
+      this.endTime,
+      required this.type,
+      required this.targetCount,
+      required this.currentCount,
+      required final List<TasbihEntry> entries,
+      required this.settings,
+      this.goal,
+      this.totalDuration,
+      this.isCompleted,
+      final Map<String, dynamic>? metadata})
+      : _entries = entries,
+        _metadata = metadata;
 
   factory _$TasbihSessionImpl.fromJson(Map<String, dynamic> json) =>
       _$$TasbihSessionImplFromJson(json);
@@ -426,21 +389,20 @@ class _$TasbihSessionImpl implements _TasbihSession {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    userId,
-    startTime,
-    endTime,
-    type,
-    targetCount,
-    currentCount,
-    const DeepCollectionEquality().hash(_entries),
-    settings,
-    goal,
-    totalDuration,
-    isCompleted,
-    const DeepCollectionEquality().hash(_metadata),
-  );
+      runtimeType,
+      id,
+      userId,
+      startTime,
+      endTime,
+      type,
+      targetCount,
+      currentCount,
+      const DeepCollectionEquality().hash(_entries),
+      settings,
+      goal,
+      totalDuration,
+      isCompleted,
+      const DeepCollectionEquality().hash(_metadata));
 
   /// Create a copy of TasbihSession
   /// with the given fields replaced by the non-null parameter values.
@@ -452,26 +414,27 @@ class _$TasbihSessionImpl implements _TasbihSession {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$TasbihSessionImplToJson(this);
+    return _$$TasbihSessionImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _TasbihSession implements TasbihSession {
-  const factory _TasbihSession({
-    required final String id,
-    required final String userId,
-    required final DateTime startTime,
-    final DateTime? endTime,
-    required final TasbihType type,
-    required final int targetCount,
-    required final int currentCount,
-    required final List<TasbihEntry> entries,
-    required final TasbihSettings settings,
-    final TasbihGoal? goal,
-    final Duration? totalDuration,
-    final bool? isCompleted,
-    final Map<String, dynamic>? metadata,
-  }) = _$TasbihSessionImpl;
+  const factory _TasbihSession(
+      {required final String id,
+      required final String userId,
+      required final DateTime startTime,
+      final DateTime? endTime,
+      required final TasbihType type,
+      required final int targetCount,
+      required final int currentCount,
+      required final List<TasbihEntry> entries,
+      required final TasbihSettings settings,
+      final TasbihGoal? goal,
+      final Duration? totalDuration,
+      final bool? isCompleted,
+      final Map<String, dynamic>? metadata}) = _$TasbihSessionImpl;
 
   factory _TasbihSession.fromJson(Map<String, dynamic> json) =
       _$TasbihSessionImpl.fromJson;
@@ -538,19 +501,17 @@ mixin _$TasbihEntry {
 /// @nodoc
 abstract class $TasbihEntryCopyWith<$Res> {
   factory $TasbihEntryCopyWith(
-    TasbihEntry value,
-    $Res Function(TasbihEntry) then,
-  ) = _$TasbihEntryCopyWithImpl<$Res, TasbihEntry>;
+          TasbihEntry value, $Res Function(TasbihEntry) then) =
+      _$TasbihEntryCopyWithImpl<$Res, TasbihEntry>;
   @useResult
-  $Res call({
-    DateTime timestamp,
-    int count,
-    InputMethod inputMethod,
-    String? dhikrText,
-    Duration? timeSinceLastEntry,
-    bool? isAutoDetected,
-    double? confidence,
-  });
+  $Res call(
+      {DateTime timestamp,
+      int count,
+      InputMethod inputMethod,
+      String? dhikrText,
+      Duration? timeSinceLastEntry,
+      bool? isAutoDetected,
+      double? confidence});
 }
 
 /// @nodoc
@@ -576,46 +537,36 @@ class _$TasbihEntryCopyWithImpl<$Res, $Val extends TasbihEntry>
     Object? isAutoDetected = freezed,
     Object? confidence = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            timestamp:
-                null == timestamp
-                    ? _value.timestamp
-                    : timestamp // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            count:
-                null == count
-                    ? _value.count
-                    : count // ignore: cast_nullable_to_non_nullable
-                        as int,
-            inputMethod:
-                null == inputMethod
-                    ? _value.inputMethod
-                    : inputMethod // ignore: cast_nullable_to_non_nullable
-                        as InputMethod,
-            dhikrText:
-                freezed == dhikrText
-                    ? _value.dhikrText
-                    : dhikrText // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            timeSinceLastEntry:
-                freezed == timeSinceLastEntry
-                    ? _value.timeSinceLastEntry
-                    : timeSinceLastEntry // ignore: cast_nullable_to_non_nullable
-                        as Duration?,
-            isAutoDetected:
-                freezed == isAutoDetected
-                    ? _value.isAutoDetected
-                    : isAutoDetected // ignore: cast_nullable_to_non_nullable
-                        as bool?,
-            confidence:
-                freezed == confidence
-                    ? _value.confidence
-                    : confidence // ignore: cast_nullable_to_non_nullable
-                        as double?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      count: null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+      inputMethod: null == inputMethod
+          ? _value.inputMethod
+          : inputMethod // ignore: cast_nullable_to_non_nullable
+              as InputMethod,
+      dhikrText: freezed == dhikrText
+          ? _value.dhikrText
+          : dhikrText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timeSinceLastEntry: freezed == timeSinceLastEntry
+          ? _value.timeSinceLastEntry
+          : timeSinceLastEntry // ignore: cast_nullable_to_non_nullable
+              as Duration?,
+      isAutoDetected: freezed == isAutoDetected
+          ? _value.isAutoDetected
+          : isAutoDetected // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      confidence: freezed == confidence
+          ? _value.confidence
+          : confidence // ignore: cast_nullable_to_non_nullable
+              as double?,
+    ) as $Val);
   }
 }
 
@@ -623,20 +574,18 @@ class _$TasbihEntryCopyWithImpl<$Res, $Val extends TasbihEntry>
 abstract class _$$TasbihEntryImplCopyWith<$Res>
     implements $TasbihEntryCopyWith<$Res> {
   factory _$$TasbihEntryImplCopyWith(
-    _$TasbihEntryImpl value,
-    $Res Function(_$TasbihEntryImpl) then,
-  ) = __$$TasbihEntryImplCopyWithImpl<$Res>;
+          _$TasbihEntryImpl value, $Res Function(_$TasbihEntryImpl) then) =
+      __$$TasbihEntryImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    DateTime timestamp,
-    int count,
-    InputMethod inputMethod,
-    String? dhikrText,
-    Duration? timeSinceLastEntry,
-    bool? isAutoDetected,
-    double? confidence,
-  });
+  $Res call(
+      {DateTime timestamp,
+      int count,
+      InputMethod inputMethod,
+      String? dhikrText,
+      Duration? timeSinceLastEntry,
+      bool? isAutoDetected,
+      double? confidence});
 }
 
 /// @nodoc
@@ -644,9 +593,8 @@ class __$$TasbihEntryImplCopyWithImpl<$Res>
     extends _$TasbihEntryCopyWithImpl<$Res, _$TasbihEntryImpl>
     implements _$$TasbihEntryImplCopyWith<$Res> {
   __$$TasbihEntryImplCopyWithImpl(
-    _$TasbihEntryImpl _value,
-    $Res Function(_$TasbihEntryImpl) _then,
-  ) : super(_value, _then);
+      _$TasbihEntryImpl _value, $Res Function(_$TasbihEntryImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of TasbihEntry
   /// with the given fields replaced by the non-null parameter values.
@@ -661,60 +609,50 @@ class __$$TasbihEntryImplCopyWithImpl<$Res>
     Object? isAutoDetected = freezed,
     Object? confidence = freezed,
   }) {
-    return _then(
-      _$TasbihEntryImpl(
-        timestamp:
-            null == timestamp
-                ? _value.timestamp
-                : timestamp // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        count:
-            null == count
-                ? _value.count
-                : count // ignore: cast_nullable_to_non_nullable
-                    as int,
-        inputMethod:
-            null == inputMethod
-                ? _value.inputMethod
-                : inputMethod // ignore: cast_nullable_to_non_nullable
-                    as InputMethod,
-        dhikrText:
-            freezed == dhikrText
-                ? _value.dhikrText
-                : dhikrText // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        timeSinceLastEntry:
-            freezed == timeSinceLastEntry
-                ? _value.timeSinceLastEntry
-                : timeSinceLastEntry // ignore: cast_nullable_to_non_nullable
-                    as Duration?,
-        isAutoDetected:
-            freezed == isAutoDetected
-                ? _value.isAutoDetected
-                : isAutoDetected // ignore: cast_nullable_to_non_nullable
-                    as bool?,
-        confidence:
-            freezed == confidence
-                ? _value.confidence
-                : confidence // ignore: cast_nullable_to_non_nullable
-                    as double?,
-      ),
-    );
+    return _then(_$TasbihEntryImpl(
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      count: null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+      inputMethod: null == inputMethod
+          ? _value.inputMethod
+          : inputMethod // ignore: cast_nullable_to_non_nullable
+              as InputMethod,
+      dhikrText: freezed == dhikrText
+          ? _value.dhikrText
+          : dhikrText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timeSinceLastEntry: freezed == timeSinceLastEntry
+          ? _value.timeSinceLastEntry
+          : timeSinceLastEntry // ignore: cast_nullable_to_non_nullable
+              as Duration?,
+      isAutoDetected: freezed == isAutoDetected
+          ? _value.isAutoDetected
+          : isAutoDetected // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      confidence: freezed == confidence
+          ? _value.confidence
+          : confidence // ignore: cast_nullable_to_non_nullable
+              as double?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$TasbihEntryImpl implements _TasbihEntry {
-  const _$TasbihEntryImpl({
-    required this.timestamp,
-    required this.count,
-    required this.inputMethod,
-    this.dhikrText,
-    this.timeSinceLastEntry,
-    this.isAutoDetected,
-    this.confidence,
-  });
+  const _$TasbihEntryImpl(
+      {required this.timestamp,
+      required this.count,
+      required this.inputMethod,
+      this.dhikrText,
+      this.timeSinceLastEntry,
+      this.isAutoDetected,
+      this.confidence});
 
   factory _$TasbihEntryImpl.fromJson(Map<String, dynamic> json) =>
       _$$TasbihEntryImplFromJson(json);
@@ -761,16 +699,8 @@ class _$TasbihEntryImpl implements _TasbihEntry {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    timestamp,
-    count,
-    inputMethod,
-    dhikrText,
-    timeSinceLastEntry,
-    isAutoDetected,
-    confidence,
-  );
+  int get hashCode => Object.hash(runtimeType, timestamp, count, inputMethod,
+      dhikrText, timeSinceLastEntry, isAutoDetected, confidence);
 
   /// Create a copy of TasbihEntry
   /// with the given fields replaced by the non-null parameter values.
@@ -782,20 +712,21 @@ class _$TasbihEntryImpl implements _TasbihEntry {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$TasbihEntryImplToJson(this);
+    return _$$TasbihEntryImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _TasbihEntry implements TasbihEntry {
-  const factory _TasbihEntry({
-    required final DateTime timestamp,
-    required final int count,
-    required final InputMethod inputMethod,
-    final String? dhikrText,
-    final Duration? timeSinceLastEntry,
-    final bool? isAutoDetected,
-    final double? confidence,
-  }) = _$TasbihEntryImpl;
+  const factory _TasbihEntry(
+      {required final DateTime timestamp,
+      required final int count,
+      required final InputMethod inputMethod,
+      final String? dhikrText,
+      final Duration? timeSinceLastEntry,
+      final bool? isAutoDetected,
+      final double? confidence}) = _$TasbihEntryImpl;
 
   factory _TasbihEntry.fromJson(Map<String, dynamic> json) =
       _$TasbihEntryImpl.fromJson;
@@ -853,22 +784,20 @@ mixin _$TasbihSettings {
 /// @nodoc
 abstract class $TasbihSettingsCopyWith<$Res> {
   factory $TasbihSettingsCopyWith(
-    TasbihSettings value,
-    $Res Function(TasbihSettings) then,
-  ) = _$TasbihSettingsCopyWithImpl<$Res, TasbihSettings>;
+          TasbihSettings value, $Res Function(TasbihSettings) then) =
+      _$TasbihSettingsCopyWithImpl<$Res, TasbihSettings>;
   @useResult
-  $Res call({
-    bool hapticFeedback,
-    bool soundFeedback,
-    bool voiceRecognition,
-    double sensitivity,
-    AnimationType animation,
-    ThemeStyle theme,
-    bool autoSave,
-    bool familySharing,
-    Map<String, dynamic>? customSounds,
-    VibrationPattern? vibrationPattern,
-  });
+  $Res call(
+      {bool hapticFeedback,
+      bool soundFeedback,
+      bool voiceRecognition,
+      double sensitivity,
+      AnimationType animation,
+      ThemeStyle theme,
+      bool autoSave,
+      bool familySharing,
+      Map<String, dynamic>? customSounds,
+      VibrationPattern? vibrationPattern});
 }
 
 /// @nodoc
@@ -897,85 +826,70 @@ class _$TasbihSettingsCopyWithImpl<$Res, $Val extends TasbihSettings>
     Object? customSounds = freezed,
     Object? vibrationPattern = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            hapticFeedback:
-                null == hapticFeedback
-                    ? _value.hapticFeedback
-                    : hapticFeedback // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            soundFeedback:
-                null == soundFeedback
-                    ? _value.soundFeedback
-                    : soundFeedback // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            voiceRecognition:
-                null == voiceRecognition
-                    ? _value.voiceRecognition
-                    : voiceRecognition // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            sensitivity:
-                null == sensitivity
-                    ? _value.sensitivity
-                    : sensitivity // ignore: cast_nullable_to_non_nullable
-                        as double,
-            animation:
-                null == animation
-                    ? _value.animation
-                    : animation // ignore: cast_nullable_to_non_nullable
-                        as AnimationType,
-            theme:
-                null == theme
-                    ? _value.theme
-                    : theme // ignore: cast_nullable_to_non_nullable
-                        as ThemeStyle,
-            autoSave:
-                null == autoSave
-                    ? _value.autoSave
-                    : autoSave // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            familySharing:
-                null == familySharing
-                    ? _value.familySharing
-                    : familySharing // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            customSounds:
-                freezed == customSounds
-                    ? _value.customSounds
-                    : customSounds // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>?,
-            vibrationPattern:
-                freezed == vibrationPattern
-                    ? _value.vibrationPattern
-                    : vibrationPattern // ignore: cast_nullable_to_non_nullable
-                        as VibrationPattern?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      hapticFeedback: null == hapticFeedback
+          ? _value.hapticFeedback
+          : hapticFeedback // ignore: cast_nullable_to_non_nullable
+              as bool,
+      soundFeedback: null == soundFeedback
+          ? _value.soundFeedback
+          : soundFeedback // ignore: cast_nullable_to_non_nullable
+              as bool,
+      voiceRecognition: null == voiceRecognition
+          ? _value.voiceRecognition
+          : voiceRecognition // ignore: cast_nullable_to_non_nullable
+              as bool,
+      sensitivity: null == sensitivity
+          ? _value.sensitivity
+          : sensitivity // ignore: cast_nullable_to_non_nullable
+              as double,
+      animation: null == animation
+          ? _value.animation
+          : animation // ignore: cast_nullable_to_non_nullable
+              as AnimationType,
+      theme: null == theme
+          ? _value.theme
+          : theme // ignore: cast_nullable_to_non_nullable
+              as ThemeStyle,
+      autoSave: null == autoSave
+          ? _value.autoSave
+          : autoSave // ignore: cast_nullable_to_non_nullable
+              as bool,
+      familySharing: null == familySharing
+          ? _value.familySharing
+          : familySharing // ignore: cast_nullable_to_non_nullable
+              as bool,
+      customSounds: freezed == customSounds
+          ? _value.customSounds
+          : customSounds // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      vibrationPattern: freezed == vibrationPattern
+          ? _value.vibrationPattern
+          : vibrationPattern // ignore: cast_nullable_to_non_nullable
+              as VibrationPattern?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$TasbihSettingsImplCopyWith<$Res>
     implements $TasbihSettingsCopyWith<$Res> {
-  factory _$$TasbihSettingsImplCopyWith(
-    _$TasbihSettingsImpl value,
-    $Res Function(_$TasbihSettingsImpl) then,
-  ) = __$$TasbihSettingsImplCopyWithImpl<$Res>;
+  factory _$$TasbihSettingsImplCopyWith(_$TasbihSettingsImpl value,
+          $Res Function(_$TasbihSettingsImpl) then) =
+      __$$TasbihSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    bool hapticFeedback,
-    bool soundFeedback,
-    bool voiceRecognition,
-    double sensitivity,
-    AnimationType animation,
-    ThemeStyle theme,
-    bool autoSave,
-    bool familySharing,
-    Map<String, dynamic>? customSounds,
-    VibrationPattern? vibrationPattern,
-  });
+  $Res call(
+      {bool hapticFeedback,
+      bool soundFeedback,
+      bool voiceRecognition,
+      double sensitivity,
+      AnimationType animation,
+      ThemeStyle theme,
+      bool autoSave,
+      bool familySharing,
+      Map<String, dynamic>? customSounds,
+      VibrationPattern? vibrationPattern});
 }
 
 /// @nodoc
@@ -983,9 +897,8 @@ class __$$TasbihSettingsImplCopyWithImpl<$Res>
     extends _$TasbihSettingsCopyWithImpl<$Res, _$TasbihSettingsImpl>
     implements _$$TasbihSettingsImplCopyWith<$Res> {
   __$$TasbihSettingsImplCopyWithImpl(
-    _$TasbihSettingsImpl _value,
-    $Res Function(_$TasbihSettingsImpl) _then,
-  ) : super(_value, _then);
+      _$TasbihSettingsImpl _value, $Res Function(_$TasbihSettingsImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of TasbihSettings
   /// with the given fields replaced by the non-null parameter values.
@@ -1003,78 +916,66 @@ class __$$TasbihSettingsImplCopyWithImpl<$Res>
     Object? customSounds = freezed,
     Object? vibrationPattern = freezed,
   }) {
-    return _then(
-      _$TasbihSettingsImpl(
-        hapticFeedback:
-            null == hapticFeedback
-                ? _value.hapticFeedback
-                : hapticFeedback // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        soundFeedback:
-            null == soundFeedback
-                ? _value.soundFeedback
-                : soundFeedback // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        voiceRecognition:
-            null == voiceRecognition
-                ? _value.voiceRecognition
-                : voiceRecognition // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        sensitivity:
-            null == sensitivity
-                ? _value.sensitivity
-                : sensitivity // ignore: cast_nullable_to_non_nullable
-                    as double,
-        animation:
-            null == animation
-                ? _value.animation
-                : animation // ignore: cast_nullable_to_non_nullable
-                    as AnimationType,
-        theme:
-            null == theme
-                ? _value.theme
-                : theme // ignore: cast_nullable_to_non_nullable
-                    as ThemeStyle,
-        autoSave:
-            null == autoSave
-                ? _value.autoSave
-                : autoSave // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        familySharing:
-            null == familySharing
-                ? _value.familySharing
-                : familySharing // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        customSounds:
-            freezed == customSounds
-                ? _value._customSounds
-                : customSounds // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>?,
-        vibrationPattern:
-            freezed == vibrationPattern
-                ? _value.vibrationPattern
-                : vibrationPattern // ignore: cast_nullable_to_non_nullable
-                    as VibrationPattern?,
-      ),
-    );
+    return _then(_$TasbihSettingsImpl(
+      hapticFeedback: null == hapticFeedback
+          ? _value.hapticFeedback
+          : hapticFeedback // ignore: cast_nullable_to_non_nullable
+              as bool,
+      soundFeedback: null == soundFeedback
+          ? _value.soundFeedback
+          : soundFeedback // ignore: cast_nullable_to_non_nullable
+              as bool,
+      voiceRecognition: null == voiceRecognition
+          ? _value.voiceRecognition
+          : voiceRecognition // ignore: cast_nullable_to_non_nullable
+              as bool,
+      sensitivity: null == sensitivity
+          ? _value.sensitivity
+          : sensitivity // ignore: cast_nullable_to_non_nullable
+              as double,
+      animation: null == animation
+          ? _value.animation
+          : animation // ignore: cast_nullable_to_non_nullable
+              as AnimationType,
+      theme: null == theme
+          ? _value.theme
+          : theme // ignore: cast_nullable_to_non_nullable
+              as ThemeStyle,
+      autoSave: null == autoSave
+          ? _value.autoSave
+          : autoSave // ignore: cast_nullable_to_non_nullable
+              as bool,
+      familySharing: null == familySharing
+          ? _value.familySharing
+          : familySharing // ignore: cast_nullable_to_non_nullable
+              as bool,
+      customSounds: freezed == customSounds
+          ? _value._customSounds
+          : customSounds // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      vibrationPattern: freezed == vibrationPattern
+          ? _value.vibrationPattern
+          : vibrationPattern // ignore: cast_nullable_to_non_nullable
+              as VibrationPattern?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$TasbihSettingsImpl implements _TasbihSettings {
-  const _$TasbihSettingsImpl({
-    required this.hapticFeedback,
-    required this.soundFeedback,
-    required this.voiceRecognition,
-    required this.sensitivity,
-    required this.animation,
-    required this.theme,
-    required this.autoSave,
-    required this.familySharing,
-    final Map<String, dynamic>? customSounds,
-    this.vibrationPattern,
-  }) : _customSounds = customSounds;
+  const _$TasbihSettingsImpl(
+      {required this.hapticFeedback,
+      required this.soundFeedback,
+      required this.voiceRecognition,
+      required this.sensitivity,
+      required this.animation,
+      required this.theme,
+      required this.autoSave,
+      required this.familySharing,
+      final Map<String, dynamic>? customSounds,
+      this.vibrationPattern})
+      : _customSounds = customSounds;
 
   factory _$TasbihSettingsImpl.fromJson(Map<String, dynamic> json) =>
       _$$TasbihSettingsImplFromJson(json);
@@ -1133,10 +1034,8 @@ class _$TasbihSettingsImpl implements _TasbihSettings {
                 other.autoSave == autoSave) &&
             (identical(other.familySharing, familySharing) ||
                 other.familySharing == familySharing) &&
-            const DeepCollectionEquality().equals(
-              other._customSounds,
-              _customSounds,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._customSounds, _customSounds) &&
             (identical(other.vibrationPattern, vibrationPattern) ||
                 other.vibrationPattern == vibrationPattern));
   }
@@ -1144,18 +1043,17 @@ class _$TasbihSettingsImpl implements _TasbihSettings {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    hapticFeedback,
-    soundFeedback,
-    voiceRecognition,
-    sensitivity,
-    animation,
-    theme,
-    autoSave,
-    familySharing,
-    const DeepCollectionEquality().hash(_customSounds),
-    vibrationPattern,
-  );
+      runtimeType,
+      hapticFeedback,
+      soundFeedback,
+      voiceRecognition,
+      sensitivity,
+      animation,
+      theme,
+      autoSave,
+      familySharing,
+      const DeepCollectionEquality().hash(_customSounds),
+      vibrationPattern);
 
   /// Create a copy of TasbihSettings
   /// with the given fields replaced by the non-null parameter values.
@@ -1164,29 +1062,28 @@ class _$TasbihSettingsImpl implements _TasbihSettings {
   @pragma('vm:prefer-inline')
   _$$TasbihSettingsImplCopyWith<_$TasbihSettingsImpl> get copyWith =>
       __$$TasbihSettingsImplCopyWithImpl<_$TasbihSettingsImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$TasbihSettingsImplToJson(this);
+    return _$$TasbihSettingsImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _TasbihSettings implements TasbihSettings {
-  const factory _TasbihSettings({
-    required final bool hapticFeedback,
-    required final bool soundFeedback,
-    required final bool voiceRecognition,
-    required final double sensitivity,
-    required final AnimationType animation,
-    required final ThemeStyle theme,
-    required final bool autoSave,
-    required final bool familySharing,
-    final Map<String, dynamic>? customSounds,
-    final VibrationPattern? vibrationPattern,
-  }) = _$TasbihSettingsImpl;
+  const factory _TasbihSettings(
+      {required final bool hapticFeedback,
+      required final bool soundFeedback,
+      required final bool voiceRecognition,
+      required final double sensitivity,
+      required final AnimationType animation,
+      required final ThemeStyle theme,
+      required final bool autoSave,
+      required final bool familySharing,
+      final Map<String, dynamic>? customSounds,
+      final VibrationPattern? vibrationPattern}) = _$TasbihSettingsImpl;
 
   factory _TasbihSettings.fromJson(Map<String, dynamic> json) =
       _$TasbihSettingsImpl.fromJson;
@@ -1254,26 +1151,24 @@ mixin _$TasbihGoal {
 /// @nodoc
 abstract class $TasbihGoalCopyWith<$Res> {
   factory $TasbihGoalCopyWith(
-    TasbihGoal value,
-    $Res Function(TasbihGoal) then,
-  ) = _$TasbihGoalCopyWithImpl<$Res, TasbihGoal>;
+          TasbihGoal value, $Res Function(TasbihGoal) then) =
+      _$TasbihGoalCopyWithImpl<$Res, TasbihGoal>;
   @useResult
-  $Res call({
-    String id,
-    String title,
-    int targetCount,
-    Duration timeFrame,
-    GoalPeriod period,
-    DateTime startDate,
-    DateTime? endDate,
-    int currentProgress,
-    List<String> dhikrTypes,
-    Map<DateTime, int> dailyProgress,
-    String? description,
-    String? reward,
-    bool? isActive,
-    GoalStatus? status,
-  });
+  $Res call(
+      {String id,
+      String title,
+      int targetCount,
+      Duration timeFrame,
+      GoalPeriod period,
+      DateTime startDate,
+      DateTime? endDate,
+      int currentProgress,
+      List<String> dhikrTypes,
+      Map<DateTime, int> dailyProgress,
+      String? description,
+      String? reward,
+      bool? isActive,
+      GoalStatus? status});
 }
 
 /// @nodoc
@@ -1306,81 +1201,64 @@ class _$TasbihGoalCopyWithImpl<$Res, $Val extends TasbihGoal>
     Object? isActive = freezed,
     Object? status = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            title:
-                null == title
-                    ? _value.title
-                    : title // ignore: cast_nullable_to_non_nullable
-                        as String,
-            targetCount:
-                null == targetCount
-                    ? _value.targetCount
-                    : targetCount // ignore: cast_nullable_to_non_nullable
-                        as int,
-            timeFrame:
-                null == timeFrame
-                    ? _value.timeFrame
-                    : timeFrame // ignore: cast_nullable_to_non_nullable
-                        as Duration,
-            period:
-                null == period
-                    ? _value.period
-                    : period // ignore: cast_nullable_to_non_nullable
-                        as GoalPeriod,
-            startDate:
-                null == startDate
-                    ? _value.startDate
-                    : startDate // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            endDate:
-                freezed == endDate
-                    ? _value.endDate
-                    : endDate // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            currentProgress:
-                null == currentProgress
-                    ? _value.currentProgress
-                    : currentProgress // ignore: cast_nullable_to_non_nullable
-                        as int,
-            dhikrTypes:
-                null == dhikrTypes
-                    ? _value.dhikrTypes
-                    : dhikrTypes // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            dailyProgress:
-                null == dailyProgress
-                    ? _value.dailyProgress
-                    : dailyProgress // ignore: cast_nullable_to_non_nullable
-                        as Map<DateTime, int>,
-            description:
-                freezed == description
-                    ? _value.description
-                    : description // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            reward:
-                freezed == reward
-                    ? _value.reward
-                    : reward // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            isActive:
-                freezed == isActive
-                    ? _value.isActive
-                    : isActive // ignore: cast_nullable_to_non_nullable
-                        as bool?,
-            status:
-                freezed == status
-                    ? _value.status
-                    : status // ignore: cast_nullable_to_non_nullable
-                        as GoalStatus?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      targetCount: null == targetCount
+          ? _value.targetCount
+          : targetCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      timeFrame: null == timeFrame
+          ? _value.timeFrame
+          : timeFrame // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      period: null == period
+          ? _value.period
+          : period // ignore: cast_nullable_to_non_nullable
+              as GoalPeriod,
+      startDate: null == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      endDate: freezed == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      currentProgress: null == currentProgress
+          ? _value.currentProgress
+          : currentProgress // ignore: cast_nullable_to_non_nullable
+              as int,
+      dhikrTypes: null == dhikrTypes
+          ? _value.dhikrTypes
+          : dhikrTypes // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      dailyProgress: null == dailyProgress
+          ? _value.dailyProgress
+          : dailyProgress // ignore: cast_nullable_to_non_nullable
+              as Map<DateTime, int>,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      reward: freezed == reward
+          ? _value.reward
+          : reward // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isActive: freezed == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as GoalStatus?,
+    ) as $Val);
   }
 }
 
@@ -1388,27 +1266,25 @@ class _$TasbihGoalCopyWithImpl<$Res, $Val extends TasbihGoal>
 abstract class _$$TasbihGoalImplCopyWith<$Res>
     implements $TasbihGoalCopyWith<$Res> {
   factory _$$TasbihGoalImplCopyWith(
-    _$TasbihGoalImpl value,
-    $Res Function(_$TasbihGoalImpl) then,
-  ) = __$$TasbihGoalImplCopyWithImpl<$Res>;
+          _$TasbihGoalImpl value, $Res Function(_$TasbihGoalImpl) then) =
+      __$$TasbihGoalImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String title,
-    int targetCount,
-    Duration timeFrame,
-    GoalPeriod period,
-    DateTime startDate,
-    DateTime? endDate,
-    int currentProgress,
-    List<String> dhikrTypes,
-    Map<DateTime, int> dailyProgress,
-    String? description,
-    String? reward,
-    bool? isActive,
-    GoalStatus? status,
-  });
+  $Res call(
+      {String id,
+      String title,
+      int targetCount,
+      Duration timeFrame,
+      GoalPeriod period,
+      DateTime startDate,
+      DateTime? endDate,
+      int currentProgress,
+      List<String> dhikrTypes,
+      Map<DateTime, int> dailyProgress,
+      String? description,
+      String? reward,
+      bool? isActive,
+      GoalStatus? status});
 }
 
 /// @nodoc
@@ -1416,9 +1292,8 @@ class __$$TasbihGoalImplCopyWithImpl<$Res>
     extends _$TasbihGoalCopyWithImpl<$Res, _$TasbihGoalImpl>
     implements _$$TasbihGoalImplCopyWith<$Res> {
   __$$TasbihGoalImplCopyWithImpl(
-    _$TasbihGoalImpl _value,
-    $Res Function(_$TasbihGoalImpl) _then,
-  ) : super(_value, _then);
+      _$TasbihGoalImpl _value, $Res Function(_$TasbihGoalImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of TasbihGoal
   /// with the given fields replaced by the non-null parameter values.
@@ -1440,103 +1315,87 @@ class __$$TasbihGoalImplCopyWithImpl<$Res>
     Object? isActive = freezed,
     Object? status = freezed,
   }) {
-    return _then(
-      _$TasbihGoalImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        title:
-            null == title
-                ? _value.title
-                : title // ignore: cast_nullable_to_non_nullable
-                    as String,
-        targetCount:
-            null == targetCount
-                ? _value.targetCount
-                : targetCount // ignore: cast_nullable_to_non_nullable
-                    as int,
-        timeFrame:
-            null == timeFrame
-                ? _value.timeFrame
-                : timeFrame // ignore: cast_nullable_to_non_nullable
-                    as Duration,
-        period:
-            null == period
-                ? _value.period
-                : period // ignore: cast_nullable_to_non_nullable
-                    as GoalPeriod,
-        startDate:
-            null == startDate
-                ? _value.startDate
-                : startDate // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        endDate:
-            freezed == endDate
-                ? _value.endDate
-                : endDate // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        currentProgress:
-            null == currentProgress
-                ? _value.currentProgress
-                : currentProgress // ignore: cast_nullable_to_non_nullable
-                    as int,
-        dhikrTypes:
-            null == dhikrTypes
-                ? _value._dhikrTypes
-                : dhikrTypes // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        dailyProgress:
-            null == dailyProgress
-                ? _value._dailyProgress
-                : dailyProgress // ignore: cast_nullable_to_non_nullable
-                    as Map<DateTime, int>,
-        description:
-            freezed == description
-                ? _value.description
-                : description // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        reward:
-            freezed == reward
-                ? _value.reward
-                : reward // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        isActive:
-            freezed == isActive
-                ? _value.isActive
-                : isActive // ignore: cast_nullable_to_non_nullable
-                    as bool?,
-        status:
-            freezed == status
-                ? _value.status
-                : status // ignore: cast_nullable_to_non_nullable
-                    as GoalStatus?,
-      ),
-    );
+    return _then(_$TasbihGoalImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      targetCount: null == targetCount
+          ? _value.targetCount
+          : targetCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      timeFrame: null == timeFrame
+          ? _value.timeFrame
+          : timeFrame // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      period: null == period
+          ? _value.period
+          : period // ignore: cast_nullable_to_non_nullable
+              as GoalPeriod,
+      startDate: null == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      endDate: freezed == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      currentProgress: null == currentProgress
+          ? _value.currentProgress
+          : currentProgress // ignore: cast_nullable_to_non_nullable
+              as int,
+      dhikrTypes: null == dhikrTypes
+          ? _value._dhikrTypes
+          : dhikrTypes // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      dailyProgress: null == dailyProgress
+          ? _value._dailyProgress
+          : dailyProgress // ignore: cast_nullable_to_non_nullable
+              as Map<DateTime, int>,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      reward: freezed == reward
+          ? _value.reward
+          : reward // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isActive: freezed == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as GoalStatus?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$TasbihGoalImpl implements _TasbihGoal {
-  const _$TasbihGoalImpl({
-    required this.id,
-    required this.title,
-    required this.targetCount,
-    required this.timeFrame,
-    required this.period,
-    required this.startDate,
-    this.endDate,
-    required this.currentProgress,
-    required final List<String> dhikrTypes,
-    required final Map<DateTime, int> dailyProgress,
-    this.description,
-    this.reward,
-    this.isActive,
-    this.status,
-  }) : _dhikrTypes = dhikrTypes,
-       _dailyProgress = dailyProgress;
+  const _$TasbihGoalImpl(
+      {required this.id,
+      required this.title,
+      required this.targetCount,
+      required this.timeFrame,
+      required this.period,
+      required this.startDate,
+      this.endDate,
+      required this.currentProgress,
+      required final List<String> dhikrTypes,
+      required final Map<DateTime, int> dailyProgress,
+      this.description,
+      this.reward,
+      this.isActive,
+      this.status})
+      : _dhikrTypes = dhikrTypes,
+        _dailyProgress = dailyProgress;
 
   factory _$TasbihGoalImpl.fromJson(Map<String, dynamic> json) =>
       _$$TasbihGoalImplFromJson(json);
@@ -1604,14 +1463,10 @@ class _$TasbihGoalImpl implements _TasbihGoal {
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
             (identical(other.currentProgress, currentProgress) ||
                 other.currentProgress == currentProgress) &&
-            const DeepCollectionEquality().equals(
-              other._dhikrTypes,
-              _dhikrTypes,
-            ) &&
-            const DeepCollectionEquality().equals(
-              other._dailyProgress,
-              _dailyProgress,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._dhikrTypes, _dhikrTypes) &&
+            const DeepCollectionEquality()
+                .equals(other._dailyProgress, _dailyProgress) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.reward, reward) || other.reward == reward) &&
@@ -1623,22 +1478,21 @@ class _$TasbihGoalImpl implements _TasbihGoal {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    title,
-    targetCount,
-    timeFrame,
-    period,
-    startDate,
-    endDate,
-    currentProgress,
-    const DeepCollectionEquality().hash(_dhikrTypes),
-    const DeepCollectionEquality().hash(_dailyProgress),
-    description,
-    reward,
-    isActive,
-    status,
-  );
+      runtimeType,
+      id,
+      title,
+      targetCount,
+      timeFrame,
+      period,
+      startDate,
+      endDate,
+      currentProgress,
+      const DeepCollectionEquality().hash(_dhikrTypes),
+      const DeepCollectionEquality().hash(_dailyProgress),
+      description,
+      reward,
+      isActive,
+      status);
 
   /// Create a copy of TasbihGoal
   /// with the given fields replaced by the non-null parameter values.
@@ -1650,27 +1504,28 @@ class _$TasbihGoalImpl implements _TasbihGoal {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$TasbihGoalImplToJson(this);
+    return _$$TasbihGoalImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _TasbihGoal implements TasbihGoal {
-  const factory _TasbihGoal({
-    required final String id,
-    required final String title,
-    required final int targetCount,
-    required final Duration timeFrame,
-    required final GoalPeriod period,
-    required final DateTime startDate,
-    final DateTime? endDate,
-    required final int currentProgress,
-    required final List<String> dhikrTypes,
-    required final Map<DateTime, int> dailyProgress,
-    final String? description,
-    final String? reward,
-    final bool? isActive,
-    final GoalStatus? status,
-  }) = _$TasbihGoalImpl;
+  const factory _TasbihGoal(
+      {required final String id,
+      required final String title,
+      required final int targetCount,
+      required final Duration timeFrame,
+      required final GoalPeriod period,
+      required final DateTime startDate,
+      final DateTime? endDate,
+      required final int currentProgress,
+      required final List<String> dhikrTypes,
+      required final Map<DateTime, int> dailyProgress,
+      final String? description,
+      final String? reward,
+      final bool? isActive,
+      final GoalStatus? status}) = _$TasbihGoalImpl;
 
   factory _TasbihGoal.fromJson(Map<String, dynamic> json) =
       _$TasbihGoalImpl.fromJson;
@@ -1744,24 +1599,22 @@ mixin _$TasbihStats {
 /// @nodoc
 abstract class $TasbihStatsCopyWith<$Res> {
   factory $TasbihStatsCopyWith(
-    TasbihStats value,
-    $Res Function(TasbihStats) then,
-  ) = _$TasbihStatsCopyWithImpl<$Res, TasbihStats>;
+          TasbihStats value, $Res Function(TasbihStats) then) =
+      _$TasbihStatsCopyWithImpl<$Res, TasbihStats>;
   @useResult
-  $Res call({
-    int totalSessions,
-    int totalCount,
-    Duration totalTime,
-    Map<TasbihType, int> countsByType,
-    Map<DateTime, int> dailyProgress,
-    int currentStreak,
-    int longestStreak,
-    DateTime lastSession,
-    double averageSessionDuration,
-    List<Achievement> achievements,
-    Map<String, dynamic>? personalBests,
-    FamilyStats? familyStats,
-  });
+  $Res call(
+      {int totalSessions,
+      int totalCount,
+      Duration totalTime,
+      Map<TasbihType, int> countsByType,
+      Map<DateTime, int> dailyProgress,
+      int currentStreak,
+      int longestStreak,
+      DateTime lastSession,
+      double averageSessionDuration,
+      List<Achievement> achievements,
+      Map<String, dynamic>? personalBests,
+      FamilyStats? familyStats});
 
   $FamilyStatsCopyWith<$Res>? get familyStats;
 }
@@ -1794,71 +1647,56 @@ class _$TasbihStatsCopyWithImpl<$Res, $Val extends TasbihStats>
     Object? personalBests = freezed,
     Object? familyStats = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            totalSessions:
-                null == totalSessions
-                    ? _value.totalSessions
-                    : totalSessions // ignore: cast_nullable_to_non_nullable
-                        as int,
-            totalCount:
-                null == totalCount
-                    ? _value.totalCount
-                    : totalCount // ignore: cast_nullable_to_non_nullable
-                        as int,
-            totalTime:
-                null == totalTime
-                    ? _value.totalTime
-                    : totalTime // ignore: cast_nullable_to_non_nullable
-                        as Duration,
-            countsByType:
-                null == countsByType
-                    ? _value.countsByType
-                    : countsByType // ignore: cast_nullable_to_non_nullable
-                        as Map<TasbihType, int>,
-            dailyProgress:
-                null == dailyProgress
-                    ? _value.dailyProgress
-                    : dailyProgress // ignore: cast_nullable_to_non_nullable
-                        as Map<DateTime, int>,
-            currentStreak:
-                null == currentStreak
-                    ? _value.currentStreak
-                    : currentStreak // ignore: cast_nullable_to_non_nullable
-                        as int,
-            longestStreak:
-                null == longestStreak
-                    ? _value.longestStreak
-                    : longestStreak // ignore: cast_nullable_to_non_nullable
-                        as int,
-            lastSession:
-                null == lastSession
-                    ? _value.lastSession
-                    : lastSession // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            averageSessionDuration:
-                null == averageSessionDuration
-                    ? _value.averageSessionDuration
-                    : averageSessionDuration // ignore: cast_nullable_to_non_nullable
-                        as double,
-            achievements:
-                null == achievements
-                    ? _value.achievements
-                    : achievements // ignore: cast_nullable_to_non_nullable
-                        as List<Achievement>,
-            personalBests:
-                freezed == personalBests
-                    ? _value.personalBests
-                    : personalBests // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>?,
-            familyStats:
-                freezed == familyStats
-                    ? _value.familyStats
-                    : familyStats // ignore: cast_nullable_to_non_nullable
-                        as FamilyStats?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      totalSessions: null == totalSessions
+          ? _value.totalSessions
+          : totalSessions // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalCount: null == totalCount
+          ? _value.totalCount
+          : totalCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalTime: null == totalTime
+          ? _value.totalTime
+          : totalTime // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      countsByType: null == countsByType
+          ? _value.countsByType
+          : countsByType // ignore: cast_nullable_to_non_nullable
+              as Map<TasbihType, int>,
+      dailyProgress: null == dailyProgress
+          ? _value.dailyProgress
+          : dailyProgress // ignore: cast_nullable_to_non_nullable
+              as Map<DateTime, int>,
+      currentStreak: null == currentStreak
+          ? _value.currentStreak
+          : currentStreak // ignore: cast_nullable_to_non_nullable
+              as int,
+      longestStreak: null == longestStreak
+          ? _value.longestStreak
+          : longestStreak // ignore: cast_nullable_to_non_nullable
+              as int,
+      lastSession: null == lastSession
+          ? _value.lastSession
+          : lastSession // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      averageSessionDuration: null == averageSessionDuration
+          ? _value.averageSessionDuration
+          : averageSessionDuration // ignore: cast_nullable_to_non_nullable
+              as double,
+      achievements: null == achievements
+          ? _value.achievements
+          : achievements // ignore: cast_nullable_to_non_nullable
+              as List<Achievement>,
+      personalBests: freezed == personalBests
+          ? _value.personalBests
+          : personalBests // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      familyStats: freezed == familyStats
+          ? _value.familyStats
+          : familyStats // ignore: cast_nullable_to_non_nullable
+              as FamilyStats?,
+    ) as $Val);
   }
 
   /// Create a copy of TasbihStats
@@ -1880,25 +1718,23 @@ class _$TasbihStatsCopyWithImpl<$Res, $Val extends TasbihStats>
 abstract class _$$TasbihStatsImplCopyWith<$Res>
     implements $TasbihStatsCopyWith<$Res> {
   factory _$$TasbihStatsImplCopyWith(
-    _$TasbihStatsImpl value,
-    $Res Function(_$TasbihStatsImpl) then,
-  ) = __$$TasbihStatsImplCopyWithImpl<$Res>;
+          _$TasbihStatsImpl value, $Res Function(_$TasbihStatsImpl) then) =
+      __$$TasbihStatsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    int totalSessions,
-    int totalCount,
-    Duration totalTime,
-    Map<TasbihType, int> countsByType,
-    Map<DateTime, int> dailyProgress,
-    int currentStreak,
-    int longestStreak,
-    DateTime lastSession,
-    double averageSessionDuration,
-    List<Achievement> achievements,
-    Map<String, dynamic>? personalBests,
-    FamilyStats? familyStats,
-  });
+  $Res call(
+      {int totalSessions,
+      int totalCount,
+      Duration totalTime,
+      Map<TasbihType, int> countsByType,
+      Map<DateTime, int> dailyProgress,
+      int currentStreak,
+      int longestStreak,
+      DateTime lastSession,
+      double averageSessionDuration,
+      List<Achievement> achievements,
+      Map<String, dynamic>? personalBests,
+      FamilyStats? familyStats});
 
   @override
   $FamilyStatsCopyWith<$Res>? get familyStats;
@@ -1909,9 +1745,8 @@ class __$$TasbihStatsImplCopyWithImpl<$Res>
     extends _$TasbihStatsCopyWithImpl<$Res, _$TasbihStatsImpl>
     implements _$$TasbihStatsImplCopyWith<$Res> {
   __$$TasbihStatsImplCopyWithImpl(
-    _$TasbihStatsImpl _value,
-    $Res Function(_$TasbihStatsImpl) _then,
-  ) : super(_value, _then);
+      _$TasbihStatsImpl _value, $Res Function(_$TasbihStatsImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of TasbihStats
   /// with the given fields replaced by the non-null parameter values.
@@ -1931,93 +1766,79 @@ class __$$TasbihStatsImplCopyWithImpl<$Res>
     Object? personalBests = freezed,
     Object? familyStats = freezed,
   }) {
-    return _then(
-      _$TasbihStatsImpl(
-        totalSessions:
-            null == totalSessions
-                ? _value.totalSessions
-                : totalSessions // ignore: cast_nullable_to_non_nullable
-                    as int,
-        totalCount:
-            null == totalCount
-                ? _value.totalCount
-                : totalCount // ignore: cast_nullable_to_non_nullable
-                    as int,
-        totalTime:
-            null == totalTime
-                ? _value.totalTime
-                : totalTime // ignore: cast_nullable_to_non_nullable
-                    as Duration,
-        countsByType:
-            null == countsByType
-                ? _value._countsByType
-                : countsByType // ignore: cast_nullable_to_non_nullable
-                    as Map<TasbihType, int>,
-        dailyProgress:
-            null == dailyProgress
-                ? _value._dailyProgress
-                : dailyProgress // ignore: cast_nullable_to_non_nullable
-                    as Map<DateTime, int>,
-        currentStreak:
-            null == currentStreak
-                ? _value.currentStreak
-                : currentStreak // ignore: cast_nullable_to_non_nullable
-                    as int,
-        longestStreak:
-            null == longestStreak
-                ? _value.longestStreak
-                : longestStreak // ignore: cast_nullable_to_non_nullable
-                    as int,
-        lastSession:
-            null == lastSession
-                ? _value.lastSession
-                : lastSession // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        averageSessionDuration:
-            null == averageSessionDuration
-                ? _value.averageSessionDuration
-                : averageSessionDuration // ignore: cast_nullable_to_non_nullable
-                    as double,
-        achievements:
-            null == achievements
-                ? _value._achievements
-                : achievements // ignore: cast_nullable_to_non_nullable
-                    as List<Achievement>,
-        personalBests:
-            freezed == personalBests
-                ? _value._personalBests
-                : personalBests // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>?,
-        familyStats:
-            freezed == familyStats
-                ? _value.familyStats
-                : familyStats // ignore: cast_nullable_to_non_nullable
-                    as FamilyStats?,
-      ),
-    );
+    return _then(_$TasbihStatsImpl(
+      totalSessions: null == totalSessions
+          ? _value.totalSessions
+          : totalSessions // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalCount: null == totalCount
+          ? _value.totalCount
+          : totalCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalTime: null == totalTime
+          ? _value.totalTime
+          : totalTime // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      countsByType: null == countsByType
+          ? _value._countsByType
+          : countsByType // ignore: cast_nullable_to_non_nullable
+              as Map<TasbihType, int>,
+      dailyProgress: null == dailyProgress
+          ? _value._dailyProgress
+          : dailyProgress // ignore: cast_nullable_to_non_nullable
+              as Map<DateTime, int>,
+      currentStreak: null == currentStreak
+          ? _value.currentStreak
+          : currentStreak // ignore: cast_nullable_to_non_nullable
+              as int,
+      longestStreak: null == longestStreak
+          ? _value.longestStreak
+          : longestStreak // ignore: cast_nullable_to_non_nullable
+              as int,
+      lastSession: null == lastSession
+          ? _value.lastSession
+          : lastSession // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      averageSessionDuration: null == averageSessionDuration
+          ? _value.averageSessionDuration
+          : averageSessionDuration // ignore: cast_nullable_to_non_nullable
+              as double,
+      achievements: null == achievements
+          ? _value._achievements
+          : achievements // ignore: cast_nullable_to_non_nullable
+              as List<Achievement>,
+      personalBests: freezed == personalBests
+          ? _value._personalBests
+          : personalBests // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      familyStats: freezed == familyStats
+          ? _value.familyStats
+          : familyStats // ignore: cast_nullable_to_non_nullable
+              as FamilyStats?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$TasbihStatsImpl implements _TasbihStats {
-  const _$TasbihStatsImpl({
-    required this.totalSessions,
-    required this.totalCount,
-    required this.totalTime,
-    required final Map<TasbihType, int> countsByType,
-    required final Map<DateTime, int> dailyProgress,
-    required this.currentStreak,
-    required this.longestStreak,
-    required this.lastSession,
-    required this.averageSessionDuration,
-    required final List<Achievement> achievements,
-    final Map<String, dynamic>? personalBests,
-    this.familyStats,
-  }) : _countsByType = countsByType,
-       _dailyProgress = dailyProgress,
-       _achievements = achievements,
-       _personalBests = personalBests;
+  const _$TasbihStatsImpl(
+      {required this.totalSessions,
+      required this.totalCount,
+      required this.totalTime,
+      required final Map<TasbihType, int> countsByType,
+      required final Map<DateTime, int> dailyProgress,
+      required this.currentStreak,
+      required this.longestStreak,
+      required this.lastSession,
+      required this.averageSessionDuration,
+      required final List<Achievement> achievements,
+      final Map<String, dynamic>? personalBests,
+      this.familyStats})
+      : _countsByType = countsByType,
+        _dailyProgress = dailyProgress,
+        _achievements = achievements,
+        _personalBests = personalBests;
 
   factory _$TasbihStatsImpl.fromJson(Map<String, dynamic> json) =>
       _$$TasbihStatsImplFromJson(json);
@@ -2089,14 +1910,10 @@ class _$TasbihStatsImpl implements _TasbihStats {
                 other.totalCount == totalCount) &&
             (identical(other.totalTime, totalTime) ||
                 other.totalTime == totalTime) &&
-            const DeepCollectionEquality().equals(
-              other._countsByType,
-              _countsByType,
-            ) &&
-            const DeepCollectionEquality().equals(
-              other._dailyProgress,
-              _dailyProgress,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._countsByType, _countsByType) &&
+            const DeepCollectionEquality()
+                .equals(other._dailyProgress, _dailyProgress) &&
             (identical(other.currentStreak, currentStreak) ||
                 other.currentStreak == currentStreak) &&
             (identical(other.longestStreak, longestStreak) ||
@@ -2105,14 +1922,10 @@ class _$TasbihStatsImpl implements _TasbihStats {
                 other.lastSession == lastSession) &&
             (identical(other.averageSessionDuration, averageSessionDuration) ||
                 other.averageSessionDuration == averageSessionDuration) &&
-            const DeepCollectionEquality().equals(
-              other._achievements,
-              _achievements,
-            ) &&
-            const DeepCollectionEquality().equals(
-              other._personalBests,
-              _personalBests,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._achievements, _achievements) &&
+            const DeepCollectionEquality()
+                .equals(other._personalBests, _personalBests) &&
             (identical(other.familyStats, familyStats) ||
                 other.familyStats == familyStats));
   }
@@ -2120,20 +1933,19 @@ class _$TasbihStatsImpl implements _TasbihStats {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    totalSessions,
-    totalCount,
-    totalTime,
-    const DeepCollectionEquality().hash(_countsByType),
-    const DeepCollectionEquality().hash(_dailyProgress),
-    currentStreak,
-    longestStreak,
-    lastSession,
-    averageSessionDuration,
-    const DeepCollectionEquality().hash(_achievements),
-    const DeepCollectionEquality().hash(_personalBests),
-    familyStats,
-  );
+      runtimeType,
+      totalSessions,
+      totalCount,
+      totalTime,
+      const DeepCollectionEquality().hash(_countsByType),
+      const DeepCollectionEquality().hash(_dailyProgress),
+      currentStreak,
+      longestStreak,
+      lastSession,
+      averageSessionDuration,
+      const DeepCollectionEquality().hash(_achievements),
+      const DeepCollectionEquality().hash(_personalBests),
+      familyStats);
 
   /// Create a copy of TasbihStats
   /// with the given fields replaced by the non-null parameter values.
@@ -2145,25 +1957,26 @@ class _$TasbihStatsImpl implements _TasbihStats {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$TasbihStatsImplToJson(this);
+    return _$$TasbihStatsImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _TasbihStats implements TasbihStats {
-  const factory _TasbihStats({
-    required final int totalSessions,
-    required final int totalCount,
-    required final Duration totalTime,
-    required final Map<TasbihType, int> countsByType,
-    required final Map<DateTime, int> dailyProgress,
-    required final int currentStreak,
-    required final int longestStreak,
-    required final DateTime lastSession,
-    required final double averageSessionDuration,
-    required final List<Achievement> achievements,
-    final Map<String, dynamic>? personalBests,
-    final FamilyStats? familyStats,
-  }) = _$TasbihStatsImpl;
+  const factory _TasbihStats(
+      {required final int totalSessions,
+      required final int totalCount,
+      required final Duration totalTime,
+      required final Map<TasbihType, int> countsByType,
+      required final Map<DateTime, int> dailyProgress,
+      required final int currentStreak,
+      required final int longestStreak,
+      required final DateTime lastSession,
+      required final double averageSessionDuration,
+      required final List<Achievement> achievements,
+      final Map<String, dynamic>? personalBests,
+      final FamilyStats? familyStats}) = _$TasbihStatsImpl;
 
   factory _TasbihStats.fromJson(Map<String, dynamic> json) =
       _$TasbihStatsImpl.fromJson;
@@ -2230,21 +2043,19 @@ mixin _$Achievement {
 /// @nodoc
 abstract class $AchievementCopyWith<$Res> {
   factory $AchievementCopyWith(
-    Achievement value,
-    $Res Function(Achievement) then,
-  ) = _$AchievementCopyWithImpl<$Res, Achievement>;
+          Achievement value, $Res Function(Achievement) then) =
+      _$AchievementCopyWithImpl<$Res, Achievement>;
   @useResult
-  $Res call({
-    String id,
-    String title,
-    String description,
-    String iconPath,
-    DateTime unlockedAt,
-    AchievementCategory category,
-    int pointsEarned,
-    bool? isRare,
-    Map<String, dynamic>? criteria,
-  });
+  $Res call(
+      {String id,
+      String title,
+      String description,
+      String iconPath,
+      DateTime unlockedAt,
+      AchievementCategory category,
+      int pointsEarned,
+      bool? isRare,
+      Map<String, dynamic>? criteria});
 }
 
 /// @nodoc
@@ -2272,56 +2083,44 @@ class _$AchievementCopyWithImpl<$Res, $Val extends Achievement>
     Object? isRare = freezed,
     Object? criteria = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            title:
-                null == title
-                    ? _value.title
-                    : title // ignore: cast_nullable_to_non_nullable
-                        as String,
-            description:
-                null == description
-                    ? _value.description
-                    : description // ignore: cast_nullable_to_non_nullable
-                        as String,
-            iconPath:
-                null == iconPath
-                    ? _value.iconPath
-                    : iconPath // ignore: cast_nullable_to_non_nullable
-                        as String,
-            unlockedAt:
-                null == unlockedAt
-                    ? _value.unlockedAt
-                    : unlockedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            category:
-                null == category
-                    ? _value.category
-                    : category // ignore: cast_nullable_to_non_nullable
-                        as AchievementCategory,
-            pointsEarned:
-                null == pointsEarned
-                    ? _value.pointsEarned
-                    : pointsEarned // ignore: cast_nullable_to_non_nullable
-                        as int,
-            isRare:
-                freezed == isRare
-                    ? _value.isRare
-                    : isRare // ignore: cast_nullable_to_non_nullable
-                        as bool?,
-            criteria:
-                freezed == criteria
-                    ? _value.criteria
-                    : criteria // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      iconPath: null == iconPath
+          ? _value.iconPath
+          : iconPath // ignore: cast_nullable_to_non_nullable
+              as String,
+      unlockedAt: null == unlockedAt
+          ? _value.unlockedAt
+          : unlockedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as AchievementCategory,
+      pointsEarned: null == pointsEarned
+          ? _value.pointsEarned
+          : pointsEarned // ignore: cast_nullable_to_non_nullable
+              as int,
+      isRare: freezed == isRare
+          ? _value.isRare
+          : isRare // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      criteria: freezed == criteria
+          ? _value.criteria
+          : criteria // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ) as $Val);
   }
 }
 
@@ -2329,22 +2128,20 @@ class _$AchievementCopyWithImpl<$Res, $Val extends Achievement>
 abstract class _$$AchievementImplCopyWith<$Res>
     implements $AchievementCopyWith<$Res> {
   factory _$$AchievementImplCopyWith(
-    _$AchievementImpl value,
-    $Res Function(_$AchievementImpl) then,
-  ) = __$$AchievementImplCopyWithImpl<$Res>;
+          _$AchievementImpl value, $Res Function(_$AchievementImpl) then) =
+      __$$AchievementImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String title,
-    String description,
-    String iconPath,
-    DateTime unlockedAt,
-    AchievementCategory category,
-    int pointsEarned,
-    bool? isRare,
-    Map<String, dynamic>? criteria,
-  });
+  $Res call(
+      {String id,
+      String title,
+      String description,
+      String iconPath,
+      DateTime unlockedAt,
+      AchievementCategory category,
+      int pointsEarned,
+      bool? isRare,
+      Map<String, dynamic>? criteria});
 }
 
 /// @nodoc
@@ -2352,9 +2149,8 @@ class __$$AchievementImplCopyWithImpl<$Res>
     extends _$AchievementCopyWithImpl<$Res, _$AchievementImpl>
     implements _$$AchievementImplCopyWith<$Res> {
   __$$AchievementImplCopyWithImpl(
-    _$AchievementImpl _value,
-    $Res Function(_$AchievementImpl) _then,
-  ) : super(_value, _then);
+      _$AchievementImpl _value, $Res Function(_$AchievementImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of Achievement
   /// with the given fields replaced by the non-null parameter values.
@@ -2371,72 +2167,61 @@ class __$$AchievementImplCopyWithImpl<$Res>
     Object? isRare = freezed,
     Object? criteria = freezed,
   }) {
-    return _then(
-      _$AchievementImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        title:
-            null == title
-                ? _value.title
-                : title // ignore: cast_nullable_to_non_nullable
-                    as String,
-        description:
-            null == description
-                ? _value.description
-                : description // ignore: cast_nullable_to_non_nullable
-                    as String,
-        iconPath:
-            null == iconPath
-                ? _value.iconPath
-                : iconPath // ignore: cast_nullable_to_non_nullable
-                    as String,
-        unlockedAt:
-            null == unlockedAt
-                ? _value.unlockedAt
-                : unlockedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        category:
-            null == category
-                ? _value.category
-                : category // ignore: cast_nullable_to_non_nullable
-                    as AchievementCategory,
-        pointsEarned:
-            null == pointsEarned
-                ? _value.pointsEarned
-                : pointsEarned // ignore: cast_nullable_to_non_nullable
-                    as int,
-        isRare:
-            freezed == isRare
-                ? _value.isRare
-                : isRare // ignore: cast_nullable_to_non_nullable
-                    as bool?,
-        criteria:
-            freezed == criteria
-                ? _value._criteria
-                : criteria // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>?,
-      ),
-    );
+    return _then(_$AchievementImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      iconPath: null == iconPath
+          ? _value.iconPath
+          : iconPath // ignore: cast_nullable_to_non_nullable
+              as String,
+      unlockedAt: null == unlockedAt
+          ? _value.unlockedAt
+          : unlockedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as AchievementCategory,
+      pointsEarned: null == pointsEarned
+          ? _value.pointsEarned
+          : pointsEarned // ignore: cast_nullable_to_non_nullable
+              as int,
+      isRare: freezed == isRare
+          ? _value.isRare
+          : isRare // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      criteria: freezed == criteria
+          ? _value._criteria
+          : criteria // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$AchievementImpl implements _Achievement {
-  const _$AchievementImpl({
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.iconPath,
-    required this.unlockedAt,
-    required this.category,
-    required this.pointsEarned,
-    this.isRare,
-    final Map<String, dynamic>? criteria,
-  }) : _criteria = criteria;
+  const _$AchievementImpl(
+      {required this.id,
+      required this.title,
+      required this.description,
+      required this.iconPath,
+      required this.unlockedAt,
+      required this.category,
+      required this.pointsEarned,
+      this.isRare,
+      final Map<String, dynamic>? criteria})
+      : _criteria = criteria;
 
   factory _$AchievementImpl.fromJson(Map<String, dynamic> json) =>
       _$$AchievementImplFromJson(json);
@@ -2496,17 +2281,16 @@ class _$AchievementImpl implements _Achievement {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    title,
-    description,
-    iconPath,
-    unlockedAt,
-    category,
-    pointsEarned,
-    isRare,
-    const DeepCollectionEquality().hash(_criteria),
-  );
+      runtimeType,
+      id,
+      title,
+      description,
+      iconPath,
+      unlockedAt,
+      category,
+      pointsEarned,
+      isRare,
+      const DeepCollectionEquality().hash(_criteria));
 
   /// Create a copy of Achievement
   /// with the given fields replaced by the non-null parameter values.
@@ -2518,22 +2302,23 @@ class _$AchievementImpl implements _Achievement {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AchievementImplToJson(this);
+    return _$$AchievementImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _Achievement implements Achievement {
-  const factory _Achievement({
-    required final String id,
-    required final String title,
-    required final String description,
-    required final String iconPath,
-    required final DateTime unlockedAt,
-    required final AchievementCategory category,
-    required final int pointsEarned,
-    final bool? isRare,
-    final Map<String, dynamic>? criteria,
-  }) = _$AchievementImpl;
+  const factory _Achievement(
+      {required final String id,
+      required final String title,
+      required final String description,
+      required final String iconPath,
+      required final DateTime unlockedAt,
+      required final AchievementCategory category,
+      required final int pointsEarned,
+      final bool? isRare,
+      final Map<String, dynamic>? criteria}) = _$AchievementImpl;
 
   factory _Achievement.fromJson(Map<String, dynamic> json) =
       _$AchievementImpl.fromJson;
@@ -2594,19 +2379,17 @@ mixin _$FamilyStats {
 /// @nodoc
 abstract class $FamilyStatsCopyWith<$Res> {
   factory $FamilyStatsCopyWith(
-    FamilyStats value,
-    $Res Function(FamilyStats) then,
-  ) = _$FamilyStatsCopyWithImpl<$Res, FamilyStats>;
+          FamilyStats value, $Res Function(FamilyStats) then) =
+      _$FamilyStatsCopyWithImpl<$Res, FamilyStats>;
   @useResult
-  $Res call({
-    String familyId,
-    Map<String, int> memberContributions,
-    int totalFamilyCount,
-    List<FamilyMember> members,
-    DateTime lastUpdated,
-    FamilyGoal? currentGoal,
-    List<FamilyChallenge>? activeChallenges,
-  });
+  $Res call(
+      {String familyId,
+      Map<String, int> memberContributions,
+      int totalFamilyCount,
+      List<FamilyMember> members,
+      DateTime lastUpdated,
+      FamilyGoal? currentGoal,
+      List<FamilyChallenge>? activeChallenges});
 
   $FamilyGoalCopyWith<$Res>? get currentGoal;
 }
@@ -2634,46 +2417,36 @@ class _$FamilyStatsCopyWithImpl<$Res, $Val extends FamilyStats>
     Object? currentGoal = freezed,
     Object? activeChallenges = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            familyId:
-                null == familyId
-                    ? _value.familyId
-                    : familyId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            memberContributions:
-                null == memberContributions
-                    ? _value.memberContributions
-                    : memberContributions // ignore: cast_nullable_to_non_nullable
-                        as Map<String, int>,
-            totalFamilyCount:
-                null == totalFamilyCount
-                    ? _value.totalFamilyCount
-                    : totalFamilyCount // ignore: cast_nullable_to_non_nullable
-                        as int,
-            members:
-                null == members
-                    ? _value.members
-                    : members // ignore: cast_nullable_to_non_nullable
-                        as List<FamilyMember>,
-            lastUpdated:
-                null == lastUpdated
-                    ? _value.lastUpdated
-                    : lastUpdated // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            currentGoal:
-                freezed == currentGoal
-                    ? _value.currentGoal
-                    : currentGoal // ignore: cast_nullable_to_non_nullable
-                        as FamilyGoal?,
-            activeChallenges:
-                freezed == activeChallenges
-                    ? _value.activeChallenges
-                    : activeChallenges // ignore: cast_nullable_to_non_nullable
-                        as List<FamilyChallenge>?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      familyId: null == familyId
+          ? _value.familyId
+          : familyId // ignore: cast_nullable_to_non_nullable
+              as String,
+      memberContributions: null == memberContributions
+          ? _value.memberContributions
+          : memberContributions // ignore: cast_nullable_to_non_nullable
+              as Map<String, int>,
+      totalFamilyCount: null == totalFamilyCount
+          ? _value.totalFamilyCount
+          : totalFamilyCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      members: null == members
+          ? _value.members
+          : members // ignore: cast_nullable_to_non_nullable
+              as List<FamilyMember>,
+      lastUpdated: null == lastUpdated
+          ? _value.lastUpdated
+          : lastUpdated // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      currentGoal: freezed == currentGoal
+          ? _value.currentGoal
+          : currentGoal // ignore: cast_nullable_to_non_nullable
+              as FamilyGoal?,
+      activeChallenges: freezed == activeChallenges
+          ? _value.activeChallenges
+          : activeChallenges // ignore: cast_nullable_to_non_nullable
+              as List<FamilyChallenge>?,
+    ) as $Val);
   }
 
   /// Create a copy of FamilyStats
@@ -2695,20 +2468,18 @@ class _$FamilyStatsCopyWithImpl<$Res, $Val extends FamilyStats>
 abstract class _$$FamilyStatsImplCopyWith<$Res>
     implements $FamilyStatsCopyWith<$Res> {
   factory _$$FamilyStatsImplCopyWith(
-    _$FamilyStatsImpl value,
-    $Res Function(_$FamilyStatsImpl) then,
-  ) = __$$FamilyStatsImplCopyWithImpl<$Res>;
+          _$FamilyStatsImpl value, $Res Function(_$FamilyStatsImpl) then) =
+      __$$FamilyStatsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String familyId,
-    Map<String, int> memberContributions,
-    int totalFamilyCount,
-    List<FamilyMember> members,
-    DateTime lastUpdated,
-    FamilyGoal? currentGoal,
-    List<FamilyChallenge>? activeChallenges,
-  });
+  $Res call(
+      {String familyId,
+      Map<String, int> memberContributions,
+      int totalFamilyCount,
+      List<FamilyMember> members,
+      DateTime lastUpdated,
+      FamilyGoal? currentGoal,
+      List<FamilyChallenge>? activeChallenges});
 
   @override
   $FamilyGoalCopyWith<$Res>? get currentGoal;
@@ -2719,9 +2490,8 @@ class __$$FamilyStatsImplCopyWithImpl<$Res>
     extends _$FamilyStatsCopyWithImpl<$Res, _$FamilyStatsImpl>
     implements _$$FamilyStatsImplCopyWith<$Res> {
   __$$FamilyStatsImplCopyWithImpl(
-    _$FamilyStatsImpl _value,
-    $Res Function(_$FamilyStatsImpl) _then,
-  ) : super(_value, _then);
+      _$FamilyStatsImpl _value, $Res Function(_$FamilyStatsImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of FamilyStats
   /// with the given fields replaced by the non-null parameter values.
@@ -2736,62 +2506,53 @@ class __$$FamilyStatsImplCopyWithImpl<$Res>
     Object? currentGoal = freezed,
     Object? activeChallenges = freezed,
   }) {
-    return _then(
-      _$FamilyStatsImpl(
-        familyId:
-            null == familyId
-                ? _value.familyId
-                : familyId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        memberContributions:
-            null == memberContributions
-                ? _value._memberContributions
-                : memberContributions // ignore: cast_nullable_to_non_nullable
-                    as Map<String, int>,
-        totalFamilyCount:
-            null == totalFamilyCount
-                ? _value.totalFamilyCount
-                : totalFamilyCount // ignore: cast_nullable_to_non_nullable
-                    as int,
-        members:
-            null == members
-                ? _value._members
-                : members // ignore: cast_nullable_to_non_nullable
-                    as List<FamilyMember>,
-        lastUpdated:
-            null == lastUpdated
-                ? _value.lastUpdated
-                : lastUpdated // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        currentGoal:
-            freezed == currentGoal
-                ? _value.currentGoal
-                : currentGoal // ignore: cast_nullable_to_non_nullable
-                    as FamilyGoal?,
-        activeChallenges:
-            freezed == activeChallenges
-                ? _value._activeChallenges
-                : activeChallenges // ignore: cast_nullable_to_non_nullable
-                    as List<FamilyChallenge>?,
-      ),
-    );
+    return _then(_$FamilyStatsImpl(
+      familyId: null == familyId
+          ? _value.familyId
+          : familyId // ignore: cast_nullable_to_non_nullable
+              as String,
+      memberContributions: null == memberContributions
+          ? _value._memberContributions
+          : memberContributions // ignore: cast_nullable_to_non_nullable
+              as Map<String, int>,
+      totalFamilyCount: null == totalFamilyCount
+          ? _value.totalFamilyCount
+          : totalFamilyCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      members: null == members
+          ? _value._members
+          : members // ignore: cast_nullable_to_non_nullable
+              as List<FamilyMember>,
+      lastUpdated: null == lastUpdated
+          ? _value.lastUpdated
+          : lastUpdated // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      currentGoal: freezed == currentGoal
+          ? _value.currentGoal
+          : currentGoal // ignore: cast_nullable_to_non_nullable
+              as FamilyGoal?,
+      activeChallenges: freezed == activeChallenges
+          ? _value._activeChallenges
+          : activeChallenges // ignore: cast_nullable_to_non_nullable
+              as List<FamilyChallenge>?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$FamilyStatsImpl implements _FamilyStats {
-  const _$FamilyStatsImpl({
-    required this.familyId,
-    required final Map<String, int> memberContributions,
-    required this.totalFamilyCount,
-    required final List<FamilyMember> members,
-    required this.lastUpdated,
-    this.currentGoal,
-    final List<FamilyChallenge>? activeChallenges,
-  }) : _memberContributions = memberContributions,
-       _members = members,
-       _activeChallenges = activeChallenges;
+  const _$FamilyStatsImpl(
+      {required this.familyId,
+      required final Map<String, int> memberContributions,
+      required this.totalFamilyCount,
+      required final List<FamilyMember> members,
+      required this.lastUpdated,
+      this.currentGoal,
+      final List<FamilyChallenge>? activeChallenges})
+      : _memberContributions = memberContributions,
+        _members = members,
+        _activeChallenges = activeChallenges;
 
   factory _$FamilyStatsImpl.fromJson(Map<String, dynamic> json) =>
       _$$FamilyStatsImplFromJson(json);
@@ -2844,10 +2605,8 @@ class _$FamilyStatsImpl implements _FamilyStats {
             other is _$FamilyStatsImpl &&
             (identical(other.familyId, familyId) ||
                 other.familyId == familyId) &&
-            const DeepCollectionEquality().equals(
-              other._memberContributions,
-              _memberContributions,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._memberContributions, _memberContributions) &&
             (identical(other.totalFamilyCount, totalFamilyCount) ||
                 other.totalFamilyCount == totalFamilyCount) &&
             const DeepCollectionEquality().equals(other._members, _members) &&
@@ -2855,24 +2614,21 @@ class _$FamilyStatsImpl implements _FamilyStats {
                 other.lastUpdated == lastUpdated) &&
             (identical(other.currentGoal, currentGoal) ||
                 other.currentGoal == currentGoal) &&
-            const DeepCollectionEquality().equals(
-              other._activeChallenges,
-              _activeChallenges,
-            ));
+            const DeepCollectionEquality()
+                .equals(other._activeChallenges, _activeChallenges));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    familyId,
-    const DeepCollectionEquality().hash(_memberContributions),
-    totalFamilyCount,
-    const DeepCollectionEquality().hash(_members),
-    lastUpdated,
-    currentGoal,
-    const DeepCollectionEquality().hash(_activeChallenges),
-  );
+      runtimeType,
+      familyId,
+      const DeepCollectionEquality().hash(_memberContributions),
+      totalFamilyCount,
+      const DeepCollectionEquality().hash(_members),
+      lastUpdated,
+      currentGoal,
+      const DeepCollectionEquality().hash(_activeChallenges));
 
   /// Create a copy of FamilyStats
   /// with the given fields replaced by the non-null parameter values.
@@ -2884,20 +2640,21 @@ class _$FamilyStatsImpl implements _FamilyStats {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$FamilyStatsImplToJson(this);
+    return _$$FamilyStatsImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _FamilyStats implements FamilyStats {
-  const factory _FamilyStats({
-    required final String familyId,
-    required final Map<String, int> memberContributions,
-    required final int totalFamilyCount,
-    required final List<FamilyMember> members,
-    required final DateTime lastUpdated,
-    final FamilyGoal? currentGoal,
-    final List<FamilyChallenge>? activeChallenges,
-  }) = _$FamilyStatsImpl;
+  const factory _FamilyStats(
+      {required final String familyId,
+      required final Map<String, int> memberContributions,
+      required final int totalFamilyCount,
+      required final List<FamilyMember> members,
+      required final DateTime lastUpdated,
+      final FamilyGoal? currentGoal,
+      final List<FamilyChallenge>? activeChallenges}) = _$FamilyStatsImpl;
 
   factory _FamilyStats.fromJson(Map<String, dynamic> json) =
       _$FamilyStatsImpl.fromJson;
@@ -2953,20 +2710,18 @@ mixin _$FamilyMember {
 /// @nodoc
 abstract class $FamilyMemberCopyWith<$Res> {
   factory $FamilyMemberCopyWith(
-    FamilyMember value,
-    $Res Function(FamilyMember) then,
-  ) = _$FamilyMemberCopyWithImpl<$Res, FamilyMember>;
+          FamilyMember value, $Res Function(FamilyMember) then) =
+      _$FamilyMemberCopyWithImpl<$Res, FamilyMember>;
   @useResult
-  $Res call({
-    String userId,
-    String displayName,
-    String role,
-    int totalCount,
-    DateTime lastActive,
-    String? avatarUrl,
-    bool? isOnline,
-    Map<String, dynamic>? preferences,
-  });
+  $Res call(
+      {String userId,
+      String displayName,
+      String role,
+      int totalCount,
+      DateTime lastActive,
+      String? avatarUrl,
+      bool? isOnline,
+      Map<String, dynamic>? preferences});
 }
 
 /// @nodoc
@@ -2993,51 +2748,40 @@ class _$FamilyMemberCopyWithImpl<$Res, $Val extends FamilyMember>
     Object? isOnline = freezed,
     Object? preferences = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            userId:
-                null == userId
-                    ? _value.userId
-                    : userId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            displayName:
-                null == displayName
-                    ? _value.displayName
-                    : displayName // ignore: cast_nullable_to_non_nullable
-                        as String,
-            role:
-                null == role
-                    ? _value.role
-                    : role // ignore: cast_nullable_to_non_nullable
-                        as String,
-            totalCount:
-                null == totalCount
-                    ? _value.totalCount
-                    : totalCount // ignore: cast_nullable_to_non_nullable
-                        as int,
-            lastActive:
-                null == lastActive
-                    ? _value.lastActive
-                    : lastActive // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            avatarUrl:
-                freezed == avatarUrl
-                    ? _value.avatarUrl
-                    : avatarUrl // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            isOnline:
-                freezed == isOnline
-                    ? _value.isOnline
-                    : isOnline // ignore: cast_nullable_to_non_nullable
-                        as bool?,
-            preferences:
-                freezed == preferences
-                    ? _value.preferences
-                    : preferences // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      displayName: null == displayName
+          ? _value.displayName
+          : displayName // ignore: cast_nullable_to_non_nullable
+              as String,
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String,
+      totalCount: null == totalCount
+          ? _value.totalCount
+          : totalCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      lastActive: null == lastActive
+          ? _value.lastActive
+          : lastActive // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      avatarUrl: freezed == avatarUrl
+          ? _value.avatarUrl
+          : avatarUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isOnline: freezed == isOnline
+          ? _value.isOnline
+          : isOnline // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      preferences: freezed == preferences
+          ? _value.preferences
+          : preferences // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ) as $Val);
   }
 }
 
@@ -3045,21 +2789,19 @@ class _$FamilyMemberCopyWithImpl<$Res, $Val extends FamilyMember>
 abstract class _$$FamilyMemberImplCopyWith<$Res>
     implements $FamilyMemberCopyWith<$Res> {
   factory _$$FamilyMemberImplCopyWith(
-    _$FamilyMemberImpl value,
-    $Res Function(_$FamilyMemberImpl) then,
-  ) = __$$FamilyMemberImplCopyWithImpl<$Res>;
+          _$FamilyMemberImpl value, $Res Function(_$FamilyMemberImpl) then) =
+      __$$FamilyMemberImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String userId,
-    String displayName,
-    String role,
-    int totalCount,
-    DateTime lastActive,
-    String? avatarUrl,
-    bool? isOnline,
-    Map<String, dynamic>? preferences,
-  });
+  $Res call(
+      {String userId,
+      String displayName,
+      String role,
+      int totalCount,
+      DateTime lastActive,
+      String? avatarUrl,
+      bool? isOnline,
+      Map<String, dynamic>? preferences});
 }
 
 /// @nodoc
@@ -3067,9 +2809,8 @@ class __$$FamilyMemberImplCopyWithImpl<$Res>
     extends _$FamilyMemberCopyWithImpl<$Res, _$FamilyMemberImpl>
     implements _$$FamilyMemberImplCopyWith<$Res> {
   __$$FamilyMemberImplCopyWithImpl(
-    _$FamilyMemberImpl _value,
-    $Res Function(_$FamilyMemberImpl) _then,
-  ) : super(_value, _then);
+      _$FamilyMemberImpl _value, $Res Function(_$FamilyMemberImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of FamilyMember
   /// with the given fields replaced by the non-null parameter values.
@@ -3085,66 +2826,56 @@ class __$$FamilyMemberImplCopyWithImpl<$Res>
     Object? isOnline = freezed,
     Object? preferences = freezed,
   }) {
-    return _then(
-      _$FamilyMemberImpl(
-        userId:
-            null == userId
-                ? _value.userId
-                : userId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        displayName:
-            null == displayName
-                ? _value.displayName
-                : displayName // ignore: cast_nullable_to_non_nullable
-                    as String,
-        role:
-            null == role
-                ? _value.role
-                : role // ignore: cast_nullable_to_non_nullable
-                    as String,
-        totalCount:
-            null == totalCount
-                ? _value.totalCount
-                : totalCount // ignore: cast_nullable_to_non_nullable
-                    as int,
-        lastActive:
-            null == lastActive
-                ? _value.lastActive
-                : lastActive // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        avatarUrl:
-            freezed == avatarUrl
-                ? _value.avatarUrl
-                : avatarUrl // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        isOnline:
-            freezed == isOnline
-                ? _value.isOnline
-                : isOnline // ignore: cast_nullable_to_non_nullable
-                    as bool?,
-        preferences:
-            freezed == preferences
-                ? _value._preferences
-                : preferences // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>?,
-      ),
-    );
+    return _then(_$FamilyMemberImpl(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      displayName: null == displayName
+          ? _value.displayName
+          : displayName // ignore: cast_nullable_to_non_nullable
+              as String,
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String,
+      totalCount: null == totalCount
+          ? _value.totalCount
+          : totalCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      lastActive: null == lastActive
+          ? _value.lastActive
+          : lastActive // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      avatarUrl: freezed == avatarUrl
+          ? _value.avatarUrl
+          : avatarUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isOnline: freezed == isOnline
+          ? _value.isOnline
+          : isOnline // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      preferences: freezed == preferences
+          ? _value._preferences
+          : preferences // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$FamilyMemberImpl implements _FamilyMember {
-  const _$FamilyMemberImpl({
-    required this.userId,
-    required this.displayName,
-    required this.role,
-    required this.totalCount,
-    required this.lastActive,
-    this.avatarUrl,
-    this.isOnline,
-    final Map<String, dynamic>? preferences,
-  }) : _preferences = preferences;
+  const _$FamilyMemberImpl(
+      {required this.userId,
+      required this.displayName,
+      required this.role,
+      required this.totalCount,
+      required this.lastActive,
+      this.avatarUrl,
+      this.isOnline,
+      final Map<String, dynamic>? preferences})
+      : _preferences = preferences;
 
   factory _$FamilyMemberImpl.fromJson(Map<String, dynamic> json) =>
       _$$FamilyMemberImplFromJson(json);
@@ -3195,25 +2926,22 @@ class _$FamilyMemberImpl implements _FamilyMember {
                 other.avatarUrl == avatarUrl) &&
             (identical(other.isOnline, isOnline) ||
                 other.isOnline == isOnline) &&
-            const DeepCollectionEquality().equals(
-              other._preferences,
-              _preferences,
-            ));
+            const DeepCollectionEquality()
+                .equals(other._preferences, _preferences));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    userId,
-    displayName,
-    role,
-    totalCount,
-    lastActive,
-    avatarUrl,
-    isOnline,
-    const DeepCollectionEquality().hash(_preferences),
-  );
+      runtimeType,
+      userId,
+      displayName,
+      role,
+      totalCount,
+      lastActive,
+      avatarUrl,
+      isOnline,
+      const DeepCollectionEquality().hash(_preferences));
 
   /// Create a copy of FamilyMember
   /// with the given fields replaced by the non-null parameter values.
@@ -3225,21 +2953,22 @@ class _$FamilyMemberImpl implements _FamilyMember {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$FamilyMemberImplToJson(this);
+    return _$$FamilyMemberImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _FamilyMember implements FamilyMember {
-  const factory _FamilyMember({
-    required final String userId,
-    required final String displayName,
-    required final String role,
-    required final int totalCount,
-    required final DateTime lastActive,
-    final String? avatarUrl,
-    final bool? isOnline,
-    final Map<String, dynamic>? preferences,
-  }) = _$FamilyMemberImpl;
+  const factory _FamilyMember(
+      {required final String userId,
+      required final String displayName,
+      required final String role,
+      required final int totalCount,
+      required final DateTime lastActive,
+      final String? avatarUrl,
+      final bool? isOnline,
+      final Map<String, dynamic>? preferences}) = _$FamilyMemberImpl;
 
   factory _FamilyMember.fromJson(Map<String, dynamic> json) =
       _$FamilyMemberImpl.fromJson;
@@ -3299,21 +3028,19 @@ mixin _$FamilyGoal {
 /// @nodoc
 abstract class $FamilyGoalCopyWith<$Res> {
   factory $FamilyGoalCopyWith(
-    FamilyGoal value,
-    $Res Function(FamilyGoal) then,
-  ) = _$FamilyGoalCopyWithImpl<$Res, FamilyGoal>;
+          FamilyGoal value, $Res Function(FamilyGoal) then) =
+      _$FamilyGoalCopyWithImpl<$Res, FamilyGoal>;
   @useResult
-  $Res call({
-    String id,
-    String title,
-    int targetCount,
-    DateTime deadline,
-    int currentProgress,
-    Map<String, int> memberContributions,
-    String? description,
-    String? reward,
-    bool? isActive,
-  });
+  $Res call(
+      {String id,
+      String title,
+      int targetCount,
+      DateTime deadline,
+      int currentProgress,
+      Map<String, int> memberContributions,
+      String? description,
+      String? reward,
+      bool? isActive});
 }
 
 /// @nodoc
@@ -3341,56 +3068,44 @@ class _$FamilyGoalCopyWithImpl<$Res, $Val extends FamilyGoal>
     Object? reward = freezed,
     Object? isActive = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            title:
-                null == title
-                    ? _value.title
-                    : title // ignore: cast_nullable_to_non_nullable
-                        as String,
-            targetCount:
-                null == targetCount
-                    ? _value.targetCount
-                    : targetCount // ignore: cast_nullable_to_non_nullable
-                        as int,
-            deadline:
-                null == deadline
-                    ? _value.deadline
-                    : deadline // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            currentProgress:
-                null == currentProgress
-                    ? _value.currentProgress
-                    : currentProgress // ignore: cast_nullable_to_non_nullable
-                        as int,
-            memberContributions:
-                null == memberContributions
-                    ? _value.memberContributions
-                    : memberContributions // ignore: cast_nullable_to_non_nullable
-                        as Map<String, int>,
-            description:
-                freezed == description
-                    ? _value.description
-                    : description // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            reward:
-                freezed == reward
-                    ? _value.reward
-                    : reward // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            isActive:
-                freezed == isActive
-                    ? _value.isActive
-                    : isActive // ignore: cast_nullable_to_non_nullable
-                        as bool?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      targetCount: null == targetCount
+          ? _value.targetCount
+          : targetCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      deadline: null == deadline
+          ? _value.deadline
+          : deadline // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      currentProgress: null == currentProgress
+          ? _value.currentProgress
+          : currentProgress // ignore: cast_nullable_to_non_nullable
+              as int,
+      memberContributions: null == memberContributions
+          ? _value.memberContributions
+          : memberContributions // ignore: cast_nullable_to_non_nullable
+              as Map<String, int>,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      reward: freezed == reward
+          ? _value.reward
+          : reward // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isActive: freezed == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ) as $Val);
   }
 }
 
@@ -3398,22 +3113,20 @@ class _$FamilyGoalCopyWithImpl<$Res, $Val extends FamilyGoal>
 abstract class _$$FamilyGoalImplCopyWith<$Res>
     implements $FamilyGoalCopyWith<$Res> {
   factory _$$FamilyGoalImplCopyWith(
-    _$FamilyGoalImpl value,
-    $Res Function(_$FamilyGoalImpl) then,
-  ) = __$$FamilyGoalImplCopyWithImpl<$Res>;
+          _$FamilyGoalImpl value, $Res Function(_$FamilyGoalImpl) then) =
+      __$$FamilyGoalImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String title,
-    int targetCount,
-    DateTime deadline,
-    int currentProgress,
-    Map<String, int> memberContributions,
-    String? description,
-    String? reward,
-    bool? isActive,
-  });
+  $Res call(
+      {String id,
+      String title,
+      int targetCount,
+      DateTime deadline,
+      int currentProgress,
+      Map<String, int> memberContributions,
+      String? description,
+      String? reward,
+      bool? isActive});
 }
 
 /// @nodoc
@@ -3421,9 +3134,8 @@ class __$$FamilyGoalImplCopyWithImpl<$Res>
     extends _$FamilyGoalCopyWithImpl<$Res, _$FamilyGoalImpl>
     implements _$$FamilyGoalImplCopyWith<$Res> {
   __$$FamilyGoalImplCopyWithImpl(
-    _$FamilyGoalImpl _value,
-    $Res Function(_$FamilyGoalImpl) _then,
-  ) : super(_value, _then);
+      _$FamilyGoalImpl _value, $Res Function(_$FamilyGoalImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of FamilyGoal
   /// with the given fields replaced by the non-null parameter values.
@@ -3440,72 +3152,61 @@ class __$$FamilyGoalImplCopyWithImpl<$Res>
     Object? reward = freezed,
     Object? isActive = freezed,
   }) {
-    return _then(
-      _$FamilyGoalImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        title:
-            null == title
-                ? _value.title
-                : title // ignore: cast_nullable_to_non_nullable
-                    as String,
-        targetCount:
-            null == targetCount
-                ? _value.targetCount
-                : targetCount // ignore: cast_nullable_to_non_nullable
-                    as int,
-        deadline:
-            null == deadline
-                ? _value.deadline
-                : deadline // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        currentProgress:
-            null == currentProgress
-                ? _value.currentProgress
-                : currentProgress // ignore: cast_nullable_to_non_nullable
-                    as int,
-        memberContributions:
-            null == memberContributions
-                ? _value._memberContributions
-                : memberContributions // ignore: cast_nullable_to_non_nullable
-                    as Map<String, int>,
-        description:
-            freezed == description
-                ? _value.description
-                : description // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        reward:
-            freezed == reward
-                ? _value.reward
-                : reward // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        isActive:
-            freezed == isActive
-                ? _value.isActive
-                : isActive // ignore: cast_nullable_to_non_nullable
-                    as bool?,
-      ),
-    );
+    return _then(_$FamilyGoalImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      targetCount: null == targetCount
+          ? _value.targetCount
+          : targetCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      deadline: null == deadline
+          ? _value.deadline
+          : deadline // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      currentProgress: null == currentProgress
+          ? _value.currentProgress
+          : currentProgress // ignore: cast_nullable_to_non_nullable
+              as int,
+      memberContributions: null == memberContributions
+          ? _value._memberContributions
+          : memberContributions // ignore: cast_nullable_to_non_nullable
+              as Map<String, int>,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      reward: freezed == reward
+          ? _value.reward
+          : reward // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isActive: freezed == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$FamilyGoalImpl implements _FamilyGoal {
-  const _$FamilyGoalImpl({
-    required this.id,
-    required this.title,
-    required this.targetCount,
-    required this.deadline,
-    required this.currentProgress,
-    required final Map<String, int> memberContributions,
-    this.description,
-    this.reward,
-    this.isActive,
-  }) : _memberContributions = memberContributions;
+  const _$FamilyGoalImpl(
+      {required this.id,
+      required this.title,
+      required this.targetCount,
+      required this.deadline,
+      required this.currentProgress,
+      required final Map<String, int> memberContributions,
+      this.description,
+      this.reward,
+      this.isActive})
+      : _memberContributions = memberContributions;
 
   factory _$FamilyGoalImpl.fromJson(Map<String, dynamic> json) =>
       _$$FamilyGoalImplFromJson(json);
@@ -3554,10 +3255,8 @@ class _$FamilyGoalImpl implements _FamilyGoal {
                 other.deadline == deadline) &&
             (identical(other.currentProgress, currentProgress) ||
                 other.currentProgress == currentProgress) &&
-            const DeepCollectionEquality().equals(
-              other._memberContributions,
-              _memberContributions,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._memberContributions, _memberContributions) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.reward, reward) || other.reward == reward) &&
@@ -3568,17 +3267,16 @@ class _$FamilyGoalImpl implements _FamilyGoal {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    title,
-    targetCount,
-    deadline,
-    currentProgress,
-    const DeepCollectionEquality().hash(_memberContributions),
-    description,
-    reward,
-    isActive,
-  );
+      runtimeType,
+      id,
+      title,
+      targetCount,
+      deadline,
+      currentProgress,
+      const DeepCollectionEquality().hash(_memberContributions),
+      description,
+      reward,
+      isActive);
 
   /// Create a copy of FamilyGoal
   /// with the given fields replaced by the non-null parameter values.
@@ -3590,22 +3288,23 @@ class _$FamilyGoalImpl implements _FamilyGoal {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$FamilyGoalImplToJson(this);
+    return _$$FamilyGoalImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _FamilyGoal implements FamilyGoal {
-  const factory _FamilyGoal({
-    required final String id,
-    required final String title,
-    required final int targetCount,
-    required final DateTime deadline,
-    required final int currentProgress,
-    required final Map<String, int> memberContributions,
-    final String? description,
-    final String? reward,
-    final bool? isActive,
-  }) = _$FamilyGoalImpl;
+  const factory _FamilyGoal(
+      {required final String id,
+      required final String title,
+      required final int targetCount,
+      required final DateTime deadline,
+      required final int currentProgress,
+      required final Map<String, int> memberContributions,
+      final String? description,
+      final String? reward,
+      final bool? isActive}) = _$FamilyGoalImpl;
 
   factory _FamilyGoal.fromJson(Map<String, dynamic> json) =
       _$FamilyGoalImpl.fromJson;
@@ -3667,22 +3366,20 @@ mixin _$FamilyChallenge {
 /// @nodoc
 abstract class $FamilyChallengeCopyWith<$Res> {
   factory $FamilyChallengeCopyWith(
-    FamilyChallenge value,
-    $Res Function(FamilyChallenge) then,
-  ) = _$FamilyChallengeCopyWithImpl<$Res, FamilyChallenge>;
+          FamilyChallenge value, $Res Function(FamilyChallenge) then) =
+      _$FamilyChallengeCopyWithImpl<$Res, FamilyChallenge>;
   @useResult
-  $Res call({
-    String id,
-    String title,
-    ChallengeType type,
-    DateTime startDate,
-    DateTime endDate,
-    Map<String, int> scores,
-    List<String> participants,
-    String? description,
-    Map<String, dynamic>? rules,
-    List<String>? prizes,
-  });
+  $Res call(
+      {String id,
+      String title,
+      ChallengeType type,
+      DateTime startDate,
+      DateTime endDate,
+      Map<String, int> scores,
+      List<String> participants,
+      String? description,
+      Map<String, dynamic>? rules,
+      List<String>? prizes});
 }
 
 /// @nodoc
@@ -3711,85 +3408,70 @@ class _$FamilyChallengeCopyWithImpl<$Res, $Val extends FamilyChallenge>
     Object? rules = freezed,
     Object? prizes = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            title:
-                null == title
-                    ? _value.title
-                    : title // ignore: cast_nullable_to_non_nullable
-                        as String,
-            type:
-                null == type
-                    ? _value.type
-                    : type // ignore: cast_nullable_to_non_nullable
-                        as ChallengeType,
-            startDate:
-                null == startDate
-                    ? _value.startDate
-                    : startDate // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            endDate:
-                null == endDate
-                    ? _value.endDate
-                    : endDate // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            scores:
-                null == scores
-                    ? _value.scores
-                    : scores // ignore: cast_nullable_to_non_nullable
-                        as Map<String, int>,
-            participants:
-                null == participants
-                    ? _value.participants
-                    : participants // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            description:
-                freezed == description
-                    ? _value.description
-                    : description // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            rules:
-                freezed == rules
-                    ? _value.rules
-                    : rules // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>?,
-            prizes:
-                freezed == prizes
-                    ? _value.prizes
-                    : prizes // ignore: cast_nullable_to_non_nullable
-                        as List<String>?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as ChallengeType,
+      startDate: null == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      endDate: null == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      scores: null == scores
+          ? _value.scores
+          : scores // ignore: cast_nullable_to_non_nullable
+              as Map<String, int>,
+      participants: null == participants
+          ? _value.participants
+          : participants // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      rules: freezed == rules
+          ? _value.rules
+          : rules // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      prizes: freezed == prizes
+          ? _value.prizes
+          : prizes // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$FamilyChallengeImplCopyWith<$Res>
     implements $FamilyChallengeCopyWith<$Res> {
-  factory _$$FamilyChallengeImplCopyWith(
-    _$FamilyChallengeImpl value,
-    $Res Function(_$FamilyChallengeImpl) then,
-  ) = __$$FamilyChallengeImplCopyWithImpl<$Res>;
+  factory _$$FamilyChallengeImplCopyWith(_$FamilyChallengeImpl value,
+          $Res Function(_$FamilyChallengeImpl) then) =
+      __$$FamilyChallengeImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String title,
-    ChallengeType type,
-    DateTime startDate,
-    DateTime endDate,
-    Map<String, int> scores,
-    List<String> participants,
-    String? description,
-    Map<String, dynamic>? rules,
-    List<String>? prizes,
-  });
+  $Res call(
+      {String id,
+      String title,
+      ChallengeType type,
+      DateTime startDate,
+      DateTime endDate,
+      Map<String, int> scores,
+      List<String> participants,
+      String? description,
+      Map<String, dynamic>? rules,
+      List<String>? prizes});
 }
 
 /// @nodoc
@@ -3797,9 +3479,8 @@ class __$$FamilyChallengeImplCopyWithImpl<$Res>
     extends _$FamilyChallengeCopyWithImpl<$Res, _$FamilyChallengeImpl>
     implements _$$FamilyChallengeImplCopyWith<$Res> {
   __$$FamilyChallengeImplCopyWithImpl(
-    _$FamilyChallengeImpl _value,
-    $Res Function(_$FamilyChallengeImpl) _then,
-  ) : super(_value, _then);
+      _$FamilyChallengeImpl _value, $Res Function(_$FamilyChallengeImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of FamilyChallenge
   /// with the given fields replaced by the non-null parameter values.
@@ -3817,81 +3498,69 @@ class __$$FamilyChallengeImplCopyWithImpl<$Res>
     Object? rules = freezed,
     Object? prizes = freezed,
   }) {
-    return _then(
-      _$FamilyChallengeImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        title:
-            null == title
-                ? _value.title
-                : title // ignore: cast_nullable_to_non_nullable
-                    as String,
-        type:
-            null == type
-                ? _value.type
-                : type // ignore: cast_nullable_to_non_nullable
-                    as ChallengeType,
-        startDate:
-            null == startDate
-                ? _value.startDate
-                : startDate // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        endDate:
-            null == endDate
-                ? _value.endDate
-                : endDate // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        scores:
-            null == scores
-                ? _value._scores
-                : scores // ignore: cast_nullable_to_non_nullable
-                    as Map<String, int>,
-        participants:
-            null == participants
-                ? _value._participants
-                : participants // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        description:
-            freezed == description
-                ? _value.description
-                : description // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        rules:
-            freezed == rules
-                ? _value._rules
-                : rules // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>?,
-        prizes:
-            freezed == prizes
-                ? _value._prizes
-                : prizes // ignore: cast_nullable_to_non_nullable
-                    as List<String>?,
-      ),
-    );
+    return _then(_$FamilyChallengeImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as ChallengeType,
+      startDate: null == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      endDate: null == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      scores: null == scores
+          ? _value._scores
+          : scores // ignore: cast_nullable_to_non_nullable
+              as Map<String, int>,
+      participants: null == participants
+          ? _value._participants
+          : participants // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      rules: freezed == rules
+          ? _value._rules
+          : rules // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      prizes: freezed == prizes
+          ? _value._prizes
+          : prizes // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$FamilyChallengeImpl implements _FamilyChallenge {
-  const _$FamilyChallengeImpl({
-    required this.id,
-    required this.title,
-    required this.type,
-    required this.startDate,
-    required this.endDate,
-    required final Map<String, int> scores,
-    required final List<String> participants,
-    this.description,
-    final Map<String, dynamic>? rules,
-    final List<String>? prizes,
-  }) : _scores = scores,
-       _participants = participants,
-       _rules = rules,
-       _prizes = prizes;
+  const _$FamilyChallengeImpl(
+      {required this.id,
+      required this.title,
+      required this.type,
+      required this.startDate,
+      required this.endDate,
+      required final Map<String, int> scores,
+      required final List<String> participants,
+      this.description,
+      final Map<String, dynamic>? rules,
+      final List<String>? prizes})
+      : _scores = scores,
+        _participants = participants,
+        _rules = rules,
+        _prizes = prizes;
 
   factory _$FamilyChallengeImpl.fromJson(Map<String, dynamic> json) =>
       _$$FamilyChallengeImplFromJson(json);
@@ -3961,10 +3630,8 @@ class _$FamilyChallengeImpl implements _FamilyChallenge {
                 other.startDate == startDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
             const DeepCollectionEquality().equals(other._scores, _scores) &&
-            const DeepCollectionEquality().equals(
-              other._participants,
-              _participants,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._participants, _participants) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             const DeepCollectionEquality().equals(other._rules, _rules) &&
@@ -3974,18 +3641,17 @@ class _$FamilyChallengeImpl implements _FamilyChallenge {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    title,
-    type,
-    startDate,
-    endDate,
-    const DeepCollectionEquality().hash(_scores),
-    const DeepCollectionEquality().hash(_participants),
-    description,
-    const DeepCollectionEquality().hash(_rules),
-    const DeepCollectionEquality().hash(_prizes),
-  );
+      runtimeType,
+      id,
+      title,
+      type,
+      startDate,
+      endDate,
+      const DeepCollectionEquality().hash(_scores),
+      const DeepCollectionEquality().hash(_participants),
+      description,
+      const DeepCollectionEquality().hash(_rules),
+      const DeepCollectionEquality().hash(_prizes));
 
   /// Create a copy of FamilyChallenge
   /// with the given fields replaced by the non-null parameter values.
@@ -3994,29 +3660,28 @@ class _$FamilyChallengeImpl implements _FamilyChallenge {
   @pragma('vm:prefer-inline')
   _$$FamilyChallengeImplCopyWith<_$FamilyChallengeImpl> get copyWith =>
       __$$FamilyChallengeImplCopyWithImpl<_$FamilyChallengeImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$FamilyChallengeImplToJson(this);
+    return _$$FamilyChallengeImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _FamilyChallenge implements FamilyChallenge {
-  const factory _FamilyChallenge({
-    required final String id,
-    required final String title,
-    required final ChallengeType type,
-    required final DateTime startDate,
-    required final DateTime endDate,
-    required final Map<String, int> scores,
-    required final List<String> participants,
-    final String? description,
-    final Map<String, dynamic>? rules,
-    final List<String>? prizes,
-  }) = _$FamilyChallengeImpl;
+  const factory _FamilyChallenge(
+      {required final String id,
+      required final String title,
+      required final ChallengeType type,
+      required final DateTime startDate,
+      required final DateTime endDate,
+      required final Map<String, int> scores,
+      required final List<String> participants,
+      final String? description,
+      final Map<String, dynamic>? rules,
+      final List<String>? prizes}) = _$FamilyChallengeImpl;
 
   factory _FamilyChallenge.fromJson(Map<String, dynamic> json) =
       _$FamilyChallengeImpl.fromJson;
@@ -4079,20 +3744,18 @@ mixin _$VoiceRecognition {
 /// @nodoc
 abstract class $VoiceRecognitionCopyWith<$Res> {
   factory $VoiceRecognitionCopyWith(
-    VoiceRecognition value,
-    $Res Function(VoiceRecognition) then,
-  ) = _$VoiceRecognitionCopyWithImpl<$Res, VoiceRecognition>;
+          VoiceRecognition value, $Res Function(VoiceRecognition) then) =
+      _$VoiceRecognitionCopyWithImpl<$Res, VoiceRecognition>;
   @useResult
-  $Res call({
-    bool isEnabled,
-    List<String> recognizedPhrases,
-    double confidenceThreshold,
-    String language,
-    Map<String, double> phraseConfidence,
-    bool? backgroundListening,
-    Duration? sessionTimeout,
-    List<String>? customPhrases,
-  });
+  $Res call(
+      {bool isEnabled,
+      List<String> recognizedPhrases,
+      double confidenceThreshold,
+      String language,
+      Map<String, double> phraseConfidence,
+      bool? backgroundListening,
+      Duration? sessionTimeout,
+      List<String>? customPhrases});
 }
 
 /// @nodoc
@@ -4119,83 +3782,69 @@ class _$VoiceRecognitionCopyWithImpl<$Res, $Val extends VoiceRecognition>
     Object? sessionTimeout = freezed,
     Object? customPhrases = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            isEnabled:
-                null == isEnabled
-                    ? _value.isEnabled
-                    : isEnabled // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            recognizedPhrases:
-                null == recognizedPhrases
-                    ? _value.recognizedPhrases
-                    : recognizedPhrases // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            confidenceThreshold:
-                null == confidenceThreshold
-                    ? _value.confidenceThreshold
-                    : confidenceThreshold // ignore: cast_nullable_to_non_nullable
-                        as double,
-            language:
-                null == language
-                    ? _value.language
-                    : language // ignore: cast_nullable_to_non_nullable
-                        as String,
-            phraseConfidence:
-                null == phraseConfidence
-                    ? _value.phraseConfidence
-                    : phraseConfidence // ignore: cast_nullable_to_non_nullable
-                        as Map<String, double>,
-            backgroundListening:
-                freezed == backgroundListening
-                    ? _value.backgroundListening
-                    : backgroundListening // ignore: cast_nullable_to_non_nullable
-                        as bool?,
-            sessionTimeout:
-                freezed == sessionTimeout
-                    ? _value.sessionTimeout
-                    : sessionTimeout // ignore: cast_nullable_to_non_nullable
-                        as Duration?,
-            customPhrases:
-                freezed == customPhrases
-                    ? _value.customPhrases
-                    : customPhrases // ignore: cast_nullable_to_non_nullable
-                        as List<String>?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      isEnabled: null == isEnabled
+          ? _value.isEnabled
+          : isEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      recognizedPhrases: null == recognizedPhrases
+          ? _value.recognizedPhrases
+          : recognizedPhrases // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      confidenceThreshold: null == confidenceThreshold
+          ? _value.confidenceThreshold
+          : confidenceThreshold // ignore: cast_nullable_to_non_nullable
+              as double,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
+      phraseConfidence: null == phraseConfidence
+          ? _value.phraseConfidence
+          : phraseConfidence // ignore: cast_nullable_to_non_nullable
+              as Map<String, double>,
+      backgroundListening: freezed == backgroundListening
+          ? _value.backgroundListening
+          : backgroundListening // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      sessionTimeout: freezed == sessionTimeout
+          ? _value.sessionTimeout
+          : sessionTimeout // ignore: cast_nullable_to_non_nullable
+              as Duration?,
+      customPhrases: freezed == customPhrases
+          ? _value.customPhrases
+          : customPhrases // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$VoiceRecognitionImplCopyWith<$Res>
     implements $VoiceRecognitionCopyWith<$Res> {
-  factory _$$VoiceRecognitionImplCopyWith(
-    _$VoiceRecognitionImpl value,
-    $Res Function(_$VoiceRecognitionImpl) then,
-  ) = __$$VoiceRecognitionImplCopyWithImpl<$Res>;
+  factory _$$VoiceRecognitionImplCopyWith(_$VoiceRecognitionImpl value,
+          $Res Function(_$VoiceRecognitionImpl) then) =
+      __$$VoiceRecognitionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    bool isEnabled,
-    List<String> recognizedPhrases,
-    double confidenceThreshold,
-    String language,
-    Map<String, double> phraseConfidence,
-    bool? backgroundListening,
-    Duration? sessionTimeout,
-    List<String>? customPhrases,
-  });
+  $Res call(
+      {bool isEnabled,
+      List<String> recognizedPhrases,
+      double confidenceThreshold,
+      String language,
+      Map<String, double> phraseConfidence,
+      bool? backgroundListening,
+      Duration? sessionTimeout,
+      List<String>? customPhrases});
 }
 
 /// @nodoc
 class __$$VoiceRecognitionImplCopyWithImpl<$Res>
     extends _$VoiceRecognitionCopyWithImpl<$Res, _$VoiceRecognitionImpl>
     implements _$$VoiceRecognitionImplCopyWith<$Res> {
-  __$$VoiceRecognitionImplCopyWithImpl(
-    _$VoiceRecognitionImpl _value,
-    $Res Function(_$VoiceRecognitionImpl) _then,
-  ) : super(_value, _then);
+  __$$VoiceRecognitionImplCopyWithImpl(_$VoiceRecognitionImpl _value,
+      $Res Function(_$VoiceRecognitionImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of VoiceRecognition
   /// with the given fields replaced by the non-null parameter values.
@@ -4211,68 +3860,58 @@ class __$$VoiceRecognitionImplCopyWithImpl<$Res>
     Object? sessionTimeout = freezed,
     Object? customPhrases = freezed,
   }) {
-    return _then(
-      _$VoiceRecognitionImpl(
-        isEnabled:
-            null == isEnabled
-                ? _value.isEnabled
-                : isEnabled // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        recognizedPhrases:
-            null == recognizedPhrases
-                ? _value._recognizedPhrases
-                : recognizedPhrases // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        confidenceThreshold:
-            null == confidenceThreshold
-                ? _value.confidenceThreshold
-                : confidenceThreshold // ignore: cast_nullable_to_non_nullable
-                    as double,
-        language:
-            null == language
-                ? _value.language
-                : language // ignore: cast_nullable_to_non_nullable
-                    as String,
-        phraseConfidence:
-            null == phraseConfidence
-                ? _value._phraseConfidence
-                : phraseConfidence // ignore: cast_nullable_to_non_nullable
-                    as Map<String, double>,
-        backgroundListening:
-            freezed == backgroundListening
-                ? _value.backgroundListening
-                : backgroundListening // ignore: cast_nullable_to_non_nullable
-                    as bool?,
-        sessionTimeout:
-            freezed == sessionTimeout
-                ? _value.sessionTimeout
-                : sessionTimeout // ignore: cast_nullable_to_non_nullable
-                    as Duration?,
-        customPhrases:
-            freezed == customPhrases
-                ? _value._customPhrases
-                : customPhrases // ignore: cast_nullable_to_non_nullable
-                    as List<String>?,
-      ),
-    );
+    return _then(_$VoiceRecognitionImpl(
+      isEnabled: null == isEnabled
+          ? _value.isEnabled
+          : isEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      recognizedPhrases: null == recognizedPhrases
+          ? _value._recognizedPhrases
+          : recognizedPhrases // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      confidenceThreshold: null == confidenceThreshold
+          ? _value.confidenceThreshold
+          : confidenceThreshold // ignore: cast_nullable_to_non_nullable
+              as double,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
+      phraseConfidence: null == phraseConfidence
+          ? _value._phraseConfidence
+          : phraseConfidence // ignore: cast_nullable_to_non_nullable
+              as Map<String, double>,
+      backgroundListening: freezed == backgroundListening
+          ? _value.backgroundListening
+          : backgroundListening // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      sessionTimeout: freezed == sessionTimeout
+          ? _value.sessionTimeout
+          : sessionTimeout // ignore: cast_nullable_to_non_nullable
+              as Duration?,
+      customPhrases: freezed == customPhrases
+          ? _value._customPhrases
+          : customPhrases // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$VoiceRecognitionImpl implements _VoiceRecognition {
-  const _$VoiceRecognitionImpl({
-    required this.isEnabled,
-    required final List<String> recognizedPhrases,
-    required this.confidenceThreshold,
-    required this.language,
-    required final Map<String, double> phraseConfidence,
-    this.backgroundListening,
-    this.sessionTimeout,
-    final List<String>? customPhrases,
-  }) : _recognizedPhrases = recognizedPhrases,
-       _phraseConfidence = phraseConfidence,
-       _customPhrases = customPhrases;
+  const _$VoiceRecognitionImpl(
+      {required this.isEnabled,
+      required final List<String> recognizedPhrases,
+      required this.confidenceThreshold,
+      required this.language,
+      required final Map<String, double> phraseConfidence,
+      this.backgroundListening,
+      this.sessionTimeout,
+      final List<String>? customPhrases})
+      : _recognizedPhrases = recognizedPhrases,
+        _phraseConfidence = phraseConfidence,
+        _customPhrases = customPhrases;
 
   factory _$VoiceRecognitionImpl.fromJson(Map<String, dynamic> json) =>
       _$$VoiceRecognitionImplFromJson(json);
@@ -4326,41 +3965,34 @@ class _$VoiceRecognitionImpl implements _VoiceRecognition {
             other is _$VoiceRecognitionImpl &&
             (identical(other.isEnabled, isEnabled) ||
                 other.isEnabled == isEnabled) &&
-            const DeepCollectionEquality().equals(
-              other._recognizedPhrases,
-              _recognizedPhrases,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._recognizedPhrases, _recognizedPhrases) &&
             (identical(other.confidenceThreshold, confidenceThreshold) ||
                 other.confidenceThreshold == confidenceThreshold) &&
             (identical(other.language, language) ||
                 other.language == language) &&
-            const DeepCollectionEquality().equals(
-              other._phraseConfidence,
-              _phraseConfidence,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._phraseConfidence, _phraseConfidence) &&
             (identical(other.backgroundListening, backgroundListening) ||
                 other.backgroundListening == backgroundListening) &&
             (identical(other.sessionTimeout, sessionTimeout) ||
                 other.sessionTimeout == sessionTimeout) &&
-            const DeepCollectionEquality().equals(
-              other._customPhrases,
-              _customPhrases,
-            ));
+            const DeepCollectionEquality()
+                .equals(other._customPhrases, _customPhrases));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    isEnabled,
-    const DeepCollectionEquality().hash(_recognizedPhrases),
-    confidenceThreshold,
-    language,
-    const DeepCollectionEquality().hash(_phraseConfidence),
-    backgroundListening,
-    sessionTimeout,
-    const DeepCollectionEquality().hash(_customPhrases),
-  );
+      runtimeType,
+      isEnabled,
+      const DeepCollectionEquality().hash(_recognizedPhrases),
+      confidenceThreshold,
+      language,
+      const DeepCollectionEquality().hash(_phraseConfidence),
+      backgroundListening,
+      sessionTimeout,
+      const DeepCollectionEquality().hash(_customPhrases));
 
   /// Create a copy of VoiceRecognition
   /// with the given fields replaced by the non-null parameter values.
@@ -4369,27 +4001,26 @@ class _$VoiceRecognitionImpl implements _VoiceRecognition {
   @pragma('vm:prefer-inline')
   _$$VoiceRecognitionImplCopyWith<_$VoiceRecognitionImpl> get copyWith =>
       __$$VoiceRecognitionImplCopyWithImpl<_$VoiceRecognitionImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$VoiceRecognitionImplToJson(this);
+    return _$$VoiceRecognitionImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _VoiceRecognition implements VoiceRecognition {
-  const factory _VoiceRecognition({
-    required final bool isEnabled,
-    required final List<String> recognizedPhrases,
-    required final double confidenceThreshold,
-    required final String language,
-    required final Map<String, double> phraseConfidence,
-    final bool? backgroundListening,
-    final Duration? sessionTimeout,
-    final List<String>? customPhrases,
-  }) = _$VoiceRecognitionImpl;
+  const factory _VoiceRecognition(
+      {required final bool isEnabled,
+      required final List<String> recognizedPhrases,
+      required final double confidenceThreshold,
+      required final String language,
+      required final Map<String, double> phraseConfidence,
+      final bool? backgroundListening,
+      final Duration? sessionTimeout,
+      final List<String>? customPhrases}) = _$VoiceRecognitionImpl;
 
   factory _VoiceRecognition.fromJson(Map<String, dynamic> json) =
       _$VoiceRecognitionImpl.fromJson;
@@ -4448,20 +4079,18 @@ mixin _$SmartReminder {
 /// @nodoc
 abstract class $SmartReminderCopyWith<$Res> {
   factory $SmartReminderCopyWith(
-    SmartReminder value,
-    $Res Function(SmartReminder) then,
-  ) = _$SmartReminderCopyWithImpl<$Res, SmartReminder>;
+          SmartReminder value, $Res Function(SmartReminder) then) =
+      _$SmartReminderCopyWithImpl<$Res, SmartReminder>;
   @useResult
-  $Res call({
-    String id,
-    ReminderType type,
-    DateTime scheduledTime,
-    bool isEnabled,
-    String message,
-    Duration? frequency,
-    List<String>? conditions,
-    Map<String, dynamic>? personalizedData,
-  });
+  $Res call(
+      {String id,
+      ReminderType type,
+      DateTime scheduledTime,
+      bool isEnabled,
+      String message,
+      Duration? frequency,
+      List<String>? conditions,
+      Map<String, dynamic>? personalizedData});
 }
 
 /// @nodoc
@@ -4488,51 +4117,40 @@ class _$SmartReminderCopyWithImpl<$Res, $Val extends SmartReminder>
     Object? conditions = freezed,
     Object? personalizedData = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            type:
-                null == type
-                    ? _value.type
-                    : type // ignore: cast_nullable_to_non_nullable
-                        as ReminderType,
-            scheduledTime:
-                null == scheduledTime
-                    ? _value.scheduledTime
-                    : scheduledTime // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            isEnabled:
-                null == isEnabled
-                    ? _value.isEnabled
-                    : isEnabled // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            message:
-                null == message
-                    ? _value.message
-                    : message // ignore: cast_nullable_to_non_nullable
-                        as String,
-            frequency:
-                freezed == frequency
-                    ? _value.frequency
-                    : frequency // ignore: cast_nullable_to_non_nullable
-                        as Duration?,
-            conditions:
-                freezed == conditions
-                    ? _value.conditions
-                    : conditions // ignore: cast_nullable_to_non_nullable
-                        as List<String>?,
-            personalizedData:
-                freezed == personalizedData
-                    ? _value.personalizedData
-                    : personalizedData // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as ReminderType,
+      scheduledTime: null == scheduledTime
+          ? _value.scheduledTime
+          : scheduledTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      isEnabled: null == isEnabled
+          ? _value.isEnabled
+          : isEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      frequency: freezed == frequency
+          ? _value.frequency
+          : frequency // ignore: cast_nullable_to_non_nullable
+              as Duration?,
+      conditions: freezed == conditions
+          ? _value.conditions
+          : conditions // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      personalizedData: freezed == personalizedData
+          ? _value.personalizedData
+          : personalizedData // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ) as $Val);
   }
 }
 
@@ -4540,21 +4158,19 @@ class _$SmartReminderCopyWithImpl<$Res, $Val extends SmartReminder>
 abstract class _$$SmartReminderImplCopyWith<$Res>
     implements $SmartReminderCopyWith<$Res> {
   factory _$$SmartReminderImplCopyWith(
-    _$SmartReminderImpl value,
-    $Res Function(_$SmartReminderImpl) then,
-  ) = __$$SmartReminderImplCopyWithImpl<$Res>;
+          _$SmartReminderImpl value, $Res Function(_$SmartReminderImpl) then) =
+      __$$SmartReminderImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    ReminderType type,
-    DateTime scheduledTime,
-    bool isEnabled,
-    String message,
-    Duration? frequency,
-    List<String>? conditions,
-    Map<String, dynamic>? personalizedData,
-  });
+  $Res call(
+      {String id,
+      ReminderType type,
+      DateTime scheduledTime,
+      bool isEnabled,
+      String message,
+      Duration? frequency,
+      List<String>? conditions,
+      Map<String, dynamic>? personalizedData});
 }
 
 /// @nodoc
@@ -4562,9 +4178,8 @@ class __$$SmartReminderImplCopyWithImpl<$Res>
     extends _$SmartReminderCopyWithImpl<$Res, _$SmartReminderImpl>
     implements _$$SmartReminderImplCopyWith<$Res> {
   __$$SmartReminderImplCopyWithImpl(
-    _$SmartReminderImpl _value,
-    $Res Function(_$SmartReminderImpl) _then,
-  ) : super(_value, _then);
+      _$SmartReminderImpl _value, $Res Function(_$SmartReminderImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of SmartReminder
   /// with the given fields replaced by the non-null parameter values.
@@ -4580,67 +4195,57 @@ class __$$SmartReminderImplCopyWithImpl<$Res>
     Object? conditions = freezed,
     Object? personalizedData = freezed,
   }) {
-    return _then(
-      _$SmartReminderImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        type:
-            null == type
-                ? _value.type
-                : type // ignore: cast_nullable_to_non_nullable
-                    as ReminderType,
-        scheduledTime:
-            null == scheduledTime
-                ? _value.scheduledTime
-                : scheduledTime // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        isEnabled:
-            null == isEnabled
-                ? _value.isEnabled
-                : isEnabled // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        message:
-            null == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                    as String,
-        frequency:
-            freezed == frequency
-                ? _value.frequency
-                : frequency // ignore: cast_nullable_to_non_nullable
-                    as Duration?,
-        conditions:
-            freezed == conditions
-                ? _value._conditions
-                : conditions // ignore: cast_nullable_to_non_nullable
-                    as List<String>?,
-        personalizedData:
-            freezed == personalizedData
-                ? _value._personalizedData
-                : personalizedData // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>?,
-      ),
-    );
+    return _then(_$SmartReminderImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as ReminderType,
+      scheduledTime: null == scheduledTime
+          ? _value.scheduledTime
+          : scheduledTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      isEnabled: null == isEnabled
+          ? _value.isEnabled
+          : isEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      frequency: freezed == frequency
+          ? _value.frequency
+          : frequency // ignore: cast_nullable_to_non_nullable
+              as Duration?,
+      conditions: freezed == conditions
+          ? _value._conditions
+          : conditions // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      personalizedData: freezed == personalizedData
+          ? _value._personalizedData
+          : personalizedData // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$SmartReminderImpl implements _SmartReminder {
-  const _$SmartReminderImpl({
-    required this.id,
-    required this.type,
-    required this.scheduledTime,
-    required this.isEnabled,
-    required this.message,
-    this.frequency,
-    final List<String>? conditions,
-    final Map<String, dynamic>? personalizedData,
-  }) : _conditions = conditions,
-       _personalizedData = personalizedData;
+  const _$SmartReminderImpl(
+      {required this.id,
+      required this.type,
+      required this.scheduledTime,
+      required this.isEnabled,
+      required this.message,
+      this.frequency,
+      final List<String>? conditions,
+      final Map<String, dynamic>? personalizedData})
+      : _conditions = conditions,
+        _personalizedData = personalizedData;
 
   factory _$SmartReminderImpl.fromJson(Map<String, dynamic> json) =>
       _$$SmartReminderImplFromJson(json);
@@ -4696,29 +4301,24 @@ class _$SmartReminderImpl implements _SmartReminder {
             (identical(other.message, message) || other.message == message) &&
             (identical(other.frequency, frequency) ||
                 other.frequency == frequency) &&
-            const DeepCollectionEquality().equals(
-              other._conditions,
-              _conditions,
-            ) &&
-            const DeepCollectionEquality().equals(
-              other._personalizedData,
-              _personalizedData,
-            ));
+            const DeepCollectionEquality()
+                .equals(other._conditions, _conditions) &&
+            const DeepCollectionEquality()
+                .equals(other._personalizedData, _personalizedData));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    type,
-    scheduledTime,
-    isEnabled,
-    message,
-    frequency,
-    const DeepCollectionEquality().hash(_conditions),
-    const DeepCollectionEquality().hash(_personalizedData),
-  );
+      runtimeType,
+      id,
+      type,
+      scheduledTime,
+      isEnabled,
+      message,
+      frequency,
+      const DeepCollectionEquality().hash(_conditions),
+      const DeepCollectionEquality().hash(_personalizedData));
 
   /// Create a copy of SmartReminder
   /// with the given fields replaced by the non-null parameter values.
@@ -4730,21 +4330,22 @@ class _$SmartReminderImpl implements _SmartReminder {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SmartReminderImplToJson(this);
+    return _$$SmartReminderImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _SmartReminder implements SmartReminder {
-  const factory _SmartReminder({
-    required final String id,
-    required final ReminderType type,
-    required final DateTime scheduledTime,
-    required final bool isEnabled,
-    required final String message,
-    final Duration? frequency,
-    final List<String>? conditions,
-    final Map<String, dynamic>? personalizedData,
-  }) = _$SmartReminderImpl;
+  const factory _SmartReminder(
+      {required final String id,
+      required final ReminderType type,
+      required final DateTime scheduledTime,
+      required final bool isEnabled,
+      required final String message,
+      final Duration? frequency,
+      final List<String>? conditions,
+      final Map<String, dynamic>? personalizedData}) = _$SmartReminderImpl;
 
   factory _SmartReminder.fromJson(Map<String, dynamic> json) =
       _$SmartReminderImpl.fromJson;

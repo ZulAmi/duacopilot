@@ -231,9 +231,7 @@ class ProductionAnalytics {
     String? errorMessage,
   }) async {
     await trackEvent(
-      errorMessage == null
-          ? AnalyticsEvent.ragQueryCompleted
-          : AnalyticsEvent.ragQueryFailed,
+      errorMessage == null ? AnalyticsEvent.ragQueryCompleted : AnalyticsEvent.ragQueryFailed,
       {
         'category': AnalyticsCategory.rag,
         'query_id': queryId,
@@ -274,10 +272,7 @@ class ProductionAnalytics {
     await trackEvent(AnalyticsEvent.screenViewed, {
       'category': AnalyticsCategory.navigation,
       'screen_name': screenName,
-      'session_time':
-          _sessionStart != null
-              ? DateTime.now().difference(_sessionStart!).inSeconds
-              : 0,
+      'session_time': _sessionStart != null ? DateTime.now().difference(_sessionStart!).inSeconds : 0,
       ...?parameters,
     });
   }
@@ -322,10 +317,7 @@ class ProductionAnalytics {
     await trackEvent(AnalyticsEvent.errorOccurred, {
       'category': AnalyticsCategory.error,
       'error_type': errorType,
-      'error_message':
-          errorMessage.length > 100
-              ? '${errorMessage.substring(0, 100)}...'
-              : errorMessage,
+      'error_message': errorMessage.length > 100 ? '${errorMessage.substring(0, 100)}...' : errorMessage,
       'timestamp': DateTime.now().toIso8601String(),
       ...?errorContext,
     });
@@ -419,8 +411,7 @@ class ProductionAnalytics {
 
   static String _categorizeEngagement(Duration timeSpent, int? interactions) {
     final seconds = timeSpent.inSeconds;
-    final interactionRate =
-        interactions != null && seconds > 0 ? interactions / seconds : 0.0;
+    final interactionRate = interactions != null && seconds > 0 ? interactions / seconds : 0.0;
 
     if (seconds < 10) return 'brief';
     if (seconds < 60 && interactionRate > 0.1) return 'engaged';
@@ -501,8 +492,9 @@ class AnalyticsBatchManager {
 
     if (_eventBatch.length >= _maxBatchSize) {
       _flushBatch();
-    } else
+    } else {
       _batchTimer ??= Timer(_maxBatchAge, _flushBatch);
+    }
   }
 
   static void _flushBatch() {

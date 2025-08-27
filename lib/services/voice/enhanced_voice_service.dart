@@ -12,8 +12,7 @@ import '../secure_storage/secure_storage_service.dart';
 /// Provides high-quality speech-to-text with contextual awareness for Islamic queries
 class EnhancedVoiceService {
   static EnhancedVoiceService? _instance;
-  static EnhancedVoiceService get instance =>
-      _instance ??= EnhancedVoiceService._();
+  static EnhancedVoiceService get instance => _instance ??= EnhancedVoiceService._();
 
   EnhancedVoiceService._();
 
@@ -52,15 +51,12 @@ class EnhancedVoiceService {
   // Stream controllers
   final _voiceStatusController = StreamController<VoiceStatus>.broadcast();
   final _voiceResultController = StreamController<VoiceQueryResult>.broadcast();
-  final _languageDetectionController =
-      StreamController<LanguageDetection>.broadcast();
+  final _languageDetectionController = StreamController<LanguageDetection>.broadcast();
 
   // Public streams
   Stream<VoiceStatus> get voiceStatusStream => _voiceStatusController.stream;
-  Stream<VoiceQueryResult> get voiceResultStream =>
-      _voiceResultController.stream;
-  Stream<LanguageDetection> get languageDetectionStream =>
-      _languageDetectionController.stream;
+  Stream<VoiceQueryResult> get voiceResultStream => _voiceResultController.stream;
+  Stream<LanguageDetection> get languageDetectionStream => _languageDetectionController.stream;
 
   // Arabic language processing
   final _arabicPreprocessor = ArabicTextPreprocessor();
@@ -139,19 +135,20 @@ class EnhancedVoiceService {
       _voiceStatusController.add(VoiceStatus.listening);
 
       await _speechToText.listen(
-        onResult:
-            (result) => _onSpeechResult(
-              result,
-              enableArabicEnhancements: enableArabicEnhancements,
-              enableIslamicTerms: enableIslamicTerms,
-            ),
+        onResult: (result) => _onSpeechResult(
+          result,
+          enableArabicEnhancements: enableArabicEnhancements,
+          enableIslamicTerms: enableIslamicTerms,
+        ),
         listenFor: timeout ?? _listeningTimeout,
         pauseFor: _pauseTimeout,
-        partialResults: true,
+        listenOptions: stt.SpeechListenOptions(
+          partialResults: true,
+          cancelOnError: false,
+          listenMode: stt.ListenMode.confirmation,
+        ),
         localeId: selectedLanguage,
         onSoundLevelChange: _onSoundLevelChange,
-        cancelOnError: false,
-        listenMode: stt.ListenMode.confirmation,
       );
 
       // Start language detection if auto-detect is enabled
@@ -206,9 +203,7 @@ class EnhancedVoiceService {
       final locales = await _speechToText.locales();
 
       // Filter to supported languages
-      return locales
-          .where((locale) => _supportedLanguages.containsKey(locale.localeId))
-          .toList();
+      return locales.where((locale) => _supportedLanguages.containsKey(locale.localeId)).toList();
     } catch (e) {
       AppLogger.error('Failed to get available languages: $e');
       return [];
@@ -271,8 +266,7 @@ class EnhancedVoiceService {
       final savedLanguage = await _secureStorage.read(
         'preferred_voice_language',
       );
-      if (savedLanguage != null &&
-          _supportedLanguages.containsKey(savedLanguage)) {
+      if (savedLanguage != null && _supportedLanguages.containsKey(savedLanguage)) {
         _preferredLanguage = savedLanguage;
       }
       AppLogger.debug('Loaded preferred language: $_preferredLanguage');
@@ -295,13 +289,12 @@ class EnhancedVoiceService {
   Future<void> _detectAvailableLanguages() async {
     try {
       final locales = await _speechToText.locales();
-      final availableSupported =
-          locales
-              .where(
-                (locale) => _supportedLanguages.containsKey(locale.localeId),
-              )
-              .map((locale) => locale.localeId)
-              .toList();
+      final availableSupported = locales
+          .where(
+            (locale) => _supportedLanguages.containsKey(locale.localeId),
+          )
+          .map((locale) => locale.localeId)
+          .toList();
 
       AppLogger.info('Available supported languages: $availableSupported');
 
@@ -331,10 +324,7 @@ class EnhancedVoiceService {
     try {
       var transcription = result.recognizedWords as String;
       final confidence = result.confidence as double;
-      final alternatives =
-          (result.alternates as List<dynamic>)
-              .map((alt) => alt.recognizedWords as String)
-              .toList();
+      final alternatives = (result.alternates as List<dynamic>).map((alt) => alt.recognizedWords as String).toList();
 
       AppLogger.debug(
         'Raw transcription: $transcription (confidence: $confidence)',
@@ -533,11 +523,7 @@ class ArabicTextPreprocessor {
     processed = processed.replaceAll(RegExp(r'[\u064B-\u0652]'), '');
 
     // Normalize Arabic letters
-    processed = processed
-        .replaceAll('أ', 'ا')
-        .replaceAll('إ', 'ا')
-        .replaceAll('آ', 'ا')
-        .replaceAll('ة', 'ه');
+    processed = processed.replaceAll('أ', 'ا').replaceAll('إ', 'ا').replaceAll('آ', 'ا').replaceAll('ة', 'ه');
 
     // Clean extra whitespace
     processed = processed.replaceAll(RegExp(r'\s+'), ' ').trim();

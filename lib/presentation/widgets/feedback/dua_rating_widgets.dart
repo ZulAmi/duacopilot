@@ -22,12 +22,10 @@ class DuaRelevanceRatingWidget extends StatefulWidget {
   });
 
   @override
-  State<DuaRelevanceRatingWidget> createState() =>
-      _DuaRelevanceRatingWidgetState();
+  State<DuaRelevanceRatingWidget> createState() => _DuaRelevanceRatingWidgetState();
 }
 
-class _DuaRelevanceRatingWidgetState extends State<DuaRelevanceRatingWidget>
-    with SingleTickerProviderStateMixin {
+class _DuaRelevanceRatingWidgetState extends State<DuaRelevanceRatingWidget> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _scaleAnimation;
   double _currentRating = 0.0;
@@ -83,13 +81,13 @@ class _DuaRelevanceRatingWidgetState extends State<DuaRelevanceRatingWidget>
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            theme.primaryColor.withOpacity(0.1),
-            theme.primaryColor.withOpacity(0.05),
+            theme.primaryColor.withValues(alpha: 0.05),
+            theme.primaryColor.withValues(alpha: 0.1),
           ],
         ),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: theme.primaryColor.withOpacity(0.2),
+          color: theme.primaryColor.withValues(alpha: 0.2),
           width: 1,
         ),
       ),
@@ -111,11 +109,10 @@ class _DuaRelevanceRatingWidgetState extends State<DuaRelevanceRatingWidget>
           // Rating Widget
           AnimatedBuilder(
             animation: _scaleAnimation,
-            builder:
-                (context, child) => Transform.scale(
-                  scale: _scaleAnimation.value,
-                  child: _buildRatingWidget(theme),
-                ),
+            builder: (context, child) => Transform.scale(
+              scale: _scaleAnimation.value,
+              child: _buildRatingWidget(theme),
+            ),
           ),
 
           const SizedBox(height: 12),
@@ -137,7 +134,7 @@ class _DuaRelevanceRatingWidgetState extends State<DuaRelevanceRatingWidget>
             Text(
               'Thank you for your feedback. We\'ll use this to improve our recommendations.',
               style: theme.textTheme.bodySmall?.copyWith(
-                color: theme.colorScheme.onSurface.withOpacity(0.7),
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
                 fontStyle: FontStyle.italic,
               ),
               textAlign: TextAlign.center,
@@ -171,31 +168,30 @@ class _DuaRelevanceRatingWidgetState extends State<DuaRelevanceRatingWidget>
       itemCount: 5,
       itemSize: 40,
       ignoreGestures: widget.readOnly,
-      itemBuilder:
-          (context, index) => Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  theme.primaryColor,
-                  theme.primaryColor.withOpacity(0.7),
-                ],
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: theme.primaryColor.withOpacity(0.3),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Icon(Icons.star_rounded, color: Colors.white, size: 24),
+      itemBuilder: (context, index) => Container(
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              theme.primaryColor,
+              theme.primaryColor.withValues(alpha: 0.8),
+            ],
           ),
+          boxShadow: [
+            BoxShadow(
+              color: theme.primaryColor.withValues(alpha: 0.3),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Icon(Icons.star_rounded, color: Colors.white, size: 24),
+      ),
       onRatingUpdate: _onRatingChanged,
-      unratedColor: theme.primaryColor.withOpacity(0.2),
-      glowColor: theme.primaryColor.withOpacity(0.6),
+      unratedColor: theme.primaryColor.withValues(alpha: 0.2),
+      glowColor: theme.primaryColor.withValues(alpha: 0.3),
       glow: true,
       glowRadius: 2,
     );
@@ -212,7 +208,7 @@ class _DuaRelevanceRatingWidgetState extends State<DuaRelevanceRatingWidget>
       ignoreGestures: widget.readOnly,
       itemBuilder: (context, _) => Icon(Icons.star, color: theme.primaryColor),
       onRatingUpdate: _onRatingChanged,
-      unratedColor: theme.primaryColor.withOpacity(0.3),
+      unratedColor: theme.primaryColor.withValues(alpha: 0.2),
     );
   }
 
@@ -227,7 +223,7 @@ class _DuaRelevanceRatingWidgetState extends State<DuaRelevanceRatingWidget>
       ignoreGestures: widget.readOnly,
       itemBuilder: (context, _) => Icon(Icons.favorite, color: Colors.red),
       onRatingUpdate: _onRatingChanged,
-      unratedColor: Colors.red.withOpacity(0.3),
+      unratedColor: Colors.red.withValues(alpha: 0.2),
     );
   }
 
@@ -319,13 +315,12 @@ class QuickDuaRatingWidget extends StatelessWidget {
           allowHalfRating: false,
           itemCount: 5,
           itemSize: 20,
-          itemBuilder:
-              (context, _) => Icon(Icons.star, color: theme.primaryColor),
+          itemBuilder: (context, _) => Icon(Icons.star, color: theme.primaryColor),
           onRatingUpdate: (rating) {
             HapticFeedback.selectionClick();
             onRatingUpdate(rating);
           },
-          unratedColor: theme.primaryColor.withOpacity(0.3),
+          unratedColor: theme.primaryColor.withValues(alpha: 0.2),
         ),
       ],
     );
@@ -346,13 +341,10 @@ class AnimatedRatingDisplayWidget extends StatefulWidget {
   });
 
   @override
-  State<AnimatedRatingDisplayWidget> createState() =>
-      _AnimatedRatingDisplayWidgetState();
+  State<AnimatedRatingDisplayWidget> createState() => _AnimatedRatingDisplayWidgetState();
 }
 
-class _AnimatedRatingDisplayWidgetState
-    extends State<AnimatedRatingDisplayWidget>
-    with SingleTickerProviderStateMixin {
+class _AnimatedRatingDisplayWidgetState extends State<AnimatedRatingDisplayWidget> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _ratingAnimation;
 
@@ -405,17 +397,16 @@ class _AnimatedRatingDisplayWidgetState
           children: [
             RatingBarIndicator(
               rating: _ratingAnimation.value,
-              itemBuilder:
-                  (context, _) => Icon(Icons.star, color: theme.primaryColor),
+              itemBuilder: (context, _) => Icon(Icons.star, color: theme.primaryColor),
               itemCount: 5,
               itemSize: 16,
-              unratedColor: theme.primaryColor.withOpacity(0.3),
+              unratedColor: theme.primaryColor.withValues(alpha: 0.2),
             ),
             const SizedBox(width: 8),
             Text(
               '${_ratingAnimation.value.toStringAsFixed(1)} (${widget.totalRatings})',
               style: theme.textTheme.bodySmall?.copyWith(
-                color: theme.colorScheme.onSurface.withOpacity(0.7),
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
               ),
             ),
           ],

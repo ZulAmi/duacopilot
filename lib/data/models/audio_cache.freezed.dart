@@ -12,8 +12,7 @@ part of 'audio_cache.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AudioCache _$AudioCacheFromJson(Map<String, dynamic> json) {
   return _AudioCache.fromJson(json);
@@ -51,28 +50,26 @@ mixin _$AudioCache {
 /// @nodoc
 abstract class $AudioCacheCopyWith<$Res> {
   factory $AudioCacheCopyWith(
-    AudioCache value,
-    $Res Function(AudioCache) then,
-  ) = _$AudioCacheCopyWithImpl<$Res, AudioCache>;
+          AudioCache value, $Res Function(AudioCache) then) =
+      _$AudioCacheCopyWithImpl<$Res, AudioCache>;
   @useResult
-  $Res call({
-    String id,
-    String duaId,
-    String fileName,
-    String localPath,
-    int fileSizeBytes,
-    AudioQuality quality,
-    DownloadStatus status,
-    String? originalUrl,
-    String? reciter,
-    String? language,
-    Map<String, dynamic>? metadata,
-    int playCount,
-    bool isFavorite,
-    DateTime? downloadedAt,
-    DateTime? lastPlayed,
-    DateTime? expiresAt,
-  });
+  $Res call(
+      {String id,
+      String duaId,
+      String fileName,
+      String localPath,
+      int fileSizeBytes,
+      AudioQuality quality,
+      DownloadStatus status,
+      String? originalUrl,
+      String? reciter,
+      String? language,
+      Map<String, dynamic>? metadata,
+      int playCount,
+      bool isFavorite,
+      DateTime? downloadedAt,
+      DateTime? lastPlayed,
+      DateTime? expiresAt});
 }
 
 /// @nodoc
@@ -107,91 +104,72 @@ class _$AudioCacheCopyWithImpl<$Res, $Val extends AudioCache>
     Object? lastPlayed = freezed,
     Object? expiresAt = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            duaId:
-                null == duaId
-                    ? _value.duaId
-                    : duaId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            fileName:
-                null == fileName
-                    ? _value.fileName
-                    : fileName // ignore: cast_nullable_to_non_nullable
-                        as String,
-            localPath:
-                null == localPath
-                    ? _value.localPath
-                    : localPath // ignore: cast_nullable_to_non_nullable
-                        as String,
-            fileSizeBytes:
-                null == fileSizeBytes
-                    ? _value.fileSizeBytes
-                    : fileSizeBytes // ignore: cast_nullable_to_non_nullable
-                        as int,
-            quality:
-                null == quality
-                    ? _value.quality
-                    : quality // ignore: cast_nullable_to_non_nullable
-                        as AudioQuality,
-            status:
-                null == status
-                    ? _value.status
-                    : status // ignore: cast_nullable_to_non_nullable
-                        as DownloadStatus,
-            originalUrl:
-                freezed == originalUrl
-                    ? _value.originalUrl
-                    : originalUrl // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            reciter:
-                freezed == reciter
-                    ? _value.reciter
-                    : reciter // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            language:
-                freezed == language
-                    ? _value.language
-                    : language // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            metadata:
-                freezed == metadata
-                    ? _value.metadata
-                    : metadata // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>?,
-            playCount:
-                null == playCount
-                    ? _value.playCount
-                    : playCount // ignore: cast_nullable_to_non_nullable
-                        as int,
-            isFavorite:
-                null == isFavorite
-                    ? _value.isFavorite
-                    : isFavorite // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            downloadedAt:
-                freezed == downloadedAt
-                    ? _value.downloadedAt
-                    : downloadedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            lastPlayed:
-                freezed == lastPlayed
-                    ? _value.lastPlayed
-                    : lastPlayed // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            expiresAt:
-                freezed == expiresAt
-                    ? _value.expiresAt
-                    : expiresAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      duaId: null == duaId
+          ? _value.duaId
+          : duaId // ignore: cast_nullable_to_non_nullable
+              as String,
+      fileName: null == fileName
+          ? _value.fileName
+          : fileName // ignore: cast_nullable_to_non_nullable
+              as String,
+      localPath: null == localPath
+          ? _value.localPath
+          : localPath // ignore: cast_nullable_to_non_nullable
+              as String,
+      fileSizeBytes: null == fileSizeBytes
+          ? _value.fileSizeBytes
+          : fileSizeBytes // ignore: cast_nullable_to_non_nullable
+              as int,
+      quality: null == quality
+          ? _value.quality
+          : quality // ignore: cast_nullable_to_non_nullable
+              as AudioQuality,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as DownloadStatus,
+      originalUrl: freezed == originalUrl
+          ? _value.originalUrl
+          : originalUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      reciter: freezed == reciter
+          ? _value.reciter
+          : reciter // ignore: cast_nullable_to_non_nullable
+              as String?,
+      language: freezed == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String?,
+      metadata: freezed == metadata
+          ? _value.metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      playCount: null == playCount
+          ? _value.playCount
+          : playCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      isFavorite: null == isFavorite
+          ? _value.isFavorite
+          : isFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
+      downloadedAt: freezed == downloadedAt
+          ? _value.downloadedAt
+          : downloadedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      lastPlayed: freezed == lastPlayed
+          ? _value.lastPlayed
+          : lastPlayed // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      expiresAt: freezed == expiresAt
+          ? _value.expiresAt
+          : expiresAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
   }
 }
 
@@ -199,29 +177,27 @@ class _$AudioCacheCopyWithImpl<$Res, $Val extends AudioCache>
 abstract class _$$AudioCacheImplCopyWith<$Res>
     implements $AudioCacheCopyWith<$Res> {
   factory _$$AudioCacheImplCopyWith(
-    _$AudioCacheImpl value,
-    $Res Function(_$AudioCacheImpl) then,
-  ) = __$$AudioCacheImplCopyWithImpl<$Res>;
+          _$AudioCacheImpl value, $Res Function(_$AudioCacheImpl) then) =
+      __$$AudioCacheImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String duaId,
-    String fileName,
-    String localPath,
-    int fileSizeBytes,
-    AudioQuality quality,
-    DownloadStatus status,
-    String? originalUrl,
-    String? reciter,
-    String? language,
-    Map<String, dynamic>? metadata,
-    int playCount,
-    bool isFavorite,
-    DateTime? downloadedAt,
-    DateTime? lastPlayed,
-    DateTime? expiresAt,
-  });
+  $Res call(
+      {String id,
+      String duaId,
+      String fileName,
+      String localPath,
+      int fileSizeBytes,
+      AudioQuality quality,
+      DownloadStatus status,
+      String? originalUrl,
+      String? reciter,
+      String? language,
+      Map<String, dynamic>? metadata,
+      int playCount,
+      bool isFavorite,
+      DateTime? downloadedAt,
+      DateTime? lastPlayed,
+      DateTime? expiresAt});
 }
 
 /// @nodoc
@@ -229,9 +205,8 @@ class __$$AudioCacheImplCopyWithImpl<$Res>
     extends _$AudioCacheCopyWithImpl<$Res, _$AudioCacheImpl>
     implements _$$AudioCacheImplCopyWith<$Res> {
   __$$AudioCacheImplCopyWithImpl(
-    _$AudioCacheImpl _value,
-    $Res Function(_$AudioCacheImpl) _then,
-  ) : super(_value, _then);
+      _$AudioCacheImpl _value, $Res Function(_$AudioCacheImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of AudioCache
   /// with the given fields replaced by the non-null parameter values.
@@ -255,114 +230,96 @@ class __$$AudioCacheImplCopyWithImpl<$Res>
     Object? lastPlayed = freezed,
     Object? expiresAt = freezed,
   }) {
-    return _then(
-      _$AudioCacheImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        duaId:
-            null == duaId
-                ? _value.duaId
-                : duaId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        fileName:
-            null == fileName
-                ? _value.fileName
-                : fileName // ignore: cast_nullable_to_non_nullable
-                    as String,
-        localPath:
-            null == localPath
-                ? _value.localPath
-                : localPath // ignore: cast_nullable_to_non_nullable
-                    as String,
-        fileSizeBytes:
-            null == fileSizeBytes
-                ? _value.fileSizeBytes
-                : fileSizeBytes // ignore: cast_nullable_to_non_nullable
-                    as int,
-        quality:
-            null == quality
-                ? _value.quality
-                : quality // ignore: cast_nullable_to_non_nullable
-                    as AudioQuality,
-        status:
-            null == status
-                ? _value.status
-                : status // ignore: cast_nullable_to_non_nullable
-                    as DownloadStatus,
-        originalUrl:
-            freezed == originalUrl
-                ? _value.originalUrl
-                : originalUrl // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        reciter:
-            freezed == reciter
-                ? _value.reciter
-                : reciter // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        language:
-            freezed == language
-                ? _value.language
-                : language // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        metadata:
-            freezed == metadata
-                ? _value._metadata
-                : metadata // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>?,
-        playCount:
-            null == playCount
-                ? _value.playCount
-                : playCount // ignore: cast_nullable_to_non_nullable
-                    as int,
-        isFavorite:
-            null == isFavorite
-                ? _value.isFavorite
-                : isFavorite // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        downloadedAt:
-            freezed == downloadedAt
-                ? _value.downloadedAt
-                : downloadedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        lastPlayed:
-            freezed == lastPlayed
-                ? _value.lastPlayed
-                : lastPlayed // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        expiresAt:
-            freezed == expiresAt
-                ? _value.expiresAt
-                : expiresAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-      ),
-    );
+    return _then(_$AudioCacheImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      duaId: null == duaId
+          ? _value.duaId
+          : duaId // ignore: cast_nullable_to_non_nullable
+              as String,
+      fileName: null == fileName
+          ? _value.fileName
+          : fileName // ignore: cast_nullable_to_non_nullable
+              as String,
+      localPath: null == localPath
+          ? _value.localPath
+          : localPath // ignore: cast_nullable_to_non_nullable
+              as String,
+      fileSizeBytes: null == fileSizeBytes
+          ? _value.fileSizeBytes
+          : fileSizeBytes // ignore: cast_nullable_to_non_nullable
+              as int,
+      quality: null == quality
+          ? _value.quality
+          : quality // ignore: cast_nullable_to_non_nullable
+              as AudioQuality,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as DownloadStatus,
+      originalUrl: freezed == originalUrl
+          ? _value.originalUrl
+          : originalUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      reciter: freezed == reciter
+          ? _value.reciter
+          : reciter // ignore: cast_nullable_to_non_nullable
+              as String?,
+      language: freezed == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String?,
+      metadata: freezed == metadata
+          ? _value._metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      playCount: null == playCount
+          ? _value.playCount
+          : playCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      isFavorite: null == isFavorite
+          ? _value.isFavorite
+          : isFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
+      downloadedAt: freezed == downloadedAt
+          ? _value.downloadedAt
+          : downloadedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      lastPlayed: freezed == lastPlayed
+          ? _value.lastPlayed
+          : lastPlayed // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      expiresAt: freezed == expiresAt
+          ? _value.expiresAt
+          : expiresAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$AudioCacheImpl implements _AudioCache {
-  const _$AudioCacheImpl({
-    required this.id,
-    required this.duaId,
-    required this.fileName,
-    required this.localPath,
-    required this.fileSizeBytes,
-    required this.quality,
-    required this.status,
-    this.originalUrl,
-    this.reciter,
-    this.language,
-    final Map<String, dynamic>? metadata,
-    this.playCount = 0,
-    this.isFavorite = false,
-    this.downloadedAt,
-    this.lastPlayed,
-    this.expiresAt,
-  }) : _metadata = metadata;
+  const _$AudioCacheImpl(
+      {required this.id,
+      required this.duaId,
+      required this.fileName,
+      required this.localPath,
+      required this.fileSizeBytes,
+      required this.quality,
+      required this.status,
+      this.originalUrl,
+      this.reciter,
+      this.language,
+      final Map<String, dynamic>? metadata,
+      this.playCount = 0,
+      this.isFavorite = false,
+      this.downloadedAt,
+      this.lastPlayed,
+      this.expiresAt})
+      : _metadata = metadata;
 
   factory _$AudioCacheImpl.fromJson(Map<String, dynamic> json) =>
       _$$AudioCacheImplFromJson(json);
@@ -451,24 +408,23 @@ class _$AudioCacheImpl implements _AudioCache {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    duaId,
-    fileName,
-    localPath,
-    fileSizeBytes,
-    quality,
-    status,
-    originalUrl,
-    reciter,
-    language,
-    const DeepCollectionEquality().hash(_metadata),
-    playCount,
-    isFavorite,
-    downloadedAt,
-    lastPlayed,
-    expiresAt,
-  );
+      runtimeType,
+      id,
+      duaId,
+      fileName,
+      localPath,
+      fileSizeBytes,
+      quality,
+      status,
+      originalUrl,
+      reciter,
+      language,
+      const DeepCollectionEquality().hash(_metadata),
+      playCount,
+      isFavorite,
+      downloadedAt,
+      lastPlayed,
+      expiresAt);
 
   /// Create a copy of AudioCache
   /// with the given fields replaced by the non-null parameter values.
@@ -480,29 +436,30 @@ class _$AudioCacheImpl implements _AudioCache {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AudioCacheImplToJson(this);
+    return _$$AudioCacheImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _AudioCache implements AudioCache {
-  const factory _AudioCache({
-    required final String id,
-    required final String duaId,
-    required final String fileName,
-    required final String localPath,
-    required final int fileSizeBytes,
-    required final AudioQuality quality,
-    required final DownloadStatus status,
-    final String? originalUrl,
-    final String? reciter,
-    final String? language,
-    final Map<String, dynamic>? metadata,
-    final int playCount,
-    final bool isFavorite,
-    final DateTime? downloadedAt,
-    final DateTime? lastPlayed,
-    final DateTime? expiresAt,
-  }) = _$AudioCacheImpl;
+  const factory _AudioCache(
+      {required final String id,
+      required final String duaId,
+      required final String fileName,
+      required final String localPath,
+      required final int fileSizeBytes,
+      required final AudioQuality quality,
+      required final DownloadStatus status,
+      final String? originalUrl,
+      final String? reciter,
+      final String? language,
+      final Map<String, dynamic>? metadata,
+      final int playCount,
+      final bool isFavorite,
+      final DateTime? downloadedAt,
+      final DateTime? lastPlayed,
+      final DateTime? expiresAt}) = _$AudioCacheImpl;
 
   factory _AudioCache.fromJson(Map<String, dynamic> json) =
       _$AudioCacheImpl.fromJson;

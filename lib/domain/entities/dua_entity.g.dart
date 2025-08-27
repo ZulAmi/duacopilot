@@ -15,23 +15,19 @@ _$DuaEntityImpl _$$DuaEntityImplFromJson(Map<String, dynamic> json) =>
       category: json['category'] as String,
       tags: (json['tags'] as List<dynamic>).map((e) => e as String).toList(),
       authenticity: SourceAuthenticity.fromJson(
-        json['authenticity'] as Map<String, dynamic>,
-      ),
-      ragConfidence: RAGConfidence.fromJson(
-        json['ragConfidence'] as Map<String, dynamic>,
-      ),
+          json['authenticity'] as Map<String, dynamic>),
+      ragConfidence:
+          RAGConfidence.fromJson(json['ragConfidence'] as Map<String, dynamic>),
       audioUrl: json['audioUrl'] as String?,
       context: json['context'] as String?,
       benefits: json['benefits'] as String?,
-      relatedDuas:
-          (json['relatedDuas'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList(),
+      relatedDuas: (json['relatedDuas'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
       isFavorite: json['isFavorite'] as bool? ?? false,
-      lastAccessed:
-          json['lastAccessed'] == null
-              ? null
-              : DateTime.parse(json['lastAccessed'] as String),
+      lastAccessed: json['lastAccessed'] == null
+          ? null
+          : DateTime.parse(json['lastAccessed'] as String),
     );
 
 Map<String, dynamic> _$$DuaEntityImplToJson(_$DuaEntityImpl instance) =>
@@ -53,28 +49,28 @@ Map<String, dynamic> _$$DuaEntityImplToJson(_$DuaEntityImpl instance) =>
     };
 
 _$SourceAuthenticityImpl _$$SourceAuthenticityImplFromJson(
-  Map<String, dynamic> json,
-) => _$SourceAuthenticityImpl(
-  level: $enumDecode(_$AuthenticityLevelEnumMap, json['level']),
-  source: json['source'] as String,
-  reference: json['reference'] as String,
-  hadithGrade: json['hadithGrade'] as String?,
-  chain: json['chain'] as String?,
-  scholar: json['scholar'] as String?,
-  confidenceScore: (json['confidenceScore'] as num?)?.toDouble() ?? 1.0,
-);
+        Map<String, dynamic> json) =>
+    _$SourceAuthenticityImpl(
+      level: $enumDecode(_$AuthenticityLevelEnumMap, json['level']),
+      source: json['source'] as String,
+      reference: json['reference'] as String,
+      hadithGrade: json['hadithGrade'] as String?,
+      chain: json['chain'] as String?,
+      scholar: json['scholar'] as String?,
+      confidenceScore: (json['confidenceScore'] as num?)?.toDouble() ?? 1.0,
+    );
 
 Map<String, dynamic> _$$SourceAuthenticityImplToJson(
-  _$SourceAuthenticityImpl instance,
-) => <String, dynamic>{
-  'level': _$AuthenticityLevelEnumMap[instance.level]!,
-  'source': instance.source,
-  'reference': instance.reference,
-  'hadithGrade': instance.hadithGrade,
-  'chain': instance.chain,
-  'scholar': instance.scholar,
-  'confidenceScore': instance.confidenceScore,
-};
+        _$SourceAuthenticityImpl instance) =>
+    <String, dynamic>{
+      'level': _$AuthenticityLevelEnumMap[instance.level]!,
+      'source': instance.source,
+      'reference': instance.reference,
+      'hadithGrade': instance.hadithGrade,
+      'chain': instance.chain,
+      'scholar': instance.scholar,
+      'confidenceScore': instance.confidenceScore,
+    };
 
 const _$AuthenticityLevelEnumMap = {
   AuthenticityLevel.sahih: 'sahih',
@@ -91,17 +87,16 @@ _$RAGConfidenceImpl _$$RAGConfidenceImplFromJson(Map<String, dynamic> json) =>
       reasoning: json['reasoning'] as String,
       keywords:
           (json['keywords'] as List<dynamic>).map((e) => e as String).toList(),
-      contextMatch: ContextMatch.fromJson(
-        json['contextMatch'] as Map<String, dynamic>,
+      contextMatch:
+          ContextMatch.fromJson(json['contextMatch'] as Map<String, dynamic>),
+      similarQueries: (json['similarQueries'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      semanticSimilarity:
+          (json['semanticSimilarity'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, (e as num).toDouble()),
       ),
-      similarQueries:
-          (json['similarQueries'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList(),
-      semanticSimilarity: (json['semanticSimilarity'] as Map<String, dynamic>?)
-          ?.map((k, e) => MapEntry(k, (e as num).toDouble())),
-      supportingEvidence:
-          (json['supportingEvidence'] as List<dynamic>?)
+      supportingEvidence: (json['supportingEvidence'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           const [],
@@ -122,10 +117,9 @@ _$ContextMatchImpl _$$ContextMatchImplFromJson(Map<String, dynamic> json) =>
     _$ContextMatchImpl(
       relevanceScore: (json['relevanceScore'] as num).toDouble(),
       category: json['category'] as String,
-      matchingCriteria:
-          (json['matchingCriteria'] as List<dynamic>)
-              .map((e) => e as String)
-              .toList(),
+      matchingCriteria: (json['matchingCriteria'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
       timeOfDay: json['timeOfDay'] as String?,
       situation: json['situation'] as String?,
       emotionalState: json['emotionalState'] as String?,

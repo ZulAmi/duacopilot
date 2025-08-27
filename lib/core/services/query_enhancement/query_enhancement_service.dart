@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:intl/intl.dart';
 
 import '../../../domain/entities/enhanced_query.dart';
@@ -23,9 +25,9 @@ class QueryEnhancementService {
     IslamicTerminologyMapper? terminologyMapper,
     QueryValidator? validator,
     IntentClassifier? intentClassifier,
-  }) : _terminologyMapper = terminologyMapper ?? IslamicTerminologyMapper(),
-       _validator = validator ?? QueryValidator(),
-       _intentClassifier = intentClassifier ?? IntentClassifier() {
+  })  : _terminologyMapper = terminologyMapper ?? IslamicTerminologyMapper(),
+        _validator = validator ?? QueryValidator(),
+        _intentClassifier = intentClassifier ?? IntentClassifier() {
     _islamicDateFormat = DateFormat('dd MMMM yyyy', 'ar');
     _timeFormat = DateFormat('HH:mm', 'en');
   }

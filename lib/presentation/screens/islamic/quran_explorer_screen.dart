@@ -8,12 +8,10 @@ class QuranExplorerScreen extends ConsumerStatefulWidget {
   const QuranExplorerScreen({super.key});
 
   @override
-  ConsumerState<QuranExplorerScreen> createState() =>
-      _QuranExplorerScreenState();
+  ConsumerState<QuranExplorerScreen> createState() => _QuranExplorerScreenState();
 }
 
-class _QuranExplorerScreenState extends ConsumerState<QuranExplorerScreen>
-    with TickerProviderStateMixin {
+class _QuranExplorerScreenState extends ConsumerState<QuranExplorerScreen> with TickerProviderStateMixin {
   late AnimationController _fadeController;
   final TextEditingController _searchController = TextEditingController();
   List<Surah> _surahs = [];
@@ -99,15 +97,14 @@ class _QuranExplorerScreenState extends ConsumerState<QuranExplorerScreen>
       if (query.isEmpty) {
         _filteredSurahs = _surahs;
       } else {
-        _filteredSurahs =
-            _surahs.where((surah) {
-              return surah.name.toLowerCase().contains(query.toLowerCase()) ||
-                  surah.arabicName.contains(query) ||
-                  surah.englishName.toLowerCase().contains(
+        _filteredSurahs = _surahs.where((surah) {
+          return surah.name.toLowerCase().contains(query.toLowerCase()) ||
+              surah.arabicName.contains(query) ||
+              surah.englishName.toLowerCase().contains(
                     query.toLowerCase(),
                   ) ||
-                  surah.number.toString().contains(query);
-            }).toList();
+              surah.number.toString().contains(query);
+        }).toList();
       }
     });
   }
@@ -171,8 +168,8 @@ class _QuranExplorerScreenState extends ConsumerState<QuranExplorerScreen>
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1),
-            RevolutionaryIslamicTheme.secondaryNavy.withOpacity(0.1),
+            RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.1),
+            RevolutionaryIslamicTheme.secondaryNavy.withValues(alpha: 0.1),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -295,7 +292,7 @@ class _QuranExplorerScreenState extends ConsumerState<QuranExplorerScreen>
           border: Border.all(color: RevolutionaryIslamicTheme.borderLight),
           boxShadow: [
             BoxShadow(
-              color: RevolutionaryIslamicTheme.neutralGray300.withOpacity(0.5),
+              color: RevolutionaryIslamicTheme.neutralGray300.withValues(alpha: 0.3),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -341,7 +338,7 @@ class _QuranExplorerScreenState extends ConsumerState<QuranExplorerScreen>
         border: Border.all(color: RevolutionaryIslamicTheme.borderLight),
         boxShadow: [
           BoxShadow(
-            color: RevolutionaryIslamicTheme.neutralGray300.withOpacity(0.5),
+            color: RevolutionaryIslamicTheme.neutralGray300.withValues(alpha: 0.3),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -364,8 +361,8 @@ class _QuranExplorerScreenState extends ConsumerState<QuranExplorerScreen>
                     gradient: LinearGradient(
                       colors: [
                         RevolutionaryIslamicTheme.primaryEmerald,
-                        RevolutionaryIslamicTheme.primaryEmerald.withOpacity(
-                          0.8,
+                        RevolutionaryIslamicTheme.primaryEmerald.withValues(
+                          alpha: 0.8,
                         ),
                       ],
                       begin: Alignment.topLeft,
@@ -408,8 +405,7 @@ class _QuranExplorerScreenState extends ConsumerState<QuranExplorerScreen>
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
-                              color: RevolutionaryIslamicTheme.primaryEmerald
-                                  .withOpacity(0.8),
+                              color: RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.8),
                             ),
                           ),
                         ],
@@ -432,22 +428,14 @@ class _QuranExplorerScreenState extends ConsumerState<QuranExplorerScreen>
                               vertical: 2,
                             ),
                             decoration: BoxDecoration(
-                              color:
-                                  surah.type == 'Meccan'
-                                      ? RevolutionaryIslamicTheme.primaryEmerald
-                                          .withOpacity(0.1)
-                                      : RevolutionaryIslamicTheme.secondaryNavy
-                                          .withOpacity(0.1),
+                              color: surah.type == 'Meccan'
+                                  ? RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.1)
+                                  : RevolutionaryIslamicTheme.secondaryNavy.withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(
-                                color:
-                                    surah.type == 'Meccan'
-                                        ? RevolutionaryIslamicTheme
-                                            .primaryEmerald
-                                            .withOpacity(0.3)
-                                        : RevolutionaryIslamicTheme
-                                            .secondaryNavy
-                                            .withOpacity(0.3),
+                                color: surah.type == 'Meccan'
+                                    ? RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.3)
+                                    : RevolutionaryIslamicTheme.secondaryNavy.withValues(alpha: 0.3),
                               ),
                             ),
                             child: Text(
@@ -455,12 +443,9 @@ class _QuranExplorerScreenState extends ConsumerState<QuranExplorerScreen>
                               style: TextStyle(
                                 fontSize: 10,
                                 fontWeight: FontWeight.w600,
-                                color:
-                                    surah.type == 'Meccan'
-                                        ? RevolutionaryIslamicTheme
-                                            .primaryEmerald
-                                        : RevolutionaryIslamicTheme
-                                            .secondaryNavy,
+                                color: surah.type == 'Meccan'
+                                    ? RevolutionaryIslamicTheme.primaryEmerald
+                                    : RevolutionaryIslamicTheme.secondaryNavy,
                               ),
                             ),
                           ),
@@ -485,19 +470,11 @@ class _QuranExplorerScreenState extends ConsumerState<QuranExplorerScreen>
                     IconButton(
                       onPressed: () => _toggleFavorite(surah),
                       icon: Icon(
-                        surah.isFavorite
-                            ? Icons.favorite
-                            : Icons.favorite_border,
-                        color:
-                            surah.isFavorite
-                                ? Colors.red
-                                : RevolutionaryIslamicTheme.textSecondary,
+                        surah.isFavorite ? Icons.favorite : Icons.favorite_border,
+                        color: surah.isFavorite ? Colors.red : RevolutionaryIslamicTheme.textSecondary,
                         size: 20,
                       ),
-                      tooltip:
-                          surah.isFavorite
-                              ? 'Remove from favorites'
-                              : 'Add to favorites',
+                      tooltip: surah.isFavorite ? 'Remove from favorites' : 'Add to favorites',
                     ),
                     const Icon(
                       Icons.arrow_forward_ios_rounded,
@@ -530,10 +507,7 @@ class _QuranExplorerScreenState extends ConsumerState<QuranExplorerScreen>
 
     RevolutionaryComponents.showModernSnackBar(
       context: context,
-      message:
-          surah.isFavorite
-              ? '${surah.name} added to favorites'
-              : '${surah.name} removed from favorites',
+      message: surah.isFavorite ? '${surah.name} added to favorites' : '${surah.name} removed from favorites',
       icon: surah.isFavorite ? Icons.favorite : Icons.favorite_border,
     );
   }

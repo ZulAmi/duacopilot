@@ -12,8 +12,7 @@ part of 'audio_entity.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AudioTrack _$AudioTrackFromJson(Map<String, dynamic> json) {
   return _AudioTrack.fromJson(json);
@@ -54,31 +53,29 @@ mixin _$AudioTrack {
 /// @nodoc
 abstract class $AudioTrackCopyWith<$Res> {
   factory $AudioTrackCopyWith(
-    AudioTrack value,
-    $Res Function(AudioTrack) then,
-  ) = _$AudioTrackCopyWithImpl<$Res, AudioTrack>;
+          AudioTrack value, $Res Function(AudioTrack) then) =
+      _$AudioTrackCopyWithImpl<$Res, AudioTrack>;
   @useResult
-  $Res call({
-    String id,
-    String duaId,
-    String title,
-    String reciter,
-    String language,
-    AudioQuality quality,
-    String url,
-    Duration duration,
-    int fileSizeBytes,
-    double ragConfidenceScore,
-    String? localPath,
-    String? checksumMd5,
-    bool isDownloaded,
-    bool isDownloading,
-    double downloadProgress,
-    DateTime? lastAccessed,
-    DateTime? downloadedAt,
-    List<String> tags,
-    Map<String, dynamic>? metadata,
-  });
+  $Res call(
+      {String id,
+      String duaId,
+      String title,
+      String reciter,
+      String language,
+      AudioQuality quality,
+      String url,
+      Duration duration,
+      int fileSizeBytes,
+      double ragConfidenceScore,
+      String? localPath,
+      String? checksumMd5,
+      bool isDownloaded,
+      bool isDownloading,
+      double downloadProgress,
+      DateTime? lastAccessed,
+      DateTime? downloadedAt,
+      List<String> tags,
+      Map<String, dynamic>? metadata});
 }
 
 /// @nodoc
@@ -116,106 +113,84 @@ class _$AudioTrackCopyWithImpl<$Res, $Val extends AudioTrack>
     Object? tags = null,
     Object? metadata = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            duaId:
-                null == duaId
-                    ? _value.duaId
-                    : duaId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            title:
-                null == title
-                    ? _value.title
-                    : title // ignore: cast_nullable_to_non_nullable
-                        as String,
-            reciter:
-                null == reciter
-                    ? _value.reciter
-                    : reciter // ignore: cast_nullable_to_non_nullable
-                        as String,
-            language:
-                null == language
-                    ? _value.language
-                    : language // ignore: cast_nullable_to_non_nullable
-                        as String,
-            quality:
-                null == quality
-                    ? _value.quality
-                    : quality // ignore: cast_nullable_to_non_nullable
-                        as AudioQuality,
-            url:
-                null == url
-                    ? _value.url
-                    : url // ignore: cast_nullable_to_non_nullable
-                        as String,
-            duration:
-                null == duration
-                    ? _value.duration
-                    : duration // ignore: cast_nullable_to_non_nullable
-                        as Duration,
-            fileSizeBytes:
-                null == fileSizeBytes
-                    ? _value.fileSizeBytes
-                    : fileSizeBytes // ignore: cast_nullable_to_non_nullable
-                        as int,
-            ragConfidenceScore:
-                null == ragConfidenceScore
-                    ? _value.ragConfidenceScore
-                    : ragConfidenceScore // ignore: cast_nullable_to_non_nullable
-                        as double,
-            localPath:
-                freezed == localPath
-                    ? _value.localPath
-                    : localPath // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            checksumMd5:
-                freezed == checksumMd5
-                    ? _value.checksumMd5
-                    : checksumMd5 // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            isDownloaded:
-                null == isDownloaded
-                    ? _value.isDownloaded
-                    : isDownloaded // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            isDownloading:
-                null == isDownloading
-                    ? _value.isDownloading
-                    : isDownloading // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            downloadProgress:
-                null == downloadProgress
-                    ? _value.downloadProgress
-                    : downloadProgress // ignore: cast_nullable_to_non_nullable
-                        as double,
-            lastAccessed:
-                freezed == lastAccessed
-                    ? _value.lastAccessed
-                    : lastAccessed // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            downloadedAt:
-                freezed == downloadedAt
-                    ? _value.downloadedAt
-                    : downloadedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            tags:
-                null == tags
-                    ? _value.tags
-                    : tags // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            metadata:
-                freezed == metadata
-                    ? _value.metadata
-                    : metadata // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      duaId: null == duaId
+          ? _value.duaId
+          : duaId // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      reciter: null == reciter
+          ? _value.reciter
+          : reciter // ignore: cast_nullable_to_non_nullable
+              as String,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
+      quality: null == quality
+          ? _value.quality
+          : quality // ignore: cast_nullable_to_non_nullable
+              as AudioQuality,
+      url: null == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      fileSizeBytes: null == fileSizeBytes
+          ? _value.fileSizeBytes
+          : fileSizeBytes // ignore: cast_nullable_to_non_nullable
+              as int,
+      ragConfidenceScore: null == ragConfidenceScore
+          ? _value.ragConfidenceScore
+          : ragConfidenceScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      localPath: freezed == localPath
+          ? _value.localPath
+          : localPath // ignore: cast_nullable_to_non_nullable
+              as String?,
+      checksumMd5: freezed == checksumMd5
+          ? _value.checksumMd5
+          : checksumMd5 // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isDownloaded: null == isDownloaded
+          ? _value.isDownloaded
+          : isDownloaded // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isDownloading: null == isDownloading
+          ? _value.isDownloading
+          : isDownloading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      downloadProgress: null == downloadProgress
+          ? _value.downloadProgress
+          : downloadProgress // ignore: cast_nullable_to_non_nullable
+              as double,
+      lastAccessed: freezed == lastAccessed
+          ? _value.lastAccessed
+          : lastAccessed // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      downloadedAt: freezed == downloadedAt
+          ? _value.downloadedAt
+          : downloadedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      tags: null == tags
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      metadata: freezed == metadata
+          ? _value.metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ) as $Val);
   }
 }
 
@@ -223,32 +198,30 @@ class _$AudioTrackCopyWithImpl<$Res, $Val extends AudioTrack>
 abstract class _$$AudioTrackImplCopyWith<$Res>
     implements $AudioTrackCopyWith<$Res> {
   factory _$$AudioTrackImplCopyWith(
-    _$AudioTrackImpl value,
-    $Res Function(_$AudioTrackImpl) then,
-  ) = __$$AudioTrackImplCopyWithImpl<$Res>;
+          _$AudioTrackImpl value, $Res Function(_$AudioTrackImpl) then) =
+      __$$AudioTrackImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String duaId,
-    String title,
-    String reciter,
-    String language,
-    AudioQuality quality,
-    String url,
-    Duration duration,
-    int fileSizeBytes,
-    double ragConfidenceScore,
-    String? localPath,
-    String? checksumMd5,
-    bool isDownloaded,
-    bool isDownloading,
-    double downloadProgress,
-    DateTime? lastAccessed,
-    DateTime? downloadedAt,
-    List<String> tags,
-    Map<String, dynamic>? metadata,
-  });
+  $Res call(
+      {String id,
+      String duaId,
+      String title,
+      String reciter,
+      String language,
+      AudioQuality quality,
+      String url,
+      Duration duration,
+      int fileSizeBytes,
+      double ragConfidenceScore,
+      String? localPath,
+      String? checksumMd5,
+      bool isDownloaded,
+      bool isDownloading,
+      double downloadProgress,
+      DateTime? lastAccessed,
+      DateTime? downloadedAt,
+      List<String> tags,
+      Map<String, dynamic>? metadata});
 }
 
 /// @nodoc
@@ -256,9 +229,8 @@ class __$$AudioTrackImplCopyWithImpl<$Res>
     extends _$AudioTrackCopyWithImpl<$Res, _$AudioTrackImpl>
     implements _$$AudioTrackImplCopyWith<$Res> {
   __$$AudioTrackImplCopyWithImpl(
-    _$AudioTrackImpl _value,
-    $Res Function(_$AudioTrackImpl) _then,
-  ) : super(_value, _then);
+      _$AudioTrackImpl _value, $Res Function(_$AudioTrackImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of AudioTrack
   /// with the given fields replaced by the non-null parameter values.
@@ -285,133 +257,112 @@ class __$$AudioTrackImplCopyWithImpl<$Res>
     Object? tags = null,
     Object? metadata = freezed,
   }) {
-    return _then(
-      _$AudioTrackImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        duaId:
-            null == duaId
-                ? _value.duaId
-                : duaId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        title:
-            null == title
-                ? _value.title
-                : title // ignore: cast_nullable_to_non_nullable
-                    as String,
-        reciter:
-            null == reciter
-                ? _value.reciter
-                : reciter // ignore: cast_nullable_to_non_nullable
-                    as String,
-        language:
-            null == language
-                ? _value.language
-                : language // ignore: cast_nullable_to_non_nullable
-                    as String,
-        quality:
-            null == quality
-                ? _value.quality
-                : quality // ignore: cast_nullable_to_non_nullable
-                    as AudioQuality,
-        url:
-            null == url
-                ? _value.url
-                : url // ignore: cast_nullable_to_non_nullable
-                    as String,
-        duration:
-            null == duration
-                ? _value.duration
-                : duration // ignore: cast_nullable_to_non_nullable
-                    as Duration,
-        fileSizeBytes:
-            null == fileSizeBytes
-                ? _value.fileSizeBytes
-                : fileSizeBytes // ignore: cast_nullable_to_non_nullable
-                    as int,
-        ragConfidenceScore:
-            null == ragConfidenceScore
-                ? _value.ragConfidenceScore
-                : ragConfidenceScore // ignore: cast_nullable_to_non_nullable
-                    as double,
-        localPath:
-            freezed == localPath
-                ? _value.localPath
-                : localPath // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        checksumMd5:
-            freezed == checksumMd5
-                ? _value.checksumMd5
-                : checksumMd5 // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        isDownloaded:
-            null == isDownloaded
-                ? _value.isDownloaded
-                : isDownloaded // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        isDownloading:
-            null == isDownloading
-                ? _value.isDownloading
-                : isDownloading // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        downloadProgress:
-            null == downloadProgress
-                ? _value.downloadProgress
-                : downloadProgress // ignore: cast_nullable_to_non_nullable
-                    as double,
-        lastAccessed:
-            freezed == lastAccessed
-                ? _value.lastAccessed
-                : lastAccessed // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        downloadedAt:
-            freezed == downloadedAt
-                ? _value.downloadedAt
-                : downloadedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        tags:
-            null == tags
-                ? _value._tags
-                : tags // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        metadata:
-            freezed == metadata
-                ? _value._metadata
-                : metadata // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>?,
-      ),
-    );
+    return _then(_$AudioTrackImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      duaId: null == duaId
+          ? _value.duaId
+          : duaId // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      reciter: null == reciter
+          ? _value.reciter
+          : reciter // ignore: cast_nullable_to_non_nullable
+              as String,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
+      quality: null == quality
+          ? _value.quality
+          : quality // ignore: cast_nullable_to_non_nullable
+              as AudioQuality,
+      url: null == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      fileSizeBytes: null == fileSizeBytes
+          ? _value.fileSizeBytes
+          : fileSizeBytes // ignore: cast_nullable_to_non_nullable
+              as int,
+      ragConfidenceScore: null == ragConfidenceScore
+          ? _value.ragConfidenceScore
+          : ragConfidenceScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      localPath: freezed == localPath
+          ? _value.localPath
+          : localPath // ignore: cast_nullable_to_non_nullable
+              as String?,
+      checksumMd5: freezed == checksumMd5
+          ? _value.checksumMd5
+          : checksumMd5 // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isDownloaded: null == isDownloaded
+          ? _value.isDownloaded
+          : isDownloaded // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isDownloading: null == isDownloading
+          ? _value.isDownloading
+          : isDownloading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      downloadProgress: null == downloadProgress
+          ? _value.downloadProgress
+          : downloadProgress // ignore: cast_nullable_to_non_nullable
+              as double,
+      lastAccessed: freezed == lastAccessed
+          ? _value.lastAccessed
+          : lastAccessed // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      downloadedAt: freezed == downloadedAt
+          ? _value.downloadedAt
+          : downloadedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      tags: null == tags
+          ? _value._tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      metadata: freezed == metadata
+          ? _value._metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$AudioTrackImpl implements _AudioTrack {
-  const _$AudioTrackImpl({
-    required this.id,
-    required this.duaId,
-    required this.title,
-    required this.reciter,
-    required this.language,
-    required this.quality,
-    required this.url,
-    required this.duration,
-    required this.fileSizeBytes,
-    required this.ragConfidenceScore,
-    this.localPath,
-    this.checksumMd5,
-    this.isDownloaded = false,
-    this.isDownloading = false,
-    this.downloadProgress = 0.0,
-    this.lastAccessed,
-    this.downloadedAt,
-    final List<String> tags = const [],
-    final Map<String, dynamic>? metadata,
-  }) : _tags = tags,
-       _metadata = metadata;
+  const _$AudioTrackImpl(
+      {required this.id,
+      required this.duaId,
+      required this.title,
+      required this.reciter,
+      required this.language,
+      required this.quality,
+      required this.url,
+      required this.duration,
+      required this.fileSizeBytes,
+      required this.ragConfidenceScore,
+      this.localPath,
+      this.checksumMd5,
+      this.isDownloaded = false,
+      this.isDownloading = false,
+      this.downloadProgress = 0.0,
+      this.lastAccessed,
+      this.downloadedAt,
+      final List<String> tags = const [],
+      final Map<String, dynamic>? metadata})
+      : _tags = tags,
+        _metadata = metadata;
 
   factory _$AudioTrackImpl.fromJson(Map<String, dynamic> json) =>
       _$$AudioTrackImplFromJson(json);
@@ -517,27 +468,27 @@ class _$AudioTrackImpl implements _AudioTrack {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
-    runtimeType,
-    id,
-    duaId,
-    title,
-    reciter,
-    language,
-    quality,
-    url,
-    duration,
-    fileSizeBytes,
-    ragConfidenceScore,
-    localPath,
-    checksumMd5,
-    isDownloaded,
-    isDownloading,
-    downloadProgress,
-    lastAccessed,
-    downloadedAt,
-    const DeepCollectionEquality().hash(_tags),
-    const DeepCollectionEquality().hash(_metadata),
-  ]);
+        runtimeType,
+        id,
+        duaId,
+        title,
+        reciter,
+        language,
+        quality,
+        url,
+        duration,
+        fileSizeBytes,
+        ragConfidenceScore,
+        localPath,
+        checksumMd5,
+        isDownloaded,
+        isDownloading,
+        downloadProgress,
+        lastAccessed,
+        downloadedAt,
+        const DeepCollectionEquality().hash(_tags),
+        const DeepCollectionEquality().hash(_metadata)
+      ]);
 
   /// Create a copy of AudioTrack
   /// with the given fields replaced by the non-null parameter values.
@@ -549,32 +500,33 @@ class _$AudioTrackImpl implements _AudioTrack {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AudioTrackImplToJson(this);
+    return _$$AudioTrackImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _AudioTrack implements AudioTrack {
-  const factory _AudioTrack({
-    required final String id,
-    required final String duaId,
-    required final String title,
-    required final String reciter,
-    required final String language,
-    required final AudioQuality quality,
-    required final String url,
-    required final Duration duration,
-    required final int fileSizeBytes,
-    required final double ragConfidenceScore,
-    final String? localPath,
-    final String? checksumMd5,
-    final bool isDownloaded,
-    final bool isDownloading,
-    final double downloadProgress,
-    final DateTime? lastAccessed,
-    final DateTime? downloadedAt,
-    final List<String> tags,
-    final Map<String, dynamic>? metadata,
-  }) = _$AudioTrackImpl;
+  const factory _AudioTrack(
+      {required final String id,
+      required final String duaId,
+      required final String title,
+      required final String reciter,
+      required final String language,
+      required final AudioQuality quality,
+      required final String url,
+      required final Duration duration,
+      required final int fileSizeBytes,
+      required final double ragConfidenceScore,
+      final String? localPath,
+      final String? checksumMd5,
+      final bool isDownloaded,
+      final bool isDownloading,
+      final double downloadProgress,
+      final DateTime? lastAccessed,
+      final DateTime? downloadedAt,
+      final List<String> tags,
+      final Map<String, dynamic>? metadata}) = _$AudioTrackImpl;
 
   factory _AudioTrack.fromJson(Map<String, dynamic> json) =
       _$AudioTrackImpl.fromJson;
@@ -659,19 +611,18 @@ abstract class $PlaylistCopyWith<$Res> {
   factory $PlaylistCopyWith(Playlist value, $Res Function(Playlist) then) =
       _$PlaylistCopyWithImpl<$Res, Playlist>;
   @useResult
-  $Res call({
-    String id,
-    String name,
-    String description,
-    List<String> trackIds,
-    PlaylistType type,
-    DateTime createdAt,
-    DateTime? lastModified,
-    String? coverImageUrl,
-    bool isAutoGenerated,
-    double? averageRagScore,
-    Map<String, dynamic>? ragMetadata,
-  });
+  $Res call(
+      {String id,
+      String name,
+      String description,
+      List<String> trackIds,
+      PlaylistType type,
+      DateTime createdAt,
+      DateTime? lastModified,
+      String? coverImageUrl,
+      bool isAutoGenerated,
+      double? averageRagScore,
+      Map<String, dynamic>? ragMetadata});
 }
 
 /// @nodoc
@@ -701,66 +652,52 @@ class _$PlaylistCopyWithImpl<$Res, $Val extends Playlist>
     Object? averageRagScore = freezed,
     Object? ragMetadata = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            name:
-                null == name
-                    ? _value.name
-                    : name // ignore: cast_nullable_to_non_nullable
-                        as String,
-            description:
-                null == description
-                    ? _value.description
-                    : description // ignore: cast_nullable_to_non_nullable
-                        as String,
-            trackIds:
-                null == trackIds
-                    ? _value.trackIds
-                    : trackIds // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            type:
-                null == type
-                    ? _value.type
-                    : type // ignore: cast_nullable_to_non_nullable
-                        as PlaylistType,
-            createdAt:
-                null == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            lastModified:
-                freezed == lastModified
-                    ? _value.lastModified
-                    : lastModified // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            coverImageUrl:
-                freezed == coverImageUrl
-                    ? _value.coverImageUrl
-                    : coverImageUrl // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            isAutoGenerated:
-                null == isAutoGenerated
-                    ? _value.isAutoGenerated
-                    : isAutoGenerated // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            averageRagScore:
-                freezed == averageRagScore
-                    ? _value.averageRagScore
-                    : averageRagScore // ignore: cast_nullable_to_non_nullable
-                        as double?,
-            ragMetadata:
-                freezed == ragMetadata
-                    ? _value.ragMetadata
-                    : ragMetadata // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      trackIds: null == trackIds
+          ? _value.trackIds
+          : trackIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as PlaylistType,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      lastModified: freezed == lastModified
+          ? _value.lastModified
+          : lastModified // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      coverImageUrl: freezed == coverImageUrl
+          ? _value.coverImageUrl
+          : coverImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isAutoGenerated: null == isAutoGenerated
+          ? _value.isAutoGenerated
+          : isAutoGenerated // ignore: cast_nullable_to_non_nullable
+              as bool,
+      averageRagScore: freezed == averageRagScore
+          ? _value.averageRagScore
+          : averageRagScore // ignore: cast_nullable_to_non_nullable
+              as double?,
+      ragMetadata: freezed == ragMetadata
+          ? _value.ragMetadata
+          : ragMetadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ) as $Val);
   }
 }
 
@@ -768,24 +705,22 @@ class _$PlaylistCopyWithImpl<$Res, $Val extends Playlist>
 abstract class _$$PlaylistImplCopyWith<$Res>
     implements $PlaylistCopyWith<$Res> {
   factory _$$PlaylistImplCopyWith(
-    _$PlaylistImpl value,
-    $Res Function(_$PlaylistImpl) then,
-  ) = __$$PlaylistImplCopyWithImpl<$Res>;
+          _$PlaylistImpl value, $Res Function(_$PlaylistImpl) then) =
+      __$$PlaylistImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String name,
-    String description,
-    List<String> trackIds,
-    PlaylistType type,
-    DateTime createdAt,
-    DateTime? lastModified,
-    String? coverImageUrl,
-    bool isAutoGenerated,
-    double? averageRagScore,
-    Map<String, dynamic>? ragMetadata,
-  });
+  $Res call(
+      {String id,
+      String name,
+      String description,
+      List<String> trackIds,
+      PlaylistType type,
+      DateTime createdAt,
+      DateTime? lastModified,
+      String? coverImageUrl,
+      bool isAutoGenerated,
+      double? averageRagScore,
+      Map<String, dynamic>? ragMetadata});
 }
 
 /// @nodoc
@@ -793,9 +728,8 @@ class __$$PlaylistImplCopyWithImpl<$Res>
     extends _$PlaylistCopyWithImpl<$Res, _$PlaylistImpl>
     implements _$$PlaylistImplCopyWith<$Res> {
   __$$PlaylistImplCopyWithImpl(
-    _$PlaylistImpl _value,
-    $Res Function(_$PlaylistImpl) _then,
-  ) : super(_value, _then);
+      _$PlaylistImpl _value, $Res Function(_$PlaylistImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of Playlist
   /// with the given fields replaced by the non-null parameter values.
@@ -814,85 +748,72 @@ class __$$PlaylistImplCopyWithImpl<$Res>
     Object? averageRagScore = freezed,
     Object? ragMetadata = freezed,
   }) {
-    return _then(
-      _$PlaylistImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        name:
-            null == name
-                ? _value.name
-                : name // ignore: cast_nullable_to_non_nullable
-                    as String,
-        description:
-            null == description
-                ? _value.description
-                : description // ignore: cast_nullable_to_non_nullable
-                    as String,
-        trackIds:
-            null == trackIds
-                ? _value._trackIds
-                : trackIds // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        type:
-            null == type
-                ? _value.type
-                : type // ignore: cast_nullable_to_non_nullable
-                    as PlaylistType,
-        createdAt:
-            null == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        lastModified:
-            freezed == lastModified
-                ? _value.lastModified
-                : lastModified // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        coverImageUrl:
-            freezed == coverImageUrl
-                ? _value.coverImageUrl
-                : coverImageUrl // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        isAutoGenerated:
-            null == isAutoGenerated
-                ? _value.isAutoGenerated
-                : isAutoGenerated // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        averageRagScore:
-            freezed == averageRagScore
-                ? _value.averageRagScore
-                : averageRagScore // ignore: cast_nullable_to_non_nullable
-                    as double?,
-        ragMetadata:
-            freezed == ragMetadata
-                ? _value._ragMetadata
-                : ragMetadata // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>?,
-      ),
-    );
+    return _then(_$PlaylistImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      trackIds: null == trackIds
+          ? _value._trackIds
+          : trackIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as PlaylistType,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      lastModified: freezed == lastModified
+          ? _value.lastModified
+          : lastModified // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      coverImageUrl: freezed == coverImageUrl
+          ? _value.coverImageUrl
+          : coverImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isAutoGenerated: null == isAutoGenerated
+          ? _value.isAutoGenerated
+          : isAutoGenerated // ignore: cast_nullable_to_non_nullable
+              as bool,
+      averageRagScore: freezed == averageRagScore
+          ? _value.averageRagScore
+          : averageRagScore // ignore: cast_nullable_to_non_nullable
+              as double?,
+      ragMetadata: freezed == ragMetadata
+          ? _value._ragMetadata
+          : ragMetadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$PlaylistImpl implements _Playlist {
-  const _$PlaylistImpl({
-    required this.id,
-    required this.name,
-    required this.description,
-    required final List<String> trackIds,
-    required this.type,
-    required this.createdAt,
-    this.lastModified,
-    this.coverImageUrl,
-    this.isAutoGenerated = false,
-    this.averageRagScore,
-    final Map<String, dynamic>? ragMetadata,
-  }) : _trackIds = trackIds,
-       _ragMetadata = ragMetadata;
+  const _$PlaylistImpl(
+      {required this.id,
+      required this.name,
+      required this.description,
+      required final List<String> trackIds,
+      required this.type,
+      required this.createdAt,
+      this.lastModified,
+      this.coverImageUrl,
+      this.isAutoGenerated = false,
+      this.averageRagScore,
+      final Map<String, dynamic>? ragMetadata})
+      : _trackIds = trackIds,
+        _ragMetadata = ragMetadata;
 
   factory _$PlaylistImpl.fromJson(Map<String, dynamic> json) =>
       _$$PlaylistImplFromJson(json);
@@ -960,28 +881,25 @@ class _$PlaylistImpl implements _Playlist {
                 other.isAutoGenerated == isAutoGenerated) &&
             (identical(other.averageRagScore, averageRagScore) ||
                 other.averageRagScore == averageRagScore) &&
-            const DeepCollectionEquality().equals(
-              other._ragMetadata,
-              _ragMetadata,
-            ));
+            const DeepCollectionEquality()
+                .equals(other._ragMetadata, _ragMetadata));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    name,
-    description,
-    const DeepCollectionEquality().hash(_trackIds),
-    type,
-    createdAt,
-    lastModified,
-    coverImageUrl,
-    isAutoGenerated,
-    averageRagScore,
-    const DeepCollectionEquality().hash(_ragMetadata),
-  );
+      runtimeType,
+      id,
+      name,
+      description,
+      const DeepCollectionEquality().hash(_trackIds),
+      type,
+      createdAt,
+      lastModified,
+      coverImageUrl,
+      isAutoGenerated,
+      averageRagScore,
+      const DeepCollectionEquality().hash(_ragMetadata));
 
   /// Create a copy of Playlist
   /// with the given fields replaced by the non-null parameter values.
@@ -993,24 +911,25 @@ class _$PlaylistImpl implements _Playlist {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PlaylistImplToJson(this);
+    return _$$PlaylistImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _Playlist implements Playlist {
-  const factory _Playlist({
-    required final String id,
-    required final String name,
-    required final String description,
-    required final List<String> trackIds,
-    required final PlaylistType type,
-    required final DateTime createdAt,
-    final DateTime? lastModified,
-    final String? coverImageUrl,
-    final bool isAutoGenerated,
-    final double? averageRagScore,
-    final Map<String, dynamic>? ragMetadata,
-  }) = _$PlaylistImpl;
+  const factory _Playlist(
+      {required final String id,
+      required final String name,
+      required final String description,
+      required final List<String> trackIds,
+      required final PlaylistType type,
+      required final DateTime createdAt,
+      final DateTime? lastModified,
+      final String? coverImageUrl,
+      final bool isAutoGenerated,
+      final double? averageRagScore,
+      final Map<String, dynamic>? ragMetadata}) = _$PlaylistImpl;
 
   factory _Playlist.fromJson(Map<String, dynamic> json) =
       _$PlaylistImpl.fromJson;
@@ -1075,21 +994,19 @@ mixin _$AudioCacheItem {
 /// @nodoc
 abstract class $AudioCacheItemCopyWith<$Res> {
   factory $AudioCacheItemCopyWith(
-    AudioCacheItem value,
-    $Res Function(AudioCacheItem) then,
-  ) = _$AudioCacheItemCopyWithImpl<$Res, AudioCacheItem>;
+          AudioCacheItem value, $Res Function(AudioCacheItem) then) =
+      _$AudioCacheItemCopyWithImpl<$Res, AudioCacheItem>;
   @useResult
-  $Res call({
-    String trackId,
-    String localPath,
-    int fileSizeBytes,
-    DateTime cachedAt,
-    String checksumMd5,
-    int accessCount,
-    DateTime? lastAccessed,
-    CacheStatus status,
-    CachePriority priority,
-  });
+  $Res call(
+      {String trackId,
+      String localPath,
+      int fileSizeBytes,
+      DateTime cachedAt,
+      String checksumMd5,
+      int accessCount,
+      DateTime? lastAccessed,
+      CacheStatus status,
+      CachePriority priority});
 }
 
 /// @nodoc
@@ -1117,79 +1034,65 @@ class _$AudioCacheItemCopyWithImpl<$Res, $Val extends AudioCacheItem>
     Object? status = null,
     Object? priority = null,
   }) {
-    return _then(
-      _value.copyWith(
-            trackId:
-                null == trackId
-                    ? _value.trackId
-                    : trackId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            localPath:
-                null == localPath
-                    ? _value.localPath
-                    : localPath // ignore: cast_nullable_to_non_nullable
-                        as String,
-            fileSizeBytes:
-                null == fileSizeBytes
-                    ? _value.fileSizeBytes
-                    : fileSizeBytes // ignore: cast_nullable_to_non_nullable
-                        as int,
-            cachedAt:
-                null == cachedAt
-                    ? _value.cachedAt
-                    : cachedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            checksumMd5:
-                null == checksumMd5
-                    ? _value.checksumMd5
-                    : checksumMd5 // ignore: cast_nullable_to_non_nullable
-                        as String,
-            accessCount:
-                null == accessCount
-                    ? _value.accessCount
-                    : accessCount // ignore: cast_nullable_to_non_nullable
-                        as int,
-            lastAccessed:
-                freezed == lastAccessed
-                    ? _value.lastAccessed
-                    : lastAccessed // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            status:
-                null == status
-                    ? _value.status
-                    : status // ignore: cast_nullable_to_non_nullable
-                        as CacheStatus,
-            priority:
-                null == priority
-                    ? _value.priority
-                    : priority // ignore: cast_nullable_to_non_nullable
-                        as CachePriority,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      trackId: null == trackId
+          ? _value.trackId
+          : trackId // ignore: cast_nullable_to_non_nullable
+              as String,
+      localPath: null == localPath
+          ? _value.localPath
+          : localPath // ignore: cast_nullable_to_non_nullable
+              as String,
+      fileSizeBytes: null == fileSizeBytes
+          ? _value.fileSizeBytes
+          : fileSizeBytes // ignore: cast_nullable_to_non_nullable
+              as int,
+      cachedAt: null == cachedAt
+          ? _value.cachedAt
+          : cachedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      checksumMd5: null == checksumMd5
+          ? _value.checksumMd5
+          : checksumMd5 // ignore: cast_nullable_to_non_nullable
+              as String,
+      accessCount: null == accessCount
+          ? _value.accessCount
+          : accessCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      lastAccessed: freezed == lastAccessed
+          ? _value.lastAccessed
+          : lastAccessed // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as CacheStatus,
+      priority: null == priority
+          ? _value.priority
+          : priority // ignore: cast_nullable_to_non_nullable
+              as CachePriority,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$AudioCacheItemImplCopyWith<$Res>
     implements $AudioCacheItemCopyWith<$Res> {
-  factory _$$AudioCacheItemImplCopyWith(
-    _$AudioCacheItemImpl value,
-    $Res Function(_$AudioCacheItemImpl) then,
-  ) = __$$AudioCacheItemImplCopyWithImpl<$Res>;
+  factory _$$AudioCacheItemImplCopyWith(_$AudioCacheItemImpl value,
+          $Res Function(_$AudioCacheItemImpl) then) =
+      __$$AudioCacheItemImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String trackId,
-    String localPath,
-    int fileSizeBytes,
-    DateTime cachedAt,
-    String checksumMd5,
-    int accessCount,
-    DateTime? lastAccessed,
-    CacheStatus status,
-    CachePriority priority,
-  });
+  $Res call(
+      {String trackId,
+      String localPath,
+      int fileSizeBytes,
+      DateTime cachedAt,
+      String checksumMd5,
+      int accessCount,
+      DateTime? lastAccessed,
+      CacheStatus status,
+      CachePriority priority});
 }
 
 /// @nodoc
@@ -1197,9 +1100,8 @@ class __$$AudioCacheItemImplCopyWithImpl<$Res>
     extends _$AudioCacheItemCopyWithImpl<$Res, _$AudioCacheItemImpl>
     implements _$$AudioCacheItemImplCopyWith<$Res> {
   __$$AudioCacheItemImplCopyWithImpl(
-    _$AudioCacheItemImpl _value,
-    $Res Function(_$AudioCacheItemImpl) _then,
-  ) : super(_value, _then);
+      _$AudioCacheItemImpl _value, $Res Function(_$AudioCacheItemImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of AudioCacheItem
   /// with the given fields replaced by the non-null parameter values.
@@ -1216,72 +1118,60 @@ class __$$AudioCacheItemImplCopyWithImpl<$Res>
     Object? status = null,
     Object? priority = null,
   }) {
-    return _then(
-      _$AudioCacheItemImpl(
-        trackId:
-            null == trackId
-                ? _value.trackId
-                : trackId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        localPath:
-            null == localPath
-                ? _value.localPath
-                : localPath // ignore: cast_nullable_to_non_nullable
-                    as String,
-        fileSizeBytes:
-            null == fileSizeBytes
-                ? _value.fileSizeBytes
-                : fileSizeBytes // ignore: cast_nullable_to_non_nullable
-                    as int,
-        cachedAt:
-            null == cachedAt
-                ? _value.cachedAt
-                : cachedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        checksumMd5:
-            null == checksumMd5
-                ? _value.checksumMd5
-                : checksumMd5 // ignore: cast_nullable_to_non_nullable
-                    as String,
-        accessCount:
-            null == accessCount
-                ? _value.accessCount
-                : accessCount // ignore: cast_nullable_to_non_nullable
-                    as int,
-        lastAccessed:
-            freezed == lastAccessed
-                ? _value.lastAccessed
-                : lastAccessed // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        status:
-            null == status
-                ? _value.status
-                : status // ignore: cast_nullable_to_non_nullable
-                    as CacheStatus,
-        priority:
-            null == priority
-                ? _value.priority
-                : priority // ignore: cast_nullable_to_non_nullable
-                    as CachePriority,
-      ),
-    );
+    return _then(_$AudioCacheItemImpl(
+      trackId: null == trackId
+          ? _value.trackId
+          : trackId // ignore: cast_nullable_to_non_nullable
+              as String,
+      localPath: null == localPath
+          ? _value.localPath
+          : localPath // ignore: cast_nullable_to_non_nullable
+              as String,
+      fileSizeBytes: null == fileSizeBytes
+          ? _value.fileSizeBytes
+          : fileSizeBytes // ignore: cast_nullable_to_non_nullable
+              as int,
+      cachedAt: null == cachedAt
+          ? _value.cachedAt
+          : cachedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      checksumMd5: null == checksumMd5
+          ? _value.checksumMd5
+          : checksumMd5 // ignore: cast_nullable_to_non_nullable
+              as String,
+      accessCount: null == accessCount
+          ? _value.accessCount
+          : accessCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      lastAccessed: freezed == lastAccessed
+          ? _value.lastAccessed
+          : lastAccessed // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as CacheStatus,
+      priority: null == priority
+          ? _value.priority
+          : priority // ignore: cast_nullable_to_non_nullable
+              as CachePriority,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$AudioCacheItemImpl implements _AudioCacheItem {
-  const _$AudioCacheItemImpl({
-    required this.trackId,
-    required this.localPath,
-    required this.fileSizeBytes,
-    required this.cachedAt,
-    required this.checksumMd5,
-    required this.accessCount,
-    this.lastAccessed,
-    this.status = CacheStatus.cached,
-    this.priority = CachePriority.normal,
-  });
+  const _$AudioCacheItemImpl(
+      {required this.trackId,
+      required this.localPath,
+      required this.fileSizeBytes,
+      required this.cachedAt,
+      required this.checksumMd5,
+      required this.accessCount,
+      this.lastAccessed,
+      this.status = CacheStatus.cached,
+      this.priority = CachePriority.normal});
 
   factory _$AudioCacheItemImpl.fromJson(Map<String, dynamic> json) =>
       _$$AudioCacheItemImplFromJson(json);
@@ -1338,17 +1228,16 @@ class _$AudioCacheItemImpl implements _AudioCacheItem {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    trackId,
-    localPath,
-    fileSizeBytes,
-    cachedAt,
-    checksumMd5,
-    accessCount,
-    lastAccessed,
-    status,
-    priority,
-  );
+      runtimeType,
+      trackId,
+      localPath,
+      fileSizeBytes,
+      cachedAt,
+      checksumMd5,
+      accessCount,
+      lastAccessed,
+      status,
+      priority);
 
   /// Create a copy of AudioCacheItem
   /// with the given fields replaced by the non-null parameter values.
@@ -1357,28 +1246,27 @@ class _$AudioCacheItemImpl implements _AudioCacheItem {
   @pragma('vm:prefer-inline')
   _$$AudioCacheItemImplCopyWith<_$AudioCacheItemImpl> get copyWith =>
       __$$AudioCacheItemImplCopyWithImpl<_$AudioCacheItemImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AudioCacheItemImplToJson(this);
+    return _$$AudioCacheItemImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _AudioCacheItem implements AudioCacheItem {
-  const factory _AudioCacheItem({
-    required final String trackId,
-    required final String localPath,
-    required final int fileSizeBytes,
-    required final DateTime cachedAt,
-    required final String checksumMd5,
-    required final int accessCount,
-    final DateTime? lastAccessed,
-    final CacheStatus status,
-    final CachePriority priority,
-  }) = _$AudioCacheItemImpl;
+  const factory _AudioCacheItem(
+      {required final String trackId,
+      required final String localPath,
+      required final int fileSizeBytes,
+      required final DateTime cachedAt,
+      required final String checksumMd5,
+      required final int accessCount,
+      final DateTime? lastAccessed,
+      final CacheStatus status,
+      final CachePriority priority}) = _$AudioCacheItemImpl;
 
   factory _AudioCacheItem.fromJson(Map<String, dynamic> json) =
       _$AudioCacheItemImpl.fromJson;
@@ -1444,26 +1332,24 @@ mixin _$AudioDownloadJob {
 /// @nodoc
 abstract class $AudioDownloadJobCopyWith<$Res> {
   factory $AudioDownloadJobCopyWith(
-    AudioDownloadJob value,
-    $Res Function(AudioDownloadJob) then,
-  ) = _$AudioDownloadJobCopyWithImpl<$Res, AudioDownloadJob>;
+          AudioDownloadJob value, $Res Function(AudioDownloadJob) then) =
+      _$AudioDownloadJobCopyWithImpl<$Res, AudioDownloadJob>;
   @useResult
-  $Res call({
-    String id,
-    String trackId,
-    String url,
-    String targetPath,
-    DownloadPriority priority,
-    DateTime queuedAt,
-    DownloadStatus status,
-    double progress,
-    int bytesDownloaded,
-    int totalBytes,
-    DateTime? startedAt,
-    DateTime? completedAt,
-    String? errorMessage,
-    int retryCount,
-  });
+  $Res call(
+      {String id,
+      String trackId,
+      String url,
+      String targetPath,
+      DownloadPriority priority,
+      DateTime queuedAt,
+      DownloadStatus status,
+      double progress,
+      int bytesDownloaded,
+      int totalBytes,
+      DateTime? startedAt,
+      DateTime? completedAt,
+      String? errorMessage,
+      int retryCount});
 }
 
 /// @nodoc
@@ -1496,119 +1382,99 @@ class _$AudioDownloadJobCopyWithImpl<$Res, $Val extends AudioDownloadJob>
     Object? errorMessage = freezed,
     Object? retryCount = null,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            trackId:
-                null == trackId
-                    ? _value.trackId
-                    : trackId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            url:
-                null == url
-                    ? _value.url
-                    : url // ignore: cast_nullable_to_non_nullable
-                        as String,
-            targetPath:
-                null == targetPath
-                    ? _value.targetPath
-                    : targetPath // ignore: cast_nullable_to_non_nullable
-                        as String,
-            priority:
-                null == priority
-                    ? _value.priority
-                    : priority // ignore: cast_nullable_to_non_nullable
-                        as DownloadPriority,
-            queuedAt:
-                null == queuedAt
-                    ? _value.queuedAt
-                    : queuedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            status:
-                null == status
-                    ? _value.status
-                    : status // ignore: cast_nullable_to_non_nullable
-                        as DownloadStatus,
-            progress:
-                null == progress
-                    ? _value.progress
-                    : progress // ignore: cast_nullable_to_non_nullable
-                        as double,
-            bytesDownloaded:
-                null == bytesDownloaded
-                    ? _value.bytesDownloaded
-                    : bytesDownloaded // ignore: cast_nullable_to_non_nullable
-                        as int,
-            totalBytes:
-                null == totalBytes
-                    ? _value.totalBytes
-                    : totalBytes // ignore: cast_nullable_to_non_nullable
-                        as int,
-            startedAt:
-                freezed == startedAt
-                    ? _value.startedAt
-                    : startedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            completedAt:
-                freezed == completedAt
-                    ? _value.completedAt
-                    : completedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            errorMessage:
-                freezed == errorMessage
-                    ? _value.errorMessage
-                    : errorMessage // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            retryCount:
-                null == retryCount
-                    ? _value.retryCount
-                    : retryCount // ignore: cast_nullable_to_non_nullable
-                        as int,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      trackId: null == trackId
+          ? _value.trackId
+          : trackId // ignore: cast_nullable_to_non_nullable
+              as String,
+      url: null == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+      targetPath: null == targetPath
+          ? _value.targetPath
+          : targetPath // ignore: cast_nullable_to_non_nullable
+              as String,
+      priority: null == priority
+          ? _value.priority
+          : priority // ignore: cast_nullable_to_non_nullable
+              as DownloadPriority,
+      queuedAt: null == queuedAt
+          ? _value.queuedAt
+          : queuedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as DownloadStatus,
+      progress: null == progress
+          ? _value.progress
+          : progress // ignore: cast_nullable_to_non_nullable
+              as double,
+      bytesDownloaded: null == bytesDownloaded
+          ? _value.bytesDownloaded
+          : bytesDownloaded // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalBytes: null == totalBytes
+          ? _value.totalBytes
+          : totalBytes // ignore: cast_nullable_to_non_nullable
+              as int,
+      startedAt: freezed == startedAt
+          ? _value.startedAt
+          : startedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      completedAt: freezed == completedAt
+          ? _value.completedAt
+          : completedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      errorMessage: freezed == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      retryCount: null == retryCount
+          ? _value.retryCount
+          : retryCount // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$AudioDownloadJobImplCopyWith<$Res>
     implements $AudioDownloadJobCopyWith<$Res> {
-  factory _$$AudioDownloadJobImplCopyWith(
-    _$AudioDownloadJobImpl value,
-    $Res Function(_$AudioDownloadJobImpl) then,
-  ) = __$$AudioDownloadJobImplCopyWithImpl<$Res>;
+  factory _$$AudioDownloadJobImplCopyWith(_$AudioDownloadJobImpl value,
+          $Res Function(_$AudioDownloadJobImpl) then) =
+      __$$AudioDownloadJobImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String trackId,
-    String url,
-    String targetPath,
-    DownloadPriority priority,
-    DateTime queuedAt,
-    DownloadStatus status,
-    double progress,
-    int bytesDownloaded,
-    int totalBytes,
-    DateTime? startedAt,
-    DateTime? completedAt,
-    String? errorMessage,
-    int retryCount,
-  });
+  $Res call(
+      {String id,
+      String trackId,
+      String url,
+      String targetPath,
+      DownloadPriority priority,
+      DateTime queuedAt,
+      DownloadStatus status,
+      double progress,
+      int bytesDownloaded,
+      int totalBytes,
+      DateTime? startedAt,
+      DateTime? completedAt,
+      String? errorMessage,
+      int retryCount});
 }
 
 /// @nodoc
 class __$$AudioDownloadJobImplCopyWithImpl<$Res>
     extends _$AudioDownloadJobCopyWithImpl<$Res, _$AudioDownloadJobImpl>
     implements _$$AudioDownloadJobImplCopyWith<$Res> {
-  __$$AudioDownloadJobImplCopyWithImpl(
-    _$AudioDownloadJobImpl _value,
-    $Res Function(_$AudioDownloadJobImpl) _then,
-  ) : super(_value, _then);
+  __$$AudioDownloadJobImplCopyWithImpl(_$AudioDownloadJobImpl _value,
+      $Res Function(_$AudioDownloadJobImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of AudioDownloadJob
   /// with the given fields replaced by the non-null parameter values.
@@ -1630,102 +1496,85 @@ class __$$AudioDownloadJobImplCopyWithImpl<$Res>
     Object? errorMessage = freezed,
     Object? retryCount = null,
   }) {
-    return _then(
-      _$AudioDownloadJobImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        trackId:
-            null == trackId
-                ? _value.trackId
-                : trackId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        url:
-            null == url
-                ? _value.url
-                : url // ignore: cast_nullable_to_non_nullable
-                    as String,
-        targetPath:
-            null == targetPath
-                ? _value.targetPath
-                : targetPath // ignore: cast_nullable_to_non_nullable
-                    as String,
-        priority:
-            null == priority
-                ? _value.priority
-                : priority // ignore: cast_nullable_to_non_nullable
-                    as DownloadPriority,
-        queuedAt:
-            null == queuedAt
-                ? _value.queuedAt
-                : queuedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        status:
-            null == status
-                ? _value.status
-                : status // ignore: cast_nullable_to_non_nullable
-                    as DownloadStatus,
-        progress:
-            null == progress
-                ? _value.progress
-                : progress // ignore: cast_nullable_to_non_nullable
-                    as double,
-        bytesDownloaded:
-            null == bytesDownloaded
-                ? _value.bytesDownloaded
-                : bytesDownloaded // ignore: cast_nullable_to_non_nullable
-                    as int,
-        totalBytes:
-            null == totalBytes
-                ? _value.totalBytes
-                : totalBytes // ignore: cast_nullable_to_non_nullable
-                    as int,
-        startedAt:
-            freezed == startedAt
-                ? _value.startedAt
-                : startedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        completedAt:
-            freezed == completedAt
-                ? _value.completedAt
-                : completedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        errorMessage:
-            freezed == errorMessage
-                ? _value.errorMessage
-                : errorMessage // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        retryCount:
-            null == retryCount
-                ? _value.retryCount
-                : retryCount // ignore: cast_nullable_to_non_nullable
-                    as int,
-      ),
-    );
+    return _then(_$AudioDownloadJobImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      trackId: null == trackId
+          ? _value.trackId
+          : trackId // ignore: cast_nullable_to_non_nullable
+              as String,
+      url: null == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+      targetPath: null == targetPath
+          ? _value.targetPath
+          : targetPath // ignore: cast_nullable_to_non_nullable
+              as String,
+      priority: null == priority
+          ? _value.priority
+          : priority // ignore: cast_nullable_to_non_nullable
+              as DownloadPriority,
+      queuedAt: null == queuedAt
+          ? _value.queuedAt
+          : queuedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as DownloadStatus,
+      progress: null == progress
+          ? _value.progress
+          : progress // ignore: cast_nullable_to_non_nullable
+              as double,
+      bytesDownloaded: null == bytesDownloaded
+          ? _value.bytesDownloaded
+          : bytesDownloaded // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalBytes: null == totalBytes
+          ? _value.totalBytes
+          : totalBytes // ignore: cast_nullable_to_non_nullable
+              as int,
+      startedAt: freezed == startedAt
+          ? _value.startedAt
+          : startedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      completedAt: freezed == completedAt
+          ? _value.completedAt
+          : completedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      errorMessage: freezed == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      retryCount: null == retryCount
+          ? _value.retryCount
+          : retryCount // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$AudioDownloadJobImpl implements _AudioDownloadJob {
-  const _$AudioDownloadJobImpl({
-    required this.id,
-    required this.trackId,
-    required this.url,
-    required this.targetPath,
-    required this.priority,
-    required this.queuedAt,
-    this.status = DownloadStatus.queued,
-    this.progress = 0.0,
-    this.bytesDownloaded = 0,
-    this.totalBytes = 0,
-    this.startedAt,
-    this.completedAt,
-    this.errorMessage,
-    this.retryCount = 0,
-  });
+  const _$AudioDownloadJobImpl(
+      {required this.id,
+      required this.trackId,
+      required this.url,
+      required this.targetPath,
+      required this.priority,
+      required this.queuedAt,
+      this.status = DownloadStatus.queued,
+      this.progress = 0.0,
+      this.bytesDownloaded = 0,
+      this.totalBytes = 0,
+      this.startedAt,
+      this.completedAt,
+      this.errorMessage,
+      this.retryCount = 0});
 
   factory _$AudioDownloadJobImpl.fromJson(Map<String, dynamic> json) =>
       _$$AudioDownloadJobImplFromJson(json);
@@ -1803,22 +1652,21 @@ class _$AudioDownloadJobImpl implements _AudioDownloadJob {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    trackId,
-    url,
-    targetPath,
-    priority,
-    queuedAt,
-    status,
-    progress,
-    bytesDownloaded,
-    totalBytes,
-    startedAt,
-    completedAt,
-    errorMessage,
-    retryCount,
-  );
+      runtimeType,
+      id,
+      trackId,
+      url,
+      targetPath,
+      priority,
+      queuedAt,
+      status,
+      progress,
+      bytesDownloaded,
+      totalBytes,
+      startedAt,
+      completedAt,
+      errorMessage,
+      retryCount);
 
   /// Create a copy of AudioDownloadJob
   /// with the given fields replaced by the non-null parameter values.
@@ -1827,33 +1675,32 @@ class _$AudioDownloadJobImpl implements _AudioDownloadJob {
   @pragma('vm:prefer-inline')
   _$$AudioDownloadJobImplCopyWith<_$AudioDownloadJobImpl> get copyWith =>
       __$$AudioDownloadJobImplCopyWithImpl<_$AudioDownloadJobImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AudioDownloadJobImplToJson(this);
+    return _$$AudioDownloadJobImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _AudioDownloadJob implements AudioDownloadJob {
-  const factory _AudioDownloadJob({
-    required final String id,
-    required final String trackId,
-    required final String url,
-    required final String targetPath,
-    required final DownloadPriority priority,
-    required final DateTime queuedAt,
-    final DownloadStatus status,
-    final double progress,
-    final int bytesDownloaded,
-    final int totalBytes,
-    final DateTime? startedAt,
-    final DateTime? completedAt,
-    final String? errorMessage,
-    final int retryCount,
-  }) = _$AudioDownloadJobImpl;
+  const factory _AudioDownloadJob(
+      {required final String id,
+      required final String trackId,
+      required final String url,
+      required final String targetPath,
+      required final DownloadPriority priority,
+      required final DateTime queuedAt,
+      final DownloadStatus status,
+      final double progress,
+      final int bytesDownloaded,
+      final int totalBytes,
+      final DateTime? startedAt,
+      final DateTime? completedAt,
+      final String? errorMessage,
+      final int retryCount}) = _$AudioDownloadJobImpl;
 
   factory _AudioDownloadJob.fromJson(Map<String, dynamic> json) =
       _$AudioDownloadJobImpl.fromJson;
@@ -1926,23 +1773,21 @@ mixin _$AudioPlaybackState {
 /// @nodoc
 abstract class $AudioPlaybackStateCopyWith<$Res> {
   factory $AudioPlaybackStateCopyWith(
-    AudioPlaybackState value,
-    $Res Function(AudioPlaybackState) then,
-  ) = _$AudioPlaybackStateCopyWithImpl<$Res, AudioPlaybackState>;
+          AudioPlaybackState value, $Res Function(AudioPlaybackState) then) =
+      _$AudioPlaybackStateCopyWithImpl<$Res, AudioPlaybackState>;
   @useResult
-  $Res call({
-    String? currentTrackId,
-    PlayerState playerState,
-    Duration position,
-    Duration duration,
-    double speed,
-    RepeatMode repeatMode,
-    bool isShuffling,
-    List<String> queue,
-    int currentIndex,
-    double volume,
-    bool isMuted,
-  });
+  $Res call(
+      {String? currentTrackId,
+      PlayerState playerState,
+      Duration position,
+      Duration duration,
+      double speed,
+      RepeatMode repeatMode,
+      bool isShuffling,
+      List<String> queue,
+      int currentIndex,
+      double volume,
+      bool isMuted});
 }
 
 /// @nodoc
@@ -1972,101 +1817,84 @@ class _$AudioPlaybackStateCopyWithImpl<$Res, $Val extends AudioPlaybackState>
     Object? volume = null,
     Object? isMuted = null,
   }) {
-    return _then(
-      _value.copyWith(
-            currentTrackId:
-                freezed == currentTrackId
-                    ? _value.currentTrackId
-                    : currentTrackId // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            playerState:
-                null == playerState
-                    ? _value.playerState
-                    : playerState // ignore: cast_nullable_to_non_nullable
-                        as PlayerState,
-            position:
-                null == position
-                    ? _value.position
-                    : position // ignore: cast_nullable_to_non_nullable
-                        as Duration,
-            duration:
-                null == duration
-                    ? _value.duration
-                    : duration // ignore: cast_nullable_to_non_nullable
-                        as Duration,
-            speed:
-                null == speed
-                    ? _value.speed
-                    : speed // ignore: cast_nullable_to_non_nullable
-                        as double,
-            repeatMode:
-                null == repeatMode
-                    ? _value.repeatMode
-                    : repeatMode // ignore: cast_nullable_to_non_nullable
-                        as RepeatMode,
-            isShuffling:
-                null == isShuffling
-                    ? _value.isShuffling
-                    : isShuffling // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            queue:
-                null == queue
-                    ? _value.queue
-                    : queue // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            currentIndex:
-                null == currentIndex
-                    ? _value.currentIndex
-                    : currentIndex // ignore: cast_nullable_to_non_nullable
-                        as int,
-            volume:
-                null == volume
-                    ? _value.volume
-                    : volume // ignore: cast_nullable_to_non_nullable
-                        as double,
-            isMuted:
-                null == isMuted
-                    ? _value.isMuted
-                    : isMuted // ignore: cast_nullable_to_non_nullable
-                        as bool,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      currentTrackId: freezed == currentTrackId
+          ? _value.currentTrackId
+          : currentTrackId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      playerState: null == playerState
+          ? _value.playerState
+          : playerState // ignore: cast_nullable_to_non_nullable
+              as PlayerState,
+      position: null == position
+          ? _value.position
+          : position // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      speed: null == speed
+          ? _value.speed
+          : speed // ignore: cast_nullable_to_non_nullable
+              as double,
+      repeatMode: null == repeatMode
+          ? _value.repeatMode
+          : repeatMode // ignore: cast_nullable_to_non_nullable
+              as RepeatMode,
+      isShuffling: null == isShuffling
+          ? _value.isShuffling
+          : isShuffling // ignore: cast_nullable_to_non_nullable
+              as bool,
+      queue: null == queue
+          ? _value.queue
+          : queue // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      currentIndex: null == currentIndex
+          ? _value.currentIndex
+          : currentIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      volume: null == volume
+          ? _value.volume
+          : volume // ignore: cast_nullable_to_non_nullable
+              as double,
+      isMuted: null == isMuted
+          ? _value.isMuted
+          : isMuted // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$AudioPlaybackStateImplCopyWith<$Res>
     implements $AudioPlaybackStateCopyWith<$Res> {
-  factory _$$AudioPlaybackStateImplCopyWith(
-    _$AudioPlaybackStateImpl value,
-    $Res Function(_$AudioPlaybackStateImpl) then,
-  ) = __$$AudioPlaybackStateImplCopyWithImpl<$Res>;
+  factory _$$AudioPlaybackStateImplCopyWith(_$AudioPlaybackStateImpl value,
+          $Res Function(_$AudioPlaybackStateImpl) then) =
+      __$$AudioPlaybackStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String? currentTrackId,
-    PlayerState playerState,
-    Duration position,
-    Duration duration,
-    double speed,
-    RepeatMode repeatMode,
-    bool isShuffling,
-    List<String> queue,
-    int currentIndex,
-    double volume,
-    bool isMuted,
-  });
+  $Res call(
+      {String? currentTrackId,
+      PlayerState playerState,
+      Duration position,
+      Duration duration,
+      double speed,
+      RepeatMode repeatMode,
+      bool isShuffling,
+      List<String> queue,
+      int currentIndex,
+      double volume,
+      bool isMuted});
 }
 
 /// @nodoc
 class __$$AudioPlaybackStateImplCopyWithImpl<$Res>
     extends _$AudioPlaybackStateCopyWithImpl<$Res, _$AudioPlaybackStateImpl>
     implements _$$AudioPlaybackStateImplCopyWith<$Res> {
-  __$$AudioPlaybackStateImplCopyWithImpl(
-    _$AudioPlaybackStateImpl _value,
-    $Res Function(_$AudioPlaybackStateImpl) _then,
-  ) : super(_value, _then);
+  __$$AudioPlaybackStateImplCopyWithImpl(_$AudioPlaybackStateImpl _value,
+      $Res Function(_$AudioPlaybackStateImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of AudioPlaybackState
   /// with the given fields replaced by the non-null parameter values.
@@ -2085,84 +1913,71 @@ class __$$AudioPlaybackStateImplCopyWithImpl<$Res>
     Object? volume = null,
     Object? isMuted = null,
   }) {
-    return _then(
-      _$AudioPlaybackStateImpl(
-        currentTrackId:
-            freezed == currentTrackId
-                ? _value.currentTrackId
-                : currentTrackId // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        playerState:
-            null == playerState
-                ? _value.playerState
-                : playerState // ignore: cast_nullable_to_non_nullable
-                    as PlayerState,
-        position:
-            null == position
-                ? _value.position
-                : position // ignore: cast_nullable_to_non_nullable
-                    as Duration,
-        duration:
-            null == duration
-                ? _value.duration
-                : duration // ignore: cast_nullable_to_non_nullable
-                    as Duration,
-        speed:
-            null == speed
-                ? _value.speed
-                : speed // ignore: cast_nullable_to_non_nullable
-                    as double,
-        repeatMode:
-            null == repeatMode
-                ? _value.repeatMode
-                : repeatMode // ignore: cast_nullable_to_non_nullable
-                    as RepeatMode,
-        isShuffling:
-            null == isShuffling
-                ? _value.isShuffling
-                : isShuffling // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        queue:
-            null == queue
-                ? _value._queue
-                : queue // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        currentIndex:
-            null == currentIndex
-                ? _value.currentIndex
-                : currentIndex // ignore: cast_nullable_to_non_nullable
-                    as int,
-        volume:
-            null == volume
-                ? _value.volume
-                : volume // ignore: cast_nullable_to_non_nullable
-                    as double,
-        isMuted:
-            null == isMuted
-                ? _value.isMuted
-                : isMuted // ignore: cast_nullable_to_non_nullable
-                    as bool,
-      ),
-    );
+    return _then(_$AudioPlaybackStateImpl(
+      currentTrackId: freezed == currentTrackId
+          ? _value.currentTrackId
+          : currentTrackId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      playerState: null == playerState
+          ? _value.playerState
+          : playerState // ignore: cast_nullable_to_non_nullable
+              as PlayerState,
+      position: null == position
+          ? _value.position
+          : position // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      speed: null == speed
+          ? _value.speed
+          : speed // ignore: cast_nullable_to_non_nullable
+              as double,
+      repeatMode: null == repeatMode
+          ? _value.repeatMode
+          : repeatMode // ignore: cast_nullable_to_non_nullable
+              as RepeatMode,
+      isShuffling: null == isShuffling
+          ? _value.isShuffling
+          : isShuffling // ignore: cast_nullable_to_non_nullable
+              as bool,
+      queue: null == queue
+          ? _value._queue
+          : queue // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      currentIndex: null == currentIndex
+          ? _value.currentIndex
+          : currentIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      volume: null == volume
+          ? _value.volume
+          : volume // ignore: cast_nullable_to_non_nullable
+              as double,
+      isMuted: null == isMuted
+          ? _value.isMuted
+          : isMuted // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$AudioPlaybackStateImpl implements _AudioPlaybackState {
-  const _$AudioPlaybackStateImpl({
-    this.currentTrackId,
-    this.playerState = PlayerState.stopped,
-    this.position = Duration.zero,
-    this.duration = Duration.zero,
-    this.speed = 1.0,
-    this.repeatMode = RepeatMode.none,
-    this.isShuffling = false,
-    final List<String> queue = const [],
-    this.currentIndex = 0,
-    this.volume = 1.0,
-    this.isMuted = false,
-  }) : _queue = queue;
+  const _$AudioPlaybackStateImpl(
+      {this.currentTrackId,
+      this.playerState = PlayerState.stopped,
+      this.position = Duration.zero,
+      this.duration = Duration.zero,
+      this.speed = 1.0,
+      this.repeatMode = RepeatMode.none,
+      this.isShuffling = false,
+      final List<String> queue = const [],
+      this.currentIndex = 0,
+      this.volume = 1.0,
+      this.isMuted = false})
+      : _queue = queue;
 
   factory _$AudioPlaybackStateImpl.fromJson(Map<String, dynamic> json) =>
       _$$AudioPlaybackStateImplFromJson(json);
@@ -2239,19 +2054,18 @@ class _$AudioPlaybackStateImpl implements _AudioPlaybackState {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    currentTrackId,
-    playerState,
-    position,
-    duration,
-    speed,
-    repeatMode,
-    isShuffling,
-    const DeepCollectionEquality().hash(_queue),
-    currentIndex,
-    volume,
-    isMuted,
-  );
+      runtimeType,
+      currentTrackId,
+      playerState,
+      position,
+      duration,
+      speed,
+      repeatMode,
+      isShuffling,
+      const DeepCollectionEquality().hash(_queue),
+      currentIndex,
+      volume,
+      isMuted);
 
   /// Create a copy of AudioPlaybackState
   /// with the given fields replaced by the non-null parameter values.
@@ -2260,30 +2074,29 @@ class _$AudioPlaybackStateImpl implements _AudioPlaybackState {
   @pragma('vm:prefer-inline')
   _$$AudioPlaybackStateImplCopyWith<_$AudioPlaybackStateImpl> get copyWith =>
       __$$AudioPlaybackStateImplCopyWithImpl<_$AudioPlaybackStateImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AudioPlaybackStateImplToJson(this);
+    return _$$AudioPlaybackStateImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _AudioPlaybackState implements AudioPlaybackState {
-  const factory _AudioPlaybackState({
-    final String? currentTrackId,
-    final PlayerState playerState,
-    final Duration position,
-    final Duration duration,
-    final double speed,
-    final RepeatMode repeatMode,
-    final bool isShuffling,
-    final List<String> queue,
-    final int currentIndex,
-    final double volume,
-    final bool isMuted,
-  }) = _$AudioPlaybackStateImpl;
+  const factory _AudioPlaybackState(
+      {final String? currentTrackId,
+      final PlayerState playerState,
+      final Duration position,
+      final Duration duration,
+      final double speed,
+      final RepeatMode repeatMode,
+      final bool isShuffling,
+      final List<String> queue,
+      final int currentIndex,
+      final double volume,
+      final bool isMuted}) = _$AudioPlaybackStateImpl;
 
   factory _AudioPlaybackState.fromJson(Map<String, dynamic> json) =
       _$AudioPlaybackStateImpl.fromJson;

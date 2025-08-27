@@ -22,7 +22,7 @@ class ProfessionalComponents {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: ProfessionalTheme.primaryEmerald.withOpacity(0.1),
+                color: ProfessionalTheme.primaryEmerald.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(ProfessionalTheme.radiusSm),
               ),
               child: const Icon(
@@ -44,14 +44,13 @@ class ProfessionalComponents {
         ],
       ),
       centerTitle: centerTitle,
-      leading:
-          leading ??
+      leading: leading ??
           (onMenuPressed != null
               ? IconButton(
-                onPressed: onMenuPressed,
-                icon: const Icon(Icons.menu_rounded),
-                color: ProfessionalTheme.textPrimary,
-              )
+                  onPressed: onMenuPressed,
+                  icon: const Icon(Icons.menu_rounded),
+                  color: ProfessionalTheme.textPrimary,
+                )
               : null),
       actions: actions,
       backgroundColor: ProfessionalTheme.surfaceColor,
@@ -97,26 +96,25 @@ class ProfessionalComponents {
             color: ProfessionalTheme.textTertiary,
             fontSize: 16,
           ),
-          prefixIcon:
-              isLoading
-                  ? Container(
-                    padding: const EdgeInsets.all(12),
-                    child: const SizedBox(
-                      width: 20,
-                      height: 20,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          ProfessionalTheme.primaryEmerald,
-                        ),
+          prefixIcon: isLoading
+              ? Container(
+                  padding: const EdgeInsets.all(12),
+                  child: const SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        ProfessionalTheme.primaryEmerald,
                       ),
                     ),
-                  )
-                  : const Icon(
-                    Icons.search_rounded,
-                    color: ProfessionalTheme.textSecondary,
-                    size: 24,
                   ),
+                )
+              : const Icon(
+                  Icons.search_rounded,
+                  color: ProfessionalTheme.textSecondary,
+                  size: 24,
+                ),
           suffixIcon: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -125,18 +123,12 @@ class ProfessionalComponents {
                   margin: const EdgeInsets.only(right: 8),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color:
-                        isVoiceListening
-                            ? ProfessionalTheme.primaryEmerald
-                            : ProfessionalTheme.gray100,
+                    color: isVoiceListening ? ProfessionalTheme.primaryEmerald : ProfessionalTheme.gray100,
                   ),
                   child: IconButton(
                     icon: Icon(
                       isVoiceListening ? Icons.mic : Icons.mic_none_rounded,
-                      color:
-                          isVoiceListening
-                              ? ProfessionalTheme.surfaceColor
-                              : ProfessionalTheme.textSecondary,
+                      color: isVoiceListening ? ProfessionalTheme.surfaceColor : ProfessionalTheme.textSecondary,
                     ),
                     onPressed: onVoiceSearch,
                   ),
@@ -192,13 +184,12 @@ class ProfessionalComponents {
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(ProfessionalTheme.radiusLg),
-          onTap:
-              onTap != null
-                  ? () {
-                    HapticFeedback.lightImpact();
-                    onTap();
-                  }
-                  : null,
+          onTap: onTap != null
+              ? () {
+                  HapticFeedback.lightImpact();
+                  onTap();
+                }
+              : null,
           child: Padding(
             padding: padding ?? const EdgeInsets.all(ProfessionalTheme.spaceMd),
             child: child,
@@ -220,60 +211,48 @@ class ProfessionalComponents {
   }) {
     return SizedBox(
       width: width,
-      child:
-          isOutlined
-              ? OutlinedButton.icon(
-                onPressed: enabled && !isLoading ? onPressed : null,
-                icon:
-                    isLoading
-                        ? const SizedBox(
-                          width: 16,
-                          height: 16,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              ProfessionalTheme.primaryEmerald,
-                            ),
-                          ),
-                        )
-                        : Icon(icon ?? Icons.arrow_forward_rounded),
-                label: Text(text),
-                style: OutlinedButton.styleFrom(
-                  foregroundColor:
-                      enabled
-                          ? ProfessionalTheme.primaryEmerald
-                          : ProfessionalTheme.textTertiary,
-                  side: BorderSide(
-                    color:
-                        enabled
-                            ? ProfessionalTheme.primaryEmerald
-                            : ProfessionalTheme.borderLight,
-                  ),
-                ),
-              )
-              : ElevatedButton.icon(
-                onPressed: enabled && !isLoading ? onPressed : null,
-                icon:
-                    isLoading
-                        ? const SizedBox(
-                          width: 16,
-                          height: 16,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              ProfessionalTheme.surfaceColor,
-                            ),
-                          ),
-                        )
-                        : Icon(icon ?? Icons.arrow_forward_rounded),
-                label: Text(text),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                      enabled
-                          ? ProfessionalTheme.primaryEmerald
-                          : ProfessionalTheme.gray300,
+      child: isOutlined
+          ? OutlinedButton.icon(
+              onPressed: enabled && !isLoading ? onPressed : null,
+              icon: isLoading
+                  ? const SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          ProfessionalTheme.primaryEmerald,
+                        ),
+                      ),
+                    )
+                  : Icon(icon ?? Icons.arrow_forward_rounded),
+              label: Text(text),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: enabled ? ProfessionalTheme.primaryEmerald : ProfessionalTheme.textTertiary,
+                side: BorderSide(
+                  color: enabled ? ProfessionalTheme.primaryEmerald : ProfessionalTheme.borderLight,
                 ),
               ),
+            )
+          : ElevatedButton.icon(
+              onPressed: enabled && !isLoading ? onPressed : null,
+              icon: isLoading
+                  ? const SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          ProfessionalTheme.surfaceColor,
+                        ),
+                      ),
+                    )
+                  : Icon(icon ?? Icons.arrow_forward_rounded),
+              label: Text(text),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: enabled ? ProfessionalTheme.primaryEmerald : ProfessionalTheme.gray300,
+              ),
+            ),
     );
   }
 
@@ -296,8 +275,7 @@ class ProfessionalComponents {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: (iconColor ?? ProfessionalTheme.primaryEmerald)
-                      .withOpacity(0.1),
+                  color: (iconColor ?? ProfessionalTheme.primaryEmerald).withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(
                     ProfessionalTheme.radiusMd,
                   ),
@@ -494,63 +472,62 @@ class ProfessionalComponents {
       isDismissible: isDismissible,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder:
-          (context) => Container(
-            decoration: const BoxDecoration(
-              color: ProfessionalTheme.surfaceColor,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(ProfessionalTheme.radiusXl),
-                topRight: Radius.circular(ProfessionalTheme.radiusXl),
-              ),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                if (title != null) ...[
-                  Container(
-                    padding: const EdgeInsets.all(ProfessionalTheme.spaceMd),
-                    decoration: const BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          color: ProfessionalTheme.borderLight,
-                        ),
+      builder: (context) => Container(
+        decoration: const BoxDecoration(
+          color: ProfessionalTheme.surfaceColor,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(ProfessionalTheme.radiusXl),
+            topRight: Radius.circular(ProfessionalTheme.radiusXl),
+          ),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (title != null) ...[
+              Container(
+                padding: const EdgeInsets.all(ProfessionalTheme.spaceMd),
+                decoration: const BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      color: ProfessionalTheme.borderLight,
+                    ),
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: ProfessionalTheme.textPrimary,
                       ),
                     ),
-                    child: Row(
-                      children: [
-                        Text(
-                          title,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                            color: ProfessionalTheme.textPrimary,
-                          ),
-                        ),
-                        const Spacer(),
-                        IconButton(
-                          onPressed: () => Navigator.of(context).pop(),
-                          icon: const Icon(Icons.close_rounded),
-                          color: ProfessionalTheme.textSecondary,
-                        ),
-                      ],
+                    const Spacer(),
+                    IconButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      icon: const Icon(Icons.close_rounded),
+                      color: ProfessionalTheme.textSecondary,
                     ),
-                  ),
-                ] else ...[
-                  Container(
-                    margin: const EdgeInsets.only(top: 12),
-                    width: 32,
-                    height: 4,
-                    decoration: BoxDecoration(
-                      color: ProfessionalTheme.borderMedium,
-                      borderRadius: BorderRadius.circular(2),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                ],
-                Flexible(child: child),
-              ],
-            ),
-          ),
+                  ],
+                ),
+              ),
+            ] else ...[
+              Container(
+                margin: const EdgeInsets.only(top: 12),
+                width: 32,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: ProfessionalTheme.borderMedium,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+              const SizedBox(height: 8),
+            ],
+            Flexible(child: child),
+          ],
+        ),
+      ),
     );
   }
 

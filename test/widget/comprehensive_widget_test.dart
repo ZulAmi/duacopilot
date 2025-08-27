@@ -220,8 +220,7 @@ void main() {
               body: Column(
                 children: [
                   Text('Source: ${source.title}'),
-                  if (source.reference != null)
-                    Text('Reference: ${source.reference}'),
+                  if (source.reference != null) Text('Reference: ${source.reference}'),
                   Text('Relevance: ${(source.relevanceScore * 100).round()}%'),
                 ],
               ),
@@ -375,11 +374,11 @@ void main() {
               final isWide = constraints.maxWidth > 600;
               return isWide
                   ? Row(
-                    children: [
-                      Expanded(child: Text('Left Panel')),
-                      Expanded(child: Text('Right Panel')),
-                    ],
-                  )
+                      children: [
+                        Expanded(child: Text('Left Panel')),
+                        Expanded(child: Text('Right Panel')),
+                      ],
+                    )
                   : Column(children: [Text('Top Panel'), Text('Bottom Panel')]);
             },
           ),
@@ -398,13 +397,12 @@ void main() {
           MaterialApp(
             home: Scaffold(
               appBar: AppBar(title: Text('DuaCopilot')),
-              drawer:
-                  MediaQuery.of(
-                            tester.element(find.byType(Scaffold)),
-                          ).size.width <
-                          600
-                      ? Drawer(child: Text('Navigation Drawer'))
-                      : null,
+              drawer: MediaQuery.of(
+                        tester.element(find.byType(Scaffold)),
+                      ).size.width <
+                      600
+                  ? Drawer(child: Text('Navigation Drawer'))
+                  : null,
               body: Text('Main Content'),
             ),
           ),
@@ -696,7 +694,7 @@ void main() {
         final theme = Theme.of(context);
 
         expect(theme.useMaterial3, isTrue);
-        expect(theme.colorScheme.primary.value, equals(0xFF2E7D32));
+        expect(theme.colorScheme.primary.toARGB32(), equals(0xFF2E7D32));
         expect(find.text('DuaCopilot'), findsOneWidget);
         expect(find.text('Islamic Content'), findsOneWidget);
       });

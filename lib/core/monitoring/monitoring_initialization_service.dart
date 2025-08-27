@@ -9,8 +9,7 @@ import '../platform/platform_service.dart';
 /// Coordinates Firebase services, platform detection, and monitoring setup
 class MonitoringInitializationService {
   static MonitoringInitializationService? _instance;
-  static MonitoringInitializationService get instance =>
-      _instance ??= MonitoringInitializationService._();
+  static MonitoringInitializationService get instance => _instance ??= MonitoringInitializationService._();
 
   MonitoringInitializationService._();
 
@@ -70,8 +69,7 @@ class MonitoringInitializationService {
         additionalMetadata: {
           'event_type': 'monitoring_init',
           'platform': PlatformService.instance.platformName,
-          'features_available':
-              PlatformService.instance.availableFeatures.length,
+          'features_available': PlatformService.instance.availableFeatures.length,
         },
       );
 
@@ -134,8 +132,7 @@ class MonitoredApp extends StatefulWidget {
   State<MonitoredApp> createState() => _MonitoredAppState();
 }
 
-class _MonitoredAppState extends State<MonitoredApp>
-    with WidgetsBindingObserver {
+class _MonitoredAppState extends State<MonitoredApp> with WidgetsBindingObserver {
   bool _monitoringInitialized = false;
   String? _initializationError;
 
@@ -229,7 +226,7 @@ class _MonitoredAppState extends State<MonitoredApp>
               left: 16,
               right: 16,
               child: Material(
-                color: Colors.orange.withOpacity(0.9),
+                color: Colors.orange.withValues(alpha: 0.9),
                 borderRadius: BorderRadius.circular(8),
                 child: Padding(
                   padding: const EdgeInsets.all(12),

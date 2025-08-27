@@ -12,8 +12,7 @@ part of 'context_entity.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UserContext _$UserContextFromJson(Map<String, dynamic> json) {
   return _UserContext.fromJson(json);
@@ -42,19 +41,17 @@ mixin _$UserContext {
 /// @nodoc
 abstract class $UserContextCopyWith<$Res> {
   factory $UserContextCopyWith(
-    UserContext value,
-    $Res Function(UserContext) then,
-  ) = _$UserContextCopyWithImpl<$Res, UserContext>;
+          UserContext value, $Res Function(UserContext) then) =
+      _$UserContextCopyWithImpl<$Res, UserContext>;
   @useResult
-  $Res call({
-    String userId,
-    DateTime timestamp,
-    LocationContext location,
-    TimeContext time,
-    UserPreferences preferences,
-    HabitStats habits,
-    Map<String, dynamic>? metadata,
-  });
+  $Res call(
+      {String userId,
+      DateTime timestamp,
+      LocationContext location,
+      TimeContext time,
+      UserPreferences preferences,
+      HabitStats habits,
+      Map<String, dynamic>? metadata});
 
   $LocationContextCopyWith<$Res> get location;
   $TimeContextCopyWith<$Res> get time;
@@ -85,46 +82,36 @@ class _$UserContextCopyWithImpl<$Res, $Val extends UserContext>
     Object? habits = null,
     Object? metadata = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            userId:
-                null == userId
-                    ? _value.userId
-                    : userId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            timestamp:
-                null == timestamp
-                    ? _value.timestamp
-                    : timestamp // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            location:
-                null == location
-                    ? _value.location
-                    : location // ignore: cast_nullable_to_non_nullable
-                        as LocationContext,
-            time:
-                null == time
-                    ? _value.time
-                    : time // ignore: cast_nullable_to_non_nullable
-                        as TimeContext,
-            preferences:
-                null == preferences
-                    ? _value.preferences
-                    : preferences // ignore: cast_nullable_to_non_nullable
-                        as UserPreferences,
-            habits:
-                null == habits
-                    ? _value.habits
-                    : habits // ignore: cast_nullable_to_non_nullable
-                        as HabitStats,
-            metadata:
-                freezed == metadata
-                    ? _value.metadata
-                    : metadata // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      location: null == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as LocationContext,
+      time: null == time
+          ? _value.time
+          : time // ignore: cast_nullable_to_non_nullable
+              as TimeContext,
+      preferences: null == preferences
+          ? _value.preferences
+          : preferences // ignore: cast_nullable_to_non_nullable
+              as UserPreferences,
+      habits: null == habits
+          ? _value.habits
+          : habits // ignore: cast_nullable_to_non_nullable
+              as HabitStats,
+      metadata: freezed == metadata
+          ? _value.metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ) as $Val);
   }
 
   /// Create a copy of UserContext
@@ -172,20 +159,18 @@ class _$UserContextCopyWithImpl<$Res, $Val extends UserContext>
 abstract class _$$UserContextImplCopyWith<$Res>
     implements $UserContextCopyWith<$Res> {
   factory _$$UserContextImplCopyWith(
-    _$UserContextImpl value,
-    $Res Function(_$UserContextImpl) then,
-  ) = __$$UserContextImplCopyWithImpl<$Res>;
+          _$UserContextImpl value, $Res Function(_$UserContextImpl) then) =
+      __$$UserContextImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String userId,
-    DateTime timestamp,
-    LocationContext location,
-    TimeContext time,
-    UserPreferences preferences,
-    HabitStats habits,
-    Map<String, dynamic>? metadata,
-  });
+  $Res call(
+      {String userId,
+      DateTime timestamp,
+      LocationContext location,
+      TimeContext time,
+      UserPreferences preferences,
+      HabitStats habits,
+      Map<String, dynamic>? metadata});
 
   @override
   $LocationContextCopyWith<$Res> get location;
@@ -202,9 +187,8 @@ class __$$UserContextImplCopyWithImpl<$Res>
     extends _$UserContextCopyWithImpl<$Res, _$UserContextImpl>
     implements _$$UserContextImplCopyWith<$Res> {
   __$$UserContextImplCopyWithImpl(
-    _$UserContextImpl _value,
-    $Res Function(_$UserContextImpl) _then,
-  ) : super(_value, _then);
+      _$UserContextImpl _value, $Res Function(_$UserContextImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of UserContext
   /// with the given fields replaced by the non-null parameter values.
@@ -219,60 +203,51 @@ class __$$UserContextImplCopyWithImpl<$Res>
     Object? habits = null,
     Object? metadata = freezed,
   }) {
-    return _then(
-      _$UserContextImpl(
-        userId:
-            null == userId
-                ? _value.userId
-                : userId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        timestamp:
-            null == timestamp
-                ? _value.timestamp
-                : timestamp // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        location:
-            null == location
-                ? _value.location
-                : location // ignore: cast_nullable_to_non_nullable
-                    as LocationContext,
-        time:
-            null == time
-                ? _value.time
-                : time // ignore: cast_nullable_to_non_nullable
-                    as TimeContext,
-        preferences:
-            null == preferences
-                ? _value.preferences
-                : preferences // ignore: cast_nullable_to_non_nullable
-                    as UserPreferences,
-        habits:
-            null == habits
-                ? _value.habits
-                : habits // ignore: cast_nullable_to_non_nullable
-                    as HabitStats,
-        metadata:
-            freezed == metadata
-                ? _value._metadata
-                : metadata // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>?,
-      ),
-    );
+    return _then(_$UserContextImpl(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      location: null == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as LocationContext,
+      time: null == time
+          ? _value.time
+          : time // ignore: cast_nullable_to_non_nullable
+              as TimeContext,
+      preferences: null == preferences
+          ? _value.preferences
+          : preferences // ignore: cast_nullable_to_non_nullable
+              as UserPreferences,
+      habits: null == habits
+          ? _value.habits
+          : habits // ignore: cast_nullable_to_non_nullable
+              as HabitStats,
+      metadata: freezed == metadata
+          ? _value._metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$UserContextImpl implements _UserContext {
-  const _$UserContextImpl({
-    required this.userId,
-    required this.timestamp,
-    required this.location,
-    required this.time,
-    required this.preferences,
-    required this.habits,
-    final Map<String, dynamic>? metadata,
-  }) : _metadata = metadata;
+  const _$UserContextImpl(
+      {required this.userId,
+      required this.timestamp,
+      required this.location,
+      required this.time,
+      required this.preferences,
+      required this.habits,
+      final Map<String, dynamic>? metadata})
+      : _metadata = metadata;
 
   factory _$UserContextImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserContextImplFromJson(json);
@@ -324,15 +299,14 @@ class _$UserContextImpl implements _UserContext {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    userId,
-    timestamp,
-    location,
-    time,
-    preferences,
-    habits,
-    const DeepCollectionEquality().hash(_metadata),
-  );
+      runtimeType,
+      userId,
+      timestamp,
+      location,
+      time,
+      preferences,
+      habits,
+      const DeepCollectionEquality().hash(_metadata));
 
   /// Create a copy of UserContext
   /// with the given fields replaced by the non-null parameter values.
@@ -344,20 +318,21 @@ class _$UserContextImpl implements _UserContext {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UserContextImplToJson(this);
+    return _$$UserContextImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _UserContext implements UserContext {
-  const factory _UserContext({
-    required final String userId,
-    required final DateTime timestamp,
-    required final LocationContext location,
-    required final TimeContext time,
-    required final UserPreferences preferences,
-    required final HabitStats habits,
-    final Map<String, dynamic>? metadata,
-  }) = _$UserContextImpl;
+  const factory _UserContext(
+      {required final String userId,
+      required final DateTime timestamp,
+      required final LocationContext location,
+      required final TimeContext time,
+      required final UserPreferences preferences,
+      required final HabitStats habits,
+      final Map<String, dynamic>? metadata}) = _$UserContextImpl;
 
   factory _UserContext.fromJson(Map<String, dynamic> json) =
       _$UserContextImpl.fromJson;
@@ -414,21 +389,19 @@ mixin _$LocationContext {
 /// @nodoc
 abstract class $LocationContextCopyWith<$Res> {
   factory $LocationContextCopyWith(
-    LocationContext value,
-    $Res Function(LocationContext) then,
-  ) = _$LocationContextCopyWithImpl<$Res, LocationContext>;
+          LocationContext value, $Res Function(LocationContext) then) =
+      _$LocationContextCopyWithImpl<$Res, LocationContext>;
   @useResult
-  $Res call({
-    double latitude,
-    double longitude,
-    double accuracy,
-    DateTime timestamp,
-    String? address,
-    String? city,
-    String? country,
-    LocationType? type,
-    List<String>? nearbyPlaces,
-  });
+  $Res call(
+      {double latitude,
+      double longitude,
+      double accuracy,
+      DateTime timestamp,
+      String? address,
+      String? city,
+      String? country,
+      LocationType? type,
+      List<String>? nearbyPlaces});
 }
 
 /// @nodoc
@@ -456,79 +429,65 @@ class _$LocationContextCopyWithImpl<$Res, $Val extends LocationContext>
     Object? type = freezed,
     Object? nearbyPlaces = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            latitude:
-                null == latitude
-                    ? _value.latitude
-                    : latitude // ignore: cast_nullable_to_non_nullable
-                        as double,
-            longitude:
-                null == longitude
-                    ? _value.longitude
-                    : longitude // ignore: cast_nullable_to_non_nullable
-                        as double,
-            accuracy:
-                null == accuracy
-                    ? _value.accuracy
-                    : accuracy // ignore: cast_nullable_to_non_nullable
-                        as double,
-            timestamp:
-                null == timestamp
-                    ? _value.timestamp
-                    : timestamp // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            address:
-                freezed == address
-                    ? _value.address
-                    : address // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            city:
-                freezed == city
-                    ? _value.city
-                    : city // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            country:
-                freezed == country
-                    ? _value.country
-                    : country // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            type:
-                freezed == type
-                    ? _value.type
-                    : type // ignore: cast_nullable_to_non_nullable
-                        as LocationType?,
-            nearbyPlaces:
-                freezed == nearbyPlaces
-                    ? _value.nearbyPlaces
-                    : nearbyPlaces // ignore: cast_nullable_to_non_nullable
-                        as List<String>?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      latitude: null == latitude
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as double,
+      longitude: null == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as double,
+      accuracy: null == accuracy
+          ? _value.accuracy
+          : accuracy // ignore: cast_nullable_to_non_nullable
+              as double,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
+      city: freezed == city
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String?,
+      country: freezed == country
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as LocationType?,
+      nearbyPlaces: freezed == nearbyPlaces
+          ? _value.nearbyPlaces
+          : nearbyPlaces // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$LocationContextImplCopyWith<$Res>
     implements $LocationContextCopyWith<$Res> {
-  factory _$$LocationContextImplCopyWith(
-    _$LocationContextImpl value,
-    $Res Function(_$LocationContextImpl) then,
-  ) = __$$LocationContextImplCopyWithImpl<$Res>;
+  factory _$$LocationContextImplCopyWith(_$LocationContextImpl value,
+          $Res Function(_$LocationContextImpl) then) =
+      __$$LocationContextImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    double latitude,
-    double longitude,
-    double accuracy,
-    DateTime timestamp,
-    String? address,
-    String? city,
-    String? country,
-    LocationType? type,
-    List<String>? nearbyPlaces,
-  });
+  $Res call(
+      {double latitude,
+      double longitude,
+      double accuracy,
+      DateTime timestamp,
+      String? address,
+      String? city,
+      String? country,
+      LocationType? type,
+      List<String>? nearbyPlaces});
 }
 
 /// @nodoc
@@ -536,9 +495,8 @@ class __$$LocationContextImplCopyWithImpl<$Res>
     extends _$LocationContextCopyWithImpl<$Res, _$LocationContextImpl>
     implements _$$LocationContextImplCopyWith<$Res> {
   __$$LocationContextImplCopyWithImpl(
-    _$LocationContextImpl _value,
-    $Res Function(_$LocationContextImpl) _then,
-  ) : super(_value, _then);
+      _$LocationContextImpl _value, $Res Function(_$LocationContextImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of LocationContext
   /// with the given fields replaced by the non-null parameter values.
@@ -555,72 +513,61 @@ class __$$LocationContextImplCopyWithImpl<$Res>
     Object? type = freezed,
     Object? nearbyPlaces = freezed,
   }) {
-    return _then(
-      _$LocationContextImpl(
-        latitude:
-            null == latitude
-                ? _value.latitude
-                : latitude // ignore: cast_nullable_to_non_nullable
-                    as double,
-        longitude:
-            null == longitude
-                ? _value.longitude
-                : longitude // ignore: cast_nullable_to_non_nullable
-                    as double,
-        accuracy:
-            null == accuracy
-                ? _value.accuracy
-                : accuracy // ignore: cast_nullable_to_non_nullable
-                    as double,
-        timestamp:
-            null == timestamp
-                ? _value.timestamp
-                : timestamp // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        address:
-            freezed == address
-                ? _value.address
-                : address // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        city:
-            freezed == city
-                ? _value.city
-                : city // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        country:
-            freezed == country
-                ? _value.country
-                : country // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        type:
-            freezed == type
-                ? _value.type
-                : type // ignore: cast_nullable_to_non_nullable
-                    as LocationType?,
-        nearbyPlaces:
-            freezed == nearbyPlaces
-                ? _value._nearbyPlaces
-                : nearbyPlaces // ignore: cast_nullable_to_non_nullable
-                    as List<String>?,
-      ),
-    );
+    return _then(_$LocationContextImpl(
+      latitude: null == latitude
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as double,
+      longitude: null == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as double,
+      accuracy: null == accuracy
+          ? _value.accuracy
+          : accuracy // ignore: cast_nullable_to_non_nullable
+              as double,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
+      city: freezed == city
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String?,
+      country: freezed == country
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as LocationType?,
+      nearbyPlaces: freezed == nearbyPlaces
+          ? _value._nearbyPlaces
+          : nearbyPlaces // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$LocationContextImpl implements _LocationContext {
-  const _$LocationContextImpl({
-    required this.latitude,
-    required this.longitude,
-    required this.accuracy,
-    required this.timestamp,
-    this.address,
-    this.city,
-    this.country,
-    this.type,
-    final List<String>? nearbyPlaces,
-  }) : _nearbyPlaces = nearbyPlaces;
+  const _$LocationContextImpl(
+      {required this.latitude,
+      required this.longitude,
+      required this.accuracy,
+      required this.timestamp,
+      this.address,
+      this.city,
+      this.country,
+      this.type,
+      final List<String>? nearbyPlaces})
+      : _nearbyPlaces = nearbyPlaces;
 
   factory _$LocationContextImpl.fromJson(Map<String, dynamic> json) =>
       _$$LocationContextImplFromJson(json);
@@ -673,26 +620,23 @@ class _$LocationContextImpl implements _LocationContext {
             (identical(other.city, city) || other.city == city) &&
             (identical(other.country, country) || other.country == country) &&
             (identical(other.type, type) || other.type == type) &&
-            const DeepCollectionEquality().equals(
-              other._nearbyPlaces,
-              _nearbyPlaces,
-            ));
+            const DeepCollectionEquality()
+                .equals(other._nearbyPlaces, _nearbyPlaces));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    latitude,
-    longitude,
-    accuracy,
-    timestamp,
-    address,
-    city,
-    country,
-    type,
-    const DeepCollectionEquality().hash(_nearbyPlaces),
-  );
+      runtimeType,
+      latitude,
+      longitude,
+      accuracy,
+      timestamp,
+      address,
+      city,
+      country,
+      type,
+      const DeepCollectionEquality().hash(_nearbyPlaces));
 
   /// Create a copy of LocationContext
   /// with the given fields replaced by the non-null parameter values.
@@ -701,28 +645,27 @@ class _$LocationContextImpl implements _LocationContext {
   @pragma('vm:prefer-inline')
   _$$LocationContextImplCopyWith<_$LocationContextImpl> get copyWith =>
       __$$LocationContextImplCopyWithImpl<_$LocationContextImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LocationContextImplToJson(this);
+    return _$$LocationContextImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _LocationContext implements LocationContext {
-  const factory _LocationContext({
-    required final double latitude,
-    required final double longitude,
-    required final double accuracy,
-    required final DateTime timestamp,
-    final String? address,
-    final String? city,
-    final String? country,
-    final LocationType? type,
-    final List<String>? nearbyPlaces,
-  }) = _$LocationContextImpl;
+  const factory _LocationContext(
+      {required final double latitude,
+      required final double longitude,
+      required final double accuracy,
+      required final DateTime timestamp,
+      final String? address,
+      final String? city,
+      final String? country,
+      final LocationType? type,
+      final List<String>? nearbyPlaces}) = _$LocationContextImpl;
 
   factory _LocationContext.fromJson(Map<String, dynamic> json) =
       _$LocationContextImpl.fromJson;
@@ -781,19 +724,17 @@ mixin _$TimeContext {
 /// @nodoc
 abstract class $TimeContextCopyWith<$Res> {
   factory $TimeContextCopyWith(
-    TimeContext value,
-    $Res Function(TimeContext) then,
-  ) = _$TimeContextCopyWithImpl<$Res, TimeContext>;
+          TimeContext value, $Res Function(TimeContext) then) =
+      _$TimeContextCopyWithImpl<$Res, TimeContext>;
   @useResult
-  $Res call({
-    DateTime currentTime,
-    TimeOfDay timeOfDay,
-    IslamicDate islamicDate,
-    PrayerTimes prayerTimes,
-    List<String> specialOccasions,
-    bool isRamadan,
-    bool isHajjSeason,
-  });
+  $Res call(
+      {DateTime currentTime,
+      TimeOfDay timeOfDay,
+      IslamicDate islamicDate,
+      PrayerTimes prayerTimes,
+      List<String> specialOccasions,
+      bool isRamadan,
+      bool isHajjSeason});
 
   $IslamicDateCopyWith<$Res> get islamicDate;
   $PrayerTimesCopyWith<$Res> get prayerTimes;
@@ -822,46 +763,36 @@ class _$TimeContextCopyWithImpl<$Res, $Val extends TimeContext>
     Object? isRamadan = null,
     Object? isHajjSeason = null,
   }) {
-    return _then(
-      _value.copyWith(
-            currentTime:
-                null == currentTime
-                    ? _value.currentTime
-                    : currentTime // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            timeOfDay:
-                null == timeOfDay
-                    ? _value.timeOfDay
-                    : timeOfDay // ignore: cast_nullable_to_non_nullable
-                        as TimeOfDay,
-            islamicDate:
-                null == islamicDate
-                    ? _value.islamicDate
-                    : islamicDate // ignore: cast_nullable_to_non_nullable
-                        as IslamicDate,
-            prayerTimes:
-                null == prayerTimes
-                    ? _value.prayerTimes
-                    : prayerTimes // ignore: cast_nullable_to_non_nullable
-                        as PrayerTimes,
-            specialOccasions:
-                null == specialOccasions
-                    ? _value.specialOccasions
-                    : specialOccasions // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            isRamadan:
-                null == isRamadan
-                    ? _value.isRamadan
-                    : isRamadan // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            isHajjSeason:
-                null == isHajjSeason
-                    ? _value.isHajjSeason
-                    : isHajjSeason // ignore: cast_nullable_to_non_nullable
-                        as bool,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      currentTime: null == currentTime
+          ? _value.currentTime
+          : currentTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      timeOfDay: null == timeOfDay
+          ? _value.timeOfDay
+          : timeOfDay // ignore: cast_nullable_to_non_nullable
+              as TimeOfDay,
+      islamicDate: null == islamicDate
+          ? _value.islamicDate
+          : islamicDate // ignore: cast_nullable_to_non_nullable
+              as IslamicDate,
+      prayerTimes: null == prayerTimes
+          ? _value.prayerTimes
+          : prayerTimes // ignore: cast_nullable_to_non_nullable
+              as PrayerTimes,
+      specialOccasions: null == specialOccasions
+          ? _value.specialOccasions
+          : specialOccasions // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      isRamadan: null == isRamadan
+          ? _value.isRamadan
+          : isRamadan // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isHajjSeason: null == isHajjSeason
+          ? _value.isHajjSeason
+          : isHajjSeason // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
   }
 
   /// Create a copy of TimeContext
@@ -889,20 +820,18 @@ class _$TimeContextCopyWithImpl<$Res, $Val extends TimeContext>
 abstract class _$$TimeContextImplCopyWith<$Res>
     implements $TimeContextCopyWith<$Res> {
   factory _$$TimeContextImplCopyWith(
-    _$TimeContextImpl value,
-    $Res Function(_$TimeContextImpl) then,
-  ) = __$$TimeContextImplCopyWithImpl<$Res>;
+          _$TimeContextImpl value, $Res Function(_$TimeContextImpl) then) =
+      __$$TimeContextImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    DateTime currentTime,
-    TimeOfDay timeOfDay,
-    IslamicDate islamicDate,
-    PrayerTimes prayerTimes,
-    List<String> specialOccasions,
-    bool isRamadan,
-    bool isHajjSeason,
-  });
+  $Res call(
+      {DateTime currentTime,
+      TimeOfDay timeOfDay,
+      IslamicDate islamicDate,
+      PrayerTimes prayerTimes,
+      List<String> specialOccasions,
+      bool isRamadan,
+      bool isHajjSeason});
 
   @override
   $IslamicDateCopyWith<$Res> get islamicDate;
@@ -915,9 +844,8 @@ class __$$TimeContextImplCopyWithImpl<$Res>
     extends _$TimeContextCopyWithImpl<$Res, _$TimeContextImpl>
     implements _$$TimeContextImplCopyWith<$Res> {
   __$$TimeContextImplCopyWithImpl(
-    _$TimeContextImpl _value,
-    $Res Function(_$TimeContextImpl) _then,
-  ) : super(_value, _then);
+      _$TimeContextImpl _value, $Res Function(_$TimeContextImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of TimeContext
   /// with the given fields replaced by the non-null parameter values.
@@ -932,60 +860,51 @@ class __$$TimeContextImplCopyWithImpl<$Res>
     Object? isRamadan = null,
     Object? isHajjSeason = null,
   }) {
-    return _then(
-      _$TimeContextImpl(
-        currentTime:
-            null == currentTime
-                ? _value.currentTime
-                : currentTime // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        timeOfDay:
-            null == timeOfDay
-                ? _value.timeOfDay
-                : timeOfDay // ignore: cast_nullable_to_non_nullable
-                    as TimeOfDay,
-        islamicDate:
-            null == islamicDate
-                ? _value.islamicDate
-                : islamicDate // ignore: cast_nullable_to_non_nullable
-                    as IslamicDate,
-        prayerTimes:
-            null == prayerTimes
-                ? _value.prayerTimes
-                : prayerTimes // ignore: cast_nullable_to_non_nullable
-                    as PrayerTimes,
-        specialOccasions:
-            null == specialOccasions
-                ? _value._specialOccasions
-                : specialOccasions // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        isRamadan:
-            null == isRamadan
-                ? _value.isRamadan
-                : isRamadan // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        isHajjSeason:
-            null == isHajjSeason
-                ? _value.isHajjSeason
-                : isHajjSeason // ignore: cast_nullable_to_non_nullable
-                    as bool,
-      ),
-    );
+    return _then(_$TimeContextImpl(
+      currentTime: null == currentTime
+          ? _value.currentTime
+          : currentTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      timeOfDay: null == timeOfDay
+          ? _value.timeOfDay
+          : timeOfDay // ignore: cast_nullable_to_non_nullable
+              as TimeOfDay,
+      islamicDate: null == islamicDate
+          ? _value.islamicDate
+          : islamicDate // ignore: cast_nullable_to_non_nullable
+              as IslamicDate,
+      prayerTimes: null == prayerTimes
+          ? _value.prayerTimes
+          : prayerTimes // ignore: cast_nullable_to_non_nullable
+              as PrayerTimes,
+      specialOccasions: null == specialOccasions
+          ? _value._specialOccasions
+          : specialOccasions // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      isRamadan: null == isRamadan
+          ? _value.isRamadan
+          : isRamadan // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isHajjSeason: null == isHajjSeason
+          ? _value.isHajjSeason
+          : isHajjSeason // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$TimeContextImpl implements _TimeContext {
-  const _$TimeContextImpl({
-    required this.currentTime,
-    required this.timeOfDay,
-    required this.islamicDate,
-    required this.prayerTimes,
-    final List<String> specialOccasions = const [],
-    this.isRamadan = false,
-    this.isHajjSeason = false,
-  }) : _specialOccasions = specialOccasions;
+  const _$TimeContextImpl(
+      {required this.currentTime,
+      required this.timeOfDay,
+      required this.islamicDate,
+      required this.prayerTimes,
+      final List<String> specialOccasions = const [],
+      this.isRamadan = false,
+      this.isHajjSeason = false})
+      : _specialOccasions = specialOccasions;
 
   factory _$TimeContextImpl.fromJson(Map<String, dynamic> json) =>
       _$$TimeContextImplFromJson(json);
@@ -1033,10 +952,8 @@ class _$TimeContextImpl implements _TimeContext {
                 other.islamicDate == islamicDate) &&
             (identical(other.prayerTimes, prayerTimes) ||
                 other.prayerTimes == prayerTimes) &&
-            const DeepCollectionEquality().equals(
-              other._specialOccasions,
-              _specialOccasions,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._specialOccasions, _specialOccasions) &&
             (identical(other.isRamadan, isRamadan) ||
                 other.isRamadan == isRamadan) &&
             (identical(other.isHajjSeason, isHajjSeason) ||
@@ -1046,15 +963,14 @@ class _$TimeContextImpl implements _TimeContext {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    currentTime,
-    timeOfDay,
-    islamicDate,
-    prayerTimes,
-    const DeepCollectionEquality().hash(_specialOccasions),
-    isRamadan,
-    isHajjSeason,
-  );
+      runtimeType,
+      currentTime,
+      timeOfDay,
+      islamicDate,
+      prayerTimes,
+      const DeepCollectionEquality().hash(_specialOccasions),
+      isRamadan,
+      isHajjSeason);
 
   /// Create a copy of TimeContext
   /// with the given fields replaced by the non-null parameter values.
@@ -1066,20 +982,21 @@ class _$TimeContextImpl implements _TimeContext {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$TimeContextImplToJson(this);
+    return _$$TimeContextImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _TimeContext implements TimeContext {
-  const factory _TimeContext({
-    required final DateTime currentTime,
-    required final TimeOfDay timeOfDay,
-    required final IslamicDate islamicDate,
-    required final PrayerTimes prayerTimes,
-    final List<String> specialOccasions,
-    final bool isRamadan,
-    final bool isHajjSeason,
-  }) = _$TimeContextImpl;
+  const factory _TimeContext(
+      {required final DateTime currentTime,
+      required final TimeOfDay timeOfDay,
+      required final IslamicDate islamicDate,
+      required final PrayerTimes prayerTimes,
+      final List<String> specialOccasions,
+      final bool isRamadan,
+      final bool isHajjSeason}) = _$TimeContextImpl;
 
   factory _TimeContext.fromJson(Map<String, dynamic> json) =
       _$TimeContextImpl.fromJson;
@@ -1133,18 +1050,16 @@ mixin _$IslamicDate {
 /// @nodoc
 abstract class $IslamicDateCopyWith<$Res> {
   factory $IslamicDateCopyWith(
-    IslamicDate value,
-    $Res Function(IslamicDate) then,
-  ) = _$IslamicDateCopyWithImpl<$Res, IslamicDate>;
+          IslamicDate value, $Res Function(IslamicDate) then) =
+      _$IslamicDateCopyWithImpl<$Res, IslamicDate>;
   @useResult
-  $Res call({
-    int day,
-    int month,
-    int year,
-    String monthName,
-    bool isHolyMonth,
-    List<String>? significantEvents,
-  });
+  $Res call(
+      {int day,
+      int month,
+      int year,
+      String monthName,
+      bool isHolyMonth,
+      List<String>? significantEvents});
 }
 
 /// @nodoc
@@ -1169,41 +1084,32 @@ class _$IslamicDateCopyWithImpl<$Res, $Val extends IslamicDate>
     Object? isHolyMonth = null,
     Object? significantEvents = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            day:
-                null == day
-                    ? _value.day
-                    : day // ignore: cast_nullable_to_non_nullable
-                        as int,
-            month:
-                null == month
-                    ? _value.month
-                    : month // ignore: cast_nullable_to_non_nullable
-                        as int,
-            year:
-                null == year
-                    ? _value.year
-                    : year // ignore: cast_nullable_to_non_nullable
-                        as int,
-            monthName:
-                null == monthName
-                    ? _value.monthName
-                    : monthName // ignore: cast_nullable_to_non_nullable
-                        as String,
-            isHolyMonth:
-                null == isHolyMonth
-                    ? _value.isHolyMonth
-                    : isHolyMonth // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            significantEvents:
-                freezed == significantEvents
-                    ? _value.significantEvents
-                    : significantEvents // ignore: cast_nullable_to_non_nullable
-                        as List<String>?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      day: null == day
+          ? _value.day
+          : day // ignore: cast_nullable_to_non_nullable
+              as int,
+      month: null == month
+          ? _value.month
+          : month // ignore: cast_nullable_to_non_nullable
+              as int,
+      year: null == year
+          ? _value.year
+          : year // ignore: cast_nullable_to_non_nullable
+              as int,
+      monthName: null == monthName
+          ? _value.monthName
+          : monthName // ignore: cast_nullable_to_non_nullable
+              as String,
+      isHolyMonth: null == isHolyMonth
+          ? _value.isHolyMonth
+          : isHolyMonth // ignore: cast_nullable_to_non_nullable
+              as bool,
+      significantEvents: freezed == significantEvents
+          ? _value.significantEvents
+          : significantEvents // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+    ) as $Val);
   }
 }
 
@@ -1211,19 +1117,17 @@ class _$IslamicDateCopyWithImpl<$Res, $Val extends IslamicDate>
 abstract class _$$IslamicDateImplCopyWith<$Res>
     implements $IslamicDateCopyWith<$Res> {
   factory _$$IslamicDateImplCopyWith(
-    _$IslamicDateImpl value,
-    $Res Function(_$IslamicDateImpl) then,
-  ) = __$$IslamicDateImplCopyWithImpl<$Res>;
+          _$IslamicDateImpl value, $Res Function(_$IslamicDateImpl) then) =
+      __$$IslamicDateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    int day,
-    int month,
-    int year,
-    String monthName,
-    bool isHolyMonth,
-    List<String>? significantEvents,
-  });
+  $Res call(
+      {int day,
+      int month,
+      int year,
+      String monthName,
+      bool isHolyMonth,
+      List<String>? significantEvents});
 }
 
 /// @nodoc
@@ -1231,9 +1135,8 @@ class __$$IslamicDateImplCopyWithImpl<$Res>
     extends _$IslamicDateCopyWithImpl<$Res, _$IslamicDateImpl>
     implements _$$IslamicDateImplCopyWith<$Res> {
   __$$IslamicDateImplCopyWithImpl(
-    _$IslamicDateImpl _value,
-    $Res Function(_$IslamicDateImpl) _then,
-  ) : super(_value, _then);
+      _$IslamicDateImpl _value, $Res Function(_$IslamicDateImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of IslamicDate
   /// with the given fields replaced by the non-null parameter values.
@@ -1247,54 +1150,46 @@ class __$$IslamicDateImplCopyWithImpl<$Res>
     Object? isHolyMonth = null,
     Object? significantEvents = freezed,
   }) {
-    return _then(
-      _$IslamicDateImpl(
-        day:
-            null == day
-                ? _value.day
-                : day // ignore: cast_nullable_to_non_nullable
-                    as int,
-        month:
-            null == month
-                ? _value.month
-                : month // ignore: cast_nullable_to_non_nullable
-                    as int,
-        year:
-            null == year
-                ? _value.year
-                : year // ignore: cast_nullable_to_non_nullable
-                    as int,
-        monthName:
-            null == monthName
-                ? _value.monthName
-                : monthName // ignore: cast_nullable_to_non_nullable
-                    as String,
-        isHolyMonth:
-            null == isHolyMonth
-                ? _value.isHolyMonth
-                : isHolyMonth // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        significantEvents:
-            freezed == significantEvents
-                ? _value._significantEvents
-                : significantEvents // ignore: cast_nullable_to_non_nullable
-                    as List<String>?,
-      ),
-    );
+    return _then(_$IslamicDateImpl(
+      day: null == day
+          ? _value.day
+          : day // ignore: cast_nullable_to_non_nullable
+              as int,
+      month: null == month
+          ? _value.month
+          : month // ignore: cast_nullable_to_non_nullable
+              as int,
+      year: null == year
+          ? _value.year
+          : year // ignore: cast_nullable_to_non_nullable
+              as int,
+      monthName: null == monthName
+          ? _value.monthName
+          : monthName // ignore: cast_nullable_to_non_nullable
+              as String,
+      isHolyMonth: null == isHolyMonth
+          ? _value.isHolyMonth
+          : isHolyMonth // ignore: cast_nullable_to_non_nullable
+              as bool,
+      significantEvents: freezed == significantEvents
+          ? _value._significantEvents
+          : significantEvents // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$IslamicDateImpl implements _IslamicDate {
-  const _$IslamicDateImpl({
-    required this.day,
-    required this.month,
-    required this.year,
-    required this.monthName,
-    required this.isHolyMonth,
-    final List<String>? significantEvents,
-  }) : _significantEvents = significantEvents;
+  const _$IslamicDateImpl(
+      {required this.day,
+      required this.month,
+      required this.year,
+      required this.monthName,
+      required this.isHolyMonth,
+      final List<String>? significantEvents})
+      : _significantEvents = significantEvents;
 
   factory _$IslamicDateImpl.fromJson(Map<String, dynamic> json) =>
       _$$IslamicDateImplFromJson(json);
@@ -1337,23 +1232,14 @@ class _$IslamicDateImpl implements _IslamicDate {
                 other.monthName == monthName) &&
             (identical(other.isHolyMonth, isHolyMonth) ||
                 other.isHolyMonth == isHolyMonth) &&
-            const DeepCollectionEquality().equals(
-              other._significantEvents,
-              _significantEvents,
-            ));
+            const DeepCollectionEquality()
+                .equals(other._significantEvents, _significantEvents));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    day,
-    month,
-    year,
-    monthName,
-    isHolyMonth,
-    const DeepCollectionEquality().hash(_significantEvents),
-  );
+  int get hashCode => Object.hash(runtimeType, day, month, year, monthName,
+      isHolyMonth, const DeepCollectionEquality().hash(_significantEvents));
 
   /// Create a copy of IslamicDate
   /// with the given fields replaced by the non-null parameter values.
@@ -1365,19 +1251,20 @@ class _$IslamicDateImpl implements _IslamicDate {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$IslamicDateImplToJson(this);
+    return _$$IslamicDateImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _IslamicDate implements IslamicDate {
-  const factory _IslamicDate({
-    required final int day,
-    required final int month,
-    required final int year,
-    required final String monthName,
-    required final bool isHolyMonth,
-    final List<String>? significantEvents,
-  }) = _$IslamicDateImpl;
+  const factory _IslamicDate(
+      {required final int day,
+      required final int month,
+      required final int year,
+      required final String monthName,
+      required final bool isHolyMonth,
+      final List<String>? significantEvents}) = _$IslamicDateImpl;
 
   factory _IslamicDate.fromJson(Map<String, dynamic> json) =
       _$IslamicDateImpl.fromJson;
@@ -1431,20 +1318,18 @@ mixin _$PrayerTimes {
 /// @nodoc
 abstract class $PrayerTimesCopyWith<$Res> {
   factory $PrayerTimesCopyWith(
-    PrayerTimes value,
-    $Res Function(PrayerTimes) then,
-  ) = _$PrayerTimesCopyWithImpl<$Res, PrayerTimes>;
+          PrayerTimes value, $Res Function(PrayerTimes) then) =
+      _$PrayerTimesCopyWithImpl<$Res, PrayerTimes>;
   @useResult
-  $Res call({
-    DateTime fajr,
-    DateTime sunrise,
-    DateTime dhuhr,
-    DateTime asr,
-    DateTime maghrib,
-    DateTime isha,
-    NextPrayer? nextPrayer,
-    Duration? timeToNext,
-  });
+  $Res call(
+      {DateTime fajr,
+      DateTime sunrise,
+      DateTime dhuhr,
+      DateTime asr,
+      DateTime maghrib,
+      DateTime isha,
+      NextPrayer? nextPrayer,
+      Duration? timeToNext});
 
   $NextPrayerCopyWith<$Res>? get nextPrayer;
 }
@@ -1473,51 +1358,40 @@ class _$PrayerTimesCopyWithImpl<$Res, $Val extends PrayerTimes>
     Object? nextPrayer = freezed,
     Object? timeToNext = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            fajr:
-                null == fajr
-                    ? _value.fajr
-                    : fajr // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            sunrise:
-                null == sunrise
-                    ? _value.sunrise
-                    : sunrise // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            dhuhr:
-                null == dhuhr
-                    ? _value.dhuhr
-                    : dhuhr // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            asr:
-                null == asr
-                    ? _value.asr
-                    : asr // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            maghrib:
-                null == maghrib
-                    ? _value.maghrib
-                    : maghrib // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            isha:
-                null == isha
-                    ? _value.isha
-                    : isha // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            nextPrayer:
-                freezed == nextPrayer
-                    ? _value.nextPrayer
-                    : nextPrayer // ignore: cast_nullable_to_non_nullable
-                        as NextPrayer?,
-            timeToNext:
-                freezed == timeToNext
-                    ? _value.timeToNext
-                    : timeToNext // ignore: cast_nullable_to_non_nullable
-                        as Duration?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      fajr: null == fajr
+          ? _value.fajr
+          : fajr // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      sunrise: null == sunrise
+          ? _value.sunrise
+          : sunrise // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      dhuhr: null == dhuhr
+          ? _value.dhuhr
+          : dhuhr // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      asr: null == asr
+          ? _value.asr
+          : asr // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      maghrib: null == maghrib
+          ? _value.maghrib
+          : maghrib // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      isha: null == isha
+          ? _value.isha
+          : isha // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      nextPrayer: freezed == nextPrayer
+          ? _value.nextPrayer
+          : nextPrayer // ignore: cast_nullable_to_non_nullable
+              as NextPrayer?,
+      timeToNext: freezed == timeToNext
+          ? _value.timeToNext
+          : timeToNext // ignore: cast_nullable_to_non_nullable
+              as Duration?,
+    ) as $Val);
   }
 
   /// Create a copy of PrayerTimes
@@ -1539,21 +1413,19 @@ class _$PrayerTimesCopyWithImpl<$Res, $Val extends PrayerTimes>
 abstract class _$$PrayerTimesImplCopyWith<$Res>
     implements $PrayerTimesCopyWith<$Res> {
   factory _$$PrayerTimesImplCopyWith(
-    _$PrayerTimesImpl value,
-    $Res Function(_$PrayerTimesImpl) then,
-  ) = __$$PrayerTimesImplCopyWithImpl<$Res>;
+          _$PrayerTimesImpl value, $Res Function(_$PrayerTimesImpl) then) =
+      __$$PrayerTimesImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    DateTime fajr,
-    DateTime sunrise,
-    DateTime dhuhr,
-    DateTime asr,
-    DateTime maghrib,
-    DateTime isha,
-    NextPrayer? nextPrayer,
-    Duration? timeToNext,
-  });
+  $Res call(
+      {DateTime fajr,
+      DateTime sunrise,
+      DateTime dhuhr,
+      DateTime asr,
+      DateTime maghrib,
+      DateTime isha,
+      NextPrayer? nextPrayer,
+      Duration? timeToNext});
 
   @override
   $NextPrayerCopyWith<$Res>? get nextPrayer;
@@ -1564,9 +1436,8 @@ class __$$PrayerTimesImplCopyWithImpl<$Res>
     extends _$PrayerTimesCopyWithImpl<$Res, _$PrayerTimesImpl>
     implements _$$PrayerTimesImplCopyWith<$Res> {
   __$$PrayerTimesImplCopyWithImpl(
-    _$PrayerTimesImpl _value,
-    $Res Function(_$PrayerTimesImpl) _then,
-  ) : super(_value, _then);
+      _$PrayerTimesImpl _value, $Res Function(_$PrayerTimesImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of PrayerTimes
   /// with the given fields replaced by the non-null parameter values.
@@ -1582,66 +1453,55 @@ class __$$PrayerTimesImplCopyWithImpl<$Res>
     Object? nextPrayer = freezed,
     Object? timeToNext = freezed,
   }) {
-    return _then(
-      _$PrayerTimesImpl(
-        fajr:
-            null == fajr
-                ? _value.fajr
-                : fajr // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        sunrise:
-            null == sunrise
-                ? _value.sunrise
-                : sunrise // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        dhuhr:
-            null == dhuhr
-                ? _value.dhuhr
-                : dhuhr // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        asr:
-            null == asr
-                ? _value.asr
-                : asr // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        maghrib:
-            null == maghrib
-                ? _value.maghrib
-                : maghrib // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        isha:
-            null == isha
-                ? _value.isha
-                : isha // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        nextPrayer:
-            freezed == nextPrayer
-                ? _value.nextPrayer
-                : nextPrayer // ignore: cast_nullable_to_non_nullable
-                    as NextPrayer?,
-        timeToNext:
-            freezed == timeToNext
-                ? _value.timeToNext
-                : timeToNext // ignore: cast_nullable_to_non_nullable
-                    as Duration?,
-      ),
-    );
+    return _then(_$PrayerTimesImpl(
+      fajr: null == fajr
+          ? _value.fajr
+          : fajr // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      sunrise: null == sunrise
+          ? _value.sunrise
+          : sunrise // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      dhuhr: null == dhuhr
+          ? _value.dhuhr
+          : dhuhr // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      asr: null == asr
+          ? _value.asr
+          : asr // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      maghrib: null == maghrib
+          ? _value.maghrib
+          : maghrib // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      isha: null == isha
+          ? _value.isha
+          : isha // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      nextPrayer: freezed == nextPrayer
+          ? _value.nextPrayer
+          : nextPrayer // ignore: cast_nullable_to_non_nullable
+              as NextPrayer?,
+      timeToNext: freezed == timeToNext
+          ? _value.timeToNext
+          : timeToNext // ignore: cast_nullable_to_non_nullable
+              as Duration?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$PrayerTimesImpl implements _PrayerTimes {
-  const _$PrayerTimesImpl({
-    required this.fajr,
-    required this.sunrise,
-    required this.dhuhr,
-    required this.asr,
-    required this.maghrib,
-    required this.isha,
-    this.nextPrayer,
-    this.timeToNext,
-  });
+  const _$PrayerTimesImpl(
+      {required this.fajr,
+      required this.sunrise,
+      required this.dhuhr,
+      required this.asr,
+      required this.maghrib,
+      required this.isha,
+      this.nextPrayer,
+      this.timeToNext});
 
   factory _$PrayerTimesImpl.fromJson(Map<String, dynamic> json) =>
       _$$PrayerTimesImplFromJson(json);
@@ -1687,17 +1547,8 @@ class _$PrayerTimesImpl implements _PrayerTimes {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    fajr,
-    sunrise,
-    dhuhr,
-    asr,
-    maghrib,
-    isha,
-    nextPrayer,
-    timeToNext,
-  );
+  int get hashCode => Object.hash(runtimeType, fajr, sunrise, dhuhr, asr,
+      maghrib, isha, nextPrayer, timeToNext);
 
   /// Create a copy of PrayerTimes
   /// with the given fields replaced by the non-null parameter values.
@@ -1709,21 +1560,22 @@ class _$PrayerTimesImpl implements _PrayerTimes {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PrayerTimesImplToJson(this);
+    return _$$PrayerTimesImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _PrayerTimes implements PrayerTimes {
-  const factory _PrayerTimes({
-    required final DateTime fajr,
-    required final DateTime sunrise,
-    required final DateTime dhuhr,
-    required final DateTime asr,
-    required final DateTime maghrib,
-    required final DateTime isha,
-    final NextPrayer? nextPrayer,
-    final Duration? timeToNext,
-  }) = _$PrayerTimesImpl;
+  const factory _PrayerTimes(
+      {required final DateTime fajr,
+      required final DateTime sunrise,
+      required final DateTime dhuhr,
+      required final DateTime asr,
+      required final DateTime maghrib,
+      required final DateTime isha,
+      final NextPrayer? nextPrayer,
+      final Duration? timeToNext}) = _$PrayerTimesImpl;
 
   factory _PrayerTimes.fromJson(Map<String, dynamic> json) =
       _$PrayerTimesImpl.fromJson;
@@ -1776,9 +1628,8 @@ mixin _$NextPrayer {
 /// @nodoc
 abstract class $NextPrayerCopyWith<$Res> {
   factory $NextPrayerCopyWith(
-    NextPrayer value,
-    $Res Function(NextPrayer) then,
-  ) = _$NextPrayerCopyWithImpl<$Res, NextPrayer>;
+          NextPrayer value, $Res Function(NextPrayer) then) =
+      _$NextPrayerCopyWithImpl<$Res, NextPrayer>;
   @useResult
   $Res call({PrayerType type, DateTime time, Duration remaining});
 }
@@ -1802,26 +1653,20 @@ class _$NextPrayerCopyWithImpl<$Res, $Val extends NextPrayer>
     Object? time = null,
     Object? remaining = null,
   }) {
-    return _then(
-      _value.copyWith(
-            type:
-                null == type
-                    ? _value.type
-                    : type // ignore: cast_nullable_to_non_nullable
-                        as PrayerType,
-            time:
-                null == time
-                    ? _value.time
-                    : time // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            remaining:
-                null == remaining
-                    ? _value.remaining
-                    : remaining // ignore: cast_nullable_to_non_nullable
-                        as Duration,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as PrayerType,
+      time: null == time
+          ? _value.time
+          : time // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      remaining: null == remaining
+          ? _value.remaining
+          : remaining // ignore: cast_nullable_to_non_nullable
+              as Duration,
+    ) as $Val);
   }
 }
 
@@ -1829,9 +1674,8 @@ class _$NextPrayerCopyWithImpl<$Res, $Val extends NextPrayer>
 abstract class _$$NextPrayerImplCopyWith<$Res>
     implements $NextPrayerCopyWith<$Res> {
   factory _$$NextPrayerImplCopyWith(
-    _$NextPrayerImpl value,
-    $Res Function(_$NextPrayerImpl) then,
-  ) = __$$NextPrayerImplCopyWithImpl<$Res>;
+          _$NextPrayerImpl value, $Res Function(_$NextPrayerImpl) then) =
+      __$$NextPrayerImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({PrayerType type, DateTime time, Duration remaining});
@@ -1842,9 +1686,8 @@ class __$$NextPrayerImplCopyWithImpl<$Res>
     extends _$NextPrayerCopyWithImpl<$Res, _$NextPrayerImpl>
     implements _$$NextPrayerImplCopyWith<$Res> {
   __$$NextPrayerImplCopyWithImpl(
-    _$NextPrayerImpl _value,
-    $Res Function(_$NextPrayerImpl) _then,
-  ) : super(_value, _then);
+      _$NextPrayerImpl _value, $Res Function(_$NextPrayerImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of NextPrayer
   /// with the given fields replaced by the non-null parameter values.
@@ -1855,36 +1698,28 @@ class __$$NextPrayerImplCopyWithImpl<$Res>
     Object? time = null,
     Object? remaining = null,
   }) {
-    return _then(
-      _$NextPrayerImpl(
-        type:
-            null == type
-                ? _value.type
-                : type // ignore: cast_nullable_to_non_nullable
-                    as PrayerType,
-        time:
-            null == time
-                ? _value.time
-                : time // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        remaining:
-            null == remaining
-                ? _value.remaining
-                : remaining // ignore: cast_nullable_to_non_nullable
-                    as Duration,
-      ),
-    );
+    return _then(_$NextPrayerImpl(
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as PrayerType,
+      time: null == time
+          ? _value.time
+          : time // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      remaining: null == remaining
+          ? _value.remaining
+          : remaining // ignore: cast_nullable_to_non_nullable
+              as Duration,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$NextPrayerImpl implements _NextPrayer {
-  const _$NextPrayerImpl({
-    required this.type,
-    required this.time,
-    required this.remaining,
-  });
+  const _$NextPrayerImpl(
+      {required this.type, required this.time, required this.remaining});
 
   factory _$NextPrayerImpl.fromJson(Map<String, dynamic> json) =>
       _$$NextPrayerImplFromJson(json);
@@ -1926,16 +1761,17 @@ class _$NextPrayerImpl implements _NextPrayer {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$NextPrayerImplToJson(this);
+    return _$$NextPrayerImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _NextPrayer implements NextPrayer {
-  const factory _NextPrayer({
-    required final PrayerType type,
-    required final DateTime time,
-    required final Duration remaining,
-  }) = _$NextPrayerImpl;
+  const factory _NextPrayer(
+      {required final PrayerType type,
+      required final DateTime time,
+      required final Duration remaining}) = _$NextPrayerImpl;
 
   factory _NextPrayer.fromJson(Map<String, dynamic> json) =
       _$NextPrayerImpl.fromJson;
@@ -1983,20 +1819,18 @@ mixin _$UserPreferences {
 /// @nodoc
 abstract class $UserPreferencesCopyWith<$Res> {
   factory $UserPreferencesCopyWith(
-    UserPreferences value,
-    $Res Function(UserPreferences) then,
-  ) = _$UserPreferencesCopyWithImpl<$Res, UserPreferences>;
+          UserPreferences value, $Res Function(UserPreferences) then) =
+      _$UserPreferencesCopyWithImpl<$Res, UserPreferences>;
   @useResult
-  $Res call({
-    String language,
-    String region,
-    NotificationSettings notifications,
-    AudioSettings audio,
-    bool locationEnabled,
-    bool smartSuggestions,
-    List<String> favoriteCategories,
-    Map<String, dynamic> customSettings,
-  });
+  $Res call(
+      {String language,
+      String region,
+      NotificationSettings notifications,
+      AudioSettings audio,
+      bool locationEnabled,
+      bool smartSuggestions,
+      List<String> favoriteCategories,
+      Map<String, dynamic> customSettings});
 
   $NotificationSettingsCopyWith<$Res> get notifications;
   $AudioSettingsCopyWith<$Res> get audio;
@@ -2026,51 +1860,40 @@ class _$UserPreferencesCopyWithImpl<$Res, $Val extends UserPreferences>
     Object? favoriteCategories = null,
     Object? customSettings = null,
   }) {
-    return _then(
-      _value.copyWith(
-            language:
-                null == language
-                    ? _value.language
-                    : language // ignore: cast_nullable_to_non_nullable
-                        as String,
-            region:
-                null == region
-                    ? _value.region
-                    : region // ignore: cast_nullable_to_non_nullable
-                        as String,
-            notifications:
-                null == notifications
-                    ? _value.notifications
-                    : notifications // ignore: cast_nullable_to_non_nullable
-                        as NotificationSettings,
-            audio:
-                null == audio
-                    ? _value.audio
-                    : audio // ignore: cast_nullable_to_non_nullable
-                        as AudioSettings,
-            locationEnabled:
-                null == locationEnabled
-                    ? _value.locationEnabled
-                    : locationEnabled // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            smartSuggestions:
-                null == smartSuggestions
-                    ? _value.smartSuggestions
-                    : smartSuggestions // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            favoriteCategories:
-                null == favoriteCategories
-                    ? _value.favoriteCategories
-                    : favoriteCategories // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            customSettings:
-                null == customSettings
-                    ? _value.customSettings
-                    : customSettings // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
+      region: null == region
+          ? _value.region
+          : region // ignore: cast_nullable_to_non_nullable
+              as String,
+      notifications: null == notifications
+          ? _value.notifications
+          : notifications // ignore: cast_nullable_to_non_nullable
+              as NotificationSettings,
+      audio: null == audio
+          ? _value.audio
+          : audio // ignore: cast_nullable_to_non_nullable
+              as AudioSettings,
+      locationEnabled: null == locationEnabled
+          ? _value.locationEnabled
+          : locationEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      smartSuggestions: null == smartSuggestions
+          ? _value.smartSuggestions
+          : smartSuggestions // ignore: cast_nullable_to_non_nullable
+              as bool,
+      favoriteCategories: null == favoriteCategories
+          ? _value.favoriteCategories
+          : favoriteCategories // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      customSettings: null == customSettings
+          ? _value.customSettings
+          : customSettings // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+    ) as $Val);
   }
 
   /// Create a copy of UserPreferences
@@ -2097,22 +1920,20 @@ class _$UserPreferencesCopyWithImpl<$Res, $Val extends UserPreferences>
 /// @nodoc
 abstract class _$$UserPreferencesImplCopyWith<$Res>
     implements $UserPreferencesCopyWith<$Res> {
-  factory _$$UserPreferencesImplCopyWith(
-    _$UserPreferencesImpl value,
-    $Res Function(_$UserPreferencesImpl) then,
-  ) = __$$UserPreferencesImplCopyWithImpl<$Res>;
+  factory _$$UserPreferencesImplCopyWith(_$UserPreferencesImpl value,
+          $Res Function(_$UserPreferencesImpl) then) =
+      __$$UserPreferencesImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String language,
-    String region,
-    NotificationSettings notifications,
-    AudioSettings audio,
-    bool locationEnabled,
-    bool smartSuggestions,
-    List<String> favoriteCategories,
-    Map<String, dynamic> customSettings,
-  });
+  $Res call(
+      {String language,
+      String region,
+      NotificationSettings notifications,
+      AudioSettings audio,
+      bool locationEnabled,
+      bool smartSuggestions,
+      List<String> favoriteCategories,
+      Map<String, dynamic> customSettings});
 
   @override
   $NotificationSettingsCopyWith<$Res> get notifications;
@@ -2125,9 +1946,8 @@ class __$$UserPreferencesImplCopyWithImpl<$Res>
     extends _$UserPreferencesCopyWithImpl<$Res, _$UserPreferencesImpl>
     implements _$$UserPreferencesImplCopyWith<$Res> {
   __$$UserPreferencesImplCopyWithImpl(
-    _$UserPreferencesImpl _value,
-    $Res Function(_$UserPreferencesImpl) _then,
-  ) : super(_value, _then);
+      _$UserPreferencesImpl _value, $Res Function(_$UserPreferencesImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of UserPreferences
   /// with the given fields replaced by the non-null parameter values.
@@ -2143,67 +1963,57 @@ class __$$UserPreferencesImplCopyWithImpl<$Res>
     Object? favoriteCategories = null,
     Object? customSettings = null,
   }) {
-    return _then(
-      _$UserPreferencesImpl(
-        language:
-            null == language
-                ? _value.language
-                : language // ignore: cast_nullable_to_non_nullable
-                    as String,
-        region:
-            null == region
-                ? _value.region
-                : region // ignore: cast_nullable_to_non_nullable
-                    as String,
-        notifications:
-            null == notifications
-                ? _value.notifications
-                : notifications // ignore: cast_nullable_to_non_nullable
-                    as NotificationSettings,
-        audio:
-            null == audio
-                ? _value.audio
-                : audio // ignore: cast_nullable_to_non_nullable
-                    as AudioSettings,
-        locationEnabled:
-            null == locationEnabled
-                ? _value.locationEnabled
-                : locationEnabled // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        smartSuggestions:
-            null == smartSuggestions
-                ? _value.smartSuggestions
-                : smartSuggestions // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        favoriteCategories:
-            null == favoriteCategories
-                ? _value._favoriteCategories
-                : favoriteCategories // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        customSettings:
-            null == customSettings
-                ? _value._customSettings
-                : customSettings // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>,
-      ),
-    );
+    return _then(_$UserPreferencesImpl(
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
+      region: null == region
+          ? _value.region
+          : region // ignore: cast_nullable_to_non_nullable
+              as String,
+      notifications: null == notifications
+          ? _value.notifications
+          : notifications // ignore: cast_nullable_to_non_nullable
+              as NotificationSettings,
+      audio: null == audio
+          ? _value.audio
+          : audio // ignore: cast_nullable_to_non_nullable
+              as AudioSettings,
+      locationEnabled: null == locationEnabled
+          ? _value.locationEnabled
+          : locationEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      smartSuggestions: null == smartSuggestions
+          ? _value.smartSuggestions
+          : smartSuggestions // ignore: cast_nullable_to_non_nullable
+              as bool,
+      favoriteCategories: null == favoriteCategories
+          ? _value._favoriteCategories
+          : favoriteCategories // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      customSettings: null == customSettings
+          ? _value._customSettings
+          : customSettings // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$UserPreferencesImpl implements _UserPreferences {
-  const _$UserPreferencesImpl({
-    required this.language,
-    required this.region,
-    required this.notifications,
-    required this.audio,
-    this.locationEnabled = true,
-    this.smartSuggestions = true,
-    final List<String> favoriteCategories = const ['general'],
-    final Map<String, dynamic> customSettings = const {},
-  }) : _favoriteCategories = favoriteCategories,
-       _customSettings = customSettings;
+  const _$UserPreferencesImpl(
+      {required this.language,
+      required this.region,
+      required this.notifications,
+      required this.audio,
+      this.locationEnabled = true,
+      this.smartSuggestions = true,
+      final List<String> favoriteCategories = const ['general'],
+      final Map<String, dynamic> customSettings = const {}})
+      : _favoriteCategories = favoriteCategories,
+        _customSettings = customSettings;
 
   factory _$UserPreferencesImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserPreferencesImplFromJson(json);
@@ -2261,29 +2071,24 @@ class _$UserPreferencesImpl implements _UserPreferences {
                 other.locationEnabled == locationEnabled) &&
             (identical(other.smartSuggestions, smartSuggestions) ||
                 other.smartSuggestions == smartSuggestions) &&
-            const DeepCollectionEquality().equals(
-              other._favoriteCategories,
-              _favoriteCategories,
-            ) &&
-            const DeepCollectionEquality().equals(
-              other._customSettings,
-              _customSettings,
-            ));
+            const DeepCollectionEquality()
+                .equals(other._favoriteCategories, _favoriteCategories) &&
+            const DeepCollectionEquality()
+                .equals(other._customSettings, _customSettings));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    language,
-    region,
-    notifications,
-    audio,
-    locationEnabled,
-    smartSuggestions,
-    const DeepCollectionEquality().hash(_favoriteCategories),
-    const DeepCollectionEquality().hash(_customSettings),
-  );
+      runtimeType,
+      language,
+      region,
+      notifications,
+      audio,
+      locationEnabled,
+      smartSuggestions,
+      const DeepCollectionEquality().hash(_favoriteCategories),
+      const DeepCollectionEquality().hash(_customSettings));
 
   /// Create a copy of UserPreferences
   /// with the given fields replaced by the non-null parameter values.
@@ -2292,27 +2097,26 @@ class _$UserPreferencesImpl implements _UserPreferences {
   @pragma('vm:prefer-inline')
   _$$UserPreferencesImplCopyWith<_$UserPreferencesImpl> get copyWith =>
       __$$UserPreferencesImplCopyWithImpl<_$UserPreferencesImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UserPreferencesImplToJson(this);
+    return _$$UserPreferencesImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _UserPreferences implements UserPreferences {
-  const factory _UserPreferences({
-    required final String language,
-    required final String region,
-    required final NotificationSettings notifications,
-    required final AudioSettings audio,
-    final bool locationEnabled,
-    final bool smartSuggestions,
-    final List<String> favoriteCategories,
-    final Map<String, dynamic> customSettings,
-  }) = _$UserPreferencesImpl;
+  const factory _UserPreferences(
+      {required final String language,
+      required final String region,
+      required final NotificationSettings notifications,
+      required final AudioSettings audio,
+      final bool locationEnabled,
+      final bool smartSuggestions,
+      final List<String> favoriteCategories,
+      final Map<String, dynamic> customSettings}) = _$UserPreferencesImpl;
 
   factory _UserPreferences.fromJson(Map<String, dynamic> json) =
       _$UserPreferencesImpl.fromJson;
@@ -2368,27 +2172,23 @@ mixin _$NotificationSettings {
 
 /// @nodoc
 abstract class $NotificationSettingsCopyWith<$Res> {
-  factory $NotificationSettingsCopyWith(
-    NotificationSettings value,
-    $Res Function(NotificationSettings) then,
-  ) = _$NotificationSettingsCopyWithImpl<$Res, NotificationSettings>;
+  factory $NotificationSettingsCopyWith(NotificationSettings value,
+          $Res Function(NotificationSettings) then) =
+      _$NotificationSettingsCopyWithImpl<$Res, NotificationSettings>;
   @useResult
-  $Res call({
-    bool enabled,
-    bool prayerReminders,
-    bool dailyDua,
-    bool contextualSuggestions,
-    bool habitReminders,
-    List<String> quietHours,
-    NotificationPriority priority,
-  });
+  $Res call(
+      {bool enabled,
+      bool prayerReminders,
+      bool dailyDua,
+      bool contextualSuggestions,
+      bool habitReminders,
+      List<String> quietHours,
+      NotificationPriority priority});
 }
 
 /// @nodoc
-class _$NotificationSettingsCopyWithImpl<
-  $Res,
-  $Val extends NotificationSettings
->
+class _$NotificationSettingsCopyWithImpl<$Res,
+        $Val extends NotificationSettings>
     implements $NotificationSettingsCopyWith<$Res> {
   _$NotificationSettingsCopyWithImpl(this._value, this._then);
 
@@ -2410,77 +2210,64 @@ class _$NotificationSettingsCopyWithImpl<
     Object? quietHours = null,
     Object? priority = null,
   }) {
-    return _then(
-      _value.copyWith(
-            enabled:
-                null == enabled
-                    ? _value.enabled
-                    : enabled // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            prayerReminders:
-                null == prayerReminders
-                    ? _value.prayerReminders
-                    : prayerReminders // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            dailyDua:
-                null == dailyDua
-                    ? _value.dailyDua
-                    : dailyDua // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            contextualSuggestions:
-                null == contextualSuggestions
-                    ? _value.contextualSuggestions
-                    : contextualSuggestions // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            habitReminders:
-                null == habitReminders
-                    ? _value.habitReminders
-                    : habitReminders // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            quietHours:
-                null == quietHours
-                    ? _value.quietHours
-                    : quietHours // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            priority:
-                null == priority
-                    ? _value.priority
-                    : priority // ignore: cast_nullable_to_non_nullable
-                        as NotificationPriority,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      enabled: null == enabled
+          ? _value.enabled
+          : enabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      prayerReminders: null == prayerReminders
+          ? _value.prayerReminders
+          : prayerReminders // ignore: cast_nullable_to_non_nullable
+              as bool,
+      dailyDua: null == dailyDua
+          ? _value.dailyDua
+          : dailyDua // ignore: cast_nullable_to_non_nullable
+              as bool,
+      contextualSuggestions: null == contextualSuggestions
+          ? _value.contextualSuggestions
+          : contextualSuggestions // ignore: cast_nullable_to_non_nullable
+              as bool,
+      habitReminders: null == habitReminders
+          ? _value.habitReminders
+          : habitReminders // ignore: cast_nullable_to_non_nullable
+              as bool,
+      quietHours: null == quietHours
+          ? _value.quietHours
+          : quietHours // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      priority: null == priority
+          ? _value.priority
+          : priority // ignore: cast_nullable_to_non_nullable
+              as NotificationPriority,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$NotificationSettingsImplCopyWith<$Res>
     implements $NotificationSettingsCopyWith<$Res> {
-  factory _$$NotificationSettingsImplCopyWith(
-    _$NotificationSettingsImpl value,
-    $Res Function(_$NotificationSettingsImpl) then,
-  ) = __$$NotificationSettingsImplCopyWithImpl<$Res>;
+  factory _$$NotificationSettingsImplCopyWith(_$NotificationSettingsImpl value,
+          $Res Function(_$NotificationSettingsImpl) then) =
+      __$$NotificationSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    bool enabled,
-    bool prayerReminders,
-    bool dailyDua,
-    bool contextualSuggestions,
-    bool habitReminders,
-    List<String> quietHours,
-    NotificationPriority priority,
-  });
+  $Res call(
+      {bool enabled,
+      bool prayerReminders,
+      bool dailyDua,
+      bool contextualSuggestions,
+      bool habitReminders,
+      List<String> quietHours,
+      NotificationPriority priority});
 }
 
 /// @nodoc
 class __$$NotificationSettingsImplCopyWithImpl<$Res>
     extends _$NotificationSettingsCopyWithImpl<$Res, _$NotificationSettingsImpl>
     implements _$$NotificationSettingsImplCopyWith<$Res> {
-  __$$NotificationSettingsImplCopyWithImpl(
-    _$NotificationSettingsImpl _value,
-    $Res Function(_$NotificationSettingsImpl) _then,
-  ) : super(_value, _then);
+  __$$NotificationSettingsImplCopyWithImpl(_$NotificationSettingsImpl _value,
+      $Res Function(_$NotificationSettingsImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of NotificationSettings
   /// with the given fields replaced by the non-null parameter values.
@@ -2495,60 +2282,51 @@ class __$$NotificationSettingsImplCopyWithImpl<$Res>
     Object? quietHours = null,
     Object? priority = null,
   }) {
-    return _then(
-      _$NotificationSettingsImpl(
-        enabled:
-            null == enabled
-                ? _value.enabled
-                : enabled // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        prayerReminders:
-            null == prayerReminders
-                ? _value.prayerReminders
-                : prayerReminders // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        dailyDua:
-            null == dailyDua
-                ? _value.dailyDua
-                : dailyDua // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        contextualSuggestions:
-            null == contextualSuggestions
-                ? _value.contextualSuggestions
-                : contextualSuggestions // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        habitReminders:
-            null == habitReminders
-                ? _value.habitReminders
-                : habitReminders // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        quietHours:
-            null == quietHours
-                ? _value._quietHours
-                : quietHours // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        priority:
-            null == priority
-                ? _value.priority
-                : priority // ignore: cast_nullable_to_non_nullable
-                    as NotificationPriority,
-      ),
-    );
+    return _then(_$NotificationSettingsImpl(
+      enabled: null == enabled
+          ? _value.enabled
+          : enabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      prayerReminders: null == prayerReminders
+          ? _value.prayerReminders
+          : prayerReminders // ignore: cast_nullable_to_non_nullable
+              as bool,
+      dailyDua: null == dailyDua
+          ? _value.dailyDua
+          : dailyDua // ignore: cast_nullable_to_non_nullable
+              as bool,
+      contextualSuggestions: null == contextualSuggestions
+          ? _value.contextualSuggestions
+          : contextualSuggestions // ignore: cast_nullable_to_non_nullable
+              as bool,
+      habitReminders: null == habitReminders
+          ? _value.habitReminders
+          : habitReminders // ignore: cast_nullable_to_non_nullable
+              as bool,
+      quietHours: null == quietHours
+          ? _value._quietHours
+          : quietHours // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      priority: null == priority
+          ? _value.priority
+          : priority // ignore: cast_nullable_to_non_nullable
+              as NotificationPriority,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$NotificationSettingsImpl implements _NotificationSettings {
-  const _$NotificationSettingsImpl({
-    this.enabled = true,
-    this.prayerReminders = true,
-    this.dailyDua = true,
-    this.contextualSuggestions = true,
-    this.habitReminders = true,
-    final List<String> quietHours = const [],
-    this.priority = NotificationPriority.normal,
-  }) : _quietHours = quietHours;
+  const _$NotificationSettingsImpl(
+      {this.enabled = true,
+      this.prayerReminders = true,
+      this.dailyDua = true,
+      this.contextualSuggestions = true,
+      this.habitReminders = true,
+      final List<String> quietHours = const [],
+      this.priority = NotificationPriority.normal})
+      : _quietHours = quietHours;
 
   factory _$NotificationSettingsImpl.fromJson(Map<String, dynamic> json) =>
       _$$NotificationSettingsImplFromJson(json);
@@ -2600,10 +2378,8 @@ class _$NotificationSettingsImpl implements _NotificationSettings {
                 other.contextualSuggestions == contextualSuggestions) &&
             (identical(other.habitReminders, habitReminders) ||
                 other.habitReminders == habitReminders) &&
-            const DeepCollectionEquality().equals(
-              other._quietHours,
-              _quietHours,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._quietHours, _quietHours) &&
             (identical(other.priority, priority) ||
                 other.priority == priority));
   }
@@ -2611,15 +2387,14 @@ class _$NotificationSettingsImpl implements _NotificationSettings {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    enabled,
-    prayerReminders,
-    dailyDua,
-    contextualSuggestions,
-    habitReminders,
-    const DeepCollectionEquality().hash(_quietHours),
-    priority,
-  );
+      runtimeType,
+      enabled,
+      prayerReminders,
+      dailyDua,
+      contextualSuggestions,
+      habitReminders,
+      const DeepCollectionEquality().hash(_quietHours),
+      priority);
 
   /// Create a copy of NotificationSettings
   /// with the given fields replaced by the non-null parameter values.
@@ -2627,28 +2402,27 @@ class _$NotificationSettingsImpl implements _NotificationSettings {
   @override
   @pragma('vm:prefer-inline')
   _$$NotificationSettingsImplCopyWith<_$NotificationSettingsImpl>
-  get copyWith =>
-      __$$NotificationSettingsImplCopyWithImpl<_$NotificationSettingsImpl>(
-        this,
-        _$identity,
-      );
+      get copyWith =>
+          __$$NotificationSettingsImplCopyWithImpl<_$NotificationSettingsImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$NotificationSettingsImplToJson(this);
+    return _$$NotificationSettingsImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _NotificationSettings implements NotificationSettings {
-  const factory _NotificationSettings({
-    final bool enabled,
-    final bool prayerReminders,
-    final bool dailyDua,
-    final bool contextualSuggestions,
-    final bool habitReminders,
-    final List<String> quietHours,
-    final NotificationPriority priority,
-  }) = _$NotificationSettingsImpl;
+  const factory _NotificationSettings(
+      {final bool enabled,
+      final bool prayerReminders,
+      final bool dailyDua,
+      final bool contextualSuggestions,
+      final bool habitReminders,
+      final List<String> quietHours,
+      final NotificationPriority priority}) = _$NotificationSettingsImpl;
 
   factory _NotificationSettings.fromJson(Map<String, dynamic> json) =
       _$NotificationSettingsImpl.fromJson;
@@ -2673,7 +2447,7 @@ abstract class _NotificationSettings implements NotificationSettings {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$NotificationSettingsImplCopyWith<_$NotificationSettingsImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 AudioSettings _$AudioSettingsFromJson(Map<String, dynamic> json) {
@@ -2701,17 +2475,15 @@ mixin _$AudioSettings {
 /// @nodoc
 abstract class $AudioSettingsCopyWith<$Res> {
   factory $AudioSettingsCopyWith(
-    AudioSettings value,
-    $Res Function(AudioSettings) then,
-  ) = _$AudioSettingsCopyWithImpl<$Res, AudioSettings>;
+          AudioSettings value, $Res Function(AudioSettings) then) =
+      _$AudioSettingsCopyWithImpl<$Res, AudioSettings>;
   @useResult
-  $Res call({
-    double playbackSpeed,
-    double volume,
-    bool autoPlay,
-    AudioQuality preferredQuality,
-    bool downloadOnWifi,
-  });
+  $Res call(
+      {double playbackSpeed,
+      double volume,
+      bool autoPlay,
+      AudioQuality preferredQuality,
+      bool downloadOnWifi});
 }
 
 /// @nodoc
@@ -2735,36 +2507,28 @@ class _$AudioSettingsCopyWithImpl<$Res, $Val extends AudioSettings>
     Object? preferredQuality = null,
     Object? downloadOnWifi = null,
   }) {
-    return _then(
-      _value.copyWith(
-            playbackSpeed:
-                null == playbackSpeed
-                    ? _value.playbackSpeed
-                    : playbackSpeed // ignore: cast_nullable_to_non_nullable
-                        as double,
-            volume:
-                null == volume
-                    ? _value.volume
-                    : volume // ignore: cast_nullable_to_non_nullable
-                        as double,
-            autoPlay:
-                null == autoPlay
-                    ? _value.autoPlay
-                    : autoPlay // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            preferredQuality:
-                null == preferredQuality
-                    ? _value.preferredQuality
-                    : preferredQuality // ignore: cast_nullable_to_non_nullable
-                        as AudioQuality,
-            downloadOnWifi:
-                null == downloadOnWifi
-                    ? _value.downloadOnWifi
-                    : downloadOnWifi // ignore: cast_nullable_to_non_nullable
-                        as bool,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      playbackSpeed: null == playbackSpeed
+          ? _value.playbackSpeed
+          : playbackSpeed // ignore: cast_nullable_to_non_nullable
+              as double,
+      volume: null == volume
+          ? _value.volume
+          : volume // ignore: cast_nullable_to_non_nullable
+              as double,
+      autoPlay: null == autoPlay
+          ? _value.autoPlay
+          : autoPlay // ignore: cast_nullable_to_non_nullable
+              as bool,
+      preferredQuality: null == preferredQuality
+          ? _value.preferredQuality
+          : preferredQuality // ignore: cast_nullable_to_non_nullable
+              as AudioQuality,
+      downloadOnWifi: null == downloadOnWifi
+          ? _value.downloadOnWifi
+          : downloadOnWifi // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
   }
 }
 
@@ -2772,18 +2536,16 @@ class _$AudioSettingsCopyWithImpl<$Res, $Val extends AudioSettings>
 abstract class _$$AudioSettingsImplCopyWith<$Res>
     implements $AudioSettingsCopyWith<$Res> {
   factory _$$AudioSettingsImplCopyWith(
-    _$AudioSettingsImpl value,
-    $Res Function(_$AudioSettingsImpl) then,
-  ) = __$$AudioSettingsImplCopyWithImpl<$Res>;
+          _$AudioSettingsImpl value, $Res Function(_$AudioSettingsImpl) then) =
+      __$$AudioSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    double playbackSpeed,
-    double volume,
-    bool autoPlay,
-    AudioQuality preferredQuality,
-    bool downloadOnWifi,
-  });
+  $Res call(
+      {double playbackSpeed,
+      double volume,
+      bool autoPlay,
+      AudioQuality preferredQuality,
+      bool downloadOnWifi});
 }
 
 /// @nodoc
@@ -2791,9 +2553,8 @@ class __$$AudioSettingsImplCopyWithImpl<$Res>
     extends _$AudioSettingsCopyWithImpl<$Res, _$AudioSettingsImpl>
     implements _$$AudioSettingsImplCopyWith<$Res> {
   __$$AudioSettingsImplCopyWithImpl(
-    _$AudioSettingsImpl _value,
-    $Res Function(_$AudioSettingsImpl) _then,
-  ) : super(_value, _then);
+      _$AudioSettingsImpl _value, $Res Function(_$AudioSettingsImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of AudioSettings
   /// with the given fields replaced by the non-null parameter values.
@@ -2806,48 +2567,40 @@ class __$$AudioSettingsImplCopyWithImpl<$Res>
     Object? preferredQuality = null,
     Object? downloadOnWifi = null,
   }) {
-    return _then(
-      _$AudioSettingsImpl(
-        playbackSpeed:
-            null == playbackSpeed
-                ? _value.playbackSpeed
-                : playbackSpeed // ignore: cast_nullable_to_non_nullable
-                    as double,
-        volume:
-            null == volume
-                ? _value.volume
-                : volume // ignore: cast_nullable_to_non_nullable
-                    as double,
-        autoPlay:
-            null == autoPlay
-                ? _value.autoPlay
-                : autoPlay // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        preferredQuality:
-            null == preferredQuality
-                ? _value.preferredQuality
-                : preferredQuality // ignore: cast_nullable_to_non_nullable
-                    as AudioQuality,
-        downloadOnWifi:
-            null == downloadOnWifi
-                ? _value.downloadOnWifi
-                : downloadOnWifi // ignore: cast_nullable_to_non_nullable
-                    as bool,
-      ),
-    );
+    return _then(_$AudioSettingsImpl(
+      playbackSpeed: null == playbackSpeed
+          ? _value.playbackSpeed
+          : playbackSpeed // ignore: cast_nullable_to_non_nullable
+              as double,
+      volume: null == volume
+          ? _value.volume
+          : volume // ignore: cast_nullable_to_non_nullable
+              as double,
+      autoPlay: null == autoPlay
+          ? _value.autoPlay
+          : autoPlay // ignore: cast_nullable_to_non_nullable
+              as bool,
+      preferredQuality: null == preferredQuality
+          ? _value.preferredQuality
+          : preferredQuality // ignore: cast_nullable_to_non_nullable
+              as AudioQuality,
+      downloadOnWifi: null == downloadOnWifi
+          ? _value.downloadOnWifi
+          : downloadOnWifi // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$AudioSettingsImpl implements _AudioSettings {
-  const _$AudioSettingsImpl({
-    this.playbackSpeed = 1.0,
-    this.volume = 0.8,
-    this.autoPlay = true,
-    this.preferredQuality = AudioQuality.high,
-    this.downloadOnWifi = true,
-  });
+  const _$AudioSettingsImpl(
+      {this.playbackSpeed = 1.0,
+      this.volume = 0.8,
+      this.autoPlay = true,
+      this.preferredQuality = AudioQuality.high,
+      this.downloadOnWifi = true});
 
   factory _$AudioSettingsImpl.fromJson(Map<String, dynamic> json) =>
       _$$AudioSettingsImplFromJson(json);
@@ -2891,14 +2644,8 @@ class _$AudioSettingsImpl implements _AudioSettings {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    playbackSpeed,
-    volume,
-    autoPlay,
-    preferredQuality,
-    downloadOnWifi,
-  );
+  int get hashCode => Object.hash(runtimeType, playbackSpeed, volume, autoPlay,
+      preferredQuality, downloadOnWifi);
 
   /// Create a copy of AudioSettings
   /// with the given fields replaced by the non-null parameter values.
@@ -2910,18 +2657,19 @@ class _$AudioSettingsImpl implements _AudioSettings {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AudioSettingsImplToJson(this);
+    return _$$AudioSettingsImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _AudioSettings implements AudioSettings {
-  const factory _AudioSettings({
-    final double playbackSpeed,
-    final double volume,
-    final bool autoPlay,
-    final AudioQuality preferredQuality,
-    final bool downloadOnWifi,
-  }) = _$AudioSettingsImpl;
+  const factory _AudioSettings(
+      {final double playbackSpeed,
+      final double volume,
+      final bool autoPlay,
+      final AudioQuality preferredQuality,
+      final bool downloadOnWifi}) = _$AudioSettingsImpl;
 
   factory _AudioSettings.fromJson(Map<String, dynamic> json) =
       _$AudioSettingsImpl.fromJson;
@@ -2973,20 +2721,18 @@ mixin _$HabitStats {
 /// @nodoc
 abstract class $HabitStatsCopyWith<$Res> {
   factory $HabitStatsCopyWith(
-    HabitStats value,
-    $Res Function(HabitStats) then,
-  ) = _$HabitStatsCopyWithImpl<$Res, HabitStats>;
+          HabitStats value, $Res Function(HabitStats) then) =
+      _$HabitStatsCopyWithImpl<$Res, HabitStats>;
   @useResult
-  $Res call({
-    int currentStreak,
-    int longestStreak,
-    int totalDuas,
-    DateTime lastActivity,
-    Map<String, int> categoryStats,
-    List<DailyActivity> recentActivity,
-    int weeklyGoal,
-    int monthlyGoal,
-  });
+  $Res call(
+      {int currentStreak,
+      int longestStreak,
+      int totalDuas,
+      DateTime lastActivity,
+      Map<String, int> categoryStats,
+      List<DailyActivity> recentActivity,
+      int weeklyGoal,
+      int monthlyGoal});
 }
 
 /// @nodoc
@@ -3013,51 +2759,40 @@ class _$HabitStatsCopyWithImpl<$Res, $Val extends HabitStats>
     Object? weeklyGoal = null,
     Object? monthlyGoal = null,
   }) {
-    return _then(
-      _value.copyWith(
-            currentStreak:
-                null == currentStreak
-                    ? _value.currentStreak
-                    : currentStreak // ignore: cast_nullable_to_non_nullable
-                        as int,
-            longestStreak:
-                null == longestStreak
-                    ? _value.longestStreak
-                    : longestStreak // ignore: cast_nullable_to_non_nullable
-                        as int,
-            totalDuas:
-                null == totalDuas
-                    ? _value.totalDuas
-                    : totalDuas // ignore: cast_nullable_to_non_nullable
-                        as int,
-            lastActivity:
-                null == lastActivity
-                    ? _value.lastActivity
-                    : lastActivity // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            categoryStats:
-                null == categoryStats
-                    ? _value.categoryStats
-                    : categoryStats // ignore: cast_nullable_to_non_nullable
-                        as Map<String, int>,
-            recentActivity:
-                null == recentActivity
-                    ? _value.recentActivity
-                    : recentActivity // ignore: cast_nullable_to_non_nullable
-                        as List<DailyActivity>,
-            weeklyGoal:
-                null == weeklyGoal
-                    ? _value.weeklyGoal
-                    : weeklyGoal // ignore: cast_nullable_to_non_nullable
-                        as int,
-            monthlyGoal:
-                null == monthlyGoal
-                    ? _value.monthlyGoal
-                    : monthlyGoal // ignore: cast_nullable_to_non_nullable
-                        as int,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      currentStreak: null == currentStreak
+          ? _value.currentStreak
+          : currentStreak // ignore: cast_nullable_to_non_nullable
+              as int,
+      longestStreak: null == longestStreak
+          ? _value.longestStreak
+          : longestStreak // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalDuas: null == totalDuas
+          ? _value.totalDuas
+          : totalDuas // ignore: cast_nullable_to_non_nullable
+              as int,
+      lastActivity: null == lastActivity
+          ? _value.lastActivity
+          : lastActivity // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      categoryStats: null == categoryStats
+          ? _value.categoryStats
+          : categoryStats // ignore: cast_nullable_to_non_nullable
+              as Map<String, int>,
+      recentActivity: null == recentActivity
+          ? _value.recentActivity
+          : recentActivity // ignore: cast_nullable_to_non_nullable
+              as List<DailyActivity>,
+      weeklyGoal: null == weeklyGoal
+          ? _value.weeklyGoal
+          : weeklyGoal // ignore: cast_nullable_to_non_nullable
+              as int,
+      monthlyGoal: null == monthlyGoal
+          ? _value.monthlyGoal
+          : monthlyGoal // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
   }
 }
 
@@ -3065,21 +2800,19 @@ class _$HabitStatsCopyWithImpl<$Res, $Val extends HabitStats>
 abstract class _$$HabitStatsImplCopyWith<$Res>
     implements $HabitStatsCopyWith<$Res> {
   factory _$$HabitStatsImplCopyWith(
-    _$HabitStatsImpl value,
-    $Res Function(_$HabitStatsImpl) then,
-  ) = __$$HabitStatsImplCopyWithImpl<$Res>;
+          _$HabitStatsImpl value, $Res Function(_$HabitStatsImpl) then) =
+      __$$HabitStatsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    int currentStreak,
-    int longestStreak,
-    int totalDuas,
-    DateTime lastActivity,
-    Map<String, int> categoryStats,
-    List<DailyActivity> recentActivity,
-    int weeklyGoal,
-    int monthlyGoal,
-  });
+  $Res call(
+      {int currentStreak,
+      int longestStreak,
+      int totalDuas,
+      DateTime lastActivity,
+      Map<String, int> categoryStats,
+      List<DailyActivity> recentActivity,
+      int weeklyGoal,
+      int monthlyGoal});
 }
 
 /// @nodoc
@@ -3087,9 +2820,8 @@ class __$$HabitStatsImplCopyWithImpl<$Res>
     extends _$HabitStatsCopyWithImpl<$Res, _$HabitStatsImpl>
     implements _$$HabitStatsImplCopyWith<$Res> {
   __$$HabitStatsImplCopyWithImpl(
-    _$HabitStatsImpl _value,
-    $Res Function(_$HabitStatsImpl) _then,
-  ) : super(_value, _then);
+      _$HabitStatsImpl _value, $Res Function(_$HabitStatsImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of HabitStats
   /// with the given fields replaced by the non-null parameter values.
@@ -3105,67 +2837,57 @@ class __$$HabitStatsImplCopyWithImpl<$Res>
     Object? weeklyGoal = null,
     Object? monthlyGoal = null,
   }) {
-    return _then(
-      _$HabitStatsImpl(
-        currentStreak:
-            null == currentStreak
-                ? _value.currentStreak
-                : currentStreak // ignore: cast_nullable_to_non_nullable
-                    as int,
-        longestStreak:
-            null == longestStreak
-                ? _value.longestStreak
-                : longestStreak // ignore: cast_nullable_to_non_nullable
-                    as int,
-        totalDuas:
-            null == totalDuas
-                ? _value.totalDuas
-                : totalDuas // ignore: cast_nullable_to_non_nullable
-                    as int,
-        lastActivity:
-            null == lastActivity
-                ? _value.lastActivity
-                : lastActivity // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        categoryStats:
-            null == categoryStats
-                ? _value._categoryStats
-                : categoryStats // ignore: cast_nullable_to_non_nullable
-                    as Map<String, int>,
-        recentActivity:
-            null == recentActivity
-                ? _value._recentActivity
-                : recentActivity // ignore: cast_nullable_to_non_nullable
-                    as List<DailyActivity>,
-        weeklyGoal:
-            null == weeklyGoal
-                ? _value.weeklyGoal
-                : weeklyGoal // ignore: cast_nullable_to_non_nullable
-                    as int,
-        monthlyGoal:
-            null == monthlyGoal
-                ? _value.monthlyGoal
-                : monthlyGoal // ignore: cast_nullable_to_non_nullable
-                    as int,
-      ),
-    );
+    return _then(_$HabitStatsImpl(
+      currentStreak: null == currentStreak
+          ? _value.currentStreak
+          : currentStreak // ignore: cast_nullable_to_non_nullable
+              as int,
+      longestStreak: null == longestStreak
+          ? _value.longestStreak
+          : longestStreak // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalDuas: null == totalDuas
+          ? _value.totalDuas
+          : totalDuas // ignore: cast_nullable_to_non_nullable
+              as int,
+      lastActivity: null == lastActivity
+          ? _value.lastActivity
+          : lastActivity // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      categoryStats: null == categoryStats
+          ? _value._categoryStats
+          : categoryStats // ignore: cast_nullable_to_non_nullable
+              as Map<String, int>,
+      recentActivity: null == recentActivity
+          ? _value._recentActivity
+          : recentActivity // ignore: cast_nullable_to_non_nullable
+              as List<DailyActivity>,
+      weeklyGoal: null == weeklyGoal
+          ? _value.weeklyGoal
+          : weeklyGoal // ignore: cast_nullable_to_non_nullable
+              as int,
+      monthlyGoal: null == monthlyGoal
+          ? _value.monthlyGoal
+          : monthlyGoal // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$HabitStatsImpl implements _HabitStats {
-  const _$HabitStatsImpl({
-    required this.currentStreak,
-    required this.longestStreak,
-    required this.totalDuas,
-    required this.lastActivity,
-    required final Map<String, int> categoryStats,
-    required final List<DailyActivity> recentActivity,
-    this.weeklyGoal = 0,
-    this.monthlyGoal = 0,
-  }) : _categoryStats = categoryStats,
-       _recentActivity = recentActivity;
+  const _$HabitStatsImpl(
+      {required this.currentStreak,
+      required this.longestStreak,
+      required this.totalDuas,
+      required this.lastActivity,
+      required final Map<String, int> categoryStats,
+      required final List<DailyActivity> recentActivity,
+      this.weeklyGoal = 0,
+      this.monthlyGoal = 0})
+      : _categoryStats = categoryStats,
+        _recentActivity = recentActivity;
 
   factory _$HabitStatsImpl.fromJson(Map<String, dynamic> json) =>
       _$$HabitStatsImplFromJson(json);
@@ -3219,14 +2941,10 @@ class _$HabitStatsImpl implements _HabitStats {
                 other.totalDuas == totalDuas) &&
             (identical(other.lastActivity, lastActivity) ||
                 other.lastActivity == lastActivity) &&
-            const DeepCollectionEquality().equals(
-              other._categoryStats,
-              _categoryStats,
-            ) &&
-            const DeepCollectionEquality().equals(
-              other._recentActivity,
-              _recentActivity,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._categoryStats, _categoryStats) &&
+            const DeepCollectionEquality()
+                .equals(other._recentActivity, _recentActivity) &&
             (identical(other.weeklyGoal, weeklyGoal) ||
                 other.weeklyGoal == weeklyGoal) &&
             (identical(other.monthlyGoal, monthlyGoal) ||
@@ -3236,16 +2954,15 @@ class _$HabitStatsImpl implements _HabitStats {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    currentStreak,
-    longestStreak,
-    totalDuas,
-    lastActivity,
-    const DeepCollectionEquality().hash(_categoryStats),
-    const DeepCollectionEquality().hash(_recentActivity),
-    weeklyGoal,
-    monthlyGoal,
-  );
+      runtimeType,
+      currentStreak,
+      longestStreak,
+      totalDuas,
+      lastActivity,
+      const DeepCollectionEquality().hash(_categoryStats),
+      const DeepCollectionEquality().hash(_recentActivity),
+      weeklyGoal,
+      monthlyGoal);
 
   /// Create a copy of HabitStats
   /// with the given fields replaced by the non-null parameter values.
@@ -3257,21 +2974,22 @@ class _$HabitStatsImpl implements _HabitStats {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$HabitStatsImplToJson(this);
+    return _$$HabitStatsImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _HabitStats implements HabitStats {
-  const factory _HabitStats({
-    required final int currentStreak,
-    required final int longestStreak,
-    required final int totalDuas,
-    required final DateTime lastActivity,
-    required final Map<String, int> categoryStats,
-    required final List<DailyActivity> recentActivity,
-    final int weeklyGoal,
-    final int monthlyGoal,
-  }) = _$HabitStatsImpl;
+  const factory _HabitStats(
+      {required final int currentStreak,
+      required final int longestStreak,
+      required final int totalDuas,
+      required final DateTime lastActivity,
+      required final Map<String, int> categoryStats,
+      required final List<DailyActivity> recentActivity,
+      final int weeklyGoal,
+      final int monthlyGoal}) = _$HabitStatsImpl;
 
   factory _HabitStats.fromJson(Map<String, dynamic> json) =
       _$HabitStatsImpl.fromJson;
@@ -3326,17 +3044,15 @@ mixin _$DailyActivity {
 /// @nodoc
 abstract class $DailyActivityCopyWith<$Res> {
   factory $DailyActivityCopyWith(
-    DailyActivity value,
-    $Res Function(DailyActivity) then,
-  ) = _$DailyActivityCopyWithImpl<$Res, DailyActivity>;
+          DailyActivity value, $Res Function(DailyActivity) then) =
+      _$DailyActivityCopyWithImpl<$Res, DailyActivity>;
   @useResult
-  $Res call({
-    DateTime date,
-    int duaCount,
-    Duration totalTime,
-    List<String> categories,
-    bool goalMet,
-  });
+  $Res call(
+      {DateTime date,
+      int duaCount,
+      Duration totalTime,
+      List<String> categories,
+      bool goalMet});
 }
 
 /// @nodoc
@@ -3360,36 +3076,28 @@ class _$DailyActivityCopyWithImpl<$Res, $Val extends DailyActivity>
     Object? categories = null,
     Object? goalMet = null,
   }) {
-    return _then(
-      _value.copyWith(
-            date:
-                null == date
-                    ? _value.date
-                    : date // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            duaCount:
-                null == duaCount
-                    ? _value.duaCount
-                    : duaCount // ignore: cast_nullable_to_non_nullable
-                        as int,
-            totalTime:
-                null == totalTime
-                    ? _value.totalTime
-                    : totalTime // ignore: cast_nullable_to_non_nullable
-                        as Duration,
-            categories:
-                null == categories
-                    ? _value.categories
-                    : categories // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            goalMet:
-                null == goalMet
-                    ? _value.goalMet
-                    : goalMet // ignore: cast_nullable_to_non_nullable
-                        as bool,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      duaCount: null == duaCount
+          ? _value.duaCount
+          : duaCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalTime: null == totalTime
+          ? _value.totalTime
+          : totalTime // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      categories: null == categories
+          ? _value.categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      goalMet: null == goalMet
+          ? _value.goalMet
+          : goalMet // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
   }
 }
 
@@ -3397,18 +3105,16 @@ class _$DailyActivityCopyWithImpl<$Res, $Val extends DailyActivity>
 abstract class _$$DailyActivityImplCopyWith<$Res>
     implements $DailyActivityCopyWith<$Res> {
   factory _$$DailyActivityImplCopyWith(
-    _$DailyActivityImpl value,
-    $Res Function(_$DailyActivityImpl) then,
-  ) = __$$DailyActivityImplCopyWithImpl<$Res>;
+          _$DailyActivityImpl value, $Res Function(_$DailyActivityImpl) then) =
+      __$$DailyActivityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    DateTime date,
-    int duaCount,
-    Duration totalTime,
-    List<String> categories,
-    bool goalMet,
-  });
+  $Res call(
+      {DateTime date,
+      int duaCount,
+      Duration totalTime,
+      List<String> categories,
+      bool goalMet});
 }
 
 /// @nodoc
@@ -3416,9 +3122,8 @@ class __$$DailyActivityImplCopyWithImpl<$Res>
     extends _$DailyActivityCopyWithImpl<$Res, _$DailyActivityImpl>
     implements _$$DailyActivityImplCopyWith<$Res> {
   __$$DailyActivityImplCopyWithImpl(
-    _$DailyActivityImpl _value,
-    $Res Function(_$DailyActivityImpl) _then,
-  ) : super(_value, _then);
+      _$DailyActivityImpl _value, $Res Function(_$DailyActivityImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of DailyActivity
   /// with the given fields replaced by the non-null parameter values.
@@ -3431,48 +3136,41 @@ class __$$DailyActivityImplCopyWithImpl<$Res>
     Object? categories = null,
     Object? goalMet = null,
   }) {
-    return _then(
-      _$DailyActivityImpl(
-        date:
-            null == date
-                ? _value.date
-                : date // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        duaCount:
-            null == duaCount
-                ? _value.duaCount
-                : duaCount // ignore: cast_nullable_to_non_nullable
-                    as int,
-        totalTime:
-            null == totalTime
-                ? _value.totalTime
-                : totalTime // ignore: cast_nullable_to_non_nullable
-                    as Duration,
-        categories:
-            null == categories
-                ? _value._categories
-                : categories // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        goalMet:
-            null == goalMet
-                ? _value.goalMet
-                : goalMet // ignore: cast_nullable_to_non_nullable
-                    as bool,
-      ),
-    );
+    return _then(_$DailyActivityImpl(
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      duaCount: null == duaCount
+          ? _value.duaCount
+          : duaCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalTime: null == totalTime
+          ? _value.totalTime
+          : totalTime // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      categories: null == categories
+          ? _value._categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      goalMet: null == goalMet
+          ? _value.goalMet
+          : goalMet // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$DailyActivityImpl implements _DailyActivity {
-  const _$DailyActivityImpl({
-    required this.date,
-    required this.duaCount,
-    required this.totalTime,
-    required final List<String> categories,
-    this.goalMet = false,
-  }) : _categories = categories;
+  const _$DailyActivityImpl(
+      {required this.date,
+      required this.duaCount,
+      required this.totalTime,
+      required final List<String> categories,
+      this.goalMet = false})
+      : _categories = categories;
 
   factory _$DailyActivityImpl.fromJson(Map<String, dynamic> json) =>
       _$$DailyActivityImplFromJson(json);
@@ -3510,23 +3208,15 @@ class _$DailyActivityImpl implements _DailyActivity {
                 other.duaCount == duaCount) &&
             (identical(other.totalTime, totalTime) ||
                 other.totalTime == totalTime) &&
-            const DeepCollectionEquality().equals(
-              other._categories,
-              _categories,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._categories, _categories) &&
             (identical(other.goalMet, goalMet) || other.goalMet == goalMet));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    date,
-    duaCount,
-    totalTime,
-    const DeepCollectionEquality().hash(_categories),
-    goalMet,
-  );
+  int get hashCode => Object.hash(runtimeType, date, duaCount, totalTime,
+      const DeepCollectionEquality().hash(_categories), goalMet);
 
   /// Create a copy of DailyActivity
   /// with the given fields replaced by the non-null parameter values.
@@ -3538,18 +3228,19 @@ class _$DailyActivityImpl implements _DailyActivity {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$DailyActivityImplToJson(this);
+    return _$$DailyActivityImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _DailyActivity implements DailyActivity {
-  const factory _DailyActivity({
-    required final DateTime date,
-    required final int duaCount,
-    required final Duration totalTime,
-    required final List<String> categories,
-    final bool goalMet,
-  }) = _$DailyActivityImpl;
+  const factory _DailyActivity(
+      {required final DateTime date,
+      required final int duaCount,
+      required final Duration totalTime,
+      required final List<String> categories,
+      final bool goalMet}) = _$DailyActivityImpl;
 
   factory _DailyActivity.fromJson(Map<String, dynamic> json) =
       _$DailyActivityImpl.fromJson;
@@ -3600,19 +3291,17 @@ mixin _$SmartSuggestion {
 /// @nodoc
 abstract class $SmartSuggestionCopyWith<$Res> {
   factory $SmartSuggestionCopyWith(
-    SmartSuggestion value,
-    $Res Function(SmartSuggestion) then,
-  ) = _$SmartSuggestionCopyWithImpl<$Res, SmartSuggestion>;
+          SmartSuggestion value, $Res Function(SmartSuggestion) then) =
+      _$SmartSuggestionCopyWithImpl<$Res, SmartSuggestion>;
   @useResult
-  $Res call({
-    String duaId,
-    SuggestionType type,
-    double confidence,
-    String reason,
-    DateTime timestamp,
-    SuggestionTrigger trigger,
-    Map<String, dynamic>? context,
-  });
+  $Res call(
+      {String duaId,
+      SuggestionType type,
+      double confidence,
+      String reason,
+      DateTime timestamp,
+      SuggestionTrigger trigger,
+      Map<String, dynamic>? context});
 }
 
 /// @nodoc
@@ -3638,67 +3327,55 @@ class _$SmartSuggestionCopyWithImpl<$Res, $Val extends SmartSuggestion>
     Object? trigger = null,
     Object? context = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            duaId:
-                null == duaId
-                    ? _value.duaId
-                    : duaId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            type:
-                null == type
-                    ? _value.type
-                    : type // ignore: cast_nullable_to_non_nullable
-                        as SuggestionType,
-            confidence:
-                null == confidence
-                    ? _value.confidence
-                    : confidence // ignore: cast_nullable_to_non_nullable
-                        as double,
-            reason:
-                null == reason
-                    ? _value.reason
-                    : reason // ignore: cast_nullable_to_non_nullable
-                        as String,
-            timestamp:
-                null == timestamp
-                    ? _value.timestamp
-                    : timestamp // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            trigger:
-                null == trigger
-                    ? _value.trigger
-                    : trigger // ignore: cast_nullable_to_non_nullable
-                        as SuggestionTrigger,
-            context:
-                freezed == context
-                    ? _value.context
-                    : context // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      duaId: null == duaId
+          ? _value.duaId
+          : duaId // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as SuggestionType,
+      confidence: null == confidence
+          ? _value.confidence
+          : confidence // ignore: cast_nullable_to_non_nullable
+              as double,
+      reason: null == reason
+          ? _value.reason
+          : reason // ignore: cast_nullable_to_non_nullable
+              as String,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      trigger: null == trigger
+          ? _value.trigger
+          : trigger // ignore: cast_nullable_to_non_nullable
+              as SuggestionTrigger,
+      context: freezed == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$SmartSuggestionImplCopyWith<$Res>
     implements $SmartSuggestionCopyWith<$Res> {
-  factory _$$SmartSuggestionImplCopyWith(
-    _$SmartSuggestionImpl value,
-    $Res Function(_$SmartSuggestionImpl) then,
-  ) = __$$SmartSuggestionImplCopyWithImpl<$Res>;
+  factory _$$SmartSuggestionImplCopyWith(_$SmartSuggestionImpl value,
+          $Res Function(_$SmartSuggestionImpl) then) =
+      __$$SmartSuggestionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String duaId,
-    SuggestionType type,
-    double confidence,
-    String reason,
-    DateTime timestamp,
-    SuggestionTrigger trigger,
-    Map<String, dynamic>? context,
-  });
+  $Res call(
+      {String duaId,
+      SuggestionType type,
+      double confidence,
+      String reason,
+      DateTime timestamp,
+      SuggestionTrigger trigger,
+      Map<String, dynamic>? context});
 }
 
 /// @nodoc
@@ -3706,9 +3383,8 @@ class __$$SmartSuggestionImplCopyWithImpl<$Res>
     extends _$SmartSuggestionCopyWithImpl<$Res, _$SmartSuggestionImpl>
     implements _$$SmartSuggestionImplCopyWith<$Res> {
   __$$SmartSuggestionImplCopyWithImpl(
-    _$SmartSuggestionImpl _value,
-    $Res Function(_$SmartSuggestionImpl) _then,
-  ) : super(_value, _then);
+      _$SmartSuggestionImpl _value, $Res Function(_$SmartSuggestionImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of SmartSuggestion
   /// with the given fields replaced by the non-null parameter values.
@@ -3723,60 +3399,51 @@ class __$$SmartSuggestionImplCopyWithImpl<$Res>
     Object? trigger = null,
     Object? context = freezed,
   }) {
-    return _then(
-      _$SmartSuggestionImpl(
-        duaId:
-            null == duaId
-                ? _value.duaId
-                : duaId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        type:
-            null == type
-                ? _value.type
-                : type // ignore: cast_nullable_to_non_nullable
-                    as SuggestionType,
-        confidence:
-            null == confidence
-                ? _value.confidence
-                : confidence // ignore: cast_nullable_to_non_nullable
-                    as double,
-        reason:
-            null == reason
-                ? _value.reason
-                : reason // ignore: cast_nullable_to_non_nullable
-                    as String,
-        timestamp:
-            null == timestamp
-                ? _value.timestamp
-                : timestamp // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        trigger:
-            null == trigger
-                ? _value.trigger
-                : trigger // ignore: cast_nullable_to_non_nullable
-                    as SuggestionTrigger,
-        context:
-            freezed == context
-                ? _value._context
-                : context // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>?,
-      ),
-    );
+    return _then(_$SmartSuggestionImpl(
+      duaId: null == duaId
+          ? _value.duaId
+          : duaId // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as SuggestionType,
+      confidence: null == confidence
+          ? _value.confidence
+          : confidence // ignore: cast_nullable_to_non_nullable
+              as double,
+      reason: null == reason
+          ? _value.reason
+          : reason // ignore: cast_nullable_to_non_nullable
+              as String,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      trigger: null == trigger
+          ? _value.trigger
+          : trigger // ignore: cast_nullable_to_non_nullable
+              as SuggestionTrigger,
+      context: freezed == context
+          ? _value._context
+          : context // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$SmartSuggestionImpl implements _SmartSuggestion {
-  const _$SmartSuggestionImpl({
-    required this.duaId,
-    required this.type,
-    required this.confidence,
-    required this.reason,
-    required this.timestamp,
-    required this.trigger,
-    final Map<String, dynamic>? context,
-  }) : _context = context;
+  const _$SmartSuggestionImpl(
+      {required this.duaId,
+      required this.type,
+      required this.confidence,
+      required this.reason,
+      required this.timestamp,
+      required this.trigger,
+      final Map<String, dynamic>? context})
+      : _context = context;
 
   factory _$SmartSuggestionImpl.fromJson(Map<String, dynamic> json) =>
       _$$SmartSuggestionImplFromJson(json);
@@ -3826,16 +3493,8 @@ class _$SmartSuggestionImpl implements _SmartSuggestion {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    duaId,
-    type,
-    confidence,
-    reason,
-    timestamp,
-    trigger,
-    const DeepCollectionEquality().hash(_context),
-  );
+  int get hashCode => Object.hash(runtimeType, duaId, type, confidence, reason,
+      timestamp, trigger, const DeepCollectionEquality().hash(_context));
 
   /// Create a copy of SmartSuggestion
   /// with the given fields replaced by the non-null parameter values.
@@ -3844,26 +3503,25 @@ class _$SmartSuggestionImpl implements _SmartSuggestion {
   @pragma('vm:prefer-inline')
   _$$SmartSuggestionImplCopyWith<_$SmartSuggestionImpl> get copyWith =>
       __$$SmartSuggestionImplCopyWithImpl<_$SmartSuggestionImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SmartSuggestionImplToJson(this);
+    return _$$SmartSuggestionImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _SmartSuggestion implements SmartSuggestion {
-  const factory _SmartSuggestion({
-    required final String duaId,
-    required final SuggestionType type,
-    required final double confidence,
-    required final String reason,
-    required final DateTime timestamp,
-    required final SuggestionTrigger trigger,
-    final Map<String, dynamic>? context,
-  }) = _$SmartSuggestionImpl;
+  const factory _SmartSuggestion(
+      {required final String duaId,
+      required final SuggestionType type,
+      required final double confidence,
+      required final String reason,
+      required final DateTime timestamp,
+      required final SuggestionTrigger trigger,
+      final Map<String, dynamic>? context}) = _$SmartSuggestionImpl;
 
   factory _SmartSuggestion.fromJson(Map<String, dynamic> json) =
       _$SmartSuggestionImpl.fromJson;
@@ -3919,29 +3577,25 @@ mixin _$NotificationSchedule {
 
 /// @nodoc
 abstract class $NotificationScheduleCopyWith<$Res> {
-  factory $NotificationScheduleCopyWith(
-    NotificationSchedule value,
-    $Res Function(NotificationSchedule) then,
-  ) = _$NotificationScheduleCopyWithImpl<$Res, NotificationSchedule>;
+  factory $NotificationScheduleCopyWith(NotificationSchedule value,
+          $Res Function(NotificationSchedule) then) =
+      _$NotificationScheduleCopyWithImpl<$Res, NotificationSchedule>;
   @useResult
-  $Res call({
-    String id,
-    String title,
-    String body,
-    DateTime scheduledTime,
-    NotificationType type,
-    String? duaId,
-    Map<String, dynamic>? payload,
-    bool isRepeating,
-    RepeatInterval? repeatInterval,
-  });
+  $Res call(
+      {String id,
+      String title,
+      String body,
+      DateTime scheduledTime,
+      NotificationType type,
+      String? duaId,
+      Map<String, dynamic>? payload,
+      bool isRepeating,
+      RepeatInterval? repeatInterval});
 }
 
 /// @nodoc
-class _$NotificationScheduleCopyWithImpl<
-  $Res,
-  $Val extends NotificationSchedule
->
+class _$NotificationScheduleCopyWithImpl<$Res,
+        $Val extends NotificationSchedule>
     implements $NotificationScheduleCopyWith<$Res> {
   _$NotificationScheduleCopyWithImpl(this._value, this._then);
 
@@ -3965,89 +3619,74 @@ class _$NotificationScheduleCopyWithImpl<
     Object? isRepeating = null,
     Object? repeatInterval = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            title:
-                null == title
-                    ? _value.title
-                    : title // ignore: cast_nullable_to_non_nullable
-                        as String,
-            body:
-                null == body
-                    ? _value.body
-                    : body // ignore: cast_nullable_to_non_nullable
-                        as String,
-            scheduledTime:
-                null == scheduledTime
-                    ? _value.scheduledTime
-                    : scheduledTime // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            type:
-                null == type
-                    ? _value.type
-                    : type // ignore: cast_nullable_to_non_nullable
-                        as NotificationType,
-            duaId:
-                freezed == duaId
-                    ? _value.duaId
-                    : duaId // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            payload:
-                freezed == payload
-                    ? _value.payload
-                    : payload // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>?,
-            isRepeating:
-                null == isRepeating
-                    ? _value.isRepeating
-                    : isRepeating // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            repeatInterval:
-                freezed == repeatInterval
-                    ? _value.repeatInterval
-                    : repeatInterval // ignore: cast_nullable_to_non_nullable
-                        as RepeatInterval?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      body: null == body
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as String,
+      scheduledTime: null == scheduledTime
+          ? _value.scheduledTime
+          : scheduledTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as NotificationType,
+      duaId: freezed == duaId
+          ? _value.duaId
+          : duaId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      payload: freezed == payload
+          ? _value.payload
+          : payload // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      isRepeating: null == isRepeating
+          ? _value.isRepeating
+          : isRepeating // ignore: cast_nullable_to_non_nullable
+              as bool,
+      repeatInterval: freezed == repeatInterval
+          ? _value.repeatInterval
+          : repeatInterval // ignore: cast_nullable_to_non_nullable
+              as RepeatInterval?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$NotificationScheduleImplCopyWith<$Res>
     implements $NotificationScheduleCopyWith<$Res> {
-  factory _$$NotificationScheduleImplCopyWith(
-    _$NotificationScheduleImpl value,
-    $Res Function(_$NotificationScheduleImpl) then,
-  ) = __$$NotificationScheduleImplCopyWithImpl<$Res>;
+  factory _$$NotificationScheduleImplCopyWith(_$NotificationScheduleImpl value,
+          $Res Function(_$NotificationScheduleImpl) then) =
+      __$$NotificationScheduleImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String title,
-    String body,
-    DateTime scheduledTime,
-    NotificationType type,
-    String? duaId,
-    Map<String, dynamic>? payload,
-    bool isRepeating,
-    RepeatInterval? repeatInterval,
-  });
+  $Res call(
+      {String id,
+      String title,
+      String body,
+      DateTime scheduledTime,
+      NotificationType type,
+      String? duaId,
+      Map<String, dynamic>? payload,
+      bool isRepeating,
+      RepeatInterval? repeatInterval});
 }
 
 /// @nodoc
 class __$$NotificationScheduleImplCopyWithImpl<$Res>
     extends _$NotificationScheduleCopyWithImpl<$Res, _$NotificationScheduleImpl>
     implements _$$NotificationScheduleImplCopyWith<$Res> {
-  __$$NotificationScheduleImplCopyWithImpl(
-    _$NotificationScheduleImpl _value,
-    $Res Function(_$NotificationScheduleImpl) _then,
-  ) : super(_value, _then);
+  __$$NotificationScheduleImplCopyWithImpl(_$NotificationScheduleImpl _value,
+      $Res Function(_$NotificationScheduleImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of NotificationSchedule
   /// with the given fields replaced by the non-null parameter values.
@@ -4064,72 +3703,61 @@ class __$$NotificationScheduleImplCopyWithImpl<$Res>
     Object? isRepeating = null,
     Object? repeatInterval = freezed,
   }) {
-    return _then(
-      _$NotificationScheduleImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        title:
-            null == title
-                ? _value.title
-                : title // ignore: cast_nullable_to_non_nullable
-                    as String,
-        body:
-            null == body
-                ? _value.body
-                : body // ignore: cast_nullable_to_non_nullable
-                    as String,
-        scheduledTime:
-            null == scheduledTime
-                ? _value.scheduledTime
-                : scheduledTime // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        type:
-            null == type
-                ? _value.type
-                : type // ignore: cast_nullable_to_non_nullable
-                    as NotificationType,
-        duaId:
-            freezed == duaId
-                ? _value.duaId
-                : duaId // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        payload:
-            freezed == payload
-                ? _value._payload
-                : payload // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>?,
-        isRepeating:
-            null == isRepeating
-                ? _value.isRepeating
-                : isRepeating // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        repeatInterval:
-            freezed == repeatInterval
-                ? _value.repeatInterval
-                : repeatInterval // ignore: cast_nullable_to_non_nullable
-                    as RepeatInterval?,
-      ),
-    );
+    return _then(_$NotificationScheduleImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      body: null == body
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as String,
+      scheduledTime: null == scheduledTime
+          ? _value.scheduledTime
+          : scheduledTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as NotificationType,
+      duaId: freezed == duaId
+          ? _value.duaId
+          : duaId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      payload: freezed == payload
+          ? _value._payload
+          : payload // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      isRepeating: null == isRepeating
+          ? _value.isRepeating
+          : isRepeating // ignore: cast_nullable_to_non_nullable
+              as bool,
+      repeatInterval: freezed == repeatInterval
+          ? _value.repeatInterval
+          : repeatInterval // ignore: cast_nullable_to_non_nullable
+              as RepeatInterval?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$NotificationScheduleImpl implements _NotificationSchedule {
-  const _$NotificationScheduleImpl({
-    required this.id,
-    required this.title,
-    required this.body,
-    required this.scheduledTime,
-    required this.type,
-    this.duaId,
-    final Map<String, dynamic>? payload,
-    this.isRepeating = false,
-    this.repeatInterval,
-  }) : _payload = payload;
+  const _$NotificationScheduleImpl(
+      {required this.id,
+      required this.title,
+      required this.body,
+      required this.scheduledTime,
+      required this.type,
+      this.duaId,
+      final Map<String, dynamic>? payload,
+      this.isRepeating = false,
+      this.repeatInterval})
+      : _payload = payload;
 
   factory _$NotificationScheduleImpl.fromJson(Map<String, dynamic> json) =>
       _$$NotificationScheduleImplFromJson(json);
@@ -4189,17 +3817,16 @@ class _$NotificationScheduleImpl implements _NotificationSchedule {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    title,
-    body,
-    scheduledTime,
-    type,
-    duaId,
-    const DeepCollectionEquality().hash(_payload),
-    isRepeating,
-    repeatInterval,
-  );
+      runtimeType,
+      id,
+      title,
+      body,
+      scheduledTime,
+      type,
+      duaId,
+      const DeepCollectionEquality().hash(_payload),
+      isRepeating,
+      repeatInterval);
 
   /// Create a copy of NotificationSchedule
   /// with the given fields replaced by the non-null parameter values.
@@ -4207,30 +3834,29 @@ class _$NotificationScheduleImpl implements _NotificationSchedule {
   @override
   @pragma('vm:prefer-inline')
   _$$NotificationScheduleImplCopyWith<_$NotificationScheduleImpl>
-  get copyWith =>
-      __$$NotificationScheduleImplCopyWithImpl<_$NotificationScheduleImpl>(
-        this,
-        _$identity,
-      );
+      get copyWith =>
+          __$$NotificationScheduleImplCopyWithImpl<_$NotificationScheduleImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$NotificationScheduleImplToJson(this);
+    return _$$NotificationScheduleImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _NotificationSchedule implements NotificationSchedule {
-  const factory _NotificationSchedule({
-    required final String id,
-    required final String title,
-    required final String body,
-    required final DateTime scheduledTime,
-    required final NotificationType type,
-    final String? duaId,
-    final Map<String, dynamic>? payload,
-    final bool isRepeating,
-    final RepeatInterval? repeatInterval,
-  }) = _$NotificationScheduleImpl;
+  const factory _NotificationSchedule(
+      {required final String id,
+      required final String title,
+      required final String body,
+      required final DateTime scheduledTime,
+      required final NotificationType type,
+      final String? duaId,
+      final Map<String, dynamic>? payload,
+      final bool isRepeating,
+      final RepeatInterval? repeatInterval}) = _$NotificationScheduleImpl;
 
   factory _NotificationSchedule.fromJson(Map<String, dynamic> json) =
       _$NotificationScheduleImpl.fromJson;
@@ -4259,5 +3885,5 @@ abstract class _NotificationSchedule implements NotificationSchedule {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$NotificationScheduleImplCopyWith<_$NotificationScheduleImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }

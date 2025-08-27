@@ -169,7 +169,7 @@ class _ScholarFeedbackFormState extends State<ScholarFeedbackForm> {
         borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.2),
             blurRadius: 10,
             offset: const Offset(0, -5),
           ),
@@ -188,7 +188,7 @@ class _ScholarFeedbackFormState extends State<ScholarFeedbackForm> {
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: theme.primaryColor.withOpacity(0.1),
+                      color: theme.primaryColor.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Icon(
@@ -211,7 +211,7 @@ class _ScholarFeedbackFormState extends State<ScholarFeedbackForm> {
                         Text(
                           'Verify content authenticity',
                           style: theme.textTheme.bodyMedium?.copyWith(
-                            color: theme.colorScheme.onSurface.withOpacity(0.7),
+                            color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
                           ),
                         ),
                       ],
@@ -345,8 +345,7 @@ class _ScholarFeedbackFormState extends State<ScholarFeedbackForm> {
                   'Supporting Sources (Optional)',
                   Icons.library_books,
                 ).copyWith(
-                  helperText:
-                      'Provide Quran verses, Hadith, or scholarly references',
+                  helperText: 'Provide Quran verses, Hadith, or scholarly references',
                 ),
                 maxLines: 3,
               ),
@@ -384,32 +383,31 @@ class _ScholarFeedbackFormState extends State<ScholarFeedbackForm> {
                     ),
                     elevation: 2,
                   ),
-                  child:
-                      _isSubmitting
-                          ? const SizedBox(
-                            height: 20,
-                            width: 20,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                Colors.white,
+                  child: _isSubmitting
+                      ? const SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              Colors.white,
+                            ),
+                          ),
+                        )
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(Icons.verified_user, size: 20),
+                            const SizedBox(width: 8),
+                            const Text(
+                              'Submit Verification',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
-                          )
-                          : Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(Icons.verified_user, size: 20),
-                              const SizedBox(width: 8),
-                              const Text(
-                                'Submit Verification',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
+                          ],
+                        ),
                 ),
               ),
 
@@ -419,10 +417,10 @@ class _ScholarFeedbackFormState extends State<ScholarFeedbackForm> {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: theme.colorScheme.surface.withOpacity(0.5),
+                  color: theme.colorScheme.surface.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                    color: theme.colorScheme.outline.withOpacity(0.2),
+                    color: theme.colorScheme.outline.withValues(alpha: 0.2),
                   ),
                 ),
                 child: Column(
@@ -447,7 +445,7 @@ class _ScholarFeedbackFormState extends State<ScholarFeedbackForm> {
                       '• You understand this will be used to improve content quality\n'
                       '• Your name and institution may be displayed with the verification',
                       style: theme.textTheme.bodySmall?.copyWith(
-                        color: theme.colorScheme.onSurface.withOpacity(0.7),
+                        color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
                       ),
                     ),
                   ],
@@ -474,15 +472,9 @@ class _ScholarFeedbackFormState extends State<ScholarFeedbackForm> {
         margin: const EdgeInsets.only(bottom: 8),
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color:
-              isSelected
-                  ? theme.primaryColor.withOpacity(0.1)
-                  : Colors.transparent,
+          color: isSelected ? theme.primaryColor.withValues(alpha: 0.1) : Colors.transparent,
           border: Border.all(
-            color:
-                isSelected
-                    ? theme.primaryColor
-                    : theme.colorScheme.outline.withOpacity(0.3),
+            color: isSelected ? theme.primaryColor : theme.colorScheme.outline.withValues(alpha: 0.3),
             width: isSelected ? 2 : 1,
           ),
           borderRadius: BorderRadius.circular(8),
@@ -497,10 +489,7 @@ class _ScholarFeedbackFormState extends State<ScholarFeedbackForm> {
                 color: isSelected ? theme.primaryColor : Colors.transparent,
                 border: Border.all(color: theme.primaryColor, width: 2),
               ),
-              child:
-                  isSelected
-                      ? Icon(Icons.check, size: 12, color: Colors.white)
-                      : null,
+              child: isSelected ? Icon(Icons.check, size: 12, color: Colors.white) : null,
             ),
             const SizedBox(width: 12),
             Expanded(
@@ -517,7 +506,7 @@ class _ScholarFeedbackFormState extends State<ScholarFeedbackForm> {
                   Text(
                     level.description,
                     style: theme.textTheme.bodySmall?.copyWith(
-                      color: theme.colorScheme.onSurface.withOpacity(0.7),
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
                     ),
                   ),
                 ],
@@ -541,7 +530,7 @@ class _ScholarFeedbackFormState extends State<ScholarFeedbackForm> {
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        border: Border.all(color: color.withOpacity(0.3)),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
@@ -549,7 +538,7 @@ class _ScholarFeedbackFormState extends State<ScholarFeedbackForm> {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: color.withOpacity(0.1),
+              color: color.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(6),
             ),
             child: Icon(icon, color: color, size: 20),
@@ -568,7 +557,7 @@ class _ScholarFeedbackFormState extends State<ScholarFeedbackForm> {
                 Text(
                   description,
                   style: theme.textTheme.bodySmall?.copyWith(
-                    color: theme.colorScheme.onSurface.withOpacity(0.7),
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
                   ),
                 ),
               ],
@@ -596,7 +585,7 @@ class _ScholarFeedbackFormState extends State<ScholarFeedbackForm> {
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
         borderSide: BorderSide(
-          color: theme.colorScheme.outline.withOpacity(0.5),
+          color: theme.colorScheme.outline.withValues(alpha: 0.3),
         ),
       ),
       focusedBorder: OutlineInputBorder(
@@ -706,10 +695,7 @@ class ScholarVerificationBadge extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         decoration: BoxDecoration(
-          color:
-              status.isVerified
-                  ? Colors.green.withOpacity(0.1)
-                  : Colors.orange.withOpacity(0.1),
+          color: status.isVerified ? Colors.green.withValues(alpha: 0.1) : Colors.orange.withValues(alpha: 0.1),
           border: Border.all(
             color: status.isVerified ? Colors.green : Colors.orange,
           ),

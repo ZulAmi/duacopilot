@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+
 import '../comprehensive_test_config.dart';
 
 /// Golden tests for Arabic text rendering and RTL layout verification
@@ -473,7 +474,7 @@ void main() {
         await tester.pumpAndSettle();
 
         // Verify semantic information is present
-        expect(tester.binding.pipelineOwner.semanticsOwner, isNotNull);
+        expect(tester.binding.rootPipelineOwner.semanticsOwner, isNotNull);
 
         // Find semantic widgets
         expect(find.byType(Semantics), findsNWidgets(2));
@@ -593,9 +594,7 @@ void main() {
                 child: ListView.builder(
                   itemCount: 100,
                   itemBuilder: (context, index) {
-                    final arabicText =
-                        TestConfig.sampleArabicQueries[index %
-                            TestConfig.sampleArabicQueries.length];
+                    final arabicText = TestConfig.sampleArabicQueries[index % TestConfig.sampleArabicQueries.length];
                     return ListTile(
                       title: Text('$arabicText - $index'),
                       subtitle: Text('عنصر رقم $index في القائمة'),

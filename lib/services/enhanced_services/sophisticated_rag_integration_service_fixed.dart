@@ -27,15 +27,12 @@ class SophisticatedRagIntegrationServiceFixed {
   CulturalContext? _currentCulturalContext;
 
   // Stream controllers
-  final _queryProcessedController =
-      StreamController<SophisticatedQueryResult>.broadcast();
+  final _queryProcessedController = StreamController<SophisticatedQueryResult>.broadcast();
   final _contextUpdateController = StreamController<ContextUpdate>.broadcast();
 
   // Public streams
-  Stream<SophisticatedQueryResult> get queryProcessedStream =>
-      _queryProcessedController.stream;
-  Stream<ContextUpdate> get contextUpdateStream =>
-      _contextUpdateController.stream;
+  Stream<SophisticatedQueryResult> get queryProcessedStream => _queryProcessedController.stream;
+  Stream<ContextUpdate> get contextUpdateStream => _contextUpdateController.stream;
 
   // Singleton pattern
   static SophisticatedRagIntegrationServiceFixed? _instance;
@@ -70,8 +67,7 @@ class SophisticatedRagIntegrationServiceFixed {
       await _backgroundService.startService();
 
       // Load current cultural context
-      _currentCulturalContext =
-          await _culturalService.getCurrentCulturalContext();
+      _currentCulturalContext = await _culturalService.getCurrentCulturalContext();
 
       _isInitialized = true;
       AppLogger.info(
@@ -121,12 +117,11 @@ class SophisticatedRagIntegrationServiceFixed {
       final calendarContext = await _calendarService.getContextualSuggestions();
 
       // Get cultural adaptations using existing API
-      final culturalRecommendations = await _culturalService
-          .getCulturalDuaRecommendations(
-            category: _categorizeQuery(query),
-            userId: userIdFinal,
-            emotionalState: emotionResult.detectedEmotion,
-          );
+      final culturalRecommendations = await _culturalService.getCulturalDuaRecommendations(
+        category: _categorizeQuery(query),
+        userId: userIdFinal,
+        emotionalState: emotionResult.detectedEmotion,
+      );
 
       // Add conversation turn using correct API
       await _conversationMemory.addConversationTurn(
@@ -210,8 +205,7 @@ class SophisticatedRagIntegrationServiceFixed {
 
     // Get preferred language from cultural context
     final culturalLanguages = await _culturalService.getPreferredLanguages();
-    final primaryLanguage =
-        culturalLanguages.isNotEmpty ? culturalLanguages.first : 'en-US';
+    final primaryLanguage = culturalLanguages.isNotEmpty ? culturalLanguages.first : 'en-US';
 
     await _voiceService.startListening(
       language: primaryLanguage,
@@ -226,8 +220,7 @@ class SophisticatedRagIntegrationServiceFixed {
   }
 
   /// Get voice service status
-  VoiceStatus get voiceStatus =>
-      _voiceService.isListening ? VoiceStatus.listening : VoiceStatus.stopped;
+  VoiceStatus get voiceStatus => _voiceService.isListening ? VoiceStatus.listening : VoiceStatus.stopped;
 
   /// Get upcoming Islamic events
   Future<List<CalendarEvent>> getUpcomingIslamicEvents() async {
@@ -255,8 +248,7 @@ class SophisticatedRagIntegrationServiceFixed {
         additionalPreferences: additionalPreferences,
       );
 
-      _currentCulturalContext =
-          await _culturalService.getCurrentCulturalContext();
+      _currentCulturalContext = await _culturalService.getCurrentCulturalContext();
 
       _contextUpdateController.add(
         ContextUpdate(
@@ -307,16 +299,21 @@ class SophisticatedRagIntegrationServiceFixed {
   String _categorizeQuery(String query) {
     final lowerQuery = query.toLowerCase();
 
-    if (lowerQuery.contains('travel') || lowerQuery.contains('journey'))
+    if (lowerQuery.contains('travel') || lowerQuery.contains('journey')) {
       return 'travel';
-    if (lowerQuery.contains('work') || lowerQuery.contains('job'))
+    }
+    if (lowerQuery.contains('work') || lowerQuery.contains('job')) {
       return 'work';
-    if (lowerQuery.contains('health') || lowerQuery.contains('sick'))
+    }
+    if (lowerQuery.contains('health') || lowerQuery.contains('sick')) {
       return 'health';
-    if (lowerQuery.contains('guidance') || lowerQuery.contains('help'))
+    }
+    if (lowerQuery.contains('guidance') || lowerQuery.contains('help')) {
       return 'guidance';
-    if (lowerQuery.contains('gratitude') || lowerQuery.contains('thank'))
+    }
+    if (lowerQuery.contains('gratitude') || lowerQuery.contains('thank')) {
       return 'gratitude';
+    }
 
     return 'general';
   }

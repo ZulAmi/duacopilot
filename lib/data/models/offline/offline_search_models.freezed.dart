@@ -12,8 +12,7 @@ part of 'offline_search_models.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 DuaEmbedding _$DuaEmbeddingFromJson(Map<String, dynamic> json) {
   return _DuaEmbedding.fromJson(json);
@@ -45,22 +44,20 @@ mixin _$DuaEmbedding {
 /// @nodoc
 abstract class $DuaEmbeddingCopyWith<$Res> {
   factory $DuaEmbeddingCopyWith(
-    DuaEmbedding value,
-    $Res Function(DuaEmbedding) then,
-  ) = _$DuaEmbeddingCopyWithImpl<$Res, DuaEmbedding>;
+          DuaEmbedding value, $Res Function(DuaEmbedding) then) =
+      _$DuaEmbeddingCopyWithImpl<$Res, DuaEmbedding>;
   @useResult
-  $Res call({
-    String id,
-    String duaId,
-    String text,
-    String language,
-    List<double> vector,
-    String category,
-    List<String> keywords,
-    Map<String, dynamic> metadata,
-    DateTime createdAt,
-    DateTime updatedAt,
-  });
+  $Res call(
+      {String id,
+      String duaId,
+      String text,
+      String language,
+      List<double> vector,
+      String category,
+      List<String> keywords,
+      Map<String, dynamic> metadata,
+      DateTime createdAt,
+      DateTime updatedAt});
 }
 
 /// @nodoc
@@ -89,61 +86,48 @@ class _$DuaEmbeddingCopyWithImpl<$Res, $Val extends DuaEmbedding>
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            duaId:
-                null == duaId
-                    ? _value.duaId
-                    : duaId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            text:
-                null == text
-                    ? _value.text
-                    : text // ignore: cast_nullable_to_non_nullable
-                        as String,
-            language:
-                null == language
-                    ? _value.language
-                    : language // ignore: cast_nullable_to_non_nullable
-                        as String,
-            vector:
-                null == vector
-                    ? _value.vector
-                    : vector // ignore: cast_nullable_to_non_nullable
-                        as List<double>,
-            category:
-                null == category
-                    ? _value.category
-                    : category // ignore: cast_nullable_to_non_nullable
-                        as String,
-            keywords:
-                null == keywords
-                    ? _value.keywords
-                    : keywords // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            metadata:
-                null == metadata
-                    ? _value.metadata
-                    : metadata // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>,
-            createdAt:
-                null == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            updatedAt:
-                null == updatedAt
-                    ? _value.updatedAt
-                    : updatedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      duaId: null == duaId
+          ? _value.duaId
+          : duaId // ignore: cast_nullable_to_non_nullable
+              as String,
+      text: null == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
+      vector: null == vector
+          ? _value.vector
+          : vector // ignore: cast_nullable_to_non_nullable
+              as List<double>,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+      keywords: null == keywords
+          ? _value.keywords
+          : keywords // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      metadata: null == metadata
+          ? _value.metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ) as $Val);
   }
 }
 
@@ -151,23 +135,21 @@ class _$DuaEmbeddingCopyWithImpl<$Res, $Val extends DuaEmbedding>
 abstract class _$$DuaEmbeddingImplCopyWith<$Res>
     implements $DuaEmbeddingCopyWith<$Res> {
   factory _$$DuaEmbeddingImplCopyWith(
-    _$DuaEmbeddingImpl value,
-    $Res Function(_$DuaEmbeddingImpl) then,
-  ) = __$$DuaEmbeddingImplCopyWithImpl<$Res>;
+          _$DuaEmbeddingImpl value, $Res Function(_$DuaEmbeddingImpl) then) =
+      __$$DuaEmbeddingImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String duaId,
-    String text,
-    String language,
-    List<double> vector,
-    String category,
-    List<String> keywords,
-    Map<String, dynamic> metadata,
-    DateTime createdAt,
-    DateTime updatedAt,
-  });
+  $Res call(
+      {String id,
+      String duaId,
+      String text,
+      String language,
+      List<double> vector,
+      String category,
+      List<String> keywords,
+      Map<String, dynamic> metadata,
+      DateTime createdAt,
+      DateTime updatedAt});
 }
 
 /// @nodoc
@@ -175,9 +157,8 @@ class __$$DuaEmbeddingImplCopyWithImpl<$Res>
     extends _$DuaEmbeddingCopyWithImpl<$Res, _$DuaEmbeddingImpl>
     implements _$$DuaEmbeddingImplCopyWith<$Res> {
   __$$DuaEmbeddingImplCopyWithImpl(
-    _$DuaEmbeddingImpl _value,
-    $Res Function(_$DuaEmbeddingImpl) _then,
-  ) : super(_value, _then);
+      _$DuaEmbeddingImpl _value, $Res Function(_$DuaEmbeddingImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of DuaEmbedding
   /// with the given fields replaced by the non-null parameter values.
@@ -195,80 +176,68 @@ class __$$DuaEmbeddingImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
-    return _then(
-      _$DuaEmbeddingImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        duaId:
-            null == duaId
-                ? _value.duaId
-                : duaId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        text:
-            null == text
-                ? _value.text
-                : text // ignore: cast_nullable_to_non_nullable
-                    as String,
-        language:
-            null == language
-                ? _value.language
-                : language // ignore: cast_nullable_to_non_nullable
-                    as String,
-        vector:
-            null == vector
-                ? _value._vector
-                : vector // ignore: cast_nullable_to_non_nullable
-                    as List<double>,
-        category:
-            null == category
-                ? _value.category
-                : category // ignore: cast_nullable_to_non_nullable
-                    as String,
-        keywords:
-            null == keywords
-                ? _value._keywords
-                : keywords // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        metadata:
-            null == metadata
-                ? _value._metadata
-                : metadata // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>,
-        createdAt:
-            null == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        updatedAt:
-            null == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-      ),
-    );
+    return _then(_$DuaEmbeddingImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      duaId: null == duaId
+          ? _value.duaId
+          : duaId // ignore: cast_nullable_to_non_nullable
+              as String,
+      text: null == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
+      vector: null == vector
+          ? _value._vector
+          : vector // ignore: cast_nullable_to_non_nullable
+              as List<double>,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+      keywords: null == keywords
+          ? _value._keywords
+          : keywords // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      metadata: null == metadata
+          ? _value._metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$DuaEmbeddingImpl implements _DuaEmbedding {
-  const _$DuaEmbeddingImpl({
-    required this.id,
-    required this.duaId,
-    required this.text,
-    required this.language,
-    required final List<double> vector,
-    required this.category,
-    final List<String> keywords = const [],
-    final Map<String, dynamic> metadata = const {},
-    required this.createdAt,
-    required this.updatedAt,
-  }) : _vector = vector,
-       _keywords = keywords,
-       _metadata = metadata;
+  const _$DuaEmbeddingImpl(
+      {required this.id,
+      required this.duaId,
+      required this.text,
+      required this.language,
+      required final List<double> vector,
+      required this.category,
+      final List<String> keywords = const [],
+      final Map<String, dynamic> metadata = const {},
+      required this.createdAt,
+      required this.updatedAt})
+      : _vector = vector,
+        _keywords = keywords,
+        _metadata = metadata;
 
   factory _$DuaEmbeddingImpl.fromJson(Map<String, dynamic> json) =>
       _$$DuaEmbeddingImplFromJson(json);
@@ -343,18 +312,17 @@ class _$DuaEmbeddingImpl implements _DuaEmbedding {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    duaId,
-    text,
-    language,
-    const DeepCollectionEquality().hash(_vector),
-    category,
-    const DeepCollectionEquality().hash(_keywords),
-    const DeepCollectionEquality().hash(_metadata),
-    createdAt,
-    updatedAt,
-  );
+      runtimeType,
+      id,
+      duaId,
+      text,
+      language,
+      const DeepCollectionEquality().hash(_vector),
+      category,
+      const DeepCollectionEquality().hash(_keywords),
+      const DeepCollectionEquality().hash(_metadata),
+      createdAt,
+      updatedAt);
 
   /// Create a copy of DuaEmbedding
   /// with the given fields replaced by the non-null parameter values.
@@ -366,23 +334,24 @@ class _$DuaEmbeddingImpl implements _DuaEmbedding {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$DuaEmbeddingImplToJson(this);
+    return _$$DuaEmbeddingImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _DuaEmbedding implements DuaEmbedding {
-  const factory _DuaEmbedding({
-    required final String id,
-    required final String duaId,
-    required final String text,
-    required final String language,
-    required final List<double> vector,
-    required final String category,
-    final List<String> keywords,
-    final Map<String, dynamic> metadata,
-    required final DateTime createdAt,
-    required final DateTime updatedAt,
-  }) = _$DuaEmbeddingImpl;
+  const factory _DuaEmbedding(
+      {required final String id,
+      required final String duaId,
+      required final String text,
+      required final String language,
+      required final List<double> vector,
+      required final String category,
+      final List<String> keywords,
+      final Map<String, dynamic> metadata,
+      required final DateTime createdAt,
+      required final DateTime updatedAt}) = _$DuaEmbeddingImpl;
 
   factory _DuaEmbedding.fromJson(Map<String, dynamic> json) =
       _$DuaEmbeddingImpl.fromJson;
@@ -443,19 +412,17 @@ mixin _$LocalSearchQuery {
 /// @nodoc
 abstract class $LocalSearchQueryCopyWith<$Res> {
   factory $LocalSearchQueryCopyWith(
-    LocalSearchQuery value,
-    $Res Function(LocalSearchQuery) then,
-  ) = _$LocalSearchQueryCopyWithImpl<$Res, LocalSearchQuery>;
+          LocalSearchQuery value, $Res Function(LocalSearchQuery) then) =
+      _$LocalSearchQueryCopyWithImpl<$Res, LocalSearchQuery>;
   @useResult
-  $Res call({
-    String id,
-    String query,
-    String language,
-    List<double> embedding,
-    DateTime timestamp,
-    Map<String, dynamic> context,
-    String? location,
-  });
+  $Res call(
+      {String id,
+      String query,
+      String language,
+      List<double> embedding,
+      DateTime timestamp,
+      Map<String, dynamic> context,
+      String? location});
 }
 
 /// @nodoc
@@ -481,77 +448,64 @@ class _$LocalSearchQueryCopyWithImpl<$Res, $Val extends LocalSearchQuery>
     Object? context = null,
     Object? location = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            query:
-                null == query
-                    ? _value.query
-                    : query // ignore: cast_nullable_to_non_nullable
-                        as String,
-            language:
-                null == language
-                    ? _value.language
-                    : language // ignore: cast_nullable_to_non_nullable
-                        as String,
-            embedding:
-                null == embedding
-                    ? _value.embedding
-                    : embedding // ignore: cast_nullable_to_non_nullable
-                        as List<double>,
-            timestamp:
-                null == timestamp
-                    ? _value.timestamp
-                    : timestamp // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            context:
-                null == context
-                    ? _value.context
-                    : context // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>,
-            location:
-                freezed == location
-                    ? _value.location
-                    : location // ignore: cast_nullable_to_non_nullable
-                        as String?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      query: null == query
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
+      embedding: null == embedding
+          ? _value.embedding
+          : embedding // ignore: cast_nullable_to_non_nullable
+              as List<double>,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$LocalSearchQueryImplCopyWith<$Res>
     implements $LocalSearchQueryCopyWith<$Res> {
-  factory _$$LocalSearchQueryImplCopyWith(
-    _$LocalSearchQueryImpl value,
-    $Res Function(_$LocalSearchQueryImpl) then,
-  ) = __$$LocalSearchQueryImplCopyWithImpl<$Res>;
+  factory _$$LocalSearchQueryImplCopyWith(_$LocalSearchQueryImpl value,
+          $Res Function(_$LocalSearchQueryImpl) then) =
+      __$$LocalSearchQueryImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String query,
-    String language,
-    List<double> embedding,
-    DateTime timestamp,
-    Map<String, dynamic> context,
-    String? location,
-  });
+  $Res call(
+      {String id,
+      String query,
+      String language,
+      List<double> embedding,
+      DateTime timestamp,
+      Map<String, dynamic> context,
+      String? location});
 }
 
 /// @nodoc
 class __$$LocalSearchQueryImplCopyWithImpl<$Res>
     extends _$LocalSearchQueryCopyWithImpl<$Res, _$LocalSearchQueryImpl>
     implements _$$LocalSearchQueryImplCopyWith<$Res> {
-  __$$LocalSearchQueryImplCopyWithImpl(
-    _$LocalSearchQueryImpl _value,
-    $Res Function(_$LocalSearchQueryImpl) _then,
-  ) : super(_value, _then);
+  __$$LocalSearchQueryImplCopyWithImpl(_$LocalSearchQueryImpl _value,
+      $Res Function(_$LocalSearchQueryImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of LocalSearchQuery
   /// with the given fields replaced by the non-null parameter values.
@@ -566,61 +520,52 @@ class __$$LocalSearchQueryImplCopyWithImpl<$Res>
     Object? context = null,
     Object? location = freezed,
   }) {
-    return _then(
-      _$LocalSearchQueryImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        query:
-            null == query
-                ? _value.query
-                : query // ignore: cast_nullable_to_non_nullable
-                    as String,
-        language:
-            null == language
-                ? _value.language
-                : language // ignore: cast_nullable_to_non_nullable
-                    as String,
-        embedding:
-            null == embedding
-                ? _value._embedding
-                : embedding // ignore: cast_nullable_to_non_nullable
-                    as List<double>,
-        timestamp:
-            null == timestamp
-                ? _value.timestamp
-                : timestamp // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        context:
-            null == context
-                ? _value._context
-                : context // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>,
-        location:
-            freezed == location
-                ? _value.location
-                : location // ignore: cast_nullable_to_non_nullable
-                    as String?,
-      ),
-    );
+    return _then(_$LocalSearchQueryImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      query: null == query
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
+      embedding: null == embedding
+          ? _value._embedding
+          : embedding // ignore: cast_nullable_to_non_nullable
+              as List<double>,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      context: null == context
+          ? _value._context
+          : context // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$LocalSearchQueryImpl implements _LocalSearchQuery {
-  const _$LocalSearchQueryImpl({
-    required this.id,
-    required this.query,
-    required this.language,
-    required final List<double> embedding,
-    required this.timestamp,
-    final Map<String, dynamic> context = const {},
-    this.location,
-  }) : _embedding = embedding,
-       _context = context;
+  const _$LocalSearchQueryImpl(
+      {required this.id,
+      required this.query,
+      required this.language,
+      required final List<double> embedding,
+      required this.timestamp,
+      final Map<String, dynamic> context = const {},
+      this.location})
+      : _embedding = embedding,
+        _context = context;
 
   factory _$LocalSearchQueryImpl.fromJson(Map<String, dynamic> json) =>
       _$$LocalSearchQueryImplFromJson(json);
@@ -667,10 +612,8 @@ class _$LocalSearchQueryImpl implements _LocalSearchQuery {
             (identical(other.query, query) || other.query == query) &&
             (identical(other.language, language) ||
                 other.language == language) &&
-            const DeepCollectionEquality().equals(
-              other._embedding,
-              _embedding,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._embedding, _embedding) &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
             const DeepCollectionEquality().equals(other._context, _context) &&
@@ -681,15 +624,14 @@ class _$LocalSearchQueryImpl implements _LocalSearchQuery {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    query,
-    language,
-    const DeepCollectionEquality().hash(_embedding),
-    timestamp,
-    const DeepCollectionEquality().hash(_context),
-    location,
-  );
+      runtimeType,
+      id,
+      query,
+      language,
+      const DeepCollectionEquality().hash(_embedding),
+      timestamp,
+      const DeepCollectionEquality().hash(_context),
+      location);
 
   /// Create a copy of LocalSearchQuery
   /// with the given fields replaced by the non-null parameter values.
@@ -698,26 +640,25 @@ class _$LocalSearchQueryImpl implements _LocalSearchQuery {
   @pragma('vm:prefer-inline')
   _$$LocalSearchQueryImplCopyWith<_$LocalSearchQueryImpl> get copyWith =>
       __$$LocalSearchQueryImplCopyWithImpl<_$LocalSearchQueryImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LocalSearchQueryImplToJson(this);
+    return _$$LocalSearchQueryImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _LocalSearchQuery implements LocalSearchQuery {
-  const factory _LocalSearchQuery({
-    required final String id,
-    required final String query,
-    required final String language,
-    required final List<double> embedding,
-    required final DateTime timestamp,
-    final Map<String, dynamic> context,
-    final String? location,
-  }) = _$LocalSearchQueryImpl;
+  const factory _LocalSearchQuery(
+      {required final String id,
+      required final String query,
+      required final String language,
+      required final List<double> embedding,
+      required final DateTime timestamp,
+      final Map<String, dynamic> context,
+      final String? location}) = _$LocalSearchQueryImpl;
 
   factory _LocalSearchQuery.fromJson(Map<String, dynamic> json) =
       _$LocalSearchQueryImpl.fromJson;
@@ -773,20 +714,18 @@ mixin _$OfflineSearchResult {
 /// @nodoc
 abstract class $OfflineSearchResultCopyWith<$Res> {
   factory $OfflineSearchResultCopyWith(
-    OfflineSearchResult value,
-    $Res Function(OfflineSearchResult) then,
-  ) = _$OfflineSearchResultCopyWithImpl<$Res, OfflineSearchResult>;
+          OfflineSearchResult value, $Res Function(OfflineSearchResult) then) =
+      _$OfflineSearchResultCopyWithImpl<$Res, OfflineSearchResult>;
   @useResult
-  $Res call({
-    String queryId,
-    List<OfflineDuaMatch> matches,
-    double confidence,
-    SearchQuality quality,
-    String reasoning,
-    DateTime timestamp,
-    bool isFromCache,
-    Map<String, dynamic> metadata,
-  });
+  $Res call(
+      {String queryId,
+      List<OfflineDuaMatch> matches,
+      double confidence,
+      SearchQuality quality,
+      String reasoning,
+      DateTime timestamp,
+      bool isFromCache,
+      Map<String, dynamic> metadata});
 }
 
 /// @nodoc
@@ -813,83 +752,69 @@ class _$OfflineSearchResultCopyWithImpl<$Res, $Val extends OfflineSearchResult>
     Object? isFromCache = null,
     Object? metadata = null,
   }) {
-    return _then(
-      _value.copyWith(
-            queryId:
-                null == queryId
-                    ? _value.queryId
-                    : queryId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            matches:
-                null == matches
-                    ? _value.matches
-                    : matches // ignore: cast_nullable_to_non_nullable
-                        as List<OfflineDuaMatch>,
-            confidence:
-                null == confidence
-                    ? _value.confidence
-                    : confidence // ignore: cast_nullable_to_non_nullable
-                        as double,
-            quality:
-                null == quality
-                    ? _value.quality
-                    : quality // ignore: cast_nullable_to_non_nullable
-                        as SearchQuality,
-            reasoning:
-                null == reasoning
-                    ? _value.reasoning
-                    : reasoning // ignore: cast_nullable_to_non_nullable
-                        as String,
-            timestamp:
-                null == timestamp
-                    ? _value.timestamp
-                    : timestamp // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            isFromCache:
-                null == isFromCache
-                    ? _value.isFromCache
-                    : isFromCache // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            metadata:
-                null == metadata
-                    ? _value.metadata
-                    : metadata // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      queryId: null == queryId
+          ? _value.queryId
+          : queryId // ignore: cast_nullable_to_non_nullable
+              as String,
+      matches: null == matches
+          ? _value.matches
+          : matches // ignore: cast_nullable_to_non_nullable
+              as List<OfflineDuaMatch>,
+      confidence: null == confidence
+          ? _value.confidence
+          : confidence // ignore: cast_nullable_to_non_nullable
+              as double,
+      quality: null == quality
+          ? _value.quality
+          : quality // ignore: cast_nullable_to_non_nullable
+              as SearchQuality,
+      reasoning: null == reasoning
+          ? _value.reasoning
+          : reasoning // ignore: cast_nullable_to_non_nullable
+              as String,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      isFromCache: null == isFromCache
+          ? _value.isFromCache
+          : isFromCache // ignore: cast_nullable_to_non_nullable
+              as bool,
+      metadata: null == metadata
+          ? _value.metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$OfflineSearchResultImplCopyWith<$Res>
     implements $OfflineSearchResultCopyWith<$Res> {
-  factory _$$OfflineSearchResultImplCopyWith(
-    _$OfflineSearchResultImpl value,
-    $Res Function(_$OfflineSearchResultImpl) then,
-  ) = __$$OfflineSearchResultImplCopyWithImpl<$Res>;
+  factory _$$OfflineSearchResultImplCopyWith(_$OfflineSearchResultImpl value,
+          $Res Function(_$OfflineSearchResultImpl) then) =
+      __$$OfflineSearchResultImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String queryId,
-    List<OfflineDuaMatch> matches,
-    double confidence,
-    SearchQuality quality,
-    String reasoning,
-    DateTime timestamp,
-    bool isFromCache,
-    Map<String, dynamic> metadata,
-  });
+  $Res call(
+      {String queryId,
+      List<OfflineDuaMatch> matches,
+      double confidence,
+      SearchQuality quality,
+      String reasoning,
+      DateTime timestamp,
+      bool isFromCache,
+      Map<String, dynamic> metadata});
 }
 
 /// @nodoc
 class __$$OfflineSearchResultImplCopyWithImpl<$Res>
     extends _$OfflineSearchResultCopyWithImpl<$Res, _$OfflineSearchResultImpl>
     implements _$$OfflineSearchResultImplCopyWith<$Res> {
-  __$$OfflineSearchResultImplCopyWithImpl(
-    _$OfflineSearchResultImpl _value,
-    $Res Function(_$OfflineSearchResultImpl) _then,
-  ) : super(_value, _then);
+  __$$OfflineSearchResultImplCopyWithImpl(_$OfflineSearchResultImpl _value,
+      $Res Function(_$OfflineSearchResultImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of OfflineSearchResult
   /// with the given fields replaced by the non-null parameter values.
@@ -905,67 +830,57 @@ class __$$OfflineSearchResultImplCopyWithImpl<$Res>
     Object? isFromCache = null,
     Object? metadata = null,
   }) {
-    return _then(
-      _$OfflineSearchResultImpl(
-        queryId:
-            null == queryId
-                ? _value.queryId
-                : queryId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        matches:
-            null == matches
-                ? _value._matches
-                : matches // ignore: cast_nullable_to_non_nullable
-                    as List<OfflineDuaMatch>,
-        confidence:
-            null == confidence
-                ? _value.confidence
-                : confidence // ignore: cast_nullable_to_non_nullable
-                    as double,
-        quality:
-            null == quality
-                ? _value.quality
-                : quality // ignore: cast_nullable_to_non_nullable
-                    as SearchQuality,
-        reasoning:
-            null == reasoning
-                ? _value.reasoning
-                : reasoning // ignore: cast_nullable_to_non_nullable
-                    as String,
-        timestamp:
-            null == timestamp
-                ? _value.timestamp
-                : timestamp // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        isFromCache:
-            null == isFromCache
-                ? _value.isFromCache
-                : isFromCache // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        metadata:
-            null == metadata
-                ? _value._metadata
-                : metadata // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>,
-      ),
-    );
+    return _then(_$OfflineSearchResultImpl(
+      queryId: null == queryId
+          ? _value.queryId
+          : queryId // ignore: cast_nullable_to_non_nullable
+              as String,
+      matches: null == matches
+          ? _value._matches
+          : matches // ignore: cast_nullable_to_non_nullable
+              as List<OfflineDuaMatch>,
+      confidence: null == confidence
+          ? _value.confidence
+          : confidence // ignore: cast_nullable_to_non_nullable
+              as double,
+      quality: null == quality
+          ? _value.quality
+          : quality // ignore: cast_nullable_to_non_nullable
+              as SearchQuality,
+      reasoning: null == reasoning
+          ? _value.reasoning
+          : reasoning // ignore: cast_nullable_to_non_nullable
+              as String,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      isFromCache: null == isFromCache
+          ? _value.isFromCache
+          : isFromCache // ignore: cast_nullable_to_non_nullable
+              as bool,
+      metadata: null == metadata
+          ? _value._metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$OfflineSearchResultImpl implements _OfflineSearchResult {
-  const _$OfflineSearchResultImpl({
-    required this.queryId,
-    required final List<OfflineDuaMatch> matches,
-    required this.confidence,
-    required this.quality,
-    required this.reasoning,
-    required this.timestamp,
-    this.isFromCache = false,
-    final Map<String, dynamic> metadata = const {},
-  }) : _matches = matches,
-       _metadata = metadata;
+  const _$OfflineSearchResultImpl(
+      {required this.queryId,
+      required final List<OfflineDuaMatch> matches,
+      required this.confidence,
+      required this.quality,
+      required this.reasoning,
+      required this.timestamp,
+      this.isFromCache = false,
+      final Map<String, dynamic> metadata = const {}})
+      : _matches = matches,
+        _metadata = metadata;
 
   factory _$OfflineSearchResultImpl.fromJson(Map<String, dynamic> json) =>
       _$$OfflineSearchResultImplFromJson(json);
@@ -1027,16 +942,15 @@ class _$OfflineSearchResultImpl implements _OfflineSearchResult {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    queryId,
-    const DeepCollectionEquality().hash(_matches),
-    confidence,
-    quality,
-    reasoning,
-    timestamp,
-    isFromCache,
-    const DeepCollectionEquality().hash(_metadata),
-  );
+      runtimeType,
+      queryId,
+      const DeepCollectionEquality().hash(_matches),
+      confidence,
+      quality,
+      reasoning,
+      timestamp,
+      isFromCache,
+      const DeepCollectionEquality().hash(_metadata));
 
   /// Create a copy of OfflineSearchResult
   /// with the given fields replaced by the non-null parameter values.
@@ -1045,27 +959,26 @@ class _$OfflineSearchResultImpl implements _OfflineSearchResult {
   @pragma('vm:prefer-inline')
   _$$OfflineSearchResultImplCopyWith<_$OfflineSearchResultImpl> get copyWith =>
       __$$OfflineSearchResultImplCopyWithImpl<_$OfflineSearchResultImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$OfflineSearchResultImplToJson(this);
+    return _$$OfflineSearchResultImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _OfflineSearchResult implements OfflineSearchResult {
-  const factory _OfflineSearchResult({
-    required final String queryId,
-    required final List<OfflineDuaMatch> matches,
-    required final double confidence,
-    required final SearchQuality quality,
-    required final String reasoning,
-    required final DateTime timestamp,
-    final bool isFromCache,
-    final Map<String, dynamic> metadata,
-  }) = _$OfflineSearchResultImpl;
+  const factory _OfflineSearchResult(
+      {required final String queryId,
+      required final List<OfflineDuaMatch> matches,
+      required final double confidence,
+      required final SearchQuality quality,
+      required final String reasoning,
+      required final DateTime timestamp,
+      final bool isFromCache,
+      final Map<String, dynamic> metadata}) = _$OfflineSearchResultImpl;
 
   factory _OfflineSearchResult.fromJson(Map<String, dynamic> json) =
       _$OfflineSearchResultImpl.fromJson;
@@ -1124,21 +1037,19 @@ mixin _$OfflineDuaMatch {
 /// @nodoc
 abstract class $OfflineDuaMatchCopyWith<$Res> {
   factory $OfflineDuaMatchCopyWith(
-    OfflineDuaMatch value,
-    $Res Function(OfflineDuaMatch) then,
-  ) = _$OfflineDuaMatchCopyWithImpl<$Res, OfflineDuaMatch>;
+          OfflineDuaMatch value, $Res Function(OfflineDuaMatch) then) =
+      _$OfflineDuaMatchCopyWithImpl<$Res, OfflineDuaMatch>;
   @useResult
-  $Res call({
-    String duaId,
-    String text,
-    String translation,
-    String transliteration,
-    String category,
-    double similarityScore,
-    List<String> matchedKeywords,
-    String matchReason,
-    Map<String, dynamic> metadata,
-  });
+  $Res call(
+      {String duaId,
+      String text,
+      String translation,
+      String transliteration,
+      String category,
+      double similarityScore,
+      List<String> matchedKeywords,
+      String matchReason,
+      Map<String, dynamic> metadata});
 }
 
 /// @nodoc
@@ -1166,79 +1077,65 @@ class _$OfflineDuaMatchCopyWithImpl<$Res, $Val extends OfflineDuaMatch>
     Object? matchReason = null,
     Object? metadata = null,
   }) {
-    return _then(
-      _value.copyWith(
-            duaId:
-                null == duaId
-                    ? _value.duaId
-                    : duaId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            text:
-                null == text
-                    ? _value.text
-                    : text // ignore: cast_nullable_to_non_nullable
-                        as String,
-            translation:
-                null == translation
-                    ? _value.translation
-                    : translation // ignore: cast_nullable_to_non_nullable
-                        as String,
-            transliteration:
-                null == transliteration
-                    ? _value.transliteration
-                    : transliteration // ignore: cast_nullable_to_non_nullable
-                        as String,
-            category:
-                null == category
-                    ? _value.category
-                    : category // ignore: cast_nullable_to_non_nullable
-                        as String,
-            similarityScore:
-                null == similarityScore
-                    ? _value.similarityScore
-                    : similarityScore // ignore: cast_nullable_to_non_nullable
-                        as double,
-            matchedKeywords:
-                null == matchedKeywords
-                    ? _value.matchedKeywords
-                    : matchedKeywords // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            matchReason:
-                null == matchReason
-                    ? _value.matchReason
-                    : matchReason // ignore: cast_nullable_to_non_nullable
-                        as String,
-            metadata:
-                null == metadata
-                    ? _value.metadata
-                    : metadata // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      duaId: null == duaId
+          ? _value.duaId
+          : duaId // ignore: cast_nullable_to_non_nullable
+              as String,
+      text: null == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String,
+      translation: null == translation
+          ? _value.translation
+          : translation // ignore: cast_nullable_to_non_nullable
+              as String,
+      transliteration: null == transliteration
+          ? _value.transliteration
+          : transliteration // ignore: cast_nullable_to_non_nullable
+              as String,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+      similarityScore: null == similarityScore
+          ? _value.similarityScore
+          : similarityScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      matchedKeywords: null == matchedKeywords
+          ? _value.matchedKeywords
+          : matchedKeywords // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      matchReason: null == matchReason
+          ? _value.matchReason
+          : matchReason // ignore: cast_nullable_to_non_nullable
+              as String,
+      metadata: null == metadata
+          ? _value.metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$OfflineDuaMatchImplCopyWith<$Res>
     implements $OfflineDuaMatchCopyWith<$Res> {
-  factory _$$OfflineDuaMatchImplCopyWith(
-    _$OfflineDuaMatchImpl value,
-    $Res Function(_$OfflineDuaMatchImpl) then,
-  ) = __$$OfflineDuaMatchImplCopyWithImpl<$Res>;
+  factory _$$OfflineDuaMatchImplCopyWith(_$OfflineDuaMatchImpl value,
+          $Res Function(_$OfflineDuaMatchImpl) then) =
+      __$$OfflineDuaMatchImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String duaId,
-    String text,
-    String translation,
-    String transliteration,
-    String category,
-    double similarityScore,
-    List<String> matchedKeywords,
-    String matchReason,
-    Map<String, dynamic> metadata,
-  });
+  $Res call(
+      {String duaId,
+      String text,
+      String translation,
+      String transliteration,
+      String category,
+      double similarityScore,
+      List<String> matchedKeywords,
+      String matchReason,
+      Map<String, dynamic> metadata});
 }
 
 /// @nodoc
@@ -1246,9 +1143,8 @@ class __$$OfflineDuaMatchImplCopyWithImpl<$Res>
     extends _$OfflineDuaMatchCopyWithImpl<$Res, _$OfflineDuaMatchImpl>
     implements _$$OfflineDuaMatchImplCopyWith<$Res> {
   __$$OfflineDuaMatchImplCopyWithImpl(
-    _$OfflineDuaMatchImpl _value,
-    $Res Function(_$OfflineDuaMatchImpl) _then,
-  ) : super(_value, _then);
+      _$OfflineDuaMatchImpl _value, $Res Function(_$OfflineDuaMatchImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of OfflineDuaMatch
   /// with the given fields replaced by the non-null parameter values.
@@ -1265,73 +1161,62 @@ class __$$OfflineDuaMatchImplCopyWithImpl<$Res>
     Object? matchReason = null,
     Object? metadata = null,
   }) {
-    return _then(
-      _$OfflineDuaMatchImpl(
-        duaId:
-            null == duaId
-                ? _value.duaId
-                : duaId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        text:
-            null == text
-                ? _value.text
-                : text // ignore: cast_nullable_to_non_nullable
-                    as String,
-        translation:
-            null == translation
-                ? _value.translation
-                : translation // ignore: cast_nullable_to_non_nullable
-                    as String,
-        transliteration:
-            null == transliteration
-                ? _value.transliteration
-                : transliteration // ignore: cast_nullable_to_non_nullable
-                    as String,
-        category:
-            null == category
-                ? _value.category
-                : category // ignore: cast_nullable_to_non_nullable
-                    as String,
-        similarityScore:
-            null == similarityScore
-                ? _value.similarityScore
-                : similarityScore // ignore: cast_nullable_to_non_nullable
-                    as double,
-        matchedKeywords:
-            null == matchedKeywords
-                ? _value._matchedKeywords
-                : matchedKeywords // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        matchReason:
-            null == matchReason
-                ? _value.matchReason
-                : matchReason // ignore: cast_nullable_to_non_nullable
-                    as String,
-        metadata:
-            null == metadata
-                ? _value._metadata
-                : metadata // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>,
-      ),
-    );
+    return _then(_$OfflineDuaMatchImpl(
+      duaId: null == duaId
+          ? _value.duaId
+          : duaId // ignore: cast_nullable_to_non_nullable
+              as String,
+      text: null == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String,
+      translation: null == translation
+          ? _value.translation
+          : translation // ignore: cast_nullable_to_non_nullable
+              as String,
+      transliteration: null == transliteration
+          ? _value.transliteration
+          : transliteration // ignore: cast_nullable_to_non_nullable
+              as String,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+      similarityScore: null == similarityScore
+          ? _value.similarityScore
+          : similarityScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      matchedKeywords: null == matchedKeywords
+          ? _value._matchedKeywords
+          : matchedKeywords // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      matchReason: null == matchReason
+          ? _value.matchReason
+          : matchReason // ignore: cast_nullable_to_non_nullable
+              as String,
+      metadata: null == metadata
+          ? _value._metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$OfflineDuaMatchImpl implements _OfflineDuaMatch {
-  const _$OfflineDuaMatchImpl({
-    required this.duaId,
-    required this.text,
-    required this.translation,
-    required this.transliteration,
-    required this.category,
-    required this.similarityScore,
-    required final List<String> matchedKeywords,
-    required this.matchReason,
-    final Map<String, dynamic> metadata = const {},
-  }) : _matchedKeywords = matchedKeywords,
-       _metadata = metadata;
+  const _$OfflineDuaMatchImpl(
+      {required this.duaId,
+      required this.text,
+      required this.translation,
+      required this.transliteration,
+      required this.category,
+      required this.similarityScore,
+      required final List<String> matchedKeywords,
+      required this.matchReason,
+      final Map<String, dynamic> metadata = const {}})
+      : _matchedKeywords = matchedKeywords,
+        _metadata = metadata;
 
   factory _$OfflineDuaMatchImpl.fromJson(Map<String, dynamic> json) =>
       _$$OfflineDuaMatchImplFromJson(json);
@@ -1387,10 +1272,8 @@ class _$OfflineDuaMatchImpl implements _OfflineDuaMatch {
                 other.category == category) &&
             (identical(other.similarityScore, similarityScore) ||
                 other.similarityScore == similarityScore) &&
-            const DeepCollectionEquality().equals(
-              other._matchedKeywords,
-              _matchedKeywords,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._matchedKeywords, _matchedKeywords) &&
             (identical(other.matchReason, matchReason) ||
                 other.matchReason == matchReason) &&
             const DeepCollectionEquality().equals(other._metadata, _metadata));
@@ -1399,17 +1282,16 @@ class _$OfflineDuaMatchImpl implements _OfflineDuaMatch {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    duaId,
-    text,
-    translation,
-    transliteration,
-    category,
-    similarityScore,
-    const DeepCollectionEquality().hash(_matchedKeywords),
-    matchReason,
-    const DeepCollectionEquality().hash(_metadata),
-  );
+      runtimeType,
+      duaId,
+      text,
+      translation,
+      transliteration,
+      category,
+      similarityScore,
+      const DeepCollectionEquality().hash(_matchedKeywords),
+      matchReason,
+      const DeepCollectionEquality().hash(_metadata));
 
   /// Create a copy of OfflineDuaMatch
   /// with the given fields replaced by the non-null parameter values.
@@ -1418,28 +1300,27 @@ class _$OfflineDuaMatchImpl implements _OfflineDuaMatch {
   @pragma('vm:prefer-inline')
   _$$OfflineDuaMatchImplCopyWith<_$OfflineDuaMatchImpl> get copyWith =>
       __$$OfflineDuaMatchImplCopyWithImpl<_$OfflineDuaMatchImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$OfflineDuaMatchImplToJson(this);
+    return _$$OfflineDuaMatchImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _OfflineDuaMatch implements OfflineDuaMatch {
-  const factory _OfflineDuaMatch({
-    required final String duaId,
-    required final String text,
-    required final String translation,
-    required final String transliteration,
-    required final String category,
-    required final double similarityScore,
-    required final List<String> matchedKeywords,
-    required final String matchReason,
-    final Map<String, dynamic> metadata,
-  }) = _$OfflineDuaMatchImpl;
+  const factory _OfflineDuaMatch(
+      {required final String duaId,
+      required final String text,
+      required final String translation,
+      required final String transliteration,
+      required final String category,
+      required final double similarityScore,
+      required final List<String> matchedKeywords,
+      required final String matchReason,
+      final Map<String, dynamic> metadata}) = _$OfflineDuaMatchImpl;
 
   factory _OfflineDuaMatch.fromJson(Map<String, dynamic> json) =
       _$OfflineDuaMatchImpl.fromJson;
@@ -1500,21 +1381,19 @@ mixin _$PendingQuery {
 /// @nodoc
 abstract class $PendingQueryCopyWith<$Res> {
   factory $PendingQueryCopyWith(
-    PendingQuery value,
-    $Res Function(PendingQuery) then,
-  ) = _$PendingQueryCopyWithImpl<$Res, PendingQuery>;
+          PendingQuery value, $Res Function(PendingQuery) then) =
+      _$PendingQueryCopyWithImpl<$Res, PendingQuery>;
   @useResult
-  $Res call({
-    String id,
-    String query,
-    String language,
-    DateTime timestamp,
-    Map<String, dynamic> context,
-    int retryCount,
-    PendingQueryStatus status,
-    String? location,
-    String? fallbackResultId,
-  });
+  $Res call(
+      {String id,
+      String query,
+      String language,
+      DateTime timestamp,
+      Map<String, dynamic> context,
+      int retryCount,
+      PendingQueryStatus status,
+      String? location,
+      String? fallbackResultId});
 }
 
 /// @nodoc
@@ -1542,56 +1421,44 @@ class _$PendingQueryCopyWithImpl<$Res, $Val extends PendingQuery>
     Object? location = freezed,
     Object? fallbackResultId = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            query:
-                null == query
-                    ? _value.query
-                    : query // ignore: cast_nullable_to_non_nullable
-                        as String,
-            language:
-                null == language
-                    ? _value.language
-                    : language // ignore: cast_nullable_to_non_nullable
-                        as String,
-            timestamp:
-                null == timestamp
-                    ? _value.timestamp
-                    : timestamp // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            context:
-                null == context
-                    ? _value.context
-                    : context // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>,
-            retryCount:
-                null == retryCount
-                    ? _value.retryCount
-                    : retryCount // ignore: cast_nullable_to_non_nullable
-                        as int,
-            status:
-                null == status
-                    ? _value.status
-                    : status // ignore: cast_nullable_to_non_nullable
-                        as PendingQueryStatus,
-            location:
-                freezed == location
-                    ? _value.location
-                    : location // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            fallbackResultId:
-                freezed == fallbackResultId
-                    ? _value.fallbackResultId
-                    : fallbackResultId // ignore: cast_nullable_to_non_nullable
-                        as String?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      query: null == query
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      retryCount: null == retryCount
+          ? _value.retryCount
+          : retryCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as PendingQueryStatus,
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fallbackResultId: freezed == fallbackResultId
+          ? _value.fallbackResultId
+          : fallbackResultId // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
   }
 }
 
@@ -1599,22 +1466,20 @@ class _$PendingQueryCopyWithImpl<$Res, $Val extends PendingQuery>
 abstract class _$$PendingQueryImplCopyWith<$Res>
     implements $PendingQueryCopyWith<$Res> {
   factory _$$PendingQueryImplCopyWith(
-    _$PendingQueryImpl value,
-    $Res Function(_$PendingQueryImpl) then,
-  ) = __$$PendingQueryImplCopyWithImpl<$Res>;
+          _$PendingQueryImpl value, $Res Function(_$PendingQueryImpl) then) =
+      __$$PendingQueryImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String query,
-    String language,
-    DateTime timestamp,
-    Map<String, dynamic> context,
-    int retryCount,
-    PendingQueryStatus status,
-    String? location,
-    String? fallbackResultId,
-  });
+  $Res call(
+      {String id,
+      String query,
+      String language,
+      DateTime timestamp,
+      Map<String, dynamic> context,
+      int retryCount,
+      PendingQueryStatus status,
+      String? location,
+      String? fallbackResultId});
 }
 
 /// @nodoc
@@ -1622,9 +1487,8 @@ class __$$PendingQueryImplCopyWithImpl<$Res>
     extends _$PendingQueryCopyWithImpl<$Res, _$PendingQueryImpl>
     implements _$$PendingQueryImplCopyWith<$Res> {
   __$$PendingQueryImplCopyWithImpl(
-    _$PendingQueryImpl _value,
-    $Res Function(_$PendingQueryImpl) _then,
-  ) : super(_value, _then);
+      _$PendingQueryImpl _value, $Res Function(_$PendingQueryImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of PendingQuery
   /// with the given fields replaced by the non-null parameter values.
@@ -1641,72 +1505,61 @@ class __$$PendingQueryImplCopyWithImpl<$Res>
     Object? location = freezed,
     Object? fallbackResultId = freezed,
   }) {
-    return _then(
-      _$PendingQueryImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        query:
-            null == query
-                ? _value.query
-                : query // ignore: cast_nullable_to_non_nullable
-                    as String,
-        language:
-            null == language
-                ? _value.language
-                : language // ignore: cast_nullable_to_non_nullable
-                    as String,
-        timestamp:
-            null == timestamp
-                ? _value.timestamp
-                : timestamp // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        context:
-            null == context
-                ? _value._context
-                : context // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>,
-        retryCount:
-            null == retryCount
-                ? _value.retryCount
-                : retryCount // ignore: cast_nullable_to_non_nullable
-                    as int,
-        status:
-            null == status
-                ? _value.status
-                : status // ignore: cast_nullable_to_non_nullable
-                    as PendingQueryStatus,
-        location:
-            freezed == location
-                ? _value.location
-                : location // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        fallbackResultId:
-            freezed == fallbackResultId
-                ? _value.fallbackResultId
-                : fallbackResultId // ignore: cast_nullable_to_non_nullable
-                    as String?,
-      ),
-    );
+    return _then(_$PendingQueryImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      query: null == query
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      context: null == context
+          ? _value._context
+          : context // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      retryCount: null == retryCount
+          ? _value.retryCount
+          : retryCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as PendingQueryStatus,
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fallbackResultId: freezed == fallbackResultId
+          ? _value.fallbackResultId
+          : fallbackResultId // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$PendingQueryImpl implements _PendingQuery {
-  const _$PendingQueryImpl({
-    required this.id,
-    required this.query,
-    required this.language,
-    required this.timestamp,
-    required final Map<String, dynamic> context,
-    this.retryCount = 0,
-    this.status = PendingQueryStatus.pending,
-    this.location,
-    this.fallbackResultId,
-  }) : _context = context;
+  const _$PendingQueryImpl(
+      {required this.id,
+      required this.query,
+      required this.language,
+      required this.timestamp,
+      required final Map<String, dynamic> context,
+      this.retryCount = 0,
+      this.status = PendingQueryStatus.pending,
+      this.location,
+      this.fallbackResultId})
+      : _context = context;
 
   factory _$PendingQueryImpl.fromJson(Map<String, dynamic> json) =>
       _$$PendingQueryImplFromJson(json);
@@ -1767,17 +1620,16 @@ class _$PendingQueryImpl implements _PendingQuery {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    query,
-    language,
-    timestamp,
-    const DeepCollectionEquality().hash(_context),
-    retryCount,
-    status,
-    location,
-    fallbackResultId,
-  );
+      runtimeType,
+      id,
+      query,
+      language,
+      timestamp,
+      const DeepCollectionEquality().hash(_context),
+      retryCount,
+      status,
+      location,
+      fallbackResultId);
 
   /// Create a copy of PendingQuery
   /// with the given fields replaced by the non-null parameter values.
@@ -1789,22 +1641,23 @@ class _$PendingQueryImpl implements _PendingQuery {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PendingQueryImplToJson(this);
+    return _$$PendingQueryImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _PendingQuery implements PendingQuery {
-  const factory _PendingQuery({
-    required final String id,
-    required final String query,
-    required final String language,
-    required final DateTime timestamp,
-    required final Map<String, dynamic> context,
-    final int retryCount,
-    final PendingQueryStatus status,
-    final String? location,
-    final String? fallbackResultId,
-  }) = _$PendingQueryImpl;
+  const factory _PendingQuery(
+      {required final String id,
+      required final String query,
+      required final String language,
+      required final DateTime timestamp,
+      required final Map<String, dynamic> context,
+      final int retryCount,
+      final PendingQueryStatus status,
+      final String? location,
+      final String? fallbackResultId}) = _$PendingQueryImpl;
 
   factory _PendingQuery.fromJson(Map<String, dynamic> json) =
       _$PendingQueryImpl.fromJson;
@@ -1864,20 +1717,18 @@ mixin _$FallbackTemplate {
 /// @nodoc
 abstract class $FallbackTemplateCopyWith<$Res> {
   factory $FallbackTemplateCopyWith(
-    FallbackTemplate value,
-    $Res Function(FallbackTemplate) then,
-  ) = _$FallbackTemplateCopyWithImpl<$Res, FallbackTemplate>;
+          FallbackTemplate value, $Res Function(FallbackTemplate) then) =
+      _$FallbackTemplateCopyWithImpl<$Res, FallbackTemplate>;
   @useResult
-  $Res call({
-    String id,
-    String category,
-    String language,
-    String template,
-    List<String> keywords,
-    double priority,
-    Map<String, dynamic> variations,
-    DateTime createdAt,
-  });
+  $Res call(
+      {String id,
+      String category,
+      String language,
+      String template,
+      List<String> keywords,
+      double priority,
+      Map<String, dynamic> variations,
+      DateTime createdAt});
 }
 
 /// @nodoc
@@ -1904,83 +1755,69 @@ class _$FallbackTemplateCopyWithImpl<$Res, $Val extends FallbackTemplate>
     Object? variations = null,
     Object? createdAt = null,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            category:
-                null == category
-                    ? _value.category
-                    : category // ignore: cast_nullable_to_non_nullable
-                        as String,
-            language:
-                null == language
-                    ? _value.language
-                    : language // ignore: cast_nullable_to_non_nullable
-                        as String,
-            template:
-                null == template
-                    ? _value.template
-                    : template // ignore: cast_nullable_to_non_nullable
-                        as String,
-            keywords:
-                null == keywords
-                    ? _value.keywords
-                    : keywords // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            priority:
-                null == priority
-                    ? _value.priority
-                    : priority // ignore: cast_nullable_to_non_nullable
-                        as double,
-            variations:
-                null == variations
-                    ? _value.variations
-                    : variations // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>,
-            createdAt:
-                null == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
+      template: null == template
+          ? _value.template
+          : template // ignore: cast_nullable_to_non_nullable
+              as String,
+      keywords: null == keywords
+          ? _value.keywords
+          : keywords // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      priority: null == priority
+          ? _value.priority
+          : priority // ignore: cast_nullable_to_non_nullable
+              as double,
+      variations: null == variations
+          ? _value.variations
+          : variations // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$FallbackTemplateImplCopyWith<$Res>
     implements $FallbackTemplateCopyWith<$Res> {
-  factory _$$FallbackTemplateImplCopyWith(
-    _$FallbackTemplateImpl value,
-    $Res Function(_$FallbackTemplateImpl) then,
-  ) = __$$FallbackTemplateImplCopyWithImpl<$Res>;
+  factory _$$FallbackTemplateImplCopyWith(_$FallbackTemplateImpl value,
+          $Res Function(_$FallbackTemplateImpl) then) =
+      __$$FallbackTemplateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String category,
-    String language,
-    String template,
-    List<String> keywords,
-    double priority,
-    Map<String, dynamic> variations,
-    DateTime createdAt,
-  });
+  $Res call(
+      {String id,
+      String category,
+      String language,
+      String template,
+      List<String> keywords,
+      double priority,
+      Map<String, dynamic> variations,
+      DateTime createdAt});
 }
 
 /// @nodoc
 class __$$FallbackTemplateImplCopyWithImpl<$Res>
     extends _$FallbackTemplateCopyWithImpl<$Res, _$FallbackTemplateImpl>
     implements _$$FallbackTemplateImplCopyWith<$Res> {
-  __$$FallbackTemplateImplCopyWithImpl(
-    _$FallbackTemplateImpl _value,
-    $Res Function(_$FallbackTemplateImpl) _then,
-  ) : super(_value, _then);
+  __$$FallbackTemplateImplCopyWithImpl(_$FallbackTemplateImpl _value,
+      $Res Function(_$FallbackTemplateImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of FallbackTemplate
   /// with the given fields replaced by the non-null parameter values.
@@ -1996,67 +1833,57 @@ class __$$FallbackTemplateImplCopyWithImpl<$Res>
     Object? variations = null,
     Object? createdAt = null,
   }) {
-    return _then(
-      _$FallbackTemplateImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        category:
-            null == category
-                ? _value.category
-                : category // ignore: cast_nullable_to_non_nullable
-                    as String,
-        language:
-            null == language
-                ? _value.language
-                : language // ignore: cast_nullable_to_non_nullable
-                    as String,
-        template:
-            null == template
-                ? _value.template
-                : template // ignore: cast_nullable_to_non_nullable
-                    as String,
-        keywords:
-            null == keywords
-                ? _value._keywords
-                : keywords // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        priority:
-            null == priority
-                ? _value.priority
-                : priority // ignore: cast_nullable_to_non_nullable
-                    as double,
-        variations:
-            null == variations
-                ? _value._variations
-                : variations // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>,
-        createdAt:
-            null == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-      ),
-    );
+    return _then(_$FallbackTemplateImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
+      template: null == template
+          ? _value.template
+          : template // ignore: cast_nullable_to_non_nullable
+              as String,
+      keywords: null == keywords
+          ? _value._keywords
+          : keywords // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      priority: null == priority
+          ? _value.priority
+          : priority // ignore: cast_nullable_to_non_nullable
+              as double,
+      variations: null == variations
+          ? _value._variations
+          : variations // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$FallbackTemplateImpl implements _FallbackTemplate {
-  const _$FallbackTemplateImpl({
-    required this.id,
-    required this.category,
-    required this.language,
-    required this.template,
-    required final List<String> keywords,
-    required this.priority,
-    final Map<String, dynamic> variations = const {},
-    required this.createdAt,
-  }) : _keywords = keywords,
-       _variations = variations;
+  const _$FallbackTemplateImpl(
+      {required this.id,
+      required this.category,
+      required this.language,
+      required this.template,
+      required final List<String> keywords,
+      required this.priority,
+      final Map<String, dynamic> variations = const {},
+      required this.createdAt})
+      : _keywords = keywords,
+        _variations = variations;
 
   factory _$FallbackTemplateImpl.fromJson(Map<String, dynamic> json) =>
       _$$FallbackTemplateImplFromJson(json);
@@ -2111,10 +1938,8 @@ class _$FallbackTemplateImpl implements _FallbackTemplate {
             const DeepCollectionEquality().equals(other._keywords, _keywords) &&
             (identical(other.priority, priority) ||
                 other.priority == priority) &&
-            const DeepCollectionEquality().equals(
-              other._variations,
-              _variations,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._variations, _variations) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
   }
@@ -2122,16 +1947,15 @@ class _$FallbackTemplateImpl implements _FallbackTemplate {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    category,
-    language,
-    template,
-    const DeepCollectionEquality().hash(_keywords),
-    priority,
-    const DeepCollectionEquality().hash(_variations),
-    createdAt,
-  );
+      runtimeType,
+      id,
+      category,
+      language,
+      template,
+      const DeepCollectionEquality().hash(_keywords),
+      priority,
+      const DeepCollectionEquality().hash(_variations),
+      createdAt);
 
   /// Create a copy of FallbackTemplate
   /// with the given fields replaced by the non-null parameter values.
@@ -2140,27 +1964,26 @@ class _$FallbackTemplateImpl implements _FallbackTemplate {
   @pragma('vm:prefer-inline')
   _$$FallbackTemplateImplCopyWith<_$FallbackTemplateImpl> get copyWith =>
       __$$FallbackTemplateImplCopyWithImpl<_$FallbackTemplateImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$FallbackTemplateImplToJson(this);
+    return _$$FallbackTemplateImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _FallbackTemplate implements FallbackTemplate {
-  const factory _FallbackTemplate({
-    required final String id,
-    required final String category,
-    required final String language,
-    required final String template,
-    required final List<String> keywords,
-    required final double priority,
-    final Map<String, dynamic> variations,
-    required final DateTime createdAt,
-  }) = _$FallbackTemplateImpl;
+  const factory _FallbackTemplate(
+      {required final String id,
+      required final String category,
+      required final String language,
+      required final String template,
+      required final List<String> keywords,
+      required final double priority,
+      final Map<String, dynamic> variations,
+      required final DateTime createdAt}) = _$FallbackTemplateImpl;
 
   factory _FallbackTemplate.fromJson(Map<String, dynamic> json) =
       _$FallbackTemplateImpl.fromJson;
@@ -2218,20 +2041,18 @@ mixin _$OfflineSyncStatus {
 /// @nodoc
 abstract class $OfflineSyncStatusCopyWith<$Res> {
   factory $OfflineSyncStatusCopyWith(
-    OfflineSyncStatus value,
-    $Res Function(OfflineSyncStatus) then,
-  ) = _$OfflineSyncStatusCopyWithImpl<$Res, OfflineSyncStatus>;
+          OfflineSyncStatus value, $Res Function(OfflineSyncStatus) then) =
+      _$OfflineSyncStatusCopyWithImpl<$Res, OfflineSyncStatus>;
   @useResult
-  $Res call({
-    DateTime lastSync,
-    int totalEmbeddings,
-    int pendingQueries,
-    List<String> availableLanguages,
-    List<String> availableCategories,
-    bool isSyncing,
-    DateTime? nextScheduledSync,
-    String? lastError,
-  });
+  $Res call(
+      {DateTime lastSync,
+      int totalEmbeddings,
+      int pendingQueries,
+      List<String> availableLanguages,
+      List<String> availableCategories,
+      bool isSyncing,
+      DateTime? nextScheduledSync,
+      String? lastError});
 }
 
 /// @nodoc
@@ -2258,83 +2079,69 @@ class _$OfflineSyncStatusCopyWithImpl<$Res, $Val extends OfflineSyncStatus>
     Object? nextScheduledSync = freezed,
     Object? lastError = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            lastSync:
-                null == lastSync
-                    ? _value.lastSync
-                    : lastSync // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            totalEmbeddings:
-                null == totalEmbeddings
-                    ? _value.totalEmbeddings
-                    : totalEmbeddings // ignore: cast_nullable_to_non_nullable
-                        as int,
-            pendingQueries:
-                null == pendingQueries
-                    ? _value.pendingQueries
-                    : pendingQueries // ignore: cast_nullable_to_non_nullable
-                        as int,
-            availableLanguages:
-                null == availableLanguages
-                    ? _value.availableLanguages
-                    : availableLanguages // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            availableCategories:
-                null == availableCategories
-                    ? _value.availableCategories
-                    : availableCategories // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            isSyncing:
-                null == isSyncing
-                    ? _value.isSyncing
-                    : isSyncing // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            nextScheduledSync:
-                freezed == nextScheduledSync
-                    ? _value.nextScheduledSync
-                    : nextScheduledSync // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            lastError:
-                freezed == lastError
-                    ? _value.lastError
-                    : lastError // ignore: cast_nullable_to_non_nullable
-                        as String?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      lastSync: null == lastSync
+          ? _value.lastSync
+          : lastSync // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      totalEmbeddings: null == totalEmbeddings
+          ? _value.totalEmbeddings
+          : totalEmbeddings // ignore: cast_nullable_to_non_nullable
+              as int,
+      pendingQueries: null == pendingQueries
+          ? _value.pendingQueries
+          : pendingQueries // ignore: cast_nullable_to_non_nullable
+              as int,
+      availableLanguages: null == availableLanguages
+          ? _value.availableLanguages
+          : availableLanguages // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      availableCategories: null == availableCategories
+          ? _value.availableCategories
+          : availableCategories // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      isSyncing: null == isSyncing
+          ? _value.isSyncing
+          : isSyncing // ignore: cast_nullable_to_non_nullable
+              as bool,
+      nextScheduledSync: freezed == nextScheduledSync
+          ? _value.nextScheduledSync
+          : nextScheduledSync // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      lastError: freezed == lastError
+          ? _value.lastError
+          : lastError // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$OfflineSyncStatusImplCopyWith<$Res>
     implements $OfflineSyncStatusCopyWith<$Res> {
-  factory _$$OfflineSyncStatusImplCopyWith(
-    _$OfflineSyncStatusImpl value,
-    $Res Function(_$OfflineSyncStatusImpl) then,
-  ) = __$$OfflineSyncStatusImplCopyWithImpl<$Res>;
+  factory _$$OfflineSyncStatusImplCopyWith(_$OfflineSyncStatusImpl value,
+          $Res Function(_$OfflineSyncStatusImpl) then) =
+      __$$OfflineSyncStatusImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    DateTime lastSync,
-    int totalEmbeddings,
-    int pendingQueries,
-    List<String> availableLanguages,
-    List<String> availableCategories,
-    bool isSyncing,
-    DateTime? nextScheduledSync,
-    String? lastError,
-  });
+  $Res call(
+      {DateTime lastSync,
+      int totalEmbeddings,
+      int pendingQueries,
+      List<String> availableLanguages,
+      List<String> availableCategories,
+      bool isSyncing,
+      DateTime? nextScheduledSync,
+      String? lastError});
 }
 
 /// @nodoc
 class __$$OfflineSyncStatusImplCopyWithImpl<$Res>
     extends _$OfflineSyncStatusCopyWithImpl<$Res, _$OfflineSyncStatusImpl>
     implements _$$OfflineSyncStatusImplCopyWith<$Res> {
-  __$$OfflineSyncStatusImplCopyWithImpl(
-    _$OfflineSyncStatusImpl _value,
-    $Res Function(_$OfflineSyncStatusImpl) _then,
-  ) : super(_value, _then);
+  __$$OfflineSyncStatusImplCopyWithImpl(_$OfflineSyncStatusImpl _value,
+      $Res Function(_$OfflineSyncStatusImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of OfflineSyncStatus
   /// with the given fields replaced by the non-null parameter values.
@@ -2350,67 +2157,57 @@ class __$$OfflineSyncStatusImplCopyWithImpl<$Res>
     Object? nextScheduledSync = freezed,
     Object? lastError = freezed,
   }) {
-    return _then(
-      _$OfflineSyncStatusImpl(
-        lastSync:
-            null == lastSync
-                ? _value.lastSync
-                : lastSync // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        totalEmbeddings:
-            null == totalEmbeddings
-                ? _value.totalEmbeddings
-                : totalEmbeddings // ignore: cast_nullable_to_non_nullable
-                    as int,
-        pendingQueries:
-            null == pendingQueries
-                ? _value.pendingQueries
-                : pendingQueries // ignore: cast_nullable_to_non_nullable
-                    as int,
-        availableLanguages:
-            null == availableLanguages
-                ? _value._availableLanguages
-                : availableLanguages // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        availableCategories:
-            null == availableCategories
-                ? _value._availableCategories
-                : availableCategories // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        isSyncing:
-            null == isSyncing
-                ? _value.isSyncing
-                : isSyncing // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        nextScheduledSync:
-            freezed == nextScheduledSync
-                ? _value.nextScheduledSync
-                : nextScheduledSync // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        lastError:
-            freezed == lastError
-                ? _value.lastError
-                : lastError // ignore: cast_nullable_to_non_nullable
-                    as String?,
-      ),
-    );
+    return _then(_$OfflineSyncStatusImpl(
+      lastSync: null == lastSync
+          ? _value.lastSync
+          : lastSync // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      totalEmbeddings: null == totalEmbeddings
+          ? _value.totalEmbeddings
+          : totalEmbeddings // ignore: cast_nullable_to_non_nullable
+              as int,
+      pendingQueries: null == pendingQueries
+          ? _value.pendingQueries
+          : pendingQueries // ignore: cast_nullable_to_non_nullable
+              as int,
+      availableLanguages: null == availableLanguages
+          ? _value._availableLanguages
+          : availableLanguages // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      availableCategories: null == availableCategories
+          ? _value._availableCategories
+          : availableCategories // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      isSyncing: null == isSyncing
+          ? _value.isSyncing
+          : isSyncing // ignore: cast_nullable_to_non_nullable
+              as bool,
+      nextScheduledSync: freezed == nextScheduledSync
+          ? _value.nextScheduledSync
+          : nextScheduledSync // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      lastError: freezed == lastError
+          ? _value.lastError
+          : lastError // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$OfflineSyncStatusImpl implements _OfflineSyncStatus {
-  const _$OfflineSyncStatusImpl({
-    required this.lastSync,
-    required this.totalEmbeddings,
-    required this.pendingQueries,
-    required final List<String> availableLanguages,
-    required final List<String> availableCategories,
-    this.isSyncing = false,
-    this.nextScheduledSync,
-    this.lastError,
-  }) : _availableLanguages = availableLanguages,
-       _availableCategories = availableCategories;
+  const _$OfflineSyncStatusImpl(
+      {required this.lastSync,
+      required this.totalEmbeddings,
+      required this.pendingQueries,
+      required final List<String> availableLanguages,
+      required final List<String> availableCategories,
+      this.isSyncing = false,
+      this.nextScheduledSync,
+      this.lastError})
+      : _availableLanguages = availableLanguages,
+        _availableCategories = availableCategories;
 
   factory _$OfflineSyncStatusImpl.fromJson(Map<String, dynamic> json) =>
       _$$OfflineSyncStatusImplFromJson(json);
@@ -2463,14 +2260,10 @@ class _$OfflineSyncStatusImpl implements _OfflineSyncStatus {
                 other.totalEmbeddings == totalEmbeddings) &&
             (identical(other.pendingQueries, pendingQueries) ||
                 other.pendingQueries == pendingQueries) &&
-            const DeepCollectionEquality().equals(
-              other._availableLanguages,
-              _availableLanguages,
-            ) &&
-            const DeepCollectionEquality().equals(
-              other._availableCategories,
-              _availableCategories,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._availableLanguages, _availableLanguages) &&
+            const DeepCollectionEquality()
+                .equals(other._availableCategories, _availableCategories) &&
             (identical(other.isSyncing, isSyncing) ||
                 other.isSyncing == isSyncing) &&
             (identical(other.nextScheduledSync, nextScheduledSync) ||
@@ -2482,16 +2275,15 @@ class _$OfflineSyncStatusImpl implements _OfflineSyncStatus {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    lastSync,
-    totalEmbeddings,
-    pendingQueries,
-    const DeepCollectionEquality().hash(_availableLanguages),
-    const DeepCollectionEquality().hash(_availableCategories),
-    isSyncing,
-    nextScheduledSync,
-    lastError,
-  );
+      runtimeType,
+      lastSync,
+      totalEmbeddings,
+      pendingQueries,
+      const DeepCollectionEquality().hash(_availableLanguages),
+      const DeepCollectionEquality().hash(_availableCategories),
+      isSyncing,
+      nextScheduledSync,
+      lastError);
 
   /// Create a copy of OfflineSyncStatus
   /// with the given fields replaced by the non-null parameter values.
@@ -2500,27 +2292,26 @@ class _$OfflineSyncStatusImpl implements _OfflineSyncStatus {
   @pragma('vm:prefer-inline')
   _$$OfflineSyncStatusImplCopyWith<_$OfflineSyncStatusImpl> get copyWith =>
       __$$OfflineSyncStatusImplCopyWithImpl<_$OfflineSyncStatusImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$OfflineSyncStatusImplToJson(this);
+    return _$$OfflineSyncStatusImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _OfflineSyncStatus implements OfflineSyncStatus {
-  const factory _OfflineSyncStatus({
-    required final DateTime lastSync,
-    required final int totalEmbeddings,
-    required final int pendingQueries,
-    required final List<String> availableLanguages,
-    required final List<String> availableCategories,
-    final bool isSyncing,
-    final DateTime? nextScheduledSync,
-    final String? lastError,
-  }) = _$OfflineSyncStatusImpl;
+  const factory _OfflineSyncStatus(
+      {required final DateTime lastSync,
+      required final int totalEmbeddings,
+      required final int pendingQueries,
+      required final List<String> availableLanguages,
+      required final List<String> availableCategories,
+      final bool isSyncing,
+      final DateTime? nextScheduledSync,
+      final String? lastError}) = _$OfflineSyncStatusImpl;
 
   factory _OfflineSyncStatus.fromJson(Map<String, dynamic> json) =
       _$OfflineSyncStatusImpl.fromJson;

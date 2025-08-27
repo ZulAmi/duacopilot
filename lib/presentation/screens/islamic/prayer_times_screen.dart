@@ -11,8 +11,7 @@ class PrayerTimesScreen extends ConsumerStatefulWidget {
   ConsumerState<PrayerTimesScreen> createState() => _PrayerTimesScreenState();
 }
 
-class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen>
-    with TickerProviderStateMixin {
+class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen> with TickerProviderStateMixin {
   late AnimationController _fadeController;
   late AnimationController _slideController;
   bool _isLoading = true;
@@ -180,7 +179,7 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen>
             Container(
               padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space3),
               decoration: BoxDecoration(
-                color: RevolutionaryIslamicTheme.textOnColor.withOpacity(0.2),
+                color: RevolutionaryIslamicTheme.textOnColor.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(
                   RevolutionaryIslamicTheme.radius2Xl,
                 ),
@@ -199,8 +198,8 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen>
                   Text(
                     'Current Location',
                     style: RevolutionaryIslamicTheme.body2.copyWith(
-                      color: RevolutionaryIslamicTheme.textOnColor.withOpacity(
-                        0.8,
+                      color: RevolutionaryIslamicTheme.textOnColor.withValues(
+                        alpha: 0.8,
                       ),
                     ),
                   ),
@@ -222,8 +221,7 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen>
                 color: RevolutionaryIslamicTheme.textOnColor,
               ),
               style: IconButton.styleFrom(
-                backgroundColor: RevolutionaryIslamicTheme.textOnColor
-                    .withOpacity(0.2),
+                backgroundColor: RevolutionaryIslamicTheme.textOnColor.withValues(alpha: 0.1),
               ),
             ),
           ],
@@ -266,8 +264,8 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen>
                     RevolutionaryIslamicTheme.space2,
                   ),
                   decoration: BoxDecoration(
-                    color: RevolutionaryIslamicTheme.accentPurple.withOpacity(
-                      0.1,
+                    color: RevolutionaryIslamicTheme.accentPurple.withValues(
+                      alpha: 0.1,
                     ),
                     borderRadius: BorderRadius.circular(
                       RevolutionaryIslamicTheme.radiusXl,
@@ -293,8 +291,8 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen>
                     vertical: RevolutionaryIslamicTheme.space1,
                   ),
                   decoration: BoxDecoration(
-                    color: RevolutionaryIslamicTheme.successGreen.withOpacity(
-                      0.1,
+                    color: RevolutionaryIslamicTheme.successGreen.withValues(
+                      alpha: 0.1,
                     ),
                     borderRadius: BorderRadius.circular(
                       RevolutionaryIslamicTheme.radiusFull,
@@ -349,10 +347,7 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen>
             final prayer = entry.value;
             return Padding(
               padding: EdgeInsets.only(
-                bottom:
-                    index < _prayerTimes.length - 1
-                        ? RevolutionaryIslamicTheme.space3
-                        : 0,
+                bottom: index < _prayerTimes.length - 1 ? RevolutionaryIslamicTheme.space3 : 0,
               ),
               child: SlideTransition(
                 position: Tween<Offset>(
@@ -382,17 +377,14 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen>
       padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space4),
       decoration: BoxDecoration(
         color:
-            prayer.isPassed
-                ? RevolutionaryIslamicTheme.neutralGray100
-                : RevolutionaryIslamicTheme.backgroundSecondary,
+            prayer.isPassed ? RevolutionaryIslamicTheme.neutralGray100 : RevolutionaryIslamicTheme.backgroundSecondary,
         borderRadius: BorderRadius.circular(
           RevolutionaryIslamicTheme.radius2Xl,
         ),
         border: Border.all(
-          color:
-              prayer.isPassed
-                  ? RevolutionaryIslamicTheme.borderLight
-                  : RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.3),
+          color: prayer.isPassed
+              ? RevolutionaryIslamicTheme.borderLight
+              : RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.3),
         ),
         boxShadow: prayer.isPassed ? [] : RevolutionaryIslamicTheme.shadowXs,
       ),
@@ -401,12 +393,11 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen>
           Container(
             padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space3),
             decoration: BoxDecoration(
-              color:
-                  prayer.isPassed
-                      ? RevolutionaryIslamicTheme.neutralGray300
-                      : RevolutionaryIslamicTheme.primaryEmerald.withOpacity(
-                        0.1,
-                      ),
+              color: prayer.isPassed
+                  ? RevolutionaryIslamicTheme.neutralGray300
+                  : RevolutionaryIslamicTheme.primaryEmerald.withValues(
+                      alpha: 0.1,
+                    ),
               borderRadius: BorderRadius.circular(
                 RevolutionaryIslamicTheme.radiusXl,
               ),
@@ -414,9 +405,7 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen>
             child: Icon(
               prayer.icon,
               color:
-                  prayer.isPassed
-                      ? RevolutionaryIslamicTheme.textTertiary
-                      : RevolutionaryIslamicTheme.primaryEmerald,
+                  prayer.isPassed ? RevolutionaryIslamicTheme.textTertiary : RevolutionaryIslamicTheme.primaryEmerald,
               size: 24,
             ),
           ),
@@ -428,10 +417,9 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen>
                 Text(
                   prayer.name,
                   style: RevolutionaryIslamicTheme.subtitle1.copyWith(
-                    color:
-                        prayer.isPassed
-                            ? RevolutionaryIslamicTheme.textTertiary
-                            : RevolutionaryIslamicTheme.textPrimary,
+                    color: prayer.isPassed
+                        ? RevolutionaryIslamicTheme.textTertiary
+                        : RevolutionaryIslamicTheme.textPrimary,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -439,10 +427,9 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen>
                 Text(
                   prayer.description,
                   style: RevolutionaryIslamicTheme.body2.copyWith(
-                    color:
-                        prayer.isPassed
-                            ? RevolutionaryIslamicTheme.textTertiary
-                            : RevolutionaryIslamicTheme.textSecondary,
+                    color: prayer.isPassed
+                        ? RevolutionaryIslamicTheme.textTertiary
+                        : RevolutionaryIslamicTheme.textSecondary,
                   ),
                 ),
               ],
@@ -454,10 +441,9 @@ class _PrayerTimesScreenState extends ConsumerState<PrayerTimesScreen>
               Text(
                 prayer.time,
                 style: RevolutionaryIslamicTheme.headline3.copyWith(
-                  color:
-                      prayer.isPassed
-                          ? RevolutionaryIslamicTheme.textTertiary
-                          : RevolutionaryIslamicTheme.primaryEmerald,
+                  color: prayer.isPassed
+                      ? RevolutionaryIslamicTheme.textTertiary
+                      : RevolutionaryIslamicTheme.primaryEmerald,
                   fontWeight: FontWeight.w700,
                 ),
               ),

@@ -12,8 +12,7 @@ part of 'dua_entity.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 DuaEntity _$DuaEntityFromJson(Map<String, dynamic> json) {
   return _DuaEntity.fromJson(json);
@@ -51,22 +50,21 @@ abstract class $DuaEntityCopyWith<$Res> {
   factory $DuaEntityCopyWith(DuaEntity value, $Res Function(DuaEntity) then) =
       _$DuaEntityCopyWithImpl<$Res, DuaEntity>;
   @useResult
-  $Res call({
-    String id,
-    String arabicText,
-    String transliteration,
-    String translation,
-    String category,
-    List<String> tags,
-    SourceAuthenticity authenticity,
-    RAGConfidence ragConfidence,
-    String? audioUrl,
-    String? context,
-    String? benefits,
-    List<String>? relatedDuas,
-    bool isFavorite,
-    DateTime? lastAccessed,
-  });
+  $Res call(
+      {String id,
+      String arabicText,
+      String transliteration,
+      String translation,
+      String category,
+      List<String> tags,
+      SourceAuthenticity authenticity,
+      RAGConfidence ragConfidence,
+      String? audioUrl,
+      String? context,
+      String? benefits,
+      List<String>? relatedDuas,
+      bool isFavorite,
+      DateTime? lastAccessed});
 
   $SourceAuthenticityCopyWith<$Res> get authenticity;
   $RAGConfidenceCopyWith<$Res> get ragConfidence;
@@ -102,81 +100,64 @@ class _$DuaEntityCopyWithImpl<$Res, $Val extends DuaEntity>
     Object? isFavorite = null,
     Object? lastAccessed = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            arabicText:
-                null == arabicText
-                    ? _value.arabicText
-                    : arabicText // ignore: cast_nullable_to_non_nullable
-                        as String,
-            transliteration:
-                null == transliteration
-                    ? _value.transliteration
-                    : transliteration // ignore: cast_nullable_to_non_nullable
-                        as String,
-            translation:
-                null == translation
-                    ? _value.translation
-                    : translation // ignore: cast_nullable_to_non_nullable
-                        as String,
-            category:
-                null == category
-                    ? _value.category
-                    : category // ignore: cast_nullable_to_non_nullable
-                        as String,
-            tags:
-                null == tags
-                    ? _value.tags
-                    : tags // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            authenticity:
-                null == authenticity
-                    ? _value.authenticity
-                    : authenticity // ignore: cast_nullable_to_non_nullable
-                        as SourceAuthenticity,
-            ragConfidence:
-                null == ragConfidence
-                    ? _value.ragConfidence
-                    : ragConfidence // ignore: cast_nullable_to_non_nullable
-                        as RAGConfidence,
-            audioUrl:
-                freezed == audioUrl
-                    ? _value.audioUrl
-                    : audioUrl // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            context:
-                freezed == context
-                    ? _value.context
-                    : context // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            benefits:
-                freezed == benefits
-                    ? _value.benefits
-                    : benefits // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            relatedDuas:
-                freezed == relatedDuas
-                    ? _value.relatedDuas
-                    : relatedDuas // ignore: cast_nullable_to_non_nullable
-                        as List<String>?,
-            isFavorite:
-                null == isFavorite
-                    ? _value.isFavorite
-                    : isFavorite // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            lastAccessed:
-                freezed == lastAccessed
-                    ? _value.lastAccessed
-                    : lastAccessed // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      arabicText: null == arabicText
+          ? _value.arabicText
+          : arabicText // ignore: cast_nullable_to_non_nullable
+              as String,
+      transliteration: null == transliteration
+          ? _value.transliteration
+          : transliteration // ignore: cast_nullable_to_non_nullable
+              as String,
+      translation: null == translation
+          ? _value.translation
+          : translation // ignore: cast_nullable_to_non_nullable
+              as String,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+      tags: null == tags
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      authenticity: null == authenticity
+          ? _value.authenticity
+          : authenticity // ignore: cast_nullable_to_non_nullable
+              as SourceAuthenticity,
+      ragConfidence: null == ragConfidence
+          ? _value.ragConfidence
+          : ragConfidence // ignore: cast_nullable_to_non_nullable
+              as RAGConfidence,
+      audioUrl: freezed == audioUrl
+          ? _value.audioUrl
+          : audioUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      context: freezed == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as String?,
+      benefits: freezed == benefits
+          ? _value.benefits
+          : benefits // ignore: cast_nullable_to_non_nullable
+              as String?,
+      relatedDuas: freezed == relatedDuas
+          ? _value.relatedDuas
+          : relatedDuas // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      isFavorite: null == isFavorite
+          ? _value.isFavorite
+          : isFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
+      lastAccessed: freezed == lastAccessed
+          ? _value.lastAccessed
+          : lastAccessed // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
   }
 
   /// Create a copy of DuaEntity
@@ -204,27 +185,25 @@ class _$DuaEntityCopyWithImpl<$Res, $Val extends DuaEntity>
 abstract class _$$DuaEntityImplCopyWith<$Res>
     implements $DuaEntityCopyWith<$Res> {
   factory _$$DuaEntityImplCopyWith(
-    _$DuaEntityImpl value,
-    $Res Function(_$DuaEntityImpl) then,
-  ) = __$$DuaEntityImplCopyWithImpl<$Res>;
+          _$DuaEntityImpl value, $Res Function(_$DuaEntityImpl) then) =
+      __$$DuaEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String arabicText,
-    String transliteration,
-    String translation,
-    String category,
-    List<String> tags,
-    SourceAuthenticity authenticity,
-    RAGConfidence ragConfidence,
-    String? audioUrl,
-    String? context,
-    String? benefits,
-    List<String>? relatedDuas,
-    bool isFavorite,
-    DateTime? lastAccessed,
-  });
+  $Res call(
+      {String id,
+      String arabicText,
+      String transliteration,
+      String translation,
+      String category,
+      List<String> tags,
+      SourceAuthenticity authenticity,
+      RAGConfidence ragConfidence,
+      String? audioUrl,
+      String? context,
+      String? benefits,
+      List<String>? relatedDuas,
+      bool isFavorite,
+      DateTime? lastAccessed});
 
   @override
   $SourceAuthenticityCopyWith<$Res> get authenticity;
@@ -237,9 +216,8 @@ class __$$DuaEntityImplCopyWithImpl<$Res>
     extends _$DuaEntityCopyWithImpl<$Res, _$DuaEntityImpl>
     implements _$$DuaEntityImplCopyWith<$Res> {
   __$$DuaEntityImplCopyWithImpl(
-    _$DuaEntityImpl _value,
-    $Res Function(_$DuaEntityImpl) _then,
-  ) : super(_value, _then);
+      _$DuaEntityImpl _value, $Res Function(_$DuaEntityImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of DuaEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -261,103 +239,87 @@ class __$$DuaEntityImplCopyWithImpl<$Res>
     Object? isFavorite = null,
     Object? lastAccessed = freezed,
   }) {
-    return _then(
-      _$DuaEntityImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        arabicText:
-            null == arabicText
-                ? _value.arabicText
-                : arabicText // ignore: cast_nullable_to_non_nullable
-                    as String,
-        transliteration:
-            null == transliteration
-                ? _value.transliteration
-                : transliteration // ignore: cast_nullable_to_non_nullable
-                    as String,
-        translation:
-            null == translation
-                ? _value.translation
-                : translation // ignore: cast_nullable_to_non_nullable
-                    as String,
-        category:
-            null == category
-                ? _value.category
-                : category // ignore: cast_nullable_to_non_nullable
-                    as String,
-        tags:
-            null == tags
-                ? _value._tags
-                : tags // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        authenticity:
-            null == authenticity
-                ? _value.authenticity
-                : authenticity // ignore: cast_nullable_to_non_nullable
-                    as SourceAuthenticity,
-        ragConfidence:
-            null == ragConfidence
-                ? _value.ragConfidence
-                : ragConfidence // ignore: cast_nullable_to_non_nullable
-                    as RAGConfidence,
-        audioUrl:
-            freezed == audioUrl
-                ? _value.audioUrl
-                : audioUrl // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        context:
-            freezed == context
-                ? _value.context
-                : context // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        benefits:
-            freezed == benefits
-                ? _value.benefits
-                : benefits // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        relatedDuas:
-            freezed == relatedDuas
-                ? _value._relatedDuas
-                : relatedDuas // ignore: cast_nullable_to_non_nullable
-                    as List<String>?,
-        isFavorite:
-            null == isFavorite
-                ? _value.isFavorite
-                : isFavorite // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        lastAccessed:
-            freezed == lastAccessed
-                ? _value.lastAccessed
-                : lastAccessed // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-      ),
-    );
+    return _then(_$DuaEntityImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      arabicText: null == arabicText
+          ? _value.arabicText
+          : arabicText // ignore: cast_nullable_to_non_nullable
+              as String,
+      transliteration: null == transliteration
+          ? _value.transliteration
+          : transliteration // ignore: cast_nullable_to_non_nullable
+              as String,
+      translation: null == translation
+          ? _value.translation
+          : translation // ignore: cast_nullable_to_non_nullable
+              as String,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+      tags: null == tags
+          ? _value._tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      authenticity: null == authenticity
+          ? _value.authenticity
+          : authenticity // ignore: cast_nullable_to_non_nullable
+              as SourceAuthenticity,
+      ragConfidence: null == ragConfidence
+          ? _value.ragConfidence
+          : ragConfidence // ignore: cast_nullable_to_non_nullable
+              as RAGConfidence,
+      audioUrl: freezed == audioUrl
+          ? _value.audioUrl
+          : audioUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      context: freezed == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as String?,
+      benefits: freezed == benefits
+          ? _value.benefits
+          : benefits // ignore: cast_nullable_to_non_nullable
+              as String?,
+      relatedDuas: freezed == relatedDuas
+          ? _value._relatedDuas
+          : relatedDuas // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      isFavorite: null == isFavorite
+          ? _value.isFavorite
+          : isFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
+      lastAccessed: freezed == lastAccessed
+          ? _value.lastAccessed
+          : lastAccessed // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$DuaEntityImpl implements _DuaEntity {
-  const _$DuaEntityImpl({
-    required this.id,
-    required this.arabicText,
-    required this.transliteration,
-    required this.translation,
-    required this.category,
-    required final List<String> tags,
-    required this.authenticity,
-    required this.ragConfidence,
-    this.audioUrl,
-    this.context,
-    this.benefits,
-    final List<String>? relatedDuas,
-    this.isFavorite = false,
-    this.lastAccessed,
-  }) : _tags = tags,
-       _relatedDuas = relatedDuas;
+  const _$DuaEntityImpl(
+      {required this.id,
+      required this.arabicText,
+      required this.transliteration,
+      required this.translation,
+      required this.category,
+      required final List<String> tags,
+      required this.authenticity,
+      required this.ragConfidence,
+      this.audioUrl,
+      this.context,
+      this.benefits,
+      final List<String>? relatedDuas,
+      this.isFavorite = false,
+      this.lastAccessed})
+      : _tags = tags,
+        _relatedDuas = relatedDuas;
 
   factory _$DuaEntityImpl.fromJson(Map<String, dynamic> json) =>
       _$$DuaEntityImplFromJson(json);
@@ -435,10 +397,8 @@ class _$DuaEntityImpl implements _DuaEntity {
             (identical(other.context, context) || other.context == context) &&
             (identical(other.benefits, benefits) ||
                 other.benefits == benefits) &&
-            const DeepCollectionEquality().equals(
-              other._relatedDuas,
-              _relatedDuas,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._relatedDuas, _relatedDuas) &&
             (identical(other.isFavorite, isFavorite) ||
                 other.isFavorite == isFavorite) &&
             (identical(other.lastAccessed, lastAccessed) ||
@@ -448,22 +408,21 @@ class _$DuaEntityImpl implements _DuaEntity {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    arabicText,
-    transliteration,
-    translation,
-    category,
-    const DeepCollectionEquality().hash(_tags),
-    authenticity,
-    ragConfidence,
-    audioUrl,
-    context,
-    benefits,
-    const DeepCollectionEquality().hash(_relatedDuas),
-    isFavorite,
-    lastAccessed,
-  );
+      runtimeType,
+      id,
+      arabicText,
+      transliteration,
+      translation,
+      category,
+      const DeepCollectionEquality().hash(_tags),
+      authenticity,
+      ragConfidence,
+      audioUrl,
+      context,
+      benefits,
+      const DeepCollectionEquality().hash(_relatedDuas),
+      isFavorite,
+      lastAccessed);
 
   /// Create a copy of DuaEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -475,27 +434,28 @@ class _$DuaEntityImpl implements _DuaEntity {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$DuaEntityImplToJson(this);
+    return _$$DuaEntityImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _DuaEntity implements DuaEntity {
-  const factory _DuaEntity({
-    required final String id,
-    required final String arabicText,
-    required final String transliteration,
-    required final String translation,
-    required final String category,
-    required final List<String> tags,
-    required final SourceAuthenticity authenticity,
-    required final RAGConfidence ragConfidence,
-    final String? audioUrl,
-    final String? context,
-    final String? benefits,
-    final List<String>? relatedDuas,
-    final bool isFavorite,
-    final DateTime? lastAccessed,
-  }) = _$DuaEntityImpl;
+  const factory _DuaEntity(
+      {required final String id,
+      required final String arabicText,
+      required final String transliteration,
+      required final String translation,
+      required final String category,
+      required final List<String> tags,
+      required final SourceAuthenticity authenticity,
+      required final RAGConfidence ragConfidence,
+      final String? audioUrl,
+      final String? context,
+      final String? benefits,
+      final List<String>? relatedDuas,
+      final bool isFavorite,
+      final DateTime? lastAccessed}) = _$DuaEntityImpl;
 
   factory _DuaEntity.fromJson(Map<String, dynamic> json) =
       _$DuaEntityImpl.fromJson;
@@ -564,19 +524,17 @@ mixin _$SourceAuthenticity {
 /// @nodoc
 abstract class $SourceAuthenticityCopyWith<$Res> {
   factory $SourceAuthenticityCopyWith(
-    SourceAuthenticity value,
-    $Res Function(SourceAuthenticity) then,
-  ) = _$SourceAuthenticityCopyWithImpl<$Res, SourceAuthenticity>;
+          SourceAuthenticity value, $Res Function(SourceAuthenticity) then) =
+      _$SourceAuthenticityCopyWithImpl<$Res, SourceAuthenticity>;
   @useResult
-  $Res call({
-    AuthenticityLevel level,
-    String source,
-    String reference,
-    String? hadithGrade,
-    String? chain,
-    String? scholar,
-    double confidenceScore,
-  });
+  $Res call(
+      {AuthenticityLevel level,
+      String source,
+      String reference,
+      String? hadithGrade,
+      String? chain,
+      String? scholar,
+      double confidenceScore});
 }
 
 /// @nodoc
@@ -602,77 +560,64 @@ class _$SourceAuthenticityCopyWithImpl<$Res, $Val extends SourceAuthenticity>
     Object? scholar = freezed,
     Object? confidenceScore = null,
   }) {
-    return _then(
-      _value.copyWith(
-            level:
-                null == level
-                    ? _value.level
-                    : level // ignore: cast_nullable_to_non_nullable
-                        as AuthenticityLevel,
-            source:
-                null == source
-                    ? _value.source
-                    : source // ignore: cast_nullable_to_non_nullable
-                        as String,
-            reference:
-                null == reference
-                    ? _value.reference
-                    : reference // ignore: cast_nullable_to_non_nullable
-                        as String,
-            hadithGrade:
-                freezed == hadithGrade
-                    ? _value.hadithGrade
-                    : hadithGrade // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            chain:
-                freezed == chain
-                    ? _value.chain
-                    : chain // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            scholar:
-                freezed == scholar
-                    ? _value.scholar
-                    : scholar // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            confidenceScore:
-                null == confidenceScore
-                    ? _value.confidenceScore
-                    : confidenceScore // ignore: cast_nullable_to_non_nullable
-                        as double,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      level: null == level
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
+              as AuthenticityLevel,
+      source: null == source
+          ? _value.source
+          : source // ignore: cast_nullable_to_non_nullable
+              as String,
+      reference: null == reference
+          ? _value.reference
+          : reference // ignore: cast_nullable_to_non_nullable
+              as String,
+      hadithGrade: freezed == hadithGrade
+          ? _value.hadithGrade
+          : hadithGrade // ignore: cast_nullable_to_non_nullable
+              as String?,
+      chain: freezed == chain
+          ? _value.chain
+          : chain // ignore: cast_nullable_to_non_nullable
+              as String?,
+      scholar: freezed == scholar
+          ? _value.scholar
+          : scholar // ignore: cast_nullable_to_non_nullable
+              as String?,
+      confidenceScore: null == confidenceScore
+          ? _value.confidenceScore
+          : confidenceScore // ignore: cast_nullable_to_non_nullable
+              as double,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$SourceAuthenticityImplCopyWith<$Res>
     implements $SourceAuthenticityCopyWith<$Res> {
-  factory _$$SourceAuthenticityImplCopyWith(
-    _$SourceAuthenticityImpl value,
-    $Res Function(_$SourceAuthenticityImpl) then,
-  ) = __$$SourceAuthenticityImplCopyWithImpl<$Res>;
+  factory _$$SourceAuthenticityImplCopyWith(_$SourceAuthenticityImpl value,
+          $Res Function(_$SourceAuthenticityImpl) then) =
+      __$$SourceAuthenticityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    AuthenticityLevel level,
-    String source,
-    String reference,
-    String? hadithGrade,
-    String? chain,
-    String? scholar,
-    double confidenceScore,
-  });
+  $Res call(
+      {AuthenticityLevel level,
+      String source,
+      String reference,
+      String? hadithGrade,
+      String? chain,
+      String? scholar,
+      double confidenceScore});
 }
 
 /// @nodoc
 class __$$SourceAuthenticityImplCopyWithImpl<$Res>
     extends _$SourceAuthenticityCopyWithImpl<$Res, _$SourceAuthenticityImpl>
     implements _$$SourceAuthenticityImplCopyWith<$Res> {
-  __$$SourceAuthenticityImplCopyWithImpl(
-    _$SourceAuthenticityImpl _value,
-    $Res Function(_$SourceAuthenticityImpl) _then,
-  ) : super(_value, _then);
+  __$$SourceAuthenticityImplCopyWithImpl(_$SourceAuthenticityImpl _value,
+      $Res Function(_$SourceAuthenticityImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of SourceAuthenticity
   /// with the given fields replaced by the non-null parameter values.
@@ -687,60 +632,50 @@ class __$$SourceAuthenticityImplCopyWithImpl<$Res>
     Object? scholar = freezed,
     Object? confidenceScore = null,
   }) {
-    return _then(
-      _$SourceAuthenticityImpl(
-        level:
-            null == level
-                ? _value.level
-                : level // ignore: cast_nullable_to_non_nullable
-                    as AuthenticityLevel,
-        source:
-            null == source
-                ? _value.source
-                : source // ignore: cast_nullable_to_non_nullable
-                    as String,
-        reference:
-            null == reference
-                ? _value.reference
-                : reference // ignore: cast_nullable_to_non_nullable
-                    as String,
-        hadithGrade:
-            freezed == hadithGrade
-                ? _value.hadithGrade
-                : hadithGrade // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        chain:
-            freezed == chain
-                ? _value.chain
-                : chain // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        scholar:
-            freezed == scholar
-                ? _value.scholar
-                : scholar // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        confidenceScore:
-            null == confidenceScore
-                ? _value.confidenceScore
-                : confidenceScore // ignore: cast_nullable_to_non_nullable
-                    as double,
-      ),
-    );
+    return _then(_$SourceAuthenticityImpl(
+      level: null == level
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
+              as AuthenticityLevel,
+      source: null == source
+          ? _value.source
+          : source // ignore: cast_nullable_to_non_nullable
+              as String,
+      reference: null == reference
+          ? _value.reference
+          : reference // ignore: cast_nullable_to_non_nullable
+              as String,
+      hadithGrade: freezed == hadithGrade
+          ? _value.hadithGrade
+          : hadithGrade // ignore: cast_nullable_to_non_nullable
+              as String?,
+      chain: freezed == chain
+          ? _value.chain
+          : chain // ignore: cast_nullable_to_non_nullable
+              as String?,
+      scholar: freezed == scholar
+          ? _value.scholar
+          : scholar // ignore: cast_nullable_to_non_nullable
+              as String?,
+      confidenceScore: null == confidenceScore
+          ? _value.confidenceScore
+          : confidenceScore // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$SourceAuthenticityImpl implements _SourceAuthenticity {
-  const _$SourceAuthenticityImpl({
-    required this.level,
-    required this.source,
-    required this.reference,
-    this.hadithGrade,
-    this.chain,
-    this.scholar,
-    this.confidenceScore = 1.0,
-  });
+  const _$SourceAuthenticityImpl(
+      {required this.level,
+      required this.source,
+      required this.reference,
+      this.hadithGrade,
+      this.chain,
+      this.scholar,
+      this.confidenceScore = 1.0});
 
   factory _$SourceAuthenticityImpl.fromJson(Map<String, dynamic> json) =>
       _$$SourceAuthenticityImplFromJson(json);
@@ -785,16 +720,8 @@ class _$SourceAuthenticityImpl implements _SourceAuthenticity {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    level,
-    source,
-    reference,
-    hadithGrade,
-    chain,
-    scholar,
-    confidenceScore,
-  );
+  int get hashCode => Object.hash(runtimeType, level, source, reference,
+      hadithGrade, chain, scholar, confidenceScore);
 
   /// Create a copy of SourceAuthenticity
   /// with the given fields replaced by the non-null parameter values.
@@ -803,26 +730,25 @@ class _$SourceAuthenticityImpl implements _SourceAuthenticity {
   @pragma('vm:prefer-inline')
   _$$SourceAuthenticityImplCopyWith<_$SourceAuthenticityImpl> get copyWith =>
       __$$SourceAuthenticityImplCopyWithImpl<_$SourceAuthenticityImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SourceAuthenticityImplToJson(this);
+    return _$$SourceAuthenticityImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _SourceAuthenticity implements SourceAuthenticity {
-  const factory _SourceAuthenticity({
-    required final AuthenticityLevel level,
-    required final String source,
-    required final String reference,
-    final String? hadithGrade,
-    final String? chain,
-    final String? scholar,
-    final double confidenceScore,
-  }) = _$SourceAuthenticityImpl;
+  const factory _SourceAuthenticity(
+      {required final AuthenticityLevel level,
+      required final String source,
+      required final String reference,
+      final String? hadithGrade,
+      final String? chain,
+      final String? scholar,
+      final double confidenceScore}) = _$SourceAuthenticityImpl;
 
   factory _SourceAuthenticity.fromJson(Map<String, dynamic> json) =
       _$SourceAuthenticityImpl.fromJson;
@@ -878,19 +804,17 @@ mixin _$RAGConfidence {
 /// @nodoc
 abstract class $RAGConfidenceCopyWith<$Res> {
   factory $RAGConfidenceCopyWith(
-    RAGConfidence value,
-    $Res Function(RAGConfidence) then,
-  ) = _$RAGConfidenceCopyWithImpl<$Res, RAGConfidence>;
+          RAGConfidence value, $Res Function(RAGConfidence) then) =
+      _$RAGConfidenceCopyWithImpl<$Res, RAGConfidence>;
   @useResult
-  $Res call({
-    double score,
-    String reasoning,
-    List<String> keywords,
-    ContextMatch contextMatch,
-    List<String>? similarQueries,
-    Map<String, double>? semanticSimilarity,
-    List<String> supportingEvidence,
-  });
+  $Res call(
+      {double score,
+      String reasoning,
+      List<String> keywords,
+      ContextMatch contextMatch,
+      List<String>? similarQueries,
+      Map<String, double>? semanticSimilarity,
+      List<String> supportingEvidence});
 
   $ContextMatchCopyWith<$Res> get contextMatch;
 }
@@ -918,46 +842,36 @@ class _$RAGConfidenceCopyWithImpl<$Res, $Val extends RAGConfidence>
     Object? semanticSimilarity = freezed,
     Object? supportingEvidence = null,
   }) {
-    return _then(
-      _value.copyWith(
-            score:
-                null == score
-                    ? _value.score
-                    : score // ignore: cast_nullable_to_non_nullable
-                        as double,
-            reasoning:
-                null == reasoning
-                    ? _value.reasoning
-                    : reasoning // ignore: cast_nullable_to_non_nullable
-                        as String,
-            keywords:
-                null == keywords
-                    ? _value.keywords
-                    : keywords // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            contextMatch:
-                null == contextMatch
-                    ? _value.contextMatch
-                    : contextMatch // ignore: cast_nullable_to_non_nullable
-                        as ContextMatch,
-            similarQueries:
-                freezed == similarQueries
-                    ? _value.similarQueries
-                    : similarQueries // ignore: cast_nullable_to_non_nullable
-                        as List<String>?,
-            semanticSimilarity:
-                freezed == semanticSimilarity
-                    ? _value.semanticSimilarity
-                    : semanticSimilarity // ignore: cast_nullable_to_non_nullable
-                        as Map<String, double>?,
-            supportingEvidence:
-                null == supportingEvidence
-                    ? _value.supportingEvidence
-                    : supportingEvidence // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      score: null == score
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
+              as double,
+      reasoning: null == reasoning
+          ? _value.reasoning
+          : reasoning // ignore: cast_nullable_to_non_nullable
+              as String,
+      keywords: null == keywords
+          ? _value.keywords
+          : keywords // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      contextMatch: null == contextMatch
+          ? _value.contextMatch
+          : contextMatch // ignore: cast_nullable_to_non_nullable
+              as ContextMatch,
+      similarQueries: freezed == similarQueries
+          ? _value.similarQueries
+          : similarQueries // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      semanticSimilarity: freezed == semanticSimilarity
+          ? _value.semanticSimilarity
+          : semanticSimilarity // ignore: cast_nullable_to_non_nullable
+              as Map<String, double>?,
+      supportingEvidence: null == supportingEvidence
+          ? _value.supportingEvidence
+          : supportingEvidence // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ) as $Val);
   }
 
   /// Create a copy of RAGConfidence
@@ -975,20 +889,18 @@ class _$RAGConfidenceCopyWithImpl<$Res, $Val extends RAGConfidence>
 abstract class _$$RAGConfidenceImplCopyWith<$Res>
     implements $RAGConfidenceCopyWith<$Res> {
   factory _$$RAGConfidenceImplCopyWith(
-    _$RAGConfidenceImpl value,
-    $Res Function(_$RAGConfidenceImpl) then,
-  ) = __$$RAGConfidenceImplCopyWithImpl<$Res>;
+          _$RAGConfidenceImpl value, $Res Function(_$RAGConfidenceImpl) then) =
+      __$$RAGConfidenceImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    double score,
-    String reasoning,
-    List<String> keywords,
-    ContextMatch contextMatch,
-    List<String>? similarQueries,
-    Map<String, double>? semanticSimilarity,
-    List<String> supportingEvidence,
-  });
+  $Res call(
+      {double score,
+      String reasoning,
+      List<String> keywords,
+      ContextMatch contextMatch,
+      List<String>? similarQueries,
+      Map<String, double>? semanticSimilarity,
+      List<String> supportingEvidence});
 
   @override
   $ContextMatchCopyWith<$Res> get contextMatch;
@@ -999,9 +911,8 @@ class __$$RAGConfidenceImplCopyWithImpl<$Res>
     extends _$RAGConfidenceCopyWithImpl<$Res, _$RAGConfidenceImpl>
     implements _$$RAGConfidenceImplCopyWith<$Res> {
   __$$RAGConfidenceImplCopyWithImpl(
-    _$RAGConfidenceImpl _value,
-    $Res Function(_$RAGConfidenceImpl) _then,
-  ) : super(_value, _then);
+      _$RAGConfidenceImpl _value, $Res Function(_$RAGConfidenceImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of RAGConfidence
   /// with the given fields replaced by the non-null parameter values.
@@ -1016,63 +927,54 @@ class __$$RAGConfidenceImplCopyWithImpl<$Res>
     Object? semanticSimilarity = freezed,
     Object? supportingEvidence = null,
   }) {
-    return _then(
-      _$RAGConfidenceImpl(
-        score:
-            null == score
-                ? _value.score
-                : score // ignore: cast_nullable_to_non_nullable
-                    as double,
-        reasoning:
-            null == reasoning
-                ? _value.reasoning
-                : reasoning // ignore: cast_nullable_to_non_nullable
-                    as String,
-        keywords:
-            null == keywords
-                ? _value._keywords
-                : keywords // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        contextMatch:
-            null == contextMatch
-                ? _value.contextMatch
-                : contextMatch // ignore: cast_nullable_to_non_nullable
-                    as ContextMatch,
-        similarQueries:
-            freezed == similarQueries
-                ? _value._similarQueries
-                : similarQueries // ignore: cast_nullable_to_non_nullable
-                    as List<String>?,
-        semanticSimilarity:
-            freezed == semanticSimilarity
-                ? _value._semanticSimilarity
-                : semanticSimilarity // ignore: cast_nullable_to_non_nullable
-                    as Map<String, double>?,
-        supportingEvidence:
-            null == supportingEvidence
-                ? _value._supportingEvidence
-                : supportingEvidence // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-      ),
-    );
+    return _then(_$RAGConfidenceImpl(
+      score: null == score
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
+              as double,
+      reasoning: null == reasoning
+          ? _value.reasoning
+          : reasoning // ignore: cast_nullable_to_non_nullable
+              as String,
+      keywords: null == keywords
+          ? _value._keywords
+          : keywords // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      contextMatch: null == contextMatch
+          ? _value.contextMatch
+          : contextMatch // ignore: cast_nullable_to_non_nullable
+              as ContextMatch,
+      similarQueries: freezed == similarQueries
+          ? _value._similarQueries
+          : similarQueries // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      semanticSimilarity: freezed == semanticSimilarity
+          ? _value._semanticSimilarity
+          : semanticSimilarity // ignore: cast_nullable_to_non_nullable
+              as Map<String, double>?,
+      supportingEvidence: null == supportingEvidence
+          ? _value._supportingEvidence
+          : supportingEvidence // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$RAGConfidenceImpl implements _RAGConfidence {
-  const _$RAGConfidenceImpl({
-    required this.score,
-    required this.reasoning,
-    required final List<String> keywords,
-    required this.contextMatch,
-    final List<String>? similarQueries,
-    final Map<String, double>? semanticSimilarity,
-    final List<String> supportingEvidence = const [],
-  }) : _keywords = keywords,
-       _similarQueries = similarQueries,
-       _semanticSimilarity = semanticSimilarity,
-       _supportingEvidence = supportingEvidence;
+  const _$RAGConfidenceImpl(
+      {required this.score,
+      required this.reasoning,
+      required final List<String> keywords,
+      required this.contextMatch,
+      final List<String>? similarQueries,
+      final Map<String, double>? semanticSimilarity,
+      final List<String> supportingEvidence = const []})
+      : _keywords = keywords,
+        _similarQueries = similarQueries,
+        _semanticSimilarity = semanticSimilarity,
+        _supportingEvidence = supportingEvidence;
 
   factory _$RAGConfidenceImpl.fromJson(Map<String, dynamic> json) =>
       _$$RAGConfidenceImplFromJson(json);
@@ -1138,32 +1040,25 @@ class _$RAGConfidenceImpl implements _RAGConfidence {
             const DeepCollectionEquality().equals(other._keywords, _keywords) &&
             (identical(other.contextMatch, contextMatch) ||
                 other.contextMatch == contextMatch) &&
-            const DeepCollectionEquality().equals(
-              other._similarQueries,
-              _similarQueries,
-            ) &&
-            const DeepCollectionEquality().equals(
-              other._semanticSimilarity,
-              _semanticSimilarity,
-            ) &&
-            const DeepCollectionEquality().equals(
-              other._supportingEvidence,
-              _supportingEvidence,
-            ));
+            const DeepCollectionEquality()
+                .equals(other._similarQueries, _similarQueries) &&
+            const DeepCollectionEquality()
+                .equals(other._semanticSimilarity, _semanticSimilarity) &&
+            const DeepCollectionEquality()
+                .equals(other._supportingEvidence, _supportingEvidence));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    score,
-    reasoning,
-    const DeepCollectionEquality().hash(_keywords),
-    contextMatch,
-    const DeepCollectionEquality().hash(_similarQueries),
-    const DeepCollectionEquality().hash(_semanticSimilarity),
-    const DeepCollectionEquality().hash(_supportingEvidence),
-  );
+      runtimeType,
+      score,
+      reasoning,
+      const DeepCollectionEquality().hash(_keywords),
+      contextMatch,
+      const DeepCollectionEquality().hash(_similarQueries),
+      const DeepCollectionEquality().hash(_semanticSimilarity),
+      const DeepCollectionEquality().hash(_supportingEvidence));
 
   /// Create a copy of RAGConfidence
   /// with the given fields replaced by the non-null parameter values.
@@ -1175,20 +1070,21 @@ class _$RAGConfidenceImpl implements _RAGConfidence {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$RAGConfidenceImplToJson(this);
+    return _$$RAGConfidenceImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _RAGConfidence implements RAGConfidence {
-  const factory _RAGConfidence({
-    required final double score,
-    required final String reasoning,
-    required final List<String> keywords,
-    required final ContextMatch contextMatch,
-    final List<String>? similarQueries,
-    final Map<String, double>? semanticSimilarity,
-    final List<String> supportingEvidence,
-  }) = _$RAGConfidenceImpl;
+  const factory _RAGConfidence(
+      {required final double score,
+      required final String reasoning,
+      required final List<String> keywords,
+      required final ContextMatch contextMatch,
+      final List<String>? similarQueries,
+      final Map<String, double>? semanticSimilarity,
+      final List<String> supportingEvidence}) = _$RAGConfidenceImpl;
 
   factory _RAGConfidence.fromJson(Map<String, dynamic> json) =
       _$RAGConfidenceImpl.fromJson;
@@ -1242,18 +1138,16 @@ mixin _$ContextMatch {
 /// @nodoc
 abstract class $ContextMatchCopyWith<$Res> {
   factory $ContextMatchCopyWith(
-    ContextMatch value,
-    $Res Function(ContextMatch) then,
-  ) = _$ContextMatchCopyWithImpl<$Res, ContextMatch>;
+          ContextMatch value, $Res Function(ContextMatch) then) =
+      _$ContextMatchCopyWithImpl<$Res, ContextMatch>;
   @useResult
-  $Res call({
-    double relevanceScore,
-    String category,
-    List<String> matchingCriteria,
-    String? timeOfDay,
-    String? situation,
-    String? emotionalState,
-  });
+  $Res call(
+      {double relevanceScore,
+      String category,
+      List<String> matchingCriteria,
+      String? timeOfDay,
+      String? situation,
+      String? emotionalState});
 }
 
 /// @nodoc
@@ -1278,41 +1172,32 @@ class _$ContextMatchCopyWithImpl<$Res, $Val extends ContextMatch>
     Object? situation = freezed,
     Object? emotionalState = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            relevanceScore:
-                null == relevanceScore
-                    ? _value.relevanceScore
-                    : relevanceScore // ignore: cast_nullable_to_non_nullable
-                        as double,
-            category:
-                null == category
-                    ? _value.category
-                    : category // ignore: cast_nullable_to_non_nullable
-                        as String,
-            matchingCriteria:
-                null == matchingCriteria
-                    ? _value.matchingCriteria
-                    : matchingCriteria // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            timeOfDay:
-                freezed == timeOfDay
-                    ? _value.timeOfDay
-                    : timeOfDay // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            situation:
-                freezed == situation
-                    ? _value.situation
-                    : situation // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            emotionalState:
-                freezed == emotionalState
-                    ? _value.emotionalState
-                    : emotionalState // ignore: cast_nullable_to_non_nullable
-                        as String?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      relevanceScore: null == relevanceScore
+          ? _value.relevanceScore
+          : relevanceScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+      matchingCriteria: null == matchingCriteria
+          ? _value.matchingCriteria
+          : matchingCriteria // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      timeOfDay: freezed == timeOfDay
+          ? _value.timeOfDay
+          : timeOfDay // ignore: cast_nullable_to_non_nullable
+              as String?,
+      situation: freezed == situation
+          ? _value.situation
+          : situation // ignore: cast_nullable_to_non_nullable
+              as String?,
+      emotionalState: freezed == emotionalState
+          ? _value.emotionalState
+          : emotionalState // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
   }
 }
 
@@ -1320,19 +1205,17 @@ class _$ContextMatchCopyWithImpl<$Res, $Val extends ContextMatch>
 abstract class _$$ContextMatchImplCopyWith<$Res>
     implements $ContextMatchCopyWith<$Res> {
   factory _$$ContextMatchImplCopyWith(
-    _$ContextMatchImpl value,
-    $Res Function(_$ContextMatchImpl) then,
-  ) = __$$ContextMatchImplCopyWithImpl<$Res>;
+          _$ContextMatchImpl value, $Res Function(_$ContextMatchImpl) then) =
+      __$$ContextMatchImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    double relevanceScore,
-    String category,
-    List<String> matchingCriteria,
-    String? timeOfDay,
-    String? situation,
-    String? emotionalState,
-  });
+  $Res call(
+      {double relevanceScore,
+      String category,
+      List<String> matchingCriteria,
+      String? timeOfDay,
+      String? situation,
+      String? emotionalState});
 }
 
 /// @nodoc
@@ -1340,9 +1223,8 @@ class __$$ContextMatchImplCopyWithImpl<$Res>
     extends _$ContextMatchCopyWithImpl<$Res, _$ContextMatchImpl>
     implements _$$ContextMatchImplCopyWith<$Res> {
   __$$ContextMatchImplCopyWithImpl(
-    _$ContextMatchImpl _value,
-    $Res Function(_$ContextMatchImpl) _then,
-  ) : super(_value, _then);
+      _$ContextMatchImpl _value, $Res Function(_$ContextMatchImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ContextMatch
   /// with the given fields replaced by the non-null parameter values.
@@ -1356,54 +1238,46 @@ class __$$ContextMatchImplCopyWithImpl<$Res>
     Object? situation = freezed,
     Object? emotionalState = freezed,
   }) {
-    return _then(
-      _$ContextMatchImpl(
-        relevanceScore:
-            null == relevanceScore
-                ? _value.relevanceScore
-                : relevanceScore // ignore: cast_nullable_to_non_nullable
-                    as double,
-        category:
-            null == category
-                ? _value.category
-                : category // ignore: cast_nullable_to_non_nullable
-                    as String,
-        matchingCriteria:
-            null == matchingCriteria
-                ? _value._matchingCriteria
-                : matchingCriteria // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        timeOfDay:
-            freezed == timeOfDay
-                ? _value.timeOfDay
-                : timeOfDay // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        situation:
-            freezed == situation
-                ? _value.situation
-                : situation // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        emotionalState:
-            freezed == emotionalState
-                ? _value.emotionalState
-                : emotionalState // ignore: cast_nullable_to_non_nullable
-                    as String?,
-      ),
-    );
+    return _then(_$ContextMatchImpl(
+      relevanceScore: null == relevanceScore
+          ? _value.relevanceScore
+          : relevanceScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+      matchingCriteria: null == matchingCriteria
+          ? _value._matchingCriteria
+          : matchingCriteria // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      timeOfDay: freezed == timeOfDay
+          ? _value.timeOfDay
+          : timeOfDay // ignore: cast_nullable_to_non_nullable
+              as String?,
+      situation: freezed == situation
+          ? _value.situation
+          : situation // ignore: cast_nullable_to_non_nullable
+              as String?,
+      emotionalState: freezed == emotionalState
+          ? _value.emotionalState
+          : emotionalState // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ContextMatchImpl implements _ContextMatch {
-  const _$ContextMatchImpl({
-    required this.relevanceScore,
-    required this.category,
-    required final List<String> matchingCriteria,
-    this.timeOfDay,
-    this.situation,
-    this.emotionalState,
-  }) : _matchingCriteria = matchingCriteria;
+  const _$ContextMatchImpl(
+      {required this.relevanceScore,
+      required this.category,
+      required final List<String> matchingCriteria,
+      this.timeOfDay,
+      this.situation,
+      this.emotionalState})
+      : _matchingCriteria = matchingCriteria;
 
   factory _$ContextMatchImpl.fromJson(Map<String, dynamic> json) =>
       _$$ContextMatchImplFromJson(json);
@@ -1442,10 +1316,8 @@ class _$ContextMatchImpl implements _ContextMatch {
                 other.relevanceScore == relevanceScore) &&
             (identical(other.category, category) ||
                 other.category == category) &&
-            const DeepCollectionEquality().equals(
-              other._matchingCriteria,
-              _matchingCriteria,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._matchingCriteria, _matchingCriteria) &&
             (identical(other.timeOfDay, timeOfDay) ||
                 other.timeOfDay == timeOfDay) &&
             (identical(other.situation, situation) ||
@@ -1457,14 +1329,13 @@ class _$ContextMatchImpl implements _ContextMatch {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    relevanceScore,
-    category,
-    const DeepCollectionEquality().hash(_matchingCriteria),
-    timeOfDay,
-    situation,
-    emotionalState,
-  );
+      runtimeType,
+      relevanceScore,
+      category,
+      const DeepCollectionEquality().hash(_matchingCriteria),
+      timeOfDay,
+      situation,
+      emotionalState);
 
   /// Create a copy of ContextMatch
   /// with the given fields replaced by the non-null parameter values.
@@ -1476,19 +1347,20 @@ class _$ContextMatchImpl implements _ContextMatch {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ContextMatchImplToJson(this);
+    return _$$ContextMatchImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _ContextMatch implements ContextMatch {
-  const factory _ContextMatch({
-    required final double relevanceScore,
-    required final String category,
-    required final List<String> matchingCriteria,
-    final String? timeOfDay,
-    final String? situation,
-    final String? emotionalState,
-  }) = _$ContextMatchImpl;
+  const factory _ContextMatch(
+      {required final double relevanceScore,
+      required final String category,
+      required final List<String> matchingCriteria,
+      final String? timeOfDay,
+      final String? situation,
+      final String? emotionalState}) = _$ContextMatchImpl;
 
   factory _ContextMatch.fromJson(Map<String, dynamic> json) =
       _$ContextMatchImpl.fromJson;

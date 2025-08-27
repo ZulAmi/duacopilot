@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -168,8 +170,7 @@ class SecureStorageAdapter {
 
     // Clear secure keys from SharedPreferences
     _prefs ??= await SharedPreferences.getInstance();
-    final keys =
-        _prefs!.getKeys().where((key) => key.startsWith('secure_')).toList();
+    final keys = _prefs!.getKeys().where((key) => key.startsWith('secure_')).toList();
     for (final key in keys) {
       await _prefs!.remove(key);
     }
@@ -239,8 +240,7 @@ class SecureStorageAdapter {
     final platform = PlatformService.instance;
     _prefs ??= await SharedPreferences.getInstance();
 
-    final secureKeys =
-        _prefs!.getKeys().where((key) => key.startsWith('secure_')).length;
+    final secureKeys = _prefs!.getKeys().where((key) => key.startsWith('secure_')).length;
     final info = {
       'platform': platform.platformName,
       'supportsSecureStorage': platform.supportsSecureStorage,

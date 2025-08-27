@@ -60,22 +60,22 @@ class ProfessionalIslamicTheme {
 
   // Islamic Gradients - Professional & Elegant
   static LinearGradient get islamicGradient => const LinearGradient(
-    colors: [islamicGreen, islamicGreenLight],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-  );
+        colors: [islamicGreen, islamicGreenLight],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      );
 
   static LinearGradient get whiteGradient => const LinearGradient(
-    colors: [pureWhite, creamWhite],
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter,
-  );
+        colors: [pureWhite, creamWhite],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+      );
 
   static LinearGradient get goldAccentGradient => const LinearGradient(
-    colors: [goldAccent, islamicGreen],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-  );
+        colors: [goldAccent, islamicGreen],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      );
 
   // Professional Spacing Scale - 8pt Grid System
   static const double space1 = 4.0;
@@ -103,36 +103,36 @@ class ProfessionalIslamicTheme {
 
   // Professional Shadow System
   static List<BoxShadow> get shadowSoft => [
-    BoxShadow(
-      color: gray900.withOpacity(0.08),
-      blurRadius: 4,
-      offset: const Offset(0, 2),
-    ),
-  ];
+        BoxShadow(
+          color: gray900.withValues(alpha: 0.08),
+          blurRadius: 4,
+          offset: const Offset(0, 2),
+        ),
+      ];
 
   static List<BoxShadow> get shadowMedium => [
-    BoxShadow(
-      color: gray900.withOpacity(0.12),
-      blurRadius: 8,
-      offset: const Offset(0, 4),
-    ),
-  ];
+        BoxShadow(
+          color: gray900.withValues(alpha: 0.12),
+          blurRadius: 8,
+          offset: const Offset(0, 4),
+        ),
+      ];
 
   static List<BoxShadow> get shadowStrong => [
-    BoxShadow(
-      color: gray900.withOpacity(0.16),
-      blurRadius: 16,
-      offset: const Offset(0, 8),
-    ),
-  ];
+        BoxShadow(
+          color: gray900.withValues(alpha: 0.16),
+          blurRadius: 16,
+          offset: const Offset(0, 8),
+        ),
+      ];
 
   static List<BoxShadow> get shadowIslamic => [
-    BoxShadow(
-      color: islamicGreen.withOpacity(0.2),
-      blurRadius: 12,
-      offset: const Offset(0, 4),
-    ),
-  ];
+        BoxShadow(
+          color: islamicGreen.withValues(alpha: 0.2),
+          blurRadius: 12,
+          offset: const Offset(0, 4),
+        ),
+      ];
 
   // Professional Typography Scale
   static const TextStyle display1 = TextStyle(
@@ -206,152 +206,150 @@ class ProfessionalIslamicTheme {
 
   // Professional Islamic Theme Data
   static ThemeData get professionalIslamicTheme => ThemeData(
-    useMaterial3: true,
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: islamicGreen,
-      brightness: Brightness.light,
-      primary: islamicGreen,
-      onPrimary: pureWhite,
-      secondary: goldAccent,
-      onSecondary: pureWhite,
-      surface: backgroundPrimary,
-      onSurface: textPrimary,
-      background: backgroundPrimary,
-      onBackground: textPrimary,
-      error: error,
-      onError: pureWhite,
-    ),
-
-    // AppBar Theme - Professional Islamic Style
-    appBarTheme: AppBarTheme(
-      backgroundColor: islamicGreen,
-      foregroundColor: pureWhite,
-      elevation: 2,
-      shadowColor: gray900.withOpacity(0.1),
-      centerTitle: true,
-      titleTextStyle: heading2.copyWith(color: pureWhite),
-      toolbarHeight: 64,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(bottom: Radius.circular(radiusLg)),
-      ),
-    ),
-
-    // Card Theme - Clean Professional Cards
-    cardTheme: CardTheme(
-      color: backgroundPrimary,
-      shadowColor: gray900.withOpacity(0.08),
-      elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(radiusXl),
-      ),
-      margin: const EdgeInsets.all(space2),
-    ),
-
-    // Button Themes - Islamic Green Primary
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: islamicGreen,
-        foregroundColor: pureWhite,
-        elevation: 4,
-        shadowColor: islamicGreen.withOpacity(0.3),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(radiusLg),
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: islamicGreen,
+          brightness: Brightness.light,
+          primary: islamicGreen,
+          onPrimary: pureWhite,
+          secondary: goldAccent,
+          onSecondary: pureWhite,
+          surface: backgroundPrimary,
+          onSurface: textPrimary,
+          error: error,
+          onError: pureWhite,
         ),
-        padding: const EdgeInsets.symmetric(
-          horizontal: space6,
-          vertical: space4,
+
+        // AppBar Theme - Professional Islamic Style
+        appBarTheme: AppBarTheme(
+          backgroundColor: islamicGreen,
+          foregroundColor: pureWhite,
+          elevation: 2,
+          shadowColor: gray900.withValues(alpha: 0.1),
+          centerTitle: true,
+          titleTextStyle: heading2.copyWith(color: pureWhite),
+          toolbarHeight: 64,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(radiusLg)),
+          ),
         ),
-        textStyle: body1.copyWith(fontWeight: FontWeight.w600),
-      ),
-    ),
 
-    outlinedButtonTheme: OutlinedButtonThemeData(
-      style: OutlinedButton.styleFrom(
-        foregroundColor: islamicGreen,
-        side: const BorderSide(color: islamicGreen, width: 2),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(radiusLg),
+        // Card Theme - Clean Professional Cards
+        cardTheme: CardTheme(
+          color: backgroundPrimary,
+          shadowColor: gray900.withValues(alpha: 0.08),
+          elevation: 4,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(radiusXl),
+          ),
+          margin: const EdgeInsets.all(space2),
         ),
-        padding: const EdgeInsets.symmetric(
-          horizontal: space6,
-          vertical: space4,
+
+        // Button Themes - Islamic Green Primary
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: islamicGreen,
+            foregroundColor: pureWhite,
+            elevation: 4,
+            shadowColor: islamicGreen.withValues(alpha: 0.3),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(radiusLg),
+            ),
+            padding: const EdgeInsets.symmetric(
+              horizontal: space6,
+              vertical: space4,
+            ),
+            textStyle: body1.copyWith(fontWeight: FontWeight.w600),
+          ),
         ),
-        textStyle: body1.copyWith(fontWeight: FontWeight.w600),
-      ),
-    ),
 
-    // Text Theme - Professional Typography
-    textTheme: TextTheme(
-      displayLarge: display1,
-      displayMedium: display2,
-      headlineLarge: heading1,
-      headlineMedium: heading2,
-      headlineSmall: heading3,
-      bodyLarge: body1,
-      bodyMedium: body2,
-      bodySmall: caption,
-    ),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+          style: OutlinedButton.styleFrom(
+            foregroundColor: islamicGreen,
+            side: const BorderSide(color: islamicGreen, width: 2),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(radiusLg),
+            ),
+            padding: const EdgeInsets.symmetric(
+              horizontal: space6,
+              vertical: space4,
+            ),
+            textStyle: body1.copyWith(fontWeight: FontWeight.w600),
+          ),
+        ),
 
-    // Input Decoration - Clean & Professional
-    inputDecorationTheme: InputDecorationTheme(
-      filled: true,
-      fillColor: backgroundSecondary,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(radiusLg),
-        borderSide: const BorderSide(color: borderLight),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(radiusLg),
-        borderSide: const BorderSide(color: borderLight),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(radiusLg),
-        borderSide: const BorderSide(color: islamicGreen, width: 2),
-      ),
-      errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(radiusLg),
-        borderSide: const BorderSide(color: error, width: 2),
-      ),
-      contentPadding: const EdgeInsets.symmetric(
-        horizontal: space4,
-        vertical: space4,
-      ),
-      hintStyle: body1.copyWith(color: textMuted),
-      labelStyle: body2.copyWith(color: textSecondary),
-    ),
+        // Text Theme - Professional Typography
+        textTheme: TextTheme(
+          displayLarge: display1,
+          displayMedium: display2,
+          headlineLarge: heading1,
+          headlineMedium: heading2,
+          headlineSmall: heading3,
+          bodyLarge: body1,
+          bodyMedium: body2,
+          bodySmall: caption,
+        ),
 
-    // Icon Theme - Consistent Islamic Colors
-    iconTheme: const IconThemeData(color: islamicGreen, size: 24),
+        // Input Decoration - Clean & Professional
+        inputDecorationTheme: InputDecorationTheme(
+          filled: true,
+          fillColor: backgroundSecondary,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(radiusLg),
+            borderSide: const BorderSide(color: borderLight),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(radiusLg),
+            borderSide: const BorderSide(color: borderLight),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(radiusLg),
+            borderSide: const BorderSide(color: islamicGreen, width: 2),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(radiusLg),
+            borderSide: const BorderSide(color: error, width: 2),
+          ),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: space4,
+            vertical: space4,
+          ),
+          hintStyle: body1.copyWith(color: textMuted),
+          labelStyle: body2.copyWith(color: textSecondary),
+        ),
 
-    primaryIconTheme: const IconThemeData(color: pureWhite, size: 24),
+        // Icon Theme - Consistent Islamic Colors
+        iconTheme: const IconThemeData(color: islamicGreen, size: 24),
 
-    // Divider Theme
-    dividerTheme: const DividerThemeData(
-      color: borderLight,
-      thickness: 1,
-      space: space4,
-    ),
+        primaryIconTheme: const IconThemeData(color: pureWhite, size: 24),
 
-    // Chip Theme - Professional Styling
-    chipTheme: ChipThemeData(
-      backgroundColor: backgroundAccent,
-      selectedColor: islamicGreen,
-      labelStyle: body2,
-      padding: const EdgeInsets.symmetric(horizontal: space3, vertical: space1),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(radiusXl),
-      ),
-    ),
+        // Divider Theme
+        dividerTheme: const DividerThemeData(
+          color: borderLight,
+          thickness: 1,
+          space: space4,
+        ),
 
-    // Bottom Navigation Bar Theme
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: backgroundPrimary,
-      selectedItemColor: islamicGreen,
-      unselectedItemColor: textMuted,
-      elevation: 8,
-      type: BottomNavigationBarType.fixed,
-      selectedLabelStyle: caption.copyWith(fontWeight: FontWeight.w600),
-      unselectedLabelStyle: caption,
-    ),
-  );
+        // Chip Theme - Professional Styling
+        chipTheme: ChipThemeData(
+          backgroundColor: backgroundAccent,
+          selectedColor: islamicGreen,
+          labelStyle: body2,
+          padding: const EdgeInsets.symmetric(horizontal: space3, vertical: space1),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(radiusXl),
+          ),
+        ),
+
+        // Bottom Navigation Bar Theme
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: backgroundPrimary,
+          selectedItemColor: islamicGreen,
+          unselectedItemColor: textMuted,
+          elevation: 8,
+          type: BottomNavigationBarType.fixed,
+          selectedLabelStyle: caption.copyWith(fontWeight: FontWeight.w600),
+          unselectedLabelStyle: caption,
+        ),
+      );
 }

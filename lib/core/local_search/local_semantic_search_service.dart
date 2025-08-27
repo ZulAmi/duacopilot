@@ -1,26 +1,27 @@
-import 'package:duacopilot/core/logging/app_logger.dart';
+// ignore_for_file: avoid_print
 
 import 'dart:async';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:duacopilot/core/logging/app_logger.dart';
+
 import '../../domain/entities/rag_response.dart';
 import 'models/local_search_models.dart';
-import 'services/local_embedding_service.dart';
 import 'services/fallback_template_service.dart';
+import 'services/local_embedding_service.dart';
 import 'services/query_queue_service.dart';
 import 'storage/local_vector_storage.dart';
 
 /// Main local semantic search service that coordinates offline functionality
 class LocalSemanticSearchService {
   static LocalSemanticSearchService? _instance;
-  static LocalSemanticSearchService get instance =>
-      _instance ??= LocalSemanticSearchService._();
+  static LocalSemanticSearchService get instance => _instance ??= LocalSemanticSearchService._();
 
   LocalSemanticSearchService._();
 
   // Services
   LocalEmbeddingService get _embeddingService => LocalEmbeddingService.instance;
-  FallbackTemplateService get _templateService =>
-      FallbackTemplateService.instance;
+  FallbackTemplateService get _templateService => FallbackTemplateService.instance;
   QueryQueueService get _queueService => QueryQueueService.instance;
   LocalVectorStorage get _vectorStorage => LocalVectorStorage.instance;
 
@@ -156,8 +157,8 @@ class LocalSemanticSearchService {
       final embeddings = await _vectorStorage.getEmbeddingsByLanguage(language);
       for (final embedding in embeddings) {
         if (embedding.query.toLowerCase().contains(
-              partialQuery.toLowerCase(),
-            ) &&
+                  partialQuery.toLowerCase(),
+                ) &&
             !suggestions.contains(embedding.query)) {
           suggestions.add(embedding.query);
         }
@@ -223,8 +224,7 @@ class LocalSemanticSearchService {
 
     try {
       AppLogger.debug('Preloading popular queries...');
-      final languages =
-          language != null ? [language] : ['en', 'ar', 'ur', 'id'];
+      final languages = language != null ? [language] : ['en', 'ar', 'ur', 'id'];
 
       for (final lang in languages) {
         final commonQueries = _templateService.getCommonQueries(
@@ -383,10 +383,7 @@ class LocalSemanticSearchService {
         final templateResult = await _templateService.generateFallbackResponse(
           query,
           language,
-          confidenceBoost:
-              results.isEmpty
-                  ? 0.0
-                  : -0.2, // Lower confidence if we have other results
+          confidenceBoost: results.isEmpty ? 0.0 : -0.2, // Lower confidence if we have other results
         );
 
         if (templateResult != null) {
@@ -399,8 +396,7 @@ class LocalSemanticSearchService {
         await _queueService.enqueueQuery(
           query: query,
           language: language,
-          priority:
-              results.isEmpty ? 2 : 1, // Higher priority if no offline results
+          priority: results.isEmpty ? 2 : 1, // Higher priority if no offline results
           localResponseId: results.isNotEmpty ? results.first.id : null,
         );
       }
@@ -511,8 +507,7 @@ class LocalSemanticSearchService {
     try {
       // This would typically load from a curated dataset
       // For now, we'll just ensure we have some basic embeddings
-      final hasEmbeddings =
-          (await _vectorStorage.getStorageStats())['embeddings_count'] > 0;
+      final hasEmbeddings = (await _vectorStorage.getStorageStats())['embeddings_count'] > 0;
 
       if (!hasEmbeddings) {
         await preloadPopularQueries(limit: 20);
@@ -527,11 +522,7 @@ class LocalSemanticSearchService {
   }
 
   List<String> _extractKeywords(String query) {
-    return query
-        .toLowerCase()
-        .split(RegExp(r'\s+'))
-        .where((word) => word.length > 2)
-        .toList();
+    return query.toLowerCase().split(RegExp(r'\s+')).where((word) => word.length > 2).toList();
   }
 
   String _categorizeQuery(String query) {
@@ -560,8 +551,7 @@ class LocalSemanticSearchService {
     // Word overlap score
     final partialWords = partialLower.split(' ');
     final suggestionWords = suggestionLower.split(' ');
-    final overlap =
-        partialWords.where((word) => suggestionWords.contains(word)).length;
+    final overlap = partialWords.where((word) => suggestionWords.contains(word)).length;
 
     return overlap / partialWords.length * 0.6;
   }
@@ -611,8 +601,7 @@ class SearchResponse {
 
   bool get isEmpty => results.isEmpty;
   bool get hasResults => results.isNotEmpty;
-  LocalSearchResult? get bestResult =>
-      results.isNotEmpty ? results.first : null;
+  LocalSearchResult? get bestResult => results.isNotEmpty ? results.first : null;
 
   factory SearchResponse.empty(String query, String language) {
     return SearchResponse(

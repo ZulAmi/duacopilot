@@ -12,8 +12,7 @@ part of 'islamic_university_entity.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 IslamicScholar _$IslamicScholarFromJson(Map<String, dynamic> json) {
   return _IslamicScholar.fromJson(json);
@@ -56,33 +55,31 @@ mixin _$IslamicScholar {
 /// @nodoc
 abstract class $IslamicScholarCopyWith<$Res> {
   factory $IslamicScholarCopyWith(
-    IslamicScholar value,
-    $Res Function(IslamicScholar) then,
-  ) = _$IslamicScholarCopyWithImpl<$Res, IslamicScholar>;
+          IslamicScholar value, $Res Function(IslamicScholar) then) =
+      _$IslamicScholarCopyWithImpl<$Res, IslamicScholar>;
   @useResult
-  $Res call({
-    String id,
-    String name,
-    String arabicName,
-    String title,
-    String institution,
-    String country,
-    String specialization,
-    String biography,
-    String arabicBiography,
-    bool isVerified,
-    String profileImageUrl,
-    List<String> credentials,
-    List<String> languages,
-    List<String> subjects,
-    double rating,
-    int totalStudents,
-    int coursesCount,
-    int sessionsCount,
-    DateTime? birthDate,
-    DateTime? verifiedAt,
-    DateTime? createdAt,
-  });
+  $Res call(
+      {String id,
+      String name,
+      String arabicName,
+      String title,
+      String institution,
+      String country,
+      String specialization,
+      String biography,
+      String arabicBiography,
+      bool isVerified,
+      String profileImageUrl,
+      List<String> credentials,
+      List<String> languages,
+      List<String> subjects,
+      double rating,
+      int totalStudents,
+      int coursesCount,
+      int sessionsCount,
+      DateTime? birthDate,
+      DateTime? verifiedAt,
+      DateTime? createdAt});
 }
 
 /// @nodoc
@@ -122,151 +119,125 @@ class _$IslamicScholarCopyWithImpl<$Res, $Val extends IslamicScholar>
     Object? verifiedAt = freezed,
     Object? createdAt = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            name:
-                null == name
-                    ? _value.name
-                    : name // ignore: cast_nullable_to_non_nullable
-                        as String,
-            arabicName:
-                null == arabicName
-                    ? _value.arabicName
-                    : arabicName // ignore: cast_nullable_to_non_nullable
-                        as String,
-            title:
-                null == title
-                    ? _value.title
-                    : title // ignore: cast_nullable_to_non_nullable
-                        as String,
-            institution:
-                null == institution
-                    ? _value.institution
-                    : institution // ignore: cast_nullable_to_non_nullable
-                        as String,
-            country:
-                null == country
-                    ? _value.country
-                    : country // ignore: cast_nullable_to_non_nullable
-                        as String,
-            specialization:
-                null == specialization
-                    ? _value.specialization
-                    : specialization // ignore: cast_nullable_to_non_nullable
-                        as String,
-            biography:
-                null == biography
-                    ? _value.biography
-                    : biography // ignore: cast_nullable_to_non_nullable
-                        as String,
-            arabicBiography:
-                null == arabicBiography
-                    ? _value.arabicBiography
-                    : arabicBiography // ignore: cast_nullable_to_non_nullable
-                        as String,
-            isVerified:
-                null == isVerified
-                    ? _value.isVerified
-                    : isVerified // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            profileImageUrl:
-                null == profileImageUrl
-                    ? _value.profileImageUrl
-                    : profileImageUrl // ignore: cast_nullable_to_non_nullable
-                        as String,
-            credentials:
-                null == credentials
-                    ? _value.credentials
-                    : credentials // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            languages:
-                null == languages
-                    ? _value.languages
-                    : languages // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            subjects:
-                null == subjects
-                    ? _value.subjects
-                    : subjects // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            rating:
-                null == rating
-                    ? _value.rating
-                    : rating // ignore: cast_nullable_to_non_nullable
-                        as double,
-            totalStudents:
-                null == totalStudents
-                    ? _value.totalStudents
-                    : totalStudents // ignore: cast_nullable_to_non_nullable
-                        as int,
-            coursesCount:
-                null == coursesCount
-                    ? _value.coursesCount
-                    : coursesCount // ignore: cast_nullable_to_non_nullable
-                        as int,
-            sessionsCount:
-                null == sessionsCount
-                    ? _value.sessionsCount
-                    : sessionsCount // ignore: cast_nullable_to_non_nullable
-                        as int,
-            birthDate:
-                freezed == birthDate
-                    ? _value.birthDate
-                    : birthDate // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            verifiedAt:
-                freezed == verifiedAt
-                    ? _value.verifiedAt
-                    : verifiedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            createdAt:
-                freezed == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      arabicName: null == arabicName
+          ? _value.arabicName
+          : arabicName // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      institution: null == institution
+          ? _value.institution
+          : institution // ignore: cast_nullable_to_non_nullable
+              as String,
+      country: null == country
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String,
+      specialization: null == specialization
+          ? _value.specialization
+          : specialization // ignore: cast_nullable_to_non_nullable
+              as String,
+      biography: null == biography
+          ? _value.biography
+          : biography // ignore: cast_nullable_to_non_nullable
+              as String,
+      arabicBiography: null == arabicBiography
+          ? _value.arabicBiography
+          : arabicBiography // ignore: cast_nullable_to_non_nullable
+              as String,
+      isVerified: null == isVerified
+          ? _value.isVerified
+          : isVerified // ignore: cast_nullable_to_non_nullable
+              as bool,
+      profileImageUrl: null == profileImageUrl
+          ? _value.profileImageUrl
+          : profileImageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      credentials: null == credentials
+          ? _value.credentials
+          : credentials // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      languages: null == languages
+          ? _value.languages
+          : languages // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      subjects: null == subjects
+          ? _value.subjects
+          : subjects // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      rating: null == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalStudents: null == totalStudents
+          ? _value.totalStudents
+          : totalStudents // ignore: cast_nullable_to_non_nullable
+              as int,
+      coursesCount: null == coursesCount
+          ? _value.coursesCount
+          : coursesCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      sessionsCount: null == sessionsCount
+          ? _value.sessionsCount
+          : sessionsCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      birthDate: freezed == birthDate
+          ? _value.birthDate
+          : birthDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      verifiedAt: freezed == verifiedAt
+          ? _value.verifiedAt
+          : verifiedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$IslamicScholarImplCopyWith<$Res>
     implements $IslamicScholarCopyWith<$Res> {
-  factory _$$IslamicScholarImplCopyWith(
-    _$IslamicScholarImpl value,
-    $Res Function(_$IslamicScholarImpl) then,
-  ) = __$$IslamicScholarImplCopyWithImpl<$Res>;
+  factory _$$IslamicScholarImplCopyWith(_$IslamicScholarImpl value,
+          $Res Function(_$IslamicScholarImpl) then) =
+      __$$IslamicScholarImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String name,
-    String arabicName,
-    String title,
-    String institution,
-    String country,
-    String specialization,
-    String biography,
-    String arabicBiography,
-    bool isVerified,
-    String profileImageUrl,
-    List<String> credentials,
-    List<String> languages,
-    List<String> subjects,
-    double rating,
-    int totalStudents,
-    int coursesCount,
-    int sessionsCount,
-    DateTime? birthDate,
-    DateTime? verifiedAt,
-    DateTime? createdAt,
-  });
+  $Res call(
+      {String id,
+      String name,
+      String arabicName,
+      String title,
+      String institution,
+      String country,
+      String specialization,
+      String biography,
+      String arabicBiography,
+      bool isVerified,
+      String profileImageUrl,
+      List<String> credentials,
+      List<String> languages,
+      List<String> subjects,
+      double rating,
+      int totalStudents,
+      int coursesCount,
+      int sessionsCount,
+      DateTime? birthDate,
+      DateTime? verifiedAt,
+      DateTime? createdAt});
 }
 
 /// @nodoc
@@ -274,9 +245,8 @@ class __$$IslamicScholarImplCopyWithImpl<$Res>
     extends _$IslamicScholarCopyWithImpl<$Res, _$IslamicScholarImpl>
     implements _$$IslamicScholarImplCopyWith<$Res> {
   __$$IslamicScholarImplCopyWithImpl(
-    _$IslamicScholarImpl _value,
-    $Res Function(_$IslamicScholarImpl) _then,
-  ) : super(_value, _then);
+      _$IslamicScholarImpl _value, $Res Function(_$IslamicScholarImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of IslamicScholar
   /// with the given fields replaced by the non-null parameter values.
@@ -305,146 +275,123 @@ class __$$IslamicScholarImplCopyWithImpl<$Res>
     Object? verifiedAt = freezed,
     Object? createdAt = freezed,
   }) {
-    return _then(
-      _$IslamicScholarImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        name:
-            null == name
-                ? _value.name
-                : name // ignore: cast_nullable_to_non_nullable
-                    as String,
-        arabicName:
-            null == arabicName
-                ? _value.arabicName
-                : arabicName // ignore: cast_nullable_to_non_nullable
-                    as String,
-        title:
-            null == title
-                ? _value.title
-                : title // ignore: cast_nullable_to_non_nullable
-                    as String,
-        institution:
-            null == institution
-                ? _value.institution
-                : institution // ignore: cast_nullable_to_non_nullable
-                    as String,
-        country:
-            null == country
-                ? _value.country
-                : country // ignore: cast_nullable_to_non_nullable
-                    as String,
-        specialization:
-            null == specialization
-                ? _value.specialization
-                : specialization // ignore: cast_nullable_to_non_nullable
-                    as String,
-        biography:
-            null == biography
-                ? _value.biography
-                : biography // ignore: cast_nullable_to_non_nullable
-                    as String,
-        arabicBiography:
-            null == arabicBiography
-                ? _value.arabicBiography
-                : arabicBiography // ignore: cast_nullable_to_non_nullable
-                    as String,
-        isVerified:
-            null == isVerified
-                ? _value.isVerified
-                : isVerified // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        profileImageUrl:
-            null == profileImageUrl
-                ? _value.profileImageUrl
-                : profileImageUrl // ignore: cast_nullable_to_non_nullable
-                    as String,
-        credentials:
-            null == credentials
-                ? _value._credentials
-                : credentials // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        languages:
-            null == languages
-                ? _value._languages
-                : languages // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        subjects:
-            null == subjects
-                ? _value._subjects
-                : subjects // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        rating:
-            null == rating
-                ? _value.rating
-                : rating // ignore: cast_nullable_to_non_nullable
-                    as double,
-        totalStudents:
-            null == totalStudents
-                ? _value.totalStudents
-                : totalStudents // ignore: cast_nullable_to_non_nullable
-                    as int,
-        coursesCount:
-            null == coursesCount
-                ? _value.coursesCount
-                : coursesCount // ignore: cast_nullable_to_non_nullable
-                    as int,
-        sessionsCount:
-            null == sessionsCount
-                ? _value.sessionsCount
-                : sessionsCount // ignore: cast_nullable_to_non_nullable
-                    as int,
-        birthDate:
-            freezed == birthDate
-                ? _value.birthDate
-                : birthDate // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        verifiedAt:
-            freezed == verifiedAt
-                ? _value.verifiedAt
-                : verifiedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        createdAt:
-            freezed == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-      ),
-    );
+    return _then(_$IslamicScholarImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      arabicName: null == arabicName
+          ? _value.arabicName
+          : arabicName // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      institution: null == institution
+          ? _value.institution
+          : institution // ignore: cast_nullable_to_non_nullable
+              as String,
+      country: null == country
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String,
+      specialization: null == specialization
+          ? _value.specialization
+          : specialization // ignore: cast_nullable_to_non_nullable
+              as String,
+      biography: null == biography
+          ? _value.biography
+          : biography // ignore: cast_nullable_to_non_nullable
+              as String,
+      arabicBiography: null == arabicBiography
+          ? _value.arabicBiography
+          : arabicBiography // ignore: cast_nullable_to_non_nullable
+              as String,
+      isVerified: null == isVerified
+          ? _value.isVerified
+          : isVerified // ignore: cast_nullable_to_non_nullable
+              as bool,
+      profileImageUrl: null == profileImageUrl
+          ? _value.profileImageUrl
+          : profileImageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      credentials: null == credentials
+          ? _value._credentials
+          : credentials // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      languages: null == languages
+          ? _value._languages
+          : languages // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      subjects: null == subjects
+          ? _value._subjects
+          : subjects // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      rating: null == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalStudents: null == totalStudents
+          ? _value.totalStudents
+          : totalStudents // ignore: cast_nullable_to_non_nullable
+              as int,
+      coursesCount: null == coursesCount
+          ? _value.coursesCount
+          : coursesCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      sessionsCount: null == sessionsCount
+          ? _value.sessionsCount
+          : sessionsCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      birthDate: freezed == birthDate
+          ? _value.birthDate
+          : birthDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      verifiedAt: freezed == verifiedAt
+          ? _value.verifiedAt
+          : verifiedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$IslamicScholarImpl implements _IslamicScholar {
-  const _$IslamicScholarImpl({
-    required this.id,
-    required this.name,
-    required this.arabicName,
-    required this.title,
-    required this.institution,
-    required this.country,
-    required this.specialization,
-    required this.biography,
-    required this.arabicBiography,
-    required this.isVerified,
-    required this.profileImageUrl,
-    final List<String> credentials = const [],
-    final List<String> languages = const [],
-    final List<String> subjects = const [],
-    this.rating = 0.0,
-    this.totalStudents = 0,
-    this.coursesCount = 0,
-    this.sessionsCount = 0,
-    this.birthDate,
-    this.verifiedAt,
-    this.createdAt,
-  }) : _credentials = credentials,
-       _languages = languages,
-       _subjects = subjects;
+  const _$IslamicScholarImpl(
+      {required this.id,
+      required this.name,
+      required this.arabicName,
+      required this.title,
+      required this.institution,
+      required this.country,
+      required this.specialization,
+      required this.biography,
+      required this.arabicBiography,
+      required this.isVerified,
+      required this.profileImageUrl,
+      final List<String> credentials = const [],
+      final List<String> languages = const [],
+      final List<String> subjects = const [],
+      this.rating = 0.0,
+      this.totalStudents = 0,
+      this.coursesCount = 0,
+      this.sessionsCount = 0,
+      this.birthDate,
+      this.verifiedAt,
+      this.createdAt})
+      : _credentials = credentials,
+        _languages = languages,
+        _subjects = subjects;
 
   factory _$IslamicScholarImpl.fromJson(Map<String, dynamic> json) =>
       _$$IslamicScholarImplFromJson(json);
@@ -545,14 +492,10 @@ class _$IslamicScholarImpl implements _IslamicScholar {
                 other.isVerified == isVerified) &&
             (identical(other.profileImageUrl, profileImageUrl) ||
                 other.profileImageUrl == profileImageUrl) &&
-            const DeepCollectionEquality().equals(
-              other._credentials,
-              _credentials,
-            ) &&
-            const DeepCollectionEquality().equals(
-              other._languages,
-              _languages,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._credentials, _credentials) &&
+            const DeepCollectionEquality()
+                .equals(other._languages, _languages) &&
             const DeepCollectionEquality().equals(other._subjects, _subjects) &&
             (identical(other.rating, rating) || other.rating == rating) &&
             (identical(other.totalStudents, totalStudents) ||
@@ -572,29 +515,29 @@ class _$IslamicScholarImpl implements _IslamicScholar {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
-    runtimeType,
-    id,
-    name,
-    arabicName,
-    title,
-    institution,
-    country,
-    specialization,
-    biography,
-    arabicBiography,
-    isVerified,
-    profileImageUrl,
-    const DeepCollectionEquality().hash(_credentials),
-    const DeepCollectionEquality().hash(_languages),
-    const DeepCollectionEquality().hash(_subjects),
-    rating,
-    totalStudents,
-    coursesCount,
-    sessionsCount,
-    birthDate,
-    verifiedAt,
-    createdAt,
-  ]);
+        runtimeType,
+        id,
+        name,
+        arabicName,
+        title,
+        institution,
+        country,
+        specialization,
+        biography,
+        arabicBiography,
+        isVerified,
+        profileImageUrl,
+        const DeepCollectionEquality().hash(_credentials),
+        const DeepCollectionEquality().hash(_languages),
+        const DeepCollectionEquality().hash(_subjects),
+        rating,
+        totalStudents,
+        coursesCount,
+        sessionsCount,
+        birthDate,
+        verifiedAt,
+        createdAt
+      ]);
 
   /// Create a copy of IslamicScholar
   /// with the given fields replaced by the non-null parameter values.
@@ -603,40 +546,39 @@ class _$IslamicScholarImpl implements _IslamicScholar {
   @pragma('vm:prefer-inline')
   _$$IslamicScholarImplCopyWith<_$IslamicScholarImpl> get copyWith =>
       __$$IslamicScholarImplCopyWithImpl<_$IslamicScholarImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$IslamicScholarImplToJson(this);
+    return _$$IslamicScholarImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _IslamicScholar implements IslamicScholar {
-  const factory _IslamicScholar({
-    required final String id,
-    required final String name,
-    required final String arabicName,
-    required final String title,
-    required final String institution,
-    required final String country,
-    required final String specialization,
-    required final String biography,
-    required final String arabicBiography,
-    required final bool isVerified,
-    required final String profileImageUrl,
-    final List<String> credentials,
-    final List<String> languages,
-    final List<String> subjects,
-    final double rating,
-    final int totalStudents,
-    final int coursesCount,
-    final int sessionsCount,
-    final DateTime? birthDate,
-    final DateTime? verifiedAt,
-    final DateTime? createdAt,
-  }) = _$IslamicScholarImpl;
+  const factory _IslamicScholar(
+      {required final String id,
+      required final String name,
+      required final String arabicName,
+      required final String title,
+      required final String institution,
+      required final String country,
+      required final String specialization,
+      required final String biography,
+      required final String arabicBiography,
+      required final bool isVerified,
+      required final String profileImageUrl,
+      final List<String> credentials,
+      final List<String> languages,
+      final List<String> subjects,
+      final double rating,
+      final int totalStudents,
+      final int coursesCount,
+      final int sessionsCount,
+      final DateTime? birthDate,
+      final DateTime? verifiedAt,
+      final DateTime? createdAt}) = _$IslamicScholarImpl;
 
   factory _IslamicScholar.fromJson(Map<String, dynamic> json) =
       _$IslamicScholarImpl.fromJson;
@@ -727,27 +669,25 @@ mixin _$IslamicLearningPath {
 /// @nodoc
 abstract class $IslamicLearningPathCopyWith<$Res> {
   factory $IslamicLearningPathCopyWith(
-    IslamicLearningPath value,
-    $Res Function(IslamicLearningPath) then,
-  ) = _$IslamicLearningPathCopyWithImpl<$Res, IslamicLearningPath>;
+          IslamicLearningPath value, $Res Function(IslamicLearningPath) then) =
+      _$IslamicLearningPathCopyWithImpl<$Res, IslamicLearningPath>;
   @useResult
-  $Res call({
-    String id,
-    String title,
-    String description,
-    LearningLevel level,
-    List<String> courseIds,
-    int estimatedHours,
-    List<String> prerequisites,
-    List<String> skills,
-    List<String> tags,
-    String? coverImageUrl,
-    bool isPremium,
-    double rating,
-    int enrolledCount,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-  });
+  $Res call(
+      {String id,
+      String title,
+      String description,
+      LearningLevel level,
+      List<String> courseIds,
+      int estimatedHours,
+      List<String> prerequisites,
+      List<String> skills,
+      List<String> tags,
+      String? coverImageUrl,
+      bool isPremium,
+      double rating,
+      int enrolledCount,
+      DateTime? createdAt,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -781,125 +721,104 @@ class _$IslamicLearningPathCopyWithImpl<$Res, $Val extends IslamicLearningPath>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            title:
-                null == title
-                    ? _value.title
-                    : title // ignore: cast_nullable_to_non_nullable
-                        as String,
-            description:
-                null == description
-                    ? _value.description
-                    : description // ignore: cast_nullable_to_non_nullable
-                        as String,
-            level:
-                null == level
-                    ? _value.level
-                    : level // ignore: cast_nullable_to_non_nullable
-                        as LearningLevel,
-            courseIds:
-                null == courseIds
-                    ? _value.courseIds
-                    : courseIds // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            estimatedHours:
-                null == estimatedHours
-                    ? _value.estimatedHours
-                    : estimatedHours // ignore: cast_nullable_to_non_nullable
-                        as int,
-            prerequisites:
-                null == prerequisites
-                    ? _value.prerequisites
-                    : prerequisites // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            skills:
-                null == skills
-                    ? _value.skills
-                    : skills // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            tags:
-                null == tags
-                    ? _value.tags
-                    : tags // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            coverImageUrl:
-                freezed == coverImageUrl
-                    ? _value.coverImageUrl
-                    : coverImageUrl // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            isPremium:
-                null == isPremium
-                    ? _value.isPremium
-                    : isPremium // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            rating:
-                null == rating
-                    ? _value.rating
-                    : rating // ignore: cast_nullable_to_non_nullable
-                        as double,
-            enrolledCount:
-                null == enrolledCount
-                    ? _value.enrolledCount
-                    : enrolledCount // ignore: cast_nullable_to_non_nullable
-                        as int,
-            createdAt:
-                freezed == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            updatedAt:
-                freezed == updatedAt
-                    ? _value.updatedAt
-                    : updatedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      level: null == level
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
+              as LearningLevel,
+      courseIds: null == courseIds
+          ? _value.courseIds
+          : courseIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      estimatedHours: null == estimatedHours
+          ? _value.estimatedHours
+          : estimatedHours // ignore: cast_nullable_to_non_nullable
+              as int,
+      prerequisites: null == prerequisites
+          ? _value.prerequisites
+          : prerequisites // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      skills: null == skills
+          ? _value.skills
+          : skills // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      tags: null == tags
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      coverImageUrl: freezed == coverImageUrl
+          ? _value.coverImageUrl
+          : coverImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isPremium: null == isPremium
+          ? _value.isPremium
+          : isPremium // ignore: cast_nullable_to_non_nullable
+              as bool,
+      rating: null == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as double,
+      enrolledCount: null == enrolledCount
+          ? _value.enrolledCount
+          : enrolledCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$IslamicLearningPathImplCopyWith<$Res>
     implements $IslamicLearningPathCopyWith<$Res> {
-  factory _$$IslamicLearningPathImplCopyWith(
-    _$IslamicLearningPathImpl value,
-    $Res Function(_$IslamicLearningPathImpl) then,
-  ) = __$$IslamicLearningPathImplCopyWithImpl<$Res>;
+  factory _$$IslamicLearningPathImplCopyWith(_$IslamicLearningPathImpl value,
+          $Res Function(_$IslamicLearningPathImpl) then) =
+      __$$IslamicLearningPathImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String title,
-    String description,
-    LearningLevel level,
-    List<String> courseIds,
-    int estimatedHours,
-    List<String> prerequisites,
-    List<String> skills,
-    List<String> tags,
-    String? coverImageUrl,
-    bool isPremium,
-    double rating,
-    int enrolledCount,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-  });
+  $Res call(
+      {String id,
+      String title,
+      String description,
+      LearningLevel level,
+      List<String> courseIds,
+      int estimatedHours,
+      List<String> prerequisites,
+      List<String> skills,
+      List<String> tags,
+      String? coverImageUrl,
+      bool isPremium,
+      double rating,
+      int enrolledCount,
+      DateTime? createdAt,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
 class __$$IslamicLearningPathImplCopyWithImpl<$Res>
     extends _$IslamicLearningPathCopyWithImpl<$Res, _$IslamicLearningPathImpl>
     implements _$$IslamicLearningPathImplCopyWith<$Res> {
-  __$$IslamicLearningPathImplCopyWithImpl(
-    _$IslamicLearningPathImpl _value,
-    $Res Function(_$IslamicLearningPathImpl) _then,
-  ) : super(_value, _then);
+  __$$IslamicLearningPathImplCopyWithImpl(_$IslamicLearningPathImpl _value,
+      $Res Function(_$IslamicLearningPathImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of IslamicLearningPath
   /// with the given fields replaced by the non-null parameter values.
@@ -922,111 +841,94 @@ class __$$IslamicLearningPathImplCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(
-      _$IslamicLearningPathImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        title:
-            null == title
-                ? _value.title
-                : title // ignore: cast_nullable_to_non_nullable
-                    as String,
-        description:
-            null == description
-                ? _value.description
-                : description // ignore: cast_nullable_to_non_nullable
-                    as String,
-        level:
-            null == level
-                ? _value.level
-                : level // ignore: cast_nullable_to_non_nullable
-                    as LearningLevel,
-        courseIds:
-            null == courseIds
-                ? _value._courseIds
-                : courseIds // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        estimatedHours:
-            null == estimatedHours
-                ? _value.estimatedHours
-                : estimatedHours // ignore: cast_nullable_to_non_nullable
-                    as int,
-        prerequisites:
-            null == prerequisites
-                ? _value._prerequisites
-                : prerequisites // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        skills:
-            null == skills
-                ? _value._skills
-                : skills // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        tags:
-            null == tags
-                ? _value._tags
-                : tags // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        coverImageUrl:
-            freezed == coverImageUrl
-                ? _value.coverImageUrl
-                : coverImageUrl // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        isPremium:
-            null == isPremium
-                ? _value.isPremium
-                : isPremium // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        rating:
-            null == rating
-                ? _value.rating
-                : rating // ignore: cast_nullable_to_non_nullable
-                    as double,
-        enrolledCount:
-            null == enrolledCount
-                ? _value.enrolledCount
-                : enrolledCount // ignore: cast_nullable_to_non_nullable
-                    as int,
-        createdAt:
-            freezed == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        updatedAt:
-            freezed == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-      ),
-    );
+    return _then(_$IslamicLearningPathImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      level: null == level
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
+              as LearningLevel,
+      courseIds: null == courseIds
+          ? _value._courseIds
+          : courseIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      estimatedHours: null == estimatedHours
+          ? _value.estimatedHours
+          : estimatedHours // ignore: cast_nullable_to_non_nullable
+              as int,
+      prerequisites: null == prerequisites
+          ? _value._prerequisites
+          : prerequisites // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      skills: null == skills
+          ? _value._skills
+          : skills // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      tags: null == tags
+          ? _value._tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      coverImageUrl: freezed == coverImageUrl
+          ? _value.coverImageUrl
+          : coverImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isPremium: null == isPremium
+          ? _value.isPremium
+          : isPremium // ignore: cast_nullable_to_non_nullable
+              as bool,
+      rating: null == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as double,
+      enrolledCount: null == enrolledCount
+          ? _value.enrolledCount
+          : enrolledCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$IslamicLearningPathImpl implements _IslamicLearningPath {
-  const _$IslamicLearningPathImpl({
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.level,
-    required final List<String> courseIds,
-    required this.estimatedHours,
-    final List<String> prerequisites = const [],
-    final List<String> skills = const [],
-    final List<String> tags = const [],
-    this.coverImageUrl,
-    this.isPremium = false,
-    this.rating = 0.0,
-    this.enrolledCount = 0,
-    this.createdAt,
-    this.updatedAt,
-  }) : _courseIds = courseIds,
-       _prerequisites = prerequisites,
-       _skills = skills,
-       _tags = tags;
+  const _$IslamicLearningPathImpl(
+      {required this.id,
+      required this.title,
+      required this.description,
+      required this.level,
+      required final List<String> courseIds,
+      required this.estimatedHours,
+      final List<String> prerequisites = const [],
+      final List<String> skills = const [],
+      final List<String> tags = const [],
+      this.coverImageUrl,
+      this.isPremium = false,
+      this.rating = 0.0,
+      this.enrolledCount = 0,
+      this.createdAt,
+      this.updatedAt})
+      : _courseIds = courseIds,
+        _prerequisites = prerequisites,
+        _skills = skills,
+        _tags = tags;
 
   factory _$IslamicLearningPathImpl.fromJson(Map<String, dynamic> json) =>
       _$$IslamicLearningPathImplFromJson(json);
@@ -1107,16 +1009,12 @@ class _$IslamicLearningPathImpl implements _IslamicLearningPath {
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.level, level) || other.level == level) &&
-            const DeepCollectionEquality().equals(
-              other._courseIds,
-              _courseIds,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._courseIds, _courseIds) &&
             (identical(other.estimatedHours, estimatedHours) ||
                 other.estimatedHours == estimatedHours) &&
-            const DeepCollectionEquality().equals(
-              other._prerequisites,
-              _prerequisites,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._prerequisites, _prerequisites) &&
             const DeepCollectionEquality().equals(other._skills, _skills) &&
             const DeepCollectionEquality().equals(other._tags, _tags) &&
             (identical(other.coverImageUrl, coverImageUrl) ||
@@ -1135,23 +1033,22 @@ class _$IslamicLearningPathImpl implements _IslamicLearningPath {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    title,
-    description,
-    level,
-    const DeepCollectionEquality().hash(_courseIds),
-    estimatedHours,
-    const DeepCollectionEquality().hash(_prerequisites),
-    const DeepCollectionEquality().hash(_skills),
-    const DeepCollectionEquality().hash(_tags),
-    coverImageUrl,
-    isPremium,
-    rating,
-    enrolledCount,
-    createdAt,
-    updatedAt,
-  );
+      runtimeType,
+      id,
+      title,
+      description,
+      level,
+      const DeepCollectionEquality().hash(_courseIds),
+      estimatedHours,
+      const DeepCollectionEquality().hash(_prerequisites),
+      const DeepCollectionEquality().hash(_skills),
+      const DeepCollectionEquality().hash(_tags),
+      coverImageUrl,
+      isPremium,
+      rating,
+      enrolledCount,
+      createdAt,
+      updatedAt);
 
   /// Create a copy of IslamicLearningPath
   /// with the given fields replaced by the non-null parameter values.
@@ -1160,34 +1057,33 @@ class _$IslamicLearningPathImpl implements _IslamicLearningPath {
   @pragma('vm:prefer-inline')
   _$$IslamicLearningPathImplCopyWith<_$IslamicLearningPathImpl> get copyWith =>
       __$$IslamicLearningPathImplCopyWithImpl<_$IslamicLearningPathImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$IslamicLearningPathImplToJson(this);
+    return _$$IslamicLearningPathImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _IslamicLearningPath implements IslamicLearningPath {
-  const factory _IslamicLearningPath({
-    required final String id,
-    required final String title,
-    required final String description,
-    required final LearningLevel level,
-    required final List<String> courseIds,
-    required final int estimatedHours,
-    final List<String> prerequisites,
-    final List<String> skills,
-    final List<String> tags,
-    final String? coverImageUrl,
-    final bool isPremium,
-    final double rating,
-    final int enrolledCount,
-    final DateTime? createdAt,
-    final DateTime? updatedAt,
-  }) = _$IslamicLearningPathImpl;
+  const factory _IslamicLearningPath(
+      {required final String id,
+      required final String title,
+      required final String description,
+      required final LearningLevel level,
+      required final List<String> courseIds,
+      required final int estimatedHours,
+      final List<String> prerequisites,
+      final List<String> skills,
+      final List<String> tags,
+      final String? coverImageUrl,
+      final bool isPremium,
+      final double rating,
+      final int enrolledCount,
+      final DateTime? createdAt,
+      final DateTime? updatedAt}) = _$IslamicLearningPathImpl;
 
   factory _IslamicLearningPath.fromJson(Map<String, dynamic> json) =
       _$IslamicLearningPathImpl.fromJson;
@@ -1282,41 +1178,39 @@ mixin _$PremiumCourse {
 /// @nodoc
 abstract class $PremiumCourseCopyWith<$Res> {
   factory $PremiumCourseCopyWith(
-    PremiumCourse value,
-    $Res Function(PremiumCourse) then,
-  ) = _$PremiumCourseCopyWithImpl<$Res, PremiumCourse>;
+          PremiumCourse value, $Res Function(PremiumCourse) then) =
+      _$PremiumCourseCopyWithImpl<$Res, PremiumCourse>;
   @useResult
-  $Res call({
-    String id,
-    String title,
-    String arabicTitle,
-    String description,
-    String shortDescription,
-    String scholarId,
-    CourseCategory category,
-    LearningLevel level,
-    List<String> lessonIds,
-    int duration,
-    double price,
-    double discountPrice,
-    bool isPremium,
-    bool isPublished,
-    List<String> tags,
-    List<String> languages,
-    String? coverImageUrl,
-    String? previewVideoUrl,
-    double rating,
-    int reviewsCount,
-    int enrolledCount,
-    int completionCount,
-    Duration averageCompletionTime,
-    bool requiresAuthentication,
-    bool allowDownload,
-    CertificationType certificateType,
-    DateTime? publishedAt,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-  });
+  $Res call(
+      {String id,
+      String title,
+      String arabicTitle,
+      String description,
+      String shortDescription,
+      String scholarId,
+      CourseCategory category,
+      LearningLevel level,
+      List<String> lessonIds,
+      int duration,
+      double price,
+      double discountPrice,
+      bool isPremium,
+      bool isPublished,
+      List<String> tags,
+      List<String> languages,
+      String? coverImageUrl,
+      String? previewVideoUrl,
+      double rating,
+      int reviewsCount,
+      int enrolledCount,
+      int completionCount,
+      Duration averageCompletionTime,
+      bool requiresAuthentication,
+      bool allowDownload,
+      CertificationType certificateType,
+      DateTime? publishedAt,
+      DateTime? createdAt,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -1364,156 +1258,124 @@ class _$PremiumCourseCopyWithImpl<$Res, $Val extends PremiumCourse>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            title:
-                null == title
-                    ? _value.title
-                    : title // ignore: cast_nullable_to_non_nullable
-                        as String,
-            arabicTitle:
-                null == arabicTitle
-                    ? _value.arabicTitle
-                    : arabicTitle // ignore: cast_nullable_to_non_nullable
-                        as String,
-            description:
-                null == description
-                    ? _value.description
-                    : description // ignore: cast_nullable_to_non_nullable
-                        as String,
-            shortDescription:
-                null == shortDescription
-                    ? _value.shortDescription
-                    : shortDescription // ignore: cast_nullable_to_non_nullable
-                        as String,
-            scholarId:
-                null == scholarId
-                    ? _value.scholarId
-                    : scholarId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            category:
-                null == category
-                    ? _value.category
-                    : category // ignore: cast_nullable_to_non_nullable
-                        as CourseCategory,
-            level:
-                null == level
-                    ? _value.level
-                    : level // ignore: cast_nullable_to_non_nullable
-                        as LearningLevel,
-            lessonIds:
-                null == lessonIds
-                    ? _value.lessonIds
-                    : lessonIds // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            duration:
-                null == duration
-                    ? _value.duration
-                    : duration // ignore: cast_nullable_to_non_nullable
-                        as int,
-            price:
-                null == price
-                    ? _value.price
-                    : price // ignore: cast_nullable_to_non_nullable
-                        as double,
-            discountPrice:
-                null == discountPrice
-                    ? _value.discountPrice
-                    : discountPrice // ignore: cast_nullable_to_non_nullable
-                        as double,
-            isPremium:
-                null == isPremium
-                    ? _value.isPremium
-                    : isPremium // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            isPublished:
-                null == isPublished
-                    ? _value.isPublished
-                    : isPublished // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            tags:
-                null == tags
-                    ? _value.tags
-                    : tags // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            languages:
-                null == languages
-                    ? _value.languages
-                    : languages // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            coverImageUrl:
-                freezed == coverImageUrl
-                    ? _value.coverImageUrl
-                    : coverImageUrl // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            previewVideoUrl:
-                freezed == previewVideoUrl
-                    ? _value.previewVideoUrl
-                    : previewVideoUrl // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            rating:
-                null == rating
-                    ? _value.rating
-                    : rating // ignore: cast_nullable_to_non_nullable
-                        as double,
-            reviewsCount:
-                null == reviewsCount
-                    ? _value.reviewsCount
-                    : reviewsCount // ignore: cast_nullable_to_non_nullable
-                        as int,
-            enrolledCount:
-                null == enrolledCount
-                    ? _value.enrolledCount
-                    : enrolledCount // ignore: cast_nullable_to_non_nullable
-                        as int,
-            completionCount:
-                null == completionCount
-                    ? _value.completionCount
-                    : completionCount // ignore: cast_nullable_to_non_nullable
-                        as int,
-            averageCompletionTime:
-                null == averageCompletionTime
-                    ? _value.averageCompletionTime
-                    : averageCompletionTime // ignore: cast_nullable_to_non_nullable
-                        as Duration,
-            requiresAuthentication:
-                null == requiresAuthentication
-                    ? _value.requiresAuthentication
-                    : requiresAuthentication // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            allowDownload:
-                null == allowDownload
-                    ? _value.allowDownload
-                    : allowDownload // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            certificateType:
-                null == certificateType
-                    ? _value.certificateType
-                    : certificateType // ignore: cast_nullable_to_non_nullable
-                        as CertificationType,
-            publishedAt:
-                freezed == publishedAt
-                    ? _value.publishedAt
-                    : publishedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            createdAt:
-                freezed == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            updatedAt:
-                freezed == updatedAt
-                    ? _value.updatedAt
-                    : updatedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      arabicTitle: null == arabicTitle
+          ? _value.arabicTitle
+          : arabicTitle // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      shortDescription: null == shortDescription
+          ? _value.shortDescription
+          : shortDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      scholarId: null == scholarId
+          ? _value.scholarId
+          : scholarId // ignore: cast_nullable_to_non_nullable
+              as String,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as CourseCategory,
+      level: null == level
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
+              as LearningLevel,
+      lessonIds: null == lessonIds
+          ? _value.lessonIds
+          : lessonIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as int,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as double,
+      discountPrice: null == discountPrice
+          ? _value.discountPrice
+          : discountPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      isPremium: null == isPremium
+          ? _value.isPremium
+          : isPremium // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isPublished: null == isPublished
+          ? _value.isPublished
+          : isPublished // ignore: cast_nullable_to_non_nullable
+              as bool,
+      tags: null == tags
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      languages: null == languages
+          ? _value.languages
+          : languages // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      coverImageUrl: freezed == coverImageUrl
+          ? _value.coverImageUrl
+          : coverImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      previewVideoUrl: freezed == previewVideoUrl
+          ? _value.previewVideoUrl
+          : previewVideoUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      rating: null == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as double,
+      reviewsCount: null == reviewsCount
+          ? _value.reviewsCount
+          : reviewsCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      enrolledCount: null == enrolledCount
+          ? _value.enrolledCount
+          : enrolledCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      completionCount: null == completionCount
+          ? _value.completionCount
+          : completionCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      averageCompletionTime: null == averageCompletionTime
+          ? _value.averageCompletionTime
+          : averageCompletionTime // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      requiresAuthentication: null == requiresAuthentication
+          ? _value.requiresAuthentication
+          : requiresAuthentication // ignore: cast_nullable_to_non_nullable
+              as bool,
+      allowDownload: null == allowDownload
+          ? _value.allowDownload
+          : allowDownload // ignore: cast_nullable_to_non_nullable
+              as bool,
+      certificateType: null == certificateType
+          ? _value.certificateType
+          : certificateType // ignore: cast_nullable_to_non_nullable
+              as CertificationType,
+      publishedAt: freezed == publishedAt
+          ? _value.publishedAt
+          : publishedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
   }
 }
 
@@ -1521,42 +1383,40 @@ class _$PremiumCourseCopyWithImpl<$Res, $Val extends PremiumCourse>
 abstract class _$$PremiumCourseImplCopyWith<$Res>
     implements $PremiumCourseCopyWith<$Res> {
   factory _$$PremiumCourseImplCopyWith(
-    _$PremiumCourseImpl value,
-    $Res Function(_$PremiumCourseImpl) then,
-  ) = __$$PremiumCourseImplCopyWithImpl<$Res>;
+          _$PremiumCourseImpl value, $Res Function(_$PremiumCourseImpl) then) =
+      __$$PremiumCourseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String title,
-    String arabicTitle,
-    String description,
-    String shortDescription,
-    String scholarId,
-    CourseCategory category,
-    LearningLevel level,
-    List<String> lessonIds,
-    int duration,
-    double price,
-    double discountPrice,
-    bool isPremium,
-    bool isPublished,
-    List<String> tags,
-    List<String> languages,
-    String? coverImageUrl,
-    String? previewVideoUrl,
-    double rating,
-    int reviewsCount,
-    int enrolledCount,
-    int completionCount,
-    Duration averageCompletionTime,
-    bool requiresAuthentication,
-    bool allowDownload,
-    CertificationType certificateType,
-    DateTime? publishedAt,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-  });
+  $Res call(
+      {String id,
+      String title,
+      String arabicTitle,
+      String description,
+      String shortDescription,
+      String scholarId,
+      CourseCategory category,
+      LearningLevel level,
+      List<String> lessonIds,
+      int duration,
+      double price,
+      double discountPrice,
+      bool isPremium,
+      bool isPublished,
+      List<String> tags,
+      List<String> languages,
+      String? coverImageUrl,
+      String? previewVideoUrl,
+      double rating,
+      int reviewsCount,
+      int enrolledCount,
+      int completionCount,
+      Duration averageCompletionTime,
+      bool requiresAuthentication,
+      bool allowDownload,
+      CertificationType certificateType,
+      DateTime? publishedAt,
+      DateTime? createdAt,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -1564,9 +1424,8 @@ class __$$PremiumCourseImplCopyWithImpl<$Res>
     extends _$PremiumCourseCopyWithImpl<$Res, _$PremiumCourseImpl>
     implements _$$PremiumCourseImplCopyWith<$Res> {
   __$$PremiumCourseImplCopyWithImpl(
-    _$PremiumCourseImpl _value,
-    $Res Function(_$PremiumCourseImpl) _then,
-  ) : super(_value, _then);
+      _$PremiumCourseImpl _value, $Res Function(_$PremiumCourseImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of PremiumCourse
   /// with the given fields replaced by the non-null parameter values.
@@ -1603,194 +1462,163 @@ class __$$PremiumCourseImplCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(
-      _$PremiumCourseImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        title:
-            null == title
-                ? _value.title
-                : title // ignore: cast_nullable_to_non_nullable
-                    as String,
-        arabicTitle:
-            null == arabicTitle
-                ? _value.arabicTitle
-                : arabicTitle // ignore: cast_nullable_to_non_nullable
-                    as String,
-        description:
-            null == description
-                ? _value.description
-                : description // ignore: cast_nullable_to_non_nullable
-                    as String,
-        shortDescription:
-            null == shortDescription
-                ? _value.shortDescription
-                : shortDescription // ignore: cast_nullable_to_non_nullable
-                    as String,
-        scholarId:
-            null == scholarId
-                ? _value.scholarId
-                : scholarId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        category:
-            null == category
-                ? _value.category
-                : category // ignore: cast_nullable_to_non_nullable
-                    as CourseCategory,
-        level:
-            null == level
-                ? _value.level
-                : level // ignore: cast_nullable_to_non_nullable
-                    as LearningLevel,
-        lessonIds:
-            null == lessonIds
-                ? _value._lessonIds
-                : lessonIds // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        duration:
-            null == duration
-                ? _value.duration
-                : duration // ignore: cast_nullable_to_non_nullable
-                    as int,
-        price:
-            null == price
-                ? _value.price
-                : price // ignore: cast_nullable_to_non_nullable
-                    as double,
-        discountPrice:
-            null == discountPrice
-                ? _value.discountPrice
-                : discountPrice // ignore: cast_nullable_to_non_nullable
-                    as double,
-        isPremium:
-            null == isPremium
-                ? _value.isPremium
-                : isPremium // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        isPublished:
-            null == isPublished
-                ? _value.isPublished
-                : isPublished // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        tags:
-            null == tags
-                ? _value._tags
-                : tags // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        languages:
-            null == languages
-                ? _value._languages
-                : languages // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        coverImageUrl:
-            freezed == coverImageUrl
-                ? _value.coverImageUrl
-                : coverImageUrl // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        previewVideoUrl:
-            freezed == previewVideoUrl
-                ? _value.previewVideoUrl
-                : previewVideoUrl // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        rating:
-            null == rating
-                ? _value.rating
-                : rating // ignore: cast_nullable_to_non_nullable
-                    as double,
-        reviewsCount:
-            null == reviewsCount
-                ? _value.reviewsCount
-                : reviewsCount // ignore: cast_nullable_to_non_nullable
-                    as int,
-        enrolledCount:
-            null == enrolledCount
-                ? _value.enrolledCount
-                : enrolledCount // ignore: cast_nullable_to_non_nullable
-                    as int,
-        completionCount:
-            null == completionCount
-                ? _value.completionCount
-                : completionCount // ignore: cast_nullable_to_non_nullable
-                    as int,
-        averageCompletionTime:
-            null == averageCompletionTime
-                ? _value.averageCompletionTime
-                : averageCompletionTime // ignore: cast_nullable_to_non_nullable
-                    as Duration,
-        requiresAuthentication:
-            null == requiresAuthentication
-                ? _value.requiresAuthentication
-                : requiresAuthentication // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        allowDownload:
-            null == allowDownload
-                ? _value.allowDownload
-                : allowDownload // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        certificateType:
-            null == certificateType
-                ? _value.certificateType
-                : certificateType // ignore: cast_nullable_to_non_nullable
-                    as CertificationType,
-        publishedAt:
-            freezed == publishedAt
-                ? _value.publishedAt
-                : publishedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        createdAt:
-            freezed == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        updatedAt:
-            freezed == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-      ),
-    );
+    return _then(_$PremiumCourseImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      arabicTitle: null == arabicTitle
+          ? _value.arabicTitle
+          : arabicTitle // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      shortDescription: null == shortDescription
+          ? _value.shortDescription
+          : shortDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      scholarId: null == scholarId
+          ? _value.scholarId
+          : scholarId // ignore: cast_nullable_to_non_nullable
+              as String,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as CourseCategory,
+      level: null == level
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
+              as LearningLevel,
+      lessonIds: null == lessonIds
+          ? _value._lessonIds
+          : lessonIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as int,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as double,
+      discountPrice: null == discountPrice
+          ? _value.discountPrice
+          : discountPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      isPremium: null == isPremium
+          ? _value.isPremium
+          : isPremium // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isPublished: null == isPublished
+          ? _value.isPublished
+          : isPublished // ignore: cast_nullable_to_non_nullable
+              as bool,
+      tags: null == tags
+          ? _value._tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      languages: null == languages
+          ? _value._languages
+          : languages // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      coverImageUrl: freezed == coverImageUrl
+          ? _value.coverImageUrl
+          : coverImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      previewVideoUrl: freezed == previewVideoUrl
+          ? _value.previewVideoUrl
+          : previewVideoUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      rating: null == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as double,
+      reviewsCount: null == reviewsCount
+          ? _value.reviewsCount
+          : reviewsCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      enrolledCount: null == enrolledCount
+          ? _value.enrolledCount
+          : enrolledCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      completionCount: null == completionCount
+          ? _value.completionCount
+          : completionCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      averageCompletionTime: null == averageCompletionTime
+          ? _value.averageCompletionTime
+          : averageCompletionTime // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      requiresAuthentication: null == requiresAuthentication
+          ? _value.requiresAuthentication
+          : requiresAuthentication // ignore: cast_nullable_to_non_nullable
+              as bool,
+      allowDownload: null == allowDownload
+          ? _value.allowDownload
+          : allowDownload // ignore: cast_nullable_to_non_nullable
+              as bool,
+      certificateType: null == certificateType
+          ? _value.certificateType
+          : certificateType // ignore: cast_nullable_to_non_nullable
+              as CertificationType,
+      publishedAt: freezed == publishedAt
+          ? _value.publishedAt
+          : publishedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$PremiumCourseImpl implements _PremiumCourse {
-  const _$PremiumCourseImpl({
-    required this.id,
-    required this.title,
-    required this.arabicTitle,
-    required this.description,
-    required this.shortDescription,
-    required this.scholarId,
-    required this.category,
-    required this.level,
-    required final List<String> lessonIds,
-    required this.duration,
-    required this.price,
-    this.discountPrice = 0.0,
-    this.isPremium = false,
-    this.isPublished = false,
-    final List<String> tags = const [],
-    final List<String> languages = const [],
-    this.coverImageUrl,
-    this.previewVideoUrl,
-    this.rating = 0.0,
-    this.reviewsCount = 0,
-    this.enrolledCount = 0,
-    this.completionCount = 0,
-    this.averageCompletionTime = Duration.zero,
-    this.requiresAuthentication = true,
-    this.allowDownload = false,
-    this.certificateType = CertificationType.completion,
-    this.publishedAt,
-    this.createdAt,
-    this.updatedAt,
-  }) : _lessonIds = lessonIds,
-       _tags = tags,
-       _languages = languages;
+  const _$PremiumCourseImpl(
+      {required this.id,
+      required this.title,
+      required this.arabicTitle,
+      required this.description,
+      required this.shortDescription,
+      required this.scholarId,
+      required this.category,
+      required this.level,
+      required final List<String> lessonIds,
+      required this.duration,
+      required this.price,
+      this.discountPrice = 0.0,
+      this.isPremium = false,
+      this.isPublished = false,
+      final List<String> tags = const [],
+      final List<String> languages = const [],
+      this.coverImageUrl,
+      this.previewVideoUrl,
+      this.rating = 0.0,
+      this.reviewsCount = 0,
+      this.enrolledCount = 0,
+      this.completionCount = 0,
+      this.averageCompletionTime = Duration.zero,
+      this.requiresAuthentication = true,
+      this.allowDownload = false,
+      this.certificateType = CertificationType.completion,
+      this.publishedAt,
+      this.createdAt,
+      this.updatedAt})
+      : _lessonIds = lessonIds,
+        _tags = tags,
+        _languages = languages;
 
   factory _$PremiumCourseImpl.fromJson(Map<String, dynamic> json) =>
       _$$PremiumCourseImplFromJson(json);
@@ -1821,7 +1649,7 @@ class _$PremiumCourseImpl implements _PremiumCourse {
 
   @override
   final int duration;
-  // in minutes
+// in minutes
   @override
   final double price;
   @override
@@ -1855,7 +1683,7 @@ class _$PremiumCourseImpl implements _PremiumCourse {
   final String? coverImageUrl;
   @override
   final String? previewVideoUrl;
-  // Course metadata
+// Course metadata
   @override
   @JsonKey()
   final double rating;
@@ -1871,7 +1699,7 @@ class _$PremiumCourseImpl implements _PremiumCourse {
   @override
   @JsonKey()
   final Duration averageCompletionTime;
-  // Security & DRM
+// Security & DRM
   @override
   @JsonKey()
   final bool requiresAuthentication;
@@ -1911,10 +1739,8 @@ class _$PremiumCourseImpl implements _PremiumCourse {
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.level, level) || other.level == level) &&
-            const DeepCollectionEquality().equals(
-              other._lessonIds,
-              _lessonIds,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._lessonIds, _lessonIds) &&
             (identical(other.duration, duration) ||
                 other.duration == duration) &&
             (identical(other.price, price) || other.price == price) &&
@@ -1925,10 +1751,8 @@ class _$PremiumCourseImpl implements _PremiumCourse {
             (identical(other.isPublished, isPublished) ||
                 other.isPublished == isPublished) &&
             const DeepCollectionEquality().equals(other._tags, _tags) &&
-            const DeepCollectionEquality().equals(
-              other._languages,
-              _languages,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._languages, _languages) &&
             (identical(other.coverImageUrl, coverImageUrl) ||
                 other.coverImageUrl == coverImageUrl) &&
             (identical(other.previewVideoUrl, previewVideoUrl) ||
@@ -1959,37 +1783,37 @@ class _$PremiumCourseImpl implements _PremiumCourse {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
-    runtimeType,
-    id,
-    title,
-    arabicTitle,
-    description,
-    shortDescription,
-    scholarId,
-    category,
-    level,
-    const DeepCollectionEquality().hash(_lessonIds),
-    duration,
-    price,
-    discountPrice,
-    isPremium,
-    isPublished,
-    const DeepCollectionEquality().hash(_tags),
-    const DeepCollectionEquality().hash(_languages),
-    coverImageUrl,
-    previewVideoUrl,
-    rating,
-    reviewsCount,
-    enrolledCount,
-    completionCount,
-    averageCompletionTime,
-    requiresAuthentication,
-    allowDownload,
-    certificateType,
-    publishedAt,
-    createdAt,
-    updatedAt,
-  ]);
+        runtimeType,
+        id,
+        title,
+        arabicTitle,
+        description,
+        shortDescription,
+        scholarId,
+        category,
+        level,
+        const DeepCollectionEquality().hash(_lessonIds),
+        duration,
+        price,
+        discountPrice,
+        isPremium,
+        isPublished,
+        const DeepCollectionEquality().hash(_tags),
+        const DeepCollectionEquality().hash(_languages),
+        coverImageUrl,
+        previewVideoUrl,
+        rating,
+        reviewsCount,
+        enrolledCount,
+        completionCount,
+        averageCompletionTime,
+        requiresAuthentication,
+        allowDownload,
+        certificateType,
+        publishedAt,
+        createdAt,
+        updatedAt
+      ]);
 
   /// Create a copy of PremiumCourse
   /// with the given fields replaced by the non-null parameter values.
@@ -2001,42 +1825,43 @@ class _$PremiumCourseImpl implements _PremiumCourse {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PremiumCourseImplToJson(this);
+    return _$$PremiumCourseImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _PremiumCourse implements PremiumCourse {
-  const factory _PremiumCourse({
-    required final String id,
-    required final String title,
-    required final String arabicTitle,
-    required final String description,
-    required final String shortDescription,
-    required final String scholarId,
-    required final CourseCategory category,
-    required final LearningLevel level,
-    required final List<String> lessonIds,
-    required final int duration,
-    required final double price,
-    final double discountPrice,
-    final bool isPremium,
-    final bool isPublished,
-    final List<String> tags,
-    final List<String> languages,
-    final String? coverImageUrl,
-    final String? previewVideoUrl,
-    final double rating,
-    final int reviewsCount,
-    final int enrolledCount,
-    final int completionCount,
-    final Duration averageCompletionTime,
-    final bool requiresAuthentication,
-    final bool allowDownload,
-    final CertificationType certificateType,
-    final DateTime? publishedAt,
-    final DateTime? createdAt,
-    final DateTime? updatedAt,
-  }) = _$PremiumCourseImpl;
+  const factory _PremiumCourse(
+      {required final String id,
+      required final String title,
+      required final String arabicTitle,
+      required final String description,
+      required final String shortDescription,
+      required final String scholarId,
+      required final CourseCategory category,
+      required final LearningLevel level,
+      required final List<String> lessonIds,
+      required final int duration,
+      required final double price,
+      final double discountPrice,
+      final bool isPremium,
+      final bool isPublished,
+      final List<String> tags,
+      final List<String> languages,
+      final String? coverImageUrl,
+      final String? previewVideoUrl,
+      final double rating,
+      final int reviewsCount,
+      final int enrolledCount,
+      final int completionCount,
+      final Duration averageCompletionTime,
+      final bool requiresAuthentication,
+      final bool allowDownload,
+      final CertificationType certificateType,
+      final DateTime? publishedAt,
+      final DateTime? createdAt,
+      final DateTime? updatedAt}) = _$PremiumCourseImpl;
 
   factory _PremiumCourse.fromJson(Map<String, dynamic> json) =
       _$PremiumCourseImpl.fromJson;
@@ -2152,33 +1977,31 @@ mixin _$CourseLesson {
 /// @nodoc
 abstract class $CourseLessonCopyWith<$Res> {
   factory $CourseLessonCopyWith(
-    CourseLesson value,
-    $Res Function(CourseLesson) then,
-  ) = _$CourseLessonCopyWithImpl<$Res, CourseLesson>;
+          CourseLesson value, $Res Function(CourseLesson) then) =
+      _$CourseLessonCopyWithImpl<$Res, CourseLesson>;
   @useResult
-  $Res call({
-    String id,
-    String courseId,
-    String title,
-    String description,
-    int orderIndex,
-    LessonType type,
-    int duration,
-    bool isFree,
-    bool isLocked,
-    String? videoUrl,
-    String? audioUrl,
-    String? documentUrl,
-    List<String> attachments,
-    List<String> quizIds,
-    List<String> exerciseIds,
-    String? notesContent,
-    int viewCount,
-    Duration averageWatchTime,
-    double completionRate,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-  });
+  $Res call(
+      {String id,
+      String courseId,
+      String title,
+      String description,
+      int orderIndex,
+      LessonType type,
+      int duration,
+      bool isFree,
+      bool isLocked,
+      String? videoUrl,
+      String? audioUrl,
+      String? documentUrl,
+      List<String> attachments,
+      List<String> quizIds,
+      List<String> exerciseIds,
+      String? notesContent,
+      int viewCount,
+      Duration averageWatchTime,
+      double completionRate,
+      DateTime? createdAt,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -2218,116 +2041,92 @@ class _$CourseLessonCopyWithImpl<$Res, $Val extends CourseLesson>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            courseId:
-                null == courseId
-                    ? _value.courseId
-                    : courseId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            title:
-                null == title
-                    ? _value.title
-                    : title // ignore: cast_nullable_to_non_nullable
-                        as String,
-            description:
-                null == description
-                    ? _value.description
-                    : description // ignore: cast_nullable_to_non_nullable
-                        as String,
-            orderIndex:
-                null == orderIndex
-                    ? _value.orderIndex
-                    : orderIndex // ignore: cast_nullable_to_non_nullable
-                        as int,
-            type:
-                null == type
-                    ? _value.type
-                    : type // ignore: cast_nullable_to_non_nullable
-                        as LessonType,
-            duration:
-                null == duration
-                    ? _value.duration
-                    : duration // ignore: cast_nullable_to_non_nullable
-                        as int,
-            isFree:
-                null == isFree
-                    ? _value.isFree
-                    : isFree // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            isLocked:
-                null == isLocked
-                    ? _value.isLocked
-                    : isLocked // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            videoUrl:
-                freezed == videoUrl
-                    ? _value.videoUrl
-                    : videoUrl // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            audioUrl:
-                freezed == audioUrl
-                    ? _value.audioUrl
-                    : audioUrl // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            documentUrl:
-                freezed == documentUrl
-                    ? _value.documentUrl
-                    : documentUrl // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            attachments:
-                null == attachments
-                    ? _value.attachments
-                    : attachments // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            quizIds:
-                null == quizIds
-                    ? _value.quizIds
-                    : quizIds // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            exerciseIds:
-                null == exerciseIds
-                    ? _value.exerciseIds
-                    : exerciseIds // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            notesContent:
-                freezed == notesContent
-                    ? _value.notesContent
-                    : notesContent // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            viewCount:
-                null == viewCount
-                    ? _value.viewCount
-                    : viewCount // ignore: cast_nullable_to_non_nullable
-                        as int,
-            averageWatchTime:
-                null == averageWatchTime
-                    ? _value.averageWatchTime
-                    : averageWatchTime // ignore: cast_nullable_to_non_nullable
-                        as Duration,
-            completionRate:
-                null == completionRate
-                    ? _value.completionRate
-                    : completionRate // ignore: cast_nullable_to_non_nullable
-                        as double,
-            createdAt:
-                freezed == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            updatedAt:
-                freezed == updatedAt
-                    ? _value.updatedAt
-                    : updatedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      courseId: null == courseId
+          ? _value.courseId
+          : courseId // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      orderIndex: null == orderIndex
+          ? _value.orderIndex
+          : orderIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as LessonType,
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as int,
+      isFree: null == isFree
+          ? _value.isFree
+          : isFree // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLocked: null == isLocked
+          ? _value.isLocked
+          : isLocked // ignore: cast_nullable_to_non_nullable
+              as bool,
+      videoUrl: freezed == videoUrl
+          ? _value.videoUrl
+          : videoUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      audioUrl: freezed == audioUrl
+          ? _value.audioUrl
+          : audioUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      documentUrl: freezed == documentUrl
+          ? _value.documentUrl
+          : documentUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      attachments: null == attachments
+          ? _value.attachments
+          : attachments // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      quizIds: null == quizIds
+          ? _value.quizIds
+          : quizIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      exerciseIds: null == exerciseIds
+          ? _value.exerciseIds
+          : exerciseIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      notesContent: freezed == notesContent
+          ? _value.notesContent
+          : notesContent // ignore: cast_nullable_to_non_nullable
+              as String?,
+      viewCount: null == viewCount
+          ? _value.viewCount
+          : viewCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      averageWatchTime: null == averageWatchTime
+          ? _value.averageWatchTime
+          : averageWatchTime // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      completionRate: null == completionRate
+          ? _value.completionRate
+          : completionRate // ignore: cast_nullable_to_non_nullable
+              as double,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
   }
 }
 
@@ -2335,34 +2134,32 @@ class _$CourseLessonCopyWithImpl<$Res, $Val extends CourseLesson>
 abstract class _$$CourseLessonImplCopyWith<$Res>
     implements $CourseLessonCopyWith<$Res> {
   factory _$$CourseLessonImplCopyWith(
-    _$CourseLessonImpl value,
-    $Res Function(_$CourseLessonImpl) then,
-  ) = __$$CourseLessonImplCopyWithImpl<$Res>;
+          _$CourseLessonImpl value, $Res Function(_$CourseLessonImpl) then) =
+      __$$CourseLessonImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String courseId,
-    String title,
-    String description,
-    int orderIndex,
-    LessonType type,
-    int duration,
-    bool isFree,
-    bool isLocked,
-    String? videoUrl,
-    String? audioUrl,
-    String? documentUrl,
-    List<String> attachments,
-    List<String> quizIds,
-    List<String> exerciseIds,
-    String? notesContent,
-    int viewCount,
-    Duration averageWatchTime,
-    double completionRate,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-  });
+  $Res call(
+      {String id,
+      String courseId,
+      String title,
+      String description,
+      int orderIndex,
+      LessonType type,
+      int duration,
+      bool isFree,
+      bool isLocked,
+      String? videoUrl,
+      String? audioUrl,
+      String? documentUrl,
+      List<String> attachments,
+      List<String> quizIds,
+      List<String> exerciseIds,
+      String? notesContent,
+      int viewCount,
+      Duration averageWatchTime,
+      double completionRate,
+      DateTime? createdAt,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -2370,9 +2167,8 @@ class __$$CourseLessonImplCopyWithImpl<$Res>
     extends _$CourseLessonCopyWithImpl<$Res, _$CourseLessonImpl>
     implements _$$CourseLessonImplCopyWith<$Res> {
   __$$CourseLessonImplCopyWithImpl(
-    _$CourseLessonImpl _value,
-    $Res Function(_$CourseLessonImpl) _then,
-  ) : super(_value, _then);
+      _$CourseLessonImpl _value, $Res Function(_$CourseLessonImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of CourseLesson
   /// with the given fields replaced by the non-null parameter values.
@@ -2401,146 +2197,123 @@ class __$$CourseLessonImplCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(
-      _$CourseLessonImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        courseId:
-            null == courseId
-                ? _value.courseId
-                : courseId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        title:
-            null == title
-                ? _value.title
-                : title // ignore: cast_nullable_to_non_nullable
-                    as String,
-        description:
-            null == description
-                ? _value.description
-                : description // ignore: cast_nullable_to_non_nullable
-                    as String,
-        orderIndex:
-            null == orderIndex
-                ? _value.orderIndex
-                : orderIndex // ignore: cast_nullable_to_non_nullable
-                    as int,
-        type:
-            null == type
-                ? _value.type
-                : type // ignore: cast_nullable_to_non_nullable
-                    as LessonType,
-        duration:
-            null == duration
-                ? _value.duration
-                : duration // ignore: cast_nullable_to_non_nullable
-                    as int,
-        isFree:
-            null == isFree
-                ? _value.isFree
-                : isFree // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        isLocked:
-            null == isLocked
-                ? _value.isLocked
-                : isLocked // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        videoUrl:
-            freezed == videoUrl
-                ? _value.videoUrl
-                : videoUrl // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        audioUrl:
-            freezed == audioUrl
-                ? _value.audioUrl
-                : audioUrl // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        documentUrl:
-            freezed == documentUrl
-                ? _value.documentUrl
-                : documentUrl // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        attachments:
-            null == attachments
-                ? _value._attachments
-                : attachments // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        quizIds:
-            null == quizIds
-                ? _value._quizIds
-                : quizIds // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        exerciseIds:
-            null == exerciseIds
-                ? _value._exerciseIds
-                : exerciseIds // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        notesContent:
-            freezed == notesContent
-                ? _value.notesContent
-                : notesContent // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        viewCount:
-            null == viewCount
-                ? _value.viewCount
-                : viewCount // ignore: cast_nullable_to_non_nullable
-                    as int,
-        averageWatchTime:
-            null == averageWatchTime
-                ? _value.averageWatchTime
-                : averageWatchTime // ignore: cast_nullable_to_non_nullable
-                    as Duration,
-        completionRate:
-            null == completionRate
-                ? _value.completionRate
-                : completionRate // ignore: cast_nullable_to_non_nullable
-                    as double,
-        createdAt:
-            freezed == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        updatedAt:
-            freezed == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-      ),
-    );
+    return _then(_$CourseLessonImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      courseId: null == courseId
+          ? _value.courseId
+          : courseId // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      orderIndex: null == orderIndex
+          ? _value.orderIndex
+          : orderIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as LessonType,
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as int,
+      isFree: null == isFree
+          ? _value.isFree
+          : isFree // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLocked: null == isLocked
+          ? _value.isLocked
+          : isLocked // ignore: cast_nullable_to_non_nullable
+              as bool,
+      videoUrl: freezed == videoUrl
+          ? _value.videoUrl
+          : videoUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      audioUrl: freezed == audioUrl
+          ? _value.audioUrl
+          : audioUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      documentUrl: freezed == documentUrl
+          ? _value.documentUrl
+          : documentUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      attachments: null == attachments
+          ? _value._attachments
+          : attachments // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      quizIds: null == quizIds
+          ? _value._quizIds
+          : quizIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      exerciseIds: null == exerciseIds
+          ? _value._exerciseIds
+          : exerciseIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      notesContent: freezed == notesContent
+          ? _value.notesContent
+          : notesContent // ignore: cast_nullable_to_non_nullable
+              as String?,
+      viewCount: null == viewCount
+          ? _value.viewCount
+          : viewCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      averageWatchTime: null == averageWatchTime
+          ? _value.averageWatchTime
+          : averageWatchTime // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      completionRate: null == completionRate
+          ? _value.completionRate
+          : completionRate // ignore: cast_nullable_to_non_nullable
+              as double,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$CourseLessonImpl implements _CourseLesson {
-  const _$CourseLessonImpl({
-    required this.id,
-    required this.courseId,
-    required this.title,
-    required this.description,
-    required this.orderIndex,
-    required this.type,
-    required this.duration,
-    this.isFree = false,
-    this.isLocked = false,
-    this.videoUrl,
-    this.audioUrl,
-    this.documentUrl,
-    final List<String> attachments = const [],
-    final List<String> quizIds = const [],
-    final List<String> exerciseIds = const [],
-    this.notesContent,
-    this.viewCount = 0,
-    this.averageWatchTime = Duration.zero,
-    this.completionRate = 0.0,
-    this.createdAt,
-    this.updatedAt,
-  }) : _attachments = attachments,
-       _quizIds = quizIds,
-       _exerciseIds = exerciseIds;
+  const _$CourseLessonImpl(
+      {required this.id,
+      required this.courseId,
+      required this.title,
+      required this.description,
+      required this.orderIndex,
+      required this.type,
+      required this.duration,
+      this.isFree = false,
+      this.isLocked = false,
+      this.videoUrl,
+      this.audioUrl,
+      this.documentUrl,
+      final List<String> attachments = const [],
+      final List<String> quizIds = const [],
+      final List<String> exerciseIds = const [],
+      this.notesContent,
+      this.viewCount = 0,
+      this.averageWatchTime = Duration.zero,
+      this.completionRate = 0.0,
+      this.createdAt,
+      this.updatedAt})
+      : _attachments = attachments,
+        _quizIds = quizIds,
+        _exerciseIds = exerciseIds;
 
   factory _$CourseLessonImpl.fromJson(Map<String, dynamic> json) =>
       _$$CourseLessonImplFromJson(json);
@@ -2559,14 +2332,14 @@ class _$CourseLessonImpl implements _CourseLesson {
   final LessonType type;
   @override
   final int duration;
-  // in minutes
+// in minutes
   @override
   @JsonKey()
   final bool isFree;
   @override
   @JsonKey()
   final bool isLocked;
-  // Content URLs with DRM protection
+// Content URLs with DRM protection
   @override
   final String? videoUrl;
   @override
@@ -2582,9 +2355,9 @@ class _$CourseLessonImpl implements _CourseLesson {
     return EqualUnmodifiableListView(_attachments);
   }
 
-  // Interactive elements
+// Interactive elements
   final List<String> _quizIds;
-  // Interactive elements
+// Interactive elements
   @override
   @JsonKey()
   List<String> get quizIds {
@@ -2604,7 +2377,7 @@ class _$CourseLessonImpl implements _CourseLesson {
 
   @override
   final String? notesContent;
-  // Progress tracking
+// Progress tracking
   @override
   @JsonKey()
   final int viewCount;
@@ -2649,15 +2422,11 @@ class _$CourseLessonImpl implements _CourseLesson {
                 other.audioUrl == audioUrl) &&
             (identical(other.documentUrl, documentUrl) ||
                 other.documentUrl == documentUrl) &&
-            const DeepCollectionEquality().equals(
-              other._attachments,
-              _attachments,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._attachments, _attachments) &&
             const DeepCollectionEquality().equals(other._quizIds, _quizIds) &&
-            const DeepCollectionEquality().equals(
-              other._exerciseIds,
-              _exerciseIds,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._exerciseIds, _exerciseIds) &&
             (identical(other.notesContent, notesContent) ||
                 other.notesContent == notesContent) &&
             (identical(other.viewCount, viewCount) ||
@@ -2675,29 +2444,29 @@ class _$CourseLessonImpl implements _CourseLesson {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
-    runtimeType,
-    id,
-    courseId,
-    title,
-    description,
-    orderIndex,
-    type,
-    duration,
-    isFree,
-    isLocked,
-    videoUrl,
-    audioUrl,
-    documentUrl,
-    const DeepCollectionEquality().hash(_attachments),
-    const DeepCollectionEquality().hash(_quizIds),
-    const DeepCollectionEquality().hash(_exerciseIds),
-    notesContent,
-    viewCount,
-    averageWatchTime,
-    completionRate,
-    createdAt,
-    updatedAt,
-  ]);
+        runtimeType,
+        id,
+        courseId,
+        title,
+        description,
+        orderIndex,
+        type,
+        duration,
+        isFree,
+        isLocked,
+        videoUrl,
+        audioUrl,
+        documentUrl,
+        const DeepCollectionEquality().hash(_attachments),
+        const DeepCollectionEquality().hash(_quizIds),
+        const DeepCollectionEquality().hash(_exerciseIds),
+        notesContent,
+        viewCount,
+        averageWatchTime,
+        completionRate,
+        createdAt,
+        updatedAt
+      ]);
 
   /// Create a copy of CourseLesson
   /// with the given fields replaced by the non-null parameter values.
@@ -2709,34 +2478,35 @@ class _$CourseLessonImpl implements _CourseLesson {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$CourseLessonImplToJson(this);
+    return _$$CourseLessonImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _CourseLesson implements CourseLesson {
-  const factory _CourseLesson({
-    required final String id,
-    required final String courseId,
-    required final String title,
-    required final String description,
-    required final int orderIndex,
-    required final LessonType type,
-    required final int duration,
-    final bool isFree,
-    final bool isLocked,
-    final String? videoUrl,
-    final String? audioUrl,
-    final String? documentUrl,
-    final List<String> attachments,
-    final List<String> quizIds,
-    final List<String> exerciseIds,
-    final String? notesContent,
-    final int viewCount,
-    final Duration averageWatchTime,
-    final double completionRate,
-    final DateTime? createdAt,
-    final DateTime? updatedAt,
-  }) = _$CourseLessonImpl;
+  const factory _CourseLesson(
+      {required final String id,
+      required final String courseId,
+      required final String title,
+      required final String description,
+      required final int orderIndex,
+      required final LessonType type,
+      required final int duration,
+      final bool isFree,
+      final bool isLocked,
+      final String? videoUrl,
+      final String? audioUrl,
+      final String? documentUrl,
+      final List<String> attachments,
+      final List<String> quizIds,
+      final List<String> exerciseIds,
+      final String? notesContent,
+      final int viewCount,
+      final Duration averageWatchTime,
+      final double completionRate,
+      final DateTime? createdAt,
+      final DateTime? updatedAt}) = _$CourseLessonImpl;
 
   factory _CourseLesson.fromJson(Map<String, dynamic> json) =
       _$CourseLessonImpl.fromJson;
@@ -2828,27 +2598,25 @@ mixin _$IslamicQuiz {
 /// @nodoc
 abstract class $IslamicQuizCopyWith<$Res> {
   factory $IslamicQuizCopyWith(
-    IslamicQuiz value,
-    $Res Function(IslamicQuiz) then,
-  ) = _$IslamicQuizCopyWithImpl<$Res, IslamicQuiz>;
+          IslamicQuiz value, $Res Function(IslamicQuiz) then) =
+      _$IslamicQuizCopyWithImpl<$Res, IslamicQuiz>;
   @useResult
-  $Res call({
-    String id,
-    String title,
-    String description,
-    QuizType type,
-    List<String> questionIds,
-    int timeLimit,
-    int passingScore,
-    int maxAttempts,
-    bool shuffleQuestions,
-    bool showCorrectAnswers,
-    bool allowReview,
-    int points,
-    List<String> badges,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-  });
+  $Res call(
+      {String id,
+      String title,
+      String description,
+      QuizType type,
+      List<String> questionIds,
+      int timeLimit,
+      int passingScore,
+      int maxAttempts,
+      bool shuffleQuestions,
+      bool showCorrectAnswers,
+      bool allowReview,
+      int points,
+      List<String> badges,
+      DateTime? createdAt,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -2882,86 +2650,68 @@ class _$IslamicQuizCopyWithImpl<$Res, $Val extends IslamicQuiz>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            title:
-                null == title
-                    ? _value.title
-                    : title // ignore: cast_nullable_to_non_nullable
-                        as String,
-            description:
-                null == description
-                    ? _value.description
-                    : description // ignore: cast_nullable_to_non_nullable
-                        as String,
-            type:
-                null == type
-                    ? _value.type
-                    : type // ignore: cast_nullable_to_non_nullable
-                        as QuizType,
-            questionIds:
-                null == questionIds
-                    ? _value.questionIds
-                    : questionIds // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            timeLimit:
-                null == timeLimit
-                    ? _value.timeLimit
-                    : timeLimit // ignore: cast_nullable_to_non_nullable
-                        as int,
-            passingScore:
-                null == passingScore
-                    ? _value.passingScore
-                    : passingScore // ignore: cast_nullable_to_non_nullable
-                        as int,
-            maxAttempts:
-                null == maxAttempts
-                    ? _value.maxAttempts
-                    : maxAttempts // ignore: cast_nullable_to_non_nullable
-                        as int,
-            shuffleQuestions:
-                null == shuffleQuestions
-                    ? _value.shuffleQuestions
-                    : shuffleQuestions // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            showCorrectAnswers:
-                null == showCorrectAnswers
-                    ? _value.showCorrectAnswers
-                    : showCorrectAnswers // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            allowReview:
-                null == allowReview
-                    ? _value.allowReview
-                    : allowReview // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            points:
-                null == points
-                    ? _value.points
-                    : points // ignore: cast_nullable_to_non_nullable
-                        as int,
-            badges:
-                null == badges
-                    ? _value.badges
-                    : badges // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            createdAt:
-                freezed == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            updatedAt:
-                freezed == updatedAt
-                    ? _value.updatedAt
-                    : updatedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as QuizType,
+      questionIds: null == questionIds
+          ? _value.questionIds
+          : questionIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      timeLimit: null == timeLimit
+          ? _value.timeLimit
+          : timeLimit // ignore: cast_nullable_to_non_nullable
+              as int,
+      passingScore: null == passingScore
+          ? _value.passingScore
+          : passingScore // ignore: cast_nullable_to_non_nullable
+              as int,
+      maxAttempts: null == maxAttempts
+          ? _value.maxAttempts
+          : maxAttempts // ignore: cast_nullable_to_non_nullable
+              as int,
+      shuffleQuestions: null == shuffleQuestions
+          ? _value.shuffleQuestions
+          : shuffleQuestions // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showCorrectAnswers: null == showCorrectAnswers
+          ? _value.showCorrectAnswers
+          : showCorrectAnswers // ignore: cast_nullable_to_non_nullable
+              as bool,
+      allowReview: null == allowReview
+          ? _value.allowReview
+          : allowReview // ignore: cast_nullable_to_non_nullable
+              as bool,
+      points: null == points
+          ? _value.points
+          : points // ignore: cast_nullable_to_non_nullable
+              as int,
+      badges: null == badges
+          ? _value.badges
+          : badges // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
   }
 }
 
@@ -2969,28 +2719,26 @@ class _$IslamicQuizCopyWithImpl<$Res, $Val extends IslamicQuiz>
 abstract class _$$IslamicQuizImplCopyWith<$Res>
     implements $IslamicQuizCopyWith<$Res> {
   factory _$$IslamicQuizImplCopyWith(
-    _$IslamicQuizImpl value,
-    $Res Function(_$IslamicQuizImpl) then,
-  ) = __$$IslamicQuizImplCopyWithImpl<$Res>;
+          _$IslamicQuizImpl value, $Res Function(_$IslamicQuizImpl) then) =
+      __$$IslamicQuizImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String title,
-    String description,
-    QuizType type,
-    List<String> questionIds,
-    int timeLimit,
-    int passingScore,
-    int maxAttempts,
-    bool shuffleQuestions,
-    bool showCorrectAnswers,
-    bool allowReview,
-    int points,
-    List<String> badges,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-  });
+  $Res call(
+      {String id,
+      String title,
+      String description,
+      QuizType type,
+      List<String> questionIds,
+      int timeLimit,
+      int passingScore,
+      int maxAttempts,
+      bool shuffleQuestions,
+      bool showCorrectAnswers,
+      bool allowReview,
+      int points,
+      List<String> badges,
+      DateTime? createdAt,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -2998,9 +2746,8 @@ class __$$IslamicQuizImplCopyWithImpl<$Res>
     extends _$IslamicQuizCopyWithImpl<$Res, _$IslamicQuizImpl>
     implements _$$IslamicQuizImplCopyWith<$Res> {
   __$$IslamicQuizImplCopyWithImpl(
-    _$IslamicQuizImpl _value,
-    $Res Function(_$IslamicQuizImpl) _then,
-  ) : super(_value, _then);
+      _$IslamicQuizImpl _value, $Res Function(_$IslamicQuizImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of IslamicQuiz
   /// with the given fields replaced by the non-null parameter values.
@@ -3023,109 +2770,92 @@ class __$$IslamicQuizImplCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(
-      _$IslamicQuizImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        title:
-            null == title
-                ? _value.title
-                : title // ignore: cast_nullable_to_non_nullable
-                    as String,
-        description:
-            null == description
-                ? _value.description
-                : description // ignore: cast_nullable_to_non_nullable
-                    as String,
-        type:
-            null == type
-                ? _value.type
-                : type // ignore: cast_nullable_to_non_nullable
-                    as QuizType,
-        questionIds:
-            null == questionIds
-                ? _value._questionIds
-                : questionIds // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        timeLimit:
-            null == timeLimit
-                ? _value.timeLimit
-                : timeLimit // ignore: cast_nullable_to_non_nullable
-                    as int,
-        passingScore:
-            null == passingScore
-                ? _value.passingScore
-                : passingScore // ignore: cast_nullable_to_non_nullable
-                    as int,
-        maxAttempts:
-            null == maxAttempts
-                ? _value.maxAttempts
-                : maxAttempts // ignore: cast_nullable_to_non_nullable
-                    as int,
-        shuffleQuestions:
-            null == shuffleQuestions
-                ? _value.shuffleQuestions
-                : shuffleQuestions // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        showCorrectAnswers:
-            null == showCorrectAnswers
-                ? _value.showCorrectAnswers
-                : showCorrectAnswers // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        allowReview:
-            null == allowReview
-                ? _value.allowReview
-                : allowReview // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        points:
-            null == points
-                ? _value.points
-                : points // ignore: cast_nullable_to_non_nullable
-                    as int,
-        badges:
-            null == badges
-                ? _value._badges
-                : badges // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        createdAt:
-            freezed == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        updatedAt:
-            freezed == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-      ),
-    );
+    return _then(_$IslamicQuizImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as QuizType,
+      questionIds: null == questionIds
+          ? _value._questionIds
+          : questionIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      timeLimit: null == timeLimit
+          ? _value.timeLimit
+          : timeLimit // ignore: cast_nullable_to_non_nullable
+              as int,
+      passingScore: null == passingScore
+          ? _value.passingScore
+          : passingScore // ignore: cast_nullable_to_non_nullable
+              as int,
+      maxAttempts: null == maxAttempts
+          ? _value.maxAttempts
+          : maxAttempts // ignore: cast_nullable_to_non_nullable
+              as int,
+      shuffleQuestions: null == shuffleQuestions
+          ? _value.shuffleQuestions
+          : shuffleQuestions // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showCorrectAnswers: null == showCorrectAnswers
+          ? _value.showCorrectAnswers
+          : showCorrectAnswers // ignore: cast_nullable_to_non_nullable
+              as bool,
+      allowReview: null == allowReview
+          ? _value.allowReview
+          : allowReview // ignore: cast_nullable_to_non_nullable
+              as bool,
+      points: null == points
+          ? _value.points
+          : points // ignore: cast_nullable_to_non_nullable
+              as int,
+      badges: null == badges
+          ? _value._badges
+          : badges // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$IslamicQuizImpl implements _IslamicQuiz {
-  const _$IslamicQuizImpl({
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.type,
-    required final List<String> questionIds,
-    required this.timeLimit,
-    required this.passingScore,
-    this.maxAttempts = 1,
-    this.shuffleQuestions = false,
-    this.showCorrectAnswers = false,
-    this.allowReview = false,
-    this.points = 0,
-    final List<String> badges = const [],
-    this.createdAt,
-    this.updatedAt,
-  }) : _questionIds = questionIds,
-       _badges = badges;
+  const _$IslamicQuizImpl(
+      {required this.id,
+      required this.title,
+      required this.description,
+      required this.type,
+      required final List<String> questionIds,
+      required this.timeLimit,
+      required this.passingScore,
+      this.maxAttempts = 1,
+      this.shuffleQuestions = false,
+      this.showCorrectAnswers = false,
+      this.allowReview = false,
+      this.points = 0,
+      final List<String> badges = const [],
+      this.createdAt,
+      this.updatedAt})
+      : _questionIds = questionIds,
+        _badges = badges;
 
   factory _$IslamicQuizImpl.fromJson(Map<String, dynamic> json) =>
       _$$IslamicQuizImplFromJson(json);
@@ -3148,10 +2878,10 @@ class _$IslamicQuizImpl implements _IslamicQuiz {
 
   @override
   final int timeLimit;
-  // in minutes, 0 for no limit
+// in minutes, 0 for no limit
   @override
   final int passingScore;
-  // percentage
+// percentage
   @override
   @JsonKey()
   final int maxAttempts;
@@ -3164,7 +2894,7 @@ class _$IslamicQuizImpl implements _IslamicQuiz {
   @override
   @JsonKey()
   final bool allowReview;
-  // Gamification
+// Gamification
   @override
   @JsonKey()
   final int points;
@@ -3197,10 +2927,8 @@ class _$IslamicQuizImpl implements _IslamicQuiz {
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.type, type) || other.type == type) &&
-            const DeepCollectionEquality().equals(
-              other._questionIds,
-              _questionIds,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._questionIds, _questionIds) &&
             (identical(other.timeLimit, timeLimit) ||
                 other.timeLimit == timeLimit) &&
             (identical(other.passingScore, passingScore) ||
@@ -3224,23 +2952,22 @@ class _$IslamicQuizImpl implements _IslamicQuiz {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    title,
-    description,
-    type,
-    const DeepCollectionEquality().hash(_questionIds),
-    timeLimit,
-    passingScore,
-    maxAttempts,
-    shuffleQuestions,
-    showCorrectAnswers,
-    allowReview,
-    points,
-    const DeepCollectionEquality().hash(_badges),
-    createdAt,
-    updatedAt,
-  );
+      runtimeType,
+      id,
+      title,
+      description,
+      type,
+      const DeepCollectionEquality().hash(_questionIds),
+      timeLimit,
+      passingScore,
+      maxAttempts,
+      shuffleQuestions,
+      showCorrectAnswers,
+      allowReview,
+      points,
+      const DeepCollectionEquality().hash(_badges),
+      createdAt,
+      updatedAt);
 
   /// Create a copy of IslamicQuiz
   /// with the given fields replaced by the non-null parameter values.
@@ -3252,28 +2979,29 @@ class _$IslamicQuizImpl implements _IslamicQuiz {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$IslamicQuizImplToJson(this);
+    return _$$IslamicQuizImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _IslamicQuiz implements IslamicQuiz {
-  const factory _IslamicQuiz({
-    required final String id,
-    required final String title,
-    required final String description,
-    required final QuizType type,
-    required final List<String> questionIds,
-    required final int timeLimit,
-    required final int passingScore,
-    final int maxAttempts,
-    final bool shuffleQuestions,
-    final bool showCorrectAnswers,
-    final bool allowReview,
-    final int points,
-    final List<String> badges,
-    final DateTime? createdAt,
-    final DateTime? updatedAt,
-  }) = _$IslamicQuizImpl;
+  const factory _IslamicQuiz(
+      {required final String id,
+      required final String title,
+      required final String description,
+      required final QuizType type,
+      required final List<String> questionIds,
+      required final int timeLimit,
+      required final int passingScore,
+      final int maxAttempts,
+      final bool shuffleQuestions,
+      final bool showCorrectAnswers,
+      final bool allowReview,
+      final int points,
+      final List<String> badges,
+      final DateTime? createdAt,
+      final DateTime? updatedAt}) = _$IslamicQuizImpl;
 
   factory _IslamicQuiz.fromJson(Map<String, dynamic> json) =
       _$IslamicQuizImpl.fromJson;
@@ -3358,31 +3086,29 @@ mixin _$QuizQuestion {
 /// @nodoc
 abstract class $QuizQuestionCopyWith<$Res> {
   factory $QuizQuestionCopyWith(
-    QuizQuestion value,
-    $Res Function(QuizQuestion) then,
-  ) = _$QuizQuestionCopyWithImpl<$Res, QuizQuestion>;
+          QuizQuestion value, $Res Function(QuizQuestion) then) =
+      _$QuizQuestionCopyWithImpl<$Res, QuizQuestion>;
   @useResult
-  $Res call({
-    String id,
-    String quizId,
-    String question,
-    String arabicQuestion,
-    QuestionType type,
-    List<String> options,
-    List<int> correctAnswerIndices,
-    int points,
-    String? explanation,
-    String? arabicExplanation,
-    String? reference,
-    String? imageUrl,
-    String? audioUrl,
-    DifficultyLevel difficulty,
-    List<String> tags,
-    int totalAttempts,
-    int correctAttempts,
-    double successRate,
-    DateTime? createdAt,
-  });
+  $Res call(
+      {String id,
+      String quizId,
+      String question,
+      String arabicQuestion,
+      QuestionType type,
+      List<String> options,
+      List<int> correctAnswerIndices,
+      int points,
+      String? explanation,
+      String? arabicExplanation,
+      String? reference,
+      String? imageUrl,
+      String? audioUrl,
+      DifficultyLevel difficulty,
+      List<String> tags,
+      int totalAttempts,
+      int correctAttempts,
+      double successRate,
+      DateTime? createdAt});
 }
 
 /// @nodoc
@@ -3420,106 +3146,84 @@ class _$QuizQuestionCopyWithImpl<$Res, $Val extends QuizQuestion>
     Object? successRate = null,
     Object? createdAt = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            quizId:
-                null == quizId
-                    ? _value.quizId
-                    : quizId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            question:
-                null == question
-                    ? _value.question
-                    : question // ignore: cast_nullable_to_non_nullable
-                        as String,
-            arabicQuestion:
-                null == arabicQuestion
-                    ? _value.arabicQuestion
-                    : arabicQuestion // ignore: cast_nullable_to_non_nullable
-                        as String,
-            type:
-                null == type
-                    ? _value.type
-                    : type // ignore: cast_nullable_to_non_nullable
-                        as QuestionType,
-            options:
-                null == options
-                    ? _value.options
-                    : options // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            correctAnswerIndices:
-                null == correctAnswerIndices
-                    ? _value.correctAnswerIndices
-                    : correctAnswerIndices // ignore: cast_nullable_to_non_nullable
-                        as List<int>,
-            points:
-                null == points
-                    ? _value.points
-                    : points // ignore: cast_nullable_to_non_nullable
-                        as int,
-            explanation:
-                freezed == explanation
-                    ? _value.explanation
-                    : explanation // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            arabicExplanation:
-                freezed == arabicExplanation
-                    ? _value.arabicExplanation
-                    : arabicExplanation // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            reference:
-                freezed == reference
-                    ? _value.reference
-                    : reference // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            imageUrl:
-                freezed == imageUrl
-                    ? _value.imageUrl
-                    : imageUrl // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            audioUrl:
-                freezed == audioUrl
-                    ? _value.audioUrl
-                    : audioUrl // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            difficulty:
-                null == difficulty
-                    ? _value.difficulty
-                    : difficulty // ignore: cast_nullable_to_non_nullable
-                        as DifficultyLevel,
-            tags:
-                null == tags
-                    ? _value.tags
-                    : tags // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            totalAttempts:
-                null == totalAttempts
-                    ? _value.totalAttempts
-                    : totalAttempts // ignore: cast_nullable_to_non_nullable
-                        as int,
-            correctAttempts:
-                null == correctAttempts
-                    ? _value.correctAttempts
-                    : correctAttempts // ignore: cast_nullable_to_non_nullable
-                        as int,
-            successRate:
-                null == successRate
-                    ? _value.successRate
-                    : successRate // ignore: cast_nullable_to_non_nullable
-                        as double,
-            createdAt:
-                freezed == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      quizId: null == quizId
+          ? _value.quizId
+          : quizId // ignore: cast_nullable_to_non_nullable
+              as String,
+      question: null == question
+          ? _value.question
+          : question // ignore: cast_nullable_to_non_nullable
+              as String,
+      arabicQuestion: null == arabicQuestion
+          ? _value.arabicQuestion
+          : arabicQuestion // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as QuestionType,
+      options: null == options
+          ? _value.options
+          : options // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      correctAnswerIndices: null == correctAnswerIndices
+          ? _value.correctAnswerIndices
+          : correctAnswerIndices // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      points: null == points
+          ? _value.points
+          : points // ignore: cast_nullable_to_non_nullable
+              as int,
+      explanation: freezed == explanation
+          ? _value.explanation
+          : explanation // ignore: cast_nullable_to_non_nullable
+              as String?,
+      arabicExplanation: freezed == arabicExplanation
+          ? _value.arabicExplanation
+          : arabicExplanation // ignore: cast_nullable_to_non_nullable
+              as String?,
+      reference: freezed == reference
+          ? _value.reference
+          : reference // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      audioUrl: freezed == audioUrl
+          ? _value.audioUrl
+          : audioUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      difficulty: null == difficulty
+          ? _value.difficulty
+          : difficulty // ignore: cast_nullable_to_non_nullable
+              as DifficultyLevel,
+      tags: null == tags
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      totalAttempts: null == totalAttempts
+          ? _value.totalAttempts
+          : totalAttempts // ignore: cast_nullable_to_non_nullable
+              as int,
+      correctAttempts: null == correctAttempts
+          ? _value.correctAttempts
+          : correctAttempts // ignore: cast_nullable_to_non_nullable
+              as int,
+      successRate: null == successRate
+          ? _value.successRate
+          : successRate // ignore: cast_nullable_to_non_nullable
+              as double,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
   }
 }
 
@@ -3527,32 +3231,30 @@ class _$QuizQuestionCopyWithImpl<$Res, $Val extends QuizQuestion>
 abstract class _$$QuizQuestionImplCopyWith<$Res>
     implements $QuizQuestionCopyWith<$Res> {
   factory _$$QuizQuestionImplCopyWith(
-    _$QuizQuestionImpl value,
-    $Res Function(_$QuizQuestionImpl) then,
-  ) = __$$QuizQuestionImplCopyWithImpl<$Res>;
+          _$QuizQuestionImpl value, $Res Function(_$QuizQuestionImpl) then) =
+      __$$QuizQuestionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String quizId,
-    String question,
-    String arabicQuestion,
-    QuestionType type,
-    List<String> options,
-    List<int> correctAnswerIndices,
-    int points,
-    String? explanation,
-    String? arabicExplanation,
-    String? reference,
-    String? imageUrl,
-    String? audioUrl,
-    DifficultyLevel difficulty,
-    List<String> tags,
-    int totalAttempts,
-    int correctAttempts,
-    double successRate,
-    DateTime? createdAt,
-  });
+  $Res call(
+      {String id,
+      String quizId,
+      String question,
+      String arabicQuestion,
+      QuestionType type,
+      List<String> options,
+      List<int> correctAnswerIndices,
+      int points,
+      String? explanation,
+      String? arabicExplanation,
+      String? reference,
+      String? imageUrl,
+      String? audioUrl,
+      DifficultyLevel difficulty,
+      List<String> tags,
+      int totalAttempts,
+      int correctAttempts,
+      double successRate,
+      DateTime? createdAt});
 }
 
 /// @nodoc
@@ -3560,9 +3262,8 @@ class __$$QuizQuestionImplCopyWithImpl<$Res>
     extends _$QuizQuestionCopyWithImpl<$Res, _$QuizQuestionImpl>
     implements _$$QuizQuestionImplCopyWith<$Res> {
   __$$QuizQuestionImplCopyWithImpl(
-    _$QuizQuestionImpl _value,
-    $Res Function(_$QuizQuestionImpl) _then,
-  ) : super(_value, _then);
+      _$QuizQuestionImpl _value, $Res Function(_$QuizQuestionImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of QuizQuestion
   /// with the given fields replaced by the non-null parameter values.
@@ -3589,134 +3290,113 @@ class __$$QuizQuestionImplCopyWithImpl<$Res>
     Object? successRate = null,
     Object? createdAt = freezed,
   }) {
-    return _then(
-      _$QuizQuestionImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        quizId:
-            null == quizId
-                ? _value.quizId
-                : quizId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        question:
-            null == question
-                ? _value.question
-                : question // ignore: cast_nullable_to_non_nullable
-                    as String,
-        arabicQuestion:
-            null == arabicQuestion
-                ? _value.arabicQuestion
-                : arabicQuestion // ignore: cast_nullable_to_non_nullable
-                    as String,
-        type:
-            null == type
-                ? _value.type
-                : type // ignore: cast_nullable_to_non_nullable
-                    as QuestionType,
-        options:
-            null == options
-                ? _value._options
-                : options // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        correctAnswerIndices:
-            null == correctAnswerIndices
-                ? _value._correctAnswerIndices
-                : correctAnswerIndices // ignore: cast_nullable_to_non_nullable
-                    as List<int>,
-        points:
-            null == points
-                ? _value.points
-                : points // ignore: cast_nullable_to_non_nullable
-                    as int,
-        explanation:
-            freezed == explanation
-                ? _value.explanation
-                : explanation // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        arabicExplanation:
-            freezed == arabicExplanation
-                ? _value.arabicExplanation
-                : arabicExplanation // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        reference:
-            freezed == reference
-                ? _value.reference
-                : reference // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        imageUrl:
-            freezed == imageUrl
-                ? _value.imageUrl
-                : imageUrl // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        audioUrl:
-            freezed == audioUrl
-                ? _value.audioUrl
-                : audioUrl // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        difficulty:
-            null == difficulty
-                ? _value.difficulty
-                : difficulty // ignore: cast_nullable_to_non_nullable
-                    as DifficultyLevel,
-        tags:
-            null == tags
-                ? _value._tags
-                : tags // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        totalAttempts:
-            null == totalAttempts
-                ? _value.totalAttempts
-                : totalAttempts // ignore: cast_nullable_to_non_nullable
-                    as int,
-        correctAttempts:
-            null == correctAttempts
-                ? _value.correctAttempts
-                : correctAttempts // ignore: cast_nullable_to_non_nullable
-                    as int,
-        successRate:
-            null == successRate
-                ? _value.successRate
-                : successRate // ignore: cast_nullable_to_non_nullable
-                    as double,
-        createdAt:
-            freezed == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-      ),
-    );
+    return _then(_$QuizQuestionImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      quizId: null == quizId
+          ? _value.quizId
+          : quizId // ignore: cast_nullable_to_non_nullable
+              as String,
+      question: null == question
+          ? _value.question
+          : question // ignore: cast_nullable_to_non_nullable
+              as String,
+      arabicQuestion: null == arabicQuestion
+          ? _value.arabicQuestion
+          : arabicQuestion // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as QuestionType,
+      options: null == options
+          ? _value._options
+          : options // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      correctAnswerIndices: null == correctAnswerIndices
+          ? _value._correctAnswerIndices
+          : correctAnswerIndices // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      points: null == points
+          ? _value.points
+          : points // ignore: cast_nullable_to_non_nullable
+              as int,
+      explanation: freezed == explanation
+          ? _value.explanation
+          : explanation // ignore: cast_nullable_to_non_nullable
+              as String?,
+      arabicExplanation: freezed == arabicExplanation
+          ? _value.arabicExplanation
+          : arabicExplanation // ignore: cast_nullable_to_non_nullable
+              as String?,
+      reference: freezed == reference
+          ? _value.reference
+          : reference // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      audioUrl: freezed == audioUrl
+          ? _value.audioUrl
+          : audioUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      difficulty: null == difficulty
+          ? _value.difficulty
+          : difficulty // ignore: cast_nullable_to_non_nullable
+              as DifficultyLevel,
+      tags: null == tags
+          ? _value._tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      totalAttempts: null == totalAttempts
+          ? _value.totalAttempts
+          : totalAttempts // ignore: cast_nullable_to_non_nullable
+              as int,
+      correctAttempts: null == correctAttempts
+          ? _value.correctAttempts
+          : correctAttempts // ignore: cast_nullable_to_non_nullable
+              as int,
+      successRate: null == successRate
+          ? _value.successRate
+          : successRate // ignore: cast_nullable_to_non_nullable
+              as double,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$QuizQuestionImpl implements _QuizQuestion {
-  const _$QuizQuestionImpl({
-    required this.id,
-    required this.quizId,
-    required this.question,
-    required this.arabicQuestion,
-    required this.type,
-    required final List<String> options,
-    required final List<int> correctAnswerIndices,
-    required this.points,
-    this.explanation,
-    this.arabicExplanation,
-    this.reference,
-    this.imageUrl,
-    this.audioUrl,
-    this.difficulty = DifficultyLevel.medium,
-    final List<String> tags = const [],
-    this.totalAttempts = 0,
-    this.correctAttempts = 0,
-    this.successRate = 0.0,
-    this.createdAt,
-  }) : _options = options,
-       _correctAnswerIndices = correctAnswerIndices,
-       _tags = tags;
+  const _$QuizQuestionImpl(
+      {required this.id,
+      required this.quizId,
+      required this.question,
+      required this.arabicQuestion,
+      required this.type,
+      required final List<String> options,
+      required final List<int> correctAnswerIndices,
+      required this.points,
+      this.explanation,
+      this.arabicExplanation,
+      this.reference,
+      this.imageUrl,
+      this.audioUrl,
+      this.difficulty = DifficultyLevel.medium,
+      final List<String> tags = const [],
+      this.totalAttempts = 0,
+      this.correctAttempts = 0,
+      this.successRate = 0.0,
+      this.createdAt})
+      : _options = options,
+        _correctAnswerIndices = correctAnswerIndices,
+        _tags = tags;
 
   factory _$QuizQuestionImpl.fromJson(Map<String, dynamic> json) =>
       _$$QuizQuestionImplFromJson(json);
@@ -3748,7 +3428,7 @@ class _$QuizQuestionImpl implements _QuizQuestion {
     return EqualUnmodifiableListView(_correctAnswerIndices);
   }
 
-  // indices of correct options
+// indices of correct options
   @override
   final int points;
   @override
@@ -3757,7 +3437,7 @@ class _$QuizQuestionImpl implements _QuizQuestion {
   final String? arabicExplanation;
   @override
   final String? reference;
-  // Quran/Hadith reference
+// Quran/Hadith reference
   @override
   final String? imageUrl;
   @override
@@ -3774,7 +3454,7 @@ class _$QuizQuestionImpl implements _QuizQuestion {
     return EqualUnmodifiableListView(_tags);
   }
 
-  // Analytics
+// Analytics
   @override
   @JsonKey()
   final int totalAttempts;
@@ -3805,10 +3485,8 @@ class _$QuizQuestionImpl implements _QuizQuestion {
                 other.arabicQuestion == arabicQuestion) &&
             (identical(other.type, type) || other.type == type) &&
             const DeepCollectionEquality().equals(other._options, _options) &&
-            const DeepCollectionEquality().equals(
-              other._correctAnswerIndices,
-              _correctAnswerIndices,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._correctAnswerIndices, _correctAnswerIndices) &&
             (identical(other.points, points) || other.points == points) &&
             (identical(other.explanation, explanation) ||
                 other.explanation == explanation) &&
@@ -3836,27 +3514,27 @@ class _$QuizQuestionImpl implements _QuizQuestion {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
-    runtimeType,
-    id,
-    quizId,
-    question,
-    arabicQuestion,
-    type,
-    const DeepCollectionEquality().hash(_options),
-    const DeepCollectionEquality().hash(_correctAnswerIndices),
-    points,
-    explanation,
-    arabicExplanation,
-    reference,
-    imageUrl,
-    audioUrl,
-    difficulty,
-    const DeepCollectionEquality().hash(_tags),
-    totalAttempts,
-    correctAttempts,
-    successRate,
-    createdAt,
-  ]);
+        runtimeType,
+        id,
+        quizId,
+        question,
+        arabicQuestion,
+        type,
+        const DeepCollectionEquality().hash(_options),
+        const DeepCollectionEquality().hash(_correctAnswerIndices),
+        points,
+        explanation,
+        arabicExplanation,
+        reference,
+        imageUrl,
+        audioUrl,
+        difficulty,
+        const DeepCollectionEquality().hash(_tags),
+        totalAttempts,
+        correctAttempts,
+        successRate,
+        createdAt
+      ]);
 
   /// Create a copy of QuizQuestion
   /// with the given fields replaced by the non-null parameter values.
@@ -3868,32 +3546,33 @@ class _$QuizQuestionImpl implements _QuizQuestion {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$QuizQuestionImplToJson(this);
+    return _$$QuizQuestionImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _QuizQuestion implements QuizQuestion {
-  const factory _QuizQuestion({
-    required final String id,
-    required final String quizId,
-    required final String question,
-    required final String arabicQuestion,
-    required final QuestionType type,
-    required final List<String> options,
-    required final List<int> correctAnswerIndices,
-    required final int points,
-    final String? explanation,
-    final String? arabicExplanation,
-    final String? reference,
-    final String? imageUrl,
-    final String? audioUrl,
-    final DifficultyLevel difficulty,
-    final List<String> tags,
-    final int totalAttempts,
-    final int correctAttempts,
-    final double successRate,
-    final DateTime? createdAt,
-  }) = _$QuizQuestionImpl;
+  const factory _QuizQuestion(
+      {required final String id,
+      required final String quizId,
+      required final String question,
+      required final String arabicQuestion,
+      required final QuestionType type,
+      required final List<String> options,
+      required final List<int> correctAnswerIndices,
+      required final int points,
+      final String? explanation,
+      final String? arabicExplanation,
+      final String? reference,
+      final String? imageUrl,
+      final String? audioUrl,
+      final DifficultyLevel difficulty,
+      final List<String> tags,
+      final int totalAttempts,
+      final int correctAttempts,
+      final double successRate,
+      final DateTime? createdAt}) = _$QuizQuestionImpl;
 
   factory _QuizQuestion.fromJson(Map<String, dynamic> json) =
       _$QuizQuestionImpl.fromJson;
@@ -3990,35 +3669,33 @@ mixin _$LiveQASession {
 /// @nodoc
 abstract class $LiveQASessionCopyWith<$Res> {
   factory $LiveQASessionCopyWith(
-    LiveQASession value,
-    $Res Function(LiveQASession) then,
-  ) = _$LiveQASessionCopyWithImpl<$Res, LiveQASession>;
+          LiveQASession value, $Res Function(LiveQASession) then) =
+      _$LiveQASessionCopyWithImpl<$Res, LiveQASession>;
   @useResult
-  $Res call({
-    String id,
-    String title,
-    String description,
-    String scholarId,
-    DateTime scheduledStart,
-    Duration duration,
-    SessionStatus status,
-    int maxParticipants,
-    int currentParticipants,
-    List<String> topics,
-    List<String> languages,
-    String? streamUrl,
-    String? chatRoomId,
-    String? recordingUrl,
-    bool requiresRegistration,
-    bool isPremiumOnly,
-    double price,
-    bool moderationEnabled,
-    List<String> moderatorIds,
-    bool allowAnonymousQuestions,
-    DateTime? actualStart,
-    DateTime? actualEnd,
-    DateTime? createdAt,
-  });
+  $Res call(
+      {String id,
+      String title,
+      String description,
+      String scholarId,
+      DateTime scheduledStart,
+      Duration duration,
+      SessionStatus status,
+      int maxParticipants,
+      int currentParticipants,
+      List<String> topics,
+      List<String> languages,
+      String? streamUrl,
+      String? chatRoomId,
+      String? recordingUrl,
+      bool requiresRegistration,
+      bool isPremiumOnly,
+      double price,
+      bool moderationEnabled,
+      List<String> moderatorIds,
+      bool allowAnonymousQuestions,
+      DateTime? actualStart,
+      DateTime? actualEnd,
+      DateTime? createdAt});
 }
 
 /// @nodoc
@@ -4060,126 +3737,100 @@ class _$LiveQASessionCopyWithImpl<$Res, $Val extends LiveQASession>
     Object? actualEnd = freezed,
     Object? createdAt = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            title:
-                null == title
-                    ? _value.title
-                    : title // ignore: cast_nullable_to_non_nullable
-                        as String,
-            description:
-                null == description
-                    ? _value.description
-                    : description // ignore: cast_nullable_to_non_nullable
-                        as String,
-            scholarId:
-                null == scholarId
-                    ? _value.scholarId
-                    : scholarId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            scheduledStart:
-                null == scheduledStart
-                    ? _value.scheduledStart
-                    : scheduledStart // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            duration:
-                null == duration
-                    ? _value.duration
-                    : duration // ignore: cast_nullable_to_non_nullable
-                        as Duration,
-            status:
-                null == status
-                    ? _value.status
-                    : status // ignore: cast_nullable_to_non_nullable
-                        as SessionStatus,
-            maxParticipants:
-                null == maxParticipants
-                    ? _value.maxParticipants
-                    : maxParticipants // ignore: cast_nullable_to_non_nullable
-                        as int,
-            currentParticipants:
-                null == currentParticipants
-                    ? _value.currentParticipants
-                    : currentParticipants // ignore: cast_nullable_to_non_nullable
-                        as int,
-            topics:
-                null == topics
-                    ? _value.topics
-                    : topics // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            languages:
-                null == languages
-                    ? _value.languages
-                    : languages // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            streamUrl:
-                freezed == streamUrl
-                    ? _value.streamUrl
-                    : streamUrl // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            chatRoomId:
-                freezed == chatRoomId
-                    ? _value.chatRoomId
-                    : chatRoomId // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            recordingUrl:
-                freezed == recordingUrl
-                    ? _value.recordingUrl
-                    : recordingUrl // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            requiresRegistration:
-                null == requiresRegistration
-                    ? _value.requiresRegistration
-                    : requiresRegistration // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            isPremiumOnly:
-                null == isPremiumOnly
-                    ? _value.isPremiumOnly
-                    : isPremiumOnly // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            price:
-                null == price
-                    ? _value.price
-                    : price // ignore: cast_nullable_to_non_nullable
-                        as double,
-            moderationEnabled:
-                null == moderationEnabled
-                    ? _value.moderationEnabled
-                    : moderationEnabled // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            moderatorIds:
-                null == moderatorIds
-                    ? _value.moderatorIds
-                    : moderatorIds // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            allowAnonymousQuestions:
-                null == allowAnonymousQuestions
-                    ? _value.allowAnonymousQuestions
-                    : allowAnonymousQuestions // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            actualStart:
-                freezed == actualStart
-                    ? _value.actualStart
-                    : actualStart // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            actualEnd:
-                freezed == actualEnd
-                    ? _value.actualEnd
-                    : actualEnd // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            createdAt:
-                freezed == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      scholarId: null == scholarId
+          ? _value.scholarId
+          : scholarId // ignore: cast_nullable_to_non_nullable
+              as String,
+      scheduledStart: null == scheduledStart
+          ? _value.scheduledStart
+          : scheduledStart // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as SessionStatus,
+      maxParticipants: null == maxParticipants
+          ? _value.maxParticipants
+          : maxParticipants // ignore: cast_nullable_to_non_nullable
+              as int,
+      currentParticipants: null == currentParticipants
+          ? _value.currentParticipants
+          : currentParticipants // ignore: cast_nullable_to_non_nullable
+              as int,
+      topics: null == topics
+          ? _value.topics
+          : topics // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      languages: null == languages
+          ? _value.languages
+          : languages // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      streamUrl: freezed == streamUrl
+          ? _value.streamUrl
+          : streamUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      chatRoomId: freezed == chatRoomId
+          ? _value.chatRoomId
+          : chatRoomId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      recordingUrl: freezed == recordingUrl
+          ? _value.recordingUrl
+          : recordingUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      requiresRegistration: null == requiresRegistration
+          ? _value.requiresRegistration
+          : requiresRegistration // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isPremiumOnly: null == isPremiumOnly
+          ? _value.isPremiumOnly
+          : isPremiumOnly // ignore: cast_nullable_to_non_nullable
+              as bool,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as double,
+      moderationEnabled: null == moderationEnabled
+          ? _value.moderationEnabled
+          : moderationEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      moderatorIds: null == moderatorIds
+          ? _value.moderatorIds
+          : moderatorIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      allowAnonymousQuestions: null == allowAnonymousQuestions
+          ? _value.allowAnonymousQuestions
+          : allowAnonymousQuestions // ignore: cast_nullable_to_non_nullable
+              as bool,
+      actualStart: freezed == actualStart
+          ? _value.actualStart
+          : actualStart // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      actualEnd: freezed == actualEnd
+          ? _value.actualEnd
+          : actualEnd // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
   }
 }
 
@@ -4187,36 +3838,34 @@ class _$LiveQASessionCopyWithImpl<$Res, $Val extends LiveQASession>
 abstract class _$$LiveQASessionImplCopyWith<$Res>
     implements $LiveQASessionCopyWith<$Res> {
   factory _$$LiveQASessionImplCopyWith(
-    _$LiveQASessionImpl value,
-    $Res Function(_$LiveQASessionImpl) then,
-  ) = __$$LiveQASessionImplCopyWithImpl<$Res>;
+          _$LiveQASessionImpl value, $Res Function(_$LiveQASessionImpl) then) =
+      __$$LiveQASessionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String title,
-    String description,
-    String scholarId,
-    DateTime scheduledStart,
-    Duration duration,
-    SessionStatus status,
-    int maxParticipants,
-    int currentParticipants,
-    List<String> topics,
-    List<String> languages,
-    String? streamUrl,
-    String? chatRoomId,
-    String? recordingUrl,
-    bool requiresRegistration,
-    bool isPremiumOnly,
-    double price,
-    bool moderationEnabled,
-    List<String> moderatorIds,
-    bool allowAnonymousQuestions,
-    DateTime? actualStart,
-    DateTime? actualEnd,
-    DateTime? createdAt,
-  });
+  $Res call(
+      {String id,
+      String title,
+      String description,
+      String scholarId,
+      DateTime scheduledStart,
+      Duration duration,
+      SessionStatus status,
+      int maxParticipants,
+      int currentParticipants,
+      List<String> topics,
+      List<String> languages,
+      String? streamUrl,
+      String? chatRoomId,
+      String? recordingUrl,
+      bool requiresRegistration,
+      bool isPremiumOnly,
+      double price,
+      bool moderationEnabled,
+      List<String> moderatorIds,
+      bool allowAnonymousQuestions,
+      DateTime? actualStart,
+      DateTime? actualEnd,
+      DateTime? createdAt});
 }
 
 /// @nodoc
@@ -4224,9 +3873,8 @@ class __$$LiveQASessionImplCopyWithImpl<$Res>
     extends _$LiveQASessionCopyWithImpl<$Res, _$LiveQASessionImpl>
     implements _$$LiveQASessionImplCopyWith<$Res> {
   __$$LiveQASessionImplCopyWithImpl(
-    _$LiveQASessionImpl _value,
-    $Res Function(_$LiveQASessionImpl) _then,
-  ) : super(_value, _then);
+      _$LiveQASessionImpl _value, $Res Function(_$LiveQASessionImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of LiveQASession
   /// with the given fields replaced by the non-null parameter values.
@@ -4257,158 +3905,133 @@ class __$$LiveQASessionImplCopyWithImpl<$Res>
     Object? actualEnd = freezed,
     Object? createdAt = freezed,
   }) {
-    return _then(
-      _$LiveQASessionImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        title:
-            null == title
-                ? _value.title
-                : title // ignore: cast_nullable_to_non_nullable
-                    as String,
-        description:
-            null == description
-                ? _value.description
-                : description // ignore: cast_nullable_to_non_nullable
-                    as String,
-        scholarId:
-            null == scholarId
-                ? _value.scholarId
-                : scholarId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        scheduledStart:
-            null == scheduledStart
-                ? _value.scheduledStart
-                : scheduledStart // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        duration:
-            null == duration
-                ? _value.duration
-                : duration // ignore: cast_nullable_to_non_nullable
-                    as Duration,
-        status:
-            null == status
-                ? _value.status
-                : status // ignore: cast_nullable_to_non_nullable
-                    as SessionStatus,
-        maxParticipants:
-            null == maxParticipants
-                ? _value.maxParticipants
-                : maxParticipants // ignore: cast_nullable_to_non_nullable
-                    as int,
-        currentParticipants:
-            null == currentParticipants
-                ? _value.currentParticipants
-                : currentParticipants // ignore: cast_nullable_to_non_nullable
-                    as int,
-        topics:
-            null == topics
-                ? _value._topics
-                : topics // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        languages:
-            null == languages
-                ? _value._languages
-                : languages // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        streamUrl:
-            freezed == streamUrl
-                ? _value.streamUrl
-                : streamUrl // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        chatRoomId:
-            freezed == chatRoomId
-                ? _value.chatRoomId
-                : chatRoomId // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        recordingUrl:
-            freezed == recordingUrl
-                ? _value.recordingUrl
-                : recordingUrl // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        requiresRegistration:
-            null == requiresRegistration
-                ? _value.requiresRegistration
-                : requiresRegistration // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        isPremiumOnly:
-            null == isPremiumOnly
-                ? _value.isPremiumOnly
-                : isPremiumOnly // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        price:
-            null == price
-                ? _value.price
-                : price // ignore: cast_nullable_to_non_nullable
-                    as double,
-        moderationEnabled:
-            null == moderationEnabled
-                ? _value.moderationEnabled
-                : moderationEnabled // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        moderatorIds:
-            null == moderatorIds
-                ? _value._moderatorIds
-                : moderatorIds // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        allowAnonymousQuestions:
-            null == allowAnonymousQuestions
-                ? _value.allowAnonymousQuestions
-                : allowAnonymousQuestions // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        actualStart:
-            freezed == actualStart
-                ? _value.actualStart
-                : actualStart // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        actualEnd:
-            freezed == actualEnd
-                ? _value.actualEnd
-                : actualEnd // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        createdAt:
-            freezed == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-      ),
-    );
+    return _then(_$LiveQASessionImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      scholarId: null == scholarId
+          ? _value.scholarId
+          : scholarId // ignore: cast_nullable_to_non_nullable
+              as String,
+      scheduledStart: null == scheduledStart
+          ? _value.scheduledStart
+          : scheduledStart // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as SessionStatus,
+      maxParticipants: null == maxParticipants
+          ? _value.maxParticipants
+          : maxParticipants // ignore: cast_nullable_to_non_nullable
+              as int,
+      currentParticipants: null == currentParticipants
+          ? _value.currentParticipants
+          : currentParticipants // ignore: cast_nullable_to_non_nullable
+              as int,
+      topics: null == topics
+          ? _value._topics
+          : topics // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      languages: null == languages
+          ? _value._languages
+          : languages // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      streamUrl: freezed == streamUrl
+          ? _value.streamUrl
+          : streamUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      chatRoomId: freezed == chatRoomId
+          ? _value.chatRoomId
+          : chatRoomId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      recordingUrl: freezed == recordingUrl
+          ? _value.recordingUrl
+          : recordingUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      requiresRegistration: null == requiresRegistration
+          ? _value.requiresRegistration
+          : requiresRegistration // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isPremiumOnly: null == isPremiumOnly
+          ? _value.isPremiumOnly
+          : isPremiumOnly // ignore: cast_nullable_to_non_nullable
+              as bool,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as double,
+      moderationEnabled: null == moderationEnabled
+          ? _value.moderationEnabled
+          : moderationEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      moderatorIds: null == moderatorIds
+          ? _value._moderatorIds
+          : moderatorIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      allowAnonymousQuestions: null == allowAnonymousQuestions
+          ? _value.allowAnonymousQuestions
+          : allowAnonymousQuestions // ignore: cast_nullable_to_non_nullable
+              as bool,
+      actualStart: freezed == actualStart
+          ? _value.actualStart
+          : actualStart // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      actualEnd: freezed == actualEnd
+          ? _value.actualEnd
+          : actualEnd // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$LiveQASessionImpl implements _LiveQASession {
-  const _$LiveQASessionImpl({
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.scholarId,
-    required this.scheduledStart,
-    required this.duration,
-    required this.status,
-    this.maxParticipants = 100,
-    this.currentParticipants = 0,
-    final List<String> topics = const [],
-    final List<String> languages = const [],
-    this.streamUrl,
-    this.chatRoomId,
-    this.recordingUrl,
-    this.requiresRegistration = false,
-    this.isPremiumOnly = false,
-    this.price = 0.0,
-    this.moderationEnabled = true,
-    final List<String> moderatorIds = const [],
-    this.allowAnonymousQuestions = true,
-    this.actualStart,
-    this.actualEnd,
-    this.createdAt,
-  }) : _topics = topics,
-       _languages = languages,
-       _moderatorIds = moderatorIds;
+  const _$LiveQASessionImpl(
+      {required this.id,
+      required this.title,
+      required this.description,
+      required this.scholarId,
+      required this.scheduledStart,
+      required this.duration,
+      required this.status,
+      this.maxParticipants = 100,
+      this.currentParticipants = 0,
+      final List<String> topics = const [],
+      final List<String> languages = const [],
+      this.streamUrl,
+      this.chatRoomId,
+      this.recordingUrl,
+      this.requiresRegistration = false,
+      this.isPremiumOnly = false,
+      this.price = 0.0,
+      this.moderationEnabled = true,
+      final List<String> moderatorIds = const [],
+      this.allowAnonymousQuestions = true,
+      this.actualStart,
+      this.actualEnd,
+      this.createdAt})
+      : _topics = topics,
+        _languages = languages,
+        _moderatorIds = moderatorIds;
 
   factory _$LiveQASessionImpl.fromJson(Map<String, dynamic> json) =>
       _$$LiveQASessionImplFromJson(json);
@@ -4451,14 +4074,14 @@ class _$LiveQASessionImpl implements _LiveQASession {
     return EqualUnmodifiableListView(_languages);
   }
 
-  // Session URLs (encrypted)
+// Session URLs (encrypted)
   @override
   final String? streamUrl;
   @override
   final String? chatRoomId;
   @override
   final String? recordingUrl;
-  // Registration & Access
+// Registration & Access
   @override
   @JsonKey()
   final bool requiresRegistration;
@@ -4468,7 +4091,7 @@ class _$LiveQASessionImpl implements _LiveQASession {
   @override
   @JsonKey()
   final double price;
-  // Moderation
+// Moderation
   @override
   @JsonKey()
   final bool moderationEnabled;
@@ -4517,10 +4140,8 @@ class _$LiveQASessionImpl implements _LiveQASession {
             (identical(other.currentParticipants, currentParticipants) ||
                 other.currentParticipants == currentParticipants) &&
             const DeepCollectionEquality().equals(other._topics, _topics) &&
-            const DeepCollectionEquality().equals(
-              other._languages,
-              _languages,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._languages, _languages) &&
             (identical(other.streamUrl, streamUrl) ||
                 other.streamUrl == streamUrl) &&
             (identical(other.chatRoomId, chatRoomId) ||
@@ -4534,14 +4155,10 @@ class _$LiveQASessionImpl implements _LiveQASession {
             (identical(other.price, price) || other.price == price) &&
             (identical(other.moderationEnabled, moderationEnabled) ||
                 other.moderationEnabled == moderationEnabled) &&
-            const DeepCollectionEquality().equals(
-              other._moderatorIds,
-              _moderatorIds,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._moderatorIds, _moderatorIds) &&
             (identical(
-                  other.allowAnonymousQuestions,
-                  allowAnonymousQuestions,
-                ) ||
+                    other.allowAnonymousQuestions, allowAnonymousQuestions) ||
                 other.allowAnonymousQuestions == allowAnonymousQuestions) &&
             (identical(other.actualStart, actualStart) ||
                 other.actualStart == actualStart) &&
@@ -4554,31 +4171,31 @@ class _$LiveQASessionImpl implements _LiveQASession {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
-    runtimeType,
-    id,
-    title,
-    description,
-    scholarId,
-    scheduledStart,
-    duration,
-    status,
-    maxParticipants,
-    currentParticipants,
-    const DeepCollectionEquality().hash(_topics),
-    const DeepCollectionEquality().hash(_languages),
-    streamUrl,
-    chatRoomId,
-    recordingUrl,
-    requiresRegistration,
-    isPremiumOnly,
-    price,
-    moderationEnabled,
-    const DeepCollectionEquality().hash(_moderatorIds),
-    allowAnonymousQuestions,
-    actualStart,
-    actualEnd,
-    createdAt,
-  ]);
+        runtimeType,
+        id,
+        title,
+        description,
+        scholarId,
+        scheduledStart,
+        duration,
+        status,
+        maxParticipants,
+        currentParticipants,
+        const DeepCollectionEquality().hash(_topics),
+        const DeepCollectionEquality().hash(_languages),
+        streamUrl,
+        chatRoomId,
+        recordingUrl,
+        requiresRegistration,
+        isPremiumOnly,
+        price,
+        moderationEnabled,
+        const DeepCollectionEquality().hash(_moderatorIds),
+        allowAnonymousQuestions,
+        actualStart,
+        actualEnd,
+        createdAt
+      ]);
 
   /// Create a copy of LiveQASession
   /// with the given fields replaced by the non-null parameter values.
@@ -4590,36 +4207,37 @@ class _$LiveQASessionImpl implements _LiveQASession {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LiveQASessionImplToJson(this);
+    return _$$LiveQASessionImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _LiveQASession implements LiveQASession {
-  const factory _LiveQASession({
-    required final String id,
-    required final String title,
-    required final String description,
-    required final String scholarId,
-    required final DateTime scheduledStart,
-    required final Duration duration,
-    required final SessionStatus status,
-    final int maxParticipants,
-    final int currentParticipants,
-    final List<String> topics,
-    final List<String> languages,
-    final String? streamUrl,
-    final String? chatRoomId,
-    final String? recordingUrl,
-    final bool requiresRegistration,
-    final bool isPremiumOnly,
-    final double price,
-    final bool moderationEnabled,
-    final List<String> moderatorIds,
-    final bool allowAnonymousQuestions,
-    final DateTime? actualStart,
-    final DateTime? actualEnd,
-    final DateTime? createdAt,
-  }) = _$LiveQASessionImpl;
+  const factory _LiveQASession(
+      {required final String id,
+      required final String title,
+      required final String description,
+      required final String scholarId,
+      required final DateTime scheduledStart,
+      required final Duration duration,
+      required final SessionStatus status,
+      final int maxParticipants,
+      final int currentParticipants,
+      final List<String> topics,
+      final List<String> languages,
+      final String? streamUrl,
+      final String? chatRoomId,
+      final String? recordingUrl,
+      final bool requiresRegistration,
+      final bool isPremiumOnly,
+      final double price,
+      final bool moderationEnabled,
+      final List<String> moderatorIds,
+      final bool allowAnonymousQuestions,
+      final DateTime? actualStart,
+      final DateTime? actualEnd,
+      final DateTime? createdAt}) = _$LiveQASessionImpl;
 
   factory _LiveQASession.fromJson(Map<String, dynamic> json) =
       _$LiveQASessionImpl.fromJson;
@@ -4680,8 +4298,7 @@ abstract class _LiveQASession implements LiveQASession {
 }
 
 PersonalizedCurriculum _$PersonalizedCurriculumFromJson(
-  Map<String, dynamic> json,
-) {
+    Map<String, dynamic> json) {
   return _PersonalizedCurriculum.fromJson(json);
 }
 
@@ -4723,41 +4340,37 @@ mixin _$PersonalizedCurriculum {
 
 /// @nodoc
 abstract class $PersonalizedCurriculumCopyWith<$Res> {
-  factory $PersonalizedCurriculumCopyWith(
-    PersonalizedCurriculum value,
-    $Res Function(PersonalizedCurriculum) then,
-  ) = _$PersonalizedCurriculumCopyWithImpl<$Res, PersonalizedCurriculum>;
+  factory $PersonalizedCurriculumCopyWith(PersonalizedCurriculum value,
+          $Res Function(PersonalizedCurriculum) then) =
+      _$PersonalizedCurriculumCopyWithImpl<$Res, PersonalizedCurriculum>;
   @useResult
-  $Res call({
-    String id,
-    String userId,
-    String title,
-    List<String> interests,
-    LearningLevel currentLevel,
-    LearningLevel targetLevel,
-    List<String> pathIds,
-    List<String> courseIds,
-    Duration dailyGoal,
-    List<StudyGoal> goals,
-    CurriculumStatus status,
-    double overallProgress,
-    int completedCourses,
-    int totalStudyTime,
-    int streakDays,
-    DateTime? lastStudyDate,
-    List<String> recommendedCourses,
-    List<String> recommendedScholars,
-    DateTime? lastRecommendationUpdate,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-  });
+  $Res call(
+      {String id,
+      String userId,
+      String title,
+      List<String> interests,
+      LearningLevel currentLevel,
+      LearningLevel targetLevel,
+      List<String> pathIds,
+      List<String> courseIds,
+      Duration dailyGoal,
+      List<StudyGoal> goals,
+      CurriculumStatus status,
+      double overallProgress,
+      int completedCourses,
+      int totalStudyTime,
+      int streakDays,
+      DateTime? lastStudyDate,
+      List<String> recommendedCourses,
+      List<String> recommendedScholars,
+      DateTime? lastRecommendationUpdate,
+      DateTime? createdAt,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
-class _$PersonalizedCurriculumCopyWithImpl<
-  $Res,
-  $Val extends PersonalizedCurriculum
->
+class _$PersonalizedCurriculumCopyWithImpl<$Res,
+        $Val extends PersonalizedCurriculum>
     implements $PersonalizedCurriculumCopyWith<$Res> {
   _$PersonalizedCurriculumCopyWithImpl(this._value, this._then);
 
@@ -4793,116 +4406,92 @@ class _$PersonalizedCurriculumCopyWithImpl<
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            userId:
-                null == userId
-                    ? _value.userId
-                    : userId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            title:
-                null == title
-                    ? _value.title
-                    : title // ignore: cast_nullable_to_non_nullable
-                        as String,
-            interests:
-                null == interests
-                    ? _value.interests
-                    : interests // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            currentLevel:
-                null == currentLevel
-                    ? _value.currentLevel
-                    : currentLevel // ignore: cast_nullable_to_non_nullable
-                        as LearningLevel,
-            targetLevel:
-                null == targetLevel
-                    ? _value.targetLevel
-                    : targetLevel // ignore: cast_nullable_to_non_nullable
-                        as LearningLevel,
-            pathIds:
-                null == pathIds
-                    ? _value.pathIds
-                    : pathIds // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            courseIds:
-                null == courseIds
-                    ? _value.courseIds
-                    : courseIds // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            dailyGoal:
-                null == dailyGoal
-                    ? _value.dailyGoal
-                    : dailyGoal // ignore: cast_nullable_to_non_nullable
-                        as Duration,
-            goals:
-                null == goals
-                    ? _value.goals
-                    : goals // ignore: cast_nullable_to_non_nullable
-                        as List<StudyGoal>,
-            status:
-                null == status
-                    ? _value.status
-                    : status // ignore: cast_nullable_to_non_nullable
-                        as CurriculumStatus,
-            overallProgress:
-                null == overallProgress
-                    ? _value.overallProgress
-                    : overallProgress // ignore: cast_nullable_to_non_nullable
-                        as double,
-            completedCourses:
-                null == completedCourses
-                    ? _value.completedCourses
-                    : completedCourses // ignore: cast_nullable_to_non_nullable
-                        as int,
-            totalStudyTime:
-                null == totalStudyTime
-                    ? _value.totalStudyTime
-                    : totalStudyTime // ignore: cast_nullable_to_non_nullable
-                        as int,
-            streakDays:
-                null == streakDays
-                    ? _value.streakDays
-                    : streakDays // ignore: cast_nullable_to_non_nullable
-                        as int,
-            lastStudyDate:
-                freezed == lastStudyDate
-                    ? _value.lastStudyDate
-                    : lastStudyDate // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            recommendedCourses:
-                null == recommendedCourses
-                    ? _value.recommendedCourses
-                    : recommendedCourses // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            recommendedScholars:
-                null == recommendedScholars
-                    ? _value.recommendedScholars
-                    : recommendedScholars // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            lastRecommendationUpdate:
-                freezed == lastRecommendationUpdate
-                    ? _value.lastRecommendationUpdate
-                    : lastRecommendationUpdate // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            createdAt:
-                freezed == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            updatedAt:
-                freezed == updatedAt
-                    ? _value.updatedAt
-                    : updatedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      interests: null == interests
+          ? _value.interests
+          : interests // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      currentLevel: null == currentLevel
+          ? _value.currentLevel
+          : currentLevel // ignore: cast_nullable_to_non_nullable
+              as LearningLevel,
+      targetLevel: null == targetLevel
+          ? _value.targetLevel
+          : targetLevel // ignore: cast_nullable_to_non_nullable
+              as LearningLevel,
+      pathIds: null == pathIds
+          ? _value.pathIds
+          : pathIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      courseIds: null == courseIds
+          ? _value.courseIds
+          : courseIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      dailyGoal: null == dailyGoal
+          ? _value.dailyGoal
+          : dailyGoal // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      goals: null == goals
+          ? _value.goals
+          : goals // ignore: cast_nullable_to_non_nullable
+              as List<StudyGoal>,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as CurriculumStatus,
+      overallProgress: null == overallProgress
+          ? _value.overallProgress
+          : overallProgress // ignore: cast_nullable_to_non_nullable
+              as double,
+      completedCourses: null == completedCourses
+          ? _value.completedCourses
+          : completedCourses // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalStudyTime: null == totalStudyTime
+          ? _value.totalStudyTime
+          : totalStudyTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      streakDays: null == streakDays
+          ? _value.streakDays
+          : streakDays // ignore: cast_nullable_to_non_nullable
+              as int,
+      lastStudyDate: freezed == lastStudyDate
+          ? _value.lastStudyDate
+          : lastStudyDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      recommendedCourses: null == recommendedCourses
+          ? _value.recommendedCourses
+          : recommendedCourses // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      recommendedScholars: null == recommendedScholars
+          ? _value.recommendedScholars
+          : recommendedScholars // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      lastRecommendationUpdate: freezed == lastRecommendationUpdate
+          ? _value.lastRecommendationUpdate
+          : lastRecommendationUpdate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
   }
 }
 
@@ -4910,45 +4499,44 @@ class _$PersonalizedCurriculumCopyWithImpl<
 abstract class _$$PersonalizedCurriculumImplCopyWith<$Res>
     implements $PersonalizedCurriculumCopyWith<$Res> {
   factory _$$PersonalizedCurriculumImplCopyWith(
-    _$PersonalizedCurriculumImpl value,
-    $Res Function(_$PersonalizedCurriculumImpl) then,
-  ) = __$$PersonalizedCurriculumImplCopyWithImpl<$Res>;
+          _$PersonalizedCurriculumImpl value,
+          $Res Function(_$PersonalizedCurriculumImpl) then) =
+      __$$PersonalizedCurriculumImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String userId,
-    String title,
-    List<String> interests,
-    LearningLevel currentLevel,
-    LearningLevel targetLevel,
-    List<String> pathIds,
-    List<String> courseIds,
-    Duration dailyGoal,
-    List<StudyGoal> goals,
-    CurriculumStatus status,
-    double overallProgress,
-    int completedCourses,
-    int totalStudyTime,
-    int streakDays,
-    DateTime? lastStudyDate,
-    List<String> recommendedCourses,
-    List<String> recommendedScholars,
-    DateTime? lastRecommendationUpdate,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-  });
+  $Res call(
+      {String id,
+      String userId,
+      String title,
+      List<String> interests,
+      LearningLevel currentLevel,
+      LearningLevel targetLevel,
+      List<String> pathIds,
+      List<String> courseIds,
+      Duration dailyGoal,
+      List<StudyGoal> goals,
+      CurriculumStatus status,
+      double overallProgress,
+      int completedCourses,
+      int totalStudyTime,
+      int streakDays,
+      DateTime? lastStudyDate,
+      List<String> recommendedCourses,
+      List<String> recommendedScholars,
+      DateTime? lastRecommendationUpdate,
+      DateTime? createdAt,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
 class __$$PersonalizedCurriculumImplCopyWithImpl<$Res>
-    extends
-        _$PersonalizedCurriculumCopyWithImpl<$Res, _$PersonalizedCurriculumImpl>
+    extends _$PersonalizedCurriculumCopyWithImpl<$Res,
+        _$PersonalizedCurriculumImpl>
     implements _$$PersonalizedCurriculumImplCopyWith<$Res> {
   __$$PersonalizedCurriculumImplCopyWithImpl(
-    _$PersonalizedCurriculumImpl _value,
-    $Res Function(_$PersonalizedCurriculumImpl) _then,
-  ) : super(_value, _then);
+      _$PersonalizedCurriculumImpl _value,
+      $Res Function(_$PersonalizedCurriculumImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of PersonalizedCurriculum
   /// with the given fields replaced by the non-null parameter values.
@@ -4977,149 +4565,126 @@ class __$$PersonalizedCurriculumImplCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(
-      _$PersonalizedCurriculumImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        userId:
-            null == userId
-                ? _value.userId
-                : userId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        title:
-            null == title
-                ? _value.title
-                : title // ignore: cast_nullable_to_non_nullable
-                    as String,
-        interests:
-            null == interests
-                ? _value._interests
-                : interests // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        currentLevel:
-            null == currentLevel
-                ? _value.currentLevel
-                : currentLevel // ignore: cast_nullable_to_non_nullable
-                    as LearningLevel,
-        targetLevel:
-            null == targetLevel
-                ? _value.targetLevel
-                : targetLevel // ignore: cast_nullable_to_non_nullable
-                    as LearningLevel,
-        pathIds:
-            null == pathIds
-                ? _value._pathIds
-                : pathIds // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        courseIds:
-            null == courseIds
-                ? _value._courseIds
-                : courseIds // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        dailyGoal:
-            null == dailyGoal
-                ? _value.dailyGoal
-                : dailyGoal // ignore: cast_nullable_to_non_nullable
-                    as Duration,
-        goals:
-            null == goals
-                ? _value._goals
-                : goals // ignore: cast_nullable_to_non_nullable
-                    as List<StudyGoal>,
-        status:
-            null == status
-                ? _value.status
-                : status // ignore: cast_nullable_to_non_nullable
-                    as CurriculumStatus,
-        overallProgress:
-            null == overallProgress
-                ? _value.overallProgress
-                : overallProgress // ignore: cast_nullable_to_non_nullable
-                    as double,
-        completedCourses:
-            null == completedCourses
-                ? _value.completedCourses
-                : completedCourses // ignore: cast_nullable_to_non_nullable
-                    as int,
-        totalStudyTime:
-            null == totalStudyTime
-                ? _value.totalStudyTime
-                : totalStudyTime // ignore: cast_nullable_to_non_nullable
-                    as int,
-        streakDays:
-            null == streakDays
-                ? _value.streakDays
-                : streakDays // ignore: cast_nullable_to_non_nullable
-                    as int,
-        lastStudyDate:
-            freezed == lastStudyDate
-                ? _value.lastStudyDate
-                : lastStudyDate // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        recommendedCourses:
-            null == recommendedCourses
-                ? _value._recommendedCourses
-                : recommendedCourses // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        recommendedScholars:
-            null == recommendedScholars
-                ? _value._recommendedScholars
-                : recommendedScholars // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        lastRecommendationUpdate:
-            freezed == lastRecommendationUpdate
-                ? _value.lastRecommendationUpdate
-                : lastRecommendationUpdate // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        createdAt:
-            freezed == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        updatedAt:
-            freezed == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-      ),
-    );
+    return _then(_$PersonalizedCurriculumImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      interests: null == interests
+          ? _value._interests
+          : interests // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      currentLevel: null == currentLevel
+          ? _value.currentLevel
+          : currentLevel // ignore: cast_nullable_to_non_nullable
+              as LearningLevel,
+      targetLevel: null == targetLevel
+          ? _value.targetLevel
+          : targetLevel // ignore: cast_nullable_to_non_nullable
+              as LearningLevel,
+      pathIds: null == pathIds
+          ? _value._pathIds
+          : pathIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      courseIds: null == courseIds
+          ? _value._courseIds
+          : courseIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      dailyGoal: null == dailyGoal
+          ? _value.dailyGoal
+          : dailyGoal // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      goals: null == goals
+          ? _value._goals
+          : goals // ignore: cast_nullable_to_non_nullable
+              as List<StudyGoal>,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as CurriculumStatus,
+      overallProgress: null == overallProgress
+          ? _value.overallProgress
+          : overallProgress // ignore: cast_nullable_to_non_nullable
+              as double,
+      completedCourses: null == completedCourses
+          ? _value.completedCourses
+          : completedCourses // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalStudyTime: null == totalStudyTime
+          ? _value.totalStudyTime
+          : totalStudyTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      streakDays: null == streakDays
+          ? _value.streakDays
+          : streakDays // ignore: cast_nullable_to_non_nullable
+              as int,
+      lastStudyDate: freezed == lastStudyDate
+          ? _value.lastStudyDate
+          : lastStudyDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      recommendedCourses: null == recommendedCourses
+          ? _value._recommendedCourses
+          : recommendedCourses // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      recommendedScholars: null == recommendedScholars
+          ? _value._recommendedScholars
+          : recommendedScholars // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      lastRecommendationUpdate: freezed == lastRecommendationUpdate
+          ? _value.lastRecommendationUpdate
+          : lastRecommendationUpdate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$PersonalizedCurriculumImpl implements _PersonalizedCurriculum {
-  const _$PersonalizedCurriculumImpl({
-    required this.id,
-    required this.userId,
-    required this.title,
-    required final List<String> interests,
-    required this.currentLevel,
-    required this.targetLevel,
-    required final List<String> pathIds,
-    required final List<String> courseIds,
-    this.dailyGoal = const Duration(hours: 1),
-    final List<StudyGoal> goals = const [],
-    this.status = CurriculumStatus.active,
-    this.overallProgress = 0.0,
-    this.completedCourses = 0,
-    this.totalStudyTime = 0,
-    this.streakDays = 0,
-    this.lastStudyDate,
-    final List<String> recommendedCourses = const [],
-    final List<String> recommendedScholars = const [],
-    this.lastRecommendationUpdate,
-    this.createdAt,
-    this.updatedAt,
-  }) : _interests = interests,
-       _pathIds = pathIds,
-       _courseIds = courseIds,
-       _goals = goals,
-       _recommendedCourses = recommendedCourses,
-       _recommendedScholars = recommendedScholars;
+  const _$PersonalizedCurriculumImpl(
+      {required this.id,
+      required this.userId,
+      required this.title,
+      required final List<String> interests,
+      required this.currentLevel,
+      required this.targetLevel,
+      required final List<String> pathIds,
+      required final List<String> courseIds,
+      this.dailyGoal = const Duration(hours: 1),
+      final List<StudyGoal> goals = const [],
+      this.status = CurriculumStatus.active,
+      this.overallProgress = 0.0,
+      this.completedCourses = 0,
+      this.totalStudyTime = 0,
+      this.streakDays = 0,
+      this.lastStudyDate,
+      final List<String> recommendedCourses = const [],
+      final List<String> recommendedScholars = const [],
+      this.lastRecommendationUpdate,
+      this.createdAt,
+      this.updatedAt})
+      : _interests = interests,
+        _pathIds = pathIds,
+        _courseIds = courseIds,
+        _goals = goals,
+        _recommendedCourses = recommendedCourses,
+        _recommendedScholars = recommendedScholars;
 
   factory _$PersonalizedCurriculumImpl.fromJson(Map<String, dynamic> json) =>
       _$$PersonalizedCurriculumImplFromJson(json);
@@ -5173,7 +4738,7 @@ class _$PersonalizedCurriculumImpl implements _PersonalizedCurriculum {
   @override
   @JsonKey()
   final CurriculumStatus status;
-  // Progress tracking
+// Progress tracking
   @override
   @JsonKey()
   final double overallProgress;
@@ -5183,15 +4748,15 @@ class _$PersonalizedCurriculumImpl implements _PersonalizedCurriculum {
   @override
   @JsonKey()
   final int totalStudyTime;
-  // in minutes
+// in minutes
   @override
   @JsonKey()
   final int streakDays;
   @override
   final DateTime? lastStudyDate;
-  // AI-generated recommendations
+// AI-generated recommendations
   final List<String> _recommendedCourses;
-  // AI-generated recommendations
+// AI-generated recommendations
   @override
   @JsonKey()
   List<String> get recommendedCourses {
@@ -5231,19 +4796,15 @@ class _$PersonalizedCurriculumImpl implements _PersonalizedCurriculum {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.title, title) || other.title == title) &&
-            const DeepCollectionEquality().equals(
-              other._interests,
-              _interests,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._interests, _interests) &&
             (identical(other.currentLevel, currentLevel) ||
                 other.currentLevel == currentLevel) &&
             (identical(other.targetLevel, targetLevel) ||
                 other.targetLevel == targetLevel) &&
             const DeepCollectionEquality().equals(other._pathIds, _pathIds) &&
-            const DeepCollectionEquality().equals(
-              other._courseIds,
-              _courseIds,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._courseIds, _courseIds) &&
             (identical(other.dailyGoal, dailyGoal) ||
                 other.dailyGoal == dailyGoal) &&
             const DeepCollectionEquality().equals(other._goals, _goals) &&
@@ -5258,18 +4819,12 @@ class _$PersonalizedCurriculumImpl implements _PersonalizedCurriculum {
                 other.streakDays == streakDays) &&
             (identical(other.lastStudyDate, lastStudyDate) ||
                 other.lastStudyDate == lastStudyDate) &&
-            const DeepCollectionEquality().equals(
-              other._recommendedCourses,
-              _recommendedCourses,
-            ) &&
-            const DeepCollectionEquality().equals(
-              other._recommendedScholars,
-              _recommendedScholars,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._recommendedCourses, _recommendedCourses) &&
+            const DeepCollectionEquality()
+                .equals(other._recommendedScholars, _recommendedScholars) &&
             (identical(
-                  other.lastRecommendationUpdate,
-                  lastRecommendationUpdate,
-                ) ||
+                    other.lastRecommendationUpdate, lastRecommendationUpdate) ||
                 other.lastRecommendationUpdate == lastRecommendationUpdate) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
@@ -5280,29 +4835,29 @@ class _$PersonalizedCurriculumImpl implements _PersonalizedCurriculum {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
-    runtimeType,
-    id,
-    userId,
-    title,
-    const DeepCollectionEquality().hash(_interests),
-    currentLevel,
-    targetLevel,
-    const DeepCollectionEquality().hash(_pathIds),
-    const DeepCollectionEquality().hash(_courseIds),
-    dailyGoal,
-    const DeepCollectionEquality().hash(_goals),
-    status,
-    overallProgress,
-    completedCourses,
-    totalStudyTime,
-    streakDays,
-    lastStudyDate,
-    const DeepCollectionEquality().hash(_recommendedCourses),
-    const DeepCollectionEquality().hash(_recommendedScholars),
-    lastRecommendationUpdate,
-    createdAt,
-    updatedAt,
-  ]);
+        runtimeType,
+        id,
+        userId,
+        title,
+        const DeepCollectionEquality().hash(_interests),
+        currentLevel,
+        targetLevel,
+        const DeepCollectionEquality().hash(_pathIds),
+        const DeepCollectionEquality().hash(_courseIds),
+        dailyGoal,
+        const DeepCollectionEquality().hash(_goals),
+        status,
+        overallProgress,
+        completedCourses,
+        totalStudyTime,
+        streakDays,
+        lastStudyDate,
+        const DeepCollectionEquality().hash(_recommendedCourses),
+        const DeepCollectionEquality().hash(_recommendedScholars),
+        lastRecommendationUpdate,
+        createdAt,
+        updatedAt
+      ]);
 
   /// Create a copy of PersonalizedCurriculum
   /// with the given fields replaced by the non-null parameter values.
@@ -5310,42 +4865,40 @@ class _$PersonalizedCurriculumImpl implements _PersonalizedCurriculum {
   @override
   @pragma('vm:prefer-inline')
   _$$PersonalizedCurriculumImplCopyWith<_$PersonalizedCurriculumImpl>
-  get copyWith =>
-      __$$PersonalizedCurriculumImplCopyWithImpl<_$PersonalizedCurriculumImpl>(
-        this,
-        _$identity,
-      );
+      get copyWith => __$$PersonalizedCurriculumImplCopyWithImpl<
+          _$PersonalizedCurriculumImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PersonalizedCurriculumImplToJson(this);
+    return _$$PersonalizedCurriculumImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _PersonalizedCurriculum implements PersonalizedCurriculum {
-  const factory _PersonalizedCurriculum({
-    required final String id,
-    required final String userId,
-    required final String title,
-    required final List<String> interests,
-    required final LearningLevel currentLevel,
-    required final LearningLevel targetLevel,
-    required final List<String> pathIds,
-    required final List<String> courseIds,
-    final Duration dailyGoal,
-    final List<StudyGoal> goals,
-    final CurriculumStatus status,
-    final double overallProgress,
-    final int completedCourses,
-    final int totalStudyTime,
-    final int streakDays,
-    final DateTime? lastStudyDate,
-    final List<String> recommendedCourses,
-    final List<String> recommendedScholars,
-    final DateTime? lastRecommendationUpdate,
-    final DateTime? createdAt,
-    final DateTime? updatedAt,
-  }) = _$PersonalizedCurriculumImpl;
+  const factory _PersonalizedCurriculum(
+      {required final String id,
+      required final String userId,
+      required final String title,
+      required final List<String> interests,
+      required final LearningLevel currentLevel,
+      required final LearningLevel targetLevel,
+      required final List<String> pathIds,
+      required final List<String> courseIds,
+      final Duration dailyGoal,
+      final List<StudyGoal> goals,
+      final CurriculumStatus status,
+      final double overallProgress,
+      final int completedCourses,
+      final int totalStudyTime,
+      final int streakDays,
+      final DateTime? lastStudyDate,
+      final List<String> recommendedCourses,
+      final List<String> recommendedScholars,
+      final DateTime? lastRecommendationUpdate,
+      final DateTime? createdAt,
+      final DateTime? updatedAt}) = _$PersonalizedCurriculumImpl;
 
   factory _PersonalizedCurriculum.fromJson(Map<String, dynamic> json) =
       _$PersonalizedCurriculumImpl.fromJson;
@@ -5398,7 +4951,7 @@ abstract class _PersonalizedCurriculum implements PersonalizedCurriculum {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PersonalizedCurriculumImplCopyWith<_$PersonalizedCurriculumImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 StudyGoal _$StudyGoalFromJson(Map<String, dynamic> json) {
@@ -5432,17 +4985,16 @@ abstract class $StudyGoalCopyWith<$Res> {
   factory $StudyGoalCopyWith(StudyGoal value, $Res Function(StudyGoal) then) =
       _$StudyGoalCopyWithImpl<$Res, StudyGoal>;
   @useResult
-  $Res call({
-    String id,
-    String title,
-    GoalType type,
-    int targetValue,
-    int currentValue,
-    DateTime deadline,
-    bool isCompleted,
-    String? reward,
-    DateTime? completedAt,
-  });
+  $Res call(
+      {String id,
+      String title,
+      GoalType type,
+      int targetValue,
+      int currentValue,
+      DateTime deadline,
+      bool isCompleted,
+      String? reward,
+      DateTime? completedAt});
 }
 
 /// @nodoc
@@ -5470,56 +5022,44 @@ class _$StudyGoalCopyWithImpl<$Res, $Val extends StudyGoal>
     Object? reward = freezed,
     Object? completedAt = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            title:
-                null == title
-                    ? _value.title
-                    : title // ignore: cast_nullable_to_non_nullable
-                        as String,
-            type:
-                null == type
-                    ? _value.type
-                    : type // ignore: cast_nullable_to_non_nullable
-                        as GoalType,
-            targetValue:
-                null == targetValue
-                    ? _value.targetValue
-                    : targetValue // ignore: cast_nullable_to_non_nullable
-                        as int,
-            currentValue:
-                null == currentValue
-                    ? _value.currentValue
-                    : currentValue // ignore: cast_nullable_to_non_nullable
-                        as int,
-            deadline:
-                null == deadline
-                    ? _value.deadline
-                    : deadline // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            isCompleted:
-                null == isCompleted
-                    ? _value.isCompleted
-                    : isCompleted // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            reward:
-                freezed == reward
-                    ? _value.reward
-                    : reward // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            completedAt:
-                freezed == completedAt
-                    ? _value.completedAt
-                    : completedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as GoalType,
+      targetValue: null == targetValue
+          ? _value.targetValue
+          : targetValue // ignore: cast_nullable_to_non_nullable
+              as int,
+      currentValue: null == currentValue
+          ? _value.currentValue
+          : currentValue // ignore: cast_nullable_to_non_nullable
+              as int,
+      deadline: null == deadline
+          ? _value.deadline
+          : deadline // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      isCompleted: null == isCompleted
+          ? _value.isCompleted
+          : isCompleted // ignore: cast_nullable_to_non_nullable
+              as bool,
+      reward: freezed == reward
+          ? _value.reward
+          : reward // ignore: cast_nullable_to_non_nullable
+              as String?,
+      completedAt: freezed == completedAt
+          ? _value.completedAt
+          : completedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
   }
 }
 
@@ -5527,22 +5067,20 @@ class _$StudyGoalCopyWithImpl<$Res, $Val extends StudyGoal>
 abstract class _$$StudyGoalImplCopyWith<$Res>
     implements $StudyGoalCopyWith<$Res> {
   factory _$$StudyGoalImplCopyWith(
-    _$StudyGoalImpl value,
-    $Res Function(_$StudyGoalImpl) then,
-  ) = __$$StudyGoalImplCopyWithImpl<$Res>;
+          _$StudyGoalImpl value, $Res Function(_$StudyGoalImpl) then) =
+      __$$StudyGoalImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String title,
-    GoalType type,
-    int targetValue,
-    int currentValue,
-    DateTime deadline,
-    bool isCompleted,
-    String? reward,
-    DateTime? completedAt,
-  });
+  $Res call(
+      {String id,
+      String title,
+      GoalType type,
+      int targetValue,
+      int currentValue,
+      DateTime deadline,
+      bool isCompleted,
+      String? reward,
+      DateTime? completedAt});
 }
 
 /// @nodoc
@@ -5550,9 +5088,8 @@ class __$$StudyGoalImplCopyWithImpl<$Res>
     extends _$StudyGoalCopyWithImpl<$Res, _$StudyGoalImpl>
     implements _$$StudyGoalImplCopyWith<$Res> {
   __$$StudyGoalImplCopyWithImpl(
-    _$StudyGoalImpl _value,
-    $Res Function(_$StudyGoalImpl) _then,
-  ) : super(_value, _then);
+      _$StudyGoalImpl _value, $Res Function(_$StudyGoalImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of StudyGoal
   /// with the given fields replaced by the non-null parameter values.
@@ -5569,72 +5106,60 @@ class __$$StudyGoalImplCopyWithImpl<$Res>
     Object? reward = freezed,
     Object? completedAt = freezed,
   }) {
-    return _then(
-      _$StudyGoalImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        title:
-            null == title
-                ? _value.title
-                : title // ignore: cast_nullable_to_non_nullable
-                    as String,
-        type:
-            null == type
-                ? _value.type
-                : type // ignore: cast_nullable_to_non_nullable
-                    as GoalType,
-        targetValue:
-            null == targetValue
-                ? _value.targetValue
-                : targetValue // ignore: cast_nullable_to_non_nullable
-                    as int,
-        currentValue:
-            null == currentValue
-                ? _value.currentValue
-                : currentValue // ignore: cast_nullable_to_non_nullable
-                    as int,
-        deadline:
-            null == deadline
-                ? _value.deadline
-                : deadline // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        isCompleted:
-            null == isCompleted
-                ? _value.isCompleted
-                : isCompleted // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        reward:
-            freezed == reward
-                ? _value.reward
-                : reward // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        completedAt:
-            freezed == completedAt
-                ? _value.completedAt
-                : completedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-      ),
-    );
+    return _then(_$StudyGoalImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as GoalType,
+      targetValue: null == targetValue
+          ? _value.targetValue
+          : targetValue // ignore: cast_nullable_to_non_nullable
+              as int,
+      currentValue: null == currentValue
+          ? _value.currentValue
+          : currentValue // ignore: cast_nullable_to_non_nullable
+              as int,
+      deadline: null == deadline
+          ? _value.deadline
+          : deadline // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      isCompleted: null == isCompleted
+          ? _value.isCompleted
+          : isCompleted // ignore: cast_nullable_to_non_nullable
+              as bool,
+      reward: freezed == reward
+          ? _value.reward
+          : reward // ignore: cast_nullable_to_non_nullable
+              as String?,
+      completedAt: freezed == completedAt
+          ? _value.completedAt
+          : completedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$StudyGoalImpl implements _StudyGoal {
-  const _$StudyGoalImpl({
-    required this.id,
-    required this.title,
-    required this.type,
-    required this.targetValue,
-    required this.currentValue,
-    required this.deadline,
-    this.isCompleted = false,
-    this.reward,
-    this.completedAt,
-  });
+  const _$StudyGoalImpl(
+      {required this.id,
+      required this.title,
+      required this.type,
+      required this.targetValue,
+      required this.currentValue,
+      required this.deadline,
+      this.isCompleted = false,
+      this.reward,
+      this.completedAt});
 
   factory _$StudyGoalImpl.fromJson(Map<String, dynamic> json) =>
       _$$StudyGoalImplFromJson(json);
@@ -5687,18 +5212,8 @@ class _$StudyGoalImpl implements _StudyGoal {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    title,
-    type,
-    targetValue,
-    currentValue,
-    deadline,
-    isCompleted,
-    reward,
-    completedAt,
-  );
+  int get hashCode => Object.hash(runtimeType, id, title, type, targetValue,
+      currentValue, deadline, isCompleted, reward, completedAt);
 
   /// Create a copy of StudyGoal
   /// with the given fields replaced by the non-null parameter values.
@@ -5710,22 +5225,23 @@ class _$StudyGoalImpl implements _StudyGoal {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$StudyGoalImplToJson(this);
+    return _$$StudyGoalImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _StudyGoal implements StudyGoal {
-  const factory _StudyGoal({
-    required final String id,
-    required final String title,
-    required final GoalType type,
-    required final int targetValue,
-    required final int currentValue,
-    required final DateTime deadline,
-    final bool isCompleted,
-    final String? reward,
-    final DateTime? completedAt,
-  }) = _$StudyGoalImpl;
+  const factory _StudyGoal(
+      {required final String id,
+      required final String title,
+      required final GoalType type,
+      required final int targetValue,
+      required final int currentValue,
+      required final DateTime deadline,
+      final bool isCompleted,
+      final String? reward,
+      final DateTime? completedAt}) = _$StudyGoalImpl;
 
   factory _StudyGoal.fromJson(Map<String, dynamic> json) =
       _$StudyGoalImpl.fromJson;
@@ -5799,31 +5315,29 @@ mixin _$IslamicCertificate {
 /// @nodoc
 abstract class $IslamicCertificateCopyWith<$Res> {
   factory $IslamicCertificateCopyWith(
-    IslamicCertificate value,
-    $Res Function(IslamicCertificate) then,
-  ) = _$IslamicCertificateCopyWithImpl<$Res, IslamicCertificate>;
+          IslamicCertificate value, $Res Function(IslamicCertificate) then) =
+      _$IslamicCertificateCopyWithImpl<$Res, IslamicCertificate>;
   @useResult
-  $Res call({
-    String id,
-    String userId,
-    String courseId,
-    String title,
-    String issuingInstitution,
-    String scholarName,
-    DateTime issuedDate,
-    CertificationType type,
-    double finalScore,
-    String certificateHash,
-    String blockchainId,
-    bool isVerifiable,
-    String? templateUrl,
-    String? downloadUrl,
-    List<String> skillsEarned,
-    bool isPublic,
-    bool allowSharing,
-    DateTime? expiryDate,
-    DateTime? lastVerified,
-  });
+  $Res call(
+      {String id,
+      String userId,
+      String courseId,
+      String title,
+      String issuingInstitution,
+      String scholarName,
+      DateTime issuedDate,
+      CertificationType type,
+      double finalScore,
+      String certificateHash,
+      String blockchainId,
+      bool isVerifiable,
+      String? templateUrl,
+      String? downloadUrl,
+      List<String> skillsEarned,
+      bool isPublic,
+      bool allowSharing,
+      DateTime? expiryDate,
+      DateTime? lastVerified});
 }
 
 /// @nodoc
@@ -5861,149 +5375,124 @@ class _$IslamicCertificateCopyWithImpl<$Res, $Val extends IslamicCertificate>
     Object? expiryDate = freezed,
     Object? lastVerified = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            userId:
-                null == userId
-                    ? _value.userId
-                    : userId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            courseId:
-                null == courseId
-                    ? _value.courseId
-                    : courseId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            title:
-                null == title
-                    ? _value.title
-                    : title // ignore: cast_nullable_to_non_nullable
-                        as String,
-            issuingInstitution:
-                null == issuingInstitution
-                    ? _value.issuingInstitution
-                    : issuingInstitution // ignore: cast_nullable_to_non_nullable
-                        as String,
-            scholarName:
-                null == scholarName
-                    ? _value.scholarName
-                    : scholarName // ignore: cast_nullable_to_non_nullable
-                        as String,
-            issuedDate:
-                null == issuedDate
-                    ? _value.issuedDate
-                    : issuedDate // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            type:
-                null == type
-                    ? _value.type
-                    : type // ignore: cast_nullable_to_non_nullable
-                        as CertificationType,
-            finalScore:
-                null == finalScore
-                    ? _value.finalScore
-                    : finalScore // ignore: cast_nullable_to_non_nullable
-                        as double,
-            certificateHash:
-                null == certificateHash
-                    ? _value.certificateHash
-                    : certificateHash // ignore: cast_nullable_to_non_nullable
-                        as String,
-            blockchainId:
-                null == blockchainId
-                    ? _value.blockchainId
-                    : blockchainId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            isVerifiable:
-                null == isVerifiable
-                    ? _value.isVerifiable
-                    : isVerifiable // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            templateUrl:
-                freezed == templateUrl
-                    ? _value.templateUrl
-                    : templateUrl // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            downloadUrl:
-                freezed == downloadUrl
-                    ? _value.downloadUrl
-                    : downloadUrl // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            skillsEarned:
-                null == skillsEarned
-                    ? _value.skillsEarned
-                    : skillsEarned // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            isPublic:
-                null == isPublic
-                    ? _value.isPublic
-                    : isPublic // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            allowSharing:
-                null == allowSharing
-                    ? _value.allowSharing
-                    : allowSharing // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            expiryDate:
-                freezed == expiryDate
-                    ? _value.expiryDate
-                    : expiryDate // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            lastVerified:
-                freezed == lastVerified
-                    ? _value.lastVerified
-                    : lastVerified // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      courseId: null == courseId
+          ? _value.courseId
+          : courseId // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      issuingInstitution: null == issuingInstitution
+          ? _value.issuingInstitution
+          : issuingInstitution // ignore: cast_nullable_to_non_nullable
+              as String,
+      scholarName: null == scholarName
+          ? _value.scholarName
+          : scholarName // ignore: cast_nullable_to_non_nullable
+              as String,
+      issuedDate: null == issuedDate
+          ? _value.issuedDate
+          : issuedDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as CertificationType,
+      finalScore: null == finalScore
+          ? _value.finalScore
+          : finalScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      certificateHash: null == certificateHash
+          ? _value.certificateHash
+          : certificateHash // ignore: cast_nullable_to_non_nullable
+              as String,
+      blockchainId: null == blockchainId
+          ? _value.blockchainId
+          : blockchainId // ignore: cast_nullable_to_non_nullable
+              as String,
+      isVerifiable: null == isVerifiable
+          ? _value.isVerifiable
+          : isVerifiable // ignore: cast_nullable_to_non_nullable
+              as bool,
+      templateUrl: freezed == templateUrl
+          ? _value.templateUrl
+          : templateUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      downloadUrl: freezed == downloadUrl
+          ? _value.downloadUrl
+          : downloadUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      skillsEarned: null == skillsEarned
+          ? _value.skillsEarned
+          : skillsEarned // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      isPublic: null == isPublic
+          ? _value.isPublic
+          : isPublic // ignore: cast_nullable_to_non_nullable
+              as bool,
+      allowSharing: null == allowSharing
+          ? _value.allowSharing
+          : allowSharing // ignore: cast_nullable_to_non_nullable
+              as bool,
+      expiryDate: freezed == expiryDate
+          ? _value.expiryDate
+          : expiryDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      lastVerified: freezed == lastVerified
+          ? _value.lastVerified
+          : lastVerified // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$IslamicCertificateImplCopyWith<$Res>
     implements $IslamicCertificateCopyWith<$Res> {
-  factory _$$IslamicCertificateImplCopyWith(
-    _$IslamicCertificateImpl value,
-    $Res Function(_$IslamicCertificateImpl) then,
-  ) = __$$IslamicCertificateImplCopyWithImpl<$Res>;
+  factory _$$IslamicCertificateImplCopyWith(_$IslamicCertificateImpl value,
+          $Res Function(_$IslamicCertificateImpl) then) =
+      __$$IslamicCertificateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String userId,
-    String courseId,
-    String title,
-    String issuingInstitution,
-    String scholarName,
-    DateTime issuedDate,
-    CertificationType type,
-    double finalScore,
-    String certificateHash,
-    String blockchainId,
-    bool isVerifiable,
-    String? templateUrl,
-    String? downloadUrl,
-    List<String> skillsEarned,
-    bool isPublic,
-    bool allowSharing,
-    DateTime? expiryDate,
-    DateTime? lastVerified,
-  });
+  $Res call(
+      {String id,
+      String userId,
+      String courseId,
+      String title,
+      String issuingInstitution,
+      String scholarName,
+      DateTime issuedDate,
+      CertificationType type,
+      double finalScore,
+      String certificateHash,
+      String blockchainId,
+      bool isVerifiable,
+      String? templateUrl,
+      String? downloadUrl,
+      List<String> skillsEarned,
+      bool isPublic,
+      bool allowSharing,
+      DateTime? expiryDate,
+      DateTime? lastVerified});
 }
 
 /// @nodoc
 class __$$IslamicCertificateImplCopyWithImpl<$Res>
     extends _$IslamicCertificateCopyWithImpl<$Res, _$IslamicCertificateImpl>
     implements _$$IslamicCertificateImplCopyWith<$Res> {
-  __$$IslamicCertificateImplCopyWithImpl(
-    _$IslamicCertificateImpl _value,
-    $Res Function(_$IslamicCertificateImpl) _then,
-  ) : super(_value, _then);
+  __$$IslamicCertificateImplCopyWithImpl(_$IslamicCertificateImpl _value,
+      $Res Function(_$IslamicCertificateImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of IslamicCertificate
   /// with the given fields replaced by the non-null parameter values.
@@ -6030,132 +5519,111 @@ class __$$IslamicCertificateImplCopyWithImpl<$Res>
     Object? expiryDate = freezed,
     Object? lastVerified = freezed,
   }) {
-    return _then(
-      _$IslamicCertificateImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        userId:
-            null == userId
-                ? _value.userId
-                : userId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        courseId:
-            null == courseId
-                ? _value.courseId
-                : courseId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        title:
-            null == title
-                ? _value.title
-                : title // ignore: cast_nullable_to_non_nullable
-                    as String,
-        issuingInstitution:
-            null == issuingInstitution
-                ? _value.issuingInstitution
-                : issuingInstitution // ignore: cast_nullable_to_non_nullable
-                    as String,
-        scholarName:
-            null == scholarName
-                ? _value.scholarName
-                : scholarName // ignore: cast_nullable_to_non_nullable
-                    as String,
-        issuedDate:
-            null == issuedDate
-                ? _value.issuedDate
-                : issuedDate // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        type:
-            null == type
-                ? _value.type
-                : type // ignore: cast_nullable_to_non_nullable
-                    as CertificationType,
-        finalScore:
-            null == finalScore
-                ? _value.finalScore
-                : finalScore // ignore: cast_nullable_to_non_nullable
-                    as double,
-        certificateHash:
-            null == certificateHash
-                ? _value.certificateHash
-                : certificateHash // ignore: cast_nullable_to_non_nullable
-                    as String,
-        blockchainId:
-            null == blockchainId
-                ? _value.blockchainId
-                : blockchainId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        isVerifiable:
-            null == isVerifiable
-                ? _value.isVerifiable
-                : isVerifiable // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        templateUrl:
-            freezed == templateUrl
-                ? _value.templateUrl
-                : templateUrl // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        downloadUrl:
-            freezed == downloadUrl
-                ? _value.downloadUrl
-                : downloadUrl // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        skillsEarned:
-            null == skillsEarned
-                ? _value._skillsEarned
-                : skillsEarned // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        isPublic:
-            null == isPublic
-                ? _value.isPublic
-                : isPublic // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        allowSharing:
-            null == allowSharing
-                ? _value.allowSharing
-                : allowSharing // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        expiryDate:
-            freezed == expiryDate
-                ? _value.expiryDate
-                : expiryDate // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        lastVerified:
-            freezed == lastVerified
-                ? _value.lastVerified
-                : lastVerified // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-      ),
-    );
+    return _then(_$IslamicCertificateImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      courseId: null == courseId
+          ? _value.courseId
+          : courseId // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      issuingInstitution: null == issuingInstitution
+          ? _value.issuingInstitution
+          : issuingInstitution // ignore: cast_nullable_to_non_nullable
+              as String,
+      scholarName: null == scholarName
+          ? _value.scholarName
+          : scholarName // ignore: cast_nullable_to_non_nullable
+              as String,
+      issuedDate: null == issuedDate
+          ? _value.issuedDate
+          : issuedDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as CertificationType,
+      finalScore: null == finalScore
+          ? _value.finalScore
+          : finalScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      certificateHash: null == certificateHash
+          ? _value.certificateHash
+          : certificateHash // ignore: cast_nullable_to_non_nullable
+              as String,
+      blockchainId: null == blockchainId
+          ? _value.blockchainId
+          : blockchainId // ignore: cast_nullable_to_non_nullable
+              as String,
+      isVerifiable: null == isVerifiable
+          ? _value.isVerifiable
+          : isVerifiable // ignore: cast_nullable_to_non_nullable
+              as bool,
+      templateUrl: freezed == templateUrl
+          ? _value.templateUrl
+          : templateUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      downloadUrl: freezed == downloadUrl
+          ? _value.downloadUrl
+          : downloadUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      skillsEarned: null == skillsEarned
+          ? _value._skillsEarned
+          : skillsEarned // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      isPublic: null == isPublic
+          ? _value.isPublic
+          : isPublic // ignore: cast_nullable_to_non_nullable
+              as bool,
+      allowSharing: null == allowSharing
+          ? _value.allowSharing
+          : allowSharing // ignore: cast_nullable_to_non_nullable
+              as bool,
+      expiryDate: freezed == expiryDate
+          ? _value.expiryDate
+          : expiryDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      lastVerified: freezed == lastVerified
+          ? _value.lastVerified
+          : lastVerified // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$IslamicCertificateImpl implements _IslamicCertificate {
-  const _$IslamicCertificateImpl({
-    required this.id,
-    required this.userId,
-    required this.courseId,
-    required this.title,
-    required this.issuingInstitution,
-    required this.scholarName,
-    required this.issuedDate,
-    required this.type,
-    required this.finalScore,
-    required this.certificateHash,
-    required this.blockchainId,
-    this.isVerifiable = true,
-    this.templateUrl,
-    this.downloadUrl,
-    final List<String> skillsEarned = const [],
-    this.isPublic = false,
-    this.allowSharing = true,
-    this.expiryDate,
-    this.lastVerified,
-  }) : _skillsEarned = skillsEarned;
+  const _$IslamicCertificateImpl(
+      {required this.id,
+      required this.userId,
+      required this.courseId,
+      required this.title,
+      required this.issuingInstitution,
+      required this.scholarName,
+      required this.issuedDate,
+      required this.type,
+      required this.finalScore,
+      required this.certificateHash,
+      required this.blockchainId,
+      this.isVerifiable = true,
+      this.templateUrl,
+      this.downloadUrl,
+      final List<String> skillsEarned = const [],
+      this.isPublic = false,
+      this.allowSharing = true,
+      this.expiryDate,
+      this.lastVerified})
+      : _skillsEarned = skillsEarned;
 
   factory _$IslamicCertificateImpl.fromJson(Map<String, dynamic> json) =>
       _$$IslamicCertificateImplFromJson(json);
@@ -6178,16 +5646,16 @@ class _$IslamicCertificateImpl implements _IslamicCertificate {
   final CertificationType type;
   @override
   final double finalScore;
-  // Verification
+// Verification
   @override
   final String certificateHash;
   @override
   final String blockchainId;
-  // For tamper-proof verification
+// For tamper-proof verification
   @override
   @JsonKey()
   final bool isVerifiable;
-  // Design & Download
+// Design & Download
   @override
   final String? templateUrl;
   @override
@@ -6201,7 +5669,7 @@ class _$IslamicCertificateImpl implements _IslamicCertificate {
     return EqualUnmodifiableListView(_skillsEarned);
   }
 
-  // Sharing & Privacy
+// Sharing & Privacy
   @override
   @JsonKey()
   final bool isPublic;
@@ -6247,10 +5715,8 @@ class _$IslamicCertificateImpl implements _IslamicCertificate {
                 other.templateUrl == templateUrl) &&
             (identical(other.downloadUrl, downloadUrl) ||
                 other.downloadUrl == downloadUrl) &&
-            const DeepCollectionEquality().equals(
-              other._skillsEarned,
-              _skillsEarned,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._skillsEarned, _skillsEarned) &&
             (identical(other.isPublic, isPublic) ||
                 other.isPublic == isPublic) &&
             (identical(other.allowSharing, allowSharing) ||
@@ -6264,27 +5730,27 @@ class _$IslamicCertificateImpl implements _IslamicCertificate {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
-    runtimeType,
-    id,
-    userId,
-    courseId,
-    title,
-    issuingInstitution,
-    scholarName,
-    issuedDate,
-    type,
-    finalScore,
-    certificateHash,
-    blockchainId,
-    isVerifiable,
-    templateUrl,
-    downloadUrl,
-    const DeepCollectionEquality().hash(_skillsEarned),
-    isPublic,
-    allowSharing,
-    expiryDate,
-    lastVerified,
-  ]);
+        runtimeType,
+        id,
+        userId,
+        courseId,
+        title,
+        issuingInstitution,
+        scholarName,
+        issuedDate,
+        type,
+        finalScore,
+        certificateHash,
+        blockchainId,
+        isVerifiable,
+        templateUrl,
+        downloadUrl,
+        const DeepCollectionEquality().hash(_skillsEarned),
+        isPublic,
+        allowSharing,
+        expiryDate,
+        lastVerified
+      ]);
 
   /// Create a copy of IslamicCertificate
   /// with the given fields replaced by the non-null parameter values.
@@ -6293,38 +5759,37 @@ class _$IslamicCertificateImpl implements _IslamicCertificate {
   @pragma('vm:prefer-inline')
   _$$IslamicCertificateImplCopyWith<_$IslamicCertificateImpl> get copyWith =>
       __$$IslamicCertificateImplCopyWithImpl<_$IslamicCertificateImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$IslamicCertificateImplToJson(this);
+    return _$$IslamicCertificateImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _IslamicCertificate implements IslamicCertificate {
-  const factory _IslamicCertificate({
-    required final String id,
-    required final String userId,
-    required final String courseId,
-    required final String title,
-    required final String issuingInstitution,
-    required final String scholarName,
-    required final DateTime issuedDate,
-    required final CertificationType type,
-    required final double finalScore,
-    required final String certificateHash,
-    required final String blockchainId,
-    final bool isVerifiable,
-    final String? templateUrl,
-    final String? downloadUrl,
-    final List<String> skillsEarned,
-    final bool isPublic,
-    final bool allowSharing,
-    final DateTime? expiryDate,
-    final DateTime? lastVerified,
-  }) = _$IslamicCertificateImpl;
+  const factory _IslamicCertificate(
+      {required final String id,
+      required final String userId,
+      required final String courseId,
+      required final String title,
+      required final String issuingInstitution,
+      required final String scholarName,
+      required final DateTime issuedDate,
+      required final CertificationType type,
+      required final double finalScore,
+      required final String certificateHash,
+      required final String blockchainId,
+      final bool isVerifiable,
+      final String? templateUrl,
+      final String? downloadUrl,
+      final List<String> skillsEarned,
+      final bool isPublic,
+      final bool allowSharing,
+      final DateTime? expiryDate,
+      final DateTime? lastVerified}) = _$IslamicCertificateImpl;
 
   factory _IslamicCertificate.fromJson(Map<String, dynamic> json) =
       _$IslamicCertificateImpl.fromJson;
@@ -6408,23 +5873,21 @@ mixin _$LearningProgress {
 /// @nodoc
 abstract class $LearningProgressCopyWith<$Res> {
   factory $LearningProgressCopyWith(
-    LearningProgress value,
-    $Res Function(LearningProgress) then,
-  ) = _$LearningProgressCopyWithImpl<$Res, LearningProgress>;
+          LearningProgress value, $Res Function(LearningProgress) then) =
+      _$LearningProgressCopyWithImpl<$Res, LearningProgress>;
   @useResult
-  $Res call({
-    String userId,
-    String itemId,
-    ProgressType type,
-    double progress,
-    int timeSpent,
-    int attempts,
-    double bestScore,
-    List<String> completedSections,
-    DateTime? startedAt,
-    DateTime? completedAt,
-    DateTime? lastActivityAt,
-  });
+  $Res call(
+      {String userId,
+      String itemId,
+      ProgressType type,
+      double progress,
+      int timeSpent,
+      int attempts,
+      double bestScore,
+      List<String> completedSections,
+      DateTime? startedAt,
+      DateTime? completedAt,
+      DateTime? lastActivityAt});
 }
 
 /// @nodoc
@@ -6454,101 +5917,84 @@ class _$LearningProgressCopyWithImpl<$Res, $Val extends LearningProgress>
     Object? completedAt = freezed,
     Object? lastActivityAt = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            userId:
-                null == userId
-                    ? _value.userId
-                    : userId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            itemId:
-                null == itemId
-                    ? _value.itemId
-                    : itemId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            type:
-                null == type
-                    ? _value.type
-                    : type // ignore: cast_nullable_to_non_nullable
-                        as ProgressType,
-            progress:
-                null == progress
-                    ? _value.progress
-                    : progress // ignore: cast_nullable_to_non_nullable
-                        as double,
-            timeSpent:
-                null == timeSpent
-                    ? _value.timeSpent
-                    : timeSpent // ignore: cast_nullable_to_non_nullable
-                        as int,
-            attempts:
-                null == attempts
-                    ? _value.attempts
-                    : attempts // ignore: cast_nullable_to_non_nullable
-                        as int,
-            bestScore:
-                null == bestScore
-                    ? _value.bestScore
-                    : bestScore // ignore: cast_nullable_to_non_nullable
-                        as double,
-            completedSections:
-                null == completedSections
-                    ? _value.completedSections
-                    : completedSections // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            startedAt:
-                freezed == startedAt
-                    ? _value.startedAt
-                    : startedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            completedAt:
-                freezed == completedAt
-                    ? _value.completedAt
-                    : completedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            lastActivityAt:
-                freezed == lastActivityAt
-                    ? _value.lastActivityAt
-                    : lastActivityAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      itemId: null == itemId
+          ? _value.itemId
+          : itemId // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as ProgressType,
+      progress: null == progress
+          ? _value.progress
+          : progress // ignore: cast_nullable_to_non_nullable
+              as double,
+      timeSpent: null == timeSpent
+          ? _value.timeSpent
+          : timeSpent // ignore: cast_nullable_to_non_nullable
+              as int,
+      attempts: null == attempts
+          ? _value.attempts
+          : attempts // ignore: cast_nullable_to_non_nullable
+              as int,
+      bestScore: null == bestScore
+          ? _value.bestScore
+          : bestScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      completedSections: null == completedSections
+          ? _value.completedSections
+          : completedSections // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      startedAt: freezed == startedAt
+          ? _value.startedAt
+          : startedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      completedAt: freezed == completedAt
+          ? _value.completedAt
+          : completedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      lastActivityAt: freezed == lastActivityAt
+          ? _value.lastActivityAt
+          : lastActivityAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$LearningProgressImplCopyWith<$Res>
     implements $LearningProgressCopyWith<$Res> {
-  factory _$$LearningProgressImplCopyWith(
-    _$LearningProgressImpl value,
-    $Res Function(_$LearningProgressImpl) then,
-  ) = __$$LearningProgressImplCopyWithImpl<$Res>;
+  factory _$$LearningProgressImplCopyWith(_$LearningProgressImpl value,
+          $Res Function(_$LearningProgressImpl) then) =
+      __$$LearningProgressImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String userId,
-    String itemId,
-    ProgressType type,
-    double progress,
-    int timeSpent,
-    int attempts,
-    double bestScore,
-    List<String> completedSections,
-    DateTime? startedAt,
-    DateTime? completedAt,
-    DateTime? lastActivityAt,
-  });
+  $Res call(
+      {String userId,
+      String itemId,
+      ProgressType type,
+      double progress,
+      int timeSpent,
+      int attempts,
+      double bestScore,
+      List<String> completedSections,
+      DateTime? startedAt,
+      DateTime? completedAt,
+      DateTime? lastActivityAt});
 }
 
 /// @nodoc
 class __$$LearningProgressImplCopyWithImpl<$Res>
     extends _$LearningProgressCopyWithImpl<$Res, _$LearningProgressImpl>
     implements _$$LearningProgressImplCopyWith<$Res> {
-  __$$LearningProgressImplCopyWithImpl(
-    _$LearningProgressImpl _value,
-    $Res Function(_$LearningProgressImpl) _then,
-  ) : super(_value, _then);
+  __$$LearningProgressImplCopyWithImpl(_$LearningProgressImpl _value,
+      $Res Function(_$LearningProgressImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of LearningProgress
   /// with the given fields replaced by the non-null parameter values.
@@ -6567,84 +6013,71 @@ class __$$LearningProgressImplCopyWithImpl<$Res>
     Object? completedAt = freezed,
     Object? lastActivityAt = freezed,
   }) {
-    return _then(
-      _$LearningProgressImpl(
-        userId:
-            null == userId
-                ? _value.userId
-                : userId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        itemId:
-            null == itemId
-                ? _value.itemId
-                : itemId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        type:
-            null == type
-                ? _value.type
-                : type // ignore: cast_nullable_to_non_nullable
-                    as ProgressType,
-        progress:
-            null == progress
-                ? _value.progress
-                : progress // ignore: cast_nullable_to_non_nullable
-                    as double,
-        timeSpent:
-            null == timeSpent
-                ? _value.timeSpent
-                : timeSpent // ignore: cast_nullable_to_non_nullable
-                    as int,
-        attempts:
-            null == attempts
-                ? _value.attempts
-                : attempts // ignore: cast_nullable_to_non_nullable
-                    as int,
-        bestScore:
-            null == bestScore
-                ? _value.bestScore
-                : bestScore // ignore: cast_nullable_to_non_nullable
-                    as double,
-        completedSections:
-            null == completedSections
-                ? _value._completedSections
-                : completedSections // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        startedAt:
-            freezed == startedAt
-                ? _value.startedAt
-                : startedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        completedAt:
-            freezed == completedAt
-                ? _value.completedAt
-                : completedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        lastActivityAt:
-            freezed == lastActivityAt
-                ? _value.lastActivityAt
-                : lastActivityAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-      ),
-    );
+    return _then(_$LearningProgressImpl(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      itemId: null == itemId
+          ? _value.itemId
+          : itemId // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as ProgressType,
+      progress: null == progress
+          ? _value.progress
+          : progress // ignore: cast_nullable_to_non_nullable
+              as double,
+      timeSpent: null == timeSpent
+          ? _value.timeSpent
+          : timeSpent // ignore: cast_nullable_to_non_nullable
+              as int,
+      attempts: null == attempts
+          ? _value.attempts
+          : attempts // ignore: cast_nullable_to_non_nullable
+              as int,
+      bestScore: null == bestScore
+          ? _value.bestScore
+          : bestScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      completedSections: null == completedSections
+          ? _value._completedSections
+          : completedSections // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      startedAt: freezed == startedAt
+          ? _value.startedAt
+          : startedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      completedAt: freezed == completedAt
+          ? _value.completedAt
+          : completedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      lastActivityAt: freezed == lastActivityAt
+          ? _value.lastActivityAt
+          : lastActivityAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$LearningProgressImpl implements _LearningProgress {
-  const _$LearningProgressImpl({
-    required this.userId,
-    required this.itemId,
-    required this.type,
-    required this.progress,
-    this.timeSpent = 0,
-    this.attempts = 0,
-    this.bestScore = 0.0,
-    final List<String> completedSections = const [],
-    this.startedAt,
-    this.completedAt,
-    this.lastActivityAt,
-  }) : _completedSections = completedSections;
+  const _$LearningProgressImpl(
+      {required this.userId,
+      required this.itemId,
+      required this.type,
+      required this.progress,
+      this.timeSpent = 0,
+      this.attempts = 0,
+      this.bestScore = 0.0,
+      final List<String> completedSections = const [],
+      this.startedAt,
+      this.completedAt,
+      this.lastActivityAt})
+      : _completedSections = completedSections;
 
   factory _$LearningProgressImpl.fromJson(Map<String, dynamic> json) =>
       _$$LearningProgressImplFromJson(json);
@@ -6653,16 +6086,16 @@ class _$LearningProgressImpl implements _LearningProgress {
   final String userId;
   @override
   final String itemId;
-  // courseId, lessonId, or quizId
+// courseId, lessonId, or quizId
   @override
   final ProgressType type;
   @override
   final double progress;
-  // 0.0 to 1.0
+// 0.0 to 1.0
   @override
   @JsonKey()
   final int timeSpent;
-  // in minutes
+// in minutes
   @override
   @JsonKey()
   final int attempts;
@@ -6707,10 +6140,8 @@ class _$LearningProgressImpl implements _LearningProgress {
                 other.attempts == attempts) &&
             (identical(other.bestScore, bestScore) ||
                 other.bestScore == bestScore) &&
-            const DeepCollectionEquality().equals(
-              other._completedSections,
-              _completedSections,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._completedSections, _completedSections) &&
             (identical(other.startedAt, startedAt) ||
                 other.startedAt == startedAt) &&
             (identical(other.completedAt, completedAt) ||
@@ -6722,19 +6153,18 @@ class _$LearningProgressImpl implements _LearningProgress {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    userId,
-    itemId,
-    type,
-    progress,
-    timeSpent,
-    attempts,
-    bestScore,
-    const DeepCollectionEquality().hash(_completedSections),
-    startedAt,
-    completedAt,
-    lastActivityAt,
-  );
+      runtimeType,
+      userId,
+      itemId,
+      type,
+      progress,
+      timeSpent,
+      attempts,
+      bestScore,
+      const DeepCollectionEquality().hash(_completedSections),
+      startedAt,
+      completedAt,
+      lastActivityAt);
 
   /// Create a copy of LearningProgress
   /// with the given fields replaced by the non-null parameter values.
@@ -6743,30 +6173,29 @@ class _$LearningProgressImpl implements _LearningProgress {
   @pragma('vm:prefer-inline')
   _$$LearningProgressImplCopyWith<_$LearningProgressImpl> get copyWith =>
       __$$LearningProgressImplCopyWithImpl<_$LearningProgressImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LearningProgressImplToJson(this);
+    return _$$LearningProgressImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _LearningProgress implements LearningProgress {
-  const factory _LearningProgress({
-    required final String userId,
-    required final String itemId,
-    required final ProgressType type,
-    required final double progress,
-    final int timeSpent,
-    final int attempts,
-    final double bestScore,
-    final List<String> completedSections,
-    final DateTime? startedAt,
-    final DateTime? completedAt,
-    final DateTime? lastActivityAt,
-  }) = _$LearningProgressImpl;
+  const factory _LearningProgress(
+      {required final String userId,
+      required final String itemId,
+      required final ProgressType type,
+      required final double progress,
+      final int timeSpent,
+      final int attempts,
+      final double bestScore,
+      final List<String> completedSections,
+      final DateTime? startedAt,
+      final DateTime? completedAt,
+      final DateTime? lastActivityAt}) = _$LearningProgressImpl;
 
   factory _LearningProgress.fromJson(Map<String, dynamic> json) =
       _$LearningProgressImpl.fromJson;
@@ -6842,30 +6271,28 @@ mixin _$LearningAnalytics {
 /// @nodoc
 abstract class $LearningAnalyticsCopyWith<$Res> {
   factory $LearningAnalyticsCopyWith(
-    LearningAnalytics value,
-    $Res Function(LearningAnalytics) then,
-  ) = _$LearningAnalyticsCopyWithImpl<$Res, LearningAnalytics>;
+          LearningAnalytics value, $Res Function(LearningAnalytics) then) =
+      _$LearningAnalyticsCopyWithImpl<$Res, LearningAnalytics>;
   @useResult
-  $Res call({
-    String userId,
-    int totalCourses,
-    int completedCourses,
-    int totalLessons,
-    int completedLessons,
-    int totalQuizzes,
-    int passedQuizzes,
-    int certificatesEarned,
-    int studyStreak,
-    int longestStreak,
-    int totalStudyTime,
-    double averageQuizScore,
-    Map<CourseCategory, int> categoryProgress,
-    Map<String, int> scholarInteractions,
-    List<String> favoriteTopics,
-    DateTime? firstStudyDate,
-    DateTime? lastStudyDate,
-    DateTime? updatedAt,
-  });
+  $Res call(
+      {String userId,
+      int totalCourses,
+      int completedCourses,
+      int totalLessons,
+      int completedLessons,
+      int totalQuizzes,
+      int passedQuizzes,
+      int certificatesEarned,
+      int studyStreak,
+      int longestStreak,
+      int totalStudyTime,
+      double averageQuizScore,
+      Map<CourseCategory, int> categoryProgress,
+      Map<String, int> scholarInteractions,
+      List<String> favoriteTopics,
+      DateTime? firstStudyDate,
+      DateTime? lastStudyDate,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -6902,143 +6329,119 @@ class _$LearningAnalyticsCopyWithImpl<$Res, $Val extends LearningAnalytics>
     Object? lastStudyDate = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            userId:
-                null == userId
-                    ? _value.userId
-                    : userId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            totalCourses:
-                null == totalCourses
-                    ? _value.totalCourses
-                    : totalCourses // ignore: cast_nullable_to_non_nullable
-                        as int,
-            completedCourses:
-                null == completedCourses
-                    ? _value.completedCourses
-                    : completedCourses // ignore: cast_nullable_to_non_nullable
-                        as int,
-            totalLessons:
-                null == totalLessons
-                    ? _value.totalLessons
-                    : totalLessons // ignore: cast_nullable_to_non_nullable
-                        as int,
-            completedLessons:
-                null == completedLessons
-                    ? _value.completedLessons
-                    : completedLessons // ignore: cast_nullable_to_non_nullable
-                        as int,
-            totalQuizzes:
-                null == totalQuizzes
-                    ? _value.totalQuizzes
-                    : totalQuizzes // ignore: cast_nullable_to_non_nullable
-                        as int,
-            passedQuizzes:
-                null == passedQuizzes
-                    ? _value.passedQuizzes
-                    : passedQuizzes // ignore: cast_nullable_to_non_nullable
-                        as int,
-            certificatesEarned:
-                null == certificatesEarned
-                    ? _value.certificatesEarned
-                    : certificatesEarned // ignore: cast_nullable_to_non_nullable
-                        as int,
-            studyStreak:
-                null == studyStreak
-                    ? _value.studyStreak
-                    : studyStreak // ignore: cast_nullable_to_non_nullable
-                        as int,
-            longestStreak:
-                null == longestStreak
-                    ? _value.longestStreak
-                    : longestStreak // ignore: cast_nullable_to_non_nullable
-                        as int,
-            totalStudyTime:
-                null == totalStudyTime
-                    ? _value.totalStudyTime
-                    : totalStudyTime // ignore: cast_nullable_to_non_nullable
-                        as int,
-            averageQuizScore:
-                null == averageQuizScore
-                    ? _value.averageQuizScore
-                    : averageQuizScore // ignore: cast_nullable_to_non_nullable
-                        as double,
-            categoryProgress:
-                null == categoryProgress
-                    ? _value.categoryProgress
-                    : categoryProgress // ignore: cast_nullable_to_non_nullable
-                        as Map<CourseCategory, int>,
-            scholarInteractions:
-                null == scholarInteractions
-                    ? _value.scholarInteractions
-                    : scholarInteractions // ignore: cast_nullable_to_non_nullable
-                        as Map<String, int>,
-            favoriteTopics:
-                null == favoriteTopics
-                    ? _value.favoriteTopics
-                    : favoriteTopics // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            firstStudyDate:
-                freezed == firstStudyDate
-                    ? _value.firstStudyDate
-                    : firstStudyDate // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            lastStudyDate:
-                freezed == lastStudyDate
-                    ? _value.lastStudyDate
-                    : lastStudyDate // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            updatedAt:
-                freezed == updatedAt
-                    ? _value.updatedAt
-                    : updatedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      totalCourses: null == totalCourses
+          ? _value.totalCourses
+          : totalCourses // ignore: cast_nullable_to_non_nullable
+              as int,
+      completedCourses: null == completedCourses
+          ? _value.completedCourses
+          : completedCourses // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalLessons: null == totalLessons
+          ? _value.totalLessons
+          : totalLessons // ignore: cast_nullable_to_non_nullable
+              as int,
+      completedLessons: null == completedLessons
+          ? _value.completedLessons
+          : completedLessons // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalQuizzes: null == totalQuizzes
+          ? _value.totalQuizzes
+          : totalQuizzes // ignore: cast_nullable_to_non_nullable
+              as int,
+      passedQuizzes: null == passedQuizzes
+          ? _value.passedQuizzes
+          : passedQuizzes // ignore: cast_nullable_to_non_nullable
+              as int,
+      certificatesEarned: null == certificatesEarned
+          ? _value.certificatesEarned
+          : certificatesEarned // ignore: cast_nullable_to_non_nullable
+              as int,
+      studyStreak: null == studyStreak
+          ? _value.studyStreak
+          : studyStreak // ignore: cast_nullable_to_non_nullable
+              as int,
+      longestStreak: null == longestStreak
+          ? _value.longestStreak
+          : longestStreak // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalStudyTime: null == totalStudyTime
+          ? _value.totalStudyTime
+          : totalStudyTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      averageQuizScore: null == averageQuizScore
+          ? _value.averageQuizScore
+          : averageQuizScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      categoryProgress: null == categoryProgress
+          ? _value.categoryProgress
+          : categoryProgress // ignore: cast_nullable_to_non_nullable
+              as Map<CourseCategory, int>,
+      scholarInteractions: null == scholarInteractions
+          ? _value.scholarInteractions
+          : scholarInteractions // ignore: cast_nullable_to_non_nullable
+              as Map<String, int>,
+      favoriteTopics: null == favoriteTopics
+          ? _value.favoriteTopics
+          : favoriteTopics // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      firstStudyDate: freezed == firstStudyDate
+          ? _value.firstStudyDate
+          : firstStudyDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      lastStudyDate: freezed == lastStudyDate
+          ? _value.lastStudyDate
+          : lastStudyDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$LearningAnalyticsImplCopyWith<$Res>
     implements $LearningAnalyticsCopyWith<$Res> {
-  factory _$$LearningAnalyticsImplCopyWith(
-    _$LearningAnalyticsImpl value,
-    $Res Function(_$LearningAnalyticsImpl) then,
-  ) = __$$LearningAnalyticsImplCopyWithImpl<$Res>;
+  factory _$$LearningAnalyticsImplCopyWith(_$LearningAnalyticsImpl value,
+          $Res Function(_$LearningAnalyticsImpl) then) =
+      __$$LearningAnalyticsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String userId,
-    int totalCourses,
-    int completedCourses,
-    int totalLessons,
-    int completedLessons,
-    int totalQuizzes,
-    int passedQuizzes,
-    int certificatesEarned,
-    int studyStreak,
-    int longestStreak,
-    int totalStudyTime,
-    double averageQuizScore,
-    Map<CourseCategory, int> categoryProgress,
-    Map<String, int> scholarInteractions,
-    List<String> favoriteTopics,
-    DateTime? firstStudyDate,
-    DateTime? lastStudyDate,
-    DateTime? updatedAt,
-  });
+  $Res call(
+      {String userId,
+      int totalCourses,
+      int completedCourses,
+      int totalLessons,
+      int completedLessons,
+      int totalQuizzes,
+      int passedQuizzes,
+      int certificatesEarned,
+      int studyStreak,
+      int longestStreak,
+      int totalStudyTime,
+      double averageQuizScore,
+      Map<CourseCategory, int> categoryProgress,
+      Map<String, int> scholarInteractions,
+      List<String> favoriteTopics,
+      DateTime? firstStudyDate,
+      DateTime? lastStudyDate,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
 class __$$LearningAnalyticsImplCopyWithImpl<$Res>
     extends _$LearningAnalyticsCopyWithImpl<$Res, _$LearningAnalyticsImpl>
     implements _$$LearningAnalyticsImplCopyWith<$Res> {
-  __$$LearningAnalyticsImplCopyWithImpl(
-    _$LearningAnalyticsImpl _value,
-    $Res Function(_$LearningAnalyticsImpl) _then,
-  ) : super(_value, _then);
+  __$$LearningAnalyticsImplCopyWithImpl(_$LearningAnalyticsImpl _value,
+      $Res Function(_$LearningAnalyticsImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of LearningAnalytics
   /// with the given fields replaced by the non-null parameter values.
@@ -7064,128 +6467,108 @@ class __$$LearningAnalyticsImplCopyWithImpl<$Res>
     Object? lastStudyDate = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(
-      _$LearningAnalyticsImpl(
-        userId:
-            null == userId
-                ? _value.userId
-                : userId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        totalCourses:
-            null == totalCourses
-                ? _value.totalCourses
-                : totalCourses // ignore: cast_nullable_to_non_nullable
-                    as int,
-        completedCourses:
-            null == completedCourses
-                ? _value.completedCourses
-                : completedCourses // ignore: cast_nullable_to_non_nullable
-                    as int,
-        totalLessons:
-            null == totalLessons
-                ? _value.totalLessons
-                : totalLessons // ignore: cast_nullable_to_non_nullable
-                    as int,
-        completedLessons:
-            null == completedLessons
-                ? _value.completedLessons
-                : completedLessons // ignore: cast_nullable_to_non_nullable
-                    as int,
-        totalQuizzes:
-            null == totalQuizzes
-                ? _value.totalQuizzes
-                : totalQuizzes // ignore: cast_nullable_to_non_nullable
-                    as int,
-        passedQuizzes:
-            null == passedQuizzes
-                ? _value.passedQuizzes
-                : passedQuizzes // ignore: cast_nullable_to_non_nullable
-                    as int,
-        certificatesEarned:
-            null == certificatesEarned
-                ? _value.certificatesEarned
-                : certificatesEarned // ignore: cast_nullable_to_non_nullable
-                    as int,
-        studyStreak:
-            null == studyStreak
-                ? _value.studyStreak
-                : studyStreak // ignore: cast_nullable_to_non_nullable
-                    as int,
-        longestStreak:
-            null == longestStreak
-                ? _value.longestStreak
-                : longestStreak // ignore: cast_nullable_to_non_nullable
-                    as int,
-        totalStudyTime:
-            null == totalStudyTime
-                ? _value.totalStudyTime
-                : totalStudyTime // ignore: cast_nullable_to_non_nullable
-                    as int,
-        averageQuizScore:
-            null == averageQuizScore
-                ? _value.averageQuizScore
-                : averageQuizScore // ignore: cast_nullable_to_non_nullable
-                    as double,
-        categoryProgress:
-            null == categoryProgress
-                ? _value._categoryProgress
-                : categoryProgress // ignore: cast_nullable_to_non_nullable
-                    as Map<CourseCategory, int>,
-        scholarInteractions:
-            null == scholarInteractions
-                ? _value._scholarInteractions
-                : scholarInteractions // ignore: cast_nullable_to_non_nullable
-                    as Map<String, int>,
-        favoriteTopics:
-            null == favoriteTopics
-                ? _value._favoriteTopics
-                : favoriteTopics // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        firstStudyDate:
-            freezed == firstStudyDate
-                ? _value.firstStudyDate
-                : firstStudyDate // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        lastStudyDate:
-            freezed == lastStudyDate
-                ? _value.lastStudyDate
-                : lastStudyDate // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        updatedAt:
-            freezed == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-      ),
-    );
+    return _then(_$LearningAnalyticsImpl(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      totalCourses: null == totalCourses
+          ? _value.totalCourses
+          : totalCourses // ignore: cast_nullable_to_non_nullable
+              as int,
+      completedCourses: null == completedCourses
+          ? _value.completedCourses
+          : completedCourses // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalLessons: null == totalLessons
+          ? _value.totalLessons
+          : totalLessons // ignore: cast_nullable_to_non_nullable
+              as int,
+      completedLessons: null == completedLessons
+          ? _value.completedLessons
+          : completedLessons // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalQuizzes: null == totalQuizzes
+          ? _value.totalQuizzes
+          : totalQuizzes // ignore: cast_nullable_to_non_nullable
+              as int,
+      passedQuizzes: null == passedQuizzes
+          ? _value.passedQuizzes
+          : passedQuizzes // ignore: cast_nullable_to_non_nullable
+              as int,
+      certificatesEarned: null == certificatesEarned
+          ? _value.certificatesEarned
+          : certificatesEarned // ignore: cast_nullable_to_non_nullable
+              as int,
+      studyStreak: null == studyStreak
+          ? _value.studyStreak
+          : studyStreak // ignore: cast_nullable_to_non_nullable
+              as int,
+      longestStreak: null == longestStreak
+          ? _value.longestStreak
+          : longestStreak // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalStudyTime: null == totalStudyTime
+          ? _value.totalStudyTime
+          : totalStudyTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      averageQuizScore: null == averageQuizScore
+          ? _value.averageQuizScore
+          : averageQuizScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      categoryProgress: null == categoryProgress
+          ? _value._categoryProgress
+          : categoryProgress // ignore: cast_nullable_to_non_nullable
+              as Map<CourseCategory, int>,
+      scholarInteractions: null == scholarInteractions
+          ? _value._scholarInteractions
+          : scholarInteractions // ignore: cast_nullable_to_non_nullable
+              as Map<String, int>,
+      favoriteTopics: null == favoriteTopics
+          ? _value._favoriteTopics
+          : favoriteTopics // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      firstStudyDate: freezed == firstStudyDate
+          ? _value.firstStudyDate
+          : firstStudyDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      lastStudyDate: freezed == lastStudyDate
+          ? _value.lastStudyDate
+          : lastStudyDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$LearningAnalyticsImpl implements _LearningAnalytics {
-  const _$LearningAnalyticsImpl({
-    required this.userId,
-    this.totalCourses = 0,
-    this.completedCourses = 0,
-    this.totalLessons = 0,
-    this.completedLessons = 0,
-    this.totalQuizzes = 0,
-    this.passedQuizzes = 0,
-    this.certificatesEarned = 0,
-    this.studyStreak = 0,
-    this.longestStreak = 0,
-    this.totalStudyTime = 0,
-    this.averageQuizScore = 0.0,
-    final Map<CourseCategory, int> categoryProgress = const {},
-    final Map<String, int> scholarInteractions = const {},
-    final List<String> favoriteTopics = const [],
-    this.firstStudyDate,
-    this.lastStudyDate,
-    this.updatedAt,
-  }) : _categoryProgress = categoryProgress,
-       _scholarInteractions = scholarInteractions,
-       _favoriteTopics = favoriteTopics;
+  const _$LearningAnalyticsImpl(
+      {required this.userId,
+      this.totalCourses = 0,
+      this.completedCourses = 0,
+      this.totalLessons = 0,
+      this.completedLessons = 0,
+      this.totalQuizzes = 0,
+      this.passedQuizzes = 0,
+      this.certificatesEarned = 0,
+      this.studyStreak = 0,
+      this.longestStreak = 0,
+      this.totalStudyTime = 0,
+      this.averageQuizScore = 0.0,
+      final Map<CourseCategory, int> categoryProgress = const {},
+      final Map<String, int> scholarInteractions = const {},
+      final List<String> favoriteTopics = const [],
+      this.firstStudyDate,
+      this.lastStudyDate,
+      this.updatedAt})
+      : _categoryProgress = categoryProgress,
+        _scholarInteractions = scholarInteractions,
+        _favoriteTopics = favoriteTopics;
 
   factory _$LearningAnalyticsImpl.fromJson(Map<String, dynamic> json) =>
       _$$LearningAnalyticsImplFromJson(json);
@@ -7222,7 +6605,7 @@ class _$LearningAnalyticsImpl implements _LearningAnalytics {
   @override
   @JsonKey()
   final int totalStudyTime;
-  // in minutes
+// in minutes
   @override
   @JsonKey()
   final double averageQuizScore;
@@ -7294,18 +6677,12 @@ class _$LearningAnalyticsImpl implements _LearningAnalytics {
                 other.totalStudyTime == totalStudyTime) &&
             (identical(other.averageQuizScore, averageQuizScore) ||
                 other.averageQuizScore == averageQuizScore) &&
-            const DeepCollectionEquality().equals(
-              other._categoryProgress,
-              _categoryProgress,
-            ) &&
-            const DeepCollectionEquality().equals(
-              other._scholarInteractions,
-              _scholarInteractions,
-            ) &&
-            const DeepCollectionEquality().equals(
-              other._favoriteTopics,
-              _favoriteTopics,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._categoryProgress, _categoryProgress) &&
+            const DeepCollectionEquality()
+                .equals(other._scholarInteractions, _scholarInteractions) &&
+            const DeepCollectionEquality()
+                .equals(other._favoriteTopics, _favoriteTopics) &&
             (identical(other.firstStudyDate, firstStudyDate) ||
                 other.firstStudyDate == firstStudyDate) &&
             (identical(other.lastStudyDate, lastStudyDate) ||
@@ -7317,26 +6694,25 @@ class _$LearningAnalyticsImpl implements _LearningAnalytics {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    userId,
-    totalCourses,
-    completedCourses,
-    totalLessons,
-    completedLessons,
-    totalQuizzes,
-    passedQuizzes,
-    certificatesEarned,
-    studyStreak,
-    longestStreak,
-    totalStudyTime,
-    averageQuizScore,
-    const DeepCollectionEquality().hash(_categoryProgress),
-    const DeepCollectionEquality().hash(_scholarInteractions),
-    const DeepCollectionEquality().hash(_favoriteTopics),
-    firstStudyDate,
-    lastStudyDate,
-    updatedAt,
-  );
+      runtimeType,
+      userId,
+      totalCourses,
+      completedCourses,
+      totalLessons,
+      completedLessons,
+      totalQuizzes,
+      passedQuizzes,
+      certificatesEarned,
+      studyStreak,
+      longestStreak,
+      totalStudyTime,
+      averageQuizScore,
+      const DeepCollectionEquality().hash(_categoryProgress),
+      const DeepCollectionEquality().hash(_scholarInteractions),
+      const DeepCollectionEquality().hash(_favoriteTopics),
+      firstStudyDate,
+      lastStudyDate,
+      updatedAt);
 
   /// Create a copy of LearningAnalytics
   /// with the given fields replaced by the non-null parameter values.
@@ -7345,37 +6721,36 @@ class _$LearningAnalyticsImpl implements _LearningAnalytics {
   @pragma('vm:prefer-inline')
   _$$LearningAnalyticsImplCopyWith<_$LearningAnalyticsImpl> get copyWith =>
       __$$LearningAnalyticsImplCopyWithImpl<_$LearningAnalyticsImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LearningAnalyticsImplToJson(this);
+    return _$$LearningAnalyticsImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _LearningAnalytics implements LearningAnalytics {
-  const factory _LearningAnalytics({
-    required final String userId,
-    final int totalCourses,
-    final int completedCourses,
-    final int totalLessons,
-    final int completedLessons,
-    final int totalQuizzes,
-    final int passedQuizzes,
-    final int certificatesEarned,
-    final int studyStreak,
-    final int longestStreak,
-    final int totalStudyTime,
-    final double averageQuizScore,
-    final Map<CourseCategory, int> categoryProgress,
-    final Map<String, int> scholarInteractions,
-    final List<String> favoriteTopics,
-    final DateTime? firstStudyDate,
-    final DateTime? lastStudyDate,
-    final DateTime? updatedAt,
-  }) = _$LearningAnalyticsImpl;
+  const factory _LearningAnalytics(
+      {required final String userId,
+      final int totalCourses,
+      final int completedCourses,
+      final int totalLessons,
+      final int completedLessons,
+      final int totalQuizzes,
+      final int passedQuizzes,
+      final int certificatesEarned,
+      final int studyStreak,
+      final int longestStreak,
+      final int totalStudyTime,
+      final double averageQuizScore,
+      final Map<CourseCategory, int> categoryProgress,
+      final Map<String, int> scholarInteractions,
+      final List<String> favoriteTopics,
+      final DateTime? firstStudyDate,
+      final DateTime? lastStudyDate,
+      final DateTime? updatedAt}) = _$LearningAnalyticsImpl;
 
   factory _LearningAnalytics.fromJson(Map<String, dynamic> json) =
       _$LearningAnalyticsImpl.fromJson;

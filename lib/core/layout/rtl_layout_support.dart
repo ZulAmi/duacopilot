@@ -38,8 +38,7 @@ class RTLLayoutSupport {
     TextDirection? explicitDirection,
     String? content,
   }) {
-    final direction =
-        explicitDirection ?? getContextDirection(context, content);
+    final direction = explicitDirection ?? getContextDirection(context, content);
 
     return Directionality(textDirection: direction, child: child);
   }
@@ -146,8 +145,7 @@ class MixedTextDirectionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textDirection = ArabicTypography.getTextDirection(text);
-    final alignment =
-        textAlign ?? ArabicTypography.getTextAlign(text, textDirection);
+    final alignment = textAlign ?? ArabicTypography.getTextAlign(text, textDirection);
 
     Widget textWidget;
 
@@ -207,10 +205,7 @@ class RTLAwareContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final direction = RTLLayoutSupport.getContextDirection(context, content);
-    final adaptedAlignment =
-        alignment != null
-            ? RTLLayoutSupport.createRTLAwareAlignment(context, alignment!)
-            : null;
+    final adaptedAlignment = alignment != null ? RTLLayoutSupport.createRTLAwareAlignment(context, alignment!) : null;
 
     return Directionality(
       textDirection: direction,
@@ -262,10 +257,7 @@ class RTLAwareRow extends StatelessWidget {
         mainAxisAlignment: adaptedMainAxis,
         crossAxisAlignment: adaptedCrossAxis,
         mainAxisSize: mainAxisSize,
-        children:
-            direction == TextDirection.rtl
-                ? children.reversed.toList()
-                : children,
+        children: direction == TextDirection.rtl ? children.reversed.toList() : children,
       ),
     );
   }
@@ -409,30 +401,28 @@ class AccessibleArabicText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textDirection = ArabicTypography.getTextDirection(text);
-    final alignment =
-        textAlign ?? ArabicTypography.getTextAlign(text, textDirection);
+    final alignment = textAlign ?? ArabicTypography.getTextAlign(text, textDirection);
 
-    Widget textWidget =
-        selectable
-            ? SelectableText(
+    Widget textWidget = selectable
+        ? SelectableText(
+            text,
+            style: style,
+            textAlign: alignment,
+            textDirection: textDirection,
+            maxLines: maxLines,
+            onTap: onTap,
+          )
+        : GestureDetector(
+            onTap: onTap,
+            child: Text(
               text,
               style: style,
               textAlign: alignment,
               textDirection: textDirection,
               maxLines: maxLines,
-              onTap: onTap,
-            )
-            : GestureDetector(
-              onTap: onTap,
-              child: Text(
-                text,
-                style: style,
-                textAlign: alignment,
-                textDirection: textDirection,
-                maxLines: maxLines,
-                overflow: overflow,
-              ),
-            );
+              overflow: overflow,
+            ),
+          );
 
     // Add semantics for screen readers
     textWidget = Semantics(
@@ -460,7 +450,7 @@ class ArabicTextSelectionControls extends MaterialTextSelectionControls {
   Widget buildHandle(
     BuildContext context,
     TextSelectionHandleType type,
-    double textLineHeight, [
+    double textHeight, [
     VoidCallback? onTap,
   ]) {
     final isRTL = Directionality.of(context) == TextDirection.rtl;
@@ -475,7 +465,7 @@ class ArabicTextSelectionControls extends MaterialTextSelectionControls {
       }
     }
 
-    return super.buildHandle(context, adjustedType, textLineHeight, onTap);
+    return super.buildHandle(context, adjustedType, textHeight, onTap);
   }
 
   @override

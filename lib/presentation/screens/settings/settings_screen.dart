@@ -14,8 +14,7 @@ class SettingsScreen extends ConsumerStatefulWidget {
   ConsumerState<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _SettingsScreenState extends ConsumerState<SettingsScreen>
-    with TickerProviderStateMixin {
+class _SettingsScreenState extends ConsumerState<SettingsScreen> with TickerProviderStateMixin {
   late AnimationController _fadeController;
   late AnimationController _slideController;
 
@@ -301,8 +300,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
                     ProfessionalIslamicTheme.space3,
                   ),
                   decoration: BoxDecoration(
-                    color: ProfessionalIslamicTheme.textOnIslamic.withOpacity(
-                      0.2,
+                    color: ProfessionalIslamicTheme.textOnIslamic.withValues(
+                      alpha: 0.2,
                     ),
                     borderRadius: BorderRadius.circular(
                       ProfessionalIslamicTheme.radius2Xl,
@@ -330,8 +329,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
                       Text(
                         'Customize DuaCopilot to match your Islamic preferences and spiritual journey',
                         style: ProfessionalIslamicTheme.body2.copyWith(
-                          color: ProfessionalIslamicTheme.textOnIslamic
-                              .withOpacity(0.9),
+                          color: ProfessionalIslamicTheme.textOnIslamic.withValues(alpha: 0.9),
                         ),
                       ),
                     ],
@@ -397,8 +395,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
           subtitle: 'Choose method for prayer time calculations',
           value: _prayerCalculationMethod,
           items: _calculationMethods,
-          onChanged:
-              (value) => setState(() => _prayerCalculationMethod = value!),
+          onChanged: (value) => setState(() => _prayerCalculationMethod = value!),
         ),
         _buildDropdownItem(
           icon: Icons.headphones_rounded,
@@ -662,8 +659,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
                       ProfessionalIslamicTheme.space2,
                     ),
                     decoration: BoxDecoration(
-                      color: ProfessionalIslamicTheme.islamicGreen.withOpacity(
-                        0.1,
+                      color: ProfessionalIslamicTheme.islamicGreen.withValues(
+                        alpha: 0.1,
                       ),
                       borderRadius: BorderRadius.circular(
                         ProfessionalIslamicTheme.radius2Xl,
@@ -845,16 +842,15 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
                       value: value,
                       isExpanded: true,
                       onChanged: onChanged,
-                      items:
-                          items.map((String item) {
-                            return DropdownMenuItem<String>(
-                              value: item,
-                              child: Text(
-                                item,
-                                style: ProfessionalIslamicTheme.body2,
-                              ),
-                            );
-                          }).toList(),
+                      items: items.map((String item) {
+                        return DropdownMenuItem<String>(
+                          value: item,
+                          child: Text(
+                            item,
+                            style: ProfessionalIslamicTheme.body2,
+                          ),
+                        );
+                      }).toList(),
                     ),
                   ),
                 ),
@@ -878,19 +874,18 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
   void _showSubscriptionDialog() {
     showDialog(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('Subscription Status'),
-            content: const Text(
-              'Premium Plan Active\n\n✓ Unlimited AI queries\n✓ Advanced features\n✓ Premium audio content\n✓ Family sharing',
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Close'),
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        title: const Text('Subscription Status'),
+        content: const Text(
+          'Premium Plan Active\n\n✓ Unlimited AI queries\n✓ Advanced features\n✓ Premium audio content\n✓ Family sharing',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Close'),
           ),
+        ],
+      ),
     );
   }
 
@@ -914,29 +909,28 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
   void _clearCache() {
     showDialog(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('Clear Cache'),
-            content: const Text('This will free up storage space. Continue?'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Cancel'),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  RevolutionaryComponents.showModernSnackBar(
-                    context: context,
-                    message: 'Cache cleared successfully',
-                    icon: Icons.check_circle_rounded,
-                    backgroundColor: ProfessionalIslamicTheme.success,
-                  );
-                },
-                child: const Text('Clear'),
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        title: const Text('Clear Cache'),
+        content: const Text('This will free up storage space. Continue?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
           ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              RevolutionaryComponents.showModernSnackBar(
+                context: context,
+                message: 'Cache cleared successfully',
+                icon: Icons.check_circle_rounded,
+                backgroundColor: ProfessionalIslamicTheme.success,
+              );
+            },
+            child: const Text('Clear'),
+          ),
+        ],
+      ),
     );
   }
 
@@ -971,45 +965,44 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
   void _resetToDefaults() {
     showDialog(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('Reset to Defaults'),
-            content: const Text(
-              'This will reset all settings to their default values. Continue?',
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Cancel'),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  setState(() {
-                    _notificationsEnabled = true;
-                    _voiceSearchEnabled = true;
-                    _darkModeEnabled = false;
-                    _arabicEnabled = true;
-                    _offlineModeEnabled = false;
-                    _analyticsEnabled = true;
-                    _crashReportingEnabled = true;
-                    _prayerReminders = true;
-                    _dhikrReminders = true;
-                    _quranReminders = true;
-                    _selectedLanguage = 'English';
-                    _selectedTheme = 'Islamic Green';
-                    _selectedFontSize = 'Medium';
-                    _selectedReciter = 'Abdul Rahman As-Sudais';
-                    _selectedTranslation = 'Sahih International';
-                    _prayerCalculationMethod = 'Muslim World League';
-                    _madhab = 'Hanafi';
-                  });
-                  _saveSettings();
-                },
-                child: const Text('Reset'),
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        title: const Text('Reset to Defaults'),
+        content: const Text(
+          'This will reset all settings to their default values. Continue?',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
           ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              setState(() {
+                _notificationsEnabled = true;
+                _voiceSearchEnabled = true;
+                _darkModeEnabled = false;
+                _arabicEnabled = true;
+                _offlineModeEnabled = false;
+                _analyticsEnabled = true;
+                _crashReportingEnabled = true;
+                _prayerReminders = true;
+                _dhikrReminders = true;
+                _quranReminders = true;
+                _selectedLanguage = 'English';
+                _selectedTheme = 'Islamic Green';
+                _selectedFontSize = 'Medium';
+                _selectedReciter = 'Abdul Rahman As-Sudais';
+                _selectedTranslation = 'Sahih International';
+                _prayerCalculationMethod = 'Muslim World League';
+                _madhab = 'Hanafi';
+              });
+              _saveSettings();
+            },
+            child: const Text('Reset'),
+          ),
+        ],
+      ),
     );
   }
 }

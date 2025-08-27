@@ -37,10 +37,10 @@ class UltraModernComponents {
           child: Container(
             padding: padding ?? const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: backgroundColor ?? Colors.white.withOpacity(0.8),
+              color: backgroundColor ?? Colors.white.withValues(alpha: 0.8),
               borderRadius: BorderRadius.circular(borderRadius),
               border: Border.all(
-                color: Colors.white.withOpacity(0.3),
+                color: Colors.white.withValues(alpha: 0.3),
                 width: 1,
               ),
             ),
@@ -218,13 +218,10 @@ class AnimatedGradientButtonWidget extends StatefulWidget {
   });
 
   @override
-  State<AnimatedGradientButtonWidget> createState() =>
-      _AnimatedGradientButtonWidgetState();
+  State<AnimatedGradientButtonWidget> createState() => _AnimatedGradientButtonWidgetState();
 }
 
-class _AnimatedGradientButtonWidgetState
-    extends State<AnimatedGradientButtonWidget>
-    with TickerProviderStateMixin {
+class _AnimatedGradientButtonWidgetState extends State<AnimatedGradientButtonWidget> with TickerProviderStateMixin {
   late AnimationController _scaleController;
   late AnimationController _shimmerController;
   late Animation<double> _scaleAnimation;
@@ -312,13 +309,12 @@ class _AnimatedGradientButtonWidgetState
                   color: Colors.transparent,
                   child: InkWell(
                     borderRadius: BorderRadius.circular(widget.borderRadius),
-                    onTap:
-                        widget.enabled && !widget.isLoading
-                            ? () {
-                              HapticFeedback.lightImpact();
-                              widget.onPressed();
-                            }
-                            : null,
+                    onTap: widget.enabled && !widget.isLoading
+                        ? () {
+                            HapticFeedback.lightImpact();
+                            widget.onPressed();
+                          }
+                        : null,
                     onTapDown: (_) => _scaleController.forward(),
                     onTapUp: (_) => _scaleController.reverse(),
                     onTapCancel: () => _scaleController.reverse(),
@@ -331,48 +327,39 @@ class _AnimatedGradientButtonWidgetState
                         ),
                       ),
                       child: Center(
-                        child:
-                            widget.isLoading
-                                ? SizedBox(
-                                  width: 24,
-                                  height: 24,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 2,
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                      widget.enabled
-                                          ? Colors.white
-                                          : Colors.grey.shade500,
+                        child: widget.isLoading
+                            ? SizedBox(
+                                width: 24,
+                                height: 24,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    widget.enabled ? Colors.white : Colors.grey.shade500,
+                                  ),
+                                ),
+                              )
+                            : Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  if (widget.icon != null) ...[
+                                    Icon(
+                                      widget.icon,
+                                      color: widget.enabled ? Colors.white : Colors.grey.shade500,
+                                      size: 20,
+                                    ),
+                                    const SizedBox(width: 8),
+                                  ],
+                                  Text(
+                                    widget.text,
+                                    style: TextStyle(
+                                      color: widget.enabled ? Colors.white : Colors.grey.shade500,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      letterSpacing: 0.2,
                                     ),
                                   ),
-                                )
-                                : Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    if (widget.icon != null) ...[
-                                      Icon(
-                                        widget.icon,
-                                        color:
-                                            widget.enabled
-                                                ? Colors.white
-                                                : Colors.grey.shade500,
-                                        size: 20,
-                                      ),
-                                      const SizedBox(width: 8),
-                                    ],
-                                    Text(
-                                      widget.text,
-                                      style: TextStyle(
-                                        color:
-                                            widget.enabled
-                                                ? Colors.white
-                                                : Colors.grey.shade500,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                        letterSpacing: 0.2,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                ],
+                              ),
                       ),
                     ),
                   ),
@@ -410,12 +397,10 @@ class FloatingSearchBarWidget extends StatefulWidget {
   });
 
   @override
-  State<FloatingSearchBarWidget> createState() =>
-      _FloatingSearchBarWidgetState();
+  State<FloatingSearchBarWidget> createState() => _FloatingSearchBarWidgetState();
 }
 
-class _FloatingSearchBarWidgetState extends State<FloatingSearchBarWidget>
-    with SingleTickerProviderStateMixin {
+class _FloatingSearchBarWidgetState extends State<FloatingSearchBarWidget> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _scaleAnimation;
   bool _isFocused = false;
@@ -452,10 +437,7 @@ class _FloatingSearchBarWidgetState extends State<FloatingSearchBarWidget>
             margin: widget.margin ?? const EdgeInsets.all(16),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24),
-              boxShadow:
-                  _isFocused
-                      ? UltraModernTheme.elevatedShadow
-                      : UltraModernTheme.softShadow,
+              boxShadow: _isFocused ? UltraModernTheme.elevatedShadow : UltraModernTheme.softShadow,
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(24),
@@ -463,13 +445,12 @@ class _FloatingSearchBarWidgetState extends State<FloatingSearchBarWidget>
                 filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.9),
+                    color: Colors.white.withValues(alpha: 0.9),
                     borderRadius: BorderRadius.circular(24),
                     border: Border.all(
-                      color:
-                          _isFocused
-                              ? context.colorScheme.primary.withOpacity(0.5)
-                              : Colors.white.withOpacity(0.3),
+                      color: _isFocused
+                          ? context.colorScheme.primary.withValues(alpha: 0.5)
+                          : Colors.white.withValues(alpha: 0.3),
                       width: 1.5,
                     ),
                   ),
@@ -538,8 +519,7 @@ class _FloatingSearchBarWidgetState extends State<FloatingSearchBarWidget>
                               borderRadius: BorderRadius.circular(12),
                               boxShadow: [
                                 BoxShadow(
-                                  color: context.colorScheme.primary
-                                      .withOpacity(0.3),
+                                  color: context.colorScheme.primary.withValues(alpha: 0.3),
                                   blurRadius: 8,
                                   offset: const Offset(0, 2),
                                 ),
@@ -597,8 +577,7 @@ class ModernCardWidget extends StatefulWidget {
   State<ModernCardWidget> createState() => _ModernCardWidgetState();
 }
 
-class _ModernCardWidgetState extends State<ModernCardWidget>
-    with SingleTickerProviderStateMixin {
+class _ModernCardWidgetState extends State<ModernCardWidget> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _scaleAnimation;
   bool _isHovered = false;
@@ -638,23 +617,19 @@ class _ModernCardWidgetState extends State<ModernCardWidget>
             margin: widget.margin,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(widget.borderRadius),
-              boxShadow:
-                  _isHovered
-                      ? UltraModernTheme.elevatedShadow
-                      : widget.boxShadow,
+              boxShadow: _isHovered ? UltraModernTheme.elevatedShadow : widget.boxShadow,
               gradient: widget.gradient,
             ),
             child: Material(
               color: Colors.transparent,
               child: InkWell(
                 borderRadius: BorderRadius.circular(widget.borderRadius),
-                onTap:
-                    widget.onTap != null
-                        ? () {
-                          HapticFeedback.lightImpact();
-                          widget.onTap!();
-                        }
-                        : null,
+                onTap: widget.onTap != null
+                    ? () {
+                        HapticFeedback.lightImpact();
+                        widget.onTap!();
+                      }
+                    : null,
                 onHover: (hovering) {
                   setState(() => _isHovered = hovering);
                   if (hovering) {
@@ -690,8 +665,7 @@ class ModernLoadingIndicator extends StatefulWidget {
   State<ModernLoadingIndicator> createState() => _ModernLoadingIndicatorState();
 }
 
-class _ModernLoadingIndicatorState extends State<ModernLoadingIndicator>
-    with TickerProviderStateMixin {
+class _ModernLoadingIndicatorState extends State<ModernLoadingIndicator> with TickerProviderStateMixin {
   late AnimationController _rotationController;
   late AnimationController _scaleController;
   late Animation<double> _rotationAnimation;
@@ -759,12 +733,11 @@ class ModernLoadingPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final Paint paint =
-        Paint()
-          ..color = color
-          ..strokeWidth = strokeWidth
-          ..strokeCap = StrokeCap.round
-          ..style = PaintingStyle.stroke;
+    final Paint paint = Paint()
+      ..color = color
+      ..strokeWidth = strokeWidth
+      ..strokeCap = StrokeCap.round
+      ..style = PaintingStyle.stroke;
 
     final double radius = size.width / 2;
     final Offset center = Offset(radius, radius);
@@ -779,7 +752,7 @@ class ModernLoadingPainter extends CustomPainter {
     const double sweepAngle = math.pi * 1.5;
 
     final Gradient gradient = SweepGradient(
-      colors: [color.withOpacity(0.1), color.withOpacity(0.3), color, color],
+      colors: [color.withValues(alpha: 0.1), color.withValues(alpha: 0.3), color, color],
       stops: const [0.0, 0.3, 0.7, 1.0],
     );
 
@@ -815,8 +788,7 @@ class GlowingFABWidget extends StatefulWidget {
   State<GlowingFABWidget> createState() => _GlowingFABWidgetState();
 }
 
-class _GlowingFABWidgetState extends State<GlowingFABWidget>
-    with SingleTickerProviderStateMixin {
+class _GlowingFABWidgetState extends State<GlowingFABWidget> with SingleTickerProviderStateMixin {
   late AnimationController _pulseController;
   late Animation<double> _pulseAnimation;
 
@@ -857,8 +829,7 @@ class _GlowingFABWidgetState extends State<GlowingFABWidget>
                 end: Alignment.bottomRight,
                 colors: [
                   widget.backgroundColor ?? context.colorScheme.primary,
-                  (widget.backgroundColor ?? context.colorScheme.primary)
-                      .withOpacity(0.8),
+                  (widget.backgroundColor ?? context.colorScheme.primary).withValues(alpha: 0.8),
                 ],
               ),
             ),
@@ -908,8 +879,7 @@ class AnimatedCounterWidget extends StatelessWidget {
       builder: (context, value, child) {
         return Text(
           '$prefix$value$suffix',
-          style:
-              textStyle ??
+          style: textStyle ??
               context.textTheme.headlineMedium?.copyWith(
                 fontWeight: FontWeight.w700,
                 color: context.colorScheme.primary,

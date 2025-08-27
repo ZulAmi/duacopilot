@@ -22,8 +22,7 @@ class ArabicRTLDemoPage extends StatefulWidget {
   State<ArabicRTLDemoPage> createState() => _ArabicRTLDemoPageState();
 }
 
-class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage>
-    with TickerProviderStateMixin {
+class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage> with TickerProviderStateMixin {
   late TabController _tabController;
   final TextEditingController _textController = TextEditingController();
   bool _showHighContrast = false;
@@ -44,10 +43,7 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage>
 
   @override
   Widget build(BuildContext context) {
-    final theme =
-        _showHighContrast
-            ? ArabicAccessibility.createHighContrastTheme(context)
-            : Theme.of(context);
+    final theme = _showHighContrast ? ArabicAccessibility.createHighContrastTheme(context) : Theme.of(context);
 
     return Theme(
       data: theme,
@@ -100,8 +96,7 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage>
   Widget _buildTypographyDemo() {
     const arabicTexts = {
       'Quran': 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',
-      'Du\'a':
-          'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً',
+      'Du\'a': 'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً',
       'Dhikr': 'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ سُبْحَانَ اللَّهِ الْعَظِيمِ',
       'Hadith': 'إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ',
     };
@@ -119,14 +114,13 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage>
 
         // Font Type Examples
         ...arabicTexts.entries.map((entry) {
-          final fontType =
-              entry.key.toLowerCase().contains('quran')
-                  ? 'quran'
-                  : entry.key.toLowerCase().contains('du')
+          final fontType = entry.key.toLowerCase().contains('quran')
+              ? 'quran'
+              : entry.key.toLowerCase().contains('du')
                   ? 'traditional'
                   : entry.key.toLowerCase().contains('dhikr')
-                  ? 'elegant'
-                  : 'readable';
+                      ? 'elegant'
+                      : 'readable';
 
           return Card(
             margin: const EdgeInsets.only(bottom: 16),
@@ -578,15 +572,14 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage>
                     children: [
                       Chip(
                         label: Text('Direction: ${direction.name}'),
-                        backgroundColor:
-                            direction == TextDirection.rtl
-                                ? Colors.green.withOpacity(0.2)
-                                : Colors.blue.withOpacity(0.2),
+                        backgroundColor: direction == TextDirection.rtl
+                            ? Colors.green.withValues(alpha: 0.2)
+                            : Colors.blue.withValues(alpha: 0.2),
                       ),
                       const SizedBox(width: 8),
                       Chip(
                         label: Text('Align: ${alignment.name}'),
-                        backgroundColor: Colors.orange.withOpacity(0.2),
+                        backgroundColor: Colors.orange.withValues(alpha: 0.2),
                       ),
                     ],
                   ),
@@ -656,8 +649,7 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage>
                 ArabicAccessibility.createIslamicContentWidget(
                   arabicText: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',
                   transliteration: 'Bismillahir Rahmanir Raheem',
-                  translation:
-                      'In the name of Allah, the Most Gracious, the Most Merciful',
+                  translation: 'In the name of Allah, the Most Gracious, the Most Merciful',
                   context: context,
                   contentType: IslamicContentType.quranVerse,
                 ),
@@ -748,8 +740,7 @@ class _ArabicRTLDemoPageState extends State<ArabicRTLDemoPage>
                 const SizedBox(height: 16),
                 const ScreenReaderOptimizedText(
                   text: 'اللَّهُمَّ اهْدِنَا فِيمَنْ هَدَيْتَ',
-                  alternativeText:
-                      'Islamic supplication: O Allah, guide us among those You have guided',
+                  alternativeText: 'Islamic supplication: O Allah, guide us among those You have guided',
                   isLive: true,
                 ),
               ],

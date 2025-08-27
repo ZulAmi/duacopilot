@@ -21,10 +21,9 @@ _$QueryHistoryImpl _$$QueryHistoryImplFromJson(Map<String, dynamic> json) =>
       metadata: json['metadata'] as Map<String, dynamic>?,
       isFavorite: json['isFavorite'] as bool? ?? false,
       isFromCache: json['isFromCache'] as bool? ?? false,
-      lastAccessed:
-          json['lastAccessed'] == null
-              ? null
-              : DateTime.parse(json['lastAccessed'] as String),
+      lastAccessed: json['lastAccessed'] == null
+          ? null
+          : DateTime.parse(json['lastAccessed'] as String),
       accessCount: (json['accessCount'] as num?)?.toInt(),
     );
 

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../../../core/feedback_system_integration.dart';
-import '../../../presentation/widgets/feedback/dua_rating_widgets.dart';
-import '../../../presentation/widgets/feedback/contextual_feedback_forms.dart';
-import '../../../presentation/widgets/feedback/scholar_feedback_system.dart';
 import '../../../presentation/widgets/analytics/usage_analytics_widgets.dart';
+import '../../../presentation/widgets/feedback/contextual_feedback_forms.dart';
+import '../../../presentation/widgets/feedback/dua_rating_widgets.dart';
+import '../../../presentation/widgets/feedback/scholar_feedback_system.dart';
 import '../../../services/ab_testing_framework.dart';
 
 /// Example screen demonstrating the comprehensive feedback system
@@ -13,12 +12,10 @@ class FeedbackSystemDemoScreen extends StatefulWidget {
   const FeedbackSystemDemoScreen({super.key});
 
   @override
-  State<FeedbackSystemDemoScreen> createState() =>
-      _FeedbackSystemDemoScreenState();
+  State<FeedbackSystemDemoScreen> createState() => _FeedbackSystemDemoScreenState();
 }
 
-class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen>
-    with FeedbackMixin {
+class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> with FeedbackMixin {
   final String _selectedContentId = 'demo_dua_001';
   bool _showRatingWidget = false;
   double _currentRating = 0.0;
@@ -113,8 +110,8 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen>
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              theme.primaryColor.withOpacity(0.1),
-              theme.primaryColor.withOpacity(0.05),
+              theme.primaryColor.withValues(alpha: 0.1),
+              theme.primaryColor.withValues(alpha: 0.05),
             ],
           ),
         ),
@@ -134,7 +131,7 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen>
             Text(
               'Experience advanced feedback collection, analytics tracking, A/B testing, and scholar verification systems.',
               style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onSurface.withOpacity(0.8),
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.8),
               ),
               textAlign: TextAlign.center,
             ),
@@ -173,10 +170,10 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen>
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: theme.colorScheme.surface.withOpacity(0.5),
+                color: theme.colorScheme.surface.withValues(alpha: 0.5),
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                  color: theme.colorScheme.outline.withOpacity(0.2),
+                  color: theme.colorScheme.outline.withValues(alpha: 0.2),
                 ),
               ),
               child: Text(
@@ -518,7 +515,6 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen>
               ],
             ),
             const SizedBox(height: 16),
-
             Wrap(
               spacing: 8,
               runSpacing: 8,
@@ -527,8 +523,7 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen>
                   'View Analytics',
                   Icons.bar_chart,
                   () async {
-                    final analytics =
-                        await feedbackService.getAggregatedAnalytics();
+                    final analytics = await feedbackService.getAggregatedAnalytics();
                     debugPrint('Analytics: $analytics');
                     _showSnackbar('Analytics data retrieved!');
                   },
@@ -599,7 +594,7 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen>
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
-              color: theme.primaryColor.withOpacity(0.1),
+              color: theme.primaryColor.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(4),
             ),
             child: Text(
@@ -669,26 +664,25 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen>
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      builder:
-          (context) => Padding(
-            padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom,
-            ),
-            child: ContextualFeedbackForm(
+      builder: (context) => Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        child: ContextualFeedbackForm(
+          contentId: _selectedContentId,
+          contentType: 'dua',
+          onSubmit: (data) async {
+            Navigator.pop(context);
+            await feedbackService.submitContextualFeedback(
               contentId: _selectedContentId,
               contentType: 'dua',
-              onSubmit: (data) async {
-                Navigator.pop(context);
-                await feedbackService.submitContextualFeedback(
-                  contentId: _selectedContentId,
-                  contentType: 'dua',
-                  feedbackData: data,
-                );
-                _showSnackbar('Detailed feedback submitted!');
-              },
-              onCancel: () => Navigator.pop(context),
-            ),
-          ),
+              feedbackData: data,
+            );
+            _showSnackbar('Detailed feedback submitted!');
+          },
+          onCancel: () => Navigator.pop(context),
+        ),
+      ),
     );
   }
 
@@ -699,21 +693,20 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen>
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      builder:
-          (context) => Padding(
-            padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom,
-            ),
-            child: ScholarFeedbackForm(
-              contentId: _selectedContentId,
-              contentType: 'dua',
-              onSubmit: (data) async {
-                Navigator.pop(context);
-                _showSnackbar('Scholar verification submitted!');
-              },
-              onCancel: () => Navigator.pop(context),
-            ),
-          ),
+      builder: (context) => Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        child: ScholarFeedbackForm(
+          contentId: _selectedContentId,
+          contentType: 'dua',
+          onSubmit: (data) async {
+            Navigator.pop(context);
+            _showSnackbar('Scholar verification submitted!');
+          },
+          onCancel: () => Navigator.pop(context),
+        ),
+      ),
     );
   }
 }

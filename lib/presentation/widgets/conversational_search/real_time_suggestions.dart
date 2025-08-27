@@ -482,11 +482,11 @@ class _RealTimeSuggestionsWidgetState extends State<RealTimeSuggestionsWidget> {
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: Theme.of(context).colorScheme.outline.withOpacity(0.2),
+          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -538,7 +538,7 @@ class _RealTimeSuggestionsWidgetState extends State<RealTimeSuggestionsWidget> {
             height: 1,
             indent: 16,
             endIndent: 16,
-            color: Theme.of(context).colorScheme.outline.withOpacity(0.1),
+            color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.1),
           ),
       itemBuilder: (context, index) {
         final suggestion = widget.controller.suggestions[index];
@@ -565,7 +565,7 @@ class _RealTimeSuggestionsWidgetState extends State<RealTimeSuggestionsWidget> {
                   decoration: BoxDecoration(
                     color: _getSuggestionTypeColor(
                       suggestion.type,
-                    ).withOpacity(0.1),
+                    ).withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Icon(
@@ -607,7 +607,7 @@ class _RealTimeSuggestionsWidgetState extends State<RealTimeSuggestionsWidget> {
               Icon(
                 Icons.north_west,
                 size: 14,
-                color: colorScheme.onSurfaceVariant.withOpacity(0.5),
+                color: colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
               ),
             ],
           ),

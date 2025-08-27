@@ -12,8 +12,7 @@ part of 'dua_response.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 DuaResponse _$DuaResponseFromJson(Map<String, dynamic> json) {
   return _DuaResponse.fromJson(json);
@@ -48,25 +47,23 @@ mixin _$DuaResponse {
 /// @nodoc
 abstract class $DuaResponseCopyWith<$Res> {
   factory $DuaResponseCopyWith(
-    DuaResponse value,
-    $Res Function(DuaResponse) then,
-  ) = _$DuaResponseCopyWithImpl<$Res, DuaResponse>;
+          DuaResponse value, $Res Function(DuaResponse) then) =
+      _$DuaResponseCopyWithImpl<$Res, DuaResponse>;
   @useResult
-  $Res call({
-    String id,
-    String query,
-    String response,
-    DateTime timestamp,
-    int responseTime,
-    double confidence,
-    List<DuaSource> sources,
-    String? sessionId,
-    int? tokensUsed,
-    String? model,
-    Map<String, dynamic>? metadata,
-    bool isFavorite,
-    bool isFromCache,
-  });
+  $Res call(
+      {String id,
+      String query,
+      String response,
+      DateTime timestamp,
+      int responseTime,
+      double confidence,
+      List<DuaSource> sources,
+      String? sessionId,
+      int? tokensUsed,
+      String? model,
+      Map<String, dynamic>? metadata,
+      bool isFavorite,
+      bool isFromCache});
 }
 
 /// @nodoc
@@ -98,76 +95,60 @@ class _$DuaResponseCopyWithImpl<$Res, $Val extends DuaResponse>
     Object? isFavorite = null,
     Object? isFromCache = null,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            query:
-                null == query
-                    ? _value.query
-                    : query // ignore: cast_nullable_to_non_nullable
-                        as String,
-            response:
-                null == response
-                    ? _value.response
-                    : response // ignore: cast_nullable_to_non_nullable
-                        as String,
-            timestamp:
-                null == timestamp
-                    ? _value.timestamp
-                    : timestamp // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            responseTime:
-                null == responseTime
-                    ? _value.responseTime
-                    : responseTime // ignore: cast_nullable_to_non_nullable
-                        as int,
-            confidence:
-                null == confidence
-                    ? _value.confidence
-                    : confidence // ignore: cast_nullable_to_non_nullable
-                        as double,
-            sources:
-                null == sources
-                    ? _value.sources
-                    : sources // ignore: cast_nullable_to_non_nullable
-                        as List<DuaSource>,
-            sessionId:
-                freezed == sessionId
-                    ? _value.sessionId
-                    : sessionId // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            tokensUsed:
-                freezed == tokensUsed
-                    ? _value.tokensUsed
-                    : tokensUsed // ignore: cast_nullable_to_non_nullable
-                        as int?,
-            model:
-                freezed == model
-                    ? _value.model
-                    : model // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            metadata:
-                freezed == metadata
-                    ? _value.metadata
-                    : metadata // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>?,
-            isFavorite:
-                null == isFavorite
-                    ? _value.isFavorite
-                    : isFavorite // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            isFromCache:
-                null == isFromCache
-                    ? _value.isFromCache
-                    : isFromCache // ignore: cast_nullable_to_non_nullable
-                        as bool,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      query: null == query
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+      response: null == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as String,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      responseTime: null == responseTime
+          ? _value.responseTime
+          : responseTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      confidence: null == confidence
+          ? _value.confidence
+          : confidence // ignore: cast_nullable_to_non_nullable
+              as double,
+      sources: null == sources
+          ? _value.sources
+          : sources // ignore: cast_nullable_to_non_nullable
+              as List<DuaSource>,
+      sessionId: freezed == sessionId
+          ? _value.sessionId
+          : sessionId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      tokensUsed: freezed == tokensUsed
+          ? _value.tokensUsed
+          : tokensUsed // ignore: cast_nullable_to_non_nullable
+              as int?,
+      model: freezed == model
+          ? _value.model
+          : model // ignore: cast_nullable_to_non_nullable
+              as String?,
+      metadata: freezed == metadata
+          ? _value.metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      isFavorite: null == isFavorite
+          ? _value.isFavorite
+          : isFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFromCache: null == isFromCache
+          ? _value.isFromCache
+          : isFromCache // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
   }
 }
 
@@ -175,26 +156,24 @@ class _$DuaResponseCopyWithImpl<$Res, $Val extends DuaResponse>
 abstract class _$$DuaResponseImplCopyWith<$Res>
     implements $DuaResponseCopyWith<$Res> {
   factory _$$DuaResponseImplCopyWith(
-    _$DuaResponseImpl value,
-    $Res Function(_$DuaResponseImpl) then,
-  ) = __$$DuaResponseImplCopyWithImpl<$Res>;
+          _$DuaResponseImpl value, $Res Function(_$DuaResponseImpl) then) =
+      __$$DuaResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String query,
-    String response,
-    DateTime timestamp,
-    int responseTime,
-    double confidence,
-    List<DuaSource> sources,
-    String? sessionId,
-    int? tokensUsed,
-    String? model,
-    Map<String, dynamic>? metadata,
-    bool isFavorite,
-    bool isFromCache,
-  });
+  $Res call(
+      {String id,
+      String query,
+      String response,
+      DateTime timestamp,
+      int responseTime,
+      double confidence,
+      List<DuaSource> sources,
+      String? sessionId,
+      int? tokensUsed,
+      String? model,
+      Map<String, dynamic>? metadata,
+      bool isFavorite,
+      bool isFromCache});
 }
 
 /// @nodoc
@@ -202,9 +181,8 @@ class __$$DuaResponseImplCopyWithImpl<$Res>
     extends _$DuaResponseCopyWithImpl<$Res, _$DuaResponseImpl>
     implements _$$DuaResponseImplCopyWith<$Res> {
   __$$DuaResponseImplCopyWithImpl(
-    _$DuaResponseImpl _value,
-    $Res Function(_$DuaResponseImpl) _then,
-  ) : super(_value, _then);
+      _$DuaResponseImpl _value, $Res Function(_$DuaResponseImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of DuaResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -225,98 +203,83 @@ class __$$DuaResponseImplCopyWithImpl<$Res>
     Object? isFavorite = null,
     Object? isFromCache = null,
   }) {
-    return _then(
-      _$DuaResponseImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        query:
-            null == query
-                ? _value.query
-                : query // ignore: cast_nullable_to_non_nullable
-                    as String,
-        response:
-            null == response
-                ? _value.response
-                : response // ignore: cast_nullable_to_non_nullable
-                    as String,
-        timestamp:
-            null == timestamp
-                ? _value.timestamp
-                : timestamp // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        responseTime:
-            null == responseTime
-                ? _value.responseTime
-                : responseTime // ignore: cast_nullable_to_non_nullable
-                    as int,
-        confidence:
-            null == confidence
-                ? _value.confidence
-                : confidence // ignore: cast_nullable_to_non_nullable
-                    as double,
-        sources:
-            null == sources
-                ? _value._sources
-                : sources // ignore: cast_nullable_to_non_nullable
-                    as List<DuaSource>,
-        sessionId:
-            freezed == sessionId
-                ? _value.sessionId
-                : sessionId // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        tokensUsed:
-            freezed == tokensUsed
-                ? _value.tokensUsed
-                : tokensUsed // ignore: cast_nullable_to_non_nullable
-                    as int?,
-        model:
-            freezed == model
-                ? _value.model
-                : model // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        metadata:
-            freezed == metadata
-                ? _value._metadata
-                : metadata // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>?,
-        isFavorite:
-            null == isFavorite
-                ? _value.isFavorite
-                : isFavorite // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        isFromCache:
-            null == isFromCache
-                ? _value.isFromCache
-                : isFromCache // ignore: cast_nullable_to_non_nullable
-                    as bool,
-      ),
-    );
+    return _then(_$DuaResponseImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      query: null == query
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+      response: null == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as String,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      responseTime: null == responseTime
+          ? _value.responseTime
+          : responseTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      confidence: null == confidence
+          ? _value.confidence
+          : confidence // ignore: cast_nullable_to_non_nullable
+              as double,
+      sources: null == sources
+          ? _value._sources
+          : sources // ignore: cast_nullable_to_non_nullable
+              as List<DuaSource>,
+      sessionId: freezed == sessionId
+          ? _value.sessionId
+          : sessionId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      tokensUsed: freezed == tokensUsed
+          ? _value.tokensUsed
+          : tokensUsed // ignore: cast_nullable_to_non_nullable
+              as int?,
+      model: freezed == model
+          ? _value.model
+          : model // ignore: cast_nullable_to_non_nullable
+              as String?,
+      metadata: freezed == metadata
+          ? _value._metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      isFavorite: null == isFavorite
+          ? _value.isFavorite
+          : isFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFromCache: null == isFromCache
+          ? _value.isFromCache
+          : isFromCache // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$DuaResponseImpl extends _DuaResponse with DiagnosticableTreeMixin {
-  const _$DuaResponseImpl({
-    required this.id,
-    required this.query,
-    required this.response,
-    required this.timestamp,
-    required this.responseTime,
-    required this.confidence,
-    required final List<DuaSource> sources,
-    this.sessionId,
-    this.tokensUsed,
-    this.model,
-    final Map<String, dynamic>? metadata,
-    this.isFavorite = false,
-    this.isFromCache = false,
-  }) : _sources = sources,
-       _metadata = metadata,
-       super._();
+  const _$DuaResponseImpl(
+      {required this.id,
+      required this.query,
+      required this.response,
+      required this.timestamp,
+      required this.responseTime,
+      required this.confidence,
+      required final List<DuaSource> sources,
+      this.sessionId,
+      this.tokensUsed,
+      this.model,
+      final Map<String, dynamic>? metadata,
+      this.isFavorite = false,
+      this.isFromCache = false})
+      : _sources = sources,
+        _metadata = metadata,
+        super._();
 
   factory _$DuaResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$DuaResponseImplFromJson(json);
@@ -420,21 +383,20 @@ class _$DuaResponseImpl extends _DuaResponse with DiagnosticableTreeMixin {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    query,
-    response,
-    timestamp,
-    responseTime,
-    confidence,
-    const DeepCollectionEquality().hash(_sources),
-    sessionId,
-    tokensUsed,
-    model,
-    const DeepCollectionEquality().hash(_metadata),
-    isFavorite,
-    isFromCache,
-  );
+      runtimeType,
+      id,
+      query,
+      response,
+      timestamp,
+      responseTime,
+      confidence,
+      const DeepCollectionEquality().hash(_sources),
+      sessionId,
+      tokensUsed,
+      model,
+      const DeepCollectionEquality().hash(_metadata),
+      isFavorite,
+      isFromCache);
 
   /// Create a copy of DuaResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -446,26 +408,27 @@ class _$DuaResponseImpl extends _DuaResponse with DiagnosticableTreeMixin {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$DuaResponseImplToJson(this);
+    return _$$DuaResponseImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _DuaResponse extends DuaResponse {
-  const factory _DuaResponse({
-    required final String id,
-    required final String query,
-    required final String response,
-    required final DateTime timestamp,
-    required final int responseTime,
-    required final double confidence,
-    required final List<DuaSource> sources,
-    final String? sessionId,
-    final int? tokensUsed,
-    final String? model,
-    final Map<String, dynamic>? metadata,
-    final bool isFavorite,
-    final bool isFromCache,
-  }) = _$DuaResponseImpl;
+  const factory _DuaResponse(
+      {required final String id,
+      required final String query,
+      required final String response,
+      required final DateTime timestamp,
+      required final int responseTime,
+      required final double confidence,
+      required final List<DuaSource> sources,
+      final String? sessionId,
+      final int? tokensUsed,
+      final String? model,
+      final Map<String, dynamic>? metadata,
+      final bool isFavorite,
+      final bool isFromCache}) = _$DuaResponseImpl;
   const _DuaResponse._() : super._();
 
   factory _DuaResponse.fromJson(Map<String, dynamic> json) =
@@ -536,16 +499,15 @@ abstract class $DuaSourceCopyWith<$Res> {
   factory $DuaSourceCopyWith(DuaSource value, $Res Function(DuaSource) then) =
       _$DuaSourceCopyWithImpl<$Res, DuaSource>;
   @useResult
-  $Res call({
-    String id,
-    String title,
-    String content,
-    double relevanceScore,
-    String? url,
-    String? reference,
-    String? category,
-    Map<String, dynamic>? metadata,
-  });
+  $Res call(
+      {String id,
+      String title,
+      String content,
+      double relevanceScore,
+      String? url,
+      String? reference,
+      String? category,
+      Map<String, dynamic>? metadata});
 }
 
 /// @nodoc
@@ -572,51 +534,40 @@ class _$DuaSourceCopyWithImpl<$Res, $Val extends DuaSource>
     Object? category = freezed,
     Object? metadata = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            title:
-                null == title
-                    ? _value.title
-                    : title // ignore: cast_nullable_to_non_nullable
-                        as String,
-            content:
-                null == content
-                    ? _value.content
-                    : content // ignore: cast_nullable_to_non_nullable
-                        as String,
-            relevanceScore:
-                null == relevanceScore
-                    ? _value.relevanceScore
-                    : relevanceScore // ignore: cast_nullable_to_non_nullable
-                        as double,
-            url:
-                freezed == url
-                    ? _value.url
-                    : url // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            reference:
-                freezed == reference
-                    ? _value.reference
-                    : reference // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            category:
-                freezed == category
-                    ? _value.category
-                    : category // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            metadata:
-                freezed == metadata
-                    ? _value.metadata
-                    : metadata // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      content: null == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as String,
+      relevanceScore: null == relevanceScore
+          ? _value.relevanceScore
+          : relevanceScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      url: freezed == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String?,
+      reference: freezed == reference
+          ? _value.reference
+          : reference // ignore: cast_nullable_to_non_nullable
+              as String?,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String?,
+      metadata: freezed == metadata
+          ? _value.metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ) as $Val);
   }
 }
 
@@ -624,21 +575,19 @@ class _$DuaSourceCopyWithImpl<$Res, $Val extends DuaSource>
 abstract class _$$DuaSourceImplCopyWith<$Res>
     implements $DuaSourceCopyWith<$Res> {
   factory _$$DuaSourceImplCopyWith(
-    _$DuaSourceImpl value,
-    $Res Function(_$DuaSourceImpl) then,
-  ) = __$$DuaSourceImplCopyWithImpl<$Res>;
+          _$DuaSourceImpl value, $Res Function(_$DuaSourceImpl) then) =
+      __$$DuaSourceImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String title,
-    String content,
-    double relevanceScore,
-    String? url,
-    String? reference,
-    String? category,
-    Map<String, dynamic>? metadata,
-  });
+  $Res call(
+      {String id,
+      String title,
+      String content,
+      double relevanceScore,
+      String? url,
+      String? reference,
+      String? category,
+      Map<String, dynamic>? metadata});
 }
 
 /// @nodoc
@@ -646,9 +595,8 @@ class __$$DuaSourceImplCopyWithImpl<$Res>
     extends _$DuaSourceCopyWithImpl<$Res, _$DuaSourceImpl>
     implements _$$DuaSourceImplCopyWith<$Res> {
   __$$DuaSourceImplCopyWithImpl(
-    _$DuaSourceImpl _value,
-    $Res Function(_$DuaSourceImpl) _then,
-  ) : super(_value, _then);
+      _$DuaSourceImpl _value, $Res Function(_$DuaSourceImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of DuaSource
   /// with the given fields replaced by the non-null parameter values.
@@ -664,67 +612,57 @@ class __$$DuaSourceImplCopyWithImpl<$Res>
     Object? category = freezed,
     Object? metadata = freezed,
   }) {
-    return _then(
-      _$DuaSourceImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        title:
-            null == title
-                ? _value.title
-                : title // ignore: cast_nullable_to_non_nullable
-                    as String,
-        content:
-            null == content
-                ? _value.content
-                : content // ignore: cast_nullable_to_non_nullable
-                    as String,
-        relevanceScore:
-            null == relevanceScore
-                ? _value.relevanceScore
-                : relevanceScore // ignore: cast_nullable_to_non_nullable
-                    as double,
-        url:
-            freezed == url
-                ? _value.url
-                : url // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        reference:
-            freezed == reference
-                ? _value.reference
-                : reference // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        category:
-            freezed == category
-                ? _value.category
-                : category // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        metadata:
-            freezed == metadata
-                ? _value._metadata
-                : metadata // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>?,
-      ),
-    );
+    return _then(_$DuaSourceImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      content: null == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as String,
+      relevanceScore: null == relevanceScore
+          ? _value.relevanceScore
+          : relevanceScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      url: freezed == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String?,
+      reference: freezed == reference
+          ? _value.reference
+          : reference // ignore: cast_nullable_to_non_nullable
+              as String?,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String?,
+      metadata: freezed == metadata
+          ? _value._metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$DuaSourceImpl extends _DuaSource with DiagnosticableTreeMixin {
-  const _$DuaSourceImpl({
-    required this.id,
-    required this.title,
-    required this.content,
-    required this.relevanceScore,
-    this.url,
-    this.reference,
-    this.category,
-    final Map<String, dynamic>? metadata,
-  }) : _metadata = metadata,
-       super._();
+  const _$DuaSourceImpl(
+      {required this.id,
+      required this.title,
+      required this.content,
+      required this.relevanceScore,
+      this.url,
+      this.reference,
+      this.category,
+      final Map<String, dynamic>? metadata})
+      : _metadata = metadata,
+        super._();
 
   factory _$DuaSourceImpl.fromJson(Map<String, dynamic> json) =>
       _$$DuaSourceImplFromJson(json);
@@ -794,16 +732,15 @@ class _$DuaSourceImpl extends _DuaSource with DiagnosticableTreeMixin {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    title,
-    content,
-    relevanceScore,
-    url,
-    reference,
-    category,
-    const DeepCollectionEquality().hash(_metadata),
-  );
+      runtimeType,
+      id,
+      title,
+      content,
+      relevanceScore,
+      url,
+      reference,
+      category,
+      const DeepCollectionEquality().hash(_metadata));
 
   /// Create a copy of DuaSource
   /// with the given fields replaced by the non-null parameter values.
@@ -815,21 +752,22 @@ class _$DuaSourceImpl extends _DuaSource with DiagnosticableTreeMixin {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$DuaSourceImplToJson(this);
+    return _$$DuaSourceImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _DuaSource extends DuaSource {
-  const factory _DuaSource({
-    required final String id,
-    required final String title,
-    required final String content,
-    required final double relevanceScore,
-    final String? url,
-    final String? reference,
-    final String? category,
-    final Map<String, dynamic>? metadata,
-  }) = _$DuaSourceImpl;
+  const factory _DuaSource(
+      {required final String id,
+      required final String title,
+      required final String content,
+      required final double relevanceScore,
+      final String? url,
+      final String? reference,
+      final String? category,
+      final Map<String, dynamic>? metadata}) = _$DuaSourceImpl;
   const _DuaSource._() : super._();
 
   factory _DuaSource.fromJson(Map<String, dynamic> json) =

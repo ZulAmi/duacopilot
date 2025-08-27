@@ -160,12 +160,12 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
             Container(
               padding: const EdgeInsets.all(ProfessionalIslamicTheme.space4),
               decoration: BoxDecoration(
-                color: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.05),
+                color: ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.05),
                 borderRadius: BorderRadius.circular(
                   ProfessionalIslamicTheme.radiusMd,
                 ),
                 border: Border.all(
-                  color: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.1),
+                  color: ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.1),
                 ),
               ),
               child: Row(

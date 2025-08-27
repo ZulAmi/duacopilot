@@ -153,7 +153,7 @@ class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
         color: colorScheme.surface,
         border: Border(
           top: BorderSide(
-            color: colorScheme.outline.withOpacity(0.2),
+            color: colorScheme.outline.withValues(alpha: 0.2),
             width: 1,
           ),
         ),
@@ -178,10 +178,10 @@ class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: colorScheme.surfaceContainerHighest.withOpacity(0.3),
+        color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
         border: Border(
           bottom: BorderSide(
-            color: colorScheme.outline.withOpacity(0.1),
+            color: colorScheme.outline.withValues(alpha: 0.1),
             width: 1,
           ),
         ),
@@ -418,7 +418,7 @@ class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
             color: colorScheme.surfaceContainerHighest,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: colorScheme.outline.withOpacity(0.2),
+              color: colorScheme.outline.withValues(alpha: 0.2),
               width: 1,
             ),
           ),
@@ -439,7 +439,7 @@ class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
                   Text(
                     _transliterationMap[key]!,
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: colorScheme.onSurfaceVariant.withOpacity(0.6),
+                      color: colorScheme.onSurfaceVariant.withValues(alpha: 0.6),
                       fontSize: 10,
                     ),
                   ),
@@ -477,7 +477,7 @@ class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
                     : colorScheme.surfaceContainerHighest,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: colorScheme.outline.withOpacity(0.2),
+              color: colorScheme.outline.withValues(alpha: 0.2),
               width: 1,
             ),
           ),
@@ -513,7 +513,7 @@ class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
               color: colorScheme.surfaceContainerHighest,
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                color: colorScheme.outline.withOpacity(0.2),
+                color: colorScheme.outline.withValues(alpha: 0.2),
                 width: 1,
               ),
             ),
@@ -638,7 +638,7 @@ class _ArabicInputFieldState extends State<ArabicInputField> {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
               border: Border.all(
-                color: Theme.of(context).colorScheme.outline.withOpacity(0.5),
+                color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.5),
               ),
               borderRadius: BorderRadius.circular(12),
             ),
@@ -654,7 +654,7 @@ class _ArabicInputFieldState extends State<ArabicInputField> {
                           _textController.text.isEmpty
                               ? Theme.of(
                                 context,
-                              ).colorScheme.onSurfaceVariant.withOpacity(0.6)
+                              ).colorScheme.onSurfaceVariant.withValues(alpha: 0.6)
                               : Theme.of(context).colorScheme.onSurface,
                     ),
                     textDirection:

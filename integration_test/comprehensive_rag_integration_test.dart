@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_print, deprecated_member_use
 import 'package:duacopilot/main_dev.dart' as app;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -578,8 +579,7 @@ void main() {
         }
 
         // Test semantic navigation
-        final semanticsNodes =
-            binding.pipelineOwner.semanticsOwner!.rootSemanticsNode;
+        final semanticsNodes = binding.pipelineOwner.semanticsOwner!.rootSemanticsNode;
         expect(semanticsNodes, isNotNull);
 
         print('✅ Semantics tree available for screen readers');
@@ -589,8 +589,7 @@ void main() {
         if (textFields.hasFound) {
           final textFieldWidget = tester.widget<TextField>(textFields.first);
           final decoration = textFieldWidget.decoration;
-          if (decoration?.hintText?.isNotEmpty == true ||
-              decoration?.labelText?.isNotEmpty == true) {
+          if (decoration?.hintText?.isNotEmpty == true || decoration?.labelText?.isNotEmpty == true) {
             print('✅ Text fields have semantic labels');
           }
         }
@@ -651,14 +650,12 @@ void main() {
             expect(
               size.width,
               greaterThanOrEqualTo(44.0 - 4), // Allow small tolerance
-              reason:
-                  'Interactive element too small: ${element.widget.runtimeType}',
+              reason: 'Interactive element too small: ${element.widget.runtimeType}',
             );
             expect(
               size.height,
               greaterThanOrEqualTo(44.0 - 4),
-              reason:
-                  'Interactive element too small: ${element.widget.runtimeType}',
+              reason: 'Interactive element too small: ${element.widget.runtimeType}',
             );
           }
         }
@@ -734,8 +731,7 @@ void main() {
           }
 
           // Check if text is still there (depends on implementation)
-          final currentText =
-              tester.widget<TextField>(searchFields.first).controller?.text;
+          final currentText = tester.widget<TextField>(searchFields.first).controller?.text;
           if (currentText != null) {
             print('✅ Text field state: $currentText');
           }
@@ -789,8 +785,7 @@ void main() {
 
       bool hasArabicContent = false;
       for (final response in mockResponses) {
-        if (arabicRegex.hasMatch(response['response'] ?? '') ||
-            arabicRegex.hasMatch(response['query'] ?? '')) {
+        if (arabicRegex.hasMatch(response['response'] ?? '') || arabicRegex.hasMatch(response['query'] ?? '')) {
           hasArabicContent = true;
           break;
         }

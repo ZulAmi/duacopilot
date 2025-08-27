@@ -84,15 +84,14 @@ class RevolutionaryDuaCopilotDevApp extends StatelessWidget {
           value: SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
             statusBarIconBrightness: Brightness.light,
-            systemNavigationBarColor:
-                ProfessionalIslamicTheme.backgroundSecondary,
+            systemNavigationBarColor: ProfessionalIslamicTheme.backgroundSecondary,
             systemNavigationBarIconBrightness: Brightness.dark,
           ),
           child: MediaQuery(
             data: MediaQuery.of(context).copyWith(
               // Ensure text scaling is reasonable for Islamic content
               textScaler: TextScaler.linear(
-                MediaQuery.of(context).textScaleFactor.clamp(0.8, 1.3),
+                MediaQuery.textScalerOf(context).scale(1.0).clamp(0.8, 1.3),
               ),
             ),
             child: child!,
@@ -108,12 +107,10 @@ class RevolutionaryAppWrapper extends StatefulWidget {
   const RevolutionaryAppWrapper({super.key});
 
   @override
-  State<RevolutionaryAppWrapper> createState() =>
-      _RevolutionaryAppWrapperState();
+  State<RevolutionaryAppWrapper> createState() => _RevolutionaryAppWrapperState();
 }
 
-class _RevolutionaryAppWrapperState extends State<RevolutionaryAppWrapper>
-    with SingleTickerProviderStateMixin {
+class _RevolutionaryAppWrapperState extends State<RevolutionaryAppWrapper> with SingleTickerProviderStateMixin {
   bool _showSplash = true;
   late AnimationController _animationController;
 
@@ -175,8 +172,7 @@ class _RevolutionaryAppWrapperState extends State<RevolutionaryAppWrapper>
                       ProfessionalIslamicTheme.space8,
                     ),
                     decoration: BoxDecoration(
-                      color: ProfessionalIslamicTheme.backgroundSecondary
-                          .withOpacity(0.95),
+                      color: ProfessionalIslamicTheme.backgroundSecondary.withValues(alpha: 0.95),
                       borderRadius: BorderRadius.circular(
                         ProfessionalIslamicTheme.radius3Xl,
                       ),
@@ -200,8 +196,8 @@ class _RevolutionaryAppWrapperState extends State<RevolutionaryAppWrapper>
                   Text(
                     'Professional Islamic AI Assistant',
                     style: ProfessionalIslamicTheme.body1.copyWith(
-                      color: ProfessionalIslamicTheme.textOnIslamic.withOpacity(
-                        0.9,
+                      color: ProfessionalIslamicTheme.textOnIslamic.withValues(
+                        alpha: 0.9,
                       ),
                     ),
                   ),

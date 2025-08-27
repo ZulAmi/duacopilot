@@ -12,8 +12,7 @@ part of 'dua_recommendation.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 DuaRecommendation _$DuaRecommendationFromJson(Map<String, dynamic> json) {
   return _DuaRecommendation.fromJson(json);
@@ -53,30 +52,28 @@ mixin _$DuaRecommendation {
 /// @nodoc
 abstract class $DuaRecommendationCopyWith<$Res> {
   factory $DuaRecommendationCopyWith(
-    DuaRecommendation value,
-    $Res Function(DuaRecommendation) then,
-  ) = _$DuaRecommendationCopyWithImpl<$Res, DuaRecommendation>;
+          DuaRecommendation value, $Res Function(DuaRecommendation) then) =
+      _$DuaRecommendationCopyWithImpl<$Res, DuaRecommendation>;
   @useResult
-  $Res call({
-    String id,
-    String arabicText,
-    String transliteration,
-    String translation,
-    double confidence,
-    String? category,
-    String? source,
-    String? reference,
-    String? audioUrl,
-    String? audioFileName,
-    int? repetitions,
-    List<String>? tags,
-    Map<String, dynamic>? metadata,
-    bool isFavorite,
-    bool hasAudio,
-    bool isDownloaded,
-    DateTime? createdAt,
-    DateTime? lastAccessed,
-  });
+  $Res call(
+      {String id,
+      String arabicText,
+      String transliteration,
+      String translation,
+      double confidence,
+      String? category,
+      String? source,
+      String? reference,
+      String? audioUrl,
+      String? audioFileName,
+      int? repetitions,
+      List<String>? tags,
+      Map<String, dynamic>? metadata,
+      bool isFavorite,
+      bool hasAudio,
+      bool isDownloaded,
+      DateTime? createdAt,
+      DateTime? lastAccessed});
 }
 
 /// @nodoc
@@ -113,143 +110,119 @@ class _$DuaRecommendationCopyWithImpl<$Res, $Val extends DuaRecommendation>
     Object? createdAt = freezed,
     Object? lastAccessed = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            arabicText:
-                null == arabicText
-                    ? _value.arabicText
-                    : arabicText // ignore: cast_nullable_to_non_nullable
-                        as String,
-            transliteration:
-                null == transliteration
-                    ? _value.transliteration
-                    : transliteration // ignore: cast_nullable_to_non_nullable
-                        as String,
-            translation:
-                null == translation
-                    ? _value.translation
-                    : translation // ignore: cast_nullable_to_non_nullable
-                        as String,
-            confidence:
-                null == confidence
-                    ? _value.confidence
-                    : confidence // ignore: cast_nullable_to_non_nullable
-                        as double,
-            category:
-                freezed == category
-                    ? _value.category
-                    : category // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            source:
-                freezed == source
-                    ? _value.source
-                    : source // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            reference:
-                freezed == reference
-                    ? _value.reference
-                    : reference // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            audioUrl:
-                freezed == audioUrl
-                    ? _value.audioUrl
-                    : audioUrl // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            audioFileName:
-                freezed == audioFileName
-                    ? _value.audioFileName
-                    : audioFileName // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            repetitions:
-                freezed == repetitions
-                    ? _value.repetitions
-                    : repetitions // ignore: cast_nullable_to_non_nullable
-                        as int?,
-            tags:
-                freezed == tags
-                    ? _value.tags
-                    : tags // ignore: cast_nullable_to_non_nullable
-                        as List<String>?,
-            metadata:
-                freezed == metadata
-                    ? _value.metadata
-                    : metadata // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>?,
-            isFavorite:
-                null == isFavorite
-                    ? _value.isFavorite
-                    : isFavorite // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            hasAudio:
-                null == hasAudio
-                    ? _value.hasAudio
-                    : hasAudio // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            isDownloaded:
-                null == isDownloaded
-                    ? _value.isDownloaded
-                    : isDownloaded // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            createdAt:
-                freezed == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            lastAccessed:
-                freezed == lastAccessed
-                    ? _value.lastAccessed
-                    : lastAccessed // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      arabicText: null == arabicText
+          ? _value.arabicText
+          : arabicText // ignore: cast_nullable_to_non_nullable
+              as String,
+      transliteration: null == transliteration
+          ? _value.transliteration
+          : transliteration // ignore: cast_nullable_to_non_nullable
+              as String,
+      translation: null == translation
+          ? _value.translation
+          : translation // ignore: cast_nullable_to_non_nullable
+              as String,
+      confidence: null == confidence
+          ? _value.confidence
+          : confidence // ignore: cast_nullable_to_non_nullable
+              as double,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String?,
+      source: freezed == source
+          ? _value.source
+          : source // ignore: cast_nullable_to_non_nullable
+              as String?,
+      reference: freezed == reference
+          ? _value.reference
+          : reference // ignore: cast_nullable_to_non_nullable
+              as String?,
+      audioUrl: freezed == audioUrl
+          ? _value.audioUrl
+          : audioUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      audioFileName: freezed == audioFileName
+          ? _value.audioFileName
+          : audioFileName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      repetitions: freezed == repetitions
+          ? _value.repetitions
+          : repetitions // ignore: cast_nullable_to_non_nullable
+              as int?,
+      tags: freezed == tags
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      metadata: freezed == metadata
+          ? _value.metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      isFavorite: null == isFavorite
+          ? _value.isFavorite
+          : isFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasAudio: null == hasAudio
+          ? _value.hasAudio
+          : hasAudio // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isDownloaded: null == isDownloaded
+          ? _value.isDownloaded
+          : isDownloaded // ignore: cast_nullable_to_non_nullable
+              as bool,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      lastAccessed: freezed == lastAccessed
+          ? _value.lastAccessed
+          : lastAccessed // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$DuaRecommendationImplCopyWith<$Res>
     implements $DuaRecommendationCopyWith<$Res> {
-  factory _$$DuaRecommendationImplCopyWith(
-    _$DuaRecommendationImpl value,
-    $Res Function(_$DuaRecommendationImpl) then,
-  ) = __$$DuaRecommendationImplCopyWithImpl<$Res>;
+  factory _$$DuaRecommendationImplCopyWith(_$DuaRecommendationImpl value,
+          $Res Function(_$DuaRecommendationImpl) then) =
+      __$$DuaRecommendationImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String arabicText,
-    String transliteration,
-    String translation,
-    double confidence,
-    String? category,
-    String? source,
-    String? reference,
-    String? audioUrl,
-    String? audioFileName,
-    int? repetitions,
-    List<String>? tags,
-    Map<String, dynamic>? metadata,
-    bool isFavorite,
-    bool hasAudio,
-    bool isDownloaded,
-    DateTime? createdAt,
-    DateTime? lastAccessed,
-  });
+  $Res call(
+      {String id,
+      String arabicText,
+      String transliteration,
+      String translation,
+      double confidence,
+      String? category,
+      String? source,
+      String? reference,
+      String? audioUrl,
+      String? audioFileName,
+      int? repetitions,
+      List<String>? tags,
+      Map<String, dynamic>? metadata,
+      bool isFavorite,
+      bool hasAudio,
+      bool isDownloaded,
+      DateTime? createdAt,
+      DateTime? lastAccessed});
 }
 
 /// @nodoc
 class __$$DuaRecommendationImplCopyWithImpl<$Res>
     extends _$DuaRecommendationCopyWithImpl<$Res, _$DuaRecommendationImpl>
     implements _$$DuaRecommendationImplCopyWith<$Res> {
-  __$$DuaRecommendationImplCopyWithImpl(
-    _$DuaRecommendationImpl _value,
-    $Res Function(_$DuaRecommendationImpl) _then,
-  ) : super(_value, _then);
+  __$$DuaRecommendationImplCopyWithImpl(_$DuaRecommendationImpl _value,
+      $Res Function(_$DuaRecommendationImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of DuaRecommendation
   /// with the given fields replaced by the non-null parameter values.
@@ -275,127 +248,107 @@ class __$$DuaRecommendationImplCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? lastAccessed = freezed,
   }) {
-    return _then(
-      _$DuaRecommendationImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        arabicText:
-            null == arabicText
-                ? _value.arabicText
-                : arabicText // ignore: cast_nullable_to_non_nullable
-                    as String,
-        transliteration:
-            null == transliteration
-                ? _value.transliteration
-                : transliteration // ignore: cast_nullable_to_non_nullable
-                    as String,
-        translation:
-            null == translation
-                ? _value.translation
-                : translation // ignore: cast_nullable_to_non_nullable
-                    as String,
-        confidence:
-            null == confidence
-                ? _value.confidence
-                : confidence // ignore: cast_nullable_to_non_nullable
-                    as double,
-        category:
-            freezed == category
-                ? _value.category
-                : category // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        source:
-            freezed == source
-                ? _value.source
-                : source // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        reference:
-            freezed == reference
-                ? _value.reference
-                : reference // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        audioUrl:
-            freezed == audioUrl
-                ? _value.audioUrl
-                : audioUrl // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        audioFileName:
-            freezed == audioFileName
-                ? _value.audioFileName
-                : audioFileName // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        repetitions:
-            freezed == repetitions
-                ? _value.repetitions
-                : repetitions // ignore: cast_nullable_to_non_nullable
-                    as int?,
-        tags:
-            freezed == tags
-                ? _value._tags
-                : tags // ignore: cast_nullable_to_non_nullable
-                    as List<String>?,
-        metadata:
-            freezed == metadata
-                ? _value._metadata
-                : metadata // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>?,
-        isFavorite:
-            null == isFavorite
-                ? _value.isFavorite
-                : isFavorite // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        hasAudio:
-            null == hasAudio
-                ? _value.hasAudio
-                : hasAudio // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        isDownloaded:
-            null == isDownloaded
-                ? _value.isDownloaded
-                : isDownloaded // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        createdAt:
-            freezed == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        lastAccessed:
-            freezed == lastAccessed
-                ? _value.lastAccessed
-                : lastAccessed // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-      ),
-    );
+    return _then(_$DuaRecommendationImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      arabicText: null == arabicText
+          ? _value.arabicText
+          : arabicText // ignore: cast_nullable_to_non_nullable
+              as String,
+      transliteration: null == transliteration
+          ? _value.transliteration
+          : transliteration // ignore: cast_nullable_to_non_nullable
+              as String,
+      translation: null == translation
+          ? _value.translation
+          : translation // ignore: cast_nullable_to_non_nullable
+              as String,
+      confidence: null == confidence
+          ? _value.confidence
+          : confidence // ignore: cast_nullable_to_non_nullable
+              as double,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String?,
+      source: freezed == source
+          ? _value.source
+          : source // ignore: cast_nullable_to_non_nullable
+              as String?,
+      reference: freezed == reference
+          ? _value.reference
+          : reference // ignore: cast_nullable_to_non_nullable
+              as String?,
+      audioUrl: freezed == audioUrl
+          ? _value.audioUrl
+          : audioUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      audioFileName: freezed == audioFileName
+          ? _value.audioFileName
+          : audioFileName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      repetitions: freezed == repetitions
+          ? _value.repetitions
+          : repetitions // ignore: cast_nullable_to_non_nullable
+              as int?,
+      tags: freezed == tags
+          ? _value._tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      metadata: freezed == metadata
+          ? _value._metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      isFavorite: null == isFavorite
+          ? _value.isFavorite
+          : isFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasAudio: null == hasAudio
+          ? _value.hasAudio
+          : hasAudio // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isDownloaded: null == isDownloaded
+          ? _value.isDownloaded
+          : isDownloaded // ignore: cast_nullable_to_non_nullable
+              as bool,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      lastAccessed: freezed == lastAccessed
+          ? _value.lastAccessed
+          : lastAccessed // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$DuaRecommendationImpl implements _DuaRecommendation {
-  const _$DuaRecommendationImpl({
-    required this.id,
-    required this.arabicText,
-    required this.transliteration,
-    required this.translation,
-    required this.confidence,
-    this.category,
-    this.source,
-    this.reference,
-    this.audioUrl,
-    this.audioFileName,
-    this.repetitions,
-    final List<String>? tags,
-    final Map<String, dynamic>? metadata,
-    this.isFavorite = false,
-    this.hasAudio = false,
-    this.isDownloaded = false,
-    this.createdAt,
-    this.lastAccessed,
-  }) : _tags = tags,
-       _metadata = metadata;
+  const _$DuaRecommendationImpl(
+      {required this.id,
+      required this.arabicText,
+      required this.transliteration,
+      required this.translation,
+      required this.confidence,
+      this.category,
+      this.source,
+      this.reference,
+      this.audioUrl,
+      this.audioFileName,
+      this.repetitions,
+      final List<String>? tags,
+      final Map<String, dynamic>? metadata,
+      this.isFavorite = false,
+      this.hasAudio = false,
+      this.isDownloaded = false,
+      this.createdAt,
+      this.lastAccessed})
+      : _tags = tags,
+        _metadata = metadata;
 
   factory _$DuaRecommendationImpl.fromJson(Map<String, dynamic> json) =>
       _$$DuaRecommendationImplFromJson(json);
@@ -503,26 +456,25 @@ class _$DuaRecommendationImpl implements _DuaRecommendation {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    arabicText,
-    transliteration,
-    translation,
-    confidence,
-    category,
-    source,
-    reference,
-    audioUrl,
-    audioFileName,
-    repetitions,
-    const DeepCollectionEquality().hash(_tags),
-    const DeepCollectionEquality().hash(_metadata),
-    isFavorite,
-    hasAudio,
-    isDownloaded,
-    createdAt,
-    lastAccessed,
-  );
+      runtimeType,
+      id,
+      arabicText,
+      transliteration,
+      translation,
+      confidence,
+      category,
+      source,
+      reference,
+      audioUrl,
+      audioFileName,
+      repetitions,
+      const DeepCollectionEquality().hash(_tags),
+      const DeepCollectionEquality().hash(_metadata),
+      isFavorite,
+      hasAudio,
+      isDownloaded,
+      createdAt,
+      lastAccessed);
 
   /// Create a copy of DuaRecommendation
   /// with the given fields replaced by the non-null parameter values.
@@ -531,37 +483,36 @@ class _$DuaRecommendationImpl implements _DuaRecommendation {
   @pragma('vm:prefer-inline')
   _$$DuaRecommendationImplCopyWith<_$DuaRecommendationImpl> get copyWith =>
       __$$DuaRecommendationImplCopyWithImpl<_$DuaRecommendationImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$DuaRecommendationImplToJson(this);
+    return _$$DuaRecommendationImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _DuaRecommendation implements DuaRecommendation {
-  const factory _DuaRecommendation({
-    required final String id,
-    required final String arabicText,
-    required final String transliteration,
-    required final String translation,
-    required final double confidence,
-    final String? category,
-    final String? source,
-    final String? reference,
-    final String? audioUrl,
-    final String? audioFileName,
-    final int? repetitions,
-    final List<String>? tags,
-    final Map<String, dynamic>? metadata,
-    final bool isFavorite,
-    final bool hasAudio,
-    final bool isDownloaded,
-    final DateTime? createdAt,
-    final DateTime? lastAccessed,
-  }) = _$DuaRecommendationImpl;
+  const factory _DuaRecommendation(
+      {required final String id,
+      required final String arabicText,
+      required final String transliteration,
+      required final String translation,
+      required final double confidence,
+      final String? category,
+      final String? source,
+      final String? reference,
+      final String? audioUrl,
+      final String? audioFileName,
+      final int? repetitions,
+      final List<String>? tags,
+      final Map<String, dynamic>? metadata,
+      final bool isFavorite,
+      final bool hasAudio,
+      final bool isDownloaded,
+      final DateTime? createdAt,
+      final DateTime? lastAccessed}) = _$DuaRecommendationImpl;
 
   factory _DuaRecommendation.fromJson(Map<String, dynamic> json) =
       _$DuaRecommendationImpl.fromJson;

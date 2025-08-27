@@ -18,13 +18,10 @@ class RevolutionaryHomeScreen extends ConsumerStatefulWidget {
   const RevolutionaryHomeScreen({super.key});
 
   @override
-  ConsumerState<RevolutionaryHomeScreen> createState() =>
-      _RevolutionaryHomeScreenState();
+  ConsumerState<RevolutionaryHomeScreen> createState() => _RevolutionaryHomeScreenState();
 }
 
-class _RevolutionaryHomeScreenState
-    extends ConsumerState<RevolutionaryHomeScreen>
-    with TickerProviderStateMixin {
+class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScreen> with TickerProviderStateMixin {
   final TextEditingController _searchController = TextEditingController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -210,8 +207,8 @@ class _RevolutionaryHomeScreenState
                       ProfessionalIslamicTheme.space4,
                     ),
                     decoration: BoxDecoration(
-                      color: ProfessionalIslamicTheme.textOnIslamic.withOpacity(
-                        0.2,
+                      color: ProfessionalIslamicTheme.textOnIslamic.withValues(
+                        alpha: 0.2,
                       ),
                       borderRadius: BorderRadius.circular(
                         ProfessionalIslamicTheme.radius2Xl,
@@ -230,8 +227,8 @@ class _RevolutionaryHomeScreenState
                       vertical: ProfessionalIslamicTheme.space2,
                     ),
                     decoration: BoxDecoration(
-                      color: ProfessionalIslamicTheme.textOnIslamic.withOpacity(
-                        0.15,
+                      color: ProfessionalIslamicTheme.textOnIslamic.withValues(
+                        alpha: 0.15,
                       ),
                       borderRadius: BorderRadius.circular(
                         ProfessionalIslamicTheme.radiusFull,
@@ -270,8 +267,8 @@ class _RevolutionaryHomeScreenState
               Text(
                 'Your intelligent Islamic companion for spiritual guidance, Quranic wisdom, and daily prayers.',
                 style: ProfessionalIslamicTheme.body1.copyWith(
-                  color: ProfessionalIslamicTheme.textOnIslamic.withOpacity(
-                    0.9,
+                  color: ProfessionalIslamicTheme.textOnIslamic.withValues(
+                    alpha: 0.9,
                   ),
                   height: 1.5,
                 ),
@@ -298,14 +295,11 @@ class _RevolutionaryHomeScreenState
                   IconButton(
                     onPressed: _toggleVoiceSearch,
                     icon: Icon(
-                      _isVoiceListening
-                          ? Icons.mic_rounded
-                          : Icons.mic_none_rounded,
+                      _isVoiceListening ? Icons.mic_rounded : Icons.mic_none_rounded,
                       color: ProfessionalIslamicTheme.textOnIslamic,
                     ),
                     style: IconButton.styleFrom(
-                      backgroundColor: ProfessionalIslamicTheme.textOnIslamic
-                          .withOpacity(0.2),
+                      backgroundColor: ProfessionalIslamicTheme.textOnIslamic.withValues(alpha: 0.2),
                       padding: const EdgeInsets.all(
                         ProfessionalIslamicTheme.space3,
                       ),
@@ -432,7 +426,7 @@ class _RevolutionaryHomeScreenState
                   vertical: ProfessionalIslamicTheme.space1,
                 ),
                 decoration: BoxDecoration(
-                  color: ProfessionalIslamicTheme.success.withOpacity(0.1),
+                  color: ProfessionalIslamicTheme.success.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(
                     ProfessionalIslamicTheme.radiusFull,
                   ),
@@ -503,8 +497,7 @@ class _RevolutionaryHomeScreenState
                 icon: const Icon(Icons.grid_view_rounded, size: 18),
                 label: const Text('View All'),
                 style: TextButton.styleFrom(
-                  backgroundColor: ProfessionalIslamicTheme.islamicGreen
-                      .withOpacity(0.1),
+                  backgroundColor: ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.1),
                   foregroundColor: ProfessionalIslamicTheme.islamicGreen,
                 ),
               ),
@@ -515,16 +508,14 @@ class _RevolutionaryHomeScreenState
             crossAxisCount: 2,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            childAspectRatio:
-                0.95, // Increased from 0.85 to 0.95 for less vertical height
+            childAspectRatio: 0.95, // Increased from 0.85 to 0.95 for less vertical height
             mainAxisSpacing: 10, // Reduced from space3 (12px) to 10px
             crossAxisSpacing: 10, // Reduced from space3 (12px) to 10px
             children: [
               RevolutionaryComponents.modernFeatureCard(
                 icon: Icons.search_rounded,
                 title: 'Smart Search',
-                description:
-                    'AI-powered Islamic knowledge search with contextual understanding',
+                description: 'AI-powered Islamic knowledge search with contextual understanding',
                 onTap: _navigateToSearch,
                 badge: 'AI',
                 gradientColors: [
@@ -535,8 +526,7 @@ class _RevolutionaryHomeScreenState
               RevolutionaryComponents.modernFeatureCard(
                 icon: Icons.menu_book_rounded,
                 title: 'Quran Explorer',
-                description:
-                    'Browse, search and study the Holy Quran with translations',
+                description: 'Browse, search and study the Holy Quran with translations',
                 onTap: _navigateToQuran,
                 gradientColors: [
                   ProfessionalIslamicTheme.deepNavy,
@@ -546,8 +536,7 @@ class _RevolutionaryHomeScreenState
               RevolutionaryComponents.modernFeatureCard(
                 icon: Icons.favorite_rounded,
                 title: 'Digital Tasbih',
-                description:
-                    'Beautiful collection of daily prayers and supplications',
+                description: 'Beautiful collection of daily prayers and supplications',
                 onTap: _navigateToDuas,
                 gradientColors: [
                   ProfessionalIslamicTheme.goldAccent,
@@ -557,8 +546,7 @@ class _RevolutionaryHomeScreenState
               RevolutionaryComponents.modernFeatureCard(
                 icon: Icons.mic_rounded,
                 title: 'Voice Assistant',
-                description:
-                    'Ask Islamic questions using voice in any language',
+                description: 'Ask Islamic questions using voice in any language',
                 onTap: _navigateToVoiceAssistant,
                 badge: 'NEW',
                 gradientColors: [
@@ -643,7 +631,7 @@ class _RevolutionaryHomeScreenState
             Container(
               padding: const EdgeInsets.all(ProfessionalIslamicTheme.space3),
               decoration: BoxDecoration(
-                color: accentColor.withOpacity(0.1),
+                color: accentColor.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(
                   ProfessionalIslamicTheme.radius2Xl,
                 ),
@@ -705,8 +693,8 @@ class _RevolutionaryHomeScreenState
                     ProfessionalIslamicTheme.space3,
                   ),
                   decoration: BoxDecoration(
-                    color: ProfessionalIslamicTheme.textOnIslamic.withOpacity(
-                      0.2,
+                    color: ProfessionalIslamicTheme.textOnIslamic.withValues(
+                      alpha: 0.2,
                     ),
                     borderRadius: BorderRadius.circular(
                       ProfessionalIslamicTheme.radius2Xl,
@@ -734,8 +722,7 @@ class _RevolutionaryHomeScreenState
                       Text(
                         'Advanced Islamic learning tools & personalized content',
                         style: ProfessionalIslamicTheme.body2.copyWith(
-                          color: ProfessionalIslamicTheme.textOnIslamic
-                              .withOpacity(0.9),
+                          color: ProfessionalIslamicTheme.textOnIslamic.withValues(alpha: 0.9),
                         ),
                       ),
                     ],
@@ -794,11 +781,13 @@ class _RevolutionaryHomeScreenState
   // Event Handlers
   Future<void> _handleRefresh() async {
     await Future.delayed(const Duration(milliseconds: 1500));
-    RevolutionaryComponents.showModernSnackBar(
-      context: context,
-      message: 'Content refreshed successfully',
-      icon: Icons.check_circle_rounded,
-    );
+    if (mounted) {
+      RevolutionaryComponents.showModernSnackBar(
+        context: context,
+        message: 'Content refreshed successfully',
+        icon: Icons.check_circle_rounded,
+      );
+    }
   }
 
   void _handleSearch(String query) async {

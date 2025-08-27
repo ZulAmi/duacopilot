@@ -1,13 +1,14 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:flutter/material.dart';
+
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:crypto/crypto.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image/image.dart' as img;
 import 'package:path_provider/path_provider.dart';
-import 'package:crypto/crypto.dart';
-import 'dart:convert';
 
 /// Optimized image widget with smart caching for RAG responses
 class OptimizedRagImage extends StatelessWidget {
@@ -52,10 +53,8 @@ class OptimizedRagImage extends StatelessWidget {
       memCacheWidth: maxWidth,
       memCacheHeight: maxHeight,
       placeholder: (context, url) => placeholder ?? _buildDefaultPlaceholder(),
-      errorWidget:
-          (context, url, error) => errorWidget ?? _buildDefaultErrorWidget(),
-      imageBuilder:
-          (context, imageProvider) => _buildOptimizedImage(imageProvider),
+      errorWidget: (context, url, error) => errorWidget ?? _buildDefaultErrorWidget(),
+      imageBuilder: (context, imageProvider) => _buildOptimizedImage(imageProvider),
     );
   }
 
@@ -111,15 +110,15 @@ class RagImageCacheManager extends CacheManager {
   }
 
   RagImageCacheManager._()
-    : super(
-        Config(
-          key,
-          stalePeriod: const Duration(days: 7), // Keep images for 7 days
-          maxNrOfCacheObjects: 1000, // Limit cache size
-          repo: JsonCacheInfoRepository(databaseName: key),
-          fileService: _getOptimizedFileService(),
-        ),
-      );
+      : super(
+          Config(
+            key,
+            stalePeriod: const Duration(days: 7), // Keep images for 7 days
+            maxNrOfCacheObjects: 1000, // Limit cache size
+            repo: JsonCacheInfoRepository(databaseName: key),
+            fileService: _getOptimizedFileService(),
+          ),
+        );
 
   static FileService _getOptimizedFileService() {
     if (Platform.isAndroid || Platform.isIOS) {
@@ -370,8 +369,7 @@ class RagMediaCacheStrategy {
     required int contentSizeBytes,
   }) {
     // Don't cache very large files on mobile
-    if ((Platform.isAndroid || Platform.isIOS) &&
-        contentSizeBytes > 50 * 1024 * 1024) {
+    if ((Platform.isAndroid || Platform.isIOS) && contentSizeBytes > 50 * 1024 * 1024) {
       return false;
     }
 
@@ -410,10 +408,11 @@ class RagMediaCacheStrategy {
     final hoursSinceAccess = DateTime.now().difference(lastAccessed).inHours;
     if (hoursSinceAccess < 1) {
       priority += 15;
-    } else if (hoursSinceAccess < 6)
+    } else if (hoursSinceAccess < 6) {
       priority += 10;
-    else if (hoursSinceAccess < 24)
+    } else if (hoursSinceAccess < 24) {
       priority += 5;
+    }
 
     return priority;
   }
@@ -427,9 +426,7 @@ class RagMediaCacheStrategy {
     final baseKey = '${uri.host}${uri.path}';
 
     if (parameters != null && parameters.isNotEmpty) {
-      final paramString = parameters.entries
-          .map((e) => '${e.key}=${e.value}')
-          .join('&');
+      final paramString = parameters.entries.map((e) => '${e.key}=${e.value}').join('&');
       return '${baseKey}_${md5.convert(utf8.encode(paramString)).toString()}';
     }
 

@@ -18,29 +18,27 @@ _$UserPreferenceImpl _$$UserPreferenceImplFromJson(Map<String, dynamic> json) =>
       metadata: json['metadata'] as Map<String, dynamic>?,
       isSystem: json['isSystem'] as bool? ?? false,
       isActive: json['isActive'] as bool? ?? true,
-      createdAt:
-          json['createdAt'] == null
-              ? null
-              : DateTime.parse(json['createdAt'] as String),
-      updatedAt:
-          json['updatedAt'] == null
-              ? null
-              : DateTime.parse(json['updatedAt'] as String),
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
+      updatedAt: json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
     );
 
 Map<String, dynamic> _$$UserPreferenceImplToJson(
-  _$UserPreferenceImpl instance,
-) => <String, dynamic>{
-  'id': instance.id,
-  'userId': instance.userId,
-  'key': instance.key,
-  'value': instance.value,
-  'type': instance.type,
-  'category': instance.category,
-  'description': instance.description,
-  'metadata': instance.metadata,
-  'isSystem': instance.isSystem,
-  'isActive': instance.isActive,
-  'createdAt': instance.createdAt?.toIso8601String(),
-  'updatedAt': instance.updatedAt?.toIso8601String(),
-};
+        _$UserPreferenceImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'userId': instance.userId,
+      'key': instance.key,
+      'value': instance.value,
+      'type': instance.type,
+      'category': instance.category,
+      'description': instance.description,
+      'metadata': instance.metadata,
+      'isSystem': instance.isSystem,
+      'isActive': instance.isActive,
+      'createdAt': instance.createdAt?.toIso8601String(),
+      'updatedAt': instance.updatedAt?.toIso8601String(),
+    };

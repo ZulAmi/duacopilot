@@ -14,43 +14,42 @@ class RevolutionaryComponents {
     VoidCallback? onMenuPressed,
     List<Widget>? actions,
     Widget? leading,
+    Color? accentColor,
   }) {
     return AppBar(
-      leading:
-          leading ??
+      leading: leading ??
           (showBackButton
               ? IconButton(
-                icon: const Icon(Icons.arrow_back_ios_rounded),
-                onPressed: onBackPressed ?? () {},
-                style: IconButton.styleFrom(
-                  backgroundColor: RevolutionaryIslamicTheme.neutralGray100,
-                  foregroundColor: RevolutionaryIslamicTheme.textPrimary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                      RevolutionaryIslamicTheme.radiusXl,
+                  icon: const Icon(Icons.arrow_back_ios_rounded),
+                  onPressed: onBackPressed ?? () {},
+                  style: IconButton.styleFrom(
+                    backgroundColor: RevolutionaryIslamicTheme.neutralGray100,
+                    foregroundColor: RevolutionaryIslamicTheme.textPrimary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                        RevolutionaryIslamicTheme.radiusXl,
+                      ),
                     ),
                   ),
-                ),
-              )
+                )
               : showHamburger
-              ? IconButton(
-                icon: const Icon(Icons.menu_rounded),
-                onPressed: onMenuPressed ?? () {},
-                style: IconButton.styleFrom(
-                  backgroundColor: RevolutionaryIslamicTheme.neutralGray100,
-                  foregroundColor: RevolutionaryIslamicTheme.textPrimary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                      RevolutionaryIslamicTheme.radiusXl,
-                    ),
-                  ),
-                ),
-              )
-              : null),
+                  ? IconButton(
+                      icon: const Icon(Icons.menu_rounded),
+                      onPressed: onMenuPressed ?? () {},
+                      style: IconButton.styleFrom(
+                        backgroundColor: RevolutionaryIslamicTheme.neutralGray100,
+                        foregroundColor: RevolutionaryIslamicTheme.textPrimary,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                            RevolutionaryIslamicTheme.radiusXl,
+                          ),
+                        ),
+                      ),
+                    )
+                  : null),
       title: Row(
         children: [
-          if (showBackButton || showHamburger)
-            const SizedBox(width: RevolutionaryIslamicTheme.space2),
+          if (showBackButton || showHamburger) const SizedBox(width: RevolutionaryIslamicTheme.space2),
           Container(
             padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space2),
             decoration: BoxDecoration(
@@ -74,8 +73,7 @@ class RevolutionaryComponents {
           ),
         ],
       ),
-      actions:
-          actions ??
+      actions: actions ??
           [
             IconButton(
               icon: const Icon(Icons.notifications_outlined),
@@ -137,8 +135,8 @@ class RevolutionaryComponents {
                       12,
                     ), // Reduced from space4 (16px) to 12px
                     decoration: BoxDecoration(
-                      color: RevolutionaryIslamicTheme.textOnColor.withOpacity(
-                        0.2,
+                      color: RevolutionaryIslamicTheme.textOnColor.withValues(
+                        alpha: 0.2,
                       ),
                       borderRadius: BorderRadius.circular(
                         RevolutionaryIslamicTheme.radiusFull,
@@ -165,8 +163,8 @@ class RevolutionaryComponents {
                   Text(
                     'Your AI Islamic Companion',
                     style: RevolutionaryIslamicTheme.body2.copyWith(
-                      color: RevolutionaryIslamicTheme.textOnColor.withOpacity(
-                        0.9,
+                      color: RevolutionaryIslamicTheme.textOnColor.withValues(
+                        alpha: 0.9,
                       ),
                     ),
                   ),
@@ -241,10 +239,7 @@ class RevolutionaryComponents {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 1), // Minimal margin
       child: Material(
-        color:
-            isSelected
-                ? RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.05)
-                : Colors.transparent,
+        color: isSelected ? RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.05) : Colors.transparent,
         borderRadius: BorderRadius.circular(8),
         child: InkWell(
           onTap: onTap,
@@ -262,19 +257,15 @@ class RevolutionaryComponents {
                   height: 28,
                   padding: const EdgeInsets.all(4), // Minimal icon padding
                   decoration: BoxDecoration(
-                    color:
-                        isSelected
-                            ? RevolutionaryIslamicTheme.primaryEmerald
-                                .withOpacity(0.1)
-                            : RevolutionaryIslamicTheme.neutralGray100,
+                    color: isSelected
+                        ? RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.1)
+                        : RevolutionaryIslamicTheme.neutralGray100,
                     borderRadius: BorderRadius.circular(6), // Smaller radius
                   ),
                   child: Icon(
                     icon,
                     color:
-                        isSelected
-                            ? RevolutionaryIslamicTheme.primaryEmerald
-                            : RevolutionaryIslamicTheme.textSecondary,
+                        isSelected ? RevolutionaryIslamicTheme.primaryEmerald : RevolutionaryIslamicTheme.textSecondary,
                     size: 16, // Smaller icon
                   ),
                 ),
@@ -288,12 +279,10 @@ class RevolutionaryComponents {
                       Text(
                         title,
                         style: RevolutionaryIslamicTheme.body2.copyWith(
-                          color:
-                              isSelected
-                                  ? RevolutionaryIslamicTheme.primaryEmerald
-                                  : RevolutionaryIslamicTheme.textPrimary,
-                          fontWeight:
-                              isSelected ? FontWeight.w600 : FontWeight.w500,
+                          color: isSelected
+                              ? RevolutionaryIslamicTheme.primaryEmerald
+                              : RevolutionaryIslamicTheme.textPrimary,
+                          fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
                           fontSize: 14, // Smaller title text
                         ),
                       ),
@@ -393,46 +382,40 @@ class RevolutionaryComponents {
               size: 20,
             ),
           ),
-          suffixIcon:
-              isLoading
-                  ? Container(
-                    margin: const EdgeInsets.all(
-                      RevolutionaryIslamicTheme.space4,
+          suffixIcon: isLoading
+              ? Container(
+                  margin: const EdgeInsets.all(
+                    RevolutionaryIslamicTheme.space4,
+                  ),
+                  width: 20,
+                  height: 20,
+                  child: const CircularProgressIndicator(
+                    strokeWidth: 2,
+                    valueColor: AlwaysStoppedAnimation(
+                      RevolutionaryIslamicTheme.primaryEmerald,
                     ),
-                    width: 20,
-                    height: 20,
-                    child: const CircularProgressIndicator(
-                      strokeWidth: 2,
-                      valueColor: AlwaysStoppedAnimation(
-                        RevolutionaryIslamicTheme.primaryEmerald,
-                      ),
-                    ),
-                  )
-                  : onVoiceSearch != null
+                  ),
+                )
+              : onVoiceSearch != null
                   ? IconButton(
-                    icon: Icon(
-                      isVoiceListening
-                          ? Icons.mic_rounded
-                          : Icons.mic_none_rounded,
-                      color:
-                          isVoiceListening
-                              ? RevolutionaryIslamicTheme.errorRose
-                              : RevolutionaryIslamicTheme.textSecondary,
-                    ),
-                    onPressed: onVoiceSearch,
-                    style: IconButton.styleFrom(
-                      backgroundColor:
-                          isVoiceListening
-                              ? RevolutionaryIslamicTheme.errorRose.withOpacity(
-                                0.1,
+                      icon: Icon(
+                        isVoiceListening ? Icons.mic_rounded : Icons.mic_none_rounded,
+                        color: isVoiceListening
+                            ? RevolutionaryIslamicTheme.errorRose
+                            : RevolutionaryIslamicTheme.textSecondary,
+                      ),
+                      onPressed: onVoiceSearch,
+                      style: IconButton.styleFrom(
+                        backgroundColor: isVoiceListening
+                            ? RevolutionaryIslamicTheme.errorRose.withValues(
+                                alpha: 0.1,
                               )
-                              : RevolutionaryIslamicTheme.neutralGray100,
-                      foregroundColor:
-                          isVoiceListening
-                              ? RevolutionaryIslamicTheme.errorRose
-                              : RevolutionaryIslamicTheme.textSecondary,
-                    ),
-                  )
+                            : RevolutionaryIslamicTheme.neutralGray100,
+                        foregroundColor: isVoiceListening
+                            ? RevolutionaryIslamicTheme.errorRose
+                            : RevolutionaryIslamicTheme.textSecondary,
+                      ),
+                    )
                   : null,
           border: InputBorder.none,
           contentPadding: const EdgeInsets.symmetric(
@@ -481,10 +464,9 @@ class RevolutionaryComponents {
                       8,
                     ), // Reduced from space3 (12px) to 8px
                     decoration: BoxDecoration(
-                      gradient:
-                          gradientColors != null
-                              ? LinearGradient(colors: gradientColors)
-                              : RevolutionaryIslamicTheme.heroGradient,
+                      gradient: gradientColors != null
+                          ? LinearGradient(colors: gradientColors)
+                          : RevolutionaryIslamicTheme.heroGradient,
                       borderRadius: BorderRadius.circular(
                         12,
                       ), // Reduced from radius2Xl to 12px
@@ -613,17 +595,14 @@ class RevolutionaryComponents {
               Container(
                 padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space2),
                 decoration: BoxDecoration(
-                  color: (accentColor ??
-                          RevolutionaryIslamicTheme.primaryEmerald)
-                      .withOpacity(0.1),
+                  color: (accentColor ?? RevolutionaryIslamicTheme.primaryEmerald).withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(
                     RevolutionaryIslamicTheme.radiusLg,
                   ),
                 ),
                 child: Icon(
                   icon,
-                  color:
-                      accentColor ?? RevolutionaryIslamicTheme.primaryEmerald,
+                  color: accentColor ?? RevolutionaryIslamicTheme.primaryEmerald,
                   size: 16,
                 ),
               ),
@@ -666,7 +645,7 @@ class RevolutionaryComponents {
           Container(
             padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space2),
             decoration: BoxDecoration(
-              color: RevolutionaryIslamicTheme.textOnColor.withOpacity(0.2),
+              color: RevolutionaryIslamicTheme.textOnColor.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(
                 RevolutionaryIslamicTheme.radiusLg,
               ),
@@ -689,8 +668,7 @@ class RevolutionaryComponents {
           ),
         ],
       ),
-      backgroundColor:
-          backgroundColor ?? RevolutionaryIslamicTheme.primaryEmerald,
+      backgroundColor: backgroundColor ?? RevolutionaryIslamicTheme.primaryEmerald,
       duration: duration,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(

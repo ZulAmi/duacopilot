@@ -8,8 +8,7 @@ import '../secure_storage/secure_storage_service.dart';
 /// Features: Wise responses, spiritual guidance, emotional support, teaching moments
 class IslamicPersonalityService {
   static IslamicPersonalityService? _instance;
-  static IslamicPersonalityService get instance =>
-      _instance ??= IslamicPersonalityService._();
+  static IslamicPersonalityService get instance => _instance ??= IslamicPersonalityService._();
 
   IslamicPersonalityService._();
 
@@ -188,10 +187,11 @@ class IslamicPersonalityService {
     }
 
     // Add time-based context
-    if (timeContext.contains('morning'))
+    if (timeContext.contains('morning')) {
       responseType = 'morning';
-    else if (timeContext.contains('evening'))
+    } else if (timeContext.contains('evening')) {
       responseType = 'evening';
+    }
 
     return {
       'type': responseType,
@@ -222,8 +222,9 @@ class IslamicPersonalityService {
     final responseType = context['type'] as String;
     final spiritualDepth = context['spiritual_depth_needed'] as double;
 
-    if (spiritualDepth < 0.3)
+    if (spiritualDepth < 0.3) {
       return null; // Don't add spiritual insight for simple queries
+    }
 
     final insights = {
       'distress': [
@@ -252,8 +253,9 @@ class IslamicPersonalityService {
   String? _generateTeachingMoment(Map<String, dynamic> context) {
     final queryComplexity = context['query_complexity'] as double;
 
-    if (queryComplexity < 0.5)
+    if (queryComplexity < 0.5) {
       return null; // Simple queries don't need teaching moments
+    }
 
     final teachings = _voicePersonality['teaching_moments']!;
     return teachings[Random().nextInt(teachings.length)];

@@ -1,7 +1,8 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter/foundation.dart';
-import 'package:logger/logger.dart';
 import 'dart:developer' as developer;
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 /// Enhanced logger configuration for RAG state management
 class RagLogger {
@@ -12,7 +13,7 @@ class RagLogger {
       lineLength: 120,
       colors: true,
       printEmojis: true,
-      printTime: true,
+      dateTimeFormat: DateTimeFormat.onlyTimeAndSinceStart,
     ),
   );
 
@@ -57,8 +58,7 @@ class RagLogger {
     Duration duration,
     int? statusCode,
   ) {
-    final message =
-        '$method $endpoint - ${statusCode ?? 'TIMEOUT'} (${duration.inMilliseconds}ms)';
+    final message = '$method $endpoint - ${statusCode ?? 'TIMEOUT'} (${duration.inMilliseconds}ms)';
     if (statusCode != null && statusCode >= 200 && statusCode < 300) {
       info(message);
     } else {
@@ -237,15 +237,10 @@ class RagDebugNotifier extends StateNotifier<RagDebugState> {
       };
     }
 
-    final totalResponseTime = apiCalls
-        .map((call) => call.duration.inMilliseconds)
-        .reduce((a, b) => a + b);
+    final totalResponseTime = apiCalls.map((call) => call.duration.inMilliseconds).reduce((a, b) => a + b);
 
     final successfulCalls = apiCalls.where(
-      (call) =>
-          call.statusCode != null &&
-          call.statusCode! >= 200 &&
-          call.statusCode! < 300,
+      (call) => call.statusCode != null && call.statusCode! >= 200 && call.statusCode! < 300,
     );
 
     final cacheHits = cacheOps.where((op) => op.hit).length;
@@ -255,8 +250,7 @@ class RagDebugNotifier extends StateNotifier<RagDebugState> {
       'apiCalls': apiCalls.length,
       'averageResponseTime': totalResponseTime / apiCalls.length,
       'cacheHitRate': totalCacheOps > 0 ? (cacheHits / totalCacheOps) * 100 : 0,
-      'errorRate':
-          ((apiCalls.length - successfulCalls.length) / apiCalls.length) * 100,
+      'errorRate': ((apiCalls.length - successfulCalls.length) / apiCalls.length) * 100,
       'errors': state.errors.length,
     };
   }
@@ -279,6 +273,7 @@ class RagDebugNotifier extends StateNotifier<RagDebugState> {
 
 /// Debug state data model
 @immutable
+
 /// RagDebugState class implementation
 class RagDebugState {
   final bool isDebugEnabled;
@@ -334,6 +329,7 @@ class RagDebugState {
 
 /// API call log entry
 @immutable
+
 /// ApiCallLog class implementation
 class ApiCallLog {
   final String endpoint;
@@ -355,6 +351,7 @@ class ApiCallLog {
 
 /// Cache operation log entry
 @immutable
+
 /// CacheOperationLog class implementation
 class CacheOperationLog {
   final String operation;
@@ -374,6 +371,7 @@ class CacheOperationLog {
 
 /// WebSocket event log entry
 @immutable
+
 /// WebSocketEventLog class implementation
 class WebSocketEventLog {
   final String event;
@@ -389,6 +387,7 @@ class WebSocketEventLog {
 
 /// State transition log entry
 @immutable
+
 /// StateTransitionLog class implementation
 class StateTransitionLog {
   final String provider;
@@ -406,6 +405,7 @@ class StateTransitionLog {
 
 /// Error log entry
 @immutable
+
 /// ErrorLog class implementation
 class ErrorLog {
   final String context;

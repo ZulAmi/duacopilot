@@ -390,7 +390,7 @@ class _MonitoringDashboardState extends ConsumerState<MonitoringDashboard> {
                       label: Text(region.count.toString()),
                       backgroundColor: Theme.of(
                         context,
-                      ).primaryColor.withOpacity(0.2),
+                      ).primaryColor.withValues(alpha: 0.2),
                     ),
                   );
                 }),
