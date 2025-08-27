@@ -348,21 +348,31 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
             const SizedBox(height: ProfessionalIslamicTheme.space4),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
+              physics: const BouncingScrollPhysics(),
+              padding: const EdgeInsets.symmetric(
+                horizontal: ProfessionalIslamicTheme.space1,
+              ),
               child: Row(
                 children: [
+                  const SizedBox(width: ProfessionalIslamicTheme.space3),
                   _buildQuickSearchChip('Morning Duas', Icons.wb_sunny_rounded),
-                  const SizedBox(width: ProfessionalIslamicTheme.space2),
+                  const SizedBox(width: ProfessionalIslamicTheme.space3),
                   _buildQuickSearchChip(
                     'Prayer Times',
                     Icons.access_time_rounded,
                   ),
-                  const SizedBox(width: ProfessionalIslamicTheme.space2),
+                  const SizedBox(width: ProfessionalIslamicTheme.space3),
                   _buildQuickSearchChip(
                     'Quran Verses',
                     Icons.menu_book_rounded,
                   ),
-                  const SizedBox(width: ProfessionalIslamicTheme.space2),
+                  const SizedBox(width: ProfessionalIslamicTheme.space3),
                   _buildQuickSearchChip('Hadith', Icons.auto_stories_rounded),
+                  const SizedBox(width: ProfessionalIslamicTheme.space3),
+                  _buildQuickSearchChip('Islamic Calendar', Icons.calendar_today_rounded),
+                  const SizedBox(width: ProfessionalIslamicTheme.space3),
+                  _buildQuickSearchChip('Qibla Direction', Icons.compass_calibration_rounded),
+                  const SizedBox(width: ProfessionalIslamicTheme.space3),
                 ],
               ),
             ),

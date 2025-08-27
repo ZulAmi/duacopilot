@@ -20,12 +20,9 @@ class DigitalTasbihService {
   final SecureStorageService _secureStorage;
   final SpeechToText _speechToText = SpeechToText();
 
-  final StreamController<TasbihSession> _sessionController =
-      StreamController<TasbihSession>.broadcast();
-  final StreamController<TasbihStats> _statsController =
-      StreamController<TasbihStats>.broadcast();
-  final StreamController<List<Achievement>> _achievementsController =
-      StreamController<List<Achievement>>.broadcast();
+  final StreamController<TasbihSession> _sessionController = StreamController<TasbihSession>.broadcast();
+  final StreamController<TasbihStats> _statsController = StreamController<TasbihStats>.broadcast();
+  final StreamController<List<Achievement>> _achievementsController = StreamController<List<Achievement>>.broadcast();
 
   TasbihSession? _currentSession;
   TasbihSettings? _currentSettings;
@@ -39,30 +36,18 @@ class DigitalTasbihService {
 
   // Voice recognition patterns for different dhikr
   static const Map<TasbihType, List<String>> _dhikrPatterns = {
-    TasbihType.subhanallah: [
-      'subhanallah',
-      'subhan allah',
-      'Ø³Ø¨Ø­Ø§Ù† Ø§Ù„Ù„Ù‡'
-    ],
-    TasbihType.alhamdulillah: [
-      'alhamdulillah',
-      'alhamdu lillah',
-      'Ø§Ù„Ø­Ù…Ø¯ Ù„Ù„Ù‡'
-    ],
-    TasbihType.allahuakbar: [
-      'allahu akbar',
-      'allah hu akbar',
-      'Ø§Ù„Ù„Ù‡ Ø£ÙƒØ¨Ø±'
-    ],
+    TasbihType.subhanallah: ['subhanallah', 'subhan allah', 'سبحان الله'],
+    TasbihType.alhamdulillah: ['alhamdulillah', 'alhamdu lillah', 'الحمد لله'],
+    TasbihType.allahuakbar: ['allahu akbar', 'allah hu akbar', 'الله أكبر'],
     TasbihType.lailahaillallah: [
       'la ilaha illallah',
       'la ilaha illa allah',
-      'Ù„Ø§ Ø¥Ù„Ù‡ Ø¥Ù„Ø§ Ø§Ù„Ù„Ù‡',
+      'لا إله إلا الله',
     ],
     TasbihType.astaghfirullah: [
       'astaghfirullah',
       'astagh firullah',
-      'Ø£Ø³ØªØºÙØ± Ø§Ù„Ù„Ù‡',
+      'أستغفر الله',
     ],
   };
 
@@ -71,8 +56,7 @@ class DigitalTasbihService {
   // Getters for streams
   Stream<TasbihSession> get sessionStream => _sessionController.stream;
   Stream<TasbihStats> get statsStream => _statsController.stream;
-  Stream<List<Achievement>> get achievementsStream =>
-      _achievementsController.stream;
+  Stream<List<Achievement>> get achievementsStream => _achievementsController.stream;
 
   /// Initialize the tasbih service
   Future<bool> initialize() async {
@@ -299,15 +283,15 @@ class DigitalTasbihService {
   String _getDhikrText(TasbihType type) {
     switch (type) {
       case TasbihType.subhanallah:
-        return 'Ø³ÙØ¨Ù’Ø­ÙŽØ§Ù†ÙŽ Ø§Ù„Ù„Ù‡Ù';
+        return 'سُبْحَانَ اللَّهِ';
       case TasbihType.alhamdulillah:
-        return 'Ø§ÙŽÙ„Ù’Ø­ÙŽÙ…Ù’Ø¯Ù Ù„Ù„Ù‡Ù';
+        return 'الْحَمْدُ لِلَّهِ';
       case TasbihType.allahuakbar:
-        return 'Ø§ÙŽÙ„Ù„Ù‡Ù Ø£ÙŽÙƒÙ’Ø¨ÙŽØ±Ù';
+        return 'اللَّهُ أَكْبَرُ';
       case TasbihType.lailahaillallah:
-        return 'Ù„ÙŽØ§ Ø¥ÙÙ„Ù°Ù‡ÙŽ Ø¥ÙÙ„ÙŽÙ‘Ø§ Ø§Ù„Ù„Ù‡Ù';
+        return 'لَا إِلَهَ إِلَّا اللَّهُ';
       case TasbihType.astaghfirullah:
-        return 'Ø£ÙŽØ³Ù’ØªÙŽØºÙ’ÙÙØ±Ù Ø§Ù„Ù„Ù‡ÙŽ';
+        return 'أَسْتَغْفِرُ اللَّهَ';
       default:
         return '';
     }
@@ -519,8 +503,7 @@ class DigitalTasbihService {
       final updatedStats = currentStats.copyWith(
         totalSessions: currentStats.totalSessions + 1,
         totalCount: currentStats.totalCount + session.currentCount,
-        totalTime:
-            currentStats.totalTime + (session.totalDuration ?? Duration.zero),
+        totalTime: currentStats.totalTime + (session.totalDuration ?? Duration.zero),
         lastSession: session.endTime ?? session.startTime,
         countsByType: _updateCountsByType(currentStats.countsByType, session),
         dailyProgress: _updateDailyProgress(
@@ -566,11 +549,8 @@ class DigitalTasbihService {
   /// Save session to secure storage
   Future<void> _saveSession(TasbihSession session) async {
     try {
-      final sessionsJson =
-          await _secureStorage.getValue(_sessionStorageKey) ?? '[]';
-      final sessions = (jsonDecode(sessionsJson) as List)
-          .map((s) => TasbihSession.fromJson(s))
-          .toList();
+      final sessionsJson = await _secureStorage.getValue(_sessionStorageKey) ?? '[]';
+      final sessions = (jsonDecode(sessionsJson) as List).map((s) => TasbihSession.fromJson(s)).toList();
 
       sessions.add(session);
 
@@ -673,9 +653,7 @@ class DigitalTasbihService {
   Future<void> _loadGoals() async {
     try {
       final goalsJson = await _secureStorage.getValue(_goalsStorageKey) ?? '[]';
-      final goalsList = (jsonDecode(goalsJson) as List)
-          .map((g) => TasbihGoal.fromJson(g))
-          .toList();
+      final goalsList = (jsonDecode(goalsJson) as List).map((g) => TasbihGoal.fromJson(g)).toList();
 
       _activeGoals = goalsList.where((g) => g.isActive == true).toList();
     } catch (e) {
@@ -688,9 +666,7 @@ class DigitalTasbihService {
   Future<void> _saveGoal(TasbihGoal goal) async {
     try {
       final goalsJson = await _secureStorage.getValue(_goalsStorageKey) ?? '[]';
-      final goals = (jsonDecode(goalsJson) as List)
-          .map((g) => TasbihGoal.fromJson(g))
-          .toList();
+      final goals = (jsonDecode(goalsJson) as List).map((g) => TasbihGoal.fromJson(g)).toList();
 
       // Update existing or add new goal
       final index = goals.indexWhere((g) => g.id == goal.id);
@@ -713,11 +689,8 @@ class DigitalTasbihService {
   /// Load achievements from storage
   Future<void> _loadAchievements() async {
     try {
-      final achievementsJson =
-          await _secureStorage.getValue(_achievementsStorageKey) ?? '[]';
-      _achievements = (jsonDecode(achievementsJson) as List)
-          .map((a) => Achievement.fromJson(a))
-          .toList();
+      final achievementsJson = await _secureStorage.getValue(_achievementsStorageKey) ?? '[]';
+      _achievements = (jsonDecode(achievementsJson) as List).map((a) => Achievement.fromJson(a)).toList();
     } catch (e) {
       print('Failed to load achievements: $e');
       _achievements = [];

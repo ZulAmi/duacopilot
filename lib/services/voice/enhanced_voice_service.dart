@@ -12,8 +12,7 @@ import '../secure_storage/secure_storage_service.dart';
 /// Provides high-quality speech-to-text with contextual awareness for Islamic queries
 class EnhancedVoiceService {
   static EnhancedVoiceService? _instance;
-  static EnhancedVoiceService get instance =>
-      _instance ??= EnhancedVoiceService._();
+  static EnhancedVoiceService get instance => _instance ??= EnhancedVoiceService._();
 
   EnhancedVoiceService._();
 
@@ -52,15 +51,12 @@ class EnhancedVoiceService {
   // Stream controllers
   final _voiceStatusController = StreamController<VoiceStatus>.broadcast();
   final _voiceResultController = StreamController<VoiceQueryResult>.broadcast();
-  final _languageDetectionController =
-      StreamController<LanguageDetection>.broadcast();
+  final _languageDetectionController = StreamController<LanguageDetection>.broadcast();
 
   // Public streams
   Stream<VoiceStatus> get voiceStatusStream => _voiceStatusController.stream;
-  Stream<VoiceQueryResult> get voiceResultStream =>
-      _voiceResultController.stream;
-  Stream<LanguageDetection> get languageDetectionStream =>
-      _languageDetectionController.stream;
+  Stream<VoiceQueryResult> get voiceResultStream => _voiceResultController.stream;
+  Stream<LanguageDetection> get languageDetectionStream => _languageDetectionController.stream;
 
   // Arabic language processing
   final _arabicPreprocessor = ArabicTextPreprocessor();
@@ -207,9 +203,7 @@ class EnhancedVoiceService {
       final locales = await _speechToText.locales();
 
       // Filter to supported languages
-      return locales
-          .where((locale) => _supportedLanguages.containsKey(locale.localeId))
-          .toList();
+      return locales.where((locale) => _supportedLanguages.containsKey(locale.localeId)).toList();
     } catch (e) {
       AppLogger.error('Failed to get available languages: $e');
       return [];
@@ -272,8 +266,7 @@ class EnhancedVoiceService {
       final savedLanguage = await _secureStorage.read(
         'preferred_voice_language',
       );
-      if (savedLanguage != null &&
-          _supportedLanguages.containsKey(savedLanguage)) {
+      if (savedLanguage != null && _supportedLanguages.containsKey(savedLanguage)) {
         _preferredLanguage = savedLanguage;
       }
       AppLogger.debug('Loaded preferred language: $_preferredLanguage');
@@ -331,9 +324,7 @@ class EnhancedVoiceService {
     try {
       var transcription = result.recognizedWords as String;
       final confidence = result.confidence as double;
-      final alternatives = (result.alternates as List<dynamic>)
-          .map((alt) => alt.recognizedWords as String)
-          .toList();
+      final alternatives = (result.alternates as List<dynamic>).map((alt) => alt.recognizedWords as String).toList();
 
       AppLogger.debug(
         'Raw transcription: $transcription (confidence: $confidence)',
@@ -442,18 +433,16 @@ class EnhancedVoiceService {
     }
 
     // Urdu detection (uses Arabic script but has distinct patterns)
+    // Urdu common particles (previously garbled encoded): کے، میں، ہے
     if (RegExp(r'[\u0600-\u06FF]').hasMatch(text) &&
-        (text.contains('Ú©Û’') ||
-            text.contains('Ù…ÛŒÚº') ||
-            text.contains('ÛÛ’'))) {
+        (text.contains('کے') || text.contains('میں') || text.contains('ہے'))) {
       return 'ur-PK';
     }
 
     // Persian detection
+    // Persian common words (previously garbled encoded): در، است، که
     if (RegExp(r'[\u0600-\u06FF]').hasMatch(text) &&
-        (text.contains('Ø¯Ø±') ||
-            text.contains('Ø§Ø³Øª') ||
-            text.contains('Ú©Ù‡'))) {
+        (text.contains('در') || text.contains('است') || text.contains('که'))) {
       return 'fa-IR';
     }
 
@@ -536,11 +525,9 @@ class ArabicTextPreprocessor {
     processed = processed.replaceAll(RegExp(r'[\u064B-\u0652]'), '');
 
     // Normalize Arabic letters
-    processed = processed
-        .replaceAll('Ø£', 'Ø§')
-        .replaceAll('Ø¥', 'Ø§')
-        .replaceAll('Ø¢', 'Ø§')
-        .replaceAll('Ø©', 'Ù‡');
+    // Normalize mis-encoded Arabic letters to their base forms
+    // (previously stored as garbled bytes like Ø£ -> أ)
+    processed = processed.replaceAll('أ', 'ا').replaceAll('إ', 'ا').replaceAll('آ', 'ا').replaceAll('ة', 'ه');
 
     // Clean extra whitespace
     processed = processed.replaceAll(RegExp(r'\s+'), ' ').trim();
@@ -553,18 +540,19 @@ class ArabicTextPreprocessor {
 class IslamicTermsEnhancer {
   /// Common Islamic terms and their variations/corrections
   static const Map<String, List<String>> _islamicTerms = {
-    'Allah': ['Allah', 'Ø§Ù„Ù„Û', 'Ø§Ù„Ù„Ù‡'],
-    'Muhammad': ['Muhammad', 'Ù…Ø­Ù…Ø¯', 'Prophet Muhammad'],
-    'Quran': ['Quran', 'Ø§Ù„Ù‚Ø±Ø¢Ù†', 'Holy Quran'],
-    'Salah': ['Salah', 'ØµÙ„Ø§Ø©', 'Prayer'],
-    'Dua': ['Dua', 'Ø¯Ø¹Ø§Ø¡', 'Supplication'],
-    'Dhikr': ['Dhikr', 'Ø°Ú©Ø±', 'Remembrance'],
-    'Hajj': ['Hajj', 'Ø­Ø¬', 'Pilgrimage'],
-    'Ramadan': ['Ramadan', 'Ø±Ù…Ø¶Ø§Ù†'],
-    'Bismillah': ['Bismillah', 'Ø¨Ø³Ù… Ø§Ù„Ù„Ù‡'],
-    'Alhamdulillah': ['Alhamdulillah', 'Ø§Ù„Ø­Ù…Ø¯ Ù„Ù„Ù‡'],
-    'SubhanAllah': ['SubhanAllah', 'Ø³Ø¨Ø­Ø§Ù† Ø§Ù„Ù„Ù‡'],
-    'Astaghfirullah': ['Astaghfirullah', 'Ø§Ø³ØªØºÙØ± Ø§Ù„Ù„Ù‡'],
+    // Corrected previously garbled Arabic variants
+    'Allah': ['Allah', 'الله', 'الله'],
+    'Muhammad': ['Muhammad', 'محمد', 'Prophet Muhammad'],
+    'Quran': ['Quran', 'القرآن', 'Holy Quran'],
+    'Salah': ['Salah', 'صلاة', 'Prayer'],
+    'Dua': ['Dua', 'دعاء', 'Supplication'],
+    'Dhikr': ['Dhikr', 'ذکر', 'Remembrance'],
+    'Hajj': ['Hajj', 'حج', 'Pilgrimage'],
+    'Ramadan': ['Ramadan', 'رمضان'],
+    'Bismillah': ['Bismillah', 'بسم الله'],
+    'Alhamdulillah': ['Alhamdulillah', 'الحمد لله'],
+    'SubhanAllah': ['SubhanAllah', 'سبحان الله'],
+    'Astaghfirullah': ['Astaghfirullah', 'استغفر الله'],
   };
 
   /// Enhance text with proper Islamic term recognition

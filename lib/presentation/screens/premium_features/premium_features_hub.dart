@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import 'premium_audio_screen.dart';
 import 'islamic_university_screen.dart';
+import 'premium_audio_screen.dart';
 
 // Subscription tier enum
 enum SubscriptionTier { free, premium, ultimate, family }
@@ -114,6 +114,8 @@ class PremiumFeaturesHub extends ConsumerWidget {
 
   /// Build premium features grid
   Widget _buildPremiumFeatures(BuildContext context, SubscriptionTier tier) {
+    final media = MediaQuery.of(context);
+    final isSmallHeight = media.size.height < 650;
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -125,19 +127,22 @@ class PremiumFeaturesHub extends ConsumerWidget {
           ],
         ),
       ),
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildWelcomeHeader(context, tier),
-            const SizedBox(height: 24),
-            _buildFeaturesGrid(context, tier),
-            const SizedBox(height: 24),
-            _buildQuickAccess(context),
-            const SizedBox(height: 24),
-            _buildRecommendations(context),
-          ],
+      child: SafeArea(
+        bottom: true,
+        child: SingleChildScrollView(
+          padding: EdgeInsets.fromLTRB(16, 16, 16, 16 + media.padding.bottom),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildWelcomeHeader(context, tier),
+              SizedBox(height: isSmallHeight ? 16 : 24),
+              _buildFeaturesGrid(context, tier),
+              SizedBox(height: isSmallHeight ? 16 : 24),
+              _buildQuickAccess(context),
+              SizedBox(height: isSmallHeight ? 16 : 24),
+              _buildRecommendations(context),
+            ],
+          ),
         ),
       ),
     );
@@ -206,6 +211,9 @@ class PremiumFeaturesHub extends ConsumerWidget {
 
   /// Build features grid
   Widget _buildFeaturesGrid(BuildContext context, SubscriptionTier tier) {
+    final width = MediaQuery.of(context).size.width;
+    final isNarrow = width < 380; // very small phones
+    final crossAxis = width < 500 ? (isNarrow ? 1 : 2) : 2;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -217,12 +225,12 @@ class PremiumFeaturesHub extends ConsumerWidget {
         ),
         const SizedBox(height: 16),
         GridView.count(
-          crossAxisCount: 2,
+          crossAxisCount: crossAxis,
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           crossAxisSpacing: 16,
           mainAxisSpacing: 16,
-          childAspectRatio: 1.1,
+          childAspectRatio: crossAxis == 1 ? 2.2 : 1.1,
           children: [
             _buildFeatureCard(
               context: context,
@@ -478,6 +486,13 @@ class PremiumFeaturesHub extends ConsumerWidget {
 
   /// Build recommendations section
   Widget _buildRecommendations(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    // Intelligent height calculation to prevent any overflow
+    final isVerySmall = screenWidth < 360 || screenHeight < 700;
+    final cardHeight = isVerySmall ? 108.0 : 128.0; // Increased slightly for safety margin
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -489,9 +504,11 @@ class PremiumFeaturesHub extends ConsumerWidget {
         ),
         const SizedBox(height: 12),
         SizedBox(
-          height: 120,
+          height: cardHeight,
           child: ListView(
             scrollDirection: Axis.horizontal,
+            physics: const BouncingScrollPhysics(), // Smooth iPhone-like scrolling
+            padding: EdgeInsets.zero, // Remove default ListView padding
             children: [
               _buildRecommendationCard(
                 context: context,
@@ -529,67 +546,100 @@ class PremiumFeaturesHub extends ConsumerWidget {
     required String image,
     required VoidCallback onTap,
   }) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    // Ultra-responsive design for all smartphone sizes
+    final isVerySmall = screenWidth < 360 || screenHeight < 700;
+    final cardWidth = isVerySmall ? 140.0 : 160.0;
+    final imageHeight = isVerySmall ? 60.0 : 70.0;
+    final textPadding = isVerySmall ? 6.0 : 8.0;
+    final titleSize = isVerySmall ? 11.0 : 12.0;
+    final instructorSize = isVerySmall ? 10.0 : 11.0;
+
     return Container(
-      width: 160,
+      width: cardWidth,
+      height: null, // Let content determine height, but constrain it
       margin: const EdgeInsets.only(right: 12),
       child: Card(
+        elevation: 3,
+        margin: EdgeInsets.zero, // Remove default Card margin
+        clipBehavior: Clip.antiAlias,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
         child: InkWell(
           onTap: onTap,
           borderRadius: BorderRadius.circular(12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                flex: 3,
-                child: Container(
+          child: Container(
+            constraints: BoxConstraints(
+              maxHeight: isVerySmall ? 100 : 120, // Strict height constraint
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Gradient header with perfect proportions
+                Container(
+                  height: imageHeight,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.vertical(
-                      top: Radius.circular(12),
-                    ),
                     gradient: LinearGradient(
                       colors: [
                         Theme.of(context).primaryColor.withOpacity(0.8),
                         Theme.of(context).primaryColor,
                       ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
                     ),
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.play_circle_outline,
                     color: Colors.white,
-                    size: 40,
+                    size: isVerySmall ? 32 : 36,
                   ),
                 ),
-              ),
-              Expanded(
-                flex: 2,
-                child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        title,
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      Text(
-                        instructor,
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: Colors.grey[600],
-                              fontSize: 11,
-                            ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
+
+                // Text content with precise spacing
+                Flexible(
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: textPadding,
+                      vertical: textPadding - 2,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: titleSize,
+                            color: Theme.of(context).colorScheme.onSurface,
+                            height: 1.2,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        SizedBox(height: isVerySmall ? 1 : 2),
+                        Text(
+                          instructor,
+                          style: TextStyle(
+                            fontSize: instructorSize,
+                            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.65),
+                            height: 1.1,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

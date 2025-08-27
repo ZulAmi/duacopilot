@@ -23,12 +23,10 @@ class ProfessionalIslamicSearchScreen extends ConsumerStatefulWidget {
   });
 
   @override
-  ConsumerState<ProfessionalIslamicSearchScreen> createState() =>
-      _ProfessionalIslamicSearchScreenState();
+  ConsumerState<ProfessionalIslamicSearchScreen> createState() => _ProfessionalIslamicSearchScreenState();
 }
 
-class _ProfessionalIslamicSearchScreenState
-    extends ConsumerState<ProfessionalIslamicSearchScreen>
+class _ProfessionalIslamicSearchScreenState extends ConsumerState<ProfessionalIslamicSearchScreen>
     with TickerProviderStateMixin {
   late final TextEditingController _searchController;
   late final ScrollController _scrollController;
@@ -45,25 +43,25 @@ class _ProfessionalIslamicSearchScreenState
   final List<IslamicSearchCategory> _searchCategories = [
     IslamicSearchCategory(
       icon: Icons.menu_book_rounded,
-      title: 'Ø§Ù„Ù‚Ø±Ø¢Ù† Ø§Ù„ÙƒØ±ÙŠÙ…',
+      title: 'القرآن الكريم',
       titleEn: 'Holy Quran',
       description: 'Search verses and meanings',
     ),
     IslamicSearchCategory(
       icon: Icons.article_rounded,
-      title: 'Ø§Ù„Ø£Ø­Ø§Ø¯ÙŠØ« Ø§Ù„Ù†Ø¨ÙˆÙŠØ©',
+      title: 'الأحاديث النبوية',
       titleEn: 'Prophetic Hadith',
       description: 'Authentic sayings of Prophet ï·º',
     ),
     IslamicSearchCategory(
       icon: Icons.favorite_rounded,
-      title: 'Ø§Ù„Ø£Ø¯Ø¹ÙŠØ©',
+      title: 'الأدعية',
       titleEn: 'Duas & Supplications',
       description: 'Daily prayers and supplications',
     ),
     IslamicSearchCategory(
       icon: Icons.school_rounded,
-      title: 'Ø§Ù„ÙÙ‚Ù‡ Ø§Ù„Ø¥Ø³Ù„Ø§Ù…ÙŠ',
+      title: 'الفقه الإسلامي',
       titleEn: 'Islamic Jurisprudence',
       description: 'Islamic legal rulings',
     ),
@@ -147,12 +145,12 @@ class _ProfessionalIslamicSearchScreenState
     final lowerQuery = query.toLowerCase();
 
     // Islamic contextual responses
-    if (lowerQuery.contains('morning') || lowerQuery.contains('ØµØ¨Ø§Ø­')) {
-      return '''**Ø£Ø°ÙƒØ§Ø± Ø§Ù„ØµØ¨Ø§Ø­ - Morning Remembrance**
+    if (lowerQuery.contains('morning') || lowerQuery.contains('صباح')) {
+      return '''**أذكار الصباح­ - Morning Remembrance**
 
-**Ø§Ù„Ù„ÙŽÙ‘Ù‡ÙÙ…ÙŽÙ‘ Ø¨ÙÙƒÙŽ Ø£ÙŽØµÙ’Ø¨ÙŽØ­Ù’Ù†ÙŽØ§ ÙˆÙŽØ¨ÙÙƒÙŽ Ø£ÙŽÙ…Ù’Ø³ÙŽÙŠÙ’Ù†ÙŽØ§ ÙˆÙŽØ¨ÙÙƒÙŽ Ù†ÙŽØ­Ù’ÙŠÙŽØ§ ÙˆÙŽØ¨ÙÙƒÙŽ Ù†ÙŽÙ…ÙÙˆØªÙ ÙˆÙŽØ¥ÙÙ„ÙŽÙŠÙ’ÙƒÙŽ Ø§Ù„Ù†ÙÙ‘Ø´ÙÙˆØ±Ù**
+**اللهم بك أصبحنا وبك أمسينا وبك نحيا وبك نموت وإليك النشور**
 
-*"AllÄhumma bika aá¹£baá¸¥nÄ wa bika amsaynÄ wa bika naá¸¥yÄ wa bika namÅ«tu wa ilayka an-nushÅ«r"*
+*"Allāhumma bika aṣbaḥnā, wa bika amsaynā, wa bika naḥyā, wa bika namūtu, wa ilayka n-nushūr"*
 
 **Translation:** "O Allah, by You we enter the morning and by You we enter the evening, by You we live and by You we die, and to You is the resurrection."
 
@@ -161,12 +159,12 @@ class _ProfessionalIslamicSearchScreenState
 **Benefits:** Protection and blessings for the day''';
     }
 
-    if (lowerQuery.contains('travel') || lowerQuery.contains('Ø³ÙØ±')) {
-      return '''**Ø¯Ø¹Ø§Ø¡ Ø§Ù„Ø³ÙØ± - Travel Supplication**
+    if (lowerQuery.contains('travel') || lowerQuery.contains('سفر')) {
+      return '''**عاء السفر - Travel Supplication**
 
-**Ø³ÙØ¨Ù’Ø­ÙŽØ§Ù†ÙŽ Ø§Ù„ÙŽÙ‘Ø°ÙÙŠ Ø³ÙŽØ®ÙŽÙ‘Ø±ÙŽ Ù„ÙŽÙ†ÙŽØ§ Ù‡ÙŽÙ°Ø°ÙŽØ§ ÙˆÙŽÙ…ÙŽØ§ ÙƒÙÙ†ÙŽÙ‘Ø§ Ù„ÙŽÙ‡Ù Ù…ÙÙ‚Ù’Ø±ÙÙ†ÙÙŠÙ†ÙŽ ÙˆÙŽØ¥ÙÙ†ÙŽÙ‘Ø§ Ø¥ÙÙ„ÙŽÙ‰Ù° Ø±ÙŽØ¨ÙÙ‘Ù†ÙŽØ§ Ù„ÙŽÙ…ÙÙ†Ù‚ÙŽÙ„ÙØ¨ÙÙˆÙ†ÙŽ**
+**سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ**
 
-*"Subá¸¥Äna alladhÄ« sakhkhara lanÄ hÄdhÄ wa mÄ kunnÄ lahu muqrinÄ«n wa innÄ ilÄ rabbinÄ la-munqalibÅ«n"*
+*"Subḥāna alladhī sakhkhara lanā hādhā wa mā kunnā lahu muq'rinīn wa innā ilā rabbinā la-munqalibūn"*
 
 **Translation:** "Glory be to Him who has subjected this to us, and we could never have it (by our efforts). And to our Lord we will surely return."
 
@@ -175,13 +173,12 @@ class _ProfessionalIslamicSearchScreenState
 **Benefits:** Protection during travel''';
     }
 
-    if (lowerQuery.contains('forgiveness') ||
-        lowerQuery.contains('Ø§Ø³ØªØºÙØ§Ø±')) {
-      return '''**Ø§Ù„Ø§Ø³ØªØºÙØ§Ø± - Seeking Forgiveness**
+    if (lowerQuery.contains('forgiveness') || lowerQuery.contains('استغفار')) {
+      return '''**الاستغفار- Seeking Forgiveness**
 
-**Ø£ÙŽØ³Ù’ØªÙŽØºÙ’ÙÙØ±Ù Ø§Ù„Ù„Ù‡ÙŽ Ø§Ù„ÙŽÙ‘Ø°ÙÙŠ Ù„ÙŽØ§ Ø¥ÙÙ„ÙŽÙ‡ÙŽ Ø¥ÙÙ„ÙŽÙ‘Ø§ Ù‡ÙÙˆÙŽ Ø§Ù„Ù’Ø­ÙŽÙŠÙÙ‘ Ø§Ù„Ù’Ù‚ÙŽÙŠÙÙ‘ÙˆÙ…Ù ÙˆÙŽØ£ÙŽØªÙÙˆØ¨Ù Ø¥ÙÙ„ÙŽÙŠÙ’Ù‡Ù**
+**أستغفر الله الذي لا إله إلا هو الحي القيوم وأتوب إليه**
 
-*"Astaghfiru allÄha alladhÄ« lÄ ilÄha illÄ huwa al-á¸¥ayyu al-qayyÅ«mu wa atÅ«bu ilayh"*
+*"Astaghfiru Allāha alladhī lā ilāha illā huwa al-ḥayy al-qayyūm wa atūbu ilayh"*
 
 **Translation:** "I seek forgiveness from Allah, besides whom there is no deity, the Ever-Living, the Self-Sustaining, and I repent to Him."
 
@@ -191,19 +188,19 @@ class _ProfessionalIslamicSearchScreenState
     }
 
     // Default response
-    return '''**Ø¥Ø±Ø´Ø§Ø¯ Ø¥Ø³Ù„Ø§Ù…ÙŠ - Islamic Guidance**
+    return '''**إرشاد إسلامي - Islamic Guidance**
 
 Based on your query about "$query", here is relevant Islamic knowledge:
 
 **Quranic Guidance:**
-"ÙˆÙŽÙ…ÙŽÙ† ÙŠÙŽØªÙŽÙ‘Ù‚Ù Ø§Ù„Ù„ÙŽÙ‘Ù‡ÙŽ ÙŠÙŽØ¬Ù’Ø¹ÙŽÙ„ Ù„ÙŽÙ‘Ù‡Ù Ù…ÙŽØ®Ù’Ø±ÙŽØ¬Ù‹Ø§ ÙˆÙŽÙŠÙŽØ±Ù’Ø²ÙÙ‚Ù’Ù‡Ù Ù…ÙÙ†Ù’ Ø­ÙŽÙŠÙ’Ø«Ù Ù„ÙŽØ§ ÙŠÙŽØ­Ù’ØªÙŽØ³ÙØ¨Ù"
+ومن يتق الله يجعل له مخرجا ويرزقه من حيث لا يحتسب"
 
 *"And whoever fears Allah - He will make for him a way out and provide for him from where he does not expect."* - Quran 65:2-3
 
 **Recommended Dua:**
-**Ø±ÙŽØ¨ÙŽÙ‘Ù†ÙŽØ§ Ø¢ØªÙÙ†ÙŽØ§ ÙÙÙŠ Ø§Ù„Ø¯ÙÙ‘Ù†Ù’ÙŠÙŽØ§ Ø­ÙŽØ³ÙŽÙ†ÙŽØ©Ù‹ ÙˆÙŽÙÙÙŠ Ø§Ù„Ù’Ø¢Ø®ÙØ±ÙŽØ©Ù Ø­ÙŽØ³ÙŽÙ†ÙŽØ©Ù‹ ÙˆÙŽÙ‚ÙÙ†ÙŽØ§ Ø¹ÙŽØ°ÙŽØ§Ø¨ÙŽ Ø§Ù„Ù†ÙŽÙ‘Ø§Ø±Ù**
+**رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ**
 
-*"RabbanÄ ÄtinÄ fÄ« ad-dunyÄ á¸¥asanatan wa fÄ« al-Äkhirati á¸¥asanatan wa qinÄ Ê¿adhÄba an-nÄr"*
+*"Rabbana ātinā fid-dunyā ḥasanatan wa fil-ākhirati ḥasanatan wa qinā ʿadhāban-nār"*
 
 **Translation:** "Our Lord, give us good in this world and good in the next world, and save us from the punishment of the Fire."
 
@@ -285,7 +282,7 @@ Based on your query about "$query", here is relevant Islamic knowledge:
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Ø§Ù„Ø¨Ø­Ø« Ø§Ù„Ø¥Ø³Ù„Ø§Ù…ÙŠ',
+                      'البحث الإسلامي',
                       style: ProfessionalIslamicTheme.heading3.copyWith(
                         fontWeight: FontWeight.w700,
                         color: ProfessionalIslamicTheme.textPrimary,
@@ -408,9 +405,7 @@ Based on your query about "$query", here is relevant Islamic knowledge:
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: _searchCategories
-                    .map((category) => _buildCompactCategoryChip(category))
-                    .toList(),
+                children: _searchCategories.map((category) => _buildCompactCategoryChip(category)).toList(),
               ),
             ),
           ],
@@ -595,7 +590,7 @@ Based on your query about "$query", here is relevant Islamic knowledge:
                 ),
                 const SizedBox(height: ProfessionalIslamicTheme.space3),
                 Text(
-                  'Ø¨ÙØ³Ù’Ù…Ù Ø§Ù„Ù„ÙŽÙ‘Ù‡Ù Ø§Ù„Ø±ÙŽÙ‘Ø­Ù’Ù…ÙŽÙ†Ù Ø§Ù„Ø±ÙŽÙ‘Ø­ÙÙŠÙ…Ù',
+                  'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',
                   style: ProfessionalIslamicTheme.heading3.copyWith(
                     color: ProfessionalIslamicTheme.islamicGreen,
                     fontWeight: FontWeight.w600,
@@ -655,10 +650,7 @@ Based on your query about "$query", here is relevant Islamic knowledge:
               ),
             ),
             const SizedBox(height: ProfessionalIslamicTheme.space3),
-            ...(_searchHistory
-                .take(5)
-                .map((item) => _buildHistoryItem(item))
-                .toList()),
+            ...(_searchHistory.take(5).map((item) => _buildHistoryItem(item)).toList()),
           ],
         ],
       ),
