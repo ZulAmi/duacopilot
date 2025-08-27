@@ -13,8 +13,7 @@ import '../secure_storage/secure_storage_service.dart';
 /// Provides region-specific Islamic guidance and cultural context awareness
 class CulturalAdaptationService {
   static CulturalAdaptationService? _instance;
-  static CulturalAdaptationService get instance =>
-      _instance ??= CulturalAdaptationService._();
+  static CulturalAdaptationService get instance => _instance ??= CulturalAdaptationService._();
 
   CulturalAdaptationService._();
 
@@ -34,16 +33,12 @@ class CulturalAdaptationService {
   DateTime? _lastLocationUpdate;
 
   // Stream controllers
-  final _culturalContextController =
-      StreamController<CulturalContext>.broadcast();
-  final _locationUpdateController =
-      StreamController<LocationUpdate>.broadcast();
+  final _culturalContextController = StreamController<CulturalContext>.broadcast();
+  final _locationUpdateController = StreamController<LocationUpdate>.broadcast();
 
   // Public streams
-  Stream<CulturalContext> get culturalContextStream =>
-      _culturalContextController.stream;
-  Stream<LocationUpdate> get locationUpdateStream =>
-      _locationUpdateController.stream;
+  Stream<CulturalContext> get culturalContextStream => _culturalContextController.stream;
+  Stream<LocationUpdate> get locationUpdateStream => _locationUpdateController.stream;
 
   // Islamic school mappings by region
   static const Map<String, Map<String, dynamic>> _regionalIslamicSchools = {
@@ -230,30 +225,29 @@ class CulturalAdaptationService {
   };
 
   // Regional Du'a adaptations
-  static const Map<String, Map<String, List<String>>> _regionalDuaAdaptations =
-      {
+  static const Map<String, Map<String, List<String>>> _regionalDuaAdaptations = {
     'travel': {
       'SA': [
-        'Ø§Ù„Ù„Ù‡Ù… Ø¥Ù†Ø§ Ù†Ø³Ø£Ù„Ùƒ ÙÙŠ Ø³ÙØ±Ù†Ø§ Ù‡Ø°Ø§ Ø§Ù„Ø¨Ø± ÙˆØ§Ù„ØªÙ‚ÙˆÙ‰',
+        'اللهم إنا نسألك في سفرنا هذا البر والتقوى',
         'Travel Du\'a with emphasis on Hajj/Umrah context',
       ],
       'PK': [
-        'Ø§Ù„Ù„Ù‡Ù… Ø¥Ù†Ø§ Ù†Ø³Ø£Ù„Ùƒ ÙÙŠ Ø³ÙØ±Ù†Ø§ Ù‡Ø°Ø§ Ø§Ù„Ø¨Ø± ÙˆØ§Ù„ØªÙ‚ÙˆÙ‰',
-        'ÛŒØ§ Ø§Ù„Ù„Û ÛÙ…Ø§Ø±ÛŒ Ø§Ø³ Ø³ÙØ± Ù…ÛŒÚº Ø¨Ú¾Ù„Ø§Ø¦ÛŒ Ø§ÙˆØ± ØªÙ‚ÙˆÛŒÙ° Ø¹Ø·Ø§ ÙØ±Ù…Ø§',
+        'اللهم إنا نسألك في سفرنا هذا البر والتقوى',
+        'یا اللہ ہماری اس سفر میں بھلائی اور تقویٰ عطا فرما',
       ],
       'ID': [
-        'Ø§Ù„Ù„Ù‡Ù… Ø¥Ù†Ø§ Ù†Ø³Ø£Ù„Ùƒ ÙÙŠ Ø³ÙØ±Ù†Ø§ Ù‡Ø°Ø§ Ø§Ù„Ø¨Ø± ÙˆØ§Ù„ØªÙ‚ÙˆÙ‰',
+        'اللهم إنا نسألك في سفرنا هذا البر والتقوى',
         'Ya Allah, dalam perjalanan ini berikanlah kebaikan dan takwa',
       ],
     },
     'work': {
       'US': [
-        'Ø§Ù„Ù„Ù‡Ù… Ø¨Ø§Ø±Ùƒ Ù„Ù†Ø§ ÙÙŠÙ…Ø§ Ø±Ø²Ù‚ØªÙ†Ø§',
+        'اللهم بارك لنا فيما رزقتنا',
         'O Allah, bless us in what You have provided',
         'Professional success with Islamic ethics emphasis',
       ],
       'SA': [
-        'Ø§Ù„Ù„Ù‡Ù… Ø¨Ø§Ø±Ùƒ Ù„Ù†Ø§ ÙÙŠÙ…Ø§ Ø±Ø²Ù‚ØªÙ†Ø§ ÙˆÙ‚Ù†Ø§ Ø¹Ø°Ø§Ø¨ Ø§Ù„Ù†Ø§Ø±',
+        'اللهم بارك لنا فيما رزقتنا وقنا عذاب النار',
         'Work Du\'a with traditional Arabic emphasis',
       ],
     },
@@ -318,14 +312,12 @@ class CulturalAdaptationService {
 
     // Get regional adaptations
     final regionalAdaptations = _regionalDuaAdaptations[category];
-    if (regionalAdaptations != null &&
-        regionalAdaptations.containsKey(countryCode)) {
+    if (regionalAdaptations != null && regionalAdaptations.containsKey(countryCode)) {
       recommendations.addAll(regionalAdaptations[countryCode]!);
     }
 
     // Add language-specific recommendations
-    final languagePriorities = _culturalPreferences['language_priority']
-        ?[countryCode] as List<String>?;
+    final languagePriorities = _culturalPreferences['language_priority']?[countryCode] as List<String>?;
     if (languagePriorities != null) {
       for (final lang in languagePriorities) {
         final langSpecific = await _getLanguageSpecificDua(category, lang);
@@ -355,8 +347,7 @@ class CulturalAdaptationService {
     final context = _currentContext;
     if (context == null) return null;
 
-    return _culturalPreferences['prayer_calculation']?[context.country]
-        as String?;
+    return _culturalPreferences['prayer_calculation']?[context.country] as String?;
   }
 
   /// Get preferred languages for user's region
@@ -366,10 +357,7 @@ class CulturalAdaptationService {
     final context = _currentContext;
     if (context == null) return ['en'];
 
-    return (_culturalPreferences['language_priority']?[context.country]
-                as List<dynamic>?)
-            ?.cast<String>() ??
-        ['en'];
+    return (_culturalPreferences['language_priority']?[context.country] as List<dynamic>?)?.cast<String>() ?? ['en'];
   }
 
   /// Get regional Islamic celebrations
@@ -379,10 +367,7 @@ class CulturalAdaptationService {
     final context = _currentContext;
     if (context == null) return [];
 
-    return (_culturalPreferences['celebrations']?[context.country]
-                as List<dynamic>?)
-            ?.cast<String>() ??
-        [];
+    return (_culturalPreferences['celebrations']?[context.country] as List<dynamic>?)?.cast<String>() ?? [];
   }
 
   /// Set manual cultural context (for users who prefer to specify)
@@ -437,8 +422,7 @@ class CulturalAdaptationService {
         permission = await Geolocator.requestPermission();
       }
 
-      _hasLocationPermission = permission == LocationPermission.whileInUse ||
-          permission == LocationPermission.always;
+      _hasLocationPermission = permission == LocationPermission.whileInUse || permission == LocationPermission.always;
 
       if (!_hasLocationPermission) {
         AppLogger.warning(
@@ -474,10 +458,7 @@ class CulturalAdaptationService {
     if (!_hasLocationPermission) return false;
     if (_lastLocationUpdate == null) return true;
 
-    return DateTime.now()
-            .difference(_lastLocationUpdate!)
-            .compareTo(_locationCacheExpiry) >
-        0;
+    return DateTime.now().difference(_lastLocationUpdate!).compareTo(_locationCacheExpiry) > 0;
   }
 
   Future<void> _updateLocationAndContext() async {
@@ -525,17 +506,15 @@ class CulturalAdaptationService {
     try {
       final countryCode = placemark.isoCountryCode ?? 'XX';
       final country = placemark.country ?? 'Unknown';
-      final region =
-          placemark.administrativeArea ?? placemark.locality ?? 'Unknown';
+      final region = placemark.administrativeArea ?? placemark.locality ?? 'Unknown';
 
       // Determine primary language based on country
       final primaryLanguage = _determinePrimaryLanguage(countryCode);
 
       // Get preferred languages for region
-      final preferredLanguages = (_culturalPreferences['language_priority']
-                  ?[countryCode] as List<dynamic>?)
-              ?.cast<String>() ??
-          [primaryLanguage];
+      final preferredLanguages =
+          (_culturalPreferences['language_priority']?[countryCode] as List<dynamic>?)?.cast<String>() ??
+              [primaryLanguage];
 
       // Determine Islamic school
       final islamicSchool = _determineIslamicSchool(countryCode);
@@ -544,12 +523,9 @@ class CulturalAdaptationService {
       final culturalPreferences = <String, dynamic>{
         'source': 'geocoding',
         'location_accuracy': 'city',
-        'prayer_method':
-            _culturalPreferences['prayer_calculation']?[countryCode] ?? 'isna',
-        'dua_style': _culturalPreferences['dua_style']?[countryCode] ??
-            'english_focused',
-        'celebrations':
-            _culturalPreferences['celebrations']?[countryCode] ?? [],
+        'prayer_method': _culturalPreferences['prayer_calculation']?[countryCode] ?? 'isna',
+        'dua_style': _culturalPreferences['dua_style']?[countryCode] ?? 'english_focused',
+        'celebrations': _culturalPreferences['celebrations']?[countryCode] ?? [],
         'coordinates': {
           'latitude': _lastKnownPosition?.latitude,
           'longitude': _lastKnownPosition?.longitude,
@@ -621,26 +597,26 @@ class CulturalAdaptationService {
   List<String> _getGenericDuaRecommendations(String category) {
     const genericRecommendations = {
       'travel': [
-        'Ø§Ù„Ù„Ù‡Ù… Ø¥Ù†Ø§ Ù†Ø³Ø£Ù„Ùƒ ÙÙŠ Ø³ÙØ±Ù†Ø§ Ù‡Ø°Ø§ Ø§Ù„Ø¨Ø± ÙˆØ§Ù„ØªÙ‚ÙˆÙ‰',
+        'اللهم إنا نسألك في سفرنا هذا البر والتقوى',
         'O Allah, we ask You for righteousness and piety in this journey',
       ],
       'work': [
-        'Ø§Ù„Ù„Ù‡Ù… Ø¨Ø§Ø±Ùƒ Ù„Ù†Ø§ ÙÙŠÙ…Ø§ Ø±Ø²Ù‚ØªÙ†Ø§',
+        'اللهم بارك لنا فيما رزقتنا',
         'O Allah, bless us in what You have provided',
       ],
       'health': [
-        'Ø§Ù„Ù„Ù‡Ù… Ø§Ø´ÙÙ†ÙŠ ÙØ¥Ù†Ùƒ Ø§Ù„Ø´Ø§ÙÙŠ',
+        'اللهم اشفني فإنك الشافي',
         'O Allah, heal me, for You are the Healer',
       ],
       'guidance': [
-        'Ø§Ù„Ù„Ù‡Ù… Ø£Ø±Ù†ÙŠ Ø§Ù„Ø­Ù‚ Ø­Ù‚Ø§Ù‹ ÙˆØ§Ø±Ø²Ù‚Ù†ÙŠ Ø§ØªØ¨Ø§Ø¹Ù‡',
+        'اللهم أرني الحق حقاً وارزقني اتباعه',
         'O Allah, show me the truth and grant me the ability to follow it',
       ],
     };
 
     return genericRecommendations[category] ??
         [
-          'Ø¨Ø³Ù… Ø§Ù„Ù„Ù‡ Ø§Ù„Ø±Ø­Ù…Ù† Ø§Ù„Ø±Ø­ÙŠÙ…',
+          'بسم الله الرحمن الرحيم',
           'In the name of Allah, the Most Gracious, the Most Merciful',
         ];
   }

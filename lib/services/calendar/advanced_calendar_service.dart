@@ -14,8 +14,7 @@ import '../time/islamic_time_service.dart';
 /// Intelligently analyzes calendar events to suggest appropriate Islamic guidance
 class AdvancedCalendarService {
   static AdvancedCalendarService? _instance;
-  static AdvancedCalendarService get instance =>
-      _instance ??= AdvancedCalendarService._();
+  static AdvancedCalendarService get instance => _instance ??= AdvancedCalendarService._();
 
   AdvancedCalendarService._();
 
@@ -41,20 +40,14 @@ class AdvancedCalendarService {
   final Map<String, CalendarEvent> _eventCache = {};
 
   // Stream controllers
-  final _calendarEventsController =
-      StreamController<List<CalendarEvent>>.broadcast();
-  final _contextualSuggestionsController =
-      StreamController<List<ContextualSuggestion>>.broadcast();
-  final _reminderNotificationsController =
-      StreamController<ReminderNotification>.broadcast();
+  final _calendarEventsController = StreamController<List<CalendarEvent>>.broadcast();
+  final _contextualSuggestionsController = StreamController<List<ContextualSuggestion>>.broadcast();
+  final _reminderNotificationsController = StreamController<ReminderNotification>.broadcast();
 
   // Public streams
-  Stream<List<CalendarEvent>> get calendarEventsStream =>
-      _calendarEventsController.stream;
-  Stream<List<ContextualSuggestion>> get contextualSuggestionsStream =>
-      _contextualSuggestionsController.stream;
-  Stream<ReminderNotification> get reminderNotificationsStream =>
-      _reminderNotificationsController.stream;
+  Stream<List<CalendarEvent>> get calendarEventsStream => _calendarEventsController.stream;
+  Stream<List<ContextualSuggestion>> get contextualSuggestionsStream => _contextualSuggestionsController.stream;
+  Stream<ReminderNotification> get reminderNotificationsStream => _reminderNotificationsController.stream;
 
   // Islamic event patterns
   static const Map<String, List<String>> _islamicEventPatterns = {
@@ -64,8 +57,8 @@ class AdvancedCalendarService {
       'asr',
       'maghrib',
       'isha',
-      'ØµÙ„Ø§Ø©',
-      'Ù†Ù…Ø§Ø²',
+      'صلاة',
+      'نماز',
       'prayer',
       'salah',
     ],
@@ -344,8 +337,7 @@ class AdvancedCalendarService {
   }
 
   /// Get available calendars
-  List<Calendar> get availableCalendars =>
-      List.unmodifiable(_availableCalendars);
+  List<Calendar> get availableCalendars => List.unmodifiable(_availableCalendars);
 
   /// Check if integration is enabled
   bool get isEnabled => _isEnabled;
@@ -381,9 +373,7 @@ class AdvancedCalendarService {
       if (prefsJson != null) {
         final prefs = jsonDecode(prefsJson) as Map<String, dynamic>;
         _isEnabled = prefs['enabled'] ?? false;
-        _enabledCalendarIds =
-            (prefs['enabled_calendars'] as List<dynamic>?)?.cast<String>() ??
-                [];
+        _enabledCalendarIds = (prefs['enabled_calendars'] as List<dynamic>?)?.cast<String>() ?? [];
       }
     } catch (e) {
       AppLogger.warning('Failed to load calendar preferences: $e');
@@ -407,9 +397,7 @@ class AdvancedCalendarService {
     try {
       final calendarsResult = await _deviceCalendar.retrieveCalendars();
       if (calendarsResult.isSuccess && calendarsResult.data != null) {
-        _availableCalendars = calendarsResult.data!
-            .where((cal) => cal.isReadOnly == false)
-            .toList();
+        _availableCalendars = calendarsResult.data!.where((cal) => cal.isReadOnly == false).toList();
         AppLogger.info(
           'Loaded ${_availableCalendars.length} available calendars',
         );
@@ -571,8 +559,7 @@ class AdvancedCalendarService {
         ContextualSuggestion(
           id: 'prayer_reminder_${DateTime.now().millisecondsSinceEpoch}',
           userId: await _secureStorage.getUserId() ?? 'anonymous',
-          suggestionText:
-              'Prepare for ${nextPrayer.type.name} prayer in ${nextPrayer.remaining.inMinutes} minutes',
+          suggestionText: 'Prepare for ${nextPrayer.type.name} prayer in ${nextPrayer.remaining.inMinutes} minutes',
           reason: 'Upcoming prayer time',
           relevanceScore: 0.9,
           suggestedAt: DateTime.now(),
@@ -590,9 +577,8 @@ class AdvancedCalendarService {
   }
 
   String _buildSuggestionText(CalendarEvent event, Duration timeUntilEvent) {
-    final timeText = timeUntilEvent.inMinutes < 60
-        ? '${timeUntilEvent.inMinutes} minutes'
-        : '${timeUntilEvent.inHours} hours';
+    final timeText =
+        timeUntilEvent.inMinutes < 60 ? '${timeUntilEvent.inMinutes} minutes' : '${timeUntilEvent.inHours} hours';
 
     if (event.suggestedDuas?.isNotEmpty == true) {
       return 'You have "${event.title}" in $timeText. Consider: ${event.suggestedDuas!.first}';

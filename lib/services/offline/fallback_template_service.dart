@@ -1,14 +1,14 @@
 import 'dart:convert';
+
 import 'package:flutter/services.dart';
+
 import '../../../data/models/offline/offline_search_models.dart';
 import 'local_vector_storage_service.dart';
 
 /// Service for managing fallback response templates
 class FallbackTemplateService {
-  static const String _templatesEnPath =
-      'assets/offline_data/templates_en.json';
-  static const String _templatesArPath =
-      'assets/offline_data/templates_ar.json';
+  static const String _templatesEnPath = 'assets/offline_data/templates_en.json';
+  static const String _templatesArPath = 'assets/offline_data/templates_ar.json';
 
   final LocalVectorStorageService _storageService;
   final Map<String, List<FallbackTemplate>> _memoryCache = {};
@@ -101,10 +101,8 @@ class FallbackTemplateService {
     final categoryCount = <String, int>{};
 
     for (final template in allTemplates) {
-      languageCount[template.language] =
-          (languageCount[template.language] ?? 0) + 1;
-      categoryCount[template.category] =
-          (categoryCount[template.category] ?? 0) + 1;
+      languageCount[template.language] = (languageCount[template.language] ?? 0) + 1;
+      categoryCount[template.category] = (categoryCount[template.category] ?? 0) + 1;
     }
 
     return {
@@ -113,8 +111,7 @@ class FallbackTemplateService {
       'categories': categoryCount,
       'average_priority': allTemplates.isEmpty
           ? 0.0
-          : allTemplates.map((t) => t.priority).reduce((a, b) => a + b) /
-              allTemplates.length,
+          : allTemplates.map((t) => t.priority).reduce((a, b) => a + b) / allTemplates.length,
     };
   }
 
@@ -217,8 +214,7 @@ class FallbackTemplateService {
         id: 'en_general_prayer',
         category: 'general',
         language: 'en',
-        template:
-            'Here are some general prayers that might help with your request.',
+        template: 'Here are some general prayers that might help with your request.',
         keywords: ['prayer', 'dua', 'help', 'guidance'],
         priority: 1.0,
         createdAt: DateTime.now(),
@@ -247,9 +243,8 @@ class FallbackTemplateService {
         id: 'ar_general_prayer',
         category: 'general',
         language: 'ar',
-        template:
-            'Ø¥Ù„ÙŠÙƒ Ø¨Ø¹Ø¶ Ø§Ù„Ø£Ø¯Ø¹ÙŠØ© Ø§Ù„Ø¹Ø§Ù…Ø© Ø§Ù„ØªÙŠ Ù‚Ø¯ ØªØ³Ø§Ø¹Ø¯ ÙÙŠ Ø·Ù„Ø¨Ùƒ',
-        keywords: ['Ø¯Ø¹Ø§Ø¡', 'ØµÙ„Ø§Ø©', 'Ù…Ø³Ø§Ø¹Ø¯Ø©', 'Ù‡Ø¯Ø§ÙŠØ©'],
+        template: 'إليك بعض الأدعية العامة التي قد تساعد في طلبك',
+        keywords: ['دعاء', 'صلاة', 'مساعدة', 'هداية'],
         priority: 1.0,
         createdAt: DateTime.now(),
       ),
@@ -257,8 +252,8 @@ class FallbackTemplateService {
         id: 'ar_morning_prayers',
         category: 'morning',
         language: 'ar',
-        template: 'Ø¥Ù„ÙŠÙƒ Ø£Ø¯Ø¹ÙŠØ© Ø§Ù„ØµØ¨Ø§Ø­ ÙˆØ§Ù„Ø£Ø°ÙƒØ§Ø±',
-        keywords: ['ØµØ¨Ø§Ø­', 'ÙØ¬Ø±', 'Ø´Ø±ÙˆÙ‚', 'Ø£Ø°ÙƒØ§Ø±'],
+        template: 'إليك أدعية الصباح والأذكار',
+        keywords: ['صباح', 'فجر', 'شروق', 'أذكار'],
         priority: 2.0,
         createdAt: DateTime.now(),
       ),
@@ -315,8 +310,7 @@ class FallbackTemplateService {
       }
 
       // Category matching bonus
-      if (category != null &&
-          template.category.toLowerCase() == category.toLowerCase()) {
+      if (category != null && template.category.toLowerCase() == category.toLowerCase()) {
         score += 5.0;
       }
 
@@ -446,11 +440,11 @@ class FallbackTemplateService {
     final isArabic = language == 'ar';
 
     final genericText = isArabic
-        ? 'Ø¹Ø°Ø±Ø§Ù‹ØŒ Ù„Ù… Ø£ØªÙ…ÙƒÙ† Ù…Ù† Ø§Ù„Ø¹Ø«ÙˆØ± Ø¹Ù„Ù‰ Ø¯Ø¹Ø§Ø¡ Ù…Ø­Ø¯Ø¯ Ù„Ø·Ù„Ø¨Ùƒ. ÙŠÙ…ÙƒÙ†Ùƒ Ù…Ø­Ø§ÙˆÙ„Ø© Ø§Ù„Ø¨Ø­Ø« Ø¨ÙƒÙ„Ù…Ø§Øª Ù…Ø®ØªÙ„ÙØ©.'
+        ? 'عذرًا، لم أتمكن من العثور على دعاء محدد لطلبك. يمكنك محاولة البحث بكلمات مختلفة.'
         : 'Sorry, I couldn\'t find a specific prayer for your request. You might try searching with different words.';
 
     final genericAdvice = isArabic
-        ? 'ÙÙŠ Ù‡Ø°Ù‡ Ø§Ù„Ø­Ø§Ù„Ø©ØŒ ÙŠÙ…ÙƒÙ†Ùƒ Ø§Ù„Ø¯Ø¹Ø§Ø¡ Ø¨Ù…Ø§ ÙŠÙØªØ­ Ø§Ù„Ù„Ù‡ Ø¨Ù‡ Ø¹Ù„ÙŠÙƒ Ù…Ù† Ø§Ù„Ù‚Ù„Ø¨.'
+        ? 'في هذه الحالة، يمكنك الدعاء بما يفتح الله به عليك من القلب.'
         : 'In this case, you can make a heartfelt prayer in your own words.';
 
     return OfflineSearchResult(
