@@ -11,10 +11,13 @@ class EnhancedWebSplashScreen extends ConsumerStatefulWidget {
   const EnhancedWebSplashScreen({super.key, required this.onAnimationComplete});
 
   @override
-  ConsumerState<EnhancedWebSplashScreen> createState() => _EnhancedWebSplashScreenState();
+  ConsumerState<EnhancedWebSplashScreen> createState() =>
+      _EnhancedWebSplashScreenState();
 }
 
-class _EnhancedWebSplashScreenState extends ConsumerState<EnhancedWebSplashScreen> with SingleTickerProviderStateMixin {
+class _EnhancedWebSplashScreenState
+    extends ConsumerState<EnhancedWebSplashScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
   late Animation<double> _scaleAnimation;
@@ -214,7 +217,7 @@ class _EnhancedWebSplashScreenState extends ConsumerState<EnhancedWebSplashScree
         Container(
           padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space2),
           decoration: BoxDecoration(
-            color: RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.1),
+            color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1),
             borderRadius: BorderRadius.circular(
               RevolutionaryIslamicTheme.radiusLg,
             ),
@@ -242,7 +245,8 @@ class EnhancedWebAppWrapper extends ConsumerStatefulWidget {
   const EnhancedWebAppWrapper({super.key});
 
   @override
-  ConsumerState<EnhancedWebAppWrapper> createState() => _EnhancedWebAppWrapperState();
+  ConsumerState<EnhancedWebAppWrapper> createState() =>
+      _EnhancedWebAppWrapperState();
 }
 
 class _EnhancedWebAppWrapperState extends ConsumerState<EnhancedWebAppWrapper> {

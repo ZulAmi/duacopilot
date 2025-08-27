@@ -12,7 +12,7 @@ import '../models/rag_response_model.dart';
 import 'islamic_rag_service.dart';
 
 /// TRUE RAG API Service with Islamic Knowledge Retrieval
-/// Architecture: RETRIEVE Islamic content → AUGMENT prompts → GENERATE responses
+/// Architecture: RETRIEVE Islamic content â†’ AUGMENT prompts â†’ GENERATE responses
 class RagApiService {
   final Dio _dio;
   final NetworkInfo _networkInfo;
@@ -25,11 +25,11 @@ class RagApiService {
     required SecureStorageService secureStorage,
     required IslamicRagService islamicRagService,
     Logger? logger,
-  }) : _networkInfo = networkInfo,
-       _secureStorage = secureStorage,
-       _islamicRagService = islamicRagService,
-       _logger = logger ?? Logger(),
-       _dio = Dio() {
+  })  : _networkInfo = networkInfo,
+        _secureStorage = secureStorage,
+        _islamicRagService = islamicRagService,
+        _logger = logger ?? Logger(),
+        _dio = Dio() {
     _setupDio();
   }
 
@@ -58,7 +58,7 @@ class RagApiService {
         },
         onError: (error, handler) async {
           if (error.response?.statusCode == 401) {
-            _logger.w('🔑 Authentication failed, clearing token');
+            _logger.w('ðŸ”‘ Authentication failed, clearing token');
             await _secureStorage.deleteValue('rag_api_token');
           }
           handler.next(error);
@@ -109,7 +109,7 @@ class RagApiService {
       }
 
       _logger.i(
-        '🤖 Making RAG query to ${RagConfig.currentProvider}: ${request.query}',
+        'ðŸ¤– Making RAG query to ${RagConfig.currentProvider}: ${request.query}',
       );
 
       final startTime = DateTime.now();
@@ -127,12 +127,12 @@ class RagApiService {
         metadata: response['metadata'] ?? {},
       );
 
-      _logger.i('✅ RAG query successful: ${ragResponse.id}');
+      _logger.i('âœ… RAG query successful: ${ragResponse.id}');
       return ragResponse;
     } on DioException catch (e) {
       throw _handleDioException(e);
     } catch (e) {
-      _logger.e('❌ RAG query failed: $e');
+      _logger.e('âŒ RAG query failed: $e');
       throw ServerException('RAG query failed: $e');
     }
   }
@@ -159,7 +159,7 @@ class RagApiService {
   Future<Map<String, dynamic>> _makeOpenAiRequest(
     RagRequestModel request,
   ) async {
-    _logger.i('🔍 Starting TRUE RAG process for OpenAI...');
+    _logger.i('ðŸ” Starting TRUE RAG process for OpenAI...');
 
     // STEP 1: RETRIEVE - Get Islamic knowledge from Quran/Hadith
     String retrievedContext = '';
@@ -167,7 +167,7 @@ class RagApiService {
     double retrievalConfidence = 0.0;
 
     try {
-      _logger.i('📚 Retrieving Islamic knowledge for: ${request.query}');
+      _logger.i('ðŸ“š Retrieving Islamic knowledge for: ${request.query}');
       final islamicResponse = await _islamicRagService.processQuery(
         query: request.query,
         language: 'en',
@@ -176,16 +176,15 @@ class RagApiService {
 
       if (islamicResponse.response.isNotEmpty) {
         retrievedContext = islamicResponse.response;
-        retrievedSources =
-            islamicResponse.sources
-                .map((source) => source.reference ?? source.title)
-                .where((ref) => ref.isNotEmpty)
-                .toList();
+        retrievedSources = islamicResponse.sources
+            .map((source) => source.reference ?? source.title)
+            .where((ref) => ref.isNotEmpty)
+            .toList();
         retrievalConfidence = islamicResponse.confidence;
-        _logger.i('✅ Retrieved ${retrievedSources.length} Islamic sources');
+        _logger.i('âœ… Retrieved ${retrievedSources.length} Islamic sources');
       }
     } catch (e) {
-      _logger.w('⚠️ Islamic knowledge retrieval failed: $e');
+      _logger.w('âš ï¸ Islamic knowledge retrieval failed: $e');
       // Continue with general Islamic prompting if retrieval fails
     }
 
@@ -197,7 +196,7 @@ class RagApiService {
     );
 
     _logger.i(
-      '🔗 Built augmented prompt with ${retrievedContext.isEmpty ? 'general' : 'specific'} Islamic context',
+      'ðŸ”— Built augmented prompt with ${retrievedContext.isEmpty ? 'general' : 'specific'} Islamic context',
     );
 
     // STEP 3: GENERATE - Send augmented prompt to OpenAI
@@ -224,10 +223,9 @@ class RagApiService {
 
     return {
       'content': content,
-      'confidence':
-          retrievedContext.isNotEmpty
-              ? 0.95
-              : 0.85, // Higher confidence with retrieved context
+      'confidence': retrievedContext.isNotEmpty
+          ? 0.95
+          : 0.85, // Higher confidence with retrieved context
       'sources': ragSources,
       'metadata': {
         'provider': 'openai',
@@ -244,7 +242,7 @@ class RagApiService {
   Future<Map<String, dynamic>> _makeClaudeRequest(
     RagRequestModel request,
   ) async {
-    _logger.i('🔍 Starting TRUE RAG process for Claude...');
+    _logger.i('ðŸ” Starting TRUE RAG process for Claude...');
 
     // STEP 1: RETRIEVE - Get Islamic knowledge
     String retrievedContext = '';
@@ -252,7 +250,7 @@ class RagApiService {
     double retrievalConfidence = 0.0;
 
     try {
-      _logger.i('📚 Retrieving Islamic knowledge for: ${request.query}');
+      _logger.i('ðŸ“š Retrieving Islamic knowledge for: ${request.query}');
       final islamicResponse = await _islamicRagService.processQuery(
         query: request.query,
         language: 'en',
@@ -261,16 +259,15 @@ class RagApiService {
 
       if (islamicResponse.response.isNotEmpty) {
         retrievedContext = islamicResponse.response;
-        retrievedSources =
-            islamicResponse.sources
-                .map((source) => source.reference ?? source.title)
-                .where((ref) => ref.isNotEmpty)
-                .toList();
+        retrievedSources = islamicResponse.sources
+            .map((source) => source.reference ?? source.title)
+            .where((ref) => ref.isNotEmpty)
+            .toList();
         retrievalConfidence = islamicResponse.confidence;
-        _logger.i('✅ Retrieved ${retrievedSources.length} Islamic sources');
+        _logger.i('âœ… Retrieved ${retrievedSources.length} Islamic sources');
       }
     } catch (e) {
-      _logger.w('⚠️ Islamic knowledge retrieval failed: $e');
+      _logger.w('âš ï¸ Islamic knowledge retrieval failed: $e');
     }
 
     // STEP 2: AUGMENT - Build enhanced prompt
@@ -280,7 +277,7 @@ class RagApiService {
       sources: retrievedSources,
     );
 
-    _logger.i('🔗 Built augmented prompt for Claude');
+    _logger.i('ðŸ”— Built augmented prompt for Claude');
 
     // STEP 3: GENERATE - Send to Claude
     final response = await _dio.post(
@@ -322,7 +319,7 @@ class RagApiService {
   Future<Map<String, dynamic>> _makeGeminiRequest(
     RagRequestModel request,
   ) async {
-    _logger.i('🔍 Starting TRUE RAG process for Gemini...');
+    _logger.i('ðŸ” Starting TRUE RAG process for Gemini...');
 
     // STEP 1: RETRIEVE - Get Islamic knowledge
     String retrievedContext = '';
@@ -330,7 +327,7 @@ class RagApiService {
     double retrievalConfidence = 0.0;
 
     try {
-      _logger.i('📚 Retrieving Islamic knowledge for: ${request.query}');
+      _logger.i('ðŸ“š Retrieving Islamic knowledge for: ${request.query}');
       final islamicResponse = await _islamicRagService.processQuery(
         query: request.query,
         language: 'en',
@@ -339,16 +336,15 @@ class RagApiService {
 
       if (islamicResponse.response.isNotEmpty) {
         retrievedContext = islamicResponse.response;
-        retrievedSources =
-            islamicResponse.sources
-                .map((source) => source.reference ?? source.title)
-                .where((ref) => ref.isNotEmpty)
-                .toList();
+        retrievedSources = islamicResponse.sources
+            .map((source) => source.reference ?? source.title)
+            .where((ref) => ref.isNotEmpty)
+            .toList();
         retrievalConfidence = islamicResponse.confidence;
-        _logger.i('✅ Retrieved ${retrievedSources.length} Islamic sources');
+        _logger.i('âœ… Retrieved ${retrievedSources.length} Islamic sources');
       }
     } catch (e) {
-      _logger.w('⚠️ Islamic knowledge retrieval failed: $e');
+      _logger.w('âš ï¸ Islamic knowledge retrieval failed: $e');
     }
 
     // STEP 2: AUGMENT - Build enhanced prompt
@@ -358,7 +354,7 @@ class RagApiService {
       sources: retrievedSources,
     );
 
-    _logger.i('🔗 Built augmented prompt for Gemini');
+    _logger.i('ðŸ”— Built augmented prompt for Gemini');
 
     // STEP 3: GENERATE - Send to Gemini
     final response = await _dio.post(
@@ -448,7 +444,7 @@ class RagApiService {
         '${RagConfig.currentProvider}_api_key',
       );
     } catch (e) {
-      _logger.e('🔐 Failed to get API key: $e');
+      _logger.e('ðŸ” Failed to get API key: $e');
       return null;
     }
   }
@@ -459,9 +455,9 @@ class RagApiService {
         '${RagConfig.currentProvider}_api_key',
         key,
       );
-      _logger.d('🔐 API key saved for ${RagConfig.currentProvider}');
+      _logger.d('ðŸ” API key saved for ${RagConfig.currentProvider}');
     } catch (e) {
-      _logger.e('🔐 Failed to save API key: $e');
+      _logger.e('ðŸ” Failed to save API key: $e');
     }
   }
 

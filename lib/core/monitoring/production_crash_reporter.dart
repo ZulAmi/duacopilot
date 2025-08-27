@@ -364,12 +364,11 @@ class ProductionCrashReporter {
       return {
         'total_crashes': crashCount,
         'last_crash_timestamp': lastCrash,
-        'last_crash_date':
-            lastCrash != null
-                ? DateTime.fromMillisecondsSinceEpoch(
-                  lastCrash,
-                ).toIso8601String()
-                : null,
+        'last_crash_date': lastCrash != null
+            ? DateTime.fromMillisecondsSinceEpoch(
+                lastCrash,
+              ).toIso8601String()
+            : null,
         'crashes_this_session': 0, // Reset on app start
         'crashlytics_enabled': await isCrashlyticsEnabled(),
       };

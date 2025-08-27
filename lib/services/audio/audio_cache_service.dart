@@ -317,18 +317,18 @@ class AudioCacheService {
 
     // Remove items if cache is too large
     if (_cacheMetadata.length > _maxCacheItems) {
-      final sortedItems =
-          _cacheMetadata.entries.toList()..sort((a, b) {
-            // Sort by priority first, then by last accessed date
-            final priorityCompare = a.value.priority.index.compareTo(
-              b.value.priority.index,
-            );
-            if (priorityCompare != 0) return priorityCompare;
+      final sortedItems = _cacheMetadata.entries.toList()
+        ..sort((a, b) {
+          // Sort by priority first, then by last accessed date
+          final priorityCompare = a.value.priority.index.compareTo(
+            b.value.priority.index,
+          );
+          if (priorityCompare != 0) return priorityCompare;
 
-            final aLastAccessed = a.value.lastAccessed ?? DateTime(2000);
-            final bLastAccessed = b.value.lastAccessed ?? DateTime(2000);
-            return aLastAccessed.compareTo(bLastAccessed);
-          });
+          final aLastAccessed = a.value.lastAccessed ?? DateTime(2000);
+          final bLastAccessed = b.value.lastAccessed ?? DateTime(2000);
+          return aLastAccessed.compareTo(bLastAccessed);
+        });
 
       final excessCount = _cacheMetadata.length - _maxCacheItems;
       for (int i = 0; i < excessCount; i++) {
@@ -342,12 +342,12 @@ class AudioCacheService {
       (sum, item) => sum + item.fileSizeBytes,
     );
     if (totalSize > _maxCacheSize) {
-      final sortedBySize =
-          _cacheMetadata.entries.toList()..sort((a, b) {
-            final aLastAccessed = a.value.lastAccessed ?? DateTime(2000);
-            final bLastAccessed = b.value.lastAccessed ?? DateTime(2000);
-            return aLastAccessed.compareTo(bLastAccessed);
-          });
+      final sortedBySize = _cacheMetadata.entries.toList()
+        ..sort((a, b) {
+          final aLastAccessed = a.value.lastAccessed ?? DateTime(2000);
+          final bLastAccessed = b.value.lastAccessed ?? DateTime(2000);
+          return aLastAccessed.compareTo(bLastAccessed);
+        });
 
       int currentSize = totalSize;
       for (final entry in sortedBySize) {
@@ -425,19 +425,19 @@ class AudioCacheService {
   }
 
   List<AudioCacheItem> getCachedItems() {
-    return _cacheMetadata.values.toList()..sort((a, b) {
-      final aLastAccessed = a.lastAccessed ?? DateTime(2000);
-      final bLastAccessed = b.lastAccessed ?? DateTime(2000);
-      return bLastAccessed.compareTo(aLastAccessed);
-    });
+    return _cacheMetadata.values.toList()
+      ..sort((a, b) {
+        final aLastAccessed = a.lastAccessed ?? DateTime(2000);
+        final bLastAccessed = b.lastAccessed ?? DateTime(2000);
+        return bLastAccessed.compareTo(aLastAccessed);
+      });
   }
 
   /// Pre-cache high confidence items
   Future<void> preloadHighConfidenceItems(List<DuaEntity> duas) async {
-    final highConfidenceItems =
-        duas
-            .where((dua) => dua.ragConfidence.score >= _highConfidenceThreshold)
-            .toList();
+    final highConfidenceItems = duas
+        .where((dua) => dua.ragConfidence.score >= _highConfidenceThreshold)
+        .toList();
 
     await smartPreCache(highConfidenceItems);
   }

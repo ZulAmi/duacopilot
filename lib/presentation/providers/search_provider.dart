@@ -43,7 +43,7 @@ class SearchNotifier extends StateNotifier<SearchState> {
   final SaveQueryHistory saveQueryHistory;
 
   SearchNotifier(this.searchRag, this.saveQueryHistory)
-    : super(const SearchState());
+      : super(const SearchState());
 
   Future<void> search(String query) async {
     if (query.trim().isEmpty) return;
@@ -112,23 +112,23 @@ final queryHistoryProvider = FutureProvider<List<QueryHistory>>((ref) async {
 // Filtered query history provider
 final filteredQueryHistoryProvider =
     Provider.family<List<QueryHistory>, String>((ref, filter) {
-      final asyncHistory = ref.watch(queryHistoryProvider);
+  final asyncHistory = ref.watch(queryHistoryProvider);
 
-      return asyncHistory.when(
-        data: (history) {
-          if (filter.isEmpty) return history;
-          return history
-              .where(
-                (query) =>
-                    query.query.toLowerCase().contains(filter.toLowerCase()) ||
-                    (query.response?.toLowerCase().contains(
+  return asyncHistory.when(
+    data: (history) {
+      if (filter.isEmpty) return history;
+      return history
+          .where(
+            (query) =>
+                query.query.toLowerCase().contains(filter.toLowerCase()) ||
+                (query.response?.toLowerCase().contains(
                           filter.toLowerCase(),
                         ) ??
-                        false),
-              )
-              .toList();
-        },
-        loading: () => [],
-        error: (_, __) => [],
-      );
-    });
+                    false),
+          )
+          .toList();
+    },
+    loading: () => [],
+    error: (_, __) => [],
+  );
+});

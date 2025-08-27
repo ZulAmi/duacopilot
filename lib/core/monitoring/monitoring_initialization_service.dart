@@ -9,7 +9,8 @@ import '../platform/platform_service.dart';
 /// Coordinates Firebase services, platform detection, and monitoring setup
 class MonitoringInitializationService {
   static MonitoringInitializationService? _instance;
-  static MonitoringInitializationService get instance => _instance ??= MonitoringInitializationService._();
+  static MonitoringInitializationService get instance =>
+      _instance ??= MonitoringInitializationService._();
 
   MonitoringInitializationService._();
 
@@ -18,32 +19,33 @@ class MonitoringInitializationService {
   /// Initialize all monitoring services in the correct order
   Future<void> initializeMonitoring() async {
     if (_isInitialized) {
-      AppLogger.info('📊 Monitoring already initialized');
+      AppLogger.info('ðŸ“Š Monitoring already initialized');
       return;
     }
 
     try {
-      AppLogger.info('🚀 Starting comprehensive monitoring initialization...');
+      AppLogger.info(
+          'ðŸš€ Starting comprehensive monitoring initialization...');
 
       // 1. Initialize platform service first
       await PlatformService.instance.initialize();
-      AppLogger.info('✅ Platform service initialized');
+      AppLogger.info('âœ… Platform service initialized');
 
       // 2. Initialize comprehensive monitoring service
       await ComprehensiveMonitoringService.instance.initialize();
-      AppLogger.info('✅ Comprehensive monitoring service initialized');
+      AppLogger.info('âœ… Comprehensive monitoring service initialized');
 
       // 3. Initialize monitoring integration helpers
       await MonitoringIntegration.initialize();
-      AppLogger.info('✅ Monitoring integration initialized');
+      AppLogger.info('âœ… Monitoring integration initialized');
 
       _isInitialized = true;
-      AppLogger.info('🎉 All monitoring services initialized successfully');
+      AppLogger.info('ðŸŽ‰ All monitoring services initialized successfully');
 
       // Track successful initialization
       await _trackInitializationSuccess();
     } catch (e) {
-      AppLogger.error('❌ Failed to initialize monitoring: $e');
+      AppLogger.error('âŒ Failed to initialize monitoring: $e');
 
       // Try to record the initialization failure
       try {
@@ -69,7 +71,8 @@ class MonitoringInitializationService {
         additionalMetadata: {
           'event_type': 'monitoring_init',
           'platform': PlatformService.instance.platformName,
-          'features_available': PlatformService.instance.availableFeatures.length,
+          'features_available':
+              PlatformService.instance.availableFeatures.length,
         },
       );
 
@@ -104,13 +107,13 @@ class MonitoringInitializationService {
     if (!_isInitialized) return;
 
     try {
-      AppLogger.info('🧹 Disposing monitoring services...');
+      AppLogger.info('ðŸ§¹ Disposing monitoring services...');
 
       await MonitoringIntegration.dispose();
       await ComprehensiveMonitoringService.instance.dispose();
 
       _isInitialized = false;
-      AppLogger.info('✅ Monitoring services disposed');
+      AppLogger.info('âœ… Monitoring services disposed');
     } catch (e) {
       AppLogger.error('Failed to dispose monitoring services: $e');
     }
@@ -132,7 +135,8 @@ class MonitoredApp extends StatefulWidget {
   State<MonitoredApp> createState() => _MonitoredAppState();
 }
 
-class _MonitoredAppState extends State<MonitoredApp> with WidgetsBindingObserver {
+class _MonitoredAppState extends State<MonitoredApp>
+    with WidgetsBindingObserver {
   bool _monitoringInitialized = false;
   String? _initializationError;
 
@@ -226,7 +230,7 @@ class _MonitoredAppState extends State<MonitoredApp> with WidgetsBindingObserver
               left: 16,
               right: 16,
               child: Material(
-                color: Colors.orange.withValues(alpha: 0.9),
+                color: Colors.orange.withOpacity(0.9),
                 borderRadius: BorderRadius.circular(8),
                 child: Padding(
                   padding: const EdgeInsets.all(12),

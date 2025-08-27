@@ -22,7 +22,7 @@ class ProfessionalComponents {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: ProfessionalTheme.primaryEmerald.withValues(alpha: 0.1),
+                color: ProfessionalTheme.primaryEmerald.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(ProfessionalTheme.radiusSm),
               ),
               child: const Icon(
@@ -123,12 +123,16 @@ class ProfessionalComponents {
                   margin: const EdgeInsets.only(right: 8),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: isVoiceListening ? ProfessionalTheme.primaryEmerald : ProfessionalTheme.gray100,
+                    color: isVoiceListening
+                        ? ProfessionalTheme.primaryEmerald
+                        : ProfessionalTheme.gray100,
                   ),
                   child: IconButton(
                     icon: Icon(
                       isVoiceListening ? Icons.mic : Icons.mic_none_rounded,
-                      color: isVoiceListening ? ProfessionalTheme.surfaceColor : ProfessionalTheme.textSecondary,
+                      color: isVoiceListening
+                          ? ProfessionalTheme.surfaceColor
+                          : ProfessionalTheme.textSecondary,
                     ),
                     onPressed: onVoiceSearch,
                   ),
@@ -228,9 +232,13 @@ class ProfessionalComponents {
                   : Icon(icon ?? Icons.arrow_forward_rounded),
               label: Text(text),
               style: OutlinedButton.styleFrom(
-                foregroundColor: enabled ? ProfessionalTheme.primaryEmerald : ProfessionalTheme.textTertiary,
+                foregroundColor: enabled
+                    ? ProfessionalTheme.primaryEmerald
+                    : ProfessionalTheme.textTertiary,
                 side: BorderSide(
-                  color: enabled ? ProfessionalTheme.primaryEmerald : ProfessionalTheme.borderLight,
+                  color: enabled
+                      ? ProfessionalTheme.primaryEmerald
+                      : ProfessionalTheme.borderLight,
                 ),
               ),
             )
@@ -250,7 +258,9 @@ class ProfessionalComponents {
                   : Icon(icon ?? Icons.arrow_forward_rounded),
               label: Text(text),
               style: ElevatedButton.styleFrom(
-                backgroundColor: enabled ? ProfessionalTheme.primaryEmerald : ProfessionalTheme.gray300,
+                backgroundColor: enabled
+                    ? ProfessionalTheme.primaryEmerald
+                    : ProfessionalTheme.gray300,
               ),
             ),
     );
@@ -275,7 +285,8 @@ class ProfessionalComponents {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: (iconColor ?? ProfessionalTheme.primaryEmerald).withValues(alpha: 0.1),
+                  color: (iconColor ?? ProfessionalTheme.primaryEmerald)
+                      .withOpacity(0.1),
                   borderRadius: BorderRadius.circular(
                     ProfessionalTheme.radiusMd,
                   ),

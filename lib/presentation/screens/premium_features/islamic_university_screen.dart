@@ -10,12 +10,16 @@ class IslamicUniversityScreen extends ConsumerStatefulWidget {
   const IslamicUniversityScreen({super.key});
 
   @override
-  ConsumerState<IslamicUniversityScreen> createState() => _IslamicUniversityScreenState();
+  ConsumerState<IslamicUniversityScreen> createState() =>
+      _IslamicUniversityScreenState();
 }
 
-class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScreen> with TickerProviderStateMixin {
+class _IslamicUniversityScreenState
+    extends ConsumerState<IslamicUniversityScreen>
+    with TickerProviderStateMixin {
   late TabController _tabController;
-  final IslamicUniversityService _universityService = IslamicUniversityService.instance;
+  final IslamicUniversityService _universityService =
+      IslamicUniversityService.instance;
 
   // Data state
   bool _isLoading = false;
@@ -139,7 +143,7 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [const Color(0xFFf093fb).withValues(alpha: 0.1), Colors.white],
+          colors: [const Color(0xFFf093fb).withOpacity(0.1), Colors.white],
         ),
       ),
       child: TabBarView(
@@ -186,14 +190,14 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            const Color(0xFFf093fb).withValues(alpha: 0.1),
-            const Color(0xFFf5576c).withValues(alpha: 0.1),
+            const Color(0xFFf093fb).withOpacity(0.1),
+            const Color(0xFFf5576c).withOpacity(0.1),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFf093fb).withValues(alpha: 0.3)),
+        border: Border.all(color: const Color(0xFFf093fb).withOpacity(0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -452,7 +456,7 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
                     ),
                     gradient: LinearGradient(
                       colors: [
-                        const Color(0xFFf093fb).withValues(alpha: 0.8),
+                        const Color(0xFFf093fb).withOpacity(0.8),
                         const Color(0xFFf5576c),
                       ],
                     ),
@@ -603,8 +607,12 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
             children: [
               CircleAvatar(
                 radius: 30,
-                backgroundImage: scholar.profileImageUrl.isNotEmpty ? NetworkImage(scholar.profileImageUrl) : null,
-                child: scholar.profileImageUrl.isEmpty ? Text(scholar.name[0]) : null,
+                backgroundImage: scholar.profileImageUrl.isNotEmpty
+                    ? NetworkImage(scholar.profileImageUrl)
+                    : null,
+                child: scholar.profileImageUrl.isEmpty
+                    ? Text(scholar.name[0])
+                    : null,
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -823,7 +831,7 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
                           ),
                         ),
                         Text(
-                          '${path.estimatedHours} hours • ${path.courseIds.length} courses',
+                          '${path.estimatedHours} hours â€¢ ${path.courseIds.length} courses',
                           style: TextStyle(
                             color: Colors.grey[600],
                             fontSize: 12,
@@ -838,7 +846,7 @@ class _IslamicUniversityScreenState extends ConsumerState<IslamicUniversityScree
                       vertical: 4,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFf093fb).withValues(alpha: 0.1),
+                      color: const Color(0xFFf093fb).withOpacity(0.1),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(

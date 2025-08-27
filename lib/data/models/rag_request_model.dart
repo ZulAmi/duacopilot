@@ -26,18 +26,16 @@ class RagRequestModel extends Equatable {
     return RagRequestModel(
       query: json['query'] as String,
       context: json['context'] as Map<String, dynamic>?,
-      sources:
-          json['sources'] != null
-              ? List<String>.from(json['sources'] as List)
-              : null,
+      sources: json['sources'] != null
+          ? List<String>.from(json['sources'] as List)
+          : null,
       maxTokens: json['max_tokens'] as int?,
       temperature: (json['temperature'] as num?)?.toDouble(),
       includeMetadata: json['include_metadata'] as bool?,
       sessionId: json['session_id'] as String?,
-      parameters:
-          json['parameters'] != null
-              ? Map<String, String>.from(json['parameters'] as Map)
-              : null,
+      parameters: json['parameters'] != null
+          ? Map<String, String>.from(json['parameters'] as Map)
+          : null,
     );
   }
 
@@ -57,15 +55,15 @@ class RagRequestModel extends Equatable {
 
   @override
   List<Object?> get props => [
-    query,
-    context,
-    sources,
-    maxTokens,
-    temperature,
-    includeMetadata,
-    sessionId,
-    parameters,
-  ];
+        query,
+        context,
+        sources,
+        maxTokens,
+        temperature,
+        includeMetadata,
+        sessionId,
+        parameters,
+      ];
 
   RagRequestModel copyWith({
     String? query,

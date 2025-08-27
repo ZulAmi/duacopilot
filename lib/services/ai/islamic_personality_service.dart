@@ -8,7 +8,8 @@ import '../secure_storage/secure_storage_service.dart';
 /// Features: Wise responses, spiritual guidance, emotional support, teaching moments
 class IslamicPersonalityService {
   static IslamicPersonalityService? _instance;
-  static IslamicPersonalityService get instance => _instance ??= IslamicPersonalityService._();
+  static IslamicPersonalityService get instance =>
+      _instance ??= IslamicPersonalityService._();
 
   IslamicPersonalityService._();
 
@@ -41,7 +42,7 @@ class IslamicPersonalityService {
       'Allah guides those who seek Him sincerely',
     ],
     'teaching_moments': [
-      'Let me share some wisdom from our beloved Prophet ﷺ',
+      'Let me share some wisdom from our beloved Prophet ï·º',
       'The Quran teaches us about this beautifully',
       'Our scholars have reflected deeply on this',
       'This reminds me of a beautiful hadith',
@@ -229,15 +230,15 @@ class IslamicPersonalityService {
     final insights = {
       'distress': [
         'Remember, Allah says: "And it is He who created the heavens and earth in truth. And the day He says, \'Be,\' and it is, His word is the truth." (6:73)',
-        'The Prophet ﷺ said: "No fatigue, nor disease, nor sorrow, nor sadness, nor hurt, nor distress befalls a Muslim, not even a prick of a thorn, but that Allah expiates some of his sins for that."',
+        'The Prophet ï·º said: "No fatigue, nor disease, nor sorrow, nor sadness, nor hurt, nor distress befalls a Muslim, not even a prick of a thorn, but that Allah expiates some of his sins for that."',
       ],
       'seeking_knowledge': [
-        'The Prophet ﷺ said: "The seeking of knowledge is obligatory upon every Muslim."',
+        'The Prophet ï·º said: "The seeking of knowledge is obligatory upon every Muslim."',
         'Allah says: "And say, \'My Lord, increase me in knowledge.\'" (20:114)',
       ],
       'celebration': [
         'Allah says: "And [remember] when your Lord proclaimed, \'If you are grateful, I will certainly give you more.\'" (14:7)',
-        'The Prophet ﷺ said: "He who does not thank people does not thank Allah."',
+        'The Prophet ï·º said: "He who does not thank people does not thank Allah."',
       ],
     };
 
@@ -301,12 +302,12 @@ class IslamicPersonalityService {
 
     // Add spiritual insight
     if (spiritualInsight != null) {
-      parts.add('\n\n🌙 **Spiritual Reflection:**\n$spiritualInsight');
+      parts.add('\n\nðŸŒ™ **Spiritual Reflection:**\n$spiritualInsight');
     }
 
     // Add teaching moment
     if (teachingMoment != null) {
-      parts.add('\n\n📚 **Learning Moment:**\n$teachingMoment');
+      parts.add('\n\nðŸ“š **Learning Moment:**\n$teachingMoment');
     }
 
     // Add personalized closing
@@ -319,10 +320,10 @@ class IslamicPersonalityService {
   /// Generate personalized closing
   String _generatePersonalizedClosing(Map<String, dynamic> context) {
     final closings = [
-      'May Allah bless you and increase you in knowledge and faith. 🤲',
-      'Barakallahu feeki/feek (May Allah bless you). I\'m always here to help. ✨',
-      'Remember, Allah is always with those who are patient and grateful. 🌸',
-      'May your heart find peace and your soul find guidance. Ameen. 🕌',
+      'May Allah bless you and increase you in knowledge and faith. ðŸ¤²',
+      'Barakallahu feeki/feek (May Allah bless you). I\'m always here to help. âœ¨',
+      'Remember, Allah is always with those who are patient and grateful. ðŸŒ¸',
+      'May your heart find peace and your soul find guidance. Ameen. ðŸ•Œ',
     ];
 
     return closings[Random().nextInt(closings.length)];

@@ -195,15 +195,13 @@ class SubscriptionService {
   ) async {
     try {
       final now = DateTime.now();
-      final endDate =
-          yearly
-              ? now.add(const Duration(days: 365))
-              : now.add(const Duration(days: 30));
+      final endDate = yearly
+          ? now.add(const Duration(days: 365))
+          : now.add(const Duration(days: 30));
 
-      final product =
-          _availableProducts
-              .where((p) => p.id == purchase.productID)
-              .firstOrNull;
+      final product = _availableProducts
+          .where((p) => p.id == purchase.productID)
+          .firstOrNull;
 
       _currentSubscription = UserSubscription(
         userId: 'current_user', // Replace with actual user ID

@@ -81,37 +81,35 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen>
 
   void _filterCourses() {
     setState(() {
-      _filteredCourses =
-          _courses.where((course) {
-            // Search filter
-            if (_searchController.text.isNotEmpty) {
-              final query = _searchController.text.toLowerCase();
-              if (!course.title.toLowerCase().contains(query) &&
-                  !course.description.toLowerCase().contains(query) &&
-                  !course.instructor.toLowerCase().contains(query)) {
-                return false;
-              }
-            }
+      _filteredCourses = _courses.where((course) {
+        // Search filter
+        if (_searchController.text.isNotEmpty) {
+          final query = _searchController.text.toLowerCase();
+          if (!course.title.toLowerCase().contains(query) &&
+              !course.description.toLowerCase().contains(query) &&
+              !course.instructor.toLowerCase().contains(query)) {
+            return false;
+          }
+        }
 
-            // Category filter
-            if (_selectedCategory != null &&
-                course.category != _selectedCategory) {
-              return false;
-            }
+        // Category filter
+        if (_selectedCategory != null && course.category != _selectedCategory) {
+          return false;
+        }
 
-            // Difficulty filter
-            if (_selectedDifficulty != null &&
-                course.difficulty != _selectedDifficulty) {
-              return false;
-            }
+        // Difficulty filter
+        if (_selectedDifficulty != null &&
+            course.difficulty != _selectedDifficulty) {
+          return false;
+        }
 
-            // Free courses filter
-            if (_showOnlyFree && course.price > 0) {
-              return false;
-            }
+        // Free courses filter
+        if (_showOnlyFree && course.price > 0) {
+          return false;
+        }
 
-            return true;
-          }).toList();
+        return true;
+      }).toList();
     });
   }
 
@@ -209,16 +207,15 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen>
           hintText: 'Search Islamic courses...',
           border: InputBorder.none,
           prefixIcon: const Icon(Icons.search),
-          suffixIcon:
-              _searchController.text.isNotEmpty
-                  ? IconButton(
-                    onPressed: () {
-                      _searchController.clear();
-                      _filterCourses();
-                    },
-                    icon: const Icon(Icons.clear),
-                  )
-                  : null,
+          suffixIcon: _searchController.text.isNotEmpty
+              ? IconButton(
+                  onPressed: () {
+                    _searchController.clear();
+                    _filterCourses();
+                  },
+                  icon: const Icon(Icons.clear),
+                )
+              : null,
         ),
         onChanged: (_) => _filterCourses(),
       ),
@@ -421,7 +418,7 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen>
     final theme = Theme.of(context);
     final hasAccess =
         _subscriptionService.isFeatureAvailable('islamic_courses') ||
-        course.price == 0;
+            course.price == 0;
     final isEnrolled = _courseService.isEnrolledInCourse(course.id);
     final progress = _courseService.getCourseProgress(course.id);
 
@@ -440,8 +437,8 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen>
               ),
               gradient: LinearGradient(
                 colors: [
-                  theme.colorScheme.primary.withValues(alpha: 0.8),
-                  theme.colorScheme.secondary.withValues(alpha: 0.8),
+                  theme.colorScheme.primary.withOpacity(0.8),
+                  theme.colorScheme.secondary.withOpacity(0.8),
                 ],
               ),
             ),
@@ -656,7 +653,7 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen>
                             vertical: 2,
                           ),
                           decoration: BoxDecoration(
-                            color: theme.colorScheme.primary.withValues(alpha: 0.1),
+                            color: theme.colorScheme.primary.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
@@ -671,17 +668,15 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen>
                       ],
                     ),
                     ElevatedButton(
-                      onPressed:
-                          hasAccess
-                              ? () => _handleCourseSelection(course)
-                              : _showSubscriptionDialog,
+                      onPressed: hasAccess
+                          ? () => _handleCourseSelection(course)
+                          : _showSubscriptionDialog,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            isEnrolled
-                                ? (progress >= 100
-                                    ? Colors.green
-                                    : theme.colorScheme.primary)
-                                : hasAccess
+                        backgroundColor: isEnrolled
+                            ? (progress >= 100
+                                ? Colors.green
+                                : theme.colorScheme.primary)
+                            : hasAccess
                                 ? theme.colorScheme.primary
                                 : Colors.grey,
                       ),
@@ -691,8 +686,8 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen>
                                 ? 'Completed'
                                 : 'Continue ${progress.toInt()}%')
                             : hasAccess
-                            ? (course.price > 0 ? 'Enroll' : 'Start')
-                            : 'Premium',
+                                ? (course.price > 0 ? 'Enroll' : 'Start')
+                                : 'Premium',
                         style: const TextStyle(color: Colors.white),
                       ),
                     ),
@@ -778,7 +773,9 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen>
                         // Title and basic info
                         Text(
                           course.title,
-                          style: Theme.of(context).textTheme.headlineSmall
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall
                               ?.copyWith(fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 8),
@@ -787,12 +784,14 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen>
                           style: Theme.of(
                             context,
                           ).textTheme.titleMedium?.copyWith(
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
                         ),
                         Text(
                           course.instructorTitle,
-                          style: Theme.of(context).textTheme.bodyMedium
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
                               ?.copyWith(color: Colors.grey[600]),
                         ),
                         const SizedBox(height: 16),
@@ -824,7 +823,9 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen>
                         // Description
                         Text(
                           'About this course',
-                          style: Theme.of(context).textTheme.titleMedium
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium
                               ?.copyWith(fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 8),
@@ -837,7 +838,9 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen>
                         // What you'll learn
                         Text(
                           'What you\'ll learn',
-                          style: Theme.of(context).textTheme.titleMedium
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium
                               ?.copyWith(fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 8),
@@ -863,24 +866,25 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen>
                         if (course.topics.isNotEmpty) ...[
                           Text(
                             'Topics covered',
-                            style: Theme.of(context).textTheme.titleMedium
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
                                 ?.copyWith(fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(height: 8),
                           Wrap(
                             spacing: 8,
                             runSpacing: 8,
-                            children:
-                                course.topics
-                                    .map(
-                                      (topic) => Chip(
-                                        label: Text(topic),
-                                        backgroundColor: Theme.of(
-                                          context,
-                                        ).colorScheme.primary.withValues(alpha: 0.1),
-                                      ),
-                                    )
-                                    .toList(),
+                            children: course.topics
+                                .map(
+                                  (topic) => Chip(
+                                    label: Text(topic),
+                                    backgroundColor: Theme.of(
+                                      context,
+                                    ).colorScheme.primary.withOpacity(0.1),
+                                  ),
+                                )
+                                .toList(),
                           ),
                           const SizedBox(height: 20),
                         ],
@@ -889,7 +893,9 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen>
                         if (course.prerequisites.isNotEmpty) ...[
                           Text(
                             'Prerequisites',
-                            style: Theme.of(context).textTheme.titleMedium
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
                                 ?.copyWith(fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(height: 8),
@@ -944,7 +950,7 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen>
     final theme = Theme.of(context);
     final hasAccess =
         _subscriptionService.isFeatureAvailable('islamic_courses') ||
-        course.price == 0;
+            course.price == 0;
     final isEnrolled = _courseService.isEnrolledInCourse(course.id);
     final progress = _courseService.getCourseProgress(course.id);
 
@@ -1052,30 +1058,29 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen>
   void _showSubscriptionDialog() {
     showDialog(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('Premium Required'),
-            content: const Text(
-              'Access to Islamic courses requires a Premium subscription. Upgrade now to unlock unlimited learning!',
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: const Text('Cancel'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const SubscriptionScreen(),
-                    ),
-                  );
-                },
-                child: const Text('Upgrade'),
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        title: const Text('Premium Required'),
+        content: const Text(
+          'Access to Islamic courses requires a Premium subscription. Upgrade now to unlock unlimited learning!',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Cancel'),
           ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const SubscriptionScreen(),
+                ),
+              );
+            },
+            child: const Text('Upgrade'),
+          ),
+        ],
+      ),
     );
   }
 }

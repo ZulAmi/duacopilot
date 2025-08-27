@@ -16,7 +16,7 @@ class PersonalizationNotifier extends StateNotifier<PersonalizationState> {
   final String? _userId;
 
   PersonalizationNotifier(this._service, this._userId)
-    : super(const PersonalizationState.initial());
+      : super(const PersonalizationState.initial());
 
   /// Initialize personalization for user
   Future<void> initialize(String userId) async {
@@ -60,24 +60,24 @@ class PersonalizationNotifier extends StateNotifier<PersonalizationState> {
           _userId,
         );
         state = state.maybeWhen(
-          loaded:
-              (
-                usagePatterns,
-                culturalPreferences,
-                isActive,
-                recommendations,
-                contextualSuggestions,
-                temporalPatterns,
-                metadata,
-              ) => PersonalizationState.loaded(
-                usagePatterns: usagePatterns,
-                culturalPreferences: updatedPrefs,
-                isPersonalizationActive: isActive,
-                recommendations: recommendations,
-                contextualSuggestions: contextualSuggestions,
-                temporalPatterns: temporalPatterns,
-                metadata: metadata,
-              ),
+          loaded: (
+            usagePatterns,
+            culturalPreferences,
+            isActive,
+            recommendations,
+            contextualSuggestions,
+            temporalPatterns,
+            metadata,
+          ) =>
+              PersonalizationState.loaded(
+            usagePatterns: usagePatterns,
+            culturalPreferences: updatedPrefs,
+            isPersonalizationActive: isActive,
+            recommendations: recommendations,
+            contextualSuggestions: contextualSuggestions,
+            temporalPatterns: temporalPatterns,
+            metadata: metadata,
+          ),
           orElse: () => state,
         );
       }
@@ -124,10 +124,7 @@ class PersonalizationNotifier extends StateNotifier<PersonalizationState> {
 
 /// Provider for PersonalizationNotifier
 final personalizationNotifierProvider = StateNotifierProvider.family<
-  PersonalizationNotifier,
-  PersonalizationState,
-  String?
->((ref, userId) {
+    PersonalizationNotifier, PersonalizationState, String?>((ref, userId) {
   final service = ref.watch(userPersonalizationServiceProvider);
   return PersonalizationNotifier(service, userId);
 });
@@ -144,46 +141,46 @@ final usagePatternsProvider = FutureProvider.family<UsagePatterns, String>((
 /// Provider for cultural preferences
 final culturalPreferencesProvider =
     FutureProvider.family<CulturalPreferences, String>((ref, userId) async {
-      final service = ref.watch(userPersonalizationServiceProvider);
-      return service.culturalEngine.getPreferences(userId);
-    });
+  final service = ref.watch(userPersonalizationServiceProvider);
+  return service.culturalEngine.getPreferences(userId);
+});
 
 /// Provider for temporal patterns
 final temporalPatternsProvider =
     FutureProvider.family<TemporalPatterns, String>((ref, userId) async {
-      final service = ref.watch(userPersonalizationServiceProvider);
-      return service.temporalAnalyzer.analyzePatterns(userId, DateTime.now());
-    });
+  final service = ref.watch(userPersonalizationServiceProvider);
+  return service.temporalAnalyzer.analyzePatterns(userId, DateTime.now());
+});
 
 /// Provider for contextual suggestions
 final contextualSuggestionsProvider =
     FutureProvider.family<List<EnhancedRecommendation>, String>((
-      ref,
-      userId,
-    ) async {
-      final service = ref.watch(userPersonalizationServiceProvider);
-      return service.getContextualSuggestions(limit: 10);
-    });
+  ref,
+  userId,
+) async {
+  final service = ref.watch(userPersonalizationServiceProvider);
+  return service.getContextualSuggestions(limit: 10);
+});
 
 /// Provider for personalization updates stream
 final personalizationUpdatesProvider =
     StreamProvider.family<PersonalizationUpdate, String>((ref, userId) {
-      final service = ref.watch(userPersonalizationServiceProvider);
-      return service.updateStream;
-    });
+  final service = ref.watch(userPersonalizationServiceProvider);
+  return service.updateStream;
+});
 
 /// Provider for recommendations stream
 final recommendationsStreamProvider =
     StreamProvider.family<List<EnhancedRecommendation>, String>((ref, userId) {
-      final service = ref.watch(userPersonalizationServiceProvider);
-      return service.recommendationsStream;
-    });
+  final service = ref.watch(userPersonalizationServiceProvider);
+  return service.recommendationsStream;
+});
 
 /// Session context provider for maintaining session state
 final sessionContextProvider =
     StateNotifierProvider<SessionContextNotifier, Map<String, dynamic>>(
-      (ref) => SessionContextNotifier(),
-    );
+  (ref) => SessionContextNotifier(),
+);
 
 class SessionContextNotifier extends StateNotifier<Map<String, dynamic>> {
   SessionContextNotifier() : super({});
@@ -211,9 +208,8 @@ final privacyLevelProvider = StateProvider<PrivacyLevel>(
 
 /// Provider for personalization settings
 final personalizationSettingsProvider = StateNotifierProvider<
-  PersonalizationSettingsNotifier,
-  PersonalizationSettings
->((ref) => PersonalizationSettingsNotifier());
+    PersonalizationSettingsNotifier,
+    PersonalizationSettings>((ref) => PersonalizationSettingsNotifier());
 
 class PersonalizationSettingsNotifier
     extends StateNotifier<PersonalizationSettings> {

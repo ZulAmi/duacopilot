@@ -32,18 +32,18 @@ class SubscriptionPlan {
   });
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'name': name,
-    'tier': tier.name,
-    'monthlyPrice': monthlyPrice,
-    'yearlyPrice': yearlyPrice,
-    'features': features,
-    'description': description,
-    'isPopular': isPopular,
-    'discountPercentage': discountPercentage,
-    'billingPeriod': billingPeriod,
-    'productId': productId,
-  };
+        'id': id,
+        'name': name,
+        'tier': tier.name,
+        'monthlyPrice': monthlyPrice,
+        'yearlyPrice': yearlyPrice,
+        'features': features,
+        'description': description,
+        'isPopular': isPopular,
+        'discountPercentage': discountPercentage,
+        'billingPeriod': billingPeriod,
+        'productId': productId,
+      };
 
   factory SubscriptionPlan.fromJson(Map<String, dynamic> json) =>
       SubscriptionPlan(
@@ -91,18 +91,18 @@ class UserSubscription {
   });
 
   Map<String, dynamic> toJson() => {
-    'userId': userId,
-    'tier': tier.name,
-    'startDate': startDate.toIso8601String(),
-    'endDate': endDate.toIso8601String(),
-    'isActive': isActive,
-    'autoRenew': autoRenew,
-    'subscriptionId': subscriptionId,
-    'paymentMethod': paymentMethod,
-    'lastPaymentAmount': lastPaymentAmount,
-    'lastPaymentDate': lastPaymentDate?.toIso8601String(),
-    'nextBillingDate': nextBillingDate?.toIso8601String(),
-  };
+        'userId': userId,
+        'tier': tier.name,
+        'startDate': startDate.toIso8601String(),
+        'endDate': endDate.toIso8601String(),
+        'isActive': isActive,
+        'autoRenew': autoRenew,
+        'subscriptionId': subscriptionId,
+        'paymentMethod': paymentMethod,
+        'lastPaymentAmount': lastPaymentAmount,
+        'lastPaymentDate': lastPaymentDate?.toIso8601String(),
+        'nextBillingDate': nextBillingDate?.toIso8601String(),
+      };
 
   factory UserSubscription.fromJson(Map<String, dynamic> json) =>
       UserSubscription(
@@ -115,14 +115,12 @@ class UserSubscription {
         subscriptionId: json['subscriptionId'],
         paymentMethod: json['paymentMethod'],
         lastPaymentAmount: (json['lastPaymentAmount'] as num?)?.toDouble(),
-        lastPaymentDate:
-            json['lastPaymentDate'] != null
-                ? DateTime.parse(json['lastPaymentDate'])
-                : null,
-        nextBillingDate:
-            json['nextBillingDate'] != null
-                ? DateTime.parse(json['nextBillingDate'])
-                : null,
+        lastPaymentDate: json['lastPaymentDate'] != null
+            ? DateTime.parse(json['lastPaymentDate'])
+            : null,
+        nextBillingDate: json['nextBillingDate'] != null
+            ? DateTime.parse(json['nextBillingDate'])
+            : null,
       );
 
   /// Check if subscription is currently valid
@@ -157,14 +155,14 @@ class SubscriptionFeature {
   });
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'name': name,
-    'description': description,
-    'requiredTier': requiredTier.name,
-    'isCore': isCore,
-    'iconCode': iconCode,
-    'category': category,
-  };
+        'id': id,
+        'name': name,
+        'description': description,
+        'requiredTier': requiredTier.name,
+        'isCore': isCore,
+        'iconCode': iconCode,
+        'category': category,
+      };
 
   factory SubscriptionFeature.fromJson(Map<String, dynamic> json) =>
       SubscriptionFeature(
@@ -201,24 +199,24 @@ class PaymentMethod {
   });
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'type': type,
-    'displayName': displayName,
-    'isActive': isActive,
-    'last4Digits': last4Digits,
-    'expiryDate': expiryDate,
-    'brand': brand,
-  };
+        'id': id,
+        'type': type,
+        'displayName': displayName,
+        'isActive': isActive,
+        'last4Digits': last4Digits,
+        'expiryDate': expiryDate,
+        'brand': brand,
+      };
 
   factory PaymentMethod.fromJson(Map<String, dynamic> json) => PaymentMethod(
-    id: json['id'],
-    type: json['type'],
-    displayName: json['displayName'],
-    isActive: json['isActive'] ?? true,
-    last4Digits: json['last4Digits'],
-    expiryDate: json['expiryDate'],
-    brand: json['brand'],
-  );
+        id: json['id'],
+        type: json['type'],
+        displayName: json['displayName'],
+        isActive: json['isActive'] ?? true,
+        last4Digits: json['last4Digits'],
+        expiryDate: json['expiryDate'],
+        brand: json['brand'],
+      );
 }
 
 /// Billing history model
@@ -246,28 +244,28 @@ class BillingHistory {
   });
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'userId': userId,
-    'amount': amount,
-    'currency': currency,
-    'date': date.toIso8601String(),
-    'status': status,
-    'description': description,
-    'invoiceUrl': invoiceUrl,
-    'receiptUrl': receiptUrl,
-  };
+        'id': id,
+        'userId': userId,
+        'amount': amount,
+        'currency': currency,
+        'date': date.toIso8601String(),
+        'status': status,
+        'description': description,
+        'invoiceUrl': invoiceUrl,
+        'receiptUrl': receiptUrl,
+      };
 
   factory BillingHistory.fromJson(Map<String, dynamic> json) => BillingHistory(
-    id: json['id'],
-    userId: json['userId'],
-    amount: (json['amount'] as num).toDouble(),
-    currency: json['currency'],
-    date: DateTime.parse(json['date']),
-    status: json['status'],
-    description: json['description'],
-    invoiceUrl: json['invoiceUrl'],
-    receiptUrl: json['receiptUrl'],
-  );
+        id: json['id'],
+        userId: json['userId'],
+        amount: (json['amount'] as num).toDouble(),
+        currency: json['currency'],
+        date: DateTime.parse(json['date']),
+        status: json['status'],
+        description: json['description'],
+        invoiceUrl: json['invoiceUrl'],
+        receiptUrl: json['receiptUrl'],
+      );
 }
 
 /// Predefined subscription plans

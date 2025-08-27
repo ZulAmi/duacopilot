@@ -12,7 +12,7 @@ class MonitoringIntegration {
   /// Initialize monitoring system
   static Future<void> initialize() async {
     await _monitoring.initialize();
-    AppLogger.info('📊 Monitoring integration ready');
+    AppLogger.info('ðŸ“Š Monitoring integration ready');
   }
 
   /// Track a RAG query from start to finish with comprehensive metrics
@@ -107,19 +107,18 @@ class MonitoringIntegration {
   }) async {
     await showDialog<void>(
       context: context,
-      builder:
-          (context) => RagSatisfactionDialog(
+      builder: (context) => RagSatisfactionDialog(
+        traceId: traceId,
+        onRatingSubmitted: (rating, feedback, tags) async {
+          await _monitoring.trackUserSatisfaction(
             traceId: traceId,
-            onRatingSubmitted: (rating, feedback, tags) async {
-              await _monitoring.trackUserSatisfaction(
-                traceId: traceId,
-                rating: rating,
-                feedback: feedback,
-                tags: tags,
-              );
-              onCompleted?.call();
-            },
-          ),
+            rating: rating,
+            feedback: feedback,
+            tags: tags,
+          );
+          onCompleted?.call();
+        },
+      ),
     );
   }
 
@@ -231,17 +230,15 @@ class RagAnalyticsSummary {
           RagQueryTypeStats.fromMap(value as Map<String, dynamic>),
         ),
       ),
-      trendingTopics:
-          trendingData
-              .map(
-                (item) => TrendingTopic.fromMap(item as Map<String, dynamic>),
-              )
-              .toList(),
+      trendingTopics: trendingData
+          .map(
+            (item) => TrendingTopic.fromMap(item as Map<String, dynamic>),
+          )
+          .toList(),
       geographicData: RagGeographicData.fromMap(geographicRaw),
-      abTests:
-          abTestsData
-              .map((item) => ABTestResult.fromMap(item as Map<String, dynamic>))
-              .toList(),
+      abTests: abTestsData
+          .map((item) => ABTestResult.fromMap(item as Map<String, dynamic>))
+          .toList(),
     );
   }
 }
@@ -341,10 +338,9 @@ class RagGeographicData {
     return RagGeographicData(
       totalGeographicQueries: data['total_geographic_queries'] as int,
       uniqueRegions: data['unique_regions'] as int,
-      topRegions:
-          topRegionsData
-              .map((item) => RegionUsage.fromMap(item as Map<String, dynamic>))
-              .toList(),
+      topRegions: topRegionsData
+          .map((item) => RegionUsage.fromMap(item as Map<String, dynamic>))
+          .toList(),
     );
   }
 }
@@ -387,7 +383,7 @@ class ABTestResult {
 class RagSatisfactionDialog extends StatefulWidget {
   final String traceId;
   final Function(int rating, String? feedback, List<String> tags)
-  onRatingSubmitted;
+      onRatingSubmitted;
 
   const RagSatisfactionDialog({
     super.key,
@@ -460,23 +456,22 @@ class _RagSatisfactionDialogState extends State<RagSatisfactionDialog> {
               Wrap(
                 spacing: 8,
                 runSpacing: 4,
-                children:
-                    _availableTags.map((tag) {
-                      final isSelected = _selectedTags.contains(tag);
-                      return FilterChip(
-                        label: Text(tag),
-                        selected: isSelected,
-                        onSelected: (selected) {
-                          setState(() {
-                            if (selected) {
-                              _selectedTags.add(tag);
-                            } else {
-                              _selectedTags.remove(tag);
-                            }
-                          });
-                        },
-                      );
-                    }).toList(),
+                children: _availableTags.map((tag) {
+                  final isSelected = _selectedTags.contains(tag);
+                  return FilterChip(
+                    label: Text(tag),
+                    selected: isSelected,
+                    onSelected: (selected) {
+                      setState(() {
+                        if (selected) {
+                          _selectedTags.add(tag);
+                        } else {
+                          _selectedTags.remove(tag);
+                        }
+                      });
+                    },
+                  );
+                }).toList(),
               ),
             ],
           ],
@@ -488,19 +483,18 @@ class _RagSatisfactionDialogState extends State<RagSatisfactionDialog> {
           child: const Text('Cancel'),
         ),
         ElevatedButton(
-          onPressed:
-              _rating > 0
-                  ? () {
-                    widget.onRatingSubmitted(
-                      _rating,
-                      _feedbackController.text.trim().isEmpty
-                          ? null
-                          : _feedbackController.text.trim(),
-                      _selectedTags.toList(),
-                    );
-                    Navigator.of(context).pop();
-                  }
-                  : null,
+          onPressed: _rating > 0
+              ? () {
+                  widget.onRatingSubmitted(
+                    _rating,
+                    _feedbackController.text.trim().isEmpty
+                        ? null
+                        : _feedbackController.text.trim(),
+                    _selectedTags.toList(),
+                  );
+                  Navigator.of(context).pop();
+                }
+              : null,
           child: const Text('Submit'),
         ),
       ],

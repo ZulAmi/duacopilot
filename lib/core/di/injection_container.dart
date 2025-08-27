@@ -45,7 +45,7 @@ final sl = GetIt.instance;
 
 Future<void> init() async {
   try {
-    AppLogger.debug('🔧 Initializing DuaCopilot services...');
+    AppLogger.debug('ðŸ”§ Initializing DuaCopilot services...');
 
     // External dependencies
     sl.registerLazySingleton(() => Dio());
@@ -63,13 +63,15 @@ Future<void> init() async {
 
     // Database initialization with platform awareness
     if (kIsWeb) {
-      AppLogger.debug('🌐 Web platform detected - using memory-based storage');
+      AppLogger.debug(
+          'ðŸŒ Web platform detected - using memory-based storage');
       // For web, register mock local data source directly (no database needed)
       try {
         sl.registerLazySingleton<LocalDataSource>(() => MockLocalDataSource());
-        AppLogger.debug('✅ Mock local data source initialized for web');
+        AppLogger.debug('âœ… Mock local data source initialized for web');
       } catch (e) {
-        AppLogger.debug('⚠️  Mock local data source initialization failed: $e');
+        AppLogger.debug(
+            'âš ï¸  Mock local data source initialization failed: $e');
       }
     } else {
       try {
@@ -82,19 +84,19 @@ Future<void> init() async {
           () => LocalDataSourceImpl(sl()),
         );
         AppLogger.debug(
-          '✅ Database and local data source initialized successfully',
+          'âœ… Database and local data source initialized successfully',
         );
       } catch (e) {
-        AppLogger.debug('⚠️  Database initialization failed: $e');
+        AppLogger.debug('âš ï¸  Database initialization failed: $e');
         // Fallback to mock implementation
         try {
           sl.registerLazySingleton<LocalDataSource>(
             () => MockLocalDataSource(),
           );
-          AppLogger.debug('✅ Fallback to mock local data source');
+          AppLogger.debug('âœ… Fallback to mock local data source');
         } catch (mockError) {
           AppLogger.debug(
-            '❌ Mock local data source fallback failed: $mockError',
+            'âŒ Mock local data source fallback failed: $mockError',
           );
         }
       }
@@ -127,10 +129,10 @@ Future<void> init() async {
       );
 
       AppLogger.debug(
-        '✅ Remote data sources and TRUE RAG services initialized',
+        'âœ… Remote data sources and TRUE RAG services initialized',
       );
     } catch (e) {
-      AppLogger.debug('⚠️  Data source initialization error: $e');
+      AppLogger.debug('âš ï¸  Data source initialization error: $e');
     }
 
     // Repositories
@@ -155,9 +157,9 @@ Future<void> init() async {
           () => FavoritesRepositoryImpl(localDataSource: sl<LocalDataSource>()),
         );
       }
-      AppLogger.debug('✅ Repositories initialized');
+      AppLogger.debug('âœ… Repositories initialized');
     } catch (e) {
-      AppLogger.debug('⚠️  Repository initialization error: $e');
+      AppLogger.debug('âš ï¸  Repository initialization error: $e');
     }
 
     // Use cases
@@ -184,9 +186,9 @@ Future<void> init() async {
           () => RemoveFavorite(sl<FavoritesRepository>()),
         );
       }
-      AppLogger.debug('✅ Use cases initialized');
+      AppLogger.debug('âœ… Use cases initialized');
     } catch (e) {
-      AppLogger.debug('⚠️  Use case initialization error: $e');
+      AppLogger.debug('âš ï¸  Use case initialization error: $e');
     }
 
     // Revolutionary AI Services - Islamic Spiritual Companion
@@ -216,15 +218,15 @@ Future<void> init() async {
       );
 
       AppLogger.debug(
-        '✅ Revolutionary AI Services initialized - Islamic Spiritual Companion ready!',
+        'âœ… Revolutionary AI Services initialized - Islamic Spiritual Companion ready!',
       );
     } catch (e) {
-      AppLogger.debug('⚠️  AI Services initialization error: $e');
+      AppLogger.debug('âš ï¸  AI Services initialization error: $e');
     }
 
-    AppLogger.debug('✅ Dependency injection initialization completed');
+    AppLogger.debug('âœ… Dependency injection initialization completed');
   } catch (e) {
-    AppLogger.debug('❌ Critical dependency injection error: $e');
+    AppLogger.debug('âŒ Critical dependency injection error: $e');
     rethrow;
   }
 }

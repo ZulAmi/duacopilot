@@ -201,12 +201,11 @@ class CacheAnalyticsService {
     String? language,
     QueryType? queryType,
   }) {
-    var queries =
-        _queryAnalytics.values
-            .where(
-              (analytics) => analytics.accessCount >= popularQueryThreshold,
-            )
-            .toList();
+    var queries = _queryAnalytics.values
+        .where(
+          (analytics) => analytics.accessCount >= popularQueryThreshold,
+        )
+        .toList();
 
     // Filter by language if specified
     if (language != null) {
@@ -244,15 +243,13 @@ class CacheAnalyticsService {
 
   /// Get cache performance metrics
   static CachePerformanceMetrics getPerformanceMetrics({Duration? timeWindow}) {
-    final cutoffTime =
-        timeWindow != null
-            ? DateTime.now().subtract(timeWindow)
-            : DateTime.fromMillisecondsSinceEpoch(0);
+    final cutoffTime = timeWindow != null
+        ? DateTime.now().subtract(timeWindow)
+        : DateTime.fromMillisecondsSinceEpoch(0);
 
-    final relevantEvents =
-        _eventQueue
-            .where((event) => event.timestamp.isAfter(cutoffTime))
-            .toList();
+    final relevantEvents = _eventQueue
+        .where((event) => event.timestamp.isAfter(cutoffTime))
+        .toList();
 
     final hitEvents =
         relevantEvents.where((e) => e.type == CacheEventType.hit).toList();
@@ -263,27 +260,23 @@ class CacheAnalyticsService {
     final totalRequests = hitEvents.length + missEvents.length;
     final hitRatio = totalRequests > 0 ? hitEvents.length / totalRequests : 0.0;
 
-    final averageHitTime =
-        hitEvents.isNotEmpty
-            ? Duration(
-              microseconds:
-                  hitEvents
-                      .map((e) => e.retrievalTime?.inMicroseconds ?? 0)
-                      .reduce((a, b) => a + b) ~/
-                  hitEvents.length,
-            )
-            : Duration.zero;
+    final averageHitTime = hitEvents.isNotEmpty
+        ? Duration(
+            microseconds: hitEvents
+                    .map((e) => e.retrievalTime?.inMicroseconds ?? 0)
+                    .reduce((a, b) => a + b) ~/
+                hitEvents.length,
+          )
+        : Duration.zero;
 
-    final averageMissTime =
-        missEvents.isNotEmpty
-            ? Duration(
-              microseconds:
-                  missEvents
-                      .map((e) => e.apiCallTime?.inMicroseconds ?? 0)
-                      .reduce((a, b) => a + b) ~/
-                  missEvents.length,
-            )
-            : Duration.zero;
+    final averageMissTime = missEvents.isNotEmpty
+        ? Duration(
+            microseconds: missEvents
+                    .map((e) => e.apiCallTime?.inMicroseconds ?? 0)
+                    .reduce((a, b) => a + b) ~/
+                missEvents.length,
+          )
+        : Duration.zero;
 
     // Calculate strategy performance
     final strategyPerformance = <String, StrategyPerformance>{};
@@ -446,19 +439,24 @@ class CacheAnalyticsService {
   static QueryType _detectQueryType(String query) {
     final lowerQuery = query.toLowerCase();
 
-    if (lowerQuery.contains('dua') || lowerQuery.contains('دعاء')) {
+    if (lowerQuery.contains('dua') || lowerQuery.contains('Ø¯Ø¹Ø§Ø¡')) {
       return QueryType.dua;
-    } else if (lowerQuery.contains('quran') || lowerQuery.contains('قرآن')) {
+    } else if (lowerQuery.contains('quran') ||
+        lowerQuery.contains('Ù‚Ø±Ø¢Ù†')) {
       return QueryType.quran;
-    } else if (lowerQuery.contains('hadith') || lowerQuery.contains('حديث')) {
+    } else if (lowerQuery.contains('hadith') ||
+        lowerQuery.contains('Ø­Ø¯ÙŠØ«')) {
       return QueryType.hadith;
-    } else if (lowerQuery.contains('prayer') || lowerQuery.contains('صلاة')) {
+    } else if (lowerQuery.contains('prayer') ||
+        lowerQuery.contains('ØµÙ„Ø§Ø©')) {
       return QueryType.prayer;
-    } else if (lowerQuery.contains('fasting') || lowerQuery.contains('صوم')) {
+    } else if (lowerQuery.contains('fasting') ||
+        lowerQuery.contains('ØµÙˆÙ…')) {
       return QueryType.fasting;
-    } else if (lowerQuery.contains('charity') || lowerQuery.contains('زكاة')) {
+    } else if (lowerQuery.contains('charity') ||
+        lowerQuery.contains('Ø²ÙƒØ§Ø©')) {
       return QueryType.charity;
-    } else if (lowerQuery.contains('hajj') || lowerQuery.contains('حج')) {
+    } else if (lowerQuery.contains('hajj') || lowerQuery.contains('Ø­Ø¬')) {
       return QueryType.pilgrimage;
     }
 
@@ -485,8 +483,8 @@ class CacheAnalyticsService {
       return TrendCalculation(score: 0, growthRate: 0, isIncreasing: false);
     }
 
-    final sortedEntries =
-        dailyCounts.entries.toList()..sort((a, b) => a.key.compareTo(b.key));
+    final sortedEntries = dailyCounts.entries.toList()
+      ..sort((a, b) => a.key.compareTo(b.key));
 
     final values = sortedEntries.map((e) => e.value.toDouble()).toList();
 
@@ -606,12 +604,11 @@ class QueryAnalytics {
 
   double get cacheHitRatio => accessCount > 0 ? hitCount / accessCount : 0.0;
 
-  Duration get averageRetrievalTime =>
-      accessCount > 0
-          ? Duration(
-            microseconds: totalRetrievalTime.inMicroseconds ~/ accessCount,
-          )
-          : Duration.zero;
+  Duration get averageRetrievalTime => accessCount > 0
+      ? Duration(
+          microseconds: totalRetrievalTime.inMicroseconds ~/ accessCount,
+        )
+      : Duration.zero;
 
   void recordAccess(bool isHit, Duration responseTime) {
     accessCount++;

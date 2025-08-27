@@ -10,6 +10,7 @@ enum RagApiState { idle, loading, success, error, retrying }
 
 /// Comprehensive RAG response data model
 @immutable
+
 /// RagStateData class implementation
 class RagStateData {
   final RagApiState apiState;
@@ -79,16 +80,14 @@ class RagStateData {
   factory RagStateData.fromJson(Map<String, dynamic> json) {
     return RagStateData(
       apiState: RagApiState.values[json['apiState'] ?? 0],
-      response:
-          json['response'] != null
-              ? _ragResponseFromJson(json['response'])
-              : null,
+      response: json['response'] != null
+          ? _ragResponseFromJson(json['response'])
+          : null,
       error: json['error'],
       currentQuery: json['currentQuery'],
-      lastUpdated:
-          json['lastUpdated'] != null
-              ? DateTime.parse(json['lastUpdated'])
-              : null,
+      lastUpdated: json['lastUpdated'] != null
+          ? DateTime.parse(json['lastUpdated'])
+          : null,
       retryCount: json['retryCount'] ?? 0,
       isFromCache: json['isFromCache'] ?? false,
       metadata: json['metadata'],
@@ -152,6 +151,7 @@ class RagCacheConfig {
 
 /// Cached RAG response entry
 @immutable
+
 /// CachedRagEntry class implementation
 class CachedRagEntry {
   final String query;
@@ -199,6 +199,7 @@ enum WebSocketConnectionState {
 }
 
 @immutable
+
 /// WebSocketState class implementation
 class WebSocketState {
   final WebSocketConnectionState connectionState;
@@ -240,6 +241,7 @@ class WebSocketState {
 
 /// Filter configuration for RAG results
 @immutable
+
 /// RagFilterConfig class implementation
 class RagFilterConfig {
   final double minConfidence;

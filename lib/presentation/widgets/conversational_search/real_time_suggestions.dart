@@ -89,9 +89,8 @@ class RealTimeSuggestionsController extends ChangeNotifier {
   }
 
   void _updatePopularSearches() {
-    final sortedEntries =
-        _searchFrequency.entries.toList()
-          ..sort((a, b) => b.value.compareTo(a.value));
+    final sortedEntries = _searchFrequency.entries.toList()
+      ..sort((a, b) => b.value.compareTo(a.value));
 
     _popularSearches.clear();
     for (int i = 0; i < sortedEntries.length && i < 5; i++) {
@@ -400,8 +399,7 @@ class RealTimeSuggestionsController extends ChangeNotifier {
         if (s1[i - 1] == s2[j - 1]) {
           dp[i][j] = dp[i - 1][j - 1];
         } else {
-          dp[i][j] =
-              1 +
+          dp[i][j] = 1 +
               [
                 dp[i - 1][j],
                 dp[i][j - 1],
@@ -482,20 +480,19 @@ class _RealTimeSuggestionsWidgetState extends State<RealTimeSuggestionsWidget> {
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+          color: Theme.of(context).colorScheme.outline.withOpacity(0.2),
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
+            color: Colors.black.withOpacity(0.1),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
         ],
       ),
-      child:
-          widget.controller.isLoading
-              ? _buildLoadingState()
-              : _buildSuggestionsList(),
+      child: widget.controller.isLoading
+          ? _buildLoadingState()
+          : _buildSuggestionsList(),
     );
   }
 
@@ -519,8 +516,8 @@ class _RealTimeSuggestionsWidgetState extends State<RealTimeSuggestionsWidget> {
             Text(
               'Generating suggestions...',
               style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
             ),
           ],
         ),
@@ -533,13 +530,12 @@ class _RealTimeSuggestionsWidgetState extends State<RealTimeSuggestionsWidget> {
       shrinkWrap: true,
       padding: const EdgeInsets.symmetric(vertical: 8),
       itemCount: widget.controller.suggestions.length,
-      separatorBuilder:
-          (context, index) => Divider(
-            height: 1,
-            indent: 16,
-            endIndent: 16,
-            color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.1),
-          ),
+      separatorBuilder: (context, index) => Divider(
+        height: 1,
+        indent: 16,
+        endIndent: 16,
+        color: Theme.of(context).colorScheme.outline.withOpacity(0.1),
+      ),
       itemBuilder: (context, index) {
         final suggestion = widget.controller.suggestions[index];
         return _buildSuggestionItem(suggestion);
@@ -565,7 +561,7 @@ class _RealTimeSuggestionsWidgetState extends State<RealTimeSuggestionsWidget> {
                   decoration: BoxDecoration(
                     color: _getSuggestionTypeColor(
                       suggestion.type,
-                    ).withValues(alpha: 0.1),
+                    ).withOpacity(0.1),
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Icon(
@@ -607,7 +603,7 @@ class _RealTimeSuggestionsWidgetState extends State<RealTimeSuggestionsWidget> {
               Icon(
                 Icons.north_west,
                 size: 14,
-                color: colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+                color: colorScheme.onSurfaceVariant.withOpacity(0.5),
               ),
             ],
           ),

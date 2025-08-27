@@ -319,11 +319,11 @@ class QueryValidationResult {
 
   /// Check if there are any security issues
   bool get hasSecurityIssues => errors.any(
-    (error) =>
-        error.contains('malicious') ||
-        error.contains('injection') ||
-        error.contains('security'),
-  );
+        (error) =>
+            error.contains('malicious') ||
+            error.contains('injection') ||
+            error.contains('security'),
+      );
 
   /// Check if there are content warnings
   bool get hasContentWarnings => warnings.isNotEmpty;

@@ -20,9 +20,10 @@ class CulturalPreferenceEngine {
       // Load existing cultural preferences
       await _loadPreferences(userId, prefs);
 
-      debugPrint('✅ Cultural preference engine initialized for user: $userId');
+      debugPrint(
+          'âœ… Cultural preference engine initialized for user: $userId');
     } catch (e) {
-      debugPrint('❌ Error initializing cultural preference engine: $e');
+      debugPrint('âŒ Error initializing cultural preference engine: $e');
       rethrow;
     }
   }
@@ -62,9 +63,10 @@ class CulturalPreferenceEngine {
 
       await _savePreferences(updatedPrefs, prefs);
 
-      debugPrint('🌍 Updated cultural preferences for user: ${update.userId}');
+      debugPrint(
+          'ðŸŒ Updated cultural preferences for user: ${update.userId}');
     } catch (e) {
-      debugPrint('❌ Error updating cultural preferences: $e');
+      debugPrint('âŒ Error updating cultural preferences: $e');
     }
   }
 
@@ -85,9 +87,10 @@ class CulturalPreferenceEngine {
         await _updateLanguagePreferences(interaction, prefs);
       }
 
-      debugPrint('🌐 Recorded cultural interaction for: ${interaction.userId}');
+      debugPrint(
+          'ðŸŒ Recorded cultural interaction for: ${interaction.userId}');
     } catch (e) {
-      debugPrint('❌ Error recording cultural interaction: $e');
+      debugPrint('âŒ Error recording cultural interaction: $e');
     }
   }
 
@@ -120,13 +123,13 @@ class CulturalPreferenceEngine {
           (a, b) => a.value > b.value ? a : b,
         );
 
-        debugPrint('🔍 Detected preferred language: ${mostUsed.key}');
+        debugPrint('ðŸ” Detected preferred language: ${mostUsed.key}');
         return mostUsed.key;
       }
 
       return 'en'; // Default to English
     } catch (e) {
-      debugPrint('❌ Error detecting preferred language: $e');
+      debugPrint('âŒ Error detecting preferred language: $e');
       return 'en';
     }
   }
@@ -152,7 +155,7 @@ class CulturalPreferenceEngine {
 
       return recommendations;
     } catch (e) {
-      debugPrint('❌ Error getting cultural recommendations: $e');
+      debugPrint('âŒ Error getting cultural recommendations: $e');
       return [];
     }
   }
@@ -206,9 +209,9 @@ class CulturalPreferenceEngine {
         prefs,
       );
 
-      debugPrint('🧠 Learned cultural patterns for user: $userId');
+      debugPrint('ðŸ§  Learned cultural patterns for user: $userId');
     } catch (e) {
-      debugPrint('❌ Error learning from cultural patterns: $e');
+      debugPrint('âŒ Error learning from cultural patterns: $e');
     }
   }
 
@@ -219,19 +222,19 @@ class CulturalPreferenceEngine {
 
       // Get all cultural data keys
       final keys = prefs.getKeys().where(
-        (key) =>
-            key.contains('cultural_preferences_') ||
-            key.contains('language_interactions_') ||
-            key.contains('cultural_context_'),
-      );
+            (key) =>
+                key.contains('cultural_preferences_') ||
+                key.contains('language_interactions_') ||
+                key.contains('cultural_context_'),
+          );
 
       for (final key in keys) {
         await _cleanupDataForKey(key, cutoffDate, prefs);
       }
 
-      debugPrint('🧹 Cleaned up old cultural data before: $cutoffDate');
+      debugPrint('ðŸ§¹ Cleaned up old cultural data before: $cutoffDate');
     } catch (e) {
-      debugPrint('❌ Error cleaning up cultural data: $e');
+      debugPrint('âŒ Error cleaning up cultural data: $e');
     }
   }
 
@@ -257,7 +260,7 @@ class CulturalPreferenceEngine {
         return defaultPrefs;
       }
     } catch (e) {
-      debugPrint('❌ Error loading cultural preferences: $e');
+      debugPrint('âŒ Error loading cultural preferences: $e');
       return CulturalPreferences.defaultFor(userId);
     }
   }
@@ -275,7 +278,7 @@ class CulturalPreferenceEngine {
       );
       _preferencesCache[preferences.userId] = preferences;
     } catch (e) {
-      debugPrint('❌ Error saving cultural preferences: $e');
+      debugPrint('âŒ Error saving cultural preferences: $e');
     }
   }
 
@@ -324,7 +327,7 @@ class CulturalPreferenceEngine {
 
       await prefs.setStringList('$_culturalContextKey$userId', contextHistory);
     } catch (e) {
-      debugPrint('❌ Error recording cultural context: $e');
+      debugPrint('âŒ Error recording cultural context: $e');
     }
   }
 
@@ -337,8 +340,7 @@ class CulturalPreferenceEngine {
       final language = interaction.metadata['language'] as String?;
       if (language == null) return;
 
-      final interactions =
-          prefs.getStringList(
+      final interactions = prefs.getStringList(
             '$_languageInteractionsKey${interaction.userId}',
           ) ??
           [];
@@ -362,7 +364,7 @@ class CulturalPreferenceEngine {
         interactions,
       );
     } catch (e) {
-      debugPrint('❌ Error updating language preferences: $e');
+      debugPrint('âŒ Error updating language preferences: $e');
     }
   }
 
@@ -391,10 +393,9 @@ class CulturalPreferenceEngine {
       // Update primary language if we have enough data
       String? newPrimaryLanguage;
       if (languageFrequency.isNotEmpty) {
-        newPrimaryLanguage =
-            languageFrequency.entries
-                .reduce((a, b) => a.value > b.value ? a : b)
-                .key;
+        newPrimaryLanguage = languageFrequency.entries
+            .reduce((a, b) => a.value > b.value ? a : b)
+            .key;
       }
 
       // Update cultural tags based on regions
@@ -402,10 +403,9 @@ class CulturalPreferenceEngine {
 
       final updatedPrefs = currentPrefs.copyWith(
         primaryLanguage: newPrimaryLanguage ?? currentPrefs.primaryLanguage,
-        languagePreferences:
-            updatedLanguagePrefs.isNotEmpty
-                ? updatedLanguagePrefs
-                : currentPrefs.languagePreferences,
+        languagePreferences: updatedLanguagePrefs.isNotEmpty
+            ? updatedLanguagePrefs
+            : currentPrefs.languagePreferences,
         culturalTags:
             culturalTags.isNotEmpty ? culturalTags : currentPrefs.culturalTags,
         lastUpdated: DateTime.now(),
@@ -413,7 +413,7 @@ class CulturalPreferenceEngine {
 
       await _savePreferences(updatedPrefs, prefs);
     } catch (e) {
-      debugPrint('❌ Error updating preferences from patterns: $e');
+      debugPrint('âŒ Error updating preferences from patterns: $e');
     }
   }
 
@@ -446,7 +446,7 @@ class CulturalPreferenceEngine {
         await prefs.setStringList(key, filteredData);
       }
     } catch (e) {
-      debugPrint('❌ Error cleaning up data for key $key: $e');
+      debugPrint('âŒ Error cleaning up data for key $key: $e');
     }
   }
 

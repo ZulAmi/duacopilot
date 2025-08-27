@@ -14,7 +14,8 @@ class SecureAdminScreen extends StatefulWidget {
   State<SecureAdminScreen> createState() => _SecureAdminScreenState();
 }
 
-class _SecureAdminScreenState extends State<SecureAdminScreen> with TickerProviderStateMixin {
+class _SecureAdminScreenState extends State<SecureAdminScreen>
+    with TickerProviderStateMixin {
   late TabController _tabController;
   Timer? _refreshTimer;
 
@@ -99,7 +100,11 @@ class _SecureAdminScreenState extends State<SecureAdminScreen> with TickerProvid
     return Scaffold(
       appBar: AppBar(
         title: const Row(
-          children: [Icon(Icons.security, color: Colors.white), SizedBox(width: 8), Text('🔒 SECURE ADMIN DASHBOARD')],
+          children: [
+            Icon(Icons.security, color: Colors.white),
+            SizedBox(width: 8),
+            Text('🔒 SECURE ADMIN DASHBOARD')
+          ],
         ),
         backgroundColor: AdminTheme.primaryRed,
         foregroundColor: Colors.white,
@@ -108,19 +113,25 @@ class _SecureAdminScreenState extends State<SecureAdminScreen> with TickerProvid
           Container(
             margin: const EdgeInsets.only(right: 16),
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            decoration: BoxDecoration(color: Colors.green, borderRadius: BorderRadius.circular(12)),
+            decoration: BoxDecoration(
+                color: Colors.green, borderRadius: BorderRadius.circular(12)),
             child: const Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(Icons.check_circle, size: 16, color: Colors.white),
                 SizedBox(width: 4),
-                Text('SECURE', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                Text('SECURE',
+                    style:
+                        TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
               ],
             ),
           ),
 
           // Logout Button
-          IconButton(icon: const Icon(Icons.logout), onPressed: _handleLogout, tooltip: 'Secure Logout'),
+          IconButton(
+              icon: const Icon(Icons.logout),
+              onPressed: _handleLogout,
+              tooltip: 'Secure Logout'),
         ],
         bottom: TabBar(
           controller: _tabController,
@@ -138,7 +149,13 @@ class _SecureAdminScreenState extends State<SecureAdminScreen> with TickerProvid
       ),
       body: TabBarView(
         controller: _tabController,
-        children: [_buildOverviewTab(), _buildAnalyticsTab(), _buildSecurityTab(), _buildUsersTab(), _buildSystemTab()],
+        children: [
+          _buildOverviewTab(),
+          _buildAnalyticsTab(),
+          _buildSecurityTab(),
+          _buildUsersTab(),
+          _buildSystemTab()
+        ],
       ),
     );
   }
@@ -164,7 +181,9 @@ class _SecureAdminScreenState extends State<SecureAdminScreen> with TickerProvid
                       children: [
                         Text(
                           'ADMIN ACCESS ACTIVE',
-                          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red.shade800),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red.shade800),
                         ),
                         Text(
                           'You are accessing sensitive administrative functions',
@@ -189,7 +208,11 @@ class _SecureAdminScreenState extends State<SecureAdminScreen> with TickerProvid
             crossAxisSpacing: 16,
             childAspectRatio: 1.5,
             children: [
-              _buildMetricCard('Active Users', _systemMetrics['users_active'].toString(), Icons.people, Colors.blue),
+              _buildMetricCard(
+                  'Active Users',
+                  _systemMetrics['users_active'].toString(),
+                  Icons.people,
+                  Colors.blue),
               _buildMetricCard(
                 'Requests/Min',
                 _systemMetrics['requests_per_minute'].toString(),
@@ -202,7 +225,11 @@ class _SecureAdminScreenState extends State<SecureAdminScreen> with TickerProvid
                 Icons.error_outline,
                 _systemMetrics['error_rate'] > 1.0 ? Colors.red : Colors.orange,
               ),
-              _buildMetricCard('Response Time', '${_systemMetrics['response_time']}ms', Icons.timer, Colors.purple),
+              _buildMetricCard(
+                  'Response Time',
+                  '${_systemMetrics['response_time']}ms',
+                  Icons.timer,
+                  Colors.purple),
             ],
           ),
 
@@ -215,7 +242,9 @@ class _SecureAdminScreenState extends State<SecureAdminScreen> with TickerProvid
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Recent Activity', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const Text('Recent Activity',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 12),
                   ListView.builder(
                     shrinkWrap: true,
@@ -227,11 +256,14 @@ class _SecureAdminScreenState extends State<SecureAdminScreen> with TickerProvid
                         dense: true,
                         leading: CircleAvatar(
                           radius: 8,
-                          backgroundColor: activity['status'] == 'success' ? Colors.green : Colors.orange,
+                          backgroundColor: activity['status'] == 'success'
+                              ? Colors.green
+                              : Colors.orange,
                         ),
                         title: Text(activity['action']),
                         subtitle: Text(activity['user']),
-                        trailing: Text(_formatTime(activity['timestamp']), style: const TextStyle(fontSize: 12)),
+                        trailing: Text(_formatTime(activity['timestamp']),
+                            style: const TextStyle(fontSize: 12)),
                       );
                     },
                   ),
@@ -250,7 +282,8 @@ class _SecureAdminScreenState extends State<SecureAdminScreen> with TickerProvid
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('System Analytics', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+          const Text('System Analytics',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
           const SizedBox(height: 20),
 
           // Performance Metrics
@@ -260,13 +293,18 @@ class _SecureAdminScreenState extends State<SecureAdminScreen> with TickerProvid
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Performance Metrics', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const Text('Performance Metrics',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 16),
-                  _buildProgressIndicator('CPU Usage', _systemMetrics['cpu_usage'], 100, Colors.blue),
+                  _buildProgressIndicator('CPU Usage',
+                      _systemMetrics['cpu_usage'], 100, Colors.blue),
                   const SizedBox(height: 12),
-                  _buildProgressIndicator('Memory Usage', _systemMetrics['memory_usage'], 100, Colors.orange),
+                  _buildProgressIndicator('Memory Usage',
+                      _systemMetrics['memory_usage'], 100, Colors.orange),
                   const SizedBox(height: 12),
-                  _buildProgressIndicator('Error Rate', _systemMetrics['error_rate'], 5, Colors.red),
+                  _buildProgressIndicator('Error Rate',
+                      _systemMetrics['error_rate'], 5, Colors.red),
                 ],
               ),
             ),
@@ -281,7 +319,9 @@ class _SecureAdminScreenState extends State<SecureAdminScreen> with TickerProvid
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Feature Usage (Last 24h)', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const Text('Feature Usage (Last 24h)',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 16),
                   _buildUsageBar('Dua Search', 850, 1000, Colors.green),
                   _buildUsageBar('Prayer Times', 720, 1000, Colors.blue),
@@ -303,7 +343,8 @@ class _SecureAdminScreenState extends State<SecureAdminScreen> with TickerProvid
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Security Monitor', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+          const Text('Security Monitor',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
           const SizedBox(height: 20),
 
           // Security Status
@@ -321,18 +362,28 @@ class _SecureAdminScreenState extends State<SecureAdminScreen> with TickerProvid
                       children: [
                         Text(
                           'SYSTEM SECURE',
-                          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.green.shade800, fontSize: 16),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green.shade800,
+                              fontSize: 16),
                         ),
-                        Text('All security checks passed', style: TextStyle(color: Colors.green.shade600)),
+                        Text('All security checks passed',
+                            style: TextStyle(color: Colors.green.shade600)),
                       ],
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(color: Colors.green, borderRadius: BorderRadius.circular(8)),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(8)),
                     child: const Text(
                       'SECURE',
-                      style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
@@ -349,7 +400,9 @@ class _SecureAdminScreenState extends State<SecureAdminScreen> with TickerProvid
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Security Events', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const Text('Security Events',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 12),
                   ListView.builder(
                     shrinkWrap: true,
@@ -364,12 +417,16 @@ class _SecureAdminScreenState extends State<SecureAdminScreen> with TickerProvid
                           color: AdminTheme.getStatusColor(log['level']),
                           size: 20,
                         ),
-                        title: Text(log['event'], style: const TextStyle(fontSize: 14)),
-                        subtitle: Text(_formatTimestamp(log['timestamp']), style: const TextStyle(fontSize: 12)),
+                        title: Text(log['event'],
+                            style: const TextStyle(fontSize: 14)),
+                        subtitle: Text(_formatTimestamp(log['timestamp']),
+                            style: const TextStyle(fontSize: 12)),
                         trailing: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 6, vertical: 2),
                           decoration: BoxDecoration(
-                            color: AdminTheme.getStatusColor(log['level']).withValues(alpha: 0.1),
+                            color: AdminTheme.getStatusColor(log['level'])
+                                .withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
@@ -400,7 +457,8 @@ class _SecureAdminScreenState extends State<SecureAdminScreen> with TickerProvid
         children: [
           Icon(Icons.people, size: 64, color: Colors.grey),
           SizedBox(height: 16),
-          Text('User Management', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+          Text('User Management',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
           SizedBox(height: 8),
           Text(
             'User analytics and management features would be implemented here',
@@ -418,7 +476,8 @@ class _SecureAdminScreenState extends State<SecureAdminScreen> with TickerProvid
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('System Configuration', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+          const Text('System Configuration',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
           const SizedBox(height: 20),
 
           // System Info Card
@@ -428,7 +487,9 @@ class _SecureAdminScreenState extends State<SecureAdminScreen> with TickerProvid
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Application Information', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const Text('Application Information',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 16),
                   _buildInfoRow('Version', '1.0.0'),
                   _buildInfoRow('Build', 'ADMIN_2024.1'),
@@ -449,7 +510,9 @@ class _SecureAdminScreenState extends State<SecureAdminScreen> with TickerProvid
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Security Actions', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const Text('Security Actions',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 16),
                   SizedBox(
                     width: double.infinity,
@@ -457,7 +520,9 @@ class _SecureAdminScreenState extends State<SecureAdminScreen> with TickerProvid
                       onPressed: _exportSecurityLogs,
                       icon: const Icon(Icons.download),
                       label: const Text('Export Security Logs'),
-                      style: ElevatedButton.styleFrom(backgroundColor: Colors.blue, foregroundColor: Colors.white),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue,
+                          foregroundColor: Colors.white),
                     ),
                   ),
                   const SizedBox(height: 12),
@@ -467,7 +532,9 @@ class _SecureAdminScreenState extends State<SecureAdminScreen> with TickerProvid
                       onPressed: _clearLogs,
                       icon: const Icon(Icons.clear_all),
                       label: const Text('Clear All Logs'),
-                      style: ElevatedButton.styleFrom(backgroundColor: Colors.orange, foregroundColor: Colors.white),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.orange,
+                          foregroundColor: Colors.white),
                     ),
                   ),
                   const SizedBox(height: 12),
@@ -477,7 +544,9 @@ class _SecureAdminScreenState extends State<SecureAdminScreen> with TickerProvid
                       onPressed: _handleLogout,
                       icon: const Icon(Icons.logout),
                       label: const Text('SECURE LOGOUT'),
-                      style: ElevatedButton.styleFrom(backgroundColor: Colors.red, foregroundColor: Colors.white),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.red,
+                          foregroundColor: Colors.white),
                     ),
                   ),
                 ],
@@ -489,7 +558,8 @@ class _SecureAdminScreenState extends State<SecureAdminScreen> with TickerProvid
     );
   }
 
-  Widget _buildMetricCard(String title, String value, IconData icon, Color color) {
+  Widget _buildMetricCard(
+      String title, String value, IconData icon, Color color) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -498,15 +568,20 @@ class _SecureAdminScreenState extends State<SecureAdminScreen> with TickerProvid
           children: [
             Icon(icon, size: 32, color: color),
             const SizedBox(height: 8),
-            Text(value, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: color)),
-            Text(title, style: const TextStyle(fontSize: 14, color: Colors.grey), textAlign: TextAlign.center),
+            Text(value,
+                style: TextStyle(
+                    fontSize: 24, fontWeight: FontWeight.bold, color: color)),
+            Text(title,
+                style: const TextStyle(fontSize: 14, color: Colors.grey),
+                textAlign: TextAlign.center),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildProgressIndicator(String label, double value, double max, Color color) {
+  Widget _buildProgressIndicator(
+      String label, double value, double max, Color color) {
     final percentage = (value / max * 100).clamp(0, 100);
 
     return Column(
@@ -536,7 +611,9 @@ class _SecureAdminScreenState extends State<SecureAdminScreen> with TickerProvid
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         children: [
-          SizedBox(width: 120, child: Text(feature, style: const TextStyle(fontSize: 12))),
+          SizedBox(
+              width: 120,
+              child: Text(feature, style: const TextStyle(fontSize: 12))),
           Expanded(
             child: LinearProgressIndicator(
               value: percentage,
@@ -556,7 +633,10 @@ class _SecureAdminScreenState extends State<SecureAdminScreen> with TickerProvid
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [Text(label, style: const TextStyle(fontWeight: FontWeight.w500)), Text(value)],
+        children: [
+          Text(label, style: const TextStyle(fontWeight: FontWeight.w500)),
+          Text(value)
+        ],
       ),
     );
   }
@@ -590,31 +670,37 @@ class _SecureAdminScreenState extends State<SecureAdminScreen> with TickerProvid
 
     ScaffoldMessenger.of(
       context,
-    ).showSnackBar(const SnackBar(content: Text('Security logs exported successfully'), backgroundColor: Colors.green));
+    ).showSnackBar(const SnackBar(
+        content: Text('Security logs exported successfully'),
+        backgroundColor: Colors.green));
   }
 
   void _clearLogs() {
     showDialog(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('Clear All Logs'),
-            content: const Text('Are you sure you want to clear all security logs? This action cannot be undone.'),
-            actions: [
-              TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  // Clear logs implementation would go here
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(const SnackBar(content: Text('All logs cleared'), backgroundColor: Colors.orange));
-                },
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                child: const Text('Clear'),
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        title: const Text('Clear All Logs'),
+        content: const Text(
+            'Are you sure you want to clear all security logs? This action cannot be undone.'),
+        actions: [
+          TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Cancel')),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              // Clear logs implementation would go here
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(const SnackBar(
+                  content: Text('All logs cleared'),
+                  backgroundColor: Colors.orange));
+            },
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+            child: const Text('Clear'),
           ),
+        ],
+      ),
     );
   }
 

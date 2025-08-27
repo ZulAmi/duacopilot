@@ -271,45 +271,43 @@ class EnhancedRagService {
     String query,
     String language,
   ) {
-    final recommendations =
-        offlineResult.matches.map((match) {
-          return DuaRecommendation(
-            dua: DuaEntity(
-              id: match.duaId,
-              arabicText: match.text,
-              transliteration: match.transliteration,
-              translation: match.translation,
+    final recommendations = offlineResult.matches.map((match) {
+      return DuaRecommendation(
+        dua: DuaEntity(
+          id: match.duaId,
+          arabicText: match.text,
+          transliteration: match.transliteration,
+          translation: match.translation,
+          category: match.category,
+          tags: match.matchedKeywords,
+          authenticity: SourceAuthenticity(
+            level: AuthenticityLevel.verified, // Default for offline content
+            source: 'offline_database',
+            reference: 'Local storage',
+          ),
+          ragConfidence: RAGConfidence(
+            score: match.similarityScore,
+            reasoning: match.matchReason,
+            keywords: match.matchedKeywords,
+            contextMatch: ContextMatch(
+              relevanceScore: match.similarityScore,
               category: match.category,
-              tags: match.matchedKeywords,
-              authenticity: SourceAuthenticity(
-                level:
-                    AuthenticityLevel.verified, // Default for offline content
-                source: 'offline_database',
-                reference: 'Local storage',
-              ),
-              ragConfidence: RAGConfidence(
-                score: match.similarityScore,
-                reasoning: match.matchReason,
-                keywords: match.matchedKeywords,
-                contextMatch: ContextMatch(
-                  relevanceScore: match.similarityScore,
-                  category: match.category,
-                  matchingCriteria: match.matchedKeywords,
-                  situation: 'offline_search',
-                ),
-              ),
+              matchingCriteria: match.matchedKeywords,
+              situation: 'offline_search',
             ),
-            relevanceScore: match.similarityScore,
-            matchReason: match.matchReason,
-            highlightedKeywords: match.matchedKeywords,
-            context: {
-              'quality': offlineResult.quality.name,
-              'confidence': offlineResult.confidence,
-              'search_method': 'offline',
-              'is_cached': offlineResult.isFromCache,
-            },
-          );
-        }).toList();
+          ),
+        ),
+        relevanceScore: match.similarityScore,
+        matchReason: match.matchReason,
+        highlightedKeywords: match.matchedKeywords,
+        context: {
+          'quality': offlineResult.quality.name,
+          'confidence': offlineResult.confidence,
+          'search_method': 'offline',
+          'is_cached': offlineResult.isFromCache,
+        },
+      );
+    }).toList();
 
     return RagSearchResponse(
       recommendations: recommendations,
@@ -328,20 +326,19 @@ class EnhancedRagService {
 
   RagSearchResponse _enhanceOnlineResult(RagSearchResponse onlineResult) {
     // Add quality indicators to online results
-    final enhancedRecommendations =
-        onlineResult.recommendations.map((rec) {
-          final enhancedContext = Map<String, dynamic>.from(rec.context ?? {});
-          enhancedContext['quality'] = 'high';
-          enhancedContext['search_method'] = 'online';
+    final enhancedRecommendations = onlineResult.recommendations.map((rec) {
+      final enhancedContext = Map<String, dynamic>.from(rec.context ?? {});
+      enhancedContext['quality'] = 'high';
+      enhancedContext['search_method'] = 'online';
 
-          return DuaRecommendation(
-            dua: rec.dua,
-            relevanceScore: rec.relevanceScore,
-            matchReason: rec.matchReason,
-            highlightedKeywords: rec.highlightedKeywords,
-            context: enhancedContext,
-          );
-        }).toList();
+      return DuaRecommendation(
+        dua: rec.dua,
+        relevanceScore: rec.relevanceScore,
+        matchReason: rec.matchReason,
+        highlightedKeywords: rec.highlightedKeywords,
+        context: enhancedContext,
+      );
+    }).toList();
 
     final enhancedMetadata = Map<String, dynamic>.from(
       onlineResult.metadata ?? {},

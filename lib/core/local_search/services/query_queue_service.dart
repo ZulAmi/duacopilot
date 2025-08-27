@@ -163,14 +163,18 @@ class QueryQueueService {
   /// Get queue statistics
   Map<String, dynamic> getQueueStats() {
     final now = DateTime.now();
-    final oldQueries = _pendingQueries.where((q) => now.difference(q.createdAt).inHours > 24).length;
+    final oldQueries = _pendingQueries
+        .where((q) => now.difference(q.createdAt).inHours > 24)
+        .length;
 
     final priorityDistribution = <int, int>{};
     final languageDistribution = <String, int>{};
 
     for (final query in _pendingQueries) {
-      priorityDistribution[query.priority] = (priorityDistribution[query.priority] ?? 0) + 1;
-      languageDistribution[query.language] = (languageDistribution[query.language] ?? 0) + 1;
+      priorityDistribution[query.priority] =
+          (priorityDistribution[query.priority] ?? 0) + 1;
+      languageDistribution[query.language] =
+          (languageDistribution[query.language] ?? 0) + 1;
     }
 
     return {
@@ -331,7 +335,8 @@ class QueryQueueService {
         _pendingQueries.addAll(queries);
 
         // Also load from local vector storage (backup)
-        final storageQueries = await LocalVectorStorage.instance.getPendingQueries(unprocessedOnly: true);
+        final storageQueries = await LocalVectorStorage.instance
+            .getPendingQueries(unprocessedOnly: true);
 
         // Merge and deduplicate
         final existingIds = _pendingQueries.map((q) => q.id).toSet();

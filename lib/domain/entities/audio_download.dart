@@ -30,15 +30,15 @@ class AudioDownload extends Equatable {
 
   @override
   List<Object?> get props => [
-    id,
-    url,
-    localPath,
-    title,
-    duration,
-    fileSize,
-    status,
-    createdAt,
-    completedAt,
-    progress,
-  ];
+        id,
+        url,
+        localPath,
+        title,
+        duration,
+        fileSize,
+        status,
+        createdAt,
+        completedAt,
+        progress,
+      ];
 }

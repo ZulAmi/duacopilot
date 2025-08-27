@@ -20,11 +20,11 @@ class QueryHistory extends Equatable {
 
   @override
   List<Object?> get props => [
-    id,
-    query,
-    response,
-    timestamp,
-    responseTime,
-    success,
-  ];
+        id,
+        query,
+        response,
+        timestamp,
+        responseTime,
+        success,
+      ];
 }

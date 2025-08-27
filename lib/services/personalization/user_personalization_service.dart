@@ -25,7 +25,8 @@ import 'usage_pattern_analyzer.dart';
 /// - Privacy-first personalization with on-device processing
 class UserPersonalizationService {
   static UserPersonalizationService? _instance;
-  static UserPersonalizationService get instance => _instance ??= UserPersonalizationService._();
+  static UserPersonalizationService get instance =>
+      _instance ??= UserPersonalizationService._();
 
   UserPersonalizationService._();
 
@@ -40,12 +41,15 @@ class UserPersonalizationService {
   late TemporalPatternAnalyzer _temporalAnalyzer;
 
   // Streams for real-time updates
-  final StreamController<PersonalizationUpdate> _updateController = StreamController<PersonalizationUpdate>.broadcast();
+  final StreamController<PersonalizationUpdate> _updateController =
+      StreamController<PersonalizationUpdate>.broadcast();
   Stream<PersonalizationUpdate> get updateStream => _updateController.stream;
 
-  final StreamController<List<EnhancedRecommendation>> _recommendationsController =
+  final StreamController<List<EnhancedRecommendation>>
+      _recommendationsController =
       StreamController<List<EnhancedRecommendation>>.broadcast();
-  Stream<List<EnhancedRecommendation>> get recommendationsStream => _recommendationsController.stream;
+  Stream<List<EnhancedRecommendation>> get recommendationsStream =>
+      _recommendationsController.stream;
 
   // Session state management
   UserSession? _currentSession;
@@ -77,9 +81,10 @@ class UserPersonalizationService {
       _startAnalyticsProcessing();
 
       _isInitialized = true;
-      AppLogger.info('✅ User personalization service initialized for user: $userId');
+      AppLogger.info(
+          'âœ… User personalization service initialized for user: $userId');
     } catch (e) {
-      AppLogger.error('❌ Failed to initialize personalization service: $e');
+      AppLogger.error('âŒ Failed to initialize personalization service: $e');
       rethrow;
     }
   }
@@ -119,7 +124,8 @@ class UserPersonalizationService {
 
     try {
       // Combine all personalization signals
-      final personalizationContext = await _buildComprehensiveContext(query: query, contextOverrides: contextOverrides);
+      final personalizationContext = await _buildComprehensiveContext(
+          query: query, contextOverrides: contextOverrides);
 
       // Process recommendations in compute isolate for privacy
       final recommendations = await compute(
@@ -138,8 +144,10 @@ class UserPersonalizationService {
       _recommendationsController.add(recommendations);
       return recommendations;
     } catch (e) {
-      AppLogger.error('❌ Error generating enhanced recommendations: $e');
-      return candidateDuas.map((dua) => EnhancedRecommendation.fromDua(dua)).toList();
+      AppLogger.error('âŒ Error generating enhanced recommendations: $e');
+      return candidateDuas
+          .map((dua) => EnhancedRecommendation.fromDua(dua))
+          .toList();
     }
   }
 
@@ -157,7 +165,8 @@ class UserPersonalizationService {
     final culturalPrefs = await _culturalEngine.getPreferences(_currentUserId!);
 
     // Get temporal patterns
-    final temporalPatterns = await _temporalAnalyzer.analyzePatterns(_currentUserId!, now);
+    final temporalPatterns =
+        await _temporalAnalyzer.analyzePatterns(_currentUserId!, now);
 
     // Get Islamic calendar context
     final islamicContext = IslamicTimeService.instance.getCurrentTimeContext();
@@ -209,18 +218,22 @@ class UserPersonalizationService {
       await _temporalAnalyzer.recordInteraction(interaction);
 
       // Update cultural preferences if relevant
-      if (metadata?.containsKey('language') == true || metadata?.containsKey('cultural_context') == true) {
+      if (metadata?.containsKey('language') == true ||
+          metadata?.containsKey('cultural_context') == true) {
         await _culturalEngine.recordCulturalInteraction(interaction);
       }
 
       // Broadcast update
       _updateController.add(
-        PersonalizationUpdate(type: UpdateType.interaction, data: interaction, timestamp: DateTime.now()),
+        PersonalizationUpdate(
+            type: UpdateType.interaction,
+            data: interaction,
+            timestamp: DateTime.now()),
       );
 
-      AppLogger.debug('📊 Tracked interaction: $type for Du\'a $duaId');
+      AppLogger.debug('ðŸ“Š Tracked interaction: $type for Du\'a $duaId');
     } catch (e) {
-      AppLogger.error('❌ Error tracking Du\'a interaction: $e');
+      AppLogger.error('âŒ Error tracking Du\'a interaction: $e');
     }
   }
 
@@ -249,25 +262,32 @@ class UserPersonalizationService {
 
       // Broadcast update
       _updateController.add(
-        PersonalizationUpdate(type: UpdateType.culturalPreferences, data: update, timestamp: DateTime.now()),
+        PersonalizationUpdate(
+            type: UpdateType.culturalPreferences,
+            data: update,
+            timestamp: DateTime.now()),
       );
 
-      AppLogger.info('🌍 Updated cultural preferences for user: $_currentUserId');
+      AppLogger.info(
+          'ðŸŒ Updated cultural preferences for user: $_currentUserId');
     } catch (e) {
-      AppLogger.error('❌ Error updating cultural preferences: $e');
+      AppLogger.error('âŒ Error updating cultural preferences: $e');
     }
   }
 
   /// Get personalized Du'a suggestions for current time/context
-  Future<List<EnhancedRecommendation>> getContextualSuggestions({int limit = 5}) async {
+  Future<List<EnhancedRecommendation>> getContextualSuggestions(
+      {int limit = 5}) async {
     await _ensureInitialized();
 
     try {
       final now = DateTime.now();
-      final islamicContext = IslamicTimeService.instance.getCurrentTimeContext();
+      final islamicContext =
+          IslamicTimeService.instance.getCurrentTimeContext();
 
       // Get time-based patterns
-      final timePatterns = await _temporalAnalyzer.getTimeBasedPatterns(_currentUserId!, now);
+      final timePatterns =
+          await _temporalAnalyzer.getTimeBasedPatterns(_currentUserId!, now);
 
       // Get location-based suggestions (if available)
       final locationSuggestions = await _getLocationBasedSuggestions();
@@ -291,7 +311,7 @@ class UserPersonalizationService {
 
       return suggestions;
     } catch (e) {
-      AppLogger.error('❌ Error generating contextual suggestions: $e');
+      AppLogger.error('âŒ Error generating contextual suggestions: $e');
       return [];
     }
   }
@@ -319,11 +339,13 @@ class UserPersonalizationService {
       if (privacyLevel == PrivacyLevel.strict) return null;
 
       final permission = await Geolocator.checkPermission();
-      if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
         return null;
       }
 
-      final position = await Geolocator.getCurrentPosition().timeout(const Duration(seconds: 5));
+      final position = await Geolocator.getCurrentPosition()
+          .timeout(const Duration(seconds: 5));
 
       return LocationContext(
         latitude: position.latitude,
@@ -332,7 +354,7 @@ class UserPersonalizationService {
         timestamp: DateTime.now(),
       );
     } catch (e) {
-      AppLogger.debug('🗺️ Location context not available: $e');
+      AppLogger.debug('ðŸ—ºï¸ Location context not available: $e');
       return null;
     }
   }
@@ -359,9 +381,9 @@ class UserPersonalizationService {
       // Clean old data to preserve privacy
       await _cleanupOldData();
 
-      AppLogger.debug('📈 Background analytics processed');
+      AppLogger.debug('ðŸ“ˆ Background analytics processed');
     } catch (e) {
-      AppLogger.error('❌ Error processing analytics: $e');
+      AppLogger.error('âŒ Error processing analytics: $e');
     }
   }
 
@@ -391,7 +413,8 @@ class UserPersonalizationService {
     if (_currentSession == null) return;
 
     _sessionContext.addAll({
-      'session_duration': DateTime.now().difference(_currentSession!.startTime).inMinutes,
+      'session_duration':
+          DateTime.now().difference(_currentSession!.startTime).inMinutes,
       'last_update': DateTime.now().toIso8601String(),
     });
   }
@@ -435,7 +458,8 @@ class UserPersonalizationService {
   Future<void> _saveSessionStart(SharedPreferences prefs) async {
     if (_currentSession == null) return;
 
-    final sessions = prefs.getStringList('${_sessionHistoryKey}_$_currentUserId') ?? [];
+    final sessions =
+        prefs.getStringList('${_sessionHistoryKey}_$_currentUserId') ?? [];
     sessions.add(json.encode(_currentSession!.toJson()));
 
     // Keep only last 50 sessions for privacy
@@ -443,11 +467,13 @@ class UserPersonalizationService {
       sessions.removeRange(0, sessions.length - 50);
     }
 
-    await prefs.setStringList('${_sessionHistoryKey}_$_currentUserId', sessions);
+    await prefs.setStringList(
+        '${_sessionHistoryKey}_$_currentUserId', sessions);
   }
 
   /// Track recommendation generation for learning
-  Future<void> _trackRecommendationGeneration(String query, List<EnhancedRecommendation> recommendations) async {
+  Future<void> _trackRecommendationGeneration(
+      String query, List<EnhancedRecommendation> recommendations) async {
     // Track for pattern learning (privacy-preserving)
     await _usageAnalyzer.trackQuery(query, recommendations.length);
 
@@ -479,7 +505,8 @@ class UserPersonalizationService {
   /// Ensure service is initialized
   Future<void> _ensureInitialized() async {
     if (!_isInitialized) {
-      throw StateError('PersonalizationService not initialized. Call initialize() first.');
+      throw StateError(
+          'PersonalizationService not initialized. Call initialize() first.');
     }
   }
 
@@ -494,7 +521,8 @@ class UserPersonalizationService {
 }
 
 /// Top-level function for compute isolate processing
-List<EnhancedRecommendation> processRecommendationsIsolate(PersonalizationInput input) {
+List<EnhancedRecommendation> processRecommendationsIsolate(
+    PersonalizationInput input) {
   // Process recommendations based on personalization context
   // This runs in an isolate for privacy and performance
 
@@ -515,13 +543,15 @@ List<EnhancedRecommendation> processRecommendationsIsolate(PersonalizationInput 
   }
 
   // Sort by personalization score
-  recommendations.sort((a, b) => b.personalizationScore.overall.compareTo(a.personalizationScore.overall));
+  recommendations.sort((a, b) =>
+      b.personalizationScore.overall.compareTo(a.personalizationScore.overall));
 
   return recommendations;
 }
 
 /// Calculate personalization score for a Du'a
-PersonalizationScore calculatePersonalizationScore(DuaEntity dua, PersonalizationContext context) {
+PersonalizationScore calculatePersonalizationScore(
+    DuaEntity dua, PersonalizationContext context) {
   double usageScore = 0.0;
   double culturalScore = 0.0;
   double temporalScore = 0.0;
@@ -541,8 +571,11 @@ PersonalizationScore calculatePersonalizationScore(DuaEntity dua, Personalizatio
   final hasArabic = dua.arabicText.isNotEmpty;
   final hasTranslation = dua.translation.isNotEmpty;
 
-  if ((context.culturalPreferences.preferredLanguages.contains('ar') && hasArabic) ||
-      (context.culturalPreferences.preferredLanguages.any((lang) => lang != 'ar') && hasTranslation)) {
+  if ((context.culturalPreferences.preferredLanguages.contains('ar') &&
+          hasArabic) ||
+      (context.culturalPreferences.preferredLanguages
+              .any((lang) => lang != 'ar') &&
+          hasTranslation)) {
     culturalScore += 0.9;
   }
 
@@ -561,7 +594,8 @@ PersonalizationScore calculatePersonalizationScore(DuaEntity dua, Personalizatio
     contextualScore += 0.5;
   }
 
-  final overall = (usageScore + culturalScore + temporalScore + contextualScore) / 4;
+  final overall =
+      (usageScore + culturalScore + temporalScore + contextualScore) / 4;
 
   return PersonalizationScore(
     usage: usageScore,
@@ -573,7 +607,8 @@ PersonalizationScore calculatePersonalizationScore(DuaEntity dua, Personalizatio
 }
 
 /// Generate reasoning for recommendation
-List<String> generateReasoning(DuaEntity dua, PersonalizationContext context, PersonalizationScore score) {
+List<String> generateReasoning(
+    DuaEntity dua, PersonalizationContext context, PersonalizationScore score) {
   final reasons = <String>[];
 
   if (score.usage > 0.5) {
@@ -596,7 +631,8 @@ List<String> generateReasoning(DuaEntity dua, PersonalizationContext context, Pe
 }
 
 /// Generate context tags for recommendation
-List<String> generateContextTags(DuaEntity dua, PersonalizationContext context) {
+List<String> generateContextTags(
+    DuaEntity dua, PersonalizationContext context) {
   final tags = <String>[];
 
   if (context.islamicTimeContext.isRamadan) {
@@ -613,7 +649,8 @@ List<String> generateContextTags(DuaEntity dua, PersonalizationContext context) 
 }
 
 /// Top-level function for contextual suggestions isolate
-List<EnhancedRecommendation> generateContextualSuggestionsIsolate(ContextualSuggestionInput input) {
+List<EnhancedRecommendation> generateContextualSuggestionsIsolate(
+    ContextualSuggestionInput input) {
   // Generate contextual suggestions in isolate
   final suggestions = <EnhancedRecommendation>[];
 

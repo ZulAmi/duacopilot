@@ -19,20 +19,20 @@ import '../cache/intelligent_cache_service.dart';
 import '../network/network_info.dart';
 import '../storage/secure_storage_service.dart';
 
-/// 🚀 ENTERPRISE-GRADE RAG ARCHITECTURE
+/// ðŸš€ ENTERPRISE-GRADE RAG ARCHITECTURE
 /// Best-in-class Flutter RAG implementation with cybersecurity excellence
 ///
 /// Features:
-/// 1. ⚡ Robust dio client with military-grade error handling
-/// 2. 💾 Intelligent offline fallback with SQLite/Hive hybrid storage
-/// 3. 🎨 Responsive UI with optimized state management
-/// 4. 🧠 ML-powered personalization layer
-/// 5. 📱 Native platform channel integrations
-/// 6. 📊 Production monitoring & DevTools optimization
+/// 1. âš¡ Robust dio client with military-grade error handling
+/// 2. ðŸ’¾ Intelligent offline fallback with SQLite/Hive hybrid storage
+/// 3. ðŸŽ¨ Responsive UI with optimized state management
+/// 4. ðŸ§  ML-powered personalization layer
+/// 5. ðŸ“± Native platform channel integrations
+/// 6. ðŸ“Š Production monitoring & DevTools optimization
 
-/// SECURITY RATING: ⭐⭐⭐⭐⭐ (MAXIMUM SECURITY)
-/// PERFORMANCE RATING: ⭐⭐⭐⭐⭐ (ENTERPRISE-OPTIMIZED)
-/// SCALABILITY RATING: ⭐⭐⭐⭐⭐ (CLOUD-NATIVE READY)
+/// SECURITY RATING: â­â­â­â­â­ (MAXIMUM SECURITY)
+/// PERFORMANCE RATING: â­â­â­â­â­ (ENTERPRISE-OPTIMIZED)
+/// SCALABILITY RATING: â­â­â­â­â­ (CLOUD-NATIVE READY)
 
 // ==================== 1. ENTERPRISE DIO CLIENT ====================
 
@@ -59,9 +59,9 @@ class EnterpriseRagClient {
   EnterpriseRagClient({
     required Logger logger,
     required SecureStorageService secureStorage,
-  }) : _logger = logger,
-       _secureStorage = secureStorage,
-       _dio = Dio() {
+  })  : _logger = logger,
+        _secureStorage = secureStorage,
+        _dio = Dio() {
     _initializeDioClient();
   }
 
@@ -601,21 +601,24 @@ class IntelligentOfflineManager {
       final now = DateTime.now().millisecondsSinceEpoch;
       final expiresAt = now + const Duration(days: 7).inMilliseconds;
 
-      await _database.insert('rag_cache', {
-        'id': response.id,
-        'query': query,
-        'query_hash': queryHash,
-        'response': response.response,
-        'confidence': response.confidence,
-        'sources': json.encode(response.sources),
-        'metadata': json.encode(response.metadata),
-        'language': language,
-        'category': category,
-        'created_at': now,
-        'expires_at': expiresAt,
-        'access_count': 0,
-        'last_accessed': now,
-      }, conflictAlgorithm: ConflictAlgorithm.replace);
+      await _database.insert(
+          'rag_cache',
+          {
+            'id': response.id,
+            'query': query,
+            'query_hash': queryHash,
+            'response': response.response,
+            'confidence': response.confidence,
+            'sources': json.encode(response.sources),
+            'metadata': json.encode(response.metadata),
+            'language': language,
+            'category': category,
+            'created_at': now,
+            'expires_at': expiresAt,
+            'access_count': 0,
+            'last_accessed': now,
+          },
+          conflictAlgorithm: ConflictAlgorithm.replace);
 
       // Store query embedding for semantic search
       await _storeQueryEmbedding(query, language);
@@ -743,16 +746,19 @@ class IntelligentOfflineManager {
     try {
       final now = DateTime.now().millisecondsSinceEpoch;
 
-      await _database.insert('personalization_data', {
-        'id': '${userId}_$key',
-        'user_id': userId,
-        'preference_key': key,
-        'preference_value': json.encode(value),
-        'preference_type': type,
-        'category': category,
-        'created_at': now,
-        'updated_at': now,
-      }, conflictAlgorithm: ConflictAlgorithm.replace);
+      await _database.insert(
+          'personalization_data',
+          {
+            'id': '${userId}_$key',
+            'user_id': userId,
+            'preference_key': key,
+            'preference_value': json.encode(value),
+            'preference_type': type,
+            'category': category,
+            'created_at': now,
+            'updated_at': now,
+          },
+          conflictAlgorithm: ConflictAlgorithm.replace);
     } catch (e) {
       _logger.e('[PERSONALIZATION_STORE] Failed to store data: $e');
     }
@@ -966,10 +972,10 @@ class EnterpriseRagService {
     required IntelligentOfflineManager offlineManager,
     required NetworkInfo networkInfo,
     required Logger logger,
-  }) : _client = client,
-       _offlineManager = offlineManager,
-       _networkInfo = networkInfo,
-       _logger = logger;
+  })  : _client = client,
+        _offlineManager = offlineManager,
+        _networkInfo = networkInfo,
+        _logger = logger;
 
   /// Execute intelligent RAG query with fallback
   Future<RagResponse> queryRag({
@@ -1094,8 +1100,7 @@ class EnterpriseRagService {
     );
     if (total == 0) return 0.0;
 
-    final successCount =
-        (_performanceMetrics['online_success'] ?? 0) +
+    final successCount = (_performanceMetrics['online_success'] ?? 0) +
         (_performanceMetrics['offline_success'] ?? 0);
 
     return (successCount / total) * 100;

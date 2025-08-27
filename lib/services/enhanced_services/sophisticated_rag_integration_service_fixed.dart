@@ -27,12 +27,15 @@ class SophisticatedRagIntegrationServiceFixed {
   CulturalContext? _currentCulturalContext;
 
   // Stream controllers
-  final _queryProcessedController = StreamController<SophisticatedQueryResult>.broadcast();
+  final _queryProcessedController =
+      StreamController<SophisticatedQueryResult>.broadcast();
   final _contextUpdateController = StreamController<ContextUpdate>.broadcast();
 
   // Public streams
-  Stream<SophisticatedQueryResult> get queryProcessedStream => _queryProcessedController.stream;
-  Stream<ContextUpdate> get contextUpdateStream => _contextUpdateController.stream;
+  Stream<SophisticatedQueryResult> get queryProcessedStream =>
+      _queryProcessedController.stream;
+  Stream<ContextUpdate> get contextUpdateStream =>
+      _contextUpdateController.stream;
 
   // Singleton pattern
   static SophisticatedRagIntegrationServiceFixed? _instance;
@@ -67,7 +70,8 @@ class SophisticatedRagIntegrationServiceFixed {
       await _backgroundService.startService();
 
       // Load current cultural context
-      _currentCulturalContext = await _culturalService.getCurrentCulturalContext();
+      _currentCulturalContext =
+          await _culturalService.getCurrentCulturalContext();
 
       _isInitialized = true;
       AppLogger.info(
@@ -117,7 +121,8 @@ class SophisticatedRagIntegrationServiceFixed {
       final calendarContext = await _calendarService.getContextualSuggestions();
 
       // Get cultural adaptations using existing API
-      final culturalRecommendations = await _culturalService.getCulturalDuaRecommendations(
+      final culturalRecommendations =
+          await _culturalService.getCulturalDuaRecommendations(
         category: _categorizeQuery(query),
         userId: userIdFinal,
         emotionalState: emotionResult.detectedEmotion,
@@ -205,7 +210,8 @@ class SophisticatedRagIntegrationServiceFixed {
 
     // Get preferred language from cultural context
     final culturalLanguages = await _culturalService.getPreferredLanguages();
-    final primaryLanguage = culturalLanguages.isNotEmpty ? culturalLanguages.first : 'en-US';
+    final primaryLanguage =
+        culturalLanguages.isNotEmpty ? culturalLanguages.first : 'en-US';
 
     await _voiceService.startListening(
       language: primaryLanguage,
@@ -220,7 +226,8 @@ class SophisticatedRagIntegrationServiceFixed {
   }
 
   /// Get voice service status
-  VoiceStatus get voiceStatus => _voiceService.isListening ? VoiceStatus.listening : VoiceStatus.stopped;
+  VoiceStatus get voiceStatus =>
+      _voiceService.isListening ? VoiceStatus.listening : VoiceStatus.stopped;
 
   /// Get upcoming Islamic events
   Future<List<CalendarEvent>> getUpcomingIslamicEvents() async {
@@ -248,7 +255,8 @@ class SophisticatedRagIntegrationServiceFixed {
         additionalPreferences: additionalPreferences,
       );
 
-      _currentCulturalContext = await _culturalService.getCurrentCulturalContext();
+      _currentCulturalContext =
+          await _culturalService.getCurrentCulturalContext();
 
       _contextUpdateController.add(
         ContextUpdate(

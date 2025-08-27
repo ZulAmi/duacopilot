@@ -61,10 +61,10 @@ class IslamicLearningPath with _$IslamicLearningPath {
 
 /// Learning levels for progressive education
 enum LearningLevel {
-  beginner('Beginner', '🌱'),
-  intermediate('Intermediate', '🌿'),
-  advanced('Advanced', '🌳'),
-  scholar('Scholar', '📚');
+  beginner('Beginner', 'ðŸŒ±'),
+  intermediate('Intermediate', 'ðŸŒ¿'),
+  advanced('Advanced', 'ðŸŒ³'),
+  scholar('Scholar', 'ðŸ“š');
 
   const LearningLevel(this.label, this.emoji);
   final String label;
@@ -105,7 +105,6 @@ class PremiumCourse with _$PremiumCourse {
     @Default(true) bool requiresAuthentication,
     @Default(false) bool allowDownload,
     @Default(CertificationType.completion) CertificationType certificateType,
-
     DateTime? publishedAt,
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -117,16 +116,16 @@ class PremiumCourse with _$PremiumCourse {
 
 /// Course categories for organization
 enum CourseCategory {
-  quran('Quran & Tajweed', '📖'),
-  hadith('Hadith Studies', '📜'),
-  fiqh('Fiqh & Jurisprudence', '⚖️'),
-  aqeedah('Aqeedah & Beliefs', '🕌'),
-  seerah('Seerah & History', '📚'),
-  arabic('Arabic Language', '🔤'),
-  spirituality('Spirituality & Tasawwuf', '💚'),
-  family('Family & Marriage', '👪'),
-  finance('Islamic Finance', '💰'),
-  ethics('Ethics & Morals', '🤲');
+  quran('Quran & Tajweed', 'ðŸ“–'),
+  hadith('Hadith Studies', 'ðŸ“œ'),
+  fiqh('Fiqh & Jurisprudence', 'âš–ï¸'),
+  aqeedah('Aqeedah & Beliefs', 'ðŸ•Œ'),
+  seerah('Seerah & History', 'ðŸ“š'),
+  arabic('Arabic Language', 'ðŸ”¤'),
+  spirituality('Spirituality & Tasawwuf', 'ðŸ’š'),
+  family('Family & Marriage', 'ðŸ‘ª'),
+  finance('Islamic Finance', 'ðŸ’°'),
+  ethics('Ethics & Morals', 'ðŸ¤²');
 
   const CourseCategory(this.label, this.emoji);
   final String label;
@@ -165,7 +164,6 @@ class CourseLesson with _$CourseLesson {
     @Default(0) int viewCount,
     @Default(Duration.zero) Duration averageWatchTime,
     @Default(0.0) double completionRate,
-
     DateTime? createdAt,
     DateTime? updatedAt,
   }) = _CourseLesson;
@@ -196,7 +194,6 @@ class IslamicQuiz with _$IslamicQuiz {
     // Gamification
     @Default(0) int points,
     @Default([]) List<String> badges,
-
     DateTime? createdAt,
     DateTime? updatedAt,
   }) = _IslamicQuiz;
@@ -232,7 +229,6 @@ class QuizQuestion with _$QuizQuestion {
     @Default(0) int totalAttempts,
     @Default(0) int correctAttempts,
     @Default(0.0) double successRate,
-
     DateTime? createdAt,
   }) = _QuizQuestion;
 
@@ -285,7 +281,6 @@ class LiveQASession with _$LiveQASession {
     @Default(true) bool moderationEnabled,
     @Default([]) List<String> moderatorIds,
     @Default(true) bool allowAnonymousQuestions,
-
     DateTime? actualStart,
     DateTime? actualEnd,
     DateTime? createdAt,
@@ -325,7 +320,6 @@ class PersonalizedCurriculum with _$PersonalizedCurriculum {
     @Default([]) List<String> recommendedCourses,
     @Default([]) List<String> recommendedScholars,
     DateTime? lastRecommendationUpdate,
-
     DateTime? createdAt,
     DateTime? updatedAt,
   }) = _PersonalizedCurriculum;
@@ -393,7 +387,6 @@ class IslamicCertificate with _$IslamicCertificate {
     // Sharing & Privacy
     @Default(false) bool isPublic,
     @Default(true) bool allowSharing,
-
     DateTime? expiryDate,
     DateTime? lastVerified,
   }) = _IslamicCertificate;

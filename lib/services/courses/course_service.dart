@@ -161,10 +161,9 @@ class CourseService {
   Map<String, dynamic> getCompletionStats() {
     final enrollments = getEnrolledCourses();
     final completed = enrollments.where((e) => e.completedAt != null).length;
-    final inProgress =
-        enrollments
-            .where((e) => e.completedAt == null && e.progress > 0)
-            .length;
+    final inProgress = enrollments
+        .where((e) => e.completedAt == null && e.progress > 0)
+        .length;
     final notStarted = enrollments.where((e) => e.progress == 0).length;
 
     return {

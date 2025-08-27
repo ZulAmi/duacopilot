@@ -6,13 +6,13 @@ import '../models/cache_models.dart';
 class SemanticHashService {
   // Arabic normalization mappings
   static const Map<String, String> _arabicNormalization = {
-    'أ': 'ا',
-    'إ': 'ا',
-    'آ': 'ا',
-    'ة': 'ه',
-    'ي': 'ى',
-    'ؤ': 'و',
-    'ئ': 'ى',
+    'Ø£': 'Ø§',
+    'Ø¥': 'Ø§',
+    'Ø¢': 'Ø§',
+    'Ø©': 'Ù‡',
+    'ÙŠ': 'Ù‰',
+    'Ø¤': 'Ùˆ',
+    'Ø¦': 'Ù‰',
   };
 
   // Islamic term synonyms for semantic matching
@@ -22,10 +22,10 @@ class SemanticHashService {
     'quran': ['qur\'an', 'book', 'scripture', 'revelation'],
     'allah': ['god', 'creator', 'almighty'],
     'prophet': ['messenger', 'rasul', 'nabi'],
-    'صلاة': ['عبادة', 'ركوع', 'سجود', 'قيام'],
-    'دعاء': ['استغاثة', 'توسل', 'ابتهال', 'طلب'],
-    'قرآن': ['كتاب', 'وحي', 'تنزيل'],
-    'الله': ['رب', 'خالق', 'إله'],
+    'ØµÙ„Ø§Ø©': ['Ø¹Ø¨Ø§Ø¯Ø©', 'Ø±ÙƒÙˆØ¹', 'Ø³Ø¬ÙˆØ¯', 'Ù‚ÙŠØ§Ù…'],
+    'Ø¯Ø¹Ø§Ø¡': ['Ø§Ø³ØªØºØ§Ø«Ø©', 'ØªÙˆØ³Ù„', 'Ø§Ø¨ØªÙ‡Ø§Ù„', 'Ø·Ù„Ø¨'],
+    'Ù‚Ø±Ø¢Ù†': ['ÙƒØªØ§Ø¨', 'ÙˆØ­ÙŠ', 'ØªÙ†Ø²ÙŠÙ„'],
+    'Ø§Ù„Ù„Ù‡': ['Ø±Ø¨', 'Ø®Ø§Ù„Ù‚', 'Ø¥Ù„Ù‡'],
   };
 
   // Stop words for different languages
@@ -120,59 +120,59 @@ class SemanticHashService {
       'once',
     ],
     'ar': [
-      'في',
-      'من',
-      'إلى',
-      'على',
-      'عن',
-      'مع',
-      'كل',
-      'بعض',
-      'هذا',
-      'هذه',
-      'ذلك',
-      'تلك',
-      'التي',
-      'الذي',
-      'التي',
-      'أن',
-      'إن',
-      'كان',
-      'يكون',
-      'تكون',
-      'سوف',
-      'قد',
-      'لم',
-      'لن',
-      'ما',
-      'لا',
-      'نعم',
-      'كيف',
-      'متى',
-      'أين',
+      'ÙÙŠ',
+      'Ù…Ù†',
+      'Ø¥Ù„Ù‰',
+      'Ø¹Ù„Ù‰',
+      'Ø¹Ù†',
+      'Ù…Ø¹',
+      'ÙƒÙ„',
+      'Ø¨Ø¹Ø¶',
+      'Ù‡Ø°Ø§',
+      'Ù‡Ø°Ù‡',
+      'Ø°Ù„Ùƒ',
+      'ØªÙ„Ùƒ',
+      'Ø§Ù„ØªÙŠ',
+      'Ø§Ù„Ø°ÙŠ',
+      'Ø§Ù„ØªÙŠ',
+      'Ø£Ù†',
+      'Ø¥Ù†',
+      'ÙƒØ§Ù†',
+      'ÙŠÙƒÙˆÙ†',
+      'ØªÙƒÙˆÙ†',
+      'Ø³ÙˆÙ',
+      'Ù‚Ø¯',
+      'Ù„Ù…',
+      'Ù„Ù†',
+      'Ù…Ø§',
+      'Ù„Ø§',
+      'Ù†Ø¹Ù…',
+      'ÙƒÙŠÙ',
+      'Ù…ØªÙ‰',
+      'Ø£ÙŠÙ†',
     ],
     'ur': [
-      'کے',
-      'کی',
-      'کو',
-      'کا',
-      'میں',
-      'پر',
-      'سے',
-      'کے لیے',
-      'یہ',
-      'وہ',
-      'جو',
-      'کہ',
-      'اور',
-      'یا',
-      'لیکن',
-      'ہے',
-      'ہیں',
-      'تھا',
-      'تھے',
-      'ہو',
-      'ہوں',
+      'Ú©Û’',
+      'Ú©ÛŒ',
+      'Ú©Ùˆ',
+      'Ú©Ø§',
+      'Ù…ÛŒÚº',
+      'Ù¾Ø±',
+      'Ø³Û’',
+      'Ú©Û’ Ù„ÛŒÛ’',
+      'ÛŒÛ',
+      'ÙˆÛ',
+      'Ø¬Ùˆ',
+      'Ú©Û',
+      'Ø§ÙˆØ±',
+      'ÛŒØ§',
+      'Ù„ÛŒÚ©Ù†',
+      'ÛÛ’',
+      'ÛÛŒÚº',
+      'ØªÚ¾Ø§',
+      'ØªÚ¾Û’',
+      'ÛÙˆ',
+      'ÛÙˆÚº',
     ],
     'id': [
       'yang',
@@ -298,8 +298,8 @@ class SemanticHashService {
 
       case 'ur':
         // Urdu normalization
-        normalized = normalized.replaceAll('ک', 'ك');
-        normalized = normalized.replaceAll('ی', 'ي');
+        normalized = normalized.replaceAll('Ú©', 'Ùƒ');
+        normalized = normalized.replaceAll('ÛŒ', 'ÙŠ');
         break;
 
       case 'id':
@@ -322,11 +322,10 @@ class SemanticHashService {
     String normalized,
     String language,
   ) {
-    final words =
-        normalized
-            .split(RegExp(r'\s+'))
-            .where((word) => word.isNotEmpty)
-            .toList();
+    final words = normalized
+        .split(RegExp(r'\s+'))
+        .where((word) => word.isNotEmpty)
+        .toList();
 
     // Remove stop words
     final stopWords = _stopWords[language] ?? _stopWords['en']!;

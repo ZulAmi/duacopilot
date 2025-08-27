@@ -122,8 +122,7 @@ class QiblaCompassService {
     final double deltaLng = kaabaLngRad - userLngRad;
 
     final double y = sin(deltaLng) * cos(kaabaLatRad);
-    final double x =
-        cos(userLatRad) * sin(kaabaLatRad) -
+    final double x = cos(userLatRad) * sin(kaabaLatRad) -
         sin(userLatRad) * cos(kaabaLatRad) * cos(deltaLng);
 
     double qiblaDirection = atan2(y, x) * 180 / pi;
@@ -204,7 +203,7 @@ class QiblaCompassService {
         _magneticReadings.reduce((a, b) => a + b) / _magneticReadings.length;
     final double variance =
         _magneticReadings.map((x) => pow(x - mean, 2)).reduce((a, b) => a + b) /
-        _magneticReadings.length;
+            _magneticReadings.length;
 
     // Determine quality based on variance
     if (variance < 5) {
@@ -225,7 +224,7 @@ class QiblaCompassService {
     final LocationAccuracy accuracy = _getLocationAccuracy();
     final bool needsCalibration =
         _calibrationQuality == CalibrationQuality.poor ||
-        _calibrationQuality == CalibrationQuality.uncalibrated;
+            _calibrationQuality == CalibrationQuality.uncalibrated;
 
     final compass = QiblaCompass(
       qiblaDirection: _qiblaDirection,
@@ -384,8 +383,7 @@ class QiblaCompassService {
       deviceHeading: _currentHeading,
       accuracy: _getLocationAccuracy(),
       lastUpdated: DateTime.now(),
-      isCalibrationNeeded:
-          _calibrationQuality == CalibrationQuality.poor ||
+      isCalibrationNeeded: _calibrationQuality == CalibrationQuality.poor ||
           _calibrationQuality == CalibrationQuality.uncalibrated,
       distanceToKaaba: _calculateDistanceToKaaba(),
       calibrationData: _getCalibrationData(),

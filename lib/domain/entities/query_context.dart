@@ -29,17 +29,17 @@ class QueryContext extends Equatable {
 
   @override
   List<Object?> get props => [
-    timestamp,
-    timeOfDay,
-    islamicDate,
-    prayerTime,
-    seasonalContext,
-    weekday,
-    location,
-    userPreferences,
-    deviceLanguage,
-    timezone,
-  ];
+        timestamp,
+        timeOfDay,
+        islamicDate,
+        prayerTime,
+        seasonalContext,
+        weekday,
+        location,
+        userPreferences,
+        deviceLanguage,
+        timezone,
+      ];
 
   QueryContext copyWith({
     DateTime? timestamp,
@@ -88,28 +88,25 @@ class QueryContext extends Equatable {
     return QueryContext(
       timestamp:
           map['timestamp'] != null ? DateTime.parse(map['timestamp']) : null,
-      timeOfDay:
-          map['timeOfDay'] != null
-              ? TimeOfDay.values.firstWhere(
-                (e) => e.name == map['timeOfDay'],
-                orElse: () => TimeOfDay.morning,
-              )
-              : null,
+      timeOfDay: map['timeOfDay'] != null
+          ? TimeOfDay.values.firstWhere(
+              (e) => e.name == map['timeOfDay'],
+              orElse: () => TimeOfDay.morning,
+            )
+          : null,
       islamicDate: map['islamicDate'],
-      prayerTime:
-          map['prayerTime'] != null
-              ? PrayerTime.values.firstWhere(
-                (e) => e.name == map['prayerTime'],
-                orElse: () => PrayerTime.fajr,
-              )
-              : null,
+      prayerTime: map['prayerTime'] != null
+          ? PrayerTime.values.firstWhere(
+              (e) => e.name == map['prayerTime'],
+              orElse: () => PrayerTime.fajr,
+            )
+          : null,
       seasonalContext: map['seasonalContext'],
       weekday: map['weekday'],
       location: map['location'],
-      userPreferences:
-          map['userPreferences'] != null
-              ? Map<String, dynamic>.from(map['userPreferences'])
-              : null,
+      userPreferences: map['userPreferences'] != null
+          ? Map<String, dynamic>.from(map['userPreferences'])
+          : null,
       deviceLanguage: map['deviceLanguage'],
       timezone: map['timezone'],
     );

@@ -53,8 +53,10 @@ class OptimizedRagImage extends StatelessWidget {
       memCacheWidth: maxWidth,
       memCacheHeight: maxHeight,
       placeholder: (context, url) => placeholder ?? _buildDefaultPlaceholder(),
-      errorWidget: (context, url, error) => errorWidget ?? _buildDefaultErrorWidget(),
-      imageBuilder: (context, imageProvider) => _buildOptimizedImage(imageProvider),
+      errorWidget: (context, url, error) =>
+          errorWidget ?? _buildDefaultErrorWidget(),
+      imageBuilder: (context, imageProvider) =>
+          _buildOptimizedImage(imageProvider),
     );
   }
 
@@ -369,7 +371,8 @@ class RagMediaCacheStrategy {
     required int contentSizeBytes,
   }) {
     // Don't cache very large files on mobile
-    if ((Platform.isAndroid || Platform.isIOS) && contentSizeBytes > 50 * 1024 * 1024) {
+    if ((Platform.isAndroid || Platform.isIOS) &&
+        contentSizeBytes > 50 * 1024 * 1024) {
       return false;
     }
 
@@ -426,7 +429,8 @@ class RagMediaCacheStrategy {
     final baseKey = '${uri.host}${uri.path}';
 
     if (parameters != null && parameters.isNotEmpty) {
-      final paramString = parameters.entries.map((e) => '${e.key}=${e.value}').join('&');
+      final paramString =
+          parameters.entries.map((e) => '${e.key}=${e.value}').join('&');
       return '${baseKey}_${md5.convert(utf8.encode(paramString)).toString()}';
     }
 

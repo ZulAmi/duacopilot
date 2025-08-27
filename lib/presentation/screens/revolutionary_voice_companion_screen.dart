@@ -13,10 +13,12 @@ class RevolutionaryVoiceCompanionScreen extends ConsumerStatefulWidget {
   const RevolutionaryVoiceCompanionScreen({super.key});
 
   @override
-  ConsumerState<RevolutionaryVoiceCompanionScreen> createState() => _RevolutionaryVoiceCompanionScreenState();
+  ConsumerState<RevolutionaryVoiceCompanionScreen> createState() =>
+      _RevolutionaryVoiceCompanionScreenState();
 }
 
-class _RevolutionaryVoiceCompanionScreenState extends ConsumerState<RevolutionaryVoiceCompanionScreen>
+class _RevolutionaryVoiceCompanionScreenState
+    extends ConsumerState<RevolutionaryVoiceCompanionScreen>
     with SingleTickerProviderStateMixin {
   // Services
   late IslamicPersonalityService _personalityService;
@@ -106,11 +108,11 @@ class _RevolutionaryVoiceCompanionScreenState extends ConsumerState<Revolutionar
 
     String timeGreeting;
     if (hour < 12) {
-      timeGreeting = '🌅 Blessed morning to you!';
+      timeGreeting = 'ðŸŒ… Blessed morning to you!';
     } else if (hour < 18) {
-      timeGreeting = '☀️ May your afternoon be filled with barakah!';
+      timeGreeting = 'â˜€ï¸ May your afternoon be filled with barakah!';
     } else {
-      timeGreeting = '🌙 Peace and tranquility this evening!';
+      timeGreeting = 'ðŸŒ™ Peace and tranquility this evening!';
     }
 
     return '''
@@ -120,9 +122,9 @@ Assalamu Alaikum, my dear brother/sister in faith! I'm your AI Islamic companion
 
 ${context.recentTurns.isNotEmpty ? 'I remember our last conversation about ${context.currentTopic}. How has your heart been since then?' : 'I\'m here to be your friend, teacher, and guide in all things Islamic. What draws your heart today?'}
 
-Remember, the Prophet ﷺ said: "The believer is not one who eats his fill while his neighbor goes hungry." 
+Remember, the Prophet ï·º said: "The believer is not one who eats his fill while his neighbor goes hungry." 
 
-How may I serve your soul today? 🤲
+How may I serve your soul today? ðŸ¤²
 ''';
   }
 
@@ -179,7 +181,8 @@ How may I serve your soul today? 🤲
 
     switch (_currentMode) {
       case CompanionMode.learning:
-        final learningResponse = await _learningService.processLearningInteraction(input);
+        final learningResponse =
+            await _learningService.processLearningInteraction(input);
         response = learningResponse.response;
         suggestions = learningResponse.suggestedResponses ?? [];
         break;
@@ -205,7 +208,8 @@ How may I serve your soul today? 🤲
     }
 
     // Personalize response with Islamic personality
-    final personalizedResponse = await _personalityService.generatePersonalizedResponse(
+    final personalizedResponse =
+        await _personalityService.generatePersonalizedResponse(
       originalResponse: response,
       userQuery: input,
       detectedEmotion: emotion,
@@ -254,7 +258,7 @@ SubhanAllah, I feel the sincerity in your words about $topic.
 
 Prayer (Salah) is one of the most beautiful gifts Allah has given us - it's our direct connection with our Creator. When we pray, we're not just performing movements; we're having a conversation with Allah, expressing our gratitude, seeking guidance, and finding peace.
 
-The Prophet ﷺ said: "Prayer is the key to Paradise." Each prayer is an opportunity to cleanse our hearts and realign our purpose.
+The Prophet ï·º said: "Prayer is the key to Paradise." Each prayer is an opportunity to cleanse our hearts and realign our purpose.
 
 Based on our conversation, I sense you're seeking deeper understanding. Would you like me to guide you through the spiritual meanings behind each prayer position, or would you prefer to learn about the practical steps first?
 
@@ -286,7 +290,7 @@ What resonates most with your soul from what we've discussed?
       return '''
 My dear friend, I hear the pain in your heart. Allah knows every tear you shed.
 
-The Prophet ﷺ said: "No fatigue, nor disease, nor sorrow, nor sadness, nor hurt, nor distress befalls a Muslim, not even a prick of a thorn, but that Allah expiates some of his sins for that."
+The Prophet ï·º said: "No fatigue, nor disease, nor sorrow, nor sadness, nor hurt, nor distress befalls a Muslim, not even a prick of a thorn, but that Allah expiates some of his sins for that."
 
 Your struggle is temporary, but Allah's mercy is eternal. Would you like to explore some duas that bring comfort to the heart?
 ''';
@@ -353,14 +357,16 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
     String modeMessage;
     switch (mode) {
       case CompanionMode.companion:
-        modeMessage = '🤲 I\'m here as your spiritual companion. Let\'s have a heart-to-heart conversation.';
+        modeMessage =
+            'ðŸ¤² I\'m here as your spiritual companion. Let\'s have a heart-to-heart conversation.';
         break;
       case CompanionMode.learning:
         modeMessage =
-            '📚 Learning mode activated! I\'m excited to teach you about Islam. What would you like to explore?';
+            'ðŸ“š Learning mode activated! I\'m excited to teach you about Islam. What would you like to explore?';
         break;
       case CompanionMode.guidance:
-        modeMessage = '🌙 Guidance mode ready. Share what\'s troubling your heart, and I\'ll provide Islamic wisdom.';
+        modeMessage =
+            'ðŸŒ™ Guidance mode ready. Share what\'s troubling your heart, and I\'ll provide Islamic wisdom.';
         break;
     }
 
@@ -378,8 +384,8 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              ProfessionalTheme.primaryEmerald.withValues(alpha: 0.1),
-              ProfessionalTheme.secondaryGold.withValues(alpha: 0.1),
+              ProfessionalTheme.primaryEmerald.withOpacity(0.1),
+              ProfessionalTheme.secondaryGold.withOpacity(0.1),
               Colors.white,
             ],
           ),
@@ -442,7 +448,7 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
               Expanded(
                 child: _buildModeButton(
                   CompanionMode.companion,
-                  '🤲 Companion',
+                  'ðŸ¤² Companion',
                   'Spiritual friendship',
                 ),
               ),
@@ -450,7 +456,7 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
               Expanded(
                 child: _buildModeButton(
                   CompanionMode.learning,
-                  '📚 Learning',
+                  'ðŸ“š Learning',
                   'Islamic education',
                 ),
               ),
@@ -458,7 +464,7 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
               Expanded(
                 child: _buildModeButton(
                   CompanionMode.guidance,
-                  '🌙 Guidance',
+                  'ðŸŒ™ Guidance',
                   'Seek Islamic advice',
                 ),
               ),
@@ -478,10 +484,13 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color:
-              isSelected ? ProfessionalTheme.primaryEmerald.withValues(alpha: 0.1) : Colors.grey.withValues(alpha: 0.1),
+          color: isSelected
+              ? ProfessionalTheme.primaryEmerald.withOpacity(0.1)
+              : Colors.grey.withOpacity(0.1),
           borderRadius: BorderRadius.circular(12),
-          border: isSelected ? Border.all(color: ProfessionalTheme.primaryEmerald) : null,
+          border: isSelected
+              ? Border.all(color: ProfessionalTheme.primaryEmerald)
+              : null,
         ),
         child: Column(
           children: [
@@ -489,7 +498,9 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
               title,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: isSelected ? ProfessionalTheme.primaryEmerald : Colors.grey[600],
+                color: isSelected
+                    ? ProfessionalTheme.primaryEmerald
+                    : Colors.grey[600],
               ),
             ),
             Text(
@@ -519,7 +530,7 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withValues(alpha: 0.1),
+                  color: Colors.grey.withOpacity(0.1),
                   blurRadius: 10,
                   offset: const Offset(0, 4),
                 ),
@@ -531,7 +542,8 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
                 Row(
                   children: [
                     CircleAvatar(
-                      backgroundColor: ProfessionalTheme.primaryEmerald.withValues(alpha: 0.1),
+                      backgroundColor:
+                          ProfessionalTheme.primaryEmerald.withOpacity(0.1),
                       child: Icon(
                         Icons.psychology,
                         color: ProfessionalTheme.primaryEmerald,
@@ -541,7 +553,10 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
                     Expanded(
                       child: Text(
                         'Your Islamic Companion',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
@@ -599,14 +614,10 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
                       vertical: 8,
                     ),
                     decoration: BoxDecoration(
-                      color: ProfessionalTheme.secondaryGold.withValues(
-                        alpha: 0.1,
-                      ),
+                      color: ProfessionalTheme.secondaryGold.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(
-                        color: ProfessionalTheme.secondaryGold.withValues(
-                          alpha: 0.3,
-                        ),
+                        color: ProfessionalTheme.secondaryGold.withOpacity(0.3),
                       ),
                     ),
                     child: Text(
@@ -649,7 +660,9 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
                 margin: const EdgeInsets.only(bottom: 8),
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: isUser ? Colors.grey[100] : ProfessionalTheme.primaryEmerald.withValues(alpha: 0.1),
+                  color: isUser
+                      ? Colors.grey[100]
+                      : ProfessionalTheme.primaryEmerald.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
@@ -682,12 +695,16 @@ Your struggle is temporary, but Allah's mercy is eternal. Would you like to expl
                     width: 80,
                     height: 80,
                     decoration: BoxDecoration(
-                      color: _isListening ? _colorAnimation.value : ProfessionalTheme.primaryEmerald,
+                      color: _isListening
+                          ? _colorAnimation.value
+                          : ProfessionalTheme.primaryEmerald,
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color: (_isListening ? _colorAnimation.value : ProfessionalTheme.primaryEmerald)!
-                              .withValues(alpha: 0.3),
+                          color: (_isListening
+                                  ? _colorAnimation.value
+                                  : ProfessionalTheme.primaryEmerald)!
+                              .withOpacity(0.3),
                           blurRadius: 20,
                           spreadRadius: 5,
                         ),

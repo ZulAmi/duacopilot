@@ -46,18 +46,17 @@ class _SearchWidgetState extends ConsumerState<SearchWidget> {
           ),
           Padding(
             padding: const EdgeInsets.only(right: 8),
-            child:
-                searchState.isLoading
-                    ? const SizedBox(
-                      width: 24,
-                      height: 24,
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    )
-                    : IconButton(
-                      onPressed: _handleSearch,
-                      icon: const Icon(Icons.send),
-                      tooltip: 'Send',
-                    ),
+            child: searchState.isLoading
+                ? const SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                : IconButton(
+                    onPressed: _handleSearch,
+                    icon: const Icon(Icons.send),
+                    tooltip: 'Send',
+                  ),
           ),
         ],
       ),

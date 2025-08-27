@@ -8,6 +8,7 @@ part 'query_history.freezed.dart';
 part 'query_history.g.dart';
 
 @freezed
+
 /// QueryHistory class implementation
 class QueryHistory with _$QueryHistory {
   const factory QueryHistory({
@@ -73,30 +74,26 @@ class QueryHistoryHelper {
       timestamp: DateTime.fromMillisecondsSinceEpoch(map['timestamp'] as int),
       responseTime: map['response_time'] as int,
       semanticHash: map['semantic_hash'] as String,
-      confidence:
-          map['confidence'] != null
-              ? (map['confidence'] as num).toDouble()
-              : null,
+      confidence: map['confidence'] != null
+          ? (map['confidence'] as num).toDouble()
+          : null,
       sessionId: map['session_id'] as String?,
-      tags:
-          map['tags'] != null
-              ? (map['tags'] as String)
-                  .split(',')
-                  .where((t) => t.isNotEmpty)
-                  .toList()
-              : null,
+      tags: map['tags'] != null
+          ? (map['tags'] as String)
+              .split(',')
+              .where((t) => t.isNotEmpty)
+              .toList()
+          : null,
       context:
           map['context'] != null ? _decodeJson(map['context'] as String) : null,
-      metadata:
-          map['metadata'] != null
-              ? _decodeJson(map['metadata'] as String)
-              : null,
+      metadata: map['metadata'] != null
+          ? _decodeJson(map['metadata'] as String)
+          : null,
       isFavorite: (map['is_favorite'] as int) == 1,
       isFromCache: (map['is_from_cache'] as int) == 1,
-      lastAccessed:
-          map['last_accessed'] != null
-              ? DateTime.fromMillisecondsSinceEpoch(map['last_accessed'] as int)
-              : null,
+      lastAccessed: map['last_accessed'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['last_accessed'] as int)
+          : null,
       accessCount: map['access_count'] as int?,
     );
   }
@@ -168,9 +165,9 @@ class QueryHistoryHelper {
   static String generateSemanticHash(String query) {
     // Simple hash generation - in production, use semantic embeddings
     final normalized = query.toLowerCase().trim().replaceAll(
-      RegExp(r'\s+'),
-      ' ',
-    );
+          RegExp(r'\s+'),
+          ' ',
+        );
     return normalized.hashCode.toString();
   }
 

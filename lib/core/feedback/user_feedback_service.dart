@@ -207,12 +207,11 @@ class UserFeedbackService {
   }) async {
     return showDialog<bool>(
       context: context,
-      builder:
-          (context) => FeedbackDialog(
-            type: type,
-            title: title,
-            initialDescription: initialDescription,
-          ),
+      builder: (context) => FeedbackDialog(
+        type: type,
+        title: title,
+        initialDescription: initialDescription,
+      ),
     );
   }
 
@@ -225,12 +224,11 @@ class UserFeedbackService {
   }) async {
     return showDialog<bool>(
       context: context,
-      builder:
-          (context) => RatingDialog(
-            title: title ?? 'Rate DuaCopilot',
-            description: description ?? 'How would you rate your experience?',
-            onRatingComplete: onRatingComplete,
-          ),
+      builder: (context) => RatingDialog(
+        title: title ?? 'Rate DuaCopilot',
+        description: description ?? 'How would you rate your experience?',
+        onRatingComplete: onRatingComplete,
+      ),
     );
   }
 
@@ -274,10 +272,9 @@ class UserFeedbackService {
       final lastPrompt = _prefs?.getInt(_lastFeedbackPromptKey);
       if (lastPrompt == null) return true;
 
-      final daysSinceLastPrompt =
-          DateTime.now()
-              .difference(DateTime.fromMillisecondsSinceEpoch(lastPrompt))
-              .inDays;
+      final daysSinceLastPrompt = DateTime.now()
+          .difference(DateTime.fromMillisecondsSinceEpoch(lastPrompt))
+          .inDays;
 
       return daysSinceLastPrompt >= 7; // Prompt once per week max
     } catch (e) {
@@ -401,7 +398,7 @@ class UserFeedbackService {
       final currentAverage = (stats['average_rating'] as num).toDouble();
       final newAverage =
           ((currentAverage * (totalFeedback - 1)) + feedback.rating) /
-          totalFeedback;
+              totalFeedback;
 
       final feedbackByType = Map<String, int>.from(
         stats['feedback_by_type'] as Map<String, dynamic>,
@@ -481,8 +478,8 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
               allowHalfRating: true,
               itemCount: 5,
               itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-              itemBuilder:
-                  (context, _) => const Icon(Icons.star, color: Colors.amber),
+              itemBuilder: (context, _) =>
+                  const Icon(Icons.star, color: Colors.amber),
               onRatingUpdate: (rating) {
                 setState(() => _rating = rating);
               },
@@ -537,14 +534,13 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
         ),
         ElevatedButton(
           onPressed: _isSubmitting ? null : _submitFeedback,
-          child:
-              _isSubmitting
-                  ? const SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  )
-                  : const Text('Submit'),
+          child: _isSubmitting
+              ? const SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                )
+              : const Text('Submit'),
         ),
       ],
     );
@@ -570,10 +566,9 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
         rating: _rating,
         title: _titleController.text.trim(),
         description: _descriptionController.text.trim(),
-        email:
-            _emailController.text.trim().isNotEmpty
-                ? _emailController.text.trim()
-                : null,
+        email: _emailController.text.trim().isNotEmpty
+            ? _emailController.text.trim()
+            : null,
       );
 
       if (mounted) {
@@ -677,8 +672,8 @@ class _RatingDialogState extends State<RatingDialog> {
             itemCount: 5,
             itemSize: 40,
             itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-            itemBuilder:
-                (context, _) => const Icon(Icons.star, color: Colors.amber),
+            itemBuilder: (context, _) =>
+                const Icon(Icons.star, color: Colors.amber),
             onRatingUpdate: (rating) {
               setState(() => _rating = rating);
             },
@@ -692,14 +687,13 @@ class _RatingDialogState extends State<RatingDialog> {
         ),
         ElevatedButton(
           onPressed: _isSubmitting || _rating == 0 ? null : _submitRating,
-          child:
-              _isSubmitting
-                  ? const SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  )
-                  : const Text('Submit'),
+          child: _isSubmitting
+              ? const SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                )
+              : const Text('Submit'),
         ),
       ],
     );

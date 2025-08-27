@@ -28,17 +28,17 @@ class DuaEmbedding extends Equatable {
 
   @override
   List<Object?> get props => [
-    id,
-    query,
-    duaText,
-    embedding,
-    language,
-    metadata,
-    createdAt,
-    popularity,
-    keywords,
-    category,
-  ];
+        id,
+        query,
+        duaText,
+        embedding,
+        language,
+        metadata,
+        createdAt,
+        popularity,
+        keywords,
+        category,
+      ];
 
   DuaEmbedding copyWith({
     String? id,
@@ -123,16 +123,16 @@ class PendingQuery extends Equatable {
 
   @override
   List<Object?> get props => [
-    id,
-    query,
-    language,
-    createdAt,
-    context,
-    priority,
-    isProcessed,
-    localResponseId,
-    retryCount,
-  ];
+        id,
+        query,
+        language,
+        createdAt,
+        context,
+        priority,
+        isProcessed,
+        localResponseId,
+        retryCount,
+      ];
 
   PendingQuery copyWith({
     String? id,
@@ -217,18 +217,18 @@ class LocalSearchResult extends Equatable {
 
   @override
   List<Object?> get props => [
-    id,
-    query,
-    response,
-    confidence,
-    source,
-    isOffline,
-    metadata,
-    relatedQueries,
-    timestamp,
-    language,
-    quality,
-  ];
+        id,
+        query,
+        response,
+        confidence,
+        source,
+        isOffline,
+        metadata,
+        relatedQueries,
+        timestamp,
+        language,
+        quality,
+      ];
 
   LocalSearchResult copyWith({
     String? id,
@@ -317,15 +317,15 @@ class ResponseQuality extends Equatable {
 
   @override
   List<Object?> get props => [
-    accuracy,
-    completeness,
-    relevance,
-    hasCitations,
-    isVerified,
-    sourceType,
-    citationCount,
-    userRating,
-  ];
+        accuracy,
+        completeness,
+        relevance,
+        hasCitations,
+        isVerified,
+        sourceType,
+        citationCount,
+        userRating,
+      ];
 
   /// Calculate overall quality score
   double get overallScore {
@@ -468,11 +468,11 @@ class LocalModelInfo extends Equatable {
 
   @override
   List<Object?> get props => [
-    modelPath,
-    version,
-    lastUpdated,
-    embeddingDimension,
-    supportedLanguages,
-    metadata,
-  ];
+        modelPath,
+        version,
+        lastUpdated,
+        embeddingDimension,
+        supportedLanguages,
+        metadata,
+      ];
 }

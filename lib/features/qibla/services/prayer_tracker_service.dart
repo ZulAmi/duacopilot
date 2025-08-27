@@ -15,7 +15,8 @@ class PrayerTrackerService {
   final SecureStorageService _secureStorage;
   final FlutterLocalNotificationsPlugin _notifications;
 
-  final StreamController<PrayerTracker> _trackerController = StreamController<PrayerTracker>.broadcast();
+  final StreamController<PrayerTracker> _trackerController =
+      StreamController<PrayerTracker>.broadcast();
   final StreamController<Map<PrayerType, PrayerCompletion>> _prayersController =
       StreamController<Map<PrayerType, PrayerCompletion>>.broadcast();
 
@@ -29,7 +30,8 @@ class PrayerTrackerService {
   Stream<PrayerTracker> get trackerStream => _trackerController.stream;
 
   /// Get prayers completion stream
-  Stream<Map<PrayerType, PrayerCompletion>> get prayersStream => _prayersController.stream;
+  Stream<Map<PrayerType, PrayerCompletion>> get prayersStream =>
+      _prayersController.stream;
 
   /// Initialize prayer tracker service
   Future<bool> initialize() async {
@@ -56,14 +58,16 @@ class PrayerTrackerService {
 
   /// Initialize local notifications
   Future<void> _initializeNotifications() async {
-    const androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
+    const androidSettings =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
     const iosSettings = DarwinInitializationSettings(
       requestAlertPermission: true,
       requestBadgePermission: true,
       requestSoundPermission: true,
     );
 
-    const initSettings = InitializationSettings(android: androidSettings, iOS: iosSettings);
+    const initSettings =
+        InitializationSettings(android: androidSettings, iOS: iosSettings);
 
     await _notifications.initialize(initSettings);
   }
@@ -74,7 +78,8 @@ class PrayerTrackerService {
       final today = DateTime.now();
       final todayKey = _getTodayKey(today);
 
-      final trackerJson = await _secureStorage.getValue('${_trackerStorageKey}_$todayKey');
+      final trackerJson =
+          await _secureStorage.getValue('${_trackerStorageKey}_$todayKey');
 
       if (trackerJson != null) {
         _currentTracker = PrayerTracker.fromJson(jsonDecode(trackerJson));
@@ -161,8 +166,12 @@ class PrayerTrackerService {
   /// Calculate daily prayer statistics
   PrayerStats _calculateDailyStats(Map<PrayerType, PrayerCompletion> prayers) {
     final total = prayers.length;
-    final completed = prayers.values.where((p) => p.status == PrayerCompletionStatus.completed).length;
-    final missed = prayers.values.where((p) => p.status == PrayerCompletionStatus.missed).length;
+    final completed = prayers.values
+        .where((p) => p.status == PrayerCompletionStatus.completed)
+        .length;
+    final missed = prayers.values
+        .where((p) => p.status == PrayerCompletionStatus.missed)
+        .length;
 
     final completionRate = total > 0 ? (completed / total) * 100 : 0.0;
 
@@ -213,7 +222,8 @@ class PrayerTrackerService {
         qiblaAccuracy: qiblaAccuracy,
       );
 
-      final updatedPrayers = Map<PrayerType, PrayerCompletion>.from(_currentTracker!.prayers);
+      final updatedPrayers =
+          Map<PrayerType, PrayerCompletion>.from(_currentTracker!.prayers);
       updatedPrayers[prayerType] = updatedCompletion;
 
       _currentTracker = _currentTracker!.copyWith(
@@ -234,16 +244,19 @@ class PrayerTrackerService {
   }
 
   /// Mark prayer as missed
-  Future<void> markPrayerMissed({required PrayerType prayerType, String? reason}) async {
+  Future<void> markPrayerMissed(
+      {required PrayerType prayerType, String? reason}) async {
     if (_currentTracker == null) return;
 
     try {
       final completion = _currentTracker!.prayers[prayerType];
       if (completion == null) return;
 
-      final updatedCompletion = completion.copyWith(status: PrayerCompletionStatus.missed, notes: reason);
+      final updatedCompletion = completion.copyWith(
+          status: PrayerCompletionStatus.missed, notes: reason);
 
-      final updatedPrayers = Map<PrayerType, PrayerCompletion>.from(_currentTracker!.prayers);
+      final updatedPrayers =
+          Map<PrayerType, PrayerCompletion>.from(_currentTracker!.prayers);
       updatedPrayers[prayerType] = updatedCompletion;
 
       _currentTracker = _currentTracker!.copyWith(
@@ -261,16 +274,19 @@ class PrayerTrackerService {
   }
 
   /// Schedule prayer to make up later
-  Future<void> scheduleMakeupPrayer({required PrayerType prayerType, required DateTime makeupTime}) async {
+  Future<void> scheduleMakeupPrayer(
+      {required PrayerType prayerType, required DateTime makeupTime}) async {
     if (_currentTracker == null) return;
 
     try {
       final completion = _currentTracker!.prayers[prayerType];
       if (completion == null) return;
 
-      final updatedCompletion = completion.copyWith(status: PrayerCompletionStatus.makeup);
+      final updatedCompletion =
+          completion.copyWith(status: PrayerCompletionStatus.makeup);
 
-      final updatedPrayers = Map<PrayerType, PrayerCompletion>.from(_currentTracker!.prayers);
+      final updatedPrayers =
+          Map<PrayerType, PrayerCompletion>.from(_currentTracker!.prayers);
       updatedPrayers[prayerType] = updatedCompletion;
 
       _currentTracker = _currentTracker!.copyWith(
@@ -341,7 +357,8 @@ class PrayerTrackerService {
   /// Schedule notification for prayer reminder
   Future<void> _scheduleNotification(PrayerReminder reminder) async {
     try {
-      final scheduleTime = reminder.scheduledTime.subtract(reminder.advanceNotification ?? const Duration(minutes: 15));
+      final scheduleTime = reminder.scheduledTime.subtract(
+          reminder.advanceNotification ?? const Duration(minutes: 15));
 
       const androidDetails = AndroidNotificationDetails(
         'prayer_reminders',
@@ -360,18 +377,21 @@ class PrayerTrackerService {
         sound: 'adhan.mp3',
       );
 
-      const details = NotificationDetails(android: androidDetails, iOS: iosDetails);
+      const details =
+          NotificationDetails(android: androidDetails, iOS: iosDetails);
 
-      final message = reminder.customMessage ?? 'It\'s time for ${_getPrayerDisplayName(reminder.prayerType)} prayer';
+      final message = reminder.customMessage ??
+          'It\'s time for ${_getPrayerDisplayName(reminder.prayerType)} prayer';
 
       await _notifications.zonedSchedule(
         reminder.hashCode,
-        '🕌 Prayer Time',
+        'ðŸ•Œ Prayer Time',
         message,
         _convertToTZDateTime(scheduleTime),
         details,
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-        uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
         matchDateTimeComponents: DateTimeComponents.time,
       );
     } catch (e) {
@@ -416,13 +436,15 @@ class PrayerTrackerService {
   }
 
   /// Schedule makeup prayer reminder
-  Future<void> _scheduleMakeupReminder(PrayerType prayerType, DateTime makeupTime) async {
+  Future<void> _scheduleMakeupReminder(
+      PrayerType prayerType, DateTime makeupTime) async {
     final makeupReminder = PrayerReminder(
       id: 'makeup_${prayerType.name}_${makeupTime.millisecondsSinceEpoch}',
       prayerType: prayerType,
       scheduledTime: makeupTime,
       isEnabled: true,
-      customMessage: 'Time for ${_getPrayerDisplayName(prayerType)} makeup prayer',
+      customMessage:
+          'Time for ${_getPrayerDisplayName(prayerType)} makeup prayer',
       repeatType: ReminderRepeat.none,
     );
 
@@ -432,8 +454,11 @@ class PrayerTrackerService {
   /// Load reminders from storage
   Future<void> _loadReminders() async {
     try {
-      final remindersJson = await _secureStorage.getValue(_remindersStorageKey) ?? '[]';
-      _reminders = (jsonDecode(remindersJson) as List).map((r) => PrayerReminder.fromJson(r)).toList();
+      final remindersJson =
+          await _secureStorage.getValue(_remindersStorageKey) ?? '[]';
+      _reminders = (jsonDecode(remindersJson) as List)
+          .map((r) => PrayerReminder.fromJson(r))
+          .toList();
     } catch (e) {
       print('Failed to load reminders: $e');
       _reminders = [];
@@ -443,7 +468,8 @@ class PrayerTrackerService {
   /// Save reminders to storage
   Future<void> _saveReminders() async {
     try {
-      final remindersJson = jsonEncode(_reminders.map((r) => r.toJson()).toList());
+      final remindersJson =
+          jsonEncode(_reminders.map((r) => r.toJson()).toList());
       await _secureStorage.saveValue(_remindersStorageKey, remindersJson);
     } catch (e) {
       print('Failed to save reminders: $e');
@@ -473,7 +499,8 @@ class PrayerTrackerService {
     final now = DateTime.now();
     bool needsUpdate = false;
 
-    final updatedPrayers = Map<PrayerType, PrayerCompletion>.from(_currentTracker!.prayers);
+    final updatedPrayers =
+        Map<PrayerType, PrayerCompletion>.from(_currentTracker!.prayers);
 
     for (final entry in updatedPrayers.entries) {
       final prayer = entry.value;
@@ -482,7 +509,8 @@ class PrayerTrackerService {
       if (prayer.status != PrayerCompletionStatus.completed &&
           prayer.status != PrayerCompletionStatus.makeup &&
           now.isAfter(_getNextPrayerDeadline(prayer))) {
-        updatedPrayers[entry.key] = prayer.copyWith(status: PrayerCompletionStatus.missed);
+        updatedPrayers[entry.key] =
+            prayer.copyWith(status: PrayerCompletionStatus.missed);
         needsUpdate = true;
       }
     }
@@ -523,7 +551,8 @@ class PrayerTrackerService {
     try {
       final todayKey = _getTodayKey(_currentTracker!.date);
       final trackerJson = jsonEncode(_currentTracker!.toJson());
-      await _secureStorage.saveValue('${_trackerStorageKey}_$todayKey', trackerJson);
+      await _secureStorage.saveValue(
+          '${_trackerStorageKey}_$todayKey', trackerJson);
     } catch (e) {
       print('Failed to save tracker: $e');
     }

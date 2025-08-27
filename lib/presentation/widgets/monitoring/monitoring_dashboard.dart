@@ -62,25 +62,24 @@ class _MonitoringDashboardState extends ConsumerState<MonitoringDashboard> {
               });
               _loadAnalytics();
             },
-            itemBuilder:
-                (context) => [
-                  const PopupMenuItem(
-                    value: Duration(hours: 1),
-                    child: Text('Last Hour'),
-                  ),
-                  const PopupMenuItem(
-                    value: Duration(hours: 6),
-                    child: Text('Last 6 Hours'),
-                  ),
-                  const PopupMenuItem(
-                    value: Duration(hours: 24),
-                    child: Text('Last 24 Hours'),
-                  ),
-                  const PopupMenuItem(
-                    value: Duration(days: 7),
-                    child: Text('Last Week'),
-                  ),
-                ],
+            itemBuilder: (context) => [
+              const PopupMenuItem(
+                value: Duration(hours: 1),
+                child: Text('Last Hour'),
+              ),
+              const PopupMenuItem(
+                value: Duration(hours: 6),
+                child: Text('Last 6 Hours'),
+              ),
+              const PopupMenuItem(
+                value: Duration(hours: 24),
+                child: Text('Last 24 Hours'),
+              ),
+              const PopupMenuItem(
+                value: Duration(days: 7),
+                child: Text('Last Week'),
+              ),
+            ],
           ),
           IconButton(
             icon: const Icon(Icons.refresh),
@@ -217,9 +216,9 @@ class _MonitoringDashboardState extends ConsumerState<MonitoringDashboard> {
             Text(
               value,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: color,
-              ),
+                    fontWeight: FontWeight.bold,
+                    color: color,
+                  ),
             ),
             const SizedBox(height: 4),
             Text(
@@ -252,56 +251,53 @@ class _MonitoringDashboardState extends ConsumerState<MonitoringDashboard> {
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
-              children:
-                  queryTypes.entries.map((entry) {
-                    final type = entry.key;
-                    final stats = entry.value;
+              children: queryTypes.entries.map((entry) {
+                final type = entry.key;
+                final stats = entry.value;
 
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 3,
-                            child: Text(
-                              type.replaceAll('_', ' ').toUpperCase(),
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: Text(
+                          type.replaceAll('_', ' ').toUpperCase(),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
                           ),
-                          Expanded(child: Text('${stats.count}')),
-                          Expanded(
-                            child: Text(
-                              '${(stats.successRate * 100).toStringAsFixed(1)}%',
-                              style: TextStyle(
-                                color:
-                                    stats.successRate > 0.8
-                                        ? Colors.green
-                                        : Colors.orange,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Text(
-                              '${stats.avgTimeMs.toStringAsFixed(0)}ms',
-                            ),
-                          ),
-                          Expanded(
-                            child: Text(
-                              stats.avgConfidence.toStringAsFixed(2),
-                              style: TextStyle(
-                                color:
-                                    stats.avgConfidence > 0.8
-                                        ? Colors.green
-                                        : Colors.orange,
-                              ),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                    );
-                  }).toList(),
+                      Expanded(child: Text('${stats.count}')),
+                      Expanded(
+                        child: Text(
+                          '${(stats.successRate * 100).toStringAsFixed(1)}%',
+                          style: TextStyle(
+                            color: stats.successRate > 0.8
+                                ? Colors.green
+                                : Colors.orange,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          '${stats.avgTimeMs.toStringAsFixed(0)}ms',
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          stats.avgConfidence.toStringAsFixed(2),
+                          style: TextStyle(
+                            color: stats.avgConfidence > 0.8
+                                ? Colors.green
+                                : Colors.orange,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }).toList(),
             ),
           ),
         ),
@@ -328,25 +324,24 @@ class _MonitoringDashboardState extends ConsumerState<MonitoringDashboard> {
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
-              children:
-                  topics.take(10).map((topic) {
-                    return ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: Theme.of(context).primaryColor,
-                        child: Text(
-                          topic.count.toString(),
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                      ),
-                      title: Text(
-                        topic.topic.replaceAll('_', ' ').toUpperCase(),
-                      ),
-                      trailing: Icon(
-                        Icons.trending_up,
-                        color: Colors.green[600],
-                      ),
-                    );
-                  }).toList(),
+              children: topics.take(10).map((topic) {
+                return ListTile(
+                  leading: CircleAvatar(
+                    backgroundColor: Theme.of(context).primaryColor,
+                    child: Text(
+                      topic.count.toString(),
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  title: Text(
+                    topic.topic.replaceAll('_', ' ').toUpperCase(),
+                  ),
+                  trailing: Icon(
+                    Icons.trending_up,
+                    color: Colors.green[600],
+                  ),
+                );
+              }).toList(),
             ),
           ),
         ),
@@ -390,7 +385,7 @@ class _MonitoringDashboardState extends ConsumerState<MonitoringDashboard> {
                       label: Text(region.count.toString()),
                       backgroundColor: Theme.of(
                         context,
-                      ).primaryColor.withValues(alpha: 0.2),
+                      ).primaryColor.withOpacity(0.2),
                     ),
                   );
                 }),
@@ -421,20 +416,19 @@ class _MonitoringDashboardState extends ConsumerState<MonitoringDashboard> {
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
-              children:
-                  abTests.map((test) {
-                    return ListTile(
-                      leading: const Icon(Icons.science),
-                      title: Text(
-                        test.experiment.replaceAll('_', ' ').toUpperCase(),
-                      ),
-                      subtitle: Text('Variant: ${test.variant}'),
-                      trailing: Text(
-                        'Since ${test.assignedAt.day}/${test.assignedAt.month}',
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                    );
-                  }).toList(),
+              children: abTests.map((test) {
+                return ListTile(
+                  leading: const Icon(Icons.science),
+                  title: Text(
+                    test.experiment.replaceAll('_', ' ').toUpperCase(),
+                  ),
+                  subtitle: Text('Variant: ${test.variant}'),
+                  trailing: Text(
+                    'Since ${test.assignedAt.day}/${test.assignedAt.month}',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                );
+              }).toList(),
             ),
           ),
         ),
@@ -446,13 +440,13 @@ class _MonitoringDashboardState extends ConsumerState<MonitoringDashboard> {
 /// Provider for monitoring dashboard data
 final monitoringDashboardProvider =
     FutureProvider.family<RagAnalyticsSummary, Duration>((
-      ref,
-      timeWindow,
-    ) async {
-      return await MonitoringIntegration.getRagAnalyticsSummary(
-        timeWindow: timeWindow,
-      );
-    });
+  ref,
+  timeWindow,
+) async {
+  return await MonitoringIntegration.getRagAnalyticsSummary(
+    timeWindow: timeWindow,
+  );
+});
 
 /// Simple monitoring widget for embedding in other screens
 class QuickMonitoringWidget extends ConsumerWidget {
@@ -493,40 +487,38 @@ class QuickMonitoringWidget extends ConsumerWidget {
             ),
             const SizedBox(height: 12),
             analyticsAsync.when(
-              data:
-                  (summary) => Column(
+              data: (summary) => Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Queries: ${summary.overview.totalQueries}'),
-                          Text(
-                            'Success: ${(summary.overview.successRate * 100).toStringAsFixed(1)}%',
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 4),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Rating: ${summary.overview.avgUserRating.toStringAsFixed(1)}/5',
-                          ),
-                          Text(
-                            'Feedback: ${summary.overview.totalSatisfactionResponses}',
-                          ),
-                        ],
+                      Text('Queries: ${summary.overview.totalQueries}'),
+                      Text(
+                        'Success: ${(summary.overview.successRate * 100).toStringAsFixed(1)}%',
                       ),
                     ],
                   ),
-              loading: () => const LinearProgressIndicator(),
-              error:
-                  (error, _) => Text(
-                    'Error loading stats',
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.error,
-                    ),
+                  const SizedBox(height: 4),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Rating: ${summary.overview.avgUserRating.toStringAsFixed(1)}/5',
+                      ),
+                      Text(
+                        'Feedback: ${summary.overview.totalSatisfactionResponses}',
+                      ),
+                    ],
                   ),
+                ],
+              ),
+              loading: () => const LinearProgressIndicator(),
+              error: (error, _) => Text(
+                'Error loading stats',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.error,
+                ),
+              ),
             ),
           ],
         ),

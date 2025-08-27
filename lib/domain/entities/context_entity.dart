@@ -4,6 +4,7 @@ part 'context_entity.freezed.dart';
 part 'context_entity.g.dart';
 
 @freezed
+
 /// UserContext class implementation
 class UserContext with _$UserContext {
   const factory UserContext({
@@ -21,6 +22,7 @@ class UserContext with _$UserContext {
 }
 
 @freezed
+
 /// LocationContext class implementation
 class LocationContext with _$LocationContext {
   const factory LocationContext({
@@ -40,6 +42,7 @@ class LocationContext with _$LocationContext {
 }
 
 @freezed
+
 /// TimeContext class implementation
 class TimeContext with _$TimeContext {
   const factory TimeContext({
@@ -57,6 +60,7 @@ class TimeContext with _$TimeContext {
 }
 
 @freezed
+
 /// IslamicDate class implementation
 class IslamicDate with _$IslamicDate {
   const factory IslamicDate({
@@ -73,6 +77,7 @@ class IslamicDate with _$IslamicDate {
 }
 
 @freezed
+
 /// PrayerTimes class implementation
 class PrayerTimes with _$PrayerTimes {
   const factory PrayerTimes({
@@ -91,6 +96,7 @@ class PrayerTimes with _$PrayerTimes {
 }
 
 @freezed
+
 /// NextPrayer class implementation
 class NextPrayer with _$NextPrayer {
   const factory NextPrayer({
@@ -104,6 +110,7 @@ class NextPrayer with _$NextPrayer {
 }
 
 @freezed
+
 /// UserPreferences class implementation
 class UserPreferences with _$UserPreferences {
   const factory UserPreferences({
@@ -122,6 +129,7 @@ class UserPreferences with _$UserPreferences {
 }
 
 @freezed
+
 /// NotificationSettings class implementation
 class NotificationSettings with _$NotificationSettings {
   const factory NotificationSettings({
@@ -139,6 +147,7 @@ class NotificationSettings with _$NotificationSettings {
 }
 
 @freezed
+
 /// AudioSettings class implementation
 class AudioSettings with _$AudioSettings {
   const factory AudioSettings({
@@ -154,6 +163,7 @@ class AudioSettings with _$AudioSettings {
 }
 
 @freezed
+
 /// HabitStats class implementation
 class HabitStats with _$HabitStats {
   const factory HabitStats({
@@ -172,6 +182,7 @@ class HabitStats with _$HabitStats {
 }
 
 @freezed
+
 /// DailyActivity class implementation
 class DailyActivity with _$DailyActivity {
   const factory DailyActivity({
@@ -187,6 +198,7 @@ class DailyActivity with _$DailyActivity {
 }
 
 @freezed
+
 /// SmartSuggestion class implementation
 class SmartSuggestion with _$SmartSuggestion {
   const factory SmartSuggestion({
@@ -204,6 +216,7 @@ class SmartSuggestion with _$SmartSuggestion {
 }
 
 @freezed
+
 /// NotificationSchedule class implementation
 class NotificationSchedule with _$NotificationSchedule {
   const factory NotificationSchedule({

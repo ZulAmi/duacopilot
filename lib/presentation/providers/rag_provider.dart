@@ -107,10 +107,9 @@ class RagApiNotifier extends AsyncNotifier<RagStateData> {
       final response = RagResponse(
         id: searchResponse.queryId,
         query: enhancedQuery.originalQuery, // Keep original for user display
-        response:
-            searchResponse.recommendations.isNotEmpty
-                ? searchResponse.recommendations.first.dua.translation
-                : 'No results found',
+        response: searchResponse.recommendations.isNotEmpty
+            ? searchResponse.recommendations.first.dua.translation
+            : 'No results found',
         timestamp: DateTime.now(),
         responseTime: 0,
         confidence: (searchResponse.confidence + enhancedQuery.confidence) / 2,
@@ -356,9 +355,8 @@ class RagCacheNotifier extends StateNotifier<Map<String, CachedRagEntry>> {
   Future<void> _evictOldest() async {
     if (state.isEmpty) return;
 
-    final sortedEntries =
-        state.entries.toList()
-          ..sort((a, b) => a.value.timestamp.compareTo(b.value.timestamp));
+    final sortedEntries = state.entries.toList()
+      ..sort((a, b) => a.value.timestamp.compareTo(b.value.timestamp));
 
     final entriesToRemove = (state.length * 0.2).ceil(); // Remove 20%
     final newState = <String, CachedRagEntry>{};
@@ -406,13 +404,13 @@ class RagCacheNotifier extends StateNotifier<Map<String, CachedRagEntry>> {
 /// Provider for RAG response caching
 final ragCacheProvider =
     StateNotifierProvider<RagCacheNotifier, Map<String, CachedRagEntry>>((ref) {
-      const config = RagCacheConfig(
-        maxEntries: 100,
-        maxAge: Duration(hours: 1),
-        enablePersistence: true,
-      );
-      return RagCacheNotifier(config);
-    });
+  const config = RagCacheConfig(
+    maxEntries: 100,
+    maxAge: Duration(hours: 1),
+    enablePersistence: true,
+  );
+  return RagCacheNotifier(config);
+});
 
 /// StateNotifier for complex RAG response processing and filtering
 class RagFilterNotifier extends StateNotifier<RagFilterConfig> {
@@ -546,8 +544,8 @@ class RagFilterNotifier extends StateNotifier<RagFilterConfig> {
 /// Provider for RAG response filtering
 final ragFilterProvider =
     StateNotifierProvider<RagFilterNotifier, RagFilterConfig>((ref) {
-      return RagFilterNotifier();
-    });
+  return RagFilterNotifier();
+});
 
 /// StreamProvider for real-time updates from WebSocket connections
 class RagWebSocketNotifier extends StateNotifier<WebSocketState> {
@@ -663,8 +661,8 @@ class RagWebSocketNotifier extends StateNotifier<WebSocketState> {
 /// Provider for WebSocket state management
 final ragWebSocketProvider =
     StateNotifierProvider<RagWebSocketNotifier, WebSocketState>((ref) {
-      return RagWebSocketNotifier();
-    });
+  return RagWebSocketNotifier();
+});
 
 /// Stream provider for real-time RAG updates
 final ragUpdatesStreamProvider = StreamProvider<RagResponse>((ref) {

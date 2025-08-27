@@ -152,7 +152,7 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen>
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [const Color(0xFF667eea).withValues(alpha: 0.1), Colors.white],
+          colors: [const Color(0xFF667eea).withOpacity(0.1), Colors.white],
         ),
       ),
       child: TabBarView(
@@ -291,10 +291,9 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen>
       child: ListTile(
         leading: CircleAvatar(
           backgroundColor: const Color(0xFF667eea),
-          child:
-              isCurrentlyPlaying
-                  ? const Icon(Icons.pause, color: Colors.white)
-                  : const Icon(Icons.play_arrow, color: Colors.white),
+          child: isCurrentlyPlaying
+              ? const Icon(Icons.pause, color: Colors.white)
+              : const Icon(Icons.play_arrow, color: Colors.white),
         ),
         title: Text(recitation.title),
         subtitle: Column(
@@ -429,19 +428,18 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen>
               // More options
               PopupMenuButton<String>(
                 onSelected: (value) => _handlePlaylistAction(value, playlist),
-                itemBuilder:
-                    (context) => [
-                      const PopupMenuItem(
-                        value: 'play',
-                        child: Text('Play All'),
-                      ),
-                      const PopupMenuItem(value: 'edit', child: Text('Edit')),
-                      const PopupMenuItem(value: 'share', child: Text('Share')),
-                      const PopupMenuItem(
-                        value: 'delete',
-                        child: Text('Delete'),
-                      ),
-                    ],
+                itemBuilder: (context) => [
+                  const PopupMenuItem(
+                    value: 'play',
+                    child: Text('Play All'),
+                  ),
+                  const PopupMenuItem(value: 'edit', child: Text('Edit')),
+                  const PopupMenuItem(value: 'share', child: Text('Share')),
+                  const PopupMenuItem(
+                    value: 'delete',
+                    child: Text('Delete'),
+                  ),
+                ],
               ),
             ],
           ),
@@ -480,7 +478,7 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen>
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
+            color: Colors.black.withOpacity(0.1),
             blurRadius: 10,
             offset: const Offset(0, -5),
           ),
@@ -490,11 +488,10 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen>
         children: [
           // Progress bar
           LinearProgressIndicator(
-            value:
-                _totalDuration.inMilliseconds > 0
-                    ? _currentPosition.inMilliseconds /
-                        _totalDuration.inMilliseconds
-                    : 0.0,
+            value: _totalDuration.inMilliseconds > 0
+                ? _currentPosition.inMilliseconds /
+                    _totalDuration.inMilliseconds
+                : 0.0,
             backgroundColor: Colors.grey[300],
             valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF667eea)),
           ),
@@ -883,27 +880,26 @@ class _PremiumAudioScreenState extends ConsumerState<PremiumAudioScreen>
   void _showSubscriptionRequired() {
     showDialog(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('Premium Subscription Required'),
-            content: const Text(
-              'Premium Audio features require an active subscription. '
-              'Upgrade now to access world-class Quranic recitations from famous Qaris.',
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Later'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  // Navigate to subscription screen
-                },
-                child: const Text('Upgrade Now'),
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        title: const Text('Premium Subscription Required'),
+        content: const Text(
+          'Premium Audio features require an active subscription. '
+          'Upgrade now to access world-class Quranic recitations from famous Qaris.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Later'),
           ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              // Navigate to subscription screen
+            },
+            child: const Text('Upgrade Now'),
+          ),
+        ],
+      ),
     );
   }
 

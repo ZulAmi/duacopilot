@@ -18,10 +18,9 @@ class RagSearchResponse {
 
   factory RagSearchResponse.fromJson(Map<String, dynamic> json) {
     return RagSearchResponse(
-      recommendations:
-          (json['recommendations'] as List)
-              .map((item) => DuaRecommendation.fromJson(item))
-              .toList(),
+      recommendations: (json['recommendations'] as List)
+          .map((item) => DuaRecommendation.fromJson(item))
+          .toList(),
       confidence: (json['confidence'] as num).toDouble(),
       reasoning: json['reasoning'] as String,
       queryId: json['query_id'] as String,
@@ -30,12 +29,12 @@ class RagSearchResponse {
   }
 
   Map<String, dynamic> toJson() => {
-    'recommendations': recommendations.map((r) => r.toJson()).toList(),
-    'confidence': confidence,
-    'reasoning': reasoning,
-    'query_id': queryId,
-    if (metadata != null) 'metadata': metadata,
-  };
+        'recommendations': recommendations.map((r) => r.toJson()).toList(),
+        'confidence': confidence,
+        'reasoning': reasoning,
+        'query_id': queryId,
+        if (metadata != null) 'metadata': metadata,
+      };
 }
 
 /// Individual Du'a recommendation with context
@@ -66,12 +65,12 @@ class DuaRecommendation {
   }
 
   Map<String, dynamic> toJson() => {
-    'dua': dua.toJson(),
-    'relevance_score': relevanceScore,
-    'match_reason': matchReason,
-    'highlighted_keywords': highlightedKeywords,
-    if (context != null) 'context': context,
-  };
+        'dua': dua.toJson(),
+        'relevance_score': relevanceScore,
+        'match_reason': matchReason,
+        'highlighted_keywords': highlightedKeywords,
+        if (context != null) 'context': context,
+      };
 }
 
 /// Detailed Du'a response with audio and metadata
@@ -98,32 +97,29 @@ class DetailedDuaResponse {
     return DetailedDuaResponse(
       dua: DuaEntity.fromJson(json['dua']),
       audio: json['audio'] != null ? AudioData.fromJson(json['audio']) : null,
-      translations:
-          (json['translations'] as List)
-              .map((item) => Translation.fromJson(item))
-              .toList(),
+      translations: (json['translations'] as List)
+          .map((item) => Translation.fromJson(item))
+          .toList(),
       tags: (json['tags'] as List).cast<String>(),
-      usageStats:
-          json['usage_stats'] != null
-              ? UsageStats.fromJson(json['usage_stats'])
-              : null,
-      relatedDuas:
-          (json['related_duas'] as List)
-              .map((item) => RelatedDua.fromJson(item))
-              .toList(),
+      usageStats: json['usage_stats'] != null
+          ? UsageStats.fromJson(json['usage_stats'])
+          : null,
+      relatedDuas: (json['related_duas'] as List)
+          .map((item) => RelatedDua.fromJson(item))
+          .toList(),
       metadata: json['metadata'] as Map<String, dynamic>?,
     );
   }
 
   Map<String, dynamic> toJson() => {
-    'dua': dua.toJson(),
-    if (audio != null) 'audio': audio!.toJson(),
-    'translations': translations.map((t) => t.toJson()).toList(),
-    'tags': tags,
-    if (usageStats != null) 'usage_stats': usageStats!.toJson(),
-    'related_duas': relatedDuas.map((r) => r.toJson()).toList(),
-    if (metadata != null) 'metadata': metadata,
-  };
+        'dua': dua.toJson(),
+        if (audio != null) 'audio': audio!.toJson(),
+        'translations': translations.map((t) => t.toJson()).toList(),
+        'tags': tags,
+        if (usageStats != null) 'usage_stats': usageStats!.toJson(),
+        'related_duas': relatedDuas.map((r) => r.toJson()).toList(),
+        if (metadata != null) 'metadata': metadata,
+      };
 }
 
 /// Audio data for Du'a recitations
@@ -159,14 +155,14 @@ class AudioData {
   }
 
   Map<String, dynamic> toJson() => {
-    'url': url,
-    'format': format,
-    'duration_ms': durationMs,
-    'quality': quality,
-    'reciter': reciter,
-    'size_bytes': sizeBytes,
-    if (downloadUrl != null) 'download_url': downloadUrl,
-  };
+        'url': url,
+        'format': format,
+        'duration_ms': durationMs,
+        'quality': quality,
+        'reciter': reciter,
+        'size_bytes': sizeBytes,
+        if (downloadUrl != null) 'download_url': downloadUrl,
+      };
 }
 
 /// Translation data for Du'as
@@ -196,12 +192,12 @@ class Translation {
   }
 
   Map<String, dynamic> toJson() => {
-    'language': language,
-    'text': text,
-    if (transliteration != null) 'transliteration': transliteration,
-    'translator': translator,
-    if (confidence != null) 'confidence': confidence,
-  };
+        'language': language,
+        'text': text,
+        if (transliteration != null) 'transliteration': transliteration,
+        'translator': translator,
+        if (confidence != null) 'confidence': confidence,
+      };
 }
 
 /// Usage statistics for Du'as
@@ -231,12 +227,12 @@ class UsageStats {
   }
 
   Map<String, dynamic> toJson() => {
-    'total_views': totalViews,
-    'total_favorites': totalFavorites,
-    'weekly_views': weeklyViews,
-    'average_rating': averageRating,
-    'rating_count': ratingCount,
-  };
+        'total_views': totalViews,
+        'total_favorites': totalFavorites,
+        'weekly_views': weeklyViews,
+        'average_rating': averageRating,
+        'rating_count': ratingCount,
+      };
 }
 
 /// Related Du'a information
@@ -263,11 +259,11 @@ class RelatedDua {
   }
 
   Map<String, dynamic> toJson() => {
-    'dua_id': duaId,
-    'title': title,
-    'relevance_score': relevanceScore,
-    'relation': relation,
-  };
+        'dua_id': duaId,
+        'title': title,
+        'relevance_score': relevanceScore,
+        'relation': relation,
+      };
 }
 
 /// Feedback submission response
@@ -294,11 +290,11 @@ class FeedbackResponse {
   }
 
   Map<String, dynamic> toJson() => {
-    'success': success,
-    'message': message,
-    'feedback_id': feedbackId,
-    'timestamp': timestamp.toIso8601String(),
-  };
+        'success': success,
+        'message': message,
+        'feedback_id': feedbackId,
+        'timestamp': timestamp.toIso8601String(),
+      };
 }
 
 /// Popular Du'as response with pagination
@@ -317,10 +313,9 @@ class PopularDuasResponse {
 
   factory PopularDuasResponse.fromJson(Map<String, dynamic> json) {
     return PopularDuasResponse(
-      duas:
-          (json['duas'] as List)
-              .map((item) => PopularDuaItem.fromJson(item))
-              .toList(),
+      duas: (json['duas'] as List)
+          .map((item) => PopularDuaItem.fromJson(item))
+          .toList(),
       pagination: PaginationInfo.fromJson(json['pagination']),
       timeframe: json['timeframe'] as String,
       metadata: json['metadata'] as Map<String, dynamic>?,
@@ -328,11 +323,11 @@ class PopularDuasResponse {
   }
 
   Map<String, dynamic> toJson() => {
-    'duas': duas.map((d) => d.toJson()).toList(),
-    'pagination': pagination.toJson(),
-    'timeframe': timeframe,
-    if (metadata != null) 'metadata': metadata,
-  };
+        'duas': duas.map((d) => d.toJson()).toList(),
+        'pagination': pagination.toJson(),
+        'timeframe': timeframe,
+        if (metadata != null) 'metadata': metadata,
+      };
 }
 
 /// Popular Du'a item with trend data
@@ -359,11 +354,11 @@ class PopularDuaItem {
   }
 
   Map<String, dynamic> toJson() => {
-    'dua': dua.toJson(),
-    'rank': rank,
-    'trend_data': trendData.toJson(),
-    'category': category,
-  };
+        'dua': dua.toJson(),
+        'rank': rank,
+        'trend_data': trendData.toJson(),
+        'category': category,
+      };
 }
 
 /// Trend data for popular Du'as
@@ -390,11 +385,11 @@ class TrendData {
   }
 
   Map<String, dynamic> toJson() => {
-    'views': views,
-    'growth_rate': growthRate,
-    'trend_direction': trendDirection,
-    if (dailyViews != null) 'daily_views': dailyViews,
-  };
+        'views': views,
+        'growth_rate': growthRate,
+        'trend_direction': trendDirection,
+        if (dailyViews != null) 'daily_views': dailyViews,
+      };
 }
 
 /// Pagination information
@@ -427,13 +422,13 @@ class PaginationInfo {
   }
 
   Map<String, dynamic> toJson() => {
-    'current_page': currentPage,
-    'total_pages': totalPages,
-    'total_items': totalItems,
-    'items_per_page': itemsPerPage,
-    'has_next': hasNext,
-    'has_previous': hasPrevious,
-  };
+        'current_page': currentPage,
+        'total_pages': totalPages,
+        'total_items': totalItems,
+        'items_per_page': itemsPerPage,
+        'has_next': hasNext,
+        'has_previous': hasPrevious,
+      };
 }
 
 /// Personalization update response
@@ -460,11 +455,11 @@ class PersonalizationResponse {
   }
 
   Map<String, dynamic> toJson() => {
-    'success': success,
-    'message': message,
-    'profile': profile.toJson(),
-    'updated_at': updatedAt.toIso8601String(),
-  };
+        'success': success,
+        'message': message,
+        'profile': profile.toJson(),
+        'updated_at': updatedAt.toIso8601String(),
+      };
 }
 
 /// User personalization profile
@@ -496,12 +491,12 @@ class PersonalizationProfile {
   }
 
   Map<String, dynamic> toJson() => {
-    'preferred_categories': preferredCategories,
-    'preferred_languages': preferredLanguages,
-    'topic_preferences': topicPreferences,
-    if (demographics != null) 'demographics': demographics,
-    if (customPreferences != null) 'custom_preferences': customPreferences,
-  };
+        'preferred_categories': preferredCategories,
+        'preferred_languages': preferredLanguages,
+        'topic_preferences': topicPreferences,
+        if (demographics != null) 'demographics': demographics,
+        if (customPreferences != null) 'custom_preferences': customPreferences,
+      };
 }
 
 /// Offline cache response
@@ -520,25 +515,23 @@ class OfflineCacheResponse {
 
   factory OfflineCacheResponse.fromJson(Map<String, dynamic> json) {
     return OfflineCacheResponse(
-      duas:
-          (json['duas'] as List)
-              .map((item) => OfflineDuaItem.fromJson(item))
-              .toList(),
-      audioFiles:
-          (json['audio_files'] as List)
-              .map((item) => AudioCacheItem.fromJson(item))
-              .toList(),
+      duas: (json['duas'] as List)
+          .map((item) => OfflineDuaItem.fromJson(item))
+          .toList(),
+      audioFiles: (json['audio_files'] as List)
+          .map((item) => AudioCacheItem.fromJson(item))
+          .toList(),
       syncTimestamp: json['sync_timestamp'] as String,
       metadata: CacheMetadata.fromJson(json['metadata']),
     );
   }
 
   Map<String, dynamic> toJson() => {
-    'duas': duas.map((d) => d.toJson()).toList(),
-    'audio_files': audioFiles.map((a) => a.toJson()).toList(),
-    'sync_timestamp': syncTimestamp,
-    'metadata': metadata.toJson(),
-  };
+        'duas': duas.map((d) => d.toJson()).toList(),
+        'audio_files': audioFiles.map((a) => a.toJson()).toList(),
+        'sync_timestamp': syncTimestamp,
+        'metadata': metadata.toJson(),
+      };
 }
 
 /// Offline Du'a item
@@ -565,11 +558,11 @@ class OfflineDuaItem {
   }
 
   Map<String, dynamic> toJson() => {
-    'dua': dua.toJson(),
-    'priority': priority,
-    'offline_languages': offlineLanguages,
-    'has_audio': hasAudio,
-  };
+        'dua': dua.toJson(),
+        'priority': priority,
+        'offline_languages': offlineLanguages,
+        'has_audio': hasAudio,
+      };
 }
 
 /// Audio cache item for offline use
@@ -602,13 +595,13 @@ class AudioCacheItem {
   }
 
   Map<String, dynamic> toJson() => {
-    'dua_id': duaId,
-    'url': url,
-    'download_url': downloadUrl,
-    'size_bytes': sizeBytes,
-    'quality': quality,
-    'format': format,
-  };
+        'dua_id': duaId,
+        'url': url,
+        'download_url': downloadUrl,
+        'size_bytes': sizeBytes,
+        'quality': quality,
+        'format': format,
+      };
 }
 
 /// Cache metadata
@@ -635,9 +628,9 @@ class CacheMetadata {
   }
 
   Map<String, dynamic> toJson() => {
-    'total_size': totalSize,
-    'item_count': itemCount,
-    'expiry': expiry.toIso8601String(),
-    'version': version,
-  };
+        'total_size': totalSize,
+        'item_count': itemCount,
+        'expiry': expiry.toIso8601String(),
+        'version': version,
+      };
 }

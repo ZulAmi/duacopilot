@@ -20,7 +20,7 @@ class PerformanceMonitor {
   /// Initialize performance monitoring
   Future<void> initialize() async {
     if (kDebugMode) {
-      AppLogger.debug('🔍 Initializing Performance Monitor');
+      AppLogger.debug('ðŸ” Initializing Performance Monitor');
     }
 
     // Start memory monitoring
@@ -125,17 +125,16 @@ class PerformanceMonitor {
 
     final averageMs = totalDuration / recentMetrics.length;
 
-    final slowOperations =
-        recentMetrics
-            .where((m) => m.duration.inMilliseconds > 1000)
-            .map(
-              (m) => SlowOperation(
-                name: m.name,
-                duration: m.duration,
-                timestamp: m.timestamp,
-              ),
-            )
-            .toList();
+    final slowOperations = recentMetrics
+        .where((m) => m.duration.inMilliseconds > 1000)
+        .map(
+          (m) => SlowOperation(
+            name: m.name,
+            duration: m.duration,
+            timestamp: m.timestamp,
+          ),
+        )
+        .toList();
 
     return PerformanceStats(
       averageResponseTime: Duration(milliseconds: averageMs.round()),
@@ -168,7 +167,7 @@ class PerformanceMonitor {
 
     if (kDebugMode && metric.duration.inMilliseconds > 1000) {
       AppLogger.debug(
-        '⚠️ Slow operation detected: ${metric.name} took ${metric.duration.inMilliseconds}ms',
+        'âš ï¸ Slow operation detected: ${metric.name} took ${metric.duration.inMilliseconds}ms',
       );
     }
 
@@ -192,7 +191,7 @@ class PerformanceMonitor {
       // 200MB threshold
       if (kDebugMode) {
         AppLogger.debug(
-          '⚠️ High memory usage detected: ${(memoryUsage / 1024 / 1024).toStringAsFixed(2)}MB',
+          'âš ï¸ High memory usage detected: ${(memoryUsage / 1024 / 1024).toStringAsFixed(2)}MB',
         );
       }
 
@@ -235,12 +234,12 @@ abstract class PerformanceMetric {
   });
 
   Map<String, dynamic> toJson() => {
-    'name': name,
-    'duration_ms': duration.inMilliseconds,
-    'timestamp': timestamp.toIso8601String(),
-    'metadata': metadata,
-    'type': runtimeType.toString(),
-  };
+        'name': name,
+        'duration_ms': duration.inMilliseconds,
+        'timestamp': timestamp.toIso8601String(),
+        'metadata': metadata,
+        'type': runtimeType.toString(),
+      };
 }
 
 /// Concrete implementation for general operation metrics
@@ -254,9 +253,9 @@ class OperationMetric extends PerformanceMetric {
 
   @override
   Map<String, dynamic> toJson() => {
-    ...super.toJson(),
-    'operation_type': 'general',
-  };
+        ...super.toJson(),
+        'operation_type': 'general',
+      };
 }
 
 /// Network request performance metric
@@ -275,11 +274,11 @@ class NetworkMetric extends PerformanceMetric {
 
   @override
   Map<String, dynamic> toJson() => {
-    ...super.toJson(),
-    'url': url,
-    'status_code': statusCode,
-    'response_size': responseSize,
-  };
+        ...super.toJson(),
+        'url': url,
+        'status_code': statusCode,
+        'response_size': responseSize,
+      };
 }
 
 /// User interaction performance metric
@@ -294,18 +293,18 @@ class UserInteractionMetric extends PerformanceMetric {
     required this.properties,
     required super.timestamp,
   }) : super(
-         name: 'user_interaction',
-         duration: Duration.zero,
-         metadata: properties,
-       );
+          name: 'user_interaction',
+          duration: Duration.zero,
+          metadata: properties,
+        );
 
   @override
   Map<String, dynamic> toJson() => {
-    ...super.toJson(),
-    'action': action,
-    'screen': screen,
-    'properties': properties,
-  };
+        ...super.toJson(),
+        'action': action,
+        'screen': screen,
+        'properties': properties,
+      };
 }
 
 /// Performance statistics summary
@@ -323,12 +322,12 @@ class PerformanceStats {
   });
 
   Map<String, dynamic> toJson() => {
-    'average_response_time_ms': averageResponseTime.inMilliseconds,
-    'slow_operations_count': slowOperations.length,
-    'memory_usage_bytes': memoryUsage,
-    'total_operations': totalOperations,
-    'slow_operations': slowOperations.map((s) => s.toJson()).toList(),
-  };
+        'average_response_time_ms': averageResponseTime.inMilliseconds,
+        'slow_operations_count': slowOperations.length,
+        'memory_usage_bytes': memoryUsage,
+        'total_operations': totalOperations,
+        'slow_operations': slowOperations.map((s) => s.toJson()).toList(),
+      };
 }
 
 /// Slow operation details
@@ -344,8 +343,8 @@ class SlowOperation {
   });
 
   Map<String, dynamic> toJson() => {
-    'name': name,
-    'duration_ms': duration.inMilliseconds,
-    'timestamp': timestamp.toIso8601String(),
-  };
+        'name': name,
+        'duration_ms': duration.inMilliseconds,
+        'timestamp': timestamp.toIso8601String(),
+      };
 }

@@ -46,16 +46,23 @@ class QariInfo with _$QariInfo {
       country: json['country'] as String,
       description: json['description'] as String,
       profileImageUrl: json['profileImageUrl'] as String,
-      specializations: (json['specializations'] as List<dynamic>).cast<String>(),
+      specializations:
+          (json['specializations'] as List<dynamic>).cast<String>(),
       isVerified: json['isVerified'] as bool,
       bioEnglish: json['bio_en'] as String? ?? json['bioEnglish'] as String,
       bioArabic: json['bio_ar'] as String? ?? json['bioArabic'] as String,
       awards: (json['awards'] as List<dynamic>?)?.cast<String>() ?? [],
       rating: (json['rating'] as num?)?.toDouble() ?? 0.0,
       totalRecitations: json['totalRecitations'] as int? ?? 0,
-      birthDate: json['birthDate'] != null ? DateTime.parse(json['birthDate'] as String) : null,
-      createdAt: json['createdAt'] != null ? DateTime.parse(json['createdAt'] as String) : null,
-      updatedAt: json['updatedAt'] != null ? DateTime.parse(json['updatedAt'] as String) : null,
+      birthDate: json['birthDate'] != null
+          ? DateTime.parse(json['birthDate'] as String)
+          : null,
+      createdAt: json['createdAt'] != null
+          ? DateTime.parse(json['createdAt'] as String)
+          : null,
+      updatedAt: json['updatedAt'] != null
+          ? DateTime.parse(json['updatedAt'] as String)
+          : null,
     );
   }
 }
@@ -121,8 +128,12 @@ class PremiumRecitation with _$PremiumRecitation {
           ? DownloadStatus.values.byName(json['downloadStatus'] as String)
           : DownloadStatus.notDownloaded,
       downloadProgress: (json['downloadProgress'] as num?)?.toDouble() ?? 0.0,
-      createdAt: json['createdAt'] != null ? DateTime.parse(json['createdAt'] as String) : null,
-      lastPlayed: json['lastPlayed'] != null ? DateTime.parse(json['lastPlayed'] as String) : null,
+      createdAt: json['createdAt'] != null
+          ? DateTime.parse(json['createdAt'] as String)
+          : null,
+      lastPlayed: json['lastPlayed'] != null
+          ? DateTime.parse(json['lastPlayed'] as String)
+          : null,
     );
   }
 }
@@ -156,7 +167,14 @@ extension PremiumRecitationX on PremiumRecitation {
 }
 
 /// Download status for offline recitations
-enum DownloadStatus { notDownloaded, downloading, downloaded, failed, pending, paused }
+enum DownloadStatus {
+  notDownloaded,
+  downloading,
+  downloaded,
+  failed,
+  pending,
+  paused
+}
 
 /// Premium playlist for different moods/occasions
 @freezed
@@ -178,21 +196,22 @@ class PremiumPlaylist with _$PremiumPlaylist {
     DateTime? lastPlayed,
   }) = _PremiumPlaylist;
 
-  factory PremiumPlaylist.fromJson(Map<String, dynamic> json) => _$PremiumPlaylistFromJson(json);
+  factory PremiumPlaylist.fromJson(Map<String, dynamic> json) =>
+      _$PremiumPlaylistFromJson(json);
 }
 
 /// Playlist moods for personalized experience
 enum PlaylistMood {
-  general('General', '🕌'),
-  morning('Morning Prayers', '🌅'),
-  evening('Evening Duas', '🌆'),
-  night('Night Recitations', '🌙'),
-  ramadan('Ramadan Special', '🌙'),
-  stress('Stress Relief', '💆'),
-  gratitude('Gratitude & Praise', '🤲'),
-  forgiveness('Seeking Forgiveness', '🙏'),
-  healing('Healing & Recovery', '💚'),
-  travel('Travel Duas', '✈️');
+  general('General', 'ðŸ•Œ'),
+  morning('Morning Prayers', 'ðŸŒ…'),
+  evening('Evening Duas', 'ðŸŒ†'),
+  night('Night Recitations', 'ðŸŒ™'),
+  ramadan('Ramadan Special', 'ðŸŒ™'),
+  stress('Stress Relief', 'ðŸ’†'),
+  gratitude('Gratitude & Praise', 'ðŸ¤²'),
+  forgiveness('Seeking Forgiveness', 'ðŸ™'),
+  healing('Healing & Recovery', 'ðŸ’š'),
+  travel('Travel Duas', 'âœˆï¸');
 
   const PlaylistMood(this.label, this.emoji);
   final String label;
@@ -211,7 +230,8 @@ class SleepTimerConfig with _$SleepTimerConfig {
     DateTime? endTime,
   }) = _SleepTimerConfig;
 
-  factory SleepTimerConfig.fromJson(Map<String, dynamic> json) => _$SleepTimerConfigFromJson(json);
+  factory SleepTimerConfig.fromJson(Map<String, dynamic> json) =>
+      _$SleepTimerConfigFromJson(json);
 }
 
 /// Sleep timer actions
@@ -255,11 +275,18 @@ class PremiumAudioSettings with _$PremiumAudioSettings {
     DateTime? lastUpdated,
   }) = _PremiumAudioSettings;
 
-  factory PremiumAudioSettings.fromJson(Map<String, dynamic> json) => _$PremiumAudioSettingsFromJson(json);
+  factory PremiumAudioSettings.fromJson(Map<String, dynamic> json) =>
+      _$PremiumAudioSettingsFromJson(json);
 }
 
 /// Auto delete policy for storage management
-enum AutoDeletePolicy { never, after30Days, after60Days, after90Days, whenStorageFull }
+enum AutoDeletePolicy {
+  never,
+  after30Days,
+  after60Days,
+  after90Days,
+  whenStorageFull
+}
 
 /// Premium audio statistics for analytics
 @freezed
@@ -280,7 +307,8 @@ class PremiumAudioStats with _$PremiumAudioStats {
     DateTime? updatedAt,
   }) = _PremiumAudioStats;
 
-  factory PremiumAudioStats.fromJson(Map<String, dynamic> json) => _$PremiumAudioStatsFromJson(json);
+  factory PremiumAudioStats.fromJson(Map<String, dynamic> json) =>
+      _$PremiumAudioStatsFromJson(json);
 }
 
 /// Content verification for authenticity
@@ -296,5 +324,6 @@ class ContentVerification with _$ContentVerification {
     DateTime? expiresAt,
   }) = _ContentVerification;
 
-  factory ContentVerification.fromJson(Map<String, dynamic> json) => _$ContentVerificationFromJson(json);
+  factory ContentVerification.fromJson(Map<String, dynamic> json) =>
+      _$ContentVerificationFromJson(json);
 }

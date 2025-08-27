@@ -324,7 +324,7 @@ class PlatformArabicFontConfig {
   static Future<bool> testArabicFontSupport() async {
     try {
       // Test if Arabic fonts render correctly
-      final testText = 'بسم الله الرحمن الرحيم';
+      final testText = 'Ø¨Ø³Ù… Ø§Ù„Ù„Ù‡ Ø§Ù„Ø±Ø­Ù…Ù† Ø§Ù„Ø±Ø­ÙŠÙ…';
       final painter = TextPainter(
         text: TextSpan(text: testText, style: getPlatformArabicStyle()),
         textDirection: TextDirection.rtl,

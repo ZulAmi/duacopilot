@@ -23,9 +23,9 @@ class SimpleMonitoringService {
       }
 
       _initialized = true;
-      AppLogger.info('📊 Simple monitoring initialized');
+      AppLogger.info('ðŸ“Š Simple monitoring initialized');
     } catch (e) {
-      AppLogger.warning('⚠️ Simple monitoring initialization failed: $e');
+      AppLogger.warning('âš ï¸ Simple monitoring initialization failed: $e');
       // Continue without monitoring - app should not fail
     }
   }
@@ -86,8 +86,7 @@ class SimpleMonitoringService {
         exception,
         stackTrace,
         reason: context,
-        information:
-            additionalData?.entries
+        information: additionalData?.entries
                 .map((e) => '${e.key}: ${e.value}')
                 .toList() ??
             [],

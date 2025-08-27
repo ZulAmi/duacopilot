@@ -144,8 +144,7 @@ class _ArabicTextInputWidgetState extends State<ArabicTextInputWidget> {
     }
 
     // Create RTL-aware decoration
-    final decoration =
-        widget.decoration ??
+    final decoration = widget.decoration ??
         InputDecoration(
           hintText: widget.hintText,
           labelText: widget.labelText,
@@ -225,14 +224,14 @@ class _ArabicTextInputFormatter extends TextInputFormatter {
     // Handle common Arabic input corrections
     return text
         // Fix common typing mistakes
-        .replaceAll('ك', 'ك') // Replace Arabic-Indic Kaf with Arabic Kaf
-        .replaceAll('ي', 'ي') // Normalize Yeh variations
+        .replaceAll('Ùƒ', 'Ùƒ') // Replace Arabic-Indic Kaf with Arabic Kaf
+        .replaceAll('ÙŠ', 'ÙŠ') // Normalize Yeh variations
         // Add intelligent space handling for Arabic
         .replaceAllMapped(RegExp(r'([^\u0600-\u06FF\s])([^\u0600-\u06FF\s])'), (
-          match,
-        ) {
-          return '${match.group(1)} ${match.group(2)}';
-        });
+      match,
+    ) {
+      return '${match.group(1)} ${match.group(2)}';
+    });
   }
 }
 
@@ -336,17 +335,16 @@ class _ArabicSuggestionTextFieldState extends State<ArabicSuggestionTextField> {
     }
 
     // Filter suggestions based on Arabic text matching
-    _filteredSuggestions =
-        widget.suggestions
-            .where((suggestion) {
-              final normalizedSuggestion = ArabicTypography.normalizeArabicText(
-                suggestion.toLowerCase(),
-              );
-              final normalizedText = ArabicTypography.normalizeArabicText(text);
-              return normalizedSuggestion.contains(normalizedText);
-            })
-            .take(widget.maxSuggestions)
-            .toList();
+    _filteredSuggestions = widget.suggestions
+        .where((suggestion) {
+          final normalizedSuggestion = ArabicTypography.normalizeArabicText(
+            suggestion.toLowerCase(),
+          );
+          final normalizedText = ArabicTypography.normalizeArabicText(text);
+          return normalizedSuggestion.contains(normalizedText);
+        })
+        .take(widget.maxSuggestions)
+        .toList();
 
     if (_filteredSuggestions.isNotEmpty) {
       _showOverlay();
@@ -361,65 +359,63 @@ class _ArabicSuggestionTextFieldState extends State<ArabicSuggestionTextField> {
     _removeOverlay();
 
     _overlayEntry = OverlayEntry(
-      builder:
-          (context) => Positioned(
-            width: 300, // Adjust width as needed
-            child: CompositedTransformFollower(
-              link: _layerLink,
-              showWhenUnlinked: false,
-              offset: const Offset(0, 60), // Position below the text field
-              child: Material(
-                elevation: 8,
+      builder: (context) => Positioned(
+        width: 300, // Adjust width as needed
+        child: CompositedTransformFollower(
+          link: _layerLink,
+          showWhenUnlinked: false,
+          offset: const Offset(0, 60), // Position below the text field
+          child: Material(
+            elevation: 8,
+            borderRadius: BorderRadius.circular(8),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(8),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      color: Theme.of(context).colorScheme.outline,
-                    ),
-                  ),
-                  child: ListView.builder(
-                    padding: EdgeInsets.zero,
-                    shrinkWrap: true,
-                    itemCount: _filteredSuggestions.length,
-                    itemBuilder: (context, index) {
-                      final suggestion = _filteredSuggestions[index];
-                      final isArabic = ArabicTypography.containsArabic(
-                        suggestion,
-                      );
-
-                      return ListTile(
-                        dense: true,
-                        title: Text(
-                          suggestion,
-                          style:
-                              widget.suggestionStyle ??
-                              (isArabic
-                                  ? ArabicTextStyles.bodyMedium(
-                                    context,
-                                    fontType: 'readable',
-                                  )
-                                  : null),
-                          textDirection: ArabicTypography.getTextDirection(
-                            suggestion,
-                          ),
-                        ),
-                        onTap: () {
-                          _controller.text = suggestion;
-                          _controller.selection = TextSelection.fromPosition(
-                            TextPosition(offset: suggestion.length),
-                          );
-                          widget.onSuggestionSelected?.call(suggestion);
-                          _removeOverlay();
-                        },
-                      );
-                    },
-                  ),
+                border: Border.all(
+                  color: Theme.of(context).colorScheme.outline,
                 ),
+              ),
+              child: ListView.builder(
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
+                itemCount: _filteredSuggestions.length,
+                itemBuilder: (context, index) {
+                  final suggestion = _filteredSuggestions[index];
+                  final isArabic = ArabicTypography.containsArabic(
+                    suggestion,
+                  );
+
+                  return ListTile(
+                    dense: true,
+                    title: Text(
+                      suggestion,
+                      style: widget.suggestionStyle ??
+                          (isArabic
+                              ? ArabicTextStyles.bodyMedium(
+                                  context,
+                                  fontType: 'readable',
+                                )
+                              : null),
+                      textDirection: ArabicTypography.getTextDirection(
+                        suggestion,
+                      ),
+                    ),
+                    onTap: () {
+                      _controller.text = suggestion;
+                      _controller.selection = TextSelection.fromPosition(
+                        TextPosition(offset: suggestion.length),
+                      );
+                      widget.onSuggestionSelected?.call(suggestion);
+                      _removeOverlay();
+                    },
+                  );
+                },
               ),
             ),
           ),
+        ),
+      ),
     );
 
     Overlay.of(context).insert(_overlayEntry!);
@@ -497,8 +493,7 @@ class ArabicTextFormField extends StatelessWidget {
         validator: validator,
         onSaved: onSaved,
         onChanged: onChanged,
-        style:
-            textStyle ??
+        style: textStyle ??
             (ArabicTypography.containsArabic(text)
                 ? ArabicTextStyles.bodyLarge(context, fontType: 'readable')
                 : null),
@@ -511,8 +506,7 @@ class ArabicTextFormField extends StatelessWidget {
         enabled: enabled,
         readOnly: readOnly,
         autovalidateMode: autovalidateMode,
-        decoration:
-            decoration ??
+        decoration: decoration ??
             InputDecoration(
               hintText: hintText,
               labelText: labelText,

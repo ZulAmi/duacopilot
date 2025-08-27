@@ -32,18 +32,17 @@ class _HistoryWidgetState extends ConsumerState<HistoryWidget> {
             hintText: 'Search history...',
             prefixIcon: const Icon(Icons.search),
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-            suffixIcon:
-                _filterText.isNotEmpty
-                    ? IconButton(
-                      onPressed: () {
-                        _searchController.clear();
-                        setState(() {
-                          _filterText = '';
-                        });
-                      },
-                      icon: const Icon(Icons.clear),
-                    )
-                    : null,
+            suffixIcon: _filterText.isNotEmpty
+                ? IconButton(
+                    onPressed: () {
+                      _searchController.clear();
+                      setState(() {
+                        _filterText = '';
+                      });
+                    },
+                    icon: const Icon(Icons.clear),
+                  )
+                : null,
           ),
           onChanged: (value) {
             setState(() {
@@ -101,37 +100,36 @@ class _HistoryWidgetState extends ConsumerState<HistoryWidget> {
               );
             },
             loading: () => const Center(child: CircularProgressIndicator()),
-            error:
-                (error, stackTrace) => Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.error_outline,
-                        size: 64,
-                        color: Theme.of(context).colorScheme.error,
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        'Error loading history',
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        error.toString(),
-                        style: Theme.of(context).textTheme.bodyLarge,
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 16),
-                      ElevatedButton(
-                        onPressed: () {
-                          ref.invalidate(queryHistoryProvider);
-                        },
-                        child: const Text('Retry'),
-                      ),
-                    ],
+            error: (error, stackTrace) => Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.error_outline,
+                    size: 64,
+                    color: Theme.of(context).colorScheme.error,
                   ),
-                ),
+                  const SizedBox(height: 16),
+                  Text(
+                    'Error loading history',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    error.toString(),
+                    style: Theme.of(context).textTheme.bodyLarge,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: () {
+                      ref.invalidate(queryHistoryProvider);
+                    },
+                    child: const Text('Retry'),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ],
@@ -165,10 +163,9 @@ class HistoryTile extends StatelessWidget {
       child: ListTile(
         leading: Icon(
           queryHistory.success ? Icons.check_circle : Icons.error,
-          color:
-              queryHistory.success
-                  ? Theme.of(context).colorScheme.primary
-                  : Theme.of(context).colorScheme.error,
+          color: queryHistory.success
+              ? Theme.of(context).colorScheme.primary
+              : Theme.of(context).colorScheme.error,
         ),
         title: Text(
           queryHistory.query,
@@ -188,8 +185,8 @@ class HistoryTile extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
                 ),
               ),
             Padding(

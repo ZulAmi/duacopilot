@@ -111,11 +111,10 @@ class FallbackTemplateService {
       'total_templates': allTemplates.length,
       'languages': languageCount,
       'categories': categoryCount,
-      'average_priority':
-          allTemplates.isEmpty
-              ? 0.0
-              : allTemplates.map((t) => t.priority).reduce((a, b) => a + b) /
-                  allTemplates.length,
+      'average_priority': allTemplates.isEmpty
+          ? 0.0
+          : allTemplates.map((t) => t.priority).reduce((a, b) => a + b) /
+              allTemplates.length,
     };
   }
 
@@ -248,8 +247,9 @@ class FallbackTemplateService {
         id: 'ar_general_prayer',
         category: 'general',
         language: 'ar',
-        template: 'إليك بعض الأدعية العامة التي قد تساعد في طلبك',
-        keywords: ['دعاء', 'صلاة', 'مساعدة', 'هداية'],
+        template:
+            'Ø¥Ù„ÙŠÙƒ Ø¨Ø¹Ø¶ Ø§Ù„Ø£Ø¯Ø¹ÙŠØ© Ø§Ù„Ø¹Ø§Ù…Ø© Ø§Ù„ØªÙŠ Ù‚Ø¯ ØªØ³Ø§Ø¹Ø¯ ÙÙŠ Ø·Ù„Ø¨Ùƒ',
+        keywords: ['Ø¯Ø¹Ø§Ø¡', 'ØµÙ„Ø§Ø©', 'Ù…Ø³Ø§Ø¹Ø¯Ø©', 'Ù‡Ø¯Ø§ÙŠØ©'],
         priority: 1.0,
         createdAt: DateTime.now(),
       ),
@@ -257,8 +257,8 @@ class FallbackTemplateService {
         id: 'ar_morning_prayers',
         category: 'morning',
         language: 'ar',
-        template: 'إليك أدعية الصباح والأذكار',
-        keywords: ['صباح', 'فجر', 'شروق', 'أذكار'],
+        template: 'Ø¥Ù„ÙŠÙƒ Ø£Ø¯Ø¹ÙŠØ© Ø§Ù„ØµØ¨Ø§Ø­ ÙˆØ§Ù„Ø£Ø°ÙƒØ§Ø±',
+        keywords: ['ØµØ¨Ø§Ø­', 'ÙØ¬Ø±', 'Ø´Ø±ÙˆÙ‚', 'Ø£Ø°ÙƒØ§Ø±'],
         priority: 2.0,
         createdAt: DateTime.now(),
       ),
@@ -331,13 +331,12 @@ class FallbackTemplateService {
 
   List<String> _extractKeywords(String query) {
     // Simple keyword extraction
-    final words =
-        query
-            .toLowerCase()
-            .replaceAll(RegExp(r'[^\w\s]'), ' ')
-            .split(' ')
-            .where((word) => word.isNotEmpty && word.length > 2)
-            .toList();
+    final words = query
+        .toLowerCase()
+        .replaceAll(RegExp(r'[^\w\s]'), ' ')
+        .split(' ')
+        .where((word) => word.isNotEmpty && word.length > 2)
+        .toList();
 
     // Remove common stop words
     final stopWords = {
@@ -446,15 +445,13 @@ class FallbackTemplateService {
   OfflineSearchResult _createGenericFallback(String query, String language) {
     final isArabic = language == 'ar';
 
-    final genericText =
-        isArabic
-            ? 'عذراً، لم أتمكن من العثور على دعاء محدد لطلبك. يمكنك محاولة البحث بكلمات مختلفة.'
-            : 'Sorry, I couldn\'t find a specific prayer for your request. You might try searching with different words.';
+    final genericText = isArabic
+        ? 'Ø¹Ø°Ø±Ø§Ù‹ØŒ Ù„Ù… Ø£ØªÙ…ÙƒÙ† Ù…Ù† Ø§Ù„Ø¹Ø«ÙˆØ± Ø¹Ù„Ù‰ Ø¯Ø¹Ø§Ø¡ Ù…Ø­Ø¯Ø¯ Ù„Ø·Ù„Ø¨Ùƒ. ÙŠÙ…ÙƒÙ†Ùƒ Ù…Ø­Ø§ÙˆÙ„Ø© Ø§Ù„Ø¨Ø­Ø« Ø¨ÙƒÙ„Ù…Ø§Øª Ù…Ø®ØªÙ„ÙØ©.'
+        : 'Sorry, I couldn\'t find a specific prayer for your request. You might try searching with different words.';
 
-    final genericAdvice =
-        isArabic
-            ? 'في هذه الحالة، يمكنك الدعاء بما يفتح الله به عليك من القلب.'
-            : 'In this case, you can make a heartfelt prayer in your own words.';
+    final genericAdvice = isArabic
+        ? 'ÙÙŠ Ù‡Ø°Ù‡ Ø§Ù„Ø­Ø§Ù„Ø©ØŒ ÙŠÙ…ÙƒÙ†Ùƒ Ø§Ù„Ø¯Ø¹Ø§Ø¡ Ø¨Ù…Ø§ ÙŠÙØªØ­ Ø§Ù„Ù„Ù‡ Ø¨Ù‡ Ø¹Ù„ÙŠÙƒ Ù…Ù† Ø§Ù„Ù‚Ù„Ø¨.'
+        : 'In this case, you can make a heartfelt prayer in your own words.';
 
     return OfflineSearchResult(
       queryId: _generateQueryId(),

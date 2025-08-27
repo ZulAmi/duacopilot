@@ -83,9 +83,10 @@ class MockDatabaseHelper {
     int? offset,
   }) async {
     final table = _tables['favorites'] ?? [];
-    final sortedTable = List<Map<String, dynamic>>.from(table)..sort(
-      (a, b) => (b['created_at'] as int).compareTo(a['created_at'] as int),
-    );
+    final sortedTable = List<Map<String, dynamic>>.from(table)
+      ..sort(
+        (a, b) => (b['created_at'] as int).compareTo(a['created_at'] as int),
+      );
 
     int start = offset ?? 0;
     int end = limit != null ? start + limit : sortedTable.length;

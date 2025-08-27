@@ -25,10 +25,10 @@ void main() async {
       await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,
       );
-      AppLogger.debug('✅ Firebase initialized successfully');
+      AppLogger.debug('âœ… Firebase initialized successfully');
     } catch (e) {
       AppLogger.debug(
-        '⚠️  Firebase initialization failed: $e - continuing without Firebase features',
+        'âš ï¸  Firebase initialization failed: $e - continuing without Firebase features',
       );
     }
 
@@ -47,18 +47,18 @@ void main() async {
         action: 'app_launch',
         category: 'dev',
       );
-      AppLogger.debug('✅ Simple monitoring system initialized');
+      AppLogger.debug('âœ… Simple monitoring system initialized');
     } catch (e) {
       AppLogger.debug(
-        '⚠️  Monitoring initialization failed: $e - continuing without monitoring',
+        'âš ï¸  Monitoring initialization failed: $e - continuing without monitoring',
       );
     }
 
     AppLogger.debug(
-      '✅ DuaCopilot Professional Islamic AI initialized successfully',
+      'âœ… DuaCopilot Professional Islamic AI initialized successfully',
     );
   } catch (e) {
-    AppLogger.debug('⚠️  DuaCopilot initialization error: $e');
+    AppLogger.debug('âš ï¸  DuaCopilot initialization error: $e');
     // Continue anyway with limited functionality
   }
 
@@ -84,7 +84,8 @@ class RevolutionaryDuaCopilotDevApp extends StatelessWidget {
           value: SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
             statusBarIconBrightness: Brightness.light,
-            systemNavigationBarColor: ProfessionalIslamicTheme.backgroundSecondary,
+            systemNavigationBarColor:
+                ProfessionalIslamicTheme.backgroundSecondary,
             systemNavigationBarIconBrightness: Brightness.dark,
           ),
           child: MediaQuery(
@@ -107,10 +108,12 @@ class RevolutionaryAppWrapper extends StatefulWidget {
   const RevolutionaryAppWrapper({super.key});
 
   @override
-  State<RevolutionaryAppWrapper> createState() => _RevolutionaryAppWrapperState();
+  State<RevolutionaryAppWrapper> createState() =>
+      _RevolutionaryAppWrapperState();
 }
 
-class _RevolutionaryAppWrapperState extends State<RevolutionaryAppWrapper> with SingleTickerProviderStateMixin {
+class _RevolutionaryAppWrapperState extends State<RevolutionaryAppWrapper>
+    with SingleTickerProviderStateMixin {
   bool _showSplash = true;
   late AnimationController _animationController;
 
@@ -172,7 +175,8 @@ class _RevolutionaryAppWrapperState extends State<RevolutionaryAppWrapper> with 
                       ProfessionalIslamicTheme.space8,
                     ),
                     decoration: BoxDecoration(
-                      color: ProfessionalIslamicTheme.backgroundSecondary.withValues(alpha: 0.95),
+                      color: ProfessionalIslamicTheme.backgroundSecondary
+                          .withOpacity(0.95),
                       borderRadius: BorderRadius.circular(
                         ProfessionalIslamicTheme.radius3Xl,
                       ),
@@ -196,9 +200,8 @@ class _RevolutionaryAppWrapperState extends State<RevolutionaryAppWrapper> with 
                   Text(
                     'Professional Islamic AI Assistant',
                     style: ProfessionalIslamicTheme.body1.copyWith(
-                      color: ProfessionalIslamicTheme.textOnIslamic.withValues(
-                        alpha: 0.9,
-                      ),
+                      color: ProfessionalIslamicTheme.textOnIslamic
+                          .withOpacity(0.9),
                     ),
                   ),
                   const SizedBox(height: ProfessionalIslamicTheme.space8),

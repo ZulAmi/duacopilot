@@ -233,8 +233,7 @@ class RagService {
   /// Sync offline cache with server
   Future<void> syncOfflineCache({bool force = false}) async {
     final lastSync = _prefs.getString(_lastSyncKey);
-    final shouldSync =
-        force ||
+    final shouldSync = force ||
         lastSync == null ||
         DateTime.now().difference(DateTime.parse(lastSync)) >
             _offlineCacheExpiry;
@@ -346,30 +345,28 @@ class RagService {
       final offlineCache = OfflineCacheResponse.fromJson(offlineData);
 
       // Simple keyword matching for offline search
-      final matchingDuas =
-          offlineCache.duas.where((item) {
-            final duaText =
-                '${item.dua.arabicText} ${item.dua.translation} ${item.dua.transliteration}'
-                    .toLowerCase();
-            return query
-                .toLowerCase()
-                .split(' ')
-                .any((word) => duaText.contains(word));
-          }).toList();
+      final matchingDuas = offlineCache.duas.where((item) {
+        final duaText =
+            '${item.dua.arabicText} ${item.dua.translation} ${item.dua.transliteration}'
+                .toLowerCase();
+        return query
+            .toLowerCase()
+            .split(' ')
+            .any((word) => duaText.contains(word));
+      }).toList();
 
       if (matchingDuas.isNotEmpty) {
-        final recommendations =
-            matchingDuas
-                .take(5)
-                .map(
-                  (item) => DuaRecommendation(
-                    dua: item.dua,
-                    relevanceScore: 0.5, // Lower confidence for offline results
-                    matchReason: 'offline_keyword_match',
-                    highlightedKeywords: [],
-                  ),
-                )
-                .toList();
+        final recommendations = matchingDuas
+            .take(5)
+            .map(
+              (item) => DuaRecommendation(
+                dua: item.dua,
+                relevanceScore: 0.5, // Lower confidence for offline results
+                matchReason: 'offline_keyword_match',
+                highlightedKeywords: [],
+              ),
+            )
+            .toList();
 
         return RagSearchResponse(
           recommendations: recommendations,
@@ -495,10 +492,9 @@ class RagService {
         preferredLanguages: preferences['preferred_languages']?.cast<String>(),
         topicPreferences:
             preferences['topic_preferences']?.cast<String, double>(),
-        demographics:
-            preferences['demographics'] != null
-                ? UserDemographics.fromJson(preferences['demographics'])
-                : null,
+        demographics: preferences['demographics'] != null
+            ? UserDemographics.fromJson(preferences['demographics'])
+            : null,
         customPreferences: preferences['custom_preferences'],
       );
 

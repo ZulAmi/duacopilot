@@ -237,10 +237,9 @@ void main() {
         final queries = ['guidance', 'patience', 'prayer', 'forgiveness'];
 
         // Act
-        final futures =
-            queries
-                .map((query) => ragService.processQuery(query: query))
-                .toList();
+        final futures = queries
+            .map((query) => ragService.processQuery(query: query))
+            .toList();
 
         final results = await Future.wait(futures);
 

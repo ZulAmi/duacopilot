@@ -65,7 +65,7 @@ class ServerSentEventsService {
     if (_isInitialized) return;
 
     try {
-      AppLogger.info('🔄 Initializing Server-Sent Events Service...');
+      AppLogger.info('ðŸ”„ Initializing Server-Sent Events Service...');
 
       _secureStorage = SecureStorageService.instance;
       await _secureStorage.initialize();
@@ -79,9 +79,9 @@ class ServerSentEventsService {
       await _startSSEConnection();
 
       _isInitialized = true;
-      AppLogger.info('✅ Server-Sent Events Service initialized');
+      AppLogger.info('âœ… Server-Sent Events Service initialized');
     } catch (e) {
-      AppLogger.error('❌ Failed to initialize SSE service: $e');
+      AppLogger.error('âŒ Failed to initialize SSE service: $e');
       rethrow;
     }
   }
@@ -99,10 +99,10 @@ class ServerSentEventsService {
       _isOnline = result != ConnectivityResult.none;
 
       if (!wasOnline && _isOnline) {
-        AppLogger.info('🌐 Internet restored, reconnecting to SSE...');
+        AppLogger.info('ðŸŒ Internet restored, reconnecting to SSE...');
         _handleConnectivityRestored();
       } else if (wasOnline && !_isOnline) {
-        AppLogger.warning('📡 Internet lost, disconnecting SSE...');
+        AppLogger.warning('ðŸ“¡ Internet lost, disconnecting SSE...');
         _handleConnectivityLost();
       }
     });
@@ -124,7 +124,8 @@ class ServerSentEventsService {
   /// Start SSE connection
   Future<void> _startSSEConnection() async {
     if (!_isOnline) {
-      AppLogger.warning('⚠️ No internet connection, skipping SSE connection');
+      AppLogger.warning(
+          'âš ï¸ No internet connection, skipping SSE connection');
       return;
     }
 
@@ -144,7 +145,7 @@ class ServerSentEventsService {
         },
       );
 
-      AppLogger.info('🔌 Connecting to SSE endpoint: $uri');
+      AppLogger.info('ðŸ”Œ Connecting to SSE endpoint: $uri');
 
       final request = http.Request('GET', uri)
         ..headers.addAll({
@@ -156,7 +157,7 @@ class ServerSentEventsService {
       final streamedResponse = await _httpClient!.send(request);
 
       if (streamedResponse.statusCode == 200) {
-        AppLogger.info('✅ SSE connection established');
+        AppLogger.info('âœ… SSE connection established');
         _isConnected = true;
         _reconnectAttempts = 0;
         _connectionStateController.add(SSEConnectionState.connected);
@@ -179,7 +180,7 @@ class ServerSentEventsService {
         );
       }
     } catch (e) {
-      AppLogger.error('❌ Failed to start SSE connection: $e');
+      AppLogger.error('âŒ Failed to start SSE connection: $e');
       _scheduleReconnect();
     }
   }
@@ -195,14 +196,14 @@ class ServerSentEventsService {
         final data = line.substring(6); // Remove 'data: ' prefix
 
         if (data.trim() == 'ping') {
-          AppLogger.debug('💓 SSE heartbeat received');
+          AppLogger.debug('ðŸ’“ SSE heartbeat received');
           return;
         }
 
         final eventData = jsonDecode(data);
         final eventType = eventData['type'] as String?;
 
-        AppLogger.debug('📨 SSE message received: $eventType');
+        AppLogger.debug('ðŸ“¨ SSE message received: $eventType');
 
         switch (eventType) {
           case 'scholar_approval':
@@ -215,19 +216,19 @@ class ServerSentEventsService {
             _handleSystemNotificationEvent(eventData);
             break;
           default:
-            AppLogger.debug('🔄 Unhandled SSE event type: $eventType');
+            AppLogger.debug('ðŸ”„ Unhandled SSE event type: $eventType');
         }
       } else if (line.startsWith('event: ')) {
         // Handle event type line if needed
         final eventType = line.substring(7);
-        AppLogger.debug('📋 SSE event type: $eventType');
+        AppLogger.debug('ðŸ“‹ SSE event type: $eventType');
       } else if (line.startsWith('id: ')) {
         // Handle event ID if needed
         final eventId = line.substring(4);
-        AppLogger.debug('🆔 SSE event ID: $eventId');
+        AppLogger.debug('ðŸ†” SSE event ID: $eventId');
       }
     } catch (e) {
-      AppLogger.error('❌ Failed to handle SSE message: $e');
+      AppLogger.error('âŒ Failed to handle SSE message: $e');
     }
   }
 
@@ -237,12 +238,12 @@ class ServerSentEventsService {
       final event = ScholarApprovalEvent.fromJson(eventData);
       _scholarApprovalController.add(event);
 
-      AppLogger.info('🎓 Scholar approved new Du\'a: ${event.duaTitle}');
+      AppLogger.info('ðŸŽ“ Scholar approved new Du\'a: ${event.duaTitle}');
 
       // Save notification for offline viewing
       _saveNotificationForOffline('scholar_approval', eventData);
     } catch (e) {
-      AppLogger.error('❌ Failed to handle scholar approval event: $e');
+      AppLogger.error('âŒ Failed to handle scholar approval event: $e');
     }
   }
 
@@ -252,12 +253,12 @@ class ServerSentEventsService {
       final event = ContentUpdateEvent.fromJson(eventData);
       _contentUpdateController.add(event);
 
-      AppLogger.info('📚 Content updated: ${event.title}');
+      AppLogger.info('ðŸ“š Content updated: ${event.title}');
 
       // Save notification for offline viewing
       _saveNotificationForOffline('content_update', eventData);
     } catch (e) {
-      AppLogger.error('❌ Failed to handle content update event: $e');
+      AppLogger.error('âŒ Failed to handle content update event: $e');
     }
   }
 
@@ -267,12 +268,12 @@ class ServerSentEventsService {
       final event = SystemNotificationEvent.fromJson(eventData);
       _systemNotificationController.add(event);
 
-      AppLogger.info('📢 System notification: ${event.title}');
+      AppLogger.info('ðŸ“¢ System notification: ${event.title}');
 
       // Save notification for offline viewing
       _saveNotificationForOffline('system_notification', eventData);
     } catch (e) {
-      AppLogger.error('❌ Failed to handle system notification event: $e');
+      AppLogger.error('âŒ Failed to handle system notification event: $e');
     }
   }
 
@@ -300,7 +301,7 @@ class ServerSentEventsService {
         jsonEncode(notifications),
       );
     } catch (e) {
-      AppLogger.error('❌ Failed to save offline notification: $e');
+      AppLogger.error('âŒ Failed to save offline notification: $e');
     }
   }
 
@@ -312,7 +313,7 @@ class ServerSentEventsService {
         return jsonDecode(notificationsJson) as List<dynamic>;
       }
     } catch (e) {
-      AppLogger.error('❌ Failed to get offline notifications: $e');
+      AppLogger.error('âŒ Failed to get offline notifications: $e');
     }
     return [];
   }
@@ -325,7 +326,7 @@ class ServerSentEventsService {
       if (_lastEventTime != null &&
           now.difference(_lastEventTime!).inSeconds > 60) {
         AppLogger.warning(
-          '⚠️ No SSE events received for 60 seconds, reconnecting...',
+          'âš ï¸ No SSE events received for 60 seconds, reconnecting...',
         );
         _scheduleReconnect();
       }
@@ -334,7 +335,7 @@ class ServerSentEventsService {
 
   /// Handle SSE error
   void _handleSSEError(Object error) {
-    AppLogger.error('❌ SSE error: $error');
+    AppLogger.error('âŒ SSE error: $error');
     _isConnected = false;
     _connectionStateController.add(SSEConnectionState.error);
     _scheduleReconnect();
@@ -342,7 +343,7 @@ class ServerSentEventsService {
 
   /// Handle SSE disconnection
   void _handleSSEDisconnection() {
-    AppLogger.warning('⚠️ SSE connection closed');
+    AppLogger.warning('âš ï¸ SSE connection closed');
     _isConnected = false;
     _connectionStateController.add(SSEConnectionState.disconnected);
     _scheduleReconnect();
@@ -351,7 +352,7 @@ class ServerSentEventsService {
   /// Schedule reconnection with exponential backoff
   void _scheduleReconnect() {
     if (_reconnectAttempts >= _maxReconnectAttempts) {
-      AppLogger.error('❌ Max SSE reconnection attempts reached');
+      AppLogger.error('âŒ Max SSE reconnection attempts reached');
       _connectionStateController.add(SSEConnectionState.failed);
       return;
     }
@@ -366,7 +367,7 @@ class ServerSentEventsService {
     _reconnectTimer = Timer(delay, () {
       _reconnectAttempts++;
       AppLogger.info(
-        '🔄 Attempting SSE reconnection ($_reconnectAttempts/$_maxReconnectAttempts)',
+        'ðŸ”„ Attempting SSE reconnection ($_reconnectAttempts/$_maxReconnectAttempts)',
       );
       _connectionStateController.add(SSEConnectionState.reconnecting);
       _startSSEConnection();
@@ -416,7 +417,7 @@ class ServerSentEventsService {
         jsonEncode(notifications),
       );
     } catch (e) {
-      AppLogger.error('❌ Failed to mark notification as read: $e');
+      AppLogger.error('âŒ Failed to mark notification as read: $e');
     }
   }
 
@@ -426,7 +427,7 @@ class ServerSentEventsService {
       final notifications = await _getOfflineNotifications();
       return notifications.cast<Map<String, dynamic>>();
     } catch (e) {
-      AppLogger.error('❌ Failed to get all offline notifications: $e');
+      AppLogger.error('âŒ Failed to get all offline notifications: $e');
       return [];
     }
   }
@@ -436,7 +437,7 @@ class ServerSentEventsService {
     try {
       await _prefs.remove('offline_notifications');
     } catch (e) {
-      AppLogger.error('❌ Failed to clear offline notifications: $e');
+      AppLogger.error('âŒ Failed to clear offline notifications: $e');
     }
   }
 
@@ -494,15 +495,15 @@ class ScholarApprovalEvent {
   }
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'dua_id': duaId,
-    'dua_title': duaTitle,
-    'dua_text': duaText,
-    'scholar_name': scholarName,
-    'scholar_id': scholarId,
-    'timestamp': timestamp.toIso8601String(),
-    'metadata': metadata,
-  };
+        'id': id,
+        'dua_id': duaId,
+        'dua_title': duaTitle,
+        'dua_text': duaText,
+        'scholar_name': scholarName,
+        'scholar_id': scholarId,
+        'timestamp': timestamp.toIso8601String(),
+        'metadata': metadata,
+      };
 }
 
 /// Content Update Event
@@ -512,7 +513,7 @@ class ContentUpdateEvent {
   final String description;
   final String category;
   final String
-  updateType; // 'new_content', 'updated_content', 'removed_content'
+      updateType; // 'new_content', 'updated_content', 'removed_content'
   final DateTime timestamp;
   final Map<String, dynamic>? data;
 
@@ -539,14 +540,14 @@ class ContentUpdateEvent {
   }
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'title': title,
-    'description': description,
-    'category': category,
-    'update_type': updateType,
-    'timestamp': timestamp.toIso8601String(),
-    'data': data,
-  };
+        'id': id,
+        'title': title,
+        'description': description,
+        'category': category,
+        'update_type': updateType,
+        'timestamp': timestamp.toIso8601String(),
+        'data': data,
+      };
 }
 
 /// System Notification Event
@@ -579,24 +580,23 @@ class SystemNotificationEvent {
       priority: json['priority'],
       timestamp: DateTime.parse(json['timestamp']),
       actionUrl: json['action_url'],
-      expiresAt:
-          json['expires_at'] != null
-              ? DateTime.parse(json['expires_at'])
-              : null,
+      expiresAt: json['expires_at'] != null
+          ? DateTime.parse(json['expires_at'])
+          : null,
       metadata: json['metadata'],
     );
   }
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'title': title,
-    'message': message,
-    'priority': priority,
-    'timestamp': timestamp.toIso8601String(),
-    'action_url': actionUrl,
-    'expires_at': expiresAt?.toIso8601String(),
-    'metadata': metadata,
-  };
+        'id': id,
+        'title': title,
+        'message': message,
+        'priority': priority,
+        'timestamp': timestamp.toIso8601String(),
+        'action_url': actionUrl,
+        'expires_at': expiresAt?.toIso8601String(),
+        'metadata': metadata,
+      };
 }
 
 /// SSE Connection State

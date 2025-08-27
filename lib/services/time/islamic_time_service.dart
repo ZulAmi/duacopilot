@@ -90,7 +90,7 @@ class IslamicTimeService {
         gregorianDate.difference(DateTime(622, 7, 16)).inDays;
     final islamicDays = daysSinceEpoch - islamicEpoch.inDays;
 
-    // Rough calculation (Islamic year ≈ 354.37 days)
+    // Rough calculation (Islamic year â‰ˆ 354.37 days)
     final islamicYear = 1 + (islamicDays / 354.37).floor();
     final dayInYear = islamicDays % 354;
     final islamicMonth = (dayInYear / 29.5).floor() + 1;
@@ -275,17 +275,16 @@ class IslamicTimeService {
       final prayerName = _getPrayerName(nextPrayer.type);
 
       if (minutesUntilPrayer <= 30 && minutesUntilPrayer > 0) {
-        final prayerDuas =
-            allDuas
-                .where(
-                  (dua) =>
-                      dua.category.toLowerCase().contains('prayer') ||
-                      dua.category.toLowerCase().contains('salah') ||
-                      dua.category.toLowerCase().contains(
+        final prayerDuas = allDuas
+            .where(
+              (dua) =>
+                  dua.category.toLowerCase().contains('prayer') ||
+                  dua.category.toLowerCase().contains('salah') ||
+                  dua.category.toLowerCase().contains(
                         prayerName.toLowerCase(),
                       ),
-                )
-                .toList();
+            )
+            .toList();
 
         for (final dua in prayerDuas.take(2)) {
           suggestions.add(
@@ -305,14 +304,13 @@ class IslamicTimeService {
     // Time-of-day specific suggestions
     switch (timeContext.timeOfDay) {
       case TimeOfDay.fajr:
-        final fajrDuas =
-            allDuas
-                .where(
-                  (dua) =>
-                      dua.category.toLowerCase().contains('morning') ||
-                      dua.category.toLowerCase().contains('fajr'),
-                )
-                .toList();
+        final fajrDuas = allDuas
+            .where(
+              (dua) =>
+                  dua.category.toLowerCase().contains('morning') ||
+                  dua.category.toLowerCase().contains('fajr'),
+            )
+            .toList();
 
         for (final dua in fajrDuas.take(2)) {
           suggestions.add(
@@ -330,14 +328,13 @@ class IslamicTimeService {
 
       case TimeOfDay.evening:
       case TimeOfDay.maghrib:
-        final eveningDuas =
-            allDuas
-                .where(
-                  (dua) =>
-                      dua.category.toLowerCase().contains('evening') ||
-                      dua.category.toLowerCase().contains('maghrib'),
-                )
-                .toList();
+        final eveningDuas = allDuas
+            .where(
+              (dua) =>
+                  dua.category.toLowerCase().contains('evening') ||
+                  dua.category.toLowerCase().contains('maghrib'),
+            )
+            .toList();
 
         for (final dua in eveningDuas.take(2)) {
           suggestions.add(
@@ -355,14 +352,13 @@ class IslamicTimeService {
 
       case TimeOfDay.night:
       case TimeOfDay.isha:
-        final nightDuas =
-            allDuas
-                .where(
-                  (dua) =>
-                      dua.category.toLowerCase().contains('night') ||
-                      dua.category.toLowerCase().contains('sleep'),
-                )
-                .toList();
+        final nightDuas = allDuas
+            .where(
+              (dua) =>
+                  dua.category.toLowerCase().contains('night') ||
+                  dua.category.toLowerCase().contains('sleep'),
+            )
+            .toList();
 
         for (final dua in nightDuas.take(1)) {
           suggestions.add(
@@ -385,14 +381,13 @@ class IslamicTimeService {
 
     // Ramadan-specific suggestions
     if (timeContext.isRamadan) {
-      final ramadanDuas =
-          allDuas
-              .where(
-                (dua) =>
-                    dua.category.toLowerCase().contains('ramadan') ||
-                    dua.category.toLowerCase().contains('fasting'),
-              )
-              .toList();
+      final ramadanDuas = allDuas
+          .where(
+            (dua) =>
+                dua.category.toLowerCase().contains('ramadan') ||
+                dua.category.toLowerCase().contains('fasting'),
+          )
+          .toList();
 
       for (final dua in ramadanDuas.take(2)) {
         suggestions.add(
@@ -410,14 +405,13 @@ class IslamicTimeService {
 
     // Hajj season suggestions
     if (timeContext.isHajjSeason) {
-      final hajjDuas =
-          allDuas
-              .where(
-                (dua) =>
-                    dua.category.toLowerCase().contains('hajj') ||
-                    dua.category.toLowerCase().contains('pilgrimage'),
-              )
-              .toList();
+      final hajjDuas = allDuas
+          .where(
+            (dua) =>
+                dua.category.toLowerCase().contains('hajj') ||
+                dua.category.toLowerCase().contains('pilgrimage'),
+          )
+          .toList();
 
       for (final dua in hajjDuas.take(1)) {
         suggestions.add(
@@ -435,19 +429,17 @@ class IslamicTimeService {
 
     // Special occasion suggestions
     for (final occasion in timeContext.specialOccasions) {
-      final occasionDuas =
-          allDuas
-              .where(
-                (dua) =>
-                    dua.category.toLowerCase().contains(
+      final occasionDuas = allDuas
+          .where(
+            (dua) =>
+                dua.category.toLowerCase().contains(
                       occasion.toLowerCase(),
                     ) ||
-                    dua.tags.any(
-                      (tag) =>
-                          tag.toLowerCase().contains(occasion.toLowerCase()),
-                    ),
-              )
-              .toList();
+                dua.tags.any(
+                  (tag) => tag.toLowerCase().contains(occasion.toLowerCase()),
+                ),
+          )
+          .toList();
 
       for (final dua in occasionDuas.take(1)) {
         suggestions.add(
@@ -504,16 +496,15 @@ class IslamicTimeService {
     List<DuaEntity> allDuas,
   ) async {
     final now = DateTime.now();
-    final occasionDuas =
-        allDuas
-            .where(
-              (dua) =>
-                  dua.category.toLowerCase().contains(occasion.toLowerCase()) ||
-                  dua.tags.any(
-                    (tag) => tag.toLowerCase().contains(occasion.toLowerCase()),
-                  ),
-            )
-            .toList();
+    final occasionDuas = allDuas
+        .where(
+          (dua) =>
+              dua.category.toLowerCase().contains(occasion.toLowerCase()) ||
+              dua.tags.any(
+                (tag) => tag.toLowerCase().contains(occasion.toLowerCase()),
+              ),
+        )
+        .toList();
 
     return occasionDuas
         .take(5)

@@ -130,7 +130,8 @@ class TestConfig {
       DuaResponse(
         id: 'dua-1',
         query: 'morning prayer',
-        response: 'بسم الله الذي لا يضر مع اسمه شيء في الأرض ولا في السماء وهو السميع العليم',
+        response:
+            'بسم الله الذي لا يضر مع اسمه شيء في الأرض ولا في السماء وهو السميع العليم',
         timestamp: DateTime.now(),
         responseTime: 200,
         confidence: 0.95,
@@ -385,7 +386,9 @@ class TestUtils {
     Widget widget,
   ) async {
     for (final orientation in TestConfig.testOrientations) {
-      final size = orientation == TestOrientation.portrait ? const Size(414, 896) : const Size(896, 414);
+      final size = orientation == TestOrientation.portrait
+          ? const Size(414, 896)
+          : const Size(896, 414);
 
       await tester.binding.setSurfaceSize(size);
       await tester.pumpWidget(MaterialApp(home: Scaffold(body: widget)));

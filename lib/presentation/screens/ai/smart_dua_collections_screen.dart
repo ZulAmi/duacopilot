@@ -96,10 +96,9 @@ class _SmartDuaCollectionsScreenState
           _recommendations = recommendations;
           _isAnalyzing = false;
           _showRecommendations = true;
-          _currentEmotion =
-              recommendations.isNotEmpty
-                  ? recommendations.first.targetEmotion
-                  : null;
+          _currentEmotion = recommendations.isNotEmpty
+              ? recommendations.first.targetEmotion
+              : null;
         });
 
         // Auto-scroll to recommendations
@@ -203,17 +202,16 @@ class _SmartDuaCollectionsScreenState
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _analyzeInput,
         backgroundColor: AppColors.islamicGreen,
-        icon:
-            _isAnalyzing
-                ? const SizedBox(
-                  width: 20,
-                  height: 20,
-                  child: CircularProgressIndicator(
-                    color: Colors.white,
-                    strokeWidth: 2,
-                  ),
-                )
-                : const Icon(Icons.psychology),
+        icon: _isAnalyzing
+            ? const SizedBox(
+                width: 20,
+                height: 20,
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                  strokeWidth: 2,
+                ),
+              )
+            : const Icon(Icons.psychology),
         label: Text(_isAnalyzing ? 'Analyzing...' : 'Analyze Feelings'),
       ),
     );
@@ -249,7 +247,7 @@ class _SmartDuaCollectionsScreenState
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.05),
+                  color: Colors.black.withOpacity(0.05),
                   blurRadius: 10,
                   offset: const Offset(0, 4),
                 ),
@@ -320,7 +318,7 @@ class _SmartDuaCollectionsScreenState
         _inputController.text = suggestion;
         _analyzeInput();
       },
-      backgroundColor: AppColors.islamicGreen.withValues(alpha: 0.1),
+      backgroundColor: AppColors.islamicGreen.withOpacity(0.1),
       labelStyle: TextStyle(color: AppColors.islamicGreen, fontSize: 12),
     );
   }
@@ -350,7 +348,7 @@ class _SmartDuaCollectionsScreenState
                   label: Text(_currentEmotion!.displayName),
                   backgroundColor: _getEmotionColor(
                     _currentEmotion!,
-                  ).withValues(alpha: 0.1),
+                  ).withOpacity(0.1),
                   labelStyle: TextStyle(
                     color: _getEmotionColor(_currentEmotion!),
                     fontSize: 12,
@@ -412,7 +410,7 @@ class _SmartDuaCollectionsScreenState
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: confidenceColor.withValues(alpha: 0.1),
+                        color: confidenceColor.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
@@ -488,13 +486,13 @@ class _SmartDuaCollectionsScreenState
                       children: [
                         IconButton(
                           icon: const Icon(Icons.thumb_up_outlined, size: 16),
-                          onPressed:
-                              () => _provideFeedback(recommendation, true),
+                          onPressed: () =>
+                              _provideFeedback(recommendation, true),
                         ),
                         IconButton(
                           icon: const Icon(Icons.thumb_down_outlined, size: 16),
-                          onPressed:
-                              () => _provideFeedback(recommendation, false),
+                          onPressed: () =>
+                              _provideFeedback(recommendation, false),
                         ),
                       ],
                     ),
@@ -549,7 +547,6 @@ class _SmartDuaCollectionsScreenState
             ),
           ),
           const SizedBox(height: 16),
-
           GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -585,8 +582,8 @@ class _SmartDuaCollectionsScreenState
             borderRadius: BorderRadius.circular(16),
             gradient: LinearGradient(
               colors: [
-                emotionColor.withValues(alpha: 0.1),
-                emotionColor.withValues(alpha: 0.05),
+                emotionColor.withOpacity(0.1),
+                emotionColor.withOpacity(0.05),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -603,7 +600,7 @@ class _SmartDuaCollectionsScreenState
                       width: 40,
                       height: 40,
                       decoration: BoxDecoration(
-                        color: emotionColor.withValues(alpha: 0.2),
+                        color: emotionColor.withOpacity(0.2),
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
@@ -619,7 +616,7 @@ class _SmartDuaCollectionsScreenState
                         vertical: 2,
                       ),
                       decoration: BoxDecoration(
-                        color: emotionColor.withValues(alpha: 0.2),
+                        color: emotionColor.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
@@ -634,7 +631,6 @@ class _SmartDuaCollectionsScreenState
                   ],
                 ),
                 const SizedBox(height: 12),
-
                 Text(
                   collection.name,
                   style: theme.textTheme.titleSmall?.copyWith(
@@ -644,7 +640,6 @@ class _SmartDuaCollectionsScreenState
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 4),
-
                 Text(
                   collection.description,
                   style: theme.textTheme.bodySmall?.copyWith(
@@ -685,14 +680,12 @@ class _SmartDuaCollectionsScreenState
             ),
           ),
           const SizedBox(height: 16),
-
           Wrap(
             spacing: 12,
             runSpacing: 12,
-            children:
-                quickEmotions.map((emotion) {
-                  return _buildQuickEmotionChip(emotion);
-                }).toList(),
+            children: quickEmotions.map((emotion) {
+              return _buildQuickEmotionChip(emotion);
+            }).toList(),
           ),
         ],
       ),
@@ -709,9 +702,9 @@ class _SmartDuaCollectionsScreenState
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
-          color: color.withValues(alpha: 0.1),
+          color: color.withOpacity(0.1),
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: color.withValues(alpha: 0.3)),
+          border: Border.all(color: color.withOpacity(0.3)),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -814,21 +807,20 @@ class _SmartDuaCollectionsScreenState
   void _showAIInfoDialog() {
     showDialog(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('AI Intelligence'),
-            content: const Text(
-              'Our Smart Dua Collections use advanced AI to analyze your emotions, context, and spiritual needs. '
-              'The system learns from your preferences to provide increasingly accurate recommendations over time.\n\n'
-              'All emotional data is encrypted and processed securely on your device.',
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Got it'),
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        title: const Text('AI Intelligence'),
+        content: const Text(
+          'Our Smart Dua Collections use advanced AI to analyze your emotions, context, and spiritual needs. '
+          'The system learns from your preferences to provide increasingly accurate recommendations over time.\n\n'
+          'All emotional data is encrypted and processed securely on your device.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Got it'),
           ),
+        ],
+      ),
     );
   }
 

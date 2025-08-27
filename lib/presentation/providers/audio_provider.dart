@@ -61,24 +61,23 @@ class AudioNotifier extends StateNotifier<AudioState> {
   }
 
   void updateDownloadProgress(int downloadId, double progress) {
-    final updatedDownloads =
-        state.downloads.map((download) {
-          if (download.id == downloadId) {
-            return AudioDownload(
-              id: download.id,
-              url: download.url,
-              localPath: download.localPath,
-              title: download.title,
-              duration: download.duration,
-              fileSize: download.fileSize,
-              status: download.status,
-              createdAt: download.createdAt,
-              completedAt: download.completedAt,
-              progress: progress,
-            );
-          }
-          return download;
-        }).toList();
+    final updatedDownloads = state.downloads.map((download) {
+      if (download.id == downloadId) {
+        return AudioDownload(
+          id: download.id,
+          url: download.url,
+          localPath: download.localPath,
+          title: download.title,
+          duration: download.duration,
+          fileSize: download.fileSize,
+          status: download.status,
+          createdAt: download.createdAt,
+          completedAt: download.completedAt,
+          progress: progress,
+        );
+      }
+      return download;
+    }).toList();
 
     state = state.copyWith(downloads: updatedDownloads);
   }

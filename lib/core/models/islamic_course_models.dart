@@ -80,73 +80,74 @@ class IslamicCourse {
   });
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'title': title,
-    'description': description,
-    'instructor': instructor,
-    'instructorTitle': instructorTitle,
-    'instructorBio': instructorBio,
-    'instructorImageUrl': instructorImageUrl,
-    'thumbnailUrl': thumbnailUrl,
-    'videoPreviewUrl': videoPreviewUrl,
-    'category': category.name,
-    'difficulty': difficulty.name,
-    'price': price,
-    'originalPrice': originalPrice,
-    'durationMinutes': durationMinutes,
-    'lessonCount': lessonCount,
-    'enrolledCount': enrolledCount,
-    'rating': rating,
-    'reviewCount': reviewCount,
-    'features': features,
-    'topics': topics,
-    'prerequisites': prerequisites,
-    'isPopular': isPopular,
-    'isNew': isNew,
-    'createdAt': createdAt.toIso8601String(),
-    'updatedAt': updatedAt?.toIso8601String(),
-    'language': language,
-    'hasSubtitles': hasSubtitles,
-    'hasCertificate': hasCertificate,
-    'isLifetimeAccess': isLifetimeAccess,
-  };
+        'id': id,
+        'title': title,
+        'description': description,
+        'instructor': instructor,
+        'instructorTitle': instructorTitle,
+        'instructorBio': instructorBio,
+        'instructorImageUrl': instructorImageUrl,
+        'thumbnailUrl': thumbnailUrl,
+        'videoPreviewUrl': videoPreviewUrl,
+        'category': category.name,
+        'difficulty': difficulty.name,
+        'price': price,
+        'originalPrice': originalPrice,
+        'durationMinutes': durationMinutes,
+        'lessonCount': lessonCount,
+        'enrolledCount': enrolledCount,
+        'rating': rating,
+        'reviewCount': reviewCount,
+        'features': features,
+        'topics': topics,
+        'prerequisites': prerequisites,
+        'isPopular': isPopular,
+        'isNew': isNew,
+        'createdAt': createdAt.toIso8601String(),
+        'updatedAt': updatedAt?.toIso8601String(),
+        'language': language,
+        'hasSubtitles': hasSubtitles,
+        'hasCertificate': hasCertificate,
+        'isLifetimeAccess': isLifetimeAccess,
+      };
 
   factory IslamicCourse.fromJson(Map<String, dynamic> json) => IslamicCourse(
-    id: json['id'],
-    title: json['title'],
-    description: json['description'],
-    instructor: json['instructor'],
-    instructorTitle: json['instructorTitle'],
-    instructorBio: json['instructorBio'],
-    instructorImageUrl: json['instructorImageUrl'],
-    thumbnailUrl: json['thumbnailUrl'],
-    videoPreviewUrl: json['videoPreviewUrl'],
-    category: CourseCategory.values.firstWhere(
-      (e) => e.name == json['category'],
-    ),
-    difficulty: CourseDifficulty.values.firstWhere(
-      (e) => e.name == json['difficulty'],
-    ),
-    price: (json['price'] as num).toDouble(),
-    originalPrice: (json['originalPrice'] as num).toDouble(),
-    durationMinutes: json['durationMinutes'],
-    lessonCount: json['lessonCount'],
-    enrolledCount: json['enrolledCount'],
-    rating: (json['rating'] as num).toDouble(),
-    reviewCount: json['reviewCount'],
-    features: List<String>.from(json['features']),
-    topics: List<String>.from(json['topics']),
-    prerequisites: List<String>.from(json['prerequisites']),
-    isPopular: json['isPopular'] ?? false,
-    isNew: json['isNew'] ?? false,
-    createdAt: DateTime.parse(json['createdAt']),
-    updatedAt:
-        json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
-    language: json['language'] ?? 'English',
-    hasSubtitles: json['hasSubtitles'] ?? false,
-    hasCertificate: json['hasCertificate'] ?? false,
-    isLifetimeAccess: json['isLifetimeAccess'] ?? true,
-  );
+        id: json['id'],
+        title: json['title'],
+        description: json['description'],
+        instructor: json['instructor'],
+        instructorTitle: json['instructorTitle'],
+        instructorBio: json['instructorBio'],
+        instructorImageUrl: json['instructorImageUrl'],
+        thumbnailUrl: json['thumbnailUrl'],
+        videoPreviewUrl: json['videoPreviewUrl'],
+        category: CourseCategory.values.firstWhere(
+          (e) => e.name == json['category'],
+        ),
+        difficulty: CourseDifficulty.values.firstWhere(
+          (e) => e.name == json['difficulty'],
+        ),
+        price: (json['price'] as num).toDouble(),
+        originalPrice: (json['originalPrice'] as num).toDouble(),
+        durationMinutes: json['durationMinutes'],
+        lessonCount: json['lessonCount'],
+        enrolledCount: json['enrolledCount'],
+        rating: (json['rating'] as num).toDouble(),
+        reviewCount: json['reviewCount'],
+        features: List<String>.from(json['features']),
+        topics: List<String>.from(json['topics']),
+        prerequisites: List<String>.from(json['prerequisites']),
+        isPopular: json['isPopular'] ?? false,
+        isNew: json['isNew'] ?? false,
+        createdAt: DateTime.parse(json['createdAt']),
+        updatedAt: json['updatedAt'] != null
+            ? DateTime.parse(json['updatedAt'])
+            : null,
+        language: json['language'] ?? 'English',
+        hasSubtitles: json['hasSubtitles'] ?? false,
+        hasCertificate: json['hasCertificate'] ?? false,
+        isLifetimeAccess: json['isLifetimeAccess'] ?? true,
+      );
 
   /// Calculate discount percentage
   double get discountPercentage {
@@ -235,17 +236,17 @@ class CourseEnrollment {
   });
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'userId': userId,
-    'courseId': courseId,
-    'enrolledAt': enrolledAt.toIso8601String(),
-    'progress': progress,
-    'completedAt': completedAt?.toIso8601String(),
-    'isFavorite': isFavorite,
-    'lastAccessedAt': lastAccessedAt?.toIso8601String(),
-    'currentLessonIndex': currentLessonIndex,
-    'certificateData': certificateData,
-  };
+        'id': id,
+        'userId': userId,
+        'courseId': courseId,
+        'enrolledAt': enrolledAt.toIso8601String(),
+        'progress': progress,
+        'completedAt': completedAt?.toIso8601String(),
+        'isFavorite': isFavorite,
+        'lastAccessedAt': lastAccessedAt?.toIso8601String(),
+        'currentLessonIndex': currentLessonIndex,
+        'certificateData': certificateData,
+      };
 
   factory CourseEnrollment.fromJson(Map<String, dynamic> json) =>
       CourseEnrollment(
@@ -254,15 +255,13 @@ class CourseEnrollment {
         courseId: json['courseId'],
         enrolledAt: DateTime.parse(json['enrolledAt']),
         progress: (json['progress'] as num?)?.toDouble() ?? 0.0,
-        completedAt:
-            json['completedAt'] != null
-                ? DateTime.parse(json['completedAt'])
-                : null,
+        completedAt: json['completedAt'] != null
+            ? DateTime.parse(json['completedAt'])
+            : null,
         isFavorite: json['isFavorite'] ?? false,
-        lastAccessedAt:
-            json['lastAccessedAt'] != null
-                ? DateTime.parse(json['lastAccessedAt'])
-                : null,
+        lastAccessedAt: json['lastAccessedAt'] != null
+            ? DateTime.parse(json['lastAccessedAt'])
+            : null,
         currentLessonIndex: json['currentLessonIndex'] ?? 0,
         certificateData: json['certificateData'],
       );
@@ -301,33 +300,32 @@ class CourseReview {
   });
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'userId': userId,
-    'courseId': courseId,
-    'userName': userName,
-    'userImageUrl': userImageUrl,
-    'rating': rating,
-    'review': review,
-    'createdAt': createdAt.toIso8601String(),
-    'isVerifiedPurchase': isVerifiedPurchase,
-    'helpfulUserIds': helpfulUserIds,
-  };
+        'id': id,
+        'userId': userId,
+        'courseId': courseId,
+        'userName': userName,
+        'userImageUrl': userImageUrl,
+        'rating': rating,
+        'review': review,
+        'createdAt': createdAt.toIso8601String(),
+        'isVerifiedPurchase': isVerifiedPurchase,
+        'helpfulUserIds': helpfulUserIds,
+      };
 
   factory CourseReview.fromJson(Map<String, dynamic> json) => CourseReview(
-    id: json['id'],
-    userId: json['userId'],
-    courseId: json['courseId'],
-    userName: json['userName'],
-    userImageUrl: json['userImageUrl'],
-    rating: (json['rating'] as num).toDouble(),
-    review: json['review'],
-    createdAt: DateTime.parse(json['createdAt']),
-    isVerifiedPurchase: json['isVerifiedPurchase'] ?? false,
-    helpfulUserIds:
-        json['helpfulUserIds'] != null
+        id: json['id'],
+        userId: json['userId'],
+        courseId: json['courseId'],
+        userName: json['userName'],
+        userImageUrl: json['userImageUrl'],
+        rating: (json['rating'] as num).toDouble(),
+        review: json['review'],
+        createdAt: DateTime.parse(json['createdAt']),
+        isVerifiedPurchase: json['isVerifiedPurchase'] ?? false,
+        helpfulUserIds: json['helpfulUserIds'] != null
             ? List<String>.from(json['helpfulUserIds'])
             : null,
-  );
+      );
 
   /// Get formatted time ago
   String get timeAgo {
@@ -392,7 +390,6 @@ class SampleIslamicCourses {
       hasCertificate: true,
       hasSubtitles: true,
     ),
-
     IslamicCourse(
       id: 'hadith-001',
       title: 'Understanding Sahih Bukhari',
@@ -427,7 +424,6 @@ class SampleIslamicCourses {
       createdAt: DateTime.now().subtract(const Duration(days: 60)),
       hasCertificate: true,
     ),
-
     IslamicCourse(
       id: 'fiqh-001',
       title: 'Islamic Jurisprudence for Modern Muslims',
@@ -462,7 +458,6 @@ class SampleIslamicCourses {
       createdAt: DateTime.now().subtract(const Duration(days: 90)),
       hasCertificate: true,
     ),
-
     IslamicCourse(
       id: 'arabic-001',
       title: 'Quranic Arabic Mastery',
@@ -499,7 +494,6 @@ class SampleIslamicCourses {
       createdAt: DateTime.now().subtract(const Duration(days: 15)),
       hasSubtitles: true,
     ),
-
     IslamicCourse(
       id: 'family-001',
       title: 'Building Islamic Families',

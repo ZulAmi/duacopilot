@@ -365,12 +365,11 @@ class IntelligentCacheService {
         limit: queryLimit ?? 50,
       );
 
-      final filteredQueries =
-          queryTypes != null
-              ? popularQueries
-                  .where((q) => queryTypes.contains(q.queryType))
-                  .toList()
-              : popularQueries;
+      final filteredQueries = queryTypes != null
+          ? popularQueries
+              .where((q) => queryTypes.contains(q.queryType))
+              .toList()
+          : popularQueries;
 
       int successCount = 0;
       int failureCount = 0;
@@ -419,16 +418,14 @@ class IntelligentCacheService {
     final totalRequests = _hitCount + _missCount;
     final hitRatio = totalRequests > 0 ? _hitCount / totalRequests : 0.0;
 
-    final averageRetrievalTime =
-        _retrievalTimes.isNotEmpty
-            ? Duration(
-              microseconds:
-                  _retrievalTimes
-                      .map((d) => d.inMicroseconds)
-                      .reduce((a, b) => a + b) ~/
-                  _retrievalTimes.length,
-            )
-            : Duration.zero;
+    final averageRetrievalTime = _retrievalTimes.isNotEmpty
+        ? Duration(
+            microseconds: _retrievalTimes
+                    .map((d) => d.inMicroseconds)
+                    .reduce((a, b) => a + b) ~/
+                _retrievalTimes.length,
+          )
+        : Duration.zero;
 
     // Calculate total cache size
     int totalSize = 0;
@@ -497,19 +494,24 @@ class IntelligentCacheService {
   QueryType _detectQueryType(String query) {
     final lowerQuery = query.toLowerCase();
 
-    if (lowerQuery.contains('dua') || lowerQuery.contains('دعاء')) {
+    if (lowerQuery.contains('dua') || lowerQuery.contains('Ø¯Ø¹Ø§Ø¡')) {
       return QueryType.dua;
-    } else if (lowerQuery.contains('quran') || lowerQuery.contains('قرآن')) {
+    } else if (lowerQuery.contains('quran') ||
+        lowerQuery.contains('Ù‚Ø±Ø¢Ù†')) {
       return QueryType.quran;
-    } else if (lowerQuery.contains('hadith') || lowerQuery.contains('حديث')) {
+    } else if (lowerQuery.contains('hadith') ||
+        lowerQuery.contains('Ø­Ø¯ÙŠØ«')) {
       return QueryType.hadith;
-    } else if (lowerQuery.contains('prayer') || lowerQuery.contains('صلاة')) {
+    } else if (lowerQuery.contains('prayer') ||
+        lowerQuery.contains('ØµÙ„Ø§Ø©')) {
       return QueryType.prayer;
-    } else if (lowerQuery.contains('fasting') || lowerQuery.contains('صوم')) {
+    } else if (lowerQuery.contains('fasting') ||
+        lowerQuery.contains('ØµÙˆÙ…')) {
       return QueryType.fasting;
-    } else if (lowerQuery.contains('charity') || lowerQuery.contains('زكاة')) {
+    } else if (lowerQuery.contains('charity') ||
+        lowerQuery.contains('Ø²ÙƒØ§Ø©')) {
       return QueryType.charity;
-    } else if (lowerQuery.contains('hajj') || lowerQuery.contains('حج')) {
+    } else if (lowerQuery.contains('hajj') || lowerQuery.contains('Ø­Ø¬')) {
       return QueryType.pilgrimage;
     }
 
@@ -579,10 +581,9 @@ class IntelligentCacheService {
   }
 
   Future<void> _evictEntries(CacheStrategy strategy) async {
-    final strategyEntries =
-        _cache.entries
-            .where((e) => e.value.strategy.name == strategy.name)
-            .toList();
+    final strategyEntries = _cache.entries
+        .where((e) => e.value.strategy.name == strategy.name)
+        .toList();
 
     if (strategyEntries.isEmpty) return;
 

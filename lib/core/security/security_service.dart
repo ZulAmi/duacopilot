@@ -14,11 +14,11 @@ class SecurityService {
     try {
       await _ensureMasterKeyExists();
       if (kDebugMode) {
-        AppLogger.debug('🔐 SecurityService initialized successfully');
+        AppLogger.debug('ðŸ” SecurityService initialized successfully');
       }
     } catch (e) {
       if (kDebugMode) {
-        AppLogger.debug('⚠️ SecurityService initialization failed: $e');
+        AppLogger.debug('âš ï¸ SecurityService initialization failed: $e');
       }
       throw SecurityException('Failed to initialize security service');
     }
@@ -44,7 +44,7 @@ class SecurityService {
       }
     } catch (e) {
       if (kDebugMode) {
-        AppLogger.debug('⚠️ Encryption failed: $e');
+        AppLogger.debug('âš ï¸ Encryption failed: $e');
       }
       throw SecurityException('Failed to encrypt data');
     }
@@ -63,7 +63,7 @@ class SecurityService {
       }
     } catch (e) {
       if (kDebugMode) {
-        AppLogger.debug('⚠️ Decryption failed: $e');
+        AppLogger.debug('âš ï¸ Decryption failed: $e');
       }
       throw SecurityException('Failed to decrypt data');
     }
@@ -129,7 +129,8 @@ class SecurityService {
   /// Sanitize user input to prevent XSS
   static String sanitizeInput(String input) {
     return input
-        .replaceAll(RegExp(r'<script[^>]*>.*?</script>', caseSensitive: false), '')
+        .replaceAll(
+            RegExp(r'<script[^>]*>.*?</script>', caseSensitive: false), '')
         .replaceAll(RegExp(r'<[^>]*>'), '') // Remove HTML tags
         .replaceAll(RegExp(r'javascript:', caseSensitive: false), '')
         .trim();
@@ -137,7 +138,8 @@ class SecurityService {
 
   /// Generate secure random tokens
   static String generateSecureToken() {
-    final bytes = List<int>.generate(32, (i) => DateTime.now().millisecondsSinceEpoch + i);
+    final bytes = List<int>.generate(
+        32, (i) => DateTime.now().millisecondsSinceEpoch + i);
     return sha256.convert(bytes).toString();
   }
 
@@ -150,8 +152,9 @@ class SecurityService {
       // In a real implementation, store encrypted key in secure storage
       // For demo purposes, we'll just log the operation
       if (kDebugMode) {
-        AppLogger.debug('🔐 API key stored securely with alias: $storageKey');
-        AppLogger.debug('🔐 Encrypted key length: ${encryptedKey.length} chars');
+        AppLogger.debug('ðŸ” API key stored securely with alias: $storageKey');
+        AppLogger.debug(
+            'ðŸ” Encrypted key length: ${encryptedKey.length} chars');
       }
 
       // Real implementation would use:
@@ -169,7 +172,7 @@ class SecurityService {
       // In a real implementation, retrieve from secure storage using key alias
       // For now, return null as this is demo code
       if (kDebugMode) {
-        AppLogger.debug('🔐 Retrieving API key with alias: $storageKey');
+        AppLogger.debug('ðŸ” Retrieving API key with alias: $storageKey');
       }
 
       return null; // Would decrypt and return actual key
@@ -203,13 +206,14 @@ class SecurityService {
     final encrypted = base64.encode(bytes);
 
     if (kDebugMode) {
-      AppLogger.debug('🔐 Data encrypted using key alias: $_keyAlias');
+      AppLogger.debug('ðŸ” Data encrypted using key alias: $_keyAlias');
     }
 
     return encrypted;
   }
 
-  static Future<String> _decryptWithPlatformSecurity(String encryptedData) async {
+  static Future<String> _decryptWithPlatformSecurity(
+      String encryptedData) async {
     // In a real implementation, use platform channels with key alias
     // to call native decryption APIs
 
@@ -266,7 +270,8 @@ class RateLimitService {
     }
 
     // Check per-minute limit
-    final recentRequests = history.where((time) => now.difference(time).inMinutes < 1).length;
+    final recentRequests =
+        history.where((time) => now.difference(time).inMinutes < 1).length;
 
     if (recentRequests >= maxRequestsPerMinute) {
       return false;

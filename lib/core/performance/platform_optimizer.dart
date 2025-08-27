@@ -205,18 +205,18 @@ class IOSConfig implements PlatformConfig {
 
   @override
   List<DeviceOrientation> get preferredOrientations => [
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ];
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+      ];
 
   @override
   String? get arabicFontFamily => '.SF Arabic'; // iOS system Arabic font
 
   @override
   List<FontFeature> get arabicFontFeatures => [
-    const FontFeature.enable('liga'), // Ligatures
-    const FontFeature.enable('calt'), // Contextual alternates
-  ];
+        const FontFeature.enable('liga'), // Ligatures
+        const FontFeature.enable('calt'), // Contextual alternates
+      ];
 
   @override
   Duration get pageTransitionDuration => const Duration(milliseconds: 350);
@@ -247,18 +247,18 @@ class AndroidConfig implements PlatformConfig {
 
   @override
   List<DeviceOrientation> get preferredOrientations => [
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ];
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+      ];
 
   @override
   String? get arabicFontFamily => 'Noto Sans Arabic'; // Google Noto fonts
 
   @override
   List<FontFeature> get arabicFontFeatures => [
-    const FontFeature.enable('liga'),
-    const FontFeature.enable('calt'),
-  ];
+        const FontFeature.enable('liga'),
+        const FontFeature.enable('calt'),
+      ];
 
   @override
   Duration get pageTransitionDuration => const Duration(milliseconds: 300);
@@ -325,8 +325,8 @@ class WindowsConfig implements PlatformConfig {
 
   @override
   List<DeviceOrientation> get preferredOrientations => [
-    DeviceOrientation.portraitUp,
-  ];
+        DeviceOrientation.portraitUp,
+      ];
 
   @override
   String? get arabicFontFamily => 'Segoe UI';
@@ -363,17 +363,17 @@ class MacOSConfig implements PlatformConfig {
 
   @override
   List<DeviceOrientation> get preferredOrientations => [
-    DeviceOrientation.portraitUp,
-  ];
+        DeviceOrientation.portraitUp,
+      ];
 
   @override
   String? get arabicFontFamily => '.SF Arabic';
 
   @override
   List<FontFeature> get arabicFontFeatures => [
-    const FontFeature.enable('liga'),
-    const FontFeature.enable('calt'),
-  ];
+        const FontFeature.enable('liga'),
+        const FontFeature.enable('calt'),
+      ];
 
   @override
   Duration get pageTransitionDuration => const Duration(milliseconds: 250);
@@ -404,8 +404,8 @@ class LinuxConfig implements PlatformConfig {
 
   @override
   List<DeviceOrientation> get preferredOrientations => [
-    DeviceOrientation.portraitUp,
-  ];
+        DeviceOrientation.portraitUp,
+      ];
 
   @override
   String? get arabicFontFamily => 'Noto Sans Arabic';

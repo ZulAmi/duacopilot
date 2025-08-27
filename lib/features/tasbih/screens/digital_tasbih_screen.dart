@@ -11,10 +11,12 @@ class DigitalTasbihScreen extends ConsumerStatefulWidget {
   const DigitalTasbihScreen({super.key});
 
   @override
-  ConsumerState<DigitalTasbihScreen> createState() => _DigitalTasbihScreenState();
+  ConsumerState<DigitalTasbihScreen> createState() =>
+      _DigitalTasbihScreenState();
 }
 
-class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with TickerProviderStateMixin {
+class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen>
+    with TickerProviderStateMixin {
   late AnimationController _rippleController;
   late AnimationController _countController;
   late AnimationController _progressController;
@@ -190,7 +192,8 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
             builder: (context, child) {
               return LinearProgressIndicator(
                 value: _progressController.value,
-                backgroundColor: RevolutionaryIslamicTheme.textOnColor.withValues(alpha: 0.3),
+                backgroundColor:
+                    RevolutionaryIslamicTheme.textOnColor.withOpacity(0.3),
                 valueColor: const AlwaysStoppedAnimation<Color>(
                   RevolutionaryIslamicTheme.textOnColor,
                 ),
@@ -205,7 +208,7 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
           Text(
             '${(progress * 100).toInt()}% Complete',
             style: RevolutionaryIslamicTheme.body1.copyWith(
-              color: RevolutionaryIslamicTheme.textOnColor.withValues(alpha: 0.8),
+              color: RevolutionaryIslamicTheme.textOnColor.withOpacity(0.8),
             ),
           ),
         ],
@@ -229,8 +232,8 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: RevolutionaryIslamicTheme.primaryEmerald.withValues(
-                      alpha: 1 - _rippleController.value,
+                    color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(
+                      1 - _rippleController.value,
                     ),
                     width: 3,
                   ),
@@ -255,11 +258,11 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
                       shape: BoxShape.circle,
                       gradient: RadialGradient(
                         colors: [
-                          RevolutionaryIslamicTheme.primaryEmerald.withValues(
-                            alpha: 0.1,
+                          RevolutionaryIslamicTheme.primaryEmerald.withOpacity(
+                            0.1,
                           ),
-                          RevolutionaryIslamicTheme.primaryEmerald.withValues(
-                            alpha: 0.3,
+                          RevolutionaryIslamicTheme.primaryEmerald.withOpacity(
+                            0.3,
                           ),
                         ],
                       ),
@@ -269,7 +272,8 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.3),
+                          color: RevolutionaryIslamicTheme.primaryEmerald
+                              .withOpacity(0.3),
                           blurRadius: 20,
                           spreadRadius: 5,
                         ),
@@ -319,7 +323,7 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
         ),
         boxShadow: RevolutionaryIslamicTheme.shadowMd,
         border: Border.all(
-          color: RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.2),
+          color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.2),
           width: 1,
         ),
       ),
@@ -360,12 +364,12 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen> with 
       child: Container(
         width: 120,
         decoration: BoxDecoration(
-          color: RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.1),
+          color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1),
           borderRadius: BorderRadius.circular(
             RevolutionaryIslamicTheme.radiusXl,
           ),
           border: Border.all(
-            color: RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.3),
+            color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.3),
           ),
           boxShadow: RevolutionaryIslamicTheme.shadowSm,
         ),

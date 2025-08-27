@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/rag/enterprise_rag_architecture.dart';
 import '../../../domain/entities/rag_response.dart';
 
-/// 🎨 RESPONSIVE FLUTTER UI WITH OPTIMIZED STATE MANAGEMENT
+/// ðŸŽ¨ RESPONSIVE FLUTTER UI WITH OPTIMIZED STATE MANAGEMENT
 /// Enterprise-grade UI components with ML-powered personalization
 
 /// High-performance RAG response state notifier
@@ -69,13 +69,17 @@ class ResponsiveRagNotifier extends StateNotifier<ResponsiveRagState> {
     var filteredResponses = state.allResponses;
 
     if (minConfidence != null) {
-      filteredResponses = filteredResponses.where((r) => (r.confidence ?? 0.0) >= minConfidence).toList();
+      filteredResponses = filteredResponses
+          .where((r) => (r.confidence ?? 0.0) >= minConfidence)
+          .toList();
     }
 
     if (categories != null && categories.isNotEmpty) {
       filteredResponses = filteredResponses
           .where(
-            (r) => r.metadata?['category'] != null && categories.contains(r.metadata!['category']),
+            (r) =>
+                r.metadata?['category'] != null &&
+                categories.contains(r.metadata!['category']),
           )
           .toList();
     }
@@ -164,11 +168,12 @@ class ResponsiveRagState {
 }
 
 /// Provider for responsive RAG state management
-final responsiveRagProvider = StateNotifierProvider<ResponsiveRagNotifier, ResponsiveRagState>((ref) {
+final responsiveRagProvider =
+    StateNotifierProvider<ResponsiveRagNotifier, ResponsiveRagState>((ref) {
   return ResponsiveRagNotifier(ref.watch(enterpriseRagServiceProvider));
 });
 
-/// 🎨 RESPONSIVE UI COMPONENTS
+/// ðŸŽ¨ RESPONSIVE UI COMPONENTS
 
 /// Adaptive RAG response card with intelligent layout
 class AdaptiveRagResponseCard extends ConsumerWidget {
@@ -234,7 +239,10 @@ class AdaptiveRagResponseCard extends ConsumerWidget {
         Expanded(
           child: Text(
             response.query,
-            style: (isCompact ? theme.textTheme.bodyMedium : theme.textTheme.titleSmall)?.copyWith(
+            style: (isCompact
+                    ? theme.textTheme.bodyMedium
+                    : theme.textTheme.titleSmall)
+                ?.copyWith(
               fontWeight: FontWeight.w600,
               color: theme.colorScheme.onSurface,
             ),
@@ -258,13 +266,15 @@ class AdaptiveRagResponseCard extends ConsumerWidget {
       width: double.infinity,
       padding: EdgeInsets.all(isCompact ? 8.0 : 12.0),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+        color: theme.colorScheme.surfaceContainerHighest.withOpacity(0.3),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.2)),
+        border: Border.all(color: theme.colorScheme.outline.withOpacity(0.2)),
       ),
       child: Text(
         response.response,
-        style: (isCompact ? theme.textTheme.bodySmall : theme.textTheme.bodyMedium)
+        style: (isCompact
+                ? theme.textTheme.bodySmall
+                : theme.textTheme.bodyMedium)
             ?.copyWith(color: theme.colorScheme.onSurfaceVariant, height: 1.4),
         maxLines: isCompact ? 3 : null,
         overflow: isCompact ? TextOverflow.ellipsis : null,
@@ -279,7 +289,8 @@ class AdaptiveRagResponseCard extends ConsumerWidget {
         if (response.sources?.isNotEmpty == true)
           _MetadataChip(
             icon: Icons.source,
-            label: '${response.sources!.length} source${response.sources!.length != 1 ? 's' : ''}',
+            label:
+                '${response.sources!.length} source${response.sources!.length != 1 ? 's' : ''}',
             isCompact: isCompact,
           ),
 
@@ -298,8 +309,11 @@ class AdaptiveRagResponseCard extends ConsumerWidget {
         // Timestamp
         Text(
           _formatTimestamp(response.timestamp),
-          style: (isCompact ? theme.textTheme.labelSmall : theme.textTheme.bodySmall)?.copyWith(
-            color: theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.7),
+          style: (isCompact
+                  ? theme.textTheme.labelSmall
+                  : theme.textTheme.bodySmall)
+              ?.copyWith(
+            color: theme.colorScheme.onSurfaceVariant.withOpacity(0.7),
           ),
         ),
       ],
@@ -340,13 +354,15 @@ class _ConfidenceBadge extends StatelessWidget {
         vertical: 2.0,
       ),
       decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.1),
+        color: color.withOpacity(0.1),
         borderRadius: BorderRadius.circular(4),
-        border: Border.all(color: color.withValues(alpha: 0.3)),
+        border: Border.all(color: color.withOpacity(0.3)),
       ),
       child: Text(
         '${(confidence * 100).round()}%',
-        style: (isCompact ? theme.textTheme.labelSmall : theme.textTheme.bodySmall)?.copyWith(
+        style:
+            (isCompact ? theme.textTheme.labelSmall : theme.textTheme.bodySmall)
+                ?.copyWith(
           color: color,
           fontWeight: FontWeight.w600,
           fontSize: isCompact ? 10 : 11,
@@ -388,7 +404,7 @@ class _MetadataChip extends StatelessWidget {
         vertical: 2.0,
       ),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+        color: theme.colorScheme.surfaceContainerHighest.withOpacity(0.5),
         borderRadius: BorderRadius.circular(4),
       ),
       child: Row(
@@ -402,7 +418,10 @@ class _MetadataChip extends StatelessWidget {
           const SizedBox(width: 2),
           Text(
             label,
-            style: (isCompact ? theme.textTheme.labelSmall : theme.textTheme.bodySmall)?.copyWith(
+            style: (isCompact
+                    ? theme.textTheme.labelSmall
+                    : theme.textTheme.bodySmall)
+                ?.copyWith(
               color: theme.colorScheme.onSurfaceVariant,
               fontSize: isCompact ? 10 : 11,
             ),
@@ -448,7 +467,10 @@ class ResponsiveLoadingWidget extends ConsumerWidget {
           // Loading text
           Text(
             loadingText ?? 'Processing your request...',
-            style: (isCompact ? theme.textTheme.bodyMedium : theme.textTheme.titleSmall)?.copyWith(
+            style: (isCompact
+                    ? theme.textTheme.bodyMedium
+                    : theme.textTheme.titleSmall)
+                ?.copyWith(
               color: theme.colorScheme.onSurface,
               fontWeight: FontWeight.w500,
             ),
@@ -489,14 +511,16 @@ class _PerformanceMetricsWidget extends StatelessWidget {
         vertical: isCompact ? 4.0 : 6.0,
       ),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+        color: theme.colorScheme.surfaceContainerHighest.withOpacity(0.3),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(
-        'Avg: ${metrics['average_response_time']?.toStringAsFixed(0) ?? 0}ms • '
+        'Avg: ${metrics['average_response_time']?.toStringAsFixed(0) ?? 0}ms â€¢ '
         'Success: ${metrics['success_rate']?.toStringAsFixed(1) ?? 0}%',
-        style: (isCompact ? theme.textTheme.labelSmall : theme.textTheme.bodySmall)?.copyWith(
-          color: theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.8),
+        style:
+            (isCompact ? theme.textTheme.labelSmall : theme.textTheme.bodySmall)
+                ?.copyWith(
+          color: theme.colorScheme.onSurfaceVariant.withOpacity(0.8),
           fontFamily: 'monospace',
         ),
       ),
@@ -534,7 +558,10 @@ class ResponsiveErrorWidget extends ConsumerWidget {
           // Error title
           Text(
             'Something went wrong',
-            style: (isCompact ? theme.textTheme.titleMedium : theme.textTheme.titleLarge)?.copyWith(
+            style: (isCompact
+                    ? theme.textTheme.titleMedium
+                    : theme.textTheme.titleLarge)
+                ?.copyWith(
               color: theme.colorScheme.error,
               fontWeight: FontWeight.w600,
             ),
@@ -547,15 +574,17 @@ class ResponsiveErrorWidget extends ConsumerWidget {
           Container(
             padding: EdgeInsets.all(isCompact ? 12.0 : 16.0),
             decoration: BoxDecoration(
-              color: theme.colorScheme.errorContainer.withValues(alpha: 0.1),
+              color: theme.colorScheme.errorContainer.withOpacity(0.1),
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                color: theme.colorScheme.error.withValues(alpha: 0.2),
+                color: theme.colorScheme.error.withOpacity(0.2),
               ),
             ),
             child: Text(
               error,
-              style: (isCompact ? theme.textTheme.bodySmall : theme.textTheme.bodyMedium)
+              style: (isCompact
+                      ? theme.textTheme.bodySmall
+                      : theme.textTheme.bodyMedium)
                   ?.copyWith(color: theme.colorScheme.onErrorContainer),
               textAlign: TextAlign.center,
             ),

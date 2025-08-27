@@ -16,12 +16,12 @@ class RagApiClient {
   String? _authToken;
 
   RagApiClient({http.Client? httpClient})
-    : _httpClient = httpClient ?? http.Client(),
-      _defaultHeaders = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'User-Agent': 'DuaCopilot-Flutter/1.0',
-      };
+      : _httpClient = httpClient ?? http.Client(),
+        _defaultHeaders = {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'User-Agent': 'DuaCopilot-Flutter/1.0',
+        };
 
   /// Set authentication token for API requests
   void setAuthToken(String token) {
@@ -207,9 +207,8 @@ class RagApiClient {
     ).replace(queryParameters: queryParams);
 
     try {
-      final response = await _httpClient
-          .get(uri, headers: _headers)
-          .timeout(_timeout);
+      final response =
+          await _httpClient.get(uri, headers: _headers).timeout(_timeout);
 
       return _handleResponse(
         response,
@@ -280,9 +279,8 @@ class RagApiClient {
     ).replace(queryParameters: queryParams);
 
     try {
-      final response = await _httpClient
-          .get(uri, headers: _headers)
-          .timeout(_timeout);
+      final response =
+          await _httpClient.get(uri, headers: _headers).timeout(_timeout);
 
       return _handleResponse(
         response,
@@ -343,12 +341,12 @@ class UserDemographics {
   });
 
   Map<String, dynamic> toJson() => {
-    if (ageGroup != null) 'age_group': ageGroup,
-    if (gender != null) 'gender': gender,
-    if (region != null) 'region': region,
-    if (religiousLevel != null) 'religious_level': religiousLevel,
-    if (interests != null) 'interests': interests,
-  };
+        if (ageGroup != null) 'age_group': ageGroup,
+        if (gender != null) 'gender': gender,
+        if (region != null) 'region': region,
+        if (religiousLevel != null) 'religious_level': religiousLevel,
+        if (interests != null) 'interests': interests,
+      };
 
   factory UserDemographics.fromJson(Map<String, dynamic> json) =>
       UserDemographics(

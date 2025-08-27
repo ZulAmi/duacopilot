@@ -4,6 +4,7 @@ part 'tasbih_entity.freezed.dart';
 part 'tasbih_entity.g.dart';
 
 @freezed
+
 /// TasbihSession entity for digital tasbih tracking
 class TasbihSession with _$TasbihSession {
   const factory TasbihSession({
@@ -27,6 +28,7 @@ class TasbihSession with _$TasbihSession {
 }
 
 @freezed
+
 /// TasbihEntry for individual count tracking
 class TasbihEntry with _$TasbihEntry {
   const factory TasbihEntry({
@@ -44,6 +46,7 @@ class TasbihEntry with _$TasbihEntry {
 }
 
 @freezed
+
 /// TasbihSettings for session configuration
 class TasbihSettings with _$TasbihSettings {
   const factory TasbihSettings({
@@ -64,6 +67,7 @@ class TasbihSettings with _$TasbihSettings {
 }
 
 @freezed
+
 /// TasbihGoal for smart goal tracking
 class TasbihGoal with _$TasbihGoal {
   const factory TasbihGoal({
@@ -88,6 +92,7 @@ class TasbihGoal with _$TasbihGoal {
 }
 
 @freezed
+
 /// TasbihStats for comprehensive statistics
 class TasbihStats with _$TasbihStats {
   const factory TasbihStats({
@@ -110,6 +115,7 @@ class TasbihStats with _$TasbihStats {
 }
 
 @freezed
+
 /// Achievement for gamification
 class Achievement with _$Achievement {
   const factory Achievement({
@@ -129,6 +135,7 @@ class Achievement with _$Achievement {
 }
 
 @freezed
+
 /// FamilyStats for family sharing feature
 class FamilyStats with _$FamilyStats {
   const factory FamilyStats({
@@ -146,6 +153,7 @@ class FamilyStats with _$FamilyStats {
 }
 
 @freezed
+
 /// FamilyMember for family tracking
 class FamilyMember with _$FamilyMember {
   const factory FamilyMember({
@@ -164,6 +172,7 @@ class FamilyMember with _$FamilyMember {
 }
 
 @freezed
+
 /// FamilyGoal for collaborative goals
 class FamilyGoal with _$FamilyGoal {
   const factory FamilyGoal({
@@ -183,6 +192,7 @@ class FamilyGoal with _$FamilyGoal {
 }
 
 @freezed
+
 /// FamilyChallenge for competitive elements
 class FamilyChallenge with _$FamilyChallenge {
   const factory FamilyChallenge({
@@ -203,6 +213,7 @@ class FamilyChallenge with _$FamilyChallenge {
 }
 
 @freezed
+
 /// VoiceRecognition for smart voice detection
 class VoiceRecognition with _$VoiceRecognition {
   const factory VoiceRecognition({
@@ -221,6 +232,7 @@ class VoiceRecognition with _$VoiceRecognition {
 }
 
 @freezed
+
 /// SmartReminder for intelligent notifications
 class SmartReminder with _$SmartReminder {
   const factory SmartReminder({

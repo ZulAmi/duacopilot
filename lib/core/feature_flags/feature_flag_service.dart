@@ -150,8 +150,7 @@ class FeatureFlagConfig {
   }
 
   @override
-  String toString() =>
-      'FeatureFlagConfig(ragSystemEnabled: $ragSystemEnabled, '
+  String toString() => 'FeatureFlagConfig(ragSystemEnabled: $ragSystemEnabled, '
       'ragFeatures: {vectorSearch: $ragVectorSearch, semanticCache: $ragSemanticCache}, '
       'maintenanceMode: $maintenanceMode, forceUpdate: $forceUpdate)';
 }
