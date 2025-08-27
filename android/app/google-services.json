@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "387572746273",
+    "project_id": "duacopilot",
+    "storage_bucket": "duacopilot.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:387572746273:android:ed6536fb9e94e08ab7fb60",
+        "android_client_info": {
+          "package_name": "com.duacopilot.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAabJKgqwpZX3JLCx-r8-92vEwE8Zk9150"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

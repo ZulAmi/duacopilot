@@ -1,4 +1,4 @@
-// lib/presentation/screens/conversational_search_screen.dart
+// lib/presentation/screens/conversational_search_screen_fixed.dart
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

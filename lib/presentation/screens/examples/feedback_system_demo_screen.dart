@@ -12,12 +12,10 @@ class FeedbackSystemDemoScreen extends StatefulWidget {
   const FeedbackSystemDemoScreen({super.key});
 
   @override
-  State<FeedbackSystemDemoScreen> createState() =>
-      _FeedbackSystemDemoScreenState();
+  State<FeedbackSystemDemoScreen> createState() => _FeedbackSystemDemoScreenState();
 }
 
-class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen>
-    with FeedbackMixin {
+class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen> with FeedbackMixin {
   final String _selectedContentId = 'demo_dua_001';
   bool _showRatingWidget = false;
   double _currentRating = 0.0;
@@ -179,7 +177,7 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen>
                 ),
               ),
               child: Text(
-                'Ø±ÙŽØ¨ÙŽÙ‘Ù†ÙŽØ§ Ø¢ØªÙÙ†ÙŽØ§ ÙÙÙŠ Ø§Ù„Ø¯ÙÙ‘Ù†Ù’ÙŠÙŽØ§ Ø­ÙŽØ³ÙŽÙ†ÙŽØ©Ù‹ ÙˆÙŽÙÙÙŠ Ø§Ù„Ù’Ø¢Ø®ÙØ±ÙŽØ©Ù Ø­ÙŽØ³ÙŽÙ†ÙŽØ©Ù‹ ÙˆÙŽÙ‚ÙÙ†ÙŽØ§ Ø¹ÙŽØ°ÙŽØ§Ø¨ÙŽ Ø§Ù„Ù†ÙŽÙ‘Ø§Ø±Ù\n\n'
+                'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ\n\n'
                 'Our Lord, give us good in this world and good in the next world, and save us from the punishment of the Fire.',
                 style: theme.textTheme.bodyMedium,
                 textAlign: TextAlign.center,
@@ -525,8 +523,7 @@ class _FeedbackSystemDemoScreenState extends State<FeedbackSystemDemoScreen>
                   'View Analytics',
                   Icons.bar_chart,
                   () async {
-                    final analytics =
-                        await feedbackService.getAggregatedAnalytics();
+                    final analytics = await feedbackService.getAggregatedAnalytics();
                     debugPrint('Analytics: $analytics');
                     _showSnackbar('Analytics data retrieved!');
                   },

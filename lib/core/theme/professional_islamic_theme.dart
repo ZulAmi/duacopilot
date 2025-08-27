@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../typography/arabic_typography.dart';
 
 /// Professional Islamic Theme - Clean Muslim Green & White Design
 /// Traditional Islamic color palette with modern professional aesthetics
@@ -199,14 +202,111 @@ class ProfessionalIslamicTheme {
     color: textMuted,
   );
 
+  // Arabic-aware text style builders
+  static TextStyle getArabicDisplay1(BuildContext context) {
+    return GoogleFonts.notoSansArabic(
+      fontSize: 48,
+      fontWeight: FontWeight.w700,
+      letterSpacing: -0.025,
+      height: 1.3, // Increased for Arabic
+      color: textPrimary,
+    );
+  }
+
+  static TextStyle getArabicDisplay2(BuildContext context) {
+    return GoogleFonts.notoSansArabic(
+      fontSize: 36,
+      fontWeight: FontWeight.w600,
+      letterSpacing: -0.025,
+      height: 1.4, // Increased for Arabic
+      color: textPrimary,
+    );
+  }
+
+  static TextStyle getArabicHeading1(BuildContext context) {
+    return GoogleFonts.notoSansArabic(
+      fontSize: 28,
+      fontWeight: FontWeight.w600,
+      letterSpacing: -0.015,
+      height: 1.5, // Increased for Arabic
+      color: textPrimary,
+    );
+  }
+
+  static TextStyle getArabicHeading2(BuildContext context) {
+    return GoogleFonts.notoSansArabic(
+      fontSize: 24,
+      fontWeight: FontWeight.w600,
+      letterSpacing: -0.015,
+      height: 1.5, // Increased for Arabic
+      color: textPrimary,
+    );
+  }
+
+  static TextStyle getArabicHeading3(BuildContext context) {
+    return GoogleFonts.notoSansArabic(
+      fontSize: 20,
+      fontWeight: FontWeight.w600,
+      letterSpacing: -0.01,
+      height: 1.6, // Increased for Arabic
+      color: textPrimary,
+    );
+  }
+
+  static TextStyle getArabicBody1(BuildContext context) {
+    return GoogleFonts.notoSansArabic(
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0.0,
+      height: 1.7, // Increased for Arabic
+      color: textPrimary,
+    );
+  }
+
+  static TextStyle getArabicBody2(BuildContext context) {
+    return GoogleFonts.notoSansArabic(
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0.0,
+      height: 1.6, // Increased for Arabic
+      color: textSecondary,
+    );
+  }
+
+  static TextStyle getArabicCaption(BuildContext context) {
+    return GoogleFonts.notoSansArabic(
+      fontSize: 12,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0.025,
+      height: 1.5, // Increased for Arabic
+      color: textMuted,
+    );
+  }
+
+  // Smart text style that detects Arabic and uses appropriate font
+  static TextStyle getSmartTextStyle(String text, TextStyle baseStyle, BuildContext context) {
+    if (ArabicTypography.containsArabic(text)) {
+      // Use Arabic font for text containing Arabic characters
+      return GoogleFonts.notoSansArabic(
+        fontSize: baseStyle.fontSize,
+        fontWeight: baseStyle.fontWeight,
+        letterSpacing: baseStyle.letterSpacing,
+        height: (baseStyle.height ?? 1.0) * 1.2, // Increase line height for Arabic
+        color: baseStyle.color,
+      );
+    }
+    return baseStyle; // Use original style for non-Arabic text
+  }
+
   // Animation Durations - Professional & Responsive
   static const Duration animationFast = Duration(milliseconds: 150);
   static const Duration animationNormal = Duration(milliseconds: 250);
   static const Duration animationSlow = Duration(milliseconds: 400);
 
-  // Professional Islamic Theme Data
+  // Professional Islamic Theme Data with Arabic Support
   static ThemeData get professionalIslamicTheme => ThemeData(
         useMaterial3: true,
+        fontFamily: GoogleFonts.notoSansArabic().fontFamily,
         colorScheme: ColorScheme.fromSeed(
           seedColor: islamicGreen,
           brightness: Brightness.light,
@@ -220,6 +320,100 @@ class ProfessionalIslamicTheme {
           onError: pureWhite,
         ),
 
+        // Typography with Arabic support
+        textTheme: TextTheme(
+          displayLarge: GoogleFonts.notoSansArabic(
+            fontSize: 57,
+            fontWeight: FontWeight.w400,
+            height: 1.3,
+            color: textPrimary,
+          ),
+          displayMedium: GoogleFonts.notoSansArabic(
+            fontSize: 45,
+            fontWeight: FontWeight.w400,
+            height: 1.3,
+            color: textPrimary,
+          ),
+          displaySmall: GoogleFonts.notoSansArabic(
+            fontSize: 36,
+            fontWeight: FontWeight.w400,
+            height: 1.4,
+            color: textPrimary,
+          ),
+          headlineLarge: GoogleFonts.notoSansArabic(
+            fontSize: 32,
+            fontWeight: FontWeight.w600,
+            height: 1.4,
+            color: textPrimary,
+          ),
+          headlineMedium: GoogleFonts.notoSansArabic(
+            fontSize: 28,
+            fontWeight: FontWeight.w600,
+            height: 1.4,
+            color: textPrimary,
+          ),
+          headlineSmall: GoogleFonts.notoSansArabic(
+            fontSize: 24,
+            fontWeight: FontWeight.w600,
+            height: 1.5,
+            color: textPrimary,
+          ),
+          titleLarge: GoogleFonts.notoSansArabic(
+            fontSize: 22,
+            fontWeight: FontWeight.w600,
+            height: 1.5,
+            color: textPrimary,
+          ),
+          titleMedium: GoogleFonts.notoSansArabic(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+            height: 1.6,
+            color: textPrimary,
+          ),
+          titleSmall: GoogleFonts.notoSansArabic(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            height: 1.6,
+            color: textSecondary,
+          ),
+          bodyLarge: GoogleFonts.notoSansArabic(
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+            height: 1.7,
+            color: textPrimary,
+          ),
+          bodyMedium: GoogleFonts.notoSansArabic(
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+            height: 1.6,
+            color: textPrimary,
+          ),
+          bodySmall: GoogleFonts.notoSansArabic(
+            fontSize: 12,
+            fontWeight: FontWeight.w400,
+            height: 1.5,
+            color: textSecondary,
+          ),
+          labelLarge: GoogleFonts.notoSansArabic(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            height: 1.4,
+            color: textPrimary,
+          ),
+          labelMedium: GoogleFonts.notoSansArabic(
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+            height: 1.4,
+            color: textSecondary,
+          ),
+          labelSmall: GoogleFonts.notoSansArabic(
+            fontSize: 11,
+            fontWeight: FontWeight.w500,
+            height: 1.4,
+            color: textMuted,
+          ),
+        ),
+
         // AppBar Theme - Professional Islamic Style
         appBarTheme: AppBarTheme(
           backgroundColor: islamicGreen,
@@ -230,8 +424,7 @@ class ProfessionalIslamicTheme {
           titleTextStyle: heading2.copyWith(color: pureWhite),
           toolbarHeight: 64,
           shape: const RoundedRectangleBorder(
-            borderRadius:
-                BorderRadius.vertical(bottom: Radius.circular(radiusLg)),
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(radiusLg)),
           ),
         ),
 
@@ -279,18 +472,6 @@ class ProfessionalIslamicTheme {
           ),
         ),
 
-        // Text Theme - Professional Typography
-        textTheme: TextTheme(
-          displayLarge: display1,
-          displayMedium: display2,
-          headlineLarge: heading1,
-          headlineMedium: heading2,
-          headlineSmall: heading3,
-          bodyLarge: body1,
-          bodyMedium: body2,
-          bodySmall: caption,
-        ),
-
         // Input Decoration - Clean & Professional
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
@@ -336,8 +517,7 @@ class ProfessionalIslamicTheme {
           backgroundColor: backgroundAccent,
           selectedColor: islamicGreen,
           labelStyle: body2,
-          padding:
-              const EdgeInsets.symmetric(horizontal: space3, vertical: space1),
+          padding: const EdgeInsets.symmetric(horizontal: space3, vertical: space1),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(radiusXl),
           ),
