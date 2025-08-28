@@ -45,8 +45,7 @@ enum BackgroundTaskPriority { low, normal, high, urgent }
 /// Handles iOS/Android differences in Flutter RAG integration
 class PlatformOptimizationService {
   static PlatformOptimizationService? _instance;
-  static PlatformOptimizationService get instance =>
-      _instance ??= PlatformOptimizationService._();
+  static PlatformOptimizationService get instance => _instance ??= PlatformOptimizationService._();
 
   PlatformOptimizationService._();
 
@@ -60,8 +59,7 @@ class PlatformOptimizationService {
   bool _isInitialized = false;
 
   // Service instances
-  final FlutterLocalNotificationsPlugin _localNotifications =
-      FlutterLocalNotificationsPlugin();
+  final FlutterLocalNotificationsPlugin _localNotifications = FlutterLocalNotificationsPlugin();
   final QuickActions _quickActions = const QuickActions();
   final AppLinks _appLinks = AppLinks();
 
@@ -70,11 +68,11 @@ class PlatformOptimizationService {
     if (_isInitialized) return;
 
     try {
-      AppLogger.info('ðŸš€ Initializing platform-specific optimizations...');
+      AppLogger.info('🚀 Initializing platform-specific optimizations...');
 
       // Detect platform
       _platformType = _detectPlatform();
-      AppLogger.info('ðŸ“± Platform detected: ${_platformType.name}');
+      AppLogger.info('📱 Platform detected: ${_platformType.name}');
 
       // Get device and app info
       await _initializeDeviceInfo();
@@ -87,10 +85,10 @@ class PlatformOptimizationService {
       await _loadPlatformConfiguration();
 
       _isInitialized = true;
-      AppLogger.info('âœ… Platform optimization service initialized');
+      AppLogger.info('✅ Platform optimization service initialized');
     } catch (e) {
       AppLogger.error(
-        'âŒ Failed to initialize platform optimization service: $e',
+        '❌ Failed to initialize platform optimization service: $e',
       );
       rethrow;
     }
@@ -184,15 +182,14 @@ class PlatformOptimizationService {
       capabilities: capabilities,
     );
 
-    AppLogger.info(
-        'ðŸ“± Device: ${_deviceInfo.model} (${_deviceInfo.version})');
-    AppLogger.debug('ðŸ”§ Capabilities: ${_deviceInfo.capabilities}');
+    AppLogger.info('📱 Device: ${_deviceInfo.model} (${_deviceInfo.version})');
+    AppLogger.debug('🛠 Capabilities: ${_deviceInfo.capabilities}');
   }
 
   Future<void> _initializePackageInfo() async {
     _packageInfo = await PackageInfo.fromPlatform();
     AppLogger.info(
-      'ðŸ“¦ App: ${_packageInfo.appName} v${_packageInfo.version}+${_packageInfo.buildNumber}',
+      '📦 App: ${_packageInfo.appName} v${_packageInfo.version}+${_packageInfo.buildNumber}',
     );
   }
 
@@ -220,7 +217,7 @@ class PlatformOptimizationService {
     );
 
     await _localNotifications.initialize(settings);
-    AppLogger.info('ðŸ”” Notifications initialized');
+    AppLogger.info('🔔 Notifications initialized');
   }
 
   Future<void> _initializeQuickActions() async {
@@ -229,13 +226,13 @@ class PlatformOptimizationService {
     try {
       // Initialize with default shortcuts
       _quickActions.initialize((type) {
-        AppLogger.info('ðŸš€ Quick action triggered: $type');
+        AppLogger.info('🚀 Quick action triggered: $type');
         // Handle quick action
       });
 
-      AppLogger.info('âš¡ Quick actions initialized');
+      AppLogger.info('⚡ Quick actions initialized');
     } catch (e) {
-      AppLogger.warning('âš ï¸ Quick actions not available: $e');
+      AppLogger.warning('⚠️ Quick actions not available: $e');
     }
   }
 
@@ -244,11 +241,11 @@ class PlatformOptimizationService {
 
     // Listen for incoming links
     _appLinks.uriLinkStream.listen((Uri uri) {
-      AppLogger.info('ðŸ”— Deep link received: $uri');
+      AppLogger.info('🔗 Deep link received: $uri');
       _handleDeepLink(uri.toString());
     });
 
-    AppLogger.info('ðŸ”— Deep linking initialized');
+    AppLogger.info('🔗 Deep linking initialized');
   }
 
   Future<void> _loadPlatformConfiguration() async {
@@ -262,7 +259,7 @@ class PlatformOptimizationService {
     });
 
     AppLogger.debug(
-      'âš™ï¸ Platform configuration loaded: ${_platformConfig.keys.join(', ')}',
+      '⚙️ Platform configuration loaded: ${_platformConfig.keys.join(', ')}',
     );
   }
 
@@ -409,7 +406,7 @@ class PlatformOptimizationService {
 
     // This would integrate with audio_service for actual implementation
     AppLogger.info(
-      'ðŸŽµ Audio session configured: background=$backgroundPlayback',
+      '🎵 Audio session configured: background=$backgroundPlayback',
     );
   }
 
@@ -449,7 +446,7 @@ class PlatformOptimizationService {
       details,
     );
 
-    AppLogger.info('ðŸ”” Notification shown: $title');
+    AppLogger.info('🔔 Notification shown: $title');
   }
 
   /// Setup quick actions/shortcuts
@@ -482,10 +479,10 @@ class PlatformOptimizationService {
 
       await _quickActions.setShortcutItems(shortcutItems);
       AppLogger.info(
-        'âš¡ Quick actions setup with ${shortcutItems.length} items',
+        '⚡ Quick actions setup with ${shortcutItems.length} items',
       );
     } catch (e) {
-      AppLogger.warning('âš ï¸ Failed to setup quick actions: $e');
+      AppLogger.warning('⚠️ Failed to setup quick actions: $e');
     }
   }
 
@@ -515,7 +512,7 @@ class PlatformOptimizationService {
         break;
     }
 
-    AppLogger.info('ðŸ“¤ Du\'a shared via ${target.name}');
+    AppLogger.info('💬 Du\'a shared via ${target.name}');
   }
 
   String _formatDuaForSharing(DuaEntity dua, String? customMessage) {
@@ -526,25 +523,25 @@ class PlatformOptimizationService {
       buffer.writeln();
     }
 
-    buffer.writeln('ðŸ¤² ${dua.category}');
+    buffer.writeln('🤲 ${dua.category}');
     buffer.writeln();
 
     if (dua.arabicText.isNotEmpty) {
-      buffer.writeln('ðŸ“– ${dua.arabicText}');
+      buffer.writeln('📖 ${dua.arabicText}');
       buffer.writeln();
     }
 
     if (dua.translation.isNotEmpty) {
-      buffer.writeln('ðŸ”¤ ${dua.translation}');
+      buffer.writeln('🔍 ${dua.translation}');
       buffer.writeln();
     }
 
     if (dua.transliteration.isNotEmpty) {
-      buffer.writeln('ðŸ—£ï¸ ${dua.transliteration}');
+      buffer.writeln('🗣️ ${dua.transliteration}');
       buffer.writeln();
     }
 
-    buffer.writeln('ðŸ“± Shared from DuaCopilot - Islamic AI Assistant');
+    buffer.writeln('📱 Shared from DuaCopilot - Islamic AI Assistant');
 
     return buffer.toString();
   }
@@ -597,7 +594,7 @@ class PlatformOptimizationService {
 
   /// Handle deep link
   Future<void> _handleDeepLink(String url) async {
-    AppLogger.info('ðŸ”— Processing deep link: $url');
+    AppLogger.info('🔗 Processing deep link: $url');
 
     final uri = Uri.parse(url);
     final pathSegments = uri.pathSegments;
@@ -608,21 +605,21 @@ class PlatformOptimizationService {
       case 'dua':
         if (pathSegments.length > 1) {
           final duaId = pathSegments[1];
-          AppLogger.info('ðŸ“– Opening Du\'a: $duaId');
+          AppLogger.info('📖 Opening Du\'a: $duaId');
           // Navigate to specific dua
         }
         break;
       case 'search':
         if (pathSegments.length > 1) {
           final query = pathSegments[1];
-          AppLogger.info('ðŸ” Searching for: $query');
+          AppLogger.info('🔍 Searching for: $query');
           // Perform search
         }
         break;
       case 'share':
         if (pathSegments.length > 1) {
           final shareType = pathSegments[1];
-          AppLogger.info('ðŸ“¤ Opening share type: $shareType');
+          AppLogger.info('💬 Opening share type: $shareType');
           // Handle shared content
         }
         break;
@@ -703,6 +700,6 @@ class PlatformOptimizationService {
   /// Cleanup resources
   Future<void> dispose() async {
     _isInitialized = false;
-    AppLogger.info('ðŸ§¹ Platform optimization service disposed');
+    AppLogger.info('🧹 Platform optimization service disposed');
   }
 }

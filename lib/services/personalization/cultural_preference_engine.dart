@@ -1,7 +1,9 @@
-import 'dart:convert';
 import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import 'personalization_models.dart';
 
 /// Cultural preference engine for learning and adapting to user's cultural and linguistic preferences
@@ -20,10 +22,9 @@ class CulturalPreferenceEngine {
       // Load existing cultural preferences
       await _loadPreferences(userId, prefs);
 
-      debugPrint(
-          'âœ… Cultural preference engine initialized for user: $userId');
+      debugPrint('✅ Cultural preference engine initialized for user: $userId');
     } catch (e) {
-      debugPrint('âŒ Error initializing cultural preference engine: $e');
+      debugPrint('❌ Error initializing cultural preference engine: $e');
       rethrow;
     }
   }
@@ -48,12 +49,10 @@ class CulturalPreferenceEngine {
 
       // Build updated preferences
       final updatedPrefs = currentPrefs.copyWith(
-        preferredLanguages:
-            update.preferredLanguages ?? currentPrefs.preferredLanguages,
+        preferredLanguages: update.preferredLanguages ?? currentPrefs.preferredLanguages,
         primaryLanguage: update.primaryLanguage ?? currentPrefs.primaryLanguage,
         culturalTags: update.culturalTags ?? currentPrefs.culturalTags,
-        languagePreferences:
-            update.languagePreferences ?? currentPrefs.languagePreferences,
+        languagePreferences: update.languagePreferences ?? currentPrefs.languagePreferences,
         customPreferences: {
           ...currentPrefs.customPreferences,
           ...(update.customPreferences ?? {}),
@@ -63,10 +62,9 @@ class CulturalPreferenceEngine {
 
       await _savePreferences(updatedPrefs, prefs);
 
-      debugPrint(
-          'ðŸŒ Updated cultural preferences for user: ${update.userId}');
+      debugPrint('🌍 Updated cultural preferences for user: ${update.userId}');
     } catch (e) {
-      debugPrint('âŒ Error updating cultural preferences: $e');
+      debugPrint('❌ Error updating cultural preferences: $e');
     }
   }
 
@@ -87,10 +85,9 @@ class CulturalPreferenceEngine {
         await _updateLanguagePreferences(interaction, prefs);
       }
 
-      debugPrint(
-          'ðŸŒ Recorded cultural interaction for: ${interaction.userId}');
+      debugPrint('🌐 Recorded cultural interaction for: ${interaction.userId}');
     } catch (e) {
-      debugPrint('âŒ Error recording cultural interaction: $e');
+      debugPrint('❌ Error recording cultural interaction: $e');
     }
   }
 
@@ -98,8 +95,7 @@ class CulturalPreferenceEngine {
   Future<String> detectPreferredLanguage(String userId) async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final interactions =
-          prefs.getStringList('$_languageInteractionsKey$userId') ?? [];
+      final interactions = prefs.getStringList('$_languageInteractionsKey$userId') ?? [];
 
       final languageFrequency = <String, int>{};
 
@@ -109,8 +105,7 @@ class CulturalPreferenceEngine {
           final language = data['language'] as String?;
 
           if (language != null) {
-            languageFrequency[language] =
-                (languageFrequency[language] ?? 0) + 1;
+            languageFrequency[language] = (languageFrequency[language] ?? 0) + 1;
           }
         } catch (e) {
           continue; // Skip invalid entries
@@ -123,13 +118,13 @@ class CulturalPreferenceEngine {
           (a, b) => a.value > b.value ? a : b,
         );
 
-        debugPrint('ðŸ” Detected preferred language: ${mostUsed.key}');
+        debugPrint('🔍 Detected preferred language: ${mostUsed.key}');
         return mostUsed.key;
       }
 
       return 'en'; // Default to English
     } catch (e) {
-      debugPrint('âŒ Error detecting preferred language: $e');
+      debugPrint('❌ Error detecting preferred language: $e');
       return 'en';
     }
   }
@@ -155,7 +150,7 @@ class CulturalPreferenceEngine {
 
       return recommendations;
     } catch (e) {
-      debugPrint('âŒ Error getting cultural recommendations: $e');
+      debugPrint('❌ Error getting cultural recommendations: $e');
       return [];
     }
   }
@@ -164,8 +159,7 @@ class CulturalPreferenceEngine {
   Future<void> learnFromPatterns(String userId) async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final culturalData =
-          prefs.getStringList('$_culturalContextKey$userId') ?? [];
+      final culturalData = prefs.getStringList('$_culturalContextKey$userId') ?? [];
 
       if (culturalData.isEmpty) return;
 
@@ -186,13 +180,11 @@ class CulturalPreferenceEngine {
           }
 
           if (language != null) {
-            languageFrequency[language] =
-                (languageFrequency[language] ?? 0) + 1;
+            languageFrequency[language] = (languageFrequency[language] ?? 0) + 1;
 
             if (timeOfDay != null) {
               timeOfDayLanguage[timeOfDay] ??= {};
-              timeOfDayLanguage[timeOfDay]![language] =
-                  (timeOfDayLanguage[timeOfDay]![language] ?? 0) + 1;
+              timeOfDayLanguage[timeOfDay]![language] = (timeOfDayLanguage[timeOfDay]![language] ?? 0) + 1;
             }
           }
         } catch (e) {
@@ -209,9 +201,9 @@ class CulturalPreferenceEngine {
         prefs,
       );
 
-      debugPrint('ðŸ§  Learned cultural patterns for user: $userId');
+      debugPrint('🧠 Learned cultural patterns for user: $userId');
     } catch (e) {
-      debugPrint('âŒ Error learning from cultural patterns: $e');
+      debugPrint('❌ Error learning from cultural patterns: $e');
     }
   }
 
@@ -232,9 +224,9 @@ class CulturalPreferenceEngine {
         await _cleanupDataForKey(key, cutoffDate, prefs);
       }
 
-      debugPrint('ðŸ§¹ Cleaned up old cultural data before: $cutoffDate');
+      debugPrint('🧹 Cleaned up old cultural data before: $cutoffDate');
     } catch (e) {
-      debugPrint('âŒ Error cleaning up cultural data: $e');
+      debugPrint('❌ Error cleaning up cultural data: $e');
     }
   }
 
@@ -260,7 +252,7 @@ class CulturalPreferenceEngine {
         return defaultPrefs;
       }
     } catch (e) {
-      debugPrint('âŒ Error loading cultural preferences: $e');
+      debugPrint('❌ Error loading cultural preferences: $e');
       return CulturalPreferences.defaultFor(userId);
     }
   }
@@ -278,7 +270,7 @@ class CulturalPreferenceEngine {
       );
       _preferencesCache[preferences.userId] = preferences;
     } catch (e) {
-      debugPrint('âŒ Error saving cultural preferences: $e');
+      debugPrint('❌ Error saving cultural preferences: $e');
     }
   }
 
@@ -315,8 +307,7 @@ class CulturalPreferenceEngine {
     SharedPreferences prefs,
   ) async {
     try {
-      final contextHistory =
-          prefs.getStringList('$_culturalContextKey$userId') ?? [];
+      final contextHistory = prefs.getStringList('$_culturalContextKey$userId') ?? [];
 
       contextHistory.add(json.encode(context));
 
@@ -327,7 +318,7 @@ class CulturalPreferenceEngine {
 
       await prefs.setStringList('$_culturalContextKey$userId', contextHistory);
     } catch (e) {
-      debugPrint('âŒ Error recording cultural context: $e');
+      debugPrint('❌ Error recording cultural context: $e');
     }
   }
 
@@ -364,7 +355,7 @@ class CulturalPreferenceEngine {
         interactions,
       );
     } catch (e) {
-      debugPrint('âŒ Error updating language preferences: $e');
+      debugPrint('❌ Error updating language preferences: $e');
     }
   }
 
@@ -393,9 +384,7 @@ class CulturalPreferenceEngine {
       // Update primary language if we have enough data
       String? newPrimaryLanguage;
       if (languageFrequency.isNotEmpty) {
-        newPrimaryLanguage = languageFrequency.entries
-            .reduce((a, b) => a.value > b.value ? a : b)
-            .key;
+        newPrimaryLanguage = languageFrequency.entries.reduce((a, b) => a.value > b.value ? a : b).key;
       }
 
       // Update cultural tags based on regions
@@ -403,17 +392,14 @@ class CulturalPreferenceEngine {
 
       final updatedPrefs = currentPrefs.copyWith(
         primaryLanguage: newPrimaryLanguage ?? currentPrefs.primaryLanguage,
-        languagePreferences: updatedLanguagePrefs.isNotEmpty
-            ? updatedLanguagePrefs
-            : currentPrefs.languagePreferences,
-        culturalTags:
-            culturalTags.isNotEmpty ? culturalTags : currentPrefs.culturalTags,
+        languagePreferences: updatedLanguagePrefs.isNotEmpty ? updatedLanguagePrefs : currentPrefs.languagePreferences,
+        culturalTags: culturalTags.isNotEmpty ? culturalTags : currentPrefs.culturalTags,
         lastUpdated: DateTime.now(),
       );
 
       await _savePreferences(updatedPrefs, prefs);
     } catch (e) {
-      debugPrint('âŒ Error updating preferences from patterns: $e');
+      debugPrint('❌ Error updating preferences from patterns: $e');
     }
   }
 
@@ -424,8 +410,7 @@ class CulturalPreferenceEngine {
     SharedPreferences prefs,
   ) async {
     try {
-      if (key.contains('language_interactions_') ||
-          key.contains('cultural_context_')) {
+      if (key.contains('language_interactions_') || key.contains('cultural_context_')) {
         // Clean up interaction/context data
         final data = prefs.getStringList(key) ?? [];
         final filteredData = <String>[];
@@ -446,7 +431,7 @@ class CulturalPreferenceEngine {
         await prefs.setStringList(key, filteredData);
       }
     } catch (e) {
-      debugPrint('âŒ Error cleaning up data for key $key: $e');
+      debugPrint('❌ Error cleaning up data for key $key: $e');
     }
   }
 

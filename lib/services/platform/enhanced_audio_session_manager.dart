@@ -6,13 +6,11 @@ import 'platform_optimization_service.dart';
 /// Enhanced audio session manager with platform-specific optimizations
 class EnhancedAudioSessionManager {
   static EnhancedAudioSessionManager? _instance;
-  static EnhancedAudioSessionManager get instance =>
-      _instance ??= EnhancedAudioSessionManager._();
+  static EnhancedAudioSessionManager get instance => _instance ??= EnhancedAudioSessionManager._();
 
   EnhancedAudioSessionManager._();
 
-  final PlatformOptimizationService _platformService =
-      PlatformOptimizationService.instance;
+  final PlatformOptimizationService _platformService = PlatformOptimizationService.instance;
 
   // Audio session configuration
   Map<String, dynamic> _currentConfig = {};
@@ -27,7 +25,7 @@ class EnhancedAudioSessionManager {
     if (_isInitialized) return;
 
     try {
-      AppLogger.info('ðŸŽµ Initializing enhanced audio session manager...');
+      AppLogger.info('🎵 Initializing enhanced audio session manager...');
 
       // Configure based on platform capabilities
       await _configurePlatformSpecificAudio();
@@ -36,9 +34,9 @@ class EnhancedAudioSessionManager {
       await _setupAudioInterruption();
 
       _isInitialized = true;
-      AppLogger.info('âœ… Enhanced audio session manager initialized');
+      AppLogger.info('✅ Enhanced audio session manager initialized');
     } catch (e) {
-      AppLogger.error('âŒ Failed to initialize audio session manager: $e');
+      AppLogger.error('❌ Failed to initialize audio session manager: $e');
       rethrow;
     }
   }
@@ -61,8 +59,8 @@ class EnhancedAudioSessionManager {
         break;
     }
 
-    AppLogger.debug('ðŸŽµ Audio configured for: ${platformType.name}');
-    AppLogger.debug('ðŸ”§ Configuration: $_currentConfig');
+    AppLogger.debug('🎵 Audio configured for: ${platformType.name}');
+    AppLogger.debug('🛠️ Configuration: $_currentConfig');
   }
 
   Future<void> _configureIOSAudio() async {
@@ -85,16 +83,14 @@ class EnhancedAudioSessionManager {
   }
 
   Future<void> _configureAndroidAudio() async {
-    final apiLevel =
-        _platformService.deviceInfo.capabilities['apiLevel'] as int? ?? 21;
+    final apiLevel = _platformService.deviceInfo.capabilities['apiLevel'] as int? ?? 21;
 
     _currentConfig = {
       'audioFocus': 'AUDIOFOCUS_GAIN',
       'contentType': 'AUDIO_CONTENT_TYPE_SPEECH',
       'usage': 'AUDIO_USAGE_MEDIA',
       'streamType': 'STREAM_MUSIC',
-      'foregroundServiceType':
-          apiLevel >= 29 ? 'FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK' : null,
+      'foregroundServiceType': apiLevel >= 29 ? 'FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK' : null,
       'backgroundAudio': true,
       'wakeLockEnabled': true,
       'becomingNoisyHandling': true,
@@ -128,72 +124,71 @@ class EnhancedAudioSessionManager {
   Future<void> _setIOSAudioSession() async {
     try {
       // This would use platform channels to configure iOS AVAudioSession
-      AppLogger.info('ðŸŽ Configuring iOS audio session...');
+      AppLogger.info('🍎 Configuring iOS audio session...');
 
       // Configure for background playback
       if (_currentConfig['backgroundAudio'] == true) {
         _isBackgroundAudioEnabled = true;
-        AppLogger.info('ðŸŽµ iOS background audio enabled');
+        AppLogger.info('🎵 iOS background audio enabled');
       }
 
       // Setup AirPlay and CarPlay support
       if (_currentConfig['airPlaySupport'] == true) {
-        AppLogger.info('ðŸ“¡ AirPlay support enabled');
+        AppLogger.info('📡 AirPlay support enabled');
       }
 
       if (_currentConfig['carPlaySupport'] == true) {
-        AppLogger.info('ðŸš— CarPlay support enabled');
+        AppLogger.info('🚗 CarPlay support enabled');
       }
     } catch (e) {
-      AppLogger.warning('âš ï¸ iOS audio session configuration failed: $e');
+      AppLogger.warning('⚠️ iOS audio session configuration failed: $e');
     }
   }
 
   Future<void> _setAndroidAudioSession() async {
     try {
-      AppLogger.info('ðŸ¤– Configuring Android audio session...');
+      AppLogger.info('🤖 Configuring Android audio session...');
 
       // Configure audio focus
       final audioFocus = _currentConfig['audioFocus'] as String;
-      AppLogger.debug('ðŸ”Š Audio focus: $audioFocus');
+      AppLogger.debug('🔊 Audio focus: $audioFocus');
 
       // Configure foreground service for background playback
       if (_currentConfig['backgroundAudio'] == true) {
         _isBackgroundAudioEnabled = true;
         AppLogger.info(
-          'ðŸŽµ Android background audio with foreground service enabled',
+          '🎵 Android background audio with foreground service enabled',
         );
 
         final serviceType = _currentConfig['foregroundServiceType'];
         if (serviceType != null) {
-          AppLogger.debug('ðŸ”§ Foreground service type: $serviceType');
+          AppLogger.debug('🛠️ Foreground service type: $serviceType');
         }
       }
 
       // Configure wake lock
       if (_currentConfig['wakeLockEnabled'] == true) {
-        AppLogger.info('â° Wake lock enabled for continuous playback');
+        AppLogger.info('⏰ Wake lock enabled for continuous playback');
       }
     } catch (e) {
-      AppLogger.warning(
-          'âš ï¸ Android audio session configuration failed: $e');
+      AppLogger.warning('⚠️ Android audio session configuration failed: $e');
     }
   }
 
   Future<void> _setWebAudioSession() async {
     try {
-      AppLogger.info('ðŸŒ Configuring Web audio session...');
+      AppLogger.info('🌐 Configuring Web audio session...');
 
       // Configure Media Session API
       if (_currentConfig['mediaSession'] == true) {
-        AppLogger.info('ðŸ“± Media Session API enabled');
+        AppLogger.info('📱 Media Session API enabled');
       }
 
       // Configure autoplay policy
       final autoplay = _currentConfig['autoplay'] as String;
-      AppLogger.debug('â–¶ï¸ Autoplay policy: $autoplay');
+      AppLogger.debug('▶️ Autoplay policy: $autoplay');
     } catch (e) {
-      AppLogger.warning('âš ï¸ Web audio session configuration failed: $e');
+      AppLogger.warning('⚠️ Web audio session configuration failed: $e');
     }
   }
 
@@ -213,24 +208,24 @@ class EnhancedAudioSessionManager {
           break;
       }
     } catch (e) {
-      AppLogger.warning('âš ï¸ Audio interruption setup failed: $e');
+      AppLogger.warning('⚠️ Audio interruption setup failed: $e');
     }
   }
 
   Future<void> _setupIOSInterruptionHandling() async {
-    AppLogger.info('ðŸŽ Setting up iOS audio interruption handling...');
+    AppLogger.info('🍎 Setting up iOS audio interruption handling...');
 
     // This would listen to AVAudioSession interruption notifications
     // For now, we'll simulate the setup
-    AppLogger.debug('ðŸ”„ iOS interruption handling configured');
+    AppLogger.debug('🔧 iOS interruption handling configured');
   }
 
   Future<void> _setupAndroidInterruptionHandling() async {
-    AppLogger.info('ðŸ¤– Setting up Android audio interruption handling...');
+    AppLogger.info('🤖 Setting up Android audio interruption handling...');
 
     // This would listen to AudioManager focus changes
     // For now, we'll simulate the setup
-    AppLogger.debug('ðŸ”„ Android audio focus handling configured');
+    AppLogger.debug('🔧 Android audio focus handling configured');
   }
 
   /// Configure audio session for specific playback requirements
@@ -245,9 +240,9 @@ class EnhancedAudioSessionManager {
     }
 
     try {
-      AppLogger.info('ðŸŽµ Configuring audio session for playback...');
+      AppLogger.info('🎵 Configuring audio session for playback...');
       AppLogger.debug(
-        'ðŸ”§ Background: $backgroundPlayback, Interruption: $interruptionHandling',
+        '🔧 Background: $backgroundPlayback, Interruption: $interruptionHandling',
       );
 
       // Update configuration
@@ -269,9 +264,9 @@ class EnhancedAudioSessionManager {
       _currentConfig = newConfig;
       _isBackgroundAudioEnabled = backgroundPlayback;
 
-      AppLogger.info('âœ… Audio session configured for playback');
+      AppLogger.info('✅ Audio session configured for playback');
     } catch (e) {
-      AppLogger.error('âŒ Failed to configure audio session: $e');
+      AppLogger.error('❌ Failed to configure audio session: $e');
       rethrow;
     }
   }
@@ -296,17 +291,17 @@ class EnhancedAudioSessionManager {
 
   Future<void> _applyIOSConfiguration(Map<String, dynamic> config) async {
     // Apply iOS-specific configuration changes
-    AppLogger.debug('ðŸŽ Applying iOS configuration changes');
+    AppLogger.debug('🍎 Applying iOS configuration changes');
   }
 
   Future<void> _applyAndroidConfiguration(Map<String, dynamic> config) async {
     // Apply Android-specific configuration changes
-    AppLogger.debug('ðŸ¤– Applying Android configuration changes');
+    AppLogger.debug('🤖 Applying Android configuration changes');
   }
 
   Future<void> _applyWebConfiguration(Map<String, dynamic> config) async {
     // Apply Web-specific configuration changes
-    AppLogger.debug('ðŸŒ Applying Web configuration changes');
+    AppLogger.debug('🌐 Applying Web configuration changes');
   }
 
   /// Handle audio interruption (phone calls, other apps, etc.)
@@ -318,26 +313,25 @@ class EnhancedAudioSessionManager {
 
     try {
       if (shouldPause) {
-        AppLogger.info('â¸ï¸ Handling audio interruption - pausing playback');
+        AppLogger.info('⏸️ Handling audio interruption - pausing playback');
         await _pauseForInterruption();
       } else if (shouldResume) {
-        AppLogger.info(
-            'â–¶ï¸ Handling audio interruption - resuming playback');
+        AppLogger.info('▶️ Handling audio interruption - resuming playback');
         await _resumeAfterInterruption();
       }
     } catch (e) {
-      AppLogger.error('âŒ Failed to handle audio interruption: $e');
+      AppLogger.error('❌ Failed to handle audio interruption: $e');
     }
   }
 
   Future<void> _pauseForInterruption() async {
     // Implement platform-specific pause logic
-    AppLogger.debug('â¸ï¸ Pausing audio for interruption');
+    AppLogger.debug('⏸️ Pausing audio for interruption');
   }
 
   Future<void> _resumeAfterInterruption() async {
     // Implement platform-specific resume logic
-    AppLogger.debug('â–¶ï¸ Resuming audio after interruption');
+    AppLogger.debug('▶️ Resuming audio after interruption');
   }
 
   /// Enable or disable background audio
@@ -350,7 +344,7 @@ class EnhancedAudioSessionManager {
 
     try {
       AppLogger.info(
-        'ðŸŽµ ${enabled ? 'Enabling' : 'Disabling'} background audio...',
+        '🎵 ${enabled ? 'Enabling' : 'Disabling'} background audio...',
       );
 
       await configureForPlayback(
@@ -358,10 +352,9 @@ class EnhancedAudioSessionManager {
         interruptionHandling: enabled,
       );
 
-      AppLogger.info(
-          'âœ… Background audio ${enabled ? 'enabled' : 'disabled'}');
+      AppLogger.info('✅ Background audio ${enabled ? 'enabled' : 'disabled'}');
     } catch (e) {
-      AppLogger.error('âŒ Failed to set background audio: $e');
+      AppLogger.error('❌ Failed to set background audio: $e');
       rethrow;
     }
   }
@@ -428,6 +421,6 @@ class EnhancedAudioSessionManager {
     _isBackgroundAudioEnabled = false;
     _currentConfig.clear();
 
-    AppLogger.info('ðŸ§¹ Enhanced audio session manager disposed');
+    AppLogger.info('🧹 Enhanced audio session manager disposed');
   }
 }

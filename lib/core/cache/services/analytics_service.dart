@@ -1,7 +1,8 @@
-import 'package:duacopilot/core/logging/app_logger.dart';
-
 import 'dart:async';
 import 'dart:collection';
+
+import 'package:duacopilot/core/logging/app_logger.dart';
+
 // Note: Firebase Analytics will be added when firebase_analytics package is available
 // import 'package:firebase_analytics/firebase_analytics.dart';
 import '../models/cache_models.dart';
@@ -22,8 +23,7 @@ class MockFirebaseAnalytics {
 
 /// Analytics service for cache performance and popular query tracking
 class CacheAnalyticsService {
-  static final MockFirebaseAnalytics _analytics =
-      MockFirebaseAnalytics.instance;
+  static final MockFirebaseAnalytics _analytics = MockFirebaseAnalytics.instance;
 
   // In-memory analytics data
   static final Map<String, QueryAnalytics> _queryAnalytics = {};
@@ -243,38 +243,29 @@ class CacheAnalyticsService {
 
   /// Get cache performance metrics
   static CachePerformanceMetrics getPerformanceMetrics({Duration? timeWindow}) {
-    final cutoffTime = timeWindow != null
-        ? DateTime.now().subtract(timeWindow)
-        : DateTime.fromMillisecondsSinceEpoch(0);
+    final cutoffTime =
+        timeWindow != null ? DateTime.now().subtract(timeWindow) : DateTime.fromMillisecondsSinceEpoch(0);
 
-    final relevantEvents = _eventQueue
-        .where((event) => event.timestamp.isAfter(cutoffTime))
-        .toList();
+    final relevantEvents = _eventQueue.where((event) => event.timestamp.isAfter(cutoffTime)).toList();
 
-    final hitEvents =
-        relevantEvents.where((e) => e.type == CacheEventType.hit).toList();
+    final hitEvents = relevantEvents.where((e) => e.type == CacheEventType.hit).toList();
 
-    final missEvents =
-        relevantEvents.where((e) => e.type == CacheEventType.miss).toList();
+    final missEvents = relevantEvents.where((e) => e.type == CacheEventType.miss).toList();
 
     final totalRequests = hitEvents.length + missEvents.length;
     final hitRatio = totalRequests > 0 ? hitEvents.length / totalRequests : 0.0;
 
     final averageHitTime = hitEvents.isNotEmpty
         ? Duration(
-            microseconds: hitEvents
-                    .map((e) => e.retrievalTime?.inMicroseconds ?? 0)
-                    .reduce((a, b) => a + b) ~/
-                hitEvents.length,
+            microseconds:
+                hitEvents.map((e) => e.retrievalTime?.inMicroseconds ?? 0).reduce((a, b) => a + b) ~/ hitEvents.length,
           )
         : Duration.zero;
 
     final averageMissTime = missEvents.isNotEmpty
         ? Duration(
-            microseconds: missEvents
-                    .map((e) => e.apiCallTime?.inMicroseconds ?? 0)
-                    .reduce((a, b) => a + b) ~/
-                missEvents.length,
+            microseconds:
+                missEvents.map((e) => e.apiCallTime?.inMicroseconds ?? 0).reduce((a, b) => a + b) ~/ missEvents.length,
           )
         : Duration.zero;
 
@@ -291,11 +282,9 @@ class CacheAnalyticsService {
       );
 
       if (event.type == CacheEventType.hit) {
-        strategyCounts[event.strategy!]!['hits'] =
-            strategyCounts[event.strategy!]!['hits']! + 1;
+        strategyCounts[event.strategy!]!['hits'] = strategyCounts[event.strategy!]!['hits']! + 1;
       } else if (event.type == CacheEventType.miss) {
-        strategyCounts[event.strategy!]!['misses'] =
-            strategyCounts[event.strategy!]!['misses']! + 1;
+        strategyCounts[event.strategy!]!['misses'] = strategyCounts[event.strategy!]!['misses']! + 1;
       }
     }
 
@@ -342,11 +331,9 @@ class CacheAnalyticsService {
       trendingQueries.putIfAbsent(query, () => TrendData());
 
       // Count accesses by day
-      final dayKey =
-          '${event.timestamp.year}-${event.timestamp.month}-${event.timestamp.day}';
+      final dayKey = '${event.timestamp.year}-${event.timestamp.month}-${event.timestamp.day}';
       trendingQueries[query]!.dailyCounts.putIfAbsent(dayKey, () => 0);
-      trendingQueries[query]!.dailyCounts[dayKey] =
-          trendingQueries[query]!.dailyCounts[dayKey]! + 1;
+      trendingQueries[query]!.dailyCounts[dayKey] = trendingQueries[query]!.dailyCounts[dayKey]! + 1;
     }
 
     // Calculate trends
@@ -439,22 +426,17 @@ class CacheAnalyticsService {
   static QueryType _detectQueryType(String query) {
     final lowerQuery = query.toLowerCase();
 
-    if (lowerQuery.contains('dua') || lowerQuery.contains('Ø¯Ø¹Ø§Ø¡')) {
+    if (lowerQuery.contains('dua') || lowerQuery.contains('دعاء')) {
       return QueryType.dua;
-    } else if (lowerQuery.contains('quran') ||
-        lowerQuery.contains('Ù‚Ø±Ø¢Ù†')) {
+    } else if (lowerQuery.contains('quran') || lowerQuery.contains('قرآن')) {
       return QueryType.quran;
-    } else if (lowerQuery.contains('hadith') ||
-        lowerQuery.contains('Ø­Ø¯ÙŠØ«')) {
+    } else if (lowerQuery.contains('hadith') || lowerQuery.contains('حديث')) {
       return QueryType.hadith;
-    } else if (lowerQuery.contains('prayer') ||
-        lowerQuery.contains('ØµÙ„Ø§Ø©')) {
+    } else if (lowerQuery.contains('prayer') || lowerQuery.contains('صلاة')) {
       return QueryType.prayer;
-    } else if (lowerQuery.contains('fasting') ||
-        lowerQuery.contains('ØµÙˆÙ…')) {
+    } else if (lowerQuery.contains('fasting') || lowerQuery.contains('صوم')) {
       return QueryType.fasting;
-    } else if (lowerQuery.contains('charity') ||
-        lowerQuery.contains('Ø²ÙƒØ§Ø©')) {
+    } else if (lowerQuery.contains('charity') || lowerQuery.contains('زكاة')) {
       return QueryType.charity;
     } else if (lowerQuery.contains('hajj') || lowerQuery.contains('Ø­Ø¬')) {
       return QueryType.pilgrimage;
@@ -468,9 +450,7 @@ class CacheAnalyticsService {
     final frequencyScore = analytics.accessCount.toDouble();
     final performanceBonus = analytics.cacheHitRatio * 10;
 
-    return (frequencyScore * 0.6) +
-        (recencyBonus * 0.3) +
-        (performanceBonus * 0.1);
+    return (frequencyScore * 0.6) + (recencyBonus * 0.3) + (performanceBonus * 0.1);
   }
 
   static double _calculateRecencyBonus(DateTime lastAccessed) {
@@ -483,8 +463,7 @@ class CacheAnalyticsService {
       return TrendCalculation(score: 0, growthRate: 0, isIncreasing: false);
     }
 
-    final sortedEntries = dailyCounts.entries.toList()
-      ..sort((a, b) => a.key.compareTo(b.key));
+    final sortedEntries = dailyCounts.entries.toList()..sort((a, b) => a.key.compareTo(b.key));
 
     final values = sortedEntries.map((e) => e.value.toDouble()).toList();
 

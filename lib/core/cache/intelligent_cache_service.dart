@@ -1,27 +1,26 @@
-import 'package:duacopilot/core/logging/app_logger.dart';
-
 import 'dart:async';
 import 'dart:convert';
+
+import 'package:duacopilot/core/logging/app_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'models/cache_models.dart';
-import 'services/semantic_hash_service.dart';
-import 'services/compression_service.dart';
-import 'services/analytics_service.dart';
+
 import '../../domain/entities/rag_response.dart';
+import 'models/cache_models.dart';
+import 'services/analytics_service.dart';
+import 'services/compression_service.dart';
+import 'services/semantic_hash_service.dart';
 
 /// Intelligent caching system for RAG data with semantic deduplication,
 /// TTL-based expiration, compression, and analytics
 class IntelligentCacheService {
   static IntelligentCacheService? _instance;
-  static IntelligentCacheService get instance =>
-      _instance ??= IntelligentCacheService._();
+  static IntelligentCacheService get instance => _instance ??= IntelligentCacheService._();
 
   IntelligentCacheService._();
 
   // Cache storage
   final Map<String, CacheEntry> _cache = {};
-  final Map<String, List<String>> _semanticIndex =
-      {}; // semantic_hash -> [keys]
+  final Map<String, List<String>> _semanticIndex = {}; // semantic_hash -> [keys]
   final Map<String, Timer> _expirationTimers = {};
 
   // Configuration
@@ -67,8 +66,7 @@ class IntelligentCacheService {
     final semanticHash = SemanticHashService.generateSemanticHash(
       query,
       language,
-      similarityThreshold:
-          strategy.parameters['semantic_similarity_threshold'] ?? 0.8,
+      similarityThreshold: strategy.parameters['semantic_similarity_threshold'] ?? 0.8,
     );
 
     // Check for similar queries
@@ -157,15 +155,13 @@ class IntelligentCacheService {
 
     try {
       final detectedType = queryType ?? _detectQueryType(query);
-      final strategy =
-          _strategies[detectedType] ?? CacheStrategy.generalQueries;
+      final strategy = _strategies[detectedType] ?? CacheStrategy.generalQueries;
 
       // Generate semantic hash for lookup
       final semanticHash = SemanticHashService.generateSemanticHash(
         query,
         language,
-        similarityThreshold:
-            strategy.parameters['semantic_similarity_threshold'] ?? 0.8,
+        similarityThreshold: strategy.parameters['semantic_similarity_threshold'] ?? 0.8,
       );
 
       // Try exact key match first
@@ -223,8 +219,7 @@ class IntelligentCacheService {
       }
 
       // Reconstruct RagResponse
-      final ragData =
-          updatedEntry.metadata['rag_response'] as Map<String, dynamic>;
+      final ragData = updatedEntry.metadata['rag_response'] as Map<String, dynamic>;
       final ragResponse = RagResponse.fromJson({
         ...ragData,
         'response': responseData, // Use decompressed data
@@ -365,11 +360,8 @@ class IntelligentCacheService {
         limit: queryLimit ?? 50,
       );
 
-      final filteredQueries = queryTypes != null
-          ? popularQueries
-              .where((q) => queryTypes.contains(q.queryType))
-              .toList()
-          : popularQueries;
+      final filteredQueries =
+          queryTypes != null ? popularQueries.where((q) => queryTypes.contains(q.queryType)).toList() : popularQueries;
 
       int successCount = 0;
       int failureCount = 0;
@@ -420,10 +412,8 @@ class IntelligentCacheService {
 
     final averageRetrievalTime = _retrievalTimes.isNotEmpty
         ? Duration(
-            microseconds: _retrievalTimes
-                    .map((d) => d.inMicroseconds)
-                    .reduce((a, b) => a + b) ~/
-                _retrievalTimes.length,
+            microseconds:
+                _retrievalTimes.map((d) => d.inMicroseconds).reduce((a, b) => a + b) ~/ _retrievalTimes.length,
           )
         : Duration.zero;
 
@@ -441,8 +431,7 @@ class IntelligentCacheService {
       strategyUsage[strategyName] = (strategyUsage[strategyName] ?? 0) + 1;
     }
 
-    final averageCompressionRatio =
-        _cache.isNotEmpty ? totalCompressionRatio / _cache.length : 1.0;
+    final averageCompressionRatio = _cache.isNotEmpty ? totalCompressionRatio / _cache.length : 1.0;
 
     return CacheMetrics(
       hitCount: _hitCount,
@@ -494,24 +483,20 @@ class IntelligentCacheService {
   QueryType _detectQueryType(String query) {
     final lowerQuery = query.toLowerCase();
 
-    if (lowerQuery.contains('dua') || lowerQuery.contains('Ø¯Ø¹Ø§Ø¡')) {
+    // Replace mojibake Arabic sequences with proper Arabic equivalents
+    if (lowerQuery.contains('dua') || lowerQuery.contains('دعاء')) {
       return QueryType.dua;
-    } else if (lowerQuery.contains('quran') ||
-        lowerQuery.contains('Ù‚Ø±Ø¢Ù†')) {
+    } else if (lowerQuery.contains('quran') || lowerQuery.contains('قرآن')) {
       return QueryType.quran;
-    } else if (lowerQuery.contains('hadith') ||
-        lowerQuery.contains('Ø­Ø¯ÙŠØ«')) {
+    } else if (lowerQuery.contains('hadith') || lowerQuery.contains('حديث')) {
       return QueryType.hadith;
-    } else if (lowerQuery.contains('prayer') ||
-        lowerQuery.contains('ØµÙ„Ø§Ø©')) {
+    } else if (lowerQuery.contains('prayer') || lowerQuery.contains('صلاة')) {
       return QueryType.prayer;
-    } else if (lowerQuery.contains('fasting') ||
-        lowerQuery.contains('ØµÙˆÙ…')) {
+    } else if (lowerQuery.contains('fasting') || lowerQuery.contains('صوم')) {
       return QueryType.fasting;
-    } else if (lowerQuery.contains('charity') ||
-        lowerQuery.contains('Ø²ÙƒØ§Ø©')) {
+    } else if (lowerQuery.contains('charity') || lowerQuery.contains('زكاة')) {
       return QueryType.charity;
-    } else if (lowerQuery.contains('hajj') || lowerQuery.contains('Ø­Ø¬')) {
+    } else if (lowerQuery.contains('hajj') || lowerQuery.contains('حج')) {
       return QueryType.pilgrimage;
     }
 
@@ -526,8 +511,7 @@ class IntelligentCacheService {
     SemanticHash targetHash,
     CacheStrategy strategy,
   ) async {
-    final threshold =
-        strategy.parameters['semantic_similarity_threshold'] ?? 0.8;
+    final threshold = strategy.parameters['semantic_similarity_threshold'] ?? 0.8;
     final candidateKeys = _semanticIndex[targetHash.hash] ?? [];
 
     for (final key in candidateKeys) {
@@ -569,8 +553,7 @@ class IntelligentCacheService {
     CacheStrategy strategy,
   ) async {
     // Check if we need to evict entries
-    final currentStrategyEntries =
-        _cache.values.where((e) => e.strategy.name == strategy.name).length;
+    final currentStrategyEntries = _cache.values.where((e) => e.strategy.name == strategy.name).length;
 
     if (currentStrategyEntries >= strategy.maxSize) {
       await _evictEntries(strategy);
@@ -581,9 +564,7 @@ class IntelligentCacheService {
   }
 
   Future<void> _evictEntries(CacheStrategy strategy) async {
-    final strategyEntries = _cache.entries
-        .where((e) => e.value.strategy.name == strategy.name)
-        .toList();
+    final strategyEntries = _cache.entries.where((e) => e.value.strategy.name == strategy.name).toList();
 
     if (strategyEntries.isEmpty) return;
 

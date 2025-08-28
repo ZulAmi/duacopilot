@@ -1,14 +1,15 @@
 import 'dart:math';
-import 'package:flutter/services.dart';
+
 import 'package:duacopilot/core/logging/app_logger.dart';
+import 'package:flutter/services.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
+
 import '../models/local_search_models.dart';
 
 /// TensorFlow Lite service for generating embeddings locally
 class LocalEmbeddingService {
   static LocalEmbeddingService? _instance;
-  static LocalEmbeddingService get instance =>
-      _instance ??= LocalEmbeddingService._();
+  static LocalEmbeddingService get instance => _instance ??= LocalEmbeddingService._();
 
   LocalEmbeddingService._();
 
@@ -17,8 +18,7 @@ class LocalEmbeddingService {
   bool _isInitialized = false;
 
   // Model configuration
-  static const String _modelAssetPath =
-      'assets/models/dua_embedding_model.tflite';
+  static const String _modelAssetPath = 'assets/models/dua_embedding_model.tflite';
   static const int _maxSequenceLength = 128;
   static const int _embeddingDimension = 256;
 
@@ -283,10 +283,7 @@ class LocalEmbeddingService {
         processed = _preprocessEnglish(processed);
     }
 
-    return processed
-        .split(RegExp(r'\s+'))
-        .where((word) => word.isNotEmpty)
-        .toList();
+    return processed.split(RegExp(r'\s+')).where((word) => word.isNotEmpty).toList();
   }
 
   String _preprocessArabic(String text) {
@@ -306,9 +303,7 @@ class LocalEmbeddingService {
   }
 
   String _preprocessEnglish(String text) {
-    return text
-        .replaceAll(RegExp(r'[^\w\s]'), ' ')
-        .replaceAll(RegExp(r'\s+'), ' ');
+    return text.replaceAll(RegExp(r'[^\w\s]'), ' ').replaceAll(RegExp(r'\s+'), ' ');
   }
 
   List<int> _tokenizeText(String text, String language) {
@@ -383,35 +378,35 @@ class LocalEmbeddingService {
     switch (language) {
       case 'ar':
         return {
-          'Ø§Ù„Ù„Ù‡',
-          'ØµÙ„Ø§Ø©',
-          'Ø¯Ø¹Ø§Ø¡',
-          'Ù‚Ø±Ø¢Ù†',
-          'Ø­Ø¯ÙŠØ«',
-          'Ø¥Ø³Ù„Ø§Ù…',
-          'Ù…Ø³Ù„Ù…',
-          'Ø±Ù…Ø¶Ø§Ù†',
-          'Ø­Ø¬',
-          'Ø²ÙƒØ§Ø©',
-          'ØµÙˆÙ…',
-          'Ø¬Ù‡Ø§Ø¯',
-          'Ø¥ÙŠÙ…Ø§Ù†',
+          'الله',
+          'صلاة',
+          'دعاء',
+          'قرآن',
+          'حديث',
+          'إسلام',
+          'مسلم',
+          'رمضان',
+          'حج',
+          'زكاة',
+          'صوم',
+          'جهاد',
+          'إيمان',
         };
       case 'ur':
         return {
-          'Ø§Ù„Ù„Û',
-          'Ù†Ù…Ø§Ø²',
-          'Ø¯Ø¹Ø§',
-          'Ù‚Ø±Ø¢Ù†',
-          'Ø­Ø¯ÛŒØ«',
-          'Ø§Ø³Ù„Ø§Ù…',
-          'Ù…Ø³Ù„Ù…Ø§Ù†',
-          'Ø±Ù…Ø¶Ø§Ù†',
-          'Ø­Ø¬',
-          'Ø²Ú©Ø§Øª',
-          'Ø±ÙˆØ²Û',
-          'Ø¬ÛØ§Ø¯',
-          'Ø§ÛŒÙ…Ø§Ù†',
+          'اللہ',
+          'نماز',
+          'دعا',
+          'قرآن',
+          'حدیث',
+          'اسلام',
+          'مسلمان',
+          'رمضان',
+          'حج',
+          'زکاة',
+          'روزہ',
+          'جہاد',
+          'ایمان',
         };
       default:
         return {
@@ -455,40 +450,40 @@ class LocalEmbeddingService {
     switch (language) {
       case 'ar':
         commonWords.addAll([
-          'Ø§Ù„Ù„Ù‡',
-          'ØµÙ„Ø§Ø©',
-          'Ø¯Ø¹Ø§Ø¡',
-          'Ù‚Ø±Ø¢Ù†',
-          'Ø­Ø¯ÙŠØ«',
-          'Ø¥Ø³Ù„Ø§Ù…',
-          'Ù…Ø³Ù„Ù…',
-          'ÙÙŠ',
-          'Ù…Ù†',
-          'Ø¥Ù„Ù‰',
-          'Ø¹Ù„Ù‰',
-          'Ù…Ø¹',
-          'Ù‡Ø°Ø§',
-          'Ø§Ù„ØªÙŠ',
-          'Ø§Ù„ØªÙŠ',
+          'الله',
+          'صلاة',
+          'دعاء',
+          'قرآن',
+          'حديث',
+          'إسلام',
+          'مسلم',
+          'في',
+          'من',
+          'إلى',
+          'على',
+          'مع',
+          'هذا',
+          'التي',
+          'التي',
         ]);
         break;
       case 'ur':
         commonWords.addAll([
-          'Ø§Ù„Ù„Û',
-          'Ù†Ù…Ø§Ø²',
-          'Ø¯Ø¹Ø§',
-          'Ù‚Ø±Ø¢Ù†',
-          'Ø­Ø¯ÛŒØ«',
-          'Ø§Ø³Ù„Ø§Ù…',
-          'Ù…Ø³Ù„Ù…Ø§Ù†',
-          'Ù…ÛŒÚº',
-          'Ø³Û’',
-          'Ú©Ùˆ',
-          'Ù¾Ø±',
-          'Ú©Û’',
-          'ÛŒÛ',
-          'Ø¬Ùˆ',
-          'Ú©Û',
+          'اللہ',
+          'نماز',
+          'دعا',
+          'قرآن',
+          'حدیث',
+          'اسلام',
+          'مسلمان',
+          'میں',
+          'سے',
+          'کو',
+          'پر',
+          'کے',
+          'یہ',
+          'جو',
+          'کہ',
         ]);
         break;
       default:

@@ -37,8 +37,7 @@ final tasbihStatsProvider = StreamProvider.autoDispose<TasbihStats?>((ref) {
 });
 
 // Achievements Stream Provider
-final tasbihAchievementsProvider =
-    StreamProvider.autoDispose<List<Achievement>>((ref) {
+final tasbihAchievementsProvider = StreamProvider.autoDispose<List<Achievement>>((ref) {
   final service = ref.watch(digitalTasbihServiceProvider);
   return service.achievementsStream;
 });
@@ -86,8 +85,8 @@ class TasbihSessionNotifier extends StateNotifier<AsyncValue<TasbihSession?>> {
   }
 }
 
-final tasbihSessionProvider = StateNotifierProvider.autoDispose<
-    TasbihSessionNotifier, AsyncValue<TasbihSession?>>((ref) {
+final tasbihSessionProvider =
+    StateNotifierProvider.autoDispose<TasbihSessionNotifier, AsyncValue<TasbihSession?>>((ref) {
   final service = ref.watch(digitalTasbihServiceProvider);
   return TasbihSessionNotifier(service);
 });
@@ -110,8 +109,7 @@ class TasbihSettingsNotifier extends StateNotifier<TasbihSettings?> {
   }
 }
 
-final tasbihSettingsProvider =
-    StateNotifierProvider<TasbihSettingsNotifier, TasbihSettings?>((ref) {
+final tasbihSettingsProvider = StateNotifierProvider<TasbihSettingsNotifier, TasbihSettings?>((ref) {
   final service = ref.watch(digitalTasbihServiceProvider);
   return TasbihSettingsNotifier(service);
 });
@@ -161,17 +159,17 @@ final currentDhikrTextProvider = Provider.autoDispose<String>((ref) {
 
   switch (session.type) {
     case TasbihType.subhanallah:
-      return 'Ø³ÙØ¨Ù’Ø­ÙŽØ§Ù†ÙŽ Ø§Ù„Ù„Ù‡Ù';
+      return 'سُبْحَانَ اللّٰه';
     case TasbihType.alhamdulillah:
-      return 'Ø§ÙŽÙ„Ù’Ø­ÙŽÙ…Ù’Ø¯Ù Ù„Ù„Ù‡Ù';
+      return 'الْحَمْدُ لِلّٰه';
     case TasbihType.allahuakbar:
-      return 'Ø§ÙŽÙ„Ù„Ù‡Ù Ø£ÙŽÙƒÙ’Ø¨ÙŽØ±Ù';
+      return 'اللّٰهُ أَكْبَرُ';
     case TasbihType.lailahaillallah:
-      return 'Ù„ÙŽØ§ Ø¥ÙÙ„Ù°Ù‡ÙŽ Ø¥ÙÙ„ÙŽÙ‘Ø§ Ø§Ù„Ù„Ù‡Ù';
+      return 'لَا إِلٰهَ إِلَّا اللّٰهُ';
     case TasbihType.astaghfirullah:
-      return 'Ø£ÙŽØ³Ù’ØªÙŽØºÙ’ÙÙØ±Ù Ø§Ù„Ù„Ù‡ÙŽ';
+      return 'أَسْتَغْفِرُ اللّٰه';
     default:
-      return 'Ø°ÙÙƒÙ’Ø±';
+      return 'ذِكْر';
   }
 });
 
@@ -257,9 +255,7 @@ final recentAchievementsProvider = Provider.autoDispose<List<Achievement>>((
   final now = DateTime.now();
   final threeDaysAgo = now.subtract(const Duration(days: 3));
 
-  return achievements
-      .where((achievement) => achievement.unlockedAt.isAfter(threeDaysAgo))
-      .toList()
+  return achievements.where((achievement) => achievement.unlockedAt.isAfter(threeDaysAgo)).toList()
     ..sort((a, b) => b.unlockedAt.compareTo(a.unlockedAt));
 });
 
@@ -276,11 +272,11 @@ final quickTasbihProvider = Provider.autoDispose<Map<TasbihType, String>>((
   ref,
 ) {
   return {
-    TasbihType.subhanallah: 'Ø³ÙØ¨Ù’Ø­ÙŽØ§Ù†ÙŽ Ø§Ù„Ù„Ù‡Ù',
-    TasbihType.alhamdulillah: 'Ø§ÙŽÙ„Ù’Ø­ÙŽÙ…Ù’Ø¯Ù Ù„Ù„Ù‡Ù',
-    TasbihType.allahuakbar: 'Ø§ÙŽÙ„Ù„Ù‡Ù Ø£ÙŽÙƒÙ’Ø¨ÙŽØ±Ù',
-    TasbihType.lailahaillallah: 'Ù„ÙŽØ§ Ø¥ÙÙ„Ù°Ù‡ÙŽ Ø¥ÙÙ„ÙŽÙ‘Ø§ Ø§Ù„Ù„Ù‡Ù',
-    TasbihType.astaghfirullah: 'Ø£ÙŽØ³Ù’ØªÙŽØºÙ’ÙÙØ±Ù Ø§Ù„Ù„Ù‡ÙŽ',
+    TasbihType.subhanallah: 'سُبْحَانَ اللّٰه',
+    TasbihType.alhamdulillah: 'الْحَمْدُ لِلّٰه',
+    TasbihType.allahuakbar: 'اللّٰهُ أَكْبَرُ',
+    TasbihType.lailahaillallah: 'لَا إِلٰهَ إِلَّا اللّٰهُ',
+    TasbihType.astaghfirullah: 'أَسْتَغْفِرُ اللّٰه',
   };
 });
 

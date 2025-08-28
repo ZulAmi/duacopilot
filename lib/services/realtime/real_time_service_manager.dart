@@ -13,8 +13,7 @@ import '../secure_storage/secure_storage_service.dart';
 /// Handles WebSockets, Server-Sent Events, Socket.IO, and real-time synchronization
 class RealTimeServiceManager {
   static RealTimeServiceManager? _instance;
-  static RealTimeServiceManager get instance =>
-      _instance ??= RealTimeServiceManager._();
+  static RealTimeServiceManager get instance => _instance ??= RealTimeServiceManager._();
 
   RealTimeServiceManager._();
 
@@ -45,22 +44,16 @@ class RealTimeServiceManager {
   Timer? _reconnectTimer;
 
   // Stream controllers
-  final _realTimeUpdatesController =
-      StreamController<RealTimeUpdate>.broadcast();
-  final _connectionStateController =
-      StreamController<ConnectionState>.broadcast();
+  final _realTimeUpdatesController = StreamController<RealTimeUpdate>.broadcast();
+  final _connectionStateController = StreamController<ConnectionState>.broadcast();
   final _syncStatusController = StreamController<SyncStatus>.broadcast();
-  final _collaborativeUpdatesController =
-      StreamController<CollaborativeUpdate>.broadcast();
+  final _collaborativeUpdatesController = StreamController<CollaborativeUpdate>.broadcast();
 
   // Public streams
-  Stream<RealTimeUpdate> get realTimeUpdatesStream =>
-      _realTimeUpdatesController.stream;
-  Stream<ConnectionState> get connectionStateStream =>
-      _connectionStateController.stream;
+  Stream<RealTimeUpdate> get realTimeUpdatesStream => _realTimeUpdatesController.stream;
+  Stream<ConnectionState> get connectionStateStream => _connectionStateController.stream;
   Stream<SyncStatus> get syncStatusStream => _syncStatusController.stream;
-  Stream<CollaborativeUpdate> get collaborativeUpdatesStream =>
-      _collaborativeUpdatesController.stream;
+  Stream<CollaborativeUpdate> get collaborativeUpdatesStream => _collaborativeUpdatesController.stream;
 
   // Data queues for offline synchronization
   final List<PendingUpdate> _pendingUpdates = [];
@@ -70,7 +63,7 @@ class RealTimeServiceManager {
     if (_isInitialized) return;
 
     try {
-      AppLogger.info('ðŸ”„ Initializing Real-Time Service Manager...');
+      AppLogger.info('🔄 Initializing Real-Time Service Manager...');
 
       _secureStorage = SecureStorageService.instance;
       await _secureStorage.initialize();
@@ -88,10 +81,10 @@ class RealTimeServiceManager {
 
       _isInitialized = true;
 
-      AppLogger.info('âœ… Real-Time Service Manager initialized successfully');
+      AppLogger.info('✅ Real-Time Service Manager initialized successfully');
       _broadcastConnectionState(ConnectionState.initialized);
     } catch (e) {
-      AppLogger.error('âŒ Failed to initialize Real-Time Service Manager: $e');
+      AppLogger.error('❌ Failed to initialize Real-Time Service Manager: $e');
       rethrow;
     }
   }
@@ -99,8 +92,7 @@ class RealTimeServiceManager {
   /// Setup connectivity monitoring
   Future<void> _setupConnectivityMonitoring() async {
     final connectivity = Connectivity();
-    _isOnline =
-        await connectivity.checkConnectivity() != ConnectivityResult.none;
+    _isOnline = await connectivity.checkConnectivity() != ConnectivityResult.none;
 
     _connectivitySubscription = connectivity.onConnectivityChanged.listen((
       result,
@@ -109,10 +101,10 @@ class RealTimeServiceManager {
       _isOnline = result != ConnectivityResult.none;
 
       if (!wasOnline && _isOnline) {
-        AppLogger.info('ðŸŒ Internet connection restored');
+        AppLogger.info('🌐 Internet connection restored');
         _handleConnectivityRestored();
       } else if (wasOnline && !_isOnline) {
-        AppLogger.warning('ðŸ“¡ Internet connection lost');
+        AppLogger.warning('📡 Internet connection lost');
         _handleConnectivityLost();
       }
     });
@@ -136,7 +128,7 @@ class RealTimeServiceManager {
   Future<void> _initializeConnections() async {
     if (!_isOnline) {
       AppLogger.warning(
-        'âš ï¸ No internet connection, skipping connection initialization',
+        '⚠️ No internet connection, skipping connection initialization',
       );
       return;
     }
@@ -157,7 +149,7 @@ class RealTimeServiceManager {
         },
       );
 
-      AppLogger.info('ðŸ”Œ Connecting to WebSocket: $uri');
+      AppLogger.info('🔌 Connecting to WebSocket: $uri');
 
       _webSocketChannel = WebSocketChannel.connect(uri);
 
@@ -171,12 +163,12 @@ class RealTimeServiceManager {
       // Start heartbeat
       _startHeartbeat();
 
-      AppLogger.info('âœ… WebSocket connected successfully');
+      AppLogger.info('✅ WebSocket connected successfully');
       _isConnected = true;
       _reconnectAttempts = 0;
       _broadcastConnectionState(ConnectionState.connected);
     } catch (e) {
-      AppLogger.error('âŒ Failed to initialize WebSocket: $e');
+      AppLogger.error('❌ Failed to initialize WebSocket: $e');
       _scheduleReconnect();
     }
   }
@@ -202,21 +194,21 @@ class RealTimeServiceManager {
       );
 
       _socketIOClient!.onConnect((_) {
-        AppLogger.info('âœ… Socket.IO connected');
+        AppLogger.info('✅ Socket.IO connected');
         _setupSocketIOListeners();
       });
 
       _socketIOClient!.onDisconnect((_) {
-        AppLogger.warning('âš ï¸ Socket.IO disconnected');
+        AppLogger.warning('⚠️ Socket.IO disconnected');
       });
 
       _socketIOClient!.onConnectError((error) {
-        AppLogger.error('âŒ Socket.IO connection error: $error');
+        AppLogger.error('❌ Socket.IO connection error: $error');
       });
 
       _socketIOClient!.connect();
     } catch (e) {
-      AppLogger.error('âŒ Failed to initialize Socket.IO: $e');
+      AppLogger.error('❌ Failed to initialize Socket.IO: $e');
     }
   }
 
@@ -248,11 +240,10 @@ class RealTimeServiceManager {
       final familyId = await _secureStorage.read('family_id');
       if (familyId != null) {
         _socketIOClient!.emit('join_family', {'family_id': familyId});
-        AppLogger.info(
-            'ðŸ‘¨â€ðŸ‘©â€ðŸ‘§â€ðŸ‘¦ Joined family room: $familyId');
+        AppLogger.info('👨‍👩‍👧‍👦 Joined family room: $familyId');
       }
     } catch (e) {
-      AppLogger.error('âŒ Failed to join family room: $e');
+      AppLogger.error('❌ Failed to join family room: $e');
     }
   }
 
@@ -262,7 +253,7 @@ class RealTimeServiceManager {
       final data = jsonDecode(message);
       final update = RealTimeUpdate.fromJson(data);
 
-      AppLogger.debug('ðŸ“¨ WebSocket message received: ${update.type}');
+      AppLogger.debug('📨 WebSocket message received: ${update.type}');
       _realTimeUpdatesController.add(update);
 
       // Handle specific message types
@@ -277,10 +268,10 @@ class RealTimeServiceManager {
           _handleSyncComplete(update);
           break;
         default:
-          AppLogger.debug('ðŸ”„ Unhandled update type: ${update.type}');
+          AppLogger.debug('🔄 Unhandled update type: ${update.type}');
       }
     } catch (e) {
-      AppLogger.error('âŒ Failed to handle WebSocket message: $e');
+      AppLogger.error('❌ Failed to handle WebSocket message: $e');
     }
   }
 
@@ -313,10 +304,9 @@ class RealTimeServiceManager {
       );
 
       _collaborativeUpdatesController.add(update);
-      AppLogger.info(
-          'ðŸ‘¨â€ðŸ‘©â€ðŸ‘§â€ðŸ‘¦ Family Du\'a shared: ${data['dua_title']}');
+      AppLogger.info('👨‍👩‍👧‍👦 Family Du\'a shared: ${data['dua_title']}');
     } catch (e) {
-      AppLogger.error('âŒ Failed to handle family Du\'a sharing: $e');
+      AppLogger.error('❌ Failed to handle family Du\'a sharing: $e');
     }
   }
 
@@ -331,12 +321,12 @@ class RealTimeServiceManager {
       );
 
       _collaborativeUpdatesController.add(update);
-      AppLogger.info('ðŸŽ“ Scholar approved new Du\'a: ${data['dua_title']}');
+      AppLogger.info('🎓 Scholar approved new Du\'a: ${data['dua_title']}');
 
       // Trigger content sync to get the new approved Du'a
       _triggerBackgroundSync();
     } catch (e) {
-      AppLogger.error('âŒ Failed to handle scholar approval: $e');
+      AppLogger.error('❌ Failed to handle scholar approval: $e');
     }
   }
 
@@ -351,19 +341,19 @@ class RealTimeServiceManager {
       );
 
       _collaborativeUpdatesController.add(update);
-      AppLogger.debug('âœï¸ Collaborative edit received');
+      AppLogger.debug('✏️ Collaborative edit received');
     } catch (e) {
-      AppLogger.error('âŒ Failed to handle collaborative edit: $e');
+      AppLogger.error('❌ Failed to handle collaborative edit: $e');
     }
   }
 
   /// Handle sync requests
   void _handleSyncRequest(dynamic data) {
     try {
-      AppLogger.info('ðŸ”„ Sync request received');
+      AppLogger.info('🔄 Sync request received');
       _processSyncRequest(data);
     } catch (e) {
-      AppLogger.error('âŒ Failed to handle sync request: $e');
+      AppLogger.error('❌ Failed to handle sync request: $e');
     }
   }
 
@@ -386,12 +376,12 @@ class RealTimeServiceManager {
           await _resolveConflicts(data);
           break;
         default:
-          AppLogger.warning('âš ï¸ Unknown sync type: $syncType');
+          AppLogger.warning('⚠️ Unknown sync type: $syncType');
       }
 
       _broadcastSyncStatus(SyncStatus.completed);
     } catch (e) {
-      AppLogger.error('âŒ Sync request failed: $e');
+      AppLogger.error('❌ Sync request failed: $e');
       _broadcastSyncStatus(SyncStatus.failed);
     }
   }
@@ -422,8 +412,7 @@ class RealTimeServiceManager {
 
       if (_socketIOClient?.connected == true) {
         _socketIOClient!.emit('share_family_dua', shareData);
-        AppLogger.info(
-            'ðŸ‘¨â€ðŸ‘©â€ðŸ‘§â€ðŸ‘¦ Du\'a shared with family: $duaTitle');
+        AppLogger.info('👨‍👩‍👧‍👦 Du\'a shared with family: $duaTitle');
       } else {
         // Queue for later when connection is restored
         _queueUpdate(
@@ -433,10 +422,10 @@ class RealTimeServiceManager {
             timestamp: DateTime.now(),
           ),
         );
-        AppLogger.info('ðŸ“‹ Du\'a sharing queued (offline)');
+        AppLogger.info('📓 Du\'a sharing queued (offline)');
       }
     } catch (e) {
-      AppLogger.error('âŒ Failed to share Du\'a with family: $e');
+      AppLogger.error('❌ Failed to share Du\'a with family: $e');
       rethrow;
     }
   }
@@ -458,7 +447,7 @@ class RealTimeServiceManager {
 
       if (_webSocketChannel != null && _isConnected) {
         _webSocketChannel!.sink.add(jsonEncode(requestData));
-        AppLogger.info('ðŸ” Live RAG query sent: $query');
+        AppLogger.info('🔍 Live RAG query sent: $query');
       } else {
         // Queue for later processing
         _queueUpdate(
@@ -468,10 +457,10 @@ class RealTimeServiceManager {
             timestamp: DateTime.now(),
           ),
         );
-        AppLogger.info('ðŸ“‹ RAG query queued (offline)');
+        AppLogger.info('📓 RAG query queued (offline)');
       }
     } catch (e) {
-      AppLogger.error('âŒ Failed to send live RAG query: $e');
+      AppLogger.error('❌ Failed to send live RAG query: $e');
       rethrow;
     }
   }
@@ -485,14 +474,14 @@ class RealTimeServiceManager {
       await _performIncrementalSync();
       _broadcastSyncStatus(SyncStatus.completed);
     } catch (e) {
-      AppLogger.error('âŒ Background sync failed: $e');
+      AppLogger.error('❌ Background sync failed: $e');
       _broadcastSyncStatus(SyncStatus.failed);
     }
   }
 
   /// Perform full synchronization
   Future<void> _performFullSync() async {
-    AppLogger.info('ðŸ”„ Starting full synchronization...');
+    AppLogger.info('🔄 Starting full synchronization...');
 
     try {
       // Implement full sync logic here
@@ -500,16 +489,16 @@ class RealTimeServiceManager {
 
       await Future.delayed(Duration(seconds: 2)); // Simulated sync time
 
-      AppLogger.info('âœ… Full synchronization completed');
+      AppLogger.info('✅ Full synchronization completed');
     } catch (e) {
-      AppLogger.error('âŒ Full synchronization failed: $e');
+      AppLogger.error('❌ Full synchronization failed: $e');
       rethrow;
     }
   }
 
   /// Perform incremental synchronization
   Future<void> _performIncrementalSync([dynamic data]) async {
-    AppLogger.info('ðŸ”„ Starting incremental synchronization...');
+    AppLogger.info('🔄 Starting incremental synchronization...');
 
     try {
       // Implement incremental sync logic here
@@ -517,16 +506,16 @@ class RealTimeServiceManager {
 
       await Future.delayed(Duration(milliseconds: 500)); // Simulated sync time
 
-      AppLogger.info('âœ… Incremental synchronization completed');
+      AppLogger.info('✅ Incremental synchronization completed');
     } catch (e) {
-      AppLogger.error('âŒ Incremental synchronization failed: $e');
+      AppLogger.error('❌ Incremental synchronization failed: $e');
       rethrow;
     }
   }
 
   /// Resolve data conflicts
   Future<void> _resolveConflicts(dynamic conflictData) async {
-    AppLogger.info('âš–ï¸ Resolving data conflicts...');
+    AppLogger.info('⚖️ Resolving data conflicts...');
 
     try {
       // Implement conflict resolution logic
@@ -540,9 +529,9 @@ class RealTimeServiceManager {
         }
       }
 
-      AppLogger.info('âœ… Conflicts resolved successfully');
+      AppLogger.info('✅ Conflicts resolved successfully');
     } catch (e) {
-      AppLogger.error('âŒ Conflict resolution failed: $e');
+      AppLogger.error('❌ Conflict resolution failed: $e');
       rethrow;
     }
   }
@@ -562,7 +551,7 @@ class RealTimeServiceManager {
         await _resolveFamilySharingConflict(conflict);
         break;
       default:
-        AppLogger.warning('âš ï¸ Unknown conflict type: $conflictType');
+        AppLogger.warning('⚠️ Unknown conflict type: $conflictType');
     }
   }
 
@@ -574,7 +563,7 @@ class RealTimeServiceManager {
 
     // Merge favorites, keeping the most recent additions
     // Implementation would depend on the specific conflict resolution strategy
-    AppLogger.info('â­ Resolving favorite conflict');
+    AppLogger.info('⭐ Resolving favorite conflict');
   }
 
   /// Resolve user preference conflicts
@@ -584,7 +573,7 @@ class RealTimeServiceManager {
 
     // Send local preferences to server to resolve conflict
     // Implementation would send the local data to the server
-    AppLogger.info('âš™ï¸ Resolving preference conflict');
+    AppLogger.info('⚙️ Resolving preference conflict');
   }
 
   /// Resolve family sharing conflicts
@@ -594,8 +583,7 @@ class RealTimeServiceManager {
     // final localData = conflict['local_data'];
 
     // Compare timestamps and keep the most recent one
-    AppLogger.info(
-        'ðŸ‘¨â€ðŸ‘©â€ðŸ‘§â€ðŸ‘¦ Resolving family sharing conflict');
+    AppLogger.info('👨‍👩‍👧‍👦 Resolving family sharing conflict');
   }
 
   /// Queue update for later processing
@@ -609,7 +597,7 @@ class RealTimeServiceManager {
     if (_pendingUpdates.isEmpty || !_isConnected) return;
 
     AppLogger.info(
-      'ðŸ”„ Processing ${_pendingUpdates.length} pending updates...',
+      '🔄 Processing ${_pendingUpdates.length} pending updates...',
     );
 
     final updates = List<PendingUpdate>.from(_pendingUpdates);
@@ -619,14 +607,14 @@ class RealTimeServiceManager {
       try {
         await _processPendingUpdate(update);
       } catch (e) {
-        AppLogger.error('âŒ Failed to process pending update: $e');
+        AppLogger.error('❌ Failed to process pending update: $e');
         // Re-queue failed updates
         _pendingUpdates.add(update);
       }
     }
 
     await _savePendingUpdates();
-    AppLogger.info('âœ… Pending updates processed');
+    AppLogger.info('✅ Pending updates processed');
   }
 
   /// Process individual pending update
@@ -667,11 +655,10 @@ class RealTimeServiceManager {
         _pendingUpdates.addAll(
           updatesList.map((json) => PendingUpdate.fromJson(json)).toList(),
         );
-        AppLogger.debug(
-            'ðŸ“‹ Loaded ${_pendingUpdates.length} pending updates');
+        AppLogger.debug('📓 Loaded ${_pendingUpdates.length} pending updates');
       }
     } catch (e) {
-      AppLogger.error('âŒ Failed to load pending updates: $e');
+      AppLogger.error('❌ Failed to load pending updates: $e');
     }
   }
 
@@ -683,7 +670,7 @@ class RealTimeServiceManager {
       );
       await _prefs.setString('pending_updates', updatesJson);
     } catch (e) {
-      AppLogger.error('âŒ Failed to save pending updates: $e');
+      AppLogger.error('❌ Failed to save pending updates: $e');
     }
   }
 
@@ -695,7 +682,7 @@ class RealTimeServiceManager {
         try {
           _webSocketChannel!.sink.add(jsonEncode({'type': 'ping'}));
         } catch (e) {
-          AppLogger.warning('ðŸ’“ Heartbeat failed: $e');
+          AppLogger.warning('💓 Heartbeat failed: $e');
           _scheduleReconnect();
         }
       }
@@ -704,7 +691,7 @@ class RealTimeServiceManager {
 
   /// Handle WebSocket error
   void _handleWebSocketError(Object error) {
-    AppLogger.error('âŒ WebSocket error: $error');
+    AppLogger.error('❌ WebSocket error: $error');
     _isConnected = false;
     _broadcastConnectionState(ConnectionState.error);
     _scheduleReconnect();
@@ -712,7 +699,7 @@ class RealTimeServiceManager {
 
   /// Handle WebSocket disconnection
   void _handleWebSocketDisconnection() {
-    AppLogger.warning('âš ï¸ WebSocket disconnected');
+    AppLogger.warning('⚠️ WebSocket disconnected');
     _isConnected = false;
     _broadcastConnectionState(ConnectionState.disconnected);
     _scheduleReconnect();
@@ -721,7 +708,7 @@ class RealTimeServiceManager {
   /// Schedule reconnection
   void _scheduleReconnect() {
     if (_reconnectAttempts >= _maxReconnectAttempts) {
-      AppLogger.error('âŒ Max reconnection attempts reached');
+      AppLogger.error('❌ Max reconnection attempts reached');
       _broadcastConnectionState(ConnectionState.failed);
       return;
     }
@@ -730,7 +717,7 @@ class RealTimeServiceManager {
     _reconnectTimer = Timer(_reconnectDelay, () {
       _reconnectAttempts++;
       AppLogger.info(
-        'ðŸ”„ Attempting reconnection ($_reconnectAttempts/$_maxReconnectAttempts)',
+        '🔄 Attempting reconnection ($_reconnectAttempts/$_maxReconnectAttempts)',
       );
       _broadcastConnectionState(ConnectionState.reconnecting);
       _reconnectAll();
@@ -744,7 +731,7 @@ class RealTimeServiceManager {
     try {
       await _initializeConnections();
     } catch (e) {
-      AppLogger.error('âŒ Reconnection failed: $e');
+      AppLogger.error('❌ Reconnection failed: $e');
       _scheduleReconnect();
     }
   }

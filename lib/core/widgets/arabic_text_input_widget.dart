@@ -118,8 +118,7 @@ class _ArabicTextInputWidgetState extends State<ArabicTextInputWidget> {
     final newDirection = ArabicTypography.getTextDirection(text);
     final newAlignment = ArabicTypography.getTextAlign(text, newDirection);
 
-    if (newDirection != _currentDirection ||
-        newAlignment != _currentAlignment) {
+    if (newDirection != _currentDirection || newAlignment != _currentAlignment) {
       setState(() {
         _currentDirection = newDirection;
         _currentAlignment = newAlignment;
@@ -224,8 +223,8 @@ class _ArabicTextInputFormatter extends TextInputFormatter {
     // Handle common Arabic input corrections
     return text
         // Fix common typing mistakes
-        .replaceAll('Ùƒ', 'Ùƒ') // Replace Arabic-Indic Kaf with Arabic Kaf
-        .replaceAll('ÙŠ', 'ÙŠ') // Normalize Yeh variations
+        .replaceAll('ك', 'ك') // Replace garbled Kaf with proper Arabic Kaf (idempotent)
+        .replaceAll('ي', 'ي') // Normalize Yeh variations (idempotent)
         // Add intelligent space handling for Arabic
         .replaceAllMapped(RegExp(r'([^\u0600-\u06FF\s])([^\u0600-\u06FF\s])'), (
       match,
@@ -300,8 +299,7 @@ class ArabicSuggestionTextField extends StatefulWidget {
   });
 
   @override
-  State<ArabicSuggestionTextField> createState() =>
-      _ArabicSuggestionTextFieldState();
+  State<ArabicSuggestionTextField> createState() => _ArabicSuggestionTextFieldState();
 }
 
 class _ArabicSuggestionTextFieldState extends State<ArabicSuggestionTextField> {
@@ -494,9 +492,7 @@ class ArabicTextFormField extends StatelessWidget {
         onSaved: onSaved,
         onChanged: onChanged,
         style: textStyle ??
-            (ArabicTypography.containsArabic(text)
-                ? ArabicTextStyles.bodyLarge(context, fontType: 'readable')
-                : null),
+            (ArabicTypography.containsArabic(text) ? ArabicTextStyles.bodyLarge(context, fontType: 'readable') : null),
         textDirection: textDirection,
         textAlign: ArabicTypography.getTextAlign(text, textDirection),
         keyboardType: keyboardType,

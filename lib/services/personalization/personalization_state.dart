@@ -1,6 +1,6 @@
 import 'personalization_models.dart';
 
-/// ðŸ—ï¸ PERSONALIZATION STATE MANAGEMENT
+/// 🏗️ PERSONALIZATION STATE MANAGEMENT
 /// Comprehensive state models for personalization UI components
 
 /// Base personalization state
@@ -93,11 +93,9 @@ class PersonalizationLoaded extends PersonalizationState {
     return PersonalizationLoaded(
       usagePatterns: usagePatterns ?? this.usagePatterns,
       culturalPreferences: culturalPreferences ?? this.culturalPreferences,
-      isPersonalizationActive:
-          isPersonalizationActive ?? this.isPersonalizationActive,
+      isPersonalizationActive: isPersonalizationActive ?? this.isPersonalizationActive,
       recommendations: recommendations ?? this.recommendations,
-      contextualSuggestions:
-          contextualSuggestions ?? this.contextualSuggestions,
+      contextualSuggestions: contextualSuggestions ?? this.contextualSuggestions,
       temporalPatterns: temporalPatterns ?? this.temporalPatterns,
       metadata: metadata ?? this.metadata,
     );
