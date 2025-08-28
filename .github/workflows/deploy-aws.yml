@@ -1,0 +1,68 @@
+# Deploy to AWS S3 + CloudFront
+#
+# Required GitHub Secrets (Configure in repository settings):
+# - AWS_ACCESS_KEY_ID: AWS access key with S3 and CloudFront permissions
+# - AWS_SECRET_ACCESS_KEY: AWS secret access key
+# - S3_BUCKET: S3 bucket name for hosting (e.g., "duacopilot-web")
+# - CLOUDFRONT_DISTRIBUTION_ID: (Optional) CloudFront distribution ID for cache invalidation
+#
+# Setup Instructions:
+# 1. Create S3 bucket with static website hosting
+# 2. (Optional) Create CloudFront distribution pointing to S3 bucket
+# 3. Create IAM user with S3 and CloudFront permissions
+# 4. Add the secrets to GitHub repository settings
+
+name: Deploy to AWS S3 + CloudFront
+
+on:
+  push:
+    branches: [aws-deploy]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.24.0"
+          channel: "stable"
+          cache: true
+
+      - name: Enable Flutter Web
+        run: flutter config --enable-web
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Build web
+        run: flutter build web --release --dart-define=FLUTTER_WEB_USE_SKIA=true
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Deploy to S3
+        env:
+          S3_BUCKET: ${{ secrets.S3_BUCKET }}
+        run: |
+          aws s3 sync build/web s3://${S3_BUCKET} --delete
+
+      - name: Invalidate CloudFront (Optional)
+        env:
+          CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
+        run: |
+          if [ ! -z "${CLOUDFRONT_DISTRIBUTION_ID}" ]; then
+            aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_DISTRIBUTION_ID} --paths "/*"
+            echo "CloudFront cache invalidated"
+          else
+            echo "CloudFront distribution ID not set, skipping invalidation"
+          fi

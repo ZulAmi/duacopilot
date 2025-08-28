@@ -1,0 +1,27 @@
+version: 1
+applications:
+  - appRoot: .
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - flutter --version
+            - flutter config --enable-web
+        build:
+          commands:
+            - flutter build web --release --dart-define=FLUTTER_WEB_USE_SKIA=true
+      artifacts:
+        baseDirectory: build/web
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - ~/.pub-cache/**/*
+    test:
+      phases:
+        preTest:
+          commands:
+            - flutter pub get
+        test:
+          commands:
+            - flutter test

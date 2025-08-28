@@ -1,4 +1,3 @@
-import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
@@ -41,7 +40,6 @@ class FeedbackSystemIntegration {
 
       // Initialize A/B testing framework
       _abTestingFramework = ABTestingFramework(
-        remoteConfig: FirebaseRemoteConfig.instance,
         feedbackService: _feedbackService,
       );
       await _abTestingFramework.initialize();
@@ -292,11 +290,9 @@ mixin FeedbackMixin<T extends StatefulWidget> on State<T> {
   }
 
   /// Quick access to feedback services
-  ComprehensiveFeedbackService get feedbackService =>
-      _feedbackIntegration.feedbackService;
+  ComprehensiveFeedbackService get feedbackService => _feedbackIntegration.feedbackService;
   ABTestingFramework get abTesting => _feedbackIntegration.abTestingFramework;
-  ScholarFeedbackSystem get scholarFeedback =>
-      _feedbackIntegration.scholarFeedbackSystem;
+  ScholarFeedbackSystem get scholarFeedback => _feedbackIntegration.scholarFeedbackSystem;
 
   /// Convenience methods
   Future<void> rateDua(String duaId, String queryId, double rating) async {

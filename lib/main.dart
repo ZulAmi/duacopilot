@@ -1,4 +1,3 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,8 +7,8 @@ import 'core/routing/app_router.dart';
 import 'core/security/production_config.dart';
 import 'core/security/secure_telemetry.dart';
 import 'core/theme/professional_theme.dart';
-import 'firebase_options.dart';
 import 'services/ads/ad_service.dart';
+import 'services/aws_services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,8 +16,8 @@ void main() async {
   // SECURITY: Validate production security requirements
   ProductionSecurityAssertion.assertProductionSecurity();
 
-  // Initialize Firebase first
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // Initialize AWS services
+  await AWSRemoteConfigService.fetchAndActivate();
 
   // Initialize secure telemetry (production-ready)
   await SecureTelemetry.initialize();

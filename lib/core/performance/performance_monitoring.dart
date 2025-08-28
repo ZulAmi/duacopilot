@@ -1,18 +1,17 @@
 import 'dart:async';
 import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_performance/firebase_performance.dart';
+// Firebase Performance removed; using lightweight in-app tracing
 
 /// Firebase Performance monitoring for RAG integration
 class RagPerformanceMonitor {
-  static final RagPerformanceMonitor _instance =
-      RagPerformanceMonitor._internal();
+  static final RagPerformanceMonitor _instance = RagPerformanceMonitor._internal();
   factory RagPerformanceMonitor() => _instance;
   RagPerformanceMonitor._internal();
 
-  final FirebasePerformance _performance = FirebasePerformance.instance;
-  final Map<String, Trace> _activeTraces = {};
+  final Map<String, _InAppTrace> _activeTraces = {};
 
   /// Start monitoring a RAG query
   Future<String> startRagQueryTrace({
@@ -23,19 +22,16 @@ class RagPerformanceMonitor {
     final traceId = 'rag_query_${DateTime.now().millisecondsSinceEpoch}';
 
     try {
-      final trace = _performance.newTrace('rag_query_processing');
+      final trace = _InAppTrace('rag_query_processing')..start();
       _activeTraces[traceId] = trace;
 
-      await trace.start();
-
-      // Add custom attributes
-      trace.putAttribute('query_type', queryType);
-      trace.putAttribute('query_length', queryText.length.toString());
-      trace.putAttribute('platform', Platform.operatingSystem);
+      trace.attributes['query_type'] = queryType;
+      trace.attributes['query_length'] = queryText.length.toString();
+      trace.attributes['platform'] = Platform.operatingSystem;
 
       if (customAttributes != null) {
         for (final entry in customAttributes.entries) {
-          trace.putAttribute(entry.key, entry.value);
+          trace.attributes[entry.key] = entry.value;
         }
       }
 
@@ -57,19 +53,11 @@ class RagPerformanceMonitor {
     try {
       final trace = _activeTraces[traceId];
       if (trace == null) return;
-
-      trace.putAttribute('success', success.toString());
-      if (!success && errorMessage != null) {
-        trace.putAttribute('error', errorMessage);
-      }
-      if (responseLength != null) {
-        trace.putAttribute('response_length', responseLength.toString());
-      }
-      if (confidence != null) {
-        trace.putAttribute('confidence', confidence.toString());
-      }
-
-      await trace.stop();
+      trace.attributes['success'] = success.toString();
+      if (!success && errorMessage != null) trace.attributes['error'] = errorMessage;
+      if (responseLength != null) trace.attributes['response_length'] = responseLength.toString();
+      if (confidence != null) trace.attributes['confidence'] = confidence.toString();
+      trace.stop();
       _activeTraces.remove(traceId);
     } catch (e) {
       debugPrint('Error stopping RAG query trace: $e');
@@ -81,13 +69,9 @@ class RagPerformanceMonitor {
     if (!kDebugMode) return;
 
     try {
-      final trace = _performance.newTrace('app_start');
-      await trace.start();
-
-      // This would typically be called when app is ready
-      WidgetsBinding.instance.addPostFrameCallback((_) async {
-        await Future.delayed(const Duration(milliseconds: 100));
-        await trace.stop();
+      final trace = _InAppTrace('app_start')..start();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Future.delayed(const Duration(milliseconds: 100), trace.stop);
       });
     } catch (e) {
       debugPrint('Error recording app start: $e');
@@ -101,22 +85,39 @@ class RagPerformanceMonitor {
     Map<String, String>? attributes,
   }) async {
     try {
-      final trace = _performance.newTrace(name);
-      await trace.start();
-
-      trace.putAttribute('platform', Platform.operatingSystem);
-      trace.putAttribute('value', value.toString());
+      final trace = _InAppTrace(name)..start();
+      trace.attributes['platform'] = Platform.operatingSystem;
+      trace.attributes['value'] = value.toString();
 
       if (attributes != null) {
         for (final entry in attributes.entries) {
-          trace.putAttribute(entry.key, entry.value);
+          trace.attributes[entry.key] = entry.value;
         }
       }
-
-      await trace.stop();
+      trace.stop();
     } catch (e) {
       debugPrint('Error recording custom metric: $e');
     }
+  }
+}
+
+/// Simple in-app trace replacement
+class _InAppTrace {
+  final String name;
+  final Stopwatch _stopwatch = Stopwatch();
+  // start wall time removed (not currently used)
+  DateTime? _endWall;
+  final Map<String, String> attributes = {};
+
+  _InAppTrace(this.name);
+
+  void start() => _stopwatch.start();
+  void stop() {
+    if (_endWall != null) return;
+    _stopwatch.stop();
+    _endWall = DateTime.now();
+    // Could emit to logging/analytics here
+    debugPrint('[TRACE] $name duration=${_stopwatch.elapsedMilliseconds}ms attrs=$attributes');
   }
 }
 
@@ -179,12 +180,10 @@ class PerformanceMonitoredWidget extends StatefulWidget {
   });
 
   @override
-  State<PerformanceMonitoredWidget> createState() =>
-      _PerformanceMonitoredWidgetState();
+  State<PerformanceMonitoredWidget> createState() => _PerformanceMonitoredWidgetState();
 }
 
-class _PerformanceMonitoredWidgetState
-    extends State<PerformanceMonitoredWidget> {
+class _PerformanceMonitoredWidgetState extends State<PerformanceMonitoredWidget> {
   @override
   Widget build(BuildContext context) {
     return widget.child;

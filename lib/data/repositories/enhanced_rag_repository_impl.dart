@@ -12,7 +12,7 @@ import '../../domain/entities/rag_response.dart';
 import '../../domain/repositories/rag_repository.dart';
 import '../datasources/islamic_rag_service.dart';
 import '../datasources/local_datasource.dart';
-import '../datasources/rag_api_service.dart';
+import '../datasources/working_rag_api_service.dart';
 import '../models/query_history_model.dart';
 import '../models/rag_request_model.dart';
 import '../models/rag_response_model.dart';
@@ -178,8 +178,7 @@ class EnhancedRagRepositoryImpl implements RagRepository {
       // 5. No resolution possible - complete monitoring with failure
       await _recordAnalytics('query_failed', {'query_length': query.length});
 
-      final errorMessage =
-          'Unable to process query: No internet connection and no cached responses available';
+      final errorMessage = 'Unable to process query: No internet connection and no cached responses available';
       await tracker.complete(success: false, errorMessage: errorMessage);
 
       return Left(NetworkFailure(errorMessage));
@@ -228,8 +227,7 @@ class EnhancedRagRepositoryImpl implements RagRepository {
 
         return Right(response);
       } on DioException catch (e) {
-        if (e.type == DioExceptionType.connectionTimeout ||
-            e.type == DioExceptionType.connectionError) {
+        if (e.type == DioExceptionType.connectionTimeout || e.type == DioExceptionType.connectionError) {
           if (attempt == _maxRetryAttempts) {
             return Left(
               NetworkFailure('Network connection failed: ${e.message}'),
@@ -325,8 +323,7 @@ class EnhancedRagRepositoryImpl implements RagRepository {
 
         // Create RagResponse from query history
         final response = RagResponse(
-          id: bestMatch.id?.toString() ??
-              DateTime.now().millisecondsSinceEpoch.toString(),
+          id: bestMatch.id?.toString() ?? DateTime.now().millisecondsSinceEpoch.toString(),
           query: query, // Use original query
           response: bestMatch.response!,
           timestamp: bestMatch.timestamp,
@@ -385,8 +382,7 @@ class EnhancedRagRepositoryImpl implements RagRepository {
         final similarity = _calculateQuerySimilarity(query, history.query);
         if (similarity >= _similarityThreshold && history.response != null) {
           final response = RagResponse(
-            id: history.id?.toString() ??
-                DateTime.now().millisecondsSinceEpoch.toString(),
+            id: history.id?.toString() ?? DateTime.now().millisecondsSinceEpoch.toString(),
             query: query,
             response: history.response!,
             timestamp: history.timestamp,
@@ -770,9 +766,7 @@ class EnhancedRagRepositoryImpl implements RagRepository {
       return 'hadith_search';
     } else if (lowerQuery.contains('islamic') || lowerQuery.contains('islam')) {
       return 'islamic_knowledge';
-    } else if (lowerQuery.contains('how') ||
-        lowerQuery.contains('what') ||
-        lowerQuery.contains('when')) {
+    } else if (lowerQuery.contains('how') || lowerQuery.contains('what') || lowerQuery.contains('when')) {
       return 'question';
     } else {
       return 'general_query';

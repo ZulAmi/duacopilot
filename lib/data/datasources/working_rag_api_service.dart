@@ -104,12 +104,63 @@ class RagApiService {
 
   Future<RagResponseModel> queryRag(RagRequestModel request) async {
     try {
+      // Determine if current provider requires an API key
+      final requiresApiKey = [
+        'openai',
+        'claude',
+        'gemini',
+        'huggingface',
+      ].contains(RagConfig.currentProvider);
+
+      // Attempt to fetch API key early so we can gracefully fallback if absent
+      final apiKey = await _getApiKey();
+
+      if (requiresApiKey && apiKey == null) {
+        _logger.w(
+          '⚠️ No API key configured for ${RagConfig.currentProvider}. Falling back to Islamic retrieval-only mode.',
+        );
+
+        // Try Islamic retrieval only (no LLM generation) – this should still give user value
+        try {
+          final islamicResponse = await _islamicRagService.processQuery(
+            query: request.query,
+            language: 'en',
+            includeAudio: false,
+          );
+
+          final now = DateTime.now();
+          return RagResponseModel(
+            id: now.millisecondsSinceEpoch.toString(),
+            query: request.query,
+            response: islamicResponse.response.isNotEmpty
+                ? '${islamicResponse.response}\n\n(Notice: Cloud AI provider ${RagConfig.currentProvider} not configured – response generated from locally retrieved Islamic knowledge only.)'
+                : 'No Islamic knowledge retrieved for this query and no API key configured for provider ${RagConfig.currentProvider}. Please configure an API key in settings.',
+            timestamp: now,
+            responseTime: 0,
+            sources: islamicResponse.sources.map((s) => s.reference ?? s.title).where((s) => s.isNotEmpty).toList(),
+            metadata: {
+              'provider': 'local_fallback',
+              'original_provider': RagConfig.currentProvider,
+              'missing_api_key': true,
+              'rag_enabled': false,
+              'retrieval_confidence': islamicResponse.confidence,
+            },
+          );
+        } catch (e) {
+          _logger.e('❌ Retrieval-only fallback failed: $e');
+          throw ServerException(
+            'RAG unavailable (missing API key) and retrieval failed: $e',
+          );
+        }
+      }
+
+      // If provider does not need API key or key is present, proceed normally
       if (!await _networkInfo.isConnected) {
         throw NetworkException('No internet connection');
       }
 
       _logger.i(
-        'ðŸ¤– Making RAG query to ${RagConfig.currentProvider}: ${request.query}',
+        '🤖 Making RAG query to ${RagConfig.currentProvider}: ${request.query}',
       );
 
       final startTime = DateTime.now();
@@ -127,12 +178,12 @@ class RagApiService {
         metadata: response['metadata'] ?? {},
       );
 
-      _logger.i('âœ… RAG query successful: ${ragResponse.id}');
+      _logger.i('✅ RAG query successful: ${ragResponse.id}');
       return ragResponse;
     } on DioException catch (e) {
       throw _handleDioException(e);
     } catch (e) {
-      _logger.e('âŒ RAG query failed: $e');
+      _logger.e('❌ RAG query failed: $e');
       throw ServerException('RAG query failed: $e');
     }
   }
@@ -223,9 +274,7 @@ class RagApiService {
 
     return {
       'content': content,
-      'confidence': retrievedContext.isNotEmpty
-          ? 0.95
-          : 0.85, // Higher confidence with retrieved context
+      'confidence': retrievedContext.isNotEmpty ? 0.95 : 0.85, // Higher confidence with retrieved context
       'sources': ragSources,
       'metadata': {
         'provider': 'openai',
@@ -370,8 +419,7 @@ class RagApiService {
       },
     );
 
-    final content =
-        response.data['candidates'][0]['content']['parts'][0]['text'];
+    final content = response.data['candidates'][0]['content']['parts'][0]['text'];
 
     // Enhanced response with TRUE RAG metadata
     final ragSources = ['Google Gemini (RAG Enhanced)'];
@@ -401,8 +449,7 @@ class RagApiService {
       '/generate',
       data: {
         'model': RagConfig.ollamaModel,
-        'prompt':
-            '${RagConfig.islamicSystemPrompt}\n\nUser Query: ${request.query}',
+        'prompt': '${RagConfig.islamicSystemPrompt}\n\nUser Query: ${request.query}',
         'stream': false,
       },
     );
@@ -421,8 +468,7 @@ class RagApiService {
     final response = await _dio.post(
       '/${RagConfig.huggingFaceModel}',
       data: {
-        'inputs':
-            '${RagConfig.islamicSystemPrompt}\n\nUser Query: ${request.query}',
+        'inputs': '${RagConfig.islamicSystemPrompt}\n\nUser Query: ${request.query}',
         'parameters': {'max_length': 1000, 'temperature': 0.7},
       },
     );
@@ -469,8 +515,7 @@ class RagApiService {
         return ServerException('Receive timeout');
       case DioExceptionType.badResponse:
         final status = e.response?.statusCode;
-        final message =
-            e.response?.data?['error']?['message'] ?? 'Server error';
+        final message = e.response?.data?['error']?['message'] ?? 'Server error';
         return ServerException('Server error ($status): $message');
       case DioExceptionType.cancel:
         return ServerException('Request cancelled');

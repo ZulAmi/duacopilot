@@ -1,0 +1,14 @@
+{
+  "name": "duacopilot-lambda-common",
+  "version": "1.0.0",
+  "description": "Common dependencies for DuaCopilot Lambda functions",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.400.0",
+    "@aws-sdk/client-sns": "^3.400.0",
+    "@aws-sdk/lib-dynamodb": "^3.400.0",
+    "@sendgrid/mail": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "uuid": "^9.0.0",
+    "openai": "^4.20.0"
+  }
+}

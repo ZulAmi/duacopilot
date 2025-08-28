@@ -15,8 +15,8 @@ import '../../data/datasources/rag_cache_service.dart'; // RAG caching
 import '../../data/datasources/rag_remote_datasource.dart';
 import '../../data/datasources/working_rag_api_service.dart'; // TRUE RAG API Service
 import '../../data/repositories/audio_repository_impl.dart';
+import '../../data/repositories/enhanced_rag_repository_impl.dart';
 import '../../data/repositories/favorites_repository_impl.dart';
-import '../../data/repositories/rag_repository_impl.dart';
 import '../../domain/repositories/audio_repository.dart';
 import '../../domain/repositories/favorites_repository.dart';
 import '../../domain/repositories/rag_repository.dart';
@@ -63,15 +63,13 @@ Future<void> init() async {
 
     // Database initialization with platform awareness
     if (kIsWeb) {
-      AppLogger.debug(
-          'ðŸŒ Web platform detected - using memory-based storage');
+      AppLogger.debug('ðŸŒ Web platform detected - using memory-based storage');
       // For web, register mock local data source directly (no database needed)
       try {
         sl.registerLazySingleton<LocalDataSource>(() => MockLocalDataSource());
         AppLogger.debug('âœ… Mock local data source initialized for web');
       } catch (e) {
-        AppLogger.debug(
-            'âš ï¸  Mock local data source initialization failed: $e');
+        AppLogger.debug('âš ï¸  Mock local data source initialization failed: $e');
       }
     } else {
       try {
@@ -138,11 +136,13 @@ Future<void> init() async {
     // Repositories
     try {
       sl.registerLazySingleton<RagRepository>(
-        () => RagRepositoryImpl(
-          remoteDataSource: sl<RagRemoteDataSource>(),
-          localDataSource:
-              sl.isRegistered<LocalDataSource>() ? sl<LocalDataSource>() : null,
+        () => EnhancedRagRepositoryImpl(
+          ragApiService: sl<RagApiService>(),
+          localDataSource: sl.isRegistered<LocalDataSource>() ? sl<LocalDataSource>() : MockLocalDataSource(),
+          islamicRagService: sl<IslamicRagService>(),
           networkInfo: sl<NetworkInfo>(),
+          dioClient: sl<Dio>(),
+          logger: sl<Logger>(),
         ),
       );
 

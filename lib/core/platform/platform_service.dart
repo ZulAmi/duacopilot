@@ -11,8 +11,7 @@ class PlatformService {
 
   // Platform Detection
   bool get isMobile => Platform.isAndroid || Platform.isIOS;
-  bool get isDesktop =>
-      Platform.isWindows || Platform.isMacOS || Platform.isLinux;
+  bool get isDesktop => Platform.isWindows || Platform.isMacOS || Platform.isLinux;
   bool get isAndroid => Platform.isAndroid;
   bool get isIOS => Platform.isIOS;
   bool get isWindows => Platform.isWindows;
@@ -33,7 +32,8 @@ class PlatformService {
   bool get supportsQuickActions => isMobile;
   bool get supportsAppLinks => !isWeb;
   bool get supportsAudio => true; // All platforms support audio
-  bool get supportsFirebase => true; // All platforms support Firebase
+  // Firebase removed
+  bool get supportsFirebase => false;
   bool get supportsCaching => true; // All platforms support caching
 
   // Storage Capabilities
@@ -70,7 +70,7 @@ class PlatformService {
     if (supportsCalendar) features.add('Device Calendar');
     if (supportsQuickActions) features.add('Quick Actions');
     if (supportsAppLinks) features.add('App Links');
-    features.add('Firebase Analytics');
+    // Firebase removed
     features.add('Audio Playback');
     features.add('Caching');
 
@@ -143,7 +143,7 @@ class PlatformService {
       case 'audio':
         return supportsAudio;
       case 'firebase':
-        return supportsFirebase;
+        return false; // Firebase removed
       case 'caching':
         return supportsCaching;
       default:

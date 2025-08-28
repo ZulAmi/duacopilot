@@ -1,5 +1,5 @@
-import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
+import * as functions from 'firebase-functions';
 import { OpenAI } from 'openai';
 
 const db = admin.firestore();
@@ -13,7 +13,7 @@ export const aiChat = functions.https.onCall(async (data, context) => {
     throw new functions.https.HttpsError('unauthenticated', 'User must be authenticated');
   }
 
-  const { message, conversationId, language = 'en', context: chatContext } = data;
+  const { message, conversationId, language = 'en' } = data;
   const userId = context.auth.uid;
 
   try {
@@ -39,7 +39,7 @@ export const aiChat = functions.https.onCall(async (data, context) => {
       max_tokens: 500
     });
 
-    const aiResponse = completion.choices[0].message.content;
+    const aiResponse = completion.choices[0].message.content || '';
 
     // Save to conversation history
     await saveConversation(conversationId, userId, message, aiResponse);
@@ -60,7 +60,7 @@ export const aiChat = functions.https.onCall(async (data, context) => {
 
 // Generate embeddings for semantic search
 export const generateEmbeddings = functions.https.onCall(async (data, context) => {
-  const { text, language = 'en' } = data;
+  const { text } = data;
 
   try {
     const embedding = await openai.embeddings.create({
@@ -80,7 +80,7 @@ export const generateEmbeddings = functions.https.onCall(async (data, context) =
 
 // Classify intent
 export const classifyIntent = functions.https.onCall(async (data, context) => {
-  const { query, language = 'en' } = data;
+  const { query } = data;
 
   const intents = [
     'dua_request',

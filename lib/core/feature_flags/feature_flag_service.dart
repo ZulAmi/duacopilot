@@ -3,7 +3,6 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,8 +27,7 @@ class FeatureFlags {
   static const String pushNotifications = 'push_notifications_enabled';
   static const String analyticsEnabled = 'analytics_enabled';
   static const String crashReportingEnabled = 'crash_reporting_enabled';
-  static const String performanceMonitoringEnabled =
-      'performance_monitoring_enabled';
+  static const String performanceMonitoringEnabled = 'performance_monitoring_enabled';
   static const String maintenanceMode = 'maintenance_mode';
   static const String forceUpdate = 'force_update_required';
 }
@@ -74,51 +72,36 @@ class FeatureFlagConfig {
     required this.customConfig,
   });
 
-  factory FeatureFlagConfig.fromRemoteConfig(
-    FirebaseRemoteConfig remoteConfig,
-  ) {
+  factory FeatureFlagConfig.fromMap(Map<String, dynamic> map) {
+    bool b(String key, [bool fallback = false]) {
+      final v = map[key];
+      if (v is bool) return v;
+      if (v is String) return v.toLowerCase() == 'true';
+      return fallback;
+    }
+
     return FeatureFlagConfig(
-      ragSystemEnabled: remoteConfig.getBool(FeatureFlags.ragSystemEnabled),
-      ragVectorSearch: remoteConfig.getBool(FeatureFlags.ragVectorSearch),
-      ragSemanticCache: remoteConfig.getBool(FeatureFlags.ragSemanticCache),
-      ragResponseStreaming: remoteConfig.getBool(
-        FeatureFlags.ragResponseStreaming,
-      ),
-      ragMultiLanguage: remoteConfig.getBool(FeatureFlags.ragMultiLanguage),
-      ragOfflineMode: remoteConfig.getBool(FeatureFlags.ragOfflineMode),
-      ragAdvancedFiltering: remoteConfig.getBool(
-        FeatureFlags.ragAdvancedFiltering,
-      ),
-      ragPremiumFeatures: remoteConfig.getBool(FeatureFlags.ragPremiumFeatures),
-      ragPerformanceMode: remoteConfig.getBool(FeatureFlags.ragPerformanceMode),
-      ragBetaFeatures: remoteConfig.getBool(FeatureFlags.ragBetaFeatures),
-      pushNotifications: remoteConfig.getBool(FeatureFlags.pushNotifications),
-      analyticsEnabled: remoteConfig.getBool(FeatureFlags.analyticsEnabled),
-      crashReportingEnabled: remoteConfig.getBool(
-        FeatureFlags.crashReportingEnabled,
-      ),
-      performanceMonitoringEnabled: remoteConfig.getBool(
-        FeatureFlags.performanceMonitoringEnabled,
-      ),
-      maintenanceMode: remoteConfig.getBool(FeatureFlags.maintenanceMode),
-      forceUpdate: remoteConfig.getBool(FeatureFlags.forceUpdate),
-      customConfig: _parseCustomConfig(remoteConfig),
+      ragSystemEnabled: b(FeatureFlags.ragSystemEnabled),
+      ragVectorSearch: b(FeatureFlags.ragVectorSearch),
+      ragSemanticCache: b(FeatureFlags.ragSemanticCache),
+      ragResponseStreaming: b(FeatureFlags.ragResponseStreaming),
+      ragMultiLanguage: b(FeatureFlags.ragMultiLanguage),
+      ragOfflineMode: b(FeatureFlags.ragOfflineMode),
+      ragAdvancedFiltering: b(FeatureFlags.ragAdvancedFiltering),
+      ragPremiumFeatures: b(FeatureFlags.ragPremiumFeatures),
+      ragPerformanceMode: b(FeatureFlags.ragPerformanceMode, true),
+      ragBetaFeatures: b(FeatureFlags.ragBetaFeatures),
+      pushNotifications: b(FeatureFlags.pushNotifications, true),
+      analyticsEnabled: b(FeatureFlags.analyticsEnabled, true),
+      crashReportingEnabled: b(FeatureFlags.crashReportingEnabled, true),
+      performanceMonitoringEnabled: b(FeatureFlags.performanceMonitoringEnabled, true),
+      maintenanceMode: b(FeatureFlags.maintenanceMode),
+      forceUpdate: b(FeatureFlags.forceUpdate),
+      customConfig: Map<String, dynamic>.from(map['custom_config'] ?? {}),
     );
   }
 
-  static Map<String, dynamic> _parseCustomConfig(
-    FirebaseRemoteConfig remoteConfig,
-  ) {
-    try {
-      final customConfigJson = remoteConfig.getString('custom_config');
-      if (customConfigJson.isNotEmpty) {
-        return json.decode(customConfigJson) as Map<String, dynamic>;
-      }
-    } catch (e) {
-      // Log error but don't crash
-    }
-    return {};
-  }
+  // Remote custom config parsing removed (Firebase eliminated)
 
   /// Check if RAG system should be available
   bool get isRagAvailable => ragSystemEnabled;
@@ -159,9 +142,7 @@ class FeatureFlagConfig {
 class FeatureFlagService {
   static const String _cacheKey = 'feature_flags_cache';
   static const Duration _cacheDuration = Duration(hours: 1);
-  static const Duration _fetchTimeout = Duration(seconds: 10);
 
-  final FirebaseRemoteConfig _remoteConfig;
   final SharedPreferences _prefs;
   final Logger _logger = Logger();
 
@@ -169,34 +150,20 @@ class FeatureFlagService {
   StreamController<FeatureFlagConfig>? _configController;
   Timer? _periodicFetchTimer;
 
-  FeatureFlagService._(this._remoteConfig, this._prefs);
+  FeatureFlagService._(this._prefs);
 
   static Future<FeatureFlagService> initialize() async {
-    final remoteConfig = FirebaseRemoteConfig.instance;
     final prefs = await SharedPreferences.getInstance();
-
-    final service = FeatureFlagService._(remoteConfig, prefs);
+    final service = FeatureFlagService._(prefs);
     await service._initialize();
     return service;
   }
 
   Future<void> _initialize() async {
     try {
-      // Set remote config settings
-      await _remoteConfig.setConfigSettings(
-        RemoteConfigSettings(
-          fetchTimeout: _fetchTimeout,
-          minimumFetchInterval: const Duration(hours: 1),
-        ),
-      );
-
-      // Set default values
-      await _remoteConfig.setDefaults(_getDefaultValues());
-
       // Load cached config first
       await _loadCachedConfig();
-
-      // Fetch latest config
+      // Apply defaults (simulate fetch)
       await fetchAndActivate();
 
       // Setup periodic refresh
@@ -219,7 +186,7 @@ class FeatureFlagService {
       );
 
       // Fallback to defaults
-      _currentConfig = FeatureFlagConfig.fromRemoteConfig(_remoteConfig);
+      _currentConfig = FeatureFlagConfig.fromMap(_getDefaultValues());
     }
   }
 
@@ -253,35 +220,19 @@ class FeatureFlagService {
   /// Fetch and activate remote config
   Future<bool> fetchAndActivate() async {
     try {
-      final fetchResult = await _remoteConfig.fetchAndActivate();
-
-      if (fetchResult) {
-        final newConfig = FeatureFlagConfig.fromRemoteConfig(_remoteConfig);
-        await _updateConfig(newConfig);
-
-        // Track config update
-        await ProductionAnalytics.trackEvent('feature_flags_updated', {
-          'config_version': DateTime.now().millisecondsSinceEpoch.toString(),
-          'rag_enabled': newConfig.ragSystemEnabled,
-          'maintenance_mode': newConfig.maintenanceMode,
-        });
-
-        _logger.i('Remote config fetched and activated successfully');
-        return true;
-      }
-
-      return false;
+      final newConfig = FeatureFlagConfig.fromMap(_getDefaultValues());
+      await _updateConfig(newConfig);
+      await ProductionAnalytics.trackEvent('feature_flags_updated', {
+        'config_version': DateTime.now().millisecondsSinceEpoch.toString(),
+        'rag_enabled': newConfig.ragSystemEnabled,
+        'maintenance_mode': newConfig.maintenanceMode,
+        'source': 'local_defaults'
+      });
+      _logger.i('Feature flags applied from local defaults');
+      return true;
     } catch (e, stackTrace) {
-      _logger.e(
-        'Failed to fetch remote config',
-        error: e,
-        stackTrace: stackTrace,
-      );
-      await ProductionCrashReporter.recordError(
-        e,
-        stackTrace,
-        context: 'FeatureFlagService.fetchAndActivate',
-      );
+      _logger.e('Failed to apply feature flags', error: e, stackTrace: stackTrace);
+      await ProductionCrashReporter.recordError(e, stackTrace, context: 'FeatureFlagService.fetchAndActivate');
       return false;
     }
   }
@@ -353,8 +304,7 @@ class FeatureFlagService {
             pushNotifications: configData['pushNotifications'] ?? true,
             analyticsEnabled: configData['analyticsEnabled'] ?? true,
             crashReportingEnabled: configData['crashReportingEnabled'] ?? true,
-            performanceMonitoringEnabled:
-                configData['performanceMonitoringEnabled'] ?? true,
+            performanceMonitoringEnabled: configData['performanceMonitoringEnabled'] ?? true,
             maintenanceMode: configData['maintenanceMode'] ?? false,
             forceUpdate: configData['forceUpdate'] ?? false,
             customConfig: Map<String, dynamic>.from(
@@ -381,8 +331,7 @@ class FeatureFlagService {
   }
 
   /// Get current feature flag configuration
-  FeatureFlagConfig get config =>
-      _currentConfig ?? FeatureFlagConfig.fromRemoteConfig(_remoteConfig);
+  FeatureFlagConfig get config => _currentConfig ?? FeatureFlagConfig.fromMap(_getDefaultValues());
 
   /// Stream of configuration updates
   Stream<FeatureFlagConfig> get configStream {
@@ -392,22 +341,27 @@ class FeatureFlagService {
 
   /// Check if a specific feature is enabled
   bool isEnabled(String featureFlag) {
-    return _remoteConfig.getBool(featureFlag);
+    return config.customConfig[featureFlag] as bool? ?? false;
   }
 
   /// Get string value for a feature flag
   String getString(String featureFlag) {
-    return _remoteConfig.getString(featureFlag);
+    final v = config.customConfig[featureFlag];
+    return v?.toString() ?? '';
   }
 
   /// Get int value for a feature flag
   int getInt(String featureFlag) {
-    return _remoteConfig.getInt(featureFlag);
+    final v = config.customConfig[featureFlag];
+    if (v is int) return v;
+    return int.tryParse(v?.toString() ?? '') ?? 0;
   }
 
   /// Get double value for a feature flag
   double getDouble(String featureFlag) {
-    return _remoteConfig.getDouble(featureFlag);
+    final v = config.customConfig[featureFlag];
+    if (v is double) return v;
+    return double.tryParse(v?.toString() ?? '') ?? 0.0;
   }
 
   /// Force refresh configuration
@@ -417,32 +371,22 @@ class FeatureFlagService {
 
   /// RAG-specific feature checks
   bool get isRagEnabled => config.ragSystemEnabled;
-  bool get isRagVectorSearchEnabled =>
-      config.isRagFeatureEnabled('vector_search');
-  bool get isRagSemanticCacheEnabled =>
-      config.isRagFeatureEnabled('semantic_cache');
-  bool get isRagStreamingEnabled =>
-      config.isRagFeatureEnabled('response_streaming');
-  bool get isRagMultiLanguageEnabled =>
-      config.isRagFeatureEnabled('multi_language');
-  bool get isRagOfflineModeEnabled =>
-      config.isRagFeatureEnabled('offline_mode');
-  bool get isRagAdvancedFilteringEnabled =>
-      config.isRagFeatureEnabled('advanced_filtering');
-  bool get isRagPremiumFeaturesEnabled =>
-      config.isRagFeatureEnabled('premium_features');
-  bool get isRagPerformanceModeEnabled =>
-      config.isRagFeatureEnabled('performance_mode');
-  bool get isRagBetaFeaturesEnabled =>
-      config.isRagFeatureEnabled('beta_features');
+  bool get isRagVectorSearchEnabled => config.isRagFeatureEnabled('vector_search');
+  bool get isRagSemanticCacheEnabled => config.isRagFeatureEnabled('semantic_cache');
+  bool get isRagStreamingEnabled => config.isRagFeatureEnabled('response_streaming');
+  bool get isRagMultiLanguageEnabled => config.isRagFeatureEnabled('multi_language');
+  bool get isRagOfflineModeEnabled => config.isRagFeatureEnabled('offline_mode');
+  bool get isRagAdvancedFilteringEnabled => config.isRagFeatureEnabled('advanced_filtering');
+  bool get isRagPremiumFeaturesEnabled => config.isRagFeatureEnabled('premium_features');
+  bool get isRagPerformanceModeEnabled => config.isRagFeatureEnabled('performance_mode');
+  bool get isRagBetaFeaturesEnabled => config.isRagFeatureEnabled('beta_features');
 
   /// App-level feature checks
   bool get isMaintenanceModeEnabled => config.maintenanceMode;
   bool get isForceUpdateRequired => config.forceUpdate;
   bool get isAnalyticsEnabled => config.analyticsEnabled;
   bool get isCrashReportingEnabled => config.crashReportingEnabled;
-  bool get isPerformanceMonitoringEnabled =>
-      config.performanceMonitoringEnabled;
+  bool get isPerformanceMonitoringEnabled => config.performanceMonitoringEnabled;
 
   /// Dispose resources
   void dispose() {

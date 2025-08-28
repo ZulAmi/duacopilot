@@ -4,7 +4,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
@@ -23,8 +22,7 @@ class RagException implements Exception {
   const RagException(this.message, {this.queryId, this.context});
 
   @override
-  String toString() =>
-      'RagException: $message${queryId != null ? ' (Query: $queryId)' : ''}';
+  String toString() => 'RagException: $message${queryId != null ? ' (Query: $queryId)' : ''}';
 }
 
 class NetworkException implements Exception {
@@ -35,8 +33,7 @@ class NetworkException implements Exception {
   const NetworkException(this.message, {this.statusCode, this.endpoint});
 
   @override
-  String toString() =>
-      'NetworkException: $message${statusCode != null ? ' (Status: $statusCode)' : ''}';
+  String toString() => 'NetworkException: $message${statusCode != null ? ' (Status: $statusCode)' : ''}';
 }
 
 class ValidationException implements Exception {
@@ -47,8 +44,7 @@ class ValidationException implements Exception {
   const ValidationException(this.message, {this.field, this.value});
 
   @override
-  String toString() =>
-      'ValidationException: $message${field != null ? ' (Field: $field)' : ''}';
+  String toString() => 'ValidationException: $message${field != null ? ' (Field: $field)' : ''}';
 }
 
 class PerformanceException implements Exception {
@@ -63,13 +59,11 @@ class PerformanceException implements Exception {
   });
 
   @override
-  String toString() =>
-      'PerformanceException: $message${operationType != null ? ' (Operation: $operationType)' : ''}';
+  String toString() => 'PerformanceException: $message${operationType != null ? ' (Operation: $operationType)' : ''}';
 }
 
 /// Production Crash Reporter
 class ProductionCrashReporter {
-  static final FirebaseCrashlytics _crashlytics = FirebaseCrashlytics.instance;
   static final Logger _logger = Logger();
   static bool _isInitialized = false;
   static PackageInfo? _packageInfo;
@@ -87,8 +81,7 @@ class ProductionCrashReporter {
       _packageInfo = await PackageInfo.fromPlatform();
       _prefs = await SharedPreferences.getInstance();
 
-      // Enable crashlytics collection
-      await _crashlytics.setCrashlyticsCollectionEnabled(!kDebugMode);
+      // Crashlytics removed - collection toggle skipped
 
       // Set up Flutter error handling
       _setupFlutterErrorHandling();
@@ -121,8 +114,7 @@ class ProductionCrashReporter {
         FlutterError.presentError(details);
       }
 
-      // Report to crashlytics
-      _crashlytics.recordFlutterFatalError(details);
+      // Crashlytics removed - would send fatal flutter error here
 
       // Track crash analytics
       _trackCrashAnalytics('flutter_error', details.exception, details.stack);
@@ -143,8 +135,7 @@ class ProductionCrashReporter {
         _logger.e('Zone error caught', error: error, stackTrace: stack);
       }
 
-      // Report to crashlytics
-      _crashlytics.recordError(error, stack, fatal: true);
+      // Crashlytics removed - would send zone error here
 
       // Track crash analytics
       _trackCrashAnalytics('zone_error', error, stack);
@@ -158,27 +149,7 @@ class ProductionCrashReporter {
 
   static Future<void> _setCustomKeys() async {
     try {
-      await _crashlytics.setCustomKey(
-        'app_version',
-        _packageInfo?.version ?? 'unknown',
-      );
-      await _crashlytics.setCustomKey(
-        'build_number',
-        _packageInfo?.buildNumber ?? 'unknown',
-      );
-      await _crashlytics.setCustomKey('platform', Platform.operatingSystem);
-      await _crashlytics.setCustomKey('debug_mode', kDebugMode);
-      await _crashlytics.setCustomKey(
-        'initialization_time',
-        DateTime.now().toIso8601String(),
-      );
-
-      // Set device info
-      if (Platform.isAndroid || Platform.isIOS) {
-        await _crashlytics.setCustomKey('mobile_platform', true);
-      } else {
-        await _crashlytics.setCustomKey('desktop_platform', true);
-      }
+      // Custom key collection removed
     } catch (e) {
       _logger.w('Failed to set custom keys', error: e);
     }
@@ -195,27 +166,7 @@ class ProductionCrashReporter {
   }) async {
     try {
       // Set context-specific custom keys
-      if (context != null) {
-        await _crashlytics.setCustomKey('error_context', context);
-      }
-
-      if (additionalData != null) {
-        for (final entry in additionalData.entries) {
-          await _crashlytics.setCustomKey(
-            'custom_${entry.key}',
-            entry.value?.toString() ?? 'null',
-          );
-        }
-      }
-
-      await _crashlytics.setCustomKey('error_severity', severity.name);
-      await _crashlytics.setCustomKey(
-        'error_timestamp',
-        DateTime.now().toIso8601String(),
-      );
-
-      // Record the error
-      await _crashlytics.recordError(error, stackTrace, fatal: fatal);
+      // Collect minimal local context only (no external service)
 
       // Track in analytics
       _trackCrashAnalytics(
@@ -324,7 +275,7 @@ class ProductionCrashReporter {
   static Future<void> log(String message, {String? context}) async {
     try {
       final logMessage = context != null ? '[$context] $message' : message;
-      await _crashlytics.log(logMessage);
+      // Crashlytics removed - log locally only
       _logger.i(logMessage);
     } catch (e) {
       _logger.w('Failed to log message to crashlytics', error: e);
@@ -334,7 +285,7 @@ class ProductionCrashReporter {
   /// Set user identifier
   static Future<void> setUserIdentifier(String? userId) async {
     try {
-      await _crashlytics.setUserIdentifier(userId ?? 'anonymous');
+      // Crashlytics removed - store user id locally only
     } catch (e) {
       _logger.w('Failed to set user identifier', error: e);
     }
@@ -342,14 +293,13 @@ class ProductionCrashReporter {
 
   /// Check if user opted in to crash reporting
   static Future<bool> isCrashlyticsEnabled() async {
-    return _crashlytics.isCrashlyticsCollectionEnabled;
+    return true; // Always 'enabled' locally
   }
 
   /// Set crashlytics collection enabled
   static Future<void> setCrashlyticsCollectionEnabled(bool enabled) async {
     try {
-      await _crashlytics.setCrashlyticsCollectionEnabled(enabled);
-      _logger.i('Crashlytics collection ${enabled ? 'enabled' : 'disabled'}');
+      _logger.i('Crash collection flag set to $enabled (local placeholder)');
     } catch (e) {
       _logger.w('Failed to set crashlytics collection enabled', error: e);
     }

@@ -29,14 +29,12 @@ dependencies:
   socket_io_client: ^2.0.3+1
   stream_channel: ^2.1.2
 
-  # Firebase (Core - All Platforms)
-  firebase_core: ^2.32.0
-  firebase_analytics: ^10.10.7
-  firebase_crashlytics: ^3.4.14
-  firebase_performance: ^0.9.4
-  firebase_remote_config: ^4.4.6
-  cloud_firestore: ^4.17.5
-  firebase_messaging: ^14.9.4
+  # AWS Services (replaced Firebase)
+  # Authentication: AWS Cognito via custom JWT implementation
+  # Storage: AWS S3 via API Gateway
+  # Analytics: AWS CloudWatch via custom implementation
+  # Remote Config: AWS Systems Manager Parameter Store
+  # Messaging: AWS SNS/SES via API Gateway
 
   # State Management & Architecture
   flutter_riverpod: ^2.4.9
@@ -153,9 +151,6 @@ flutter:
     - assets/models/
     - assets/offline_data/
 
-# Platform-aware overrides for web compatibility
+# Platform-aware overrides for web compatibility  
 dependency_overrides:
-  firebase_messaging_web: ^3.8.0
-  firebase_core_web: ^2.17.5
-  cloud_firestore_web: ^3.12.5
   js: ^0.6.7

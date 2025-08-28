@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,8 +11,7 @@ class ComprehensiveFeedbackService {
   static const String _analyticsBoxName = 'analytics_data';
   static const String _prefsPrefix = 'feedback_prefs_';
 
-  final FirebaseAnalytics _analytics;
-  final FirebaseRemoteConfig _remoteConfig;
+  // Firebase removed
   late Box<Map<String, dynamic>> _feedbackBox;
   late Box<Map<String, dynamic>> _analyticsBox;
   late SharedPreferences _prefs;
@@ -23,11 +20,7 @@ class ComprehensiveFeedbackService {
   Timer? _batchUploadTimer;
   final List<Map<String, dynamic>> _pendingAnalytics = [];
 
-  ComprehensiveFeedbackService({
-    FirebaseAnalytics? analytics,
-    FirebaseRemoteConfig? remoteConfig,
-  })  : _analytics = analytics ?? FirebaseAnalytics.instance,
-        _remoteConfig = remoteConfig ?? FirebaseRemoteConfig.instance;
+  ComprehensiveFeedbackService();
 
   /// Initialize the feedback service
   Future<void> initialize() async {
@@ -41,24 +34,7 @@ class ComprehensiveFeedbackService {
       );
       _prefs = await SharedPreferences.getInstance();
 
-      // Initialize Firebase Remote Config
-      await _remoteConfig.setConfigSettings(
-        RemoteConfigSettings(
-          fetchTimeout: const Duration(minutes: 1),
-          minimumFetchInterval: const Duration(hours: 1),
-        ),
-      );
-
-      // Set default values for A/B testing
-      await _remoteConfig.setDefaults({
-        'enable_advanced_feedback_ui': true,
-        'feedback_form_version': 'v2',
-        'rating_widget_style': 'modern',
-        'analytics_batch_size': 10,
-        'analytics_upload_interval_minutes': 5,
-      });
-
-      await _remoteConfig.fetchAndActivate();
+      // Remote configuration removed (Firebase dependency eliminated)
 
       // Start batch upload timer for analytics
       _startBatchUploadTimer();
@@ -133,7 +109,7 @@ class ComprehensiveFeedbackService {
         'tags': tags ?? [],
         'timestamp': DateTime.now().millisecondsSinceEpoch,
         'user_id': await _getUserId(),
-        'form_version': _remoteConfig.getString('feedback_form_version'),
+        'form_version': 'v2',
       };
 
       // Validate feedback data
@@ -185,8 +161,7 @@ class ComprehensiveFeedbackService {
       await _storeAnalyticsLocally(analyticsData);
 
       // Check if we should upload batch
-      if (_pendingAnalytics.length >=
-          _remoteConfig.getInt('analytics_batch_size')) {
+      if (_pendingAnalytics.length >= 10) {
         await _uploadAnalyticsBatch();
       }
     } catch (e) {
@@ -227,9 +202,7 @@ class ComprehensiveFeedbackService {
       duration: playbackTime,
       additionalData: {
         'total_duration_ms': totalDuration?.inMilliseconds,
-        'completion_rate': totalDuration != null
-            ? playbackTime.inMilliseconds / totalDuration.inMilliseconds
-            : null,
+        'completion_rate': totalDuration != null ? playbackTime.inMilliseconds / totalDuration.inMilliseconds : null,
         'completed': completed,
       },
     );
@@ -296,7 +269,7 @@ class ComprehensiveFeedbackService {
     if (!_initialized) return defaultVariant;
 
     try {
-      return _remoteConfig.getString('${testName}_variant');
+      return 'control';
     } catch (e) {
       debugPrint('Error getting UI variant for $testName: $e');
       return defaultVariant;
@@ -305,12 +278,12 @@ class ComprehensiveFeedbackService {
 
   /// Check if advanced feedback UI is enabled
   bool get isAdvancedFeedbackUIEnabled {
-    return _remoteConfig.getBool('enable_advanced_feedback_ui');
+    return true;
   }
 
   /// Get rating widget style
   String get ratingWidgetStyle {
-    return _remoteConfig.getString('rating_widget_style');
+    return 'modern';
   }
 
   /// Get aggregated analytics (privacy-preserving)
@@ -389,8 +362,7 @@ class ComprehensiveFeedbackService {
     _pendingAnalytics.clear();
 
     // Clear preferences
-    final keys =
-        _prefs.getKeys().where((key) => key.startsWith(_prefsPrefix)).toList();
+    final keys = _prefs.getKeys().where((key) => key.startsWith(_prefsPrefix)).toList();
 
     for (final key in keys) {
       await _prefs.remove(key);
@@ -439,7 +411,7 @@ class ComprehensiveFeedbackService {
     Map<String, Object> parameters,
   ) async {
     try {
-      await _analytics.logEvent(name: eventName, parameters: parameters);
+      // Analytics removed; placeholder no-op
     } catch (e) {
       debugPrint('Error logging analytics event: $e');
     }
@@ -485,8 +457,7 @@ class ComprehensiveFeedbackService {
       actionCounts[action] = (actionCounts[action] ?? 0) + 1;
 
       if (contentType != null) {
-        contentTypeCounts[contentType] =
-            (contentTypeCounts[contentType] ?? 0) + 1;
+        contentTypeCounts[contentType] = (contentTypeCounts[contentType] ?? 0) + 1;
       }
 
       if (duration != null) {
@@ -497,8 +468,7 @@ class ComprehensiveFeedbackService {
     // Calculate average durations
     final Map<String, double> averageDurations = {};
     durationsByAction.forEach((action, durations) {
-      averageDurations[action] =
-          durations.reduce((a, b) => a + b) / durations.length;
+      averageDurations[action] = durations.reduce((a, b) => a + b) / durations.length;
     });
 
     return {
@@ -510,9 +480,7 @@ class ComprehensiveFeedbackService {
   }
 
   void _startBatchUploadTimer() {
-    final interval = Duration(
-      minutes: _remoteConfig.getInt('analytics_upload_interval_minutes'),
-    );
+    final interval = const Duration(minutes: 5);
 
     _batchUploadTimer = Timer.periodic(
       interval,

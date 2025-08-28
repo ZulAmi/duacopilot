@@ -3,27 +3,30 @@ import 'dart:collection';
 
 import 'package:duacopilot/core/logging/app_logger.dart';
 
-// Note: Firebase Analytics will be added when firebase_analytics package is available
-// import 'package:firebase_analytics/firebase_analytics.dart';
+import '../../../../services/aws_services.dart';
+// Firebase Analytics removed. Using AWS analytics & local in-memory metrics.
 import '../models/cache_models.dart';
 
-// Mock Firebase Analytics for development
-/// MockFirebaseAnalytics class implementation
-class MockFirebaseAnalytics {
-  static final MockFirebaseAnalytics instance = MockFirebaseAnalytics();
+/// Lightweight analytics event forwarder (was MockFirebaseAnalytics)
+class _CacheEventForwarder {
+  static final _CacheEventForwarder instance = _CacheEventForwarder();
 
   Future<void> logEvent({
     required String name,
     Map<String, Object>? parameters,
   }) async {
-    // In development, just print to console
-    AppLogger.debug('Analytics Event: $name - $parameters');
+    // Forward to AWS analytics service; swallow errors
+    try {
+      await AWSAnalyticsService.logEvent(name: name, parameters: parameters);
+    } catch (e) {
+      AppLogger.debug('Cache analytic event failed: $e');
+    }
   }
 }
 
 /// Analytics service for cache performance and popular query tracking
 class CacheAnalyticsService {
-  static final MockFirebaseAnalytics _analytics = MockFirebaseAnalytics.instance;
+  static final _CacheEventForwarder _analytics = _CacheEventForwarder.instance;
 
   // In-memory analytics data
   static final Map<String, QueryAnalytics> _queryAnalytics = {};
@@ -65,7 +68,7 @@ class CacheAnalyticsService {
     _updateQueryAnalytics(query, language, true, retrievalTime);
     _incrementPopularQuery(query);
 
-    // Firebase Analytics event
+    // Analytics event
     _analytics.logEvent(
       name: 'cache_hit',
       parameters: {
@@ -99,7 +102,7 @@ class CacheAnalyticsService {
 
     _updateQueryAnalytics(query, language, false, apiCallTime);
 
-    // Firebase Analytics event
+    // Analytics event
     _analytics.logEvent(
       name: 'cache_miss',
       parameters: {
@@ -129,7 +132,7 @@ class CacheAnalyticsService {
       ),
     );
 
-    // Firebase Analytics event
+    // Analytics event
     _analytics.logEvent(
       name: 'cache_eviction',
       parameters: {
@@ -160,7 +163,7 @@ class CacheAnalyticsService {
       ),
     );
 
-    // Firebase Analytics event
+    // Analytics event
     _analytics.logEvent(
       name: 'cache_prewarming',
       parameters: {
@@ -184,7 +187,7 @@ class CacheAnalyticsService {
       ),
     );
 
-    // Firebase Analytics event
+    // Analytics event
     _analytics.logEvent(
       name: 'cache_invalidation',
       parameters: {

@@ -4,7 +4,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:firebase_performance/firebase_performance.dart';
+// Firebase Performance removed; using lightweight in-app traces
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
@@ -46,7 +46,7 @@ class PerformanceMetrics {
 /// RAG Query Performance Tracker
 class RagPerformanceTracker {
   final String queryId;
-  final Trace _trace;
+  final _InAppTrace _trace;
   final Stopwatch _stopwatch;
   final Map<String, dynamic> _attributes = {};
 
@@ -55,8 +55,7 @@ class RagPerformanceTracker {
   RagPerformanceTracker._(this.queryId, this._trace, this._stopwatch);
 
   static Future<RagPerformanceTracker> start(String queryId) async {
-    final trace = FirebasePerformance.instance.newTrace('rag_query');
-    await trace.start();
+    final trace = _InAppTrace('rag_query')..start();
 
     final stopwatch = Stopwatch()..start();
     final tracker = RagPerformanceTracker._(queryId, trace, stopwatch);
@@ -70,27 +69,23 @@ class RagPerformanceTracker {
   void addAttribute(String key, String value) {
     if (!_isCompleted) {
       _attributes[key] = value;
-      _trace.putAttribute(key, value);
+      _trace.attributes[key] = value;
     }
   }
 
   void incrementMetric(String metricName, [int value = 1]) {
     if (!_isCompleted) {
-      _trace.incrementMetric(metricName, value);
+      _trace.increment(metricName, value);
     }
   }
 
   void setMetric(String metricName, int value) {
     if (!_isCompleted) {
-      _trace.setMetric(metricName, value);
+      _trace.set(metricName, value);
     }
   }
 
-  Future<void> complete(
-      {bool success = true,
-      String? errorMessage,
-      int? resultCount,
-      bool? cacheHit}) async {
+  Future<void> complete({bool success = true, String? errorMessage, int? resultCount, bool? cacheHit}) async {
     if (_isCompleted) return;
 
     _stopwatch.stop();
@@ -99,8 +94,7 @@ class RagPerformanceTracker {
     // Set final attributes
     addAttribute('success', success.toString());
     if (errorMessage != null) addAttribute('error_message', errorMessage);
-    if (resultCount != null)
-      addAttribute('result_count', resultCount.toString());
+    if (resultCount != null) addAttribute('result_count', resultCount.toString());
     if (cacheHit != null) addAttribute('cache_hit', cacheHit.toString());
 
     // Set metrics
@@ -108,7 +102,7 @@ class RagPerformanceTracker {
     if (resultCount != null) setMetric('result_count', resultCount);
 
     // Stop trace
-    await _trace.stop();
+    _trace.stop();
 
     // Track in analytics
     await ProductionAnalytics.trackRagQueryPerformance(
@@ -127,7 +121,6 @@ class RagPerformanceTracker {
 
 /// Production Performance Monitor
 class ProductionPerformanceMonitor {
-  static final FirebasePerformance _performance = FirebasePerformance.instance;
   static final Logger _logger = Logger();
   static bool _isInitialized = false;
   static SharedPreferences? _prefs;
@@ -152,7 +145,7 @@ class ProductionPerformanceMonitor {
       await _loadPerformanceConfig();
 
       // Enable performance monitoring
-      await _performance.setPerformanceCollectionEnabled(true);
+      // Performance collection toggle skipped (Firebase removed)
 
       // Setup automatic HTTP/HTTPS network request monitoring
       // This is automatically enabled by Firebase Performance
@@ -171,16 +164,11 @@ class ProductionPerformanceMonitor {
         'performance_monitor_init',
         Duration.zero, // No duration for initialization
         success: true,
-        attributes: {
-          'timestamp': DateTime.now().toIso8601String(),
-          'platform': Platform.operatingSystem
-        },
+        attributes: {'timestamp': DateTime.now().toIso8601String(), 'platform': Platform.operatingSystem},
       );
     } catch (e, stackTrace) {
-      _logger.e('Failed to initialize ProductionPerformanceMonitor',
-          error: e, stackTrace: stackTrace);
-      await ProductionCrashReporter.recordError(e, stackTrace,
-          context: 'PerformanceMonitor.initialize');
+      _logger.e('Failed to initialize ProductionPerformanceMonitor', error: e, stackTrace: stackTrace);
+      await ProductionCrashReporter.recordError(e, stackTrace, context: 'PerformanceMonitor.initialize');
     }
   }
 
@@ -196,21 +184,18 @@ class ProductionPerformanceMonitor {
 
       if (queryType != null) tracker.addAttribute('query_type', queryType);
       if (modelName != null) tracker.addAttribute('model_name', modelName);
-      if (inputTokens != null)
-        tracker.addAttribute('input_tokens', inputTokens.toString());
+      if (inputTokens != null) tracker.addAttribute('input_tokens', inputTokens.toString());
 
       _activeTrackers[queryId] = tracker;
 
       _logger.d('Started RAG query performance tracking: $queryId');
       return tracker;
     } catch (e, stackTrace) {
-      _logger.e('Failed to start RAG query tracking',
-          error: e, stackTrace: stackTrace);
-      await ProductionCrashReporter.recordError(e, stackTrace,
-          context: 'PerformanceMonitor.startRagQuery');
+      _logger.e('Failed to start RAG query tracking', error: e, stackTrace: stackTrace);
+      await ProductionCrashReporter.recordError(e, stackTrace, context: 'PerformanceMonitor.startRagQuery');
 
       // Return a no-op tracker on error
-      final trace = _performance.newTrace('rag_query_error');
+      final trace = _InAppTrace('rag_query_error')..start();
       final stopwatch = Stopwatch()..start();
       return RagPerformanceTracker._('error', trace, stopwatch);
     }
@@ -228,8 +213,7 @@ class ProductionPerformanceMonitor {
     try {
       final tracker = _activeTrackers.remove(queryId);
       if (tracker != null) {
-        if (outputTokens != null)
-          tracker.addAttribute('output_tokens', outputTokens.toString());
+        if (outputTokens != null) tracker.addAttribute('output_tokens', outputTokens.toString());
 
         await tracker.complete(
           success: success,
@@ -238,14 +222,11 @@ class ProductionPerformanceMonitor {
           cacheHit: cacheHit,
         );
 
-        _logger.d(
-            'Completed RAG query performance tracking: $queryId (${tracker.elapsed.inMilliseconds}ms)');
+        _logger.d('Completed RAG query performance tracking: $queryId (${tracker.elapsed.inMilliseconds}ms)');
       }
     } catch (e, stackTrace) {
-      _logger.e('Failed to complete RAG query tracking',
-          error: e, stackTrace: stackTrace);
-      await ProductionCrashReporter.recordError(e, stackTrace,
-          context: 'PerformanceMonitor.completeRagQuery');
+      _logger.e('Failed to complete RAG query tracking', error: e, stackTrace: stackTrace);
+      await ProductionCrashReporter.recordError(e, stackTrace, context: 'PerformanceMonitor.completeRagQuery');
     }
   }
 
@@ -258,26 +239,23 @@ class ProductionPerformanceMonitor {
     Map<String, dynamic>? attributes,
   }) async {
     try {
-      final trace = _performance.newTrace('custom_$operationType');
-
-      await trace.start();
+      final trace = _InAppTrace('custom_$operationType')..start();
 
       // Add attributes
-      trace.putAttribute('operation_type', operationType);
-      trace.putAttribute('success', success.toString());
-      if (errorMessage != null)
-        trace.putAttribute('error_message', errorMessage);
+      trace.attributes['operation_type'] = operationType;
+      trace.attributes['success'] = success.toString();
+      if (errorMessage != null) trace.attributes['error_message'] = errorMessage;
 
       if (attributes != null) {
         for (final entry in attributes.entries) {
-          trace.putAttribute(entry.key, entry.value?.toString() ?? 'null');
+          trace.attributes[entry.key] = entry.value?.toString() ?? 'null';
         }
       }
 
       // Add metrics
-      trace.setMetric('duration_ms', duration.inMilliseconds);
+      trace.set('duration_ms', duration.inMilliseconds);
 
-      await trace.stop();
+      trace.stop();
 
       // Store for analytics
       final metrics = PerformanceMetrics(
@@ -291,13 +269,10 @@ class ProductionPerformanceMonitor {
       _metricsBuffer.add(metrics);
       await _cacheMetric(metrics);
 
-      _logger.d(
-          'Tracked custom metric: $operationType (${duration.inMilliseconds}ms)');
+      _logger.d('Tracked custom metric: $operationType (${duration.inMilliseconds}ms)');
     } catch (e, stackTrace) {
-      _logger.e('Failed to track custom metric',
-          error: e, stackTrace: stackTrace);
-      await ProductionCrashReporter.recordError(e, stackTrace,
-          context: 'PerformanceMonitor.trackCustomMetric');
+      _logger.e('Failed to track custom metric', error: e, stackTrace: stackTrace);
+      await ProductionCrashReporter.recordError(e, stackTrace, context: 'PerformanceMonitor.trackCustomMetric');
     }
   }
 
@@ -339,10 +314,8 @@ class ProductionPerformanceMonitor {
         'error_message': errorMessage,
       });
     } catch (e, stackTrace) {
-      _logger.e('Failed to track network request',
-          error: e, stackTrace: stackTrace);
-      await ProductionCrashReporter.recordError(e, stackTrace,
-          context: 'PerformanceMonitor.trackNetworkRequest');
+      _logger.e('Failed to track network request', error: e, stackTrace: stackTrace);
+      await ProductionCrashReporter.recordError(e, stackTrace, context: 'PerformanceMonitor.trackNetworkRequest');
     }
   }
 
@@ -360,10 +333,8 @@ class ProductionPerformanceMonitor {
   }
 
   /// Track screen render performance
-  static Future<void> trackScreenRender(
-      String screenName, Duration renderDuration) async {
-    await trackCustomMetric('screen_render', renderDuration,
-        attributes: {'screen_name': screenName});
+  static Future<void> trackScreenRender(String screenName, Duration renderDuration) async {
+    await trackCustomMetric('screen_render', renderDuration, attributes: {'screen_name': screenName});
   }
 
   /// Track memory usage
@@ -380,8 +351,7 @@ class ProductionPerformanceMonitor {
 
       await ProductionAnalytics.trackEvent('memory_usage', memoryMetrics);
     } catch (e, stackTrace) {
-      _logger.e('Failed to track memory usage',
-          error: e, stackTrace: stackTrace);
+      _logger.e('Failed to track memory usage', error: e, stackTrace: stackTrace);
     }
   }
 
@@ -418,7 +388,7 @@ class ProductionPerformanceMonitor {
   /// Set performance collection enabled
   static Future<void> setPerformanceCollectionEnabled(bool enabled) async {
     try {
-      await _performance.setPerformanceCollectionEnabled(enabled);
+      // No-op; Firebase removed
 
       // Update configuration
       final currentConfig = await _getPerformanceConfig();
@@ -443,14 +413,12 @@ class ProductionPerformanceMonitor {
 
       if (metricsEnabled != null) {
         currentConfig['metrics_enabled'] = metricsEnabled;
-        await _performance.setPerformanceCollectionEnabled(metricsEnabled);
       }
 
       if (flushIntervalMinutes != null && flushIntervalMinutes > 0) {
         currentConfig['flush_interval_minutes'] = flushIntervalMinutes;
         _metricsFlushTimer?.cancel();
-        _metricsFlushTimer = Timer.periodic(
-            Duration(minutes: flushIntervalMinutes), (timer) => flushMetrics());
+        _metricsFlushTimer = Timer.periodic(Duration(minutes: flushIntervalMinutes), (timer) => flushMetrics());
       }
 
       if (autoTrackingEnabled != null) {
@@ -503,20 +471,17 @@ class ProductionPerformanceMonitor {
 
         // Apply configuration settings
         final metricsEnabled = config['metrics_enabled'] as bool? ?? true;
-        final flushIntervalMinutes =
-            config['flush_interval_minutes'] as int? ?? 5;
+        final flushIntervalMinutes = config['flush_interval_minutes'] as int? ?? 5;
 
         if (!metricsEnabled) {
-          await _performance.setPerformanceCollectionEnabled(false);
+          // collection disabled placeholder
           _logger.i('Performance metrics disabled by configuration');
         }
 
         // Update flush interval if different from default
         if (flushIntervalMinutes != 5) {
           _metricsFlushTimer?.cancel();
-          _metricsFlushTimer = Timer.periodic(
-              Duration(minutes: flushIntervalMinutes),
-              (timer) => flushMetrics());
+          _metricsFlushTimer = Timer.periodic(Duration(minutes: flushIntervalMinutes), (timer) => flushMetrics());
         }
 
         _logger.d('Performance configuration loaded: $config');
@@ -534,8 +499,7 @@ class ProductionPerformanceMonitor {
     }
   }
 
-  static Future<void> _savePerformanceConfig(
-      Map<String, dynamic> config) async {
+  static Future<void> _savePerformanceConfig(Map<String, dynamic> config) async {
     try {
       await _prefs?.setString(_performanceConfigKey, json.encode(config));
       _logger.d('Performance configuration saved');
@@ -568,14 +532,12 @@ class ProductionPerformanceMonitor {
       final cachedMetrics = _prefs?.getStringList(_performanceDataKey) ?? [];
 
       if (cachedMetrics.isNotEmpty) {
-        _logger
-            .i('Processing ${cachedMetrics.length} cached performance metrics');
+        _logger.i('Processing ${cachedMetrics.length} cached performance metrics');
 
         for (final metricJson in cachedMetrics) {
           try {
             final metricData = json.decode(metricJson) as Map<String, dynamic>;
-            await ProductionAnalytics.trackEvent(
-                'cached_performance_metric', metricData);
+            await ProductionAnalytics.trackEvent('cached_performance_metric', metricData);
           } catch (e) {
             _logger.w('Failed to process cached metric', error: e);
           }
@@ -604,6 +566,26 @@ class ProductionPerformanceMonitor {
   }
 }
 
+// Lightweight internal trace (replaces Firebase Trace)
+class _InAppTrace {
+  final String name;
+  final Stopwatch _sw = Stopwatch();
+  final Map<String, dynamic> attributes = {};
+  final Map<String, int> metrics = {};
+  bool _stopped = false;
+  _InAppTrace(this.name);
+  void start() => _sw.start();
+  void stop() {
+    if (_stopped) return;
+    _sw.stop();
+    _stopped = true;
+    debugPrint('[TRACE] $name ${_sw.elapsedMilliseconds}ms attrs=$attributes metrics=$metrics');
+  }
+
+  void increment(String metric, [int by = 1]) => metrics.update(metric, (v) => v + by, ifAbsent: () => by);
+  void set(String metric, int value) => metrics[metric] = value;
+}
+
 /// Performance monitoring widget wrapper
 class PerformanceMonitoredWidget extends StatefulWidget {
   final Widget child;
@@ -618,12 +600,10 @@ class PerformanceMonitoredWidget extends StatefulWidget {
   });
 
   @override
-  State<PerformanceMonitoredWidget> createState() =>
-      _PerformanceMonitoredWidgetState();
+  State<PerformanceMonitoredWidget> createState() => _PerformanceMonitoredWidgetState();
 }
 
-class _PerformanceMonitoredWidgetState
-    extends State<PerformanceMonitoredWidget> {
+class _PerformanceMonitoredWidgetState extends State<PerformanceMonitoredWidget> {
   late final Stopwatch _stopwatch;
 
   @override
@@ -639,8 +619,7 @@ class _PerformanceMonitoredWidgetState
     super.didChangeDependencies();
     if (widget.trackRenderTime && _stopwatch.isRunning) {
       _stopwatch.stop();
-      ProductionPerformanceMonitor.trackScreenRender(
-          widget.widgetName, _stopwatch.elapsed);
+      ProductionPerformanceMonitor.trackScreenRender(widget.widgetName, _stopwatch.elapsed);
     }
   }
 
@@ -652,8 +631,7 @@ class _PerformanceMonitoredWidgetState
 
 /// Extensions for easy performance tracking
 extension PerformanceTrackingExtension<T> on Future<T> Function() {
-  Future<T> trackPerformance(String operationType,
-      {Map<String, dynamic>? attributes}) async {
+  Future<T> trackPerformance(String operationType, {Map<String, dynamic>? attributes}) async {
     final stopwatch = Stopwatch()..start();
     String? errorMessage;
     bool success = true;

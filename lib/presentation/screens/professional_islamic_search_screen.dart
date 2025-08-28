@@ -3,7 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/di/injection_container.dart';
+import '../../core/error/failures.dart';
 import '../../core/theme/professional_islamic_theme.dart';
+import '../../domain/usecases/search_rag.dart';
 import '../widgets/professional_components.dart';
 
 /// Professional Islamic Search Screen
@@ -67,6 +70,9 @@ class _ProfessionalIslamicSearchScreenState extends ConsumerState<ProfessionalIs
     ),
   ];
 
+  late final SearchRag _searchRag; // RAG use case
+  String? _errorMessage; // store failures
+
   @override
   void initState() {
     super.initState();
@@ -77,6 +83,7 @@ class _ProfessionalIslamicSearchScreenState extends ConsumerState<ProfessionalIs
       vsync: this,
     );
 
+    _searchRag = sl<SearchRag>();
     _fadeController.forward();
   }
 
@@ -95,116 +102,118 @@ class _ProfessionalIslamicSearchScreenState extends ConsumerState<ProfessionalIs
       _currentQuery = query;
       _isSearching = true;
       _showResults = false;
+      _errorMessage = null;
+      _searchResults = null;
     });
 
     try {
-      // Simulate search with appropriate delay
-      await Future.delayed(const Duration(seconds: 2));
-
-      final results = await _simulateIslamicSearch(query);
-
-      setState(() {
-        _searchResults = results;
-        _isSearching = false;
-        _showResults = true;
-        _searchCount++;
-      });
-
-      // Add to search history
-      final historyItem = IslamicSearchHistoryItem(
-        id: DateTime.now().millisecondsSinceEpoch.toString(),
-        query: query,
-        timestamp: DateTime.now(),
-        results: results,
+      final ragEither = await _searchRag(query);
+      ragEither.fold(
+        (failure) {
+          setState(() {
+            _isSearching = false;
+            _showResults = false;
+            _errorMessage = _mapFailure(failure);
+          });
+          if (mounted) {
+            ProfessionalComponents.showSnackBar(
+              context: context,
+              message: 'Search failed: ${_errorMessage ?? 'Unknown error'}',
+              icon: Icons.error_rounded,
+              backgroundColor: ProfessionalIslamicTheme.error,
+            );
+          }
+        },
+        (ragResponse) {
+          final formatted = _formatRagResponse(ragResponse);
+          setState(() {
+            _searchResults = formatted;
+            _isSearching = false;
+            _showResults = true;
+            _searchCount++;
+          });
+          final historyItem = IslamicSearchHistoryItem(
+            id: DateTime.now().millisecondsSinceEpoch.toString(),
+            query: query,
+            timestamp: DateTime.now(),
+            results: formatted,
+          );
+          setState(() {
+            _searchHistory.insert(0, historyItem);
+            if (_searchHistory.length > 15) _searchHistory.removeLast();
+          });
+        },
       );
-
-      setState(() {
-        _searchHistory.insert(0, historyItem);
-        if (_searchHistory.length > 15) {
-          _searchHistory.removeLast();
-        }
-      });
     } catch (e) {
       setState(() {
         _isSearching = false;
         _showResults = false;
+        _errorMessage = e.toString();
       });
-
       if (mounted) {
         ProfessionalComponents.showSnackBar(
           context: context,
-          message: 'Search failed. Please try again.',
-          icon: Icons.error_rounded,
+          message: 'Unexpected error during search',
+          icon: Icons.error_outline,
           backgroundColor: ProfessionalIslamicTheme.error,
         );
       }
     }
   }
 
-  Future<String> _simulateIslamicSearch(String query) async {
-    final lowerQuery = query.toLowerCase();
+  // Replace old mock method with formatter & fallback
+  String _formatRagResponse(dynamic ragSearchResponse) {
+    final buffer = StringBuffer();
+    try {
+      // RagResponse has 'response' (content) and 'sources' fields, not 'recommendations'
+      if (ragSearchResponse.response == null || ragSearchResponse.response.isEmpty) {
+        return _buildFallback('No Islamic knowledge found for this query.');
+      }
 
-    // Islamic contextual responses
-    if (lowerQuery.contains('morning') || lowerQuery.contains('صباح')) {
-      return '''**أذكار الصباح­ - Morning Remembrance**
+      buffer.writeln('**📖 Islamic Knowledge Response**\n');
 
-**اللهم بك أصبحنا وبك أمسينا وبك نحيا وبك نموت وإليك النشور**
+      // Add the main response content
+      buffer.writeln(ragSearchResponse.response);
 
-*"Allāhumma bika aṣbaḥnā, wa bika amsaynā, wa bika naḥyā, wa bika namūtu, wa ilayka n-nushūr"*
+      // Add sources if available
+      if (ragSearchResponse.sources != null && ragSearchResponse.sources.isNotEmpty) {
+        buffer.writeln('\n**📚 Sources:**');
+        for (var source in ragSearchResponse.sources) {
+          buffer.writeln('• $source');
+        }
+      }
 
-**Translation:** "O Allah, by You we enter the morning and by You we enter the evening, by You we live and by You we die, and to You is the resurrection."
+      // Add confidence/metadata if available
+      if (ragSearchResponse.metadata != null) {
+        final metadata = ragSearchResponse.metadata;
+        if (metadata['retrieval_confidence'] != null) {
+          final confidence = (metadata['retrieval_confidence'] * 100).toStringAsFixed(1);
+          buffer.writeln('\n**Confidence:** $confidence%');
+        }
+        if (metadata['rag_enabled'] == true) {
+          buffer.writeln('*Enhanced with TRUE RAG system*');
+        }
+      }
 
-**Source:** Abu Dawud, At-Tirmidhi
-**Time:** After Fajr prayer
-**Benefits:** Protection and blessings for the day''';
+      buffer.writeln('\n---');
+      buffer.writeln('*Always verify with qualified scholars for religious rulings.*');
+      return buffer.toString();
+    } catch (e) {
+      return _buildFallback('Error formatting RAG response: $e');
     }
+  }
 
-    if (lowerQuery.contains('travel') || lowerQuery.contains('سفر')) {
-      return '''**عاء السفر - Travel Supplication**
+  String _buildFallback(String reason) {
+    return '''**Islamic Guidance (Fallback)**\n\n$reason\n\n**Reminder:** Maintain prayers, seek knowledge, and remember Allah often.''';
+  }
 
-**سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ**
-
-*"Subḥāna alladhī sakhkhara lanā hādhā wa mā kunnā lahu muq'rinīn wa innā ilā rabbinā la-munqalibūn"*
-
-**Translation:** "Glory be to Him who has subjected this to us, and we could never have it (by our efforts). And to our Lord we will surely return."
-
-**Source:** Quran 43:13-14
-**When:** Before beginning any journey
-**Benefits:** Protection during travel''';
-    }
-
-    if (lowerQuery.contains('forgiveness') || lowerQuery.contains('استغفار')) {
-      return '''**الاستغفار- Seeking Forgiveness**
-
-**أستغفر الله الذي لا إله إلا هو الحي القيوم وأتوب إليه**
-
-*"Astaghfiru Allāha alladhī lā ilāha illā huwa al-ḥayy al-qayyūm wa atūbu ilayh"*
-
-**Translation:** "I seek forgiveness from Allah, besides whom there is no deity, the Ever-Living, the Self-Sustaining, and I repent to Him."
-
-**Source:** Abu Dawud, At-Tirmidhi, Al-Hakim
-**Benefits:** Complete forgiveness of sins
-**Recommendation:** Recite 100 times daily''';
-    }
-
-    // Default response
-    return '''**إرشاد إسلامي - Islamic Guidance**
-
-Based on your query about "$query", here is relevant Islamic knowledge:
-
-**Quranic Guidance:**
-ومن يتق الله يجعل له مخرجا ويرزقه من حيث لا يحتسب"
-
-*"And whoever fears Allah - He will make for him a way out and provide for him from where he does not expect."* - Quran 65:2-3
-
-**Recommended Dua:**
-**رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ**
-
-*"Rabbana ātinā fid-dunyā ḥasanatan wa fil-ākhirati ḥasanatan wa qinā ʿadhāban-nār"*
-
-**Translation:** "Our Lord, give us good in this world and good in the next world, and save us from the punishment of the Fire."
-
-**Islamic Guidance:** Remember Allah often, maintain regular prayers, seek beneficial knowledge, and always turn to Allah in times of need.''';
+  String _mapFailure(Failure failure) {
+    if (failure is NetworkFailure) return 'Network issue, please check your connection';
+    if (failure is ServerFailure) return 'Server error fetching Islamic knowledge';
+    if (failure is CacheFailure) return 'Cache error retrieving results';
+    if (failure is ValidationFailure) return 'Invalid query';
+    if (failure is AuthenticationFailure) return 'Authentication required';
+    return 'Unknown error';
   }
 
   @override

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/di/injection_container.dart';
 import '../../core/theme/professional_theme.dart';
+import '../../domain/usecases/search_rag.dart';
 import '../../services/ai/conversational_memory_service.dart';
 import '../../services/ai/interactive_learning_companion_service.dart';
 import '../../services/ai/islamic_personality_service.dart';
@@ -23,6 +25,7 @@ class _RevolutionaryVoiceCompanionScreenState extends ConsumerState<Revolutionar
   late ConversationalMemoryService _memoryService;
   late ProactiveSpiritualCompanionService _companionService;
   late InteractiveLearningCompanionService _learningService;
+  late final SearchRag _searchRag; // RAG use case for enrichment
 
   // Animation controllers
   late AnimationController _animationController;
@@ -34,6 +37,7 @@ class _RevolutionaryVoiceCompanionScreenState extends ConsumerState<Revolutionar
   bool _isProcessing = false;
   String _companionResponse = '';
   String _userInput = '';
+  String _ragEnrichment = '';
   final List<String> _conversationHistory = [];
   List<String> _suggestionChips = [];
   CompanionMode _currentMode = CompanionMode.companion;
@@ -52,6 +56,7 @@ class _RevolutionaryVoiceCompanionScreenState extends ConsumerState<Revolutionar
     _memoryService = ConversationalMemoryService.instance;
     _companionService = ProactiveSpiritualCompanionService.instance;
     _learningService = InteractiveLearningCompanionService.instance;
+    _searchRag = sl<SearchRag>();
 
     // Initialize all services
     await Future.wait([
@@ -240,6 +245,45 @@ How may I serve your soul today?
       topic: topic,
       emotion: emotion,
     );
+
+    // Add RAG enrichment AFTER updating _companionResponse
+    await _enrichWithRag(input);
+  }
+
+  Future<void> _enrichWithRag(String query) async {
+    try {
+      final either = await _searchRag(query);
+      either.fold(
+        (_) => null,
+        (ragResp) {
+          // ragResp is a RagResponse (single aggregated text) - use its response & metadata
+          if ((ragResp.response).isEmpty) return;
+          final buffer = StringBuffer();
+          buffer.writeln('\n\n---');
+          buffer.writeln('📖 Enriched Islamic Reference');
+          // Primary generated response text (already Islamic guidance)
+          buffer.writeln('\n${ragResp.response}');
+          // Add sources if present
+          if (ragResp.sources != null && ragResp.sources!.isNotEmpty) {
+            buffer.writeln('\nSources:');
+            for (final s in ragResp.sources!) {
+              buffer.writeln('• $s');
+            }
+          }
+          if (ragResp.confidence != null) {
+            buffer.writeln('\nConfidence: ${(ragResp.confidence! * 100).toStringAsFixed(1)}%');
+          }
+          if (ragResp.metadata?['reasoning'] != null) {
+            buffer.writeln('\nReasoning: ${ragResp.metadata!['reasoning']}');
+          }
+          buffer.writeln('\n(Always verify with qualified scholars.)');
+          setState(() {
+            _ragEnrichment = buffer.toString();
+            _companionResponse += _ragEnrichment;
+          });
+        },
+      );
+    } catch (_) {}
   }
 
   /// Generate companion response

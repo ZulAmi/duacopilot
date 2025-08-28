@@ -3,8 +3,6 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -41,8 +39,6 @@ class AnalyticsEvent {
 
   // UI Events
   static const String screenViewed = 'screen_viewed';
-  static const String buttonClicked = 'button_clicked';
-  static const String featureUsed = 'feature_used';
 
   // Performance Events
   static const String appStartup = 'app_startup';
@@ -50,7 +46,7 @@ class AnalyticsEvent {
   static const String appForeground = 'app_foreground';
   static const String memoryWarning = 'memory_warning';
 
-  // Error Events
+  // Firebase removed; placeholder implementations
   static const String errorOccurred = 'error_occurred';
   static const String crashReported = 'crash_reported';
   static const String networkError = 'network_error';
@@ -67,7 +63,6 @@ class AnalyticsEvent {
 
 /// Production Analytics Service
 class ProductionAnalytics {
-  static final FirebaseAnalytics _analytics = FirebaseAnalytics.instance;
   static final Logger _logger = Logger();
   static const String _sessionKey = 'analytics_session';
   static const String _userPropertiesKey = 'analytics_user_properties';
@@ -86,15 +81,12 @@ class ProductionAnalytics {
       _packageInfo = await PackageInfo.fromPlatform();
       _prefs = await SharedPreferences.getInstance();
 
-      // Set analytics collection enabled
-      await _analytics.setAnalyticsCollectionEnabled(true);
-
-      // Set user properties
+      // Analytics collection removed; set basic properties locally
       await _setUserProperties();
 
       // Start new session
       await _startNewSession();
-
+      // Crash reporting removed with Firebase
       _isInitialized = true;
       _logger.i('ProductionAnalytics initialized successfully');
 
@@ -111,43 +103,29 @@ class ProductionAnalytics {
         error: e,
         stackTrace: stackTrace,
       );
-      FirebaseCrashlytics.instance.recordError(e, stackTrace);
+      // Crash reporting removed
     }
   }
 
   static Future<void> _setUserProperties() async {
     try {
-      await _analytics.setUserProperty(
-        name: 'app_version',
-        value: _packageInfo?.version ?? 'unknown',
-      );
+      // Store core properties locally for future extension
+      final properties = <String, dynamic>{
+        'app_version': _packageInfo?.version ?? 'unknown',
+        'build_number': _packageInfo?.buildNumber ?? 'unknown',
+        'platform': defaultTargetPlatform.name,
+      };
 
-      await _analytics.setUserProperty(
-        name: 'build_number',
-        value: _packageInfo?.buildNumber ?? 'unknown',
-      );
-
-      await _analytics.setUserProperty(
-        name: 'platform',
-        value: defaultTargetPlatform.name,
-      );
-
-      await _analytics.setUserProperty(
-        name: 'debug_mode',
-        value: kDebugMode.toString(),
-      );
-
-      // Load and set custom user properties
       final savedProperties = _prefs?.getString(_userPropertiesKey);
       if (savedProperties != null) {
-        final properties = json.decode(savedProperties) as Map<String, dynamic>;
-        for (final entry in properties.entries) {
-          await _analytics.setUserProperty(
-            name: entry.key,
-            value: entry.value?.toString(),
-          );
-        }
+        final extra = json.decode(savedProperties) as Map<String, dynamic>;
+        properties.addAll(extra);
       }
+
+      await _prefs?.setString(
+        _userPropertiesKey,
+        json.encode(properties),
+      );
     } catch (e) {
       _logger.w('Failed to set user properties', error: e);
     }
@@ -201,10 +179,7 @@ class ProductionAnalytics {
         }
       }
 
-      await _analytics.logEvent(
-        name: _sanitizeEventName(eventName),
-        parameters: filteredParameters,
-      );
+      // Event logging removed (Firebase). Placeholder for future AWS analytics.
 
       if (kDebugMode) {
         _logger.d(
@@ -217,7 +192,7 @@ class ProductionAnalytics {
         error: e,
         stackTrace: stackTrace,
       );
-      FirebaseCrashlytics.instance.recordError(e, stackTrace);
+      // Crash reporting removed
     }
   }
 
@@ -231,9 +206,7 @@ class ProductionAnalytics {
     String? errorMessage,
   }) async {
     await trackEvent(
-      errorMessage == null
-          ? AnalyticsEvent.ragQueryCompleted
-          : AnalyticsEvent.ragQueryFailed,
+      errorMessage == null ? AnalyticsEvent.ragQueryCompleted : AnalyticsEvent.ragQueryFailed,
       {
         'category': AnalyticsCategory.rag,
         'query_id': queryId,
@@ -269,14 +242,12 @@ class ProductionAnalytics {
     String screenName, [
     Map<String, Object?>? parameters,
   ]) async {
-    await _analytics.logScreenView(screenName: screenName);
+    // Screen view logging removed
 
     await trackEvent(AnalyticsEvent.screenViewed, {
       'category': AnalyticsCategory.navigation,
       'screen_name': screenName,
-      'session_time': _sessionStart != null
-          ? DateTime.now().difference(_sessionStart!).inSeconds
-          : 0,
+      'session_time': _sessionStart != null ? DateTime.now().difference(_sessionStart!).inSeconds : 0,
       ...?parameters,
     });
   }
@@ -287,7 +258,7 @@ class ProductionAnalytics {
     String action, [
     Map<String, Object?>? additionalData,
   ]) async {
-    await trackEvent(AnalyticsEvent.featureUsed, {
+    await trackEvent('feature_used', {
       'category': AnalyticsCategory.feature,
       'feature_name': featureName,
       'action': action,
@@ -321,9 +292,7 @@ class ProductionAnalytics {
     await trackEvent(AnalyticsEvent.errorOccurred, {
       'category': AnalyticsCategory.error,
       'error_type': errorType,
-      'error_message': errorMessage.length > 100
-          ? '${errorMessage.substring(0, 100)}...'
-          : errorMessage,
+      'error_message': errorMessage.length > 100 ? '${errorMessage.substring(0, 100)}...' : errorMessage,
       'timestamp': DateTime.now().toIso8601String(),
       ...?errorContext,
     });
@@ -352,9 +321,6 @@ class ProductionAnalytics {
   /// Set custom user property
   static Future<void> setUserProperty(String name, String? value) async {
     try {
-      await _analytics.setUserProperty(name: name, value: value);
-
-      // Save to local cache
       final savedProperties = _prefs?.getString(_userPropertiesKey);
       Map<String, dynamic> properties = {};
 
@@ -377,7 +343,7 @@ class ProductionAnalytics {
   /// Set user ID
   static Future<void> setUserId(String? userId) async {
     try {
-      await _analytics.setUserId(id: userId);
+      // User ID setting removed
     } catch (e) {
       _logger.w('Failed to set user ID', error: e);
     }
@@ -404,9 +370,6 @@ class ProductionAnalytics {
   }
 
   /// Utility methods
-  static String _sanitizeEventName(String eventName) {
-    return eventName.replaceAll(RegExp(r'[^a-zA-Z0-9_]'), '_').toLowerCase();
-  }
 
   static String _categorizePerformance(Duration duration) {
     if (duration.inMilliseconds < 500) return 'fast';
@@ -417,8 +380,7 @@ class ProductionAnalytics {
 
   static String _categorizeEngagement(Duration timeSpent, int? interactions) {
     final seconds = timeSpent.inSeconds;
-    final interactionRate =
-        interactions != null && seconds > 0 ? interactions / seconds : 0.0;
+    final interactionRate = interactions != null && seconds > 0 ? interactions / seconds : 0.0;
 
     if (seconds < 10) return 'brief';
     if (seconds < 60 && interactionRate > 0.1) return 'engaged';

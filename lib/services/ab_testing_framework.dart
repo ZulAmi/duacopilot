@@ -1,12 +1,11 @@
-import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 
 import '../../../services/comprehensive_feedback_service.dart';
 
-/// A/B Testing framework using Firebase Remote Config
+/// Lightweight in-app A/B Testing framework (Firebase Remote Config removed)
 class ABTestingFramework {
-  final FirebaseRemoteConfig _remoteConfig;
   final ComprehensiveFeedbackService _feedbackService;
+  final Map<String, dynamic> _activeConfigs = {};
 
   static const Map<String, dynamic> _defaultConfigs = {
     // UI Variations
@@ -31,52 +30,22 @@ class ABTestingFramework {
   };
 
   ABTestingFramework({
-    required FirebaseRemoteConfig remoteConfig,
     required ComprehensiveFeedbackService feedbackService,
-  })  : _remoteConfig = remoteConfig,
-        _feedbackService = feedbackService;
+  }) : _feedbackService = feedbackService;
 
   /// Initialize A/B testing framework
   Future<void> initialize() async {
-    try {
-      // Set defaults
-      await _remoteConfig.setDefaults(_defaultConfigs);
-
-      // Configure fetch settings
-      await _remoteConfig.setConfigSettings(
-        RemoteConfigSettings(
-          fetchTimeout: const Duration(minutes: 1),
-          minimumFetchInterval: const Duration(hours: 1),
-        ),
-      );
-
-      // Fetch and activate
-      await _remoteConfig.fetchAndActivate();
-
-      // Track A/B test initialization
-      await _trackExperimentParticipation();
-    } catch (e) {
-      debugPrint('Error initializing A/B testing framework: $e');
-    }
+    // Copy defaults into active configs (could be extended to load from disk / API)
+    _activeConfigs.clear();
+    _activeConfigs.addAll(_defaultConfigs);
+    await _trackExperimentParticipation();
   }
 
   /// Get experiment variant for a given test
   T getVariant<T>(String experimentName, T defaultValue) {
-    try {
-      if (T == String) {
-        return _remoteConfig.getString(experimentName) as T? ?? defaultValue;
-      } else if (T == bool) {
-        return _remoteConfig.getBool(experimentName) as T? ?? defaultValue;
-      } else if (T == int) {
-        return _remoteConfig.getInt(experimentName) as T? ?? defaultValue;
-      } else if (T == double) {
-        return _remoteConfig.getDouble(experimentName) as T? ?? defaultValue;
-      }
-      return defaultValue;
-    } catch (e) {
-      debugPrint('Error getting variant for $experimentName: $e');
-      return defaultValue;
-    }
+    final value = _activeConfigs[experimentName];
+    if (value is T) return value;
+    return defaultValue;
   }
 
   /// Track experiment participation and outcomes
@@ -183,15 +152,11 @@ class ABFeedbackButton extends StatelessWidget {
       experimentName: 'feedback_button_style',
       abTesting: abTesting,
       variants: {
-        'modern': (context) =>
-            _ModernFeedbackButton(onPressed: onPressed, text: text),
-        'classic': (context) =>
-            _ClassicFeedbackButton(onPressed: onPressed, text: text),
-        'minimal': (context) =>
-            _MinimalFeedbackButton(onPressed: onPressed, text: text),
+        'modern': (context) => _ModernFeedbackButton(onPressed: onPressed, text: text),
+        'classic': (context) => _ClassicFeedbackButton(onPressed: onPressed, text: text),
+        'minimal': (context) => _MinimalFeedbackButton(onPressed: onPressed, text: text),
       },
-      fallback: (context) =>
-          _ModernFeedbackButton(onPressed: onPressed, text: text),
+      fallback: (context) => _ModernFeedbackButton(onPressed: onPressed, text: text),
     );
   }
 }
@@ -289,8 +254,7 @@ class ABThemeProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme =
-        abTesting?.getVariant('color_scheme', 'default') ?? 'default';
+    final colorScheme = abTesting?.getVariant('color_scheme', 'default') ?? 'default';
 
     return Theme(data: _getThemeData(context, colorScheme), child: child);
   }
@@ -354,8 +318,7 @@ mixin ExperimentTracker<T extends StatefulWidget> on State<T> {
     if (_trackedExperiments.contains(experimentName)) return;
 
     _trackedExperiments.add(experimentName);
-    final variant =
-        _abTesting?.getVariant(experimentName, 'control') ?? 'control';
+    final variant = _abTesting?.getVariant(experimentName, 'control') ?? 'control';
 
     _abTesting?.trackExperimentOutcome(
       experimentName: experimentName,
@@ -369,8 +332,7 @@ mixin ExperimentTracker<T extends StatefulWidget> on State<T> {
     String interactionType, {
     Map<String, dynamic>? data,
   }) {
-    final variant =
-        _abTesting?.getVariant(experimentName, 'control') ?? 'control';
+    final variant = _abTesting?.getVariant(experimentName, 'control') ?? 'control';
 
     _abTesting?.trackExperimentOutcome(
       experimentName: experimentName,

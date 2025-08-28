@@ -1,5 +1,3 @@
-import 'package:duacopilot/firebase_options.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,9 +8,6 @@ import 'secure_admin_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // SECURITY: Initialize Firebase for admin app
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   // SECURITY: Initialize admin security
   await AdminSecurity.initialize();
@@ -58,8 +53,7 @@ class AdminAuthenticationGate extends StatefulWidget {
   const AdminAuthenticationGate({super.key});
 
   @override
-  State<AdminAuthenticationGate> createState() =>
-      _AdminAuthenticationGateState();
+  State<AdminAuthenticationGate> createState() => _AdminAuthenticationGateState();
 }
 
 class _AdminAuthenticationGateState extends State<AdminAuthenticationGate> {
@@ -102,12 +96,7 @@ class _AdminAuthenticationGateState extends State<AdminAuthenticationGate> {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.3),
-                  blurRadius: 20,
-                  spreadRadius: 5)
-            ],
+            boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.3), blurRadius: 20, spreadRadius: 5)],
           ),
           child: Form(
             key: _formKey,
@@ -124,21 +113,16 @@ class _AdminAuthenticationGateState extends State<AdminAuthenticationGate> {
                   ),
                   child: Column(
                     children: [
-                      Icon(Icons.security,
-                          color: Colors.red.shade600, size: 32),
+                      Icon(Icons.security, color: Colors.red.shade600, size: 32),
                       const SizedBox(height: 8),
                       Text(
                         'SECURE ADMIN ACCESS',
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.red.shade800),
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.red.shade800),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         'Unauthorized access is monitored and logged',
-                        style:
-                            TextStyle(fontSize: 12, color: Colors.red.shade600),
+                        style: TextStyle(fontSize: 12, color: Colors.red.shade600),
                         textAlign: TextAlign.center,
                       ),
                     ],
@@ -214,8 +198,7 @@ class _AdminAuthenticationGateState extends State<AdminAuthenticationGate> {
                       border: Border.all(color: Colors.red.shade300),
                       borderRadius: BorderRadius.circular(4),
                     ),
-                    child: Text(_errorMessage!,
-                        style: TextStyle(color: Colors.red.shade800)),
+                    child: Text(_errorMessage!, style: TextStyle(color: Colors.red.shade800)),
                   ),
 
                 const SizedBox(height: 16),
@@ -230,9 +213,8 @@ class _AdminAuthenticationGateState extends State<AdminAuthenticationGate> {
                       backgroundColor: Colors.red.shade800,
                       foregroundColor: Colors.white,
                     ),
-                    child: _isLoading
-                        ? const CircularProgressIndicator(color: Colors.white)
-                        : const Text('AUTHENTICATE'),
+                    child:
+                        _isLoading ? const CircularProgressIndicator(color: Colors.white) : const Text('AUTHENTICATE'),
                   ),
                 ),
 
@@ -241,11 +223,7 @@ class _AdminAuthenticationGateState extends State<AdminAuthenticationGate> {
                 // Security Notice
                 Text(
                   'Failed attempts: $_failedAttempts/5',
-                  style: TextStyle(
-                      fontSize: 12,
-                      color: _failedAttempts >= 3
-                          ? Colors.red
-                          : Colors.grey.shade600),
+                  style: TextStyle(fontSize: 12, color: _failedAttempts >= 3 ? Colors.red : Colors.grey.shade600),
                 ),
               ],
             ),
@@ -276,16 +254,12 @@ class _AdminAuthenticationGateState extends State<AdminAuthenticationGate> {
         AdminSecurity.logSecurityEvent(
           event: 'admin_login_success',
           level: SecurityLevel.info,
-          context: {
-            'username': _usernameController.text.trim(),
-            'timestamp': DateTime.now().toIso8601String()
-          },
+          context: {'username': _usernameController.text.trim(), 'timestamp': DateTime.now().toIso8601String()},
         );
 
         // Navigate to secure admin dashboard
         if (mounted) {
-          Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (_) => const SecureAdminScreen()));
+          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => const SecureAdminScreen()));
         }
       } else {
         // SECURITY: Handle failed authentication

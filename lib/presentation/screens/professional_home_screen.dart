@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/di/injection_container.dart';
 import '../../core/theme/professional_islamic_theme.dart';
+import '../../domain/usecases/search_rag.dart';
 import '../../features/qibla/screens/qibla_compass_screen.dart';
 import '../../features/tasbih/screens/digital_tasbih_screen.dart';
 import '../widgets/professional_components.dart';
@@ -16,17 +18,18 @@ class ProfessionalHomeScreen extends ConsumerStatefulWidget {
   const ProfessionalHomeScreen({super.key});
 
   @override
-  ConsumerState<ProfessionalHomeScreen> createState() =>
-      _ProfessionalHomeScreenState();
+  ConsumerState<ProfessionalHomeScreen> createState() => _ProfessionalHomeScreenState();
 }
 
-class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
-    with TickerProviderStateMixin {
+class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen> with TickerProviderStateMixin {
   final TextEditingController _searchController = TextEditingController();
   late AnimationController _fadeController;
   late AnimationController _slideController;
   bool _isSearching = false;
   bool _isVoiceListening = false;
+  late final SearchRag _searchRag; // RAG use case
+  String? _lastSearchSnippet; // brief preview
+  String? _searchError;
 
   @override
   void initState() {
@@ -43,6 +46,7 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
     // Start animations
     _fadeController.forward();
     _slideController.forward();
+    _searchRag = sl<SearchRag>();
   }
 
   @override
@@ -225,6 +229,43 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
               onVoiceSearch: _toggleVoiceSearch,
               isVoiceListening: _isVoiceListening,
             ),
+            if (_lastSearchSnippet != null && !_isSearching) ...[
+              const SizedBox(height: 8),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: ProfessionalIslamicTheme.backgroundSecondary,
+                  border: Border.all(color: ProfessionalIslamicTheme.borderLight),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text(
+                  _lastSearchSnippet!,
+                  style: TextStyle(
+                    color: ProfessionalIslamicTheme.textSecondary,
+                    fontSize: 13,
+                    height: 1.3,
+                  ),
+                ),
+              ),
+            ],
+            if (_searchError != null && !_isSearching) ...[
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  const Icon(Icons.error_outline, size: 16, color: Colors.red),
+                  const SizedBox(width: 6),
+                  Expanded(
+                    child: Text(
+                      _searchError!,
+                      style: const TextStyle(color: Colors.red, fontSize: 12),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
+            ],
             const SizedBox(height: ProfessionalIslamicTheme.space2),
             Wrap(
               spacing: 8,
@@ -495,32 +536,56 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
   void _handleSearch(String query) async {
     if (query.trim().isEmpty) return;
 
-    setState(() => _isSearching = true);
+    setState(() {
+      _isSearching = true;
+      _searchError = null;
+      _lastSearchSnippet = null;
+    });
 
     try {
-      // TODO: Implement actual search logic
-      await Future.delayed(const Duration(milliseconds: 1500));
-
-      if (mounted) {
-        ProfessionalComponents.showSnackBar(
-          context: context,
-          message: 'Searching for: $query',
-          icon: Icons.search_rounded,
-        );
-      }
+      final either = await _searchRag(query);
+      either.fold(
+        (failure) {
+          setState(() => _searchError = failure.toString());
+          if (mounted) {
+            ProfessionalComponents.showSnackBar(
+              context: context,
+              message: 'Search failed',
+              icon: Icons.error_rounded,
+              backgroundColor: Colors.red,
+            );
+          }
+        },
+        (ragResp) {
+          final snippet = ragResp.response.length > 180 ? '${ragResp.response.substring(0, 180)}...' : ragResp.response;
+          setState(() => _lastSearchSnippet = snippet);
+          if (mounted) {
+            ProfessionalComponents.showSnackBar(
+              context: context,
+              message: 'Islamic guidance ready',
+              icon: Icons.menu_book_rounded,
+            );
+          }
+          // Optional: navigate to full search screen
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (c) => const ProfessionalIslamicSearchScreen(),
+            ),
+          );
+        },
+      );
     } catch (e) {
+      setState(() => _searchError = e.toString());
       if (mounted) {
         ProfessionalComponents.showSnackBar(
           context: context,
-          message: 'Search failed. Please try again.',
-          icon: Icons.error_rounded,
+          message: 'Unexpected error during search',
+          icon: Icons.error_outline,
           backgroundColor: Colors.red,
         );
       }
     } finally {
-      if (mounted) {
-        setState(() => _isSearching = false);
-      }
+      if (mounted) setState(() => _isSearching = false);
     }
   }
 
@@ -592,8 +657,7 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
   void _navigateToVoiceAssistant() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) =>
-            const ConversationalSearchScreen(enableVoiceSearch: true),
+        builder: (context) => const ConversationalSearchScreen(enableVoiceSearch: true),
       ),
     );
   }

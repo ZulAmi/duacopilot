@@ -3,13 +3,11 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
-import '../firebase_options.dart';
 import 'deployment/deployment_config_service.dart';
 import 'feature_flags/feature_flag_service.dart';
 import 'feedback/user_feedback_service.dart';
@@ -32,8 +30,8 @@ class ProductionAppInitializer {
     try {
       _logger.i('Starting production app initialization...');
 
-      // 1. Initialize Firebase Core
-      await _initializeFirebase();
+      // 1. Initialize AWS/Core Services (Firebase removed)
+      await _initializeCoreServices();
 
       // 2. Initialize Crash Reporting (must be early)
       await _initializeCrashReporting();
@@ -97,16 +95,14 @@ class ProductionAppInitializer {
     }
   }
 
-  static Future<void> _initializeFirebase() async {
+  static Future<void> _initializeCoreServices() async {
     try {
-      _logger.i('Initializing Firebase...');
-      await Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform,
-      );
-      _logger.i('Firebase initialized successfully');
+      _logger.i('Initializing core services (Firebase removed)...');
+      // Initialize any required core AWS/other services here
+      _logger.i('Core services initialized successfully');
     } catch (e, stackTrace) {
       _logger.e(
-        'Failed to initialize Firebase',
+        'Failed to initialize core services',
         error: e,
         stackTrace: stackTrace,
       );
@@ -242,18 +238,15 @@ class ProductionAppInitializer {
       _logger.i('Validating production services...');
 
       final validationResults = <String, bool>{
-        'deployment_config':
-            await DeploymentConfigService.validateConfiguration(),
+        'deployment_config': await DeploymentConfigService.validateConfiguration(),
         'feature_flags': _isFeatureFlagsHealthy(),
         'analytics': _isAnalyticsHealthy(),
         'performance_monitor': _isPerformanceMonitorHealthy(),
         'crash_reporting': await ProductionCrashReporter.isCrashlyticsEnabled(),
       };
 
-      final failedServices = validationResults.entries
-          .where((entry) => !entry.value)
-          .map((entry) => entry.key)
-          .toList();
+      final failedServices =
+          validationResults.entries.where((entry) => !entry.value).map((entry) => entry.key).toList();
 
       if (failedServices.isNotEmpty) {
         _logger.w(

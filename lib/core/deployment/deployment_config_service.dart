@@ -4,7 +4,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -125,42 +124,41 @@ class DeploymentConfig {
     );
   }
 
-  factory DeploymentConfig.fromRemoteConfig(
-    FirebaseRemoteConfig remoteConfig,
+  factory DeploymentConfig.fromMap(
+    Map<String, dynamic>? configMap,
     DeploymentEnvironment fallbackEnvironment,
   ) {
-    try {
-      final configJson = remoteConfig.getString('deployment_config');
-      if (configJson.isNotEmpty) {
-        final configMap = json.decode(configJson) as Map<String, dynamic>;
-
-        return DeploymentConfig(
-          environment: DeploymentEnvironment.values.firstWhere(
-            (e) => e.name == configMap['environment'],
-            orElse: () => fallbackEnvironment,
-          ),
-          apiBaseUrl: configMap['api_base_url'] ?? '',
-          ragServiceUrl: configMap['rag_service_url'] ?? '',
-          enableAnalytics: configMap['enable_analytics'] ?? true,
-          enableCrashReporting: configMap['enable_crash_reporting'] ?? true,
-          enablePerformanceMonitoring:
-              configMap['enable_performance_monitoring'] ?? true,
-          enableFeatureFlags: configMap['enable_feature_flags'] ?? true,
-          debugMode: configMap['debug_mode'] ?? false,
-          platformConfig: Map<String, dynamic>.from(
-            configMap['platform_config'] ?? {},
-          ),
-          ragConfig: Map<String, dynamic>.from(configMap['rag_config'] ?? {}),
-          customConfig: Map<String, dynamic>.from(
-            configMap['custom_config'] ?? {},
-          ),
-        );
-      }
-    } catch (e) {
-      // Fall back to default config on error
+    if (configMap == null) {
+      return _fallbackFor(fallbackEnvironment);
     }
+    try {
+      return DeploymentConfig(
+        environment: DeploymentEnvironment.values.firstWhere(
+          (e) => e.name == configMap['environment'],
+          orElse: () => fallbackEnvironment,
+        ),
+        apiBaseUrl: configMap['api_base_url'] ?? '',
+        ragServiceUrl: configMap['rag_service_url'] ?? '',
+        enableAnalytics: configMap['enable_analytics'] ?? true,
+        enableCrashReporting: configMap['enable_crash_reporting'] ?? true,
+        enablePerformanceMonitoring: configMap['enable_performance_monitoring'] ?? true,
+        enableFeatureFlags: configMap['enable_feature_flags'] ?? true,
+        debugMode: configMap['debug_mode'] ?? false,
+        platformConfig: Map<String, dynamic>.from(
+          configMap['platform_config'] ?? {},
+        ),
+        ragConfig: Map<String, dynamic>.from(configMap['rag_config'] ?? {}),
+        customConfig: Map<String, dynamic>.from(
+          configMap['custom_config'] ?? {},
+        ),
+      );
+    } catch (_) {
+      return _fallbackFor(fallbackEnvironment);
+    }
+  }
 
-    switch (fallbackEnvironment) {
+  static DeploymentConfig _fallbackFor(DeploymentEnvironment env) {
+    switch (env) {
       case DeploymentEnvironment.development:
         return DeploymentConfig.development();
       case DeploymentEnvironment.staging:
@@ -270,14 +268,9 @@ class DeploymentConfigService {
   static Future<void> updateFromRemoteConfig() async {
     try {
       if (!_isInitialized) return;
-
-      final remoteConfig = FirebaseRemoteConfig.instance;
-      await remoteConfig.fetchAndActivate();
-
-      final newConfig = DeploymentConfig.fromRemoteConfig(
-        remoteConfig,
-        _currentConfig?.environment ?? DeploymentEnvironment.production,
-      );
+      // Previously fetched from Firebase Remote Config. Now just re-emit existing config.
+      final newConfig =
+          _currentConfig ?? _fallbackForEnv(_currentConfig?.environment ?? DeploymentEnvironment.production);
 
       if (_isDifferentConfig(newConfig)) {
         await _updateConfiguration(newConfig);
@@ -367,8 +360,7 @@ class DeploymentConfigService {
       }
 
       // Validate environment consistency
-      if (kDebugMode &&
-          config.environment == DeploymentEnvironment.production) {
+      if (kDebugMode && config.environment == DeploymentEnvironment.production) {
         _logger.w('Debug mode enabled in production environment');
         return false;
       }
@@ -450,15 +442,7 @@ class DeploymentConfigService {
       // Then try to update from remote config if available
       if (config.enableFeatureFlags) {
         try {
-          final remoteConfig = FirebaseRemoteConfig.instance;
-          final newConfig = DeploymentConfig.fromRemoteConfig(
-            remoteConfig,
-            environment,
-          );
-
-          if (_isDifferentConfig(newConfig)) {
-            await _updateConfiguration(newConfig);
-          }
+          // Remote config removed – skip dynamic fetch
         } catch (e) {
           _logger.w(
             'Failed to load from remote config, using defaults',
@@ -495,6 +479,18 @@ class DeploymentConfigService {
     }
   }
 
+  // Local helper duplicating earlier factory fallback
+  static DeploymentConfig _fallbackForEnv(DeploymentEnvironment env) {
+    switch (env) {
+      case DeploymentEnvironment.development:
+        return DeploymentConfig.development();
+      case DeploymentEnvironment.staging:
+        return DeploymentConfig.staging();
+      case DeploymentEnvironment.production:
+        return DeploymentConfig.production();
+    }
+  }
+
   static Future<void> _loadCachedConfiguration(
     DeploymentEnvironment environment,
   ) async {
@@ -511,8 +507,7 @@ class DeploymentConfigService {
             ragServiceUrl: configMap['rag_service_url'] ?? '',
             enableAnalytics: configMap['enable_analytics'] ?? true,
             enableCrashReporting: configMap['enable_crash_reporting'] ?? true,
-            enablePerformanceMonitoring:
-                configMap['enable_performance_monitoring'] ?? true,
+            enablePerformanceMonitoring: configMap['enable_performance_monitoring'] ?? true,
             enableFeatureFlags: configMap['enable_feature_flags'] ?? true,
             debugMode: configMap['debug_mode'] ?? false,
             platformConfig: Map<String, dynamic>.from(
@@ -560,10 +555,8 @@ class DeploymentConfigService {
     return _currentConfig!.apiBaseUrl != newConfig.apiBaseUrl ||
         _currentConfig!.ragServiceUrl != newConfig.ragServiceUrl ||
         _currentConfig!.enableAnalytics != newConfig.enableAnalytics ||
-        _currentConfig!.enableCrashReporting !=
-            newConfig.enableCrashReporting ||
-        _currentConfig!.enablePerformanceMonitoring !=
-            newConfig.enablePerformanceMonitoring ||
+        _currentConfig!.enableCrashReporting != newConfig.enableCrashReporting ||
+        _currentConfig!.enablePerformanceMonitoring != newConfig.enablePerformanceMonitoring ||
         _currentConfig!.enableFeatureFlags != newConfig.enableFeatureFlags;
   }
 

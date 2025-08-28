@@ -1,13 +1,14 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import '../logging/app_logger.dart';
-import '../monitoring/comprehensive_monitoring_service.dart';
+import '../monitoring/aws_monitoring_services.dart';
 
 /// Integration helper for comprehensive monitoring with RAG queries
 /// Provides easy-to-use methods for tracking RAG performance and user satisfaction
 class MonitoringIntegration {
-  static final ComprehensiveMonitoringService _monitoring =
-      ComprehensiveMonitoringService.instance;
+  static final AWSRagMonitoringAdapter _monitoring = AWSRagMonitoringAdapter.instance;
 
   /// Initialize monitoring system
   static Future<void> initialize() async {
@@ -150,7 +151,7 @@ class RagQueryTracker {
     Duration? cacheHitTime,
     Map<String, dynamic>? additionalMetrics,
   }) async {
-    await ComprehensiveMonitoringService.instance.completeRagQueryTracking(
+    await AWSRagMonitoringAdapter.instance.completeRagQueryTracking(
       traceId: _traceId,
       success: success,
       errorMessage: errorMessage,
@@ -181,12 +182,169 @@ class RagQueryTracker {
     String? feedback,
     List<String>? tags,
   }) async {
-    await ComprehensiveMonitoringService.instance.trackUserSatisfaction(
+    await AWSRagMonitoringAdapter.instance.trackUserSatisfaction(
       traceId: _traceId,
       rating: rating,
       feedback: feedback,
       tags: tags,
     );
+  }
+}
+
+/// Adapter that re-implements the previous ComprehensiveMonitoringService RAG-specific
+/// APIs on top of the new AWS monitoring services. This avoids bringing back the
+/// removed Firebase-based implementation while preserving higher-level integration.
+class AWSRagMonitoringAdapter {
+  AWSRagMonitoringAdapter._();
+  static final AWSRagMonitoringAdapter instance = AWSRagMonitoringAdapter._();
+
+  bool _initialized = false;
+  final Map<String, DateTime> _queryStarts = {};
+  final Random _rand = Random();
+
+  Future<void> initialize() async {
+    if (_initialized) return;
+    await AWSComprehensiveMonitoringService.initialize();
+    _initialized = true;
+    AppLogger.debug('✅ AWS RAG Monitoring Adapter initialized');
+  }
+
+  String _newTraceId() {
+    final ts = DateTime.now().microsecondsSinceEpoch;
+    final r = _rand.nextInt(1 << 32);
+    return 'rag_${ts.toRadixString(16)}_${r.toRadixString(16)}';
+  }
+
+  Future<String> startRagQueryTracking({
+    required String query,
+    required String queryType,
+    required Map<String, dynamic> metadata,
+  }) async {
+    final id = _newTraceId();
+    _queryStarts[id] = DateTime.now();
+    await AWSSimpleMonitoringService.trackUserAction(
+      action: 'rag_query_start',
+      category: 'rag',
+      properties: {
+        'trace_id': id,
+        'query_type': queryType,
+        'query_length': query.length,
+        ...metadata.map((k, v) => MapEntry(k, v.toString())),
+      },
+    );
+    return id;
+  }
+
+  Future<void> completeRagQueryTracking({
+    required String traceId,
+    required bool success,
+    String? errorMessage,
+    double? confidence,
+    int? responseLength,
+    List<String>? sources,
+    Duration? cacheHitTime,
+  }) async {
+    final start = _queryStarts.remove(traceId);
+    final durationMs = start != null ? DateTime.now().difference(start).inMilliseconds : -1;
+    await AWSComprehensiveMonitoringService.trackEvent(
+      name: 'rag_query_complete',
+      parameters: {
+        'trace_id': traceId,
+        'success': success,
+        if (errorMessage != null) 'error': errorMessage,
+        if (confidence != null) 'confidence': confidence,
+        if (responseLength != null) 'response_length': responseLength,
+        if (sources != null) 'sources': sources.join(','),
+        if (cacheHitTime != null) 'cache_hit_ms': cacheHitTime.inMilliseconds,
+        'duration_ms': durationMs,
+      },
+    );
+  }
+
+  Future<String> getABTestVariant(String experimentName) async {
+    // Placeholder: always control variant
+    return 'control';
+  }
+
+  Future<void> trackABTestResult({
+    required String experimentName,
+    required String variant,
+    required String outcome,
+    Map<String, dynamic>? additionalData,
+  }) async {
+    await AWSComprehensiveMonitoringService.trackEvent(
+      name: 'ab_test_result',
+      parameters: {
+        'experiment': experimentName,
+        'variant': variant,
+        'outcome': outcome,
+        ...?additionalData?.map((k, v) => MapEntry(k, v.toString())),
+      },
+    );
+  }
+
+  Future<void> recordException({
+    required dynamic exception,
+    StackTrace? stackTrace,
+    required String reason,
+    Map<String, dynamic>? additionalInfo,
+    bool fatal = false,
+  }) async {
+    await AWSSimpleMonitoringService.recordError(
+      exception,
+      stackTrace,
+      reason: reason,
+      fatal: fatal,
+    );
+    if (additionalInfo != null && additionalInfo.isNotEmpty) {
+      await AWSSimpleMonitoringService.log('exception_meta: ${additionalInfo.toString()}');
+    }
+  }
+
+  Future<Map<String, dynamic>> getAnalyticsSummary({
+    Duration? timeWindow,
+  }) async {
+    final windowHrs = timeWindow?.inHours ?? 1;
+    return {
+      'session_id': 'sess_${DateTime.now().millisecondsSinceEpoch}',
+      'generated_at': DateTime.now().toIso8601String(),
+      'time_window_hours': windowHrs,
+      'overview': {
+        'total_queries': 0,
+        'success_rate': 0.0,
+        'avg_user_rating': 0.0,
+        'total_satisfaction_responses': 0,
+      },
+      'query_types': <String, dynamic>{},
+      'trending_topics': <dynamic>[],
+      'geographic_data': {
+        'total_geographic_queries': 0,
+        'unique_regions': 0,
+        'top_regions': <dynamic>[],
+      },
+      'ab_tests': <dynamic>[],
+    };
+  }
+
+  Future<void> trackUserSatisfaction({
+    required String traceId,
+    required int rating,
+    String? feedback,
+    List<String>? tags,
+  }) async {
+    await AWSComprehensiveMonitoringService.trackEvent(
+      name: 'rag_user_satisfaction',
+      parameters: {
+        'trace_id': traceId,
+        'rating': rating,
+        if (feedback != null) 'feedback': feedback,
+        if (tags != null && tags.isNotEmpty) 'tags': tags.join(','),
+      },
+    );
+  }
+
+  Future<void> dispose() async {
+    _queryStarts.clear();
   }
 }
 
@@ -236,9 +394,7 @@ class RagAnalyticsSummary {
           )
           .toList(),
       geographicData: RagGeographicData.fromMap(geographicRaw),
-      abTests: abTestsData
-          .map((item) => ABTestResult.fromMap(item as Map<String, dynamic>))
-          .toList(),
+      abTests: abTestsData.map((item) => ABTestResult.fromMap(item as Map<String, dynamic>)).toList(),
     );
   }
 }
@@ -338,9 +494,7 @@ class RagGeographicData {
     return RagGeographicData(
       totalGeographicQueries: data['total_geographic_queries'] as int,
       uniqueRegions: data['unique_regions'] as int,
-      topRegions: topRegionsData
-          .map((item) => RegionUsage.fromMap(item as Map<String, dynamic>))
-          .toList(),
+      topRegions: topRegionsData.map((item) => RegionUsage.fromMap(item as Map<String, dynamic>)).toList(),
     );
   }
 }
@@ -382,8 +536,7 @@ class ABTestResult {
 /// User satisfaction dialog widget
 class RagSatisfactionDialog extends StatefulWidget {
   final String traceId;
-  final Function(int rating, String? feedback, List<String> tags)
-      onRatingSubmitted;
+  final Function(int rating, String? feedback, List<String> tags) onRatingSubmitted;
 
   const RagSatisfactionDialog({
     super.key,
@@ -487,9 +640,7 @@ class _RagSatisfactionDialogState extends State<RagSatisfactionDialog> {
               ? () {
                   widget.onRatingSubmitted(
                     _rating,
-                    _feedbackController.text.trim().isEmpty
-                        ? null
-                        : _feedbackController.text.trim(),
+                    _feedbackController.text.trim().isEmpty ? null : _feedbackController.text.trim(),
                     _selectedTags.toList(),
                   );
                   Navigator.of(context).pop();

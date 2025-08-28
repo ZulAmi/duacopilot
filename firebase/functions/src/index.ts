@@ -10,7 +10,6 @@ export * from './analytics';
 export * from './auth';
 export * from './islamic-content';
 export * from './notifications';
-export * from './user-management';
 
 // Health check endpoint
 export const healthCheck = functions.https.onRequest((req, res) => {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../logging/app_logger.dart';
-import '../monitoring/comprehensive_monitoring_service.dart';
+import '../monitoring/aws_monitoring_services.dart';
 import '../monitoring/monitoring_integration.dart';
 import '../platform/platform_service.dart';
 
@@ -9,8 +9,7 @@ import '../platform/platform_service.dart';
 /// Coordinates Firebase services, platform detection, and monitoring setup
 class MonitoringInitializationService {
   static MonitoringInitializationService? _instance;
-  static MonitoringInitializationService get instance =>
-      _instance ??= MonitoringInitializationService._();
+  static MonitoringInitializationService get instance => _instance ??= MonitoringInitializationService._();
 
   MonitoringInitializationService._();
 
@@ -24,16 +23,15 @@ class MonitoringInitializationService {
     }
 
     try {
-      AppLogger.info(
-          'ðŸš€ Starting comprehensive monitoring initialization...');
+      AppLogger.info('ðŸš€ Starting comprehensive monitoring initialization...');
 
       // 1. Initialize platform service first
       await PlatformService.instance.initialize();
       AppLogger.info('âœ… Platform service initialized');
 
-      // 2. Initialize comprehensive monitoring service
-      await ComprehensiveMonitoringService.instance.initialize();
-      AppLogger.info('âœ… Comprehensive monitoring service initialized');
+      // 2. Initialize comprehensive (AWS) monitoring service
+      await AWSComprehensiveMonitoringService.initialize();
+      AppLogger.info('âœ… AWS comprehensive monitoring service initialized');
 
       // 3. Initialize monitoring integration helpers
       await MonitoringIntegration.initialize();
@@ -44,13 +42,14 @@ class MonitoringInitializationService {
 
       // Track successful initialization
       await _trackInitializationSuccess();
-    } catch (e) {
-      AppLogger.error('âŒ Failed to initialize monitoring: $e');
+    } catch (e, stack) {
+      AppLogger.error('❌ Failed to initialize monitoring: $e');
 
-      // Try to record the initialization failure
+      // Try to record the initialization failure via AWS simple monitoring
       try {
-        await ComprehensiveMonitoringService.instance.recordException(
-          exception: e,
+        await AWSSimpleMonitoringService.recordError(
+          e,
+          stack,
           reason: 'Monitoring initialization failed',
           fatal: false,
         );
@@ -71,8 +70,7 @@ class MonitoringInitializationService {
         additionalMetadata: {
           'event_type': 'monitoring_init',
           'platform': PlatformService.instance.platformName,
-          'features_available':
-              PlatformService.instance.availableFeatures.length,
+          'features_available': PlatformService.instance.availableFeatures.length,
         },
       );
 
@@ -97,7 +95,7 @@ class MonitoringInitializationService {
       'initialized': _isInitialized,
       'platform_service': PlatformService.instance.platformName,
       'platform_features': PlatformService.instance.availableFeatures.length,
-      'firebase_enabled': true, // Assuming Firebase is always available
+      'aws_monitoring': true,
       'timestamp': DateTime.now().toIso8601String(),
     };
   }
@@ -110,7 +108,7 @@ class MonitoringInitializationService {
       AppLogger.info('ðŸ§¹ Disposing monitoring services...');
 
       await MonitoringIntegration.dispose();
-      await ComprehensiveMonitoringService.instance.dispose();
+      // No explicit dispose required for AWSComprehensiveMonitoringService currently
 
       _isInitialized = false;
       AppLogger.info('âœ… Monitoring services disposed');
@@ -135,8 +133,7 @@ class MonitoredApp extends StatefulWidget {
   State<MonitoredApp> createState() => _MonitoredAppState();
 }
 
-class _MonitoredAppState extends State<MonitoredApp>
-    with WidgetsBindingObserver {
+class _MonitoredAppState extends State<MonitoredApp> with WidgetsBindingObserver {
   bool _monitoringInitialized = false;
   String? _initializationError;
 
@@ -230,7 +227,8 @@ class _MonitoredAppState extends State<MonitoredApp>
               left: 16,
               right: 16,
               child: Material(
-                color: Colors.orange.withOpacity(0.9),
+                // Replaced deprecated withOpacity with withValues for precision
+                color: Colors.orange.withValues(alpha: 230), // ~90% opacity
                 borderRadius: BorderRadius.circular(8),
                 child: Padding(
                   padding: const EdgeInsets.all(12),

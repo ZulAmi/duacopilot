@@ -1,0 +1,252 @@
+# Serverless Framework Configuration for DuaCopilot Backend
+# Deploy Firebase Functions to AWS Lambda
+
+service: duacopilot-backend
+
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  environment:
+    OPENAI_API_KEY: ${env:OPENAI_API_KEY}
+    # SENDGRID_API_KEY: ${env:SENDGRID_API_KEY, ""}
+    JWT_SECRET: ${env:JWT_SECRET}
+    DYNAMODB_TABLE: duacopilot-backend-prod-users
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource:
+            - "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/duacopilot-backend-prod-users"
+            - "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/duacopilot-backend-prod-users/index/*"
+        - Effect: Allow
+          Action:
+            - sns:Publish
+            - s3:GetObject
+            - s3:PutObject
+          Resource: "*"
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-webpack
+  - serverless-offline
+
+functions:
+  # AI Services
+  aiChat:
+    handler: src/handlers.aiChat
+    events:
+      - http:
+          path: api/v1/ai/chat
+          method: post
+          cors: true
+
+  classifyIntent:
+    handler: src/handlers.classifyIntent
+    events:
+      - http:
+          path: api/v1/ai/intent
+          method: post
+          cors: true
+
+  # Authentication
+  createUser:
+    handler: src/handlers.createUser
+    events:
+      - http:
+          path: api/v1/auth/register
+          method: post
+          cors: true
+
+  updateLastLogin:
+    handler: src/handlers.updateLastLogin
+    events:
+      - http:
+          path: api/v1/auth/login
+          method: post
+          cors: true
+
+  # Islamic Content
+  getDuas:
+    handler: src/handlers.getDuas
+    events:
+      - http:
+          path: api/v1/content/duas
+          method: get
+          cors: true
+
+  searchQuran:
+    handler: src/handlers.searchQuran
+    events:
+      - http:
+          path: api/v1/content/quran
+          method: get
+          cors: true
+
+  # Analytics
+  logEvent:
+    handler: src/handlers.logEvent
+    events:
+      - http:
+          path: api/v1/analytics/event
+          method: post
+          cors: true
+
+  getUserAnalytics:
+    handler: src/handlers.getUserAnalytics
+    events:
+      - http:
+          path: api/v1/analytics/user/{userId}
+          method: get
+          cors: true
+
+  # Notifications
+  sendNotification:
+    handler: src/handlers.sendNotification
+    events:
+      - http:
+          path: api/v1/notifications/send
+          method: post
+          cors: true
+
+  schedulePrayerNotifications:
+    handler: src/handlers.schedulePrayerNotifications
+    events:
+      - schedule:
+          rate: rate(1 hour)
+          enabled: true
+
+  # Health Check
+  healthCheck:
+    handler: src/handlers.healthCheck
+    events:
+      - http:
+          path: api/v1/health
+          method: get
+          cors: true
+
+resources:
+  Resources:
+    # DynamoDB Tables
+    UsersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: duacopilot-backend-prod-users
+        AttributeDefinitions:
+          - AttributeName: userId
+            AttributeType: S
+          - AttributeName: email
+            AttributeType: S
+        KeySchema:
+          - AttributeName: userId
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: EmailIndex
+            KeySchema:
+              - AttributeName: email
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+            ProvisionedThroughput:
+              ReadCapacityUnits: 5
+              WriteCapacityUnits: 5
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+
+    ConversationsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.DYNAMODB_TABLE}-conversations
+        AttributeDefinitions:
+          - AttributeName: conversationId
+            AttributeType: S
+          - AttributeName: userId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: conversationId
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: UserIndex
+            KeySchema:
+              - AttributeName: userId
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+            ProvisionedThroughput:
+              ReadCapacityUnits: 5
+              WriteCapacityUnits: 5
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+
+    AnalyticsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.DYNAMODB_TABLE}-analytics
+        AttributeDefinitions:
+          - AttributeName: eventId
+            AttributeType: S
+          - AttributeName: userId
+            AttributeType: S
+          - AttributeName: timestamp
+            AttributeType: N
+        KeySchema:
+          - AttributeName: eventId
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: UserTimeIndex
+            KeySchema:
+              - AttributeName: userId
+                KeyType: HASH
+              - AttributeName: timestamp
+                KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
+            ProvisionedThroughput:
+              ReadCapacityUnits: 5
+              WriteCapacityUnits: 5
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+
+    # S3 Bucket for file storage
+    FileStorage:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: duacopilot-backend-prod-storage
+        CorsConfiguration:
+          CorsRules:
+            - AllowedOrigins:
+                - "*"
+              AllowedMethods:
+                - GET
+                - PUT
+                - POST
+                - HEAD
+              AllowedHeaders:
+                - "*"
+
+    # SNS Topic for notifications
+    NotificationsTopic:
+      Type: AWS::SNS::Topic
+      Properties:
+        TopicName: duacopilot-backend-prod-notifications
+
+# Package configuration
+package:
+  exclude:
+    - .git/**
+    - .github/**
+    - node_modules/**
+    - test/**
+    - "*.md"

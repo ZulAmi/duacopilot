@@ -1,8 +1,23 @@
-import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
+import * as functions from 'firebase-functions';
 
 const db = admin.firestore();
 const messaging = admin.messaging();
+
+// User interface for notifications
+interface User {
+  id: string;
+  timezone?: string;
+  location?: {
+    lat: number;
+    lng: number;
+  };
+  fcmToken?: string;
+  method?: string;
+  preferences?: {
+    notifications?: boolean;
+  };
+}
 
 // Schedule prayer notifications
 export const schedulePrayerNotifications = functions.pubsub
@@ -13,13 +28,13 @@ export const schedulePrayerNotifications = functions.pubsub
     const users = await getUsersWithNotificationsEnabled();
     
     for (const user of users) {
-      const { timezone, location, fcmToken } = user;
-      if (!fcmToken) continue;
+      const { timezone, location, fcmToken, method } = user;
+      if (!fcmToken || !location) continue;
       
-      const prayerTimes = await calculatePrayerTimes(location.lat, location.lng, user.method, now);
-      const nextPrayer = getNextPrayer(prayerTimes, timezone);
+      const prayerTimes = await calculatePrayerTimes(location.lat, location.lng, method || 'MWL', now);
+      const nextPrayer = getNextPrayer(prayerTimes, timezone || 'UTC');
       
-      if (shouldNotify(nextPrayer, timezone)) {
+      if (shouldNotify(nextPrayer, timezone || 'UTC')) {
         await sendPrayerNotification(fcmToken, nextPrayer);
       }
     }
@@ -93,7 +108,7 @@ export const updateFcmToken = functions.https.onCall(async (data, context) => {
 });
 
 // Helper functions
-async function getUsersWithNotificationsEnabled() {
+async function getUsersWithNotificationsEnabled(): Promise<User[]> {
   const snapshot = await db.collection('users')
     .where('preferences.notifications', '==', true)
     .where('fcmToken', '!=', null)
@@ -102,7 +117,19 @@ async function getUsersWithNotificationsEnabled() {
   return snapshot.docs.map(doc => ({
     id: doc.id,
     ...doc.data()
-  }));
+  } as User));
+}
+
+async function calculatePrayerTimes(lat: number, lng: number, method: string, date: Date) {
+  // Simplified prayer time calculation - in production, use a proper Islamic library
+  // This is just a placeholder implementation
+  return {
+    fajr: '05:30',
+    dhuhr: '12:30',
+    asr: '15:45',
+    maghrib: '18:00',
+    isha: '19:30'
+  };
 }
 
 async function sendPrayerNotification(token: string, prayer: any) {

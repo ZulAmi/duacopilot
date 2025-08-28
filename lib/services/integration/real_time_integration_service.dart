@@ -3,7 +3,6 @@ import 'dart:async';
 import '../../core/logging/app_logger.dart';
 import '../background/intelligent_background_sync_service.dart';
 import '../collaborative/collaborative_service.dart';
-import '../messaging/firebase_messaging_service.dart';
 import '../realtime/real_time_service_manager.dart';
 import '../sse/server_sent_events_service.dart';
 
@@ -20,7 +19,7 @@ class RealTimeIntegrationService {
   late IntelligentBackgroundSyncService _backgroundSync;
   late ServerSentEventsService _sseService;
   late CollaborativeService _collaborativeService;
-  late FirebaseMessagingService _messagingService;
+  // FirebaseMessagingService removed; replace with AWS SNS or other messaging if needed
 
   // State management
   bool _isInitialized = false;
@@ -41,14 +40,14 @@ class RealTimeIntegrationService {
       _backgroundSync = IntelligentBackgroundSyncService.instance;
       _sseService = ServerSentEventsService.instance;
       _collaborativeService = CollaborativeService.instance;
-      _messagingService = FirebaseMessagingService.instance;
+      // Messaging service removed (Firebase). Initialize AWS SNS client here when implemented.
 
       // Initialize services in order
       await _realTimeManager.initialize();
       await _backgroundSync.initialize();
       await _sseService.initialize();
       await _collaborativeService.initialize();
-      await _messagingService.initialize();
+      // Messaging initialization removed (Firebase)
 
       // Setup service coordination
       _setupServiceCoordination();
@@ -120,19 +119,7 @@ class RealTimeIntegrationService {
       }),
     );
 
-    // Coordinate Firebase messaging with other services
-    _subscriptions.add(
-      _messagingService.scholarApprovalStream.listen((approval) {
-        _backgroundSync.recordUsage('push_notification_scholar_approval');
-
-        // If we have collaborative service active, share with family
-        if (_collaborativeService.hasFamily) {
-          AppLogger.info(
-            '📲 Scholar approval push received, coordinating with family sharing',
-          );
-        }
-      }),
-    );
+    // Push messaging coordination removed
 
     // Coordinate WebSocket reconnection with SSE
     _subscriptions.add(
@@ -299,9 +286,7 @@ class RealTimeIntegrationService {
       final familyInfo = _collaborativeService.getFamilyInfo();
       final familyId = familyInfo['family_id'] as String?;
 
-      if (familyId != null) {
-        await _messagingService.subscribeToFamilyNotifications(familyId);
-      }
+      // Family push subscription removed (Firebase Messaging)
 
       // Record usage for intelligent sync
       _backgroundSync.recordUsage('family_created');
@@ -330,7 +315,7 @@ class RealTimeIntegrationService {
         'websocket_connected': _realTimeManager.isConnected,
         'sse_connected': _sseService.isConnected,
         'collaborative_connected': _collaborativeService.isConnected,
-        'messaging_enabled': _messagingService.areNotificationsEnabled,
+        'messaging_enabled': false,
         'background_sync_enabled': true, // Always available
       },
       'connectivity': {
@@ -339,7 +324,7 @@ class RealTimeIntegrationService {
       },
       'family_info': _collaborativeService.getFamilyInfo(),
       'sync_stats': _backgroundSync.getSyncStats(),
-      'notification_preferences': _messagingService.getNotificationPreferences(),
+      'notification_preferences': const {},
     };
   }
 
@@ -367,10 +352,7 @@ class RealTimeIntegrationService {
       'prayer_session': _collaborativeService.prayerSessionStream,
 
       // Push notifications
-      'push_scholar_approval': _messagingService.scholarApprovalStream,
-      'push_content_update': _messagingService.contentUpdateStream,
-      'push_family_notification': _messagingService.familyNotificationStream,
-      'push_system_notification': _messagingService.systemNotificationStream,
+      // Push notification streams removed
     };
   }
 
@@ -402,12 +384,7 @@ class RealTimeIntegrationService {
     bool? systemNotificationsEnabled,
   }) async {
     try {
-      await _messagingService.updateNotificationPreferences(
-        scholarApprovalEnabled: scholarApprovalEnabled,
-        contentUpdateEnabled: contentUpdateEnabled,
-        familyNotificationsEnabled: familyNotificationsEnabled,
-        systemNotificationsEnabled: systemNotificationsEnabled,
-      );
+      // Messaging preference updates removed
 
       AppLogger.info('âš™ï¸ Notification preferences updated');
     } catch (e) {
@@ -477,7 +454,7 @@ class RealTimeIntegrationService {
     _backgroundSync.dispose();
     _sseService.dispose();
     _collaborativeService.dispose();
-    _messagingService.dispose();
+    // Messaging service disposed (removed)
 
     _isActive = false;
     _isInitialized = false;
