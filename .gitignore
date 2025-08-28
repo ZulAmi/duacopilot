@@ -43,3 +43,88 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# ========================================
+# CRITICAL: ENVIRONMENT VARIABLES & API KEYS
+# ========================================
+.env
+.env.*
+*.env
+aws-backend/.env*
+firebase/.env*
+
+# ========================================
+# AWS BACKEND (Node.js/TypeScript)
+# ========================================
+aws-backend/node_modules/
+aws-backend/build/
+aws-backend/dist/
+aws-backend/lib/
+aws-backend/coverage/
+aws-backend/.nyc_output/
+aws-backend/cdk.out/
+aws-backend/.serverless/
+aws-backend/package-lock.json
+
+# Node.js general
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# ========================================
+# FIREBASE
+# ========================================
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+.firebase/
+firebase/node_modules/
+
+# ========================================
+# AWS CREDENTIALS & DEPLOYMENT
+# ========================================
+.aws/
+aws-config/
+*.pem
+*.p12
+*.jks
+*.zip
+*.tar.gz
+deployment/
+
+# ========================================
+# DEVELOPMENT & TESTING
+# ========================================
+coverage/
+*.lcov
+test/.test_coverage.dart
+integration_test/reports/
+logs/
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# ========================================
+# PLATFORM SPECIFIC
+# ========================================
+# Android
+android/app/key.properties
+android/key.properties
+android/keystore/
+android/local.properties
+
+# iOS
+ios/Pods/
+ios/.symlinks/
+
+# Windows
+windows/flutter/generated_plugin_registrant.*
+
+# Linux  
+linux/flutter/generated_plugin_registrant.*
+
+# macOS
+macos/flutter/generated_plugin_registrant.*

@@ -1,0 +1,36 @@
+{
+  "maintenance_mode": false,
+  "maintenance_message": "DuaCopilot is under maintenance. Please try again later.",
+  "min_app_version": "1.0.0",
+  "force_update": false,
+  "update_message": "A new version is available. Please update to continue.",
+  "features": {
+    "ai_chat_enabled": true,
+    "voice_search_enabled": true,
+    "offline_mode_enabled": true,
+    "family_sharing_enabled": true,
+    "live_streaming_enabled": false
+  },
+  "limits": {
+    "free_ai_queries_per_day": 10,
+    "free_offline_duas": 50,
+    "max_family_members": 10,
+    "max_favorites": 100
+  },
+  "api_endpoints": {
+    "quran_api": "https://api.quran.com/api/v4",
+    "hadith_api": "https://api.sunnah.com/v1",
+    "prayer_api": "https://api.aladhan.com/v1"
+  },
+  "subscription_plans": {
+    "premium": {
+      "price_usd": 9.99,
+      "features": [
+        "unlimited_ai_queries",
+        "offline_all_content",
+        "advanced_analytics",
+        "priority_support"
+      ]
+    }
+  }
+}

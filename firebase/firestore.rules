@@ -1,0 +1,70 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+    
+    function isPremium() {
+      return request.auth.token.premium == true;
+    }
+    
+    function isAdmin() {
+      return request.auth.token.admin == true;
+    }
+
+    // Users collection
+    match /users/{userId} {
+      allow read: if isAuthenticated() && isOwner(userId);
+      allow write: if isAuthenticated() && isOwner(userId);
+      
+      // User subcollections
+      match /favorites/{docId} {
+        allow read, write: if isAuthenticated() && isOwner(userId);
+      }
+      
+      match /history/{docId} {
+        allow read, write: if isAuthenticated() && isOwner(userId);
+      }
+    }
+
+    // Islamic content - public read
+    match /duas/{duaId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    match /quran/{verseId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    match /hadith/{hadithId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    // Premium content
+    match /premium/{contentId} {
+      allow read: if isPremium() || isAdmin();
+      allow write: if isAdmin();
+    }
+    
+    // Community features
+    match /families/{familyId} {
+      allow read: if isAuthenticated() && 
+        (resource.data.members.hasAny([request.auth.uid]) || 
+         resource.data.isPublic == true);
+      allow create: if isAuthenticated();
+      allow update: if isAuthenticated() && 
+        resource.data.members.hasAny([request.auth.uid]);
+      allow delete: if isAuthenticated() && 
+        resource.data.owner == request.auth.uid;
+    }
+  }
+}

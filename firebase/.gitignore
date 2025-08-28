@@ -1,0 +1,29 @@
+# Firebase cache
+.firebase/
+
+# Firebase debug log
+firebase-debug.log*
+firebase-debug.*.log*
+
+# Firebase hosting cache
+.firebase-cache/
+
+# Firebase config
+.firebaserc
+
+# Runtime configuration
+functions/runtimeconfig.json
+
+# Local Firebase UI debug log
+ui-debug.log
+
+# Firebase emulator data
+firebase-export-*/
+firestore-debug.log
+
+# Firebase Functions logs
+functions/logs/
+
+# Temporary files
+*.tmp
+*.temp
