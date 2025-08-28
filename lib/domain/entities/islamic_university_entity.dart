@@ -30,8 +30,7 @@ class IslamicScholar with _$IslamicScholar {
     DateTime? createdAt,
   }) = _IslamicScholar;
 
-  factory IslamicScholar.fromJson(Map<String, dynamic> json) =>
-      _$IslamicScholarFromJson(json);
+  factory IslamicScholar.fromJson(Map<String, dynamic> json) => _$IslamicScholarFromJson(json);
 }
 
 /// Learning Path for structured Islamic education
@@ -55,16 +54,15 @@ class IslamicLearningPath with _$IslamicLearningPath {
     DateTime? updatedAt,
   }) = _IslamicLearningPath;
 
-  factory IslamicLearningPath.fromJson(Map<String, dynamic> json) =>
-      _$IslamicLearningPathFromJson(json);
+  factory IslamicLearningPath.fromJson(Map<String, dynamic> json) => _$IslamicLearningPathFromJson(json);
 }
 
 /// Learning levels for progressive education
 enum LearningLevel {
-  beginner('Beginner', 'ðŸŒ±'),
-  intermediate('Intermediate', 'ðŸŒ¿'),
-  advanced('Advanced', 'ðŸŒ³'),
-  scholar('Scholar', 'ðŸ“š');
+  beginner('Beginner', '🌱'),
+  intermediate('Intermediate', '🌿'),
+  advanced('Advanced', '🌳'),
+  scholar('Scholar', '📚');
 
   const LearningLevel(this.label, this.emoji);
   final String label;
@@ -110,22 +108,21 @@ class PremiumCourse with _$PremiumCourse {
     DateTime? updatedAt,
   }) = _PremiumCourse;
 
-  factory PremiumCourse.fromJson(Map<String, dynamic> json) =>
-      _$PremiumCourseFromJson(json);
+  factory PremiumCourse.fromJson(Map<String, dynamic> json) => _$PremiumCourseFromJson(json);
 }
 
 /// Course categories for organization
 enum CourseCategory {
-  quran('Quran & Tajweed', 'ðŸ“–'),
-  hadith('Hadith Studies', 'ðŸ“œ'),
-  fiqh('Fiqh & Jurisprudence', 'âš–ï¸'),
-  aqeedah('Aqeedah & Beliefs', 'ðŸ•Œ'),
-  seerah('Seerah & History', 'ðŸ“š'),
-  arabic('Arabic Language', 'ðŸ”¤'),
-  spirituality('Spirituality & Tasawwuf', 'ðŸ’š'),
-  family('Family & Marriage', 'ðŸ‘ª'),
-  finance('Islamic Finance', 'ðŸ’°'),
-  ethics('Ethics & Morals', 'ðŸ¤²');
+  quran('Quran & Tajweed', '📖'),
+  hadith('Hadith Studies', '📜'),
+  fiqh('Fiqh & Jurisprudence', '⚖️'),
+  aqeedah('Aqeedah & Beliefs', '🕋'),
+  seerah('Seerah & History', '📚'),
+  arabic('Arabic Language', '🗣️'),
+  spirituality('Spirituality & Tasawwuf', '💖'),
+  family('Family & Marriage', '👪'),
+  finance('Islamic Finance', '💰'),
+  ethics('Ethics & Morals', '🤲');
 
   const CourseCategory(this.label, this.emoji);
   final String label;
@@ -168,8 +165,7 @@ class CourseLesson with _$CourseLesson {
     DateTime? updatedAt,
   }) = _CourseLesson;
 
-  factory CourseLesson.fromJson(Map<String, dynamic> json) =>
-      _$CourseLessonFromJson(json);
+  factory CourseLesson.fromJson(Map<String, dynamic> json) => _$CourseLessonFromJson(json);
 }
 
 /// Lesson content types
@@ -198,8 +194,7 @@ class IslamicQuiz with _$IslamicQuiz {
     DateTime? updatedAt,
   }) = _IslamicQuiz;
 
-  factory IslamicQuiz.fromJson(Map<String, dynamic> json) =>
-      _$IslamicQuizFromJson(json);
+  factory IslamicQuiz.fromJson(Map<String, dynamic> json) => _$IslamicQuizFromJson(json);
 }
 
 /// Quiz types for different assessments
@@ -232,8 +227,7 @@ class QuizQuestion with _$QuizQuestion {
     DateTime? createdAt,
   }) = _QuizQuestion;
 
-  factory QuizQuestion.fromJson(Map<String, dynamic> json) =>
-      _$QuizQuestionFromJson(json);
+  factory QuizQuestion.fromJson(Map<String, dynamic> json) => _$QuizQuestionFromJson(json);
 }
 
 /// Question types for varied assessment
@@ -286,8 +280,7 @@ class LiveQASession with _$LiveQASession {
     DateTime? createdAt,
   }) = _LiveQASession;
 
-  factory LiveQASession.fromJson(Map<String, dynamic> json) =>
-      _$LiveQASessionFromJson(json);
+  factory LiveQASession.fromJson(Map<String, dynamic> json) => _$LiveQASessionFromJson(json);
 }
 
 /// Session status tracking
@@ -324,8 +317,7 @@ class PersonalizedCurriculum with _$PersonalizedCurriculum {
     DateTime? updatedAt,
   }) = _PersonalizedCurriculum;
 
-  factory PersonalizedCurriculum.fromJson(Map<String, dynamic> json) =>
-      _$PersonalizedCurriculumFromJson(json);
+  factory PersonalizedCurriculum.fromJson(Map<String, dynamic> json) => _$PersonalizedCurriculumFromJson(json);
 }
 
 /// Study goals for motivation
@@ -343,8 +335,7 @@ class StudyGoal with _$StudyGoal {
     DateTime? completedAt,
   }) = _StudyGoal;
 
-  factory StudyGoal.fromJson(Map<String, dynamic> json) =>
-      _$StudyGoalFromJson(json);
+  factory StudyGoal.fromJson(Map<String, dynamic> json) => _$StudyGoalFromJson(json);
 }
 
 /// Types of study goals
@@ -391,8 +382,7 @@ class IslamicCertificate with _$IslamicCertificate {
     DateTime? lastVerified,
   }) = _IslamicCertificate;
 
-  factory IslamicCertificate.fromJson(Map<String, dynamic> json) =>
-      _$IslamicCertificateFromJson(json);
+  factory IslamicCertificate.fromJson(Map<String, dynamic> json) => _$IslamicCertificateFromJson(json);
 }
 
 /// User learning progress tracking
@@ -412,8 +402,7 @@ class LearningProgress with _$LearningProgress {
     DateTime? lastActivityAt,
   }) = _LearningProgress;
 
-  factory LearningProgress.fromJson(Map<String, dynamic> json) =>
-      _$LearningProgressFromJson(json);
+  factory LearningProgress.fromJson(Map<String, dynamic> json) => _$LearningProgressFromJson(json);
 }
 
 /// Progress tracking types
@@ -443,6 +432,5 @@ class LearningAnalytics with _$LearningAnalytics {
     DateTime? updatedAt,
   }) = _LearningAnalytics;
 
-  factory LearningAnalytics.fromJson(Map<String, dynamic> json) =>
-      _$LearningAnalyticsFromJson(json);
+  factory LearningAnalytics.fromJson(Map<String, dynamic> json) => _$LearningAnalyticsFromJson(json);
 }

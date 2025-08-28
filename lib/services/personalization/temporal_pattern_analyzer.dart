@@ -26,9 +26,9 @@ class TemporalPatternAnalyzer {
       // Load existing temporal patterns
       await _loadPatterns(userId, prefs);
 
-      debugPrint('âœ… Temporal pattern analyzer initialized for user: $userId');
+      debugPrint('✅ Temporal pattern analyzer initialized for user: $userId');
     } catch (e) {
-      debugPrint('âŒ Error initializing temporal pattern analyzer: $e');
+      debugPrint('❌ Error initializing temporal pattern analyzer: $e');
       rethrow;
     }
   }
@@ -67,10 +67,9 @@ class TemporalPatternAnalyzer {
       // Update Islamic calendar patterns
       await _updateIslamicPatterns(interaction, prefs);
 
-      debugPrint(
-          'â° Recorded temporal interaction for: ${interaction.userId}');
+      debugPrint('⏰ Recorded temporal interaction for: ${interaction.userId}');
     } catch (e) {
-      debugPrint('âŒ Error recording temporal interaction: $e');
+      debugPrint('❌ Error recording temporal interaction: $e');
     }
   }
 
@@ -91,7 +90,7 @@ class TemporalPatternAnalyzer {
 
       return enrichedPatterns;
     } catch (e) {
-      debugPrint('âŒ Error getting time-based patterns: $e');
+      debugPrint('❌ Error getting time-based patterns: $e');
       return TemporalPatterns.empty(userId);
     }
   }
@@ -111,10 +110,10 @@ class TemporalPatternAnalyzer {
       await _updateWeeklyPatterns(session, prefs);
 
       debugPrint(
-        'ðŸ“Š Processed session data for temporal analysis: ${session.id}',
+        '📊 Processed session data for temporal analysis: ${session.id}',
       );
     } catch (e) {
-      debugPrint('âŒ Error processing session data: $e');
+      debugPrint('❌ Error processing session data: $e');
     }
   }
 
@@ -141,7 +140,7 @@ class TemporalPatternAnalyzer {
 
       return {};
     } catch (e) {
-      debugPrint('âŒ Error getting habit strengths: $e');
+      debugPrint('❌ Error getting habit strengths: $e');
       return {};
     }
   }
@@ -160,8 +159,7 @@ class TemporalPatternAnalyzer {
 
       // Analyze hourly patterns
       patterns.hourlyPatterns.forEach((hour, pattern) {
-        if (pattern.popularDuas.contains(duaId) &&
-            pattern.activityScore > 0.5) {
+        if (pattern.popularDuas.contains(duaId) && pattern.activityScore > 0.5) {
           final nextOccurrence = _getNextOccurrenceOfHour(now, hour);
           optimalTimes.add(nextOccurrence);
         }
@@ -185,16 +183,12 @@ class TemporalPatternAnalyzer {
 
       // Sort by proximity to current time
       optimalTimes.sort(
-        (a, b) => a
-            .difference(now)
-            .inMinutes
-            .abs()
-            .compareTo(b.difference(now).inMinutes.abs()),
+        (a, b) => a.difference(now).inMinutes.abs().compareTo(b.difference(now).inMinutes.abs()),
       );
 
       return optimalTimes.take(5).toList();
     } catch (e) {
-      debugPrint('âŒ Error predicting optimal times: $e');
+      debugPrint('❌ Error predicting optimal times: $e');
       return [];
     }
   }
@@ -217,9 +211,9 @@ class TemporalPatternAnalyzer {
         await _cleanupDataForKey(key, cutoffDate, prefs);
       }
 
-      debugPrint('ðŸ§¹ Cleaned up old temporal data before: $cutoffDate');
+      debugPrint('🧹 Cleaned up old temporal data before: $cutoffDate');
     } catch (e) {
-      debugPrint('âŒ Error cleaning up temporal data: $e');
+      debugPrint('❌ Error cleaning up temporal data: $e');
     }
   }
 
@@ -243,7 +237,7 @@ class TemporalPatternAnalyzer {
         return emptyPatterns;
       }
     } catch (e) {
-      debugPrint('âŒ Error loading temporal patterns: $e');
+      debugPrint('❌ Error loading temporal patterns: $e');
       return TemporalPatterns.empty(userId);
     }
   }
@@ -261,7 +255,7 @@ class TemporalPatternAnalyzer {
       );
       _patternsCache[patterns.userId] = patterns;
     } catch (e) {
-      debugPrint('âŒ Error saving temporal patterns: $e');
+      debugPrint('❌ Error saving temporal patterns: $e');
     }
   }
 
@@ -299,7 +293,7 @@ class TemporalPatternAnalyzer {
       await _savePatterns(patterns, prefs);
       return patterns;
     } catch (e) {
-      debugPrint('âŒ Error analyzing temporal patterns: $e');
+      debugPrint('❌ Error analyzing temporal patterns: $e');
       return TemporalPatterns.empty(userId);
     }
   }
@@ -335,7 +329,7 @@ class TemporalPatternAnalyzer {
         interactions,
       );
     } catch (e) {
-      debugPrint('âŒ Error recording time-based interaction: $e');
+      debugPrint('❌ Error recording time-based interaction: $e');
     }
   }
 
@@ -359,15 +353,12 @@ class TemporalPatternAnalyzer {
       // Update habit metrics
       final newFrequency = currentHabit.frequency + 1;
       final newAvgDuration = Duration(
-        seconds:
-            ((currentHabit.avgDuration.inSeconds * currentHabit.frequency) +
-                    interaction.duration.inSeconds) ~/
-                newFrequency,
+        seconds: ((currentHabit.avgDuration.inSeconds * currentHabit.frequency) + interaction.duration.inSeconds) ~/
+            newFrequency,
       );
 
       // Calculate strength based on frequency and recency
-      final daysSinceLastPractice =
-          interaction.timestamp.difference(currentHabit.lastPracticed).inDays;
+      final daysSinceLastPractice = interaction.timestamp.difference(currentHabit.lastPracticed).inDays;
 
       double strengthBoost = 0.1; // Base boost per interaction
       if (daysSinceLastPractice <= 1) {
@@ -416,7 +407,7 @@ class TemporalPatternAnalyzer {
         json.encode(habitsJson),
       );
     } catch (e) {
-      debugPrint('âŒ Error updating habit strength: $e');
+      debugPrint('❌ Error updating habit strength: $e');
     }
   }
 
@@ -455,7 +446,7 @@ class TemporalPatternAnalyzer {
         patterns,
       );
     } catch (e) {
-      debugPrint('âŒ Error updating Islamic patterns: $e');
+      debugPrint('❌ Error updating Islamic patterns: $e');
     }
   }
 
@@ -465,13 +456,10 @@ class TemporalPatternAnalyzer {
     SharedPreferences prefs,
   ) async {
     try {
-      final interactions =
-          prefs.getStringList('$_timeBasedInteractionsKey$userId') ?? [];
-      return interactions
-          .map((i) => json.decode(i) as Map<String, dynamic>)
-          .toList();
+      final interactions = prefs.getStringList('$_timeBasedInteractionsKey$userId') ?? [];
+      return interactions.map((i) => json.decode(i) as Map<String, dynamic>).toList();
     } catch (e) {
-      debugPrint('âŒ Error loading time-based interactions: $e');
+      debugPrint('❌ Error loading time-based interactions: $e');
       return [];
     }
   }
@@ -512,8 +500,7 @@ class TemporalPatternAnalyzer {
         0,
         (sum, count) => sum + count,
       );
-      final activityScore =
-          totalActivity > 0 ? hourlyActivity[hour]! / totalActivity : 0.0;
+      final activityScore = totalActivity > 0 ? hourlyActivity[hour]! / totalActivity : 0.0;
 
       patterns[hour] = HourlyPattern(
         hour: hour,
@@ -563,8 +550,7 @@ class TemporalPatternAnalyzer {
         0,
         (sum, count) => sum + count,
       );
-      final engagementScore =
-          totalActivity > 0 ? dailyActivity[day]! / totalActivity : 0.0;
+      final engagementScore = totalActivity > 0 ? dailyActivity[day]! / totalActivity : 0.0;
 
       patterns[day] = DayOfWeekPattern(
         dayName: day,
@@ -608,8 +594,7 @@ class TemporalPatternAnalyzer {
 
       duaFrequency[duaId] = (duaFrequency[duaId] ?? 0) + 1;
 
-      if (!duaLastSeen.containsKey(duaId) ||
-          duaLastSeen[duaId]!.isBefore(timestamp)) {
+      if (!duaLastSeen.containsKey(duaId) || duaLastSeen[duaId]!.isBefore(timestamp)) {
         duaLastSeen[duaId] = timestamp;
       }
     }
@@ -756,8 +741,7 @@ class TemporalPatternAnalyzer {
     SharedPreferences prefs,
   ) async {
     try {
-      if (key.contains('time_interactions_') ||
-          key.contains('islamic_patterns_')) {
+      if (key.contains('time_interactions_') || key.contains('islamic_patterns_')) {
         final data = prefs.getStringList(key) ?? [];
         final filteredData = <String>[];
 
@@ -777,7 +761,7 @@ class TemporalPatternAnalyzer {
         await prefs.setStringList(key, filteredData);
       }
     } catch (e) {
-      debugPrint('âŒ Error cleaning up data for key $key: $e');
+      debugPrint('❌ Error cleaning up data for key $key: $e');
     }
   }
 

@@ -55,12 +55,10 @@ class QueryEnhancementService {
       final enhancedContext = await _enhanceContext(context ?? QueryContext());
 
       // Step 4: Classify intent
-      final intent =
-          await _intentClassifier.classifyIntent(normalizedQuery, language);
+      final intent = await _intentClassifier.classifyIntent(normalizedQuery, language);
 
       // Step 5: Expand query with Islamic terminology
-      final expandedQuery = await _terminologyMapper
-          .expandQuery(normalizedQuery, language, intent: intent);
+      final expandedQuery = await _terminologyMapper.expandQuery(normalizedQuery, language, intent: intent);
 
       // Step 6: Inject contextual information
       final contextualizedQuery = await _injectContextualInfo(
@@ -71,8 +69,7 @@ class QueryEnhancementService {
       );
 
       // Step 7: Generate semantic tags and keywords
-      final semanticTags =
-          await _generateSemanticTags(contextualizedQuery, intent, language);
+      final semanticTags = await _generateSemanticTags(contextualizedQuery, intent, language);
 
       // Step 8: Create enhanced query object
       final enhancedQuery = EnhancedQuery(
@@ -82,8 +79,7 @@ class QueryEnhancementService {
         intent: intent,
         context: enhancedContext,
         semanticTags: semanticTags,
-        confidence:
-            _calculateConfidence(normalizedQuery, intent, enhancedContext),
+        confidence: _calculateConfidence(normalizedQuery, intent, enhancedContext),
         processingSteps: [
           'validation',
           'sanitization',
@@ -159,8 +155,7 @@ class QueryEnhancementService {
     final islamicDateString = _getIslamicDate(now);
 
     // Log the enhanced context for debugging
-    print(
-        'Enhanced context: time=$formattedTime, islamic_date=$islamicDateString');
+    print('Enhanced context: time=$formattedTime, islamic_date=$islamicDateString');
 
     return baseContext.copyWith(
       timestamp: now,
@@ -183,45 +178,38 @@ class QueryEnhancementService {
 
     // Time-based context with formatted time
     if (context.timeOfDay != null) {
-      contextualPhrases
-          .add(_getTimeContextPhrase(context.timeOfDay!, language));
+      contextualPhrases.add(_getTimeContextPhrase(context.timeOfDay!, language));
 
       // Add specific formatted time using the time formatter
       if (context.timestamp != null) {
         final formattedTime = _timeFormat.format(context.timestamp!);
-        contextualPhrases
-            .add(_getFormattedTimeContext(formattedTime, language));
+        contextualPhrases.add(_getFormattedTimeContext(formattedTime, language));
       }
     }
 
     // Islamic date context
     if (context.islamicDate != null) {
-      contextualPhrases
-          .add(_getIslamicDateContext(context.islamicDate!, language));
+      contextualPhrases.add(_getIslamicDateContext(context.islamicDate!, language));
     }
 
     // Prayer time context
     if (context.prayerTime != null) {
-      contextualPhrases
-          .add(_getPrayerContextPhrase(context.prayerTime!, language));
+      contextualPhrases.add(_getPrayerContextPhrase(context.prayerTime!, language));
     }
 
     // Seasonal context
     if (context.seasonalContext != null) {
-      contextualPhrases
-          .add(_getSeasonalContextPhrase(context.seasonalContext!, language));
+      contextualPhrases.add(_getSeasonalContextPhrase(context.seasonalContext!, language));
     }
 
     // Location context
     if (context.location != null) {
-      contextualPhrases
-          .add(_getLocationContextPhrase(context.location!, language));
+      contextualPhrases.add(_getLocationContextPhrase(context.location!, language));
     }
 
     // User preferences context
     if (userPreferences != null) {
-      contextualPhrases
-          .addAll(_getUserPreferenceContextPhrases(userPreferences, language));
+      contextualPhrases.addAll(_getUserPreferenceContextPhrases(userPreferences, language));
     }
 
     // Combine original query with context
@@ -234,8 +222,7 @@ class QueryEnhancementService {
   }
 
   /// Generate semantic tags for the query
-  Future<List<String>> _generateSemanticTags(
-      String query, QueryIntent intent, String language) async {
+  Future<List<String>> _generateSemanticTags(String query, QueryIntent intent, String language) async {
     final tags = <String>[];
 
     // Intent-based tags
@@ -253,16 +240,14 @@ class QueryEnhancementService {
     tags.addAll(emotionalTags);
 
     // Topic tags using Islamic terminology
-    final topicTags =
-        await _terminologyMapper.extractTopicTags(query, language);
+    final topicTags = await _terminologyMapper.extractTopicTags(query, language);
     tags.addAll(topicTags);
 
     return tags.toSet().toList(); // Remove duplicates
   }
 
   /// Calculate confidence score for the enhanced query
-  double _calculateConfidence(
-      String query, QueryIntent intent, QueryContext context) {
+  double _calculateConfidence(String query, QueryIntent intent, QueryContext context) {
     double confidence = 0.5; // Base confidence
 
     // Query length factor
@@ -301,14 +286,13 @@ class QueryEnhancementService {
   String _normalizeUnicode(String text) {
     // Normalize Arabic diacritics and variants
     return text
-        .replaceAll(RegExp(r'[\u064B-\u065F\u0670\u06D6-\u06ED]'),
-            '') // Remove diacritics
-        .replaceAll('Ø£', 'Ø§') // Normalize Alif variants
-        .replaceAll('Ø¥', 'Ø§')
-        .replaceAll('Ø¢', 'Ø§')
-        .replaceAll('Ø©', 'Ù‡') // Normalize Taa Marbouta
-        .replaceAll('ÙŠ', 'Ù‰') // Normalize Yaa variants
-        .replaceAll('Ùƒ', 'Ú©'); // Normalize Kaaf variants for Urdu
+        .replaceAll(RegExp(r'[\u064B-\u065F\u0670\u06D6-\u06ED]'), '') // Remove diacritics
+        .replaceAll('أ', 'ا') // Normalize Alif variants
+        .replaceAll('إ', 'ا')
+        .replaceAll('آ', 'ا')
+        .replaceAll('ة', 'ه') // Normalize Taa Marbouta
+        .replaceAll('ي', 'ى') // Normalize Yaa variants
+        .replaceAll('ك', 'ک'); // Normalize Kaaf variants for Urdu
   }
 
   String _normalizePunctuation(String text) {
@@ -321,18 +305,19 @@ class QueryEnhancementService {
 
   String _preprocessArabic(String text) {
     return text
-        .replaceAll(
-            'ï·º', 'ØµÙ„Ù‰ Ø§Ù„Ù„Ù‡ Ø¹Ù„ÙŠÙ‡ ÙˆØ³Ù„Ù…') // Expand PBUH symbol
-        .replaceAll('ï·»', 'Ø¬Ù„ Ø¬Ù„Ø§Ù„Ù‡') // Expand Jalla Jalalahu
-        .replaceAll('ï·½',
-            'Ø¨Ø³Ù… Ø§Ù„Ù„Ù‡ Ø§Ù„Ø±Ø­Ù…Ù† Ø§Ù„Ø±Ø­ÙŠÙ…'); // Expand Basmala
+        .replaceAll('ï·º', 'صلى الله عليه وسلم') // Expand PBUH symbol
+        .replaceAll('ï·»', 'جل جلاله') // Expand Jalla Jalalahu
+        .replaceAll('ï·½', 'بسم الله الرحمن الرحيم'); // Expand Basmala
   }
 
   String _preprocessUrdu(String text) {
     return text
-        .replaceAll('ï·º', 'ØµÙ„ÛŒ Ø§Ù„Ù„Û Ø¹Ù„ÛŒÛ ÙˆØ³Ù„Ù…')
-        .replaceAll('Ø‘', 'Ø¹Ù„ÛŒÛ Ø§Ù„Ø³Ù„Ø§Ù…')
-        .replaceAll('Ø“', 'Ø±Ø¶ÛŒ Ø§Ù„Ù„Û Ø¹Ù†Û');
+        .replaceAll('ï·º', 'صلی اللہ علیہ وسلم')
+        // Normalize honorifics (these source tokens were previously mojibake; keep placeholders if encountered)
+        .replaceAll('ﷺ', 'صلی اللہ علیہ وسلم')
+        .replaceAll('ؓ', 'رضی اللہ عنہ')
+        .replaceAll('ؒ', 'رحمہ اللہ')
+        .replaceAll('ؐ', 'علیہ السلام');
   }
 
   String _preprocessIndonesian(String text) {
@@ -371,17 +356,16 @@ class QueryEnhancementService {
 
       // Use the Islamic date formatter
       final formattedDate = _islamicDateFormat.format(date);
-      return 'Ø§Ù„ØªØ§Ø±ÙŠØ® Ø§Ù„Ù‡Ø¬Ø±ÙŠ: $islamicDay/$islamicMonth/$islamicYear ($formattedDate)';
+      return 'التاريخ الهجري: $islamicDay/$islamicMonth/$islamicYear ($formattedDate)';
     } catch (e) {
       // Fallback to simple Islamic year calculation
       final daysSinceEpoch = date.difference(DateTime(622, 7, 16)).inDays;
       final islamicYear = 1 + (daysSinceEpoch / 354.37).floor();
-      return 'Ø§Ù„Ø³Ù†Ø© Ø§Ù„Ù‡Ø¬Ø±ÙŠØ© $islamicYear';
+      return 'السنة الهجرية $islamicYear';
     }
   }
 
-  Future<PrayerTime?> _getCurrentPrayerTime(
-      DateTime time, String? location) async {
+  Future<PrayerTime?> _getCurrentPrayerTime(DateTime time, String? location) async {
     // Use the time formatter for consistent time representation
     final formattedTime = _timeFormat.format(time);
 
@@ -407,8 +391,7 @@ class QueryEnhancementService {
     // Log formatted time for debugging/context
     if (prayerTime != null) {
       // This formatted time can be used for context injection
-      print(
-          'Prayer time ${prayerTime.name} detected at $formattedTime${location != null ? ' in $location' : ''}');
+      print('Prayer time ${prayerTime.name} detected at $formattedTime${location != null ? ' in $location' : ''}');
     }
 
     return prayerTime;
@@ -423,15 +406,7 @@ class QueryEnhancementService {
   }
 
   String _getIslamicWeekday(int weekday) {
-    const islamicWeekdays = [
-      'Ø§Ù„Ø¥Ø«Ù†ÙŠÙ†',
-      'Ø§Ù„Ø«Ù„Ø§Ø«Ø§Ø¡',
-      'Ø§Ù„Ø£Ø±Ø¨Ø¹Ø§Ø¡',
-      'Ø§Ù„Ø®Ù…ÙŠØ³',
-      'Ø§Ù„Ø¬Ù…Ø¹Ø©',
-      'Ø§Ù„Ø³Ø¨Øª',
-      'Ø§Ù„Ø£Ø­Ø¯'
-    ];
+    const islamicWeekdays = ['الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت', 'الأحد'];
     return islamicWeekdays[weekday - 1];
   }
 
@@ -441,24 +416,24 @@ class QueryEnhancementService {
       case 'ar':
         switch (timeOfDay) {
           case TimeOfDay.morning:
-            return 'ÙÙŠ Ø§Ù„ØµØ¨Ø§Ø­';
+            return 'في الصباح';
           case TimeOfDay.afternoon:
-            return 'ÙÙŠ ÙØªØ±Ø© Ø§Ù„Ø¸Ù‡ÙŠØ±Ø©';
+            return 'في فترة الظهيرة';
           case TimeOfDay.evening:
-            return 'ÙÙŠ Ø§Ù„Ù…Ø³Ø§Ø¡';
+            return 'في المساء';
           case TimeOfDay.night:
-            return 'ÙÙŠ Ø§Ù„Ù„ÙŠÙ„';
+            return 'في الليل';
         }
       case 'ur':
         switch (timeOfDay) {
           case TimeOfDay.morning:
-            return 'ØµØ¨Ø­ Ú©Û’ ÙˆÙ‚Øª';
+            return 'صبح کے وقت';
           case TimeOfDay.afternoon:
-            return 'Ø¯ÙˆÙ¾ÛØ± Ú©Û’ ÙˆÙ‚Øª';
+            return 'دوپہر کے وقت';
           case TimeOfDay.evening:
-            return 'Ø´Ø§Ù… Ú©Û’ ÙˆÙ‚Øª';
+            return 'شام کے وقت';
           case TimeOfDay.night:
-            return 'Ø±Ø§Øª Ú©Û’ ÙˆÙ‚Øª';
+            return 'رات کے وقت';
         }
       case 'id':
         switch (timeOfDay) {
@@ -489,9 +464,9 @@ class QueryEnhancementService {
   String _getFormattedTimeContext(String formattedTime, String language) {
     switch (language) {
       case 'ar':
-        return 'Ø§Ù„ÙˆÙ‚Øª: $formattedTime';
+        return 'الوقت: $formattedTime';
       case 'ur':
-        return 'ÙˆÙ‚Øª: $formattedTime';
+        return 'وقت: $formattedTime';
       case 'id':
         return 'waktu: $formattedTime';
       default:
@@ -505,7 +480,7 @@ class QueryEnhancementService {
       case 'ar':
         return islamicDate; // Already in Arabic
       case 'ur':
-        return 'Ø§Ø³Ù„Ø§Ù…ÛŒ ØªØ§Ø±ÛŒØ®: $islamicDate';
+        return 'اسلامی تاریخ: $islamicDate';
       case 'id':
         return 'tanggal Islam: $islamicDate';
       default:
@@ -518,32 +493,32 @@ class QueryEnhancementService {
       case 'ar':
         switch (prayerTime) {
           case PrayerTime.fajr:
-            return 'ÙˆÙ‚Øª ØµÙ„Ø§Ø© Ø§Ù„ÙØ¬Ø±';
+            return 'وقت صلاة الفجر';
           case PrayerTime.duha:
-            return 'ÙˆÙ‚Øª ØµÙ„Ø§Ø© Ø§Ù„Ø¶Ø­Ù‰';
+            return 'وقت صلاة الضحى';
           case PrayerTime.dhuhr:
-            return 'ÙˆÙ‚Øª ØµÙ„Ø§Ø© Ø§Ù„Ø¸Ù‡Ø±';
+            return 'وقت صلاة الظهر';
           case PrayerTime.asr:
-            return 'ÙˆÙ‚Øª ØµÙ„Ø§Ø© Ø§Ù„Ø¹ØµØ±';
+            return 'وقت صلاة العصر';
           case PrayerTime.maghrib:
-            return 'ÙˆÙ‚Øª ØµÙ„Ø§Ø© Ø§Ù„Ù…ØºØ±Ø¨';
+            return 'وقت صلاة المغرب';
           case PrayerTime.isha:
-            return 'ÙˆÙ‚Øª ØµÙ„Ø§Ø© Ø§Ù„Ø¹Ø´Ø§Ø¡';
+            return 'وقت صلاة العشاء';
         }
       case 'ur':
         switch (prayerTime) {
           case PrayerTime.fajr:
-            return 'ÙØ¬Ø± Ú©Ø§ ÙˆÙ‚Øª';
+            return 'فجر کا وقت';
           case PrayerTime.duha:
-            return 'Ú†Ø§Ø´Øª Ú©Ø§ ÙˆÙ‚Øª';
+            return 'چاشت کا وقت';
           case PrayerTime.dhuhr:
-            return 'Ø¸ÛØ± Ú©Ø§ ÙˆÙ‚Øª';
+            return 'ظہر کا وقت';
           case PrayerTime.asr:
-            return 'Ø¹ØµØ± Ú©Ø§ ÙˆÙ‚Øª';
+            return 'عصر کا وقت';
           case PrayerTime.maghrib:
-            return 'Ù…ØºØ±Ø¨ Ú©Ø§ ÙˆÙ‚Øª';
+            return 'مغرب کا وقت';
           case PrayerTime.isha:
-            return 'Ø¹Ø´Ø§Ø¡ Ú©Ø§ ÙˆÙ‚Øª';
+            return 'عشاء کا وقت';
         }
       case 'id':
         switch (prayerTime) {
@@ -583,26 +558,26 @@ class QueryEnhancementService {
       case 'ar':
         switch (season) {
           case 'spring':
-            return 'ÙÙŠ ÙØµÙ„ Ø§Ù„Ø±Ø¨ÙŠØ¹';
+            return 'في فصل الربيع';
           case 'summer':
-            return 'ÙÙŠ ÙØµÙ„ Ø§Ù„ØµÙŠÙ';
+            return 'في فصل الصيف';
           case 'autumn':
-            return 'ÙÙŠ ÙØµÙ„ Ø§Ù„Ø®Ø±ÙŠÙ';
+            return 'في فصل الخريف';
           case 'winter':
-            return 'ÙÙŠ ÙØµÙ„ Ø§Ù„Ø´ØªØ§Ø¡';
+            return 'في فصل الشتاء';
           default:
             return '';
         }
       case 'ur':
         switch (season) {
           case 'spring':
-            return 'Ø¨ÛØ§Ø± Ú©Û’ Ù…ÙˆØ³Ù… Ù…ÛŒÚº';
+            return 'بہار کے موسم میں';
           case 'summer':
-            return 'Ú¯Ø±Ù…ÛŒÙˆÚº Ú©Û’ Ù…ÙˆØ³Ù… Ù…ÛŒÚº';
+            return 'گرمیوں کے موسم میں';
           case 'autumn':
-            return 'Ø®Ø²Ø§Úº Ú©Û’ Ù…ÙˆØ³Ù… Ù…ÛŒÚº';
+            return 'خزاں کے موسم میں';
           case 'winter':
-            return 'Ø³Ø±Ø¯ÛŒÙˆÚº Ú©Û’ Ù…ÙˆØ³Ù… Ù…ÛŒÚº';
+            return 'سردیوں کے موسم میں';
           default:
             return '';
         }
@@ -627,9 +602,9 @@ class QueryEnhancementService {
   String _getLocationContextPhrase(String location, String language) {
     switch (language) {
       case 'ar':
-        return 'ÙÙŠ $location';
+        return 'في $location';
       case 'ur':
-        return '$location Ù…ÛŒÚº';
+        return '$location میں';
       case 'id':
         return 'di $location';
       default:
@@ -637,18 +612,17 @@ class QueryEnhancementService {
     }
   }
 
-  List<String> _getUserPreferenceContextPhrases(
-      Map<String, dynamic> preferences, String language) {
+  List<String> _getUserPreferenceContextPhrases(Map<String, dynamic> preferences, String language) {
     final phrases = <String>[];
 
     if (preferences['preferred_school'] != null) {
       final school = preferences['preferred_school'];
       switch (language) {
         case 'ar':
-          phrases.add('ÙˆÙÙ‚Ø§Ù‹ Ù„Ù…Ø°Ù‡Ø¨ $school');
+          phrases.add('وفقاً لمذهب $school');
           break;
         case 'ur':
-          phrases.add('$school Ù…Ø³Ù„Ú© Ú©Û’ Ù…Ø·Ø§Ø¨Ù‚');
+          phrases.add('$school مسلک کے مطابق');
           break;
         case 'id':
           phrases.add('menurut mazhab $school');
@@ -663,10 +637,10 @@ class QueryEnhancementService {
       final level = preferences['difficulty_level'];
       switch (language) {
         case 'ar':
-          phrases.add('Ù…Ø³ØªÙˆÙ‰ $level');
+          phrases.add('مستوى $level');
           break;
         case 'ur':
-          phrases.add('$level Ø³Ø·Ø­');
+          phrases.add('$level سطح');
           break;
         case 'id':
           phrases.add('tingkat $level');
@@ -681,28 +655,19 @@ class QueryEnhancementService {
   }
 
   // Content analysis methods
-  Future<List<String>> _extractContentTags(
-      String query, String language) async {
+  Future<List<String>> _extractContentTags(String query, String language) async {
     final tags = <String>[];
     final lowerQuery = query.toLowerCase();
 
     // Common Islamic concepts
     final islamicConcepts = {
-      'prayer': ['prayer', 'salah', 'namaz', 'shalat', 'ØµÙ„Ø§Ø©', 'Ù†Ù…Ø§Ø²'],
-      'dua': ['dua', 'supplication', 'prayer', 'Ø¯Ø¹Ø§Ø¡'],
-      'quran': ['quran', 'quraan', 'koran', 'Ù‚Ø±Ø¢Ù†'],
-      'hadith': ['hadith', 'sunnah', 'Ø­Ø¯ÙŠØ«', 'Ø³Ù†Ø©'],
-      'fasting': [
-        'fast',
-        'fasting',
-        'sawm',
-        'roza',
-        'puasa',
-        'ØµÙˆÙ…',
-        'Ø±ÙˆØ²Û'
-      ],
-      'charity': ['charity', 'zakat', 'sadaqah', 'Ø²ÙƒØ§Ø©', 'ØµØ¯Ù‚Ø©'],
-      'pilgrimage': ['hajj', 'umrah', 'pilgrimage', 'Ø­Ø¬', 'Ø¹Ù…Ø±Ø©'],
+      'prayer': ['prayer', 'salah', 'namaz', 'shalat', 'صلاة', 'نماز'],
+      'dua': ['dua', 'supplication', 'prayer', 'دعاء'],
+      'quran': ['quran', 'quraan', 'koran', 'قرآن'],
+      'hadith': ['hadith', 'sunnah', 'حديث', 'سنة'],
+      'fasting': ['fast', 'fasting', 'sawm', 'roza', 'puasa', 'صوم', 'روزہ'],
+      'charity': ['charity', 'zakat', 'sadaqah', 'زكاة', 'صدقة'],
+      'pilgrimage': ['hajj', 'umrah', 'pilgrimage', 'حج', 'عمرة'],
     };
 
     for (final entry in islamicConcepts.entries) {
@@ -723,30 +688,10 @@ class QueryEnhancementService {
 
     // Emotional indicators
     final emotions = {
-      'distressed': [
-        'help',
-        'problem',
-        'difficulty',
-        'trouble',
-        'Ù…Ø´ÙƒÙ„Ø©',
-        'Ù…Ø³Ø§Ø¹Ø¯Ø©'
-      ],
-      'grateful': ['thank', 'grateful', 'blessing', 'Ø´ÙƒØ±', 'Ø­Ù…Ø¯'],
-      'seeking': [
-        'want',
-        'need',
-        'seeking',
-        'looking for',
-        'Ø£Ø±ÙŠØ¯',
-        'Ø£Ø­ØªØ§Ø¬'
-      ],
-      'confused': [
-        'confused',
-        'don\'t understand',
-        'unclear',
-        'Ù…Ø­ØªØ§Ø±',
-        'Ù„Ø§ Ø£ÙÙ‡Ù…'
-      ],
+      'distressed': ['help', 'problem', 'difficulty', 'trouble', 'مشكلة', 'مساعدة'],
+      'grateful': ['thank', 'grateful', 'blessing', 'شكر', 'حمد'],
+      'seeking': ['want', 'need', 'seeking', 'looking for', 'أريد', 'أحتاج'],
+      'confused': ['confused', 'don\'t understand', 'unclear', 'محتار', 'لا أفهم'],
     };
 
     for (final entry in emotions.entries) {

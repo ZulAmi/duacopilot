@@ -147,11 +147,11 @@ class CompressionService {
 
     // Normalize common Arabic patterns
     final normalizations = {
-      'Ø¨Ø³Ù… Ø§Ù„Ù„Ù‡ Ø§Ù„Ø±Ø­Ù…Ù† Ø§Ù„Ø±Ø­ÙŠÙ…': 'ï·½',
-      'ØµÙ„Ù‰ Ø§Ù„Ù„Ù‡ Ø¹Ù„ÙŠÙ‡ ÙˆØ³Ù„Ù…': 'ï·º',
-      'Ø¹Ù„ÙŠÙ‡ Ø§Ù„Ø³Ù„Ø§Ù…': 'Ø',
-      'Ø±Ø¶ÙŠ Ø§Ù„Ù„Ù‡ Ø¹Ù†Ù‡': 'ØØ“',
-      'Ø±Ø¶ÙŠ Ø§Ù„Ù„Ù‡ Ø¹Ù†Ù‡Ø§': 'ØØ“',
+      'بسم الله الرحمن الرحيم': 'ï·½',
+      'صلى الله عليه وسلم': 'ï·º',
+      'عليه السلام': 'Ø', // placeholder retained
+      'رضي الله عنه': 'ØØ“',
+      'رضي الله عنها': 'ØØ“',
     };
 
     normalizations.forEach((pattern, replacement) {
@@ -170,8 +170,7 @@ class CompressionService {
     var decompressed = decompressString(result.data);
 
     // Handle Arabic preprocessing reversal if needed
-    if (result.metadata['preprocessed'] == true &&
-        result.metadata['language'] == 'arabic') {
+    if (result.metadata['preprocessed'] == true && result.metadata['language'] == 'arabic') {
       decompressed = _reverseArabicPreprocessing(decompressed);
     }
 
@@ -183,10 +182,10 @@ class CompressionService {
     var restored = text;
 
     final reversals = {
-      'ï·½': 'Ø¨Ø³Ù… Ø§Ù„Ù„Ù‡ Ø§Ù„Ø±Ø­Ù…Ù† Ø§Ù„Ø±Ø­ÙŠÙ…',
-      'ï·º': 'ØµÙ„Ù‰ Ø§Ù„Ù„Ù‡ Ø¹Ù„ÙŠÙ‡ ÙˆØ³Ù„Ù…',
-      'Ø': 'Ø¹Ù„ÙŠÙ‡ Ø§Ù„Ø³Ù„Ø§Ù…',
-      'ØØ“': 'Ø±Ø¶ÙŠ Ø§Ù„Ù„Ù‡ Ø¹Ù†Ù‡', // Note: This is simplified
+      'ï·½': 'بسم الله الرحمن الرحيم',
+      'ï·º': 'صلى الله عليه وسلم',
+      'Ø': 'عليه السلام',
+      'ØØ“': 'رضي الله عنه', // Simplified; original could also be عنها
     };
 
     reversals.forEach((symbol, expansion) {
@@ -225,8 +224,7 @@ class CompressionService {
       }
     }
 
-    final averageRatio =
-        totalOriginalSize > 0 ? totalCompressedSize / totalOriginalSize : 1.0;
+    final averageRatio = totalOriginalSize > 0 ? totalCompressedSize / totalOriginalSize : 1.0;
 
     return CompressionStats(
       totalOriginalSize: totalOriginalSize,
@@ -259,8 +257,7 @@ class CompressionResult {
 
   int get spaceSaved => originalSize - compressedSize;
 
-  double get spaceSavedPercentage =>
-      originalSize > 0 ? (spaceSaved / originalSize) * 100 : 0.0;
+  double get spaceSavedPercentage => originalSize > 0 ? (spaceSaved / originalSize) * 100 : 0.0;
 
   Map<String, dynamic> toJson() {
     return {
@@ -305,11 +302,9 @@ class CompressionStats {
 
   int get totalCount => compressionCount + uncompressedCount;
 
-  double get compressionPercentage =>
-      totalCount > 0 ? (compressionCount / totalCount) * 100 : 0.0;
+  double get compressionPercentage => totalCount > 0 ? (compressionCount / totalCount) * 100 : 0.0;
 
-  double get spaceSavedPercentage =>
-      totalOriginalSize > 0 ? (totalSpaceSaved / totalOriginalSize) * 100 : 0.0;
+  double get spaceSavedPercentage => totalOriginalSize > 0 ? (totalSpaceSaved / totalOriginalSize) * 100 : 0.0;
 
   Map<String, dynamic> toJson() {
     return {
@@ -326,8 +321,7 @@ class CompressionStats {
     return CompressionStats(
       totalOriginalSize: json['totalOriginalSize'] ?? 0,
       totalCompressedSize: json['totalCompressedSize'] ?? 0,
-      averageCompressionRatio:
-          json['averageCompressionRatio']?.toDouble() ?? 1.0,
+      averageCompressionRatio: json['averageCompressionRatio']?.toDouble() ?? 1.0,
       compressionCount: json['compressionCount'] ?? 0,
       uncompressedCount: json['uncompressedCount'] ?? 0,
       totalSpaceSaved: json['totalSpaceSaved'] ?? 0,

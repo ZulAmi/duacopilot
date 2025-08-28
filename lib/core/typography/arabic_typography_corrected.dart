@@ -74,8 +74,7 @@ class ArabicTypography {
     double? letterSpacing,
     double? wordSpacing,
   }) {
-    final fontName =
-        arabicGoogleFonts[fontType] ?? arabicGoogleFonts['modern']!;
+    final fontName = arabicGoogleFonts[fontType] ?? arabicGoogleFonts['modern']!;
     final scaleFactor = textScaleFactors[fontType] ?? 1.0;
 
     try {
@@ -206,18 +205,7 @@ class ArabicTypography {
 
   /// Format Arabic numbers to Arabic-Indic digits
   static String formatArabicNumbers(String text) {
-    const arabicDigits = [
-      'Ù ',
-      'Ù¡',
-      'Ù¢',
-      'Ù£',
-      'Ù¤',
-      'Ù¥',
-      'Ù¦',
-      'Ù§',
-      'Ù¨',
-      'Ù©'
-    ];
+    const arabicDigits = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
     String result = text;
 
     for (int i = 0; i <= 9; i++) {
@@ -231,14 +219,14 @@ class ArabicTypography {
   static String normalizeArabicText(String text) {
     return text
         // Normalize Alif variations
-        .replaceAll(RegExp(r'[Ø¢Ø£Ø¥Ù±]'), 'Ø§')
+        .replaceAll(RegExp(r'[آأإٱ]'), 'ا')
         // Normalize Taa Marbouta and Haa
-        .replaceAll('Ø©', 'Ù‡')
+        .replaceAll('ة', 'ه')
         // Remove diacritics for search
         .replaceAll(RegExp(r'[\u064B-\u065F\u0670\u06D6-\u06ED]'), '')
         // Normalize Yaa variations
-        .replaceAll('ÙŠ', 'ÛŒ')
-        .replaceAll('Ù‰', 'ÛŒ')
+        .replaceAll('ي', 'ی')
+        .replaceAll('ى', 'ی')
         // Remove extra spaces
         .replaceAll(RegExp(r'\s+'), ' ')
         .trim();
@@ -250,10 +238,7 @@ class ArabicTypography {
       r'[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF\s]+',
     );
     final matches = arabicRegex.allMatches(text);
-    return matches
-        .map((match) => match.group(0)?.trim() ?? '')
-        .where((s) => s.isNotEmpty)
-        .toList();
+    return matches.map((match) => match.group(0)?.trim() ?? '').where((s) => s.isNotEmpty).toList();
   }
 
   /// Get appropriate line height based on font type and size
@@ -516,8 +501,7 @@ class ArabicTextStyles {
       );
 
   // Specialized Islamic Content Styles
-  static TextStyle quranVerse(BuildContext context) =>
-      ArabicTypography.getArabicGoogleFont(
+  static TextStyle quranVerse(BuildContext context) => ArabicTypography.getArabicGoogleFont(
         'quran',
         fontSize: 24,
         fontWeight: FontWeight.w400,
@@ -526,8 +510,7 @@ class ArabicTextStyles {
         wordSpacing: 2.0,
       );
 
-  static TextStyle duaText(BuildContext context) =>
-      ArabicTypography.getArabicGoogleFont(
+  static TextStyle duaText(BuildContext context) => ArabicTypography.getArabicGoogleFont(
         'traditional',
         fontSize: 20,
         fontWeight: FontWeight.w400,
@@ -536,8 +519,7 @@ class ArabicTextStyles {
         wordSpacing: 1.5,
       );
 
-  static TextStyle hadithText(BuildContext context) =>
-      ArabicTypography.getArabicGoogleFont(
+  static TextStyle hadithText(BuildContext context) => ArabicTypography.getArabicGoogleFont(
         'readable',
         fontSize: 16,
         fontWeight: FontWeight.w400,
@@ -545,8 +527,7 @@ class ArabicTextStyles {
         height: 1.8,
       );
 
-  static TextStyle dhikrText(BuildContext context) =>
-      ArabicTypography.getArabicGoogleFont(
+  static TextStyle dhikrText(BuildContext context) => ArabicTypography.getArabicGoogleFont(
         'elegant',
         fontSize: 18,
         fontWeight: FontWeight.w500,

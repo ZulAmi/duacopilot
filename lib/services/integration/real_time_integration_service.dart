@@ -11,8 +11,7 @@ import '../sse/server_sent_events_service.dart';
 /// Coordinates all real-time services and provides unified interface
 class RealTimeIntegrationService {
   static RealTimeIntegrationService? _instance;
-  static RealTimeIntegrationService get instance =>
-      _instance ??= RealTimeIntegrationService._();
+  static RealTimeIntegrationService get instance => _instance ??= RealTimeIntegrationService._();
 
   RealTimeIntegrationService._();
 
@@ -35,7 +34,7 @@ class RealTimeIntegrationService {
     if (_isInitialized) return;
 
     try {
-      AppLogger.info('ðŸš€ Initializing Real-Time Integration Service...');
+      AppLogger.info('🚀 Initializing Real-Time Integration Service...');
 
       // Initialize all service instances
       _realTimeManager = RealTimeServiceManager.instance;
@@ -58,14 +57,14 @@ class RealTimeIntegrationService {
       _isActive = true;
 
       AppLogger.info(
-        'âœ… Real-Time Integration Service initialized successfully',
+        '✅ Real-Time Integration Service initialized successfully',
       );
 
       // Record usage for intelligent background sync
       _backgroundSync.recordUsage('real_time_service_init');
     } catch (e) {
       AppLogger.error(
-        'âŒ Failed to initialize Real-Time Integration Service: $e',
+        '❌ Failed to initialize Real-Time Integration Service: $e',
       );
       rethrow;
     }
@@ -129,7 +128,7 @@ class RealTimeIntegrationService {
         // If we have collaborative service active, share with family
         if (_collaborativeService.hasFamily) {
           AppLogger.info(
-            'ðŸ“² Scholar approval push received, coordinating with family sharing',
+            '📲 Scholar approval push received, coordinating with family sharing',
           );
         }
       }),
@@ -141,18 +140,17 @@ class RealTimeIntegrationService {
         switch (state) {
           case ConnectionState.connected:
             AppLogger.info(
-              'ðŸ”— WebSocket connected, coordinating real-time services',
+              '📴 WebSocket connected, coordinating real-time services',
             );
             _backgroundSync.recordUsage('websocket_connected');
             break;
           case ConnectionState.offline:
             AppLogger.info(
-              'ðŸ“± WebSocket offline, relying on SSE and push notifications',
+              '📱 WebSocket offline, relying on SSE and push notifications',
             );
             break;
           case ConnectionState.failed:
-            AppLogger.warning(
-                'âš ï¸ WebSocket failed, scheduling urgent sync');
+            AppLogger.warning('âš ï¸ WebSocket failed, scheduling urgent sync');
             _backgroundSync.scheduleUrgentSync(
               reason: 'WebSocket connection failed, forcing sync',
             );
@@ -168,7 +166,7 @@ class RealTimeIntegrationService {
       _collaborativeService.prayerSessionStream.listen((session) {
         _backgroundSync.recordUsage('prayer_session_activity');
 
-        AppLogger.info('ðŸ¤² Prayer session activity: ${session.sessionName}');
+        AppLogger.info('🤲 Prayer session activity: ${session.sessionName}');
 
         // Schedule family sync for prayer session data
         _backgroundSync.scheduleFamilySync(
@@ -190,7 +188,7 @@ class RealTimeIntegrationService {
   }) async {
     try {
       AppLogger.info(
-        'ðŸ“¤ Sharing Du\'a with family through multiple channels: $duaTitle',
+        '📤 Sharing Du\'a with family through multiple channels: $duaTitle',
       );
 
       // Primary: Use collaborative service
@@ -215,9 +213,9 @@ class RealTimeIntegrationService {
       // Record usage for intelligent sync
       _backgroundSync.recordUsage('family_dua_shared');
 
-      AppLogger.info('âœ… Du\'a shared with family successfully');
+      AppLogger.info('✅ Du\'a shared with family successfully');
     } catch (e) {
-      AppLogger.error('âŒ Failed to share Du\'a with family: $e');
+      AppLogger.error('❌ Failed to share Du\'a with family: $e');
       rethrow;
     }
   }
@@ -229,7 +227,7 @@ class RealTimeIntegrationService {
     Map<String, dynamic>? context,
   }) async {
     try {
-      AppLogger.info('ðŸ” Requesting live RAG processing: $query');
+      AppLogger.info('🔍 Requesting live RAG processing: $query');
 
       // Primary: Use WebSocket connection
       await _realTimeManager.requestLiveRagProcessing(
@@ -241,9 +239,9 @@ class RealTimeIntegrationService {
       // Record usage for intelligent sync
       _backgroundSync.recordUsage('live_rag_query');
 
-      AppLogger.info('âœ… Live RAG processing requested');
+      AppLogger.info('✅ Live RAG processing requested');
     } catch (e) {
-      AppLogger.error('âŒ Failed to request live RAG processing: $e');
+      AppLogger.error('❌ Failed to request live RAG processing: $e');
 
       // Fallback: Schedule background processing
       await _backgroundSync.scheduleUrgentSync(
@@ -261,7 +259,7 @@ class RealTimeIntegrationService {
     String? description,
   }) async {
     try {
-      AppLogger.info('ðŸ¤² Starting family prayer session: $sessionName');
+      AppLogger.info('🤲 Starting family prayer session: $sessionName');
 
       await _collaborativeService.startFamilyPrayerSession(
         sessionName: sessionName,
@@ -273,9 +271,9 @@ class RealTimeIntegrationService {
       // Record usage for intelligent sync
       _backgroundSync.recordUsage('family_prayer_session_started');
 
-      AppLogger.info('âœ… Family prayer session started successfully');
+      AppLogger.info('✅ Family prayer session started successfully');
     } catch (e) {
-      AppLogger.error('âŒ Failed to start family prayer session: $e');
+      AppLogger.error('❌ Failed to start family prayer session: $e');
       rethrow;
     }
   }
@@ -287,7 +285,7 @@ class RealTimeIntegrationService {
   }) async {
     try {
       AppLogger.info(
-        'ðŸ‘¨â€ðŸ‘©â€ðŸ‘§â€ðŸ‘¦ Creating family with real-time integration: $familyName',
+        '👨‍👩‍👧‍👦 Creating family with real-time integration: $familyName',
       );
 
       // Create family through collaborative service
@@ -316,9 +314,9 @@ class RealTimeIntegrationService {
         );
       }
 
-      AppLogger.info('âœ… Family created with full real-time integration');
+      AppLogger.info('✅ Family created with full real-time integration');
     } catch (e) {
-      AppLogger.error('âŒ Failed to create family with integration: $e');
+      AppLogger.error('❌ Failed to create family with integration: $e');
       rethrow;
     }
   }
@@ -341,8 +339,7 @@ class RealTimeIntegrationService {
       },
       'family_info': _collaborativeService.getFamilyInfo(),
       'sync_stats': _backgroundSync.getSyncStats(),
-      'notification_preferences':
-          _messagingService.getNotificationPreferences(),
+      'notification_preferences': _messagingService.getNotificationPreferences(),
     };
   }
 
@@ -380,8 +377,7 @@ class RealTimeIntegrationService {
   /// Force full synchronization across all services
   Future<void> forceFullSync() async {
     try {
-      AppLogger.info(
-          'ðŸ”„ Forcing full synchronization across all services...');
+      AppLogger.info('🔄 Forcing full synchronization across all services...');
 
       // Force sync on background service
       await _backgroundSync.forceSyncNow();
@@ -392,9 +388,9 @@ class RealTimeIntegrationService {
       // Record usage
       _backgroundSync.recordUsage('manual_full_sync');
 
-      AppLogger.info('âœ… Full synchronization completed');
+      AppLogger.info('✅ Full synchronization completed');
     } catch (e) {
-      AppLogger.error('âŒ Failed to force full sync: $e');
+      AppLogger.error('❌ Failed to force full sync: $e');
     }
   }
 
@@ -415,7 +411,7 @@ class RealTimeIntegrationService {
 
       AppLogger.info('âš™ï¸ Notification preferences updated');
     } catch (e) {
-      AppLogger.error('âŒ Failed to update notification preferences: $e');
+      AppLogger.error('❌ Failed to update notification preferences: $e');
     }
   }
 
@@ -437,7 +433,7 @@ class RealTimeIntegrationService {
 
       AppLogger.info('â¸ï¸ Real-time services paused');
     } catch (e) {
-      AppLogger.error('âŒ Failed to pause real-time services: $e');
+      AppLogger.error('❌ Failed to pause real-time services: $e');
     }
   }
 
@@ -459,7 +455,7 @@ class RealTimeIntegrationService {
 
       AppLogger.info('â–¶ï¸ Real-time services resumed');
     } catch (e) {
-      AppLogger.error('âŒ Failed to resume real-time services: $e');
+      AppLogger.error('❌ Failed to resume real-time services: $e');
     }
   }
 
@@ -468,7 +464,7 @@ class RealTimeIntegrationService {
 
   /// Dispose all resources
   void dispose() {
-    AppLogger.info('ðŸ—‘ï¸ Disposing Real-Time Integration Service...');
+    AppLogger.info('🗑️ Disposing Real-Time Integration Service...');
 
     // Cancel all subscriptions
     for (final subscription in _subscriptions) {
@@ -486,6 +482,6 @@ class RealTimeIntegrationService {
     _isActive = false;
     _isInitialized = false;
 
-    AppLogger.info('âœ… Real-Time Integration Service disposed');
+    AppLogger.info('✅ Real-Time Integration Service disposed');
   }
 }

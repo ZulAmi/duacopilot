@@ -11,8 +11,7 @@ import '../secure_storage/secure_storage_service.dart';
 /// Handles push notifications for new Du'as and content updates
 class FirebaseMessagingService {
   static FirebaseMessagingService? _instance;
-  static FirebaseMessagingService get instance =>
-      _instance ??= FirebaseMessagingService._();
+  static FirebaseMessagingService get instance => _instance ??= FirebaseMessagingService._();
 
   FirebaseMessagingService._();
 
@@ -26,24 +25,16 @@ class FirebaseMessagingService {
   String? _fcmToken;
 
   // Stream controllers for different notification types
-  final _scholarApprovalController =
-      StreamController<ScholarApprovalNotification>.broadcast();
-  final _contentUpdateController =
-      StreamController<ContentUpdateNotification>.broadcast();
-  final _familyNotificationController =
-      StreamController<FamilyNotification>.broadcast();
-  final _systemNotificationController =
-      StreamController<SystemNotification>.broadcast();
+  final _scholarApprovalController = StreamController<ScholarApprovalNotification>.broadcast();
+  final _contentUpdateController = StreamController<ContentUpdateNotification>.broadcast();
+  final _familyNotificationController = StreamController<FamilyNotification>.broadcast();
+  final _systemNotificationController = StreamController<SystemNotification>.broadcast();
 
   // Public notification streams
-  Stream<ScholarApprovalNotification> get scholarApprovalStream =>
-      _scholarApprovalController.stream;
-  Stream<ContentUpdateNotification> get contentUpdateStream =>
-      _contentUpdateController.stream;
-  Stream<FamilyNotification> get familyNotificationStream =>
-      _familyNotificationController.stream;
-  Stream<SystemNotification> get systemNotificationStream =>
-      _systemNotificationController.stream;
+  Stream<ScholarApprovalNotification> get scholarApprovalStream => _scholarApprovalController.stream;
+  Stream<ContentUpdateNotification> get contentUpdateStream => _contentUpdateController.stream;
+  Stream<FamilyNotification> get familyNotificationStream => _familyNotificationController.stream;
+  Stream<SystemNotification> get systemNotificationStream => _systemNotificationController.stream;
 
   // Notification preferences
   bool _scholarApprovalEnabled = true;
@@ -56,7 +47,7 @@ class FirebaseMessagingService {
     if (_isInitialized) return;
 
     try {
-      AppLogger.info('ðŸ”„ Initializing Firebase Messaging Service...');
+      AppLogger.info('🔄 Initializing Firebase Messaging Service...');
 
       _firebaseMessaging = FirebaseMessaging.instance;
       _secureStorage = SecureStorageService.instance;
@@ -80,9 +71,9 @@ class FirebaseMessagingService {
       _setupTokenRefreshListener();
 
       _isInitialized = true;
-      AppLogger.info('âœ… Firebase Messaging Service initialized');
+      AppLogger.info('✅ Firebase Messaging Service initialized');
     } catch (e) {
-      AppLogger.error('âŒ Failed to initialize Firebase Messaging: $e');
+      AppLogger.error('❌ Failed to initialize Firebase Messaging: $e');
       rethrow;
     }
   }
@@ -102,17 +93,16 @@ class FirebaseMessagingService {
 
       switch (settings.authorizationStatus) {
         case AuthorizationStatus.authorized:
-          AppLogger.info('âœ… Push notifications authorized');
+          AppLogger.info('✅ Push notifications authorized');
           break;
         case AuthorizationStatus.provisional:
           AppLogger.info('âš ï¸ Push notifications provisionally authorized');
           break;
         case AuthorizationStatus.denied:
-          AppLogger.warning('âŒ Push notifications denied');
+          AppLogger.warning('❌ Push notifications denied');
           break;
         case AuthorizationStatus.notDetermined:
-          AppLogger.warning(
-              'âš ï¸ Push notification permission not determined');
+          AppLogger.warning('âš ï¸ Push notification permission not determined');
           break;
       }
 
@@ -122,7 +112,7 @@ class FirebaseMessagingService {
         settings.authorizationStatus == AuthorizationStatus.authorized,
       );
     } catch (e) {
-      AppLogger.error('âŒ Failed to request notification permissions: $e');
+      AppLogger.error('❌ Failed to request notification permissions: $e');
     }
   }
 
@@ -132,7 +122,7 @@ class FirebaseMessagingService {
       _fcmToken = await _firebaseMessaging.getToken();
       if (_fcmToken != null) {
         AppLogger.info(
-          'ðŸ“± FCM Token obtained: ${_fcmToken!.substring(0, 20)}...',
+          '📱 FCM Token obtained: ${_fcmToken!.substring(0, 20)}...',
         );
 
         // Store token securely
@@ -144,7 +134,7 @@ class FirebaseMessagingService {
         AppLogger.warning('âš ï¸ Failed to obtain FCM token');
       }
     } catch (e) {
-      AppLogger.error('âŒ Failed to get FCM token: $e');
+      AppLogger.error('❌ Failed to get FCM token: $e');
     }
   }
 
@@ -153,7 +143,7 @@ class FirebaseMessagingService {
     // Handle messages when app is in foreground
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       AppLogger.info(
-        'ðŸ“¨ Foreground message received: ${message.notification?.title}',
+        '📨 Foreground message received: ${message.notification?.title}',
       );
       _handleMessage(message, MessageSource.foreground);
     });
@@ -161,7 +151,7 @@ class FirebaseMessagingService {
     // Handle messages when app is opened from background
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       AppLogger.info(
-        'ðŸ“± App opened from background message: ${message.notification?.title}',
+        '📱 App opened from background message: ${message.notification?.title}',
       );
       _handleMessage(message, MessageSource.background);
     });
@@ -170,7 +160,7 @@ class FirebaseMessagingService {
     _firebaseMessaging.getInitialMessage().then((RemoteMessage? message) {
       if (message != null) {
         AppLogger.info(
-          'ðŸš€ App opened from terminated state message: ${message.notification?.title}',
+          '🚀 App opened from terminated state message: ${message.notification?.title}',
         );
         _handleMessage(message, MessageSource.terminated);
       }
@@ -180,7 +170,7 @@ class FirebaseMessagingService {
   /// Setup FCM token refresh listener
   void _setupTokenRefreshListener() {
     _firebaseMessaging.onTokenRefresh.listen((String token) {
-      AppLogger.info('ðŸ”„ FCM Token refreshed');
+      AppLogger.info('🔄 FCM Token refreshed');
       _fcmToken = token;
       _secureStorage.write('fcm_token', token);
       _sendTokenToServer(token);
@@ -218,11 +208,10 @@ class FirebaseMessagingService {
           }
           break;
         default:
-          AppLogger.debug(
-              'ðŸ”„ Unhandled notification type: $notificationType');
+          AppLogger.debug('🔄 Unhandled notification type: $notificationType');
       }
     } catch (e) {
-      AppLogger.error('âŒ Failed to handle push message: $e');
+      AppLogger.error('❌ Failed to handle push message: $e');
     }
   }
 
@@ -235,13 +224,11 @@ class FirebaseMessagingService {
       final notification = ScholarApprovalNotification(
         id: message.data['id'] ?? message.messageId ?? '',
         duaId: message.data['dua_id'] ?? '',
-        duaTitle:
-            message.data['dua_title'] ?? message.notification?.title ?? '',
+        duaTitle: message.data['dua_title'] ?? message.notification?.title ?? '',
         duaText: message.data['dua_text'] ?? '',
         scholarName: message.data['scholar_name'] ?? '',
         scholarId: message.data['scholar_id'] ?? '',
-        approvedAt: DateTime.tryParse(message.data['approved_at'] ?? '') ??
-            DateTime.now(),
+        approvedAt: DateTime.tryParse(message.data['approved_at'] ?? '') ?? DateTime.now(),
         messageSource: source,
         notificationBody: message.notification?.body,
         imageUrl: message.notification?.android?.imageUrl,
@@ -249,10 +236,10 @@ class FirebaseMessagingService {
 
       _scholarApprovalController.add(notification);
       AppLogger.info(
-        'ðŸŽ“ Scholar approval notification processed: ${notification.duaTitle}',
+        '🎓 Scholar approval notification processed: ${notification.duaTitle}',
       );
     } catch (e) {
-      AppLogger.error('âŒ Failed to handle scholar approval notification: $e');
+      AppLogger.error('❌ Failed to handle scholar approval notification: $e');
     }
   }
 
@@ -264,15 +251,11 @@ class FirebaseMessagingService {
     try {
       final notification = ContentUpdateNotification(
         id: message.data['id'] ?? message.messageId ?? '',
-        title:
-            message.data['content_title'] ?? message.notification?.title ?? '',
-        description: message.data['content_description'] ??
-            message.notification?.body ??
-            '',
+        title: message.data['content_title'] ?? message.notification?.title ?? '',
+        description: message.data['content_description'] ?? message.notification?.body ?? '',
         category: message.data['category'] ?? '',
         updateType: message.data['update_type'] ?? 'new_content',
-        updatedAt: DateTime.tryParse(message.data['updated_at'] ?? '') ??
-            DateTime.now(),
+        updatedAt: DateTime.tryParse(message.data['updated_at'] ?? '') ?? DateTime.now(),
         messageSource: source,
         imageUrl: message.notification?.android?.imageUrl,
         actionUrl: message.data['action_url'],
@@ -280,10 +263,10 @@ class FirebaseMessagingService {
 
       _contentUpdateController.add(notification);
       AppLogger.info(
-        'ðŸ“š Content update notification processed: ${notification.title}',
+        '📚 Content update notification processed: ${notification.title}',
       );
     } catch (e) {
-      AppLogger.error('âŒ Failed to handle content update notification: $e');
+      AppLogger.error('❌ Failed to handle content update notification: $e');
     }
   }
 
@@ -296,22 +279,19 @@ class FirebaseMessagingService {
         fromMemberId: message.data['from_member_id'] ?? '',
         fromMemberName: message.data['from_member_name'] ?? '',
         notificationType: message.data['notification_type'] ?? '',
-        title:
-            message.data['family_title'] ?? message.notification?.title ?? '',
-        message:
-            message.data['family_message'] ?? message.notification?.body ?? '',
-        timestamp: DateTime.tryParse(message.data['timestamp'] ?? '') ??
-            DateTime.now(),
+        title: message.data['family_title'] ?? message.notification?.title ?? '',
+        message: message.data['family_message'] ?? message.notification?.body ?? '',
+        timestamp: DateTime.tryParse(message.data['timestamp'] ?? '') ?? DateTime.now(),
         messageSource: source,
         data: message.data,
       );
 
       _familyNotificationController.add(notification);
       AppLogger.info(
-        'ðŸ‘¨â€ðŸ‘©â€ðŸ‘§â€ðŸ‘¦ Family notification processed: ${notification.title}',
+        '👨‍👩‍👧‍👦 Family notification processed: ${notification.title}',
       );
     } catch (e) {
-      AppLogger.error('âŒ Failed to handle family notification: $e');
+      AppLogger.error('❌ Failed to handle family notification: $e');
     }
   }
 
@@ -320,14 +300,11 @@ class FirebaseMessagingService {
     try {
       final notification = SystemNotification(
         id: message.data['id'] ?? message.messageId ?? '',
-        title:
-            message.data['system_title'] ?? message.notification?.title ?? '',
-        message:
-            message.data['system_message'] ?? message.notification?.body ?? '',
+        title: message.data['system_title'] ?? message.notification?.title ?? '',
+        message: message.data['system_message'] ?? message.notification?.body ?? '',
         priority: message.data['priority'] ?? 'medium',
         category: message.data['category'] ?? 'general',
-        timestamp: DateTime.tryParse(message.data['timestamp'] ?? '') ??
-            DateTime.now(),
+        timestamp: DateTime.tryParse(message.data['timestamp'] ?? '') ?? DateTime.now(),
         messageSource: source,
         actionUrl: message.data['action_url'],
         imageUrl: message.notification?.android?.imageUrl,
@@ -335,10 +312,9 @@ class FirebaseMessagingService {
       );
 
       _systemNotificationController.add(notification);
-      AppLogger.info(
-          'ðŸ“¢ System notification processed: ${notification.title}');
+      AppLogger.info('📢 System notification processed: ${notification.title}');
     } catch (e) {
-      AppLogger.error('âŒ Failed to handle system notification: $e');
+      AppLogger.error('❌ Failed to handle system notification: $e');
     }
   }
 
@@ -370,7 +346,7 @@ class FirebaseMessagingService {
 
       await _prefs.setString('local_notifications', jsonEncode(notifications));
     } catch (e) {
-      AppLogger.error('âŒ Failed to save notification locally: $e');
+      AppLogger.error('❌ Failed to save notification locally: $e');
     }
   }
 
@@ -382,7 +358,7 @@ class FirebaseMessagingService {
         return jsonDecode(notificationsJson) as List<dynamic>;
       }
     } catch (e) {
-      AppLogger.error('âŒ Failed to get local notifications: $e');
+      AppLogger.error('❌ Failed to get local notifications: $e');
     }
     return [];
   }
@@ -395,14 +371,14 @@ class FirebaseMessagingService {
 
       final userId = await _secureStorage.getUserId();
 
-      AppLogger.debug('ðŸ“¤ Sending FCM token to server for user: $userId');
+      AppLogger.debug('📤 Sending FCM token to server for user: $userId');
 
       // Simulated server call
       await Future.delayed(Duration(milliseconds: 500));
 
-      AppLogger.info('âœ… FCM token sent to server');
+      AppLogger.info('✅ FCM token sent to server');
     } catch (e) {
-      AppLogger.error('âŒ Failed to send FCM token to server: $e');
+      AppLogger.error('❌ Failed to send FCM token to server: $e');
     }
   }
 
@@ -412,9 +388,9 @@ class FirebaseMessagingService {
       await _firebaseMessaging.subscribeToTopic('scholar_approvals');
       _scholarApprovalEnabled = true;
       await _saveNotificationPreferences();
-      AppLogger.info('ðŸ“š Subscribed to scholar approval notifications');
+      AppLogger.info('📚 Subscribed to scholar approval notifications');
     } catch (e) {
-      AppLogger.error('âŒ Failed to subscribe to scholar approvals: $e');
+      AppLogger.error('❌ Failed to subscribe to scholar approvals: $e');
     }
   }
 
@@ -424,9 +400,9 @@ class FirebaseMessagingService {
       await _firebaseMessaging.unsubscribeFromTopic('scholar_approvals');
       _scholarApprovalEnabled = false;
       await _saveNotificationPreferences();
-      AppLogger.info('ðŸ”• Unsubscribed from scholar approval notifications');
+      AppLogger.info('🔕 Unsubscribed from scholar approval notifications');
     } catch (e) {
-      AppLogger.error('âŒ Failed to unsubscribe from scholar approvals: $e');
+      AppLogger.error('❌ Failed to unsubscribe from scholar approvals: $e');
     }
   }
 
@@ -436,9 +412,9 @@ class FirebaseMessagingService {
       await _firebaseMessaging.subscribeToTopic('content_updates');
       _contentUpdateEnabled = true;
       await _saveNotificationPreferences();
-      AppLogger.info('ðŸ“š Subscribed to content update notifications');
+      AppLogger.info('📚 Subscribed to content update notifications');
     } catch (e) {
-      AppLogger.error('âŒ Failed to subscribe to content updates: $e');
+      AppLogger.error('❌ Failed to subscribe to content updates: $e');
     }
   }
 
@@ -448,9 +424,9 @@ class FirebaseMessagingService {
       await _firebaseMessaging.unsubscribeFromTopic('content_updates');
       _contentUpdateEnabled = false;
       await _saveNotificationPreferences();
-      AppLogger.info('ðŸ”• Unsubscribed from content update notifications');
+      AppLogger.info('🔕 Unsubscribed from content update notifications');
     } catch (e) {
-      AppLogger.error('âŒ Failed to unsubscribe from content updates: $e');
+      AppLogger.error('❌ Failed to unsubscribe from content updates: $e');
     }
   }
 
@@ -461,10 +437,10 @@ class FirebaseMessagingService {
       _familyNotificationsEnabled = true;
       await _saveNotificationPreferences();
       AppLogger.info(
-        'ðŸ‘¨â€ðŸ‘©â€ðŸ‘§â€ðŸ‘¦ Subscribed to family notifications: $familyId',
+        '👨‍👩‍👧‍👦 Subscribed to family notifications: $familyId',
       );
     } catch (e) {
-      AppLogger.error('âŒ Failed to subscribe to family notifications: $e');
+      AppLogger.error('❌ Failed to subscribe to family notifications: $e');
     }
   }
 
@@ -474,26 +450,21 @@ class FirebaseMessagingService {
       await _firebaseMessaging.unsubscribeFromTopic('family_$familyId');
       _familyNotificationsEnabled = false;
       await _saveNotificationPreferences();
-      AppLogger.info('ðŸ”• Unsubscribed from family notifications: $familyId');
+      AppLogger.info('🔕 Unsubscribed from family notifications: $familyId');
     } catch (e) {
-      AppLogger.error(
-          'âŒ Failed to unsubscribe from family notifications: $e');
+      AppLogger.error('❌ Failed to unsubscribe from family notifications: $e');
     }
   }
 
   /// Load notification preferences
   Future<void> _loadNotificationPreferences() async {
     try {
-      _scholarApprovalEnabled =
-          _prefs.getBool('scholar_approval_notifications') ?? true;
-      _contentUpdateEnabled =
-          _prefs.getBool('content_update_notifications') ?? true;
-      _familyNotificationsEnabled =
-          _prefs.getBool('family_notifications') ?? true;
-      _systemNotificationsEnabled =
-          _prefs.getBool('system_notifications') ?? true;
+      _scholarApprovalEnabled = _prefs.getBool('scholar_approval_notifications') ?? true;
+      _contentUpdateEnabled = _prefs.getBool('content_update_notifications') ?? true;
+      _familyNotificationsEnabled = _prefs.getBool('family_notifications') ?? true;
+      _systemNotificationsEnabled = _prefs.getBool('system_notifications') ?? true;
     } catch (e) {
-      AppLogger.error('âŒ Failed to load notification preferences: $e');
+      AppLogger.error('❌ Failed to load notification preferences: $e');
     }
   }
 
@@ -511,7 +482,7 @@ class FirebaseMessagingService {
       await _prefs.setBool('family_notifications', _familyNotificationsEnabled);
       await _prefs.setBool('system_notifications', _systemNotificationsEnabled);
     } catch (e) {
-      AppLogger.error('âŒ Failed to save notification preferences: $e');
+      AppLogger.error('❌ Failed to save notification preferences: $e');
     }
   }
 
@@ -521,7 +492,7 @@ class FirebaseMessagingService {
       final notifications = await _getLocalNotifications();
       return notifications.where((n) => n['read'] == false).length;
     } catch (e) {
-      AppLogger.error('âŒ Failed to get unread notifications count: $e');
+      AppLogger.error('❌ Failed to get unread notifications count: $e');
       return 0;
     }
   }
@@ -538,7 +509,7 @@ class FirebaseMessagingService {
       }
       await _prefs.setString('local_notifications', jsonEncode(notifications));
     } catch (e) {
-      AppLogger.error('âŒ Failed to mark notification as read: $e');
+      AppLogger.error('❌ Failed to mark notification as read: $e');
     }
   }
 
@@ -548,7 +519,7 @@ class FirebaseMessagingService {
       final notifications = await _getLocalNotifications();
       return notifications.cast<Map<String, dynamic>>();
     } catch (e) {
-      AppLogger.error('âŒ Failed to get all notifications: $e');
+      AppLogger.error('❌ Failed to get all notifications: $e');
       return [];
     }
   }
@@ -557,9 +528,9 @@ class FirebaseMessagingService {
   Future<void> clearAllNotifications() async {
     try {
       await _prefs.remove('local_notifications');
-      AppLogger.info('ðŸ—‘ï¸ All notifications cleared');
+      AppLogger.info('🗑️ All notifications cleared');
     } catch (e) {
-      AppLogger.error('âŒ Failed to clear all notifications: $e');
+      AppLogger.error('❌ Failed to clear all notifications: $e');
     }
   }
 
@@ -615,10 +586,7 @@ class FirebaseMessagingService {
 
   /// Check if notifications are enabled
   bool get areNotificationsEnabled =>
-      _scholarApprovalEnabled ||
-      _contentUpdateEnabled ||
-      _familyNotificationsEnabled ||
-      _systemNotificationsEnabled;
+      _scholarApprovalEnabled || _contentUpdateEnabled || _familyNotificationsEnabled || _systemNotificationsEnabled;
 
   /// Dispose resources
   void dispose() {

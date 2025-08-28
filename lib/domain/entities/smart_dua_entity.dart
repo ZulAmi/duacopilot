@@ -99,8 +99,7 @@ class SmartDuaCollection with _$SmartDuaCollection {
     @Default(true) bool isPersonalized,
   }) = _SmartDuaCollection;
 
-  factory SmartDuaCollection.fromJson(Map<String, dynamic> json) =>
-      _$SmartDuaCollectionFromJson(json);
+  factory SmartDuaCollection.fromJson(Map<String, dynamic> json) => _$SmartDuaCollectionFromJson(json);
 }
 
 /// User emotional pattern analysis
@@ -122,8 +121,7 @@ class EmotionalPattern with _$EmotionalPattern {
     @Default(0.0) double predictionAccuracy,
   }) = _EmotionalPattern;
 
-  factory EmotionalPattern.fromJson(Map<String, dynamic> json) =>
-      _$EmotionalPatternFromJson(json);
+  factory EmotionalPattern.fromJson(Map<String, dynamic> json) => _$EmotionalPatternFromJson(json);
 }
 
 /// AI-powered dua recommendation
@@ -150,8 +148,7 @@ class SmartDuaRecommendation with _$SmartDuaRecommendation {
     String? userFeedback,
   }) = _SmartDuaRecommendation;
 
-  factory SmartDuaRecommendation.fromJson(Map<String, dynamic> json) =>
-      _$SmartDuaRecommendationFromJson(json);
+  factory SmartDuaRecommendation.fromJson(Map<String, dynamic> json) => _$SmartDuaRecommendationFromJson(json);
 }
 
 /// User input for contextual analysis
@@ -172,8 +169,7 @@ class ContextualInput with _$ContextualInput {
     String? encryptionKey,
   }) = _ContextualInput;
 
-  factory ContextualInput.fromJson(Map<String, dynamic> json) =>
-      _$ContextualInputFromJson(json);
+  factory ContextualInput.fromJson(Map<String, dynamic> json) => _$ContextualInputFromJson(json);
 }
 
 /// AI learning feedback for model improvement
@@ -191,8 +187,7 @@ class AIFeedback with _$AIFeedback {
     DateTime? providedAt,
   }) = _AIFeedback;
 
-  factory AIFeedback.fromJson(Map<String, dynamic> json) =>
-      _$AIFeedbackFromJson(json);
+  factory AIFeedback.fromJson(Map<String, dynamic> json) => _$AIFeedbackFromJson(json);
 }
 
 /// Contextual dua analytics for privacy-compliant tracking
@@ -210,8 +205,7 @@ class ContextualAnalytics with _$ContextualAnalytics {
     required DateTime lastUpdated,
   }) = _ContextualAnalytics;
 
-  factory ContextualAnalytics.fromJson(Map<String, dynamic> json) =>
-      _$ContextualAnalyticsFromJson(json);
+  factory ContextualAnalytics.fromJson(Map<String, dynamic> json) => _$ContextualAnalyticsFromJson(json);
 }
 
 /// Extension methods for emotional state analysis
@@ -250,31 +244,31 @@ extension EmotionalStateExtensions on EmotionalState {
   String get arabicName {
     switch (this) {
       case EmotionalState.anxious:
-        return 'Ø§Ù„Ù‚Ù„Ù‚';
+        return 'القلق';
       case EmotionalState.stressed:
-        return 'Ø§Ù„ØªÙˆØªØ±';
+        return 'التوتر';
       case EmotionalState.hopeful:
-        return 'Ø§Ù„Ø£Ù…Ù„';
+        return 'الأمل';
       case EmotionalState.grateful:
-        return 'Ø§Ù„Ø§Ù…ØªÙ†Ø§Ù†';
+        return 'الامتنان';
       case EmotionalState.worried:
-        return 'Ø§Ù„Ù‡Ù…';
+        return 'الهم';
       case EmotionalState.excited:
-        return 'Ø§Ù„ÙØ±Ø­';
+        return 'الفرح';
       case EmotionalState.sad:
-        return 'Ø§Ù„Ø­Ø²Ù†';
+        return 'الحزن';
       case EmotionalState.peaceful:
-        return 'Ø§Ù„Ø³ÙƒÙŠÙ†Ø©';
+        return 'السكينة';
       case EmotionalState.fearful:
-        return 'Ø§Ù„Ø®ÙˆÙ';
+        return 'الخوف';
       case EmotionalState.confident:
-        return 'Ø§Ù„Ø«Ù‚Ø©';
+        return 'الثقة';
       case EmotionalState.uncertain:
-        return 'Ø§Ù„ØªØ±Ø¯Ø¯';
+        return 'التردد';
       case EmotionalState.overwhelmed:
-        return 'Ø§Ù„Ø¥Ø±Ù‡Ø§Ù‚';
+        return 'الإرهاق';
       case EmotionalState.seekingGuidance:
-        return 'Ø·Ù„Ø¨ Ø§Ù„Ù‡Ø¯Ø§ÙŠØ©';
+        return 'طلب الهداية';
     }
   }
 
@@ -350,29 +344,29 @@ extension DuaContextExtensions on DuaContext {
   String get arabicName {
     switch (this) {
       case DuaContext.travel:
-        return 'Ø§Ù„Ø³ÙØ± ÙˆØ§Ù„Ø±Ø­Ù„Ø©';
+        return 'السفر والرحلة';
       case DuaContext.health:
-        return 'Ø§Ù„ØµØ­Ø© ÙˆØ§Ù„Ø´ÙØ§Ø¡';
+        return 'الصحة والشفاء';
       case DuaContext.workCareer:
-        return 'Ø§Ù„Ø¹Ù…Ù„ ÙˆØ§Ù„Ù…Ù‡Ù†Ø©';
+        return 'العمل والمهنة';
       case DuaContext.family:
-        return 'Ø§Ù„Ø£Ø³Ø±Ø©';
+        return 'الأسرة';
       case DuaContext.education:
-        return 'Ø§Ù„ØªØ¹Ù„Ù… ÙˆØ§Ù„ØªØ¹Ù„ÙŠÙ…';
+        return 'التعلم والتعليم';
       case DuaContext.financial:
-        return 'Ø§Ù„Ø£Ù…ÙˆØ± Ø§Ù„Ù…Ø§Ù„ÙŠØ©';
+        return 'الأمور المالية';
       case DuaContext.spiritual:
-        return 'Ø§Ù„Ù†Ù…Ùˆ Ø§Ù„Ø±ÙˆØ­ÙŠ';
+        return 'النمو الروحي';
       case DuaContext.relationships:
-        return 'Ø§Ù„Ø¹Ù„Ø§Ù‚Ø§Øª';
+        return 'العلاقات';
       case DuaContext.protection:
-        return 'Ø§Ù„Ø­Ù…Ø§ÙŠØ© ÙˆØ§Ù„Ø£Ù…Ø§Ù†';
+        return 'الحماية والأمان';
       case DuaContext.guidance:
-        return 'Ø§Ù„Ù‡Ø¯Ø§ÙŠØ© Ø§Ù„Ø¥Ù„Ù‡ÙŠØ©';
+        return 'الهداية الإلهية';
       case DuaContext.gratitude:
-        return 'Ø§Ù„Ø§Ù…ØªÙ†Ø§Ù† ÙˆØ§Ù„Ø´ÙƒØ±';
+        return 'الامتنان والشكر';
       case DuaContext.forgiveness:
-        return 'Ø§Ù„Ù…ØºÙØ±Ø© ÙˆØ§Ù„Ø±Ø­Ù…Ø©';
+        return 'المغفرة والرحمة';
     }
   }
 

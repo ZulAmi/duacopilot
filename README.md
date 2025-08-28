@@ -91,7 +91,7 @@ lib/
     └── performance_example.dart  # Performance optimization examples
 ```
 
-## � Technology Stack
+## 🧰 Technology Stack
 
 ### **Core Framework**
 
@@ -279,18 +279,18 @@ We welcome contributions! Please follow these steps:
 - [Architecture Guide](docs/architecture.md)
 - [Contributing Guidelines](CONTRIBUTING.md)
 
-## � Security & Privacy
+## 🔐 Security & Privacy
 
 - **Data Encryption**: Sensitive data encrypted at rest
 - **Secure Storage**: API keys and tokens stored securely
 - **Privacy First**: No unnecessary data collection
 - **Offline Capable**: Core functionality works without internet
 
-## �📄 License
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## � Acknowledgments
+## 🙏 Acknowledgments
 
 - **Flutter Team** - For the amazing framework
 - **Firebase Team** - For performance monitoring tools

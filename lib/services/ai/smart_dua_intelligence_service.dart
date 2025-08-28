@@ -13,8 +13,7 @@ import '../subscription/subscription_service.dart';
 /// Enterprise-grade security with encrypted emotional data processing
 class SmartDuaIntelligenceService {
   static SmartDuaIntelligenceService? _instance;
-  static SmartDuaIntelligenceService get instance =>
-      _instance ??= SmartDuaIntelligenceService._();
+  static SmartDuaIntelligenceService get instance => _instance ??= SmartDuaIntelligenceService._();
 
   SmartDuaIntelligenceService._();
 
@@ -34,20 +33,14 @@ class SmartDuaIntelligenceService {
   final Map<String, EmotionalPattern> _patternsCache = {};
 
   // Stream controllers for real-time updates
-  final _recommendationsController =
-      StreamController<List<SmartDuaRecommendation>>.broadcast();
-  final _emotionalStateController =
-      StreamController<EmotionalState>.broadcast();
-  final _collectionsController =
-      StreamController<List<SmartDuaCollection>>.broadcast();
+  final _recommendationsController = StreamController<List<SmartDuaRecommendation>>.broadcast();
+  final _emotionalStateController = StreamController<EmotionalState>.broadcast();
+  final _collectionsController = StreamController<List<SmartDuaCollection>>.broadcast();
 
   // Public streams
-  Stream<List<SmartDuaRecommendation>> get recommendationsStream =>
-      _recommendationsController.stream;
-  Stream<EmotionalState> get emotionalStateStream =>
-      _emotionalStateController.stream;
-  Stream<List<SmartDuaCollection>> get collectionsStream =>
-      _collectionsController.stream;
+  Stream<List<SmartDuaRecommendation>> get recommendationsStream => _recommendationsController.stream;
+  Stream<EmotionalState> get emotionalStateStream => _emotionalStateController.stream;
+  Stream<List<SmartDuaCollection>> get collectionsStream => _collectionsController.stream;
 
   bool _isInitialized = false;
   Timer? _patternAnalysisTimer;
@@ -326,8 +319,7 @@ class SmartDuaIntelligenceService {
 
   /// Extract relevant keywords from input
   List<String> _extractKeywords(String input) {
-    final words =
-        input.split(RegExp(r'\W+')).where((word) => word.length > 2).toList();
+    final words = input.split(RegExp(r'\W+')).where((word) => word.length > 2).toList();
 
     // Remove common stop words
     final stopWords = {
@@ -360,8 +352,7 @@ class SmartDuaIntelligenceService {
     // Calculate scores for each emotion
     for (final emotion in EmotionalState.values) {
       final emotionKey = emotion.toString().split('.').last;
-      final relatedKeywords =
-          (emotionKeywords[emotionKey] as List<dynamic>?)?.cast<String>() ?? [];
+      final relatedKeywords = (emotionKeywords[emotionKey] as List<dynamic>?)?.cast<String>() ?? [];
 
       double score = 0.0;
       for (final keyword in keywords) {
@@ -369,8 +360,7 @@ class SmartDuaIntelligenceService {
           if (input.contains(emotionKeyword) || keyword == emotionKeyword) {
             score += 1.0;
           }
-          if (keyword.contains(emotionKeyword) ||
-              emotionKeyword.contains(keyword)) {
+          if (keyword.contains(emotionKeyword) || emotionKeyword.contains(keyword)) {
             score += 0.5;
           }
         }
@@ -380,9 +370,7 @@ class SmartDuaIntelligenceService {
     }
 
     // Return emotion with highest score
-    return emotionScores.entries
-        .reduce((a, b) => a.value > b.value ? a : b)
-        .key;
+    return emotionScores.entries.reduce((a, b) => a.value > b.value ? a : b).key;
   }
 
   /// Detect context from input
@@ -393,8 +381,7 @@ class SmartDuaIntelligenceService {
     // Calculate scores for each context
     for (final context in DuaContext.values) {
       final contextKey = context.toString().split('.').last;
-      final relatedKeywords =
-          (contextKeywords[contextKey] as List<dynamic>?)?.cast<String>() ?? [];
+      final relatedKeywords = (contextKeywords[contextKey] as List<dynamic>?)?.cast<String>() ?? [];
 
       double score = 0.0;
       for (final keyword in keywords) {
@@ -402,8 +389,7 @@ class SmartDuaIntelligenceService {
           if (input.contains(contextKeyword) || keyword == contextKeyword) {
             score += 1.0;
           }
-          if (keyword.contains(contextKeyword) ||
-              contextKeyword.contains(keyword)) {
+          if (keyword.contains(contextKeyword) || contextKeyword.contains(keyword)) {
             score += 0.5;
           }
         }
@@ -413,9 +399,7 @@ class SmartDuaIntelligenceService {
     }
 
     // Return context with highest score
-    return contextScores.entries
-        .reduce((a, b) => a.value > b.value ? a : b)
-        .key;
+    return contextScores.entries.reduce((a, b) => a.value > b.value ? a : b).key;
   }
 
   /// Calculate emotion detection confidence
@@ -590,8 +574,7 @@ class SmartDuaIntelligenceService {
     return [
       DuaEntity(
         id: 'anxiety_relief_1',
-        arabicText:
-            'Ø§Ù„Ù„ÙŽÙ‘Ù‡ÙÙ…ÙŽÙ‘ Ø¥ÙÙ†ÙÙ‘ÙŠ Ø£ÙŽØ¹ÙÙˆØ°Ù Ø¨ÙÙƒÙŽ Ù…ÙÙ†ÙŽ Ø§Ù„Ù’Ù‡ÙŽÙ…ÙÙ‘ ÙˆÙŽØ§Ù„Ù’Ø­ÙŽØ²ÙŽÙ†Ù',
+        arabicText: 'اللهم إني أعوذ بك من الهم والحزن',
         transliteration: 'Allahumma inni a\'udhu bika min al-hammi wal-hazan',
         translation: 'O Allah, I seek refuge in You from anxiety and sorrow',
         category: 'Emotional Healing',
@@ -614,8 +597,7 @@ class SmartDuaIntelligenceService {
       ),
       DuaEntity(
         id: 'travel_protection',
-        arabicText:
-            'Ø¨ÙØ³Ù’Ù…Ù Ø§Ù„Ù„ÙŽÙ‘Ù‡Ù ØªÙŽÙˆÙŽÙƒÙŽÙ‘Ù„Ù’ØªÙ Ø¹ÙŽÙ„ÙŽÙ‰ Ø§Ù„Ù„ÙŽÙ‘Ù‡Ù',
+        arabicText: 'بسم الله توكلت على الله',
         transliteration: 'Bismillahi tawakkaltu \'ala Allah',
         translation: 'In the name of Allah, I place my trust in Allah',
         category: 'Travel',
@@ -674,8 +656,7 @@ class SmartDuaIntelligenceService {
     double emotionConfidence,
     double contextConfidence,
   ) {
-    final averageConfidence =
-        (relevanceScore / 10.0 + emotionConfidence + contextConfidence) / 3.0;
+    final averageConfidence = (relevanceScore / 10.0 + emotionConfidence + contextConfidence) / 3.0;
 
     if (averageConfidence >= 0.8) return AIConfidenceLevel.veryHigh;
     if (averageConfidence >= 0.6) return AIConfidenceLevel.high;
@@ -708,9 +689,7 @@ class SmartDuaIntelligenceService {
 
     for (final inputKeyword in inputKeywords) {
       for (final duaKeyword in duaKeywords) {
-        if (inputKeyword == duaKeyword ||
-            inputKeyword.contains(duaKeyword) ||
-            duaKeyword.contains(inputKeyword)) {
+        if (inputKeyword == duaKeyword || inputKeyword.contains(duaKeyword) || duaKeyword.contains(inputKeyword)) {
           matches.add(inputKeyword);
         }
       }
@@ -936,8 +915,7 @@ class SmartDuaIntelligenceService {
       id: 'smart_${emotion.name}_$userId',
       userId: userId,
       name: '${emotion.displayName} Collection',
-      description:
-          'Personalized duas for when you\'re ${emotion.displayName.toLowerCase()}',
+      description: 'Personalized duas for when you\'re ${emotion.displayName.toLowerCase()}',
       duaIds: duaIds,
       primaryEmotion: emotion,
       secondaryEmotions: _getRelatedEmotions(emotion),
@@ -1024,8 +1002,7 @@ class SmartDuaIntelligenceService {
   }
 
   /// Get current emotional state
-  EmotionalState? get currentEmotionalState =>
-      _patternsCache.values.firstOrNull?.dominantEmotion;
+  EmotionalState? get currentEmotionalState => _patternsCache.values.firstOrNull?.dominantEmotion;
 
   /// Get user analytics
   Future<ContextualAnalytics> getUserAnalytics(String userId) async {

@@ -1,4 +1,5 @@
 import 'dart:math';
+
 import '../../../domain/entities/enhanced_query.dart';
 
 /// Intent classification service for query understanding
@@ -128,47 +129,47 @@ class IntentClassifier {
     },
     'ar': {
       QueryIntent.prayer: [
-        r'\b(ØµÙ„Ø§Ø©|ØµÙ„Ù‰|Ù†Ù…Ø§Ø²|Ø¹Ø¨Ø§Ø¯Ø©)\b',
-        r'\b(ÙØ¬Ø±|Ø¸Ù‡Ø±|Ø¹ØµØ±|Ù…ØºØ±Ø¨|Ø¹Ø´Ø§Ø¡)\b',
-        r'\b(Ù‚ÙŠØ§Ù…|ØªÙ‡Ø¬Ø¯|ÙˆØªØ±)\b',
-        r'ÙƒÙŠÙ Ø£ØµÙ„ÙŠ',
-        r'ÙˆÙ‚Øª Ø§Ù„ØµÙ„Ø§Ø©',
+        r'\b(صلاة|صلى|نماز|عبادة)\b',
+        r'\b(فجر|ظهر|عصر|مغرب|عشاء)\b',
+        r'\b(قيام|تهجد|وتر)\b',
+        r'كيف أصلي',
+        r'وقت الصلاة',
       ],
       QueryIntent.dua: [
-        r'\b(Ø¯Ø¹Ø§Ø¡|Ø§Ø¯Ø¹|Ø§Ø³ØªØºÙØ§Ø±)\b',
-        r'\b(Ù…Ù† ÙØ¶Ù„Ùƒ|Ø³Ø§Ø¹Ø¯|Ø¨Ø§Ø±Ùƒ|Ø§Ø­Ù…)\b',
-        r'\b(Ø§ØºÙØ±|Ø±Ø­Ù…Ø©|Ù‡Ø¯Ø§ÙŠØ©)\b',
-        r'Ø¯Ø¹Ø§Ø¡ Ù„Ù€',
-        r'Ø§Ø¯Ø¹ Ù„ÙŠ',
+        r'\b(دعاء|ادع|استغفار)\b',
+        r'\b(من فضلك|ساعد|بارك|احم)\b',
+        r'\b(اغفر|رحمة|هداية)\b',
+        r'دعاء ل',
+        r'ادع لي',
       ],
       QueryIntent.quran: [
-        r'\b(Ù‚Ø±Ø¢Ù†|Ù‚Ø±Ø£Ù†|ÙƒØªØ§Ø¨ Ø§Ù„Ù„Ù‡)\b',
-        r'\b(Ø³ÙˆØ±Ø©|Ø¢ÙŠØ©|ØªÙ„Ø§ÙˆØ©)\b',
-        r'\b(Ø­ÙØ¸|ØªØ¬ÙˆÙŠØ¯|ØªÙØ³ÙŠØ±)\b',
-        r'ÙŠÙ‚ÙˆÙ„ Ø§Ù„Ù‚Ø±Ø¢Ù†',
-        r'ÙÙŠ Ø§Ù„Ù‚Ø±Ø¢Ù†',
+        r'\b(قرآن|قرءان|كتاب الله)\b',
+        r'\b(سورة|آية|تلاوة)\b',
+        r'\b(حفظ|تجويد|تفسير)\b',
+        r'يقول القرآن',
+        r'في القرآن',
       ],
       QueryIntent.fasting: [
-        r'\b(ØµÙˆÙ…|ØµÙŠØ§Ù…|Ø±Ù…Ø¶Ø§Ù†)\b',
-        r'\b(Ø¥ÙØ·Ø§Ø±|Ø³Ø­ÙˆØ±|Ø¥Ù…Ø³Ø§Ùƒ)\b',
-        r'Ø£Ø­ÙƒØ§Ù… Ø§Ù„ØµÙŠØ§Ù…',
-        r'ÙƒÙŠÙÙŠØ© Ø§Ù„ØµÙˆÙ…',
+        r'\b(صوم|صيام|رمضان)\b',
+        r'\b(إفطار|سحور|إمساك)\b',
+        r'أحكام الصيام',
+        r'كيفية الصوم',
       ],
     },
     'ur': {
       QueryIntent.prayer: [
-        r'\b(Ù†Ù…Ø§Ø²|ØµÙ„Ø§Ø©|Ø¹Ø¨Ø§Ø¯Øª)\b',
-        r'\b(ÙØ¬Ø±|Ø¸ÛØ±|Ø¹ØµØ±|Ù…ØºØ±Ø¨|Ø¹Ø´Ø§Ø¡)\b',
-        r'\b(Ù‚ÛŒØ§Ù…|ØªÛØ¬Ø¯|ÙˆØªØ±)\b',
-        r'Ù†Ù…Ø§Ø² Ú©ÛŒØ³Û’ Ù¾Ú‘Ú¾ÛŒÚº',
-        r'Ù†Ù…Ø§Ø² Ú©Ø§ ÙˆÙ‚Øª',
+        r'\b(نماز|صلاة|عبادت)\b',
+        r'\b(فجر|ظہر|عصر|مغرب|عشاء)\b',
+        r'\b(قیام|تہجد|وتر)\b',
+        r'نماز کیسے پڑھیں',
+        r'نماز کا وقت',
       ],
       QueryIntent.dua: [
-        r'\b(Ø¯Ø¹Ø§|Ø§Ù„ØªØ¬Ø§|Ù…Ù†Øª)\b',
-        r'\b(Ù…ÛØ±Ø¨Ø§Ù†ÛŒ|Ù…Ø¯Ø¯|Ø¨Ø±Ú©Øª|Ø­ÙØ§Ø¸Øª)\b',
-        r'\b(Ù…Ø¹Ø§ÙÛŒ|Ø±Ø­Ù…|ÛØ¯Ø§ÛŒØª)\b',
-        r'Ø¯Ø¹Ø§ Ø¨Ø±Ø§Ø¦Û’',
-        r'Ù…ÛŒØ±Û’ Ù„ÛŒÛ’ Ø¯Ø¹Ø§',
+        r'\b(دعا|التجا|منت)\b',
+        r'\b(مہربانی|مدد|برکت|حفاظت)\b',
+        r'\b(معافی|رحم|ہدایت)\b',
+        r'دعا برائے',
+        r'میرے لیے دعا',
       ],
     },
     'id': {
@@ -193,20 +194,20 @@ class IntentClassifier {
   static const Map<String, List<String>> _contextModifiers = {
     'time_sensitive': [
       r'\b(now|immediately|urgent|quickly|today)\b',
-      r'\b(Ø§Ù„Ø¢Ù†|ÙÙˆØ±Ø§Ù‹|Ø¹Ø§Ø¬Ù„|Ø§Ù„ÙŠÙˆÙ…)\b',
-      r'\b(Ø§Ø¨Ú¾ÛŒ|ÙÙˆØ±ÛŒ|Ø¢Ø¬|Ø¬Ù„Ø¯ÛŒ)\b',
+      r'\b(الآن|فوراً|عاجل|اليوم)\b',
+      r'\b(ابھی|فوری|آج|جلدی)\b',
       r'\b(sekarang|segera|hari ini|cepat)\b',
     ],
     'emotional_distress': [
       r'\b(worried|anxious|scared|desperate|helpless)\b',
-      r'\b(Ù‚Ù„Ù‚|Ø®Ø§Ø¦Ù|ÙŠØ§Ø¦Ø³|Ø¹Ø§Ø¬Ø²)\b',
-      r'\b(Ù¾Ø±ÛŒØ´Ø§Ù†|Ø®ÙˆÙ|Ù…Ø§ÛŒÙˆØ³|Ø¨Û’Ø¨Ø³)\b',
+      r'\b(قلق|خائف|يائس|عاجز)\b',
+      r'\b(پریشان|خوف|مایوس|بےبس)\b',
       r'\b(khawatir|takut|putus asa|tidak berdaya)\b',
     ],
     'seeking_knowledge': [
       r'\b(what|how|why|when|where|explain|tell me)\b',
-      r'\b(Ù…Ø§|ÙƒÙŠÙ|Ù„Ù…Ø§Ø°Ø§|Ù…ØªÙ‰|Ø£ÙŠÙ†|Ø§Ø´Ø±Ø­)\b',
-      r'\b(Ú©ÛŒØ§|Ú©ÛŒØ³Û’|Ú©ÛŒÙˆÚº|Ú©Ø¨|Ú©ÛØ§Úº|Ø¨ØªØ§Ø¦ÛŒÚº)\b',
+      r'\b(ما|كيف|لماذا|متى|أين|اشرح)\b',
+      r'\b(کیا|کیسے|کیوں|کب|کہاں|بتائیں)\b',
       r'\b(apa|bagaimana|mengapa|kapan|dimana|jelaskan)\b',
     ],
   };
@@ -258,10 +259,7 @@ class IntentClassifier {
     }
 
     final maxScore = intentScores.values.reduce(max);
-    final topIntent = intentScores.entries
-        .where((entry) => entry.value == maxScore)
-        .first
-        .key;
+    final topIntent = intentScores.entries.where((entry) => entry.value == maxScore).first.key;
 
     // Require minimum confidence threshold
     if (maxScore < 0.5) {
@@ -356,26 +354,20 @@ class IntentClassifier {
         switch (modifierType) {
           case 'time_sensitive':
             // Boost emergency and guidance intents
-            intentScores[QueryIntent.emergency] =
-                (intentScores[QueryIntent.emergency] ?? 0) + 0.3;
-            intentScores[QueryIntent.guidance] =
-                (intentScores[QueryIntent.guidance] ?? 0) + 0.2;
+            intentScores[QueryIntent.emergency] = (intentScores[QueryIntent.emergency] ?? 0) + 0.3;
+            intentScores[QueryIntent.guidance] = (intentScores[QueryIntent.guidance] ?? 0) + 0.2;
             break;
 
           case 'emotional_distress':
             // Boost healing, protection, and guidance intents
-            intentScores[QueryIntent.healing] =
-                (intentScores[QueryIntent.healing] ?? 0) + 0.3;
-            intentScores[QueryIntent.protection] =
-                (intentScores[QueryIntent.protection] ?? 0) + 0.3;
-            intentScores[QueryIntent.guidance] =
-                (intentScores[QueryIntent.guidance] ?? 0) + 0.2;
+            intentScores[QueryIntent.healing] = (intentScores[QueryIntent.healing] ?? 0) + 0.3;
+            intentScores[QueryIntent.protection] = (intentScores[QueryIntent.protection] ?? 0) + 0.3;
+            intentScores[QueryIntent.guidance] = (intentScores[QueryIntent.guidance] ?? 0) + 0.2;
             break;
 
           case 'seeking_knowledge':
             // Boost knowledge intent
-            intentScores[QueryIntent.knowledge] =
-                (intentScores[QueryIntent.knowledge] ?? 0) + 0.3;
+            intentScores[QueryIntent.knowledge] = (intentScores[QueryIntent.knowledge] ?? 0) + 0.3;
             break;
         }
       }
@@ -416,15 +408,13 @@ class IntentClassifier {
 
   /// Check if query has mixed intents
   bool hasMixedIntents(Map<QueryIntent, double> scores) {
-    final significantScores =
-        scores.values.where((score) => score > 0.3).length;
+    final significantScores = scores.values.where((score) => score > 0.3).length;
     return significantScores > 1;
   }
 
   /// Get the secondary intent if mixed intents are detected
   QueryIntent? getSecondaryIntent(Map<QueryIntent, double> scores) {
-    final sortedScores = scores.entries.toList()
-      ..sort((a, b) => b.value.compareTo(a.value));
+    final sortedScores = scores.entries.toList()..sort((a, b) => b.value.compareTo(a.value));
 
     if (sortedScores.length >= 2 && sortedScores[1].value > 0.3) {
       return sortedScores[1].key;
@@ -440,14 +430,8 @@ class IntentClassifier {
         r'\b(what|how|why|when|where|which|who|can|is|are|do|does|will)\b',
         r'\?',
       ],
-      'ar': [
-        r'\b(Ù…Ø§|ÙƒÙŠÙ|Ù„Ù…Ø§Ø°Ø§|Ù…ØªÙ‰|Ø£ÙŠÙ†|Ù…Ù†|Ù‡Ù„|Ø£ÙŠÙ†)\b',
-        r'\ØŸ'
-      ],
-      'ur': [
-        r'\b(Ú©ÛŒØ§|Ú©ÛŒØ³Û’|Ú©ÛŒÙˆÚº|Ú©Ø¨|Ú©ÛØ§Úº|Ú©ÙˆÙ†|Ú©ÛŒØ§)\b',
-        r'\ØŸ'
-      ],
+      'ar': [r'\b(ما|كيف|لماذا|متى|أين|من|هل|أين)\b', r'؟'],
+      'ur': [r'\b(کیا|کیسے|کیوں|کب|کہاں|کون|کیا)\b', r'؟'],
       'id': [r'\b(apa|bagaimana|mengapa|kapan|dimana|siapa|apakah)\b', r'\?'],
     };
 
@@ -461,10 +445,8 @@ class IntentClassifier {
   bool isStatement(String query, String language) {
     final statementPatterns = {
       'en': [r'\b(i am|i have|i want|i need|i feel|my)\b'],
-      'ar': [r'\b(Ø£Ù†Ø§|Ù„Ø¯ÙŠ|Ø£Ø±ÙŠØ¯|Ø£Ø­ØªØ§Ø¬|Ø£Ø´Ø¹Ø±)\b'],
-      'ur': [
-        r'\b(Ù…ÛŒÚº|Ù…ÛŒØ±Û’ Ù¾Ø§Ø³|Ù…Ø¬Ú¾Û’ Ú†Ø§ÛÛŒÛ’|Ù…ÛŒÚº Ù…Ø­Ø³ÙˆØ³)\b'
-      ],
+      'ar': [r'\b(أنا|لدي|أريد|أحتاج|أشعر)\b'],
+      'ur': [r'\b(میں|میرے پاس|مجھے چاہیے|میں محسوس)\b'],
       'id': [r'\b(saya|saya punya|saya ingin|saya butuh|saya merasa)\b'],
     };
 

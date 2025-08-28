@@ -12,8 +12,7 @@ import '../secure_storage/secure_storage_service.dart';
 /// Handles real-time family collaboration, sharing, and group activities
 class CollaborativeService {
   static CollaborativeService? _instance;
-  static CollaborativeService get instance =>
-      _instance ??= CollaborativeService._();
+  static CollaborativeService get instance => _instance ??= CollaborativeService._();
 
   CollaborativeService._();
 
@@ -32,31 +31,20 @@ class CollaborativeService {
   String? _currentUserId;
 
   // Stream controllers for collaborative events
-  final _familyDuaSharedController =
-      StreamController<FamilyDuaShare>.broadcast();
-  final _familyMemberJoinedController =
-      StreamController<FamilyMemberJoined>.broadcast();
-  final _familyMemberLeftController =
-      StreamController<FamilyMemberLeft>.broadcast();
-  final _collaborativeEditController =
-      StreamController<CollaborativeEdit>.broadcast();
-  final _familyActivityController =
-      StreamController<FamilyActivity>.broadcast();
+  final _familyDuaSharedController = StreamController<FamilyDuaShare>.broadcast();
+  final _familyMemberJoinedController = StreamController<FamilyMemberJoined>.broadcast();
+  final _familyMemberLeftController = StreamController<FamilyMemberLeft>.broadcast();
+  final _collaborativeEditController = StreamController<CollaborativeEdit>.broadcast();
+  final _familyActivityController = StreamController<FamilyActivity>.broadcast();
   final _prayerSessionController = StreamController<PrayerSession>.broadcast();
 
   // Public streams
-  Stream<FamilyDuaShare> get familyDuaSharedStream =>
-      _familyDuaSharedController.stream;
-  Stream<FamilyMemberJoined> get familyMemberJoinedStream =>
-      _familyMemberJoinedController.stream;
-  Stream<FamilyMemberLeft> get familyMemberLeftStream =>
-      _familyMemberLeftController.stream;
-  Stream<CollaborativeEdit> get collaborativeEditStream =>
-      _collaborativeEditController.stream;
-  Stream<FamilyActivity> get familyActivityStream =>
-      _familyActivityController.stream;
-  Stream<PrayerSession> get prayerSessionStream =>
-      _prayerSessionController.stream;
+  Stream<FamilyDuaShare> get familyDuaSharedStream => _familyDuaSharedController.stream;
+  Stream<FamilyMemberJoined> get familyMemberJoinedStream => _familyMemberJoinedController.stream;
+  Stream<FamilyMemberLeft> get familyMemberLeftStream => _familyMemberLeftController.stream;
+  Stream<CollaborativeEdit> get collaborativeEditStream => _collaborativeEditController.stream;
+  Stream<FamilyActivity> get familyActivityStream => _familyActivityController.stream;
+  Stream<PrayerSession> get prayerSessionStream => _prayerSessionController.stream;
 
   // Family data caching
   final Map<String, FamilyMember> _familyMembers = {};
@@ -68,7 +56,7 @@ class CollaborativeService {
     if (_isInitialized) return;
 
     try {
-      AppLogger.info('ðŸ”„ Initializing Collaborative Service...');
+      AppLogger.info('🔄 Initializing Collaborative Service...');
 
       _secureStorage = SecureStorageService.instance;
       await _secureStorage.initialize();
@@ -87,9 +75,9 @@ class CollaborativeService {
       }
 
       _isInitialized = true;
-      AppLogger.info('âœ… Collaborative Service initialized');
+      AppLogger.info('✅ Collaborative Service initialized');
     } catch (e) {
-      AppLogger.error('âŒ Failed to initialize Collaborative Service: $e');
+      AppLogger.error('❌ Failed to initialize Collaborative Service: $e');
       rethrow;
     }
   }
@@ -100,32 +88,29 @@ class CollaborativeService {
     _currentFamilyId = await _secureStorage.read('family_id');
 
     if (_currentFamilyId != null) {
-      AppLogger.info(
-          'ðŸ‘¨â€ðŸ‘©â€ðŸ‘§â€ðŸ‘¦ Found family ID: $_currentFamilyId');
+      AppLogger.info('👨‍👩‍👧‍👦 Found family ID: $_currentFamilyId');
       await _loadFamilyMembers();
       await _loadRecentShares();
       await _loadRecentActivities();
     } else {
-      AppLogger.info('ðŸ‘¤ No family associated with this user');
+      AppLogger.info('🧑‍🤝‍🧑 No family associated with this user');
     }
   }
 
   /// Setup connectivity monitoring
   Future<void> _setupConnectivityMonitoring() async {
     final connectivity = Connectivity();
-    _isOnline =
-        await connectivity.checkConnectivity() != ConnectivityResult.none;
+    _isOnline = await connectivity.checkConnectivity() != ConnectivityResult.none;
 
     connectivity.onConnectivityChanged.listen((result) {
       final wasOnline = _isOnline;
       _isOnline = result != ConnectivityResult.none;
 
       if (!wasOnline && _isOnline && _currentFamilyId != null) {
-        AppLogger.info(
-            'ðŸŒ Internet restored, reconnecting to family collaboration...');
+        AppLogger.info('🌐 Internet restored, reconnecting to family collaboration...');
         _initializeSocketConnection();
       } else if (wasOnline && !_isOnline) {
-        AppLogger.warning('ðŸ“¡ Internet lost, collaborative features offline');
+        AppLogger.warning('📡 Internet lost, collaborative features offline');
         _isConnected = false;
         _socket?.disconnect();
       }
@@ -143,11 +128,7 @@ class CollaborativeService {
         'https://api.duacopilot.com',
         socket_io.OptionBuilder()
             .setTransports(['websocket'])
-            .setAuth({
-              if (token != null) 'token': token,
-              'user_id': _currentUserId,
-              'family_id': _currentFamilyId
-            })
+            .setAuth({if (token != null) 'token': token, 'user_id': _currentUserId, 'family_id': _currentFamilyId})
             .enableReconnection()
             .setReconnectionAttempts(5)
             .setReconnectionDelay(5000)
@@ -155,7 +136,7 @@ class CollaborativeService {
       );
 
       _socket!.onConnect((_) {
-        AppLogger.info('âœ… Connected to collaborative server');
+        AppLogger.info('✅ Connected to collaborative server');
         _isConnected = true;
         _setupSocketListeners();
         _joinFamilyRoom();
@@ -167,13 +148,13 @@ class CollaborativeService {
       });
 
       _socket!.onConnectError((error) {
-        AppLogger.error('âŒ Collaborative connection error: $error');
+        AppLogger.error('❌ Collaborative connection error: $error');
         _isConnected = false;
       });
 
       _socket!.connect();
     } catch (e) {
-      AppLogger.error('âŒ Failed to initialize socket connection: $e');
+      AppLogger.error('❌ Failed to initialize socket connection: $e');
     }
   }
 
@@ -215,10 +196,8 @@ class CollaborativeService {
   /// Join family room for collaborative features
   void _joinFamilyRoom() {
     if (_socket?.connected == true && _currentFamilyId != null) {
-      _socket!.emit('join_family',
-          {'family_id': _currentFamilyId, 'user_id': _currentUserId});
-      AppLogger.info(
-          'ðŸ‘¨â€ðŸ‘©â€ðŸ‘§â€ðŸ‘¦ Joined family room: $_currentFamilyId');
+      _socket!.emit('join_family', {'family_id': _currentFamilyId, 'user_id': _currentUserId});
+      AppLogger.info('👨‍👩‍👧‍👦 Joined family room: $_currentFamilyId');
     }
   }
 
@@ -250,11 +229,11 @@ class CollaborativeService {
 
       if (_isConnected) {
         _socket!.emit('share_family_dua', shareData);
-        AppLogger.info('ðŸ“¤ Du\'a shared with family: $duaTitle');
+        AppLogger.info('📤 Du\'a shared with family: $duaTitle');
       } else {
         // Queue for later when connection is restored
         await _queueFamilyShare(shareData);
-        AppLogger.info('ðŸ“‹ Du\'a sharing queued (offline): $duaTitle');
+        AppLogger.info('📋 Du\'a sharing queued (offline): $duaTitle');
       }
 
       // Add to local cache
@@ -265,7 +244,7 @@ class CollaborativeService {
       }
       await _saveRecentShares();
     } catch (e) {
-      AppLogger.error('âŒ Failed to share Du\'a with family: $e');
+      AppLogger.error('❌ Failed to share Du\'a with family: $e');
       rethrow;
     }
   }
@@ -296,13 +275,13 @@ class CollaborativeService {
 
       if (_isConnected) {
         _socket!.emit('start_prayer_session', sessionData);
-        AppLogger.info('ðŸ¤² Started family prayer session: $sessionName');
+        AppLogger.info('🤲 Started family prayer session: $sessionName');
       } else {
-        AppLogger.warning('âš ï¸ Cannot start prayer session while offline');
+        AppLogger.warning('⚠️ Cannot start prayer session while offline');
         throw Exception('Cannot start prayer session while offline');
       }
     } catch (e) {
-      AppLogger.error('âŒ Failed to start family prayer session: $e');
+      AppLogger.error('❌ Failed to start family prayer session: $e');
       rethrow;
     }
   }
@@ -321,9 +300,9 @@ class CollaborativeService {
         'joined_at': DateTime.now().toIso8601String(),
       });
 
-      AppLogger.info('ðŸ¤² Joined family prayer session: $sessionId');
+      AppLogger.info('🤲 Joined family prayer session: $sessionId');
     } catch (e) {
-      AppLogger.error('âŒ Failed to join prayer session: $e');
+      AppLogger.error('❌ Failed to join prayer session: $e');
       rethrow;
     }
   }
@@ -340,15 +319,14 @@ class CollaborativeService {
         'left_at': DateTime.now().toIso8601String(),
       });
 
-      AppLogger.info('ðŸ‘‹ Left family prayer session: $sessionId');
+      AppLogger.info('👋 Left family prayer session: $sessionId');
     } catch (e) {
-      AppLogger.error('âŒ Failed to leave prayer session: $e');
+      AppLogger.error('❌ Failed to leave prayer session: $e');
     }
   }
 
   /// Create a family group
-  Future<void> createFamily(
-      {required String familyName, String? description}) async {
+  Future<void> createFamily({required String familyName, String? description}) async {
     try {
       final familyId = 'family_${DateTime.now().millisecondsSinceEpoch}';
 
@@ -375,10 +353,9 @@ class CollaborativeService {
         await _initializeSocketConnection();
       }
 
-      AppLogger.info(
-          'ðŸ‘¨â€ðŸ‘©â€ðŸ‘§â€ðŸ‘¦ Created family: $familyName ($familyId)');
+      AppLogger.info('👨‍👩‍👧‍👦 Created family: $familyName ($familyId)');
     } catch (e) {
-      AppLogger.error('âŒ Failed to create family: $e');
+      AppLogger.error('❌ Failed to create family: $e');
       rethrow;
     }
   }
@@ -397,9 +374,9 @@ class CollaborativeService {
         await _initializeSocketConnection();
       }
 
-      AppLogger.info('ðŸ‘¨â€ðŸ‘©â€ðŸ‘§â€ðŸ‘¦ Joined family: $familyId');
+      AppLogger.info('👨‍👩‍👧‍👦 Joined family: $familyId');
     } catch (e) {
-      AppLogger.error('âŒ Failed to join family: $e');
+      AppLogger.error('❌ Failed to join family: $e');
       rethrow;
     }
   }
@@ -429,9 +406,9 @@ class CollaborativeService {
       _socket?.disconnect();
       _isConnected = false;
 
-      AppLogger.info('ðŸ‘‹ Left family');
+      AppLogger.info('👋 Left family');
     } catch (e) {
-      AppLogger.error('âŒ Failed to leave family: $e');
+      AppLogger.error('❌ Failed to leave family: $e');
     }
   }
 
@@ -448,9 +425,9 @@ class CollaborativeService {
       }
       _saveRecentShares();
 
-      AppLogger.info('ðŸ“¥ Family Du\'a received: ${share.duaTitle}');
+      AppLogger.info('📥 Family Du\'a received: ${share.duaTitle}');
     } catch (e) {
-      AppLogger.error('âŒ Failed to handle family Du\'a shared: $e');
+      AppLogger.error('❌ Failed to handle family Du\'a shared: $e');
     }
   }
 
@@ -464,10 +441,9 @@ class CollaborativeService {
       _familyMembers[event.member.id] = event.member;
       _saveFamilyMembers();
 
-      AppLogger.info(
-          'ðŸ‘¨â€ðŸ‘©â€ðŸ‘§â€ðŸ‘¦ Family member joined: ${event.member.name}');
+      AppLogger.info('👨‍👩‍👧‍👦 Family member joined: ${event.member.name}');
     } catch (e) {
-      AppLogger.error('âŒ Failed to handle family member joined: $e');
+      AppLogger.error('❌ Failed to handle family member joined: $e');
     }
   }
 
@@ -481,9 +457,9 @@ class CollaborativeService {
       _familyMembers.remove(event.memberId);
       _saveFamilyMembers();
 
-      AppLogger.info('ðŸ‘‹ Family member left: ${event.memberName}');
+      AppLogger.info('👋 Family member left: ${event.memberName}');
     } catch (e) {
-      AppLogger.error('âŒ Failed to handle family member left: $e');
+      AppLogger.error('❌ Failed to handle family member left: $e');
     }
   }
 
@@ -493,9 +469,9 @@ class CollaborativeService {
       final edit = CollaborativeEdit.fromJson(data);
       _collaborativeEditController.add(edit);
 
-      AppLogger.debug('âœï¸ Collaborative edit received: ${edit.type}');
+      AppLogger.debug('✏️ Collaborative edit received: ${edit.type}');
     } catch (e) {
-      AppLogger.error('âŒ Failed to handle collaborative edit: $e');
+      AppLogger.error('❌ Failed to handle collaborative edit: $e');
     }
   }
 
@@ -512,9 +488,9 @@ class CollaborativeService {
       }
       _saveRecentActivities();
 
-      AppLogger.debug('ðŸ“‹ Family activity: ${activity.type}');
+      AppLogger.debug('📋 Family activity: ${activity.type}');
     } catch (e) {
-      AppLogger.error('âŒ Failed to handle family activity: $e');
+      AppLogger.error('❌ Failed to handle family activity: $e');
     }
   }
 
@@ -524,9 +500,9 @@ class CollaborativeService {
       final session = PrayerSession.fromJson(data);
       _prayerSessionController.add(session);
 
-      AppLogger.info('ðŸ¤² Prayer session started: ${session.sessionName}');
+      AppLogger.info('🤲 Prayer session started: ${session.sessionName}');
     } catch (e) {
-      AppLogger.error('âŒ Failed to handle prayer session started: $e');
+      AppLogger.error('❌ Failed to handle prayer session started: $e');
     }
   }
 
@@ -536,10 +512,9 @@ class CollaborativeService {
       final session = PrayerSession.fromJson(data);
       _prayerSessionController.add(session);
 
-      AppLogger.info(
-          'ðŸ¤² Member joined prayer session: ${session.sessionName}');
+      AppLogger.info('🤲 Member joined prayer session: ${session.sessionName}');
     } catch (e) {
-      AppLogger.error('âŒ Failed to handle prayer session joined: $e');
+      AppLogger.error('❌ Failed to handle prayer session joined: $e');
     }
   }
 
@@ -549,9 +524,9 @@ class CollaborativeService {
       final session = PrayerSession.fromJson(data);
       _prayerSessionController.add(session);
 
-      AppLogger.info('ðŸ¤² Prayer session ended: ${session.sessionName}');
+      AppLogger.info('🤲 Prayer session ended: ${session.sessionName}');
     } catch (e) {
-      AppLogger.error('âŒ Failed to handle prayer session ended: $e');
+      AppLogger.error('❌ Failed to handle prayer session ended: $e');
     }
   }
 
@@ -562,7 +537,7 @@ class CollaborativeService {
       queuedShares.add(shareData);
       await _prefs.setString('queued_family_shares', jsonEncode(queuedShares));
     } catch (e) {
-      AppLogger.error('âŒ Failed to queue family share: $e');
+      AppLogger.error('❌ Failed to queue family share: $e');
     }
   }
 
@@ -574,7 +549,7 @@ class CollaborativeService {
         return jsonDecode(sharesJson) as List<dynamic>;
       }
     } catch (e) {
-      AppLogger.error('âŒ Failed to get queued shares: $e');
+      AppLogger.error('❌ Failed to get queued shares: $e');
     }
     return [];
   }
@@ -591,7 +566,7 @@ class CollaborativeService {
         });
       }
     } catch (e) {
-      AppLogger.error('âŒ Failed to load family members: $e');
+      AppLogger.error('❌ Failed to load family members: $e');
     }
   }
 
@@ -605,10 +580,9 @@ class CollaborativeService {
         membersData[id] = member.toJson();
       });
 
-      await _prefs.setString(
-          'family_members_$_currentFamilyId', jsonEncode(membersData));
+      await _prefs.setString('family_members_$_currentFamilyId', jsonEncode(membersData));
     } catch (e) {
-      AppLogger.error('âŒ Failed to save family members: $e');
+      AppLogger.error('❌ Failed to save family members: $e');
     }
   }
 
@@ -619,11 +593,10 @@ class CollaborativeService {
       if (sharesJson != null) {
         final sharesData = jsonDecode(sharesJson) as List<dynamic>;
         _recentShares.clear();
-        _recentShares.addAll(
-            sharesData.map((data) => FamilyDuaShare.fromJson(data)).toList());
+        _recentShares.addAll(sharesData.map((data) => FamilyDuaShare.fromJson(data)).toList());
       }
     } catch (e) {
-      AppLogger.error('âŒ Failed to load recent shares: $e');
+      AppLogger.error('❌ Failed to load recent shares: $e');
     }
   }
 
@@ -633,27 +606,23 @@ class CollaborativeService {
       if (_currentFamilyId == null) return;
 
       final sharesData = _recentShares.map((share) => share.toJson()).toList();
-      await _prefs.setString(
-          'recent_shares_$_currentFamilyId', jsonEncode(sharesData));
+      await _prefs.setString('recent_shares_$_currentFamilyId', jsonEncode(sharesData));
     } catch (e) {
-      AppLogger.error('âŒ Failed to save recent shares: $e');
+      AppLogger.error('❌ Failed to save recent shares: $e');
     }
   }
 
   /// Load recent activities from storage
   Future<void> _loadRecentActivities() async {
     try {
-      final activitiesJson =
-          _prefs.getString('recent_activities_$_currentFamilyId');
+      final activitiesJson = _prefs.getString('recent_activities_$_currentFamilyId');
       if (activitiesJson != null) {
         final activitiesData = jsonDecode(activitiesJson) as List<dynamic>;
         _recentActivities.clear();
-        _recentActivities.addAll(activitiesData
-            .map((data) => FamilyActivity.fromJson(data))
-            .toList());
+        _recentActivities.addAll(activitiesData.map((data) => FamilyActivity.fromJson(data)).toList());
       }
     } catch (e) {
-      AppLogger.error('âŒ Failed to load recent activities: $e');
+      AppLogger.error('❌ Failed to load recent activities: $e');
     }
   }
 
@@ -662,12 +631,10 @@ class CollaborativeService {
     try {
       if (_currentFamilyId == null) return;
 
-      final activitiesData =
-          _recentActivities.map((activity) => activity.toJson()).toList();
-      await _prefs.setString(
-          'recent_activities_$_currentFamilyId', jsonEncode(activitiesData));
+      final activitiesData = _recentActivities.map((activity) => activity.toJson()).toList();
+      await _prefs.setString('recent_activities_$_currentFamilyId', jsonEncode(activitiesData));
     } catch (e) {
-      AppLogger.error('âŒ Failed to save recent activities: $e');
+      AppLogger.error('❌ Failed to save recent activities: $e');
     }
   }
 
@@ -831,10 +798,7 @@ class FamilyMemberLeft {
   final String memberName;
   final DateTime timestamp;
 
-  FamilyMemberLeft(
-      {required this.memberId,
-      required this.memberName,
-      required this.timestamp});
+  FamilyMemberLeft({required this.memberId, required this.memberName, required this.timestamp});
 
   factory FamilyMemberLeft.fromJson(Map<String, dynamic> json) {
     return FamilyMemberLeft(

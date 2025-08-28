@@ -1,31 +1,33 @@
 import 'dart:convert';
+
 import 'package:crypto/crypto.dart';
+
 import '../models/cache_models.dart';
 
 /// Semantic similarity hashing service for query deduplication
 class SemanticHashService {
   // Arabic normalization mappings
   static const Map<String, String> _arabicNormalization = {
-    'Ø£': 'Ø§',
-    'Ø¥': 'Ø§',
-    'Ø¢': 'Ø§',
-    'Ø©': 'Ù‡',
-    'ÙŠ': 'Ù‰',
-    'Ø¤': 'Ùˆ',
-    'Ø¦': 'Ù‰',
+    'أ': 'ا',
+    'إ': 'ا',
+    'آ': 'ا',
+    'ة': 'ه',
+    'ي': 'ى',
+    'ؤ': 'و',
+    'ئ': 'ى',
   };
 
   // Islamic term synonyms for semantic matching
   static const Map<String, List<String>> _islamicSynonyms = {
     'prayer': ['salah', 'namaz', 'worship', 'prostration'],
     'dua': ['supplication', 'invocation', 'prayer', 'request'],
-    'quran': ['qur\'an', 'book', 'scripture', 'revelation'],
+    'quran': ["qur'an", 'book', 'scripture', 'revelation'],
     'allah': ['god', 'creator', 'almighty'],
     'prophet': ['messenger', 'rasul', 'nabi'],
-    'ØµÙ„Ø§Ø©': ['Ø¹Ø¨Ø§Ø¯Ø©', 'Ø±ÙƒÙˆØ¹', 'Ø³Ø¬ÙˆØ¯', 'Ù‚ÙŠØ§Ù…'],
-    'Ø¯Ø¹Ø§Ø¡': ['Ø§Ø³ØªØºØ§Ø«Ø©', 'ØªÙˆØ³Ù„', 'Ø§Ø¨ØªÙ‡Ø§Ù„', 'Ø·Ù„Ø¨'],
-    'Ù‚Ø±Ø¢Ù†': ['ÙƒØªØ§Ø¨', 'ÙˆØ­ÙŠ', 'ØªÙ†Ø²ÙŠÙ„'],
-    'Ø§Ù„Ù„Ù‡': ['Ø±Ø¨', 'Ø®Ø§Ù„Ù‚', 'Ø¥Ù„Ù‡'],
+    'صلاة': ['عبادة', 'ركوع', 'سجود', 'قيام'],
+    'دعاء': ['استغاثة', 'توسل', 'ابتهال', 'طلب'],
+    'قرآن': ['كتاب', 'وحي', 'تنزيل'],
+    'الله': ['رب', 'خالق', 'إله'],
   };
 
   // Stop words for different languages
@@ -120,59 +122,58 @@ class SemanticHashService {
       'once',
     ],
     'ar': [
-      'ÙÙŠ',
-      'Ù…Ù†',
-      'Ø¥Ù„Ù‰',
-      'Ø¹Ù„Ù‰',
-      'Ø¹Ù†',
-      'Ù…Ø¹',
-      'ÙƒÙ„',
-      'Ø¨Ø¹Ø¶',
-      'Ù‡Ø°Ø§',
-      'Ù‡Ø°Ù‡',
-      'Ø°Ù„Ùƒ',
-      'ØªÙ„Ùƒ',
-      'Ø§Ù„ØªÙŠ',
-      'Ø§Ù„Ø°ÙŠ',
-      'Ø§Ù„ØªÙŠ',
-      'Ø£Ù†',
-      'Ø¥Ù†',
-      'ÙƒØ§Ù†',
-      'ÙŠÙƒÙˆÙ†',
-      'ØªÙƒÙˆÙ†',
-      'Ø³ÙˆÙ',
-      'Ù‚Ø¯',
-      'Ù„Ù…',
-      'Ù„Ù†',
-      'Ù…Ø§',
-      'Ù„Ø§',
-      'Ù†Ø¹Ù…',
-      'ÙƒÙŠÙ',
-      'Ù…ØªÙ‰',
-      'Ø£ÙŠÙ†',
+      'في',
+      'من',
+      'إلى',
+      'على',
+      'عن',
+      'مع',
+      'كل',
+      'بعض',
+      'هذا',
+      'هذه',
+      'ذلك',
+      'تلك',
+      'التي',
+      'الذي',
+      'أن',
+      'إن',
+      'كان',
+      'يكون',
+      'تكون',
+      'سوف',
+      'قد',
+      'لم',
+      'لن',
+      'ما',
+      'لا',
+      'نعم',
+      'كيف',
+      'متى',
+      'أين',
     ],
     'ur': [
-      'Ú©Û’',
-      'Ú©ÛŒ',
-      'Ú©Ùˆ',
-      'Ú©Ø§',
-      'Ù…ÛŒÚº',
-      'Ù¾Ø±',
-      'Ø³Û’',
-      'Ú©Û’ Ù„ÛŒÛ’',
-      'ÛŒÛ',
-      'ÙˆÛ',
-      'Ø¬Ùˆ',
-      'Ú©Û',
-      'Ø§ÙˆØ±',
-      'ÛŒØ§',
-      'Ù„ÛŒÚ©Ù†',
-      'ÛÛ’',
-      'ÛÛŒÚº',
-      'ØªÚ¾Ø§',
-      'ØªÚ¾Û’',
-      'ÛÙˆ',
-      'ÛÙˆÚº',
+      'کے',
+      'کی',
+      'کو',
+      'کا',
+      'میں',
+      'پر',
+      'سے',
+      'کے لیے',
+      'یہ',
+      'وہ',
+      'جو',
+      'کہ',
+      'اور',
+      'یا',
+      'لیکن',
+      'ہے',
+      'ہیں',
+      'تھا',
+      'تھے',
+      'ہو',
+      'ہوں',
     ],
     'id': [
       'yang',
@@ -298,8 +299,8 @@ class SemanticHashService {
 
       case 'ur':
         // Urdu normalization
-        normalized = normalized.replaceAll('Ú©', 'Ùƒ');
-        normalized = normalized.replaceAll('ÛŒ', 'ÙŠ');
+        normalized = normalized.replaceAll('ک', 'ك');
+        normalized = normalized.replaceAll('ی', 'ي');
         break;
 
       case 'id':
@@ -322,15 +323,11 @@ class SemanticHashService {
     String normalized,
     String language,
   ) {
-    final words = normalized
-        .split(RegExp(r'\s+'))
-        .where((word) => word.isNotEmpty)
-        .toList();
+    final words = normalized.split(RegExp(r'\s+')).where((word) => word.isNotEmpty).toList();
 
     // Remove stop words
     final stopWords = _stopWords[language] ?? _stopWords['en']!;
-    final meaningfulWords =
-        words.where((word) => !stopWords.contains(word.toLowerCase())).toList();
+    final meaningfulWords = words.where((word) => !stopWords.contains(word.toLowerCase())).toList();
 
     // Expand with synonyms
     final expandedTokens = <String>[];
@@ -425,8 +422,7 @@ class SemanticHashService {
   /// Check if two tokens are synonyms
   static bool _areSynonyms(String token1, String token2) {
     for (final synonymGroup in _islamicSynonyms.values) {
-      if (synonymGroup.contains(token1.toLowerCase()) &&
-          synonymGroup.contains(token2.toLowerCase())) {
+      if (synonymGroup.contains(token1.toLowerCase()) && synonymGroup.contains(token2.toLowerCase())) {
         return true;
       }
     }

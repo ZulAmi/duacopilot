@@ -27,13 +27,11 @@ class ConversationalSearchField extends StatefulWidget {
   });
 
   @override
-  State<ConversationalSearchField> createState() =>
-      _ConversationalSearchFieldState();
+  State<ConversationalSearchField> createState() => _ConversationalSearchFieldState();
 }
 
 /// _ConversationalSearchFieldState class implementation
-class _ConversationalSearchFieldState extends State<ConversationalSearchField>
-    with TickerProviderStateMixin {
+class _ConversationalSearchFieldState extends State<ConversationalSearchField> with TickerProviderStateMixin {
   late TextEditingController _controller;
   late FocusNode _focusNode;
   late AnimationController _micAnimationController;
@@ -251,10 +249,7 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField>
                             Icon(
                               Icons.arrow_outward_rounded,
                               size: 16,
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSurfaceVariant
-                                  .withOpacity(0.6),
+                              color: Theme.of(context).colorScheme.onSurfaceVariant.withOpacity(0.6),
                             ),
                           ],
                         ),
@@ -323,9 +318,7 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField>
           borderRadius: BorderRadius.circular(24),
           color: colorScheme.surface,
           border: Border.all(
-            color: _focusNode.hasFocus
-                ? colorScheme.primary
-                : colorScheme.outline.withOpacity(0.3),
+            color: _focusNode.hasFocus ? colorScheme.primary : colorScheme.outline.withOpacity(0.3),
             width: _focusNode.hasFocus ? 2 : 1,
           ),
           boxShadow: _focusNode.hasFocus
@@ -387,7 +380,7 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField>
               ),
           decoration: InputDecoration(
             hintText: widget.supportArabic
-                ? 'Ask about duas, verses, and Islamic guidance... | Ø§Ø³Ø£Ù„ Ø¹Ù† Ø§Ù„Ø£Ø¯Ø¹ÙŠØ© ÙˆØ§Ù„Ø¢ÙŠØ§Øª ÙˆØ§Ù„Ø¥Ø±Ø´Ø§Ø¯Ø§Øª Ø§Ù„Ø¥Ø³Ù„Ø§Ù…ÙŠØ©...'
+                ? 'Ask about duas, verses, and Islamic guidance... | اسأل عن الأدعية والآيات والإرشادات الإسلامية...'
                 : 'Ask about duas, verses, and Islamic guidance...',
             hintStyle: textTheme.bodyLarge
                 ?.copyWith(
@@ -396,8 +389,7 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField>
                   fontWeight: FontWeight.w400,
                 )
                 .merge(
-                  widget.supportArabic &&
-                          ArabicTypography.containsArabic(_controller.text)
+                  widget.supportArabic && ArabicTypography.containsArabic(_controller.text)
                       ? ArabicTextStyles.bodyMedium(
                           context,
                           fontType: 'readable',
@@ -451,13 +443,8 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField>
                                   )
                                 : null,
                             child: Icon(
-                              _isListening
-                                  ? Icons.mic_rounded
-                                  : Icons.mic_none_rounded,
-                              color: _isListening
-                                  ? colorScheme.primary
-                                  : colorScheme.onSurfaceVariant
-                                      .withOpacity(0.7),
+                              _isListening ? Icons.mic_rounded : Icons.mic_none_rounded,
+                              color: _isListening ? colorScheme.primary : colorScheme.onSurfaceVariant.withOpacity(0.7),
                               size: 24,
                             ),
                           ),

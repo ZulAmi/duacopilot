@@ -1,14 +1,15 @@
 import 'dart:convert';
 import 'dart:math';
-import 'package:flutter/services.dart';
+
 import 'package:duacopilot/core/logging/app_logger.dart';
+import 'package:flutter/services.dart';
+
 import '../models/local_search_models.dart';
 
 /// Service for managing fallback response templates stored in asset JSON files
 class FallbackTemplateService {
   static FallbackTemplateService? _instance;
-  static FallbackTemplateService get instance =>
-      _instance ??= FallbackTemplateService._();
+  static FallbackTemplateService get instance => _instance ??= FallbackTemplateService._();
 
   FallbackTemplateService._();
 
@@ -144,8 +145,7 @@ class FallbackTemplateService {
 
       final categoryCount = <String, int>{};
       for (final template in templates) {
-        categoryCount[template.category] =
-            (categoryCount[template.category] ?? 0) + 1;
+        categoryCount[template.category] = (categoryCount[template.category] ?? 0) + 1;
       }
 
       stats[language] = {
@@ -359,9 +359,9 @@ class FallbackTemplateService {
 
     switch (language) {
       case 'ar':
-        return '$islamicYear Ù‡Ø¬Ø±ÙŠ';
+        return '$islamicYear هجري';
       case 'ur':
-        return '$islamicYear ÛØ¬Ø±ÛŒ';
+        return '$islamicYear ہجری';
       default:
         return '$islamicYear AH';
     }
@@ -459,20 +459,11 @@ class FallbackTemplateService {
         confidence: 0.7,
         completeness: 0.8,
         relevance: 0.9,
-        responseTemplate:
-            'Ø¯Ø¹Ø§Ø¡ Ø¹Ø§Ù… Ù„Ù€ {{action}}: "Ø¨Ø³Ù… Ø§Ù„Ù„Ù‡ØŒ Ø±Ø¨ Ø²Ø¯Ù†ÙŠ Ø¹Ù„Ù…Ø§Ù‹". ÙŠÙ…ÙƒÙ† Ù‚Ø±Ø§Ø¡Ø© Ù‡Ø°Ø§ Ø§Ù„Ø¯Ø¹Ø§Ø¡ ÙÙŠ {{time}}.',
-        keywords: ['Ø¯Ø¹Ø§Ø¡', 'ØµÙ„Ø§Ø©', 'Ø¹Ø§Ù…', 'Ù…Ø³Ø§Ø¹Ø¯Ø©'],
-        patterns: [r'Ø¯Ø¹Ø§Ø¡.*', r'ØµÙ„Ø§Ø©.*', r'Ù…Ø³Ø§Ø¹Ø¯Ø©.*'],
-        examples: [
-          'Ø¯Ø¹Ø§Ø¡ Ù„Ù„Ù†Ø¬Ø§Ø­',
-          'ØµÙ„Ø§Ø© Ù„Ù„Ù‡Ø¯Ø§ÙŠØ©',
-          'Ù…Ø³Ø§Ø¹Ø¯Ø© ÙÙŠ Ø§Ù„Ø¯Ø±Ø§Ø³Ø©'
-        ],
-        relatedQueries: [
-          'Ø¯Ø¹Ø§Ø¡ Ø§Ù„ØµØ¨Ø§Ø­',
-          'Ø¯Ø¹Ø§Ø¡ Ø§Ù„Ù…Ø³Ø§Ø¡',
-          'Ø¯Ø¹Ø§Ø¡ Ø§Ù„Ø³ÙØ±'
-        ],
+        responseTemplate: 'دعاء عام لـ {{action}}: "بسم الله، رب زدني علماً". يمكن قراءة هذا الدعاء في {{time}}.',
+        keywords: ['دعاء', 'صلاة', 'عام', 'مساعدة'],
+        patterns: [r'دعاء.*', r'صلاة.*', r'مساعدة.*'],
+        examples: ['دعاء للنجاح', 'صلاة للهداية', 'مساعدة في الدراسة'],
+        relatedQueries: ['دعاء الصباح', 'دعاء المساء', 'دعاء السفر'],
         popularity: 0.8,
       ),
     ];
@@ -486,20 +477,11 @@ class FallbackTemplateService {
         confidence: 0.7,
         completeness: 0.8,
         relevance: 0.9,
-        responseTemplate:
-            '{{action}} Ú©Û’ Ù„ÛŒÛ’ Ø¹Ø§Ù… Ø¯Ø¹Ø§: "Ø¨Ø³Ù… Ø§Ù„Ù„ÛØŒ Ø±Ø¨ Ø²Ø¯Ù†ÛŒ Ø¹Ù„Ù…Ø§Ù‹"Û” ÛŒÛ Ø¯Ø¹Ø§ {{time}} Ù…ÛŒÚº Ù¾Ú‘Ú¾ÛŒ Ø¬Ø§ Ø³Ú©ØªÛŒ ÛÛ’Û”',
-        keywords: ['Ø¯Ø¹Ø§', 'Ù†Ù…Ø§Ø²', 'Ø¹Ø§Ù…', 'Ù…Ø¯Ø¯'],
-        patterns: [r'Ø¯Ø¹Ø§.*', r'Ù†Ù…Ø§Ø².*', r'Ù…Ø¯Ø¯.*'],
-        examples: [
-          'Ú©Ø§Ù…ÛŒØ§Ø¨ÛŒ Ú©ÛŒ Ø¯Ø¹Ø§',
-          'ÛØ¯Ø§ÛŒØª Ú©ÛŒ Ù†Ù…Ø§Ø²',
-          'Ù¾Ú‘Ú¾Ø§Ø¦ÛŒ Ù…ÛŒÚº Ù…Ø¯Ø¯'
-        ],
-        relatedQueries: [
-          'ØµØ¨Ø­ Ú©ÛŒ Ø¯Ø¹Ø§',
-          'Ø´Ø§Ù… Ú©ÛŒ Ø¯Ø¹Ø§',
-          'Ø³ÙØ± Ú©ÛŒ Ø¯Ø¹Ø§'
-        ],
+        responseTemplate: '{{action}} کے لیے عام دعا: "بسم اللہ، رب زدنی علماً"۔ یہ دعا {{time}} میں پڑھی جا سکتی ہے۔',
+        keywords: ['دعا', 'نماز', 'عام', 'مدد'],
+        patterns: [r'دعا.*', r'نماز.*', r'مدد.*'],
+        examples: ['کامیابی کی دعا', 'ہدایت کی نماز', 'پڑھائی میں مدد'],
+        relatedQueries: ['صبح کی دعا', 'شام کی دعا', 'سفر کی دعا'],
         popularity: 0.8,
       ),
     ];
@@ -541,31 +523,31 @@ class FallbackTemplateService {
 
   List<String> _createArabicCommonQueries() {
     return [
-      'Ø¯Ø¹Ø§Ø¡ Ø§Ù„ØµØ¨Ø§Ø­',
-      'Ø¯Ø¹Ø§Ø¡ Ø§Ù„Ù…Ø³Ø§Ø¡',
-      'Ø¯Ø¹Ø§Ø¡ Ø§Ù„Ø³ÙØ±',
-      'Ø¯Ø¹Ø§Ø¡ Ù„Ù„Ù†Ø¬Ø§Ø­',
-      'Ø¯Ø¹Ø§Ø¡ Ù‚Ø¨Ù„ Ø§Ù„Ø·Ø¹Ø§Ù…',
-      'Ø¯Ø¹Ø§Ø¡ Ø¨Ø¹Ø¯ Ø§Ù„Ø·Ø¹Ø§Ù…',
-      'Ø¯Ø¹Ø§Ø¡ Ù„Ù„ØµØ­Ø©',
-      'Ø¯Ø¹Ø§Ø¡ Ù„Ù„Ø­Ù…Ø§ÙŠØ©',
-      'Ø¯Ø¹Ø§Ø¡ Ù„Ù„Ù…ØºÙØ±Ø©',
-      'Ø¯Ø¹Ø§Ø¡ Ù„Ù„Ù‡Ø¯Ø§ÙŠØ©',
+      'دعاء الصباح',
+      'دعاء المساء',
+      'دعاء السفر',
+      'دعاء للنجاح',
+      'دعاء قبل الطعام',
+      'دعاء بعد الطعام',
+      'دعاء للصحة',
+      'دعاء للحماية',
+      'دعاء للمغفرة',
+      'دعاء للهداية',
     ];
   }
 
   List<String> _createUrduCommonQueries() {
     return [
-      'ØµØ¨Ø­ Ú©ÛŒ Ø¯Ø¹Ø§',
-      'Ø´Ø§Ù… Ú©ÛŒ Ø¯Ø¹Ø§',
-      'Ø³ÙØ± Ú©ÛŒ Ø¯Ø¹Ø§',
-      'Ú©Ø§Ù…ÛŒØ§Ø¨ÛŒ Ú©ÛŒ Ø¯Ø¹Ø§',
-      'Ú©Ú¾Ø§Ù†Û’ Ø³Û’ Ù¾ÛÙ„Û’ Ú©ÛŒ Ø¯Ø¹Ø§',
-      'Ú©Ú¾Ø§Ù†Û’ Ú©Û’ Ø¨Ø¹Ø¯ Ú©ÛŒ Ø¯Ø¹Ø§',
-      'ØµØ­Øª Ú©ÛŒ Ø¯Ø¹Ø§',
-      'Ø­ÙØ§Ø¸Øª Ú©ÛŒ Ø¯Ø¹Ø§',
-      'Ù…Ø¹Ø§ÙÛŒ Ú©ÛŒ Ø¯Ø¹Ø§',
-      'ÛØ¯Ø§ÛŒØª Ú©ÛŒ Ø¯Ø¹Ø§',
+      'صبح کی دعا',
+      'شام کی دعا',
+      'سفر کی دعا',
+      'کامیابی کی دعا',
+      'کھانے سے پہلے کی دعا',
+      'کھانے کے بعد کی دعا',
+      'صحت کی دعا',
+      'حفاظت کی دعا',
+      'معافی کی دعا',
+      'ہدایت کی دعا',
     ];
   }
 
