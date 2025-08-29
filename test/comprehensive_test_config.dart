@@ -1,9 +1,11 @@
 // Test configuration for comprehensive testing approach
+import 'package:duacopilot/core/di/injection_container.dart' as di;
 import 'package:duacopilot/data/models/dua_response.dart';
 import 'package:duacopilot/data/models/rag_response_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Comprehensive test configuration for DuaCopilot
@@ -91,6 +93,15 @@ class TestConfig {
     // Configure flutter test environment for Android target
     if (kDebugMode) {
       debugDefaultTargetPlatformOverride = TargetPlatform.android;
+    }
+
+    // Initialize dependency injection for tests
+    try {
+      GetIt.instance.reset(); // Clear any existing registrations
+      await di.init(); // Initialize all dependencies
+    } catch (e) {
+      // If initialization fails, continue with tests (some may fail gracefully)
+      debugPrint('⚠️ DI initialization failed in tests: $e');
     }
   }
 
@@ -310,6 +321,13 @@ class TestConfig {
     SharedPreferences.setMockInitialValues({});
     if (kDebugMode) {
       debugDefaultTargetPlatformOverride = null;
+    }
+    
+    // Clean up dependency injection
+    try {
+      GetIt.instance.reset();
+    } catch (e) {
+      debugPrint('⚠️ GetIt cleanup failed: $e');
     }
   }
 }

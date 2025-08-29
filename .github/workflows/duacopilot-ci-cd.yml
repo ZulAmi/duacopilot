@@ -4,7 +4,7 @@ name: 🕌 DuaCopilot CI/CD
 
 on:
   push:
-    branches: [main, develop, feature/*]
+    branches: [main, develop, feature/*, backend]
     paths-ignore:
       - "**.md"
       - "docs/**"
