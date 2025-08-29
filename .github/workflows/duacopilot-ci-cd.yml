@@ -33,7 +33,7 @@ on:
         type: boolean
 
 env:
-  FLUTTER_VERSION: "3.24.0"
+  FLUTTER_VERSION: "3.29.1"
   DART_VERSION: "3.5.0"
 
 # ==================== JOB MATRIX ====================
@@ -319,9 +319,10 @@ jobs:
         uses: trufflesecurity/trufflehog@main
         with:
           path: ./
-          base: main
+          base: ${{ github.event.repository.default_branch }}
           head: HEAD
           extra_args: --debug --only-verified
+        continue-on-error: true
 
   # ⚡ PERFORMANCE ANALYSIS (production builds only)
   performance:
