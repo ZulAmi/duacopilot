@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../core/theme/revolutionary_islamic_theme.dart';
@@ -138,7 +138,7 @@ class RevolutionaryComponents {
                     ), // Reduced from space4 (16px) to 12px
                     decoration: BoxDecoration(
                       color: RevolutionaryIslamicTheme.textOnColor
-                          .withOpacity(0.2),
+                          .withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(
                         RevolutionaryIslamicTheme.radiusFull,
                       ),
@@ -165,7 +165,7 @@ class RevolutionaryComponents {
                     'Your AI Islamic Companion',
                     style: RevolutionaryIslamicTheme.body2.copyWith(
                       color: RevolutionaryIslamicTheme.textOnColor
-                          .withOpacity(0.9),
+                          .withValues(alpha: 0.9),
                     ),
                   ),
                 ],
@@ -240,7 +240,7 @@ class RevolutionaryComponents {
       margin: const EdgeInsets.symmetric(vertical: 1), // Minimal margin
       child: Material(
         color: isSelected
-            ? RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.05)
+            ? RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.05)
             : Colors.transparent,
         borderRadius: BorderRadius.circular(8),
         child: InkWell(
@@ -261,7 +261,7 @@ class RevolutionaryComponents {
                   decoration: BoxDecoration(
                     color: isSelected
                         ? RevolutionaryIslamicTheme.primaryEmerald
-                            .withOpacity(0.1)
+                            .withValues(alpha: 0.1)
                         : RevolutionaryIslamicTheme.neutralGray100,
                     borderRadius: BorderRadius.circular(6), // Smaller radius
                   ),
@@ -415,7 +415,7 @@ class RevolutionaryComponents {
                       style: IconButton.styleFrom(
                         backgroundColor: isVoiceListening
                             ? RevolutionaryIslamicTheme.errorRose
-                                .withOpacity(0.1)
+                                .withValues(alpha: 0.1)
                             : RevolutionaryIslamicTheme.neutralGray100,
                         foregroundColor: isVoiceListening
                             ? RevolutionaryIslamicTheme.errorRose
@@ -603,7 +603,7 @@ class RevolutionaryComponents {
                 decoration: BoxDecoration(
                   color:
                       (accentColor ?? RevolutionaryIslamicTheme.primaryEmerald)
-                          .withOpacity(0.1),
+                          .withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(
                     RevolutionaryIslamicTheme.radiusLg,
                   ),
@@ -654,7 +654,7 @@ class RevolutionaryComponents {
           Container(
             padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space2),
             decoration: BoxDecoration(
-              color: RevolutionaryIslamicTheme.textOnColor.withOpacity(0.2),
+              color: RevolutionaryIslamicTheme.textOnColor.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(
                 RevolutionaryIslamicTheme.radiusLg,
               ),
@@ -709,3 +709,4 @@ class DrawerMenuItem {
     this.badge,
   });
 }
+

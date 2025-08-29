@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../typography/arabic_typography.dart';
@@ -107,7 +107,7 @@ class ProfessionalIslamicTheme {
   // Professional Shadow System
   static List<BoxShadow> get shadowSoft => [
         BoxShadow(
-          color: gray900.withOpacity(0.08),
+          color: gray900.withValues(alpha: 0.08),
           blurRadius: 4,
           offset: const Offset(0, 2),
         ),
@@ -115,7 +115,7 @@ class ProfessionalIslamicTheme {
 
   static List<BoxShadow> get shadowMedium => [
         BoxShadow(
-          color: gray900.withOpacity(0.12),
+          color: gray900.withValues(alpha: 0.12),
           blurRadius: 8,
           offset: const Offset(0, 4),
         ),
@@ -123,7 +123,7 @@ class ProfessionalIslamicTheme {
 
   static List<BoxShadow> get shadowStrong => [
         BoxShadow(
-          color: gray900.withOpacity(0.16),
+          color: gray900.withValues(alpha: 0.16),
           blurRadius: 16,
           offset: const Offset(0, 8),
         ),
@@ -131,7 +131,7 @@ class ProfessionalIslamicTheme {
 
   static List<BoxShadow> get shadowIslamic => [
         BoxShadow(
-          color: islamicGreen.withOpacity(0.2),
+          color: islamicGreen.withValues(alpha: 0.2),
           blurRadius: 12,
           offset: const Offset(0, 4),
         ),
@@ -419,7 +419,7 @@ class ProfessionalIslamicTheme {
           backgroundColor: islamicGreen,
           foregroundColor: pureWhite,
           elevation: 2,
-          shadowColor: gray900.withOpacity(0.1),
+          shadowColor: gray900.withValues(alpha: 0.1),
           centerTitle: true,
           titleTextStyle: heading2.copyWith(color: pureWhite),
           toolbarHeight: 64,
@@ -431,7 +431,7 @@ class ProfessionalIslamicTheme {
         // Card Theme - Clean Professional Cards
         cardTheme: CardTheme(
           color: backgroundPrimary,
-          shadowColor: gray900.withOpacity(0.08),
+          shadowColor: gray900.withValues(alpha: 0.08),
           elevation: 4,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(radiusXl),
@@ -445,7 +445,7 @@ class ProfessionalIslamicTheme {
             backgroundColor: islamicGreen,
             foregroundColor: pureWhite,
             elevation: 4,
-            shadowColor: islamicGreen.withOpacity(0.3),
+            shadowColor: islamicGreen.withValues(alpha: 0.3),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(radiusLg),
             ),
@@ -535,3 +535,4 @@ class ProfessionalIslamicTheme {
         ),
       );
 }
+

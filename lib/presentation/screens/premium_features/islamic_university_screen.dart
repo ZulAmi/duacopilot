@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../domain/entities/islamic_university_entity.dart';
@@ -143,7 +143,7 @@ class _IslamicUniversityScreenState
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [const Color(0xFFf093fb).withOpacity(0.1), Colors.white],
+          colors: [const Color(0xFFf093fb).withValues(alpha: 0.1), Colors.white],
         ),
       ),
       child: TabBarView(
@@ -190,14 +190,14 @@ class _IslamicUniversityScreenState
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            const Color(0xFFf093fb).withOpacity(0.1),
-            const Color(0xFFf5576c).withOpacity(0.1),
+            const Color(0xFFf093fb).withValues(alpha: 0.1),
+            const Color(0xFFf5576c).withValues(alpha: 0.1),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFf093fb).withOpacity(0.3)),
+        border: Border.all(color: const Color(0xFFf093fb).withValues(alpha: 0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -456,7 +456,7 @@ class _IslamicUniversityScreenState
                     ),
                     gradient: LinearGradient(
                       colors: [
-                        const Color(0xFFf093fb).withOpacity(0.8),
+                        const Color(0xFFf093fb).withValues(alpha: 0.8),
                         const Color(0xFFf5576c),
                       ],
                     ),
@@ -831,7 +831,7 @@ class _IslamicUniversityScreenState
                           ),
                         ),
                         Text(
-                          '${path.estimatedHours} hours â€¢ ${path.courseIds.length} courses',
+                          '${path.estimatedHours} hours Ã¢â‚¬Â¢ ${path.courseIds.length} courses',
                           style: TextStyle(
                             color: Colors.grey[600],
                             fontSize: 12,
@@ -846,7 +846,7 @@ class _IslamicUniversityScreenState
                       vertical: 4,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFf093fb).withOpacity(0.1),
+                      color: const Color(0xFFf093fb).withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
@@ -1138,3 +1138,4 @@ class _IslamicUniversityScreenState
     );
   }
 }
+

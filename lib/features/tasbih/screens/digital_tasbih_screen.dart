@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/theme/revolutionary_islamic_theme.dart';
@@ -193,7 +193,7 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen>
               return LinearProgressIndicator(
                 value: _progressController.value,
                 backgroundColor:
-                    RevolutionaryIslamicTheme.textOnColor.withOpacity(0.3),
+                    RevolutionaryIslamicTheme.textOnColor.withValues(alpha: 0.3),
                 valueColor: const AlwaysStoppedAnimation<Color>(
                   RevolutionaryIslamicTheme.textOnColor,
                 ),
@@ -208,7 +208,7 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen>
           Text(
             '${(progress * 100).toInt()}% Complete',
             style: RevolutionaryIslamicTheme.body1.copyWith(
-              color: RevolutionaryIslamicTheme.textOnColor.withOpacity(0.8),
+              color: RevolutionaryIslamicTheme.textOnColor.withValues(alpha: 0.8),
             ),
           ),
         ],
@@ -232,7 +232,7 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen>
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(
+                    color: RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 
                       1 - _rippleController.value,
                     ),
                     width: 3,
@@ -258,10 +258,10 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen>
                       shape: BoxShape.circle,
                       gradient: RadialGradient(
                         colors: [
-                          RevolutionaryIslamicTheme.primaryEmerald.withOpacity(
+                          RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 
                             0.1,
                           ),
-                          RevolutionaryIslamicTheme.primaryEmerald.withOpacity(
+                          RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 
                             0.3,
                           ),
                         ],
@@ -273,7 +273,7 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen>
                       boxShadow: [
                         BoxShadow(
                           color: RevolutionaryIslamicTheme.primaryEmerald
-                              .withOpacity(0.3),
+                              .withValues(alpha: 0.3),
                           blurRadius: 20,
                           spreadRadius: 5,
                         ),
@@ -323,7 +323,7 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen>
         ),
         boxShadow: RevolutionaryIslamicTheme.shadowMd,
         border: Border.all(
-          color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.2),
+          color: RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.2),
           width: 1,
         ),
       ),
@@ -364,12 +364,12 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen>
       child: Container(
         width: 120,
         decoration: BoxDecoration(
-          color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1),
+          color: RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(
             RevolutionaryIslamicTheme.radiusXl,
           ),
           border: Border.all(
-            color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.3),
+            color: RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.3),
           ),
           boxShadow: RevolutionaryIslamicTheme.shadowSm,
         ),
@@ -715,3 +715,4 @@ class _DigitalTasbihScreenState extends ConsumerState<DigitalTasbihScreen>
     }
   }
 }
+

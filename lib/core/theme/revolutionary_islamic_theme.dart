@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 /// Revolutionary Islamic Theme - Next-Gen Professional Design
@@ -94,7 +94,7 @@ class RevolutionaryIslamicTheme {
   // Professional Shadow System
   static List<BoxShadow> get shadowXs => [
         BoxShadow(
-          color: neutralGray900.withOpacity(0.05),
+          color: neutralGray900.withValues(alpha: 0.05),
           blurRadius: 1,
           offset: const Offset(0, 1),
         ),
@@ -102,12 +102,12 @@ class RevolutionaryIslamicTheme {
 
   static List<BoxShadow> get shadowSm => [
         BoxShadow(
-          color: neutralGray900.withOpacity(0.05),
+          color: neutralGray900.withValues(alpha: 0.05),
           blurRadius: 2,
           offset: const Offset(0, 1),
         ),
         BoxShadow(
-          color: neutralGray900.withOpacity(0.1),
+          color: neutralGray900.withValues(alpha: 0.1),
           blurRadius: 3,
           offset: const Offset(0, 1),
         ),
@@ -115,12 +115,12 @@ class RevolutionaryIslamicTheme {
 
   static List<BoxShadow> get shadowMd => [
         BoxShadow(
-          color: neutralGray900.withOpacity(0.1),
+          color: neutralGray900.withValues(alpha: 0.1),
           blurRadius: 6,
           offset: const Offset(0, 4),
         ),
         BoxShadow(
-          color: neutralGray900.withOpacity(0.06),
+          color: neutralGray900.withValues(alpha: 0.06),
           blurRadius: 4,
           offset: const Offset(0, 2),
         ),
@@ -128,12 +128,12 @@ class RevolutionaryIslamicTheme {
 
   static List<BoxShadow> get shadowLg => [
         BoxShadow(
-          color: neutralGray900.withOpacity(0.1),
+          color: neutralGray900.withValues(alpha: 0.1),
           blurRadius: 15,
           offset: const Offset(0, 10),
         ),
         BoxShadow(
-          color: neutralGray900.withOpacity(0.04),
+          color: neutralGray900.withValues(alpha: 0.04),
           blurRadius: 6,
           offset: const Offset(0, 4),
         ),
@@ -141,12 +141,12 @@ class RevolutionaryIslamicTheme {
 
   static List<BoxShadow> get shadowXl => [
         BoxShadow(
-          color: neutralGray900.withOpacity(0.1),
+          color: neutralGray900.withValues(alpha: 0.1),
           blurRadius: 25,
           offset: const Offset(0, 20),
         ),
         BoxShadow(
-          color: neutralGray900.withOpacity(0.04),
+          color: neutralGray900.withValues(alpha: 0.04),
           blurRadius: 10,
           offset: const Offset(0, 8),
         ),
@@ -397,7 +397,7 @@ class RevolutionaryIslamicTheme {
       // Chip Theme
       chipTheme: ChipThemeData(
         backgroundColor: backgroundTertiary,
-        selectedColor: primaryEmerald.withOpacity(0.1),
+        selectedColor: primaryEmerald.withValues(alpha: 0.1),
         labelStyle: caption.copyWith(color: textPrimary),
         padding: const EdgeInsets.symmetric(
           horizontal: space3,
@@ -442,3 +442,4 @@ class RevolutionaryIslamicTheme {
     );
   }
 }
+

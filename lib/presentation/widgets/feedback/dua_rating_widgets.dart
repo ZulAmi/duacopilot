@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -83,13 +83,13 @@ class _DuaRelevanceRatingWidgetState extends State<DuaRelevanceRatingWidget>
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            theme.primaryColor.withOpacity(0.05),
-            theme.primaryColor.withOpacity(0.1),
+            theme.primaryColor.withValues(alpha: 0.05),
+            theme.primaryColor.withValues(alpha: 0.1),
           ],
         ),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: theme.primaryColor.withOpacity(0.2),
+          color: theme.primaryColor.withValues(alpha: 0.2),
           width: 1,
         ),
       ),
@@ -136,7 +136,7 @@ class _DuaRelevanceRatingWidgetState extends State<DuaRelevanceRatingWidget>
             Text(
               'Thank you for your feedback. We\'ll use this to improve our recommendations.',
               style: theme.textTheme.bodySmall?.copyWith(
-                color: theme.colorScheme.onSurface.withOpacity(0.6),
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
                 fontStyle: FontStyle.italic,
               ),
               textAlign: TextAlign.center,
@@ -178,12 +178,12 @@ class _DuaRelevanceRatingWidgetState extends State<DuaRelevanceRatingWidget>
             end: Alignment.bottomRight,
             colors: [
               theme.primaryColor,
-              theme.primaryColor.withOpacity(0.8),
+              theme.primaryColor.withValues(alpha: 0.8),
             ],
           ),
           boxShadow: [
             BoxShadow(
-              color: theme.primaryColor.withOpacity(0.3),
+              color: theme.primaryColor.withValues(alpha: 0.3),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -192,8 +192,8 @@ class _DuaRelevanceRatingWidgetState extends State<DuaRelevanceRatingWidget>
         child: Icon(Icons.star_rounded, color: Colors.white, size: 24),
       ),
       onRatingUpdate: _onRatingChanged,
-      unratedColor: theme.primaryColor.withOpacity(0.2),
-      glowColor: theme.primaryColor.withOpacity(0.3),
+      unratedColor: theme.primaryColor.withValues(alpha: 0.2),
+      glowColor: theme.primaryColor.withValues(alpha: 0.3),
       glow: true,
       glowRadius: 2,
     );
@@ -210,7 +210,7 @@ class _DuaRelevanceRatingWidgetState extends State<DuaRelevanceRatingWidget>
       ignoreGestures: widget.readOnly,
       itemBuilder: (context, _) => Icon(Icons.star, color: theme.primaryColor),
       onRatingUpdate: _onRatingChanged,
-      unratedColor: theme.primaryColor.withOpacity(0.2),
+      unratedColor: theme.primaryColor.withValues(alpha: 0.2),
     );
   }
 
@@ -225,7 +225,7 @@ class _DuaRelevanceRatingWidgetState extends State<DuaRelevanceRatingWidget>
       ignoreGestures: widget.readOnly,
       itemBuilder: (context, _) => Icon(Icons.favorite, color: Colors.red),
       onRatingUpdate: _onRatingChanged,
-      unratedColor: Colors.red.withOpacity(0.2),
+      unratedColor: Colors.red.withValues(alpha: 0.2),
     );
   }
 
@@ -323,7 +323,7 @@ class QuickDuaRatingWidget extends StatelessWidget {
             HapticFeedback.selectionClick();
             onRatingUpdate(rating);
           },
-          unratedColor: theme.primaryColor.withOpacity(0.2),
+          unratedColor: theme.primaryColor.withValues(alpha: 0.2),
         ),
       ],
     );
@@ -407,13 +407,13 @@ class _AnimatedRatingDisplayWidgetState
                   Icon(Icons.star, color: theme.primaryColor),
               itemCount: 5,
               itemSize: 16,
-              unratedColor: theme.primaryColor.withOpacity(0.2),
+              unratedColor: theme.primaryColor.withValues(alpha: 0.2),
             ),
             const SizedBox(width: 8),
             Text(
               '${_ratingAnimation.value.toStringAsFixed(1)} (${widget.totalRatings})',
               style: theme.textTheme.bodySmall?.copyWith(
-                color: theme.colorScheme.onSurface.withOpacity(0.7),
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
               ),
             ),
           ],
@@ -422,3 +422,4 @@ class _AnimatedRatingDisplayWidgetState
     );
   }
 }
+

@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/rag/enterprise_rag_architecture.dart';
 import '../../../domain/entities/rag_response.dart';
 
-/// ðŸŽ¨ RESPONSIVE FLUTTER UI WITH OPTIMIZED STATE MANAGEMENT
+/// Ã°Å¸Å½Â¨ RESPONSIVE FLUTTER UI WITH OPTIMIZED STATE MANAGEMENT
 /// Enterprise-grade UI components with ML-powered personalization
 
 /// High-performance RAG response state notifier
@@ -173,7 +173,7 @@ final responsiveRagProvider =
   return ResponsiveRagNotifier(ref.watch(enterpriseRagServiceProvider));
 });
 
-/// ðŸŽ¨ RESPONSIVE UI COMPONENTS
+/// Ã°Å¸Å½Â¨ RESPONSIVE UI COMPONENTS
 
 /// Adaptive RAG response card with intelligent layout
 class AdaptiveRagResponseCard extends ConsumerWidget {
@@ -266,9 +266,9 @@ class AdaptiveRagResponseCard extends ConsumerWidget {
       width: double.infinity,
       padding: EdgeInsets.all(isCompact ? 8.0 : 12.0),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceContainerHighest.withOpacity(0.3),
+        color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: theme.colorScheme.outline.withOpacity(0.2)),
+        border: Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.2)),
       ),
       child: Text(
         response.response,
@@ -313,7 +313,7 @@ class AdaptiveRagResponseCard extends ConsumerWidget {
                   ? theme.textTheme.labelSmall
                   : theme.textTheme.bodySmall)
               ?.copyWith(
-            color: theme.colorScheme.onSurfaceVariant.withOpacity(0.7),
+            color: theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.7),
           ),
         ),
       ],
@@ -354,9 +354,9 @@ class _ConfidenceBadge extends StatelessWidget {
         vertical: 2.0,
       ),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(4),
-        border: Border.all(color: color.withOpacity(0.3)),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
       ),
       child: Text(
         '${(confidence * 100).round()}%',
@@ -404,7 +404,7 @@ class _MetadataChip extends StatelessWidget {
         vertical: 2.0,
       ),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceContainerHighest.withOpacity(0.5),
+        color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(4),
       ),
       child: Row(
@@ -511,16 +511,16 @@ class _PerformanceMetricsWidget extends StatelessWidget {
         vertical: isCompact ? 4.0 : 6.0,
       ),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceContainerHighest.withOpacity(0.3),
+        color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(
-        'Avg: ${metrics['average_response_time']?.toStringAsFixed(0) ?? 0}ms â€¢ '
+        'Avg: ${metrics['average_response_time']?.toStringAsFixed(0) ?? 0}ms Ã¢â‚¬Â¢ '
         'Success: ${metrics['success_rate']?.toStringAsFixed(1) ?? 0}%',
         style:
             (isCompact ? theme.textTheme.labelSmall : theme.textTheme.bodySmall)
                 ?.copyWith(
-          color: theme.colorScheme.onSurfaceVariant.withOpacity(0.8),
+          color: theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.8),
           fontFamily: 'monospace',
         ),
       ),
@@ -574,10 +574,10 @@ class ResponsiveErrorWidget extends ConsumerWidget {
           Container(
             padding: EdgeInsets.all(isCompact ? 12.0 : 16.0),
             decoration: BoxDecoration(
-              color: theme.colorScheme.errorContainer.withOpacity(0.1),
+              color: theme.colorScheme.errorContainer.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                color: theme.colorScheme.error.withOpacity(0.2),
+                color: theme.colorScheme.error.withValues(alpha: 0.2),
               ),
             ),
             child: Text(
@@ -611,3 +611,4 @@ class ResponsiveErrorWidget extends ConsumerWidget {
     );
   }
 }
+

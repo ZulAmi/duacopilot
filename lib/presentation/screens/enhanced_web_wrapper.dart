@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/theme/revolutionary_islamic_theme.dart';
@@ -217,7 +217,7 @@ class _EnhancedWebSplashScreenState
         Container(
           padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space2),
           decoration: BoxDecoration(
-            color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1),
+            color: RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(
               RevolutionaryIslamicTheme.radiusLg,
             ),
@@ -307,3 +307,4 @@ class WebOptimizedProfessionalHome extends ConsumerWidget {
     return const RevolutionaryHomeScreen();
   }
 }
+

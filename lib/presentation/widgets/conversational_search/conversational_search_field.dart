@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 import '../../../core/typography/arabic_typography.dart';
@@ -171,18 +171,18 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField> w
                 border: Border.all(
                   color: Theme.of(
                     context,
-                  ).colorScheme.outline.withOpacity(0.3),
+                  ).colorScheme.outline.withValues(alpha: 0.3),
                   width: 1,
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
+                    color: Colors.black.withValues(alpha: 0.1),
                     blurRadius: 20,
                     offset: const Offset(0, 8),
                     spreadRadius: 0,
                   ),
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
+                    color: Colors.black.withValues(alpha: 0.05),
                     blurRadius: 40,
                     offset: const Offset(0, 16),
                     spreadRadius: 0,
@@ -220,7 +220,7 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField> w
                               decoration: BoxDecoration(
                                 color: Theme.of(
                                   context,
-                                ).colorScheme.primary.withOpacity(0.1),
+                                ).colorScheme.primary.withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(6),
                               ),
                               child: Icon(
@@ -249,7 +249,7 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField> w
                             Icon(
                               Icons.arrow_outward_rounded,
                               size: 16,
-                              color: Theme.of(context).colorScheme.onSurfaceVariant.withOpacity(0.6),
+                              color: Theme.of(context).colorScheme.onSurfaceVariant.withValues(alpha: 0.6),
                             ),
                           ],
                         ),
@@ -318,19 +318,19 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField> w
           borderRadius: BorderRadius.circular(24),
           color: colorScheme.surface,
           border: Border.all(
-            color: _focusNode.hasFocus ? colorScheme.primary : colorScheme.outline.withOpacity(0.3),
+            color: _focusNode.hasFocus ? colorScheme.primary : colorScheme.outline.withValues(alpha: 0.3),
             width: _focusNode.hasFocus ? 2 : 1,
           ),
           boxShadow: _focusNode.hasFocus
               ? [
                   BoxShadow(
-                    color: colorScheme.primary.withOpacity(0.2),
+                    color: colorScheme.primary.withValues(alpha: 0.2),
                     blurRadius: 20,
                     offset: const Offset(0, 4),
                     spreadRadius: 0,
                   ),
                   BoxShadow(
-                    color: colorScheme.primary.withOpacity(0.1),
+                    color: colorScheme.primary.withValues(alpha: 0.1),
                     blurRadius: 40,
                     offset: const Offset(0, 8),
                     spreadRadius: 0,
@@ -338,13 +338,13 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField> w
                 ]
               : [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
+                    color: Colors.black.withValues(alpha: 0.05),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                     spreadRadius: 0,
                   ),
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.03),
+                    color: Colors.black.withValues(alpha: 0.03),
                     blurRadius: 16,
                     offset: const Offset(0, 4),
                     spreadRadius: 0,
@@ -380,11 +380,11 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField> w
               ),
           decoration: InputDecoration(
             hintText: widget.supportArabic
-                ? 'Ask about duas, verses, and Islamic guidance... | اسأل عن الأدعية والآيات والإرشادات الإسلامية...'
+                ? 'Ask about duas, verses, and Islamic guidance... | Ø§Ø³Ø£Ù„ Ø¹Ù† Ø§Ù„Ø£Ø¯Ø¹ÙŠØ© ÙˆØ§Ù„Ø¢ÙŠØ§Øª ÙˆØ§Ù„Ø¥Ø±Ø´Ø§Ø¯Ø§Øª Ø§Ù„Ø¥Ø³Ù„Ø§Ù…ÙŠØ©...'
                 : 'Ask about duas, verses, and Islamic guidance...',
             hintStyle: textTheme.bodyLarge
                 ?.copyWith(
-                  color: colorScheme.onSurfaceVariant.withOpacity(0.6),
+                  color: colorScheme.onSurfaceVariant.withValues(alpha: 0.6),
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                 )
@@ -405,7 +405,7 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField> w
               padding: const EdgeInsets.all(16),
               child: Icon(
                 Icons.search_rounded,
-                color: colorScheme.onSurfaceVariant.withOpacity(0.7),
+                color: colorScheme.onSurfaceVariant.withValues(alpha: 0.7),
                 size: 24,
               ),
             ),
@@ -438,13 +438,13 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField> w
                             padding: const EdgeInsets.all(16),
                             decoration: _isListening
                                 ? BoxDecoration(
-                                    color: colorScheme.primary.withOpacity(0.1),
+                                    color: colorScheme.primary.withValues(alpha: 0.1),
                                     shape: BoxShape.circle,
                                   )
                                 : null,
                             child: Icon(
                               _isListening ? Icons.mic_rounded : Icons.mic_none_rounded,
-                              color: _isListening ? colorScheme.primary : colorScheme.onSurfaceVariant.withOpacity(0.7),
+                              color: _isListening ? colorScheme.primary : colorScheme.onSurfaceVariant.withValues(alpha: 0.7),
                               size: 24,
                             ),
                           ),
@@ -463,7 +463,7 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField> w
                       padding: const EdgeInsets.all(16),
                       child: Icon(
                         Icons.close_rounded,
-                        color: colorScheme.onSurfaceVariant.withOpacity(0.7),
+                        color: colorScheme.onSurfaceVariant.withValues(alpha: 0.7),
                         size: 20,
                       ),
                     ),
@@ -477,3 +477,4 @@ class _ConversationalSearchFieldState extends State<ConversationalSearchField> w
     );
   }
 }
+

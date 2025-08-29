@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../domain/entities/rag_response.dart';
 
@@ -88,7 +88,7 @@ class RagResponseWidget extends StatelessWidget {
                 border: Border.all(
                   color: Theme.of(
                     context,
-                  ).colorScheme.outline.withOpacity(0.3),
+                  ).colorScheme.outline.withValues(alpha: 0.3),
                 ),
               ),
               child: Text(
@@ -246,3 +246,4 @@ class _DetailRow extends StatelessWidget {
     );
   }
 }
+

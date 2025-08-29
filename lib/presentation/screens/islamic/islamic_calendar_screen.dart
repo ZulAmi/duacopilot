@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/theme/revolutionary_islamic_theme.dart';
@@ -182,7 +182,7 @@ class _IslamicCalendarScreenState extends ConsumerState<IslamicCalendarScreen>
         gradient: LinearGradient(
           colors: [
             RevolutionaryIslamicTheme.primaryEmerald,
-            RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.8),
+            RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.8),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -190,7 +190,7 @@ class _IslamicCalendarScreenState extends ConsumerState<IslamicCalendarScreen>
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: RevolutionaryIslamicTheme.neutralGray400.withOpacity(0.5),
+            color: RevolutionaryIslamicTheme.neutralGray400.withValues(alpha: 0.5),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),
@@ -205,7 +205,7 @@ class _IslamicCalendarScreenState extends ConsumerState<IslamicCalendarScreen>
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color:
-                      RevolutionaryIslamicTheme.neutralWhite.withOpacity(0.2),
+                      RevolutionaryIslamicTheme.neutralWhite.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: const Icon(
@@ -244,7 +244,7 @@ class _IslamicCalendarScreenState extends ConsumerState<IslamicCalendarScreen>
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
-              color: RevolutionaryIslamicTheme.neutralWhite.withOpacity(0.2),
+              color: RevolutionaryIslamicTheme.neutralWhite.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Row(
@@ -291,11 +291,11 @@ class _IslamicCalendarScreenState extends ConsumerState<IslamicCalendarScreen>
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
                 color:
-                    RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1),
+                    RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
                   color:
-                      RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.3),
+                      RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.3),
                 ),
               ),
               child: Row(
@@ -330,7 +330,7 @@ class _IslamicCalendarScreenState extends ConsumerState<IslamicCalendarScreen>
             boxShadow: [
               BoxShadow(
                 color:
-                    RevolutionaryIslamicTheme.neutralGray300.withOpacity(0.5),
+                    RevolutionaryIslamicTheme.neutralGray300.withValues(alpha: 0.5),
                 blurRadius: 12,
                 offset: const Offset(0, 4),
               ),
@@ -347,7 +347,7 @@ class _IslamicCalendarScreenState extends ConsumerState<IslamicCalendarScreen>
                     Container(
                       decoration: BoxDecoration(
                         color: RevolutionaryIslamicTheme.primaryEmerald
-                            .withOpacity(0.1),
+                            .withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: IconButton(
@@ -394,7 +394,7 @@ class _IslamicCalendarScreenState extends ConsumerState<IslamicCalendarScreen>
                     Container(
                       decoration: BoxDecoration(
                         color: RevolutionaryIslamicTheme.primaryEmerald
-                            .withOpacity(0.1),
+                            .withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: IconButton(
@@ -530,18 +530,18 @@ class _IslamicCalendarScreenState extends ConsumerState<IslamicCalendarScreen>
                                 ? RevolutionaryIslamicTheme.primaryEmerald
                                 : isSelected
                                     ? RevolutionaryIslamicTheme.primaryEmerald
-                                        .withOpacity(0.3)
+                                        .withValues(alpha: 0.3)
                                     : hasEvent
                                         ? RevolutionaryIslamicTheme
                                             .secondaryNavy
-                                            .withOpacity(0.15)
+                                            .withValues(alpha: 0.15)
                                         : null,
                             borderRadius: BorderRadius.circular(18),
                             border: hasEvent && !isToday && !isSelected
                                 ? Border.all(
                                     color: RevolutionaryIslamicTheme
                                         .secondaryNavy
-                                        .withOpacity(0.4),
+                                        .withValues(alpha: 0.4),
                                     width: 1,
                                   )
                                 : isSelected && !isToday
@@ -567,7 +567,7 @@ class _IslamicCalendarScreenState extends ConsumerState<IslamicCalendarScreen>
                                         : (isPrevMonth || isNextMonth)
                                             ? RevolutionaryIslamicTheme
                                                 .textSecondary
-                                                .withOpacity(0.4)
+                                                .withValues(alpha: 0.4)
                                             : isSelected
                                                 ? RevolutionaryIslamicTheme
                                                     .primaryEmerald
@@ -645,12 +645,12 @@ class _IslamicCalendarScreenState extends ConsumerState<IslamicCalendarScreen>
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: event.isImportant
-              ? event.color.withOpacity(0.3)
+              ? event.color.withValues(alpha: 0.3)
               : RevolutionaryIslamicTheme.borderLight,
         ),
         boxShadow: [
           BoxShadow(
-            color: RevolutionaryIslamicTheme.neutralGray300.withOpacity(0.5),
+            color: RevolutionaryIslamicTheme.neutralGray300.withValues(alpha: 0.5),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -661,7 +661,7 @@ class _IslamicCalendarScreenState extends ConsumerState<IslamicCalendarScreen>
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: event.color.withOpacity(0.1),
+              color: event.color.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(event.icon, color: event.color, size: 24),
@@ -780,13 +780,13 @@ class _IslamicCalendarScreenState extends ConsumerState<IslamicCalendarScreen>
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               decoration: BoxDecoration(
                 color: isCurrentMonth
-                    ? RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1)
+                    ? RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.1)
                     : RevolutionaryIslamicTheme.backgroundSecondary,
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
                   color: isCurrentMonth
                       ? RevolutionaryIslamicTheme.primaryEmerald
-                          .withOpacity(0.3)
+                          .withValues(alpha: 0.3)
                       : RevolutionaryIslamicTheme.borderLight,
                 ),
               ),
@@ -924,7 +924,7 @@ class _IslamicCalendarScreenState extends ConsumerState<IslamicCalendarScreen>
                   leading: Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: event.color.withOpacity(0.1),
+                      color: event.color.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Icon(
@@ -987,7 +987,7 @@ class _IslamicCalendarScreenState extends ConsumerState<IslamicCalendarScreen>
         children: [
           _legendItem(RevolutionaryIslamicTheme.primaryEmerald, 'Today'),
           _legendItem(
-            RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.3),
+            RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.3),
             'Selected',
           ),
           Row(
@@ -1083,7 +1083,7 @@ class _IslamicCalendarScreenState extends ConsumerState<IslamicCalendarScreen>
                     ),
                     decoration: BoxDecoration(
                       color: RevolutionaryIslamicTheme.primaryEmerald
-                          .withOpacity(0.1),
+                          .withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
@@ -1245,3 +1245,4 @@ class HijriDate {
     return HijriDate(15, 8, 1445, islamicMonths[7]); // Mock current Hijri date
   }
 }
+

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../core/theme/professional_theme.dart';
@@ -22,7 +22,7 @@ class ProfessionalComponents {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: ProfessionalTheme.primaryEmerald.withOpacity(0.1),
+                color: ProfessionalTheme.primaryEmerald.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(ProfessionalTheme.radiusSm),
               ),
               child: const Icon(
@@ -286,7 +286,7 @@ class ProfessionalComponents {
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: (iconColor ?? ProfessionalTheme.primaryEmerald)
-                      .withOpacity(0.1),
+                      .withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(
                     ProfessionalTheme.radiusMd,
                   ),
@@ -622,3 +622,4 @@ class ProfessionalComponents {
     );
   }
 }
+

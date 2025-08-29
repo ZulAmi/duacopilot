@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/logging/app_logger.dart';
@@ -385,7 +385,7 @@ class _MonitoringDashboardState extends ConsumerState<MonitoringDashboard> {
                       label: Text(region.count.toString()),
                       backgroundColor: Theme.of(
                         context,
-                      ).primaryColor.withOpacity(0.2),
+                      ).primaryColor.withValues(alpha: 0.2),
                     ),
                   );
                 }),
@@ -526,3 +526,4 @@ class QuickMonitoringWidget extends ConsumerWidget {
     );
   }
 }
+

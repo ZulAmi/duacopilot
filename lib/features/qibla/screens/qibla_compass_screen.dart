@@ -1,4 +1,4 @@
-import 'dart:math' as math;
+﻿import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -181,8 +181,8 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen>
       padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space4),
       decoration: BoxDecoration(
         color: needsCalibration
-            ? RevolutionaryIslamicTheme.warningAmber.withOpacity(0.1)
-            : RevolutionaryIslamicTheme.successGreen.withOpacity(0.1),
+            ? RevolutionaryIslamicTheme.warningAmber.withValues(alpha: 0.1)
+            : RevolutionaryIslamicTheme.successGreen.withValues(alpha: 0.1),
         border: Border(
           bottom: BorderSide(
             color: needsCalibration
@@ -235,8 +235,8 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen>
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
                   colors: [
-                    RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1),
-                    RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.3),
+                    RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.1),
+                    RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.3),
                   ],
                 ),
                 border: Border.all(
@@ -266,7 +266,7 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen>
                   boxShadow: [
                     BoxShadow(
                       color: RevolutionaryIslamicTheme.successGreen
-                          .withOpacity(0.5),
+                          .withValues(alpha: 0.5),
                       blurRadius: 8,
                       spreadRadius: 2,
                     ),
@@ -288,7 +288,7 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen>
                     boxShadow: [
                       BoxShadow(
                         color: RevolutionaryIslamicTheme.primaryEmerald
-                            .withOpacity(0.3),
+                            .withValues(alpha: 0.3),
                         blurRadius: 10 + (_pulseController.value * 5),
                         spreadRadius: 2,
                       ),
@@ -340,7 +340,7 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen>
         height: 30,
         margin: const EdgeInsets.only(bottom: 140),
         decoration: BoxDecoration(
-          color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.5),
+          color: RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.5),
           borderRadius: BorderRadius.circular(
             RevolutionaryIslamicTheme.radiusXs,
           ),
@@ -362,7 +362,7 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen>
         borderRadius: BorderRadius.circular(RevolutionaryIslamicTheme.radiusXl),
         boxShadow: RevolutionaryIslamicTheme.shadowMd,
         border: Border.all(
-          color: RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.2),
+          color: RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.2),
           width: 1,
         ),
       ),
@@ -373,7 +373,7 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen>
               Expanded(
                 child: _buildInfoItem(
                   'Qibla Direction',
-                  '${compass.qiblaDirection.toInt()}Â°',
+                  '${compass.qiblaDirection.toInt()}Ã‚Â°',
                   Icons.navigation_rounded,
                 ),
               ),
@@ -587,3 +587,4 @@ class _QiblaCompassScreenState extends ConsumerState<QiblaCompassScreen>
     return '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
   }
 }
+

@@ -1,4 +1,4 @@
-import 'dart:async';
+﻿import 'dart:async';
 import 'dart:io' show Platform;
 
 import 'package:duacopilot/core/config/environment_config.dart';
@@ -24,10 +24,10 @@ void main() async {
     // Initialize AWS services (replaces Firebase)
     try {
       await AWSRemoteConfigService.fetchAndActivate();
-      AppLogger.debug('✅ AWS services initialized successfully');
+      AppLogger.debug('âœ… AWS services initialized successfully');
     } catch (e) {
       AppLogger.debug(
-        '⚠️ AWS initialization failed: $e - continuing with default configuration',
+        'âš ï¸ AWS initialization failed: $e - continuing with default configuration',
       );
     }
 
@@ -52,18 +52,18 @@ void main() async {
         action: 'app_launch',
         category: 'dev',
       );
-      AppLogger.debug('✅ Simple monitoring system initialized');
+      AppLogger.debug('âœ… Simple monitoring system initialized');
     } catch (e) {
       AppLogger.debug(
-        '⚠️ Monitoring initialization failed: $e - continuing without monitoring',
+        'âš ï¸ Monitoring initialization failed: $e - continuing without monitoring',
       );
     }
 
     AppLogger.debug(
-      '✅ DuaCopilot Professional Islamic AI initialized successfully',
+      'âœ… DuaCopilot Professional Islamic AI initialized successfully',
     );
   } catch (e) {
-    AppLogger.debug('⚠️ DuaCopilot initialization error: $e');
+    AppLogger.debug('âš ï¸ DuaCopilot initialization error: $e');
     // Continue anyway with limited functionality
   }
 
@@ -177,7 +177,7 @@ class _RevolutionaryAppWrapperState extends State<RevolutionaryAppWrapper> with 
                       ProfessionalIslamicTheme.space8,
                     ),
                     decoration: BoxDecoration(
-                      color: ProfessionalIslamicTheme.backgroundSecondary.withOpacity(0.95),
+                      color: ProfessionalIslamicTheme.backgroundSecondary.withValues(alpha: 0.95),
                       borderRadius: BorderRadius.circular(
                         ProfessionalIslamicTheme.radius3Xl,
                       ),
@@ -201,7 +201,7 @@ class _RevolutionaryAppWrapperState extends State<RevolutionaryAppWrapper> with 
                   Text(
                     'Professional Islamic AI Assistant',
                     style: ProfessionalIslamicTheme.body1.copyWith(
-                      color: ProfessionalIslamicTheme.textOnIslamic.withOpacity(0.9),
+                      color: ProfessionalIslamicTheme.textOnIslamic.withValues(alpha: 0.9),
                     ),
                   ),
                   const SizedBox(height: ProfessionalIslamicTheme.space8),
@@ -245,9 +245,9 @@ Future<void> _setupApiKeys() async {
     // Setup HuggingFace API key
     await _setupApiKey(storage, 'huggingface_api_key', EnvironmentConfig.huggingFaceApiKey, 'HuggingFace');
 
-    AppLogger.debug('✅ API keys configuration completed');
+    AppLogger.debug('âœ… API keys configuration completed');
   } catch (e) {
-    AppLogger.debug('❌ Failed to setup API keys: $e');
+    AppLogger.debug('âŒ Failed to setup API keys: $e');
   }
 }
 
@@ -257,19 +257,20 @@ Future<void> _setupApiKey(SecureStorageService storage, String storageKey, Strin
     // Check if API key is already stored
     final existingKey = await storage.getValue(storageKey);
     if (existingKey != null && existingKey.isNotEmpty) {
-      AppLogger.debug('✅ $provider API key already configured in secure storage');
+      AppLogger.debug('âœ… $provider API key already configured in secure storage');
       return;
     }
 
     // Use environment value if available
     if (envValue != null && envValue.isNotEmpty) {
       await storage.saveValue(storageKey, envValue);
-      AppLogger.debug('✅ $provider API key configured from environment');
+      AppLogger.debug('âœ… $provider API key configured from environment');
       return;
     }
 
-    AppLogger.debug('⚠️ $provider API key not found in environment - configure in .env file or settings');
+    AppLogger.debug('âš ï¸ $provider API key not found in environment - configure in .env file or settings');
   } catch (e) {
-    AppLogger.debug('❌ Failed to setup $provider API key: $e');
+    AppLogger.debug('âŒ Failed to setup $provider API key: $e');
   }
 }
+

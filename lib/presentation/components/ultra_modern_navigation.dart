@@ -1,4 +1,4 @@
-// lib/presentation/components/ultra_modern_navigation.dart
+﻿// lib/presentation/components/ultra_modern_navigation.dart
 
 import 'dart:ui';
 
@@ -113,17 +113,17 @@ class _UltraModernNavigationBarState extends State<UltraModernNavigationBar>
         borderRadius: BorderRadius.circular(25),
         color: widget.backgroundColor ??
             (isDark
-                ? Colors.black.withOpacity(0.3)
-                : Colors.white.withOpacity(0.3)),
-        border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
+                ? Colors.black.withValues(alpha: 0.3)
+                : Colors.white.withValues(alpha: 0.3)),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.2), width: 1),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),
           BoxShadow(
-            color: Colors.white.withOpacity(0.1),
+            color: Colors.white.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, -5),
           ),
@@ -140,8 +140,8 @@ class _UltraModernNavigationBarState extends State<UltraModernNavigationBar>
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  Colors.white.withOpacity(0.15),
-                  Colors.white.withOpacity(0.05),
+                  Colors.white.withValues(alpha: 0.15),
+                  Colors.white.withValues(alpha: 0.05),
                 ],
               ),
             ),
@@ -184,9 +184,9 @@ class _UltraModernNavigationBarState extends State<UltraModernNavigationBar>
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 color: isSelected
-                    ? widget.selectedItemColor?.withOpacity(0.15) ??
+                    ? widget.selectedItemColor?.withValues(alpha: 0.15) ??
                         UltraModernTheme.primaryGradient.colors.first
-                            .withOpacity(0.15)
+                            .withValues(alpha: 0.15)
                     : Colors.transparent,
                 border: isSelected
                     ? Border.all(
@@ -212,7 +212,7 @@ class _UltraModernNavigationBarState extends State<UltraModernNavigationBar>
                             color: (widget.selectedItemColor ??
                                     UltraModernTheme
                                         .primaryGradient.colors.first)
-                                .withOpacity(
+                                .withValues(alpha: 
                               0.1 * (1 - _rippleController.value),
                             ),
                           ),
@@ -242,7 +242,7 @@ class _UltraModernNavigationBarState extends State<UltraModernNavigationBar>
                                           UltraModernTheme
                                               .primaryGradient.colors.first,
                                       widget.selectedItemColor
-                                              ?.withOpacity(0.7) ??
+                                              ?.withValues(alpha: 0.7) ??
                                           UltraModernTheme
                                               .primaryGradient.colors.last,
                                     ],
@@ -252,7 +252,7 @@ class _UltraModernNavigationBarState extends State<UltraModernNavigationBar>
                                       color: (widget.selectedItemColor ??
                                               UltraModernTheme
                                                   .primaryGradient.colors.first)
-                                          .withOpacity(0.3),
+                                          .withValues(alpha: 0.3),
                                       blurRadius: 8,
                                       spreadRadius: 1,
                                     ),
@@ -265,7 +265,7 @@ class _UltraModernNavigationBarState extends State<UltraModernNavigationBar>
                             color: isSelected
                                 ? Colors.white
                                 : widget.unselectedItemColor ??
-                                    theme.iconTheme.color?.withOpacity(0.6),
+                                    theme.iconTheme.color?.withValues(alpha: 0.6),
                           ),
                         ),
                       ),
@@ -289,7 +289,7 @@ class _UltraModernNavigationBarState extends State<UltraModernNavigationBar>
                                           .primaryGradient.colors.first
                                   : widget.unselectedItemColor ??
                                       theme.textTheme.bodySmall?.color
-                                          ?.withOpacity(0.6),
+                                          ?.withValues(alpha: 0.6),
                               letterSpacing: 0.2,
                             ),
                             child: Text(
@@ -326,7 +326,7 @@ class _UltraModernNavigationBarState extends State<UltraModernNavigationBar>
                                     color: (widget.selectedItemColor ??
                                             UltraModernTheme
                                                 .primaryGradient.colors.first)
-                                        .withOpacity(0.5),
+                                        .withValues(alpha: 0.5),
                                     blurRadius: 4,
                                     spreadRadius: 1,
                                   ),
@@ -406,14 +406,14 @@ class UltraModernAppBar extends StatelessWidget implements PreferredSizeWidget {
       decoration: BoxDecoration(
         color: backgroundColor ??
             (isDark
-                ? Colors.black.withOpacity(0.2)
-                : Colors.white.withOpacity(0.2)),
+                ? Colors.black.withValues(alpha: 0.2)
+                : Colors.white.withValues(alpha: 0.2)),
         border: Border(
-          bottom: BorderSide(color: Colors.white.withOpacity(0.1), width: 1),
+          bottom: BorderSide(color: Colors.white.withValues(alpha: 0.1), width: 1),
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -428,8 +428,8 @@ class UltraModernAppBar extends StatelessWidget implements PreferredSizeWidget {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  Colors.white.withOpacity(0.1),
-                  Colors.white.withOpacity(0.05),
+                  Colors.white.withValues(alpha: 0.1),
+                  Colors.white.withValues(alpha: 0.05),
                 ],
               ),
             ),
@@ -505,8 +505,8 @@ class UltraModernAppBar extends StatelessWidget implements PreferredSizeWidget {
         height: 44,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: Colors.white.withOpacity(0.1),
-          border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
+          color: Colors.white.withValues(alpha: 0.1),
+          border: Border.all(color: Colors.white.withValues(alpha: 0.2), width: 1),
         ),
         child: Icon(
           Icons.arrow_back_ios_rounded,
@@ -583,14 +583,14 @@ class _UltraModernDrawerState extends State<UltraModernDrawer>
         decoration: BoxDecoration(
           color: widget.backgroundColor ??
               (isDark
-                  ? Colors.black.withOpacity(0.3)
-                  : Colors.white.withOpacity(0.3)),
+                  ? Colors.black.withValues(alpha: 0.3)
+                  : Colors.white.withValues(alpha: 0.3)),
           border: Border(
-            right: BorderSide(color: Colors.white.withOpacity(0.1), width: 1),
+            right: BorderSide(color: Colors.white.withValues(alpha: 0.1), width: 1),
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withValues(alpha: 0.1),
               blurRadius: 20,
               offset: const Offset(5, 0),
             ),
@@ -605,8 +605,8 @@ class _UltraModernDrawerState extends State<UltraModernDrawer>
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    Colors.white.withOpacity(0.1),
-                    Colors.white.withOpacity(0.05),
+                    Colors.white.withValues(alpha: 0.1),
+                    Colors.white.withValues(alpha: 0.05),
                   ],
                 ),
               ),
@@ -669,12 +669,12 @@ class _UltraModernDrawerState extends State<UltraModernDrawer>
               borderRadius: BorderRadius.circular(16),
               color: isSelected
                   ? UltraModernTheme.primaryGradient.colors.first
-                      .withOpacity(0.1)
+                      .withValues(alpha: 0.1)
                   : Colors.transparent,
               border: isSelected
                   ? Border.all(
                       color: UltraModernTheme.primaryGradient.colors.first
-                          .withOpacity(0.3),
+                          .withValues(alpha: 0.3),
                       width: 1,
                     )
                   : null,
@@ -689,14 +689,14 @@ class _UltraModernDrawerState extends State<UltraModernDrawer>
                     shape: BoxShape.circle,
                     color: isSelected
                         ? UltraModernTheme.primaryGradient.colors.first
-                        : Colors.white.withOpacity(0.1),
+                        : Colors.white.withValues(alpha: 0.1),
                   ),
                   child: Icon(
                     item.icon,
                     size: 20,
                     color: isSelected
                         ? Colors.white
-                        : theme.iconTheme.color?.withOpacity(0.7),
+                        : theme.iconTheme.color?.withValues(alpha: 0.7),
                   ),
                 ),
 
@@ -712,7 +712,7 @@ class _UltraModernDrawerState extends State<UltraModernDrawer>
                           isSelected ? FontWeight.w600 : FontWeight.w500,
                       color: isSelected
                           ? UltraModernTheme.primaryGradient.colors.first
-                          : theme.textTheme.bodyLarge?.color?.withOpacity(0.8),
+                          : theme.textTheme.bodyLarge?.color?.withValues(alpha: 0.8),
                       letterSpacing: 0.1,
                     ),
                   ),
@@ -753,3 +753,4 @@ class UltraModernDrawerItem {
     this.onTap,
   });
 }
+

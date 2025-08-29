@@ -26,6 +26,14 @@ class RagConfig {
   static const String currentProvider =
       'openai'; // Change to: openai, claude, gemini, ollama, huggingface
 
+  // Local Vector Database Configuration (Qdrant-compatible)
+  // When enabled, uses local semantic search for 50-200ms retrieval before API fallback
+  static const bool useLocalVectorDB = true; // RE-ENABLED FOR TESTING
+  static const String localVectorDBUrl = 'http://localhost:6801'; // Updated port
+  static const String vectorCollectionName = 'quran_verses';
+  static const int embeddingDimension = 384; // MiniLM-L6-v2 standard
+  static const double similarityThreshold = 0.7;
+
   // Islamic context prompt
   static const String islamicSystemPrompt = '''
 You are DuaCopilot, an Islamic AI assistant specializing in providing authentic Islamic guidance.

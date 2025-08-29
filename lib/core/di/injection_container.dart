@@ -8,6 +8,7 @@ import 'package:logger/logger.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../../data/datasources/islamic_rag_service.dart'; // Islamic knowledge retrieval
+import '../../data/datasources/quran_vector_index.dart'; // Local vector database
 import '../../data/datasources/local_datasource.dart';
 import '../../data/datasources/mock_local_datasource.dart'; // Add mock local datasource
 import '../../data/datasources/quran_api_service.dart'; // Quran API integration
@@ -109,6 +110,15 @@ Future<void> init() async {
       // Islamic services for TRUE RAG
       sl.registerLazySingleton<QuranApiService>(() => QuranApiService());
       sl.registerLazySingleton<RagCacheService>(() => RagCacheService());
+      
+      // Local Vector Database for fast retrieval
+      sl.registerLazySingleton<QuranVectorIndex>(() => QuranVectorIndex.instance);
+      
+      // Initialize vector index asynchronously for fast startup
+      sl<QuranVectorIndex>().initialize().catchError((e) {
+        AppLogger.debug('⚠️ Vector index initialization failed: $e');
+      });
+      
       sl.registerLazySingleton<IslamicRagService>(
         () => IslamicRagService(
           quranApi: sl<QuranApiService>(),

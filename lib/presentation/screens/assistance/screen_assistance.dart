@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -136,8 +136,8 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance>
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  ProfessionalIslamicTheme.islamicGreen.withOpacity(0.1),
-                  ProfessionalIslamicTheme.islamicGreenLight.withOpacity(0.1),
+                  ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.1),
+                  ProfessionalIslamicTheme.islamicGreenLight.withValues(alpha: 0.1),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -247,11 +247,11 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance>
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusLg),
         color: isSelected
-            ? ProfessionalIslamicTheme.islamicGreen.withOpacity(0.1)
+            ? ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.1)
             : null,
         border: isSelected
             ? Border.all(
-                color: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.3),
+                color: ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.3),
                 width: 1,
               )
             : null,
@@ -495,7 +495,7 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance>
                   ),
                   decoration: BoxDecoration(
                     color:
-                        ProfessionalIslamicTheme.islamicGreen.withOpacity(0.1),
+                        ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(
                       ProfessionalIslamicTheme.radiusLg,
                     ),
@@ -642,7 +642,7 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance>
               Container(
                 padding: const EdgeInsets.all(ProfessionalIslamicTheme.space6),
                 decoration: BoxDecoration(
-                  color: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.1),
+                  color: ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(
                     ProfessionalIslamicTheme.radiusLg,
                   ),
@@ -815,15 +815,15 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance>
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            ProfessionalIslamicTheme.islamicGreen.withOpacity(0.1),
-            ProfessionalIslamicTheme.goldAccent.withOpacity(0.1),
+            ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.1),
+            ProfessionalIslamicTheme.goldAccent.withValues(alpha: 0.1),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusLg),
         border: Border.all(
-          color: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.2),
+          color: ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.2),
           width: 1,
         ),
       ),
@@ -905,3 +905,4 @@ class _ScreenAssistanceState extends ConsumerState<ScreenAssistance>
     _launchEmail();
   }
 }
+

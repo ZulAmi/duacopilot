@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/theme/professional_islamic_theme.dart';
@@ -207,7 +207,7 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
                       ProfessionalIslamicTheme.space4,
                     ),
                     decoration: BoxDecoration(
-                      color: ProfessionalIslamicTheme.textOnIslamic.withOpacity(0.2),
+                      color: ProfessionalIslamicTheme.textOnIslamic.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(
                         ProfessionalIslamicTheme.radius2Xl,
                       ),
@@ -225,7 +225,7 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
                       vertical: ProfessionalIslamicTheme.space2,
                     ),
                     decoration: BoxDecoration(
-                      color: ProfessionalIslamicTheme.textOnIslamic.withOpacity(0.15),
+                      color: ProfessionalIslamicTheme.textOnIslamic.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(
                         ProfessionalIslamicTheme.radiusFull,
                       ),
@@ -253,7 +253,7 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
               ),
               const SizedBox(height: ProfessionalIslamicTheme.space6),
               Text(
-                'السلام عليكم',
+                'Ø§Ù„Ø³Ù„Ø§Ù… Ø¹Ù„ÙŠÙƒÙ…',
                 style: ProfessionalIslamicTheme.display2.copyWith(
                   color: ProfessionalIslamicTheme.textOnIslamic,
                   fontWeight: FontWeight.w900,
@@ -264,7 +264,7 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
               Text(
                 'Assalamu Alaikum',
                 style: ProfessionalIslamicTheme.body1.copyWith(
-                  color: ProfessionalIslamicTheme.textOnIslamic.withOpacity(0.8),
+                  color: ProfessionalIslamicTheme.textOnIslamic.withValues(alpha: 0.8),
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -272,7 +272,7 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
               Text(
                 'Your intelligent Islamic companion for spiritual guidance, Quranic wisdom, and daily prayers.',
                 style: ProfessionalIslamicTheme.body1.copyWith(
-                  color: ProfessionalIslamicTheme.textOnIslamic.withOpacity(0.9),
+                  color: ProfessionalIslamicTheme.textOnIslamic.withValues(alpha: 0.9),
                   height: 1.5,
                 ),
               ),
@@ -302,7 +302,7 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
                       color: ProfessionalIslamicTheme.textOnIslamic,
                     ),
                     style: IconButton.styleFrom(
-                      backgroundColor: ProfessionalIslamicTheme.textOnIslamic.withOpacity(0.2),
+                      backgroundColor: ProfessionalIslamicTheme.textOnIslamic.withValues(alpha: 0.2),
                       padding: const EdgeInsets.all(
                         ProfessionalIslamicTheme.space3,
                       ),
@@ -439,7 +439,7 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
                   vertical: ProfessionalIslamicTheme.space1,
                 ),
                 decoration: BoxDecoration(
-                  color: ProfessionalIslamicTheme.success.withOpacity(0.1),
+                  color: ProfessionalIslamicTheme.success.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(
                     ProfessionalIslamicTheme.radiusFull,
                   ),
@@ -510,7 +510,7 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
                 icon: const Icon(Icons.grid_view_rounded, size: 18),
                 label: const Text('View All'),
                 style: TextButton.styleFrom(
-                  backgroundColor: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.1),
+                  backgroundColor: ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.1),
                   foregroundColor: ProfessionalIslamicTheme.islamicGreen,
                 ),
               ),
@@ -644,7 +644,7 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
             Container(
               padding: const EdgeInsets.all(ProfessionalIslamicTheme.space3),
               decoration: BoxDecoration(
-                color: accentColor.withOpacity(0.1),
+                color: accentColor.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(
                   ProfessionalIslamicTheme.radius2Xl,
                 ),
@@ -706,7 +706,7 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
                     ProfessionalIslamicTheme.space3,
                   ),
                   decoration: BoxDecoration(
-                    color: ProfessionalIslamicTheme.textOnIslamic.withOpacity(0.2),
+                    color: ProfessionalIslamicTheme.textOnIslamic.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(
                       ProfessionalIslamicTheme.radius2Xl,
                     ),
@@ -733,7 +733,7 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
                       Text(
                         'Advanced Islamic learning tools & personalized content',
                         style: ProfessionalIslamicTheme.body2.copyWith(
-                          color: ProfessionalIslamicTheme.textOnIslamic.withOpacity(0.9),
+                          color: ProfessionalIslamicTheme.textOnIslamic.withValues(alpha: 0.9),
                         ),
                       ),
                     ],
@@ -925,3 +925,4 @@ class _RevolutionaryHomeScreenState extends ConsumerState<RevolutionaryHomeScree
     ).push(MaterialPageRoute(builder: (context) => const ScreenAssistance()));
   }
 }
+

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../widgets/modern_ui_components.dart';
 import '../../../core/models/islamic_course_models.dart';
@@ -437,8 +437,8 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen>
               ),
               gradient: LinearGradient(
                 colors: [
-                  theme.colorScheme.primary.withOpacity(0.8),
-                  theme.colorScheme.secondary.withOpacity(0.8),
+                  theme.colorScheme.primary.withValues(alpha: 0.8),
+                  theme.colorScheme.secondary.withValues(alpha: 0.8),
                 ],
               ),
             ),
@@ -653,7 +653,7 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen>
                             vertical: 2,
                           ),
                           decoration: BoxDecoration(
-                            color: theme.colorScheme.primary.withOpacity(0.1),
+                            color: theme.colorScheme.primary.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
@@ -881,7 +881,7 @@ class _IslamicCoursesScreenState extends State<IslamicCoursesScreen>
                                     label: Text(topic),
                                     backgroundColor: Theme.of(
                                       context,
-                                    ).colorScheme.primary.withOpacity(0.1),
+                                    ).colorScheme.primary.withValues(alpha: 0.1),
                                   ),
                                 )
                                 .toList(),
@@ -1091,3 +1091,4 @@ extension StringCapitalize on String {
     return this[0].toUpperCase() + substring(1);
   }
 }
+

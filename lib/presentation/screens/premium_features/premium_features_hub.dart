@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -54,7 +54,7 @@ class PremiumFeaturesHub extends ConsumerWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Theme.of(context).primaryColor.withOpacity(0.1),
+            Theme.of(context).primaryColor.withValues(alpha: 0.1),
             Theme.of(context).scaffoldBackgroundColor,
           ],
         ),
@@ -122,7 +122,7 @@ class PremiumFeaturesHub extends ConsumerWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Theme.of(context).primaryColor.withOpacity(0.05),
+            Theme.of(context).primaryColor.withValues(alpha: 0.05),
             Theme.of(context).scaffoldBackgroundColor,
           ],
         ),
@@ -158,12 +158,12 @@ class PremiumFeaturesHub extends ConsumerWidget {
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [tierColor.withOpacity(0.1), tierColor.withOpacity(0.05)],
+          colors: [tierColor.withValues(alpha: 0.1), tierColor.withValues(alpha: 0.05)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: tierColor.withOpacity(0.3)),
+        border: Border.all(color: tierColor.withValues(alpha: 0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -586,7 +586,7 @@ class PremiumFeaturesHub extends ConsumerWidget {
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
-                        Theme.of(context).primaryColor.withOpacity(0.8),
+                        Theme.of(context).primaryColor.withValues(alpha: 0.8),
                         Theme.of(context).primaryColor,
                       ],
                       begin: Alignment.topLeft,
@@ -628,7 +628,7 @@ class PremiumFeaturesHub extends ConsumerWidget {
                           instructor,
                           style: TextStyle(
                             fontSize: instructorSize,
-                            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.65),
+                            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.65),
                             height: 1.1,
                           ),
                           maxLines: 1,
@@ -658,3 +658,4 @@ class PremiumFeaturesHub extends ConsumerWidget {
     }
   }
 }
+

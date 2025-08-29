@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/theme/professional_islamic_theme.dart';
@@ -302,7 +302,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
                   ),
                   decoration: BoxDecoration(
                     color:
-                        ProfessionalIslamicTheme.textOnIslamic.withOpacity(0.2),
+                        ProfessionalIslamicTheme.textOnIslamic.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(
                       ProfessionalIslamicTheme.radius2Xl,
                     ),
@@ -330,7 +330,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
                         'Customize DuaCopilot to match your Islamic preferences and spiritual journey',
                         style: ProfessionalIslamicTheme.body2.copyWith(
                           color: ProfessionalIslamicTheme.textOnIslamic
-                              .withOpacity(0.9),
+                              .withValues(alpha: 0.9),
                         ),
                       ),
                     ],
@@ -359,7 +359,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
         _buildSettingsItem(
           icon: Icons.workspace_premium_rounded,
           title: 'Subscription',
-          subtitle: 'Premium â€¢ View subscription details',
+          subtitle: 'Premium Ã¢â‚¬Â¢ View subscription details',
           onTap: () => _showSubscriptionDialog(),
           trailing: const Icon(
             Icons.star,
@@ -570,7 +570,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
         _buildSettingsItem(
           icon: Icons.info_rounded,
           title: 'About DuaCopilot',
-          subtitle: 'Version 2.0.0 â€¢ Build 1001',
+          subtitle: 'Version 2.0.0 Ã¢â‚¬Â¢ Build 1001',
           onTap: () => _showAboutDialog(),
         ),
       ],
@@ -662,7 +662,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
                     ),
                     decoration: BoxDecoration(
                       color: ProfessionalIslamicTheme.islamicGreen
-                          .withOpacity(0.1),
+                          .withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(
                         ProfessionalIslamicTheme.radius2Xl,
                       ),
@@ -878,7 +878,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
       builder: (context) => AlertDialog(
         title: const Text('Subscription Status'),
         content: const Text(
-          'Premium Plan Active\n\nâœ“ Unlimited AI queries\nâœ“ Advanced features\nâœ“ Premium audio content\nâœ“ Family sharing',
+          'Premium Plan Active\n\nÃ¢Å“â€œ Unlimited AI queries\nÃ¢Å“â€œ Advanced features\nÃ¢Å“â€œ Premium audio content\nÃ¢Å“â€œ Family sharing',
         ),
         actions: [
           TextButton(
@@ -958,7 +958,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
           'Your intelligent Islamic companion for spiritual guidance, Quranic wisdom, and daily prayers.',
         ),
         const SizedBox(height: 16),
-        const Text('Built with â¤ï¸ for the Muslim community.'),
+        const Text('Built with Ã¢ÂÂ¤Ã¯Â¸Â for the Muslim community.'),
       ],
     );
   }
@@ -1007,3 +1007,4 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
     );
   }
 }
+

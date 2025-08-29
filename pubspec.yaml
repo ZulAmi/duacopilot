@@ -150,6 +150,12 @@ flutter:
   assets:
     - assets/models/
     - assets/offline_data/
+    # Local vector database assets for fast retrieval (50-200ms)
+    - assets/data/quran_verses_min.json
+    - assets/data/quran_embeddings_minilm.json
+    # Full Quran dataset (uncomment after generation)
+    - assets/data/quran_verses_full.json
+    - assets/data/quran_embeddings_full.json
 
 # Platform-aware overrides for web compatibility  
 dependency_overrides:

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
 import '../../../services/comprehensive_feedback_service.dart';
 
@@ -174,12 +174,12 @@ class _ModernFeedbackButton extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [theme.primaryColor, theme.primaryColor.withOpacity(0.8)],
+          colors: [theme.primaryColor, theme.primaryColor.withValues(alpha: 0.8)],
         ),
         borderRadius: BorderRadius.circular(25),
         boxShadow: [
           BoxShadow(
-            color: theme.primaryColor.withOpacity(0.3),
+            color: theme.primaryColor.withValues(alpha: 0.3),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -389,3 +389,4 @@ class ExperimentVariantData {
     required this.outcomes,
   });
 }
+

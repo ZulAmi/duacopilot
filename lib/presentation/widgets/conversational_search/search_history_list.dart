@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
 /// SearchHistoryItem class implementation
 class SearchHistoryItem {
@@ -286,7 +286,7 @@ class _SearchHistoryListViewState extends State<SearchHistoryListView> {
             size: 64,
             color: Theme.of(
               context,
-            ).colorScheme.onSurfaceVariant.withOpacity(0.5),
+            ).colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
           ),
           const SizedBox(height: 16),
           Text(
@@ -301,7 +301,7 @@ class _SearchHistoryListViewState extends State<SearchHistoryListView> {
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: Theme.of(
                     context,
-                  ).colorScheme.onSurfaceVariant.withOpacity(0.7),
+                  ).colorScheme.onSurfaceVariant.withValues(alpha: 0.7),
                 ),
             textAlign: TextAlign.center,
           ),
@@ -328,7 +328,7 @@ class _SearchHistoryListViewState extends State<SearchHistoryListView> {
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: categoryColor.withOpacity(0.1),
+                      color: categoryColor.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Icon(
@@ -403,7 +403,7 @@ class _SearchHistoryListViewState extends State<SearchHistoryListView> {
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             border: Border.all(
-              color: Theme.of(context).colorScheme.outline.withOpacity(0.3),
+              color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
             ),
             borderRadius: BorderRadius.circular(8),
           ),
@@ -445,7 +445,7 @@ class _SearchHistoryListViewState extends State<SearchHistoryListView> {
             decoration: BoxDecoration(
               color: colorScheme.surface,
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: colorScheme.outline.withOpacity(0.1)),
+              border: Border.all(color: colorScheme.outline.withValues(alpha: 0.1)),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -536,8 +536,8 @@ class _SearchHistoryListViewState extends State<SearchHistoryListView> {
                       ),
                       decoration: BoxDecoration(
                         color: item.success
-                            ? Colors.green.withOpacity(0.1)
-                            : Colors.red.withOpacity(0.1),
+                            ? Colors.green.withValues(alpha: 0.1)
+                            : Colors.red.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text(
@@ -575,3 +575,4 @@ class _SearchHistoryListViewState extends State<SearchHistoryListView> {
     }
   }
 }
+

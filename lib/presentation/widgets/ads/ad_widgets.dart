@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../../../services/ads/ad_service.dart';
@@ -31,7 +31,7 @@ class _SmartBannerAdState extends State<SmartBannerAd> {
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -317,3 +317,4 @@ class AdConfigWidget extends StatelessWidget {
     );
   }
 }
+

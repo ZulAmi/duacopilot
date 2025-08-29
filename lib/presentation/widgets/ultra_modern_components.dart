@@ -1,4 +1,4 @@
-// lib/presentation/widgets/ultra_modern_components.dart
+﻿// lib/presentation/widgets/ultra_modern_components.dart
 
 import 'dart:math' as math;
 import 'dart:ui';
@@ -37,10 +37,10 @@ class UltraModernComponents {
           child: Container(
             padding: padding ?? const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: backgroundColor ?? Colors.white.withOpacity(0.8),
+              color: backgroundColor ?? Colors.white.withValues(alpha: 0.8),
               borderRadius: BorderRadius.circular(borderRadius),
               border: Border.all(
-                color: Colors.white.withOpacity(0.3),
+                color: Colors.white.withValues(alpha: 0.3),
                 width: 1,
               ),
             ),
@@ -457,12 +457,12 @@ class _FloatingSearchBarWidgetState extends State<FloatingSearchBarWidget>
                 filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.9),
+                    color: Colors.white.withValues(alpha: 0.9),
                     borderRadius: BorderRadius.circular(24),
                     border: Border.all(
                       color: _isFocused
-                          ? context.colorScheme.primary.withOpacity(0.5)
-                          : Colors.white.withOpacity(0.3),
+                          ? context.colorScheme.primary.withValues(alpha: 0.5)
+                          : Colors.white.withValues(alpha: 0.3),
                       width: 1.5,
                     ),
                   ),
@@ -532,7 +532,7 @@ class _FloatingSearchBarWidgetState extends State<FloatingSearchBarWidget>
                               boxShadow: [
                                 BoxShadow(
                                   color: context.colorScheme.primary
-                                      .withOpacity(0.3),
+                                      .withValues(alpha: 0.3),
                                   blurRadius: 8,
                                   offset: const Offset(0, 2),
                                 ),
@@ -769,7 +769,7 @@ class ModernLoadingPainter extends CustomPainter {
     const double sweepAngle = math.pi * 1.5;
 
     final Gradient gradient = SweepGradient(
-      colors: [color.withOpacity(0.1), color.withOpacity(0.3), color, color],
+      colors: [color.withValues(alpha: 0.1), color.withValues(alpha: 0.3), color, color],
       stops: const [0.0, 0.3, 0.7, 1.0],
     );
 
@@ -848,7 +848,7 @@ class _GlowingFABWidgetState extends State<GlowingFABWidget>
                 colors: [
                   widget.backgroundColor ?? context.colorScheme.primary,
                   (widget.backgroundColor ?? context.colorScheme.primary)
-                      .withOpacity(0.8),
+                      .withValues(alpha: 0.8),
                 ],
               ),
             ),
@@ -908,3 +908,4 @@ class AnimatedCounterWidget extends StatelessWidget {
     );
   }
 }
+

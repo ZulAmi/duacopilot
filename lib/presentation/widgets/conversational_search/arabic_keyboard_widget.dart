@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 /// ArabicKeyboardController class implementation
@@ -93,54 +93,54 @@ class ArabicKeyboardWidget extends StatefulWidget {
 /// _ArabicKeyboardWidgetState class implementation
 class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
   final Map<String, String> _transliterationMap = {
-    'ا': 'a',
-    'ب': 'b',
-    'ت': 't',
-    'ث': 'th',
-    'ج': 'j',
-    'ح': 'h',
-    'خ': 'kh',
-    'د': 'd',
-    'ذ': 'dh',
-    'ر': 'r',
-    'ز': 'z',
-    'س': 's',
-    'ش': 'sh',
-    'ص': 's',
-    'ض': 'd',
-    'ط': 't',
-    'ظ': 'z',
-    'ع': 'a',
-    'غ': 'gh',
-    'ف': 'f',
-    'ق': 'q',
-    'ك': 'k',
-    'ل': 'l',
-    'م': 'm',
-    'ن': 'n',
-    'ه': 'h',
-    'و': 'w',
-    'ي': 'y',
-    'ة': 'h',
-    'ى': 'a',
-    'ء': "'",
-    'ئ': "'",
-    'ؤ': "'",
-    'لا': 'la',
+    'Ø§': 'a',
+    'Ø¨': 'b',
+    'Øª': 't',
+    'Ø«': 'th',
+    'Ø¬': 'j',
+    'Ø­': 'h',
+    'Ø®': 'kh',
+    'Ø¯': 'd',
+    'Ø°': 'dh',
+    'Ø±': 'r',
+    'Ø²': 'z',
+    'Ø³': 's',
+    'Ø´': 'sh',
+    'Øµ': 's',
+    'Ø¶': 'd',
+    'Ø·': 't',
+    'Ø¸': 'z',
+    'Ø¹': 'a',
+    'Øº': 'gh',
+    'Ù': 'f',
+    'Ù‚': 'q',
+    'Ùƒ': 'k',
+    'Ù„': 'l',
+    'Ù…': 'm',
+    'Ù†': 'n',
+    'Ù‡': 'h',
+    'Ùˆ': 'w',
+    'ÙŠ': 'y',
+    'Ø©': 'h',
+    'Ù‰': 'a',
+    'Ø¡': "'",
+    'Ø¦': "'",
+    'Ø¤': "'",
+    'Ù„Ø§': 'la',
   };
 
   final List<String> _diacritics = [
-    'ً', // Fathatan
-    'ٌ', // Dammatan
-    'ٍ', // Kasratan
-    'َ', // Fatha
-    'ُ', // Damma
-    'ِ', // Kasra
-    'ّ', // Shadda
-    'ْ', // Sukun
-    'ٓ', // Maddah Above
-    'ٔ', // Hamza Above
-    'ٕ', // Hamza Below
+    'Ù‹', // Fathatan
+    'ÙŒ', // Dammatan
+    'Ù', // Kasratan
+    'ÙŽ', // Fatha
+    'Ù', // Damma
+    'Ù', // Kasra
+    'Ù‘', // Shadda
+    'Ù’', // Sukun
+    'Ù“', // Maddah Above
+    'Ù”', // Hamza Above
+    'Ù•', // Hamza Below
   ];
 
   @override
@@ -153,7 +153,7 @@ class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
         color: colorScheme.surface,
         border: Border(
           top: BorderSide(
-            color: colorScheme.outline.withOpacity(0.2),
+            color: colorScheme.outline.withValues(alpha: 0.2),
             width: 1,
           ),
         ),
@@ -175,10 +175,10 @@ class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: colorScheme.surfaceContainerHighest.withOpacity(0.3),
+        color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
         border: Border(
           bottom: BorderSide(
-            color: colorScheme.outline.withOpacity(0.1),
+            color: colorScheme.outline.withValues(alpha: 0.1),
             width: 1,
           ),
         ),
@@ -193,7 +193,7 @@ class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
             ),
           ),
           Text(
-            widget.controller.isArabicMode ? 'عربي' : 'English',
+            widget.controller.isArabicMode ? 'Ø¹Ø±Ø¨ÙŠ' : 'English',
             style: Theme.of(context).textTheme.labelMedium?.copyWith(
                   color: colorScheme.onSurfaceVariant,
                   fontWeight: FontWeight.w500,
@@ -235,33 +235,33 @@ class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
         children: [
           // First row
           _buildKeyboardRow([
-            'ض',
-            'ص',
-            'ث',
-            'ق',
-            'ف',
-            'غ',
-            'ع',
-            'ه',
-            'خ',
-            'ح',
-            'ج',
+            'Ø¶',
+            'Øµ',
+            'Ø«',
+            'Ù‚',
+            'Ù',
+            'Øº',
+            'Ø¹',
+            'Ù‡',
+            'Ø®',
+            'Ø­',
+            'Ø¬',
           ]),
           const SizedBox(height: 4),
 
           // Second row
           _buildKeyboardRow([
-            'ش',
-            'س',
-            'ي',
-            'ب',
-            'ل',
-            'ا',
-            'ت',
-            'ن',
-            'م',
-            'ك',
-            'ط',
+            'Ø´',
+            'Ø³',
+            'ÙŠ',
+            'Ø¨',
+            'Ù„',
+            'Ø§',
+            'Øª',
+            'Ù†',
+            'Ù…',
+            'Ùƒ',
+            'Ø·',
           ]),
           const SizedBox(height: 4),
 
@@ -280,16 +280,16 @@ class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
               ),
               const SizedBox(width: 4),
               ..._buildKeyboardRowKeys([
-                'ئ',
-                'ء',
-                'ؤ',
-                'ر',
-                'لا',
-                'ى',
-                'ة',
-                'و',
-                'ز',
-                'ظ',
+                'Ø¦',
+                'Ø¡',
+                'Ø¤',
+                'Ø±',
+                'Ù„Ø§',
+                'Ù‰',
+                'Ø©',
+                'Ùˆ',
+                'Ø²',
+                'Ø¸',
               ]),
               const SizedBox(width: 4),
               _buildActionKey(Icons.backspace, widget.controller.deleteText),
@@ -407,7 +407,7 @@ class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
             color: colorScheme.surfaceContainerHighest,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: colorScheme.outline.withOpacity(0.2),
+              color: colorScheme.outline.withValues(alpha: 0.2),
               width: 1,
             ),
           ),
@@ -428,7 +428,7 @@ class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
                   Text(
                     _transliterationMap[key]!,
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                          color: colorScheme.onSurfaceVariant.withOpacity(0.6),
+                          color: colorScheme.onSurfaceVariant.withValues(alpha: 0.6),
                           fontSize: 10,
                         ),
                   ),
@@ -463,7 +463,7 @@ class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
             color: isToggle && isActive ? colorScheme.primary : colorScheme.surfaceContainerHighest,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: colorScheme.outline.withOpacity(0.2),
+              color: colorScheme.outline.withValues(alpha: 0.2),
               width: 1,
             ),
           ),
@@ -496,7 +496,7 @@ class _ArabicKeyboardWidgetState extends State<ArabicKeyboardWidget> {
               color: colorScheme.surfaceContainerHighest,
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                color: colorScheme.outline.withOpacity(0.2),
+                color: colorScheme.outline.withValues(alpha: 0.2),
                 width: 1,
               ),
             ),
@@ -621,7 +621,7 @@ class _ArabicInputFieldState extends State<ArabicInputField> {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
               border: Border.all(
-                color: Theme.of(context).colorScheme.outline.withOpacity(0.5),
+                color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.5),
               ),
               borderRadius: BorderRadius.circular(12),
             ),
@@ -636,7 +636,7 @@ class _ArabicInputFieldState extends State<ArabicInputField> {
                           color: _textController.text.isEmpty
                               ? Theme.of(
                                   context,
-                                ).colorScheme.onSurfaceVariant.withOpacity(0.6)
+                                ).colorScheme.onSurfaceVariant.withValues(alpha: 0.6)
                               : Theme.of(context).colorScheme.onSurface,
                         ),
                     textDirection: _isArabicText(_textController.text) ? TextDirection.rtl : TextDirection.ltr,
@@ -678,3 +678,4 @@ class _ArabicInputFieldState extends State<ArabicInputField> {
     return arabicChars > text.length * 0.3; // If more than 30% Arabic characters
   }
 }
+

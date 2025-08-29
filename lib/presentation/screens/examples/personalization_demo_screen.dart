@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/theme/professional_theme.dart';
@@ -280,7 +280,7 @@ class _PersonalizationDemoScreenState
                           Chip(
                             label: Text('${entry.value}'),
                             backgroundColor:
-                                ProfessionalTheme.primaryColor.withOpacity(0.1),
+                                ProfessionalTheme.primaryColor.withValues(alpha: 0.1),
                           ),
                         ],
                       ),
@@ -824,3 +824,4 @@ class _PersonalizationDemoScreenState
     _simulateDuaInteraction(randomDua, randomType);
   }
 }
+

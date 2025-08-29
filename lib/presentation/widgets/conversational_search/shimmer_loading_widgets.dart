@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
 /// ShimmerEffect class implementation
 class ShimmerEffect extends StatefulWidget {
@@ -127,7 +127,7 @@ class RAGLoadingWidget extends StatelessWidget {
               ),
               boxShadow: [
                 BoxShadow(
-                  color: colorScheme.primary.withOpacity(0.3),
+                  color: colorScheme.primary.withValues(alpha: 0.3),
                   blurRadius: 20,
                   spreadRadius: 2,
                 ),
@@ -387,3 +387,4 @@ class SearchResultShimmer extends StatelessWidget {
     );
   }
 }
+

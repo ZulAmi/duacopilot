@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../../data/models/rag_response_models.dart';
@@ -391,7 +391,7 @@ class _OfflineSemanticSearchExampleScreenState
                                 decoration: BoxDecoration(
                                   color: Theme.of(
                                     context,
-                                  ).primaryColor.withOpacity(0.1),
+                                  ).primaryColor.withValues(alpha: 0.1),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Text(
@@ -528,3 +528,4 @@ class _OfflineSemanticSearchExampleScreenState
     super.dispose();
   }
 }
+

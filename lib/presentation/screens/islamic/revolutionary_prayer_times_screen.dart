@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/theme/revolutionary_islamic_theme.dart';
@@ -182,7 +182,7 @@ class _RevolutionaryPrayerTimesScreenState
             Container(
               padding: const EdgeInsets.all(RevolutionaryIslamicTheme.space3),
               decoration: BoxDecoration(
-                color: RevolutionaryIslamicTheme.textOnColor.withOpacity(0.1),
+                color: RevolutionaryIslamicTheme.textOnColor.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(
                   RevolutionaryIslamicTheme.radius2Xl,
                 ),
@@ -202,7 +202,7 @@ class _RevolutionaryPrayerTimesScreenState
                     'Current Location',
                     style: RevolutionaryIslamicTheme.body2.copyWith(
                       color: RevolutionaryIslamicTheme.textOnColor
-                          .withOpacity(0.8),
+                          .withValues(alpha: 0.8),
                     ),
                   ),
                   const SizedBox(height: RevolutionaryIslamicTheme.space1),
@@ -224,7 +224,7 @@ class _RevolutionaryPrayerTimesScreenState
               ),
               style: IconButton.styleFrom(
                 backgroundColor:
-                    RevolutionaryIslamicTheme.textOnColor.withOpacity(0.1),
+                    RevolutionaryIslamicTheme.textOnColor.withValues(alpha: 0.1),
               ),
             ),
           ],
@@ -268,7 +268,7 @@ class _RevolutionaryPrayerTimesScreenState
                   ),
                   decoration: BoxDecoration(
                     color:
-                        RevolutionaryIslamicTheme.accentPurple.withOpacity(0.1),
+                        RevolutionaryIslamicTheme.accentPurple.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(
                       RevolutionaryIslamicTheme.radiusXl,
                     ),
@@ -294,7 +294,7 @@ class _RevolutionaryPrayerTimesScreenState
                   ),
                   decoration: BoxDecoration(
                     color:
-                        RevolutionaryIslamicTheme.successGreen.withOpacity(0.1),
+                        RevolutionaryIslamicTheme.successGreen.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(
                       RevolutionaryIslamicTheme.radiusFull,
                     ),
@@ -388,7 +388,7 @@ class _RevolutionaryPrayerTimesScreenState
         border: Border.all(
           color: prayer.isPassed
               ? RevolutionaryIslamicTheme.borderLight
-              : RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.3),
+              : RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.3),
         ),
         boxShadow: prayer.isPassed ? [] : RevolutionaryIslamicTheme.shadowXs,
       ),
@@ -399,7 +399,7 @@ class _RevolutionaryPrayerTimesScreenState
             decoration: BoxDecoration(
               color: prayer.isPassed
                   ? RevolutionaryIslamicTheme.neutralGray300
-                  : RevolutionaryIslamicTheme.primaryEmerald.withOpacity(0.1),
+                  : RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(
                 RevolutionaryIslamicTheme.radiusXl,
               ),
@@ -569,3 +569,4 @@ class PrayerTime {
 
   PrayerTime(this.name, this.time, this.description, this.icon, this.isPassed);
 }
+

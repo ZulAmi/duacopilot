@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/di/injection_container.dart';
@@ -164,12 +164,12 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
             Container(
               padding: const EdgeInsets.all(ProfessionalIslamicTheme.space4),
               decoration: BoxDecoration(
-                color: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.05),
+                color: ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.05),
                 borderRadius: BorderRadius.circular(
                   ProfessionalIslamicTheme.radiusMd,
                 ),
                 border: Border.all(
-                  color: ProfessionalIslamicTheme.islamicGreen.withOpacity(0.1),
+                  color: ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.1),
                 ),
               ),
               child: Row(
@@ -378,7 +378,7 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
               TextButton(
                 onPressed: () => _showDrawer(context),
                 child: const Text(
-                  'View All â†’',
+                  'View All Ã¢â€ â€™',
                   style: TextStyle(
                     color: ProfessionalIslamicTheme.islamicGreen,
                   ),
@@ -695,3 +695,4 @@ class _ProfessionalHomeScreenState extends ConsumerState<ProfessionalHomeScreen>
     ).push(MaterialPageRoute(builder: (context) => const PremiumFeaturesHub()));
   }
 }
+

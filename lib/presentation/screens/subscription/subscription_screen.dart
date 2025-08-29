@@ -1,4 +1,4 @@
-//filepath: j:\Programming\FlutterProject\duacopilot\lib\presentation\screens\subscription\subscription_screen.dart
+﻿//filepath: j:\Programming\FlutterProject\duacopilot\lib\presentation\screens\subscription\subscription_screen.dart
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -147,7 +147,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen>
                     width: 4,
                     height: 4,
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.3),
+                      color: Colors.white.withValues(alpha: 0.3),
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -247,9 +247,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen>
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.orange.withOpacity(0.1),
+                color: Colors.orange.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.orange.withOpacity(0.3)),
+                border: Border.all(color: Colors.orange.withValues(alpha: 0.3)),
               ),
               child: Row(
                 children: [
@@ -325,7 +325,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen>
                         'Save 17%',
                         style: TextStyle(
                           fontSize: 12,
-                          color: Colors.white.withOpacity(0.9),
+                          color: Colors.white.withValues(alpha: 0.9),
                         ),
                       ),
                   ],
@@ -447,10 +447,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen>
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: theme.colorScheme.primary.withOpacity(0.1),
+                        color: theme.colorScheme.primary.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(
-                          color: theme.colorScheme.primary.withOpacity(0.2),
+                          color: theme.colorScheme.primary.withValues(alpha: 0.2),
                         ),
                       ),
                       child: Text(
@@ -688,3 +688,4 @@ class _SubscriptionScreenState extends State<SubscriptionScreen>
     }
   }
 }
+

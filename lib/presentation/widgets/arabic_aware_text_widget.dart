@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
 import '../../core/accessibility/arabic_accessibility.dart';
 import '../../core/layout/rtl_layout_support.dart';
@@ -149,10 +149,10 @@ class _ArabicAwareSearchFieldState extends State<ArabicAwareSearchField> {
       decoration: BoxDecoration(
         color: colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: colorScheme.outline.withOpacity(0.2)),
+        border: Border.all(color: colorScheme.outline.withValues(alpha: 0.2)),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.shadow.withOpacity(0.05),
+            color: colorScheme.shadow.withValues(alpha: 0.05),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -173,7 +173,7 @@ class _ArabicAwareSearchFieldState extends State<ArabicAwareSearchField> {
         decoration: InputDecoration(
           hintText: fullHintText,
           hintStyle: textTheme.bodyMedium?.copyWith(
-            color: colorScheme.onSurfaceVariant.withOpacity(0.7),
+            color: colorScheme.onSurfaceVariant.withValues(alpha: 0.7),
           ),
           border: InputBorder.none,
           contentPadding: const EdgeInsets.symmetric(
@@ -220,3 +220,4 @@ extension ArabicAwareExtensions on Widget {
     );
   }
 }
+
