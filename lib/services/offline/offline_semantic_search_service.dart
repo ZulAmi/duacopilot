@@ -4,7 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../data/models/offline/offline_search_models.dart';
-import '../rag_service.dart';
+import '../../domain/repositories/rag_repository.dart';
 import 'fallback_template_service.dart';
 import 'local_embedding_service.dart';
 import 'local_vector_storage_service.dart';
@@ -18,7 +18,7 @@ class OfflineSemanticSearchService {
   final LocalVectorStorageService _storageService;
   final QueryQueueService _queueService;
   final FallbackTemplateService _templateService;
-  final RagService _ragService;
+  final RagRepository _ragRepository;
   final Connectivity _connectivity;
   final SharedPreferences _prefs;
 
@@ -31,14 +31,14 @@ class OfflineSemanticSearchService {
     required LocalVectorStorageService storageService,
     required QueryQueueService queueService,
     required FallbackTemplateService templateService,
-    required RagService ragService,
+    required RagRepository ragRepository,
     required Connectivity connectivity,
     required SharedPreferences prefs,
   })  : _embeddingService = embeddingService,
         _storageService = storageService,
         _queueService = queueService,
         _templateService = templateService,
-        _ragService = ragService,
+        _ragRepository = ragRepository,
         _connectivity = connectivity,
         _prefs = prefs;
 
@@ -311,10 +311,13 @@ class OfflineSemanticSearchService {
   }) async {
     await _prefs.setString('last_online_attempt', DateTime.now().toIso8601String());
 
-    // Try online search with timeout
-    return await _ragService
-        .searchDuas(query: query, language: language, location: location, additionalContext: context)
-        .timeout(const Duration(seconds: 10));
+    // Try online search with timeout using RagRepository
+    final result = await _ragRepository.searchRag(query).timeout(const Duration(seconds: 10));
+
+    return result.fold(
+      (failure) => throw Exception('Search failed: $failure'),
+      (response) => response,
+    );
   }
 
   Future<OfflineSearchResult> _performOfflineSearch({

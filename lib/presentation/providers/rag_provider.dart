@@ -1,23 +1,24 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:dio/dio.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:web_socket_channel/io.dart';
-import '../../domain/entities/rag_response.dart';
-import '../../domain/entities/query_context.dart';
-import '../../services/rag_service.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
+
 import '../../core/services/query_enhancement/query_enhancement_service.dart';
-import 'rag_state_models.dart';
+import '../../domain/entities/query_context.dart';
+import '../../domain/entities/rag_response.dart';
+import '../../domain/repositories/rag_repository.dart';
 import 'provider_config.dart';
+import 'rag_state_models.dart';
 
 /// AsyncNotifierProvider for RAG API calls with loading, success, error states
 class RagApiNotifier extends AsyncNotifier<RagStateData> {
-  late final RagService _ragService;
+  late final RagRepository _ragRepository;
   late final QueryEnhancementService _queryEnhancer;
 
   @override
   Future<RagStateData> build() async {
-    _ragService = ref.read(ragServiceProvider);
+    _ragRepository = ref.read(ragRepositoryProvider);
     _queryEnhancer = QueryEnhancementService();
 
     // Load persisted state
@@ -89,66 +90,41 @@ class RagApiNotifier extends AsyncNotifier<RagStateData> {
       }
 
       // Step 2: Perform RAG query with enhanced query
-      final searchResponse = await _ragService.searchDuas(
-        query: enhancedQuery.processedQuery,
-        language: language,
-        location: enhancedQuery.context.location,
-        additionalContext: {
-          'intent': enhancedQuery.intent.name,
-          'semantic_tags': enhancedQuery.semanticTags,
-          'time_context': enhancedQuery.context.timeOfDay?.name,
-          'prayer_context': enhancedQuery.context.prayerTime?.name,
-          'confidence': enhancedQuery.confidence,
-          ...enhancedQuery.metadata,
+      final searchResult = await _ragRepository.searchRag(enhancedQuery.processedQuery);
+
+      // Handle repository result (Either<Failure, RagResponse>)
+      searchResult.fold(
+        (failure) {
+          // Handle failure case
+          state = AsyncValue.error(failure, StackTrace.current);
+          return;
+        },
+        (response) async {
+          // Handle success case - repository already returns RagResponse
+          final ragStateData = RagStateData(
+            apiState: RagApiState.success,
+            response: response,
+            currentQuery: enhancedQuery.originalQuery,
+            lastUpdated: DateTime.now(),
+            retryCount: 0,
+            isFromCache: false,
+            metadata: {
+              'enhanced_query': enhancedQuery.processedQuery,
+              'original_query': enhancedQuery.originalQuery,
+              'intent': enhancedQuery.intent.name,
+              'semantic_tags': enhancedQuery.semanticTags,
+              'confidence': enhancedQuery.confidence,
+              'processing_steps': enhancedQuery.processingSteps,
+              ...enhancedQuery.metadata,
+              ...?response.metadata,
+            },
+            confidence: response.confidence,
+          );
+
+          state = AsyncValue.data(ragStateData);
+          await _persistState();
         },
       );
-
-      // Convert RagSearchResponse to RagResponse for compatibility
-      final response = RagResponse(
-        id: searchResponse.queryId,
-        query: enhancedQuery.originalQuery, // Keep original for user display
-        response: searchResponse.recommendations.isNotEmpty
-            ? searchResponse.recommendations.first.dua.translation
-            : 'No results found',
-        timestamp: DateTime.now(),
-        responseTime: 0,
-        confidence: (searchResponse.confidence + enhancedQuery.confidence) / 2,
-        metadata: {
-          'reasoning': searchResponse.reasoning,
-          'recommendations_count': searchResponse.recommendations.length,
-          'enhanced_query': enhancedQuery.processedQuery,
-          'original_query': enhancedQuery.originalQuery,
-          'intent': enhancedQuery.intent.name,
-          'semantic_tags': enhancedQuery.semanticTags,
-          'processing_steps': enhancedQuery.processingSteps,
-          'query_enhancement_confidence': enhancedQuery.confidence,
-          'context_summary': enhancedQuery.context.summary,
-          ...enhancedQuery.metadata,
-        },
-      );
-
-      // Update state with success
-      final newState = state.value!.copyWith(
-        apiState: RagApiState.success,
-        response: response,
-        isFromCache: false,
-        lastUpdated: DateTime.now(),
-        retryCount: 0,
-        confidence: response.confidence,
-        metadata: response.metadata,
-      );
-
-      state = AsyncValue.data(newState);
-
-      // Cache the response (using enhanced query as key)
-      if (useCache) {
-        await ref
-            .read(ragCacheProvider.notifier)
-            .put(enhancedQuery.processedQuery, response);
-      }
-
-      // Persist state
-      await _persistState();
     } catch (error, stackTrace) {
       // Handle error with retry logic
       await _handleError(
@@ -355,8 +331,7 @@ class RagCacheNotifier extends StateNotifier<Map<String, CachedRagEntry>> {
   Future<void> _evictOldest() async {
     if (state.isEmpty) return;
 
-    final sortedEntries = state.entries.toList()
-      ..sort((a, b) => a.value.timestamp.compareTo(b.value.timestamp));
+    final sortedEntries = state.entries.toList()..sort((a, b) => a.value.timestamp.compareTo(b.value.timestamp));
 
     final entriesToRemove = (state.length * 0.2).ceil(); // Remove 20%
     final newState = <String, CachedRagEntry>{};
@@ -402,8 +377,7 @@ class RagCacheNotifier extends StateNotifier<Map<String, CachedRagEntry>> {
 }
 
 /// Provider for RAG response caching
-final ragCacheProvider =
-    StateNotifierProvider<RagCacheNotifier, Map<String, CachedRagEntry>>((ref) {
+final ragCacheProvider = StateNotifierProvider<RagCacheNotifier, Map<String, CachedRagEntry>>((ref) {
   const config = RagCacheConfig(
     maxEntries: 100,
     maxAge: Duration(hours: 1),
@@ -484,14 +458,12 @@ class RagFilterNotifier extends StateNotifier<RagFilterConfig> {
   List<RagResponse> filterResponses(List<RagResponse> responses) {
     return responses.where((response) {
       // Confidence filter
-      if (response.confidence != null &&
-          response.confidence! < state.minConfidence) {
+      if (response.confidence != null && response.confidence! < state.minConfidence) {
         return false;
       }
 
       // Length filter
-      if (state.maxResponseLength != null &&
-          response.response.length > state.maxResponseLength!) {
+      if (state.maxResponseLength != null && response.response.length > state.maxResponseLength!) {
         return false;
       }
 
@@ -542,8 +514,7 @@ class RagFilterNotifier extends StateNotifier<RagFilterConfig> {
 }
 
 /// Provider for RAG response filtering
-final ragFilterProvider =
-    StateNotifierProvider<RagFilterNotifier, RagFilterConfig>((ref) {
+final ragFilterProvider = StateNotifierProvider<RagFilterNotifier, RagFilterConfig>((ref) {
   return RagFilterNotifier();
 });
 
@@ -659,8 +630,7 @@ class RagWebSocketNotifier extends StateNotifier<WebSocketState> {
 }
 
 /// Provider for WebSocket state management
-final ragWebSocketProvider =
-    StateNotifierProvider<RagWebSocketNotifier, WebSocketState>((ref) {
+final ragWebSocketProvider = StateNotifierProvider<RagWebSocketNotifier, WebSocketState>((ref) {
   return RagWebSocketNotifier();
 });
 

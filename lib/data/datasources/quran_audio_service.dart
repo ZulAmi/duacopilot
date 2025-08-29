@@ -1,13 +1,12 @@
-import 'package:duacopilot/core/logging/app_logger.dart';
-
 import 'dart:io';
-import 'package:http/http.dart' as http;
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart' as path;
 
-import '../models/audio_cache.dart';
+import 'package:duacopilot/core/logging/app_logger.dart';
+import 'package:http/http.dart' as http;
+import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart';
+
 import '../datasources/quran_api_service.dart';
-import '../datasources/rag_cache_service.dart';
+import '../models/audio_cache.dart';
 
 /// Enhanced audio service with Quran API integration
 ///
@@ -15,15 +14,12 @@ import '../datasources/rag_cache_service.dart';
 /// with support for multiple reciters and quality levels.
 class QuranAudioService {
   final QuranApiService _quranApi;
-  final RagCacheService _cacheService;
   final http.Client _httpClient;
 
   QuranAudioService({
     QuranApiService? quranApi,
-    RagCacheService? cacheService,
     http.Client? httpClient,
   })  : _quranApi = quranApi ?? QuranApiService(),
-        _cacheService = cacheService ?? RagCacheService(),
         _httpClient = httpClient ?? http.Client();
 
   /// Download audio for a specific verse
@@ -48,7 +44,8 @@ class QuranAudioService {
           lastPlayed: DateTime.now(),
           playCount: existingCache.playCount + 1,
         );
-        await _cacheService.cacheAudioFile(updatedCache);
+        // Audio caching is now handled locally through file system
+        AppLogger.debug('Using cached audio file: ${updatedCache.fileName}');
         return updatedCache;
       }
 
@@ -64,8 +61,7 @@ class QuranAudioService {
       );
 
       // Create audio cache entry
-      final fileName =
-          'verse_${verseNumber}_${quality.toString().split('.').last}.mp3';
+      final fileName = 'verse_${verseNumber}_${quality.toString().split('.').last}.mp3';
       final audioCache = AudioCache(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
         duaId: 'verse_$verseNumber',
@@ -88,8 +84,8 @@ class QuranAudioService {
         playCount: 1,
       );
 
-      // Cache the audio file metadata
-      await _cacheService.cacheAudioFile(audioCache);
+      // Audio file metadata is cached locally through file system
+      AppLogger.debug('Downloaded and cached audio: ${audioCache.fileName}');
 
       return audioCache;
     } catch (e) {
@@ -199,17 +195,16 @@ class QuranAudioService {
 
   /// Get audio cache statistics
   Future<Map<String, dynamic>> getAudioCacheStats() async {
-    final stats = await _cacheService.getCacheStats();
-
-    // Calculate additional audio-specific stats
+    // Calculate audio-specific stats from local files
     final audioFiles = await _getLocalAudioFiles();
     final totalSize = await _calculateTotalAudioSize(audioFiles);
 
     return {
-      ...stats,
+      'cached_audio_enabled': true,
       'local_audio_files': audioFiles.length,
       'total_audio_size_bytes': totalSize,
       'total_audio_size_mb': (totalSize / (1024 * 1024)).toStringAsFixed(2),
+      'cache_location': 'local_file_system',
     };
   }
 
@@ -262,8 +257,7 @@ class QuranAudioService {
       await audioDir.create(recursive: true);
     }
 
-    final fileName =
-        'verse_${verseNumber}_${quality.toString().split('.').last}.mp3';
+    final fileName = 'verse_${verseNumber}_${quality.toString().split('.').last}.mp3';
     final filePath = path.join(audioDir.path, fileName);
 
     final file = File(filePath);

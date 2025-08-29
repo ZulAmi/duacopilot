@@ -47,19 +47,19 @@ class _ProfessionalIslamicSearchScreenState extends ConsumerState<ProfessionalIs
   final List<IslamicSearchCategory> _searchCategories = [
     IslamicSearchCategory(
       icon: Icons.menu_book_rounded,
-      title: 'Ø§Ù„Ù‚Ø±Ø¢Ù† Ø§Ù„ÙƒØ±ÙŠÙ…',
+      title: 'القرآن الكريم',
       titleEn: 'Holy Quran',
       description: 'Search verses and meanings',
     ),
     IslamicSearchCategory(
       icon: Icons.article_rounded,
-      title: 'Ø§Ù„Ø£Ø­Ø§Ø¯ÙŠØ« Ø§Ù„Ù†Ø¨ÙˆÙŠØ©',
+      title: 'الأحاديث النبوية',
       titleEn: 'Prophetic Hadith',
-      description: 'Authentic sayings of Prophet Ã¯Â·Âº',
+      description: 'Authentic sayings of Prophet ﷺ',
     ),
     IslamicSearchCategory(
       icon: Icons.favorite_rounded,
-      title: 'Ø§Ù„Ø£Ø¯Ø¹ÙŠØ©',
+      title: 'الأدعية',
       titleEn: 'Duas & Supplications',
       description: 'Daily prayers and supplications',
     ),
@@ -145,16 +145,21 @@ class _ProfessionalIslamicSearchScreenState extends ConsumerState<ProfessionalIs
           });
         },
       );
-    } catch (e) {
+    } catch (e, stackTrace) {
       setState(() {
         _isSearching = false;
         _showResults = false;
         _errorMessage = e.toString();
       });
+
+      // Print detailed error for debugging
+      print('🚨 SEARCH ERROR: $e');
+      print('📍 STACK TRACE: $stackTrace');
+
       if (mounted) {
         ProfessionalComponents.showSnackBar(
           context: context,
-          message: 'Unexpected error during search',
+          message: 'Search error: ${e.toString()}',
           icon: Icons.error_outline,
           backgroundColor: ProfessionalIslamicTheme.error,
         );
@@ -294,7 +299,7 @@ class _ProfessionalIslamicSearchScreenState extends ConsumerState<ProfessionalIs
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Ø§Ù„Ø¨Ø­Ø« Ø§Ù„Ø¥Ø³Ù„Ø§Ù…ÙŠ',
+                      'البحث الإسلامي',
                       style: ProfessionalIslamicTheme.heading3.copyWith(
                         fontWeight: FontWeight.w700,
                         color: ProfessionalIslamicTheme.textPrimary,
@@ -525,10 +530,7 @@ class _ProfessionalIslamicSearchScreenState extends ConsumerState<ProfessionalIs
             offset: const Offset(0, 2),
           ),
         ],
-        border: Border.all(
-          color: ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.1),
-          width: 1.5,
-        ),
+        // Removed border since gradients don't support borders with borderRadius
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -647,10 +649,7 @@ class _ProfessionalIslamicSearchScreenState extends ConsumerState<ProfessionalIs
                 ],
               ),
               borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusMd),
-              border: Border.all(
-                color: ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.2),
-                width: 1,
-              ),
+              // Removed border since gradients don't support borders with borderRadius
             ),
             child: Row(
               children: [
@@ -743,328 +742,123 @@ class _ProfessionalIslamicSearchScreenState extends ConsumerState<ProfessionalIs
   }
 
   Widget _buildFormattedResponse(String response) {
-    // Enhanced text rendering to handle the comprehensive RAG response format
+    // Simple, clean professional formatting without complex parsing
+    return Container(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildCleanResponseContent(response),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCleanResponseContent(String response) {
+    // Split response into clean, readable sections
     final lines = response.split('\n');
     final widgets = <Widget>[];
-
-    for (int i = 0; i < lines.length; i++) {
-      final line = lines[i];
-
-      // Skip empty lines but add spacing
-      if (line.trim().isEmpty) {
-        widgets.add(const SizedBox(height: 8));
+    
+    String currentSection = '';
+    bool isInQuote = false;
+    bool isInArabic = false;
+    
+    for (final line in lines) {
+      final trimmed = line.trim();
+      
+      if (trimmed.isEmpty) {
+        if (currentSection.isNotEmpty) {
+          widgets.add(_buildCleanSection(currentSection, isInQuote, isInArabic));
+          widgets.add(const SizedBox(height: 12));
+          currentSection = '';
+          isInQuote = false;
+          isInArabic = false;
+        }
         continue;
       }
-
-      // Handle different formatting
-      if (line.startsWith('## ')) {
-        // Section headers
-        widgets.add(_buildSectionHeader(line.substring(3)));
-      } else if (line.startsWith('### ')) {
-        // Subsection headers
-        widgets.add(_buildSubsectionHeader(line.substring(4)));
-      } else if (line.startsWith('**[') && line.contains(']')) {
-        // Citations and references
-        widgets.add(_buildCitationText(line));
-      } else if (line.startsWith('> ')) {
-        // Quoted text (Arabic, translations, etc.)
-        widgets.add(_buildQuotedText(line.substring(2)));
-      } else if (line.startsWith('*') && line.endsWith('*')) {
-        // Italic/emphasis text
-        widgets.add(_buildEmphasisText(line));
-      } else if (line.contains('ï·º') || line.contains('ï·»')) {
-        // Text with Islamic honorifics
-        widgets.add(_buildIslamicText(line));
-      } else if (line.trim() == '---') {
-        // Divider
-        widgets.add(_buildDivider());
-      } else {
-        // Regular text
-        widgets.add(_buildRegularText(line));
+      
+      // Detect section types
+      if (trimmed.startsWith('##')) {
+        if (currentSection.isNotEmpty) {
+          widgets.add(_buildCleanSection(currentSection, isInQuote, isInArabic));
+          widgets.add(const SizedBox(height: 16));
+        }
+        widgets.add(_buildCleanHeader(trimmed.substring(2).trim()));
+        widgets.add(const SizedBox(height: 12));
+        currentSection = '';
+        isInQuote = false;
+        isInArabic = false;
+        continue;
       }
-
-      // Add spacing between elements
-      if (i < lines.length - 1) {
-        widgets.add(const SizedBox(height: 6));
+      
+      // Check for quotes or Arabic text
+      if (trimmed.startsWith('>') || trimmed.contains('Arabic:') || _isArabicText(trimmed)) {
+        if (currentSection.isNotEmpty && !isInQuote) {
+          widgets.add(_buildCleanSection(currentSection, false, false));
+          widgets.add(const SizedBox(height: 8));
+          currentSection = '';
+        }
+        isInQuote = true;
+        isInArabic = _isArabicText(trimmed);
+      } else if (trimmed.startsWith('**[') || trimmed.startsWith('[H')) {
+        if (currentSection.isNotEmpty) {
+          widgets.add(_buildCleanSection(currentSection, isInQuote, isInArabic));
+          widgets.add(const SizedBox(height: 8));
+          currentSection = '';
+        }
+        widgets.add(_buildCleanCitation(trimmed));
+        widgets.add(const SizedBox(height: 8));
+        isInQuote = false;
+        isInArabic = false;
+        continue;
       }
+      
+      if (currentSection.isNotEmpty) {
+        currentSection += '\n';
+      }
+      currentSection += line;
     }
-
+    
+    if (currentSection.isNotEmpty) {
+      widgets.add(_buildCleanSection(currentSection, isInQuote, isInArabic));
+    }
+    
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: widgets,
     );
   }
 
-  Widget _buildSectionHeader(String text) {
+  Widget _buildCleanHeader(String text) {
     return Container(
-      margin: const EdgeInsets.only(top: 16, bottom: 12),
-      child: Row(
-        children: [
-          Container(
-            width: 4,
-            height: 24,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  ProfessionalIslamicTheme.islamicGreen,
-                  ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.6),
-                ],
-              ),
-              borderRadius: BorderRadius.circular(2),
-            ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Text(
-              text.trim(),
-              style: ProfessionalIslamicTheme.heading3.copyWith(
-                color: ProfessionalIslamicTheme.islamicGreen,
-                fontWeight: FontWeight.w700,
-                height: 1.2,
-              ),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            decoration: BoxDecoration(
-              color: ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusFull),
-            ),
-            child: Icon(
-              Icons.auto_awesome,
-              size: 14,
-              color: ProfessionalIslamicTheme.islamicGreen,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSubsectionHeader(String text) {
-    return Container(
-      margin: const EdgeInsets.only(top: 12, bottom: 8),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
           colors: [
-            ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.1),
-            ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.05),
+            ProfessionalIslamicTheme.islamicGreen,
+            ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.8),
           ],
         ),
-        borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusMd),
-        border: Border.all(
-          color: ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.3),
-          width: 1,
-        ),
+        borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
-        children: [
-          Icon(
-            Icons.label_rounded,
-            size: 16,
-            color: ProfessionalIslamicTheme.islamicGreen,
-          ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Text(
-              text.trim(),
-              style: ProfessionalIslamicTheme.body1.copyWith(
-                color: ProfessionalIslamicTheme.textPrimary,
-                fontWeight: FontWeight.w600,
-                height: 1.3,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildCitationText(String text) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 6),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.08),
-            ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.12),
-          ],
-        ),
-        borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusMd),
-        border: Border.all(
-          color: ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.2),
-          width: 1,
-        ),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(6),
-            decoration: BoxDecoration(
-              color: ProfessionalIslamicTheme.islamicGreen,
-              borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusFull),
-            ),
-            child: Icon(
-              Icons.format_quote_rounded,
-              size: 12,
-              color: ProfessionalIslamicTheme.textOnIslamic,
-            ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Text(
-              text.trim(),
-              style: ProfessionalIslamicTheme.body1.copyWith(
-                color: ProfessionalIslamicTheme.islamicGreen,
-                fontWeight: FontWeight.w600,
-                height: 1.5,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildQuotedText(String text) {
-    final isArabic = text.contains('Arabic:');
-    final isTranslation = text.contains('Translation:');
-    final isTransliteration = text.contains('Transliteration:');
-
-    Color backgroundColor;
-    Color borderColor;
-    IconData iconData;
-
-    if (isArabic) {
-      backgroundColor = ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.08);
-      borderColor = ProfessionalIslamicTheme.islamicGreen;
-      iconData = Icons.menu_book_rounded;
-    } else if (isTranslation) {
-      backgroundColor = ProfessionalIslamicTheme.warning.withValues(alpha: 0.08);
-      borderColor = ProfessionalIslamicTheme.warning;
-      iconData = Icons.translate_rounded;
-    } else {
-      backgroundColor = ProfessionalIslamicTheme.textSecondary.withValues(alpha: 0.05);
-      borderColor = ProfessionalIslamicTheme.textSecondary.withValues(alpha: 0.3);
-      iconData = Icons.text_fields_rounded;
-    }
-
-    return Container(
-      margin: const EdgeInsets.only(left: 20, top: 6, bottom: 6, right: 4),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusMd),
-        border: Border(
-          left: BorderSide(
-            color: borderColor,
-            width: 4,
-          ),
-          top: BorderSide(color: borderColor.withValues(alpha: 0.2)),
-          right: BorderSide(color: borderColor.withValues(alpha: 0.2)),
-          bottom: BorderSide(color: borderColor.withValues(alpha: 0.2)),
-        ),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(6),
-            decoration: BoxDecoration(
-              color: borderColor.withValues(alpha: 0.15),
-              borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusFull),
-            ),
-            child: Icon(
-              iconData,
-              size: 14,
-              color: borderColor,
-            ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Text(
-              text.trim(),
-              style: ProfessionalIslamicTheme.body1.copyWith(
-                color: ProfessionalIslamicTheme.textPrimary,
-                fontWeight: isArabic ? FontWeight.w600 : FontWeight.w500,
-                fontStyle: isTransliteration ? FontStyle.italic : FontStyle.normal,
-                height: 1.6,
-                fontSize: isArabic ? 16 : 15,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildEmphasisText(String text) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 4),
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      decoration: BoxDecoration(
-        color: ProfessionalIslamicTheme.textSecondary.withValues(alpha: 0.05),
-        borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusSm),
-        border: Border.all(
-          color: ProfessionalIslamicTheme.textSecondary.withValues(alpha: 0.1),
-        ),
-      ),
-      child: Text(
-        text.trim().replaceAll('*', ''),
-        style: ProfessionalIslamicTheme.body2.copyWith(
-          color: ProfessionalIslamicTheme.textSecondary,
-          fontStyle: FontStyle.italic,
-          height: 1.5,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildIslamicText(String text) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 6),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-          colors: [
-            ProfessionalIslamicTheme.warning.withValues(alpha: 0.1),
-            ProfessionalIslamicTheme.warning.withValues(alpha: 0.05),
-          ],
-        ),
-        borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusMd),
-        border: Border.all(
-          color: ProfessionalIslamicTheme.warning.withValues(alpha: 0.3),
-          width: 1,
-        ),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(
             Icons.star_rounded,
-            size: 16,
-            color: ProfessionalIslamicTheme.warning,
+            color: Colors.white,
+            size: 20,
           ),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
-              text.trim(),
+              text,
               style: ProfessionalIslamicTheme.body1.copyWith(
-                color: ProfessionalIslamicTheme.textPrimary,
-                height: 1.6,
-                fontWeight: FontWeight.w500,
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
               ),
             ),
           ),
@@ -1073,76 +867,107 @@ class _ProfessionalIslamicSearchScreenState extends ConsumerState<ProfessionalIs
     );
   }
 
-  Widget _buildDivider() {
+  Widget _buildCleanSection(String content, bool isQuote, bool isArabic) {
+    final cleanContent = content.trim()
+        .replaceAll(RegExp(r'^\*\*'), '')
+        .replaceAll(RegExp(r'\*\*$'), '')
+        .replaceAll(RegExp(r'^>'), '')
+        .trim();
+    
+    if (isQuote || isArabic) {
+      return Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: isArabic 
+              ? ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.05)
+              : ProfessionalIslamicTheme.backgroundSecondary,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: isArabic 
+                ? ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.2)
+                : ProfessionalIslamicTheme.borderLight,
+          ),
+        ),
+        child: Text(
+          cleanContent,
+          style: ProfessionalIslamicTheme.body1.copyWith(
+            color: isArabic 
+                ? ProfessionalIslamicTheme.islamicGreen
+                : ProfessionalIslamicTheme.textPrimary,
+            fontWeight: isArabic ? FontWeight.w600 : FontWeight.w500,
+            fontSize: isArabic ? 18 : 15,
+            height: isArabic ? 2.0 : 1.6,
+            fontStyle: isQuote && !isArabic ? FontStyle.italic : FontStyle.normal,
+          ),
+          textAlign: isArabic ? TextAlign.right : TextAlign.left,
+          textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
+        ),
+      );
+    }
+    
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 20),
-      child: Row(
-        children: [
-          Expanded(
-            child: Container(
-              height: 1,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                  colors: [
-                    Colors.transparent,
-                    ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.3),
-                    Colors.transparent,
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16),
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusFull),
-              border: Border.all(
-                color: ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.2),
-              ),
-            ),
-            child: Icon(
-              Icons.brightness_2_rounded,
-              size: 12,
-              color: ProfessionalIslamicTheme.islamicGreen,
-            ),
-          ),
-          Expanded(
-            child: Container(
-              height: 1,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                  colors: [
-                    Colors.transparent,
-                    ProfessionalIslamicTheme.islamicGreen.withValues(alpha: 0.3),
-                    Colors.transparent,
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildRegularText(String text) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 4),
+      width: double.infinity,
       child: Text(
-        text.trim(),
+        cleanContent,
         style: ProfessionalIslamicTheme.body1.copyWith(
           color: ProfessionalIslamicTheme.textPrimary,
-          height: 1.7,
-          fontWeight: FontWeight.w400,
+          height: 1.6,
+          fontSize: 15,
         ),
       ),
     );
+  }
+
+  Widget _buildCleanCitation(String citation) {
+    // Extract source info cleanly
+    String displayText = citation
+        .replaceAll(RegExp(r'^\*\*\['), '')
+        .replaceAll(RegExp(r'\]\*\*'), '')
+        .replaceAll(RegExp(r'^\[H\d+\]'), '')
+        .trim();
+    
+    IconData iconData = Icons.auto_stories_rounded;
+    Color color = ProfessionalIslamicTheme.islamicGreen;
+    
+    if (citation.contains('[H')) {
+      iconData = Icons.article_rounded;
+      color = const Color(0xFF8B4513);
+    }
+    
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.05),
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(
+          color: color.withValues(alpha: 0.2),
+        ),
+      ),
+      child: Row(
+        children: [
+          Icon(
+            iconData,
+            size: 16,
+            color: color,
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              displayText,
+              style: ProfessionalIslamicTheme.body2.copyWith(
+                color: color,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  bool _isArabicText(String text) {
+    return RegExp(r'[\u0600-\u06FF]').hasMatch(text);
   }
 
   Widget _buildWelcomeContent() {
@@ -1173,7 +998,7 @@ class _ProfessionalIslamicSearchScreenState extends ConsumerState<ProfessionalIs
                 ),
                 const SizedBox(height: ProfessionalIslamicTheme.space3),
                 Text(
-                  'Ø¨ÙØ³Ù’Ù…Ù Ø§Ù„Ù„Ù‘ÙŽÙ‡Ù Ø§Ù„Ø±Ù‘ÙŽØ­Ù’Ù…ÙŽÙ°Ù†Ù Ø§Ù„Ø±Ù‘ÙŽØ­ÙÙŠÙ…Ù',
+                  'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',
                   style: ProfessionalIslamicTheme.heading3.copyWith(
                     color: ProfessionalIslamicTheme.islamicGreen,
                     fontWeight: FontWeight.w600,
@@ -1203,25 +1028,6 @@ class _ProfessionalIslamicSearchScreenState extends ConsumerState<ProfessionalIs
 
           const SizedBox(height: ProfessionalIslamicTheme.space6),
 
-          // Quick Suggestions
-          Text(
-            'Popular Searches',
-            style: ProfessionalIslamicTheme.body1.copyWith(
-              fontWeight: FontWeight.w600,
-              color: ProfessionalIslamicTheme.textPrimary,
-            ),
-          ),
-          const SizedBox(height: ProfessionalIslamicTheme.space3),
-
-          ...[
-            'Morning remembrance',
-            'Evening supplications',
-            'Travel prayers',
-            'Seeking forgiveness',
-            'Prayer times',
-            'Quranic wisdom',
-          ].map((suggestion) => _buildSuggestionItem(suggestion)),
-
           // Search History
           if (widget.showSearchHistory && _searchHistory.isNotEmpty) ...[
             const SizedBox(height: ProfessionalIslamicTheme.space6),
@@ -1236,49 +1042,6 @@ class _ProfessionalIslamicSearchScreenState extends ConsumerState<ProfessionalIs
             ...(_searchHistory.take(5).map((item) => _buildHistoryItem(item)).toList()),
           ],
         ],
-      ),
-    );
-  }
-
-  Widget _buildSuggestionItem(String suggestion) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: ProfessionalIslamicTheme.space2),
-      child: InkWell(
-        onTap: () => _performSearch(suggestion),
-        borderRadius: BorderRadius.circular(ProfessionalIslamicTheme.radiusSm),
-        child: Container(
-          padding: const EdgeInsets.all(ProfessionalIslamicTheme.space3),
-          decoration: BoxDecoration(
-            color: ProfessionalIslamicTheme.backgroundSecondary,
-            borderRadius: BorderRadius.circular(
-              ProfessionalIslamicTheme.radiusSm,
-            ),
-            border: Border.all(color: ProfessionalIslamicTheme.borderLight),
-          ),
-          child: Row(
-            children: [
-              Icon(
-                Icons.search_rounded,
-                size: 18,
-                color: ProfessionalIslamicTheme.textSecondary,
-              ),
-              const SizedBox(width: ProfessionalIslamicTheme.space3),
-              Expanded(
-                child: Text(
-                  suggestion,
-                  style: ProfessionalIslamicTheme.body2.copyWith(
-                    color: ProfessionalIslamicTheme.textPrimary,
-                  ),
-                ),
-              ),
-              Icon(
-                Icons.arrow_forward_ios_rounded,
-                size: 14,
-                color: ProfessionalIslamicTheme.textSecondary,
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }
@@ -1356,6 +1119,40 @@ class _ProfessionalIslamicSearchScreenState extends ConsumerState<ProfessionalIs
   }
 }
 
+/// Response Section Model for Professional Formatting
+class ResponseSection {
+  final String type;
+  final String content;
+
+  ResponseSection({required this.type, required this.content});
+}
+
+/// Quran Verse Model for Professional Display
+class QuranVerse {
+  final String reference;
+  final String arabicText;
+  final String translation;
+
+  QuranVerse({
+    required this.reference,
+    required this.arabicText,
+    required this.translation,
+  });
+}
+
+/// Hadith Reference Model for Professional Display
+class HadithReference {
+  final String source;
+  final String arabicText;
+  final String translation;
+
+  HadithReference({
+    required this.source,
+    required this.arabicText,
+    required this.translation,
+  });
+}
+
 /// Islamic Search History Item
 class IslamicSearchHistoryItem {
   final String id;
@@ -1385,4 +1182,3 @@ class IslamicSearchCategory {
     required this.description,
   });
 }
-

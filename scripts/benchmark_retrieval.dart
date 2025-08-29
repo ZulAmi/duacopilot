@@ -1,25 +1,24 @@
 /// High-performance benchmark comparing local vector DB vs API retrieval latency.
-/// 
+///
 /// Usage:
 ///   dart run scripts/benchmark_retrieval.dart
 ///   flutter test scripts/benchmark_retrieval.dart
-/// 
+///
 /// Expected results:
 ///   - Local vector DB: 50-200ms
 ///   - API retrieval: 1000-3000ms
+library;
+
 import 'dart:async';
 import 'dart:math' as math;
 
-import 'package:duacopilot/core/logging/app_logger.dart';
-import 'package:duacopilot/config/rag_config.dart';
 import 'package:duacopilot/data/datasources/quran_vector_index.dart';
 import 'package:duacopilot/data/datasources/islamic_rag_service.dart';
 import 'package:duacopilot/data/datasources/quran_api_service.dart';
-import 'package:duacopilot/data/datasources/rag_cache_service.dart';
 
 Future<void> main() async {
   print('🚀 Starting Quran Vector Database Performance Benchmark\n');
-  
+
   final benchmark = RetrievalBenchmark();
   await benchmark.run();
 }
@@ -45,39 +44,38 @@ class RetrievalBenchmark {
   Future<void> run() async {
     await _initialize();
     await _warmup();
-    
+
     final localResults = await _benchmarkLocalVector();
     final apiResults = await _benchmarkApiRetrieval();
-    
+
     _printResults(localResults, apiResults);
     _analyzePerformance(localResults, apiResults);
   }
 
   Future<void> _initialize() async {
     print('📝 Initializing benchmark components...');
-    
+
     // Initialize vector index
     vectorIndex = QuranVectorIndex.instance;
     await vectorIndex.initialize();
-    
+
     // Initialize services
     apiService = QuranApiService();
     ragService = IslamicRagService(
       quranApi: apiService,
-      cacheService: RagCacheService(),
     );
-    
+
     print('✅ Initialization complete\n');
   }
 
   Future<void> _warmup() async {
     print('🔥 Warming up systems...');
-    
+
     // Warmup vector index
     if (vectorIndex.isReady) {
       await vectorIndex.search(query: 'test warmup', limit: 1);
     }
-    
+
     // Warmup API (with rate limiting consideration)
     try {
       await apiService.searchVerses(query: 'guidance', edition: 'en.sahih');
@@ -85,13 +83,13 @@ class RetrievalBenchmark {
     } catch (e) {
       print('⚠️ API warmup failed: $e');
     }
-    
+
     print('✅ Warmup complete\n');
   }
 
   Future<BenchmarkResults> _benchmarkLocalVector() async {
     print('🔍 Benchmarking Local Vector Database...');
-    
+
     final latencies = <int>[];
     final resultCounts = <int>[];
     int failures = 0;
@@ -129,7 +127,7 @@ class RetrievalBenchmark {
 
   Future<BenchmarkResults> _benchmarkApiRetrieval() async {
     print('\n🌐 Benchmarking API Retrieval...');
-    
+
     final latencies = <int>[];
     final resultCounts = <int>[];
     int failures = 0;
@@ -168,7 +166,7 @@ class RetrievalBenchmark {
   void _printResults(BenchmarkResults local, BenchmarkResults api) {
     print('\n📊 BENCHMARK RESULTS\n');
     print('=' * 60);
-    
+
     _printResultsFor(local);
     print('');
     _printResultsFor(api);
@@ -187,7 +185,7 @@ class RetrievalBenchmark {
     final p95 = _percentile(sorted, 95);
     final min = sorted.first;
     final max = sorted.last;
-    
+
     final avgResults = results.resultCounts.isNotEmpty
         ? results.resultCounts.reduce((a, b) => a + b) / results.resultCounts.length
         : 0;
@@ -209,7 +207,7 @@ class RetrievalBenchmark {
 
       print('Speed Improvement: ${speedup.toStringAsFixed(1)}x faster');
       print('Local target (50-200ms): ${_checkTarget(local.latencies, 50, 200)}');
-      
+
       // Check if local retrieval meets performance requirements
       final localP95 = _percentile([...local.latencies]..sort(), 95);
       if (localP95 <= 200) {
@@ -221,13 +219,13 @@ class RetrievalBenchmark {
 
     // Recommend optimizations
     print('\n💡 OPTIMIZATION RECOMMENDATIONS:');
-    
+
     if (vectorIndex.isReady) {
       print('✅ Vector index is ready and operational');
     } else {
       print('❌ Vector index not ready - check initialization');
     }
-    
+
     print('📈 Consider:');
     print('  - Pre-compute embeddings with sentence-transformers');
     print('  - Use production Qdrant deployment for scaling');
@@ -239,7 +237,7 @@ class RetrievalBenchmark {
     final sorted = [...latencies]..sort();
     final median = _percentile(sorted, 50);
     final p95 = _percentile(sorted, 95);
-    
+
     if (median >= minMs && p95 <= maxMs) {
       return '✅ PASS (${median}ms median, ${p95}ms p95)';
     } else {

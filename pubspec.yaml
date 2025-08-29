@@ -146,6 +146,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  generate: true
 
   assets:
     - assets/models/
@@ -156,6 +157,9 @@ flutter:
     # Full Quran dataset (uncomment after generation)
     - assets/data/quran_verses_full.json
     - assets/data/quran_embeddings_full.json
+    # Comprehensive Islamic texts and hadith data
+    - assets/data/comprehensive_islamic_texts.json
+    - assets/data/comprehensive_islamic_embeddings.json
 
 # Platform-aware overrides for web compatibility  
 dependency_overrides:

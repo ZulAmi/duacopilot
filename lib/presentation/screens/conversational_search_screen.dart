@@ -664,31 +664,6 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
         children: [
           const SizedBox(height: 20),
 
-          // Quick Start Suggestions Header
-          const Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Try asking about:',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: RevolutionaryIslamicTheme.textPrimary,
-              ),
-            ),
-          ),
-
-          const SizedBox(height: 12),
-
-          // Suggestion Cards
-          ...[
-            'Morning duas',
-            'Travel prayers',
-            'Protection from evil',
-            'Seeking forgiveness',
-          ].map((suggestion) => _buildSuggestionChip(suggestion)),
-
-          const SizedBox(height: 24),
-
           // Search History (if available)
           if (widget.showSearchHistory && _searchHistory.isNotEmpty) ...[
             const Align(
@@ -838,66 +813,6 @@ Remember to maintain regular prayers, seek knowledge, and always turn to Allah i
     );
   }
 
-  Widget _buildSuggestionChip(String title) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      decoration: BoxDecoration(
-        color: RevolutionaryIslamicTheme.backgroundSecondary,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: RevolutionaryIslamicTheme.borderLight),
-        boxShadow: [
-          BoxShadow(
-            color: RevolutionaryIslamicTheme.neutralGray300.withValues(alpha: 0.5),
-            blurRadius: 4,
-            offset: const Offset(0, 1),
-          ),
-        ],
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: () => _performSearch(title),
-          borderRadius: BorderRadius.circular(12),
-          child: Padding(
-            padding: const EdgeInsets.all(12),
-            child: Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(6),
-                  decoration: BoxDecoration(
-                    color: RevolutionaryIslamicTheme.primaryEmerald.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: Icon(
-                    Icons.lightbulb_outline,
-                    size: 16,
-                    color: RevolutionaryIslamicTheme.primaryEmerald,
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: RevolutionaryIslamicTheme.textPrimary,
-                    ),
-                  ),
-                ),
-                const Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  color: RevolutionaryIslamicTheme.textSecondary,
-                  size: 12,
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
   Widget _buildHistoryItem(SearchHistoryItem item) {
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
@@ -1010,4 +925,3 @@ class SearchHistoryItem {
     required this.results,
   });
 }
-

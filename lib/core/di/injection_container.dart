@@ -8,16 +8,14 @@ import 'package:logger/logger.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../../data/datasources/islamic_rag_service.dart'; // Islamic knowledge retrieval
-import '../../data/datasources/quran_vector_index.dart'; // Local vector database
 import '../../data/datasources/local_datasource.dart';
 import '../../data/datasources/mock_local_datasource.dart'; // Add mock local datasource
 import '../../data/datasources/quran_api_service.dart'; // Quran API integration
-import '../../data/datasources/rag_cache_service.dart'; // RAG caching
+import '../../data/datasources/quran_vector_index.dart'; // Local vector database
 import '../../data/datasources/rag_remote_datasource.dart';
-import '../../data/datasources/working_rag_api_service.dart'; // TRUE RAG API Service
 import '../../data/repositories/audio_repository_impl.dart';
-import '../../data/repositories/enhanced_rag_repository_impl.dart';
 import '../../data/repositories/favorites_repository_impl.dart';
+import '../../data/repositories/unified_rag_repository_impl.dart';
 import '../../domain/repositories/audio_repository.dart';
 import '../../domain/repositories/favorites_repository.dart';
 import '../../domain/repositories/rag_repository.dart';
@@ -109,30 +107,18 @@ Future<void> init() async {
 
       // Islamic services for TRUE RAG
       sl.registerLazySingleton<QuranApiService>(() => QuranApiService());
-      sl.registerLazySingleton<RagCacheService>(() => RagCacheService());
-      
+
       // Local Vector Database for fast retrieval
       sl.registerLazySingleton<QuranVectorIndex>(() => QuranVectorIndex.instance);
-      
+
       // Initialize vector index asynchronously for fast startup
       sl<QuranVectorIndex>().initialize().catchError((e) {
         AppLogger.debug('⚠️ Vector index initialization failed: $e');
       });
-      
+
       sl.registerLazySingleton<IslamicRagService>(
         () => IslamicRagService(
           quranApi: sl<QuranApiService>(),
-          cacheService: sl<RagCacheService>(),
-        ),
-      );
-
-      // TRUE RAG API Service with Islamic knowledge retrieval
-      sl.registerLazySingleton<RagApiService>(
-        () => RagApiService(
-          networkInfo: sl<NetworkInfo>(),
-          secureStorage: sl<SecureStorageService>(),
-          islamicRagService: sl<IslamicRagService>(),
-          logger: sl<Logger>(),
         ),
       );
 
@@ -146,12 +132,10 @@ Future<void> init() async {
     // Repositories
     try {
       sl.registerLazySingleton<RagRepository>(
-        () => EnhancedRagRepositoryImpl(
-          ragApiService: sl<RagApiService>(),
+        () => UnifiedRagRepositoryImpl(
           localDataSource: sl.isRegistered<LocalDataSource>() ? sl<LocalDataSource>() : MockLocalDataSource(),
           islamicRagService: sl<IslamicRagService>(),
           networkInfo: sl<NetworkInfo>(),
-          dioClient: sl<Dio>(),
           logger: sl<Logger>(),
         ),
       );

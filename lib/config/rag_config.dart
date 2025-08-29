@@ -9,8 +9,7 @@ class RagConfig {
   static const String claudeModel = 'claude-3-haiku-20240307'; // Cost-effective
 
   // Option 3: Google Gemini (Free tier available)
-  static const String geminiApiUrl =
-      'https://generativelanguage.googleapis.com/v1beta';
+  static const String geminiApiUrl = 'https://generativelanguage.googleapis.com/v1beta';
   static const String geminiModel = 'gemini-1.5-flash'; // Fast and free
 
   // Option 4: Ollama (Local/Self-hosted)
@@ -18,13 +17,11 @@ class RagConfig {
   static const String ollamaModel = 'llama3.1:8b'; // Local model
 
   // Option 5: Hugging Face (Open source)
-  static const String huggingFaceApiUrl =
-      'https://api-inference.huggingface.co/models';
+  static const String huggingFaceApiUrl = 'https://api-inference.huggingface.co/models';
   static const String huggingFaceModel = 'microsoft/DialoGPT-large';
 
   // Current configuration (change this to switch providers)
-  static const String currentProvider =
-      'openai'; // Change to: openai, claude, gemini, ollama, huggingface
+  static const String currentProvider = 'openai'; // Change to: openai, claude, gemini, ollama, huggingface
 
   // Local Vector Database Configuration (Qdrant-compatible)
   // When enabled, uses local semantic search for 50-200ms retrieval before API fallback
@@ -32,7 +29,7 @@ class RagConfig {
   static const String localVectorDBUrl = 'http://localhost:6801'; // Updated port
   static const String vectorCollectionName = 'quran_verses';
   static const int embeddingDimension = 384; // MiniLM-L6-v2 standard
-  static const double similarityThreshold = 0.7;
+  static const double similarityThreshold = 0.1; // Lowered further to catch more results
 
   // Islamic context prompt
   static const String islamicSystemPrompt = '''

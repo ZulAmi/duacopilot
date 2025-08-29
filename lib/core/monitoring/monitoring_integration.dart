@@ -211,7 +211,7 @@ class AWSRagMonitoringAdapter {
 
   String _newTraceId() {
     final ts = DateTime.now().microsecondsSinceEpoch;
-    final r = _rand.nextInt(1 << 32);
+    final r = _rand.nextInt(0x7FFFFFFF); // Use max safe integer for web
     return 'rag_${ts.toRadixString(16)}_${r.toRadixString(16)}';
   }
 

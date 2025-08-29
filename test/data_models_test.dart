@@ -1,10 +1,9 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:duacopilot/data/datasources/rag_cache_service.dart';
-import 'package:duacopilot/data/models/query_history.dart';
-import 'package:duacopilot/data/models/dua_recommendation.dart';
-import 'package:duacopilot/data/models/user_preference.dart';
 import 'package:duacopilot/data/models/audio_cache.dart';
+import 'package:duacopilot/data/models/dua_recommendation.dart';
 import 'package:duacopilot/data/models/dua_response.dart';
+import 'package:duacopilot/data/models/query_history.dart';
+import 'package:duacopilot/data/models/user_preference.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('RAG Data Models Tests', () {
@@ -121,18 +120,7 @@ void main() {
     });
   });
 
-  group('RAG Cache Service Tests', () {
-    late RagCacheService cacheService;
-
-    setUp(() {
-      cacheService = RagCacheService();
-    });
-
-    test('Cache service initialization', () {
-      expect(cacheService, isNotNull);
-    });
-
-    // Note: These would require actual database setup for full testing
+  group('Data Model Utility Tests', () {
     test('Semantic hash generation', () {
       final hash1 = QueryHistoryHelper.generateSemanticHash(
         'What is the dua for traveling?',

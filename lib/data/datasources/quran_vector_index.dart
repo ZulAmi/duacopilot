@@ -123,20 +123,21 @@ class QuranVectorIndex {
     try {
       // Try to load comprehensive dataset first, fallback to minimal
       String raw;
-      bool isComprehensive = false;
       try {
         raw = await rootBundle.loadString('assets/data/comprehensive_islamic_texts.json');
-        isComprehensive = true;
         AppLogger.debug('📚 Loading comprehensive Islamic texts dataset');
       } catch (e) {
         raw = await rootBundle.loadString(versesAssetPath);
         AppLogger.debug('📚 Loading minimal dataset from: $versesAssetPath');
       }
 
-      if (isComprehensive) {
-        // Handle new comprehensive format: {"1:1": {"surah": 1, "verse": 1, ...}, ...}
-        final data = jsonDecode(raw) as Map<String, dynamic>;
-        for (final entry in data.entries) {
+      final jsonData = jsonDecode(raw);
+
+      // Auto-detect format: object format {"1:1": {...}} vs array format [{...}]
+      if (jsonData is Map<String, dynamic>) {
+        // Handle object format: {"1:1": {"surah": 1, "verse": 1, ...}, ...}
+        AppLogger.debug('📋 Processing object format metadata');
+        for (final entry in jsonData.entries) {
           final String key = entry.key;
           final map = entry.value as Map<String, dynamic>;
 
@@ -166,10 +167,10 @@ class QuranVectorIndex {
             );
           }
         }
-      } else {
-        // Handle original format: [{"number": 1, "text": "...", ...}, ...]
-        final data = jsonDecode(raw) as List<dynamic>;
-        for (final item in data) {
+      } else if (jsonData is List<dynamic>) {
+        // Handle array format: [{"number": 1, "text": "...", ...}, ...]
+        AppLogger.debug('📋 Processing array format metadata');
+        for (final item in jsonData) {
           final map = item as Map<String, dynamic>;
           final number = map['number'] as int;
           _versesMetadata[number] = _VerseMeta(
@@ -181,6 +182,8 @@ class QuranVectorIndex {
             revelationType: map['revelation_type'] as String? ?? 'Meccan',
           );
         }
+      } else {
+        AppLogger.debug('⚠️ Unknown metadata format: ${jsonData.runtimeType}');
       }
 
       AppLogger.debug('Loaded ${_versesMetadata.length} verses metadata');
